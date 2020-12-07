@@ -1,0 +1,13 @@
+image: node:10.15.0
+
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Build and release
+          script:
+            - pipe: atlassian/ssh-run:0.2.8
+              variables:
+                SSH_USER: 'root'
+                SERVER: 'pods.pabau.com'
+                COMMAND: 'echo $HOSTNAME'

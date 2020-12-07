@@ -1,0 +1,15 @@
+{
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./mobile"
+    },
+    {
+      "path": "./ui"
+    },
+    {
+      "path": "./web"
+    }
+  ]
+}
