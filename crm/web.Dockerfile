@@ -7,6 +7,7 @@ WORKDIR /usr/app
 # Copy package.json and package-lock.json before other files
 # Utilise Docker cache to save re-installing dependencies if unchanged
 COPY package.json ./
+COPY web/package.json ./web/
 
 # Install dependencies
 RUN cd web && yarn install --focus
