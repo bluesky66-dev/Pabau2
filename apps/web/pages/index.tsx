@@ -6,7 +6,7 @@ import {Layout} from "@pabau/ui";
 export function Index() {
   return (
     <Layout>
-      v0.0.2
+      v0.0.3
     </Layout>
   );
 }
