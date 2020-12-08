@@ -9,14 +9,17 @@ WORKDIR /usr/app
 COPY package.json ./
 
 # Install dependencies
-RUN yarn
+RUN cd web && yarn install --focus
 
 # Copy all files
 COPY web/ ./web/
 COPY tsconfig.base.json ./
 
 # Build app
-RUN yarn --cwd web build
+RUN pwd && ls -al
+RUN yarn --cwd crm/web build || true
+RUN yarn --cwd web build || true
+
 
 # Host the static build directory
 FROM halverneus/static-file-server:latest
