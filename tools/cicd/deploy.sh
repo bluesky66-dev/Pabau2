@@ -9,7 +9,7 @@ echo "Hostname: $(hostname)"
 mkdir -p /cdata/monorepo && cd "$_"
 
 if [ ! -d "/cdata/monorepo/.git" ]; then
-  git clone git@bitbucket.org:pabau/monorepo .
+  git clone git@pabau.bitbucket:pabau/monorepo .
 fi
 
 git pull --ff-only
