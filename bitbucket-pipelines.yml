@@ -6,7 +6,7 @@ pipelines:
       - step:
           name: Build and release
           script:
-            - apk add --update envsubst
+            - apk add gettext
             - envsubst < tools/cicd/deploy.sh > deploy-out.sh
             - pipe: atlassian/ssh-run:0.2.8
               variables:
