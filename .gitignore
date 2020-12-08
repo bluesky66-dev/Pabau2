@@ -49,7 +49,6 @@ Thumbs.db
 *.wmv
 
 # npm files
-yarn.lock
 package-lock.json
 .*/
 !/.run/
