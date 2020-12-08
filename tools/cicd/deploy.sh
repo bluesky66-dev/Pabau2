@@ -10,6 +10,7 @@ pwd && ls -al
 
 mkdir -p /cdata/monorepo && cd "$_"
 
+cd /cdata/monorepo
 pwd && ls -al
 
 echo "About to checkout..."
