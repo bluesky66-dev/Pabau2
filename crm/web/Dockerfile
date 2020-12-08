@@ -9,7 +9,7 @@ WORKDIR /usr/app
 COPY package.json ./
 
 # Install dependencies
-RUN yarn --production
+RUN yarn
 
 # Copy all files
 COPY . .
