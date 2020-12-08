@@ -15,6 +15,6 @@ fi
 git pull --ff-only
 docker build -t pabau-app-frontend -f tools/cicd/web.Dockerfile .
 
-~/rancher-cli/bin/rancher ps
+docker run --rm -it -e "RANCHER_ACCESS_KEY=${RANCHER_ACCESS_KEY}" -e "RANCHER_SECRET_KEY=${RANCHER_SECRET_KEY}" -e "RANCHER_URL=${RANCHER_URL}" cdrx/rancher-gitlab-deploy upgrade --environment Default --stack global-ops --create --service newpabau-web --finish-upgrade --rollback-on-error --start-before-stopping --wait-for-upgrade-to-finish --sidekicks
 
 echo "EOF"

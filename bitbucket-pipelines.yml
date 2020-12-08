@@ -6,9 +6,10 @@ pipelines:
       - step:
           name: Build and release
           script:
+            - envsubst < tools/cicd/deploy.sh > deploy-out.sh
             - pipe: atlassian/ssh-run:0.2.8
               variables:
                 SSH_USER: 'root'
                 SERVER: 'pods.pabau.com'
                 MODE: 'script'
-                COMMAND: 'tools/cicd/deploy.sh'
+                COMMAND: 'deploy-out.sh'
