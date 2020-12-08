@@ -18,4 +18,4 @@ RUN npm run web:export
 
 # Host the static build directory
 FROM halverneus/static-file-server:latest
-COPY --from=builder dist/apps/web/exported/ ./
+COPY --from=builder /usr/app/dist/apps/web/exported/ ./

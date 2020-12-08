@@ -13,9 +13,7 @@ if [ ! -d "/cdata/monorepo/.git" ]; then
 fi
 
 git pull --ff-only
-docker build -t pabau-app-frontend -f tools/cicd/web.Dockerfile || true
-docker build -t pabau-app-frontend -f tools/cicd/web.Dockerfile . || true
-
+docker build -t pabau-app-frontend -f tools/cicd/web.Dockerfile .
 
 ~/rancher-cli/bin/rancher ps
 
