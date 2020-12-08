@@ -10,4 +10,4 @@ pipelines:
               variables:
                 SSH_USER: 'root'
                 SERVER: 'pods.pabau.com'
-                COMMAND: 'echo $HOSTNAME'
+                COMMAND: 'tools/cicd/deploy.sh'
