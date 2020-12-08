@@ -10,6 +10,8 @@ pwd && ls -al
 
 mkdir -p /cdata/monorepo && cd "$_"
 
+pwd && ls -al
+
 echo "About to checkout..."
 if [ ! -d "/cdata/monorepo/.git" ]; then
   echo "Checking out..."
