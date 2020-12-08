@@ -5,6 +5,7 @@
   "license": "Copyright Hambrand Technologies Ltd UK",
   "scripts": {
     "dev": "next",
+    "build": "next build && next export",
     "test": "next build"
   },
   "dependencies": {
