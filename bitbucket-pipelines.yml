@@ -1,4 +1,4 @@
-image: node:10.15.0
+image: node:alpine
 
 pipelines:
   branches:
