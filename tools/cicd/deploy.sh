@@ -6,7 +6,7 @@ echo "About to deploy!"
 echo "Hostname: $HOSTNAME"
 echo "Hostname: $(hostname)"
 
-mkdir -p /cdata/monorepo
+mkdir -p /cdata/monorepo && cd "$_"
 
 if [ ! -d "/cdata/monorepo/.git" ]; then
   git clone git@bitbucket.org:pabau/monorepo .
