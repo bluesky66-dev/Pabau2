@@ -12,10 +12,11 @@ COPY package.json ./
 RUN yarn
 
 # Copy all files
-COPY . .
+COPY web/ ./web/
+COPY tsconfig.base.json ./
 
 # Build app
-RUN yarn build
+RUN yarn --cwd web build
 
 # Host the static build directory
 FROM halverneus/static-file-server:latest

@@ -13,7 +13,7 @@ if [ ! -d "/cdata/monorepo/.git" ]; then
 fi
 
 git pull --ff-only
-docker build -t pabau-app-frontend crm/web/
+docker build -t pabau-app-frontend crm/web.Dockerfile
 
 ~/rancher-cli/bin/rancher ps
 
