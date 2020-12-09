@@ -1,18 +1,18 @@
-import React, { FC, useCallback, useState } from 'react';
-import { ReactComponent as IllustrationSvg } from './example.svg';
-import './Layout.less';
-import Header from '../header/Header';
-import Menu from '../menu/Menu';
-import { Button, Layout as AntLayout, Switch } from 'antd';
-import { useRouter } from 'next/router';
+import React, { FC, useCallback, useEffect, useState } from 'react'
+import { ReactComponent as IllustrationSvg } from './example.svg'
+import './Layout.less'
+import Header from '../header/Header'
+import Menu from '../menu/Menu'
+import { Button, Layout as AntLayout, Switch } from 'antd'
+import { useRouter } from 'next/router'
 
-const { Content, Footer } = AntLayout;
+const { Content, Footer } = AntLayout
 
 interface P extends React.HTMLProps<HTMLDivElement> {
-  pageTitle?: string;
-  newButtonText?: string;
-  onNewClicked?: string | (() => void);
-  onCancelClicked?: true | (() => void);
+  pageTitle?: string
+  newButtonText?: string
+  onNewClicked?: string | (() => void)
+  onCancelClicked?: true | (() => void)
 }
 
 export const Layout: FC<P> = ({
@@ -22,20 +22,24 @@ export const Layout: FC<P> = ({
   onCancelClicked,
   children,
 }) => {
-  const [isActive, setIsActive] = useState(true);
-  const router = useRouter();
+  const [isActive, setIsActive] = useState(true)
+  const [pageHasLoaded, setPageHasLoaded] = useState(false)
+  const router = useRouter()
   const onNewClick = useCallback(() => {
     if (typeof onNewClicked === 'string') {
-      router.push(router.pathname + '/' + onNewClicked);
+      router.push(router.pathname + '/' + onNewClicked)
     }
-  }, []);
+  }, [])
   const onCancelClick = () => {
-    if (onCancelClicked === true) router.back();
-    else onCancelClicked?.();
-  };
+    if (onCancelClicked === true) router.back()
+    else onCancelClicked?.()
+  }
+  useEffect(() => {
+    setPageHasLoaded(true)
+  }, [])
 
   return (
-    <div>
+    <div style={{ opacity: pageHasLoaded ? 1 : 0 }}>
       <Header />
       <Menu />
       <Content
@@ -57,11 +61,7 @@ export const Layout: FC<P> = ({
         >
           <h3 style={{ userSelect: 'none' }}>{pageTitle}</h3>
           {newButtonText && onNewClicked && (
-            <Button
-              type="primary"
-              style={{ float: 'right' }}
-              onClick={onNewClick}
-            >
+            <Button type="primary" style={{ float: 'right' }} onClick={onNewClick}>
               {newButtonText}
             </Button>
           )}
@@ -132,18 +132,10 @@ export const Layout: FC<P> = ({
                   title="yo"
                 />
               </label>
-              <Button
-                type="default"
-                style={{ margin: '0 .5em' }}
-                onClick={onCancelClick}
-              >
+              <Button type="default" style={{ margin: '0 .5em' }} onClick={onCancelClick}>
                 Cancel
               </Button>
-              <Button
-                type="primary"
-                disabled={isActive}
-                style={{ margin: '0 .5em' }}
-              >
+              <Button type="primary" disabled={isActive} style={{ margin: '0 .5em' }}>
                 Save
               </Button>
             </div>
@@ -151,5 +143,5 @@ export const Layout: FC<P> = ({
         </Footer>
       )}
     </div>
-  );
-};
+  )
+}
