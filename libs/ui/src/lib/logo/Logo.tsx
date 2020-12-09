@@ -8,7 +8,7 @@ export interface LogoProps {}
 export function Logo(props: LogoProps) {
   return (
     <div>
-      <h1>Welcome to logo!</h1>
+      <h1 style={{userSelect: 'none'}}>Welcome to <span className="logo">Pabau</span>!</h1>
     </div>
   );
 }

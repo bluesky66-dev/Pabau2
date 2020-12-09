@@ -1,12 +1,14 @@
 import React from 'react';
 
-import styles from './index.module.less';
+import './index.module.less';
 import {Layout} from "@pabau/ui";
+
+const handleMenuClick = () => alert("not yet implemented")
 
 export function Index() {
   return (
-    <Layout>
-      v0.0.3
+    <Layout pageTitle="Welcome">
+      dashboard/buzzfeed to go here. BUT FOR NOW, CLICK MARKETING TAB
     </Layout>
   );
 }
