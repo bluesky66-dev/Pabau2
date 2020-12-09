@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {FC, useCallback, useState} from 'react';
 import {ReactComponent as IllustrationSvg} from './example.svg';
 import './Layout.less';
 import Header from "../header/Header";
@@ -8,12 +8,14 @@ import {useRouter} from "next/router";
 
 const {Content, Footer} = AntLayout;
 
-
-/* eslint-disable-next-line */
-export interface LayoutProps extends React.HTMLProps<HTMLDivElement> {
+interface P extends React.HTMLProps<HTMLDivElement> {
+  pageTitle?: string;
+  newButtonText?: string;
+  onNewClicked?: string | (() => void);
+  onCancelClicked?: true | (() => void);
 }
 
-export function Layout({pageTitle = "Unknown Title", newButtonText, onNewClicked, onCancelClicked, children}) {
+export const Layout: FC<P> = ({pageTitle = "Unknown Title", newButtonText, onNewClicked, onCancelClicked, children}) => {
   const [isActive, setIsActive] = useState(true);
   const router = useRouter();
   const onNewClick = useCallback(() => {
@@ -22,7 +24,8 @@ export function Layout({pageTitle = "Unknown Title", newButtonText, onNewClicked
     }
   }, []);
   const onCancelClick = () => {
-    onCancelClicked?.();
+    if (onCancelClicked === true) router.back();
+    else onCancelClicked?.();
   };
 
   return (
@@ -97,5 +100,3 @@ export function Layout({pageTitle = "Unknown Title", newButtonText, onNewClicked
     </div>
   );
 }
-
-export default Layout;
