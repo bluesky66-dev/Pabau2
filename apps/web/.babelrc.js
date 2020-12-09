@@ -1,9 +1,7 @@
 // .babelrc.js
 module.exports = {
   presets: [
-    [
-      'next/babel'
-    ],
+    ['next/babel'],
     // [
     //   "@babel/preset-env",
     //   {
@@ -29,4 +27,4 @@ module.exports = {
     //   "@ant-design/icons"
     // ]
   ],
-};
+}

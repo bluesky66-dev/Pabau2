@@ -1,9 +1,7 @@
-import React from 'react';
-import { AppProps } from 'next/app';
+import React from 'react'
+import { AppProps } from 'next/app'
 import './styles.less'
 
-function CustomApp({ Component, pageProps }: AppProps) {
+export default function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
   return <Component {...pageProps} />
 }
-
-export default CustomApp;

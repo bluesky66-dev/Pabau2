@@ -1,11 +1,7 @@
 import React from 'react';
+ import './Logo.less';
 
-import './Logo.less';
-
-/* eslint-disable-next-line */
-export interface LogoProps {}
-
-export function Logo(props: LogoProps) {
+export function Logo() {
   return (
     <div>
       <h1 style={{userSelect: 'none'}}>Welcome to <span className="logo">Pabau</span>!</h1>
