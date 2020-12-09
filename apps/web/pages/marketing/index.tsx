@@ -6,11 +6,8 @@ import Link from 'next/link'
 const Index: FC = () => (
   <Layout pageTitle="Marketing">
     <div>
-      <a href="/marketing/sources">Sources (hard link)</a>
-    </div>
-    <div>
       <Link href="/marketing/sources">
-        <a>Sources (fast link)</a>
+        <a>Sources</a>
       </Link>
     </div>
   </Layout>

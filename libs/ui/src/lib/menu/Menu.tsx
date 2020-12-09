@@ -48,7 +48,7 @@ const Menu: FC = () => {
     <div className="main">
       {items.map(({ name, icon = <PoundOutlined />, url }) => (
         <a key={name} href={url}>
-          <Button style={{ height: '100%' }} type="text" onClick={() => url && router.push(url)}>
+          <Button style={{ height: '100%' }} type="text" onClick={() => url && router.replace(url)}>
             {icon}
             <span style={{ fontWeight: 600 }}>{name}</span>
           </Button>
