@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
-
 import './Menu.less'
 import { CalendarOutlined, PoundOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 const items = [
   {
@@ -43,16 +43,22 @@ const items = [
 ]
 
 const Menu: FC = () => {
-  const router = useRouter()
+  // const router = useRouter()
   return (
     <div className="main">
       {items.map(({ name, icon = <PoundOutlined />, url }) => (
-        <a key={name} href={url}>
-          <Button style={{ height: '100%' }} type="text" onClick={() => url && router.replace(url)}>
-            {icon}
-            <span style={{ fontWeight: 600 }}>{name}</span>
-          </Button>
-        </a>
+        <Link key={name} href={url || '/'}>
+          <a style={{ height: '100%' }}>
+            <Button
+              style={{ height: '100%' }}
+              type="text"
+              // onClick={() => url && router.replace(url)}
+            >
+              {icon}
+              <span style={{ fontWeight: 600 }}>{name}</span>
+            </Button>
+          </a>
+        </Link>
       ))}
     </div>
   )

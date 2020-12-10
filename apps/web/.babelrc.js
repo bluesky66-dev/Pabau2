@@ -2,29 +2,29 @@
 module.exports = {
   presets: [
     ['next/babel'],
-    // [
-    //   "@babel/preset-env",
-    //   {
-    //     "modules": true
-    //   }
-    // ],
+    [
+      '@babel/preset-env',
+      {
+        modules: false,
+      },
+    ],
   ],
   plugins: [
     // [
     //   'import',
     //   {
     //     libraryName: 'antd',
-    //     style: false
-    //   }
+    //     style: true,
+    //   },
     // ],
     // [
-    //   "import",
+    //   'import',
     //   {
-    //     "libraryName": "@ant-design/icons",
-    //     "libraryDirectory": "es",
-    //     "camel2DashComponentName": false,
+    //     libraryName: '@ant-design/icons',
+    //     libraryDirectory: 'es',
+    //     camel2DashComponentName: false,
     //   },
-    //   "@ant-design/icons"
-    // ]
+    //   '@ant-design/icons',
+    // ],
   ],
 }

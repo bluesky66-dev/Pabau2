@@ -1,0 +1,17 @@
+{
+    "marketingsource.header.create": {
+        "translation": "Create Marketing Source"
+    },
+    "marketingsource.title": {
+        "translation": "Create a marketing source"
+    },
+    "marketingsource.name.textfield": {
+        "translation": "Name"
+    },
+    "marketingsource.name.placeholder": {
+        "translation": "eg. Facebook"
+    },
+    "marketingsource.header.edit": {
+        "translation": "Edit Marketing Source"
+    }
+}
