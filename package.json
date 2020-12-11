@@ -5,6 +5,7 @@
   "scripts": {
     "nx": "nx",
     "start": "nx serve",
+    "start:production": "npm run build && npm run web:export && npx serve dist/apps/web/exported",
     "build": "nx build",
     "web:export": "nx run web:export",
     "test": "nx test",
@@ -56,6 +57,7 @@
     "@nrwl/jest": "10.4.4",
     "@nrwl/next": "10.4.4",
     "@nrwl/react": "10.4.4",
+    "@nrwl/storybook": "^10.4.7",
     "@nrwl/tao": "10.4.4",
     "@nrwl/web": "10.4.4",
     "@nrwl/workspace": "10.4.4",

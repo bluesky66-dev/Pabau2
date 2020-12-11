@@ -14,15 +14,20 @@ COPY . .
 
 # Build app
 RUN npm run build
-RUN npm run web:export
-
-# Host the static build directory
 
 FROM node:alpine
-RUN npm install -g serve
-WORKDIR /static
-RUN pwd && ls -als
-COPY --from=builder /usr/app/dist/apps/web/exported/ ./
-RUN pwd && ls -als
-EXPOSE 5000
-ENTRYPOINT [ "serve" ]
+WORKDIR /usr/app
+
+COPY --from=builder /app/package*.json ./
+
+ENV NODE_ENV=production
+RUN yarn --frozen-lockfile
+
+COPY --from=builder /usr/app/build ./build
+#RUN pwd
+#RUN ls -al
+#RUN ls -al build/ || true
+#RUN ls -al /app/build/ || true
+
+EXPOSE 3000
+CMD npm run server

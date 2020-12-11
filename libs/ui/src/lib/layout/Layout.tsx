@@ -21,6 +21,7 @@ export const Layout: FC<P> = ({
   onNewClicked,
   onCancelClicked,
   children,
+  ...rest
 }) => {
   const [isActive, setIsActive] = useState(true)
   const [pageHasLoaded, setPageHasLoaded] = useState(false)
@@ -36,10 +37,10 @@ export const Layout: FC<P> = ({
   }
   useEffect(() => {
     setPageHasLoaded(true)
-  }, [])
+  }, [setPageHasLoaded])
 
   return (
-    <div style={{ opacity: pageHasLoaded ? 1 : 0 }}>
+    <div className={pageHasLoaded ? '' : 'fade-appear'} {...{ rest }}>
       <Header />
       <Menu />
       <Content
