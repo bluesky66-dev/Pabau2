@@ -4,7 +4,7 @@ FROM node:alpine AS builder
 # Set working directory
 WORKDIR /usr/app
 
-ENV HUSKY=1
+ENV HUSKY=0
 ENV NODE_ENV='production'
 
 # Copy package.json and package-lock.json before other files
