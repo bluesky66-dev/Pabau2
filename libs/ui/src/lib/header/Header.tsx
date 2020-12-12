@@ -39,16 +39,15 @@ const items = [
 ]
 
 export function Header2() {
+  const searchRef = useRef<Input>(null)
   useEffect(() => {
     window.document.onkeydown = (e) => {
-      // console.log(e.code, e.ctrlKey)
       if (e.ctrlKey && e.code === 'KeyA') {
         e.preventDefault()
-        searchRef.current?.focus()
+        searchRef.current?.focus
       }
     }
   })
-  const searchRef = useRef()
   const handleMenuClick = useCallback(() => alert('Not yet done'), [])
   const overlay = (
     <Menu onClick={handleMenuClick}>
