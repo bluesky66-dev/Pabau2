@@ -94,7 +94,7 @@
     "skipCI": true,
     "hooks": {
       "pre-commit": "npm run lint",
-      "pre-push": "npm run build"
+      "pre-push": "npm test"
     }
   }
 }
