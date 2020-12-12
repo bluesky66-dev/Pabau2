@@ -4,12 +4,12 @@ FROM node:alpine AS builder
 # Set working directory
 WORKDIR /usr/app
 
-ENV HUSKY=0
-ENV NODE_ENV='production'
-
 # Copy package.json and package-lock.json before other files
 # Utilise Docker cache to save re-installing dependencies if unchanged
 COPY package*.json ./
+
+ENV HUSKY_SKIP_INSTALL=1
+ENV NODE_ENV='production'
 RUN npm install
 
 # Copy all files
