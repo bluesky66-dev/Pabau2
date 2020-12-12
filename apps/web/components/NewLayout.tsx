@@ -24,7 +24,7 @@ export default function NewLayout<T>({
     return () => {
       console.log('clean up now pls')
     }
-  }, [])
+  }, [router])
   return (
     <Layout onCancelClicked={() => router.back()} pageTitle={null}>
       <Card title={`Create new ${full}`} style={{ width: '50vmin', margin: '0 auto' }}>

@@ -39,7 +39,8 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/web/**/*.{ts,tsx}"]
+            "lintFilePatterns": ["apps/web/**/*.{ts,tsx}"],
+            "maxWarnings": 0
           }
         },
         "test": {

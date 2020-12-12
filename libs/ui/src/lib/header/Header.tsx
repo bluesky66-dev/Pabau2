@@ -44,7 +44,7 @@ export function Header2() {
     window.document.onkeydown = (e) => {
       if (e.ctrlKey && e.code === 'KeyA') {
         e.preventDefault()
-        searchRef.current?.focus
+        searchRef.current?.focus()
       }
     }
   })

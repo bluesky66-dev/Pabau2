@@ -9,7 +9,7 @@
     "build": "nx build",
     "web:export": "nx run web:export",
     "test": "nx test",
-    "lint": "nx workspace-lint && nx lint",
+    "lint": "nx workspace-lint && nx lint --maxWarnings 0",
     "e2e": "nx e2e",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
