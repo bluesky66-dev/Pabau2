@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 
 import './Header.less'
 import Logo from '../logo/Logo'
@@ -39,6 +39,16 @@ const items = [
 ]
 
 export function Header2() {
+  useEffect(() => {
+    window.document.onkeydown = (e) => {
+      // console.log(e.code, e.ctrlKey)
+      if (e.ctrlKey && e.code === 'KeyA') {
+        e.preventDefault()
+        searchRef.current?.focus()
+      }
+    }
+  })
+  const searchRef = useRef()
   const handleMenuClick = useCallback(() => alert('Not yet done'), [])
   const overlay = (
     <Menu onClick={handleMenuClick}>
@@ -90,7 +100,7 @@ export function Header2() {
         <div className="searchBox">
           <label>
             <SearchOutlined className="searchBoxIcon" />
-            <Input allowClear className="searchBoxInner" />
+            <Input allowClear className="searchBoxInner" ref={searchRef} />
           </label>
         </div>
 

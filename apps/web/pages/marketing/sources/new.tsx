@@ -1,14 +1,39 @@
 import React, { FC } from 'react'
-import './styles.less'
-import { Layout } from '@pabau/ui'
-import { useRouter } from 'next/router'
+import NewLayout from '../../../components/NewLayout'
+
+interface Values {
+  name: string
+}
 
 const Page: FC = () => {
-  const router = useRouter()
   return (
-    <Layout pageTitle="Add new Marketing Source" onCancelClicked={() => router.back()}>
-      Name: <input />
-    </Layout>
+    <NewLayout<Values>
+      schema={{
+        full: 'Marketing Source',
+        fullLower: 'marketing source',
+        short: 'Source',
+        shortLower: 'source',
+        fields: {
+          name: {
+            full: 'Friendly Name',
+            fullLower: 'friendly name',
+            short: 'Name',
+            shortLower: 'name',
+            min: 2,
+            example: 'Facebook',
+            description: 'A friendly name',
+            extra: <i>Please note: blah blah blah</i>,
+          },
+        },
+      }}
+      onSubmit={async (form) => {
+        console.log(`marketing source new page received a form! name=${form.name}`, form)
+        await new Promise((resolve) => {
+          setTimeout(() => resolve(), 1300)
+        })
+        //return false
+      }}
+    />
   )
 }
 

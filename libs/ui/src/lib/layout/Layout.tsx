@@ -3,7 +3,7 @@ import { ReactComponent as IllustrationSvg } from './example.svg'
 import './Layout.less'
 import Header from '../header/Header'
 import Menu from '../menu/Menu'
-import { Button, Layout as AntLayout, Switch } from 'antd'
+import { Button, Card, Layout as AntLayout, Switch } from 'antd'
 import { useRouter } from 'next/router'
 
 const { Content, Footer } = AntLayout
@@ -13,6 +13,7 @@ interface P extends React.HTMLProps<HTMLDivElement> {
   newButtonText?: string
   onNewClicked?: string | (() => void)
   onCancelClicked?: true | (() => void)
+  card?: true
 }
 
 export const Layout: FC<P> = ({
@@ -20,6 +21,7 @@ export const Layout: FC<P> = ({
   newButtonText,
   onNewClicked,
   onCancelClicked,
+  card,
   children,
   ...rest
 }) => {
@@ -60,13 +62,21 @@ export const Layout: FC<P> = ({
             minHeight: 'calc(100vh - 64px - 56px - 60px - 1em)',
           }}
         >
-          <h3 style={{ userSelect: 'none' }}>{pageTitle}</h3>
-          {newButtonText && onNewClicked && (
-            <Button type="primary" style={{ float: 'right' }} onClick={onNewClick}>
-              {newButtonText}
-            </Button>
+          {card ? (
+            <Card title={pageTitle} style={{ width: '50vmin', margin: '0 auto' }}>
+              {children}
+            </Card>
+          ) : (
+            <>
+              <h3 style={{ userSelect: 'none' }}>{pageTitle}</h3>
+              {newButtonText && onNewClicked && (
+                <Button type="primary" style={{ float: 'right' }} onClick={onNewClick}>
+                  {newButtonText}
+                </Button>
+              )}
+              {children}
+            </>
           )}
-          {children}
         </Content>
       </Content>
 
