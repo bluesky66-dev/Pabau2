@@ -9,7 +9,6 @@ WORKDIR /usr/app
 COPY package*.json ./
 
 ENV HUSKY_SKIP_INSTALL=1
-ENV NODE_ENV='production'
 RUN npm install
 
 # Copy all files
