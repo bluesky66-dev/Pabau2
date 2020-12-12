@@ -44,6 +44,7 @@ export function Header2() {
     window.document.onkeydown = (e) => {
       if (e.ctrlKey && e.code === 'KeyA') {
         e.preventDefault()
+        // noinspection BadExpressionStatementJS
         searchRef.current?.focus()
       }
     }
