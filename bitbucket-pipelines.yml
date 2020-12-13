@@ -3,6 +3,9 @@ image: node:alpine
 definitions:
   caches:
     nextcache: .next/cache
+  services:
+    docker:
+      memory: 2048
 pipelines:
   branches:
     default:
