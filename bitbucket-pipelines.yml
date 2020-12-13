@@ -17,7 +17,7 @@ pipelines:
             - node
           script:
             - yarn
-            - yarn build
+            - yarn run nx build
             - yarn run nx deploy
             - apk add gettext
             - envsubst < tools/cicd/storybook.deploy.sh > deploy-out.sh
