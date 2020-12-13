@@ -5,12 +5,16 @@ pipelines:
     default:
       - step:
           name: Build and Test branch
+          caches:
+            - node
           script:
             - npm install
             - npm test
     master:
       - step:
           name: Build and release master
+          caches:
+            - node
           script:
             - npm install
             - npm run build

@@ -23,8 +23,6 @@ RUN npm run web:export
 FROM node:alpine
 RUN npm install -g serve
 WORKDIR /static
-RUN pwd && ls -als
 COPY --from=builder /usr/app/dist/apps/web/exported/ ./
-RUN pwd && ls -als
 EXPOSE 5000
 ENTRYPOINT [ "serve" ]
