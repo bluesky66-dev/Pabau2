@@ -14,7 +14,7 @@ pipelines:
           script:
             - npm install
             - npm run build
-            - npm run deploy
+            - npm run nx deploy
             - apk add gettext
             - envsubst < tools/cicd/deploy.sh > deploy-out.sh
             - pipe: atlassian/ssh-run:0.2.8
