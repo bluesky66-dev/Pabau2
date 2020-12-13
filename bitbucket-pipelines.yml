@@ -2,10 +2,18 @@ image: node:alpine
 
 pipelines:
   branches:
+    default:
+      - step:
+          name: Build and Test branch
+          script:
+            - npm install
+            - npm test
     master:
       - step:
-          name: Build and release
+          name: Build and release master
           script:
+            - npm run nx build
+            - npm run nx deploy
             - apk add gettext
             - envsubst < tools/cicd/deploy.sh > deploy-out.sh
             - pipe: atlassian/ssh-run:0.2.8

@@ -1,18 +1,26 @@
 module.exports = {
-  presets: ['@nrwl/react/babel'],
+  presets: [
+    ['@nrwl/react/babel'],
+    [
+      '@babel/preset-env',
+      {
+        modules: false,
+      },
+    ],
+  ],
   plugins: [
     [
       'import',
       {
         libraryName: 'antd',
-        style: false,
+        style: true,
       },
     ],
     [
       'import',
       {
         libraryName: '@ant-design/icons',
-        libraryDirectory: 'es',
+        libraryDirectory: 'es/icons',
         camel2DashComponentName: false,
       },
       '@ant-design/icons',

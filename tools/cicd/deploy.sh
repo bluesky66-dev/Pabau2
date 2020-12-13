@@ -22,8 +22,10 @@ fi
 echo "About to pull..."
 git pull --ff-only
 
+
 echo "About to docker build..."
 docker build -t pabau-app-frontend -f tools/cicd/web.Dockerfile .
+docker build -t pabau-ui-storybook -f tools/cicd/storybook.Dockerfile .
 
 echo "About to deploy..."
 docker run --rm -e "RANCHER_ACCESS_KEY=${RANCHER_ACCESS_KEY}" -e "RANCHER_SECRET_KEY=${RANCHER_SECRET_KEY}" -e "RANCHER_URL=${RANCHER_URL}" cdrx/rancher-gitlab-deploy upgrade --environment Default --stack global-ops --create --service newpabau-web --finish-upgrade --rollback-on-error --start-before-stopping --wait-for-upgrade-to-finish --sidekicks

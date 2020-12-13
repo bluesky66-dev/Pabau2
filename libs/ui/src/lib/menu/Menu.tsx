@@ -42,7 +42,7 @@ const items = [
   },
 ]
 
-const Menu: FC = () => {
+export const Menu: FC = () => {
   // const router = useRouter()
   return (
     <div className="main">
@@ -63,5 +63,3 @@ const Menu: FC = () => {
     </div>
   )
 }
-
-export default Menu
