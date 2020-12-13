@@ -1,5 +1,8 @@
 image: node:alpine
 
+definitions:
+  caches:
+    nextcache: .next/cache
 pipelines:
   branches:
     default:
@@ -16,6 +19,9 @@ pipelines:
           name: Build and release master
           caches:
             - node
+            - nextcache
+          services:
+            - docker
           script:
             - yarn
             - yarn run nx build
