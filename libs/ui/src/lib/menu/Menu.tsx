@@ -2,7 +2,6 @@ import React, { FC } from 'react'
 import './Menu.less'
 import { CalendarOutlined, PoundOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
 
 const items = [
@@ -63,3 +62,5 @@ export const Menu: FC = () => {
     </div>
   )
 }
+
+export default Menu

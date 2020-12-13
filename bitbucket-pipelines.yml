@@ -12,8 +12,8 @@ pipelines:
       - step:
           name: Build and release master
           script:
-            - npm run nx build
-            - npm run nx deploy
+            - npm run build
+            - npm run deploy
             - apk add gettext
             - envsubst < tools/cicd/deploy.sh > deploy-out.sh
             - pipe: atlassian/ssh-run:0.2.8
