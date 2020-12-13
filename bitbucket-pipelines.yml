@@ -12,6 +12,7 @@ pipelines:
       - step:
           name: Build and release master
           script:
+            - npm install
             - npm run build
             - npm run deploy
             - apk add gettext
