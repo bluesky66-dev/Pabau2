@@ -10,14 +10,14 @@ COPY package*.json ./
 
 ENV HUSKY_SKIP_INSTALL=1
 ENV HUSKY=0
-RUN npm install
+RUN yarn
 
 # Copy all files
 COPY . .
 
 # Build app
-RUN npm run build
-#RUN npm run web:export
+RUN yarn build
+RUN yarn run nx run ui:build-storybook
 
 # Host the static build directory
 

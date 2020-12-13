@@ -29,7 +29,7 @@ const Page: FC = () => {
       onSubmit={async (form) => {
         console.log(`marketing source new page received a form! name=${form.name}`, form)
         await new Promise((resolve) => {
-          setTimeout(() => resolve(), 1300)
+          setTimeout(() => resolve(null), 1300)
         })
         //return false
       }}
