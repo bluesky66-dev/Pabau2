@@ -17,18 +17,18 @@ pipelines:
             - npm install
             - npm test
     master:
-      - step:
-          size: 2x
-          name: Build and release master
-          caches:
-            - node
-            - nextcache
-          services:
-            - docker
-          script:
-            - yarn
-            - yarn run nx build
-            - yarn run nx deploy
+#      - step:
+#          size: 2x
+#          name: Build and release master
+#          caches:
+#            - node
+#            - nextcache
+#          services:
+#            - docker
+#          script:
+#            - yarn
+#            - yarn run nx build
+#            - yarn run nx deploy
       - step:
           name: Build and release master via ssh
           script:

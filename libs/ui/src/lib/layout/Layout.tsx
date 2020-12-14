@@ -30,11 +30,11 @@ export const Layout: FC<P> = ({
   const router = useRouter()
   const onNewClick = useCallback(() => {
     if (typeof onNewClicked === 'string') {
-      router.push(router.pathname + '/' + onNewClicked)
+      router?.push(router.pathname + '/' + onNewClicked)
     }
-  }, [])
+  }, [router])
   const onCancelClick = () => {
-    if (onCancelClicked === true) router.back()
+    if (onCancelClicked === true) router?.back()
     else onCancelClicked?.()
   }
   useEffect(() => {
