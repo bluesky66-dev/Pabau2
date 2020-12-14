@@ -2,7 +2,7 @@ import React from 'react'
 import './button.less'
 import { Button as AntButton } from 'antd'
 
-export interface ButtonProps {
+export interface ButtonProps extends JSX.Element {
   disabled: boolean
   onClick: () => void
 }

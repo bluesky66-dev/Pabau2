@@ -108,8 +108,8 @@
   "husky": {
     "skipCI": true,
     "hooks": {
-      "pre-commit": "npm run lint",
-      "pre-push": "npm test"
+      "pre-commit": "yarn run affected:lint",
+      "pre-push": "yarn run affected:test"
     }
   }
 }
