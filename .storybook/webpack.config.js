@@ -9,7 +9,17 @@ const path = require('path')
 module.exports = async ({ config, mode }) => {
   // Make whatever fine-grained changes you need
 
-
+  config.plugins.push([
+    "@babel/plugin-transform-runtime",
+    {
+      "absoluteRuntime": false,
+      "corejs": false,
+      "helpers": true,
+      "regenerator": true,
+      "useESModules": false,
+      "version": "7.12.5"
+    }
+  ])
 
   // Return the altered config
   return config
