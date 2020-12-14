@@ -10,7 +10,7 @@ export interface ButtonProps {
 export function Button2({ disabled, children, onClick }: ButtonProps) {
   return (
     <AntButton disabled={disabled} onClick={() => onClick?.()}>
-      {children}swuellertd
+      {children}swuellertds
     </AntButton>
   )
 }
