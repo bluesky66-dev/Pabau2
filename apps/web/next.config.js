@@ -1,7 +1,7 @@
 const withNx = require('@nrwl/next/plugins/with-nx')
 const withLess = require('@zeit/next-less')
 const withCss = require('@zeit/next-css')
-const nextTranslate = require('next-translate')
+//const nextTranslate = require('next-translate')
 
 module.exports =
   withCss({
@@ -16,12 +16,13 @@ module.exports =
         cssModules: false,
         // ...nextTranslate(),
       }),
-      //options: {
-        lessLoaderOptions: {
+
+      lessLoaderOptions: {
+        lessOptions: {
           javascriptEnabled: true,
-          cssModules: false,
         },
-      //},
+      },
+
       // webpack: (config, { isServer }) => {
       //   if (isServer) {
       //     const antStyles = /antd\/.*?\/style.*?/;
