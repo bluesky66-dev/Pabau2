@@ -42,7 +42,9 @@ module.exports = async ({ config, mode }) => {
       {
         loader: 'less-loader',
         options: {
-          javascriptEnabled: true,
+          lessOptions: {
+            javascriptEnabled: true,
+          },
         },
       },
     ],

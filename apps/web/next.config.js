@@ -16,10 +16,12 @@ module.exports =
         cssModules: false,
         // ...nextTranslate(),
       }),
-      lessLoaderOptions: {
-        javascriptEnabled: true,
-        cssModules: false,
-      },
+      //options: {
+        lessLoaderOptions: {
+          javascriptEnabled: true,
+          cssModules: false,
+        },
+      //},
       // webpack: (config, { isServer }) => {
       //   if (isServer) {
       //     const antStyles = /antd\/.*?\/style.*?/;
