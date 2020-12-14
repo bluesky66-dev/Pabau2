@@ -106,6 +106,7 @@
     "url-loader": "^3.0.0"
   },
   "husky": {
+    "skipCI": true,
     "hooks": {
       "pre-commit": "yarn run lint",
       "pre-push": "yarn run affected:lint && yarn run affected:test"
