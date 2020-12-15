@@ -37,6 +37,6 @@ pipelines:
             - pipe: atlassian/ssh-run:0.2.8
               variables:
                 SSH_USER: 'root'
-                SERVER: 'pods.pabau.com'
+                SERVER: 'dev-uk.nodes.pabau.com'
                 MODE: 'script'
                 COMMAND: 'deploy-out.sh'
