@@ -1,4 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const rootMain = require('../../../.storybook/main')
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path')
 
 // Use the following syntax to add addons!

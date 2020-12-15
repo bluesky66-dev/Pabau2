@@ -1,11 +1,11 @@
-import React from 'react';
-import { render } from '@testing-library/react';
+import React from 'react'
+import { render } from '@testing-library/react'
 
-import Layout from './Layout';
+import Layout from './Layout'
 
 describe('Layout', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Layout />);
-    expect(baseElement).toBeTruthy();
-  });
-});
+    const { baseElement } = render(<Layout />)
+    expect(baseElement).toBeTruthy()
+  })
+})

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react'
 import Button from './button'
 
@@ -9,4 +11,4 @@ export default {
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 
-export const primary = ({ disabled, onClick }) => <Button disabled={disabled} onClick={onClick}>wee</Button>
+export const primary = (args: any) => <Button {...args}>wee</Button>

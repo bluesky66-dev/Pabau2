@@ -1,5 +1,3 @@
-const path = require('path')
-
 module.exports = {
   components: './src/index.ts',
   outputPath: './dist/playroom',

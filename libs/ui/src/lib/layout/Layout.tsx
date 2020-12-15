@@ -32,7 +32,7 @@ export const Layout: FC<P> = ({
     if (typeof onNewClicked === 'string') {
       router?.push(router.pathname + '/' + onNewClicked)
     }
-  }, [router])
+  }, [router, onNewClicked])
   const onCancelClick = () => {
     if (onCancelClicked === true) router?.back()
     else onCancelClicked?.()
@@ -94,6 +94,7 @@ export const Layout: FC<P> = ({
           <h4>Related guides</h4>
           <ul>
             <li>
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a>Setting up a Marketing Source</a>
             </li>
           </ul>
@@ -156,3 +157,5 @@ export const Layout: FC<P> = ({
     </div>
   )
 }
+
+export default Layout

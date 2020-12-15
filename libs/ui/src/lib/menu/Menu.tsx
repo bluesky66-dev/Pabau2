@@ -47,6 +47,7 @@ export const Menu: FC = () => {
     <div className="main">
       {items.map(({ name, icon = <PoundOutlined />, url }) => (
         <Link key={name} href={url || '/'}>
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a style={{ height: '100%' }}>
             <Button
               style={{ height: '100%' }}

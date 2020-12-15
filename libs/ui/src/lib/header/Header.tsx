@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react'
+import React, { FC, useCallback, useEffect, useRef } from 'react'
 
 import './Header.less'
 import Logo from '../logo/Logo'
@@ -38,7 +38,7 @@ const items = [
   },
 ]
 
-export function Header2() {
+export const Header2: FC = () => {
   const searchRef = useRef<Input>(null)
   useEffect(() => {
     window.document.onkeydown = (e) => {
