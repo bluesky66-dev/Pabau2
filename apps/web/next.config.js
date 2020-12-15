@@ -18,7 +18,7 @@ module.exports =
       }),
 
       lessLoaderOptions: {
-        javascriptEnabled: true,
+        //javascriptEnabled: true,
         lessOptions: {
           javascriptEnabled: true,
         },
