@@ -6,7 +6,7 @@ import { gql, useSubscription } from '@apollo/client'
 
 const MARKETING_SOURCE_LIST = gql`
   subscription MarketingSourceList {
-    marketing_source {
+    marketing_source(order_by: { created_at: desc }) {
       id
       name
     }
