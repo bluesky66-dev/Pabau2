@@ -30,7 +30,18 @@ pipelines:
 #            - yarn run nx build
 #            - yarn run nx deploy
       - step:
-          name: Build and release master via ssh
+          name: Build and release web via ssh
+          script:
+            - apk add gettext
+            - envsubst < tools/cicd/web.deploy.sh > deploy-out.sh
+            - pipe: atlassian/ssh-run:0.2.8
+              variables:
+                SSH_USER: 'root'
+                SERVER: 'dev-uk.nodes.pabau.com'
+                MODE: 'script'
+                COMMAND: 'deploy-out.sh'
+      - step:
+          name: Build and release storybook via ssh
           script:
             - apk add gettext
             - envsubst < tools/cicd/storybook.deploy.sh > deploy-out.sh
