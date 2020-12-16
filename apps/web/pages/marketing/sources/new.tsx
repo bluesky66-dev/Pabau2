@@ -36,9 +36,9 @@ const Page: FC = () => {
           },
         },
       }}
-      onSubmit={async (form) => {
+      onSubmit={(form) => {
         console.log(`marketing source new page received a form! name=${form.name}`, form)
-        return doMutation({ variables: form })
+        doMutation({ variables: form })
         // await new Promise((resolve) => {
         //   setTimeout(() => resolve(null), 1300)
         // })
