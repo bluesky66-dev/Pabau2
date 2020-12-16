@@ -24,7 +24,7 @@ git pull --ff-only
 
 
 echo "About to docker build..."
-docker build -t pabau-ui-storybook -f tools/cicd/storybook.Dockerfile .
+docker build -t pabau/pabau-ui-storybook:latest -f tools/cicd/storybook.Dockerfile .
 docker tag pabau/pabau-ui-storybook:latest 10.42.184.17:5000/pabau/pabau-ui-storybook:latest
 docker push 10.42.184.17:5000/pabau/pabau-ui-storybook
 
