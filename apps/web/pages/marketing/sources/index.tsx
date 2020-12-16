@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import './styles.less'
 import { Table } from 'antd'
 import { Layout } from '@pabau/ui'
