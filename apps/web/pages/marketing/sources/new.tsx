@@ -32,7 +32,7 @@ const Page: FC = () => {
             min: 2,
             example: 'Facebook',
             description: 'A friendly name',
-            extra: <i>Please note: blah blah blah</i>,
+            extra: <i>Please note: blah blah blahh</i>,
           },
         },
       }}
