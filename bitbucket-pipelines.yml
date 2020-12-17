@@ -44,9 +44,9 @@ pipelines:
                 SERVER: 'dev-uk.nodes.pabau.com'
                 MODE: 'script'
                 COMMAND: 'deploy-out.sh'
-          deployment: Production
+          deployment: production-web
           after-script:
-            - if [[ BITBUCKET_EXIT_CODE -gt 0 ]]; then exit 0; else echo "Step failed"
+            - if [[ BITBUCKET_EXIT_CODE -gt 0 ]]; then echo "Step passed"; else echo "Step failed"
             -  pipe: atlassian/email-notify:0.3.8
                variables:
                  USERNAME: 'pabau'
