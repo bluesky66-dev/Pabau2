@@ -1,14 +1,12 @@
 import React, { FC } from 'react'
 import NewLayout from '../../../components/NewLayout'
 import { gql, useMutation } from '@apollo/client'
-
-interface Values {
-  name: string
-}
+import { MARKETING_SOURCE_LIST, MarketingSourceList, Values } from './index'
 
 const MARKETING_SOURCE_ADD = gql`
   mutation MarketingSourceAdd($name: String!) {
     insert_marketing_source_one(object: { name: $name }) {
+      __typename
       id
     }
   }
@@ -36,13 +34,25 @@ const Page: FC = () => {
           },
         },
       }}
-      onSubmit={(form) => {
-        console.log(`marketing source new page received a form! name=${form.name}`, form)
-        doMutation({ variables: form })
-        // await new Promise((resolve) => {
-        //   setTimeout(() => resolve(null), 1300)
-        // })
-        //return false
+      onSubmit={async (form) => {
+        await doMutation({
+          variables: form,
+          optimisticResponse: {},
+          update: (proxy, { data: { insert_marketing_source_one } }) => {
+            // Read the data from our cache for this query.
+            const data = proxy.readQuery<MarketingSourceList>({
+              query: MARKETING_SOURCE_LIST,
+            })
+            // Write our data back to the cache with the new comment in it
+            proxy.writeQuery({
+              query: MARKETING_SOURCE_LIST,
+              data: {
+                ...data,
+                marketing_source: [...data.marketing_source, insert_marketing_source_one],
+              },
+            })
+          },
+        })
       }}
     />
   )

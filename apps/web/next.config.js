@@ -1,7 +1,7 @@
 const withNx = require('@nrwl/next/plugins/with-nx')
 const withLess = require('@zeit/next-less')
 const withCss = require('@zeit/next-css')
-//const nextTranslate = require('next-translate')
+const nextTranslate = require('next-translate')
 
 module.exports =
   withCss({
@@ -14,7 +14,7 @@ module.exports =
         // Set this to true if you use CSS modules.
         // See: https://github.com/css-modules/css-modules
         cssModules: false,
-        // ...nextTranslate(),
+        //...nextTranslate(),
       }),
 
       lessLoaderOptions: {
