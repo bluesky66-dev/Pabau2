@@ -1,13 +1,13 @@
 /* eslint-disable */
 import React from 'react'
-import { StepCounter } from './steps'
+import { Steps } from './steps'
 
 export default {
-  component: StepCounter,
+  component: Steps,
   title: 'Step Counter',
 }
 
 export const primary = () => {
-  return <StepCounter />
-  
+  return <Steps />
+
 }

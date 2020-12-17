@@ -15,7 +15,7 @@ pipelines:
         script:
           - yarn
           - yarn run nx affected --all --target=lint
-          - yarn run nx affected --all --target=build
+#          - yarn run nx affected --all --target=build
 #          - yarn run nx affected --target=lint --base=master~1
 #          - yarn run nx affected --target=test --base=master~1 --head=master
 #          - yarn run nx affected --target=build --base=master~1

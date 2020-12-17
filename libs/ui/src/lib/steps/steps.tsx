@@ -1,13 +1,13 @@
 import React, { FC } from 'react'
-import { Steps } from 'antd'
-const { Step } = Steps
+import { Steps as AntSteps } from 'antd'
+const { Step } = AntSteps
 
-export const StepCounter: FC = () => {
+export const Steps: FC = () => {
   return (
-    <Steps current={1}>
+    <AntSteps current={1}>
       <Step title="Finished" description="This is a description." />
       <Step title="In Progress" subTitle="Left 00:00:08" description="This is a description." />
       <Step title="Waiting" description="This is a description." />
-    </Steps>
+    </AntSteps>
   )
 }
