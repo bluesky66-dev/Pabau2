@@ -18,7 +18,7 @@ COPY . .
 # Build app
 #RUN yarn run nx build
 #RUN yarn run web:export
-RUN yarn run nx run web:build:export
+RUN yarn run nx run web:export
 
 # Host the static build directory
 
