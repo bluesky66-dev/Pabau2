@@ -1,11 +1,10 @@
 import React, { FC } from 'react'
 import './Logo.less'
+import { ReactComponent as LogoSvg } from './logo.svg'
 
 export const Logo: FC = () => (
-  <div>
-    <h1 style={{ userSelect: 'none' }}>
-      Welcome to <span className="logo">Pabau</span>!
-    </h1>
+  <div className="container">
+    <LogoSvg className="logo" />
   </div>
 )
 

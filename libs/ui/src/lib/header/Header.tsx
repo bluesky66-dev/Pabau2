@@ -63,40 +63,28 @@ export const Header2: FC = () => {
     <Header
       style={{
         backgroundColor: 'white',
-        paddingLeft: '0.5em',
+        padding: '1rem',
         position: 'sticky',
         top: 0,
         zIndex: 2,
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-        {screenfull.isEnabled && (
-          <Button
-            type="ghost"
-            style={{ borderRadius: 5 }}
-            shape="round"
-            icon={<ExpandOutlined />}
-            className="button"
-            size="large"
-            onClick={() => {
-              if (screenfull.isEnabled) screenfull.toggle()
-            }}
-          />
-        )}
+        {/*{screenfull.isEnabled && (*/}
+        {/*  <Button*/}
+        {/*    type="ghost"*/}
+        {/*    style={{ borderRadius: 5 }}*/}
+        {/*    shape="round"*/}
+        {/*    icon={<ExpandOutlined />}*/}
+        {/*    className="button"*/}
+        {/*    size="large"*/}
+        {/*    onClick={() => {*/}
+        {/*      if (screenfull.isEnabled) screenfull.toggle()*/}
+        {/*    }}*/}
+        {/*  />*/}
+        {/*)}*/}
 
-        <Dropdown overlay={overlay}>
-          <Button
-            style={{ borderRadius: 5 }}
-            type="primary"
-            shape="round"
-            size="large"
-            className="button"
-          >
-            + Create
-            {/*Create <DownOutlined/>*/}
-          </Button>
-        </Dropdown>
-
+        <Logo />
         <div className="searchBox">
           <label>
             <SearchOutlined className="searchBoxIcon" />
@@ -104,7 +92,20 @@ export const Header2: FC = () => {
           </label>
         </div>
 
-        <Logo />
+        <div style={{ textAlign: 'right', float: 'right', width: 'min-content' }}>
+          <Dropdown overlay={overlay}>
+            <Button
+              style={{ borderRadius: 5 }}
+              type="primary"
+              shape="round"
+              size="large"
+              className="button"
+            >
+              + Create
+              {/*Create <DownOutlined/>*/}
+            </Button>
+          </Dropdown>
+        </div>
       </div>
     </Header>
   )
