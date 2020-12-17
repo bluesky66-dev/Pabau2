@@ -14,8 +14,10 @@ pipelines:
           caches:
             - node
           script:
-            - npm install
-            - npm test
+            - yarn ci
+            - yarn run nx affected --target=lint --base=master~1 --head=master
+#            - yarn run nx affected --target=test --base=master~1 --head=master
+            - yarn run nx affected --target=build --base=master~1 --head=master
     master:
 #      - step:
 #          size: 2x
