@@ -11,6 +11,8 @@ const Index: FC = () => {
       dashboard/buzzfeed to go here. BUT FOR NOW, CLICK MARKETING TAB. Translate:{' '}
       {t('common:marketingsource.header.edit')}
       <Steps></Steps>
+      <hr />
+      v0.0.1
     </Layout>
   )
 }

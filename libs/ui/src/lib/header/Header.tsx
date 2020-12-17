@@ -92,7 +92,7 @@ export const Header2: FC = () => {
             size="large"
             className="button"
           >
-            Create
+            + Create
             {/*Create <DownOutlined/>*/}
           </Button>
         </Dropdown>
