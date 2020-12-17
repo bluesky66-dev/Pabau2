@@ -16,7 +16,7 @@ RUN yarn
 COPY . .
 
 # Build app
-RUN yarn build
+#RUN yarn build
 RUN yarn run nx run ui:build-storybook
 
 # Host the static build directory

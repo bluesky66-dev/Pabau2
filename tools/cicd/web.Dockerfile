@@ -9,14 +9,16 @@ WORKDIR /usr/app
 COPY package*.json ./
 
 ENV HUSKY_SKIP_INSTALL=1
+ENV HUSKY=0
 RUN yarn
 
 # Copy all files
 COPY . .
 
 # Build app
-RUN yarn run nx build
-RUN yarn run web:export
+#RUN yarn run nx build
+#RUN yarn run web:export
+RUN yarn run nx run web:build:export
 
 # Host the static build directory
 
