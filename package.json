@@ -113,7 +113,7 @@
     "skipCI": true,
     "hooks": {
       "pre-commit": "yarn run affected:lint",
-      "pre-push": "yarn run affected:lint && yarn run affected:test"
+      "pre-push": "yarn run affected:lint && yarn run affected:build"
     }
   }
 }
