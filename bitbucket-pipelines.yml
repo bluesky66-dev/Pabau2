@@ -53,7 +53,7 @@ pipelines:
                  PASSWORD: $MAILCHIMP_PASSWORD
                  FROM: 'nobody@pabau.com'
                  TO: 'ops@pabau.com'
-                 HOST: 'smtp.mandrill.com'
+                 HOST: 'smtp.mandrillapp.com'
                  BODY_PLAIN: "Build built!"
       - step:
           name: Build and release storybook via ssh
