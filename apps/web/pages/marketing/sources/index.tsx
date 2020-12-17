@@ -5,6 +5,7 @@ import { Layout, Button2 as Button } from '@pabau/ui'
 import { gql, useMutation, useQuery } from '@apollo/client'
 
 export interface Values {
+  id?: string
   name: string
 }
 export const MARKETING_SOURCE_LIST = gql`
@@ -60,20 +61,15 @@ export const Index: FC = () => {
                     deleteMutation({
                       variables: { id },
                       optimisticResponse: {},
-                      update: (cache, mutationResult) => {
-                        console.log('doing update', cache)
-
-                        const existing = cache.readQuery({
+                      update: (cache) => {
+                        const existing = cache.readQuery<MarketingSourceList>({
                           query: MARKETING_SOURCE_LIST,
                         })
-                        console.log('got cache', existing)
-
-                        const newTodos = existing.marketing_source.filter((t) => t.id !== id)
-                        console.log('doing update with ', newTodos)
-
                         cache.writeQuery({
                           query: MARKETING_SOURCE_LIST,
-                          data: { marketing_source: newTodos },
+                          data: {
+                            marketing_source: existing.marketing_source.filter((t) => t.id !== id),
+                          },
                         })
                       },
                     })
