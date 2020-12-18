@@ -25,6 +25,8 @@ RUN yarn run nx build backend
 FROM node:alpine
 WORKDIR /usr/app
 
-COPY --from=builder /usr/app/dist/apps/backend/ ./
+COPY --from=builder /usr/app/dist/apps/backend/ ./dist/apps/backend/
+COPY --from=builder /usr/app/node_modules/ ./node_modules/
+COPY --from=builder /usr/app/package.json ./
 EXPOSE 3333
-ENTRYPOINT [ "node", "/usr/app/main.js" ]
+ENTRYPOINT [ "node", "/usr/app/dist/apps/backend/main.js" ]
