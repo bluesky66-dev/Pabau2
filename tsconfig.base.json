@@ -16,7 +16,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@pabau/ui": ["libs/ui/src/index.ts"]
+      "@pabau/ui": ["libs/ui/src/index.ts"],
+      "@pabau/yup": ["libs/yup/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
