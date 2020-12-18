@@ -27,4 +27,4 @@ WORKDIR /usr/app
 
 COPY --from=builder /usr/app/dist/apps/backend/ ./
 EXPOSE 3333
-ENTRYPOINT [ "node", "/usr/app/dist/apps/backend/main.js" ]
+ENTRYPOINT [ "node", "/usr/app/main.js" ]
