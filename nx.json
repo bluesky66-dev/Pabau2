@@ -42,6 +42,13 @@
     },
     "backend": {
       "tags": []
+    },
+    "mgmt": {
+      "tags": []
+    },
+    "mgmt-e2e": {
+      "tags": [],
+      "implicitDependencies": ["mgmt"]
     }
   }
 }

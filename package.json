@@ -58,7 +58,7 @@
     "rxjs": "~6.5.5",
     "screenfull": "^5.0.2",
     "subscriptions-transport-ws": "^0.9.18",
-    "tslib": "^2.0.3",
+    "tslib": "^2.0.0",
     "yup": "^0.32.8"
   },
   "devDependencies": {

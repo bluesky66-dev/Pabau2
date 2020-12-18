@@ -232,6 +232,82 @@
           }
         }
       }
+    },
+    "mgmt": {
+      "root": "apps/mgmt",
+      "sourceRoot": "apps/mgmt",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/next:build",
+          "options": {
+            "root": "apps/mgmt",
+            "outputPath": "dist/apps/mgmt"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "mgmt:build",
+            "dev": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "mgmt:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "builder": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "mgmt:build:production"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/mgmt/**/*.{ts,tsx}"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/mgmt/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "mgmt-e2e": {
+      "root": "apps/mgmt-e2e",
+      "sourceRoot": "apps/mgmt-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/mgmt-e2e/cypress.json",
+            "tsConfig": "apps/mgmt-e2e/tsconfig.e2e.json",
+            "devServerTarget": "mgmt:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "mgmt:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/mgmt-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
     }
   },
   "cli": {
