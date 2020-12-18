@@ -308,6 +308,82 @@
           }
         }
       }
+    },
+    "connect": {
+      "root": "apps/connect",
+      "sourceRoot": "apps/connect",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/next:build",
+          "options": {
+            "root": "apps/connect",
+            "outputPath": "dist/apps/connect"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "connect:build",
+            "dev": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "connect:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "builder": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "connect:build:production"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/connect/**/*.{ts,tsx}"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/connect/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "connect-e2e": {
+      "root": "apps/connect-e2e",
+      "sourceRoot": "apps/connect-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/connect-e2e/cypress.json",
+            "tsConfig": "apps/connect-e2e/tsconfig.e2e.json",
+            "devServerTarget": "connect:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "connect:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/connect-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
     }
   },
   "cli": {

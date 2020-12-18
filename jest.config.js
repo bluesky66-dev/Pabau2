@@ -5,5 +5,6 @@ module.exports = {
     '<rootDir>/libs/yup',
     '<rootDir>/apps/backend',
     '<rootDir>/apps/mgmt',
+    '<rootDir>/apps/connect',
   ],
 }

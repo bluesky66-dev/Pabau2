@@ -24,7 +24,8 @@
   },
   "projects": {
     "web": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["backend"]
     },
     "web-e2e": {
       "tags": [],
@@ -44,11 +45,20 @@
       "tags": []
     },
     "mgmt": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["backend"]
     },
     "mgmt-e2e": {
       "tags": [],
       "implicitDependencies": ["mgmt"]
+    },
+    "connect": {
+      "tags": [],
+      "implicitDependencies": ["backend"]
+    },
+    "connect-e2e": {
+      "tags": [],
+      "implicitDependencies": ["connect"]
     }
   }
 }
