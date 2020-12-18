@@ -1,4 +1,5 @@
 import React from 'react'
+import { yup } from '@pabau/yup'
 
 
 export function Index() {
