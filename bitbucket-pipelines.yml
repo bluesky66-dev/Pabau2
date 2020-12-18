@@ -46,7 +46,7 @@ pipelines:
                 MODE: 'script'
                 COMMAND: 'deploy-out.sh'
           after-script:
-            - if [[ BITBUCKET_EXIT_CODE -gt 0 ]]; then echo "Step passed"; else echo "Step failed"
+            - if [[ BITBUCKET_EXIT_CODE -gt 0 ]]; then echo "Step passed"; else echo "Step failed"; fi
             - pipe: atlassian/email-notify:0.3.8
               variables:
                 USERNAME: 'pabau'
@@ -68,7 +68,7 @@ pipelines:
                 MODE: 'script'
                 COMMAND: 'deploy-out.sh'
           after-script:
-            - if [[ BITBUCKET_EXIT_CODE -gt 0 ]]; then echo "Step passed"; else echo "Step failed"
+            - if [[ BITBUCKET_EXIT_CODE -gt 0 ]]; then echo "Step passed"; else echo "Step failed"; fi
             - pipe: atlassian/email-notify:0.3.8
               variables:
                 USERNAME: 'pabau'
