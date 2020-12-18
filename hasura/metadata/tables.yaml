@@ -1,0 +1,40 @@
+- table:
+    schema: public
+    name: marketing_source
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - id
+      - name
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - id
+      - created_at
+      - updated_at
+      - name
+      filter: {}
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: user
+  configuration:
+    custom_root_fields:
+      select: user
+    custom_column_names: {}
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - id
+      - created_at
+      - updated_at
+      - full_name
+      filter: {}
