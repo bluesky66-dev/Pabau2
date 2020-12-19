@@ -79,6 +79,7 @@ pipelines:
                 BODY_PLAIN: "Build built backend!"
       - step:
           name: storybook
+          deployment: production-storybook
           script:
             - apk add gettext
             - envsubst < tools/cicd/storybook.deploy.sh > deploy-out.sh

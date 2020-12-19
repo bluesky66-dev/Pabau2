@@ -52,13 +52,14 @@
     "next-plugin-antd-less": "^0.1.3",
     "next-translate": "^1.0.1-canary.3",
     "null-loader": "^4.0.1",
+    "r7insight_node": "^2.1.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.5.5",
     "screenfull": "^5.0.2",
     "subscriptions-transport-ws": "^0.9.18",
-    "tslib": "^2.0.0",
+    "tslib": "^2.0.3",
     "yup": "^0.32.8"
   },
   "devDependencies": {
