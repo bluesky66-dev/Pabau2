@@ -4,9 +4,9 @@ import logger from '../lib/logger'
 
 @Injectable()
 export class AppService {
-  getData(): { message: string } {
-    logger("test!");
-    return { message: 'Welcome to backend! This should say yup --> ' + yup() }
+  getData(data: any): { message: string } {
+    if (data) logger(data);
+    return { message: 'Welcome to backend! This should say yup --> ' + yup() + JSON.stringify(data) }
   }
 
 
