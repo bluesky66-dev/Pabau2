@@ -34,7 +34,51 @@ pipelines:
 #            - yarn run nx build
 #            - yarn run nx deploy
       - step:
-          name: web
+          name: pull
+          script:
+            - apk add gettext
+            - envsubst < tools/cicd/pull.sh > deploy-out.sh
+            - pipe: atlassian/ssh-run:0.2.8
+              variables:
+                SSH_USER: 'root'
+                SERVER: 'dev-uk.nodes.pabau.com'
+                MODE: 'script'
+                COMMAND: 'deploy-out.sh'
+      - step:
+          name: web-build
+          script:
+            - apk add gettext
+            - envsubst < tools/cicd/web.build.sh > deploy-out.sh
+            - pipe: atlassian/ssh-run:0.2.8
+              variables:
+                SSH_USER: 'root'
+                SERVER: 'dev-uk.nodes.pabau.com'
+                MODE: 'script'
+                COMMAND: 'deploy-out.sh'
+      - step:
+          name: backend-build
+          script:
+            - apk add gettext
+            - envsubst < tools/cicd/backend.build.sh > deploy-out.sh
+            - pipe: atlassian/ssh-run:0.2.8
+              variables:
+                SSH_USER: 'root'
+                SERVER: 'dev-uk.nodes.pabau.com'
+                MODE: 'script'
+                COMMAND: 'deploy-out.sh'
+      - step:
+          name: storybook-build
+          script:
+            - apk add gettext
+            - envsubst < tools/cicd/storybook.build.sh > deploy-out.sh
+            - pipe: atlassian/ssh-run:0.2.8
+              variables:
+                SSH_USER: 'root'
+                SERVER: 'dev-uk.nodes.pabau.com'
+                MODE: 'script'
+                COMMAND: 'deploy-out.sh'
+      - step:
+          name: web-deploy
           deployment: production-web
           script:
             - apk add gettext
@@ -56,7 +100,7 @@ pipelines:
                 HOST: 'smtp.mandrillapp.com'
                 BODY_PLAIN: "Build built!"
       - step:
-          name: backend
+          name: backend-deploy
           deployment: production-backend
           script:
             - apk add gettext
@@ -78,7 +122,7 @@ pipelines:
                 HOST: 'smtp.mandrillapp.com'
                 BODY_PLAIN: "Build built backend!"
       - step:
-          name: storybook
+          name: storybook-deploy
           deployment: production-storybook
           script:
             - apk add gettext

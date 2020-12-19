@@ -1,6 +1,5 @@
 import React from 'react'
 
-import styles from './index.module.less'
 import { yup } from '@pabau/yup'
 
 export function Index() {
@@ -10,7 +9,7 @@ export function Index() {
    * Note: The corresponding styles are in the ./index.less file.
    */
   return (
-    <div className={styles.page}>
+    <div className="page">
       <h2>Resources &amp; Tools</h2>
       <p>Thank you for using and showing some ♥ for Nx.</p>
       <div className="flex github-star-container">
