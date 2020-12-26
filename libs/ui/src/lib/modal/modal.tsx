@@ -1,39 +1,85 @@
-import React, { PropsWithChildren } from 'react'
-import { Modal as AntModal, Button, Input, Checkbox } from 'antd';
+import React, { PropsWithChildren, useState } from 'react'
+import { Form, Modal as AntModal, Button, Input, Checkbox } from 'antd'
+import { CloseOutlined } from '@ant-design/icons'
 import './modal.less'
-import { CloseOutlined } from '@ant-design/icons';
 
 export interface ModalInterface {
   loading?: boolean
   visible?: boolean
   onClick?: () => void
-  handleCancel?: () => void
+  handleSubmit?: () => void
 }
 
-export function Modal({ loading, visible, children, onClick, handleCancel }: PropsWithChildren<ModalInterface>): JSX.Element {
+export function Modal({
+  loading,
+  visible,
+  onClick,
+}: PropsWithChildren<ModalInterface>): JSX.Element {
+  const [form] = Form.useForm()
+
+  const [mSourceName, setMSourceName] = useState('Facebook')
+  const [activate, setActivate] = useState(false)
 
   return (
     <AntModal
       visible={visible}
-      title="Create Marketing Source"
+      title={
+        <div className="modal-heading-align">
+          <h1 className="ant-modal-title">Create Marketing Source</h1>
+          <CloseOutlined />
+        </div>
+      }
       width={682}
       footer={false}
-      wrapClassName="modal"      
+      wrapClassName="modal"
+      closable={false}
     >
-      <div className="modal-body">
-        <div className="input-field">
-          <label> Name </label>
-          <Input className="input-style" placeholder="Enter marketing source name"/>
+      <Form form={form} requiredMark={false} layout="vertical">
+        <div className="modal-body">
+          <div className="input-field">
+            <Form.Item
+              label="Name"
+              name="marketingSorce"
+              rules={[
+                {
+                  required: true,
+                  message: 'Marketing source name is required!',
+                },
+              ]}
+            >
+              <Input
+                className="input-style"
+                placeholder="Enter marketing source name"
+                defaultValue={mSourceName}
+                onChange={(e) => setMSourceName(e.target.value)}
+              />
+            </Form.Item>
+          </div>
         </div>
-      </div>
-      <div className="modal-footer">
-        <div className="active">
-          <Checkbox className="active-style">Activate</Checkbox>
+        <div className="modal-footer">
+          <div className="active">
+            <Checkbox
+              className="active-style"
+              checked={activate}
+              onChange={() => setActivate(!activate)}
+            >
+              Activate
+            </Checkbox>
+          </div>
+          <Button
+            key="submit"
+            type="primary"
+            className="createBtn"
+            size="large"
+            loading={loading}
+            onClick={onClick}
+            htmlType="submit"
+            disabled={!mSourceName || !activate}
+          >
+            Create
+          </Button>
         </div>
-        <Button key="submit" type="primary" className="btnCreate" size="large" loading={loading} disabled={true} onClick={onClick} >
-          Create
-        </Button>
-      </div>
+      </Form>
     </AntModal>
   )
 }
