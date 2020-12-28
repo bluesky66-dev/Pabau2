@@ -31,26 +31,39 @@ module.exports = async ({ config, mode }) => {
     svgRuleIndex
   ].test = /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|cur|ani|pdf)(\?.*)?$/
 
-  config.module.rules.push({
-    test: /\.less$/,
-    use: [
-      {
-        loader: 'style-loader',
-      },
-      {
-        loader: 'css-loader',
-      },
-      {
-        loader: 'less-loader',
-        options: {
-          lessOptions: {
-            javascriptEnabled: true,
+  config.module.rules.push(
+    {
+      test: /\.less$/,
+      use: [
+        {
+          loader: 'style-loader',
+        },
+        {
+          loader: 'css-loader',
+        },
+        {
+          loader: 'less-loader',
+          options: {
+            lessOptions: {
+              javascriptEnabled: true,
+            },
           },
         },
-      },
-    ],
-    //include: path.resolve(__dirname, '../src/'),
-  })
+      ],
+      //include: path.resolve(__dirname, '../src/'),
+    },
+    {
+      test: /\.s[ac]ss$/i,
+      use: [
+        // Creates `style` nodes from JS strings
+        'style-loader',
+        // Translates CSS into CommonJS
+        'css-loader',
+        // Compiles Sass to CSS
+        'sass-loader',
+      ],
+    }
+  )
 
   config.module.rules.push(
     {

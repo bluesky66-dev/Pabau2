@@ -11,7 +11,7 @@ export const data = [
     key: '2',
     name: 'From a friend',
     createdDate: 'Monday, 4 Feb 2019',
-    isActive: true,
+    isActive: false,
     isLocked: false,
     index: 1,
   },
@@ -28,7 +28,7 @@ export const data = [
     name: 'Imported',
     createdDate: 'Tuesday, 5 Feb 2019',
     isActive: true,
-    isLocked: true,
+    isLocked: false,
     index: 3,
   },
   {
@@ -36,7 +36,7 @@ export const data = [
     name: 'Walk-in',
     createdDate: 'Saturday, 14 April 2018',
     isActive: true,
-    isLocked: true,
+    isLocked: false,
     index: 4,
   },
   {
@@ -44,7 +44,7 @@ export const data = [
     name: 'Facebook',
     createdDate: 'Saturday, 14 April 2018',
     isActive: true,
-    isLocked: true,
+    isLocked: false,
     index: 5,
   },
   {
@@ -52,7 +52,7 @@ export const data = [
     name: 'Fresha',
     createdDate: 'Tuesday, 5 Feb 2019',
     isActive: true,
-    isLocked: true,
+    isLocked: false,
     index: 6,
   },
 ]
