@@ -65,11 +65,11 @@ export function Modal({
           <div className="pretty p-svg p-toggle p-plain">
             <input type="checkbox" checked={activate} onChange={() => setActivate(!activate)} />
             <div className="state p-off">
-              <img className="svg" src={NotActiveSVG} />
+              <img className="svg" src={NotActiveSVG} alt="none-active-state" />
               <label>Activate</label>
             </div>
             <div className="state p-on">
-              <img className="svg" src={ActiveSVG} />
+              <img className="svg" src={ActiveSVG} alt="active-state" />
               <label>Activate</label>
             </div>
           </div>

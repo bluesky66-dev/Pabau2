@@ -4,6 +4,15 @@ import { data } from './mock'
 import './dragfeature.less'
 import './styles/style.scss'
 import { Row, Col } from 'antd'
+import {
+  MenuOutlined,
+  SearchOutlined,
+  FilterOutlined,
+  LockOutlined,
+  ArrowUpOutlined,
+  LeftOutlined,
+  RightOutlined,
+} from '@ant-design/icons'
 
 function array_move(arr, old_index, new_index) {
   if (new_index >= arr.length) {
@@ -43,17 +52,12 @@ export const DragFeature: FC = () => {
     return (
       <tr tabIndex={0}>
         <td align="center">
-          <img src={require('../../assets/images/table-icon.svg').default} alt="table-icon" />
+          <MenuOutlined style={{ fontSize: '14px', color: '#B8B8C0' }} />
+          {/* <img src={require('../../assets/images/table-icon.svg').default} alt="table-icon" /> */}
         </td>
         <td>
           <span className="table-data-text-style">{value.name}</span>
-          {value.isLocked && (
-            <img
-              className="pl-4"
-              src={require('../../assets/images/lock.svg').default}
-              alt="lock"
-            />
-          )}
+          {value.isLocked && <LockOutlined className="lock-icon-style" />}
         </td>
         <td>
           <button
@@ -88,11 +92,11 @@ export const DragFeature: FC = () => {
               >
                 <div style={{ display: 'flex' }}>
                   <div className="search-menu pr-4">
-                    <img src={require('../../assets/images/Vector.svg').default} alt="search" />
+                    <SearchOutlined style={{ fontSize: '14px' }} />
                     <span className="filter-left-space"> Search</span>
                   </div>
                   <div className="search-menu">
-                    <img src={require('../../assets/images/filter.svg').default} alt="filter" />
+                    <FilterOutlined style={{ fontSize: '14px' }} />
                     <span className="filter-left-space"> Filter</span>
                   </div>
                   <div className="create-source-btn pl-4">
@@ -106,15 +110,12 @@ export const DragFeature: FC = () => {
             <thead>
               <tr>
                 <th className="text-center">
-                  <img
-                    src={require('../../assets/images/table-icon.svg').default}
-                    alt="table-icon"
-                  />
+                  <MenuOutlined style={{ fontSize: '14px', color: '#B8B8C0' }} />
                 </th>
                 <th className="table-highlight">
                   <div className="d-flex align-items-center">
                     <span className="table-heading-style pr-2">NAME</span>
-                    <img src={require('../../assets/images/Path.svg').default} alt="Path" />
+                    <ArrowUpOutlined className="up-icon-style" />
                   </div>
                 </th>
                 <th>
@@ -134,7 +135,7 @@ export const DragFeature: FC = () => {
                 <td style={{ display: 'flex', justifyContent: 'flex-end' }}>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <div className="pagination-left-space">
-                      <img src={require('../../assets/images/left.svg').default} alt="left" />
+                      <LeftOutlined className="pagination-icon" />
                     </div>
                     <div className="pr-2">
                       <div className="pagination-style text-center text-white pagination-style pagination-background-color">
@@ -162,7 +163,7 @@ export const DragFeature: FC = () => {
                       </div>
                     </div>
                     <div className="pagination-right-space">
-                      <img src={require('../../assets/images/right.svg').default} alt="right" />
+                      <RightOutlined className="pagination-icon" />
                     </div>
                   </div>
                 </td>

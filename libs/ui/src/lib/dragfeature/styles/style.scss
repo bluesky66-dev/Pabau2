@@ -1,21 +1,4 @@
 @import '../styles/varible.scss';
-body {
-    font-family: "Roboto", sans-serif !important;
-    background-color: $body-background-color !important;
-    user-select: none;
-}
-header {
-    padding-top: 18px;
-    padding-bottom: 18px;
-    background-color: $white-background;
-    border-bottom:2px solid #F3F5FB;
-    .logo {
-        img {
-            // width: 150px;
-            height: 30px;
-        }
-    }
-}
 .left-right-spacing {
     padding-left: 32px !important;
     padding-right: 32px !important;
@@ -85,6 +68,7 @@ header {
     border: 1px solid $btn-border;
     color: $btn-text-color;
     background: none;
+    font-family: 'Circular-Std-Book';
 }
 .form-group {
     margin-bottom: 0rem !important;
@@ -141,11 +125,17 @@ header {
     @extend .border-radius;
     border: none !important;
     transition-duration: 0.5s;
+    font-family: 'Circular-Std-Bold';
     color: #ffffff;
     cursor: pointer;
     &:hover {
         background-color: #61c6ea;
     }
+}
+.lock-icon-style {
+    font-size: 14px;
+    padding-left: 10px;
+    color: #9292A3;
 }
 .table-heading-style {
     color: $btn-text-color;
@@ -337,4 +327,12 @@ img {
     display: flex;
     align-items: center;
     justify-content: end;
+}
+.up-icon-style {
+    color: #54b2d3;
+    font-size: 14px;
+}
+.pagination-icon {
+    color:#BFBFBF;
+
 }
