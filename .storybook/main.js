@@ -2,7 +2,7 @@
 module.exports = {
   stories: [],
   addons: [
-    '@storybook/addon-knobs/register',
+    '@storybook/addon-docs',
     '@storybook/addon-essentials',
     'storybook-addon-playroom',
   ],

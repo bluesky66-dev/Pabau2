@@ -184,7 +184,7 @@ const menu = (
 
 export function Dropdown(): JSX.Element {
   return (
-    <AntDropDown overlay={menu} placement="bottomRight" arrow>
+    <AntDropDown overlay={menu} placement="bottomRight" arrow trigger={['click']}>
       <Button>Avatar</Button>
     </AntDropDown>
   )
