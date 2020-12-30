@@ -18,6 +18,7 @@ import {
 } from '@ant-design/icons'
 import { ReactComponent as JASVG } from './company/JA.svg'
 import { ReactComponent as UPSVG } from './UP.svg'
+import { ReactComponent as TaskSVG } from './Vector.svg'
 import { languageMenu } from './language/lang-logos/index'
 
 const { SubMenu } = Menu
@@ -86,7 +87,7 @@ const menu = (
     </Menu.Item>
     <Menu.Item className="dropdown-menu" style={{ borderBottom: '1px solid #F1F1F1' }}>
       <div className="dropdown-header">
-        <OrderedListOutlined className="logo" />
+        <TaskSVG />
         <span className="header-text">Tasks</span>
       </div>
     </Menu.Item>
