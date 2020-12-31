@@ -1,12 +1,17 @@
 /* eslint-disable */
 import React from 'react'
-import { Header2 } from './Header'
+// import { Header2 } from './Header'
+import { PabauHeader } from './PabauHeader'
+import { Logo } from './logo/Logo'
 
 export default {
-  component: Header2,
-  title: 'Header2',
+  component: PabauHeader,
+  title: 'Header',
 }
 
-export const primary = () => {
-  return <Header2 />
+export const PabauHeaderStory = () => {
+  return <PabauHeader />
+}
+export const PabauLogo = () => {
+  return <Logo />
 }

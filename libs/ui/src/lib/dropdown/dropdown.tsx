@@ -5,7 +5,6 @@ import Logo from '../pabaucliniclogo/Logo'
 import LaunchSVG from './LaunchSVG'
 import {
   UserOutlined,
-  OrderedListOutlined,
   NotificationOutlined,
   QuestionCircleOutlined,
   GlobalOutlined,
