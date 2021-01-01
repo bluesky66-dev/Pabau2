@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useRef } from 'react'
+import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
 import './PabauHeader.less'
 import Logo from './logo/Logo'
 import { Button, Dropdown, Input, Layout, Menu, Row, Col, Avatar, Badge } from 'antd'
@@ -14,7 +14,7 @@ import {
   PlusCircleFilled,
   DownOutlined,
 } from '@ant-design/icons'
-
+import PabauNotification from './notification/notification'
 const { Header } = Layout
 
 /* eslint-disable-next-line */
@@ -41,6 +41,7 @@ const items = [
 
 export const PabauHeader: FC = () => {
   const searchRef = useRef<Input>(null)
+  const [notification, setNotification] = useState<boolean>(false)
   useEffect(() => {
     window.document.onkeydown = (e) => {
       if (e.ctrlKey && e.code === 'KeyA') {
@@ -60,6 +61,7 @@ export const PabauHeader: FC = () => {
       ))}
     </Menu>
   )
+
   return (
     <Header
       className="pabau-header"
@@ -91,7 +93,10 @@ export const PabauHeader: FC = () => {
               <SettingOutlined className="header-icon" />
             </div>
             <div className="pr-4">
-              <BellOutlined className="header-icon" />
+              <BellOutlined
+                className="header-icon"
+                onClick={() => setNotification(!notification)}
+              />
             </div>
             <div className="pr-4">
               <MailOutlined className="header-icon" />
@@ -123,6 +128,12 @@ export const PabauHeader: FC = () => {
           </div>
         </Col>
       </Row>
+      {notification && (
+        <PabauNotification
+          openDrawer={notification}
+          closeDrawer={() => setNotification(!notification)}
+        />
+      )}
     </Header>
   )
 }

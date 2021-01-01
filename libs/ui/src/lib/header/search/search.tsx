@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from 'react'
+import React, { FC, useRef, useState } from 'react'
 import '../PabauHeader.less'
 import './search.less'
 import { Input, Popover, Avatar, Image, Modal, Form, Button } from 'antd'
@@ -24,15 +24,6 @@ export const Search: FC = () => {
   const [form] = Form.useForm()
 
   const searchRef = useRef<Input>(null)
-  useEffect(() => {
-    window.document.onkeydown = (e) => {
-      if (e.ctrlKey && e.code === 'KeyA') {
-        e.preventDefault()
-        // noinspection BadExpressionStatementJS
-        searchRef.current?.focus()
-      }
-    }
-  })
 
   const searchMenu = () => {
     return (
