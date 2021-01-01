@@ -1,133 +1,220 @@
-.clinic-menu {
-  min-width: 300px;
-  .clinic-menu-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #F1F1F1;
-    .logo {
-      display: flex;
-      align-items: center;
-      .container-pabau {
-        padding: 0.5rem;
-      }
-    }
-    .header {
-      color: #9292A3;
-      font-size: 14px;
-      font-weight: 400;
-    }
+.avatar-popover {
+  .ant-popover-inner-content {
+    padding: 0px;
   }
   .userinfo {
-    border-bottom: 1px solid #F1F1F1;
-    .user-name {
-      font-style: normal;
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 18px;
-      color: #3D3D46;
+    border: none;
+  }
+  .avatar-menu {
+    user-select: none;
+    width: 304px;
+    // transition: all 0.5s ease;
+
+    .ant-menu-item-selected {
+      background-color: transparent;
     }
-    .user-balance {
-      padding-top: 7px;
-      font-size: 14px;
-      color: #9292A3; 
-      p {
-        margin-bottom: 0;
-        opacity: 0.5;
+
+    .ant-menu-item {
+      line-height: 0;
+      margin-bottom: 0px;
+    }
+    .userinfo {
+      padding: 11px 17px;
+      border-top: 1px solid #f1f1f1;
+      border-bottom: 1px solid #f1f1f1;
+      height: 84px;
+      .user-name {
+        font-family: Circular-Std-Bold;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18px;
+        color: #3d3d46;
+      }
+      .user-balance {
+        p {
+          font-family: Circular-Std-Book;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 18px;
+          color: #9292a3;
+          margin-bottom: 0;
+          margin-top: 7px;
+          opacity: 0.5;
+        }
+        span {
+          font-family: Circular-Std-Book;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 18px;
+          color: #9292a3;
+        }
+      }
+    }
+
+    .dropdown-icon {
+      color: #9292a3;
+    }
+
+    .task-text {
+      padding-left: 19px !important;
+    }
+
+    .dropdown-menu {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .dropdown-header {
+        display: flex;
+        align-items: center;
+        .logo {
+          color: #9292a3;
+        }
+        .header-text {
+          padding-left: 10px;
+          font-family: Circular-Std-Book;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 18px;
+          color: #9292a3;
+        }
       }
     }
   }
 
-  .dropdown {
-    border-bottom: 1px solid #F1F1F1;
-  }
-  .dropdown-menu {
-    line-height: 2.2rem;
-    font-size: 14px;
-    color: #9292A3;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .dropdown-setting {
+  .avatar-sub-menu {
+    width: 304px;
+    user-select: none;
+    
+    .ant-menu-item-selected {
+      background-color: transparent;
+    }
+    .sub-dropdown-list {
       display: flex;
       align-items: center;
-      .antdicon {
-        font-size: large;
+      justify-content: space-between;
+      height: auto;
+      span {
+        color: #9292a3;
+      }
+      .sub-header-text {
+        padding-left: 10px;
+        font-family: 'Circular-Std-Bold';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        color: #3d3d46;
+      }
+      .sub-dropdown-list-header {
+        display: flex;
+        align-items: center;
+      }
+      .sub-dropdown-list-header-text {
+        width: 70%;
+        white-space: normal;
+        word-break: break-all;
+        font-family: Circular-Std-Medium;
+        padding-left: 8px;
+        line-height: 18px;
+        color: #9292a3;
       }
     }
-    .dropdown-item {
-      padding-left: 10px;
+  }
+
+  .avatar-help-menu {
+    width: 304px;
+    user-select: none;
+    .ant-menu-item-selected {
+      background-color: transparent;
     }
- 
-    .dropdown-logo {
-      color: #9292A3;
+    .ant-menu-item {
+      line-height: 0;
+      margin-bottom: 0px;
+      // margin-top: 0px;
     }
-  }  
-}
-
-
-.select-company-style {
-  color: #3D3D46;
-  font-size: 14px;
-  padding-left: 10px;
-}
-
-.company-clinic-menu {
-  width: 320px;
-  .company-clinic-menu-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #F1F1F1;
-    .logo {
+    .avatar-help-sub-list {
       display: flex;
       align-items: center;
+      .feedback-align-content {
+        display: flex;
+        align-items: center;
+        p {
+          margin-bottom: 0px;
+          font-family: 'Circular-Std-Bold';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          color: #3d3d46;
+        }
+        span {
+          font-size: 14px;
+          padding-left: 5px;
+          font-family: Circular-Std-Medium;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 18px;
+          color: #9292A3;
+        }
+      }
     }
-    .header {
-      color: #9292A3;
-      font-size: 14px;
-      font-weight: 400;
+
+    .lang-sub-dropdown-menu {
+      display: flex;
+      align-items: center;
+      span {
+        color: #9292a3;
+      }
+      .ant-menu-item-selected {
+        background-color: transparent;
+      }
+      .lang-align-content {
+        display: flex;
+        align-items: center;
+        p {
+          margin-bottom: 0px;
+          font-family: 'Circular-Std-Bold';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          color: #3d3d46;
+        }
+      }
     }
   }
 
-  .dropdown {
-    border-bottom: 1px solid #F1F1F1;
+  .text-nowrap {
+    white-space: nowrap !important;
   }
-  .dropdown-menu {
-    line-height: 2.2rem;
-    font-size: 14px;
-    color: #9292A3;
+
+  .ant-dropdown-menu-item {
+    padding-top: 15px;
+    padding-left: 18px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+  }
+
+  .active-menu {
+    color: #54b2d3 !important;
+  }
+  .check-icon {
+    font-size: 16px;
+  }
+  .language-text-align {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    .dropdown-setting {
-      width: 80%;
-      word-break: break-all;
-      display: flex;
-      align-items: center;
-    }
-    .dropdown-item {
+  }
+  .language-flag-center {
+    display: flex;
+    align-items: center;
+    span {
       padding-left: 10px;
-      width: 70%;
-      white-space: normal;
-      word-break: break-all;
-      line-height: 1.5rem;
+      color: #9292a3;
+      font-family: 'Circular-Std-Medium';
     }
- 
-    .dropdown-logo {
-      color: #9292A3;
-    }
-  }  
-}
-.select-company-style {
-  color: #3D3D46;
-  font-size: 14px;
-  padding-left: 10px;
-}
-.check-icon {
-  font-size: large;
-  color: #54B2D3;
-}
-.active {
-  color: #54B2D3 !important;
+  }
 }

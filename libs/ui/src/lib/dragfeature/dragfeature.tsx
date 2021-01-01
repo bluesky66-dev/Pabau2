@@ -1,59 +1,18 @@
 import React, { FC, useState } from 'react'
-import { Table, Button } from 'antd'
-import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc'
-import { MenuOutlined, LockFilled } from '@ant-design/icons'
+import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 import { data } from './mock'
 import './dragfeature.less'
-import 'antd/dist/antd.css'
-
-const DragHandle = SortableHandle(() => (
-  <MenuOutlined style={{ cursor: 'pointer', color: '#999' }} />
-))
-
-const columns = [
-  {
-    title: '',
-    dataIndex: 'sort',
-    width: 30,
-    className: 'drag-visible',
-    render: function renderDragHandle() {
-      return <DragHandle />
-    },
-  },
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    className: 'drag-visible',
-  },
-  {
-    title: 'DATE ADDED',
-    dataIndex: 'createdDate',
-    className: 'drag-visible',
-  },
-  {
-    title: 'STATUS',
-    dataIndex: 'isActive',
-    className: 'drag-visible',
-    render: function ActiveBtn() {
-      return (
-        <Button size="small" className="activeBtn">
-          ACTIVE
-        </Button>
-      )
-    },
-  },
-  {
-    title: '',
-    dataIndex: 'isLocked',
-    className: 'drag-visible',
-    render: function lockValue(val) {
-      return val && <LockFilled />
-    },
-  },
-]
-
-const SortItem = SortableElement((props) => <tr {...props} />)
-const SortContainer = SortableContainer((props) => <tbody {...props} />)
+import './styles/style.scss'
+import { Row, Col } from 'antd'
+import {
+  MenuOutlined,
+  SearchOutlined,
+  FilterOutlined,
+  LockOutlined,
+  ArrowUpOutlined,
+  LeftOutlined,
+  RightOutlined,
+} from '@ant-design/icons'
 
 function array_move(arr, old_index, new_index) {
   if (new_index >= arr.length) {
@@ -79,27 +38,140 @@ export const DragFeature: FC = () => {
     }
   }
 
-  const DraggableBodyRow = ({ className, style, ...restProps }) => {
-    const index = dataSource.findIndex((x) => x.index === restProps['data-row-key'])
-    return <SortItem index={index} {...restProps} />
-  }
+  const SortableList = SortableContainer(({ items }) => {
+    return (
+      <tbody>
+        {items.map((value, index) => (
+          <SortableItem key={value.index} index={value.index} value={value} />
+        ))}
+      </tbody>
+    )
+  })
 
-  const DraggableContainer = (props) => (
-    <SortContainer useDragHandle helperClass="row-dragging" onSortEnd={onSortEnd} {...props} />
-  )
+  const SortableItem = SortableElement(({ value }) => {
+    return (
+      <tr tabIndex={0}>
+        <td align="center">
+          <MenuOutlined style={{ fontSize: '14px', color: '#B8B8C0' }} />
+          {/* <img src={require('../../assets/images/table-icon.svg').default} alt="table-icon" /> */}
+        </td>
+        <td>
+          <span className="table-data-text-style">{value.name}</span>
+          {value.isLocked && <LockOutlined className="lock-icon-style" />}
+        </td>
+        <td>
+          <button
+            className={`${value.isActive ? 'active-btn-style' : 'disable-btn'} text-center`}
+            disabled={value.isActive}
+          >
+            {' '}
+            {value.isActive ? 'Activated' : 'Deactivated'}{' '}
+          </button>
+        </td>
+      </tr>
+    )
+  })
 
   return (
-    <Table
-      pagination={false}
-      dataSource={dataSource}
-      columns={columns}
-      rowKey="index"
-      components={{
-        body: {
-          wrapper: DraggableContainer,
-          row: DraggableBodyRow,
-        },
-      }}
-    />
+    <div className="container-fluid left-right-spacing">
+      <section className="header-bottom-space">
+        <div className="home-banner">
+          <div className="p-4">
+            <Row>
+              <Col span={12}>
+                <div className="setup-text">
+                  <p>
+                    Setup &gt; <span className="pl-2"> Marketing sources</span>
+                  </p>
+                  <h5>Marketing Sources</h5>
+                </div>
+              </Col>
+              <Col
+                span={12}
+                style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}
+              >
+                <div style={{ display: 'flex' }}>
+                  <div className="search-menu pr-4">
+                    <SearchOutlined style={{ fontSize: '14px' }} />
+                    <span className="filter-left-space"> Search</span>
+                  </div>
+                  <div className="search-menu">
+                    <FilterOutlined style={{ fontSize: '14px' }} />
+                    <span className="filter-left-space"> Filter</span>
+                  </div>
+                  <div className="create-source-btn pl-4">
+                    <button className="create-source-btn-style">Create Source</button>
+                  </div>
+                </div>
+              </Col>
+            </Row>
+          </div>
+          <table className="fixed">
+            <thead>
+              <tr>
+                <th className="text-center">
+                  <MenuOutlined style={{ fontSize: '14px', color: '#B8B8C0' }} />
+                </th>
+                <th className="table-highlight">
+                  <div className="d-flex align-items-center">
+                    <span className="table-heading-style pr-2">NAME</span>
+                    <ArrowUpOutlined className="up-icon-style" />
+                  </div>
+                </th>
+                <th>
+                  <span className="table-heading-child pr-2">STATUS</span>
+                </th>
+              </tr>
+            </thead>
+            <SortableList items={dataSource} onSortEnd={onSortEnd} helperClass="row-dragging" />
+            <tbody>
+              <tr>
+                <td colSpan={2}>
+                  <p className="pl-3 footer-text-style">
+                    SHOWING <span className="footer-child-text"> 8 </span> RESULTS FROM{' '}
+                    <span className="footer-child-text"> 40 </span>
+                  </p>
+                </td>
+                <td style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div className="pagination-left-space">
+                      <LeftOutlined className="pagination-icon" />
+                    </div>
+                    <div className="pr-2">
+                      <div className="pagination-style text-center text-white pagination-style pagination-background-color">
+                        1
+                      </div>
+                    </div>
+                    <div className="pr-2">
+                      <div className="pagination-style text-center pagination-style pagination-text-color">
+                        2
+                      </div>
+                    </div>
+                    <div className="pr-2">
+                      <div className="pagination-style text-center pagination-style pagination-text-color">
+                        3
+                      </div>
+                    </div>
+                    <div className="pr-2">
+                      <div className="pagination-style text-center pagination-style pagination-text-color">
+                        4
+                      </div>
+                    </div>
+                    <div className="">
+                      <div className="pagination-style text-center pagination-style pagination-text-color">
+                        5
+                      </div>
+                    </div>
+                    <div className="pagination-right-space">
+                      <RightOutlined className="pagination-icon" />
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
   )
 }

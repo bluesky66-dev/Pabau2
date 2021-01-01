@@ -1,14 +1,17 @@
 /* eslint-disable */
 
 import React from 'react'
-import Modal from './modal'
+import BasicModalStory from './basicmodal'
+import ConfirmModalStory from './confirmmodal'
 
 export default {
-  component: Modal,
-  title: 'Modal',
-  args: { loading: false, visible: true, mSourceName: 'Facebook' },
-  argTypes: { disabled: { control: { type: 'boolean' } }, onClick: { action: 'clicked' } },
+  component: BasicModalStory,
+  title: 'BasicModal',
+  args: { title: "Basic Modal", modalWidth: 600 },
+  argTypes: { onClick: { action: 'clicked' } },
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 
-export const primary = (args: any) => <Modal {...args} />
+
+export const BasicModal = (args: any) => <BasicModalStory {...args} />
+export const ConfirmModal = (args: any) => <ConfirmModalStory {...args} />

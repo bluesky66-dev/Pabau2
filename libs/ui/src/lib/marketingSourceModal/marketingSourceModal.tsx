@@ -1,7 +1,11 @@
 import React, { PropsWithChildren, useState } from 'react'
-import { Form, Modal as AntModal, Button, Input, Checkbox } from 'antd'
+import { Form, Modal as AntModal, Button, Input } from 'antd'
 import { CloseOutlined } from '@ant-design/icons'
 import './modal.less'
+import '../fonts.scss'
+import '../../assets/scss/pretty-checkbox.scss'
+import ActiveSVG from '../../assets/images/active.svg'
+import NotActiveSVG from '../../assets/images/notactive.svg'
 
 export interface ModalInterface {
   loading?: boolean
@@ -18,14 +22,14 @@ export function Modal({
   const [form] = Form.useForm()
 
   const [mSourceName, setMSourceName] = useState('Facebook')
-  const [activate, setActivate] = useState(false)
+  const [activate, setActivate] = useState(true)
 
   return (
     <AntModal
       visible={visible}
       title={
         <div className="modal-heading-align">
-          <h1 className="ant-modal-title">Create Marketing Source</h1>
+          <div className="ant-modal-title">Create Marketing Source</div>
           <CloseOutlined />
         </div>
       }
@@ -50,6 +54,7 @@ export function Modal({
               <Input
                 className="input-style"
                 placeholder="Enter marketing source name"
+                value={mSourceName}
                 defaultValue={mSourceName}
                 onChange={(e) => setMSourceName(e.target.value)}
               />
@@ -57,24 +62,24 @@ export function Modal({
           </div>
         </div>
         <div className="modal-footer">
-          <div className="active">
-            <Checkbox
-              className="active-style"
-              checked={activate}
-              onChange={() => setActivate(!activate)}
-            >
-              Activate
-            </Checkbox>
+          <div className="pretty p-svg p-toggle p-plain">
+            <input type="checkbox" checked={activate} onChange={() => setActivate(!activate)} />
+            <div className="state p-off">
+              <img className="svg" src={NotActiveSVG} alt="none-active-state" />
+              <label>Activate</label>
+            </div>
+            <div className="state p-on">
+              <img className="svg" src={ActiveSVG} alt="active-state" />
+              <label>Activate</label>
+            </div>
           </div>
           <Button
-            key="submit"
             type="primary"
             className="createBtn"
             size="large"
             loading={loading}
             onClick={onClick}
-            htmlType="submit"
-            disabled={!mSourceName || !activate}
+            disabled={!mSourceName}
           >
             Create
           </Button>

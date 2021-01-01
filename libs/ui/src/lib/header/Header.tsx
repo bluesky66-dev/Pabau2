@@ -16,8 +16,7 @@ import {
 const { Header } = Layout
 
 /* eslint-disable-next-line */
-export interface HeaderProps {
-}
+export interface HeaderProps {}
 
 const items = [
   {
@@ -88,7 +87,7 @@ export const Header2: FC = () => {
         <div className="searchBox">
           <label>
             <SearchOutlined className="searchBoxIcon" />
-            <Input allowClear className="searchBoxInner" ref={searchRef} />
+            <Input allowClear className="searchBoxInner" ref={} />
           </label>
         </div>
 
