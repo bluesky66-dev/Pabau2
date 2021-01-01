@@ -29,6 +29,7 @@ export default class ShowcaseLayout extends React.Component {
   }
 
   generateDOM() {
+    // @ts-ignore
     return _.map(this.state.layouts.lg, function (l, i) {
       return (
         <div key={i} className={l.static ? 'static' : ''} style={{ backgroundColor: 'green' }}>
@@ -51,6 +52,7 @@ export default class ShowcaseLayout extends React.Component {
   }
 
   onCompactTypeChange() {
+    // @ts-ignore
     const { compactType: oldCompactType } = this.state
     const compactType =
       oldCompactType === 'horizontal'
@@ -62,6 +64,7 @@ export default class ShowcaseLayout extends React.Component {
   }
 
   onLayoutChange(layout, layouts) {
+    // @ts-ignore
     this.props.onLayoutChange(layout, layouts)
   }
 
@@ -75,16 +78,16 @@ export default class ShowcaseLayout extends React.Component {
     return (
       <ResponsiveReactGridLayout
         {...this.props}
-        layouts={this.state.layouts}
+        layouts={(this.state as any).layouts}
         onBreakpointChange={this.onBreakpointChange}
         onLayoutChange={this.onLayoutChange}
         // WidthProvider option
         measureBeforeMount={false}
         // I like to have it animate on mount. If you don't, delete `useCSSTransforms` (it's default `true`)
         // and set `measureBeforeMount={true}`.
-        useCSSTransforms={this.state.mounted}
-        compactType={this.state.compactType}
-        preventCollision={!this.state.compactType}
+        useCSSTransforms={(this.state as any).mounted}
+        compactType={(this.state as any).compactType}
+        preventCollision={!(this.state as any).compactType}
       >
         {this.generateDOM()}
       </ResponsiveReactGridLayout>
@@ -92,10 +95,12 @@ export default class ShowcaseLayout extends React.Component {
   }
 }
 
+// @ts-ignore
 ShowcaseLayout.propTypes = {
   onLayoutChange: PropTypes.func.isRequired,
 }
 
+// @ts-ignore
 ShowcaseLayout.defaultProps = {
   className: 'layout',
   rowHeight: 30,
