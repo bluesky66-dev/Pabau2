@@ -1,7 +1,7 @@
 image: node:alpine
 
 options:
-  max-time: 10 # configure default 10 minute timeout
+  max-time: 15 # max time in minutes for each step
 
 definitions:
   caches:
