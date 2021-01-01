@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 import { data } from './mock'
 import './dragfeature.less'
-import './styles/style.scss'
+//import './styles/style.scss'
 import { Row, Col } from 'antd'
 import {
   MenuOutlined,

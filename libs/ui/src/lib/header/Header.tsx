@@ -2,16 +2,16 @@ import React, { FC, useCallback, useEffect, useRef } from 'react'
 
 import './Header.less'
 import Logo from '../logo/Logo'
-import screenfull from 'screenfull'
-import { Button, Dropdown, Input, Layout, Menu } from 'antd'
+// import screenfull from 'screenfull'
+import { Button, Input, Layout, Menu } from 'antd'
 import {
   CalendarOutlined,
-  ExpandOutlined,
   PoundOutlined,
   SearchOutlined,
   SmileOutlined,
   UserOutlined,
 } from '@ant-design/icons'
+import { Dropdown } from '@pabau/ui'
 
 const { Header } = Layout
 
@@ -83,16 +83,16 @@ export const Header2: FC = () => {
         {/*  />*/}
         {/*)}*/}
 
-        <Logo />
+        <Logo className="imageSpin" />
         <div className="searchBox">
           <label>
             <SearchOutlined className="searchBoxIcon" />
-            <Input allowClear className="searchBoxInner" ref={} />
+            <Input allowClear className="searchBoxInner" />
           </label>
         </div>
 
         <div style={{ textAlign: 'right', float: 'right', width: 'min-content' }}>
-          <Dropdown overlay={overlay}>
+          <Dropdown>
             <Button
               style={{ borderRadius: 5 }}
               type="primary"

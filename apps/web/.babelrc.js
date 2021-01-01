@@ -1,11 +1,13 @@
 // .babelrc.js
 module.exports = {
   presets: [
-    ['next/babel'],
     [
-      '@babel/preset-env',
+      'next/babel',
       {
-        modules: false,
+        'preset-env': {},
+        // 'styled-jsx': {
+        //   plugins: ['styled-jsx-plugin-postcss'],
+        // },
       },
     ],
   ],
@@ -14,6 +16,7 @@ module.exports = {
       'import',
       {
         libraryName: 'antd',
+        // libraryDirectory: 'es',
         style: true,
       },
     ],

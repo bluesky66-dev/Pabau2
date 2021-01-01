@@ -1,7 +1,7 @@
 import React from 'react'
 import { Menu, Dropdown as AntDropDown, Button } from 'antd'
 import { LeftOutlined, CheckCircleFilled } from '@ant-design/icons'
-import { languageMenu } from './lang-logos/index'
+import { languageMenu } from './lang-logos'
 
 const menu = (
   <Menu className="clinic-menu">

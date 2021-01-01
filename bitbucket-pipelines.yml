@@ -1,11 +1,15 @@
 image: node:alpine
 
+options:
+  max-time: 10 # configure default 10 minute timeout
+
 definitions:
   caches:
     nextcache: .next/cache
   services:
     docker:
       memory: 2048
+
 pipelines:
   default:
     - step:

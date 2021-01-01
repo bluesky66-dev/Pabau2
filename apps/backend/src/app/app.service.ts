@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
-import { yup } from '@pabau/yup'
 import logger from '../lib/logger'
+import { yup } from '@pabau/yup'
 
 @Injectable()
 export class AppService {

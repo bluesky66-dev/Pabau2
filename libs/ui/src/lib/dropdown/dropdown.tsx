@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { HTMLProps, useState } from 'react'
 import { Menu, Button, Popover } from 'antd'
 import './dropdown.less'
 import LaunchSVG from './LaunchSVG'
@@ -19,7 +19,7 @@ import { ReactComponent as PABAULOGO } from './company/pabaulogo.svg'
 import { ReactComponent as JASVG } from './company/JA.svg'
 import { ReactComponent as UPSVG } from './UP.svg'
 import { ReactComponent as TaskSVG } from './Vector.svg'
-import { languageMenu } from './language/lang-logos/index'
+import { languageMenu } from './language/lang-logos'
 
 export interface DropDownInterface {
   loading?: boolean
@@ -28,7 +28,7 @@ export interface DropDownInterface {
   handleSubmit?: () => void
 }
 
-export function Dropdown(): JSX.Element {
+export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
   const [activeMenu, setActiveMenu] = useState('Menu')
 
   const menu = (
@@ -41,7 +41,7 @@ export function Dropdown(): JSX.Element {
         <RightOutlined className="dropdown-icon" />
       </Menu.Item>
       <Menu.Item className="userinfo">
-        <div className="user-name">William Branham</div>
+        <div className="user-name">William Brandham</div>
         <div className="user-balance">
           <p>Balance</p>
           <span>9445,00</span>

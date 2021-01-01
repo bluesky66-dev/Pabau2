@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import './Menu.less'
 import { CalendarOutlined, PoundOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
-// import Link from 'next/link'
+import Link from 'next/link'
 
 const items = [
   {
@@ -45,8 +45,8 @@ export const Menu: FC = () => {
   // const router = useRouter()
   return (
     <div className="main">
-      {items.map(({ name, icon = <PoundOutlined />, url }) => (
-        <a key={name} href={url || '/'}>
+      {items.map(({ name, icon = <PoundOutlined />, url = '/' }) => (
+        <Link key={name} href={url}>
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a style={{ height: '100%' }}>
             <Button
@@ -58,7 +58,7 @@ export const Menu: FC = () => {
               <span style={{ fontWeight: 600 }}>{name}</span>
             </Button>
           </a>
-        </a>
+        </Link>
       ))}
     </div>
   )
