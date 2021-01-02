@@ -1,0 +1,81 @@
+@keyframes spin {
+  from {
+    transform: rotateX(0deg);
+    transform-origin: center;
+  }
+  to {
+    transform: rotateX(360deg);
+    transform-origin: center;
+  }
+}
+
+
+.imageSpin {
+  display: flex;
+  color: red;
+}
+
+:global {
+
+  svg .spin {
+    //transform: rotateX(0deg);
+    animation-name: spin;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-iteration-count: 1;
+    animation-duration: 0.8s;
+  }
+
+  .imageSpin:hover {
+  }
+
+  svg .spin {
+    animation-iteration-count: infinite;
+    animation-duration: .5s;
+    animation-name: spin;
+    animation-play-state: running;
+  }
+
+  svg {
+    .animation-delay-1 {
+      animation-delay: 0s;
+    }
+
+    .animation-delay-2 {
+      animation-delay: 0.1s;
+    }
+
+    .animation-delay-3 {
+      animation-delay: 0.2s;
+    }
+
+    .animation-delay-4 {
+      animation-delay: 0.3s;
+    }
+
+    .animation-delay-5 {
+      animation-delay: 0.4s;
+    }
+
+    .imageSpin:hover .animation-delay-1 {
+      animation-delay: 0s;
+    }
+
+    .imageSpin:hover .animation-delay-2 {
+      animation-delay: 1s;
+    }
+
+    .imageSpin:hover .animation-delay-3 {
+      animation-delay: 2s;
+    }
+
+    .imageSpin:hover .animation-delay-4 {
+      animation-delay: 3s;
+    }
+
+    .imageSpin:hover .animation-delay-5 {
+      animation-delay: 4s;
+    }
+
+  }
+}

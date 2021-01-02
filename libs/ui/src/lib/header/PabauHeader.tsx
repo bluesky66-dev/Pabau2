@@ -1,19 +1,20 @@
-import React, { FC, useCallback, useEffect, useRef } from 'react'
-import './PabauHeader.less'
-import Logo from './logo/Logo'
-import { Button, Dropdown, Input, Layout, Menu, Row, Col, Avatar, Badge } from 'antd'
+import React, { FC, HTMLProps, useCallback, useEffect, useRef } from 'react'
+import { Avatar, Badge, Col, Dropdown, Input, Layout, Menu, Row } from 'antd'
 import {
-  CalendarOutlined,
-  PoundOutlined,
-  SearchOutlined,
-  SmileOutlined,
-  UserOutlined,
-  SettingOutlined,
   BellOutlined,
+  CalendarOutlined,
+  DownOutlined,
   MailOutlined,
   PlusCircleFilled,
-  DownOutlined,
+  PoundOutlined,
+  SearchOutlined,
+  SettingOutlined,
+  SmileOutlined,
+  UserOutlined,
 } from '@ant-design/icons'
+import { Logo } from '../logo/Logo'
+import styles from './Header.module.less'
+import { Button, ButtonTypes } from '@pabau/ui'
 
 const { Header } = Layout
 
@@ -39,7 +40,7 @@ const items = [
   },
 ]
 
-export const PabauHeader: FC = () => {
+export const PabauHeader: FC = ({ ...props }: HTMLProps<HTMLElement>) => {
   const searchRef = useRef<Input>(null)
   useEffect(() => {
     window.document.onkeydown = (e) => {
@@ -62,24 +63,25 @@ export const PabauHeader: FC = () => {
   )
   return (
     <Header
-      className="pabau-header"
+      className={styles.pabauHeader}
       style={{
         backgroundColor: 'white',
         // padding: '1rem',
-        position: 'sticky',
+        // position: 'sticky',
 
+        height: '64px',
         top: 0,
         zIndex: 2,
         border: '1px solid #ECEDF0',
       }}
     >
-      <Row style={{ paddingLeft: '30px', paddingRight: '30px' }}>
-        <Col span={8}>
+      <Row style={{ paddingLeft: '30px', paddingRight: '30px', height: '100%' }}>
+        <Col span={8} style={{ height: '100%', padding: '16px' }}>
           <Logo />
         </Col>
-        <Col span={8}>
+        <Col span={8} style={{ height: '64px' }}>
           <Input
-            className="search-input-style"
+            className={styles.searchInputStyle}
             placeholder="Search clients or leads"
             prefix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
             ref={searchRef}
@@ -88,22 +90,22 @@ export const PabauHeader: FC = () => {
         <Col span={8}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
             <div className="pr-4">
-              <SettingOutlined className="header-icon" />
+              <SettingOutlined className={styles.headerIcon} />
             </div>
             <div className="pr-4">
-              <BellOutlined className="header-icon" />
+              <BellOutlined className={styles.headerIcon} />
             </div>
             <div className="pr-4">
-              <MailOutlined className="header-icon" />
+              <MailOutlined className={styles.headerIcon} />
             </div>
 
             <Dropdown overlay={overlay}>
               <Button
                 style={{ borderRadius: 5 }}
-                type="primary"
-                shape="round"
-                size="large"
-                className="button create-btn-style"
+                btnType={ButtonTypes.primary}
+                // shape="round"
+                // size="large"
+                className={styles.createBtnStyle}
               >
                 <PlusCircleFilled /> Create
               </Button>

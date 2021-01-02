@@ -1,8 +1,8 @@
-import React, { PropsWithChildren } from 'react'
-import './button.less'
+import React, { FC, HTMLProps } from 'react'
 import { Button as AntButton } from 'antd'
+import { NativeButtonProps } from 'antd/lib/button/button'
 
-enum ButtonTypes {
+export enum ButtonTypes {
   default = 'default',
   primary = 'primary',
   ghost = 'ghost',
@@ -15,36 +15,34 @@ enum ButtonSize {
   middle = 'middle',
   large = 'large',
 }
-export interface P {
-  size?: ButtonSize
+export type P = {
   btnType?: ButtonTypes
   disabled?: boolean
   color?: string
   backgroundColor?: string
-  onClick?: () => void
-}
+  style?: HTMLProps<HTMLElement>['style']
+  className?: string
+} & NativeButtonProps
 
-export function Button({
-  size,
-  btnType,
+export const Button: FC<P> = ({
+  className,
   disabled,
   color,
   backgroundColor,
   children,
-  onClick,
-}: PropsWithChildren<P>): JSX.Element {
-  return (
-    <AntButton
-      type={btnType}
-      size={size}
-      disabled={disabled}
-      onClick={() => onClick?.()}
-      color={color}
-      style={{ backgroundColor: backgroundColor }}
-    >
-      {children}
-    </AntButton>
-  )
-}
+  style,
+  ...props
+}) => (
+  <AntButton
+    style={{ ...style, ...{ backgroundColor: backgroundColor } }}
+    //size={ButtonSize.large}
+    disabled={disabled}
+    color={color}
+    className={className}
+    {...props}
+  >
+    {children}
+  </AntButton>
+)
 
 export default Button

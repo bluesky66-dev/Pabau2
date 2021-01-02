@@ -1,10 +1,10 @@
 import React, { FC, useCallback, useEffect, useState } from 'react'
 import { ReactComponent as IllustrationSvg } from './example.svg'
-import './Layout.less'
-import Header from '../header/Header'
+import Header from '../header/PabauHeader'
 import Menu from '../menu/Menu'
-import { Button, Card, Layout as AntLayout, Switch } from 'antd'
+import { Card, Layout as AntLayout, Switch } from 'antd'
 import { useRouter } from 'next/router'
+import { Button, ButtonTypes } from '../button/button'
 
 const { Content, Footer } = AntLayout
 
@@ -42,7 +42,7 @@ export const Layout: FC<P> = ({
   }, [setPageHasLoaded])
 
   return (
-    <div className={pageHasLoaded ? '' : 'fade-appear'} {...{ rest }}>
+    <div className={pageHasLoaded ? '' : 'fade-appear'} {...rest}>
       <Header />
       <Menu />
       <Content
@@ -70,7 +70,11 @@ export const Layout: FC<P> = ({
             <>
               <h3 style={{ userSelect: 'none' }}>{pageTitle}</h3>
               {newButtonText && onNewClicked && (
-                <Button type="primary" style={{ float: 'right' }} onClick={onNewClick}>
+                <Button
+                  btnType={ButtonTypes.primary}
+                  style={{ float: 'right' }}
+                  onClick={onNewClick}
+                >
                   {newButtonText}
                 </Button>
               )}
@@ -123,9 +127,7 @@ export const Layout: FC<P> = ({
             }}
           >
             <div>
-              <Button type="default" danger>
-                Delete
-              </Button>
+              <Button btnType={ButtonTypes.default}>Delete</Button>
             </div>
             <div
               style={{
@@ -144,10 +146,18 @@ export const Layout: FC<P> = ({
                   title="yo"
                 />
               </label>
-              <Button type="default" style={{ margin: '0 .5em' }} onClick={onCancelClick}>
+              <Button
+                btnType={ButtonTypes.default}
+                style={{ margin: '0 .5em' }}
+                onClick={onCancelClick}
+              >
                 Cancel
               </Button>
-              <Button type="primary" disabled={isActive} style={{ margin: '0 .5em' }}>
+              <Button
+                btnType={ButtonTypes.primary}
+                disabled={isActive}
+                style={{ margin: '0 .5em' }}
+              >
                 Save
               </Button>
             </div>

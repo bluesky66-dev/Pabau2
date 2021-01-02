@@ -8,6 +8,10 @@ module.exports = {
         // 'styled-jsx': {
         //   plugins: ['styled-jsx-plugin-postcss'],
         // },
+
+        'styled-jsx': {
+          //plugins: ['styled-jsx-plugin-less'],
+        },
       },
     ],
   ],
@@ -17,7 +21,7 @@ module.exports = {
       {
         libraryName: 'antd',
         // libraryDirectory: 'es',
-        style: true,
+        style: false,
       },
     ],
     [

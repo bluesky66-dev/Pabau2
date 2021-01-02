@@ -1,8 +1,4 @@
 import React, { FC, useCallback, useEffect, useRef } from 'react'
-
-import './Header.less'
-import Logo from '../logo/Logo'
-// import screenfull from 'screenfull'
 import { Button, Input, Layout, Menu } from 'antd'
 import {
   CalendarOutlined,
@@ -11,12 +7,9 @@ import {
   SmileOutlined,
   UserOutlined,
 } from '@ant-design/icons'
-import { Dropdown } from '@pabau/ui'
+import { Dropdown, Logo } from '@pabau/ui'
 
 const { Header } = Layout
-
-/* eslint-disable-next-line */
-export interface HeaderProps {}
 
 const items = [
   {
@@ -68,6 +61,113 @@ export const Header2: FC = () => {
         zIndex: 2,
       }}
     >
+      <style jsx>{`
+        @keyframes spin {
+          from {
+            transform: rotateX(0deg);
+            transform-origin: center;
+            opacity: 0;
+          }
+          to {
+            transform: rotateX(360deg);
+            transform-origin: center;
+          }
+        }
+        @keyframes spin2 {
+          from {
+            transform: rotateX(0deg);
+            transform-origin: center;
+          }
+          to {
+            transform: rotateX(360deg);
+            transform-origin: center;
+          }
+        }
+        .imageSpin {
+          display: flex;
+        }
+        .imageSpin svg .spin {
+          //transform: rotateX(0deg);
+          animation-name: spin2;
+          animation-timing-function: linear;
+          animation-fill-mode: both;
+          animation-iteration-count: 1;
+          animation-duration: 0.8s;
+        }
+        .imageSpin:hover {
+        }
+        .imageSpin:hover svg .spin {
+          animation-iteration-count: infinite;
+          animation-duration: 5s;
+          animation-name: spin2;
+          animation-play-state: running;
+        }
+        .animation-delay-1 {
+          animation-delay: 0s;
+        }
+        .animation-delay-2 {
+          animation-delay: 0.1s;
+        }
+        .animation-delay-3 {
+          animation-delay: 0.2s;
+        }
+        .animation-delay-4 {
+          animation-delay: 0.3s;
+        }
+        .animation-delay-5 {
+          animation-delay: 0.4s;
+        }
+
+        .imageSpin:hover .animation-delay-1 {
+          animation-delay: 0s;
+        }
+        .imageSpin:hover .animation-delay-2 {
+          animation-delay: 1s;
+        }
+        .imageSpin:hover .animation-delay-3 {
+          animation-delay: 2s;
+        }
+        .imageSpin:hover .animation-delay-4 {
+          animation-delay: 3s;
+        }
+        .imageSpin:hover .animation-delay-5 {
+          animation-delay: 4s;
+        }
+
+        .button.ant-btn-primary {
+          border-color: transparent;
+          color: black;
+          margin: 0 0.1em;
+          background-color: transparent;
+        }
+        .button.ant-btn-primary:hover {
+          border-color: #1890ff;
+        }
+
+        .searchBox {
+          margin-left: 1em;
+          margin-right: 1em;
+          flex: 1;
+        }
+
+        .searchBox .searchBoxInner {
+          //display: none;
+        }
+        .searchBoxIcon {
+          font-size: 1.8em;
+          z-index: 2;
+          position: absolute;
+          line-height: 70px;
+          cursor: pointer;
+        }
+        .searchBoxInner:not(:hover) {
+          border-color: transparent;
+        }
+        .searchBox:focus-within .searchBoxIcon {
+          color: rgba(0, 0, 0, 0);
+          transition: 0.2s linear;
+        }
+      `}</style>
       <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
         {/*{screenfull.isEnabled && (*/}
         {/*  <Button*/}

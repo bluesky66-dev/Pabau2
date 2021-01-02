@@ -1,6 +1,6 @@
 import React from 'react'
 import { AppProps } from 'next/app'
-import './styles.less'
+import '../styles/global.less'
 import {
   ApolloClient,
   ApolloLink,
@@ -124,13 +124,13 @@ const client = new ApolloClient({
 })
 
 export default function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
-  console.log('rendering _app', pageProps.initialApolloState)
   return (
     <ApolloProvider client={client}>
       <style jsx global>{`
         @font-face {
           font-family: 'Circular-Std-Black';
-          src: local('Circular-Std-Black'), url(/fonts/CircularStd-Black.otf) format('opentype');
+          src: local('Circular-Std-Black'),
+            url(../public/fonts/CircularStd-Black.otf) format('opentype');
         }
 
         @font-face {

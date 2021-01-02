@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import './Menu.less'
 import { CalendarOutlined, PoundOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import Link from 'next/link'
@@ -42,9 +41,17 @@ const items = [
 ]
 
 export const Menu: FC = () => {
-  // const router = useRouter()
   return (
     <div className="main">
+      <style jsx>{`
+        .main {
+          background-color: #dbf7ff;
+          height: 56px;
+          line-height: 56px;
+          padding: 0 1em;
+          overflow: hidden;
+        }
+      `}</style>
       {items.map(({ name, icon = <PoundOutlined />, url = '/' }) => (
         <Link key={name} href={url}>
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
