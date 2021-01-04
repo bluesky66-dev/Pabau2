@@ -1,4 +1,4 @@
-import React, { FC, HTMLProps, useCallback, useEffect, useRef } from 'react'
+import React, { FC, HTMLProps, useCallback, useEffect, useRef, useState } from 'react'
 import { Avatar, Badge, Col, Dropdown, Input, Layout, Menu, Row } from 'antd'
 import {
   BellOutlined,
@@ -12,7 +12,7 @@ import {
   SmileOutlined,
   UserOutlined,
 } from '@ant-design/icons'
-import { Logo } from '../logo/Logo'
+import Logo  from '../logo/Logo'
 import styles from './Header.module.less'
 import { Button, ButtonTypes } from '@pabau/ui'
 import PabauNotification from './notification/notification'
