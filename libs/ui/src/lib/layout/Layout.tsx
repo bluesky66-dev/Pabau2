@@ -1,10 +1,10 @@
 import React, { FC, useCallback, useEffect, useState } from 'react'
 import { ReactComponent as IllustrationSvg } from './example.svg'
-import Header from '../header/PabauHeader'
 import Menu from '../menu/Menu'
 import { Card, Layout as AntLayout, Switch } from 'antd'
 import { useRouter } from 'next/router'
 import { Button, ButtonTypes } from '../button/button'
+import { Header } from '@pabau/ui'
 
 const { Content, Footer } = AntLayout
 

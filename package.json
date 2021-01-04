@@ -126,7 +126,7 @@
   "husky": {
     "skipCI": true,
     "hooks": {
-      "pre-commit": "yarn run affected:lint --uncommitted=true",
+      "pre-commit": "yarn run affected:lint --uncommitted=true && yarn run nx run web:export",
       "pre-push": "yarn run affected:build"
     }
   }
