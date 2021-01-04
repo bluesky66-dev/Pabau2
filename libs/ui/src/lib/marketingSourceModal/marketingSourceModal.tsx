@@ -3,7 +3,7 @@ import { Form, Modal as AntModal, Button, Input } from 'antd'
 import { CloseOutlined } from '@ant-design/icons'
 import './modal.less'
 //import '../fonts.less'
-// import '../../assets/scss/pretty-checkbox.scss'
+import '../../assets/less/pretty-checkbox.less'
 import ActiveSVG from '../../assets/images/active.svg'
 import NotActiveSVG from '../../assets/images/notactive.svg'
 
