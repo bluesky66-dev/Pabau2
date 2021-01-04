@@ -53,14 +53,14 @@ module.exports = async ({ config, mode }) => {
   })
 
   config.module.rules.push(
-    {
-      test: /\.(png|jpe?g|gif|webp)$/,
-      loader: require.resolve('url-loader'),
-      options: {
-        limit: 10000, // 10kB
-        name: '[name].[hash:7].[ext]',
-      },
-    },
+    // {
+    //   test: /\.(png|jpe?g|gif|webp)$/,
+    //   loader: require.resolve('url-loader'),
+    //   options: {
+    //     limit: 10000, // 10kB
+    //     name: '[name].[hash:7].[ext]',
+    //   },
+    // },
     {
       test: /\.svg$/,
       oneOf: [
