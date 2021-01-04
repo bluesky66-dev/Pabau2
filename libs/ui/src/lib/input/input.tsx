@@ -1,17 +1,18 @@
 import React, { PropsWithChildren } from 'react'
 import { Input as AntInput, Form } from 'antd'
+import { FormProps } from 'antd/lib/form'
 
 enum ButtonSize {
   small = 'small',
   middle = 'middle',
   large = 'large',
 }
-export interface CheckBoxProps {
+
+export interface CheckBoxProps extends FormProps {
   text?: string
   size?: ButtonSize
   disabled?: boolean
   placeHolderText?: string
-  requiredMark?: any
   reqiredMsg?: string
 }
 
@@ -22,11 +23,12 @@ export function Input({
   placeHolderText,
   requiredMark = false,
   reqiredMsg,
+  ...props
 }: PropsWithChildren<CheckBoxProps>): JSX.Element {
   const [form] = Form.useForm()
 
   return (
-    <Form form={form} requiredMark={requiredMark} layout="vertical">
+    <Form form={form} requiredMark={requiredMark} layout="vertical" {...props}>
       <Form.Item
         label="Name"
         name="marketingSorce"

@@ -10,11 +10,6 @@ export enum ButtonTypes {
   link = 'link',
   text = 'text',
 }
-enum ButtonSize {
-  small = 'small',
-  middle = 'middle',
-  large = 'large',
-}
 export type P = {
   btnType?: ButtonTypes
   disabled?: boolean

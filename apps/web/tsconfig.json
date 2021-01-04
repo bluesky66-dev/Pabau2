@@ -14,7 +14,8 @@
     "noEmit": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "typeRoots": ["./types"]
+    "typeRoots": ["./types"],
+    "moduleResolution": "Node"
   },
   "include": [
     "**/*.ts",

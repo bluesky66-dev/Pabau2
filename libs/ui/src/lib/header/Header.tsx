@@ -1,5 +1,5 @@
-import React, { FC, useCallback, useEffect, useRef } from 'react'
-import { Button, Input, Layout, Menu } from 'antd'
+import React, { FC, useEffect, useRef } from 'react'
+import { Button, Input, Layout } from 'antd'
 import {
   CalendarOutlined,
   PoundOutlined,
@@ -10,25 +10,6 @@ import {
 import { Dropdown, Logo } from '@pabau/ui'
 
 const { Header } = Layout
-
-const items = [
-  {
-    name: 'Contact',
-    icon: <UserOutlined />,
-  },
-  {
-    name: 'Lead',
-    icon: <SmileOutlined />,
-  },
-  {
-    name: 'Appointment',
-    icon: <CalendarOutlined />,
-  },
-  {
-    name: 'Invoice',
-    icon: <PoundOutlined />,
-  },
-]
 
 export const Header2: FC = () => {
   const searchRef = useRef<Input>(null)
@@ -41,16 +22,6 @@ export const Header2: FC = () => {
       }
     }
   })
-  const handleMenuClick = useCallback(() => alert('Not yet done'), [])
-  const overlay = (
-    <Menu onClick={handleMenuClick}>
-      {items.map(({ name, icon }) => (
-        <Menu.Item key={name} icon={icon}>
-          {name}
-        </Menu.Item>
-      ))}
-    </Menu>
-  )
   return (
     <Header
       style={{

@@ -1,5 +1,5 @@
 import React, { FC, HTMLProps, useCallback, useEffect, useRef } from 'react'
-import { Avatar, Badge, Col, Dropdown, Input, Layout, Menu, Row } from 'antd'
+import { Avatar, Badge, Dropdown, Input, Layout, Menu } from 'antd'
 import {
   BellOutlined,
   CalendarOutlined,
@@ -7,19 +7,21 @@ import {
   MailOutlined,
   PlusCircleFilled,
   PoundOutlined,
-  SearchOutlined,
   SettingOutlined,
   SmileOutlined,
   UserOutlined,
 } from '@ant-design/icons'
+
 import { Logo } from '../logo/Logo'
 import styles from './Header.module.less'
 import { Button, ButtonTypes } from '@pabau/ui'
+import { Search } from '../search/search'
 
 const { Header } = Layout
 
 /* eslint-disable-next-line */
-export interface HeaderProps {}
+export interface HeaderProps {
+}
 
 const items = [
   {
@@ -41,16 +43,6 @@ const items = [
 ]
 
 export const PabauHeader: FC = ({ ...props }: HTMLProps<HTMLElement>) => {
-  const searchRef = useRef<Input>(null)
-  useEffect(() => {
-    window.document.onkeydown = (e) => {
-      if (e.ctrlKey && e.code === 'KeyA') {
-        e.preventDefault()
-        // noinspection BadExpressionStatementJS
-        searchRef.current?.focus()
-      }
-    }
-  })
   const handleMenuClick = useCallback(() => alert('Not yet done'), [])
   const overlay = (
     <Menu onClick={handleMenuClick}>
@@ -75,56 +67,54 @@ export const PabauHeader: FC = ({ ...props }: HTMLProps<HTMLElement>) => {
         border: '1px solid #ECEDF0',
       }}
     >
-      <Row style={{ paddingLeft: '30px', paddingRight: '30px', height: '100%' }}>
-        <Col span={8} style={{ height: '100%', padding: '16px' }}>
-          <Logo />
-        </Col>
-        <Col span={8} style={{ height: '64px' }}>
-          <Input
-            className={styles.searchInputStyle}
-            placeholder="Search clients or leads"
-            prefix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
-            ref={searchRef}
-          />
-        </Col>
-        <Col span={8}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-            <div className="pr-4">
-              <SettingOutlined className={styles.headerIcon} />
-            </div>
-            <div className="pr-4">
-              <BellOutlined className={styles.headerIcon} />
-            </div>
-            <div className="pr-4">
-              <MailOutlined className={styles.headerIcon} />
-            </div>
+      <div
+        style={{
+          paddingLeft: '30px',
+          paddingRight: '30px',
+          height: '100%',
+          display: 'flex',
+          placeItems: 'center',
+        }}
+      >
+        <Logo />
+        <Search style={{ margin: '0 2em', flex: 1 }} />
+        <Dropdown overlay={overlay} className={styles.pointer}>
+          <SettingOutlined className={styles.headerIcon} />
+        </Dropdown>
+        <Dropdown overlay={overlay} className={styles.pointer}>
+          <BellOutlined className={styles.headerIcon} />
+        </Dropdown>
+        <Dropdown overlay={overlay} className={styles.pointer}>
+          <MailOutlined className={styles.headerIcon} />
+        </Dropdown>
 
-            <Dropdown overlay={overlay}>
-              <Button
-                style={{ borderRadius: 5 }}
-                btnType={ButtonTypes.primary}
-                // shape="round"
-                // size="large"
-                className={styles.createBtnStyle}
-              >
-                <PlusCircleFilled /> Create
-              </Button>
-            </Dropdown>
-            <div className="pl-4">
-              <Badge
-                dot
-                color="#65CD98"
-                offset={[-2, 30]}
-                size="default"
-                style={{ height: '8px', width: '8px' }}
-              >
-                <Avatar size={40} icon={<UserOutlined />} />
-              </Badge>
-            </div>
-            <DownOutlined style={{ paddingLeft: '10px', color: '#9292A3' }} />
-          </div>
-        </Col>
-      </Row>
+        <div style={{ padding: '0 1rem' }}>
+          <Dropdown overlay={overlay}>
+            <Button
+              style={{ borderRadius: 5 }}
+              btnType={ButtonTypes.primary}
+              // shape="round"
+              // size="large"
+              className={styles.createBtnStyle}
+            >
+              <PlusCircleFilled /> Create
+            </Button>
+          </Dropdown>
+        </div>
+
+        <div className="pl-4">
+          <Badge
+            dot
+            color="#65CD98"
+            offset={[-2, 30]}
+            size="default"
+            style={{ height: '8px', width: '8px' }}
+          >
+            <Avatar size={40} icon={<UserOutlined />} />
+          </Badge>
+        </div>
+        <DownOutlined style={{ paddingLeft: '10px', color: '#9292A3' }} />
+      </div>
     </Header>
   )
 }

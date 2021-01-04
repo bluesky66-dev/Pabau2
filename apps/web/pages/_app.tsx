@@ -1,6 +1,5 @@
 import React from 'react'
 import { AppProps } from 'next/app'
-import '../styles/global.less'
 import {
   ApolloClient,
   ApolloLink,
@@ -12,6 +11,8 @@ import {
 import { WebSocketLink } from '@apollo/client/link/ws'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { OperationDefinitionNode } from 'graphql'
+
+require('../styles/global.less')
 
 const cache = new InMemoryCache()
 const GRAPHQL_ENDPOINT = 'wss://api.new.pabau.com/v1/graphql'

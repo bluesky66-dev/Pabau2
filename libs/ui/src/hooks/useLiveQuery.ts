@@ -1,4 +1,4 @@
-import { DocumentNode, gql, useQuery } from '@apollo/client'
+import { DocumentNode, gql, QueryResult, useQuery } from '@apollo/client'
 
 function convert(doc: DocumentNode): DocumentNode {
   // console.log('previously', doc.definitions[0].operation)
@@ -18,7 +18,7 @@ function convert(doc: DocumentNode): DocumentNode {
   return gql(`subscription ${snipped}`)
 }
 
-export function useLiveQuery(query: DocumentNode) {
+export function useLiveQuery(query: DocumentNode): Omit<QueryResult, 'subscribeToMore'> {
   const { subscribeToMore, ...rest } = useQuery(query, {
     //ssr: typeof window === 'undefined',
     ssr: false,
@@ -38,6 +38,6 @@ export function useLiveQuery(query: DocumentNode) {
       })
     },
   })
-  const innerData = rest.data ? rest.data[Object.keys(rest.data)[0]] : undefined
-  return { innerData, ...rest }
+  const data = rest.data ? rest.data[Object.keys(rest.data)[0]] : undefined
+  return { ...rest, data }
 }
