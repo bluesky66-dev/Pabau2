@@ -12,7 +12,7 @@ import {
   SmileOutlined,
   UserOutlined,
 } from '@ant-design/icons'
-import Logo  from '../logo/Logo'
+import Logo from '../logo/Logo'
 import styles from './Header.module.less'
 import { Button, ButtonTypes } from '@pabau/ui'
 import PabauNotification from './notification/notification'

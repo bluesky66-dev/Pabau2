@@ -11,6 +11,7 @@ import {
   LeftOutlined,
   RightOutlined,
 } from '@ant-design/icons'
+import './styles/style.less'
 
 function array_move(arr, old_index, new_index) {
   if (new_index >= arr.length) {
