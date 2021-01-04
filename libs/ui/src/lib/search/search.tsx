@@ -1,5 +1,5 @@
 import React, { FC, HTMLProps, useEffect, useRef, useState } from 'react'
-import './search.less'
+import styles from './search.less'
 import { Input, Popover, Avatar, Image, Modal, Form, Button } from 'antd'
 import {
   SearchOutlined,
@@ -184,7 +184,7 @@ export const Search: FC<P> = ({ ...props }) => {
         }
         width={360}
         footer={false}
-        wrapClassName="advance-search-modal"
+        wrapClassName={styles.advanceSearchModal}
         closable={false}
       >
         <Form

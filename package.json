@@ -5,7 +5,7 @@
   "scripts": {
     "nx": "nx",
     "start": "nx serve",
-    "start:production": "nx affected web:export && npx serve dist/apps/web/exported",
+    "start:production": "nx affected --uncommitted=true --target=export && npx serve dist/apps/web/exported",
     "build": "nx build",
     "test": "nx test",
     "lint": "nx workspace-lint && nx lint",
