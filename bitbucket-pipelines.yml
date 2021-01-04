@@ -1,11 +1,15 @@
 image: node:alpine
 
+options:
+  max-time: 15 # max time in minutes for each step
+
 definitions:
   caches:
     nextcache: .next/cache
   services:
     docker:
       memory: 2048
+
 pipelines:
   default:
     - step:

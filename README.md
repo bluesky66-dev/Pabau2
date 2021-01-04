@@ -7,7 +7,7 @@ This monorepo contains all of our code (with the exception of `/.env`). The mono
 ### Paths
 - `/apps` - where most of our projects reside.
 - `/apps/web` - the main application Frontend.
-- `/apps/*-e2e` - Cypress testing for apps.
+- `/apps/*-e2e` - End-to-end testing with Cypress.
 - `/libs` - where any shared libraries reside. These can be referenced (used) in any app.
 - `/libs/ui` - our shared UI components.
 - `/tools` - repo-level tooling.

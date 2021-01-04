@@ -1,13 +1,16 @@
-import React, { FC } from 'react'
-import './styles.less'
 import { Table } from 'antd'
-import { Layout, Button2 as Button } from '@pabau/ui'
-import { gql, useMutation, useQuery } from '@apollo/client'
+import { Layout, Button, useLiveQuery } from '@pabau/ui'
+import { gql, useMutation } from '@apollo/client'
+import { NextPage } from 'next'
 
 export interface Values {
   id?: string
   name: string
 }
+export interface MarketingSourceList {
+  marketing_source: Values[]
+}
+
 export const MARKETING_SOURCE_LIST = gql`
   query MarketingSourceListQuery {
     marketing_source(order_by: { created_at: desc }) {
@@ -17,9 +20,6 @@ export const MARKETING_SOURCE_LIST = gql`
     }
   }
 `
-export interface MarketingSourceList {
-  marketing_source: Values[]
-}
 
 const MARKETING_SOURCE_DELETE = gql`
   mutation MarketingSourceDelete($id: uuid!) {
@@ -29,12 +29,10 @@ const MARKETING_SOURCE_DELETE = gql`
   }
 `
 
-export const Index: FC = () => {
-  //const sub = useSubscription(MARKETING_SOURCE_LIST, {})
-  const { loading, error, data } = useQuery(MARKETING_SOURCE_LIST)
+export const Index: NextPage = () => {
+  const { innerData, error, loading } = useLiveQuery(MARKETING_SOURCE_LIST)
   const [deleteMutation] = useMutation(MARKETING_SOURCE_DELETE)
 
-  //if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
 
   return (
@@ -43,7 +41,7 @@ export const Index: FC = () => {
         loading={loading}
         style={{ height: '100vh' }}
         sticky={true}
-        pagination={data?.marketing_source?.length > 10 ? {} : false}
+        pagination={innerData?.length > 10 ? {} : false}
         scroll={{ x: 'max-content' }}
         columns={[
           {
@@ -81,9 +79,10 @@ export const Index: FC = () => {
             },
           },
         ]}
-        dataSource={data?.marketing_source.map((e) => ({ key: e.id, ...e }))}
+        dataSource={innerData?.map((e) => ({ key: e.id, ...e }))}
       />
     </Layout>
   )
 }
+
 export default Index

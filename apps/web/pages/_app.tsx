@@ -1,6 +1,6 @@
 import React from 'react'
 import { AppProps } from 'next/app'
-import './styles.less'
+import '../styles/global.less'
 import {
   ApolloClient,
   ApolloLink,
@@ -80,6 +80,7 @@ const terminatingLink = wsLink
   : httpLink
 
 const client = new ApolloClient({
+  ssrMode: false,
   link: ApolloLink.from([
     // onError(({ graphQLErrors, networkError }) => {
     //   if (graphQLErrors) {
@@ -125,6 +126,28 @@ const client = new ApolloClient({
 export default function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <ApolloProvider client={client}>
+      <style jsx global>{`
+        @font-face {
+          font-family: 'Circular-Std-Black';
+          src: local('Circular-Std-Black'),
+            url(../public/fonts/CircularStd-Black.otf) format('opentype');
+        }
+
+        @font-face {
+          font-family: 'Circular-Std-Bold';
+          src: url('/fonts/CircularStd-Bold.otf') format('opentype');
+        }
+
+        @font-face {
+          font-family: 'Circular-Std-Book';
+          src: url('/fonts/CircularStd-Book.otf') format('opentype');
+        }
+
+        @font-face {
+          font-family: 'Circular-Std-Medium';
+          src: url('/fonts/CircularStd-Medium.otf') format('opentype');
+        }
+      `}</style>
       <Component {...pageProps} />
     </ApolloProvider>
   )

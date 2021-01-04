@@ -1,8 +1,6 @@
 import React, { FC, useState } from 'react'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
 import { data } from './mock'
-import './dragfeature.less'
-import './styles/style.scss'
 import { Row, Col } from 'antd'
 import {
   MenuOutlined,
@@ -74,6 +72,46 @@ export const DragFeature: FC = () => {
 
   return (
     <div className="container-fluid left-right-spacing">
+      <style jsx>{`
+        .row-dragging {
+          background: #fafafa;
+          border: 1px solid #ccc;
+        }
+
+        .ant-table-cell .drag-visible {
+          cursor: pointer !important;
+        }
+
+        // .row-dragging td {
+        //   // visibility: hidden;
+        // }
+
+        // .row-dragging .drag-visible {
+        //   visibility: visible;
+        // }
+
+        .activeBtn {
+          color: #ffffff !important;
+          background-color: #54b2d3 !important;
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+          border-radius: 4px !important;
+          font-size: 12px !important;
+        }
+        .text-white {
+          color: #fff !important;
+        }
+        .text-center {
+          text-align: center !important;
+        }
+        // thead th {
+        //   background-color: #ECEDF0 !important;
+        //   color: #A0A0A0 !important;
+        // }
+        // tr:hover {
+        //   background-color: #ECEDF0 !important;
+        // }
+      `}</style>
       <section className="header-bottom-space">
         <div className="home-banner">
           <div className="p-4">

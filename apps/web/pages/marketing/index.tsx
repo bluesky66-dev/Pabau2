@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import './styles.less'
 import { Layout } from '@pabau/ui'
 import Link from 'next/link'
 

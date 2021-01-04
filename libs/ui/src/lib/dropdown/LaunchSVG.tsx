@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import './Logo.less'
 import { ReactComponent as LaunchSvg } from './launch.svg'
 
 export const LaunchSVG: FC = () => (

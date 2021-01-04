@@ -1,18 +1,11 @@
 import React, { FC } from 'react'
-import './index.module.less'
-import useTranslation from 'next-translate/useTranslation'
-import { Layout, Steps } from '@pabau/ui'
+import { Layout } from '@pabau/ui'
+import { Button } from 'antd'
 
 const Index: FC = () => {
-  const { t } = useTranslation()
-
   return (
     <Layout pageTitle="Welcome">
-      dashboard/buzzfeed to go here. BUT FOR NOW, CLICK MARKETING TAB. Translate:{' '}
-      {t('common:marketingsource.header.edit')}
-      <Steps></Steps>
-      <hr />
-      v0.0.1
+      <Button type="primary">yes</Button>
     </Layout>
   )
 }
