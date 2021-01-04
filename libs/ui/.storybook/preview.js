@@ -1,1 +1,1 @@
-// import { addDecorator } from '@storybook/react'
+import "../src/assets/fonts/fonts.css";
