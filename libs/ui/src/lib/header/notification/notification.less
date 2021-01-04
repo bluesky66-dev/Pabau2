@@ -39,6 +39,9 @@
     cursor: pointer;
     font-style: normal;
   }
+  button:focus {
+    outline: none;
+  }
   .active-tabs {
     border-bottom: 3px solid #54b2d3;
     color: #54b2d3;
@@ -79,12 +82,12 @@
   padding-right: 24px;
   padding-bottom: 16px;
   padding-top: 6px;
-  .appointment-align {
+  .notify-align {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-top: 10px;
-    .appointment-logo {
+    .logo {
       p {
         text-transform: uppercase;
         margin-bottom: 0;
@@ -101,7 +104,7 @@
       }
     }
 
-    .appointment-time {
+    .time {
       p {
         margin-bottom: 0;
         font-weight: 400;
@@ -113,7 +116,7 @@
       }
     }
   }
-  .appointment-remove {
+  .notify-title-desc {
     h1 {
       margin-top: 8px;
       font-family: Circular-Std-Bold;
@@ -129,9 +132,35 @@
       font-weight: normal;
       font-size: 14px;
       line-height: 18px;
-      color: #9292A3;
+      color: #9292a3;
       width: 80%;
     }
+  }
+  .lead-title-desc {
+    h1 {
+      margin-top: 8px;
+      font-family: Circular-Std-Bold;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 18px;
+      color: #3d3d46;
+    }
+    p {
+      font-family: Circular-Std-Medium;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 18px;
+      color: #9292a3;
+    }
+  }
+  .learn-more {
+    font-family: Circular-Std-Bold;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 18px;
+    color: #54b2d3;
   }
 }
 

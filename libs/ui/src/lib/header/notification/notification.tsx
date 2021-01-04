@@ -5,6 +5,8 @@ import { CloseOutlined } from '@ant-design/icons'
 import AppointmentSVG from '../../../assets/images/notification.svg'
 import ReportSVG from '../../../assets/images/notification-report.svg'
 import LeadSVG from '../../../assets/images/notification-lead.svg'
+import { ReactComponent as Lead1SVG } from '../../../assets/images/lead.svg'
+import { ReactComponent as Lead2SVG } from '../../../assets/images/lead1.svg'
 
 export interface NotificationProps {
   openDrawer: boolean
@@ -53,6 +55,29 @@ export const PabauNotification: FC<NotificationProps> = ({
     },
   ]
 
+  const notificationLeadsData = [
+    {
+      Today: [
+        {
+          leadDate: new Date(),
+          title: 'New features to sell vouchers with blase messages',
+          desc:
+            'Encourage clients and loved ones to treat themselves right in the time for the festive season!',
+        },
+      ],
+    },
+    {
+      '14 December': [
+        {
+          leadDate: new Date(),
+          title: 'Are you ready for reopening soon?',
+          desc:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean malesuada lobortis ex eget viverra. Ut viverra non nisi eget viverra.',
+        },
+      ],
+    },
+  ]
+
   const closeDrawerMenu = () => {
     setNotificationDrawer(false)
     closeDrawer()
@@ -87,48 +112,82 @@ export const PabauNotification: FC<NotificationProps> = ({
         </div>
       </div>
 
-      {notificationData.map((notify, index) => {
-        return Object.keys(notify).map((notification) => {
-          return (
-            <>
-              <div className="notification-align today-text-top-space">
-                <h2>{notification}</h2>
-                <CloseOutlined />
-              </div>
-              {notify[notification].map((dayNotify, index) => {
-                return (
-                  <>
-                    <div key={index} className="notification-card">
-                      <div className="appointment-align">
-                        <div className="appointment-logo flex ">
-                          <Image
-                            src={
-                              dayNotify.notificationType === 'Appointment'
-                                ? AppointmentSVG
-                                : dayNotify.notificationType === 'Report'
-                                ? ReportSVG
-                                : LeadSVG
-                            }
-                          />
-                          <p className="text-sm">{dayNotify.notificationType}</p>
+      {notifyTab === 'Clients' &&
+        notificationData.map((notify, index) => {
+          return Object.keys(notify).map((notification) => {
+            return (
+              <>
+                <div className="notification-align today-text-top-space">
+                  <h2>{notification}</h2>
+                  <CloseOutlined />
+                </div>
+                {notify[notification].map((dayNotify, index) => {
+                  return (
+                    <>
+                      <div key={index} className="notification-card">
+                        <div className="notify-align">
+                          <div className="logo flex ">
+                            <Image
+                              src={
+                                dayNotify.notificationType === 'Appointment'
+                                  ? AppointmentSVG
+                                  : dayNotify.notificationType === 'Report'
+                                  ? ReportSVG
+                                  : LeadSVG
+                              }
+                            />
+                            <p className="text-sm">{dayNotify.notificationType}</p>
+                          </div>
+                          <div className="time">
+                            <p className="text-md gray-text-color">{dayNotify.notificationTime}</p>
+                          </div>
                         </div>
-                        <div className="appointment-time">
-                          <p className="text-md gray-text-color">{dayNotify.notificationTime}</p>
+                        <div className="notify-title-desc">
+                          <h1>{dayNotify.title}</h1>
+                          <p>{dayNotify.desc}</p>
                         </div>
                       </div>
-                      <div className="appointment-remove">
-                        <h1>{dayNotify.title}</h1>
-                        <p>{dayNotify.desc}</p>
+                      <div className="card-border"></div>
+                    </>
+                  )
+                })}
+              </>
+            )
+          })
+        })}
+
+      {notifyTab === 'Leads' &&
+        notificationLeadsData.map((notify, index) => {
+          return Object.keys(notify).map((notification) => {
+            return (
+              <>
+                <div className="notification-align today-text-top-space">
+                  <h2>{notification}</h2>
+                </div>
+                {notify[notification].map((dayNotify, index) => {
+                  return (
+                    <>
+                      <div key={index} className="notification-card">
+                        <div className="notify-align">
+                          <div className="logo flex">
+                            {notification === 'Today' ? <Lead1SVG /> : <Lead2SVG />}
+                            <p className="text-sm">{dayNotify.notificationType}</p>
+                          </div>
+                        </div>
+                        <div className="lead-title-desc">
+                          <h1>{dayNotify.title}</h1>
+                          <p>{dayNotify.desc}</p>
+                        </div>
+                        <span className="text-md learn-more">Learn more</span>
                       </div>
-                    </div>
-                    <div className="card-border"></div>
-                  </>
-                )
-              })}
-            </>
-          )
-        })
-      })}
+                      <div className="card-border"></div>
+                    </>
+                  )
+                })}
+              </>
+            )
+          })
+        })}
     </Drawer>
   )
 }
