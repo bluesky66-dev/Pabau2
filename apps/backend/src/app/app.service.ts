@@ -4,7 +4,7 @@ import { yup } from '@pabau/yup'
 
 @Injectable()
 export class AppService {
-  getData(data?: any): { message: string } {
+  getData(data?): { message: string } {
     if (data) logger(data);
     return { message: 'Welcome to backend! This should say yup --> ' + yup() + JSON.stringify(data) }
   }

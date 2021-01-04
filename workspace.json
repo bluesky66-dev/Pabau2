@@ -94,7 +94,8 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/ui/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": ["libs/ui/**/*.{ts,tsx,js,jsx}"],
+            "maxWarnings": 0
           }
         },
         "test": {
