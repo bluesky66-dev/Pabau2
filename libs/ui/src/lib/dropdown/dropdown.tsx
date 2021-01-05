@@ -1,5 +1,5 @@
 import React, { HTMLProps, useState } from 'react'
-import { Menu, Button, Popover, Image } from 'antd'
+import { Menu, Badge, Avatar, Popover, Image } from 'antd'
 import LaunchSVG from './LaunchSVG'
 import {
   RightOutlined,
@@ -13,12 +13,14 @@ import {
   InfoCircleOutlined,
   ExclamationOutlined,
   PlaySquareOutlined,
+  CaretDownOutlined,
 } from '@ant-design/icons'
 import { ReactComponent as PABAULOGO } from './company/pabaulogo.svg'
 import { ReactComponent as JASVG } from './company/JA.svg'
 import { ReactComponent as UPSVG } from './UP.svg'
 import { ReactComponent as TaskSVG } from './Vector.svg'
 import { languageMenu } from './language/lang-logos'
+import './dropdown.less'
 
 export interface DropDownInterface {
   loading?: boolean
@@ -218,260 +220,26 @@ export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
   }
 
   return (
-    <div style={{ margin: '15px' }}>
-      <style jsx>{`
-        .avatar-popover .ant-popover-inner-content {
-          padding: 0px;
-        }
+    <Popover
+      content={avatarMenu}
+      trigger="click"
+      placement="bottomRight"
+      overlayClassName="avatar-popover"
+    >
+      <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '20px' }}>
+        <Badge
+          dot
+          color="#65CD98"
+          offset={[-2, 30]}
+          size="default"
+          style={{ height: '8px', width: '8px' }}
+        >
+          <Avatar size={40} icon={<UserOutlined />} />
+        </Badge>
 
-        .avatar-popover .userinfo {
-          border: none;
-        }
-
-        .avatar-popover .avatar-menu {
-          user-select: none;
-          width: 304px;
-        }
-
-        .avatar-popover .avatar-menu .ant-menu-item-selected {
-          background-color: transparent;
-        }
-
-        .avatar-popover .avatar-menu .ant-menu-item {
-          line-height: 0;
-          margin-bottom: 0px;
-          transition: none;
-        }
-
-        .avatar-popover .avatar-menu .userinfo {
-          padding: 11px 17px;
-          border-top: 1px solid #f1f1f1;
-          border-bottom: 1px solid #f1f1f1;
-          height: 84px;
-        }
-
-        .avatar-popover .avatar-menu .userinfo .user-name {
-          font-family: Circular-Std-Bold;
-          font-style: normal;
-          font-weight: 500;
-          font-size: 14px;
-          line-height: 18px;
-          color: #3d3d46;
-        }
-
-        .avatar-popover .avatar-menu .userinfo .user-balance p {
-          font-family: Circular-Std-Book;
-          font-style: normal;
-          font-weight: normal;
-          font-size: 14px;
-          line-height: 18px;
-          color: #9292a3;
-          margin-bottom: 0;
-          margin-top: 7px;
-          opacity: 0.5;
-        }
-
-        .avatar-popover .avatar-menu .userinfo .user-balance span {
-          font-family: Circular-Std-Book;
-          font-style: normal;
-          font-weight: normal;
-          font-size: 14px;
-          line-height: 18px;
-          color: #9292a3;
-        }
-
-        .avatar-popover .avatar-menu .dropdown-icon {
-          color: #9292a3;
-        }
-
-        .avatar-popover .avatar-menu .task-text {
-          padding-left: 19px !important;
-        }
-
-        .avatar-popover .avatar-menu .dropdown-menu {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-
-        .avatar-popover .avatar-menu .dropdown-menu .dropdown-header {
-          display: flex;
-          align-items: center;
-        }
-
-        .avatar-popover .avatar-menu .dropdown-menu .dropdown-header .logo {
-          color: #9292a3;
-        }
-
-        .avatar-popover .avatar-menu .dropdown-menu .dropdown-header .header-text {
-          padding-left: 10px;
-          font-family: Circular-Std-Book;
-          font-style: normal;
-          font-weight: normal;
-          font-size: 14px;
-          line-height: 18px;
-          color: #9292a3;
-        }
-
-        .avatar-popover .avatar-sub-menu {
-          width: 304px;
-          user-select: none;
-        }
-
-        .avatar-popover .avatar-sub-menu .ant-menu-item-selected {
-          background-color: transparent;
-        }
-
-        .avatar-popover .avatar-sub-menu .sub-dropdown-list {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          height: auto;
-        }
-
-        .avatar-popover .avatar-sub-menu .sub-dropdown-list span {
-          color: #9292a3;
-        }
-
-        .avatar-popover .avatar-sub-menu .sub-dropdown-list .sub-header-text {
-          padding-left: 10px;
-          font-family: 'Circular-Std-Bold';
-          font-style: normal;
-          font-weight: 500;
-          font-size: 14px;
-          color: #3d3d46;
-        }
-
-        .avatar-popover .avatar-sub-menu .sub-dropdown-list .sub-dropdown-list-header {
-          display: flex;
-          align-items: center;
-        }
-
-        .avatar-popover .avatar-sub-menu .sub-dropdown-list .sub-dropdown-list-header-text {
-          width: 70%;
-          white-space: normal;
-          word-break: break-all;
-          font-family: Circular-Std-Medium;
-          padding-left: 8px;
-          line-height: 18px;
-          color: #9292a3;
-        }
-
-        .avatar-popover .avatar-help-menu {
-          width: 304px;
-          user-select: none;
-        }
-
-        .avatar-popover .avatar-help-menu .ant-menu-item-selected {
-          background-color: transparent;
-        }
-
-        .avatar-popover .avatar-help-menu .ant-menu-item {
-          line-height: 0;
-          margin-bottom: 0px;
-        }
-
-        .avatar-popover .avatar-help-menu .avatar-help-sub-list {
-          display: flex;
-          align-items: center;
-        }
-
-        .avatar-popover .avatar-help-menu .avatar-help-sub-list .feedback-align-content {
-          display: flex;
-          align-items: center;
-        }
-
-        .avatar-popover .avatar-help-menu .avatar-help-sub-list .feedback-align-content p {
-          margin-bottom: 0px;
-          font-family: 'Circular-Std-Bold';
-          font-style: normal;
-          font-weight: 500;
-          font-size: 14px;
-          color: #3d3d46;
-        }
-
-        .avatar-popover .avatar-help-menu .avatar-help-sub-list .feedback-align-content span {
-          font-size: 14px;
-          padding-left: 5px;
-          font-family: 'Circular-Std-Medium';
-          font-style: normal;
-          font-weight: normal;
-          line-height: 18px;
-          color: #9292a3;
-        }
-
-        .avatar-popover .avatar-help-menu .lang-sub-dropdown-menu {
-          display: flex;
-          align-items: center;
-        }
-
-        .avatar-popover .avatar-help-menu .lang-sub-dropdown-menu span {
-          color: #9292a3;
-        }
-
-        .avatar-popover .avatar-help-menu .lang-sub-dropdown-menu .ant-menu-item-selected {
-          background-color: transparent;
-        }
-
-        .avatar-popover .avatar-help-menu .lang-sub-dropdown-menu .lang-align-content {
-          display: flex;
-          align-items: center;
-        }
-
-        .avatar-popover .avatar-help-menu .lang-sub-dropdown-menu .lang-align-content p {
-          margin-bottom: 0px;
-          font-family: 'Circular-Std-Bold';
-          font-style: normal;
-          font-weight: 500;
-          font-size: 14px;
-          color: #3d3d46;
-        }
-
-        .avatar-popover .text-nowrap {
-          white-space: nowrap !important;
-        }
-
-        .avatar-popover .ant-dropdown-menu-item {
-          padding-top: 15px;
-          padding-left: 18px;
-          padding-right: 15px;
-          padding-bottom: 15px;
-        }
-
-        .avatar-popover .active-menu {
-          color: #54b2d3 !important;
-        }
-
-        .avatar-popover .check-icon {
-          font-size: 16px;
-        }
-
-        .avatar-popover .language-text-align {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-
-        .avatar-popover .language-flag-center {
-          display: flex;
-          align-items: center;
-        }
-
-        .avatar-popover .language-flag-center span {
-          padding-left: 10px;
-          color: #9292a3;
-          font-family: 'Circular-Std-Medium';
-        }
-      `}</style>
-      <Popover
-        content={avatarMenu}
-        trigger="click"
-        placement="bottomRight"
-        overlayClassName="avatar-popover"
-      >
-        <Button>Avatar</Button>
-      </Popover>
-    </div>
+        <CaretDownOutlined style={{ paddingLeft: '5px', color: '#9292A3' }} />
+      </div>
+    </Popover>
   )
 }
 
