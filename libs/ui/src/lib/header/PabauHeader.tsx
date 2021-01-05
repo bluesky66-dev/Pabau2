@@ -110,7 +110,7 @@ export const PabauHeader: FC = ({ ...props }: HTMLProps<HTMLElement>) => {
             <Dropdown overlay={overlay}>
               <Button
                 style={{ borderRadius: 5 }}
-                btnType={ButtonTypes.primary}
+                type={ButtonTypes.primary}
                 // shape="round"
                 // size="large"
                 className={styles.createBtnStyle}

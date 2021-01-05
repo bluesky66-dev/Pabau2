@@ -6,7 +6,7 @@ import Button from './button'
 export default {
   component: Button,
   title: 'Button',
-  args: { label: 'Pabau', disabled: false, btnType: '', size: 'medium' },
+  args: { label: 'Pabau', disabled: false, type: '', size: 'medium' },
   argTypes: {
     label: { control: { type: 'text' } },
     disabled: { control: { type: 'boolean' } },
@@ -14,7 +14,7 @@ export default {
     size: {
       control: { type: 'select', selected: 'medium', options: ['small', 'medium', 'large'] },
     },
-    btnType: {
+    type: {
       control: {
         type: 'select',
         selected: 'primary',
@@ -35,37 +35,37 @@ const ButtonStory = ({ ...args }) => <Button {...args}>{args.label}</Button>
 
 export const defaultBtn = ButtonStory.bind({})
 defaultBtn.args = {
-  btnType: 'default',
+  type: 'default',
 }
 
 export const primary = ButtonStory.bind({})
 primary.args = {
-  btnType: 'primary',
+  type: 'primary',
 }
 export const ghost = ButtonStory.bind({})
 ghost.args = {
-  btnType: 'ghost',
+  type: 'ghost',
 }
 export const dashed = ButtonStory.bind({})
 dashed.args = {
-  btnType: 'dashed',
+  type: 'dashed',
 }
 export const link = ButtonStory.bind({})
 link.args = {
-  btnType: 'link',
+  type: 'link',
 }
 export const text = ButtonStory.bind({})
 text.args = {
-  btnType: 'text',
+  type: 'text',
 }
 export const danger = ButtonStory.bind({})
 danger.args = {
-  btnType: 'danger',
+  type: 'danger',
 }
 
 export const diabled = ButtonStory.bind({})
-danger.args = {
-  btnType: 'primary',
+diabled.args = {
+  type: 'primary',
   disabled: true,
 }
 

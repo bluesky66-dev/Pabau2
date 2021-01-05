@@ -70,11 +70,7 @@ export const Layout: FC<P> = ({
             <>
               <h3 style={{ userSelect: 'none' }}>{pageTitle}</h3>
               {newButtonText && onNewClicked && (
-                <Button
-                  btnType={ButtonTypes.primary}
-                  style={{ float: 'right' }}
-                  onClick={onNewClick}
-                >
+                <Button type={ButtonTypes.primary} style={{ float: 'right' }} onClick={onNewClick}>
                   {newButtonText}
                 </Button>
               )}
@@ -127,7 +123,7 @@ export const Layout: FC<P> = ({
             }}
           >
             <div>
-              <Button btnType={ButtonTypes.default}>Delete</Button>
+              <Button type={ButtonTypes.default}>Delete</Button>
             </div>
             <div
               style={{
@@ -147,17 +143,13 @@ export const Layout: FC<P> = ({
                 />
               </label>
               <Button
-                btnType={ButtonTypes.default}
+                type={ButtonTypes.default}
                 style={{ margin: '0 .5em' }}
                 onClick={onCancelClick}
               >
                 Cancel
               </Button>
-              <Button
-                btnType={ButtonTypes.primary}
-                disabled={isActive}
-                style={{ margin: '0 .5em' }}
-              >
+              <Button type={ButtonTypes.primary} disabled={isActive} style={{ margin: '0 .5em' }}>
                 Save
               </Button>
             </div>
