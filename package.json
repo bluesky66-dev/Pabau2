@@ -5,11 +5,10 @@
   "scripts": {
     "nx": "nx",
     "start": "nx serve",
-    "start:production": "npm run build && npm run web:export && npx serve dist/apps/web/exported",
+    "start:production": "nx affected --uncommitted=true --target=export && npx serve dist/apps/web/exported",
     "build": "nx build",
-    "web:export": "nx run web:export",
     "test": "nx test",
-    "lint": "nx workspace-lint && nx lint --maxWarnings 0",
+    "lint": "nx workspace-lint && nx lint",
     "e2e": "nx e2e",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
@@ -125,7 +124,7 @@
   "husky": {
     "skipCI": true,
     "hooks": {
-      "pre-commit": "yarn run affected:lint",
+      "pre-commit": "yarn run affected:lint --uncommitted=true && yarn run nx run web:export",
       "pre-push": "yarn run affected:build"
     }
   }

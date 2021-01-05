@@ -1,6 +1,5 @@
-import React, { FC, useRef, useState } from 'react'
-import '../PabauHeader.less'
-import './search.less'
+import React, { FC, HTMLProps, useEffect, useRef, useState } from 'react'
+import styles from './search.less'
 import { Input, Popover, Avatar, Image, Modal, Form, Button } from 'antd'
 import {
   SearchOutlined,
@@ -9,21 +8,40 @@ import {
   LeftOutlined,
   CloseOutlined,
 } from '@ant-design/icons'
-import User from '../../../assets/images/user.png'
-import User1 from '../../../assets/images/user1.png'
-import User2 from '../../../assets/images/user2.png'
-import User3 from '../../../assets/images/user3.png'
-import User4 from '../../../assets/images/user4.png'
-import User5 from '../../../assets/images/user5.png'
+import User from '../../assets/images/user.png'
+import User1 from '../../assets/images/user1.png'
+import User2 from '../../assets/images/user2.png'
+import User3 from '../../assets/images/user3.png'
+import User4 from '../../assets/images/user4.png'
+import User5 from '../../assets/images/user5.png'
 
-export const Search: FC = () => {
-  const [searchPopUp, setSearchPopUp] = useState(true)
+type P = HTMLProps<HTMLDivElement>
+
+export const Search: FC<P> = ({ ...props }) => {
+  const [searchText, setSearchText] = useState('')
+  const [searchPopUp, setSearchPopUp] = useState(false)
   const [searchTab, setSearchTab] = useState('Clients')
   const [advanceSearch, setAdvanceSearch] = useState(false)
 
   const [form] = Form.useForm()
 
   const searchRef = useRef<Input>(null)
+  useEffect(() => {
+    window.document.onkeydown = (e) => {
+      console.log('state', searchRef.current?.state)
+      console.log('code', e.code)
+      if (
+        !searchRef.current?.state.focused &&
+        (e.code === 'KeyS' || (e.ctrlKey && e.code === 'KeyF'))
+      ) {
+        e.preventDefault()
+        searchRef.current?.focus()
+      } else if (searchRef.current?.state.focused && e.code === 'Escape') {
+        e.preventDefault()
+        searchRef.current?.blur()
+      }
+    }
+  })
 
   const searchMenu = () => {
     return (
@@ -106,16 +124,20 @@ export const Search: FC = () => {
   ]
 
   return (
-    <div style={{ margin: '15px' }}>
+    <div {...props}>
       <Popover content={searchMenu} trigger="click" visible={searchPopUp}>
         <Input
           className="search-input-style"
           placeholder="Search clients or leads"
           prefix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
           ref={searchRef}
-          onClick={() => {
-            setSearchPopUp(!searchPopUp)
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          onFocus={() => {
+            searchRef.current?.select()
+            setSearchPopUp(true)
           }}
+          onBlur={() => setSearchPopUp(false)}
         />
       </Popover>
       <Modal
@@ -162,7 +184,7 @@ export const Search: FC = () => {
         }
         width={360}
         footer={false}
-        wrapClassName="advance-search-modal"
+        wrapClassName={styles.advanceSearchModal}
         closable={false}
       >
         <Form

@@ -1,18 +1,16 @@
-/* eslint-disable */
+import { Header, Logo } from '@pabau/ui'
 import React from 'react'
-// import { Header2 } from './Header'
-import { PabauHeader } from './PabauHeader'
-import Logo  from '../logo/Logo'
-import { Search } from './search/search'
+import { Search } from '../search/search'
 
 export default {
-  component: PabauHeader,
+  component: Header,
   title: 'Header',
 }
 
 export const PabauHeaderStory = () => {
-  return <PabauHeader />
+  return <Header />
 }
+
 export const PabauLogo = () => {
   return <Logo />
 }

@@ -2,7 +2,6 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "jsx": "preserve",
-    "allowJs": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "types": [
@@ -17,7 +16,8 @@
   },
   "include": [
     "**/*.ts",
-    "**/*.tsx",    "*.js",
+    "**/*.tsx",
+    "**/.*.js",
     "next-env.d.ts"
   ],
   "exclude": [

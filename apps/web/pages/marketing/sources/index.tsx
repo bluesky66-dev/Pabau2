@@ -30,7 +30,7 @@ const MARKETING_SOURCE_DELETE = gql`
 `
 
 export const Index: NextPage = () => {
-  const { innerData, error, loading } = useLiveQuery(MARKETING_SOURCE_LIST)
+  const { data, error, loading } = useLiveQuery(MARKETING_SOURCE_LIST)
   const [deleteMutation] = useMutation(MARKETING_SOURCE_DELETE)
 
   if (error) return <p>Error :(</p>
@@ -41,7 +41,7 @@ export const Index: NextPage = () => {
         loading={loading}
         style={{ height: '100vh' }}
         sticky={true}
-        pagination={innerData?.length > 10 ? {} : false}
+        pagination={data?.length > 10 ? {} : false}
         scroll={{ x: 'max-content' }}
         columns={[
           {
@@ -79,7 +79,7 @@ export const Index: NextPage = () => {
             },
           },
         ]}
-        dataSource={innerData?.map((e) => ({ key: e.id, ...e }))}
+        dataSource={data?.map((e) => ({ key: e.id, ...e }))}
       />
     </Layout>
   )

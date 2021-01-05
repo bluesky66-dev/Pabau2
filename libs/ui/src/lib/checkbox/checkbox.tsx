@@ -17,8 +17,8 @@ export function Checkbox({
     <AntCheckbox
       checked={checkBoxVal}
       disabled={disabled}
-      onClick={(e: any) => {
-        setCheckBoxVal(e.target.checked)
+      onClick={(e: React.MouseEvent<HTMLInputElement>) => {
+        setCheckBoxVal((e.target as HTMLInputElement).checked)
       }}
       onChange={onChange}
     >

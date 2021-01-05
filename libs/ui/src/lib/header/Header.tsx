@@ -1,15 +1,27 @@
-import React, { FC, useCallback, useEffect, useRef } from 'react'
-import { Button, Input, Layout, Menu } from 'antd'
+import React, { FC, HTMLProps, useCallback } from 'react'
+import { Avatar, Badge, Dropdown, Layout, Menu } from 'antd'
 import {
+  BellOutlined,
   CalendarOutlined,
+  DownOutlined,
+  MailOutlined,
+  PlusCircleFilled,
   PoundOutlined,
-  SearchOutlined,
+  SettingOutlined,
   SmileOutlined,
   UserOutlined,
 } from '@ant-design/icons'
-import { Dropdown, Logo } from '@pabau/ui'
 
-const { Header } = Layout
+import { Logo } from '../logo/Logo'
+import styles from './Header.module.less'
+import { Button, ButtonTypes } from '@pabau/ui'
+import { Search } from '../search/search'
+
+const AntHeader = Layout.Header
+
+/* eslint-disable-next-line */
+export interface HeaderProps {
+}
 
 const items = [
   {
@@ -30,17 +42,7 @@ const items = [
   },
 ]
 
-export const Header2: FC = () => {
-  const searchRef = useRef<Input>(null)
-  useEffect(() => {
-    window.document.onkeydown = (e) => {
-      if (e.ctrlKey && e.code === 'KeyA') {
-        e.preventDefault()
-        // noinspection BadExpressionStatementJS
-        searchRef.current?.focus()
-      }
-    }
-  })
+export const Header: FC = ({ ...props }: HTMLProps<HTMLElement>) => {
   const handleMenuClick = useCallback(() => alert('Not yet done'), [])
   const overlay = (
     <Menu onClick={handleMenuClick}>
@@ -52,162 +54,69 @@ export const Header2: FC = () => {
     </Menu>
   )
   return (
-    <Header
+    <AntHeader
+      className={styles.pabauHeader}
       style={{
         backgroundColor: 'white',
-        padding: '1rem',
-        position: 'sticky',
+        // padding: '1rem',
+        // position: 'sticky',
+
+        height: '64px',
         top: 0,
         zIndex: 2,
+        border: '1px solid #ECEDF0',
       }}
     >
-      <style jsx>{`
-        @keyframes spin {
-          from {
-            transform: rotateX(0deg);
-            transform-origin: center;
-            opacity: 0;
-          }
-          to {
-            transform: rotateX(360deg);
-            transform-origin: center;
-          }
-        }
-        @keyframes spin2 {
-          from {
-            transform: rotateX(0deg);
-            transform-origin: center;
-          }
-          to {
-            transform: rotateX(360deg);
-            transform-origin: center;
-          }
-        }
-        .imageSpin {
-          display: flex;
-        }
-        .imageSpin svg .spin {
-          //transform: rotateX(0deg);
-          animation-name: spin2;
-          animation-timing-function: linear;
-          animation-fill-mode: both;
-          animation-iteration-count: 1;
-          animation-duration: 0.8s;
-        }
-        .imageSpin:hover {
-        }
-        .imageSpin:hover svg .spin {
-          animation-iteration-count: infinite;
-          animation-duration: 5s;
-          animation-name: spin2;
-          animation-play-state: running;
-        }
-        .animation-delay-1 {
-          animation-delay: 0s;
-        }
-        .animation-delay-2 {
-          animation-delay: 0.1s;
-        }
-        .animation-delay-3 {
-          animation-delay: 0.2s;
-        }
-        .animation-delay-4 {
-          animation-delay: 0.3s;
-        }
-        .animation-delay-5 {
-          animation-delay: 0.4s;
-        }
+      <div
+        style={{
+          paddingLeft: '30px',
+          paddingRight: '30px',
+          height: '100%',
+          display: 'flex',
+          placeItems: 'center',
+        }}
+      >
+        <Logo />
+        <Search style={{ margin: '0 2em', flex: 1 }} />
+        <Dropdown overlay={overlay} className={styles.pointer}>
+          <SettingOutlined className={styles.headerIcon} />
+        </Dropdown>
+        <Dropdown overlay={overlay} className={styles.pointer}>
+          <BellOutlined className={styles.headerIcon} />
+        </Dropdown>
+        <Dropdown overlay={overlay} className={styles.pointer}>
+          <MailOutlined className={styles.headerIcon} />
+        </Dropdown>
 
-        .imageSpin:hover .animation-delay-1 {
-          animation-delay: 0s;
-        }
-        .imageSpin:hover .animation-delay-2 {
-          animation-delay: 1s;
-        }
-        .imageSpin:hover .animation-delay-3 {
-          animation-delay: 2s;
-        }
-        .imageSpin:hover .animation-delay-4 {
-          animation-delay: 3s;
-        }
-        .imageSpin:hover .animation-delay-5 {
-          animation-delay: 4s;
-        }
-
-        .button.ant-btn-primary {
-          border-color: transparent;
-          color: black;
-          margin: 0 0.1em;
-          background-color: transparent;
-        }
-        .button.ant-btn-primary:hover {
-          border-color: #1890ff;
-        }
-
-        .searchBox {
-          margin-left: 1em;
-          margin-right: 1em;
-          flex: 1;
-        }
-
-        .searchBox .searchBoxInner {
-          //display: none;
-        }
-        .searchBoxIcon {
-          font-size: 1.8em;
-          z-index: 2;
-          position: absolute;
-          line-height: 70px;
-          cursor: pointer;
-        }
-        .searchBoxInner:not(:hover) {
-          border-color: transparent;
-        }
-        .searchBox:focus-within .searchBoxIcon {
-          color: rgba(0, 0, 0, 0);
-          transition: 0.2s linear;
-        }
-      `}</style>
-      <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-        {/*{screenfull.isEnabled && (*/}
-        {/*  <Button*/}
-        {/*    type="ghost"*/}
-        {/*    style={{ borderRadius: 5 }}*/}
-        {/*    shape="round"*/}
-        {/*    icon={<ExpandOutlined />}*/}
-        {/*    className="button"*/}
-        {/*    size="large"*/}
-        {/*    onClick={() => {*/}
-        {/*      if (screenfull.isEnabled) screenfull.toggle()*/}
-        {/*    }}*/}
-        {/*  />*/}
-        {/*)}*/}
-
-        <Logo className="imageSpin" />
-        <div className="searchBox">
-          <label>
-            <SearchOutlined className="searchBoxIcon" />
-            <Input allowClear className="searchBoxInner" />
-          </label>
-        </div>
-
-        <div style={{ textAlign: 'right', float: 'right', width: 'min-content' }}>
-          <Dropdown>
+        <div style={{ padding: '0 1rem' }}>
+          <Dropdown overlay={overlay}>
             <Button
               style={{ borderRadius: 5 }}
-              type="primary"
-              shape="round"
-              size="large"
-              className="button"
+              btnType={ButtonTypes.primary}
+              // shape="round"
+              // size="large"
+              className={styles.createBtnStyle}
             >
-              + Create
-              {/*Create <DownOutlined/>*/}
+              <PlusCircleFilled /> Create
             </Button>
           </Dropdown>
         </div>
+
+        <div className="pl-4">
+          <Badge
+            dot
+            color="#65CD98"
+            offset={[-2, 30]}
+            size="default"
+            style={{ height: '8px', width: '8px' }}
+          >
+            <Avatar size={40} icon={<UserOutlined />} />
+          </Badge>
+        </div>
+        <DownOutlined style={{ paddingLeft: '10px', color: '#9292A3' }} />
       </div>
-    </Header>
+    </AntHeader>
   )
 }
 
-export default Header2
+export default Header

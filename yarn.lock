@@ -3131,9 +3131,9 @@
     loader-utils "^2.0.0"
 
 "@testing-library/dom@^7.26.6":
-  version "7.29.0"
-  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.29.0.tgz#60b18065bab50a5cde21fe80275a47a43024d9cc"
-  integrity sha512-0hhuJSmw/zLc6ewR9cVm84TehuTd7tbqBX9pRNSp8znJ9gTmSgesdbiGZtt8R6dL+2rgaPFp9Yjr7IU1HWm49w==
+  version "7.29.1"
+  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.29.1.tgz#a08ebeb26b2ea859b1621ff9642d114c1f04fe3a"
+  integrity sha512-6BU7vAjKuMspCy9QQEtbWgmkuXi/yOSZo3ANdvZmNQW8N/WQGjO9cvlcA5EFJaPtp2hL1RAaPGpCXxumijUxCg==
   dependencies:
     "@babel/code-frame" "^7.10.4"
     "@babel/runtime" "^7.12.5"
@@ -14221,9 +14221,9 @@ rc-notification@~4.5.2:
     rc-util "^5.0.1"
 
 rc-overflow@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/rc-overflow/-/rc-overflow-1.0.1.tgz#e574ee33b7243880dc05a176e363884630a3a2e5"
-  integrity sha512-amCsAVFQ2VxryPwx37+PhVEhX/3tk222VaoBLZP0OZvuU19NJoJP7vO/gRgoHiEDV6m2yQrY210eMWfDOnjPpw==
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/rc-overflow/-/rc-overflow-1.0.2.tgz#f56bcd920029979989f576d55084b81f9632c19c"
+  integrity sha512-GXj4DAyNxm4f57LvXLwhJaZoJHzSge2l2lQq64MZP7NJAfLpQqOLD+v9JMV9ONTvDPZe8kdzR+UMmkAn7qlzFA==
   dependencies:
     "@babel/runtime" "^7.11.1"
     classnames "^2.2.1"
