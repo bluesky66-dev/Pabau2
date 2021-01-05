@@ -1,5 +1,5 @@
 import React, { HTMLProps, useState } from 'react'
-import { Menu, Button, Popover } from 'antd'
+import { Menu, Button, Popover, Image } from 'antd'
 import LaunchSVG from './LaunchSVG'
 import {
   RightOutlined,
@@ -189,7 +189,7 @@ export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
         return (
           <Menu.Item key={index} className="language-text-align">
             <div className="language-flag-center">
-              {lang.logo}
+              <Image src={lang.logo} alt={lang.label} />
               <span className={`${lang.selected ? 'active-menu' : ''}`}>{lang.label}</span>
             </div>
             {lang.selected && <CheckCircleFilled className="check-icon active-menu" />}
@@ -240,6 +240,7 @@ export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
         .avatar-popover .avatar-menu .ant-menu-item {
           line-height: 0;
           margin-bottom: 0px;
+          transition: none;
         }
 
         .avatar-popover .avatar-menu .userinfo {
