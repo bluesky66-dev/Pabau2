@@ -125,7 +125,12 @@ export const Search: FC<P> = ({ ...props }) => {
 
   return (
     <div {...props}>
-      <Popover content={searchMenu} trigger="click" visible={searchPopUp}>
+      <Popover
+        content={searchMenu}
+        trigger="focus"
+        visible={searchPopUp}
+        overlayClassName="search-input"
+      >
         <Input
           className="search-input-style"
           placeholder="Search clients or leads"
