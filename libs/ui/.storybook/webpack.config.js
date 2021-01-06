@@ -32,7 +32,7 @@ module.exports = async ({ config, mode }) => {
   ].test = /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|cur|ani|pdf)(\?.*)?$/
 
   config.module.rules.push({
-    test: /\.less$/,
+    test: /\.module\.less$/,
     use: [
       {
         loader: 'style-loader',
@@ -42,8 +42,32 @@ module.exports = async ({ config, mode }) => {
         options: {
           modules: {
             mode: "local",
-            localIdentName: "[path][name]__[local]--[hash:base64:5]",
+            localIdentName: "[local]--[hash:base64:5]",
           },
+        }
+      },
+      {
+        loader: 'less-loader',
+        options: {
+          lessOptions: {
+            javascriptEnabled: true,
+          },
+        },
+      },
+    ],
+    //include: path.resolve(__dirname, '../src/'),
+  })
+
+  config.module.rules.push({
+    test: /\.less$/,
+    exclude: /\.module\.less$/,
+    use: [
+      {
+        loader: 'style-loader',
+      },
+      {
+        loader: 'css-loader',
+        options: {
         }
       },
       {
@@ -109,17 +133,18 @@ module.exports = async ({ config, mode }) => {
     loader: require.resolve('babel-loader'),
     options: {
       plugins: [
-        [
-          '@babel/plugin-transform-runtime',
-          {
-            absoluteRuntime: false,
-            corejs: false,
-            helpers: true,
-            regenerator: true,
-            useESModules: false,
-            version: '7.12.5',
-          },
-        ],
+        // [
+        //   '@babel/plugin-transform-runtime',
+        //   {
+        //     absoluteRuntime: false,
+        //     corejs: false,
+        //     helpers: true,
+        //     regenerator: true,
+        //     useESModules: false,
+        //     version: '7.12.5',
+        //   },
+        // ],
+        ["import", { libraryName: "antd", style: true }]
       ],
       // presets: [require.resolve('babel-preset-react-app')],
     },
@@ -134,6 +159,8 @@ module.exports = async ({ config, mode }) => {
   // })
 
   config.devtool = 'inline-source-map'
+
+  //config.cssModules = true;
 
   return config
 }
