@@ -8,9 +8,9 @@ definitions:
     nodemodules: 'node_modules/'
     nextcache: 'dist/**/.next/cache'
     yarncustom: '/usr/local/share/.cache/yarn'
-  services:
-    docker:
-      memory: 2048
+#  services:
+#    docker:
+#      memory: 2048
 
 pipelines:
   default:
