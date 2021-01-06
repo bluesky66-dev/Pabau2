@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "nx": "nx",
+    "vercel": "vercel",
     "start": "nx serve",
     "start:production": "nx affected --uncommitted=true --target=export && npx serve dist/apps/web/exported",
     "build": "nx build",
