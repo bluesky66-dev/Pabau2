@@ -1,10 +1,9 @@
 import React, { FC, PropsWithChildren, useState } from 'react'
 import { Drawer, Badge, Avatar } from 'antd'
-import './messages.less'
+import styles from './messages.module.less'
 import { CloseOutlined, EditOutlined, SearchOutlined } from '@ant-design/icons'
-
 import { ReactComponent as Chat } from '../../../assets/images/chat.svg'
-
+import classNames from 'classnames'
 export interface MessagesProps {
   openDrawer: boolean
   closeDrawer: () => void
@@ -15,7 +14,7 @@ export const PabauMessages: FC<MessagesProps> = ({
   closeDrawer,
 }: PropsWithChildren<MessagesProps>) => {
   const [messageDrawer, setMessageDrawer] = useState(openDrawer)
-  const [notifyTab, setNotifyTab] = useState('Clients')
+  const [notifyTab, setNotifyTab] = useState('All')
 
   const chatMessages = [
     {
@@ -72,80 +71,125 @@ export const PabauMessages: FC<MessagesProps> = ({
       closable={false}
       onClose={closeDrawerMenu}
       visible={messageDrawer}
-      className="messages-drawer"
+      className={styles.messagesDrawer}
     >
-      <div className="space">
-        <div className="messages-align">
+      <div className={styles.space}>
+        <div className={styles.messagesAlign}>
           <div>
             <h1>Chat</h1>
           </div>
           <div>
-            <EditOutlined className="gray-text-color pr-5" />
-            <SearchOutlined className="gray-text-color pr-5" />
-            <CloseOutlined className="gray-text-color" onClick={closeDrawerMenu} />
+            <EditOutlined className={classNames(styles.grayTextColor, styles.pr5)} />
+            <SearchOutlined className={classNames(styles.grayTextColor, styles.pr5)} />
+            <CloseOutlined className={styles.grayTextColor} onClick={closeDrawerMenu} />
           </div>
         </div>
-        <div className="messages-tabs top-space-notification">
+        <div className={classNames(styles.messagesTabs, styles.topSpaceNotification)}>
           <button
-            className={`messages-tab-design ${notifyTab === 'Clients' && 'active-tabs'}`}
-            onClick={() => setNotifyTab('Clients')}
+            className={classNames(
+              styles.messagesTabDesign,
+              notifyTab === 'All' && styles.activeTabs
+            )}
+            onClick={() => setNotifyTab('All')}
           >
             All
           </button>
           <button
-            className={`messages-tab-design ${notifyTab === 'Leads' && 'active-tabs'}`}
-            onClick={() => setNotifyTab('Leads')}
+            className={classNames(
+              styles.messagesTabDesign,
+              notifyTab === 'Contacts' && styles.activeTabs
+            )}
+            onClick={() => setNotifyTab('Contacts')}
           >
             Contacts
           </button>
         </div>
       </div>
-      <div className="chat-panel">
-        <div className="channels-text d-flex">
-          <span className="text-sm gray-text-color">channels</span>
+      <div className={styles.chatPanel}>
+        <div className={classNames(styles.channelsText, styles.dFlex)}>
+          <span className={classNames(styles.textSm, styles.grayTextColor)}>channels</span>
         </div>
-        <div className="d-flex channel-text">
-          <p className="text-black text-md font-medium mb"> #general </p>
-          <h6 className="gray-text-color text-sm mb">11:20 AM</h6>
+        <div className={classNames(styles.dFlex, styles.channelText)}>
+          <p className={classNames(styles.textBlack, styles.textMd, styles.fontMedium, styles.mb)}>
+            #general
+          </p>
+          <h6 className={classNames(styles.grayTextColor, styles.textSm, styles.mb)}>11:20 AM</h6>
         </div>
-        <div className="d-flex channel-message">
-          <p className="gray-text-color text-md font-medium mb"> 6 unread messages </p>
-          <h6 className="gray-text-color text-sm mb">
+        <div className={classNames(styles.dFlex, styles.channelMessage)}>
+          <p
+            className={classNames(
+              styles.grayTextColor,
+              styles.textMd,
+              styles.fontMedium,
+              styles.mb
+            )}
+          >
+            6 unread messages
+          </p>
+          <h6 className={classNames(styles.grayTextColor, styles.textSm, styles.mb)}>
             <Badge count={6} style={{ backgroundColor: '#54B2D3' }} />
           </h6>
         </div>
-        <div className="chat-border"></div>
-        <div className="d-flex channel-text top-space">
-          <p className="text-black text-md font-medium mb"> #design </p>
-          <h6 className="gray-text-color text-sm mb">11:20 AM</h6>
+        <div className={styles.chatBorder}></div>
+        <div className={classNames(styles.dFlex, styles.channelText, styles.topSpace)}>
+          <p className={classNames(styles.textBlack, styles.textMd, styles.fontMedium, styles.mb)}>
+            #design
+          </p>
+          <h6 className={classNames(styles.grayTextColor, styles.textSm, styles.mb)}>11:20 AM</h6>
         </div>
-        <div className="d-flex channel-message">
-          <p className="gray-text-color text-md font-medium mb">
+        <div className={classNames(styles.dFlex, styles.channelMessage)}>
+          <p
+            className={classNames(
+              styles.grayTextColor,
+              styles.textMd,
+              styles.fontMedium,
+              styles.mb
+            )}
+          >
             Oliver Addams: I have an idia on this issue...
           </p>
         </div>
-        <div className="chat-border"></div>
-        <div className="channels-text chat-top-space">
-          <p className="gray-text-color text-sm ">chats</p>
+        <div className={styles.chatBorder}></div>
+        <div className={classNames(styles.channelsText, styles.chatTopSpace)}>
+          <p className={classNames(styles.grayTextColor, styles.textSm)}>chats</p>
         </div>
 
-        {chatMessages.map((chat) => {
+        {chatMessages.map((chat, index) => {
           return (
-            <>
-              <div className="flex porfile-chat-space">
-                <div className="chat-profile">
+            <div key={index}>
+              <div className={classNames(styles.flex, styles.porfileChatSpace)}>
+                <div className={styles.chatProfile}>
                   <Avatar size={40} src={<Chat />} />
                 </div>
-                <div className="chat-text">
-                  <div className="d-flex user-details">
-                    <p className="text-black mb font-medium text-md">{chat.userName}</p>
-                    <p className="gray-text-color mb text-sm ">{chat.dateTime}</p>
+                <div className={styles.chatText}>
+                  <div className={classNames(styles.dFlex, styles.userDetails)}>
+                    <p
+                      className={classNames(
+                        styles.textBlack,
+                        styles.mb,
+                        styles.fontMedium,
+                        styles.textMd
+                      )}
+                    >
+                      {chat.userName}
+                    </p>
+                    <p className={classNames(styles.grayTextColor, styles.mb, styles.textSm)}>
+                      {chat.dateTime}
+                    </p>
                   </div>
-                  <div className="d-flex">
-                    <p className="gray-text-color mb font-medium text-md user-message">
+                  <div className={styles.dFlex}>
+                    <p
+                      className={classNames(
+                        styles.grayTextColor,
+                        styles.mb,
+                        styles.fontMedium,
+                        styles.textMd,
+                        styles.userMessage
+                      )}
+                    >
                       {chat.message}
                     </p>
-                    <h6 className="gray-text-color text-sm mb">
+                    <h6 className={classNames(styles.grayTextColor, styles.textSm, styles.mb)}>
                       {chat.unread && (
                         <Badge count={chat.unread} style={{ backgroundColor: '#54B2D3' }} />
                       )}
@@ -153,8 +197,8 @@ export const PabauMessages: FC<MessagesProps> = ({
                   </div>
                 </div>
               </div>
-              <div className="chat-border"></div>
-            </>
+              <div className={styles.chatBorder}></div>
+            </div>
           )
         })}
       </div>
