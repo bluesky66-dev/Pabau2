@@ -1,7 +1,6 @@
 import React, { FC, HTMLProps } from 'react'
 import { Button as AntButton } from 'antd'
 import { NativeButtonProps } from 'antd/lib/button/button'
-import styles from './button.module.less'
 
 export enum ButtonTypes {
   default = 'default',
