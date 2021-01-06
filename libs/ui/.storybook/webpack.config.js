@@ -76,6 +76,9 @@ module.exports = async ({ config, mode }) => {
         options: {
           lessOptions: {
             javascriptEnabled: true,
+            modifyVars: {
+              "primary-color": "yellow"
+            }
           },
         },
       },
