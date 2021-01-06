@@ -5,7 +5,7 @@ options:
 
 definitions:
   caches:
-    nextcache: .next/cache
+    nxcache: dist
   services:
     docker:
       memory: 2048
@@ -16,6 +16,7 @@ pipelines:
         name: Build and Test branch
         caches:
           - node
+          - nxcache
         script:
           - yarn
           - yarn run nx affected --all --target=lint
@@ -30,10 +31,11 @@ pipelines:
           name: New Deploy scripot
           caches:
             - node
-            - nextcache
+            - nxcache
           services:
             - docker
           script:
+            - apk --update add git
             - yarn install --frozen-lockfile
             - yarn affected:build --base=HEAD~1 --with-deps --prod
             - yarn affected:lint --base=HEAD~1 --with-deps --prod
