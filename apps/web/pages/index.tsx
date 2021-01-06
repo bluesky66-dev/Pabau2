@@ -5,7 +5,7 @@ import { Button } from 'antd'
 const Index: FC = () => {
   return (
     <Layout pageTitle="Welcome">
-      <Button type="primary">yes.......</Button>
+      <Button type="primary">yes........</Button>
     </Layout>
   )
 }

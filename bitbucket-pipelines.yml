@@ -8,6 +8,7 @@ definitions:
     nodemodules: 'node_modules/'
     nextcache: 'dist/**/.next/cache'
     yarncustom: '/usr/local/share/.cache/yarn'
+    cypress: '/root/.cache/Cypress'
 #  services:
 #    docker:
 #      memory: 2048
@@ -36,6 +37,7 @@ pipelines:
             - nodemodules
             - nextcache
             - yarncustom
+            - cypress
           script:
             - yarn install --frozen-lockfile
             - yarn affected:build --base=HEAD~1 --prod
