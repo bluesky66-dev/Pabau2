@@ -6,7 +6,7 @@
     "nx": "nx",
     "start": "nx serve",
     "start:production": "nx affected --uncommitted=true --target=export && npx serve dist/apps/web/exported",
-    "deploy": "nx affected --target=deploy --prod",
+    "deploy": "nx affected --target=deploy --prod --base=HEAD~1",
     "build": "nx build",
     "test": "nx test",
     "lint": "nx workspace-lint && nx lint",

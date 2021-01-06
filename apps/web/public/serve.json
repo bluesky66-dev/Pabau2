@@ -1,5 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/projects/:id/edit", "destination": "/edit-project-:id.html" }
-  ]
-}
