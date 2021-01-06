@@ -38,8 +38,7 @@ pipelines:
           services:
             - docker
           script:
-            - apt update -q && apt install -q nodejs
-            - npm i -g yarn
+            - curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
             - yarn install --frozen-lockfile
             - yarn affected:build --base=HEAD~1 --prod
             - yarn affected:lint --base=HEAD~1
