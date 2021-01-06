@@ -35,8 +35,13 @@ pipelines:
           services:
             - docker
           script:
+            - ls -al
             - apk --update add git
+            - ls -al
+            - yarn --frozen-lockfile
+            - ls -al
             - yarn install --frozen-lockfile
+            - ls -al
             - yarn affected:build --base=HEAD~1
             - yarn affected:build --base=HEAD~1 --prod
             - yarn affected:lint --base=HEAD~1
