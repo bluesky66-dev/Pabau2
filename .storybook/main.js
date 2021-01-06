@@ -4,7 +4,6 @@ module.exports = {
   addons: [
     '@storybook/addon-docs',
     '@storybook/addon-essentials',
-    'storybook-addon-playroom',
   ],
   typescript: {
     reactDocgen: 'react-docgen-typescript',
