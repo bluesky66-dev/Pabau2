@@ -54,7 +54,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "outputs": [],
           "options": {
-            "command": "docker build -f tools/cicd/web.Dockerfile ."
+            "command": "cd dist/apps/web/exported && vercel -c -C --token ${VERCEL_TOKEN} -A ../../../../apps/web/vercel.json --prod"
           },
           "configurations": {
             "production": {}
