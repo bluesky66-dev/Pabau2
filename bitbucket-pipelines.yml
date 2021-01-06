@@ -38,7 +38,7 @@ pipelines:
           services:
             - docker
           script:
-            - apt update -q && apt install -q xvfb
+            - apt update -y && apt install -y xvfb
             - yarn install --frozen-lockfile
             - yarn affected:build --base=HEAD~1 --prod
             - yarn affected:lint --base=HEAD~1
