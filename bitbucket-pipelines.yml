@@ -25,18 +25,20 @@ pipelines:
 #          - yarn run nx affected --target=build --base=master~1
   branches:
     master:
-#      - step:
-#          size: 2x
-#          name: Build and release master
-#          caches:
-#            - node
-#            - nextcache
-#          services:
-#            - docker
-#          script:
-#            - yarn
-#            - yarn run nx build
-#            - yarn run nx deploy
+      - step:
+          size: 2x
+          name: New Deploy scripot
+          caches:
+            - node
+            - nextcache
+          services:
+            - docker
+          script:
+            - yarn install --frozen-lockfile
+            - yarn affected:build --base=HEAD~1 --with-deps --prod
+            - yarn affected:lint --base=HEAD~1 --with-deps --prod
+            - yarn affected:test --base=HEAD~1 --with-deps --prod
+            - yarn affected:e2e --base=HEAD~1 --with-deps --prod
       - step:
           name: pull
           script:
