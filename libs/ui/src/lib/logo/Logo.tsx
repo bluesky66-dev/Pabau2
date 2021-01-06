@@ -4,7 +4,7 @@ import styles from './Logo.module.less'
 
 export const Logo: FC<HTMLProps<HTMLDivElement>> = ({ ...props }) => (
   <div className={styles.container} {...props}>
-    <LogoSvg className="imageSpin2" style={{ height: '100%' }} />
+    <LogoSvg className="imageSpin" style={{ height: '100%' }} />
   </div>
 )
 
