@@ -37,7 +37,9 @@ pipelines:
           script:
             - apk --update add git
             - yarn install --frozen-lockfile
+            - yarn affected:build --base=HEAD~1
             - yarn affected:build --base=HEAD~1 --prod
+            - yarn affected:lint --base=HEAD~1
             - yarn affected:lint --base=HEAD~1 --prod
             - yarn affected:lint --base=HEAD~1 --with-deps --prod
             - yarn affected:test --base=HEAD~1 --with-deps --prod || true

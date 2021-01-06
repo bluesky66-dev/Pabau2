@@ -15,7 +15,7 @@ export function Index() {
       <div className="flex github-star-container">
         <a href="https://github.com/nrwl/nx" target="_blank" rel="noopener noreferrer">
           {' '}
-          If you like Nx, please give it a star:
+          If you like Nx, please give it a star::
           <div className="github-star-badge">
             <img src="/star.svg" className="material-icons" alt="" />
             Star

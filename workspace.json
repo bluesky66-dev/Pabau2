@@ -55,6 +55,9 @@
           "outputs": [],
           "options": {
             "command": "docker build -f tools/cicd/web.Dockerfile ."
+          },
+          "configurations": {
+            "production": {}
           }
         }
       }
