@@ -1,4 +1,4 @@
-image: markadams/chromium-xvfb
+#image: ubuntu
 
 options:
   max-time: 15 # max time in minutes for each step
@@ -39,7 +39,7 @@ pipelines:
             - docker
           script:
             #- apk --update add git
-            - npm i -g yarn
+            #- npm i -g yarn
             - yarn install --frozen-lockfile
             - yarn affected:build --base=HEAD~1 --prod
             - yarn affected:lint --base=HEAD~1
@@ -48,4 +48,10 @@ pipelines:
             - yarn affected:e2e --base=HEAD~1 || true
             - yarn affected --target=export --prod
             - yarn deploy
+#      - step:
+#          size: 2x
+#          name: e2e
+#          caches:
+#            - nextcache
+#
 
