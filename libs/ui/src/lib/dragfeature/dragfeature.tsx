@@ -13,7 +13,7 @@ import {
 } from '@ant-design/icons'
 import './styles/style.less'
 
-function array_move(arr, old_index, new_index) {
+function array_move(arr: unknown[], old_index: number, new_index: number) {
   if (new_index >= arr.length) {
     let k = new_index - arr.length + 1
     while (k--) {
@@ -22,6 +22,8 @@ function array_move(arr, old_index, new_index) {
   }
   arr.splice(new_index, 0, arr.splice(old_index, 1)[0])
   return arr.map((ele, index) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     ele.index = index
     return ele
   })
@@ -30,9 +32,11 @@ function array_move(arr, old_index, new_index) {
 export const DragFeature: FC = () => {
   const [dataSource, setDataSource] = useState(data)
 
-  const onSortEnd = ({ oldIndex, newIndex }) => {
+  const onSortEnd = ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
     if (oldIndex !== newIndex) {
       const newData = array_move(dataSource, oldIndex, newIndex)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       setDataSource(newData)
     }
   }
@@ -40,7 +44,7 @@ export const DragFeature: FC = () => {
   const SortableList = SortableContainer(({ items }) => {
     return (
       <tbody>
-        {items.map((value, index) => (
+        {items.map((value) => (
           <SortableItem key={value.index} index={value.index} value={value} />
         ))}
       </tbody>

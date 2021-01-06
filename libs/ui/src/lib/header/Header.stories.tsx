@@ -7,14 +7,14 @@ export default {
   title: 'Header',
 }
 
-export const PabauHeaderStory = () => {
+export const PabauHeaderStory = (): JSX.Element => {
   return <Header />
 }
 
-export const PabauLogo = () => {
+export const PabauLogo = (): JSX.Element => {
   return <Logo />
 }
 
-export const PabauSearch = () => {
+export const PabauSearch = (): JSX.Element => {
   return <Search />
 }

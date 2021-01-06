@@ -9,7 +9,7 @@ import { Responsive, WidthProvider } from 'react-grid-layout'
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
 export default class ShowcaseLayout extends React.Component {
-  constructor(props) {
+  constructor(props: any) {
     super(props)
     this.state = {
       currentBreakpoint: 'lg',
@@ -45,7 +45,7 @@ export default class ShowcaseLayout extends React.Component {
     })
   }
 
-  onBreakpointChange(breakpoint) {
+  onBreakpointChange(breakpoint: any) {
     this.setState({
       currentBreakpoint: breakpoint,
     })
@@ -63,7 +63,7 @@ export default class ShowcaseLayout extends React.Component {
     this.setState({ compactType })
   }
 
-  onLayoutChange(layout, layouts) {
+  onLayoutChange(layout: any, layouts: any) {
     // @ts-ignore
     this.props.onLayoutChange(layout, layouts)
   }

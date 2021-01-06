@@ -15,7 +15,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "typeRoots": ["./types"],
-    "moduleResolution": "Node"
+    "moduleResolution": "node"
   },
   "include": [
     "**/*.ts",

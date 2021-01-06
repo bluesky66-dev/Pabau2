@@ -2,6 +2,8 @@ import React, { FC } from 'react'
 import { CalendarOutlined, PoundOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import Link from 'next/link'
+import { useKeyPressEvent } from 'react-use'
+import { useRouter } from 'next/router'
 
 const items = [
   {
@@ -41,6 +43,18 @@ const items = [
 ]
 
 export const Menu: FC = () => {
+  const router = useRouter()
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  useKeyPressEvent(['1', '2', '3', '4', '5', '6', '7', '8', '9'], (e) => {
+    console.log('key pressed', e)
+    try {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      router.push(items[parseInt(e.key) - 1].url)
+      // eslint-disable-next-line no-empty
+    } catch {}
+  })
   return (
     <div className="main">
       <style jsx>{`

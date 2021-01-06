@@ -5,17 +5,9 @@ import React from 'react'
 import CrudTable from '../../../components/CrudTable'
 import pluralize from 'pluralize'
 
-export interface Values {
-  id?: string
-  name: string
-}
-export interface MarketingSourceList {
-  marketing_source: Values[]
-}
-
 const LIST_QUERY = gql`
   query {
-    marketing_source(order_by: { created_at: desc }) {
+    marketing_campaign(order_by: { created_at: desc }) {
       __typename
       id
       name
@@ -24,7 +16,7 @@ const LIST_QUERY = gql`
 `
 const DELETE_MUTATION = gql`
   mutation($id: uuid!) {
-    delete_marketing_source_by_pk(id: $id) {
+    delete_marketing_campaign_by_pk(id: $id) {
       __typename
       id
     }
@@ -32,7 +24,7 @@ const DELETE_MUTATION = gql`
 `
 const ADD_MUTATION = gql`
   mutation($name: String!) {
-    insert_marketing_source_one(object: { name: $name }) {
+    insert_marketing_campaign_one(object: { name: $name }) {
       __typename
       id
     }
@@ -40,10 +32,8 @@ const ADD_MUTATION = gql`
 `
 
 const schema: Schema = {
-  full: 'Marketing Source',
-  fullLower: 'marketing source',
-  short: 'Source',
-  shortLower: 'source',
+  full: 'Marketing Campaign',
+  short: 'Campaign',
   fields: {
     name: {
       full: 'Friendly Name',

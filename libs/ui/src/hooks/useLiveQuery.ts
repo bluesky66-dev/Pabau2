@@ -18,8 +18,8 @@ function convert(doc: DocumentNode): DocumentNode {
   return gql(`subscription ${snipped}`)
 }
 
-export function useLiveQuery(query: DocumentNode): Omit<QueryResult, 'subscribeToMore'> {
-  const { subscribeToMore, ...rest } = useQuery(query, {
+export function useLiveQuery<T>(query: DocumentNode): Omit<QueryResult, 'subscribeToMore'> {
+  const { subscribeToMore, ...rest } = useQuery<T>(query, {
     //ssr: typeof window === 'undefined',
     ssr: false,
     skip: typeof window === 'undefined',
@@ -32,12 +32,14 @@ export function useLiveQuery(query: DocumentNode): Omit<QueryResult, 'subscribeT
           if (!subscriptionData.data) return prev
           const key = Object.keys(subscriptionData.data)[0]
           return Object.assign({}, prev, {
-            [key]: subscriptionData.data[key],
+            [key]: (subscriptionData.data as Record<string, unknown>)[key],
           })
         },
       })
     },
   })
-  const data = rest.data ? rest.data[Object.keys(rest.data)[0]] : undefined
+  const data = rest.data
+    ? (rest.data as Record<string, unknown>)[Object.keys(rest.data as Record<string, unknown>)[0]]
+    : undefined
   return { ...rest, data }
 }

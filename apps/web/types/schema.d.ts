@@ -1,11 +1,9 @@
-import { ReactNode } from 'react'
-
 interface Schema {
   full: string
   fullLower?: string
   short: string
   shortLower?: string
-  fields: Record<string, SchemaItem | undefined>
+  fields: Record<string, SchemaItem>
 }
 interface SchemaItem {
   full?: string
@@ -15,5 +13,6 @@ interface SchemaItem {
   min?: number
   example?: string
   description?: string
-  extra?: ReactNode
+  extra?: JSX.Element
+  cssWidth?: string
 }
