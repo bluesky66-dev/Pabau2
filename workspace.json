@@ -54,7 +54,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "outputs": [],
           "options": {
-            "command": "cd dist/apps/web/exported && vercel -c -C --token ${VERCEL_TOKEN} -A ../../../../apps/web/vercel.json --prod"
+            "command": "cd dist/apps/web/exported && npx vercel -c -C --token ${VERCEL_TOKEN} -A ../../../../apps/web/vercel.json --prod"
           },
           "configurations": {
             "production": {}
