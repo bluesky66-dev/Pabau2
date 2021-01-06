@@ -1,9 +1,8 @@
-import React, { FC, HTMLProps, useCallback } from 'react'
-import { Avatar, Badge, Dropdown, Layout, Menu } from 'antd'
+import React, { FC, HTMLProps, useCallback, useState } from 'react'
+import { Dropdown, Layout, Menu } from 'antd'
 import {
   BellOutlined,
   CalendarOutlined,
-  DownOutlined,
   MailOutlined,
   PlusCircleFilled,
   PoundOutlined,
@@ -14,14 +13,15 @@ import {
 
 import { Logo } from '../logo/Logo'
 import styles from './Header.module.less'
-import { Button, ButtonTypes } from '@pabau/ui'
+import { Button, Dropdown as AvatarDropDown } from '@pabau/ui'
 import { Search } from '../search/search'
+import PabauNotification from './notification/notification'
+import PabauMessages from './messages/messages'
 
 const AntHeader = Layout.Header
 
 /* eslint-disable-next-line */
-export interface HeaderProps {
-}
+export interface HeaderProps {}
 
 const items = [
   {
@@ -43,6 +43,8 @@ const items = [
 ]
 
 export const Header: FC = ({ ...props }: HTMLProps<HTMLElement>) => {
+  const [openNotificationDrawer, setNotificationDrawer] = useState<boolean>(false)
+  const [openMessageDrawer, setMessageDrawer] = useState<boolean>(false)
   const handleMenuClick = useCallback(() => alert('Not yet done'), [])
   const overlay = (
     <Menu onClick={handleMenuClick}>
@@ -61,7 +63,7 @@ export const Header: FC = ({ ...props }: HTMLProps<HTMLElement>) => {
         // padding: '1rem',
         // position: 'sticky',
 
-        height: '64px',
+        height: '80px',
         top: 0,
         zIndex: 2,
         border: '1px solid #ECEDF0',
@@ -74,46 +76,48 @@ export const Header: FC = ({ ...props }: HTMLProps<HTMLElement>) => {
           height: '100%',
           display: 'flex',
           placeItems: 'center',
+          justifyContent: 'space-between',
+          alignItems: 'center',
         }}
       >
         <Logo />
-        <Search style={{ margin: '0 2em', flex: 1 }} />
-        <Dropdown overlay={overlay} className={styles.pointer}>
+
+        <Search style={{ width: '360px' }} />
+        <div className={styles.headerAlign}>
           <SettingOutlined className={styles.headerIcon} />
-        </Dropdown>
-        <Dropdown overlay={overlay} className={styles.pointer}>
-          <BellOutlined className={styles.headerIcon} />
-        </Dropdown>
-        <Dropdown overlay={overlay} className={styles.pointer}>
-          <MailOutlined className={styles.headerIcon} />
-        </Dropdown>
+          <BellOutlined
+            className={styles.headerIcon}
+            onClick={() => setNotificationDrawer((e) => !e)}
+          />
+          <MailOutlined className={styles.headerIcon} onClick={() => setMessageDrawer((e) => !e)} />
 
-        <div style={{ padding: '0 1rem' }}>
-          <Dropdown overlay={overlay}>
-            <Button
-              style={{ borderRadius: 5 }}
-              btnType={ButtonTypes.primary}
-              // shape="round"
-              // size="large"
-              className={styles.createBtnStyle}
-            >
-              <PlusCircleFilled /> Create
-            </Button>
-          </Dropdown>
+          <div>
+            <Dropdown overlay={overlay}>
+              <Button
+                style={{ borderRadius: 5 }}
+                // type={ButtonTypes.primary}
+                // shape="round"
+                // size="large"
+                className={styles.createBtnStyle}
+              >
+                <PlusCircleFilled /> Create
+              </Button>
+            </Dropdown>
+          </div>
+          <AvatarDropDown />
         </div>
-
-        <div className="pl-4">
-          <Badge
-            dot
-            color="#65CD98"
-            offset={[-2, 30]}
-            size="default"
-            style={{ height: '8px', width: '8px' }}
-          >
-            <Avatar size={40} icon={<UserOutlined />} />
-          </Badge>
-        </div>
-        <DownOutlined style={{ paddingLeft: '10px', color: '#9292A3' }} />
+        {openNotificationDrawer && (
+          <PabauNotification
+            openDrawer={openNotificationDrawer}
+            closeDrawer={() => setNotificationDrawer((e) => !e)}
+          />
+        )}
+        {openMessageDrawer && (
+          <PabauMessages
+            openDrawer={openMessageDrawer}
+            closeDrawer={() => setMessageDrawer((e) => !e)}
+          />
+        )}
       </div>
     </AntHeader>
   )

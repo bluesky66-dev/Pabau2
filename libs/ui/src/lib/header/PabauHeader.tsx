@@ -16,6 +16,7 @@ import Logo from '../logo/Logo'
 import styles from './Header.module.less'
 import { Button, ButtonTypes } from '@pabau/ui'
 import PabauNotification from './notification/notification'
+import PabauMessages from './messages/messages'
 
 const { Header } = Layout
 
@@ -44,6 +45,7 @@ const items = [
 export const PabauHeader: FC = ({ ...props }: HTMLProps<HTMLElement>) => {
   const searchRef = useRef<Input>(null)
   const [notification, setNotification] = useState<boolean>(false)
+  const [messages, setMessages] = useState<boolean>(false)
   useEffect(() => {
     window.document.onkeydown = (e) => {
       if (e.ctrlKey && e.code === 'KeyA') {
@@ -102,13 +104,13 @@ export const PabauHeader: FC = ({ ...props }: HTMLProps<HTMLElement>) => {
               />
             </div>
             <div className="pr-4">
-              <MailOutlined className={styles.headerIcon} />
+              <MailOutlined className={styles.headerIcon} onClick={() => setMessages(!messages)} />
             </div>
 
             <Dropdown overlay={overlay}>
               <Button
                 style={{ borderRadius: 5 }}
-                btnType={ButtonTypes.primary}
+                type={ButtonTypes.primary}
                 // shape="round"
                 // size="large"
                 className={styles.createBtnStyle}
@@ -136,6 +138,9 @@ export const PabauHeader: FC = ({ ...props }: HTMLProps<HTMLElement>) => {
           openDrawer={notification}
           closeDrawer={() => setNotification(!notification)}
         />
+      )}
+      {messages && (
+        <PabauMessages openDrawer={messages} closeDrawer={() => setMessages(!messages)} />
       )}
     </Header>
   )

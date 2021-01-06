@@ -8,4 +8,4 @@ export default {
   title: 'Dropdown'
 }
 
-export const Avatar = () => <Dropdown />
+export const Avatar = () => <div style={{ width: "100px" }}><Dropdown /></div>

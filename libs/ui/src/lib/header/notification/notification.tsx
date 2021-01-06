@@ -1,13 +1,13 @@
 import React, { FC, PropsWithChildren, useState } from 'react'
 import { Drawer, Image } from 'antd'
-import './notification.less'
+import styles from './notification.module.less'
 import { CloseOutlined } from '@ant-design/icons'
 import AppointmentSVG from '../../../assets/images/notification.svg'
 import ReportSVG from '../../../assets/images/notification-report.svg'
 import LeadSVG from '../../../assets/images/notification-lead.svg'
 import { ReactComponent as Lead1SVG } from '../../../assets/images/lead.svg'
 import { ReactComponent as Lead2SVG } from '../../../assets/images/lead1.svg'
-
+import classNames from 'classnames'
 export interface NotificationProps {
   openDrawer: boolean
   closeDrawer: () => void
@@ -89,22 +89,28 @@ export const PabauNotification: FC<NotificationProps> = ({
       closable={false}
       onClose={closeDrawerMenu}
       visible={notificationDrawer}
-      className="notification-drawer"
+      className={styles.notificationDrawer}
     >
-      <div className="space">
-        <div className="notification-align">
+      <div className={styles.space}>
+        <div className={styles.notificationAlign}>
           <h1> Notifications</h1>
           <CloseOutlined onClick={closeDrawerMenu} />
         </div>
-        <div className="notify-tabs top-space-notification">
+        <div className={classNames(styles.notifyTabs, styles.topSpaceNotification)}>
           <button
-            className={`notify-tab-design ${notifyTab === 'Clients' && 'active-tabs'}`}
+            className={classNames(
+              styles.notifyTabDesign,
+              notifyTab === 'Clients' && styles.activeTabs
+            )}
             onClick={() => setNotifyTab('Clients')}
           >
             Activity
           </button>
           <button
-            className={`notify-tab-design ${notifyTab === 'Leads' && 'active-tabs'}`}
+            className={classNames(
+              styles.notifyTabDesign,
+              notifyTab === 'Leads' && styles.activeTabs
+            )}
             onClick={() => setNotifyTab('Leads')}
           >
             News
@@ -117,16 +123,16 @@ export const PabauNotification: FC<NotificationProps> = ({
           return Object.keys(notify).map((notification) => {
             return (
               <>
-                <div className="notification-align today-text-top-space">
+                <div className={classNames(styles.notificationAlign, styles.todayTextTopSpace)}>
                   <h2>{notification}</h2>
                   <CloseOutlined />
                 </div>
                 {notify[notification].map((dayNotify, index) => {
                   return (
                     <>
-                      <div key={index} className="notification-card">
-                        <div className="notify-align">
-                          <div className="logo flex ">
+                      <div key={index} className={styles.notificationCard}>
+                        <div className={styles.notifyAlign}>
+                          <div className={classNames(styles.logo, styles.flex)}>
                             <Image
                               src={
                                 dayNotify.notificationType === 'Appointment'
@@ -136,18 +142,20 @@ export const PabauNotification: FC<NotificationProps> = ({
                                   : LeadSVG
                               }
                             />
-                            <p className="text-sm">{dayNotify.notificationType}</p>
+                            <p className={styles.textSm}>{dayNotify.notificationType}</p>
                           </div>
-                          <div className="time">
-                            <p className="text-md gray-text-color">{dayNotify.notificationTime}</p>
+                          <div className={styles.time}>
+                            <p className={classNames(styles.textMd, styles.grayTextColor)}>
+                              {dayNotify.notificationTime}
+                            </p>
                           </div>
                         </div>
-                        <div className="notify-title-desc">
+                        <div className={styles.notifyTitleDesc}>
                           <h1>{dayNotify.title}</h1>
                           <p>{dayNotify.desc}</p>
                         </div>
                       </div>
-                      <div className="card-border"></div>
+                      <div className={styles.cardBorder}></div>
                     </>
                   )
                 })}
@@ -161,26 +169,28 @@ export const PabauNotification: FC<NotificationProps> = ({
           return Object.keys(notify).map((notification) => {
             return (
               <>
-                <div className="notification-align today-text-top-space">
+                <div className={classNames(styles.notificationAlign, styles.todayTextTopSpace)}>
                   <h2>{notification}</h2>
                 </div>
                 {notify[notification].map((dayNotify, index) => {
                   return (
                     <>
-                      <div key={index} className="notification-card">
-                        <div className="notify-align">
-                          <div className="logo flex">
+                      <div key={index} className={styles.notificationCard}>
+                        <div className={styles.notifyAlign}>
+                          <div className={classNames(styles.logo, styles.flex)}>
                             {notification === 'Today' ? <Lead1SVG /> : <Lead2SVG />}
-                            <p className="text-sm">{dayNotify.notificationType}</p>
+                            <p className={styles.textSm}>{dayNotify.notificationType}</p>
                           </div>
                         </div>
-                        <div className="lead-title-desc">
+                        <div className={styles.leadTitleDesc}>
                           <h1>{dayNotify.title}</h1>
                           <p>{dayNotify.desc}</p>
                         </div>
-                        <span className="text-md learn-more">Learn more</span>
+                        <span className={classNames(styles.textMd, styles.learnMore)}>
+                          Learn more
+                        </span>
                       </div>
-                      <div className="card-border"></div>
+                      <div className={styles.cardBorder}></div>
                     </>
                   )
                 })}

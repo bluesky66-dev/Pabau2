@@ -11,8 +11,8 @@ export enum ButtonTypes {
   link = 'link',
   text = 'text',
 }
-type P = {
-  btnType?: ButtonTypes
+export type P = {
+  // type?: ButtonTypes
   disabled?: boolean
   color?: string
   backgroundColor?: string

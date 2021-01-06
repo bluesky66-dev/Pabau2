@@ -1,4 +1,3 @@
-import React from 'react'
 import ENSVG from './en.svg'
 import FRSVG from './french.svg'
 import SPSVG from './spanish.svg'
@@ -17,63 +16,63 @@ import RUSSVG from './russian.svg'
 export const languageMenu = [
   {
     label: 'English',
-    logo: <ENSVG className="antdicon" />,
+    logo: ENSVG,
     selected: true,
   },
   {
     label: 'French',
-    logo: <FRSVG className="antdicon" />,
+    logo: FRSVG,
   },
   {
     label: 'Spanish',
-    logo: <SPSVG className="antdicon" />,
+    logo: SPSVG,
   },
   {
     label: 'Arabic',
-    logo: <ARSVG className="antdicon" />,
+    logo: ARSVG,
   },
   {
     label: 'Bulgarian',
-    logo: <BRSVG className="antdicon" />,
+    logo: BRSVG,
   },
   {
     label: 'Czech',
-    logo: <CZSVG className="antdicon" />,
+    logo: CZSVG,
   },
   {
     label: 'Dannish',
-    logo: <FRSVG className="antdicon" />,
+    logo: FRSVG,
   },
   {
     label: 'Hungarian',
-    logo: <HGSVG className="antdicon" />,
+    logo: HGSVG,
   },
   {
     label: 'Latvian',
-    logo: <LTSVG className="antdicon" />,
+    logo: LTSVG,
   },
   {
     label: 'Norwegian',
-    logo: <NWSVG className="antdicon" />,
+    logo: NWSVG,
   },
   {
     label: 'Polish',
-    logo: <POSVG className="antdicon" />,
+    logo: POSVG,
   },
   {
     label: 'Spannish',
-    logo: <SHSVG className="antdicon" />,
+    logo: SHSVG,
   },
   {
     label: 'Swedish',
-    logo: <SWSVG className="antdicon" />,
+    logo: SWSVG,
   },
   {
     label: 'Romanian',
-    logo: <ROMSVG className="antdicon" />,
+    logo: ROMSVG,
   },
   {
     label: 'Russian',
-    logo: <RUSSVG className="antdicon" />,
+    logo: RUSSVG,
   },
 ]
