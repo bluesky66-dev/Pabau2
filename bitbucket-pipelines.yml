@@ -38,13 +38,14 @@ pipelines:
           services:
             - docker
           script:
+            - apt update -q && apt install -q xvfb
             - yarn install --frozen-lockfile
             - yarn affected:build --base=HEAD~1 --prod
             - yarn affected:lint --base=HEAD~1
             - yarn affected:lint --base=HEAD~1 --with-deps
             - yarn affected:test --base=HEAD~1 || true
             - yarn affected:e2e --base=HEAD~1 || true
-            - yarn affected --target=export --prod
+            - yarn affected --base=HEAD~1 --target=export --prod
             - yarn deploy
 #      - step:
 #          size: 2x
