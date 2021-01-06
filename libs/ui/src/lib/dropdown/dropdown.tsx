@@ -20,7 +20,8 @@ import { ReactComponent as JASVG } from './company/JA.svg'
 import { ReactComponent as UPSVG } from './UP.svg'
 import { ReactComponent as TaskSVG } from './Vector.svg'
 import { languageMenu } from './language/lang-logos'
-import './dropdown.less'
+import styles from './dropdown.module.less'
+import classNames from 'classnames'
 
 export interface DropDownInterface {
   loading?: boolean
@@ -33,93 +34,99 @@ export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
   const [activeMenu, setActiveMenu] = useState('Menu')
 
   const menu = (
-    <Menu className="avatar-menu">
-      <Menu.Item className="dropdown-menu" onClick={() => onClickAvatarMenu('ClinicMenu')}>
-        <div className="dropdown-header">
+    <Menu className={styles.avatarMenu}>
+      <Menu.Item className={styles.dropdownMenu} onClick={() => onClickAvatarMenu('ClinicMenu')}>
+        <div className={styles.dropdownHeader}>
           <PABAULOGO />
-          <span className="header-text">Pabau Clinic Software</span>
+          <span className={styles.headerText}>Pabau Clinic Software</span>
         </div>
-        <RightOutlined className="dropdown-icon" />
+        <RightOutlined className={styles.dropdownIcon} />
       </Menu.Item>
-      <Menu.Item className="userinfo">
-        <div className="user-name">William Brandham</div>
-        <div className="user-balance">
+      <Menu.Item className={styles.userinfo}>
+        <div className={styles.userName}>William Brandham</div>
+        <div className={styles.userBalance}>
           <p>Balance</p>
           <span>9445,00</span>
         </div>
       </Menu.Item>
-      <Menu.Item className="dropdown-menu">
-        <div className="dropdown-header">
+      <Menu.Item className={styles.dropdownMenu}>
+        <div className={styles.dropdownHeader}>
           <UserOutlined style={{ color: '#9292A3' }} />
-          <span className="header-text">Account Settings</span>
+          <span className={styles.headerText}>Account Settings</span>
         </div>
         <LaunchSVG />
       </Menu.Item>
-      <Menu.Item className="dropdown-menu" style={{ borderBottom: '1px solid #F1F1F1' }}>
-        <div className="dropdown-header">
+      <Menu.Item className={styles.dropdownMenu} style={{ borderBottom: '1px solid #F1F1F1' }}>
+        <div className={styles.dropdownHeader}>
           <TaskSVG />
-          <span className="header-text task-text">Tasks</span>
+          <span className={classNames(styles.headerText, styles.taskText)}>Tasks</span>
         </div>
       </Menu.Item>
-      <Menu.Item className="dropdown-menu" onClick={() => onClickAvatarMenu('FeedbackMenu')}>
-        <div className="dropdown-header">
-          <NotificationOutlined className="dropdown-icon" />
-          <span className="header-text">Give feedback</span>
+      <Menu.Item className={styles.dropdownMenu} onClick={() => onClickAvatarMenu('FeedbackMenu')}>
+        <div className={styles.dropdownHeader}>
+          <NotificationOutlined className={styles.dropdownIcon} />
+          <span className={styles.headerText}>Give feedback</span>
         </div>
-        <RightOutlined className="dropdown-icon" />
+        <RightOutlined className={styles.dropdownIcon} />
       </Menu.Item>
-      <Menu.Item className="dropdown-menu" onClick={() => onClickAvatarMenu('HelpMenu')}>
-        <div className="dropdown-header">
-          <QuestionCircleOutlined className="dropdown-icon" />
-          <span className="header-text">Help & Support</span>
+      <Menu.Item className={styles.dropdownMenu} onClick={() => onClickAvatarMenu('HelpMenu')}>
+        <div className={styles.dropdownHeader}>
+          <QuestionCircleOutlined className={styles.dropdownIcon} />
+          <span className={styles.headerText}>Help & Support</span>
         </div>
-        <RightOutlined className="dropdown-icon" />
+        <RightOutlined className={styles.dropdownIcon} />
       </Menu.Item>
-      <Menu.Item className="dropdown-menu" onClick={() => onClickAvatarMenu('LangMenu')}>
-        <div className="dropdown-header">
-          <GlobalOutlined className="dropdown-icon" />
-          <span className="header-text">English</span>
+      <Menu.Item className={styles.dropdownMenu} onClick={() => onClickAvatarMenu('LangMenu')}>
+        <div className={styles.dropdownHeader}>
+          <GlobalOutlined className={styles.dropdownIcon} />
+          <span className={styles.headerText}>English</span>
         </div>
-        <RightOutlined className="dropdown-icon" />
+        <RightOutlined className={styles.dropdownIcon} />
       </Menu.Item>
-      <Menu.Item className="dropdown-menu">
-        <div className="dropdown-header">
-          <ExportOutlined className="dropdown-icon" />
-          <span className="header-text">Log out</span>
+      <Menu.Item className={styles.dropdownMenu}>
+        <div className={styles.dropdownHeader}>
+          <ExportOutlined className={styles.dropdownIcon} />
+          <span className={styles.headerText}>Log out</span>
         </div>
       </Menu.Item>
     </Menu>
   )
 
   const ClinicSubMenu = (
-    <Menu className="avatar-sub-menu">
-      <Menu.Item className="sub-dropdown-list" onClick={() => onClickAvatarMenu('Menu')}>
-        <div className="sub-dropdown-list-header">
-          <LeftOutlined className="sub-logo" />
-          <span className="sub-header-text">Select company</span>
+    <Menu className={styles.avatarSubMenu}>
+      <Menu.Item className={styles.subDropdownList} onClick={() => onClickAvatarMenu('Menu')}>
+        <div className={styles.subDropdownListHeader}>
+          <LeftOutlined className={styles.subLogo} />
+          <span className={styles.subHeaderText}>Select company</span>
         </div>
       </Menu.Item>
-      <Menu.Item className="sub-dropdown-list">
-        <div className="sub-dropdown-list-header">
+      <Menu.Item className={styles.subDropdownList}>
+        <div className={styles.subDropdownListHeader}>
           <PABAULOGO />
-          <span className="sub-dropdown-list-header-text text-nowrap active-menu">
+          <span
+            className={classNames(
+              styles.subDropdownListHeaderText,
+              styles.textNowrap,
+              styles.activeMenu
+            )}
+          >
             Pabau Clinic Software
           </span>
         </div>
-        <CheckCircleFilled className="check-icon active-menu" />
+        <CheckCircleFilled className={classNames(styles.checkIcon, styles.activeMenu)} />
       </Menu.Item>
-      <Menu.Item className="sub-dropdown-list">
-        <div className="sub-dropdown-list-header">
+      <Menu.Item className={styles.subDropdownList}>
+        <div className={styles.subDropdownListHeader}>
           <JASVG />
-          <span className="sub-dropdown-list-header-text">
+          <span className={classNames(styles.subDropdownListHeaderText)}>
             Jason Austin Har Salon’s & Barbershops
           </span>
         </div>
       </Menu.Item>
-      <Menu.Item className="sub-dropdown-list">
-        <div className="sub-dropdown-list-header">
+      <Menu.Item className={styles.subDropdownList}>
+        <div className={styles.subDropdownListHeader}>
           <UPSVG />
-          <span className="sub-dropdown-list-header-text">
+          <span className={classNames(styles.subDropdownListHeaderText)}>
             University of Portsmouth Essenntial Student Guide – Info, Offers, Nightlife
           </span>
         </div>
@@ -128,21 +135,21 @@ export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
   )
 
   const FeedbackMenu = (
-    <Menu className="avatar-help-menu">
-      <Menu.Item className="avatar-help-sub-list" onClick={() => setActiveMenu('Menu')}>
-        <div className="feedback-align-content">
-          <LeftOutlined className="sub-logo" />
-          <p className="sub-header-text">Give us feedback</p>
+    <Menu className={styles.avatarHelpMenu}>
+      <Menu.Item className={styles.avatarHelpSubList} onClick={() => setActiveMenu('Menu')}>
+        <div className={styles.feedbackAlignContent}>
+          <LeftOutlined className={styles.subLogo} />
+          <p className={styles.subHeaderText}>Give us feedback</p>
         </div>
       </Menu.Item>
-      <Menu.Item className="avatar-help-sub-list">
-        <div className="feedback-align-content">
+      <Menu.Item className={styles.avatarHelpSubList}>
+        <div className={styles.feedbackAlignContent}>
           <InfoCircleOutlined className="" />
           <span className="">Help us improve Pabau</span>
         </div>
       </Menu.Item>
-      <Menu.Item className="avatar-help-sub-list">
-        <div className="feedback-align-content">
+      <Menu.Item className={styles.avatarHelpSubList}>
+        <div className={styles.feedbackAlignContent}>
           <ExclamationOutlined className="" />
           <span className="">Something went wrong</span>
         </div>
@@ -151,27 +158,27 @@ export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
   )
 
   const HelpMenu = (
-    <Menu className="avatar-help-menu">
-      <Menu.Item className="avatar-help-sub-list" onClick={() => onClickAvatarMenu('Menu')}>
-        <div className="feedback-align-content">
-          <LeftOutlined className="sub-logo" />
-          <p className="sub-header-text">Help & Support </p>
+    <Menu className={styles.avatarHelpMenu}>
+      <Menu.Item className={styles.avatarHelpSubList} onClick={() => onClickAvatarMenu('Menu')}>
+        <div className={styles.feedbackAlignContent}>
+          <LeftOutlined className={styles.subLogo} />
+          <p className={styles.subHeaderText}>Help & Support </p>
         </div>
       </Menu.Item>
-      <Menu.Item className="avatar-help-sub-list">
-        <div className="feedback-align-content">
+      <Menu.Item className={styles.avatarHelpSubList}>
+        <div className={styles.feedbackAlignContent}>
           <QuestionCircleOutlined className="" />
           <span className="">Help Centre</span>
         </div>
       </Menu.Item>
-      <Menu.Item className="avatar-help-sub-list">
-        <div className="feedback-align-content">
+      <Menu.Item className={styles.avatarHelpSubList}>
+        <div className={styles.feedbackAlignContent}>
           <PlaySquareOutlined className="" />
           <span className="">Video Guides</span>
         </div>
       </Menu.Item>
-      <Menu.Item className="avatar-help-sub-list">
-        <div className="feedback-align-content">
+      <Menu.Item className={styles.avatarHelpSubList}>
+        <div className={styles.feedbackAlignContent}>
           <ExclamationOutlined className="" />
           <span className="">Contact Support</span>
         </div>
@@ -180,21 +187,23 @@ export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
   )
 
   const LangMenu = (
-    <Menu className="avatar-help-menu">
-      <Menu.Item className="lang-sub-dropdown-menu" onClick={() => onClickAvatarMenu('Menu')}>
-        <div className="lang-align-content">
+    <Menu className={styles.avatarHelpMenu}>
+      <Menu.Item className={styles.langSubDropdownMenu} onClick={() => onClickAvatarMenu('Menu')}>
+        <div className={styles.langAlignContent}>
           <LeftOutlined className="" />
           <p className="">Select language </p>
         </div>
       </Menu.Item>
       {languageMenu.map((lang, index) => {
         return (
-          <Menu.Item key={index} className="language-text-align">
-            <div className="language-flag-center">
+          <Menu.Item key={index} className={styles.languageTextAlign}>
+            <div className={styles.languageFlagCenter}>
               <Image src={lang.logo} alt={lang.label} />
-              <span className={`${lang.selected ? 'active-menu' : ''}`}>{lang.label}</span>
+              <span className={lang.selected && styles.activeMenu}>{lang.label}</span>
             </div>
-            {lang.selected && <CheckCircleFilled className="check-icon active-menu" />}
+            {lang.selected && (
+              <CheckCircleFilled className={classNames(styles.checkIcon, styles.activeMenu)} />
+            )}
           </Menu.Item>
         )
       })}
@@ -224,9 +233,11 @@ export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
       content={avatarMenu}
       trigger="click"
       placement="bottomRight"
-      overlayClassName="avatar-popover"
+      overlayClassName={styles.avatarPopover}
     >
-      <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '20px' }}>
+      <div
+        style={{ display: 'flex', alignItems: 'center', paddingLeft: '20px', cursor: 'pointer' }}
+      >
         <Badge
           dot
           color="#65CD98"

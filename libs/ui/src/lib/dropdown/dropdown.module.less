@@ -1,7 +1,10 @@
 .avatar-popover {
-  .ant-popover-inner-content {
-    padding: 0px;
+  :global {
+    .ant-popover-inner-content {
+      padding: 0px;
+    }
   }
+
   .userinfo {
     border: none;
   }
@@ -9,16 +12,17 @@
     user-select: none;
     width: 304px;
     // transition: all 0.5s ease;
-
-    .ant-menu-item-selected {
-      background-color: transparent;
+    :global {
+      .ant-menu-item-selected {
+        background-color: transparent;
+      }
+      .ant-menu-item {
+        line-height: 0;
+        margin-bottom: 0px;
+        transition: none;
+      }
     }
 
-    .ant-menu-item {
-      line-height: 0;
-      margin-bottom: 0px;
-      transition: none;
-    }
     .userinfo {
       padding: 11px 17px;
       border-top: 1px solid #f1f1f1;
@@ -89,9 +93,10 @@
   .avatar-sub-menu {
     width: 304px;
     user-select: none;
-
-    .ant-menu-item-selected {
-      background-color: transparent;
+    :global {
+      .ant-menu-item-selected {
+        background-color: transparent;
+      }
     }
     .sub-dropdown-list {
       display: flex;
@@ -128,14 +133,17 @@
   .avatar-help-menu {
     width: 304px;
     user-select: none;
-    .ant-menu-item-selected {
-      background-color: transparent;
+    :global {
+      .ant-menu-item-selected {
+        background-color: transparent;
+      }
+      .ant-menu-item {
+        line-height: 0;
+        margin-bottom: 0px;
+        // margin-top: 0px;
+      }
     }
-    .ant-menu-item {
-      line-height: 0;
-      margin-bottom: 0px;
-      // margin-top: 0px;
-    }
+
     .avatar-help-sub-list {
       display: flex;
       align-items: center;
@@ -157,7 +165,7 @@
           font-style: normal;
           font-weight: normal;
           line-height: 18px;
-          color: #9292A3;
+          color: #9292a3;
         }
       }
     }
@@ -190,11 +198,13 @@
     white-space: nowrap !important;
   }
 
-  .ant-dropdown-menu-item {
-    padding-top: 15px;
-    padding-left: 18px;
-    padding-right: 15px;
-    padding-bottom: 15px;
+  :global {
+    .ant-dropdown-menu-item {
+      padding-top: 15px;
+      padding-left: 18px;
+      padding-right: 15px;
+      padding-bottom: 15px;
+    }
   }
 
   .active-menu {
