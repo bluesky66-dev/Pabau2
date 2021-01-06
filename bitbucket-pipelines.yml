@@ -38,8 +38,8 @@ pipelines:
           services:
             - docker
           script:
-            #- apk --update add git
-            #- npm i -g yarn
+            - apt update -q && apt install -q nodejs
+            - npm i -g yarn
             - yarn install --frozen-lockfile
             - yarn affected:build --base=HEAD~1 --prod
             - yarn affected:lint --base=HEAD~1
