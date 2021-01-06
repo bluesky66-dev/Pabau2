@@ -137,6 +137,16 @@
               "quiet": true
             }
           }
+        },
+        "deploy": {
+          "builder": "@nrwl/workspace:run-commands",
+          "outputs": [],
+          "options": {
+            "command": "yarn nx run ui:build-storybook && cd dist/storybook/ui && vercel -c -C --token ${VERCEL_TOKEN} -A ../../../libs/ui/vercel.json --prod"
+          },
+          "configurations": {
+            "production": {}
+          }
         }
       }
     },

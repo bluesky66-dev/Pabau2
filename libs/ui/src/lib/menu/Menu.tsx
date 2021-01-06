@@ -14,6 +14,7 @@ const items = [
   {
     name: 'Calendar',
     icon: <SmileOutlined />,
+    url: '/cal',
   },
   {
     name: 'Clients',
