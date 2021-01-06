@@ -6,6 +6,7 @@ options:
 definitions:
   caches:
     nextcache: 'dist/**/.next/cache'
+    yarncustom: '/usr/local/share/.cache/yarn'
   services:
     docker:
       memory: 2048
@@ -17,6 +18,7 @@ pipelines:
         caches:
           - node
           - nextcache
+          - yarncustom
         script:
           - yarn
           - yarn run nx affected --all --target=lint
@@ -32,23 +34,18 @@ pipelines:
           caches:
             - node
             - nextcache
+            - yarncustom
           services:
             - docker
           script:
-            - ls -al
             - apk --update add git
-            - ls -al
-            - yarn --frozen-lockfile
-            - ls -al
             - yarn install --frozen-lockfile
-            - ls -al
             - yarn affected:build --base=HEAD~1
             - yarn affected:build --base=HEAD~1 --prod
             - yarn affected:lint --base=HEAD~1
-            - yarn affected:lint --base=HEAD~1 --prod
-            - yarn affected:lint --base=HEAD~1 --with-deps --prod
-            - yarn affected:test --base=HEAD~1 --with-deps --prod || true
-            - yarn affected:e2e --base=HEAD~1 --with-deps --prod || true
+            - yarn affected:lint --base=HEAD~1 --with-deps
+            - yarn affected:test --base=HEAD~1  || true
+            - yarn affected:e2e --base=HEAD~1  || true
             - yarn affected --target=export --prod
             - yarn deploy
 
