@@ -1,4 +1,4 @@
-image: node:alpine
+image: markadams/chromium-xvfb
 
 options:
   max-time: 15 # max time in minutes for each step
@@ -40,12 +40,11 @@ pipelines:
           script:
             - apk --update add git
             - yarn install --frozen-lockfile
-            - yarn affected:build --base=HEAD~1
             - yarn affected:build --base=HEAD~1 --prod
             - yarn affected:lint --base=HEAD~1
             - yarn affected:lint --base=HEAD~1 --with-deps
-            - yarn affected:test --base=HEAD~1  || true
-            - yarn affected:e2e --base=HEAD~1  || true
+            - yarn affected:test --base=HEAD~1 || true
+            - yarn affected:e2e --base=HEAD~1 || true
             - yarn affected --target=export --prod
             - yarn deploy
 
