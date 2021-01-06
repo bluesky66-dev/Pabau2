@@ -7,14 +7,16 @@
 
 .search-box {
   border-radius: 6px;
-  width: 328px;
+  padding: 8px;
 }
 .search-input {
-  .ant-popover-inner-content {
-    width: 360px;
-  }
-  .ant-popover-arrow {
-    display: none !important;
+  :global {
+    .ant-popover-inner-content {
+      width: 360px;
+    }
+    .ant-popover-arrow {
+      display: none !important;
+    }
   }
 }
 
@@ -110,16 +112,18 @@ button:focus {
 }
 
 .advance-search-modal {
-  .ant-modal-header {
-    border-bottom-width: 0;
-    padding: 20px;
-    padding-bottom: 0px;
-    // padding-bottom: 19px;
-    border-radius: 8px;
-  }
-  .ant-modal-body {
-    padding: 20px;
-    padding-top: 0px;
+  :global {
+    .ant-modal-header {
+      border-bottom-width: 0;
+      padding: 20px;
+      padding-bottom: 0px;
+      // padding-bottom: 19px;
+      border-radius: 8px;
+    }
+    .ant-modal-body {
+      padding: 20px;
+      padding-top: 0px;
+    }
   }
   .back-to-modal {
     display: flex;
@@ -161,20 +165,22 @@ button:focus {
     padding-top: 15px;
   }
   .adv-search-form {
-    .ant-form-item {
-      margin-bottom: 15px;
-    }
-    .ant-form-item-label {
-      padding-bottom: 3px;
-      label {
-        font-family: Circular-Std-Book;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 14px;
-        line-height: 22px;
-        display: flex;
-        align-items: center;
-        color: #9292a3;
+    :global {
+      .ant-form-item {
+        margin-bottom: 15px;
+      }
+      .ant-form-item-label {
+        padding-bottom: 3px;
+        label {
+          font-family: Circular-Std-Book;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 22px;
+          display: flex;
+          align-items: center;
+          color: #9292a3;
+        }
       }
     }
     .adv-search-input {
