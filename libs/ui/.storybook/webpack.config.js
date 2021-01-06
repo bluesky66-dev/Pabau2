@@ -40,6 +40,7 @@ module.exports = async ({ config, mode }) => {
       {
         loader: 'css-loader',
         options: {
+          localsConvention: "camelCase",
           modules: {
             mode: "local",
             localIdentName: "[local]--[hash:base64:5]",

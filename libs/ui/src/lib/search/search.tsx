@@ -67,7 +67,7 @@ export const Search: FC<P> = ({ ...props }) => {
         {searchTab === 'Clients' && (
           <div style={{ marginTop: '15px' }}>
             <div className={styles.resultText}>
-              <h1> TOP RESULT </h1>
+              <h1>Top Result</h1>
             </div>
 
             <div className={styles.contentAlignProfile}>
