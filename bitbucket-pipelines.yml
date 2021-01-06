@@ -37,8 +37,11 @@ pipelines:
           script:
             - apk --update add git
             - yarn install --frozen-lockfile
-            - yarn affected:build --base=HEAD~1 --with-deps --prod
+            - yarn affected:build --base=HEAD~1 --prod
+            - yarn affected:lint --base=HEAD~1 --prod
             - yarn affected:lint --base=HEAD~1 --with-deps --prod
-            - yarn affected:test --base=HEAD~1 --with-deps --prod
-            - yarn affected:e2e --base=HEAD~1 --with-deps --prod
+            - yarn affected:test --base=HEAD~1 --with-deps --prod || true
+            - yarn affected:e2e --base=HEAD~1 --with-deps --prod || true
+            - yarn affected --target=export --prod
+            - yarn deploy
 

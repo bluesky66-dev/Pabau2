@@ -6,8 +6,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "types": [
-      "node",
-      "jest"
+      "node"
     ],
     "strict": false,
     "forceConsistentCasingInFileNames": true,
@@ -23,6 +22,10 @@
     "next-env.d.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/*.spec.js",
+    "**/*.spec.jsx"
   ]
 }
