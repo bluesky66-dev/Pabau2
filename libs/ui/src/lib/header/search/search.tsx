@@ -1,6 +1,5 @@
-import React, { FC, useRef, useState } from 'react'
-import '../PabauHeader.less'
-import './search.less'
+import React, { FC, HTMLProps, useState } from 'react'
+import styles from './search.module.less'
 import { Input, Popover, Avatar, Image, Modal, Form, Button } from 'antd'
 import {
   SearchOutlined,
@@ -15,28 +14,33 @@ import User2 from '../../../assets/images/user2.png'
 import User3 from '../../../assets/images/user3.png'
 import User4 from '../../../assets/images/user4.png'
 import User5 from '../../../assets/images/user5.png'
+import classNames from 'classnames'
 
-export const Search: FC = () => {
+type P = HTMLProps<HTMLDivElement>
+
+export const Search: FC<P> = ({ ...props }) => {
+  const [searchText, setSearchText] = useState('')
   const [searchPopUp, setSearchPopUp] = useState(false)
   const [searchTab, setSearchTab] = useState('Clients')
   const [advanceSearch, setAdvanceSearch] = useState(false)
 
   const [form] = Form.useForm()
 
-  const searchRef = useRef<Input>(null)
-
   const searchMenu = () => {
     return (
-      <div className="search-box">
-        <div className="cus-tabs">
+      <div className={styles.searchBox}>
+        <div className={styles.cusTabs}>
           <button
-            className={`cus-tab-design ${searchTab === 'Clients' && 'active-tabs'}`}
+            className={classNames(
+              styles.cusTabDesign,
+              searchTab === 'Clients' && styles.activeTabs
+            )}
             onClick={() => setSearchTab('Clients')}
           >
             Clients
           </button>
           <button
-            className={`cus-tab-design ${searchTab === 'Leads' && 'active-tabs'}`}
+            className={classNames(styles.cusTabDesign, searchTab === 'Leads' && styles.activeTabs)}
             onClick={() => setSearchTab('Leads')}
           >
             Leads
@@ -44,52 +48,52 @@ export const Search: FC = () => {
         </div>
         {searchTab === 'Clients' && (
           <div style={{ marginTop: '15px' }}>
-            <div className="result-text">
-              <h1> TOP RESULT </h1>
+            <div className={styles.resultText}>
+              <h1>Top Result</h1>
             </div>
 
-            <div className="content-align-profile">
-              <div className="client-profile">
+            <div className={styles.contentAlignProfile}>
+              <div className={styles.clientProfile}>
                 <Avatar size={40} src={<Image src={User} />} />
               </div>
-              <div className="client-profile-text">
+              <div className={styles.clientProfileText}>
                 <h1>Whitney Jameson</h1>
                 <p>3893312</p>
               </div>
             </div>
-            <div className="result-text result-text-top-space">
+            <div className={classNames(styles.resultText, styles.resultTextTopSpace)}>
               <h1> All results </h1>
             </div>
             {searchResult.map((result, index) => {
               return (
-                <div key={index} className="content-align-profile">
-                  <div className="client-profile">
+                <div key={index} className={styles.contentAlignProfile}>
+                  <div className={styles.clientProfile}>
                     <Avatar size={40} src={<Image src={result.profileURL} />} />
                   </div>
-                  <div className="client-profile-text">
+                  <div className={styles.clientProfileText}>
                     <h1>{result.clientName}</h1>
                     <p>{result.follower}</p>
                   </div>
                 </div>
               )
             })}
-            <div className="content-align-profile">
-              <div className="client-profile">
+            <div className={styles.contentAlignProfile}>
+              <div className={styles.clientProfile}>
                 <Avatar size={40} icon={<UserAddOutlined />} />
               </div>
-              <div className="client-profile-text">
+              <div className={styles.clientProfileText}>
                 <span>Add new client</span>
               </div>
             </div>
             <div
-              className="advance-search"
+              className={styles.advanceSearch}
               onClick={() => {
                 setSearchPopUp(false)
                 setAdvanceSearch(!advanceSearch)
               }}
             >
               <p> Advanced Search </p>
-              <RightOutlined className="right-arrow-color" />
+              <RightOutlined className={styles.rightArrowColor} />
             </div>
           </div>
         )}
@@ -106,31 +110,36 @@ export const Search: FC = () => {
   ]
 
   return (
-    <div style={{ margin: '15px' }}>
-      <Popover content={searchMenu} trigger="click" visible={searchPopUp}>
+    <div {...props}>
+      <Popover
+        content={searchMenu}
+        trigger="focus"
+        visible={searchPopUp}
+        overlayClassName={styles.searchInput}
+      >
         <Input
-          className="search-input-style"
+          className={styles.searchInputStyle}
           placeholder="Search clients or leads"
           prefix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
-          ref={searchRef}
-          onClick={() => {
-            setSearchPopUp(!searchPopUp)
-          }}
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          onFocus={() => setSearchPopUp(true)}
+          onBlur={() => setSearchPopUp(false)}
         />
       </Popover>
       <Modal
         visible={advanceSearch}
         title={
           <>
-            <div className="back-to-modal">
+            <div className={styles.backToModal}>
               <div
-                className="basic-search-align"
+                className={styles.basicSearchAlign}
                 onClick={() => {
                   setAdvanceSearch(!advanceSearch)
                   setSearchPopUp(!searchPopUp)
                 }}
               >
-                <LeftOutlined className="right-arrow-color" />
+                <LeftOutlined className={styles.rightArrowColor} />
                 <h6> Back to basic search</h6>
               </div>
               <div>
@@ -141,18 +150,24 @@ export const Search: FC = () => {
                 />
               </div>
             </div>
-            <div className="advance-search-text">
+            <div className={styles.advanceSearchText}>
               <h1>Advance Search</h1>
             </div>
-            <div className="cus-tabs cus-tabs-top-space">
+            <div className={classNames(styles.cusTabs, styles.cusTabsTopSpace)}>
               <button
-                className={`cus-tab-design ${searchTab === 'Clients' && 'active-tabs'}`}
+                className={classNames(
+                  styles.cusTabDesign,
+                  searchTab === 'Clients' && styles.activeTabs
+                )}
                 onClick={() => setSearchTab('Clients')}
               >
                 Clients
               </button>
               <button
-                className={`cus-tab-design ${searchTab === 'Leads' && 'active-tabs'}`}
+                className={classNames(
+                  styles.cusTabDesign,
+                  searchTab === 'Leads' && styles.activeTabs
+                )}
                 onClick={() => setSearchTab('Leads')}
               >
                 Leads
@@ -162,44 +177,44 @@ export const Search: FC = () => {
         }
         width={360}
         footer={false}
-        wrapClassName="advance-search-modal"
+        wrapClassName={styles.advanceSearchModal}
         closable={false}
       >
         <Form
           form={form}
           requiredMark={false}
           layout="vertical"
-          className="adv-search-form adv-search-top-space"
+          className={classNames(styles.advSearchForm, styles.advSearchTopSpace)}
         >
-          <Form.Item className="search-form" label="First name">
-            <Input className="adv-search-input" placeholder="First name" />
+          <Form.Item className={styles.searchForm} label="First name">
+            <Input className={styles.advSearchInput} placeholder="First name" />
           </Form.Item>
-          <Form.Item className="search-form" label="Email">
-            <Input className="adv-search-input" placeholder="Email" />
+          <Form.Item className={styles.searchForm} label="Email">
+            <Input className={styles.advSearchInput} placeholder="Email" />
           </Form.Item>
-          <Form.Item className="search-form" label="Date of birth">
-            <Input className="adv-search-input" placeholder="DD/MM/YYYY" />
+          <Form.Item className={styles.searchForm} label="Date of birth">
+            <Input className={styles.advSearchInput} placeholder="DD/MM/YYYY" />
           </Form.Item>
-          <Form.Item className="search-form" label="Phone">
-            <Input className="adv-search-input" placeholder="Phone" />
+          <Form.Item className={styles.searchForm} label="Phone">
+            <Input className={styles.advSearchInput} placeholder="Phone" />
           </Form.Item>
-          <Form.Item className="search-form" label="Mobile">
-            <Input className="adv-search-input" placeholder="Mobile" />
+          <Form.Item className={styles.searchForm} label="Mobile">
+            <Input className={styles.advSearchInput} placeholder="Mobile" />
           </Form.Item>
-          <Form.Item className="search-form" label="Post code">
-            <Input className="adv-search-input" placeholder="Post code" />
+          <Form.Item className={styles.searchForm} label="Post code">
+            <Input className={styles.advSearchInput} placeholder="Post code" />
           </Form.Item>
-          <Form.Item className="search-form" label="Policy number">
-            <Input className="adv-search-input" placeholder="Policy number" />
+          <Form.Item className={styles.searchForm} label="Policy number">
+            <Input className={styles.advSearchInput} placeholder="Policy number" />
           </Form.Item>
-          <Form.Item className="search-form" label="Patient ID">
-            <Input className="adv-search-input" placeholder="Patient ID" />
+          <Form.Item className={styles.searchForm} label="Patient ID">
+            <Input className={styles.advSearchInput} placeholder="Patient ID" />
           </Form.Item>
-          <Form.Item className="search-form" label="Invoice NO">
-            <Input className="adv-search-input" placeholder="Invoice NO" />
+          <Form.Item className={styles.searchForm} label="Invoice NO">
+            <Input className={styles.advSearchInput} placeholder="Invoice NO" />
           </Form.Item>
-          <div className="button-end">
-            <Button className="btn-disable-style" disabled={true} size="large">
+          <div className={styles.buttonEnd}>
+            <Button className={styles.btnDisableStyle} disabled={true} size="large">
               Search
             </Button>
           </div>
