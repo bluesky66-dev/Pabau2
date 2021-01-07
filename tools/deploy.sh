@@ -15,6 +15,7 @@ echo "last line: ${LAST_LINE}"
 
 echo "commit hash: ${BITBUCKET_COMMIT}"
 
-vercel alias "${LAST_LINE}" "prelive-crm.new.pabau.com"
+vercel --token "${VERCEL_TOKEN}" -A ../../../../apps/web/vercel.json \
+  alias "${LAST_LINE}" "prelive-crm.new.pabau.com"
 
 
