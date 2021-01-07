@@ -1,6 +1,6 @@
 import { Header, Logo } from '@pabau/ui'
 import React from 'react'
-import { Search } from '../search/search'
+import { Search } from './search/search'
 
 export default {
   component: Header,
