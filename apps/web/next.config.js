@@ -3,7 +3,7 @@ const withImages = require('next-images');
 const withNx = require('@nrwl/next/plugins/with-nx');
 
 module.exports = {
-  trailingSlash: true,
+  trailingSlash: false,
   ...withImages({
     fileExtensions: ["jpg", "jpeg", "png", "gif", "ico", "webp", "jp2", "avif"],
     inlineImageLimit: 10000,
