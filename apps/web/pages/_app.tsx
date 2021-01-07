@@ -12,6 +12,7 @@ import { WebSocketLink } from '@apollo/client/link/ws'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { OperationDefinitionNode } from 'graphql'
 
+require('../styles/global.less')
 require('../../../libs/ui/src/styles/antd.less')
 
 const cache = new InMemoryCache()
