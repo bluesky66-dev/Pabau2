@@ -1,4 +1,4 @@
-import React, { FC, HTMLProps, useEffect, useRef, useState } from 'react'
+import React, { FC, HTMLProps, useState } from 'react'
 import styles from './search.module.less'
 import { Input, Popover, Avatar, Image, Modal, Form, Button } from 'antd'
 import {
@@ -25,24 +25,6 @@ export const Search: FC<P> = ({ ...props }) => {
   const [advanceSearch, setAdvanceSearch] = useState(false)
 
   const [form] = Form.useForm()
-
-  const searchRef = useRef<Input>(null)
-  useEffect(() => {
-    window.document.onkeydown = (e) => {
-      console.log('state', searchRef.current?.state)
-      console.log('code', e.code)
-      if (
-        !searchRef.current?.state.focused &&
-        (e.code === 'KeyS' || (e.ctrlKey && e.code === 'KeyF'))
-      ) {
-        e.preventDefault()
-        searchRef.current?.focus()
-      } else if (searchRef.current?.state.focused && e.code === 'Escape') {
-        e.preventDefault()
-        searchRef.current?.blur()
-      }
-    }
-  })
 
   const searchMenu = () => {
     return (
@@ -139,13 +121,9 @@ export const Search: FC<P> = ({ ...props }) => {
           className={styles.searchInputStyle}
           placeholder="Search clients or leads"
           prefix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
-          ref={searchRef}
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
-          onFocus={() => {
-            searchRef.current?.select()
-            setSearchPopUp(true)
-          }}
+          onFocus={() => setSearchPopUp(true)}
           onBlur={() => setSearchPopUp(false)}
         />
       </Popover>
