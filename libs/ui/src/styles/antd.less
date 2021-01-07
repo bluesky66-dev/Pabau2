@@ -57,6 +57,18 @@
   src: url('../assets/fonts/CircularStd-Medium.otf') format('otf');
 }
 
+@keyframes spin {
+  from {
+    transform: rotateX(0deg);
+    transform-origin: center;
+  }
+  to {
+    transform: rotateX(360deg);
+    transform-origin: center;
+  }
+}
+
+
 .ant-input-affix-wrapper:hover,
 .ant-input-affix-wrapper:focus {
   border: 1px solid #54b2d3;

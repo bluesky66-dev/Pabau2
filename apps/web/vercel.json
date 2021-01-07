@@ -1,4 +1,5 @@
 {
   "name": "web",
-  "trailingSlash": false
+  "trailingSlash": false,
+  "cleanUrls": true
 }
