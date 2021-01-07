@@ -8,6 +8,7 @@ module.exports = {
     fileExtensions: ["jpg", "jpeg", "png", "gif", "ico", "webp", "jp2", "avif", "woff", "woff2", "otf"],
     inlineImageLimit: 100000,
     ...withAntdLess({
+      lessVarsFilePath: 'libs/ui/src/styles/antd.less',
       importLoaders: 3,
       cssLoaderOptions: {
         sourceMap: true,

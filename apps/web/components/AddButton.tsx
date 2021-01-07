@@ -1,6 +1,6 @@
 import { DocumentNode, useMutation } from '@apollo/client'
 import React, { FC, useState } from 'react'
-import { BasicModal, Button } from '@pabau/ui'
+import { BasicModal as Modal, Button } from '@pabau/ui'
 import Form from './Form'
 import { useKeyPressEvent } from 'react-use'
 
@@ -27,7 +27,7 @@ const AddButton: FC<P> = ({
       <Button style={{ float: 'right' }} type="primary" onClick={() => setModalShowing(true)}>
         {newButtonText}
       </Button>
-      <BasicModal
+      <Modal
         onCancel={() => setModalShowing(false)}
         onOk={() => formRef?.submitForm()}
         visible={modalShowing}
@@ -66,7 +66,7 @@ const AddButton: FC<P> = ({
             setModalShowing(false)
           }}
         />
-      </BasicModal>
+      </Modal>
     </>
   )
 }
