@@ -31,8 +31,8 @@ const AddButton: FC<P> = ({
         onCancel={() => setModalShowing(false)}
         onOk={() => formRef?.submitForm()}
         visible={modalShowing}
-        title={`New ${schema.full}`}
-        newButtonText={`New ${schema.short}`}
+        title={`Create ${schema.full}`}
+        newButtonText={`Create ${schema.short}`}
       >
         <Form
           onRef={(ref) => {

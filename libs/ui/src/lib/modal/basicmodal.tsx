@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 import { Modal } from 'antd'
+import Button from '../button/button'
 
 interface P {
   onOk?: () => void
@@ -24,11 +25,18 @@ export function BasicModal({
       visible={visible}
       onOk={() => onOk?.()}
       onCancel={() => onCancel?.()}
+      footer={null}
+      cancelText={null}
       width={modalWidth}
       destroyOnClose={true}
       modalRender={(E) => E}
     >
-      {children}
+      <div>{children}</div>
+      <div style={{ marginTop: '2em', display: 'flex', placeContent: 'flex-end' }}>
+        <Button type="primary" onClick={() => onOk?.()}>
+          Create
+        </Button>
+      </div>
     </Modal>
   )
 }
