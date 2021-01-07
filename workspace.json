@@ -54,7 +54,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "outputs": [],
           "options": {
-            "command": "tools/deploy.sh"
+            "command": "sh tools/deploy.sh"
           },
           "configurations": {
             "production": {}
