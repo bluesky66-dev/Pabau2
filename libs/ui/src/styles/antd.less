@@ -1,4 +1,7 @@
-@primary-color: yellow; // primary color for all components
+@border-radius-base: 25px; // major border radius
+@primary-color: #54b2d3; // primary color for all components
+//@import '~antd/dist/antd.less';
+
 @link-color: #1890ff; // link color
 @success-color: #52c41a; // success state color
 @warning-color: #faad14; // warning state color
@@ -8,6 +11,47 @@
 @text-color: rgba(0, 0, 0, 0.65); // major text color
 @text-color-secondary: rgba(0, 0, 0, 0.45); // secondary text color
 @disabled-color: rgba(0, 0, 0, 0.25); // disable state color
-@border-radius-base: 2px; // major border radius
-@border-color-base: #d9d9d9; // major border color
+@border-radius-base: 25px; // major border radius
+@border-color-base: #ecedf0; // major border color
 @box-shadow-base: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05); // major shadow for layers
+@font-variant-base: normal;
+@font-feature-settings-base: normal;
+@font-family: Circular-Std-Bold, -apple-system, sans-serif;
+
+@font-face {
+  font-family: 'Circular-Std-Bold';
+  src: url('../assets/fonts/CircularStd-Bold.woff') format('woff'),
+    url('../assets/fonts/CircularStd-Bold.otf') format('otf');
+}
+@font-face {
+  font-family: 'Circular-Std-Black';
+  src: url('../assets/fonts/CircularStd-Black.otf') format('otf');
+}
+@font-face {
+  font-family: 'Circular-Std-Book';
+  src: url('../assets/fonts/CircularStd-Book.otf') format('otf');
+}
+@font-face {
+  font-family: 'Circular-Std-Medium';
+  src: url('../assets/fonts/CircularStd-Medium.otf') format('otf');
+}
+
+.ant-input-affix-wrapper:hover,
+.ant-input-affix-wrapper:focus {
+  border: 1px solid #54b2d3;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 4px #c0e4f1;
+}
+.ant-btn {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+.ant-layout-footer {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  padding: 1em;
+}

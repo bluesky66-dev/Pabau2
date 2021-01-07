@@ -12,7 +12,7 @@ import { WebSocketLink } from '@apollo/client/link/ws'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { OperationDefinitionNode } from 'graphql'
 
-require('../styles/global.less')
+require('../../../libs/ui/src/styles/antd.less')
 
 const cache = new InMemoryCache()
 const GRAPHQL_ENDPOINT = 'wss://api.new.pabau.com/v1/graphql'
@@ -132,11 +132,6 @@ export default function CustomApp({ Component, pageProps }: AppProps): JSX.Eleme
           font-family: 'Circular-Std-Black';
           src: local('Circular-Std-Black'),
             url(../public/fonts/CircularStd-Black.otf) format('opentype');
-        }
-
-        @font-face {
-          font-family: 'Circular-Std-Bold';
-          src: url('/fonts/CircularStd-Bold.otf') format('opentype');
         }
 
         @font-face {

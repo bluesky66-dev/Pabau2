@@ -94,10 +94,11 @@ export const Header: FC = ({ ...props }: HTMLProps<HTMLElement>) => {
           <div>
             <Dropdown overlay={overlay}>
               <Button
-                style={{ borderRadius: 5 }}
+                //style={{ borderRadius: 5 }}
                 // type={ButtonTypes.primary}
                 // shape="round"
                 // size="large"
+                type="default"
                 className={styles.createBtnStyle}
               >
                 <PlusCircleFilled /> Create

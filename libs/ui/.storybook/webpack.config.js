@@ -3,6 +3,18 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const rootWebpackConfig = require('../../../.storybook/webpack.config')
 
+console.log("reading less vars...")
+const lessToJs = require('less-vars-to-js');
+const fs = require('fs');
+const path = require('path');
+
+// Read the less file in as string
+const paletteLess = fs.readFileSync(path.resolve(__dirname, '../src/styles/antd.less'), 'utf8');
+
+// Pass in file contents
+const lessVars = lessToJs(paletteLess, {resolveVariables: true, stripPrefix: true});
+console.log("read less vars: ", lessVars)
+
 /**
  * Export a function. Accept the base config as the only param.
  *
@@ -52,6 +64,7 @@ module.exports = async ({ config, mode }) => {
         options: {
           lessOptions: {
             javascriptEnabled: true,
+            modifyVars: lessVars
           },
         },
       },
@@ -76,9 +89,7 @@ module.exports = async ({ config, mode }) => {
         options: {
           lessOptions: {
             javascriptEnabled: true,
-            modifyVars: {
-              "primary-color": "yellow"
-            }
+            modifyVars: lessVars
           },
         },
       },
@@ -137,18 +148,18 @@ module.exports = async ({ config, mode }) => {
     loader: require.resolve('babel-loader'),
     options: {
       plugins: [
-        // [
-        //   '@babel/plugin-transform-runtime',
-        //   {
-        //     absoluteRuntime: false,
-        //     corejs: false,
-        //     helpers: true,
-        //     regenerator: true,
-        //     useESModules: false,
-        //     version: '7.12.5',
-        //   },
-        // ],
-        ["import", { libraryName: "antd", style: true }]
+        [
+          '@babel/plugin-transform-runtime',
+          {
+            absoluteRuntime: false,
+            corejs: false,
+            helpers: true,
+            regenerator: true,
+            useESModules: false,
+            version: '7.12.5',
+          },
+        ],
+        //["import", { libraryName: "antd", style: true }]
       ],
       // presets: [require.resolve('babel-preset-react-app')],
     },

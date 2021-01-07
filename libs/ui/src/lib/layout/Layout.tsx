@@ -6,6 +6,8 @@ import { useRouter } from 'next/router'
 import { Button, ButtonTypes } from '../button/button'
 import { Header } from '@pabau/ui'
 
+require('../../styles/antd.less')
+
 const { Content, Footer } = AntLayout
 
 interface P extends React.HTMLProps<HTMLDivElement> {
