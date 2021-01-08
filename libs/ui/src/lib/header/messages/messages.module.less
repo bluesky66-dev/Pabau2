@@ -3,8 +3,24 @@
     .ant-drawer-body {
       padding: 0px;
     }
+    .ant-drawer-wrapper-body {
+      height: auto;
+    }
   }
+  .chat-space {
+    padding-top: 27px;
+    // padding-right:24px;
+    // padding-left: 24px;
+    // padding-bottom: 19px;
+  }
+  .chat-icon-style {
+    font-size: 16px;
+    color: #9292A3;
 
+  }
+  .close-icon {
+    padding-right: 24px;
+  }
   .messages-align {
     display: flex;
     align-items: center;
@@ -20,6 +36,8 @@
       font-size: 16px;
       font-weight: 600;
       margin-bottom: 0;
+      color: #3D3D46;
+      padding-left: 24px;
     }
     h2 {
       font-size: 18px;
@@ -36,7 +54,7 @@
     color: var(--grey-text-color);
   }
   .channel-message {
-    font-family: 'Circular-Std-Black';
+    font-family: 'Circular-Std-Bold';
     font-style: normal;
     font-weight: normal;
     font-size: var(--font-size-base);
@@ -44,7 +62,7 @@
     color: var(--light-grey-color);
   }
   .top-space-notification {
-    padding-top: 15px;
+    padding-top: 19px;
   }
   .messages-tabs {
     border-bottom: 1px solid var(--border-color-base);
@@ -106,7 +124,10 @@
     color: var(--light-grey-color);
   }
   .chat-panel {
-    padding: 20px;
+    padding-top: 16px;
+    padding-left: 24px;
+    padding-right: 20px;
+    padding-bottom: 5px;
   }
   .d-flex {
     display: flex;
@@ -121,6 +142,10 @@
   .card-border {
     border-bottom: 1px solid var(--border-color-base);
   }
+  .channel-name {
+    padding-top: 10px;
+    margin-bottom: 1px;
+  }
   .channels-text {
     span,
     p {
@@ -129,9 +154,16 @@
       font-weight: normal;
       font-size: 12px;
       letter-spacing: 1px;
-      line-height: 15px;
+      line-height: 15px;;
       text-transform: uppercase;
     }
+  }
+  .add-channel-icon {
+    opacity: 0;
+    transition: all 0.5s;
+  }
+  .channels-text:hover .add-channel-icon {
+    opacity: 1;
   }
   .top-space {
     padding-top: 10px;
@@ -143,7 +175,7 @@
     width: 100%;
     padding-left: 10px;
     .user-details {
-      font-family: Circular-Std-Bold;
+      font-family: Circular-Std-Book;
       font-style: normal;
       font-weight: 500;
       font-size: var(--font-size-base);
@@ -161,7 +193,7 @@
   }
   .chat-border {
     border: 1px solid var(--border-color-base);
-    margin-top: 11px;
+    margin-top: 9px;
     width: 85%;
     margin-left: auto;
   }

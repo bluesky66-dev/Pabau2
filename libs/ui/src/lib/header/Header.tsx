@@ -60,9 +60,6 @@ export const Header: FC = ({ ...props }: HTMLProps<HTMLElement>) => {
       className={styles.pabauHeader}
       style={{
         backgroundColor: 'white',
-        // padding: '1rem',
-        // position: 'sticky',
-
         height: '80px',
         top: 0,
         zIndex: 2,
@@ -93,14 +90,7 @@ export const Header: FC = ({ ...props }: HTMLProps<HTMLElement>) => {
 
           <div>
             <Dropdown overlay={overlay}>
-              <Button
-                //style={{ borderRadius: 5 }}
-                // type={ButtonTypes.primary}
-                // shape="round"
-                // size="large"
-                type="default"
-                className={styles.createBtnStyle}
-              >
+              <Button type="default" className={styles.createBtnStyle}>
                 <PlusCircleFilled /> Create
               </Button>
             </Dropdown>

@@ -91,10 +91,10 @@ export const PabauNotification: FC<NotificationProps> = ({
       visible={notificationDrawer}
       className={styles.notificationDrawer}
     >
-      <div className={styles.space}>
+      <div className="">
         <div className={styles.notificationAlign}>
           <h1> Notifications</h1>
-          <CloseOutlined onClick={closeDrawerMenu} />
+          <CloseOutlined onClick={closeDrawerMenu} className={styles.searchIconSize} />
         </div>
         <div className={classNames(styles.notifyTabs, styles.topSpaceNotification)}>
           <button
@@ -125,7 +125,7 @@ export const PabauNotification: FC<NotificationProps> = ({
               <>
                 <div className={classNames(styles.notificationAlign, styles.todayTextTopSpace)}>
                   <h2>{notification}</h2>
-                  <CloseOutlined />
+                  <CloseOutlined className={styles.searchIconSize} />
                 </div>
                 {notify[notification].map((dayNotify, index) => {
                   return (

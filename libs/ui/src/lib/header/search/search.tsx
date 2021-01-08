@@ -1,4 +1,5 @@
 import React, { FC, HTMLProps, useState } from 'react'
+import { Checkbox } from '@pabau/ui'
 import styles from './search.module.less'
 import { Input, Popover, Avatar, Image, Modal, Form, Button } from 'antd'
 import {
@@ -7,6 +8,7 @@ import {
   RightOutlined,
   LeftOutlined,
   CloseOutlined,
+  CloseCircleFilled,
 } from '@ant-design/icons'
 import User from '../../../assets/images/user.png'
 import User1 from '../../../assets/images/user1.png'
@@ -29,6 +31,9 @@ export const Search: FC<P> = ({ ...props }) => {
   const searchMenu = () => {
     return (
       <div className={styles.searchBox}>
+        <div className={styles.closeIconRight}>
+          <CloseOutlined className={styles.closeIconStyle} />
+        </div>
         <div className={styles.cusTabs}>
           <button
             className={classNames(
@@ -47,7 +52,7 @@ export const Search: FC<P> = ({ ...props }) => {
           </button>
         </div>
         {searchTab === 'Clients' && (
-          <div style={{ marginTop: '15px' }}>
+          <div className={styles.clientsList}>
             <div className={styles.resultText}>
               <h1>Top Result</h1>
             </div>
@@ -79,7 +84,11 @@ export const Search: FC<P> = ({ ...props }) => {
             })}
             <div className={styles.contentAlignProfile}>
               <div className={styles.clientProfile}>
-                <Avatar size={40} icon={<UserAddOutlined />} />
+                <Avatar
+                  size={40}
+                  icon={<UserAddOutlined style={{ color: 'var(--grey-text-color)' }} />}
+                  className={styles.addNewClient}
+                />
               </div>
               <div className={styles.clientProfileText}>
                 <span>Add new client</span>
@@ -125,6 +134,7 @@ export const Search: FC<P> = ({ ...props }) => {
           onChange={(e) => setSearchText(e.target.value)}
           onFocus={() => setSearchPopUp(true)}
           onBlur={() => setSearchPopUp(false)}
+          suffix={<CloseCircleFilled style={{ color: '#BFBFBF' }} />}
         />
       </Popover>
       <Modal
@@ -144,6 +154,7 @@ export const Search: FC<P> = ({ ...props }) => {
               </div>
               <div>
                 <CloseOutlined
+                  style={{ color: 'var(--light-grey-color)', fontSize: '12px' }}
                   onClick={() => {
                     setAdvanceSearch(!advanceSearch)
                   }}
@@ -213,6 +224,10 @@ export const Search: FC<P> = ({ ...props }) => {
           <Form.Item className={styles.searchForm} label="Invoice NO">
             <Input className={styles.advSearchInput} placeholder="Invoice NO" />
           </Form.Item>
+          <Checkbox>
+            {' '}
+            <span className={styles.greyTextColor}> Show inactive clients</span>{' '}
+          </Checkbox>
           <div className={styles.buttonEnd}>
             <Button className={styles.btnDisableStyle} disabled={true} size="large">
               Search
