@@ -1,20 +1,22 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
 set -e
 
-docker run --rm \
-  -e "RANCHER_ACCESS_KEY=${RANCHER_ACCESS_KEY}" \
-  -e "RANCHER_SECRET_KEY=${RANCHER_SECRET_KEY}" \
-  -e "RANCHER_URL=${RANCHER_URL}" \
-  cdrx/rancher-gitlab-deploy \
-    upgrade \
-      --environment Default \
-      --stack global-ops \
-      --create \
-      --service newpabau-backend \
-      --new-image "10.42.184.17:5000/pabau/newpabau-backend:latest" \
-      --finish-upgrade \
-      --rollback-on-error \
-      --start-before-stopping \
-      --wait-for-upgrade-to-finish \
-      --sidekicks
+yarn run nx run backend:build --prod
+cp apps/backend/package-json.dummy dist/apps/backend/package.json
+cd dist/apps/backend
+
+OUTPUT=$(vercel -c -C --token "${VERCEL_TOKEN}" -A ../../../../apps/backend/vercel.json --prod)
+echo "errorlevel: $?"
+
+echo "Output from vercel:"
+echo "${OUTPUT}"
+echo "--"
+
+LAST_LINE=$(echo "${OUTPUT}" | tail -n1)
+echo "last line: ${LAST_LINE}"
+
+echo "commit hash: ${BITBUCKET_COMMIT}"
+
+
+
+

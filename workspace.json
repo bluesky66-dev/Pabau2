@@ -54,7 +54,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "outputs": [],
           "options": {
-            "command": "sh tools/deploy.sh"
+            "command": "sh tools/cicd/web.deploy.sh"
           },
           "configurations": {
             "production": {}
@@ -249,7 +249,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "outputs": [],
           "options": {
-            "command": "yarn nx run backend:build --prod && cd dist/apps/backend && vercel -c -C --token ${VERCEL_TOKEN} -A ../../../apps/backend/vercel.json --prod"
+            "command": "sh tools/cicd/backend.deploy.sh"
           },
           "configurations": {
             "production": {}
