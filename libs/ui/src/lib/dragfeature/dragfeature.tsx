@@ -39,10 +39,10 @@ const columns = [
     title: 'STATUS',
     dataIndex: 'isActive',
     className: 'drag-visible',
-    render: function ActiveBtn() {
+    render: function ActiveBtn(val) {
       return (
-        <Button size="small" className={styles.activeBtn}>
-          Active
+        <Button size="small" className={val ? styles.activeBtn : styles.disableSourceBtn}>
+          {val ? 'Active' : 'Deactivated'}
         </Button>
       )
     },
@@ -92,6 +92,7 @@ export const DragFeature: FC = () => {
 
   return (
     <Table
+      className={styles.dragTable}
       pagination={false}
       dataSource={dataSource}
       columns={columns}
