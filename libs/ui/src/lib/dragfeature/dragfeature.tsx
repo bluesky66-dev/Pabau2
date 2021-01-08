@@ -4,6 +4,7 @@ import { SortableContainer, SortableElement, SortableHandle } from 'react-sortab
 import { MenuOutlined, LockFilled } from '@ant-design/icons'
 import { data } from './mock'
 import styles from './dragfeature.module.less'
+import { TableProps } from 'antd/es/table'
 
 const DragHandle = SortableHandle(() => (
   <MenuOutlined style={{ cursor: 'pointer', color: '#999' }} />
@@ -66,7 +67,7 @@ function array_move(arr, old_index, new_index) {
   })
 }
 
-export const DragFeature: FC = () => {
+export const DragFeature: FC<TableProps<never>> = ({ ...props }) => {
   const [dataSource, setDataSource] = useState(data)
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
@@ -92,6 +93,7 @@ export const DragFeature: FC = () => {
 
   return (
     <Table
+      {...props}
       pagination={false}
       dataSource={dataSource}
       columns={columns}
