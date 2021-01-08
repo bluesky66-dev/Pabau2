@@ -1,12 +1,10 @@
 import React, { PropsWithChildren, useState } from 'react'
 import { Form, Modal as AntModal, Button, Input } from 'antd'
 import { CloseOutlined } from '@ant-design/icons'
-import './modal.less'
-//import '../fonts.less'
+import styles from './modal.module.less'
 import '../../assets/less/pretty-checkbox.less'
 import ActiveSVG from '../../assets/images/active.svg'
 import NotActiveSVG from '../../assets/images/notactive.svg'
-
 export interface ModalInterface {
   loading?: boolean
   visible?: boolean
@@ -28,19 +26,19 @@ export function Modal({
     <AntModal
       visible={visible}
       title={
-        <div className="modal-heading-align">
-          <div className="ant-modal-title">Create Marketing Source</div>
+        <div className={styles.modalHeadingAlign}>
+          <div className={styles.antModalTitle}>Create Marketing Source</div>
           <CloseOutlined />
         </div>
       }
       width={682}
       footer={false}
-      wrapClassName="modal"
+      wrapClassName={styles.modal}
       closable={false}
     >
       <Form form={form} requiredMark={false} layout="vertical">
-        <div className="modal-body">
-          <div className="input-field">
+        <div className={styles.modalBody}>
+          <div className={styles.inputField}>
             <Form.Item
               label="Name"
               name="marketingSorce"
@@ -52,7 +50,7 @@ export function Modal({
               ]}
             >
               <Input
-                className="input-style"
+                className={styles.inputStyle}
                 placeholder="Enter marketing source name"
                 value={mSourceName}
                 defaultValue={mSourceName}
@@ -61,8 +59,8 @@ export function Modal({
             </Form.Item>
           </div>
         </div>
-        <div className="modal-footer">
-          <div className="pretty p-svg p-toggle p-plain">
+        <div className={styles.modalFooter}>
+          <div className={'pretty p-svg p-toggle p-plain'}>
             <input type="checkbox" checked={activate} onChange={() => setActivate(!activate)} />
             <div className="state p-off">
               <img className="svg" src={NotActiveSVG} alt="none-active-state" />
@@ -75,7 +73,7 @@ export function Modal({
           </div>
           <Button
             type="primary"
-            className="createBtn"
+            className={styles.createBtn}
             size="large"
             loading={loading}
             onClick={onClick}
