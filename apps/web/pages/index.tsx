@@ -1,11 +1,20 @@
-import React, { FC } from 'react'
-import { Layout } from '@pabau/ui'
+import React, { FC, useState } from 'react'
+import { Button, Layout } from '@pabau/ui'
 import { version } from '../../../package.json'
-
-// test...
+import useTranslation from '../hooks/useTranslation'
+import Grid from '../components/Grid'
 
 const Index: FC = () => {
-  return <Layout pageTitle="Welcome">Version {version}</Layout>
+  const { t } = useTranslation()
+  const [showGrid, setShowGrid] = useState(false)
+
+  return (
+    <Layout pageTitle={t('common', 'index.title')}>
+      {!showGrid && <Button onClick={() => setShowGrid(true)}>Edit</Button>}
+      {showGrid && <Grid />}
+      Version {version}
+    </Layout>
+  )
 }
 
 export default Index

@@ -1,22 +1,24 @@
 - table:
     schema: public
-    name: marketing_source
+    name: marketing_campaign
   insert_permissions:
   - role: public
     permission:
       check: {}
       columns:
       - id
+      - created_at
+      - updated_at
       - name
       backend_only: false
   select_permissions:
   - role: public
     permission:
       columns:
-      - id
+      - name
       - created_at
       - updated_at
-      - name
+      - id
       filter: {}
   delete_permissions:
   - role: public
@@ -24,17 +26,43 @@
       filter: {}
 - table:
     schema: public
-    name: user
-  configuration:
-    custom_root_fields:
-      select: user
-    custom_column_names: {}
+    name: marketing_source
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - name
+      backend_only: false
   select_permissions:
   - role: public
     permission:
       columns:
-      - id
       - created_at
+      - id
+      - name
       - updated_at
-      - full_name
       filter: {}
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+  event_triggers:
+  - name: ll
+    definition:
+      enable_manual: true
+      insert:
+        columns: '*'
+      delete:
+        columns: '*'
+      update:
+        columns:
+        - name
+        - created_at
+        - updated_at
+        - id
+    retry_conf:
+      num_retries: 10
+      interval_sec: 10
+      timeout_sec: 596
+    webhook: https://backend.new.pabau.com

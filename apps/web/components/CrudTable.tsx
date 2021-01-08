@@ -1,5 +1,5 @@
-import { Table } from 'antd'
-import React from 'react'
+import { DragFeature as Table } from '@pabau/ui'
+import React, { FC } from 'react'
 import { useLiveQuery } from '@pabau/ui'
 import { DocumentNode } from '@apollo/client'
 import AddButton from './AddButton'
@@ -12,7 +12,7 @@ interface P {
   listQuery: DocumentNode
 }
 
-function CrudTable({ schema, addQuery, deleteQuery, listQuery }: P): JSX.Element {
+const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery }) => {
   const { data, error, loading } = useLiveQuery(listQuery)
   //const [deleteMutation] = useMutation(deleteQuery)
 

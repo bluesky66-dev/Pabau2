@@ -4,6 +4,7 @@ import { SortableContainer, SortableElement, SortableHandle } from 'react-sortab
 import { MenuOutlined, LockFilled } from '@ant-design/icons'
 import { data } from './mock'
 import styles from './dragfeature.module.less'
+import { TableProps } from 'antd/es/table'
 
 const DragHandle = SortableHandle(() => (
   <MenuOutlined style={{ cursor: 'pointer', color: '#999' }} />
@@ -39,10 +40,10 @@ const columns = [
     title: 'STATUS',
     dataIndex: 'isActive',
     className: 'drag-visible',
-    render: function ActiveBtn(val) {
+    render: function ActiveBtn() {
       return (
-        <Button size="small" className={val ? styles.activeBtn : styles.disableSourceBtn}>
-          {val ? 'Active' : 'Deactivated'}
+        <Button size="small" className={styles.activeBtn}>
+          Active
         </Button>
       )
     },
@@ -66,7 +67,7 @@ function array_move(arr, old_index, new_index) {
   })
 }
 
-export const DragFeature: FC = () => {
+export const DragFeature: FC<TableProps<never>> = ({ ...props }) => {
   const [dataSource, setDataSource] = useState(data)
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
@@ -92,7 +93,7 @@ export const DragFeature: FC = () => {
 
   return (
     <Table
-      className={styles.dragTable}
+      {...props}
       pagination={false}
       dataSource={dataSource}
       columns={columns}

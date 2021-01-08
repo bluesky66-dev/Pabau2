@@ -244,6 +244,16 @@
             "jestConfig": "apps/backend/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "deploy": {
+          "builder": "@nrwl/workspace:run-commands",
+          "outputs": [],
+          "options": {
+            "command": "yarn nx run backend:build --prod && cd dist/apps/backend && vercel -c -C --token ${VERCEL_TOKEN} -A ../../../apps/backend/vercel.json --prod"
+          },
+          "configurations": {
+            "production": {}
+          }
         }
       }
     },
