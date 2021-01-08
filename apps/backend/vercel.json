@@ -1,3 +1,6 @@
 {
-  "name": "backend"
+  "name": "backend",
+  "routes": [
+    { "src": "/(.*)", "dest": "/main.js" }
+  ]
 }
