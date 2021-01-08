@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useState } from 'react'
-import './checkbox.less'
+import styles from './checkbox.module.less'
 import '../../assets/less/pretty-checkbox.less'
 import ActiveSVG from '../../assets/images/active.svg'
 import NotActiveSVG from '../../assets/images/notactive.svg'
@@ -17,7 +17,7 @@ export function Checkbox({
 }: PropsWithChildren<CheckboxProps>): JSX.Element {
   const [activate, setActivate] = useState(true)
   return (
-    <div className="custom-checkbox">
+    <div className={styles.customCheckbox}>
       <div className="pretty p-svg p-toggle p-plain">
         <input
           type="checkbox"

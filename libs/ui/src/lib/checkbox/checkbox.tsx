@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useState } from 'react'
-import './checkbox.less'
+// import styles from './checkbox.module.less'
 import { Checkbox as AntCheckbox } from 'antd'
 
 export interface CheckboxProps {
