@@ -2,7 +2,7 @@
 set -e
 
 yarn run nx run backend:build --prod
-cp apps/backend/package-json.dummy dist/apps/backend/package.json
+cp apps/backend/package.json-dummy dist/apps/backend/package.json
 cd dist/apps/backend
 
 OUTPUT=$(vercel -c -C --token "${VERCEL_TOKEN}" -A ../../../../apps/backend/vercel.json --prod)

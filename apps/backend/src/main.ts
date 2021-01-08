@@ -32,7 +32,6 @@ function invokeNest(req, res) {
   })
 }
 
-
 export default function(req, res) {
   invokeNest(req, res)
 }
