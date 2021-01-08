@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useState } from 'react'
-import './checkbox.less'
+// import './checkbox.less'
 import '../../assets/less/pretty-checkbox.less'
 import ActiveSVG from '../../assets/images/active.svg'
 import NotActiveSVG from '../../assets/images/notactive.svg'
