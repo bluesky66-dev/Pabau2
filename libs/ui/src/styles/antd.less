@@ -10,7 +10,7 @@
 @text-color: rgba(0, 0, 0, 0.65); // major text color
 @text-color-secondary: rgba(0, 0, 0, 0.45); // secondary text color
 @disabled-color: rgba(0, 0, 0, 0.25); // disable state color
-@border-radius-base: 4px; // major border radius
+// @border-radius-base: 4px; // major border radius
 @border-color-base: #ecedf0; // major border color
 @box-shadow-base: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05); // major shadow for layers
 @font-variant-base: normal;
@@ -18,25 +18,25 @@
 @font-family: Circular-Std-Book, -apple-system, sans-serif;
 
 :root {
-  --primary-color: #54b2d3;
-  --link-color: #1890ff; // link color
-  --success-color: #52c41a; // success state color
-  --warning-color: #faad14; // warning state color
-  --error-color: #f5222d; // error state color
-  --font-size-base: 14px; // major text font size
-  --heading-color: rgba(0, 0, 0, 0.85); // heading text color
-  --text-color: rgba(0, 0, 0, 0.65); // major text color
-  --text-color-secondary: rgba(0, 0, 0, 0.45); // secondary text color
-  --disabled-color: rgba(0, 0, 0, 0.25); // disable state color
-  --border-radius-base: @border-radius-base; // major border radius
-  --border-color-base: #ecedf0; // major border color
-  --box-shadow-base: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05); // major shadow for layers
+  --primary-color: @primary-color;
+  --link-color: @link-color;
+  --success-color:@success-color;
+  --warning-color: @warning-color;
+  --error-color: @error-color;
+  --font-size-base: @font-size-base;
+  --heading-color: @heading-color;
+  --text-color: @text-color;
+  --text-color-secondary: @text-color-secondary;
+  --disabled-color: @disabled-color;
+  --border-radius-base: 25px;
+  --border-color-base: @border-color-base;
+  --box-shadow-base: @box-shadow-base;
   --grey-text-color: #3d3d46;
   --light-grey-color: #9292a3;
   --time-notification-text-color:#b8b8c0;
-  --font-variant-base: normal;
-  --font-feature-settings-base: normal;
-  --font-family: Circular-Std-Bold, -apple-system, sans-serif;
+  --font-variant-base: @font-variant-base;
+  --font-feature-settings-base: @font-feature-settings-base;
+  --font-family: @font-family;  
 }
 
 @font-face {

@@ -1,16 +1,47 @@
 .search-box {
-  border-radius: 6px;
-  padding: 8px;
+  border-radius: 6px !important;
+  // padding: 8px;
+  .close-icon-right {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 24px;
+    padding-top: 10px;
+  }
 }
 .search-input {
   :global {
     .ant-popover-inner-content {
       width: 360px;
+      padding: 0px;
     }
     .ant-popover-arrow {
-      display: none !important;
+      // display: none !important;
+      height: 22px;
+      top: 0 !important;
+      width: 22px;
+      background: #fff;
+
     }
   }
+}
+.close-icon-style {
+  font-size: 12px;
+  color: #9292a3;
+}
+.search-input-style {
+  height: 40px;
+  box-shadow: 0px 0px 4px #c0e4f1;
+  border-radius: 2px;
+  .ant-input-affix-wrapper:focus {
+    border: 1px solid #54b2d3 !important;
+    box-shadow: none !important;
+  }
+}
+.clients-list {
+  padding-top: 15px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 20px;
 }
 
 .ant-tabs-tab {
@@ -76,13 +107,19 @@ button:focus {
     color: var(--light-grey-color);
     font-size: 14px;
     margin-bottom: 0;
-    font-weight: 600;
+    font-weight: 400;
   }
   span {
     color: var(--light-grey-color);
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 400;
   }
+}
+
+.add-new-client {
+  background: #fff;
+  opacity: 0.34;
+  border: 1px solid #9292a3;
 }
 .advance-search {
   display: flex;
@@ -95,6 +132,7 @@ button:focus {
     margin-bottom: 0;
     padding-right: 10px;
     font-family: 'Circular-Std-Book';
+    font-weight: 400;
   }
 }
 .right-arrow-color {
@@ -108,13 +146,13 @@ button:focus {
   :global {
     .ant-modal-header {
       border-bottom-width: 0;
-      padding: 20px;
+      padding: 0px;
       padding-bottom: 0px;
       // padding-bottom: 19px;
       border-radius: 8px;
     }
     .ant-modal-body {
-      padding: 20px;
+      padding: 24px;
       padding-top: 0px;
     }
   }
@@ -122,6 +160,10 @@ button:focus {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-top: 19px;
+    padding-left: 27px;
+    padding-right: 27px;
+    padding-bottom: 3px;
     h6 {
       margin-bottom: 0;
       margin-left: 10px;
@@ -136,6 +178,7 @@ button:focus {
       cursor: pointer;
       display: flex;
       align-items: center;
+      color: 9292a3;
     }
   }
   .advance-search-text {
@@ -149,13 +192,14 @@ button:focus {
       line-height: 28px;
       text-transform: capitalize;
       color: var(--grey-text-color);
+      padding-left: 27px;
     }
   }
   .cus-tabs-top-space {
     padding-top: 15px;
   }
   .adv-search-top-space {
-    padding-top: 15px;
+    padding-top: 20px;
   }
   .adv-search-form {
     :global {
@@ -180,7 +224,7 @@ button:focus {
       color: #b8b8c0;
       line-height: 2.1715 !important;
       background: #ffffff;
-      border: 1px solid var(--disabled-color);
+      border: 1px solid #e8e8e8;
       box-sizing: border-box;
       border-radius: 4px;
       ::-webkit-input-placeholder {
@@ -200,8 +244,23 @@ button:focus {
       justify-content: flex-end;
     }
     .btn-disable-style {
+      border: 1px solid #e8e8e8;
+      border-radius: 4px;
       background: #f2f5f7;
-      border: 1px solid var(--disabled-color);
+      font-size: 14px;
+      color: #CFCFD7;
+      font-weight: 500;
+      text-align: center;
+      text-transform: none;
+      font-family: 'Circular-Std-Medium';
+      :global {
+        .ant-btn-lg {
+          padding: 5.4px 5px;
+        }
+      }
     }
+  }
+  .grey-text-color {
+    color: var(--grey-text-color);
   }
 }
