@@ -2,6 +2,7 @@
 set -e
 
 yarn run nx run backend:build --prod
+cp apps/backend/vercel.json dist/apps/backend/vercel.json
 cp apps/backend/package.json-dummy dist/apps/backend/package.json
 cd dist/apps/backend
 
