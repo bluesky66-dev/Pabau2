@@ -10,7 +10,7 @@
 @text-color: rgba(0, 0, 0, 0.65); // major text color
 @text-color-secondary: rgba(0, 0, 0, 0.45); // secondary text color
 @disabled-color: rgba(0, 0, 0, 0.25); // disable state color
-@border-radius-base: 25px; // major border radius
+@border-radius-base: 4px; // major border radius
 @border-color-base: #ecedf0; // major border color
 @box-shadow-base: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05); // major shadow for layers
 @font-variant-base: normal;
@@ -28,7 +28,7 @@
   --text-color: rgba(0, 0, 0, 0.65); // major text color
   --text-color-secondary: rgba(0, 0, 0, 0.45); // secondary text color
   --disabled-color: rgba(0, 0, 0, 0.25); // disable state color
-  --border-radius-base: 25px; // major border radius
+  --border-radius-base: @border-radius-base; // major border radius
   --border-color-base: #ecedf0; // major border color
   --box-shadow-base: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05); // major shadow for layers
   --grey-text-color: #3d3d46;
@@ -36,7 +36,7 @@
   --time-notification-text-color:#b8b8c0;
   --font-variant-base: normal;
   --font-feature-settings-base: normal;
-  --font-family: Circular-Std-Bold, -apple-system, sans-serif;  
+  --font-family: Circular-Std-Bold, -apple-system, sans-serif;
 }
 
 @font-face {

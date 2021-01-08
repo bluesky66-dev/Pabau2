@@ -1,4 +1,4 @@
-import { Table } from 'antd'
+import { DragFeature as Table } from '@pabau/ui'
 import React from 'react'
 import { useLiveQuery } from '@pabau/ui'
 import { DocumentNode } from '@apollo/client'
