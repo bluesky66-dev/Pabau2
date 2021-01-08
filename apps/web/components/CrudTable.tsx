@@ -28,6 +28,7 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery }) => {
         sticky={true}
         pagination={data?.length > 10 ? {} : false}
         scroll={{ x: 'max-content' }}
+        dragVisible={true}
         columns={[
           ...Object.entries(schema.fields).map(([k, v]) => ({
             dataIndex: k,

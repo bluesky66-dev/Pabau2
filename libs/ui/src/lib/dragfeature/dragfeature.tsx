@@ -1,54 +1,12 @@
-import React, { FC, useState } from 'react'
-import { Table, Button } from 'antd'
+import React, { FC, useEffect, useState } from 'react'
+import { Table } from 'antd'
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc'
-import { MenuOutlined, LockFilled } from '@ant-design/icons'
-import { data } from './mock'
+import { MenuOutlined } from '@ant-design/icons'
 import styles from './dragfeature.module.less'
 import { TableProps } from 'antd/es/table'
-
-const DragHandle = SortableHandle(() => (
-  <MenuOutlined style={{ cursor: 'pointer', color: '#999' }} />
-))
-
-const columns = [
-  {
-    title: '',
-    dataIndex: 'sort',
-    width: 30,
-    className: 'drag-visible',
-    render: function renderDragHandle() {
-      return <DragHandle />
-    },
-  },
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    className: 'drag-visible',
-    render: function renderSourceName(val, rowData) {
-      if (rowData.isLocked) {
-        return (
-          <>
-            {val} &nbsp;&nbsp; <LockFilled />
-          </>
-        )
-      } else {
-        return val
-      }
-    },
-  },
-  {
-    title: 'STATUS',
-    dataIndex: 'isActive',
-    className: 'drag-visible',
-    render: function ActiveBtn() {
-      return (
-        <Button size="small" className={styles.activeBtn}>
-          Active
-        </Button>
-      )
-    },
-  },
-]
+export interface DragProps {
+  dragVisible?: boolean
+}
 
 const SortItem = SortableElement((props) => <tr {...props} className={styles.abc} />)
 const SortContainer = SortableContainer((props) => <tbody {...props} />)
@@ -67,18 +25,18 @@ function array_move(arr, old_index, new_index) {
   })
 }
 
-export const DragFeature: FC<TableProps<never>> = ({ ...props }) => {
-  const [dataSource, setDataSource] = useState(data)
+export const DragFeature: FC<TableProps<never> & DragProps> = ({ dataSource = [], ...props }) => {
+  const [tableData, setTableData]: any = useState(dataSource)
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
     if (oldIndex !== newIndex) {
-      const newData = array_move(dataSource, oldIndex, newIndex)
-      setDataSource(newData)
+      const newData = array_move(tableData, oldIndex, newIndex)
+      setTableData(newData)
     }
   }
 
   const DraggableBodyRow = ({ className, style, ...restProps }) => {
-    const index = dataSource.findIndex((x) => x.index === restProps['data-row-key'])
+    const index = tableData.findIndex((x) => x.key === restProps['data-row-key'])
     return <SortItem index={index} {...restProps} />
   }
 
@@ -91,13 +49,34 @@ export const DragFeature: FC<TableProps<never>> = ({ ...props }) => {
     />
   )
 
+  const DragHandle = SortableHandle(() => (
+    <MenuOutlined style={{ cursor: 'pointer', color: '#999' }} />
+  ))
+
+  const renderSortHandler = (props) => {
+    let dragColumn = {
+      title: '',
+      dataIndex: 'sort',
+      width: 30,
+      className: 'drag-visible',
+      render: function renderDragHandle() {
+        return <DragHandle />
+      },
+    }
+    if (props.dragVisible && props.dataSource) {
+      props.columns.unshift(dragColumn)
+    }
+    return props.columns
+  }
+
   return (
     <Table
       {...props}
       pagination={false}
-      dataSource={dataSource}
-      columns={columns}
-      rowKey="index"
+      dataSource={tableData}
+      columns={renderSortHandler(props)}
+      rowKey="key"
+      className={styles.dragTable}
       components={{
         body: {
           wrapper: DraggableContainer,
