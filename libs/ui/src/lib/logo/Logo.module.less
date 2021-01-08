@@ -5,8 +5,9 @@
 
 :global {
   svg.imageSpin {
+
     .spin {
-      animation-name: spin;
+      animation-name: emptyanim;
       animation-timing-function: linear;
       animation-fill-mode: both;
       animation-iteration-count: 1;
@@ -36,6 +37,7 @@
 
     &:hover {
       .spin {
+        animation-name: spin;
         animation-iteration-count: infinite;
         animation-duration: 4s;
         animation-play-state: running;
