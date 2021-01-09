@@ -2,18 +2,9 @@
 
 import { Button } from 'antd'
 import styles from './dragfeature.module.less'
-import React from 'react'
+import React, { FC, useState } from 'react'
 import { DragFeature } from './dragfeature'
 import { data } from './mock'
-
-export default {
-  component: DragFeature,
-  title: 'DragFeature',
-  args: { dragVisible: true },
-  argTypes: {
-    dragVisible: { control: { type: 'boolean' } },
-  },
-}
 
 const columns = [
   {
@@ -42,11 +33,24 @@ const columns = [
   },
 ]
 
-const DragFeatureStory = ({ ...args }) => <DragFeature {...args} />
-
-export const dragFeature = DragFeatureStory.bind({})
-dragFeature.args = {
-  columns,
-  dataSource: data,
-  dragVisible: true,
+export default {
+  component: DragFeature,
+  title: 'DragFeature',
+  args: {
+    draggable: true,
+    dataSource: data,
+    columns,
+  },
+  argTypes: {
+    draggable: { control: { type: 'boolean' } },
+  },
 }
+
+const DragFeatureStory: FC = ({ ...args }) => {
+  const [dataSource, setDataSource]: any = useState(data)
+  const updateDataSource = ({ newData, oldIndex, newIndex }) => {
+    setDataSource(newData)
+  }
+  return <DragFeature {...args} dataSource={dataSource} updateDataSource={updateDataSource} />
+}
+export const dragFeature = DragFeatureStory.bind({})
