@@ -1,4 +1,4 @@
-import React, { FC, HTMLProps, useCallback, useState } from 'react'
+import React, { FC, useCallback, useState } from 'react'
 import { Dropdown, Layout, Menu } from 'antd'
 import {
   BellOutlined,
@@ -20,8 +20,9 @@ import PabauMessages from './messages/messages'
 
 const AntHeader = Layout.Header
 
-/* eslint-disable-next-line */
-export interface HeaderProps {}
+interface P {
+  searchRender?: (innerComponent: JSX.Element) => JSX.Element
+}
 
 const items = [
   {
@@ -42,7 +43,7 @@ const items = [
   },
 ]
 
-export const Header: FC = ({ ...props }: HTMLProps<HTMLElement>) => {
+export const Header: FC<P> = ({ searchRender, ...props }) => {
   const [openNotificationDrawer, setNotificationDrawer] = useState<boolean>(false)
   const [openMessageDrawer, setMessageDrawer] = useState<boolean>(false)
   const handleMenuClick = useCallback(() => alert('Not yet done'), [])
@@ -79,7 +80,7 @@ export const Header: FC = ({ ...props }: HTMLProps<HTMLElement>) => {
       >
         <Logo />
 
-        <Search style={{ width: '360px' }} />
+        <div style={{ width: '360px' }}>{searchRender ? searchRender(<Search />) : <Search />}</div>
         <div className={styles.headerAlign}>
           <SettingOutlined className={styles.headerIcon} />
           <BellOutlined

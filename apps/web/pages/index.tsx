@@ -1,8 +1,9 @@
 import React, { FC, useState } from 'react'
-import { Button, Layout } from '@pabau/ui'
+import { Button } from '@pabau/ui'
 import { version } from '../../../package.json'
 import useTranslation from '../hooks/useTranslation'
 import Grid from '../components/Grid'
+import Layout from '../components/Layout/Layout'
 
 const Index: FC = () => {
   const { t } = useTranslation()

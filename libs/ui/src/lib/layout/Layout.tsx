@@ -1,25 +1,25 @@
-import React, { FC, useCallback, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import { ReactComponent as IllustrationSvg } from './example.svg'
-import Menu from '../menu/Menu'
-import { Card, Layout as AntLayout, Switch } from 'antd'
-import { useRouter } from 'next/router'
-import { Button, ButtonTypes } from '../button/button'
+import { Card, Layout as AntLayout } from 'antd'
 import { Header } from '@pabau/ui'
 
+//TODO: do we need this?
 require('../../styles/antd.less')
 
-const { Content, Footer } = AntLayout
+const { Content } = AntLayout
 
-interface P extends React.HTMLProps<HTMLDivElement> {
+export interface LayoutProps {
   pageTitle?: string
   newButtonText?: string
   onNewClicked?: string | (() => void)
   onCancelClicked?: true | (() => void)
   card?: true
+  searchRender?: (innerComponent: JSX.Element) => JSX.Element
 }
 
-export const Layout: FC<P> = ({
-  pageTitle = 'Unknown Title',
+export const Layout: FC<LayoutProps> = ({
+  searchRender,
+  pageTitle,
   newButtonText,
   onNewClicked,
   onCancelClicked,
@@ -27,41 +27,22 @@ export const Layout: FC<P> = ({
   children,
   ...rest
 }) => {
-  const [isActive, setIsActive] = useState(true)
-  const [pageHasLoaded, setPageHasLoaded] = useState(false)
-  const router = useRouter()
-  const onNewClick = useCallback(() => {
-    if (typeof onNewClicked === 'string') {
-      router?.push(router.pathname + '/' + onNewClicked)
-    }
-  }, [router, onNewClicked])
-  const onCancelClick = () => {
-    if (onCancelClicked === true) router?.back()
-    else onCancelClicked?.()
-  }
-  useEffect(() => {
-    setPageHasLoaded(true)
-  }, [setPageHasLoaded])
-
   return (
-    <div className={pageHasLoaded ? '' : 'fade-appear'} {...rest}>
-      <Header />
-      <Menu />
+    <div {...rest}>
+      <Header searchRender={searchRender} />
       <Content
         style={{
-          padding: '1em',
-          boxShadow: 'inset 0 7px 9px -7px rgba(0,0,0,0.5)',
-          backgroundColor: '#eee',
-          minHeight: 'calc(100vh - 64px - 56px - 60px)',
+          borderTop: '2px solid #f3f5fb',
+          padding: '2em',
+          //minHeight: 'calc(100vh - 64px - 56px - 60px)',
         }}
       >
         <Content
           style={{
             padding: '1em',
-            boxShadow: '0 0px 9px -4px rgba(0,0,0,0.8)',
-            borderRadius: '0.5em',
-            backgroundColor: '#f4f4f4',
-            minHeight: 'calc(100vh - 64px - 56px - 60px - 1em)',
+            boxShadow: '0 0.5rem 1rem rgba(0,0,0,.1)',
+            //minHeight: 'calc(100vh - 64px - 56px - 60px - 1em)',
+            position: 'relative',
           }}
         >
           {card ? (
@@ -70,12 +51,7 @@ export const Layout: FC<P> = ({
             </Card>
           ) : (
             <>
-              <h3 style={{ userSelect: 'none' }}>{pageTitle}</h3>
-              {newButtonText && onNewClicked && (
-                <Button type={ButtonTypes.primary} style={{ float: 'right' }} onClick={onNewClick}>
-                  {newButtonText}
-                </Button>
-              )}
+              {pageTitle && <h1>{pageTitle}</h1>}
               {children}
             </>
           )}
@@ -113,50 +89,6 @@ export const Layout: FC<P> = ({
             <IllustrationSvg width={600} height={200} />
           </div>
         </Content>
-      )}
-
-      {!onNewClicked && (
-        <Footer>
-          <div
-            style={{
-              display: 'flex',
-              margin: '0 0',
-              textTransform: 'uppercase',
-            }}
-          >
-            <div>
-              <Button type={ButtonTypes.default}>Delete</Button>
-            </div>
-            <div
-              style={{
-                textAlign: 'right',
-                flex: 1,
-                textTransform: 'uppercase',
-              }}
-            >
-              <label style={{ userSelect: 'none', cursor: 'pointer' }}>
-                Active{' '}
-                <Switch
-                  onChange={(e) => setIsActive(e)}
-                  size="small"
-                  defaultChecked
-                  style={{ margin: '0 .5em' }}
-                  title="yo"
-                />
-              </label>
-              <Button
-                type={ButtonTypes.default}
-                style={{ margin: '0 .5em' }}
-                onClick={onCancelClick}
-              >
-                Cancel
-              </Button>
-              <Button type={ButtonTypes.primary} disabled={isActive} style={{ margin: '0 .5em' }}>
-                Save
-              </Button>
-            </div>
-          </div>
-        </Footer>
       )}
     </div>
   )

@@ -1,4 +1,4 @@
-import React, { FC, HTMLProps, useCallback, useEffect, useRef, useState } from 'react'
+import React, { FC, useCallback, useRef, useState } from 'react'
 import { Avatar, Badge, Col, Dropdown, Input, Layout, Menu, Row } from 'antd'
 import {
   BellOutlined,
@@ -20,8 +20,9 @@ import PabauMessages from './messages/messages'
 
 const { Header } = Layout
 
-/* eslint-disable-next-line */
-export interface HeaderProps {}
+export interface HeaderProps {
+  searchRender?: (innerComponent: JSX.Element) => JSX.Element
+}
 
 const items = [
   {
@@ -42,19 +43,10 @@ const items = [
   },
 ]
 
-export const PabauHeader: FC = ({ ...props }: HTMLProps<HTMLElement>) => {
+export const PabauHeader: FC<HeaderProps> = () => {
   const searchRef = useRef<Input>(null)
   const [notification, setNotification] = useState<boolean>(false)
   const [messages, setMessages] = useState<boolean>(false)
-  useEffect(() => {
-    window.document.onkeydown = (e) => {
-      if (e.ctrlKey && e.code === 'KeyA') {
-        e.preventDefault()
-        // noinspection BadExpressionStatementJS
-        searchRef.current?.focus()
-      }
-    }
-  })
   const handleMenuClick = useCallback(() => alert('Not yet done'), [])
   const overlay = (
     <Menu onClick={handleMenuClick}>
