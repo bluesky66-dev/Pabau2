@@ -3,11 +3,12 @@ set -e
 
 echo "DEBUG: pwd=$(pwd)"
 
-APP_NAME="$(basename "$(dirname "${BASH_SOURCE[0]}")")"
+APP_NAME="$(basename "$(dirname "${0}")")"
 
-yarn run nx run "${APP_NAME}:build" --prod
-cp apps/${APP_NAME}/vercel.json "dist/apps/${APP_NAME}/"
+yarn run nx run "${APP_NAME}:export" --prod
+cp "apps/${APP_NAME}/vercel.json" "dist/apps/${APP_NAME}/"
 cp package.json "dist/apps/${APP_NAME}/"
+cp yarn.lock "dist/apps/${APP_NAME}/"
 cd "dist/apps/${APP_NAME}"
 
 OUTPUT=$(vercel -c -C --token "${VERCEL_TOKEN}" -A ./vercel.json --prod)
