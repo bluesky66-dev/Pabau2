@@ -48,8 +48,12 @@ pipelines:
 #            - yarn cypress install || true
 #            - yarn affected:e2e --base=HEAD~1 || true
 #            - yarn affected --base=HEAD~1 --target=export --prod
-            - yarn pr-bumper check
-            - yarn pr-bumper bump
+            - yarn global add pr-bumper
+            - pr-bumper check || true
+            - pr-bumper bump || true
+            - yarn global add bumpr
+            - bumpr check || true
+            - bumpr bump || true
             - yarn affected --base=HEAD~1 --target=deploy --prod
 #      - step:
 #          size: 2x
