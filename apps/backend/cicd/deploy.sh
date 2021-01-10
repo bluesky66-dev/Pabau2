@@ -2,8 +2,8 @@
 set -e
 
 echo "DEBUG: pwd=$(pwd)"
-
-APP_NAME="$(basename "$(dirname "${0}")/..")"
+APP_NAME="$(basename "$(dirname "$(cd "$(dirname "${0}")"; pwd)")")"
+echo "DEBUG: app_name=${APP_NAME}"
 
 yarn run nx run "${APP_NAME}:export" --prod
 cp "apps/${APP_NAME}/vercel.json" "dist/apps/${APP_NAME}/"
@@ -22,7 +22,3 @@ LAST_LINE=$(echo "${OUTPUT}" | tail -n1)
 echo "last line: ${LAST_LINE}"
 
 echo "commit hash: ${BITBUCKET_COMMIT}"
-
-
-
-
