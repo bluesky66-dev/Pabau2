@@ -6,9 +6,9 @@ echo "DEBUG: pwd=$(pwd)"
 APP_NAME="$(basename "$(dirname "${BASH_SOURCE[0]}")")"
 
 yarn run nx run "${APP_NAME}:build" --prod
-cp vercel.json "../../dist/apps/${APP_NAME}/vercel.json"
-cp ../../package.json "../../dist/apps/${APP_NAME}/package.json"
-cd "../../dist/apps/${APP_NAME}"
+cp apps/${APP_NAME}/vercel.json "dist/apps/${APP_NAME}/"
+cp package.json "dist/apps/${APP_NAME}/"
+cd "dist/apps/${APP_NAME}"
 
 OUTPUT=$(vercel -c -C --token "${VERCEL_TOKEN}" -A ./vercel.json --prod)
 echo "errorlevel: $?"
