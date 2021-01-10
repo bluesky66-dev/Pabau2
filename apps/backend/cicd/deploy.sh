@@ -3,7 +3,7 @@ set -e
 
 echo "DEBUG: pwd=$(pwd)"
 
-APP_NAME="$(basename "$(dirname "${0}/..")")"
+APP_NAME="$(basename "$(dirname "${0}")/..")"
 
 yarn run nx run "${APP_NAME}:export" --prod
 cp "apps/${APP_NAME}/vercel.json" "dist/apps/${APP_NAME}/"
