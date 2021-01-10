@@ -5,7 +5,7 @@ import { useLiveQuery, Search as PabauSearch } from '@pabau/ui'
 const QUERY = gql`
   query($searchTerm1: String, $searchTerm2: String) {
     contacts(
-      where {
+      where: {
         _or: [
           {
             _and: [
