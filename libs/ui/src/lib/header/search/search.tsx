@@ -82,7 +82,7 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
                   .map(({ id, avatarUrl, firstName, lastName }) => (
                     <div key={id} className={styles.contentAlignProfile}>
                       <div className={styles.clientProfile}>
-                        <Avatar size={40} src={<Image src={User} />} />
+                        <Avatar size={40} src={<Image src={avatarUrl ?? User} />} />
                       </div>
                       <div className={styles.clientProfileText}>
                         <h1>{firstName + ' ' + lastName}</h1>

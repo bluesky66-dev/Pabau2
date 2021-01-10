@@ -249,7 +249,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "outputs": [],
           "options": {
-            "command": "sh tools/cicd/backend.deploy.sh"
+            "command": "sh apps/backend/cicd/deploy.sh"
           },
           "configurations": {
             "production": {}
