@@ -3,7 +3,7 @@ set -e
 
 echo "DEBUG: pwd=$(pwd)"
 
-APP_NAME="$(basename "$(dirname "..")")"
+APP_NAME="$(basename "$(dirname "${BASH_SOURCE[0]}")")"
 
 yarn run nx run "${APP_NAME}:build" --prod
 cp vercel.json "../../dist/apps/${APP_NAME}/vercel.json"
