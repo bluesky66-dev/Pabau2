@@ -1,6 +1,5 @@
-import { DragFeature as Table } from '@pabau/ui'
+import { DragFeature as Table, useLiveQuery } from '@pabau/ui'
 import React, { FC } from 'react'
-import { useLiveQuery } from '@pabau/ui'
 import { DocumentNode } from '@apollo/client'
 import AddButton from './AddButton'
 import DeleteButton from './DeleteButton'
@@ -14,9 +13,8 @@ interface P {
 
 const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery }) => {
   const { data, error, loading } = useLiveQuery(listQuery)
-  //const [deleteMutation] = useMutation(deleteQuery)
 
-  if (error) return <p>Error :((</p>
+  if (error) return <p>Error :( {error.message}</p>
 
   return (
     <>

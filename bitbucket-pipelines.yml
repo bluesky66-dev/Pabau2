@@ -31,23 +31,29 @@ pipelines:
   branches:
     master:
       - step:
-          size: 2x
+          #size: 2x
           name: New Deploy scripot
           caches:
             - nodemodules
             - nextcache
             - yarncustom
-            - cypress
+#            - cypress
           script:
-            - yarn install --frozen-lockfile
-            - yarn affected:build --base=HEAD~1 --prod
-            - yarn affected:lint --base=HEAD~1
+            - yarn install --pure-lockfile --prefer-offline
+#            - yarn affected:lint --base=HEAD~1
             - yarn affected:lint --base=HEAD~1 --with-deps
-            - yarn affected:test --base=HEAD~1 || true
-            - apt update -y && apt install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
-            - yarn cypress install || true
-            - yarn affected:e2e --base=HEAD~1 || true
+#            - yarn affected:test --base=HEAD~1 --with-deps
+            - yarn affected:build --base=HEAD~1 --prod
+#            - apt update -y && apt install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+#            - yarn cypress install || true
+#            - yarn affected:e2e --base=HEAD~1 || true
             - yarn affected --base=HEAD~1 --target=export --prod
+            - yarn global add pr-bumper
+            - pr-bumper check || true
+            - pr-bumper bump || true
+            - yarn global add bumpr
+            - bumpr check || true
+            - bumpr bump || true
             - yarn affected --base=HEAD~1 --target=deploy --prod
 #      - step:
 #          size: 2x

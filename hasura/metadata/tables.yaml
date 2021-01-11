@@ -1,5 +1,20 @@
 - table:
     schema: public
+    name: contacts
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - id
+      - created_at
+      - updated_at
+      - first_name
+      - last_name
+      - client_id
+      - mobile_number
+      filter: {}
+- table:
+    schema: public
     name: marketing_campaign
   insert_permissions:
   - role: public

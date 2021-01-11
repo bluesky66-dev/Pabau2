@@ -14,7 +14,7 @@ const AddButton: FC<P> = ({
   schema,
   addQuery,
   listQuery,
-  newButtonText = 'New ' + schema.short,
+  newButtonText = 'Create ' + schema.short,
 }) => {
   const [addMutation] = useMutation(addQuery)
   const [modalShowing, setModalShowing] = useState(false)
@@ -24,7 +24,11 @@ const AddButton: FC<P> = ({
   })
   return (
     <>
-      <Button style={{ float: 'right' }} type="primary" onClick={() => setModalShowing(true)}>
+      <Button
+        style={{ position: 'absolute', top: 0, right: 0, margin: '1.5em 1em' }}
+        type="primary"
+        onClick={() => setModalShowing(true)}
+      >
         {newButtonText}
       </Button>
       <Modal

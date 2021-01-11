@@ -1,4 +1,4 @@
-import React, { FC, HTMLProps, useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Checkbox } from '@pabau/ui'
 import styles from './Search.module.less'
 import { Input, Popover, Avatar, Image, Modal, Form, Button } from 'antd'
@@ -11,18 +11,20 @@ import {
   CloseCircleFilled,
 } from '@ant-design/icons'
 import User from '../../../assets/images/user.png'
-import User1 from '../../../assets/images/user1.png'
-import User2 from '../../../assets/images/user2.png'
-import User3 from '../../../assets/images/user3.png'
-import User4 from '../../../assets/images/user4.png'
-import User5 from '../../../assets/images/user5.png'
 import classNames from 'classnames'
 
-type P = HTMLProps<HTMLDivElement>
-
 const WAIT_INTERVAL = 400
+interface P {
+  searchResults?: {
+    id: string
+    firstName: string
+    lastName: string
+    avatarUrl?: string
+  }[]
+  onChange?: (newText: string) => void
+}
 
-export const Search: FC<P> = ({ ...props }) => {
+export const Search: FC<P> = ({ onChange, searchResults }) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [searchPopUp, setSearchPopUp] = useState(false)
   const [searchTab, setSearchTab] = useState('Clients')
@@ -30,11 +32,14 @@ export const Search: FC<P> = ({ ...props }) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (searchTerm) setSearchPopUp(true)
-      else setSearchPopUp(false)
+      if (searchTerm) {
+        setSearchPopUp(true)
+        onChange?.(searchTerm)
+      } else setSearchPopUp(false)
     }, WAIT_INTERVAL)
 
     return () => clearTimeout(timer)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm])
 
   const [form] = Form.useForm()
@@ -67,35 +72,43 @@ export const Search: FC<P> = ({ ...props }) => {
         </div>
         {searchTab === 'Clients' && (
           <div className={styles.clientsList}>
-            <div className={styles.resultText}>
-              <h1>Top Result</h1>
-            </div>
+            {searchResults && searchResults.length > 0 && (
+              <>
+                <div className={styles.resultText}>
+                  <h1>Top Result</h1>
+                </div>
 
-            <div className={styles.contentAlignProfile}>
-              <div className={styles.clientProfile}>
-                <Avatar size={40} src={<Image src={User} />} />
-              </div>
-              <div className={styles.clientProfileText}>
-                <h1>Whitney Jameson</h1>
-                <p>3893312</p>
-              </div>
-            </div>
-            <div className={classNames(styles.resultText, styles.resultTextTopSpace)}>
-              <h1> All results </h1>
-            </div>
-            {searchResult.map((result, index) => {
-              return (
-                <div key={index} className={styles.contentAlignProfile}>
+                <div className={styles.contentAlignProfile}>
                   <div className={styles.clientProfile}>
-                    <Avatar size={40} src={<Image src={result.profileURL} />} />
+                    <Avatar size={40} src={<Image src={User} />} />
                   </div>
                   <div className={styles.clientProfileText}>
-                    <h1>{result.clientName}</h1>
-                    <p>{result.follower}</p>
+                    <h1>{searchResults[0].firstName + ' ' + searchResults[0].lastName}</h1>
+                    <p>3893312</p>
                   </div>
                 </div>
-              )
-            })}
+              </>
+            )}
+            {searchResults && searchResults.length > 1 && (
+              <>
+                <div className={classNames(styles.resultText, styles.resultTextTopSpace)}>
+                  <h1>All results</h1>
+                </div>
+                {searchResults
+                  .filter((_, i) => i !== 0)
+                  .map(({ id, avatarUrl, firstName, lastName }) => (
+                    <div key={id} className={styles.contentAlignProfile}>
+                      <div className={styles.clientProfile}>
+                        <Avatar size={40} src={<Image src={avatarUrl ?? User} />} />
+                      </div>
+                      <div className={styles.clientProfileText}>
+                        <h1>{firstName + ' ' + lastName}</h1>
+                        <p>1234</p>
+                      </div>
+                    </div>
+                  ))}
+              </>
+            )}
             <div className={styles.contentAlignProfile}>
               <div className={styles.clientProfile}>
                 <Avatar
@@ -124,22 +137,14 @@ export const Search: FC<P> = ({ ...props }) => {
     )
   }
 
-  const searchResult = [
-    { clientName: 'Will Lawsons', follower: 38933122, profileURL: User1 },
-    { clientName: 'Jessica Winter', follower: 3292312, profileURL: User2 },
-    { clientName: 'Stephen Watson', follower: 74628, profileURL: User3 },
-    { clientName: 'Walt Smith', follower: 352728, profileURL: User4 },
-    { clientName: 'Willy Brown', follower: 2283912, profileURL: User5 },
-  ]
-
   return (
-    <div {...props}>
+    <div style={{ width: '100%' }}>
       <Popover content={searchMenu} visible={searchPopUp} overlayClassName={styles.searchInput}>
         <Input
           className={styles.searchInputStyle}
           placeholder="Search clients or leads"
-          prefix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
           value={searchTerm}
+          prefix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
           onChange={(e) => setSearchTerm(e.target.value)}
           suffix={
             searchTerm && (

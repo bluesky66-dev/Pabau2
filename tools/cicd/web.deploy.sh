@@ -1,20 +1,23 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
 set -e
 
-docker run --rm \
-  -e "RANCHER_ACCESS_KEY=${RANCHER_ACCESS_KEY}" \
-  -e "RANCHER_SECRET_KEY=${RANCHER_SECRET_KEY}" \
-  -e "RANCHER_URL=${RANCHER_URL}" \
-  cdrx/rancher-gitlab-deploy \
-    upgrade \
-      --environment Default \
-      --stack global-ops \
-      --create \
-      --service newpabau-web \
-      --new-image "10.42.184.17:5000/pabau/newpabau-web:latest" \
-      --finish-upgrade \
-      --rollback-on-error \
-      --start-before-stopping \
-      --wait-for-upgrade-to-finish \
-      --sidekicks
+yarn run nx run web:build --prod
+yarn run nx run web:export --prod
+cd dist/apps/web/exported
+
+OUTPUT=$(vercel -c -C --token "${VERCEL_TOKEN}" -A ../../../../apps/web/vercel.json)
+echo "errorlevel: $?"
+
+echo "Output from vercel:"
+echo "${OUTPUT}"
+echo "--"
+
+LAST_LINE=$(echo "${OUTPUT}" | tail -n1)
+echo "last line: ${LAST_LINE}"
+
+echo "commit hash: ${BITBUCKET_COMMIT}"
+
+vercel --token "${VERCEL_TOKEN}" -A ../../../../apps/web/vercel.json \
+  alias "${LAST_LINE}" "prelive-crm.new.pabau.com"
+
+
