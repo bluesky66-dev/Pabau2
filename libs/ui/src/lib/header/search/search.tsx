@@ -1,4 +1,4 @@
-import React, { FC, HTMLProps, useState } from 'react'
+import React, { FC, HTMLProps, useEffect, useState } from 'react'
 import { Checkbox } from '@pabau/ui'
 import styles from './search.module.less'
 import { Input, Popover, Avatar, Image, Modal, Form, Button } from 'antd'
@@ -20,11 +20,22 @@ import classNames from 'classnames'
 
 type P = HTMLProps<HTMLDivElement>
 
+const WAIT_INTERVAL = 400
+
 export const Search: FC<P> = ({ ...props }) => {
-  const [searchText, setSearchText] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
   const [searchPopUp, setSearchPopUp] = useState(false)
   const [searchTab, setSearchTab] = useState('Clients')
   const [advanceSearch, setAdvanceSearch] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchTerm) setSearchPopUp(true)
+      else setSearchPopUp(false)
+    }, WAIT_INTERVAL)
+
+    return () => clearTimeout(timer)
+  }, [searchTerm])
 
   const [form] = Form.useForm()
 
@@ -32,7 +43,10 @@ export const Search: FC<P> = ({ ...props }) => {
     return (
       <div className={styles.searchBox}>
         <div className={styles.closeIconRight}>
-          <CloseOutlined className={styles.closeIconStyle} />
+          <CloseOutlined
+            className={styles.closeIconStyle}
+            onClick={() => setSearchPopUp((e) => !e)}
+          />
         </div>
         <div className={styles.cusTabs}>
           <button
@@ -120,21 +134,24 @@ export const Search: FC<P> = ({ ...props }) => {
 
   return (
     <div {...props}>
-      <Popover
-        content={searchMenu}
-        trigger="focus"
-        visible={searchPopUp}
-        overlayClassName={styles.searchInput}
-      >
+      <Popover content={searchMenu} visible={searchPopUp} overlayClassName={styles.searchInput}>
         <Input
           className={styles.searchInputStyle}
           placeholder="Search clients or leads"
           prefix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-          onFocus={() => setSearchPopUp(true)}
-          onBlur={() => setSearchPopUp(false)}
-          suffix={<CloseCircleFilled style={{ color: '#BFBFBF' }} />}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          suffix={
+            searchTerm && (
+              <CloseCircleFilled
+                style={{ color: '#BFBFBF' }}
+                onClick={() => {
+                  setSearchPopUp(false)
+                  setSearchTerm('')
+                }}
+              />
+            )
+          }
         />
       </Popover>
       <Modal
