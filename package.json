@@ -5,6 +5,7 @@
   "scripts": {
     "nx": "nx",
     "vercel": "vercel",
+    "nest": "cd apps/backend && nest",
     "start": "nx serve",
     "hasura:export": "hasura --project hasura metadata export && hasura migrate && graphql-codegen --config codegen.yml",
     "start:production": "nx affected --uncommitted=true --target=export && npx serve dist/apps/web/exported",
@@ -38,6 +39,7 @@
     "@nestjs/core": "^7.0.0",
     "@nestjs/platform-express": "^7.0.0",
     "@storybook/addon-docs": "^6.1.11",
+    "@zeit/next-less": "1.0.1",
     "antd": "^4.9.2",
     "babel-plugin-import": "^1.13.3",
     "classnames": "^2.2.6",
@@ -83,6 +85,7 @@
     "@graphql-codegen/typescript-operations": "1.17.13",
     "@graphql-codegen/typescript-react-apollo": "2.2.1",
     "@graphql-codegen/typescript-resolvers": "1.18.1",
+    "@nestjs/cli": "^7.5.4",
     "@nestjs/schematics": "^7.0.0",
     "@nestjs/testing": "^7.0.0",
     "@nrwl/cli": "10.4.4",
