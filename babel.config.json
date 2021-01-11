@@ -1,22 +1,10 @@
 {
-  "presets": ["@nrwl/web/babel"],
-  "babelrcRoots": ["*"],
+  "presets": [
+    "@nrwl/web/babel"
+  ],
+  "babelrcRoots": [
+    "*"
+  ],
   "plugins": [
-    [
-      "import",
-      {
-        "libraryName": "antd",
-        "style": "css"
-      }
-    ],
-    [
-      "import",
-      {
-        "libraryName": "@ant-design/icons",
-        "libraryDirectory": "es",
-        "camel2DashComponentName": false
-      },
-      "@ant-design/icons"
-    ]
   ]
 }
