@@ -304,6 +304,16 @@
             "jestConfig": "apps/mgmt/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "deploy": {
+          "builder": "@nrwl/workspace:run-commands",
+          "outputs": [],
+          "options": {
+            "command": "sh apps/mgmt/cicd/deploy.sh"
+          },
+          "configurations": {
+            "production": {}
+          }
         }
       }
     },
