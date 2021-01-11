@@ -1,13 +1,18 @@
 import { Injectable } from '@nestjs/common'
-import logger from '../lib/logger'
-import { yup } from '@pabau/yup'
-import { version } from '../../../../package.json'
+//import logger from '../lib/logger'
+import fetch from 'node-fetch'
+
+interface JsonType {
+ results: { name: { first: string, last: string } }
+}
 
 @Injectable()
 export class AppService {
-  getData(data?): { message: string } {
-    if (data) logger(data);
-    return { message: `Welcome to backend v${version}! This should say yup --> ` + yup() + JSON.stringify(data) }
+  async getData(): Promise<JsonType> {
+    const data = await fetch('https://randomuser.me/api/')
+    const json = await data.json()
+    return json as JsonType;
+    //if (data) logger(data);
   }
 
 
