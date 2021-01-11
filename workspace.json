@@ -269,6 +269,9 @@
           "options": {
             "root": "apps/mgmt",
             "outputPath": "dist/apps/mgmt"
+          },
+          "configurations": {
+            "production": {}
           }
         },
         "serve": {
@@ -352,6 +355,9 @@
           "options": {
             "root": "apps/connect",
             "outputPath": "dist/apps/connect"
+          },
+          "configurations": {
+            "production": {}
           }
         },
         "serve": {
