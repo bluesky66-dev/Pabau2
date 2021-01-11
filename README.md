@@ -15,21 +15,18 @@ This monorepo contains all of our code (with the exception of `/.env`). The mono
 
 ## Setup
 
-1. Install Node 14 LTS
-   1. Opt in for the extra build tools
-1. Install yarn: `npm i -g yarn`
-   1. `yarn --version` \>=1.22.10 && <2 is fine.
-1. Ensure your terminal is posix (cmd and PS not supported)
-   1. Windows + Vscode: `"terminal.integrated.shell.windows": "c:/program files/git/bin/bash.exe",`
+1. Install Node 14 LTS (Opt in for the extra build tools)
+1. Install yarn: `npm i -g yarn` (`yarn --version` \>=1.22.10 && <2 is fine)
+1. Ensure your terminal is BASH (cmd and PS not supported. Vscode: `"terminal.integrated.shell.windows": "c:/program files/git/bin/bash.exe",`)
 
 ### Storybook
-Any component that is likely to be needed on other pages, such as a table, button, heading, avatar, etc, should live in `/libs/ui/`. Each component in here should be exposed as a Storybook item, and is visible on https://storybook.new.pabau.com or run `yarn run nx run ui:storybook` to develop on it locally with live reloading.
+Any component that is likely to be needed on other pages, such as a table, button, heading, avatar, etc, should live in `/libs/ui/`. Each component in here should be exposed as a Storybook item, and is visible on [https://storybook.new.pabau.com](https://storybook.new.pabau.com) or run `yarn run nx run ui:storybook` to develop on it locally with live reloading.
 
 To create a new component, such as "Button", do the following:
 1. `yarn run nx g @nrwl/react:component --project=ui --style=less --export --pascalCaseFiles --name=Button`
 
 ### Frontend
-To view the Frontend, you can either visit https://crm.new.pabau.com or run `yarn start` to develop on it locally with live reloading.
+To view the Frontend, you can either visit [https://prelive-crm.new.pabau.com](https://prelive-crm.new.pabau.com) or run `yarn start` to develop on it locally with live reloading.
 
 Each Page on the Frontend should use as many components as possible from our Storybook.
 
