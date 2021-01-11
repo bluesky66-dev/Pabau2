@@ -1,6 +1,6 @@
 import React, { FC, PropsWithChildren, useState } from 'react'
 import { Drawer, Badge, Avatar } from 'antd'
-import styles from './messages.module.less'
+import styles from './Messages.module.less'
 import { CloseOutlined, EditOutlined, SearchOutlined, PlusCircleFilled } from '@ant-design/icons'
 // import { ReactComponent as Chat } from '../../../assets/images/chat.svg'
 import Stephen from '../../../assets/images/users/stephen.png'

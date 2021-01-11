@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useState } from 'react'
 import { Checkbox as AntCheckbox } from 'antd'
-import styles from './checkbox.module.less'
+// import styles from './checkbox.module.less'
 
 export interface CheckboxProps {
   disabled?: boolean
@@ -15,7 +15,7 @@ export function Checkbox({
   const [checkBoxVal, setCheckBoxVal] = useState(true)
   return (
     <AntCheckbox
-      className={styles.customCheckbox}
+      // className={styles.customCheckbox}
       checked={checkBoxVal}
       disabled={disabled}
       onClick={(e: React.MouseEvent<HTMLInputElement>) => {

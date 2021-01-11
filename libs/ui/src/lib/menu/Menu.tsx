@@ -68,7 +68,7 @@ export const Menu: FC = () => {
         }
       `}</style>
       {items.map(({ name, icon = <PoundOutlined />, url = '/' }) => (
-        <Link key={name} href={url}>
+        <Link key={name} href={url} prefetch={!process.env.STORYBOOK}>
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a style={{ height: '100%' }}>
             <Button

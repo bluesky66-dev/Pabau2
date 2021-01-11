@@ -14,9 +14,9 @@ import {
 import { Logo } from '../logo/Logo'
 import styles from './Header.module.less'
 import { Button, Dropdown as AvatarDropDown } from '@pabau/ui'
-import { Search } from './search/search'
-import PabauNotification from './notification/notification'
-import PabauMessages from './messages/messages'
+import { Search } from './search/Search'
+import PabauNotification from './notification/Notification'
+import PabauMessages from './messages/Messages'
 
 const AntHeader = Layout.Header
 

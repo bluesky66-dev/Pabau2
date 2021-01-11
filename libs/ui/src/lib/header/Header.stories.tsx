@@ -1,6 +1,6 @@
 import { Header, Logo } from '@pabau/ui'
 import React from 'react'
-import { Search } from './search/search'
+import { Search } from './search/Search'
 import User1 from '../../assets/images/user1.png'
 import User2 from '../../assets/images/user2.png'
 import User3 from '../../assets/images/user3.png'

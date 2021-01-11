@@ -144,25 +144,22 @@ button:focus {
 
 .advance-search-modal {
   :global {
-    .ant-modal-header {
-      border-bottom-width: 0;
+    .ant-popover-inner-content {
+      width: 360px;
       padding: 0px;
-      padding-bottom: 0px;
-      // padding-bottom: 19px;
-      border-radius: 8px;
+      border-radius: 4px;
     }
-    .ant-modal-body {
-      padding: 24px;
-      padding-top: 0px;
+    .ant-popover-arrow {
+      display: none;
     }
   }
-  .back-to-modal {
+  .back-to-search {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-top: 19px;
-    padding-left: 27px;
-    padding-right: 27px;
+    padding-left: 24px;
+    padding-right: 24px;
     padding-bottom: 3px;
     h6 {
       margin-bottom: 0;
@@ -192,13 +189,14 @@ button:focus {
       line-height: 28px;
       text-transform: capitalize;
       color: var(--grey-text-color);
-      padding-left: 27px;
+      padding-left: 24px;
     }
   }
   .cus-tabs-top-space {
     padding-top: 15px;
   }
   .adv-search-top-space {
+    padding: 24px;
     padding-top: 20px;
   }
   .adv-search-form {
@@ -260,7 +258,9 @@ button:focus {
       }
     }
   }
-  .grey-text-color {
+  .inactive-client-text {
+    font-family: 'Circular-Std-Book';
+    font-weight: 400;
     color: var(--grey-text-color);
   }
 }

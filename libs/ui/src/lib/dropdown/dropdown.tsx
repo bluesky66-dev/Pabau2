@@ -1,7 +1,6 @@
 // teest edit, remove this line
 import React, { HTMLProps, useState } from 'react'
 import { Menu, Badge, Avatar, Popover, Image } from 'antd'
-import LaunchSVG from './LaunchSVG'
 import {
   RightOutlined,
   UserOutlined,
@@ -17,6 +16,7 @@ import {
   CaretDownOutlined,
 } from '@ant-design/icons'
 import { ReactComponent as PABAULOGO } from '../../assets/images/pabaulogo.svg'
+import { ReactComponent as LaunchSVG } from '../../assets/images/launch.svg'
 import { ReactComponent as JASVG } from '../../assets/images/JA.svg'
 import { ReactComponent as UPSVG } from '../../assets/images/UP.svg'
 import { ReactComponent as TaskSVG } from '../../assets/images/Vector.svg'
@@ -47,18 +47,18 @@ export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
         <RightOutlined className={styles.dropdownIcon} />
       </Menu.Item>
       <Menu.Item className={styles.userinfo}>
-        <div className={styles.userName}>William Brandham</div>
+        <div className={styles.userName}>William Branham</div>
         <div className={styles.userBalance}>
           <p>Balance</p>
           <span>9445,00</span>
         </div>
       </Menu.Item>
-      <Menu.Item className={styles.dropdownMenu}>
+      <Menu.Item className={classNames(styles.dropdownMenu, styles.avatarSpaceTop)}>
         <div className={styles.dropdownHeader}>
           <UserOutlined style={{ color: '#9292A3' }} />
           <span className={styles.headerText}>Account Settings</span>
         </div>
-        <LaunchSVG />
+        <LaunchSVG className={styles.launchLogo} />
       </Menu.Item>
       <Menu.Item className={styles.dropdownMenu} style={{ borderBottom: '1px solid #F1F1F1' }}>
         <div className={styles.dropdownHeader}>
@@ -66,7 +66,10 @@ export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
           <span className={classNames(styles.headerText, styles.taskText)}>Tasks</span>
         </div>
       </Menu.Item>
-      <Menu.Item className={styles.dropdownMenu} onClick={() => onClickAvatarMenu('FeedbackMenu')}>
+      <Menu.Item
+        className={classNames(styles.dropdownMenu, styles.avatarSpaceTop)}
+        onClick={() => onClickAvatarMenu('FeedbackMenu')}
+      >
         <div className={styles.dropdownHeader}>
           <NotificationOutlined className={styles.dropdownIcon} />
           <span className={styles.headerText}>Give feedback</span>
