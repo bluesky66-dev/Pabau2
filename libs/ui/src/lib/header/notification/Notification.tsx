@@ -1,6 +1,6 @@
 import React, { FC, PropsWithChildren, useState } from 'react'
 import { Drawer, Image } from 'antd'
-import styles from './notification.module.less'
+import styles from './Notification.module.less'
 import { CloseOutlined } from '@ant-design/icons'
 import AppointmentSVG from '../../../assets/images/notification.svg'
 import ReportSVG from '../../../assets/images/notification-report.svg'

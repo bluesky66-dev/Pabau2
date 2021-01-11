@@ -1,6 +1,6 @@
 import React, { FC, HTMLProps, useEffect, useState } from 'react'
 import { Checkbox } from '@pabau/ui'
-import styles from './search.module.less'
+import styles from './Search.module.less'
 import { Input, Popover, Avatar, Image, Modal, Form, Button } from 'antd'
 import {
   SearchOutlined,
