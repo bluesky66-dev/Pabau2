@@ -1,10 +1,27 @@
-const withNx = require('@nrwl/next/plugins/with-nx')
+const withAntdLess = require('next-plugin-antd-less');
+const withImages = require('next-images');
+const withNx = require('@nrwl/next/plugins/with-nx');
 
-const withLess = require('@zeit/next-less')
-module.exports = withLess(
-  withNx({
-    // Set this to true if you use CSS modules.
-    // See: https://github.com/css-modules/css-modules
-    cssModules: false,
+module.exports = {
+  trailingSlash: false,
+  ...withImages({
+    fileExtensions: ["jpg", "jpeg", "png", "gif", "ico", "webp", "jp2", "avif", "woff", "woff2", "otf"],
+    inlineImageLimit: 100000,
+    ...withAntdLess({
+      lessVarsFilePath: 'libs/ui/src/styles/antd.less',
+      importLoaders: 3,
+      cssLoaderOptions: {
+        sourceMap: true,
+        esModule: true,
+        modules: {
+          exportLocalsConvention: 'camelCase',
+          // exportOnlyLocals: false,
+          mode: 'local',
+        },
+      },
+      ...withNx({
+        cssModules: false,
+      })
+    })
   })
-)
+};
