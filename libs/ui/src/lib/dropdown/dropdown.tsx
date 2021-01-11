@@ -1,7 +1,6 @@
 // teest edit, remove this line
 import React, { HTMLProps, useState } from 'react'
 import { Menu, Badge, Avatar, Popover, Image } from 'antd'
-import LaunchSVG from './LaunchSVG'
 import {
   RightOutlined,
   UserOutlined,
@@ -17,6 +16,7 @@ import {
   CaretDownOutlined,
 } from '@ant-design/icons'
 import { ReactComponent as PABAULOGO } from '../../assets/images/pabaulogo.svg'
+import { ReactComponent as LaunchSVG } from '../../assets/images/launch.svg'
 import { ReactComponent as JASVG } from '../../assets/images/JA.svg'
 import { ReactComponent as UPSVG } from '../../assets/images/UP.svg'
 import { ReactComponent as TaskSVG } from '../../assets/images/Vector.svg'
@@ -58,7 +58,7 @@ export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
           <UserOutlined style={{ color: '#9292A3' }} />
           <span className={styles.headerText}>Account Settings</span>
         </div>
-        <LaunchSVG />
+        <LaunchSVG className={styles.launchLogo} />
       </Menu.Item>
       <Menu.Item className={styles.dropdownMenu} style={{ borderBottom: '1px solid #F1F1F1' }}>
         <div className={styles.dropdownHeader}>
