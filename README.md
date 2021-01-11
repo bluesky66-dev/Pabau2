@@ -23,7 +23,9 @@ This monorepo contains all of our code (with the exception of `/.env`). The mono
 Any component that is likely to be needed on other pages, such as a table, button, heading, avatar, etc, should live in `/libs/ui/`. Each component in here should be exposed as a Storybook item, and is visible on [https://storybook.new.pabau.com](https://storybook.new.pabau.com) or run `yarn run nx run ui:storybook` to develop on it locally with live reloading.
 
 To create a new component, such as "Button", do the following:
-1. `yarn run nx g @nrwl/react:component --project=ui --style=less --export --pascalCaseFiles --name=Button`
+```bash
+yarn run nx g @nrwl/react:component --project=ui --style=less --export --pascalCaseFiles --name=Button
+```
 
 ### Frontend
 To view the Frontend, you can either visit [https://prelive-crm.new.pabau.com](https://prelive-crm.new.pabau.com) or run `yarn start` to develop on it locally with live reloading.
@@ -31,14 +33,17 @@ To view the Frontend, you can either visit [https://prelive-crm.new.pabau.com](h
 Each Page on the Frontend should use as many components as possible from our Storybook.
 
 To create a new page (route), such as "/marketing/sources", do the following:
-1. `yarn run nx g @nrwl/next:page --project=web --style=less --directory marketing sources`
-1. add `import { } from '@pabau/ui'` at top and fill in the {} with components you need.
+```bash
+yarn run nx g @nrwl/next:page --project=web --style=less --directory marketing sources
+```
+
+Now add `import { } from '@pabau/ui'` at top of the new page file and fill in the {} with components you need.
 
 ## Code Rules
 
 * Branch from master, PR back to master.
-  * Small PR's are good
-  * Tag your commits and/or PR with the JIRA issue ID.
+  - Small PR's are good
+  - Tag your commits and/or PR with the JIRA issue ID.
 * Keep eye on your build pipeline status. If it fails, the onus is on your to make it green.
 * Never do `import './MyComponent.less'` - always change it to `import styles from './MyComponent.module.less'`
 * Never run your IDE or npm/yarn/npx as root or Administrator.

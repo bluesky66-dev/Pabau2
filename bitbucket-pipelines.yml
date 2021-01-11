@@ -6,23 +6,41 @@ options:
 definitions:
   caches:
     nodemodules: 'node_modules/'
-    nextcache: 'dist/**/.next/cache'
+#    nextcache: 'dist/**/.next/cache'
     yarncustom: '/usr/local/share/.cache/yarn'
+    nxcache: 'dist/'
     cypress: '/root/.cache/Cypress'
 #  services:
 #    docker:
 #      memory: 2048
 
 pipelines:
+  pull-requests:
+    '**':
+      - step:
+          name: PR pipeline
+          caches:
+            - nodemodules
+            - nxcache
+            - yarncustom
+          script:
+            - yarn install --pure-lockfile --prefer-offline
+            - yarn affected --base=origin/master --target=lint --with-deps
+            - yarn affected --base=origin/master --target=export --prod
+    #          - yarn run nx affected --all --target=build
+    #          - yarn run nx affected --target=lint --base=master~1
+    #          - yarn run nx affected --target=test --base=master~1 --head=master
+    #          - yarn run nx affected --target=build --base=master~1
+
   default:
     - step:
         name: Build and Test branch
         caches:
           - nodemodules
-          - nextcache
+          - nxcache
           - yarncustom
         script:
-          - yarn
+          - yarn install --pure-lockfile --prefer-offline
           - yarn run nx affected --all --target=lint
 #          - yarn run nx affected --all --target=build
 #          - yarn run nx affected --target=lint --base=master~1
@@ -35,7 +53,7 @@ pipelines:
           name: New Deploy scripot
           caches:
             - nodemodules
-            - nextcache
+            - nxcache
             - yarncustom
 #            - cypress
           script:
@@ -43,7 +61,7 @@ pipelines:
 #            - yarn affected:lint --base=HEAD~1
             - yarn affected:lint --base=HEAD~1 --with-deps
 #            - yarn affected:test --base=HEAD~1 --with-deps
-            - yarn affected:build --base=HEAD~1 --prod
+#            - yarn affected:build --base=HEAD~1 --prod
 #            - apt update -y && apt install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
 #            - yarn cypress install || true
 #            - yarn affected:e2e --base=HEAD~1 || true
