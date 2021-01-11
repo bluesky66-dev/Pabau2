@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import { Checkbox } from '@pabau/ui'
 import styles from './Search.module.less'
-import { Input, Popover, Avatar, Image, Modal, Form, Button } from 'antd'
+import { Input, Popover, Avatar, Image, Form, Button } from 'antd'
 import {
   SearchOutlined,
   UserAddOutlined,
@@ -34,7 +34,7 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
     const timer = setTimeout(() => {
       if (searchTerm) {
         setSearchPopUp(true)
-        onChange?.(searchTerm)
+        onChange && onChange(searchTerm)
       } else setSearchPopUp(false)
     }, WAIT_INTERVAL)
 
@@ -124,8 +124,8 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
             <div
               className={styles.advanceSearch}
               onClick={() => {
-                setSearchPopUp(false)
                 setAdvanceSearch(!advanceSearch)
+                setSearchPopUp(true)
               }}
             >
               <p> Advanced Search </p>
@@ -137,82 +137,48 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
     )
   }
 
-  return (
-    <div style={{ width: '100%' }}>
-      <Popover content={searchMenu} visible={searchPopUp} overlayClassName={styles.searchInput}>
-        <Input
-          className={styles.searchInputStyle}
-          placeholder="Search clients or leads"
-          value={searchTerm}
-          prefix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          suffix={
-            searchTerm && (
-              <CloseCircleFilled
-                style={{ color: '#BFBFBF' }}
-                onClick={() => {
-                  setSearchPopUp(false)
-                  setSearchTerm('')
-                }}
-              />
-            )
-          }
-        />
-      </Popover>
-      <Modal
-        visible={advanceSearch}
-        title={
-          <>
-            <div className={styles.backToModal}>
-              <div
-                className={styles.basicSearchAlign}
-                onClick={() => {
-                  setAdvanceSearch(!advanceSearch)
-                  setSearchPopUp(!searchPopUp)
-                }}
-              >
-                <LeftOutlined className={styles.rightArrowColor} />
-                <h6> Back to basic search</h6>
-              </div>
-              <div>
-                <CloseOutlined
-                  style={{ color: 'var(--light-grey-color)', fontSize: '12px' }}
-                  onClick={() => {
-                    setAdvanceSearch(!advanceSearch)
-                  }}
-                />
-              </div>
-            </div>
-            <div className={styles.advanceSearchText}>
-              <h1>Advance Search</h1>
-            </div>
-            <div className={classNames(styles.cusTabs, styles.cusTabsTopSpace)}>
-              <button
-                className={classNames(
-                  styles.cusTabDesign,
-                  searchTab === 'Clients' && styles.activeTabs
-                )}
-                onClick={() => setSearchTab('Clients')}
-              >
-                Clients
-              </button>
-              <button
-                className={classNames(
-                  styles.cusTabDesign,
-                  searchTab === 'Leads' && styles.activeTabs
-                )}
-                onClick={() => setSearchTab('Leads')}
-              >
-                Leads
-              </button>
-            </div>
-          </>
-        }
-        width={360}
-        footer={false}
-        wrapClassName={styles.advanceSearchModal}
-        closable={false}
-      >
+  const advanceSearchMenu = () => {
+    return (
+      <div className={classNames(styles.advanceSearchModal, styles.advSearchBody)}>
+        <div className={styles.backToSearch}>
+          <div
+            className={styles.basicSearchAlign}
+            onClick={() => {
+              setAdvanceSearch((e) => !e)
+            }}
+          >
+            <LeftOutlined className={styles.rightArrowColor} />
+            <h6> Back to basic search</h6>
+          </div>
+          <div>
+            <CloseOutlined
+              style={{ color: 'var(--light-grey-color)', fontSize: '12px' }}
+              onClick={() => {
+                setAdvanceSearch((e) => !e)
+              }}
+            />
+          </div>
+        </div>
+        <div className={styles.advanceSearchText}>
+          <h1>Advance Search</h1>
+        </div>
+        <div className={classNames(styles.cusTabs, styles.cusTabsTopSpace)}>
+          <button
+            className={classNames(
+              styles.cusTabDesign,
+              searchTab === 'Clients' && styles.activeTabs
+            )}
+            onClick={() => setSearchTab('Clients')}
+          >
+            Clients
+          </button>
+          <button
+            className={classNames(styles.cusTabDesign, searchTab === 'Leads' && styles.activeTabs)}
+            onClick={() => setSearchTab('Leads')}
+          >
+            Leads
+          </button>
+        </div>
         <Form
           form={form}
           requiredMark={false}
@@ -247,8 +213,7 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
             <Input className={styles.advSearchInput} placeholder="Invoice NO" />
           </Form.Item>
           <Checkbox>
-            {' '}
-            <span className={styles.greyTextColor}> Show inactive clients</span>{' '}
+            <span className={styles.inactiveClientText}> Show inactive clients</span>{' '}
           </Checkbox>
           <div className={styles.buttonEnd}>
             <Button className={styles.btnDisableStyle} disabled={true} size="large">
@@ -256,7 +221,43 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
             </Button>
           </div>
         </Form>
-      </Modal>
+      </div>
+    )
+  }
+
+  const renderMenu = () => {
+    if (advanceSearch) {
+      return advanceSearchMenu()
+    }
+    return searchMenu()
+  }
+
+  return (
+    <div style={{ width: '100%' }}>
+      <Popover
+        content={renderMenu}
+        visible={searchPopUp}
+        overlayClassName={advanceSearch ? styles.advanceSearchModal : styles.searchInput}
+      >
+        <Input
+          className={styles.searchInputStyle}
+          placeholder="Search clients or leads"
+          value={searchTerm}
+          prefix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          suffix={
+            searchTerm && (
+              <CloseCircleFilled
+                style={{ color: '#BFBFBF' }}
+                onClick={() => {
+                  setSearchPopUp(false)
+                  setSearchTerm('')
+                }}
+              />
+            )
+          }
+        />
+      </Popover>
     </div>
   )
 }

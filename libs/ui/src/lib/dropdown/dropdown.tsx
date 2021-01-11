@@ -47,13 +47,13 @@ export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
         <RightOutlined className={styles.dropdownIcon} />
       </Menu.Item>
       <Menu.Item className={styles.userinfo}>
-        <div className={styles.userName}>William Brandham</div>
+        <div className={styles.userName}>William Branham</div>
         <div className={styles.userBalance}>
           <p>Balance</p>
           <span>9445,00</span>
         </div>
       </Menu.Item>
-      <Menu.Item className={styles.dropdownMenu}>
+      <Menu.Item className={classNames(styles.dropdownMenu, styles.avatarSpaceTop)}>
         <div className={styles.dropdownHeader}>
           <UserOutlined style={{ color: '#9292A3' }} />
           <span className={styles.headerText}>Account Settings</span>
@@ -66,7 +66,10 @@ export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
           <span className={classNames(styles.headerText, styles.taskText)}>Tasks</span>
         </div>
       </Menu.Item>
-      <Menu.Item className={styles.dropdownMenu} onClick={() => onClickAvatarMenu('FeedbackMenu')}>
+      <Menu.Item
+        className={classNames(styles.dropdownMenu, styles.avatarSpaceTop)}
+        onClick={() => onClickAvatarMenu('FeedbackMenu')}
+      >
         <div className={styles.dropdownHeader}>
           <NotificationOutlined className={styles.dropdownIcon} />
           <span className={styles.headerText}>Give feedback</span>
