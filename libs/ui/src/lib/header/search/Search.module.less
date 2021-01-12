@@ -1,5 +1,4 @@
 .search-box {
-  border-radius: 6px !important;
   // padding: 8px;
   .close-icon-right {
     display: flex;
@@ -10,6 +9,10 @@
 }
 .search-input {
   :global {
+    .ant-popover-inner {
+      border-radius: 6px;
+      box-shadow: 4px 0px 15px rgba(0, 34, 65, 0.1);
+    }
     .ant-popover-inner-content {
       width: 360px;
       padding: 0px;
@@ -144,10 +147,12 @@ button:focus {
 
 .advance-search-modal {
   :global {
+    .ant-popover-inner {
+      border-radius: 4px;
+    }
     .ant-popover-inner-content {
       width: 360px;
       padding: 0px;
-      border-radius: 4px;
     }
     .ant-popover-arrow {
       display: none;
