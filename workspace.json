@@ -54,7 +54,7 @@
           "builder": "@nrwl/workspace:run-commands",
           "outputs": [],
           "options": {
-            "command": "sh tools/cicd/web.deploy.sh"
+            "command": "sh apps/web/cicd/deploy.sh"
           },
           "configurations": {
             "production": {}

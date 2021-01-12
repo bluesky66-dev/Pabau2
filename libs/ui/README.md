@@ -1,6 +1,6 @@
 # ui
 
-This library was generated with [Nx](https://nx.dev).
+This library is for shared React Components.
 
 ## Running unit tests
 
