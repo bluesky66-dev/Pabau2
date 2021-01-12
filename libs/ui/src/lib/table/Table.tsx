@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
-import { Table } from 'antd'
+import { Table as AntTable } from 'antd'
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc'
 import { MenuOutlined } from '@ant-design/icons'
-import styles from './dragfeature.module.less'
+import styles from './Table.module.less'
 import { TableProps } from 'antd/es/table'
 export interface DragProps {
   draggable?: boolean
@@ -30,7 +30,7 @@ function array_move(arr, old_index, new_index) {
   })
 }
 
-export const DragFeature: FC<TableProps<never> & DragProps> = ({
+export const Table: FC<TableProps<never> & DragProps> = ({
   dataSource = [],
   updateDataSource,
   ...props
@@ -72,7 +72,7 @@ export const DragFeature: FC<TableProps<never> & DragProps> = ({
   }
 
   return (
-    <Table
+    <AntTable
       {...props}
       dataSource={dataSource}
       columns={renderSortHandler()}

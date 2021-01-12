@@ -1,4 +1,4 @@
-import { DragFeature as Table, useLiveQuery } from '@pabau/ui'
+import { Table, useLiveQuery } from '@pabau/ui'
 import React, { FC } from 'react'
 import { DocumentNode } from '@apollo/client'
 import AddButton from './AddButton'
