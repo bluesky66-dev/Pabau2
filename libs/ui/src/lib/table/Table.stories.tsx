@@ -1,9 +1,9 @@
 /* eslint-disable */
 
 import { Button } from 'antd'
-import styles from './dragfeature.module.less'
+import styles from './Table.module.less'
 import React, { FC, useState } from 'react'
-import { DragFeature } from './dragfeature'
+import { Table } from './Table'
 import { data } from './mock'
 
 const columns = [
@@ -34,8 +34,8 @@ const columns = [
 ]
 
 export default {
-  component: DragFeature,
-  title: 'DragFeature',
+  component: Table,
+  title: 'Table',
   args: {
     draggable: true,
     dataSource: data,
@@ -51,6 +51,6 @@ const DragFeatureStory: FC = ({ ...args }) => {
   const updateDataSource = ({ newData, oldIndex, newIndex }) => {
     setDataSource(newData)
   }
-  return <DragFeature {...args} dataSource={dataSource} updateDataSource={updateDataSource} />
+  return <Table {...args} dataSource={dataSource} updateDataSource={updateDataSource} />
 }
-export const dragFeature = DragFeatureStory.bind({})
+export const TableWithDragFeature = DragFeatureStory.bind({})
