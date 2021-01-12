@@ -7,8 +7,6 @@ echo "DEBUG: app_name=${APP_NAME}"
 
 yarn run nx run "${APP_NAME}:export"
 cp "apps/${APP_NAME}/vercel.json" "dist/apps/${APP_NAME}/exported/"
-cp package.json "dist/apps/${APP_NAME}/"
-cp yarn.lock "dist/apps/${APP_NAME}/"
 cd "dist/apps/${APP_NAME}/exported"
 
 OUTPUT=$(vercel -c -C --token "${VERCEL_TOKEN}" -A ./vercel.json --prod)
