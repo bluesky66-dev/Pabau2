@@ -1,10 +1,10 @@
 module.exports = {
   presets: [
-    ['@nrwl/react/babel'],
     [
-      '@babel/preset-env',
+      'next/babel',
       {
-        modules: false,
+        'preset-env': {},
+        'styled-jsx': {},
       },
     ],
   ],
