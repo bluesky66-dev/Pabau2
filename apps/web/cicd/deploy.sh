@@ -20,3 +20,4 @@ LAST_LINE=$(echo "${OUTPUT}" | tail -n1)
 echo "last line: ${LAST_LINE}"
 
 echo "commit hash: ${BITBUCKET_COMMIT}"
+vercel -c -C --token "${VERCEL_TOKEN}" alias "${LAST_LINE}" prelive-crm.new.pabau.com
