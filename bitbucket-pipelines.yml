@@ -60,6 +60,7 @@ pipelines:
             - git config user.name "Pipeline"
             - git config user.email nobody@pabau.com
             - yarn version --message "[skip ci]" --patch --non-interactive --no-progress
+            - git push
             - yarn install --pure-lockfile --prefer-offline
 #            - yarn affected:lint --base=HEAD~1
             - yarn affected:lint --base=HEAD~1 --with-deps
