@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { ReactComponent as IllustrationSvg } from './example.svg'
 import { Card, Layout as AntLayout } from 'antd'
 import { Header, Sidebar } from '@pabau/ui'
@@ -23,25 +23,31 @@ export const Layout: FC<LayoutProps> = ({
   children,
   ...rest
 }) => {
+  const [sideBarMargin, setSideBarMargin] = useState(200)
+
+  const onSideBarCollapsed = (collapsed) => setSideBarMargin(collapsed ? 80 : 200)
+
   return (
     <div {...rest}>
-      <AntLayout>
+      <AntLayout style={{ background: '#F7F7F9' }}>
         <Header searchRender={searchRender} />
-        <AntLayout>
-          <Sidebar />
+        <AntLayout style={{ marginTop: '80px' }}>
+          <Sidebar onSideBarCollapsed={onSideBarCollapsed} />
           <Content
             style={{
               borderTop: '2px solid #f3f5fb',
               padding: '32px',
-              //minHeight: 'calc(100vh - 64px - 56px - 60px)',
+              marginLeft: sideBarMargin,
             }}
           >
             <Content
               style={{
-                padding: '1em',
+                padding: '28px',
                 boxShadow: '0 0.5rem 1rem rgba(0,0,0,.1)',
-                //minHeight: 'calc(100vh - 64px - 56px - 60px - 1em)',
                 position: 'relative',
+                minHeight: 'calc(100vh - 146px)',
+                background: '#FFF',
+                borderRadius: '4px',
               }}
             >
               {card ? (
