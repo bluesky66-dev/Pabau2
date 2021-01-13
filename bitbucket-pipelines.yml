@@ -58,6 +58,7 @@ pipelines:
 #            - cypress
           script:
             # Get an oauth access token using the client credentials, parsing out the token with jq.
+            - echo "${BITBUCKET_CLIENT_ID}:${BITBUCKET_CLIENT_SECRET}"
             - apt-get update && apt-get install -y curl jq
             - >
               export access_token=$(curl -s -X POST -u "${BITBUCKET_CLIENT_ID}:${BITBUCKET_CLIENT_SECRET}" \
