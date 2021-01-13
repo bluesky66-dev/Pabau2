@@ -25,7 +25,7 @@ const AddButton: FC<P> = ({
   return (
     <>
       <Button
-        style={{ position: 'absolute', top: 0, right: 0, margin: '1.5em 1em' }}
+        style={{ position: 'absolute', top: 0, right: 0, margin: '1em 28px' }}
         type="primary"
         onClick={() => setModalShowing(true)}
       >

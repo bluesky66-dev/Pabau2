@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import { Layout as PabauLayout, LayoutProps } from '@pabau/ui'
 import Search from '../Search'
 
