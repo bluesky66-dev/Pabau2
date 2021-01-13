@@ -2,7 +2,7 @@ import { Table, useLiveQuery } from '@pabau/ui'
 import React, { FC, useEffect, useState } from 'react'
 import { DocumentNode } from '@apollo/client'
 import AddButton from './AddButton'
-import DeleteButton from './DeleteButton'
+// import DeleteButton from './DeleteButton'
 
 interface P {
   schema: Schema
