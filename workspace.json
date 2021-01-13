@@ -15,7 +15,7 @@
           },
           "configurations": {
             "production": {
-              "cacheBuster": 1
+              "cacheBuster": 2
             }
           }
         },
