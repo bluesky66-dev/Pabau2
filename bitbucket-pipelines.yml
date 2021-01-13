@@ -62,10 +62,10 @@ pipelines:
             - >
               export access_token=$(curl -s -X POST -u "${BITBUCKET_CLIENT_ID}:${BITBUCKET_CLIENT_SECRET}" \
                 https://bitbucket.org/site/oauth2/access_token \
-                -d grant_type=client_credentials -d scopes="repository"| jq --raw-output '.access_token')
+                -d grant_type=client_credentials -d scopes="repository:write"| jq --raw-output '.access_token')
 
             # Configure git to use the oauth token.
-            - git remote set-url origin "https://x-token-auth:${access_token}@bitbucket.org/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}.git"
+            - git remote set-url origin "https://x-token-auth:${access_token}@bitbucket.org/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}"
 
 #            - git config user.name "Pipeline"
 #            - git config user.email nobody@pabau.com
