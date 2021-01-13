@@ -75,9 +75,9 @@ Now add `import { } from '@pabau/ui'` at top of the new page file and fill in th
 * Apollo local state
 * Apollo getfromtree
 * Ant design babel import loader
-* Convert from 'next export' to full on next server with ssr (i'm not sure)
-* Fix 'vercel dev' for backend project
 * Playroom
 * Apollo Typed Documents
 * local dev env for hasura, migrations
+* graphql-code-generator
+* Convert from 'next export' to full on next server with ssr (i'm not sure)
 

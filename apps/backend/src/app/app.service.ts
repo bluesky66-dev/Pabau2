@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common'
-//import logger from '../lib/logger'
 import fetch from 'node-fetch'
 
 interface JsonType {
@@ -14,6 +13,4 @@ export class AppService {
     return json as JsonType
     //if (data) logger(data);
   }
-
-
 }

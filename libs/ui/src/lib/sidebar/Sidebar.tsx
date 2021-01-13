@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC, useState } from 'react'
 import { Layout, Menu } from 'antd'
 import {
@@ -17,8 +16,15 @@ import {
 import { Button } from '@pabau/ui'
 import styles from './Sidebar.module.less'
 import classNames from 'classnames'
+
 const { SubMenu } = Menu
 const { Sider } = Layout
+
+interface SidebarMenuItem {
+  menuName: string
+  icon?: JSX.Element
+  children?: SidebarMenuItem[]
+}
 
 export const Sidebar: FC = () => {
   const [collapsed, setCollapsed] = useState(false)
@@ -28,7 +34,7 @@ export const Sidebar: FC = () => {
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1)
     setOpenKeys(latestOpenKey ? [latestOpenKey] : [])
   }
-  const sidebarMenu: any = [
+  const sidebarMenu: SidebarMenuItem[] = [
     {
       menuName: 'Dashboard',
       icon: <DashboardOutlined className={styles.sidebarIcon} />,
