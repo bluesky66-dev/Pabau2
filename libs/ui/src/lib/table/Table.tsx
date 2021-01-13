@@ -58,10 +58,10 @@ export const Table: FC<TableProps<never> & DragProps> = ({
   )
 
   const dragColumn = {
-    title: '',
+    title: <DragHandle />,
     dataIndex: 'sort',
-    width: 30,
-    className: 'drag-visible',
+    width: 64,
+    className: 'drag-visible align-center',
     render: function renderDragHandle() {
       return <DragHandle />
     },
