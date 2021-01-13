@@ -12,6 +12,7 @@ import {
   ProfileOutlined,
   SettingOutlined,
   MenuFoldOutlined,
+  MenuUnfoldOutlined,
 } from '@ant-design/icons'
 import { Button } from '@pabau/ui'
 import styles from './Sidebar.module.less'
@@ -26,26 +27,39 @@ interface SidebarMenuItem {
   children?: SidebarMenuItem[]
 }
 
-export const Sidebar: FC = () => {
+interface SidebarProps {
+  onSideBarCollapsed?: (collapsed: boolean) => void
+}
+
+export const Sidebar: FC<SidebarProps> = ({ onSideBarCollapsed }) => {
   const [collapsed, setCollapsed] = useState(false)
   const [openKeys, setOpenKeys] = useState<string[]>([])
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([])
+
+  const handleSidebarCollapse = () => {
+    setCollapsed((e) => {
+      onSideBarCollapsed && onSideBarCollapsed(!e)
+      return !e
+    })
+  }
 
   const onOpenChange = (keys) => {
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1)
     setOpenKeys(latestOpenKey ? [latestOpenKey] : [])
   }
+
   const sidebarMenu: SidebarMenuItem[] = [
     {
       menuName: 'Dashboard',
-      icon: <DashboardOutlined className={styles.sidebarIcon} />,
+      icon: <DashboardOutlined />,
     },
     {
       menuName: 'Calendar',
-      icon: <CalendarOutlined className={styles.sidebarIcon} />,
+      icon: <CalendarOutlined />,
     },
     {
       menuName: 'Team',
-      icon: <TeamOutlined className={styles.sidebarIcon} />,
+      icon: <TeamOutlined />,
       children: [
         {
           menuName: 'Staff manager',
@@ -60,7 +74,7 @@ export const Sidebar: FC = () => {
     },
     {
       menuName: 'Leads',
-      icon: <RiseOutlined className={styles.sidebarIcon} />,
+      icon: <RiseOutlined />,
       children: [
         {
           menuName: 'Leads Manager',
@@ -81,11 +95,11 @@ export const Sidebar: FC = () => {
     },
     {
       menuName: 'Reports',
-      icon: <FundOutlined className={styles.sidebarIcon} />,
+      icon: <FundOutlined />,
     },
     {
       menuName: 'Stock',
-      icon: <ShoppingCartOutlined className={styles.sidebarIcon} />,
+      icon: <ShoppingCartOutlined />,
       children: [
         {
           menuName: 'Products',
@@ -103,7 +117,7 @@ export const Sidebar: FC = () => {
     },
     {
       menuName: 'Marketing',
-      icon: <NotificationOutlined className={styles.sidebarIcon} />,
+      icon: <NotificationOutlined />,
       children: [
         {
           menuName: 'SMS campaign',
@@ -130,7 +144,7 @@ export const Sidebar: FC = () => {
     },
     {
       menuName: 'Financials',
-      icon: <WalletOutlined className={styles.sidebarIcon} />,
+      icon: <WalletOutlined />,
       children: [
         {
           menuName: 'Accounts',
@@ -142,7 +156,7 @@ export const Sidebar: FC = () => {
     },
     {
       menuName: 'Contacts',
-      icon: <ProfileOutlined className={styles.sidebarIcon} />,
+      icon: <ProfileOutlined />,
       children: [
         {
           menuName: 'Contact manager',
@@ -161,16 +175,31 @@ export const Sidebar: FC = () => {
       </Menu.Item>
     )
   }
-  const onCollapse = () => {
-    setCollapsed((e) => !e)
+
+  const onClickMenu = (e) => {
+    setSelectedKeys([e.key])
   }
+
   return (
-    <Sider className={styles.pabauSidebar} collapsed={collapsed} onCollapse={onCollapse}>
+    <Sider
+      trigger={null}
+      className={styles.pabauSidebar}
+      collapsed={collapsed}
+      style={{
+        overflow: 'auto',
+        height: '100vh',
+        position: 'fixed',
+        left: 0,
+      }}
+    >
       <Menu
         mode="inline"
         style={{ height: '100%', borderRight: 0 }}
         openKeys={openKeys}
         onOpenChange={onOpenChange}
+        multiple={false}
+        selectedKeys={selectedKeys}
+        onClick={onClickMenu}
       >
         {sidebarMenu.map((menuData, index) => {
           return !menuData.children ? (
@@ -180,7 +209,11 @@ export const Sidebar: FC = () => {
               key={menuData.menuName + index}
               icon={menuData.icon}
               title={menuData.menuName}
-              className={styles.sidebarMenu}
+              onTitleClick={onClickMenu}
+              className={classNames(
+                styles.sidebarMenu,
+                selectedKeys.includes(menuData.menuName + index) && styles.subMenuActive
+              )}
             >
               {menuData.children.map((subMenu, subIndex) => {
                 return renderMenu(subMenu.menuName + subIndex, subMenu.menuName, subMenu?.icon)
@@ -201,14 +234,14 @@ export const Sidebar: FC = () => {
           )}
         </div>
         <div>
-          <MenuFoldOutlined
-            className={classNames(
+          {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+            className: classNames(
               styles.sidebarCollapseIcon,
               styles.sidebarMenu,
               collapsed && styles.sidebarCollapsed
-            )}
-            onClick={onCollapse}
-          />
+            ),
+            onClick: handleSidebarCollapse,
+          })}
         </div>
       </Menu>
     </Sider>

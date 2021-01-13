@@ -1,5 +1,5 @@
 import { Table, useLiveQuery } from '@pabau/ui'
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { DocumentNode } from '@apollo/client'
 import AddButton from './AddButton'
 import DeleteButton from './DeleteButton'
@@ -14,6 +14,12 @@ interface P {
 const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery }) => {
   const { data, error, loading } = useLiveQuery(listQuery)
 
+  const [sourceData, setSourceData] = useState(null)
+
+  useEffect(() => {
+    setSourceData(data)
+  }, [data])
+
   if (error) return <p>Error :( {error.message}</p>
 
   return (
@@ -24,7 +30,7 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery }) => {
         loading={loading}
         style={{ height: '100%' }}
         sticky={true}
-        pagination={data?.length > 10 ? {} : false}
+        pagination={sourceData?.length > 10 ? {} : false}
         scroll={{ x: 'max-content' }}
         draggable={true}
         columns={[
@@ -60,8 +66,9 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery }) => {
           },
         ]}
         // eslint-disable-next-line
-        dataSource={data?.map((e: { id: any }) => ({ key: e.id, ...e }))}
+        dataSource={sourceData?.map((e: { id: any }) => ({ key: e.id, ...e }))}
         updateDataSource={({ newData, oldIndex, newIndex }) => {
+          setSourceData(newData)
           console.log('newData, oldIndex, newIndex ', { newData, oldIndex, newIndex })
         }}
       />

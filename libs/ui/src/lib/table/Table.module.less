@@ -16,12 +16,24 @@
 }
 
 .drag-table {
-  tr:hover {
-    background-color: #eef7fb;
-  }
-
-  .ant-table-cell .drag-visible {
-    cursor: pointer !important;
+  :global {
+    .ant-table-tbody {
+      tr {
+        border-bottom: 1px solid #F1F1F1;
+      }
+    }
+    tr:hover {
+      background-color: #eef7fb;
+      td {
+        color: var(--primary-color)
+      }
+    }
+    .ant-table-cell .drag-visible {
+      cursor: pointer !important;
+    }
+    .align-center {
+      text-align: center;
+    }
   }
 }
 

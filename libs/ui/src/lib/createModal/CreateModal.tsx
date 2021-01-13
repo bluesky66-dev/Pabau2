@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, useState } from 'react'
 import { Form, Modal as AntModal, Button, Input } from 'antd'
 import { CloseOutlined } from '@ant-design/icons'
-import styles from './modal.module.less'
+import styles from './CreateModal.module.less'
 import '../../assets/less/pretty-checkbox.less'
 import ActiveSVG from '../../assets/images/active.svg'
 import NotActiveSVG from '../../assets/images/notactive.svg'

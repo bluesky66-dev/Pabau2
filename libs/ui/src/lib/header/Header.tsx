@@ -65,6 +65,8 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
         top: 0,
         zIndex: 2,
         border: '1px solid #ECEDF0',
+        position: 'fixed',
+        width: '100%',
       }}
     >
       <div
