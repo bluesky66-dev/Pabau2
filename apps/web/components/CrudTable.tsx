@@ -39,31 +39,31 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery }) => {
             width: v.cssWidth,
             title: v.short,
           })),
-          {
-            title: 'Actions',
-            width: '10em',
-            // eslint-disable-next-line react/display-name
-            render: ({ id }) => {
-              return (
-                // eslint-disable-next-line react/jsx-no-useless-fragment
-                <>
-                  {deleteQuery && (
-                    <DeleteButton
-                      id={id}
-                      listQuery={listQuery}
-                      deleteQuery={deleteQuery}
-
-                      // onClick={() =>
-
-                      // }
-                    >
-                      Delete
-                    </DeleteButton>
-                  )}
-                </>
-              )
-            },
-          },
+          // {
+          //   title: 'Actions',
+          //   width: '10em',
+          //   // eslint-disable-next-line react/display-name
+          //   render: ({ id }) => {
+          //     return (
+          //       // eslint-disable-next-line react/jsx-no-useless-fragment
+          //       <>
+          //         {deleteQuery && (
+          //           <DeleteButton
+          //             id={id}
+          //             listQuery={listQuery}
+          //             deleteQuery={deleteQuery}
+          //
+          //             // onClick={() =>
+          //
+          //             // }
+          //           >
+          //             Delete
+          //           </DeleteButton>
+          //         )}
+          //       </>
+          //     )
+          //   },
+          // },
         ]}
         // eslint-disable-next-line
         dataSource={sourceData?.map((e: { id: any }) => ({ key: e.id, ...e }))}
