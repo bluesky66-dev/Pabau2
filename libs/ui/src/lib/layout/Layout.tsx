@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import { ReactComponent as IllustrationSvg } from './example.svg'
 import { Card, Layout as AntLayout } from 'antd'
-import { Header, Sidebar } from '@pabau/ui'
+import { Footer, Header, Sidebar } from '@pabau/ui'
 
 const { Content } = AntLayout
 export interface LayoutProps {
@@ -97,6 +97,7 @@ export const Layout: FC<LayoutProps> = ({
           )}
         </AntLayout>
       </AntLayout>
+      <Footer />
     </div>
   )
 }
