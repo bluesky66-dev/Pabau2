@@ -74,6 +74,7 @@ export const Table: FC<TableProps<never> & DragProps> = ({
   return (
     <AntTable
       {...props}
+      pagination={false}
       dataSource={dataSource}
       columns={renderSortHandler()}
       rowKey="key"

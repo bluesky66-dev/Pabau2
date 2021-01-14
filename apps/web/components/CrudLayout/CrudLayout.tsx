@@ -3,6 +3,9 @@ import { DocumentNode } from '@apollo/client'
 import CrudTable from '../CrudTable'
 import pluralize from 'pluralize'
 import Layout from '../Layout/Layout'
+import { Typography } from 'antd'
+
+const { Title } = Typography
 
 interface P {
   schema: Schema
@@ -13,7 +16,7 @@ interface P {
 
 const CrudLayout: FC<P> = ({ ...props }) => (
   <Layout>
-    <h1>{pluralize(props.schema.full || props.schema.short)}</h1>
+    <Title>{pluralize(props.schema.full || props.schema.short)}</Title>
     <CrudTable {...props} />
   </Layout>
 )

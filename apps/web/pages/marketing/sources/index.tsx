@@ -3,25 +3,18 @@ import { NextPage } from 'next'
 import React from 'react'
 import CrudLayout from '../../../components/CrudLayout/CrudLayout'
 
-export interface Values {
-  id?: string
-  name: string
-}
-export interface MarketingSourceList {
-  marketing_source: Values[]
-}
-
 const LIST_QUERY = gql`
-  query {
+  query marketing_sources {
     marketing_source(order_by: { created_at: desc }) {
       __typename
       id
       name
+      is_active
     }
   }
 `
 const DELETE_MUTATION = gql`
-  mutation($id: uuid!) {
+  mutation delete_marketing_source($id: uuid!) {
     delete_marketing_source_by_pk(id: $id) {
       __typename
       id
@@ -29,7 +22,7 @@ const DELETE_MUTATION = gql`
   }
 `
 const ADD_MUTATION = gql`
-  mutation($name: String!) {
+  mutation add_marketing_source($name: String!) {
     insert_marketing_source_one(object: { name: $name }) {
       __typename
       id
@@ -53,6 +46,10 @@ const schema: Schema = {
       description: 'A friendly name',
       // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
+    },
+    is_active: {
+      full: 'Active',
+      type: 'boolean',
     },
   },
 }

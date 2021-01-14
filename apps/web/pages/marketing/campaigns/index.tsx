@@ -6,7 +6,7 @@ import CrudTable from '../../../components/CrudTable'
 import pluralize from 'pluralize'
 
 const LIST_QUERY = gql`
-  query {
+  query marketing_campaigns {
     marketing_campaign(order_by: { created_at: desc }) {
       __typename
       id
@@ -15,7 +15,7 @@ const LIST_QUERY = gql`
   }
 `
 const DELETE_MUTATION = gql`
-  mutation($id: uuid!) {
+  mutation delete_marketing_campaign($id: uuid!) {
     delete_marketing_campaign_by_pk(id: $id) {
       __typename
       id
@@ -23,7 +23,7 @@ const DELETE_MUTATION = gql`
   }
 `
 const ADD_MUTATION = gql`
-  mutation($name: String!) {
+  mutation add_marketing_campaign($name: String!) {
     insert_marketing_campaign_one(object: { name: $name }) {
       __typename
       id

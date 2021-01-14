@@ -43,11 +43,10 @@ export const Layout: FC<LayoutProps> = ({
           >
             <Content
               style={{
-                padding: '28px',
                 boxShadow: '0 0.5rem 1rem rgba(0,0,0,.1)',
                 position: 'relative',
                 minHeight: 'calc(100vh - 146px)',
-                background: '#FFF',
+                // background: '#FFF',
                 borderRadius: '4px',
               }}
             >

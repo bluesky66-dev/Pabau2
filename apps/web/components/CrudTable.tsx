@@ -29,7 +29,7 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery }) => {
       <Table
         loading={loading}
         style={{ height: '100%' }}
-        sticky={true}
+        sticky={{ offsetScroll: 80, offsetHeader: 80 }}
         pagination={sourceData?.length > 10 ? {} : false}
         scroll={{ x: 'max-content' }}
         draggable={true}
@@ -37,7 +37,7 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery }) => {
           ...Object.entries(schema.fields).map(([k, v]) => ({
             dataIndex: k,
             width: v.cssWidth,
-            title: v.short,
+            title: v.short || v.full,
           })),
           // {
           //   title: 'Actions',

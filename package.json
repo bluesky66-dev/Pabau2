@@ -7,7 +7,7 @@
     "vercel": "vercel",
     "nest": "cd apps/backend && nest",
     "start": "nx serve",
-    "hasura:export": "hasura --project hasura metadata export && hasura migrate && graphql-codegen --config codegen.yml",
+    "hasura:export": "hasura --project hasura metadata export && graphql-codegen --config codegen.yml",
     "start:production": "nx affected --uncommitted=true --target=export && npx serve dist/apps/web/exported",
     "build": "pwd && ls -al && rm -rf public/ && nx build backend --no-cache && cp -rf dist/apps/backend/ public/ && cp apps/backend/vercel.json public/ && cp package.json public/",
     "test": "nx test",
