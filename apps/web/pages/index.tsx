@@ -5,6 +5,8 @@ import useTranslation from '../hooks/useTranslation'
 import Grid from '../components/Grid'
 import Layout from '../components/Layout/Layout'
 
+const blah = []
+
 const Index: FC = () => {
   const { t } = useTranslation()
   const [showGrid, setShowGrid] = useState(false)
