@@ -62,13 +62,13 @@ export const Sidebar: FC<SidebarProps> = ({ onSideBarCollapsed }) => {
       icon: <TeamOutlined />,
       children: [
         {
-          menuName: 'Staff manager',
+          menuName: 'Staff Manager',
         },
         {
-          menuName: 'Staff targets',
+          menuName: 'Staff Targets',
         },
         {
-          menuName: 'Staff rota',
+          menuName: 'Schedule',
         },
       ],
     },
@@ -126,13 +126,13 @@ export const Sidebar: FC<SidebarProps> = ({ onSideBarCollapsed }) => {
           menuName: 'Birthday mailer',
         },
         {
-          menuName: 'Newsletter manager',
+          menuName: 'Newsletter',
         },
         {
-          menuName: 'Social survey',
+          menuName: 'Feedback Survey',
         },
         {
-          menuName: 'Gift vouchers',
+          menuName: 'Gift Vouchers',
         },
         {
           menuName: 'Referral tracker',
@@ -159,7 +159,7 @@ export const Sidebar: FC<SidebarProps> = ({ onSideBarCollapsed }) => {
       icon: <ProfileOutlined />,
       children: [
         {
-          menuName: 'Contact manager',
+          menuName: 'Clients',
         },
         {
           menuName: 'Case manager',

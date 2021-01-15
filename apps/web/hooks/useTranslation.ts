@@ -4,6 +4,7 @@ const translatedLocales = {
   'en-gb': {
     common: {
       'index.title': 'Welcome!',
+      'setup.title': 'Setup',
     },
   },
 

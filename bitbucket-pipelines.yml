@@ -65,14 +65,24 @@ pipelines:
 #            - apt update -y && apt install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
 #            - yarn cypress install || true
 #            - yarn affected:e2e --base=HEAD~1 || true
-            - yarn affected --base=HEAD~1 --target=export --prod
-            - yarn global add pr-bumper
-            - pr-bumper check || true
-            - pr-bumper bump || true
-            - yarn global add bumpr
-            - bumpr check || true
-            - bumpr bump || true
-            - yarn affected --base=HEAD~1 --target=deploy --prod
+
+            # Get an oauth access token using the client credentials, parsing out the token with jq.
+            - apt-get update && apt-get install -y curl jq
+            - >
+              export access_token=$(curl -s -X POST -u "${BITBUCKET_CLIENT_ID}:${BITBUCKET_CLIENT_SECRET}" \
+                https://bitbucket.org/site/oauth2/access_token \
+                -d grant_type=client_credentials -d scopes="repository:write"| jq --raw-output '.access_token')
+
+            # Configure git to use the oauth token.
+            - git remote set-url origin "https://x-token-auth:${access_token}@bitbucket.org/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}.git"
+
+            #            - git config user.name "Pipeline"
+            #            - git config user.email nobody@pabau.com
+            - yarn version --message "[skip ci]" --patch --non-interactive --no-progress
+            - git push
+
+            - yarn affected --base=HEAD~2 --target=export --prod
+            - yarn affected --base=HEAD~2 --target=deploy --prod
 #      - step:
 #          size: 2x
 #          name: e2e

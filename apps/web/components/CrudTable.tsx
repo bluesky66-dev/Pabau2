@@ -2,7 +2,7 @@ import { Table, useLiveQuery } from '@pabau/ui'
 import React, { FC, useEffect, useState } from 'react'
 import { DocumentNode } from '@apollo/client'
 import AddButton from './AddButton'
-import DeleteButton from './DeleteButton'
+// import DeleteButton from './DeleteButton'
 
 interface P {
   schema: Schema
@@ -29,7 +29,7 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery }) => {
       <Table
         loading={loading}
         style={{ height: '100%' }}
-        sticky={true}
+        sticky={{ offsetScroll: 80, offsetHeader: 80 }}
         pagination={sourceData?.length > 10 ? {} : false}
         scroll={{ x: 'max-content' }}
         draggable={true}
@@ -37,33 +37,33 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery }) => {
           ...Object.entries(schema.fields).map(([k, v]) => ({
             dataIndex: k,
             width: v.cssWidth,
-            title: v.short,
+            title: v.short || v.full,
           })),
-          {
-            title: 'Actions',
-            width: '10em',
-            // eslint-disable-next-line react/display-name
-            render: ({ id }) => {
-              return (
-                // eslint-disable-next-line react/jsx-no-useless-fragment
-                <>
-                  {deleteQuery && (
-                    <DeleteButton
-                      id={id}
-                      listQuery={listQuery}
-                      deleteQuery={deleteQuery}
-
-                      // onClick={() =>
-
-                      // }
-                    >
-                      Delete
-                    </DeleteButton>
-                  )}
-                </>
-              )
-            },
-          },
+          // {
+          //   title: 'Actions',
+          //   width: '10em',
+          //   // eslint-disable-next-line react/display-name
+          //   render: ({ id }) => {
+          //     return (
+          //       // eslint-disable-next-line react/jsx-no-useless-fragment
+          //       <>
+          //         {deleteQuery && (
+          //           <DeleteButton
+          //             id={id}
+          //             listQuery={listQuery}
+          //             deleteQuery={deleteQuery}
+          //
+          //             // onClick={() =>
+          //
+          //             // }
+          //           >
+          //             Delete
+          //           </DeleteButton>
+          //         )}
+          //       </>
+          //     )
+          //   },
+          // },
         ]}
         // eslint-disable-next-line
         dataSource={sourceData?.map((e: { id: any }) => ({ key: e.id, ...e }))}

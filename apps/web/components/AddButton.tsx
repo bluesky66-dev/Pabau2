@@ -25,7 +25,7 @@ const AddButton: FC<P> = ({
   return (
     <>
       <Button
-        style={{ position: 'absolute', top: 0, right: 0, margin: '1.5em 1em' }}
+        style={{ position: 'absolute', top: 0, right: 0, margin: '1em 28px' }}
         type="primary"
         onClick={() => setModalShowing(true)}
       >
@@ -43,20 +43,17 @@ const AddButton: FC<P> = ({
             formRef = ref
           }}
           schema={schema}
-          // eslint-disable-next-line
-          onSubmit={async (form: Record<string, any>) => {
+          onSubmit={async (form: Record<string, unknown>) => {
             await addMutation({
               variables: form,
               optimisticResponse: {},
               update: (proxy) => {
                 if (listQuery) {
-                  // eslint-disable-next-line
-                  const existing = proxy.readQuery<any>({
+                  const existing = proxy.readQuery({
                     query: listQuery,
                   })
                   if (existing) {
-                    // eslint-disable-next-line @typescript-eslint/ban-types
-                    const key = Object.keys(existing as object)[0]
+                    const key = Object.keys(existing)[0]
                     proxy.writeQuery({
                       query: listQuery,
                       data: {

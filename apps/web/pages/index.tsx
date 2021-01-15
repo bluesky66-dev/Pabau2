@@ -13,7 +13,7 @@ const Index: FC = () => {
     <Layout pageTitle={t('common', 'index.title')}>
       {!showGrid && <Button onClick={() => setShowGrid(true)}>Edit</Button>}
       {showGrid && <Grid />}
-      Version {version}
+      BB: Version {version}
     </Layout>
   )
 }

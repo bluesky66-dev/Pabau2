@@ -71,7 +71,7 @@ Now add `import { } from '@pabau/ui'` at top of the new page file and fill in th
 
 ## To do (big engineering items)
 
-* Apollo persisted queries
+* Apollo persisted queries (automatic, or build time)
 * Apollo local state
 * Apollo getfromtree
 * Ant design babel import loader
@@ -80,4 +80,4 @@ Now add `import { } from '@pabau/ui'` at top of the new page file and fill in th
 * local dev env for hasura, migrations
 * graphql-code-generator
 * Convert from 'next export' to full on next server with ssr (i'm not sure)
-
+* proper next i18n at build time
