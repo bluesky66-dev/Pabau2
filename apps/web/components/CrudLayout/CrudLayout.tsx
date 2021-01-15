@@ -14,17 +14,12 @@ interface P {
   listQuery: DocumentNode
 }
 
-const styles = {
-  fontFamily: 'Circular-Std-Bold',
-  fontSize: '20px',
-  lineHeight: '25px',
-  color: 'var(--grey-text-color)',
-}
-
 const CrudLayout: FC<P> = ({ ...props }) => (
   <Layout>
-    <Breadcrumb breadcrumbItems={['Setup', pluralize(props.schema.full || props.schema.short)]} />
-    <Title style={styles}>{pluralize(props.schema.full || props.schema.short)}</Title>
+    <div style={{ background: '#FFF' }}>
+      <Breadcrumb breadcrumbItems={['Setup', pluralize(props.schema.full || props.schema.short)]} />
+      <Title>{pluralize(props.schema.full || props.schema.short)}</Title>
+    </div>
     <CrudTable {...props} />
   </Layout>
 )

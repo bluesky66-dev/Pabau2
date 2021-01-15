@@ -1,4 +1,4 @@
-import { Table, useLiveQuery } from '@pabau/ui'
+import { Table, useLiveQuery, Pagination } from '@pabau/ui'
 import React, { FC, useEffect, useState } from 'react'
 import { DocumentNode } from '@apollo/client'
 import AddButton from './AddButton'
@@ -72,6 +72,7 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery }) => {
           console.log('newData, oldIndex, newIndex ', { newData, oldIndex, newIndex })
         }}
       />
+      <Pagination total={50} current={1} defaultPageSize={10} defaultCurrent={1} />
     </>
   )
 }
