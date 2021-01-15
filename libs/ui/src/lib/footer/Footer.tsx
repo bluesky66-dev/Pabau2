@@ -9,10 +9,13 @@ export const Footer: FC = () => {
     <div className={styles.footerBanner}>
       <div className={styles.footerBorder}></div>
       <Row>
-        <Col flex={1}>
+        <Col md={16} sm={12}>
+          <div className={styles.footerHeading}>
+            <h1>Related guides</h1>
+          </div>
           <Guides />
         </Col>
-        <Col flex={2}>
+        <Col md={8} sm={12}>
           <Webinar />
         </Col>
       </Row>

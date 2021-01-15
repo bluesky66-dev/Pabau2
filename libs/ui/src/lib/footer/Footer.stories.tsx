@@ -10,11 +10,11 @@ export default {
 }
 
 export const primary = () => {
-  return <Footer />
+  return  <div style={{ background: '#f0f2f5', padding: '24px', height: '96vh' }}><Footer /></div>
 }
 export const Guides = () => {
   return (
-    <div style={{ background: '#f0f2f5', padding: '24px', height: '96vh' }}>
+    <div style={{ background: '#f0f2f5', padding: '24px', height: '96vh', width: '50%' }}>
       <FooterGuides />
     </div>
   )
