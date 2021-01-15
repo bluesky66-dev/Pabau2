@@ -4,7 +4,7 @@ import CrudTable from '../CrudTable'
 import pluralize from 'pluralize'
 import Layout from '../Layout/Layout'
 import { Typography } from 'antd'
-
+import { Breadcrumb } from '@pabau/ui'
 const { Title } = Typography
 
 interface P {
@@ -14,9 +14,17 @@ interface P {
   listQuery: DocumentNode
 }
 
+const styles = {
+  fontFamily: 'Circular-Std-Bold',
+  fontSize: '20px',
+  lineHeight: '25px',
+  color: 'var(--grey-text-color)',
+}
+
 const CrudLayout: FC<P> = ({ ...props }) => (
   <Layout>
-    <Title>{pluralize(props.schema.full || props.schema.short)}</Title>
+    <Breadcrumb breadcrumbItems={['Setup', pluralize(props.schema.full || props.schema.short)]} />
+    <Title style={styles}>{pluralize(props.schema.full || props.schema.short)}</Title>
     <CrudTable {...props} />
   </Layout>
 )

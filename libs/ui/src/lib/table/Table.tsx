@@ -58,7 +58,7 @@ export const Table: FC<TableProps<never> & DragProps> = ({
   )
 
   const dragColumn = {
-    title: <DragHandle />,
+    title: '',
     dataIndex: 'sort',
     width: 64,
     className: 'drag-visible align-center',
