@@ -56,6 +56,7 @@ pipelines:
           - nxcache
           - yarncustom
         script:
+          - git fetch
           - yarn install --pure-lockfile --prefer-offline
           - yarn affected --base=origin/master --target=lint --parallel
 #          - yarn run nx affected --all --target=build
@@ -94,7 +95,7 @@ pipelines:
 
             #            - git config user.name "Pipeline"
             #            - git config user.email nobody@pabau.com
-            - yarn version --message "[skip ci]" --patch --non-interactive --no-progress
+            - yarn version --message "[skip ci] bumping version (patch)" --patch --non-interactive --no-progress
             - git push && git push --tags
             - export PACKAGE_JSON_VERSION=$(jq -r .version < package.json)
 
