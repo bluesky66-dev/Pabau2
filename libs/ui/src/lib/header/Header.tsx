@@ -1,12 +1,11 @@
 import React, { FC, useCallback, useState } from 'react'
-import { Dropdown, Layout, Menu } from 'antd'
+import { Col, Dropdown, Layout, Menu, Row } from 'antd'
 import {
   BellOutlined,
   CalendarOutlined,
   MailOutlined,
   PlusCircleFilled,
   PoundOutlined,
-  SettingOutlined,
   SmileOutlined,
   UserOutlined,
 } from '@ant-design/icons'
@@ -74,32 +73,41 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
           paddingLeft: '30px',
           paddingRight: '30px',
           height: '100%',
-          display: 'flex',
-          placeItems: 'center',
-          justifyContent: 'space-between',
           alignItems: 'center',
         }}
       >
-        <Logo />
+        <Row>
+          <Col md={8}>
+            <Logo />
+          </Col>
+          <Col md={8} className={styles.headerSearchCenter}>
+            <div style={{ width: '360px' }}>
+              {searchRender ? searchRender(<Search />) : <Search />}
+            </div>
+          </Col>
+          <Col md={8} className={styles.headerIconEnd}>
+            <div className={styles.headerAlign}>
+              {/* <SettingOutlined className={styles.headerIcon} /> */}
+              <BellOutlined
+                className={styles.headerIcon}
+                onClick={() => setNotificationDrawer((e) => !e)}
+              />
+              <MailOutlined
+                className={styles.headerIcon}
+                onClick={() => setMessageDrawer((e) => !e)}
+              />
+              <div>
+                <Dropdown overlay={overlay}>
+                  <Button type="default" className={styles.createBtnStyle}>
+                    <PlusCircleFilled /> Create
+                  </Button>
+                </Dropdown>
+              </div>
+              <AvatarDropDown />
+            </div>
+          </Col>
+        </Row>
 
-        <div style={{ width: '360px' }}>{searchRender ? searchRender(<Search />) : <Search />}</div>
-        <div className={styles.headerAlign}>
-          <SettingOutlined className={styles.headerIcon} />
-          <BellOutlined
-            className={styles.headerIcon}
-            onClick={() => setNotificationDrawer((e) => !e)}
-          />
-          <MailOutlined className={styles.headerIcon} onClick={() => setMessageDrawer((e) => !e)} />
-
-          <div>
-            <Dropdown overlay={overlay}>
-              <Button type="default" className={styles.createBtnStyle}>
-                <PlusCircleFilled /> Create
-              </Button>
-            </Dropdown>
-          </div>
-          <AvatarDropDown />
-        </div>
         {openNotificationDrawer && (
           <PabauNotification
             openDrawer={openNotificationDrawer}
