@@ -27,6 +27,7 @@ pipelines:
             - yarn install --pure-lockfile --prefer-offline
             - yarn affected --base=origin/master --target=lint --with-deps
             - yarn affected --base=origin/master --target=export --prod
+            - yarn affected --base=origin/master --target=deploy
     #          - yarn run nx affected --all --target=build
     #          - yarn run nx affected --target=lint --base=master~1
     #          - yarn run nx affected --target=test --base=master~1 --head=master
