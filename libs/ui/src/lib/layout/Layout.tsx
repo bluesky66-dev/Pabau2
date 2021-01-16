@@ -43,7 +43,7 @@ export const Layout: FC<LayoutProps> = ({
           >
             <Content
               style={{
-                boxShadow: '0 0.5rem 1rem rgba(0,0,0,.1)',
+                // boxShadow: '0 0.5rem 1rem rgba(0,0,0,.1)',
                 position: 'relative',
                 minHeight: 'calc(100vh - 146px)',
                 // background: '#FFF',
