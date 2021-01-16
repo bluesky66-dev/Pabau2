@@ -19,7 +19,7 @@ echo "commit hash: ${BITBUCKET_COMMIT}"
 
 echo "BITBUCKET_PR_ID: ${BITBUCKET_PR_ID}"
 
-if [ -n "${BITBUCKET_PR_ID}" ]; then
+if [ -z "${BITBUCKET_PR_ID}" ]; then
   OUTPUT=$(vercel -c -C --token "${VERCEL_TOKEN}" -A ./vercel.json --prod)
   echo "errorlevel: $?"
   echo "Output from vercel:"

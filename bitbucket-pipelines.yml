@@ -80,7 +80,8 @@ pipelines:
             #            - git config user.name "Pipeline"
             #            - git config user.email nobody@pabau.com
             - yarn version --message "[skip ci]" --patch --non-interactive --no-progress
-            - git push
+            - git push && git push --tags
+            - jq -r .version < package.json
 
             - yarn affected --base=HEAD~2 --target=export --prod
             - yarn affected --base=HEAD~2 --target=deploy --prod
