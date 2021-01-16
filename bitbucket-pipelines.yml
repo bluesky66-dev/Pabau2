@@ -34,6 +34,7 @@ pipelines:
             - echo $access_token
 
             # Configure git to use the oauth token.
+            - echo "https://x-token-auth:${access_token}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}"
             - curl "https://x-token-auth:${access_token}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}"
             - curl "https://x-token-auth:${access_token}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}" | jq --raw-output '.display_name'
             - export PR_AUTHOR=$(curl "https://x-token-auth:${access_token}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}" | jq --raw-output '.display_name')
