@@ -1,7 +1,7 @@
 image: node:14-buster
 
 options:
-  max-time: 15 # max time in minutes for each step
+  max-time: 20 # max time in minutes for each step
 
 definitions:
   caches:
@@ -25,7 +25,7 @@ pipelines:
             - yarncustom
           script:
             - yarn install --pure-lockfile --prefer-offline
-            - yarn affected --base=origin/master --target=lint --with-deps
+            - yarn affected --base=origin/master --target=lint --with-deps --parallel
             - yarn affected --base=origin/master --target=export --prod
             - yarn affected --base=origin/master --target=deploy
     #          - yarn run nx affected --all --target=build
@@ -42,7 +42,7 @@ pipelines:
           - yarncustom
         script:
           - yarn install --pure-lockfile --prefer-offline
-          - yarn run nx affected --all --target=lint
+          - yarn affected --base=origin/master --target=lint --parallel
 #          - yarn run nx affected --all --target=build
 #          - yarn run nx affected --target=lint --base=master~1
 #          - yarn run nx affected --target=test --base=master~1 --head=master
@@ -60,7 +60,7 @@ pipelines:
           script:
             - yarn install --pure-lockfile --prefer-offline
 #            - yarn affected:lint --base=HEAD~1
-            - yarn affected:lint --base=HEAD~1 --with-deps
+            - yarn affected:lint --base=HEAD~1 --with-deps --parallel
 #            - yarn affected:test --base=HEAD~1 --with-deps
 #            - yarn affected:build --base=HEAD~1 --prod
 #            - apt update -y && apt install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
@@ -81,7 +81,7 @@ pipelines:
             #            - git config user.email nobody@pabau.com
             - yarn version --message "[skip ci]" --patch --non-interactive --no-progress
             - git push && git push --tags
-            - jq -r .version < package.json
+            - export PACKAGE_JSON_VERSION=$(jq -r .version < package.json)
 
             - yarn affected --base=HEAD~2 --target=export --prod
             - yarn affected --base=HEAD~2 --target=deploy --prod

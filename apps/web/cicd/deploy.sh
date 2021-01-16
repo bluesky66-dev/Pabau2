@@ -11,7 +11,7 @@ APP_NAME="$(basename "$(dirname "$(
 )")")"
 echo "DEBUG: app_name=${APP_NAME}"
 
-yarn run nx run "${APP_NAME}:export"
+yarn run nx run "${APP_NAME}:export" --skip-nx-cache
 cp "apps/${APP_NAME}/vercel.json" "dist/apps/${APP_NAME}/exported/"
 cd "dist/apps/${APP_NAME}/exported"
 
@@ -28,7 +28,7 @@ if [ -z "${BITBUCKET_PR_ID}" ]; then
   LAST_LINE=$(echo "${OUTPUT}" | tail -n1)
   echo "last line: ${LAST_LINE}"
   curl -X POST -H "Content-Type: application/json" \
-    -d '{"channel":"#pabau-2-dev","text":"'"${APP_NAME}"' for production deployed to '"${LAST_LINE}"'"}' \
+    -d '{"channel":"#pabau-2-dev","text":"'"${APP_NAME}"' version '"${PACKAGE_JSON_VERSION}"' for production deployed to '"${LAST_LINE}"'"}' \
     "${SLACK_HOOK_URL}"
 else
   OUTPUT=$(vercel -c -C --token "${VERCEL_TOKEN}" -A ./vercel.json)
