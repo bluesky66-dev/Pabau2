@@ -2,7 +2,10 @@
 set -e
 
 echo "DEBUG: pwd=$(pwd)"
-APP_NAME="$(basename "$(dirname "$(cd "$(dirname "${0}")"; pwd)")")"
+APP_NAME="$(basename "$(dirname "$(
+  cd "$(dirname "${0}")"
+  pwd
+)")")"
 echo "DEBUG: app_name=${APP_NAME}"
 
 yarn run nx run "${APP_NAME}:export"
@@ -25,5 +28,8 @@ echo "BITBUCKET_PR_ID: ${BITBUCKET_PR_ID}"
 if [ -z "${BITBUCKET_PR_ID}" ]; then
   vercel --token "${VERCEL_TOKEN}" alias "${LAST_LINE}" prelive-crm.new.pabau.com
 else
-  vercel --token "${VERCEL_TOKEN}" alias "${LAST_LINE}" "crm-pr-${BITBUCKET_PR_ID}.new.pabau.com"
+  curl -X POST -H "Content-Type: application/json" \
+    -d '{"channel":"#pabau-2-dev","text":"'"${APP_NAME}"' for PR ID '"${BITBUCKET_PR_ID}"' deployed to '"${LAST_LINE}"'"}' \
+    "${SLACK_HOOK_URL}"
+  #vercel --token "${VERCEL_TOKEN}" alias "${LAST_LINE}" "crm-pr-${BITBUCKET_PR_ID}.new.pabau.com"
 fi
