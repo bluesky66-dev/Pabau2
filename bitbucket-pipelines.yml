@@ -25,18 +25,18 @@ pipelines:
             - yarncustom
           script:
 
-
+            # Get an oauth access token using the client credentials, parsing out the token with jq.
             - apt-get update && apt-get install -y curl jq
             - >
               export access_token=$(curl -s -X POST -u "${BITBUCKET_CLIENT_ID}:${BITBUCKET_CLIENT_SECRET}" \
                 https://bitbucket.org/site/oauth2/access_token \
-                -d grant_type=client_credentials -d scopes="pullrequests"| jq --raw-output '.access_token')
-            - echo $access_token
+                -d grant_type=client_credentials -d scopes="pullrequest"| jq --raw-output '.access_token')
 
             # Configure git to use the oauth token.
-            - curl "https://x-token-auth:${access_token}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}"
-            - curl "https://x-token-auth:${access_token}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}" | jq --raw-output '.display_name'
-            - export PR_AUTHOR=$(curl "https://x-token-auth:${access_token}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}" | jq --raw-output '.display_name')
+            - >
+              curl -sS -H "Authorization: Bearer ${access_token}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}"
+            - >
+              export PR_AUTHOR=$(curl -sS -H "Authorization: Bearer ${access_token}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}" | jq -r '.author.display_name')
 
             - yarn install --pure-lockfile --prefer-offline
             - yarn affected --base=origin/master --target=lint --with-deps --parallel
@@ -56,6 +56,7 @@ pipelines:
           - nxcache
           - yarncustom
         script:
+          - git fetch
           - yarn install --pure-lockfile --prefer-offline
           - yarn affected --base=origin/master --target=lint --parallel
 #          - yarn run nx affected --all --target=build
@@ -94,7 +95,7 @@ pipelines:
 
             #            - git config user.name "Pipeline"
             #            - git config user.email nobody@pabau.com
-            - yarn version --message "[skip ci]" --patch --non-interactive --no-progress
+            - yarn version --message "[skip ci] bumping version (patch)" --patch --non-interactive --no-progress
             - git push && git push --tags
             - export PACKAGE_JSON_VERSION=$(jq -r .version < package.json)
 

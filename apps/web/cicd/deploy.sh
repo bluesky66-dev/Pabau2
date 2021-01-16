@@ -39,7 +39,7 @@ else
   LAST_LINE=$(echo "${OUTPUT}" | tail -n1)
   echo "last line: ${LAST_LINE}"
   curl -X POST -H "Content-Type: application/json" \
-    -d '{"channel":"#pabau-2-dev","text":"'"${APP_NAME}"' for PR ID '"${BITBUCKET_PR_ID}"' https://bitbucket.org/pabau/monorepo/pull-requests/'"${BITBUCKET_PR_ID}"' deployed to '"${LAST_LINE}"'"}' \
+    -d '{"channel":"#pabau-2-dev","text":"'"${APP_NAME}"' for PR ID '"${BITBUCKET_PR_ID}"' https://bitbucket.org/pabau/monorepo/pull-requests/'"${BITBUCKET_PR_ID}"' by '"${PR_AUTHOR}"' deployed to '"${LAST_LINE}"'"}' \
     "${SLACK_HOOK_URL}"
   #vercel --token "${VERCEL_TOKEN}" alias "${LAST_LINE}" "crm-pr-${BITBUCKET_PR_ID}.new.pabau.com"
 fi
