@@ -22,8 +22,8 @@ echo "last line: ${LAST_LINE}"
 echo "commit hash: ${BITBUCKET_COMMIT}"
 
 echo "BITBUCKET_PR_ID: ${BITBUCKET_PR_ID}"
-if [[ -z "${BITBUCKET_PR_ID}" ]]; then
+if [ -z "${BITBUCKET_PR_ID}" ]; then
   vercel --token "${VERCEL_TOKEN}" alias "${LAST_LINE}" prelive-crm.new.pabau.com
 else
-  vercel --token "${VERCEL_TOKEN}" alias "${LAST_LINE}" "crm.pr-${BITBUCKET_PR_ID}.new.pabau.com"
+  vercel --token "${VERCEL_TOKEN}" alias "${LAST_LINE}" "crm-pr-${BITBUCKET_PR_ID}.new.pabau.com"
 fi
