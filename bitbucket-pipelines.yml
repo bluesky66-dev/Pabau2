@@ -1,7 +1,7 @@
 image: node:14-buster
 
 options:
-  max-time: 15 # max time in minutes for each step
+  max-time: 20 # max time in minutes for each step
 
 definitions:
   caches:
@@ -24,10 +24,25 @@ pipelines:
             - nxcache
             - yarncustom
           script:
+
+
+            - apt-get update && apt-get install -y curl jq
+            - >
+              export access_token=$(curl -s -X POST -u "${BITBUCKET_CLIENT_ID}:${BITBUCKET_CLIENT_SECRET}" \
+                https://bitbucket.org/site/oauth2/access_token \
+                -d grant_type=client_credentials -d scopes="pullrequests"| jq --raw-output '.access_token')
+            - echo $access_token
+
+            # Configure git to use the oauth token.
+            - curl "https://x-token-auth:${access_token}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}"
+            - curl "https://x-token-auth:${access_token}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}" | jq --raw-output '.display_name'
+            - export PR_AUTHOR=$(curl "https://x-token-auth:${access_token}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}" | jq --raw-output '.display_name')
+
             - yarn install --pure-lockfile --prefer-offline
-            - yarn affected --base=origin/master --target=lint --with-deps
+            - yarn affected --base=origin/master --target=lint --with-deps --parallel
             - yarn affected --base=origin/master --target=export --prod
             - yarn affected --base=origin/master --target=deploy
+
     #          - yarn run nx affected --all --target=build
     #          - yarn run nx affected --target=lint --base=master~1
     #          - yarn run nx affected --target=test --base=master~1 --head=master
@@ -42,7 +57,7 @@ pipelines:
           - yarncustom
         script:
           - yarn install --pure-lockfile --prefer-offline
-          - yarn run nx affected --all --target=lint
+          - yarn affected --base=origin/master --target=lint --parallel
 #          - yarn run nx affected --all --target=build
 #          - yarn run nx affected --target=lint --base=master~1
 #          - yarn run nx affected --target=test --base=master~1 --head=master
@@ -60,7 +75,7 @@ pipelines:
           script:
             - yarn install --pure-lockfile --prefer-offline
 #            - yarn affected:lint --base=HEAD~1
-            - yarn affected:lint --base=HEAD~1 --with-deps
+            - yarn affected:lint --base=HEAD~1 --with-deps --parallel
 #            - yarn affected:test --base=HEAD~1 --with-deps
 #            - yarn affected:build --base=HEAD~1 --prod
 #            - apt update -y && apt install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
@@ -80,7 +95,8 @@ pipelines:
             #            - git config user.name "Pipeline"
             #            - git config user.email nobody@pabau.com
             - yarn version --message "[skip ci]" --patch --non-interactive --no-progress
-            - git push
+            - git push && git push --tags
+            - export PACKAGE_JSON_VERSION=$(jq -r .version < package.json)
 
             - yarn affected --base=HEAD~2 --target=export --prod
             - yarn affected --base=HEAD~2 --target=deploy --prod
