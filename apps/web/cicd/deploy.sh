@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
+echo "GIT_USER: ${GIT_USER}"
+echo "GIT_USER_NAME: ${GIT_USER_NAME}"
+
 echo "DEBUG: pwd=$(pwd)"
 APP_NAME="$(basename "$(dirname "$(
   cd "$(dirname "${0}")"
