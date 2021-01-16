@@ -24,10 +24,25 @@ pipelines:
             - nxcache
             - yarncustom
           script:
+
+
+            - apt-get update && apt-get install -y curl jq
+            - >
+              export access_token=$(curl -s -X POST -u "${BITBUCKET_CLIENT_ID}:${BITBUCKET_CLIENT_SECRET}" \
+                https://bitbucket.org/site/oauth2/access_token \
+                -d grant_type=client_credentials -d scopes="pullrequests"| jq --raw-output '.access_token')
+            - echo $access_token
+
+            # Configure git to use the oauth token.
+            - curl "https://x-token-auth:${access_token}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}"
+            - curl "https://x-token-auth:${access_token}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}" | jq --raw-output '.display_name'
+            - export PR_AUTHOR=$(curl "https://x-token-auth:${access_token}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}" | jq --raw-output '.display_name')
+
             - yarn install --pure-lockfile --prefer-offline
             - yarn affected --base=origin/master --target=lint --with-deps --parallel
             - yarn affected --base=origin/master --target=export --prod
             - yarn affected --base=origin/master --target=deploy
+
     #          - yarn run nx affected --all --target=build
     #          - yarn run nx affected --target=lint --base=master~1
     #          - yarn run nx affected --target=test --base=master~1 --head=master
