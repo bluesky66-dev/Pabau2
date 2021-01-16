@@ -56,7 +56,7 @@ pipelines:
           - nxcache
           - yarncustom
         script:
-          - git fetch
+          - git fetch origin
           - yarn install --pure-lockfile --prefer-offline
           - yarn affected --base=origin/master --target=lint --parallel
 #          - yarn run nx affected --all --target=build
