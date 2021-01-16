@@ -30,7 +30,7 @@ pipelines:
             - >
               export access_token=$(curl -s -X POST -u "${BITBUCKET_CLIENT_ID}:${BITBUCKET_CLIENT_SECRET}" \
                 https://bitbucket.org/site/oauth2/access_token \
-                -d grant_type=client_credentials -d scopes="pullrequests"| jq --raw-output '.access_token')
+                -d grant_type=client_credentials -d scopes="pullrequest"| jq --raw-output '.access_token')
 
             # Configure git to use the oauth token.
             - echo "https://x-token-auth:${access_token}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}"
