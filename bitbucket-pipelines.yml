@@ -33,10 +33,10 @@ pipelines:
                 -d grant_type=client_credentials -d scopes="pullrequest"| jq --raw-output '.access_token')
 
             # Configure git to use the oauth token.
-            - echo "https://x-token-auth:${access_token}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}"
-            - curl -sS "https://x-token-auth:${access_token}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}"
-            - curl -sS "https://x-token-auth:${access_token}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}" | jq --raw-output '.display_name'
-            - export PR_AUTHOR=$(curl -sS "https://x-token-auth:${access_token}@api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}" | jq --raw-output '.display_name')
+            - >
+              curl -sS -H "Authorization: Bearer ${access_token}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}"
+            - >
+              export PR_AUTHOR=$(curl -sS -H "Authorization: Bearer ${access_token}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}" | jq -r '.author.display_name')
 
             - yarn install --pure-lockfile --prefer-offline
             - yarn affected --base=origin/master --target=lint --with-deps --parallel
