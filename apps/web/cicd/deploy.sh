@@ -1,4 +1,10 @@
 #!/bin/sh
+
+#
+# Deploys to vercel
+#
+
+# Stop on error
 set -e
 
 NEWLINE="
@@ -19,20 +25,32 @@ APP_NAME="$(basename "$(dirname "$(
   pwd
 )")")"
 echo "APP_NAME=${APP_NAME}"
+APP_TYPE="$(basename "$(dirname "$(
+  cd "$(dirname "${0}")/.."
+  pwd
+)")")"
+echo "APP_TYPE=${APP_TYPE}"
+echo "BITBUCKET_COMMIT=${BITBUCKET_COMMIT}"
+echo "BITBUCKET_PR_ID=${BITBUCKET_PR_ID}"
 pwd
 ls -al
 echo "-----------------"
 
-yarn run nx run "${APP_NAME}:export" #--skip-nx-cache
-cp "apps/${APP_NAME}/vercel.json" "dist/apps/${APP_NAME}/exported/"
+if [ "${APP_TYPE}" = "apps" ]; then
+  yarn run nx run "${APP_NAME}:export" #--skip-nx-cache
+  build_output_path="dist/apps/${APP_NAME}/exported/"
+elif [ "${APP_TYPE}" = "libs" ]; then
+  yarn run nx run "${APP_NAME}:build-storybook" #--skip-nx-cache
+  build_output_path="dist/storybook/${APP_NAME}/"
+else
+  echo "ERROR: unknown app type '${APP_TYPE}'"; exit 1
+fi
 
-echo "commit hash: ${BITBUCKET_COMMIT}"
-
-echo "BITBUCKET_PR_ID: ${BITBUCKET_PR_ID}"
+cp "${APP_TYPE}/${APP_NAME}/vercel.json" "${build_output_path}/"
 
 if [ -z "${BITBUCKET_PR_ID}" ]; then
   echo "===== Processing type COMMIT ====="
-  OUTPUT=$(cd "dist/apps/${APP_NAME}/exported" && vercel -c -C --token "${VERCEL_TOKEN}" -A ./vercel.json --prod)
+  OUTPUT=$(cd "${build_output_path}/" && vercel -c -C --token "${VERCEL_TOKEN}" -A ./vercel.json --prod)
   echo "errorlevel: $?"
   echo "Output from vercel:"
   echo "${OUTPUT}"
@@ -40,6 +58,7 @@ if [ -z "${BITBUCKET_PR_ID}" ]; then
   LAST_LINE=$(echo "${OUTPUT}" | tail -n1)
   echo "last line: ${LAST_LINE}"
 
+  message_body=''
   read_heredoc message_body <<'HEREDOC'
 *New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}
 
@@ -49,7 +68,7 @@ ${LAST_COMMIT_LOG}
 HEREDOC
 echo "v1 ${message_body}"
 
-
+  message_body=''
   read_heredoc message_body <<HEREDOC
 *New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}
 
@@ -58,9 +77,6 @@ ${LAST_LINE}
 ${LAST_COMMIT_LOG}
 HEREDOC
 echo "v2 ${message_body}"
-
-#  export message_body="*New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}\n\n${LAST_LINE}\n\n${LAST_COMMIT_LOG}"
-#  echo "message_body=${message_body}"
 
   cat tools/cicd/slack_notification.json > /dev/null || (echo "ERROR: JSON not found"; exit 1)
   jq '.' tools/cicd/slack_notification.json > /dev/null || (echo "ERROR: Invalid JSON"; exit 1)
