@@ -59,6 +59,8 @@ pipelines:
           - git fetch --all
           - git status -sb
           - git branch -r
+          - cat .git/config
+          - cat fsdihjfsdloikhjfsd
           - yarn install --pure-lockfile --prefer-offline
           - yarn affected --base=origin/master --target=lint --parallel
 #          - yarn run nx affected --all --target=build
