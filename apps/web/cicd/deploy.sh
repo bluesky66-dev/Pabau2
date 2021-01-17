@@ -33,6 +33,10 @@ if [ -z "${BITBUCKET_PR_ID}" ]; then
   echo "message_body=${message_body}"
   pwd
   ls -al
+  cat tools/cicd/slack_notification.json
+  jq tools/cicd/slack_notification.json
+  jq '.blocks[0]' tools/cicd/slack_notification.json
+  jq < tools/cicd/slack_notification.json
   echo "jq=="
   jq --arg var "${message_body}" '.blocks[0].text.text = $var' tools/cicd/slack_notification.json
   echo "==="
