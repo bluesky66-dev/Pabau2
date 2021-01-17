@@ -8,7 +8,7 @@ definitions:
     nodemodules: 'node_modules/'
 #    nextcache: 'dist/**/.next/cache'
     yarncustom: '/usr/local/share/.cache/yarn'
-    nxcache: 'dist/'
+#    nxcache: 'dist/'
     cypress: '/root/.cache/Cypress'
 #  services:
 #    docker:
@@ -21,7 +21,6 @@ pipelines:
           name: PR pipeline
           caches:
             - nodemodules
-            - nxcache
             - yarncustom
           script:
 
@@ -53,7 +52,6 @@ pipelines:
         name: Build and Test branch
         caches:
           - nodemodules
-          - nxcache
           - yarncustom
         script:
           - git fetch origin master --refmap="+refs/heads/*:refs/remotes/origin/*"
@@ -70,11 +68,10 @@ pipelines:
           name: Production
           caches:
             - nodemodules
-            - nxcache
             - yarncustom
 #            - cypress
           script:
-            - export LAST_COMMIT_LOG=$(git log HEAD~2 -1 | head -n +4)
+            - export LAST_COMMIT_LOG=$(git log HEAD~2 -1 | tail -n +4)
             - yarn install --pure-lockfile --prefer-offline
 #            - yarn affected:lint --base=HEAD~1
             - yarn affected:lint --base=HEAD~1 --with-deps --parallel
@@ -85,8 +82,7 @@ pipelines:
 #            - yarn affected:e2e --base=HEAD~1 || true
 
             # Get an oauth access token using the client credentials, parsing out the token with jq.
-            - apt-get update && apt-get install -y curl jq
-            - jq --version
+            - apt-get update && apt-get install -y curl jq && jq --version && curl --version
             - >
               export access_token=$(curl -s -X POST -u "${BITBUCKET_CLIENT_ID}:${BITBUCKET_CLIENT_SECRET}" \
                 https://bitbucket.org/site/oauth2/access_token \
