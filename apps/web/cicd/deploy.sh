@@ -40,7 +40,7 @@ if [ -z "${BITBUCKET_PR_ID}" ]; then
           "text": [
             {
               "type": "mrkdwn",
-              "text": "*New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}\n\n${LAST_LINE}\n\n${LAST_COMMIT_LOG}\n\n\nTo deploy this type \`npx vercel -c -C alias ${LAST_LINE} crm.new.pabau.com\`"
+              "text": "*New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}\n\n${LAST_LINE}\n\n${LAST_COMMIT_LOG}"
             }
           ]
         },
