@@ -20,6 +20,7 @@ echo "commit hash: ${BITBUCKET_COMMIT}"
 echo "BITBUCKET_PR_ID: ${BITBUCKET_PR_ID}"
 
 if [ -z "${BITBUCKET_PR_ID}" ]; then
+  echo "===== Processing type COMMIT ====="
   OUTPUT=$(vercel -c -C --token "${VERCEL_TOKEN}" -A ./vercel.json --prod)
   echo "errorlevel: $?"
   echo "Output from vercel:"
@@ -27,10 +28,62 @@ if [ -z "${BITBUCKET_PR_ID}" ]; then
   echo "--"
   LAST_LINE=$(echo "${OUTPUT}" | tail -n1)
   echo "last line: ${LAST_LINE}"
-  curl -X POST -H "Content-Type: application/json" \
-    -d '{"channel":"#pabau-2-dev","text":"'"${APP_NAME}"' version '"${PACKAGE_JSON_VERSION}"' for production deployed to '"${LAST_LINE}"'"}' \
-    "${SLACK_HOOK_URL}"
+    #-d '{"channel":"#pabau-2-dev","text":"'"${APP_NAME}"' version '"${PACKAGE_JSON_VERSION}"' for production deployed to '"${LAST_LINE}"'"}' \
+  curl -0 -v -X POST "${SLACK_HOOK_URL}" \
+    -H "Expect:" \
+    -H 'Content-Type: application/json; charset=utf-8' \
+    --data-binary @- << EOF
+    {
+      "channel": "#pabau-2-dev",
+      "blocks": [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "Danny Torrence left the following review for your property:"
+          }
+        },
+        {
+          "type": "section",
+          "block_id": "section567",
+          "text": {
+            "type": "mrkdwn",
+            "text": "<https://google.com|Overlook Hotel> \n :star: \n Doors had too many axe holes, guest in room 237 was far too rowdy, whole place felt stuck in the 1920s."
+          },
+          "accessory": {
+            "type": "image",
+            "image_url": "https://is5-ssl.mzstatic.com/image/thumb/Purple3/v4/d3/72/5c/d3725c8f-c642-5d69-1904-aa36e4297885/source/256x256bb.jpg",
+            "alt_text": "Haunted hotel image"
+          }
+        },
+        {
+          "type": "section",
+          "block_id": "section789",
+          "fields": [
+            {
+              "type": "mrkdwn",
+              "text": "*Average Rating*\n1.0"
+            }
+          ]
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+                "text": {
+                    "type": "plain_text",
+                    "text": "Deploy",
+                    "emoji": false
+                }
+            }
+          ]
+        }
+      ]
+    }
+EOF
 else
+  echo "===== Processing type PR ====="
   OUTPUT=$(vercel -c -C --token "${VERCEL_TOKEN}" -A ./vercel.json)
   echo "errorlevel: $?"
   echo "Output from vercel:"
@@ -41,5 +94,8 @@ else
   curl -X POST -H "Content-Type: application/json" \
     -d '{"channel":"#pabau-2-dev","text":"'"${APP_NAME}"' for PR ID '"${BITBUCKET_PR_ID}"' https://bitbucket.org/pabau/monorepo/pull-requests/'"${BITBUCKET_PR_ID}"' by '"${PR_AUTHOR}"' deployed to '"${LAST_LINE}"'"}' \
     "${SLACK_HOOK_URL}"
+
+
+
   #vercel --token "${VERCEL_TOKEN}" alias "${LAST_LINE}" "crm-pr-${BITBUCKET_PR_ID}.new.pabau.com"
 fi
