@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
 set -e
 
-echo "GIT_USER: ${GIT_USER}"
-echo "GIT_USER_NAME: ${GIT_USER_NAME}"
-
-echo "DEBUG: pwd=$(pwd)"
+echo "----- DEBUG -----"
+echo "(pwd)=$(pwd)"
 APP_NAME="$(basename "$(dirname "$(
   cd "$(dirname "${0}")"
   pwd
 )")")"
-echo "DEBUG: app_name=${APP_NAME}"
+echo "APP_NAME=${APP_NAME}"
+echo "-----------------"
 
 yarn run nx run "${APP_NAME}:export" --skip-nx-cache
 cp "apps/${APP_NAME}/vercel.json" "dist/apps/${APP_NAME}/exported/"
@@ -38,11 +37,10 @@ if [ -z "${BITBUCKET_PR_ID}" ]; then
       "blocks": [
         {
           "type": "section",
-          "block_id": "section_main",
-          "fields": [
+          "text": [
             {
               "type": "mrkdwn",
-              "text": "*New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}\n\n${LAST_LINE}\n\n${LAST_COMMIT_LOG}"
+              "text": "*New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}\n\n${LAST_LINE}\n\n${LAST_COMMIT_LOG}\n\n\nTo deploy this type \`npx vercel -c -C alias ${LAST_LINE} crm.new.pabau.com\`"
             }
           ]
         },
