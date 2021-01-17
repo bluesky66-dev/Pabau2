@@ -1,5 +1,16 @@
-#!/usr/bin/env bash
+#!/bin/sh
 set -e
+
+NEWLINE="
+"
+
+read_heredoc() {
+  read_heredoc_result=""
+  while IFS="${NEWLINE}" read -r read_heredoc_line; do
+    read_heredoc_result="${read_heredoc_result}${read_heredoc_line}${NEWLINE}"
+  done
+  eval $1'=${read_heredoc_result}'
+}
 
 echo "----- DEBUG -----"
 echo "(pwd)=$(pwd)"
@@ -29,8 +40,27 @@ if [ -z "${BITBUCKET_PR_ID}" ]; then
   LAST_LINE=$(echo "${OUTPUT}" | tail -n1)
   echo "last line: ${LAST_LINE}"
 
-  export message_body="*New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}\n\n${LAST_LINE}\n\n${LAST_COMMIT_LOG}"
-  echo "message_body=${message_body}"
+  read_heredoc message_body <<'HEREDOC'
+*New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}
+
+${LAST_LINE}
+
+${LAST_COMMIT_LOG}
+HEREDOC
+echo "v1 ${message_body}"
+
+
+  read_heredoc message_body <<HEREDOC
+*New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}
+
+${LAST_LINE}
+
+${LAST_COMMIT_LOG}
+HEREDOC
+echo "v2 ${message_body}"
+
+#  export message_body="*New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}\n\n${LAST_LINE}\n\n${LAST_COMMIT_LOG}"
+#  echo "message_body=${message_body}"
 
   cat tools/cicd/slack_notification.json > /dev/null || (echo "ERROR: JSON not found"; exit 1)
   jq '.' tools/cicd/slack_notification.json > /dev/null || (echo "ERROR: Invalid JSON"; exit 1)
