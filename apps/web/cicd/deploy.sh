@@ -38,31 +38,11 @@ if [ -z "${BITBUCKET_PR_ID}" ]; then
       "blocks": [
         {
           "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "Danny Torrence left the following review for your property:"
-          }
-        },
-        {
-          "type": "section",
-          "block_id": "section567",
-          "text": {
-            "type": "mrkdwn",
-            "text": "<https://google.com|Overlook Hotel> \n :star: \n Doors had too many axe holes, guest in room 237 was far too rowdy, whole place felt stuck in the 1920s."
-          },
-          "accessory": {
-            "type": "image",
-            "image_url": "https://is5-ssl.mzstatic.com/image/thumb/Purple3/v4/d3/72/5c/d3725c8f-c642-5d69-1904-aa36e4297885/source/256x256bb.jpg",
-            "alt_text": "Haunted hotel image"
-          }
-        },
-        {
-          "type": "section",
-          "block_id": "section789",
+          "block_id": "section_main",
           "fields": [
             {
               "type": "mrkdwn",
-              "text": "*Average Rating*\n1.0"
+              "text": "*New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}\n\n${LAST_LINE}\n\n${LAST_COMMIT_LOG}"
             }
           ]
         },
@@ -73,7 +53,7 @@ if [ -z "${BITBUCKET_PR_ID}" ]; then
               "type": "button",
                 "text": {
                     "type": "plain_text",
-                    "text": "Deploy",
+                    "text": "Deploy to crm.new.pabau.com",
                     "emoji": false
                 }
             }
