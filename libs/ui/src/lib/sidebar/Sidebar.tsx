@@ -77,16 +77,13 @@ export const Sidebar: FC<SidebarProps> = ({ onSideBarCollapsed }) => {
       icon: <RiseOutlined />,
       children: [
         {
-          menuName: 'Leads Manager',
+          menuName: 'Leads',
         },
         {
           menuName: 'Lead groups',
         },
         {
           menuName: 'Lead views',
-        },
-        {
-          menuName: 'Summary',
         },
         {
           menuName: 'New leads',
@@ -150,7 +147,7 @@ export const Sidebar: FC<SidebarProps> = ({ onSideBarCollapsed }) => {
           menuName: 'Accounts',
         },
         {
-          menuName: 'Cashups',
+          menuName: 'Cashup',
         },
       ],
     },
