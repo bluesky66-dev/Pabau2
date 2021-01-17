@@ -56,6 +56,8 @@ pipelines:
           - nxcache
           - yarncustom
         script:
+          - git status -sb
+          - git branch -r
           - git fetch origin
           - yarn install --pure-lockfile --prefer-offline
           - yarn affected --base=origin/master --target=lint --parallel
