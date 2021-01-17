@@ -57,10 +57,20 @@ pipelines:
           - git fetch origin master --refmap="+refs/heads/*:refs/remotes/origin/*"
           - yarn install --pure-lockfile --prefer-offline
           - yarn affected --base=origin/master --target=lint --parallel
-#          - yarn run nx affected --all --target=build
-#          - yarn run nx affected --target=lint --base=master~1
-#          - yarn run nx affected --target=test --base=master~1 --head=master
-#          - yarn run nx affected --target=build --base=master~1
+
+          # TODO: move these to eslint so that `yarn lint` picks up these errors instead
+          - tsc --noEmit -p apps/backend/
+          - tsc --noEmit -p apps/connect/
+          - tsc --noEmit -p apps/connect-e2e/
+          - tsc --noEmit -p apps/mgmt/
+          - tsc --noEmit -p apps/mgmt-e2e/
+          - tsc --noEmit -p apps/ui-e2e/
+          - tsc --noEmit -p apps/web/
+          - tsc --noEmit -p apps/web-e2e/
+          - tsc --noEmit -p libs/ui/tsconfig.lib.json
+          - tsc --noEmit -p libs/yup/tsconfig.lib.json
+
+
   branches:
     master:
       - step:
