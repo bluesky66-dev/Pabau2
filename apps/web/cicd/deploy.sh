@@ -28,9 +28,12 @@ if [ -z "${BITBUCKET_PR_ID}" ]; then
   echo "last line: ${LAST_LINE}"
 
   export message_body="*New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}\n\n${LAST_LINE}\n\n${LAST_COMMIT_LOG}"
-  {
-    jq --arg var "${message_body}" '.blocks[0].text.text = $var' <tools/cicd/slack_notification.json
-  } | curl -0 "${SLACK_HOOK_URL}" \
+  echo "message_body=${message_body}"
+  echo "jq=="
+  jq --arg var "${message_body}" '.blocks[0].text.text = $var' tools/cicd/slack_notification.json
+  echo "==="
+
+  jq --arg var "${message_body}" '.blocks[0].text.text = $var' tools/cicd/slack_notification.json | curl -0 "${SLACK_HOOK_URL}" \
     -H "Expect:" \
     -H 'Content-Type: application/json; charset=utf-8' \
     --data-binary @-
