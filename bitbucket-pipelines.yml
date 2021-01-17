@@ -56,7 +56,7 @@ pipelines:
           - nxcache
           - yarncustom
         script:
-          - git fetch origin master
+          - git fetch --all
           - git status -sb
           - git branch -r
           - yarn install --pure-lockfile --prefer-offline
