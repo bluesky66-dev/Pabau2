@@ -34,10 +34,10 @@ if [ -z "${BITBUCKET_PR_ID}" ]; then
 
   cat tools/cicd/slack_notification.json || (echo "ERROR: JSON not found"; exit 1)
   jq '.' tools/cicd/slack_notification.json || (echo "ERROR: Invalid JSON"; exit 1)
-  jq '.blocks' tools/cicd/slack_notification.json
-  jq '.blocks[]' tools/cicd/slack_notification.json
-  jq '.blocks[0]' tools/cicd/slack_notification.json
-  jq < tools/cicd/slack_notification.json
+#  jq '.blocks' tools/cicd/slack_notification.json
+#  jq '.blocks[]' tools/cicd/slack_notification.json
+#  jq '.blocks[0]' tools/cicd/slack_notification.json
+  jq '.' < tools/cicd/slack_notification.json
   echo "jq=="
   jq --arg var "${message_body}" '.blocks[0].text.text = $var' tools/cicd/slack_notification.json
   echo "==="
