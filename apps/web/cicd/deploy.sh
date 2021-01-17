@@ -12,7 +12,6 @@ echo "-----------------"
 
 yarn run nx run "${APP_NAME}:export" --skip-nx-cache
 cp "apps/${APP_NAME}/vercel.json" "dist/apps/${APP_NAME}/exported/"
-cd "dist/apps/${APP_NAME}/exported"
 
 echo "commit hash: ${BITBUCKET_COMMIT}"
 
@@ -20,49 +19,23 @@ echo "BITBUCKET_PR_ID: ${BITBUCKET_PR_ID}"
 
 if [ -z "${BITBUCKET_PR_ID}" ]; then
   echo "===== Processing type COMMIT ====="
-  OUTPUT=$(vercel -c -C --token "${VERCEL_TOKEN}" -A ./vercel.json --prod)
+  OUTPUT=$(cd "dist/apps/${APP_NAME}/exported" && vercel -c -C --token "${VERCEL_TOKEN}" -A ./vercel.json --prod)
   echo "errorlevel: $?"
   echo "Output from vercel:"
   echo "${OUTPUT}"
   echo "--"
   LAST_LINE=$(echo "${OUTPUT}" | tail -n1)
   echo "last line: ${LAST_LINE}"
-    #-d '{"channel":"#pabau-2-dev","text":"'"${APP_NAME}"' version '"${PACKAGE_JSON_VERSION}"' for production deployed to '"${LAST_LINE}"'"}' \
-  curl -0 -v -X POST "${SLACK_HOOK_URL}" \
+
+  export message_body="*New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}\n\n${LAST_LINE}\n\n${LAST_COMMIT_LOG}"
+  jq --arg var "${message_body}" '.blocks[0].text.text = $var' tools/cicd/slack_notification.json | curl -0 "${SLACK_HOOK_URL}" \
     -H "Expect:" \
     -H 'Content-Type: application/json; charset=utf-8' \
-    --data-binary @- << EOF
-    {
-      "channel": "#pabau-2-dev",
-      "blocks": [
-        {
-          "type": "section",
-          "text": [
-            {
-              "type": "mrkdwn",
-              "text": "*New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}\n\n${LAST_LINE}\n\n${LAST_COMMIT_LOG}"
-            }
-          ]
-        },
-        {
-          "type": "actions",
-          "elements": [
-            {
-              "type": "button",
-                "text": {
-                    "type": "plain_text",
-                    "text": "Deploy to crm.new.pabau.com",
-                    "emoji": false
-                }
-            }
-          ]
-        }
-      ]
-    }
-EOF
+    --data-binary @-
+
 else
   echo "===== Processing type PR ====="
-  OUTPUT=$(vercel -c -C --token "${VERCEL_TOKEN}" -A ./vercel.json)
+  OUTPUT=$(cd "dist/apps/${APP_NAME}/exported" && vercel -c -C --token "${VERCEL_TOKEN}" -A ./vercel.json)
   echo "errorlevel: $?"
   echo "Output from vercel:"
   echo "${OUTPUT}"
