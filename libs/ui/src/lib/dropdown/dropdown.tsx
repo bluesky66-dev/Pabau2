@@ -1,5 +1,4 @@
-// teest edit, remove this line
-import React, { HTMLProps, useState } from 'react'
+import React, { useState } from 'react'
 import { Menu, Badge, Avatar, Popover, Image } from 'antd'
 import {
   RightOutlined,
@@ -31,7 +30,7 @@ export interface DropDownInterface {
   handleSubmit?: () => void
 }
 
-export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
+export function Dropdown(): JSX.Element {
   const [activeMenu, setActiveMenu] = useState('Menu')
 
   const menu = (
@@ -96,7 +95,7 @@ export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
           <span className={styles.headerText}>Log out</span>
         </div>
       </Menu.Item>
-      <div style={{ marginTop: '8px' }}></div>
+      <div style={{ marginTop: '8px' }} />
     </Menu>
   )
 
@@ -147,7 +146,7 @@ export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
             </span>
           </div>
         </Menu.Item>
-        <div style={{ marginTop: '8px' }}></div>
+        <div style={{ marginTop: '8px' }} />
       </Menu>
     </QueueAnim>
   )
@@ -177,7 +176,7 @@ export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
             <span className="">Something went wrong</span>
           </div>
         </Menu.Item>
-        <div style={{ marginTop: '8px' }}></div>
+        <div style={{ marginTop: '8px' }} />
       </Menu>
     </QueueAnim>
   )
@@ -213,7 +212,7 @@ export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
             <span className="">Contact Support</span>
           </div>
         </Menu.Item>
-        <div style={{ marginTop: '8px' }}></div>
+        <div style={{ marginTop: '8px' }} />
       </Menu>
     </QueueAnim>
   )
@@ -236,7 +235,7 @@ export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
             <Menu.Item key={index} className={styles.languageTextAlign}>
               <div className={styles.languageFlagCenter}>
                 <Image src={lang.logo} alt={lang.label} />
-                <span className={lang.selected && styles.activeMenu}>{lang.label}</span>
+                <span className={lang.selected ? styles.activeMenu : undefined}>{lang.label}</span>
               </div>
               {lang.selected && (
                 <CheckCircleFilled className={classNames(styles.checkIcon, styles.activeMenu)} />
@@ -244,7 +243,7 @@ export function Dropdown(props: HTMLProps<HTMLDivElement>): JSX.Element {
             </Menu.Item>
           )
         })}
-        <div style={{ marginTop: '8px' }}></div>
+        <div style={{ marginTop: '8px' }} />
       </Menu>
     </QueueAnim>
   )
