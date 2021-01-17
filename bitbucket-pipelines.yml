@@ -57,10 +57,6 @@ pipelines:
           - yarncustom
         script:
           - git fetch origin master --refmap="+refs/heads/*:refs/remotes/origin/*"
-          - git status -sb
-          - git branch -r
-          - cat .git/config
-          - cat fsdihjfsdloikhjfsd
           - yarn install --pure-lockfile --prefer-offline
           - yarn affected --base=origin/master --target=lint --parallel
 #          - yarn run nx affected --all --target=build
