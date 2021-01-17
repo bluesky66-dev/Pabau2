@@ -3,12 +3,10 @@
   "blocks": [
     {
       "type": "section",
-      "text": [
-        {
-          "type": "mrkdwn",
-          "text": "(text goes here)"
-        }
-      ]
+      "text": {
+        "type": "mrkdwn",
+        "text": "(text goes here)"
+      }
     },
     {
       "type": "actions",

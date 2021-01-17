@@ -32,15 +32,8 @@ if [ -z "${BITBUCKET_PR_ID}" ]; then
   export message_body="*New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}\n\n${LAST_LINE}\n\n${LAST_COMMIT_LOG}"
   echo "message_body=${message_body}"
 
-  cat tools/cicd/slack_notification.json || (echo "ERROR: JSON not found"; exit 1)
-  jq '.' tools/cicd/slack_notification.json || (echo "ERROR: Invalid JSON"; exit 1)
-#  jq '.blocks' tools/cicd/slack_notification.json
-#  jq '.blocks[]' tools/cicd/slack_notification.json
-#  jq '.blocks[0]' tools/cicd/slack_notification.json
-  jq '.' < tools/cicd/slack_notification.json
-  echo "jq=="
-  jq --arg var "${message_body}" '.blocks[0].text.text = $var' tools/cicd/slack_notification.json
-  echo "==="
+  cat tools/cicd/slack_notification.json > /dev/null || (echo "ERROR: JSON not found"; exit 1)
+  jq '.' tools/cicd/slack_notification.json > /dev/null || (echo "ERROR: Invalid JSON"; exit 1)
 
   jq --arg var "${message_body}" '.blocks[0].text.text = $var' tools/cicd/slack_notification.json | curl -0 "${SLACK_HOOK_URL}" \
     -H "Expect:" \
