@@ -56,7 +56,7 @@ pipelines:
           - nxcache
           - yarncustom
         script:
-          - git fetch --all
+          - git fetch origin master --refmap="+refs/heads/*:refs/remotes/origin/*"
           - git status -sb
           - git branch -r
           - cat .git/config
