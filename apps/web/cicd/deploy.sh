@@ -8,9 +8,11 @@ APP_NAME="$(basename "$(dirname "$(
   pwd
 )")")"
 echo "APP_NAME=${APP_NAME}"
+pwd
+ls -al
 echo "-----------------"
 
-yarn run nx run "${APP_NAME}:export" --skip-nx-cache
+yarn run nx run "${APP_NAME}:export" #--skip-nx-cache
 cp "apps/${APP_NAME}/vercel.json" "dist/apps/${APP_NAME}/exported/"
 
 echo "commit hash: ${BITBUCKET_COMMIT}"
@@ -29,6 +31,8 @@ if [ -z "${BITBUCKET_PR_ID}" ]; then
 
   export message_body="*New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}\n\n${LAST_LINE}\n\n${LAST_COMMIT_LOG}"
   echo "message_body=${message_body}"
+  pwd
+  ls -al
   echo "jq=="
   jq --arg var "${message_body}" '.blocks[0].text.text = $var' tools/cicd/slack_notification.json
   echo "==="
