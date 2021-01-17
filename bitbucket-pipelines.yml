@@ -74,6 +74,38 @@ pipelines:
             - yarncustom
 #            - cypress
           script:
+            - >
+              curl -0 -v -X POST "${SLACK_HOOK_URL}" \
+                  -H "Expect:" \
+                  -H 'Content-Type: application/json; charset=utf-8' \
+                  --data-binary @- << EOF
+                  {
+                    "channel": "#pabau-2-dev",
+                    "blocks": [
+                      {
+                        "type": "section",
+                        "block_id": "section_main",
+                        "text": {
+                          "type": "mrkdwn",
+                          "text": "*New Version Staged for Production*\n1 ${BITBUCKET_PROJECT_KEY} 2 $BITBUCKET_PROJECT_KEY"
+                        }
+                      },
+                      {
+                        "type": "actions",
+                        "elements": [
+                          {
+                            "type": "button",
+                              "text": {
+                                  "type": "plain_text",
+                                  "text": "Deploy to crm.new.pabau.com",
+                                  "emoji": false
+                              }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+              EOF
             - yarn install --pure-lockfile --prefer-offline
 #            - yarn affected:lint --base=HEAD~1
             - yarn affected:lint --base=HEAD~1 --with-deps --parallel
