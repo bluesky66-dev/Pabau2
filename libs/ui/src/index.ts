@@ -1,3 +1,4 @@
+export * from './lib/notification-banner/NotificationBanner'
 export * from './lib/button/button'
 export * from './lib/menu/Menu'
 export * from './lib/layout/Layout'
