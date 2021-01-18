@@ -72,7 +72,7 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery }) => {
           console.log('newData, oldIndex, newIndex ', { newData, oldIndex, newIndex })
         }}
       />
-      <Pagination total={50} current={1} defaultPageSize={10} defaultCurrent={1} />
+      <Pagination total={50} defaultPageSize={10} defaultCurrent={1} />
     </>
   )
 }

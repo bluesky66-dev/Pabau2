@@ -1,14 +1,14 @@
 image: node:14-buster
 
 options:
-  max-time: 15 # max time in minutes for each step
+  max-time: 20 # max time in minutes for each step
 
 definitions:
   caches:
     nodemodules: 'node_modules/'
 #    nextcache: 'dist/**/.next/cache'
     yarncustom: '/usr/local/share/.cache/yarn'
-    nxcache: 'dist/'
+#    nxcache: 'dist/'
     cypress: '/root/.cache/Cypress'
 #  services:
 #    docker:
@@ -21,12 +21,27 @@ pipelines:
           name: PR pipeline
           caches:
             - nodemodules
-            - nxcache
             - yarncustom
           script:
+
+            # Get an oauth access token using the client credentials, parsing out the token with jq.
+            - apt-get update && apt-get install -y curl jq
+            - >
+              export access_token=$(curl -s -X POST -u "${BITBUCKET_CLIENT_ID}:${BITBUCKET_CLIENT_SECRET}" \
+                https://bitbucket.org/site/oauth2/access_token \
+                -d grant_type=client_credentials -d scopes="pullrequest"| jq --raw-output '.access_token')
+
+            # Configure git to use the oauth token.
+            - >
+              curl -sS -H "Authorization: Bearer ${access_token}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}"
+            - >
+              export PR_AUTHOR=$(curl -sS -H "Authorization: Bearer ${access_token}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}" | jq -r '.author.display_name')
+
             - yarn install --pure-lockfile --prefer-offline
-            - yarn affected --base=origin/master --target=lint --with-deps
+            - yarn affected --base=origin/master --target=lint --with-deps --parallel
             - yarn affected --base=origin/master --target=export --prod
+            - yarn affected --base=origin/master --target=deploy
+
     #          - yarn run nx affected --all --target=build
     #          - yarn run nx affected --target=lint --base=master~1
     #          - yarn run nx affected --target=test --base=master~1 --head=master
@@ -37,15 +52,25 @@ pipelines:
         name: Build and Test branch
         caches:
           - nodemodules
-          - nxcache
           - yarncustom
         script:
+          - git fetch origin master --refmap="+refs/heads/*:refs/remotes/origin/*"
           - yarn install --pure-lockfile --prefer-offline
-          - yarn run nx affected --all --target=lint
-#          - yarn run nx affected --all --target=build
-#          - yarn run nx affected --target=lint --base=master~1
-#          - yarn run nx affected --target=test --base=master~1 --head=master
-#          - yarn run nx affected --target=build --base=master~1
+          - yarn affected --base=origin/master --target=lint --parallel
+
+          # TODO: move these to eslint so that `yarn lint` picks up these errors instead
+          - tsc --noEmit -p apps/backend/
+          - tsc --noEmit -p apps/connect/
+          - tsc --noEmit -p apps/connect-e2e/
+          - tsc --noEmit -p apps/mgmt/
+          - tsc --noEmit -p apps/mgmt-e2e/
+          - tsc --noEmit -p apps/ui-e2e/
+          - tsc --noEmit -p apps/web/
+          - tsc --noEmit -p apps/web-e2e/
+          - tsc --noEmit -p libs/ui/tsconfig.lib.json
+          - tsc --noEmit -p libs/yup/tsconfig.lib.json
+
+
   branches:
     master:
       - step:
@@ -53,13 +78,13 @@ pipelines:
           name: Production
           caches:
             - nodemodules
-            - nxcache
             - yarncustom
 #            - cypress
           script:
+            - export LAST_COMMIT_LOG=$(git log HEAD~2 -1 | tail -n +4)
             - yarn install --pure-lockfile --prefer-offline
 #            - yarn affected:lint --base=HEAD~1
-            - yarn affected:lint --base=HEAD~1 --with-deps
+            - yarn affected:lint --base=HEAD~1 --with-deps --parallel
 #            - yarn affected:test --base=HEAD~1 --with-deps
 #            - yarn affected:build --base=HEAD~1 --prod
 #            - apt update -y && apt install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
@@ -67,19 +92,14 @@ pipelines:
 #            - yarn affected:e2e --base=HEAD~1 || true
 
             # Get an oauth access token using the client credentials, parsing out the token with jq.
-            - apt-get update && apt-get install -y curl jq
-            - >
-              export access_token=$(curl -s -X POST -u "${BITBUCKET_CLIENT_ID}:${BITBUCKET_CLIENT_SECRET}" \
-                https://bitbucket.org/site/oauth2/access_token \
-                -d grant_type=client_credentials -d scopes="repository:write"| jq --raw-output '.access_token')
-
-            # Configure git to use the oauth token.
-            - git remote set-url origin "https://x-token-auth:${access_token}@bitbucket.org/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}.git"
+            - apt-get update && apt-get install -y curl jq && jq --version && curl --version
+            - git remote set-url origin "${BITBUCKET_GIT_SSH_ORIGIN}"
 
             #            - git config user.name "Pipeline"
             #            - git config user.email nobody@pabau.com
-            - yarn version --message "[skip ci]" --patch --non-interactive --no-progress
-            - git push
+            - yarn version --message "[skip ci] bumping version (patch)" --patch --non-interactive --no-progress
+            - git push && git push --tags
+            - export PACKAGE_JSON_VERSION=$(jq -r .version < package.json)
 
             - yarn affected --base=HEAD~2 --target=export --prod
             - yarn affected --base=HEAD~2 --target=deploy --prod

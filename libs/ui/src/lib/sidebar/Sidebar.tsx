@@ -17,6 +17,7 @@ import {
 import { Button } from '@pabau/ui'
 import styles from './Sidebar.module.less'
 import classNames from 'classnames'
+import Link from 'next/link'
 
 const { SubMenu } = Menu
 const { Sider } = Layout
@@ -77,16 +78,13 @@ export const Sidebar: FC<SidebarProps> = ({ onSideBarCollapsed }) => {
       icon: <RiseOutlined />,
       children: [
         {
-          menuName: 'Leads Manager',
+          menuName: 'Leads',
         },
         {
           menuName: 'Lead groups',
         },
         {
           menuName: 'Lead views',
-        },
-        {
-          menuName: 'Summary',
         },
         {
           menuName: 'New leads',
@@ -150,7 +148,7 @@ export const Sidebar: FC<SidebarProps> = ({ onSideBarCollapsed }) => {
           menuName: 'Accounts',
         },
         {
-          menuName: 'Cashups',
+          menuName: 'Cashup',
         },
       ],
     },
@@ -225,12 +223,14 @@ export const Sidebar: FC<SidebarProps> = ({ onSideBarCollapsed }) => {
           {collapsed ? (
             <SettingOutlined className={styles.sidebarMenu} />
           ) : (
-            <Button
-              icon={<SettingOutlined className={styles.sidebarMenu} />}
-              className={styles.setupBtn}
-            >
-              Setup
-            </Button>
+            <Link href="/setup">
+              <Button
+                icon={<SettingOutlined className={styles.sidebarMenu} />}
+                className={styles.setupBtn}
+              >
+                Setup
+              </Button>
+            </Link>
           )}
         </div>
         <div>

@@ -8,7 +8,7 @@ const Index: FC = () => {
 
   return (
     <Layout pageTitle={t('common', 'setup.title')}>
-      <Card title=""></Card>
+      <Card title="Calender">Blah one, blah two</Card>
     </Layout>
   )
 }
