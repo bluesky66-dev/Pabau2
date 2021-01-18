@@ -1,0 +1,113 @@
+.setting-content {
+  padding-top: 20px;
+  padding-left: 24px;
+  min-height: 129px;
+  border-bottom: 1px solid var(--border-color-base);
+  .header-text {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 25px;
+    color: var(--grey-text-color);
+    padding: 0;
+    margin-bottom: 8px;
+  }
+  .description {
+    font-family: 'Circular-Std-Book';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    color: var(--light-grey-color);
+  }
+}
+.calendar-settings-configuration {
+  .configuration-controls {
+    padding-top: 23px;
+    padding-right: 24px;
+    padding-left: 24px;
+
+    .time-slot-select {
+      :global {
+        .ant-select-selector {
+          min-height: 40px;
+          display: flex;
+          align-items: center;
+          border: 1px solid #ecedf0;
+          border-radius: 4px;
+        }
+
+        .ant-select-selection-item {
+          color: var(--grey-text-color);
+          font-size: 16px;
+          font-family: 'Circular-Std-Book';
+        }
+      }
+    }
+    :global {
+      .ant-input {
+        padding: 8px 11px;
+        border: 1px solid #ecedf0;
+        color: var(--grey-text-color);
+        font-family: 'Circular-Std-Book';
+        border-radius: 4px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+
+    .col-left-space {
+      padding-left: 6px;
+    }
+    .col-right-space {
+      padding-right: 6px;
+    }
+    .time-input-space {
+      padding-top: 16px;
+    }
+  }
+  .title-text-style {
+    font-size: 14px;
+    color: var(--light-grey-color);
+    margin-bottom: 0px;
+    font-family: 'Circular-Std-Medium';
+    line-height: 22px;
+    font-weight: normal;
+  }
+}
+.calendar-settings-appointment {
+  .appointments-controls {
+    padding-top: 30px;
+    padding-left: 24px;
+    :global {
+      .ant-checkbox-wrapper {
+        padding-bottom: 22px;
+      }
+    }
+    .appointment-text {
+      font-family: Circular-Std-Book;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 18px;
+      color: var(--grey-text-color);
+    }
+    .appointment-icon {
+      font-size: 14px;
+      color: var(--light-grey-color);
+    }
+  }
+}
+.calendar-settings-appearance{
+  .appearances-controls {
+    .general-block {
+      padding-top: 17px;
+      padding-left: 24px;
+      // .general-text {
+        
+      // }
+    }
+  }
+}

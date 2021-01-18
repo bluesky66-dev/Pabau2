@@ -31,28 +31,19 @@ export const Guides: FC = () => {
   return (
     <div className={styles.relatedGuides}>
       {guides.map((guide, index) => {
-        return index % 2 === 0 ? (
-          <div key={index} className={styles.boxDirection} style={{ marginBottom: '12px' }}>
-            <div className={classNames(styles.footerBox)}>
-              <div className={styles.iconTextAlign}>
-                <div>{guides[index].icon}</div>
-                <div className={styles.boxText}>
-                  <p>{guides[index].guideName}</p>
-                  <h6>{guides[index].type}</h6>
-                </div>
-              </div>
-            </div>
+        return (
+          <div key={index} className={styles.boxDirection}>
             <div className={classNames(styles.footerBox, styles.rightSpace)}>
               <div className={styles.iconTextAlign}>
-                <div>{guides[index + 1].icon}</div>
+                <div>{guide.icon}</div>
                 <div className={styles.boxText}>
-                  <p>{guides[index + 1].guideName}</p>
-                  <h6>{guides[index + 1].type}</h6>
+                  <p>{guide.guideName}</p>
+                  <h6>{guide.type}</h6>
                 </div>
               </div>
             </div>
           </div>
-        ) : null
+        )
       })}
     </div>
   )

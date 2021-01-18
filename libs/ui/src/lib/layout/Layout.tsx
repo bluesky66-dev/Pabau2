@@ -3,6 +3,7 @@ import { ReactComponent as IllustrationSvg } from './example.svg'
 import { Card, Layout as AntLayout } from 'antd'
 import { Footer, Header, Sidebar } from '@pabau/ui'
 import styles from './Layout.module.less'
+import classNames from 'classnames'
 
 const { Content } = AntLayout
 export interface LayoutProps {
@@ -24,22 +25,21 @@ export const Layout: FC<LayoutProps> = ({
   children,
   ...rest
 }) => {
-  const [sideBarMargin, setSideBarMargin] = useState(200)
+  const [collapsed, setCollapsed] = useState(false)
 
-  const onSideBarCollapsed = (collapsed) => setSideBarMargin(collapsed ? 80 : 200)
+  const onSideBarCollapsed = (collapsed) => setCollapsed(collapsed)
 
   return (
     <AntLayout {...rest} className={styles.main}>
       <AntLayout style={{ background: '#F7F7F9' }}>
         <Header searchRender={searchRender} />
-        <AntLayout style={{ marginTop: '80px' }}>
+        <AntLayout className={styles.headerMargin}>
           <Sidebar onSideBarCollapsed={onSideBarCollapsed} />
           <Content
-            style={{
-              borderTop: '2px solid #f3f5fb',
-              padding: '32px',
-              marginLeft: sideBarMargin,
-            }}
+            className={classNames(
+              styles.layoutContent,
+              collapsed ? styles.collapsedSidebarMargin : styles.sidebarMargin
+            )}
           >
             <Content
               style={{

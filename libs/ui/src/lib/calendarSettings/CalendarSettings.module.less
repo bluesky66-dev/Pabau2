@@ -1,0 +1,40 @@
+.calendar-settings {
+  border: 1px solid var(--border-color-base);
+  :global {
+    .ant-tabs {
+      line-height: 18px;
+    }
+    .ant-tabs > .ant-tabs-nav {
+      width: 200px;
+    }
+    .ant-tabs-left > .ant-tabs-nav .ant-tabs-tab, .ant-tabs-tab-active {
+      padding-left: 24px;
+      padding-top: 9px;
+      padding-bottom: 9px;
+      margin: 0;
+    }
+    .ant-tabs-tab-active {
+      background-color: #eef7fb;
+    }
+    .ant-tabs-tab:hover {
+      color: var(--primary-color);
+    }
+    .ant-tabs-left > .ant-tabs-nav .ant-tabs-ink-bar,
+    .ant-tabs-left > div > .ant-tabs-nav .ant-tabs-ink-bar {
+      right: unset;
+    }
+    .ant-tabs-tab {
+      color: var(--light-grey-color);
+    }
+    .ant-tabs-left > .ant-tabs-nav .ant-tabs-tab-active .ant-tabs-tab-btn {
+      font-family: 'Circular-Std-Book';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 18px;
+    }
+    .ant-tabs-left > .ant-tabs-content-holder > .ant-tabs-content > .ant-tabs-tabpane {
+      padding-left: 0;
+    }
+  }
+}

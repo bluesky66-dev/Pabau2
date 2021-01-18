@@ -2,3 +2,25 @@
   display: flex;
   flex-direction: column;
 }
+.layout-content {
+  border-top: 2px solid #f3f5fb;
+  padding: 32px;
+}
+.header-margin {
+  margin-top: 80px;
+}
+.sidebar-margin {
+  margin-left: 200px
+}
+.collapsed-sidebar-margin {
+  margin-left: 80px
+}
+
+@media (min-width:240px) and (max-width:767px) {
+  .sidebar-margin {
+    margin-left: 0px;
+  }
+  .layout-content {
+    padding: 0px;
+  }
+}
