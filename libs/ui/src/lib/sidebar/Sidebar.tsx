@@ -1,32 +1,13 @@
 import React, { FC, useState } from 'react'
 import { Layout, Menu } from 'antd'
-import {
-  NotificationOutlined,
-  DashboardOutlined,
-  TeamOutlined,
-  CalendarOutlined,
-  FundOutlined,
-  RiseOutlined,
-  ShoppingCartOutlined,
-  WalletOutlined,
-  ProfileOutlined,
-  SettingOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-} from '@ant-design/icons'
+import { SettingOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import { Button } from '@pabau/ui'
 import styles from './Sidebar.module.less'
 import classNames from 'classnames'
 import Link from 'next/link'
-
+import { sidebarMenu } from './sidebarMenu'
 const { SubMenu } = Menu
 const { Sider } = Layout
-
-interface SidebarMenuItem {
-  menuName: string
-  icon?: JSX.Element
-  children?: SidebarMenuItem[]
-}
 
 interface SidebarProps {
   onSideBarCollapsed?: (collapsed: boolean) => void
@@ -48,123 +29,6 @@ export const Sidebar: FC<SidebarProps> = ({ onSideBarCollapsed }) => {
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1)
     setOpenKeys(latestOpenKey ? [latestOpenKey] : [])
   }
-
-  const sidebarMenu: SidebarMenuItem[] = [
-    {
-      menuName: 'Dashboard',
-      icon: <DashboardOutlined />,
-    },
-    {
-      menuName: 'Calendar',
-      icon: <CalendarOutlined />,
-    },
-    {
-      menuName: 'Team',
-      icon: <TeamOutlined />,
-      children: [
-        {
-          menuName: 'Staff Manager',
-        },
-        {
-          menuName: 'Staff Targets',
-        },
-        {
-          menuName: 'Schedule',
-        },
-      ],
-    },
-    {
-      menuName: 'Leads',
-      icon: <RiseOutlined />,
-      children: [
-        {
-          menuName: 'Leads',
-        },
-        {
-          menuName: 'Lead groups',
-        },
-        {
-          menuName: 'Lead views',
-        },
-        {
-          menuName: 'New leads',
-        },
-      ],
-    },
-    {
-      menuName: 'Reports',
-      icon: <FundOutlined />,
-    },
-    {
-      menuName: 'Stock',
-      icon: <ShoppingCartOutlined />,
-      children: [
-        {
-          menuName: 'Products',
-        },
-        {
-          menuName: 'Inventory count',
-        },
-        {
-          menuName: 'Purchase order',
-        },
-        {
-          menuName: 'Suppliers',
-        },
-      ],
-    },
-    {
-      menuName: 'Marketing',
-      icon: <NotificationOutlined />,
-      children: [
-        {
-          menuName: 'SMS campaign',
-        },
-        {
-          menuName: 'Birthday mailer',
-        },
-        {
-          menuName: 'Newsletter',
-        },
-        {
-          menuName: 'Feedback Survey',
-        },
-        {
-          menuName: 'Gift Vouchers',
-        },
-        {
-          menuName: 'Referral tracker',
-        },
-        {
-          menuName: 'Loyalty',
-        },
-      ],
-    },
-    {
-      menuName: 'Financials',
-      icon: <WalletOutlined />,
-      children: [
-        {
-          menuName: 'Accounts',
-        },
-        {
-          menuName: 'Cashup',
-        },
-      ],
-    },
-    {
-      menuName: 'Contacts',
-      icon: <ProfileOutlined />,
-      children: [
-        {
-          menuName: 'Clients',
-        },
-        {
-          menuName: 'Case manager',
-        },
-      ],
-    },
-  ]
 
   const renderMenu = (index, menuName, icon) => {
     return (
@@ -192,7 +56,7 @@ export const Sidebar: FC<SidebarProps> = ({ onSideBarCollapsed }) => {
     >
       <Menu
         mode="inline"
-        style={{ height: '100%', borderRight: 0 }}
+        className={styles.sidebar}
         openKeys={openKeys}
         onOpenChange={onOpenChange}
         multiple={false}

@@ -21,18 +21,22 @@
 }
 
 .pabau-header {
-  height: auto;
   padding: 0;
-  // color: rgba(0, 0, 0, 0.85);
   padding-top: 19px;
   padding-bottom: 19px;
   line-height: unset;
+  background-color: #fff;
+  height: 80px;
+  top: 0;
+  z-index: 2;
+  border: 1px solid var(--border-color-base);
+  position: fixed;
+  width: 100%;
 }
 
 .sb-show-main.sb-main-padded {
   padding: 0px !important;
 }
-
 
 .create-btn-style {
   margin: 0 0.1em;
@@ -42,7 +46,7 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 18px;
-  border: 1px solid #E4E6EA;
+  border: 1px solid #e4e6ea;
   border-radius: 4px;
   height: 40px;
   color: var(--primary-color);
@@ -74,4 +78,55 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+// mobile view header css
+
+
+.pabau-mobile-header {
+  display: none;
+  background-color: #fff;
+}
+.menu-header-icon-color {
+  color: #9292a3;
+  font-size: 18px;
+}
+.mobile-view-header-heading {
+  display: flex;
+  align-items: center;
+  span {
+    color: var(--light-grey-color);
+    font-size: 17px;
+  }
+  p {
+    margin-bottom: 0px;
+    font-family: Circular-Std-Bold;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 22px;
+    text-transform: capitalize;
+    color:var(--grey-text-color);
+    padding-left: 10px;
+
+  }
+}
+@media (min-width: 240px) and (max-width: 767px) {
+  :global {
+    .ant-layout-header {
+      padding-top: 21px;
+      padding-bottom: 21px;
+      padding-left: 18px;
+      padding-right: 18px;
+      position: fixed;
+      z-index: 1;
+      width: 100%;
+    }
+  }
+  .pabau-header {
+    display: none;
+  }
+  .pabau-mobile-header {
+    display: block;
+  }
 }
