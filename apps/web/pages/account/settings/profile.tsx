@@ -5,7 +5,7 @@ const ColorList = ['#f0f2f5']
 const { TextArea } = Input
 
 const Profile: FC = () => {
-  const [color, setColor] = useState(ColorList[0])
+  const [color] = useState(ColorList[0])
   const { Option } = Select
 
   const uploadPhoto = () => {
