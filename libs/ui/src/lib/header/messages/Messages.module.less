@@ -207,3 +207,16 @@
     margin-top: 14px;
   }
 }
+
+@media (min-width: 240px) and (max-width: 767px) {
+  .messages-drawer {
+    :global {
+      .ant-drawer-body {
+        padding: 0px;
+      }
+      .ant-drawer-content-wrapper {
+        width: 100% !important;
+      }
+    }
+  }
+}

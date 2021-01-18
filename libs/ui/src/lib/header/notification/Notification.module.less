@@ -191,3 +191,16 @@
 .card-border {
   border-bottom: 1px solid var(--border-color-base);
 }
+
+@media (min-width: 240px) and (max-width: 767px) {
+  .notification-drawer {
+    :global {
+      .ant-drawer-body {
+        padding: 0px;
+      }
+      .ant-drawer-content-wrapper {
+        width: 100% !important;
+      }
+    }
+  }
+}
