@@ -5,8 +5,9 @@ import styles from './NotificationBanner.module.less'
 import { Row, Col } from 'antd'
 
 import icon from '../../assets/images/bkg_notification_banner.svg'
-import { relative } from 'path'
-export interface NotificationBannerProps {}
+export interface NotificationBannerProps {
+  className?: string
+}
 
 export function NotificationBanner(props: NotificationBannerProps) {
   return (

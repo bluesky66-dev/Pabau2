@@ -6,6 +6,6 @@ export default {
   title: 'NotificationBanner',
 }
 
-const NotificationStory = ({ ...args }) => <NotificationBanner/>
+const NotificationStory = ({ ...args }) => <NotificationBanner {...args}/>
 
 export const defaultNotificationBanner = NotificationStory.bind({})
