@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from 'react'
+import React, { FC, useCallback, useContext, useState } from 'react'
 import { Col, Dropdown, Layout, Menu, Row } from 'antd'
 import {
   BellOutlined,
@@ -13,7 +13,7 @@ import {
 
 import { Logo } from '../logo/Logo'
 import styles from './Header.module.less'
-import { Button, Dropdown as AvatarDropDown } from '@pabau/ui'
+import { Button, Dropdown as AvatarDropDown, PabauContext } from '@pabau/ui'
 import { Search } from './search/Search'
 import PabauNotification from './notification/Notification'
 import PabauMessages from './messages/Messages'
@@ -44,6 +44,7 @@ const items = [
 ]
 
 export const Header: FC<P> = ({ searchRender, ...props }) => {
+  const context = useContext(PabauContext)
   const [openNotificationDrawer, setNotificationDrawer] = useState<boolean>(false)
   const [openMessageDrawer, setMessageDrawer] = useState<boolean>(false)
   const [openMenuDrawer, setMenuDrawer] = useState<boolean>(false)
@@ -60,48 +61,50 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
   )
   return (
     <>
-      <AntHeader className={styles.pabauHeader}>
-        <div
-          style={{
-            paddingLeft: '30px',
-            paddingRight: '30px',
-            height: '100%',
-            alignItems: 'center',
-          }}
-        >
-          <Row>
-            <Col md={8}>
-              <Logo />
-            </Col>
-            <Col md={8} className={styles.headerSearchCenter}>
-              <div style={{ width: '360px' }}>
-                {searchRender ? searchRender(<Search />) : <Search />}
-              </div>
-            </Col>
-            <Col md={8} className={styles.headerIconEnd}>
-              <div className={styles.headerAlign}>
-                {/* <SettingOutlined className={styles.headerIcon} /> */}
-                <BellOutlined
-                  className={styles.headerIcon}
-                  onClick={() => setNotificationDrawer((e) => !e)}
-                />
-                <MailOutlined
-                  className={styles.headerIcon}
-                  onClick={() => setMessageDrawer((e) => !e)}
-                />
-                <div>
-                  <Dropdown overlay={overlay}>
-                    <Button type="default" className={styles.createBtnStyle}>
-                      <PlusCircleFilled /> Create
-                    </Button>
-                  </Dropdown>
+      {!context.isMobileDevice && (
+        <AntHeader className={styles.pabauHeader}>
+          <div
+            style={{
+              paddingLeft: '30px',
+              paddingRight: '30px',
+              height: '100%',
+              alignItems: 'center',
+            }}
+          >
+            <Row>
+              <Col md={8}>
+                <Logo />
+              </Col>
+              <Col md={8} className={styles.headerSearchCenter}>
+                <div style={{ width: '360px' }}>
+                  {searchRender ? searchRender(<Search />) : <Search />}
                 </div>
-                <AvatarDropDown />
-              </div>
-            </Col>
-          </Row>
-        </div>
-      </AntHeader>
+              </Col>
+              <Col md={8} className={styles.headerIconEnd}>
+                <div className={styles.headerAlign}>
+                  {/* <SettingOutlined className={styles.headerIcon} /> */}
+                  <BellOutlined
+                    className={styles.headerIcon}
+                    onClick={() => setNotificationDrawer((e) => !e)}
+                  />
+                  <MailOutlined
+                    className={styles.headerIcon}
+                    onClick={() => setMessageDrawer((e) => !e)}
+                  />
+                  <div>
+                    <Dropdown overlay={overlay}>
+                      <Button type="default" className={styles.createBtnStyle}>
+                        <PlusCircleFilled /> Create
+                      </Button>
+                    </Dropdown>
+                  </div>
+                  <AvatarDropDown />
+                </div>
+              </Col>
+            </Row>
+          </div>
+        </AntHeader>
+      )}
       {openNotificationDrawer && (
         <PabauNotification
           openDrawer={openNotificationDrawer}
@@ -115,26 +118,31 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
         />
       )}
       {/* mobile responsive header start */}
-      <AntHeader className={styles.pabauMobileHeader}>
-        <div className={styles.mobileViewAlign}>
-          <div className={styles.mobileViewHeaderHeading}>
-            <MenuOutlined
-              className="menuHeaderIconColor"
-              onClick={() => {
-                setMenuDrawer((e) => !openMenuDrawer)
-              }}
+      {context.isMobileDevice && (
+        <>
+          <AntHeader className={styles.pabauMobileHeader}>
+            <div className={styles.mobileViewAlign}>
+              <div className={styles.mobileViewHeaderHeading}>
+                <MenuOutlined
+                  className="menuHeaderIconColor"
+                  onClick={() => {
+                    setMenuDrawer((e) => !openMenuDrawer)
+                  }}
+                />
+                <p>Setup</p>
+              </div>
+            </div>
+          </AntHeader>
+          {openMenuDrawer && (
+            <Sidebar
+              searchRender={searchRender}
+              onSideBarClosed={() => setMenuDrawer((e) => !openMenuDrawer)}
+              onClickNotificationDrawer={() => setNotificationDrawer((e) => !e)}
+              onClickChatDrawer={() => setMessageDrawer((e) => !e)}
             />
-            <p>Setup</p>
-          </div>
-        </div>
-      </AntHeader>
-      {openMenuDrawer && (
-        <Sidebar
-          searchRender={searchRender}
-          onSideBarClosed={() => setMenuDrawer((e) => !openMenuDrawer)}
-          onClickNotificationDrawer={() => setNotificationDrawer((e) => !e)}
-          onClickChatDrawer={() => setMessageDrawer((e) => !e)}
-        />
+          )}
+          )
+        </>
       )}
       {/* mobile responsive header end */}
     </>

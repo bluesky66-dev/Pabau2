@@ -10,9 +10,9 @@ import {
   MailOutlined,
   PlusCircleFilled,
   SettingOutlined,
-  UserOutlined,
 } from '@ant-design/icons'
 import Avatar from 'antd/lib/avatar/avatar'
+import User from '../../assets/images/users/stephen.png'
 import Link from 'next/link'
 
 const { SubMenu } = Menu
@@ -112,10 +112,7 @@ export const Sidebar: FC<SidebarProps> = ({
         {mobileSidebar.map((menuData, index) => {
           return renderMenu(menuData.menuName + index, menuData.menuName, menuData.icon)
         })}
-        <Menu.Item
-          className={styles.sidebarMenu}
-          icon={<Avatar size={24} icon={<UserOutlined />} />}
-        >
+        <Menu.Item className={styles.sidebarMenu} icon={<Avatar size={24} src={User} />}>
           Profile
         </Menu.Item>
         <div className={styles.buttonMenu}>
@@ -128,12 +125,15 @@ export const Sidebar: FC<SidebarProps> = ({
         </div>
         <div className={styles.buttonMenu}>
           <Link href="/setup">
-            <Button
-              className={classNames(styles.buttonStyles, styles.setUpBtn)}
-              icon={<SettingOutlined />}
-            >
-              Setup
-            </Button>
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+            <a>
+              <Button
+                className={classNames(styles.buttonStyles, styles.setUpBtn)}
+                icon={<SettingOutlined />}
+              >
+                Setup
+              </Button>
+            </a>
           </Link>
         </div>
       </Menu>

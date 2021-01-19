@@ -1,7 +1,7 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useContext, useState } from 'react'
 import { ReactComponent as IllustrationSvg } from './example.svg'
 import { Card, Layout as AntLayout } from 'antd'
-import { Footer, Header, Sidebar } from '@pabau/ui'
+import { Footer, Header, Sidebar, PabauContext } from '@pabau/ui'
 import styles from './Layout.module.less'
 import classNames from 'classnames'
 
@@ -25,6 +25,7 @@ export const Layout: FC<LayoutProps> = ({
   children,
   ...rest
 }) => {
+  const context = useContext(PabauContext)
   const [collapsed, setCollapsed] = useState(false)
 
   const onSideBarCollapsed = (collapsed) => setCollapsed(collapsed)
@@ -34,7 +35,7 @@ export const Layout: FC<LayoutProps> = ({
       <AntLayout style={{ background: '#F7F7F9' }}>
         <Header searchRender={searchRender} />
         <AntLayout className={styles.headerMargin}>
-          <Sidebar onSideBarCollapsed={onSideBarCollapsed} />
+          {!context.isMobileDevice && <Sidebar onSideBarCollapsed={onSideBarCollapsed} />}
           <Content
             className={classNames(
               styles.layoutContent,
