@@ -5,7 +5,7 @@ import { Row, Col, Progress } from 'antd'
 import {Button} from '../../lib/button/button'
 
 export interface SecurityScoreProps {
-  percent: number
+  percent?: number
 }
 
 export function SecurityScore(props: SecurityScoreProps) {
@@ -32,7 +32,8 @@ export function SecurityScore(props: SecurityScoreProps) {
         <Col md = { 19 } sm = { 19}>
           
             <Progress className={styles.scoreProgress} percent={percent || 0} strokeColor={ progressColor } showInfo={false} />
-            <Button className={styles.btnScore} onClick={() => {}} size="medium" type="link">How do we calculate this score?</Button>
+            <Button className={styles.btnScore} onClick={() => {}} size="middle" type="link">How do we calculate this score?</Button>
+
         </Col>
       </Row>
     </div>
