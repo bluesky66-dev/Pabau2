@@ -27,24 +27,23 @@ export function SecurityScore(props: SecurityScoreProps) {
 
   return (
     <div className={styles.scoreBody}>
-      <Row style={{ position: 'relative' }}>
-        <Col md={5} sm={5}>
-          <p className={styles.scoreTitle}>Pabau Baseline Standart</p>
-          <p className={styles.scorePercent}> {percent || 0}% {stateStr}</p>
-          <p className={styles.scoreTitle1}>of the standart met</p>
-        </Col>
-        <Col md={19} sm={19}>
-          <Progress
+      <p className={styles.scoreTitle}>Pabau Baseline Standard</p>
+      <div className={styles.seconddivrow}>
+        <span className={styles.scorePercent}> {percent || 0}% {stateStr}</span>
+        <Progress
             className={styles.scoreProgress}
             percent={percent || 0}
             strokeColor={progressColor}
             showInfo={false}
           />
-          <Button className={styles.btnScore} size="middle" type="link">
-            How do we calculate this score?
-          </Button>
-        </Col>
-      </Row>
+      </div>
+      <div className={styles.thirddivrow}> 
+        <span className={styles.scoreTitle1}>of the standart met</span>
+        <Button className={styles.btnScore} size="middle" type="link">
+              How do we calculate this score?
+        </Button>
+      </div>
+      
     </div>
   )
 }

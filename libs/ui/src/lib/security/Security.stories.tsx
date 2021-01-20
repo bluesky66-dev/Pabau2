@@ -22,8 +22,6 @@ Score.args = {
 }
 export const Tools = () => {
   return (
-    <div style={{ background: '#f0f2f5', padding: '24px', height: '96vh', width: '50%' }}>
       <SecurityTools />
-    </div>
   )
 }
