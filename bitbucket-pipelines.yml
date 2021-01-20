@@ -82,7 +82,7 @@ pipelines:
             - yarncustom
 #            - cypress
           script:
-            - export LAST_COMMIT_LOG=$(git log HEAD~2 -1 | tail -n +4)
+            - export LAST_COMMIT_LOG=$(git log HEAD~1 -1 | tail -n +4)
             - yarn install --pure-lockfile --prefer-offline
 #            - yarn affected:lint --base=HEAD~1
             - yarn affected:lint --base=HEAD~1 --with-deps --parallel
