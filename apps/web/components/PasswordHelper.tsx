@@ -2,7 +2,6 @@ import { CheckCircleFilled, CheckCircleTwoTone, EyeInvisibleOutlined } from '@an
 import { Input, Popover } from 'antd'
 import { FC } from 'react'
 
-const text = <span>Title</span>
 const content = (
   <>
     <div className="helperPhase">
