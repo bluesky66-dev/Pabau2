@@ -1,41 +1,60 @@
 .modal {
   font-family: Circular-Std-Book;
-  .ant-modal-content {
-    background: #ffffff;
-    box-shadow: 4px 4px 23px rgba(0, 34, 65, 0.15);
-    border-radius: 8px;
+  :global {
+    .ant-modal-content {
+      background: #ffffff;
+      box-shadow: 4px 4px 23px rgba(0, 34, 65, 0.15);
+      border-radius: 8px;
+      :global {
+        .ant-modal-close-x {
+          height: 88px;
+          width: 88px;
+          line-height: 88px;
+        }
+        .ant-modal-close-icon {
+          color: #9292a3;
+          font-size: 14px;
+        }
+      }
+    }
+    .ant-modal-header {
+      border-bottom-width: 0;
+      padding: 40px;
+      padding-bottom: 19px;
+      border-radius: 8px;
+    }
+    .ant-modal-title {
+      font-family: Circular-Std-Medium;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 28px;
+      text-transform: capitalize;
+      color: #3D3D46;
+    }
+
+    .ant-modal-body {
+      padding: 0 !important;
+      :global {
+        .ant-form-item-label,
+        .ant-form-item-required {
+          color: #9292A3;
+        }
+      }
+    }
   }
-  .ant-modal-header {
-    border-bottom-width: 0;
-    padding: 40px;
-    padding-bottom: 19px;
-    border-radius: 8px;
-  }
-  .ant-modal-title {
-    font-family: Circular-Std-Medium;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 22px;
-    line-height: 28px;
-    text-transform: capitalize;
-    color: #3D3D46;
-  }
+
   .modal-heading-align {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    .anticon-close {
-      color: #9292A3;
-      font-size: 14px;
-    }
   }
+
   .modal-body {
     padding-left: 40px;
     padding-right: 40px;
   }
-  .ant-modal-body {
-    padding: 0 !important;
-  }
+
   .input-field label {
     font-family: Circular-Std-Book;
     font-style: normal;
@@ -46,9 +65,7 @@
     align-items: center;
     color: #9292A3;
   }
-  .input-field .ant-form-item-label {
-    padding: 0 !important;
-  }
+
   .input-field .input-style {
     font-family: Circular-Std-Book;
     border: 1px solid #ecedf0 !important;
@@ -103,7 +120,7 @@
     color: #ffffff;
     border-radius: 6px;
     border-radius: 6px;
-    border: none; 
+    border: none;
     background-color: #54B2D3;
     font-style: normal;
     font-weight: 500;

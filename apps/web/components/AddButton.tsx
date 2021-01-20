@@ -45,6 +45,7 @@ const AddButton: FC<P> = ({
         visible={modalShowing}
         title={`Create ${schema.full}`}
         newButtonText={`Create ${schema.short}`}
+        modalWidth={682}
       >
         <Form
           onRef={(ref) => {

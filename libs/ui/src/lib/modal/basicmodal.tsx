@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import { Modal } from 'antd'
 import Button from '../button/button'
+import styles from './Modal.module.less'
 
 interface P {
   onOk?: () => void
@@ -21,7 +22,11 @@ export function BasicModal({
 }: PropsWithChildren<P>): JSX.Element {
   return (
     <Modal
-      title={title}
+      title={
+        <div className={styles.modalHeadingAlign}>
+          <div className={styles.antModalTitle}>{title}</div>
+        </div>
+      }
       visible={visible}
       onOk={() => onOk?.()}
       onCancel={() => onCancel?.()}
@@ -30,10 +35,16 @@ export function BasicModal({
       width={modalWidth}
       destroyOnClose={true}
       modalRender={(E) => E}
+      wrapClassName={styles.modal}
     >
-      <div>{children}</div>
-      <div style={{ marginTop: '2em', display: 'flex', placeContent: 'flex-end' }}>
-        <Button type="primary" onClick={() => onOk?.()}>
+      <div className={styles.modalBody}>{children}</div>
+      <div className={styles.modalFooter}>
+        <Button
+          type="primary"
+          className={styles.createBtn}
+          size="large"
+          onClick={() => onOk?.()}
+        >
           Create
         </Button>
       </div>
