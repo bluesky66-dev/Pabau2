@@ -3,7 +3,10 @@ import React, { FC, useState } from 'react'
 import { BasicModal as Modal, Button } from '@pabau/ui'
 import Form from './Form'
 import { useKeyPressEvent } from 'react-use'
-
+import styles from './CrudTable.module.less'
+import { FilterOutlined, PlusSquareFilled, SearchOutlined } from '@ant-design/icons'
+import { Input, Radio, Popover } from 'antd'
+import { isMobile, isTablet } from 'react-device-detect'
 interface P {
   schema: Schema
   addQuery: DocumentNode
@@ -18,27 +21,71 @@ const AddButton: FC<P> = ({
 }) => {
   const [addMutation] = useMutation(addQuery)
   const [modalShowing, setModalShowing] = useState(false)
+  const [isActive, setIsActive] = useState(true)
+  const [marketingSourceSearch, setMarketingSourceSearch] = useState('')
   let formRef: { submitForm: () => void } | null = null
   useKeyPressEvent('n', () => {
     setModalShowing(true)
   })
+
+  const filterContent = (
+    <div className={styles.filterContent}>
+      <div className={styles.filterHeader}>
+        <h6>Filter by</h6>
+        <p>Status</p>
+      </div>
+      <div className={styles.radioTextStyle}>
+        <Radio.Group onChange={(e) => setIsActive(e.target.value)} value={isActive}>
+          <Radio value={true}>
+            <span>Active</span>
+          </Radio>
+          <Radio value={false}>
+            <span>Inactive</span>
+          </Radio>
+        </Radio.Group>
+      </div>
+    </div>
+  )
   return (
     <>
-      <Button
-        style={{
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          margin: '1em 28px',
-          height: '40px',
-          minWidth: '124px',
-          fontSize: '14px',
-        }}
-        type="primary"
-        onClick={() => setModalShowing(true)}
-      >
-        {newButtonText}
-      </Button>
+      {!isTablet && isMobile ? (
+        <div className={styles.marketingIcon}>
+          <SearchOutlined className={styles.marketingIconStyle} />
+          <FilterOutlined className={styles.marketingIconStyle} />
+          <PlusSquareFilled
+            className={styles.plusIconStyle}
+            onClick={() => setModalShowing(true)}
+          />
+        </div>
+      ) : (
+        <div className={styles.marketingSource}>
+          <Input
+            className={styles.searchMarketingStyle}
+            placeholder="Search"
+            value={marketingSourceSearch}
+            onChange={(e) => setMarketingSourceSearch(e.target.value)}
+            suffix={<SearchOutlined style={{ color: '#8C8C8C' }} />}
+            autoFocus
+          />
+          <Popover
+            trigger="click"
+            content={filterContent}
+            placement="bottomRight"
+            overlayClassName={styles.filterPopover}
+          >
+            <Button className={styles.filterBtn}>
+              <FilterOutlined /> Filter
+            </Button>
+          </Popover>
+          <Button
+            className={styles.createSourceBtn}
+            type="primary"
+            onClick={() => setModalShowing(true)}
+          >
+            {newButtonText}
+          </Button>
+        </div>
+      )}
       <Modal
         onCancel={() => setModalShowing(false)}
         onOk={() => formRef?.submitForm()}
