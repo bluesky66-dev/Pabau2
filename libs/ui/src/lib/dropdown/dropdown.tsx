@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Menu, Badge, Avatar, Popover, Image } from 'antd'
+import React, { FC, useState } from 'react'
+import { Menu, Badge, Avatar, Popover, Image, Drawer } from 'antd'
 import {
   RightOutlined,
   UserOutlined,
@@ -23,15 +23,16 @@ import { languageMenu } from '../../assets/images/lang-logos'
 import styles from './dropdown.module.less'
 import classNames from 'classnames'
 import QueueAnim from 'rc-queue-anim'
+import { isMobile } from 'react-device-detect'
 export interface DropDownInterface {
-  loading?: boolean
-  visible?: boolean
-  onClick?: () => void
-  handleSubmit?: () => void
+  onCloseDrawer?: () => void
 }
 
-export function Dropdown(): JSX.Element {
+export const Dropdown: FC<DropDownInterface> = ({ onCloseDrawer }): JSX.Element => {
   const [activeMenu, setActiveMenu] = useState('Menu')
+
+  // used for mobile device
+  const [activeMenuTitle, setActiveMenuTitle] = useState('Profile')
 
   const menu = (
     <Menu className={styles.avatarMenu}>
@@ -249,10 +250,21 @@ export function Dropdown(): JSX.Element {
   )
 
   const onClickAvatarMenu = (menuName: string) => {
+    if (menuName === 'Menu') {
+      setActiveMenuTitle('Profile')
+    } else if (menuName === 'ClinicMenu') {
+      setActiveMenuTitle('Select company')
+    } else if (menuName === 'FeedbackMenu') {
+      setActiveMenuTitle('Give us feedback')
+    } else if (menuName === 'HelpMenu') {
+      setActiveMenuTitle('Help & Support')
+    } else if (menuName === 'LangMenu') {
+      setActiveMenuTitle('Select language')
+    }
     setActiveMenu(menuName)
   }
 
-  const avatarMenu = () => {
+  const getActiveAvatarMenu = () => {
     if (activeMenu === 'Menu') {
       return menu
     } else if (activeMenu === 'ClinicMenu') {
@@ -266,9 +278,18 @@ export function Dropdown(): JSX.Element {
     }
   }
 
-  return (
+  const onClickMobileBackToMenu = () => {
+    if (activeMenu !== 'Menu') {
+      setActiveMenuTitle('Profile')
+      setActiveMenu('Menu')
+    } else {
+      onCloseDrawer?.()
+    }
+  }
+
+  return !isMobile ? (
     <Popover
-      content={avatarMenu}
+      content={getActiveAvatarMenu}
       trigger="click"
       placement="bottomRight"
       overlayClassName={styles.avatarPopover}
@@ -289,6 +310,16 @@ export function Dropdown(): JSX.Element {
         <CaretDownOutlined style={{ paddingLeft: '5px', color: '#9292A3' }} />
       </div>
     </Popover>
+  ) : (
+    <Drawer visible={true} placement="left" closable={false} className={styles.mobileAvatarDrawar}>
+      <div className={styles.mobileViewAlign}>
+        <div className={styles.mobileViewHeaderHeading}>
+          <LeftOutlined onClick={onClickMobileBackToMenu} />
+          <p>{activeMenuTitle}</p>
+        </div>
+      </div>
+      <div className={styles.avatarPopover}>{getActiveAvatarMenu()}</div>
+    </Drawer>
   )
 }
 

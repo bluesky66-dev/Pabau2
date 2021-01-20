@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import { Drawer, Menu } from 'antd'
-import { Button, Search } from '@pabau/ui'
+import { Button, Search, Dropdown as AvatarDropDown } from '@pabau/ui'
 import styles from './MobileSidebar.module.less'
 import classNames from 'classnames'
 import { sidebarMenu, SidebarMenuItem } from './sidebarMenu'
@@ -9,6 +9,7 @@ import {
   CloseOutlined,
   MailOutlined,
   PlusCircleFilled,
+  RightOutlined,
   SettingOutlined,
 } from '@ant-design/icons'
 import Avatar from 'antd/lib/avatar/avatar'
@@ -32,6 +33,7 @@ export const Sidebar: FC<SidebarProps> = ({
 }) => {
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([])
+  const [openProfileDrawer, setProfileDrawer] = useState<boolean>(false)
 
   const mobileSidebar: SidebarMenuItem[] = [
     {
@@ -112,9 +114,17 @@ export const Sidebar: FC<SidebarProps> = ({
         {mobileSidebar.map((menuData, index) => {
           return renderMenu(menuData.menuName + index, menuData.menuName, menuData.icon)
         })}
-        <Menu.Item className={styles.sidebarMenu} icon={<Avatar size={24} src={User} />}>
+        <Menu.Item
+          className={classNames(styles.sidebarMenu, styles.profileMenu)}
+          icon={<Avatar size={24} src={User} />}
+          onClick={() => setProfileDrawer(true)}
+        >
+          {/* <div className={styles.profileContent}> */}
           Profile
+          <RightOutlined style={{ fontSize: '14px' }} />
+          {/* </div> */}
         </Menu.Item>
+        {openProfileDrawer && <AvatarDropDown onCloseDrawer={() => setProfileDrawer((e) => !e)} />}
         <div className={styles.buttonMenu}>
           <Button
             className={classNames(styles.buttonStyles, styles.createBtn)}
@@ -126,7 +136,7 @@ export const Sidebar: FC<SidebarProps> = ({
         <div className={styles.buttonMenu}>
           <Link href="/setup">
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a>
+            <a style={{ width: '100%' }}>
               <Button
                 className={classNames(styles.buttonStyles, styles.setUpBtn)}
                 icon={<SettingOutlined />}
