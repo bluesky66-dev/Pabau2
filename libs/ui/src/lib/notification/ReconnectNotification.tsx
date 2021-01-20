@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import { message, Button } from 'antd'
+import { Button } from 'antd'
 import { LoadingOutlined } from '@ant-design/icons'
 import styles from './Notification.module.less'
 
@@ -19,6 +19,7 @@ export const Reconnect: FC<Props> = ({ message, delay }) => {
   const [text, setText] = useState('Connection lost. Reconnecting in ' + delay + ' seconds...')
   const [secondCount, setSecondCount] = useState(delay)
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const decrement = () => {
     const second = secondCount - 1
     setSecondCount(second)
@@ -28,7 +29,7 @@ export const Reconnect: FC<Props> = ({ message, delay }) => {
   useEffect(() => {
     const interval = setInterval(decrement, 1000)
     return () => clearInterval(interval)
-  }, [secondCount])
+  }, [decrement, secondCount])
 
   return (
     <div className={styles.reconnectContainer}>
