@@ -12,7 +12,8 @@
 @disabled-color: rgba(0, 0, 0, 0.25); // disable state color
 // @border-radius-base: 4px; // major border radius
 @border-color-base: #ecedf0; // major border color
-@box-shadow-base: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05); // major shadow for layers
+@box-shadow-base: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+  0 9px 28px 8px rgba(0, 0, 0, 0.05); // major shadow for layers
 @font-variant-base: normal;
 @font-feature-settings-base: normal;
 @font-family: Circular-Std-Book, -apple-system, sans-serif;
@@ -20,7 +21,7 @@
 :root {
   --primary-color: @primary-color;
   --link-color: @link-color;
-  --success-color:@success-color;
+  --success-color: @success-color;
   --warning-color: @warning-color;
   --error-color: @error-color;
   --font-size-base: @font-size-base;
@@ -33,7 +34,7 @@
   --box-shadow-base: @box-shadow-base;
   --grey-text-color: #3d3d46;
   --light-grey-color: #9292a3;
-  --time-notification-text-color:#b8b8c0;
+  --time-notification-text-color: #b8b8c0;
   --font-variant-base: @font-variant-base;
   --font-feature-settings-base: @font-feature-settings-base;
   --font-family: @font-family;
@@ -57,7 +58,8 @@
   src: url('../assets/fonts/CircularStd-Medium.otf') format('otf');
 }
 
-@keyframes emptyanim {}
+@keyframes emptyanim {
+}
 @keyframes spin {
   from {
     transform: rotateX(0deg);
@@ -69,14 +71,14 @@
   }
 }
 
-
 .ant-input-affix-wrapper:hover,
 .ant-input-affix-wrapper:focus {
   border: 1px solid #54b2d3;
   box-sizing: border-box;
   box-shadow: 0px 0px 4px #c0e4f1;
 }
-h1.ant-typography, .ant-typography h1 {
+h1.ant-typography,
+.ant-typography h1 {
   font-family: Circular-Std-Bold;
   font-size: 20px;
   padding-left: 24px;
@@ -99,3 +101,64 @@ h1.ant-typography, .ant-typography h1 {
 //  width: 100%;
 //  padding: 1em;
 //}
+button.chkActive {
+  background: #eef7fb;
+  border: 1px solid #24bee1;
+  box-sizing: border-box;
+  border-radius: 22px;
+}
+button.chkInActive {
+  background: rgba(207, 207, 207, 0.1);
+  border: 1px solid #c0c0c0;
+  box-sizing: border-box;
+  border-radius: 22px;
+}
+button.chkActive span {
+  color: #24bee1;
+}
+button.chkInActive span {
+  color: #c0c0c0;
+}
+.helperPhase {
+  border-bottom: 2px solid #ecedf0;
+  p {
+    .step {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      color: #9292a3;
+      padding-left: 10px;
+    }
+  }
+}
+
+.helperStrength {
+  margin-top: 13px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  display: flow-root;
+  .strengthStart {
+    color: #9292a3;
+    float: left;
+  }
+  .strengthEnd {
+    color: #faad14;
+    float: right;
+  }
+}
+
+.helperPercent {
+  margin-top: 1px;
+  .step {
+    float: left;
+    width: 24%;
+    margin: 0px 1px 0px 1px;
+  }
+  .step.pass {
+    border-bottom: 3px solid #faad14;
+  }
+  .step.nopass {
+    border-bottom: 3px solid #cfcfd7;
+  }
+}

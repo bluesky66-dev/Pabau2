@@ -12,12 +12,12 @@ export function Index() {
   return (
     <Layout>
       <Row className={styles.container}>
-        <Col span={5}>
-          <Button icon={<LeftOutlined />} className="Btn">
+        <Col span={6}>
+          <Button icon={<LeftOutlined />} className="Btn Back">
             Back
           </Button>
         </Col>
-        <Col span={14}>
+        <Col span={12}>
           <h1>Account Settings</h1>
           <Tabs tabPosition={'left'} className={styles.mainBody}>
             <TabPane
@@ -55,7 +55,7 @@ export function Index() {
             </TabPane>
           </Tabs>
         </Col>
-        <Col span={5}>
+        <Col span={6}>
           <Button className="Btn Save">Save Changes</Button>
         </Col>
       </Row>

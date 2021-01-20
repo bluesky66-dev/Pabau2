@@ -1,17 +1,46 @@
-import { CheckOutlined } from '@ant-design/icons'
-import { Button, Checkbox, Descriptions, Divider, Form } from 'antd'
+import { Checkbox, Descriptions, Divider, Form } from 'antd'
+import dynamic from 'next/dynamic'
 import React, { FC } from 'react'
+
+const CheckboxButton = dynamic(() => import('../../../components/CheckboxButton'), {
+  ssr: false,
+})
 
 const Notification: FC = () => {
   const btnOptions = [
-    { key: 1, label: 'iOS', icon: <CheckOutlined />, chked: 'chkActive' },
-    { key: 2, label: 'Email', icon: <CheckOutlined />, chked: 'chkActive' },
-    { key: 3, label: 'SMS', icon: <CheckOutlined />, chked: 'chkActive' },
-    { key: 4, label: 'Pabau Web', icon: '', chked: 'chkInActive' },
+    { key: 1, label: 'iOS', chked: 'chkActive' },
+    { key: 2, label: 'Email', chked: 'chkActive' },
+    { key: 3, label: 'SMS', chked: 'chkInActive' },
+    { key: 4, label: 'Pabau Web', chked: 'chkInActive' },
+  ]
+  const generalNotifications = [
+    { key: 'feed_post', label: 'Feed Post', desc: 'When someone makes a post to the buzzfeeed' },
+    { key: 'like_post', label: 'Like a post', desc: 'When someone likes their wall post' },
+    {
+      key: 'scheduled_report',
+      label: 'Scheduled report',
+      desc: 'When a scheduled report is delivered to you',
+    },
+    {
+      key: 'appt_booked',
+      label: 'Appointment booked',
+      desc: 'When an appointment is booked with them',
+    },
+    {
+      key: 'appt_cancelled',
+      label: 'Appointment cancelled',
+      desc: 'When an appointment is cancelled',
+    },
+    { key: 'lead_enquiry', label: 'Lead Enquiry', desc: 'When you receive new enquiry' },
+  ]
+  const apptNotifications = [
+    { key: '1', label: 'News and announcements' },
+    { key: '2', label: 'New feature release' },
+    { key: '3', label: 'New blog post' },
   ]
   return (
     <>
-      <Descriptions title="Notification">
+      <Descriptions title="Notifications">
         <Descriptions.Item>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </Descriptions.Item>
@@ -21,121 +50,31 @@ const Notification: FC = () => {
         <Form.Item>
           <h1>GENERAL</h1>
         </Form.Item>
-        <Form.Item>
-          <h2>Feed Post</h2>
-          <span>When someone makes a post to the buzzfeeed</span>
-          <br />
-          <br />
-          {btnOptions.map(({ key, label, icon, chked }) => (
-            <Button
-              key={key}
-              shape="round"
-              icon={icon}
-              className={chked}
-              style={{ marginRight: '10px' }}
-            >
-              {label}
-            </Button>
-          ))}
-        </Form.Item>
-        <Divider />
-        <Form.Item>
-          <h2>Like a post</h2>
-          <span>When someone likes their wall post</span>
-          <br />
-          <br />
-          {btnOptions.map(({ key, label, icon, chked }) => (
-            <Button
-              key={key}
-              shape="round"
-              icon={icon}
-              className={chked}
-              style={{ marginRight: '10px' }}
-            >
-              {label}
-            </Button>
-          ))}
-        </Form.Item>
-        <Divider />
-        <Form.Item>
-          <h2>Scheduled report</h2>
-          <span>When a scheduled report is delivered to you</span>
-          <br />
-          <br />
-          {btnOptions.map(({ key, label, icon, chked }) => (
-            <Button
-              key={key}
-              shape="round"
-              icon={icon}
-              className={chked}
-              style={{ marginRight: '10px' }}
-            >
-              {label}
-            </Button>
-          ))}
-        </Form.Item>
-        <Divider />
-        <Form.Item>
-          <h2>Appointment booked</h2>
-          <span>When an appointment is booked with them</span>
-          <br />
-          <br />
-          {btnOptions.map(({ key, label, icon, chked }) => (
-            <Button
-              key={key}
-              shape="round"
-              icon={icon}
-              className={chked}
-              style={{ marginRight: '10px' }}
-            >
-              {label}
-            </Button>
-          ))}
-        </Form.Item>
-        <Divider />
-        <Form.Item>
-          <h2>Appointment cancelled</h2>
-          <span>When an appointment is cancelled</span>
-          <br />
-          <br />
-          {btnOptions.map(({ key, label, icon, chked }) => (
-            <Button
-              key={key}
-              shape="round"
-              icon={icon}
-              className={chked}
-              style={{ marginRight: '10px' }}
-            >
-              {label}
-            </Button>
-          ))}
-        </Form.Item>
-        <Divider />
-        <Form.Item>
-          <h2>Lead Enquiry</h2>
-          <span>When you receive new enquiry</span>
-          <br />
-          <br />
-          {btnOptions.map(({ key, label, icon, chked }) => (
-            <Button
-              key={key}
-              shape="round"
-              icon={icon}
-              className={chked}
-              style={{ marginRight: '10px' }}
-            >
-              {label}
-            </Button>
-          ))}
-        </Form.Item>
-        <Divider />
+        {generalNotifications.map(({ key, label, desc }) => (
+          <>
+            <Form.Item key={key}>
+              <h2>{label}</h2>
+              <span>{desc}</span>
+              <br />
+              <br />
+              {btnOptions.map(({ key, label, chked }) => (
+                <CheckboxButton key={key} label={label} chked={chked} />
+              ))}
+            </Form.Item>
+            <Divider />
+          </>
+        ))}
+
         <Form.Item>
           <h1 className="nofiticaionApp">APPLICATION</h1>
-          <Checkbox>News and announcements</Checkbox>
-          <br />
-          <Checkbox>New feature release</Checkbox>
-          <br />
-          <Checkbox>New feature release</Checkbox>
+          {apptNotifications.map(({ key, label }) => (
+            <>
+              <Checkbox className="nofiticaionAppChk" key={key}>
+                {label}
+              </Checkbox>
+              <br />
+            </>
+          ))}
         </Form.Item>
       </Form>
     </>

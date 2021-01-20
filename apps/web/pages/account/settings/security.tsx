@@ -1,6 +1,21 @@
-import { EyeInvisibleOutlined, EyeTwoTone, LaptopOutlined, MobileOutlined } from '@ant-design/icons'
+import {
+  EyeInvisibleOutlined,
+  EyeOutlined,
+  LaptopOutlined,
+  MobileOutlined,
+} from '@ant-design/icons'
 import { Button, Descriptions, Divider, Form, Input } from 'antd'
+import dynamic from 'next/dynamic'
 import React, { FC } from 'react'
+
+const Passcode = dynamic(() => import('../../../components/Passcode'), {
+  ssr: false,
+})
+
+const PasswordHelper = dynamic(() => import('../../../components/PasswordHelper'), {
+  ssr: false,
+})
+
 const Security: FC = () => {
   return (
     <>
@@ -16,13 +31,10 @@ const Security: FC = () => {
           <span>Changing your password will sign out of all your devices.</span>
         </Form.Item>
         <Form.Item label="Old password">
-          <Input.Password placeholder="Old password" iconRender={(visible) => <EyeTwoTone />} />
+          <Input.Password placeholder="Old password" iconRender={(visible) => <EyeOutlined />} />
         </Form.Item>
         <Form.Item label="New password">
-          <Input.Password
-            placeholder="New password"
-            iconRender={(visible) => <EyeInvisibleOutlined />}
-          />
+          <PasswordHelper />
         </Form.Item>
         <Form.Item label="Confirm password">
           <Input.Password
@@ -41,16 +53,16 @@ const Security: FC = () => {
           <span>Your 4-digit code used to access Pabau Go (for iPad/iPhone)</span>
           <br />
           <br />
-          <Input.Password
-            placeholder="Passcode"
-            iconRender={(visible) => <EyeInvisibleOutlined />}
-          />
+          <Passcode />
         </Form.Item>
       </Form>
       <Divider />
       <Form layout="vertical">
         <Form.Item>
-          <h2>Two-factor authentication</h2>
+          <h2>
+            Two-factor authentication
+            <span className="two-faceor-status"> Disabled</span>
+          </h2>
           <span>
             Two factor authentication adds an extra layer of security to your Pabau account.
           </span>
@@ -75,9 +87,9 @@ const Security: FC = () => {
       <Form layout="vertical">
         <Form.Item>
           <h2>Where you logged in</h2>
-          <span>Some description here.</span>
+          <span>Where you logged in</span>
           <br />
-          <Divider />
+          <Divider className="smallDivider" />
           <div className="whereLoggedIn">
             <div className="iCon">
               <LaptopOutlined />
@@ -89,7 +101,7 @@ const Security: FC = () => {
               </div>
             </div>
           </div>
-          <Divider />
+          <Divider className="smallDivider" />
           <div className="whereLoggedIn">
             <div className="iCon">
               <MobileOutlined />
@@ -101,7 +113,7 @@ const Security: FC = () => {
               </div>
             </div>
           </div>
-          <Divider />
+          <Divider className="smallDivider" />
           <span>Show more</span>
         </Form.Item>
       </Form>

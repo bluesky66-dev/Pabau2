@@ -1,11 +1,20 @@
-import { Avatar, Button, Col, Descriptions, Divider, Form, Input, Row, Select } from 'antd'
-import React, { FC, useState } from 'react'
+import { Button, Col, Descriptions, Divider, Form, Input, Row, Select } from 'antd'
+import dynamic from 'next/dynamic'
+import React, { FC } from 'react'
 
-const ColorList = ['#f0f2f5']
 const { TextArea } = Input
 
+const ReactQuill = dynamic(() => import('../../../components/MyReactQuill'), {
+  ssr: false,
+})
+const LanguageList = dynamic(() => import('../../../components/LanguageList'), {
+  ssr: false,
+})
+const MyAvatar = dynamic(() => import('../../../components/MyAvatar'), {
+  ssr: false,
+})
+
 const Profile: FC = () => {
-  const [color] = useState(ColorList[0])
   const { Option } = Select
 
   const uploadPhoto = () => {
@@ -24,19 +33,11 @@ const Profile: FC = () => {
       <Divider />
       <Form layout="vertical">
         <Form.Item>
-          <Avatar
-            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-            style={{ backgroundColor: color, verticalAlign: 'middle' }}
-            size={64}
-          ></Avatar>
-          <Button
-            size="small"
-            style={{ margin: '0 16px', verticalAlign: 'middle' }}
-            onClick={uploadPhoto}
-          >
+          <MyAvatar />
+          <Button style={{ margin: '0 16px', verticalAlign: 'middle' }} onClick={uploadPhoto}>
             Upload Photo
           </Button>
-          <Button size="small" style={{ verticalAlign: 'middle' }} onClick={deletePhoto}>
+          <Button style={{ verticalAlign: 'middle' }} onClick={deletePhoto}>
             Delete
           </Button>
         </Form.Item>
@@ -56,38 +57,35 @@ const Profile: FC = () => {
         <Row>
           <Col span={24}>
             <Form.Item label="Mobile phone">
-              <Input placeholder="input placeholder" />
+              <Input placeholder="Mobile phone" />
             </Form.Item>
           </Col>
         </Row>
         <Row>
           <Col span={24}>
             <Form.Item label="Biography">
-              <TextArea placeholder="input placeholder" style={{ width: '100%' }} />
+              <TextArea placeholder="Biography" style={{ width: '100%' }} />
             </Form.Item>
           </Col>
         </Row>
         <Row>
           <Col span={24}>
             <Form.Item label="Email signature">
-              <TextArea placeholder="input placeholder" style={{ width: '100%' }} />
+              <ReactQuill />
             </Form.Item>
           </Col>
         </Row>
         <Row>
           <Col span={24}>
             <Form.Item label="Language">
-              <Select defaultValue="english">
-                <Option value="english">English</Option>
-                <Option value="chinese">Chinese</Option>
-              </Select>
+              <LanguageList />
             </Form.Item>
           </Col>
         </Row>
         <Row>
           <Col span={24}>
             <Form.Item label="Timezone">
-              <Select defaultValue="london">
+              <Select defaultValue="london" placeholder="Language">
                 <Option value="london">London/Europe</Option>
                 <Option value="beijing">Bejing/China</Option>
               </Select>
