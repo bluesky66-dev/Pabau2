@@ -59,6 +59,9 @@
     "connect-e2e": {
       "tags": [],
       "implicitDependencies": ["connect"]
+    },
+    "mobile": {
+      "tags": []
     }
   }
 }

@@ -1,10 +1,11 @@
-import React, { FC, PropsWithChildren, useState } from 'react'
+import React, { FC, PropsWithChildren, useState, useEffect } from 'react'
 import { Drawer, Image } from 'antd'
 import styles from './Notification.module.less'
 import { CloseOutlined } from '@ant-design/icons'
 import AppointmentSVG from '../../../assets/images/notification.svg'
 import ReportSVG from '../../../assets/images/notification-report.svg'
 import LeadSVG from '../../../assets/images/notification-lead.svg'
+import { ReactComponent as EmptySVG } from '../../../assets/images/notification-empty.svg'
 import { ReactComponent as Lead1SVG } from '../../../assets/images/lead.svg'
 import { ReactComponent as Lead2SVG } from '../../../assets/images/lead1.svg'
 import classNames from 'classnames'
@@ -13,47 +14,60 @@ export interface NotificationProps {
   closeDrawer: () => void
 }
 
+interface Notification {
+  notificationTime: string
+  notificationType: string
+  title: string
+  desc: string
+}
+interface NotificationData {
+  [key: string]: Notification[]
+}
+
 export const PabauNotification: FC<NotificationProps> = ({
   openDrawer = false,
   closeDrawer,
 }: PropsWithChildren<NotificationProps>) => {
   const [notificationDrawer, setNotificationDrawer] = useState(openDrawer)
   const [notifyTab, setNotifyTab] = useState('Clients')
+  const [notificationData, setNotificationData] = useState<NotificationData[]>([])
 
-  const notificationData = [
-    {
-      Today: [
-        {
-          notificationTime: '3:00 PM',
-          notificationType: 'Appointment',
-          title: 'Cancelled appointment',
-          desc: 'Your appointment at 17:00 PM with John Smith was cancelled',
-        },
-        {
-          notificationTime: '1:20 PM',
-          notificationType: 'Appointment',
-          title: 'Cancelled appointment',
-          desc: 'Your appointment at 17:00 PM with John Smith was cancelled',
-        },
-      ],
-    },
-    {
-      Yesterday: [
-        {
-          notificationTime: '1:20 PM',
-          notificationType: 'Report',
-          title: 'New financial report',
-          desc: 'Your appointment at 17:00 PM with John Smith was cancelled',
-        },
-        {
-          notificationTime: '1:20 PM',
-          notificationType: 'Lead',
-          title: 'New lead',
-          desc: 'John Smith has enquired about Botox',
-        },
-      ],
-    },
-  ]
+  useEffect(() => {
+    setNotificationData([
+      {
+        Today: [
+          {
+            notificationTime: '3:00 PM',
+            notificationType: 'Appointment',
+            title: 'Cancelled appointment',
+            desc: 'Your appointment at 17:00 PM with John Smith was cancelled',
+          },
+          {
+            notificationTime: '1:20 PM',
+            notificationType: 'Appointment',
+            title: 'Cancelled appointment',
+            desc: 'Your appointment at 17:00 PM with John Smith was cancelled',
+          },
+        ],
+      },
+      {
+        Yesterday: [
+          {
+            notificationTime: '1:20 PM',
+            notificationType: 'Report',
+            title: 'New financial report',
+            desc: 'Your appointment at 17:00 PM with John Smith was cancelled',
+          },
+          {
+            notificationTime: '1:20 PM',
+            notificationType: 'Lead',
+            title: 'New lead',
+            desc: 'John Smith has enquired about Botox',
+          },
+        ],
+      },
+    ])
+  }, [])
 
   const notificationLeadsData = [
     {
@@ -82,6 +96,23 @@ export const PabauNotification: FC<NotificationProps> = ({
     setNotificationDrawer(false)
     closeDrawer()
   }
+
+  const removeNotification = (index, objectKey) => {
+    const selectedObject = notificationData[index]
+    delete selectedObject[objectKey]
+    if (Object.keys(selectedObject).length === 0) {
+      notificationData.splice(index, 1)
+      setNotificationData([...notificationData])
+    } else {
+      const newNotificationData = notificationData.map((item, i) => {
+        if (i !== index) {
+          return item
+        }
+        return { ...selectedObject }
+      })
+      setNotificationData([...newNotificationData])
+    }
+  }
   return (
     <Drawer
       width={392}
@@ -91,7 +122,7 @@ export const PabauNotification: FC<NotificationProps> = ({
       visible={notificationDrawer}
       className={styles.notificationDrawer}
     >
-      <div className="">
+      <div className={styles.notificationHeader}>
         <div className={styles.notificationAlign}>
           <h1> Notifications</h1>
           <CloseOutlined onClick={closeDrawerMenu} className={styles.searchIconSize} />
@@ -122,15 +153,18 @@ export const PabauNotification: FC<NotificationProps> = ({
         notificationData.map((notify, index) => {
           return Object.keys(notify).map((notification) => {
             return (
-              <>
+              <div key={notification}>
                 <div className={classNames(styles.notificationAlign, styles.todayTextTopSpace)}>
                   <h2>{notification}</h2>
-                  <CloseOutlined className={styles.searchIconSize} />
+                  <CloseOutlined
+                    className={styles.searchIconSize}
+                    onClick={(e) => removeNotification(index, notification)}
+                  />
                 </div>
-                {notify[notification].map((dayNotify, index) => {
+                {notify[notification].map((dayNotify, dayIndex) => {
                   return (
-                    <>
-                      <div key={index} className={styles.notificationCard}>
+                    <div key={dayIndex}>
+                      <div className={styles.notificationCard}>
                         <div className={styles.notifyAlign}>
                           <div className={classNames(styles.logo, styles.flex)}>
                             <Image
@@ -156,13 +190,26 @@ export const PabauNotification: FC<NotificationProps> = ({
                         </div>
                       </div>
                       <div className={styles.cardBorder}></div>
-                    </>
+                    </div>
                   )
                 })}
-              </>
+              </div>
             )
           })
         })}
+
+      {Array.isArray(notificationData) && notificationData.length === 0 && notifyTab === 'Clients' && (
+        <div className={styles.notificationEmpty}>
+          <EmptySVG />
+          <p className={styles.emptyMessage}>No notifications yet</p>
+          <p className={styles.emptyHint}>
+            Stay tuned! Notifications about your activity will show up here.
+          </p>
+          <a href="#test" className={styles.emptyAnchor}>
+            Notification settings {'>'}
+          </a>
+        </div>
+      )}
 
       {notifyTab === 'Leads' &&
         notificationLeadsData.map((notify, index) => {
@@ -175,7 +222,7 @@ export const PabauNotification: FC<NotificationProps> = ({
                 {notify[notification].map((dayNotify, index) => {
                   return (
                     <>
-                      <div key={index} className={styles.notificationCard}>
+                      <div key={dayNotify.title} className={styles.notificationCard}>
                         <div className={styles.notifyAlign}>
                           <div className={classNames(styles.logo, styles.flex)}>
                             {notification === 'Today' ? <Lead1SVG /> : <Lead2SVG />}

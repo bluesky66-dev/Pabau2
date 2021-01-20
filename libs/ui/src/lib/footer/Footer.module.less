@@ -24,7 +24,7 @@
     .footer-box {
       width: 320px;
       background: #ffffff;
-      border: 1px solid #ecedf0;
+      border: 1px solid var(--border-color-base);
       padding-top: 11px;
       padding-left: 17px;
       padding-right: 17px;
@@ -32,7 +32,7 @@
       padding-bottom: 8px;
     }
     .right-space {
-      margin-left: 24px;
+      margin-right: 24px;
     }
     .icon-text-align {
       display: flex;
@@ -72,7 +72,7 @@
   width: 270px;
   height: 180px;
   background-color: #ffffff;
-  border: 1px solid #ecedf0;
+  border: 1px solid var(--border-color-base);
   border-radius: 4px;
   position: relative;
 }
@@ -126,4 +126,38 @@
 .webinar-banner-end {
   display: flex;
   justify-content: flex-end;
+}
+
+// .grid {
+//   display: grid;
+//   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+// }
+
+@media (min-width: 240px) and (max-width: 767px) {
+  .footer-heading {
+    padding-left: 16px;
+  }
+  .footer-box {
+    width: 100%;
+  }
+  .related-guides {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+  .box-direction {
+    width: 100% !important;
+    margin-bottom: 0px;
+    .footer-box {
+      width: 100% !important;
+    }
+    .right-space {
+      margin-right: 0 !important;
+    }
+  }
+  .box-direction:last-child {
+    margin-bottom: 16px;
+  }
+  .webinar-box {
+    margin-left: 15px;
+  }
 }

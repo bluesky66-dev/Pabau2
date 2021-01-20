@@ -6,6 +6,10 @@
 }
 .pabau-sidebar {
   user-select: none;
+  .sidebar {
+    height: 100%;
+    border-right: 0; 
+  }
   :global {
     .ant-menu-light {
       padding-top: 30px;
@@ -79,5 +83,10 @@
   }
   .sidebar-collapsed {
     padding-left: 32px;
+  }
+}
+@media (min-width:240px) and (max-width:767px) {
+  .pabau-sidebar {
+    display: none;
   }
 }
