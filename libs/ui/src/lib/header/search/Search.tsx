@@ -1,5 +1,5 @@
-import React, { FC, useContext, useEffect, useState } from 'react'
-import { Checkbox, PabauContext } from '@pabau/ui'
+import React, { FC, useEffect, useState } from 'react'
+import { Checkbox } from '@pabau/ui'
 import styles from './Search.module.less'
 import { Input, Popover, Avatar, Image, Form, Button, Drawer } from 'antd'
 import {
@@ -12,6 +12,7 @@ import {
 } from '@ant-design/icons'
 import User from '../../../assets/images/user.png'
 import classNames from 'classnames'
+import { isMobile } from 'react-device-detect'
 
 const WAIT_INTERVAL = 400
 interface P {
@@ -25,7 +26,6 @@ interface P {
 }
 
 export const Search: FC<P> = ({ onChange, searchResults }) => {
-  const context = useContext(PabauContext)
   const [searchDrawer, setSearchDrawer] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const [searchPopUp, setSearchPopUp] = useState(false)
@@ -136,7 +136,7 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
   const advanceSearchMenu = () => {
     return (
       <div className={classNames(styles.advanceSearchModal, styles.advSearchBody)}>
-        {!context.isMobileDevice && (
+        {!isMobile && (
           <div className={styles.backToSearch}>
             <div
               className={styles.basicSearchAlign}
@@ -213,17 +213,9 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
           <Checkbox>
             <span className={styles.inactiveClientText}> Show inactive clients</span>{' '}
           </Checkbox>
-          <div
-            className={classNames(
-              styles.buttonEnd,
-              context.isMobileDevice && styles.searchBtnBlock
-            )}
-          >
+          <div className={classNames(styles.buttonEnd, isMobile && styles.searchBtnBlock)}>
             <Button
-              className={classNames(
-                styles.btnDisableStyle,
-                context.isMobileDevice && styles.mobileviewBtnSize
-              )}
+              className={classNames(styles.btnDisableStyle, isMobile && styles.mobileviewBtnSize)}
               disabled={true}
               size="large"
             >
@@ -244,7 +236,7 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
 
   return (
     <div style={{ width: '100%' }}>
-      {!context.isMobileDevice ? (
+      {!isMobile ? (
         <Popover
           content={renderMenu}
           visible={searchPopUp}

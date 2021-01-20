@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useContext, useState } from 'react'
+import React, { FC, useCallback, useState } from 'react'
 import { Col, Dropdown, Layout, Menu, Row } from 'antd'
 import {
   BellOutlined,
@@ -13,11 +13,12 @@ import {
 
 import { Logo } from '../logo/Logo'
 import styles from './Header.module.less'
-import { Button, Dropdown as AvatarDropDown, PabauContext } from '@pabau/ui'
+import { Button, Dropdown as AvatarDropDown } from '@pabau/ui'
 import { Search } from './search/Search'
 import PabauNotification from './notification/Notification'
 import PabauMessages from './messages/Messages'
 import { Sidebar } from '../sidebar/MobileSidebar'
+import { isMobile } from 'react-device-detect'
 const AntHeader = Layout.Header
 
 interface P {
@@ -44,7 +45,6 @@ const items = [
 ]
 
 export const Header: FC<P> = ({ searchRender, ...props }) => {
-  const context = useContext(PabauContext)
   const [openNotificationDrawer, setNotificationDrawer] = useState<boolean>(false)
   const [openMessageDrawer, setMessageDrawer] = useState<boolean>(false)
   const [openMenuDrawer, setMenuDrawer] = useState<boolean>(false)
@@ -61,7 +61,7 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
   )
   return (
     <>
-      {!context.isMobileDevice && (
+      {!isMobile ? (
         <AntHeader className={styles.pabauHeader}>
           <div
             style={{
@@ -82,7 +82,6 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
               </Col>
               <Col md={8} className={styles.headerIconEnd}>
                 <div className={styles.headerAlign}>
-                  {/* <SettingOutlined className={styles.headerIcon} /> */}
                   <BellOutlined
                     className={styles.headerIcon}
                     onClick={() => setNotificationDrawer((e) => !e)}
@@ -104,7 +103,7 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
             </Row>
           </div>
         </AntHeader>
-      )}
+      ) : null}
       {openNotificationDrawer && (
         <PabauNotification
           openDrawer={openNotificationDrawer}
@@ -118,8 +117,8 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
         />
       )}
       {/* mobile responsive header start */}
-      {context.isMobileDevice && (
-        <>
+      {isMobile ? (
+        <div>
           <AntHeader className={styles.pabauMobileHeader}>
             <div className={styles.mobileViewAlign}>
               <div className={styles.mobileViewHeaderHeading}>
@@ -141,9 +140,8 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
               onClickChatDrawer={() => setMessageDrawer((e) => !e)}
             />
           )}
-          )
-        </>
-      )}
+        </div>
+      ) : null}
       {/* mobile responsive header end */}
     </>
   )
