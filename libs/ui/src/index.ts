@@ -1,4 +1,5 @@
-export * from './lib/notification-banner/NotificationBanner'
+export * from './lib/security/SecurityScore'
+export * from './lib/notificationBanner/NotificationBanner'
 export * from './lib/button/button'
 export * from './lib/menu/Menu'
 export * from './lib/layout/Layout'
