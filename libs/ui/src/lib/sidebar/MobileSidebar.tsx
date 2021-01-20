@@ -25,7 +25,7 @@ interface SidebarProps {
   onClickChatDrawer: () => void
 }
 
-export const Sidebar: FC<SidebarProps> = ({
+export const MobileSidebar: FC<SidebarProps> = ({
   searchRender,
   onSideBarClosed,
   onClickNotificationDrawer,
@@ -117,12 +117,12 @@ export const Sidebar: FC<SidebarProps> = ({
         <Menu.Item
           className={classNames(styles.sidebarMenu, styles.profileMenu)}
           icon={<Avatar size={24} src={User} />}
-          onClick={() => setProfileDrawer(true)}
+          onClick={() => {
+            setProfileDrawer(true)
+          }}
         >
-          {/* <div className={styles.profileContent}> */}
           Profile
           <RightOutlined style={{ fontSize: '14px' }} />
-          {/* </div> */}
         </Menu.Item>
         {openProfileDrawer && <AvatarDropDown onCloseDrawer={() => setProfileDrawer((e) => !e)} />}
         <div className={styles.buttonMenu}>
@@ -151,4 +151,4 @@ export const Sidebar: FC<SidebarProps> = ({
   )
 }
 
-export default Sidebar
+export default MobileSidebar

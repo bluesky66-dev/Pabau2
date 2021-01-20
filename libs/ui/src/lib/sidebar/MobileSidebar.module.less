@@ -6,6 +6,22 @@
     .ant-drawer-body {
       padding: 0;
     }
+    // .ant-menu-inline {
+    //   height: auto !important;
+    // }
+    .ant-menu-inline .ant-menu-item,
+    .ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title,
+    .ant-menu-sub.ant-menu-inline > .ant-menu-item {
+      height: 48px;
+      line-height: 48px;
+    }
+    .ant-menu-inline .ant-menu-submenu-title {
+      margin: 0px;
+    }
+    .ant-menu-inline .ant-menu-item::after {
+      right: unset;
+      left: 0;
+    }
   }
 }
 .divborder {
@@ -90,25 +106,6 @@
 .searchBox {
   padding: 16px 24px;
   border: 1px solid var(--border-color-base);
-}
-
-:global {
-  // .ant-menu-inline {
-  //   height: auto !important;
-  // }
-  .ant-menu-inline .ant-menu-item,
-  .ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title,
-  .ant-menu-sub.ant-menu-inline > .ant-menu-item {
-    height: 48px;
-    line-height: 48px;
-  }
-  .ant-menu-inline .ant-menu-submenu-title {
-    margin: 0px;
-  }
-  .ant-menu-inline .ant-menu-item::after {
-    right: unset;
-    left: 0;
-  }
 }
 
 .sidebarSubMenu {
