@@ -4,7 +4,6 @@ import {
   BellOutlined,
   CalendarOutlined,
   MailOutlined,
-  MenuOutlined,
   PlusCircleFilled,
   PoundOutlined,
   SmileOutlined,
@@ -17,8 +16,7 @@ import { Button, Dropdown as AvatarDropDown } from '@pabau/ui'
 import { Search } from './search/Search'
 import PabauNotification from './notification/Notification'
 import PabauMessages from './messages/Messages'
-import { Sidebar } from '../sidebar/MobileSidebar'
-import { isMobile } from 'react-device-detect'
+import { isMobile, isTablet } from 'react-device-detect'
 const AntHeader = Layout.Header
 
 interface P {
@@ -47,7 +45,6 @@ const items = [
 export const Header: FC<P> = ({ searchRender, ...props }) => {
   const [openNotificationDrawer, setNotificationDrawer] = useState<boolean>(false)
   const [openMessageDrawer, setMessageDrawer] = useState<boolean>(false)
-  const [openMenuDrawer, setMenuDrawer] = useState<boolean>(false)
 
   const handleMenuClick = useCallback(() => alert('Not yet done'), [])
   const overlay = (
@@ -61,7 +58,7 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
   )
   return (
     <>
-      {!isMobile ? (
+      {isTablet || !isMobile ? (
         <AntHeader className={styles.pabauHeader}>
           <div
             style={{
@@ -116,33 +113,6 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
           closeDrawer={() => setMessageDrawer((e) => !e)}
         />
       )}
-      {/* mobile responsive header start */}
-      {isMobile ? (
-        <div>
-          <AntHeader className={styles.pabauMobileHeader}>
-            <div className={styles.mobileViewAlign}>
-              <div className={styles.mobileViewHeaderHeading}>
-                <MenuOutlined
-                  className="menuHeaderIconColor"
-                  onClick={() => {
-                    setMenuDrawer((e) => !openMenuDrawer)
-                  }}
-                />
-                <p>Setup</p>
-              </div>
-            </div>
-          </AntHeader>
-          {openMenuDrawer && (
-            <Sidebar
-              searchRender={searchRender}
-              onSideBarClosed={() => setMenuDrawer((e) => !openMenuDrawer)}
-              onClickNotificationDrawer={() => setNotificationDrawer((e) => !e)}
-              onClickChatDrawer={() => setMessageDrawer((e) => !e)}
-            />
-          )}
-        </div>
-      ) : null}
-      {/* mobile responsive header end */}
     </>
   )
 }
