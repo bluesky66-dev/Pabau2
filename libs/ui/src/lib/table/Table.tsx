@@ -1,9 +1,10 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Table as AntTable } from 'antd'
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc'
 import { MenuOutlined } from '@ant-design/icons'
 import styles from './Table.module.less'
 import { TableProps } from 'antd/es/table'
+import BasicModal from '../modal/basicmodal'
 export interface DragProps {
   draggable?: boolean
   updateDataSource?: ({ newData, oldIndex, newIndex }) => void
@@ -30,11 +31,12 @@ function array_move(arr, old_index, new_index) {
   })
 }
 
-export const Table: FC<TableProps<never> & DragProps> = ({
-  dataSource = [],
-  updateDataSource,
-  ...props
-}) => {
+type P = {
+  onRowClick: (e) => void
+} & TableProps<never> &
+  DragProps
+
+export const Table: FC<P> = ({ dataSource = [], updateDataSource, onRowClick, ...props }) => {
   const onSortEnd = ({ oldIndex, newIndex }) => {
     if (oldIndex !== newIndex) {
       const newData = array_move(dataSource, oldIndex, newIndex)
@@ -74,6 +76,18 @@ export const Table: FC<TableProps<never> & DragProps> = ({
   return (
     <AntTable
       {...props}
+      onRow={(record, rowIndex) => {
+        return {
+          onClick: (event) => {
+            console.log(event, record)
+            onRowClick?.(record)
+          }, // click row
+          //   onDoubleClick: (event) => {}, // double click row
+          //   onContextMenu: (event) => {}, // right button click row
+          //   onMouseEnter: (event) => {}, // mouse enter row
+          //   onMouseLeave: (event) => {}, // mouse leave row
+        }
+      }}
       pagination={false}
       dataSource={dataSource}
       columns={renderSortHandler()}

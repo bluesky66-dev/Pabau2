@@ -1,16 +1,19 @@
 import { Formik, FormikErrors } from 'formik'
-import { Form as AntForm, Input } from 'formik-antd'
+import { Form as AntForm } from 'antd'
 import React from 'react'
+import { Input } from 'antd'
 
 export default function Form<T>({
   onRef,
   schema: { fields },
   onSubmit,
+  initialValues,
 }: {
   // eslint-disable-next-line
   onRef?: (ref: any) => void
   schema: Schema
   onSubmit: (form: T) => false | string | void | Promise<false | string | void>
+  initialValues: T
 }): JSX.Element {
   return (
     <Formik
@@ -33,30 +36,27 @@ export default function Form<T>({
           return a
         }, {} as FormikErrors<T>)
       }
-      onSubmit={async (values) => onSubmit?.(values)}
-      initialValues={Object.keys(fields).reduce((a, c) => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        a[c] = ''
-        return a
-      }, {} as T)}
-      render={({ isSubmitting }) => (
+      onSubmit={async (values) => onSubmit?.(values as T)}
+      initialValues={initialValues}
+    >
+      {({ isSubmitting, initialValues }) => (
         <AntForm layout="vertical">
           {Object.entries(fields).map(
             ([name, { short, shortLower, example, description, extra, min }], i) => (
               <AntForm.Item
+                //initialValue={initialValues[name]}
                 key={name}
                 label={short}
                 name={name}
                 required={!!min}
                 tooltip={`${description} for this ${shortLower}, eg: ${example}`}
-                //showValidateSuccess={!!min}
+                // showValidateSuccess={!!min}
                 extra={extra && <div>{extra}</div>}
               >
                 <Input
                   disabled={isSubmitting}
                   name={name}
-                  placeholder={`eg ${example}`}
+                  placeholder={example && `eg ${example}`}
                   autoFocus={i === 0}
                 />
               </AntForm.Item>
@@ -64,6 +64,6 @@ export default function Form<T>({
           )}
         </AntForm>
       )}
-    />
+    </Formik>
   )
 }

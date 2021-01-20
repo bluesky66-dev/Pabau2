@@ -2,7 +2,7 @@ import { Table, useLiveQuery, Pagination } from '@pabau/ui'
 import React, { FC, useEffect, useState } from 'react'
 import { DocumentNode } from '@apollo/client'
 import AddButton from './AddButton'
-// import DeleteButton from './DeleteButton'
+import CrudModal from './CrudModal'
 
 interface P {
   schema: Schema
@@ -15,6 +15,9 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery }) => {
   const { data, error, loading } = useLiveQuery(listQuery)
 
   const [sourceData, setSourceData] = useState(null)
+  const [modalShowing, setModalShowing] = useState<
+    Record<string, string | boolean | number> | false
+  >(false)
 
   useEffect(() => {
     setSourceData(data)
@@ -25,6 +28,15 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery }) => {
   return (
     <>
       {addQuery && <AddButton addQuery={addQuery} listQuery={listQuery} schema={schema} />}
+
+      <CrudModal
+        schema={schema}
+        editingRow={modalShowing}
+        addQuery={addQuery}
+        listQuery={listQuery}
+        deleteQuery={deleteQuery}
+        onClose={() => setModalShowing(false)}
+      />
 
       <Table
         loading={loading}
@@ -71,6 +83,7 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery }) => {
           setSourceData(newData)
           console.log('newData, oldIndex, newIndex ', { newData, oldIndex, newIndex })
         }}
+        onRowClick={(e) => setModalShowing(e)}
       />
       <Pagination total={50} defaultPageSize={10} defaultCurrent={1} />
     </>

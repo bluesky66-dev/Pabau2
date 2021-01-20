@@ -1,6 +1,9 @@
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, useState } from 'react'
 import { Modal } from 'antd'
 import Button from '../button/button'
+import NotActiveSVG from '../../assets/images/notactive.svg'
+import ActiveSVG from '../../assets/images/active.svg'
+import styles from './basicmodal.module.less'
 
 interface P {
   onOk?: () => void
@@ -9,6 +12,21 @@ interface P {
   newButtonText?: string
   title?: string
   modalWidth?: number
+
+  /**
+   * Creates a special tickbox next to the OK button
+   */
+  onSpecialBooleanClick?: () => void
+
+  /**
+   * Creates a special tickbox next to the OK button
+   */
+  specialBooleanLabel?: string
+
+  /**
+   * Creates a special tickbox next to the OK button
+   */
+  specialBooleanValue?: boolean
 }
 
 export function BasicModal({
@@ -18,6 +36,10 @@ export function BasicModal({
   children,
   title,
   modalWidth,
+  specialBooleanLabel,
+  specialBooleanValue,
+  onSpecialBooleanClick,
+  newButtonText = 'OK',
 }: PropsWithChildren<P>): JSX.Element {
   return (
     <Modal
@@ -30,11 +52,29 @@ export function BasicModal({
       width={modalWidth}
       destroyOnClose={true}
       modalRender={(E) => E}
+      wrapClassName={styles.modal}
     >
-      <div>{children}</div>
-      <div style={{ marginTop: '2em', display: 'flex', placeContent: 'flex-end' }}>
+      <div className={styles.modalBody}>{children}</div>
+      <div className={styles.modalFooter}>
+        {specialBooleanLabel && (
+          <div
+            className={'pretty p-svg p-toggle p-plain'}
+            onClick={() => {
+              onSpecialBooleanClick?.()
+            }}
+          >
+            <div>
+              {!specialBooleanValue ? (
+                <img className="svg" src={NotActiveSVG} alt="none-active-state" />
+              ) : (
+                <img className="svg" src={ActiveSVG} alt="active-state" />
+              )}
+              <label>{specialBooleanLabel}</label>
+            </div>
+          </div>
+        )}
         <Button type="primary" onClick={() => onOk?.()}>
-          Create
+          {newButtonText}
         </Button>
       </div>
     </Modal>
