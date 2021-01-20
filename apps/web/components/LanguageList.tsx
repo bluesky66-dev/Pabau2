@@ -14,6 +14,7 @@ const LanguageList: FC = () => {
       {langs.map(({ key, label, value, img }) => (
         <Option key={key} value={value}>
           <img
+            alt={label}
             src={img}
             style={{ width: '18px', height: '18px', borderRadius: '10%', marginBottom: '2px' }}
           />{' '}
