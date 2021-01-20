@@ -23,7 +23,7 @@ import { languageMenu } from '../../assets/images/lang-logos'
 import styles from './dropdown.module.less'
 import classNames from 'classnames'
 import QueueAnim from 'rc-queue-anim'
-import { isMobile } from 'react-device-detect'
+import { isMobile, isTablet } from 'react-device-detect'
 export interface DropDownInterface {
   onCloseDrawer?: () => void
 }
@@ -287,7 +287,7 @@ export const Dropdown: FC<DropDownInterface> = ({ onCloseDrawer }): JSX.Element 
     }
   }
 
-  return !isMobile ? (
+  return isTablet || !isMobile ? (
     <Popover
       content={getActiveAvatarMenu}
       trigger="click"
