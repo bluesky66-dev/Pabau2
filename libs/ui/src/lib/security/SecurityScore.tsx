@@ -12,14 +12,17 @@ export interface SecurityScoreProps {
 export function SecurityScore(props: SecurityScoreProps) {
   const { percent = 0 } = props
 
-  let progressColor
+  let progressColor, stateStr
 
   if (percent < 30) {
     progressColor = 'red'
+    stateStr = 'Bad'
   } else if (percent >= 30 && percent < 60) {
     progressColor = 'yellow'
+    stateStr = 'Good'
   } else {
     progressColor = 'green'
+    stateStr = 'Excellent'
   }
 
   return (
@@ -27,7 +30,7 @@ export function SecurityScore(props: SecurityScoreProps) {
       <Row style={{ position: 'relative' }}>
         <Col md={5} sm={5}>
           <p className={styles.scoreTitle}>Pabau Baseline Standart</p>
-          <p className={styles.scorePercent}> {percent || 0}% Good</p>
+          <p className={styles.scorePercent}> {percent || 0}% {stateStr}</p>
           <p className={styles.scoreTitle1}>of the standart met</p>
         </Col>
         <Col md={19} sm={19}>
