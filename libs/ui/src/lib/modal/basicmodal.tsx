@@ -39,7 +39,7 @@ export function BasicModal({
     >
       <div className={styles.modalBody}>{children}</div>
       <div className={styles.modalFooter}>
-        <Button type="primary"  size="large" onClick={() => onOk?.()}>
+        <Button type="primary" size="large" onClick={() => onOk?.()}>
           Create
         </Button>
       </div>
