@@ -10,7 +10,12 @@ export enum NotificationType {
   delete = 'delete',
 }
 
-export const openNotification = (notificationType: string, text: string, delay: number): void => {
+export const openNotification = (
+  notificationType: string,
+  text: string,
+  delay: number,
+  offset = '65px'
+): void => {
   if (notificationType === NotificationType.connect) {
     message.open({
       type: 'success',
@@ -26,6 +31,9 @@ export const openNotification = (notificationType: string, text: string, delay: 
         </div>
       ),
       duration: delay,
+      style: {
+        marginTop: offset,
+      },
     })
   } else if (notificationType === NotificationType.edit) {
     message.open({
@@ -36,6 +44,9 @@ export const openNotification = (notificationType: string, text: string, delay: 
         </div>
       ),
       duration: delay,
+      style: {
+        marginTop: offset,
+      },
     })
   } else if (notificationType === NotificationType.delete) {
     message.open({
@@ -46,6 +57,9 @@ export const openNotification = (notificationType: string, text: string, delay: 
         </div>
       ),
       duration: delay,
+      style: {
+        marginTop: offset,
+      },
     })
   }
 }

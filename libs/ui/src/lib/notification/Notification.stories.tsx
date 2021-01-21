@@ -17,6 +17,7 @@ export default {
     },
     text: { control: { type: 'text' } },
     delay: { control: { type: 'number' } },
+    offset: { control: { type: 'text' } },
   },
 }
 
