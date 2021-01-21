@@ -1,7 +1,5 @@
 /* eslint-disable */
 import React from 'react'
-
-import './Statuslabel.module.less'
 import btn_enable from '../../assets/images/security/btn_enable.svg'
 import btn_disabled from '../../assets/images/security/close.svg'
 import styles from './Statuslabel.module.less'

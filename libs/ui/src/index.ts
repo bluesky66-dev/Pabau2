@@ -1,3 +1,5 @@
+export * from './lib/stepper/Stepper'
+export * from './lib/wizard/Wizard'
 export * from './lib/statuslabel/Statuslabel'
 export * from './lib/security/SecurityScore'
 export * from './lib/notificationBanner/NotificationBanner'
