@@ -10,6 +10,7 @@ import styles from './CrudTable.module.less'
 import Layout from './Layout/Layout'
 import { LeftOutlined } from '@ant-design/icons'
 import classNames from 'classnames'
+import Link from 'next/link'
 const { Title } = Typography
 // import DeleteButton from './DeleteButton'
 
@@ -37,7 +38,9 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery }) => {
         <MobileHeader className={styles.marketingSourceHeader}>
           <div className={styles.allContentAlignMobile}>
             <div className={styles.marketingTextStyle}>
-              <LeftOutlined />
+              <Link href="/">
+                <LeftOutlined />
+              </Link>
               <p> Marketing sources </p>
             </div>
             {addQuery && <AddButton addQuery={addQuery} listQuery={listQuery} schema={schema} />}

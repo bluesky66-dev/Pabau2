@@ -15,6 +15,7 @@ import {
 import Avatar from 'antd/lib/avatar/avatar'
 import User from '../../assets/images/users/stephen.png'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const { SubMenu } = Menu
 
@@ -31,6 +32,7 @@ export const MobileSidebar: FC<SidebarProps> = ({
   onClickNotificationDrawer,
   onClickChatDrawer,
 }) => {
+  const router = useRouter()
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([])
   const [openProfileDrawer, setProfileDrawer] = useState<boolean>(false)
@@ -69,6 +71,9 @@ export const MobileSidebar: FC<SidebarProps> = ({
       onClickNotificationDrawer()
     } else if (e.key.includes('Chat')) {
       onClickChatDrawer()
+    }
+    if (e.key.includes('Marketing')) {
+      router.push('/marketing/sources')
     }
   }
 
