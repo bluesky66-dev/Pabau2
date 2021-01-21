@@ -30,6 +30,14 @@ const ADD_MUTATION = gql`
     }
   }
 `
+const EDIT_MUTATION = gql`
+  mutation update_marketing_campaign_by_pk($id: uuid!, $name: String!) {
+    update_marketing_campaign_by_pk(pk_columns: { id: $id }, _set: { name: $name }) {
+      __typename
+      id
+    }
+  }
+`
 
 const schema: Schema = {
   full: 'Marketing Campaign',
@@ -57,6 +65,7 @@ export const Index: NextPage = () => {
         addQuery={ADD_MUTATION}
         deleteQuery={DELETE_MUTATION}
         listQuery={LIST_QUERY}
+        editQuery={EDIT_MUTATION}
       />
     </Layout>
   )

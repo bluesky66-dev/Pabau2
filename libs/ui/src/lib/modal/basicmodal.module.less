@@ -1,0 +1,131 @@
+.modal {
+  font-family: Circular-Std-Book;
+  :global {
+    .ant-modal-content {
+      background: #ffffff;
+      box-shadow: 4px 4px 23px rgba(0, 34, 65, 0.15);
+      border-radius: 8px;
+    }
+    .ant-modal-header {
+      border-bottom-width: 0;
+      padding: 40px;
+      padding-bottom: 19px;
+      border-radius: 8px;
+    }
+    .ant-modal-title {
+      font-family: Circular-Std-Medium;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 28px;
+      text-transform: capitalize;
+      color: #3d3d46;
+    }
+
+    .ant-modal-body {
+      padding: 0 !important;
+    }
+
+    .ant-form-item-has-error .ant-input,
+    .ant-form-item-explain .ant-form-item-explain-error {
+      border: 1px solid #ff5b64 !important;
+    }
+  }
+
+  .modal-heading-align {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    :global {
+      .anticon-close {
+        color: #9292a3;
+        font-size: 14px;
+      }
+    }
+  }
+  .modal-body {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .input-field label {
+    font-family: Circular-Std-Book;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: #9292a3;
+  }
+  .input-field .ant-form-item-label {
+    padding: 0 !important;
+  }
+  .input-field .input-style {
+    font-family: Circular-Std-Book;
+    border: 1px solid #ecedf0 !important;
+    border-radius: 4px !important;
+    height: 40px !important;
+    border-radius: 2px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: #3d3d46;
+  }
+
+  .modal-footer {
+    margin-top: 2em;
+    place-content: flex-end;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 40px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  :global {
+    .pretty {
+      margin-right: 2em;
+    }
+    .pretty .state label {
+      line-height: 28px;
+      text-indent: 2.5em;
+      font-size: 14px;
+      color: #9292a3;
+    }
+    .pretty.p-svg .state .svg {
+      font-size: 24px;
+      top: 0;
+    }
+    input[type='checkbox'] {
+      height: 24px;
+    }
+    .pretty .state label:before {
+      color: #d5d5db;
+    }
+    .ant-checkbox + span {
+      padding-right: 24px !important;
+    }
+    .ant-btn[disabled] {
+      background-color: #d5d5d5 !important;
+    }
+  }
+  .createBtn {
+    padding: 7px 14px;
+    min-width: 76px;
+    text-align: center;
+    color: #ffffff;
+    border-radius: 4px;
+    border: none;
+    background-color: var(--primary-color);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    text-transform: capitalize;
+  }
+}
