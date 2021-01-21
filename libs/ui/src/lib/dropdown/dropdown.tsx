@@ -23,15 +23,17 @@ import { languageMenu } from '../../assets/images/lang-logos'
 import styles from './dropdown.module.less'
 import classNames from 'classnames'
 import QueueAnim from 'rc-queue-anim'
-import { isMobile, isTablet } from 'react-device-detect'
+// import { isMobile, isTablet } from 'react-device-detect'
 export interface DropDownInterface {
+  isOpen?: boolean
   onCloseDrawer?: () => void
 }
 
-export const Dropdown: FC<DropDownInterface> = ({ onCloseDrawer }): JSX.Element => {
+export const Dropdown: FC<DropDownInterface> = ({ isOpen, onCloseDrawer }): JSX.Element => {
   const [activeMenu, setActiveMenu] = useState('Menu')
 
   // used for mobile device
+  const [openProfileDrawer, setProfileDrawer] = useState(isOpen)
   const [activeMenuTitle, setActiveMenuTitle] = useState('Profile')
 
   const menu = (
@@ -283,43 +285,58 @@ export const Dropdown: FC<DropDownInterface> = ({ onCloseDrawer }): JSX.Element 
       setActiveMenuTitle('Profile')
       setActiveMenu('Menu')
     } else {
+      setProfileDrawer(false)
       onCloseDrawer?.()
     }
   }
 
-  return isTablet || !isMobile ? (
-    <Popover
-      content={getActiveAvatarMenu}
-      trigger="click"
-      placement="bottomRight"
-      overlayClassName={styles.avatarPopover}
-    >
-      <div
-        style={{ display: 'flex', alignItems: 'center', paddingLeft: '20px', cursor: 'pointer' }}
-      >
-        <Badge
-          dot
-          color="#65CD98"
-          offset={[-2, 30]}
-          size="default"
-          style={{ height: '8px', width: '8px' }}
+  return (
+    <div>
+      <div className={styles.mobileViewNone}>
+        <Popover
+          content={getActiveAvatarMenu}
+          trigger="click"
+          placement="bottomRight"
+          overlayClassName={styles.avatarPopover}
         >
-          <Avatar size={40} icon={<UserOutlined />} />
-        </Badge>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              paddingLeft: '20px',
+              cursor: 'pointer',
+            }}
+          >
+            <Badge
+              dot
+              color="#65CD98"
+              offset={[-2, 30]}
+              size="default"
+              style={{ height: '8px', width: '8px' }}
+            >
+              <Avatar size={40} icon={<UserOutlined />} />
+            </Badge>
 
-        <CaretDownOutlined style={{ paddingLeft: '5px', color: '#9292A3' }} />
+            <CaretDownOutlined style={{ paddingLeft: '5px', color: '#9292A3' }} />
+          </div>
+        </Popover>
       </div>
-    </Popover>
-  ) : (
-    <Drawer visible={true} placement="left" closable={false} className={styles.mobileAvatarDrawar}>
-      <div className={styles.mobileViewAlign}>
-        <div className={styles.mobileViewHeaderHeading}>
-          <LeftOutlined onClick={onClickMobileBackToMenu} />
-          <p>{activeMenuTitle}</p>
+
+      <Drawer
+        visible={openProfileDrawer}
+        placement="left"
+        closable={false}
+        className={classNames(styles.mobileAvatarDrawar)}
+      >
+        <div className={styles.mobileViewAlign}>
+          <div className={styles.mobileViewHeaderHeading}>
+            <LeftOutlined onClick={onClickMobileBackToMenu} />
+            <p>{activeMenuTitle}</p>
+          </div>
         </div>
-      </div>
-      <div className={styles.avatarPopover}>{getActiveAvatarMenu()}</div>
-    </Drawer>
+        <div className={styles.avatarPopover}>{getActiveAvatarMenu()}</div>
+      </Drawer>
+    </div>
   )
 }
 

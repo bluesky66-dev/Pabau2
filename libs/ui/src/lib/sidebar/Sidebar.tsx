@@ -45,7 +45,7 @@ export const Sidebar: FC<SidebarProps> = ({ onSideBarCollapsed }) => {
   return (
     <Sider
       trigger={null}
-      className={styles.pabauSidebar}
+      className={classNames(styles.pabauSidebar, styles.mobileViewNone)}
       collapsed={collapsed}
       style={{
         overflow: 'auto',

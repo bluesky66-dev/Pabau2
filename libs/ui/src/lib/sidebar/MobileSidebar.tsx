@@ -124,7 +124,12 @@ export const MobileSidebar: FC<SidebarProps> = ({
           Profile
           <RightOutlined style={{ fontSize: '14px' }} />
         </Menu.Item>
-        {openProfileDrawer && <AvatarDropDown onCloseDrawer={() => setProfileDrawer((e) => !e)} />}
+        {openProfileDrawer && (
+          <AvatarDropDown
+            isOpen={openProfileDrawer}
+            onCloseDrawer={() => setProfileDrawer((e) => !e)}
+          />
+        )}
         <div className={styles.buttonMenu}>
           <Button
             className={classNames(styles.buttonStyles, styles.createBtn)}

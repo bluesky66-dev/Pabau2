@@ -6,7 +6,8 @@ import { useKeyPressEvent } from 'react-use'
 import styles from './CrudTable.module.less'
 import { FilterOutlined, PlusSquareFilled, SearchOutlined } from '@ant-design/icons'
 import { Input, Radio, Popover } from 'antd'
-import { isMobile, isTablet } from 'react-device-detect'
+import classNames from 'classnames'
+// import { isMobile, isTablet } from 'react-device-detect'
 interface P {
   schema: Schema
   addQuery: DocumentNode
@@ -48,44 +49,38 @@ const AddButton: FC<P> = ({
   )
   return (
     <>
-      {!isTablet && isMobile ? (
-        <div className={styles.marketingIcon}>
-          <SearchOutlined className={styles.marketingIconStyle} />
-          <FilterOutlined className={styles.marketingIconStyle} />
-          <PlusSquareFilled
-            className={styles.plusIconStyle}
-            onClick={() => setModalShowing(true)}
-          />
-        </div>
-      ) : (
-        <div className={styles.marketingSource}>
-          <Input
-            className={styles.searchMarketingStyle}
-            placeholder="Search"
-            value={marketingSourceSearch}
-            onChange={(e) => setMarketingSourceSearch(e.target.value)}
-            suffix={<SearchOutlined style={{ color: '#8C8C8C' }} />}
-            autoFocus
-          />
-          <Popover
-            trigger="click"
-            content={filterContent}
-            placement="bottomRight"
-            overlayClassName={styles.filterPopover}
-          >
-            <Button className={styles.filterBtn}>
-              <FilterOutlined /> Filter
-            </Button>
-          </Popover>
-          <Button
-            className={styles.createSourceBtn}
-            type="primary"
-            onClick={() => setModalShowing(true)}
-          >
-            {newButtonText}
+      <div className={classNames(styles.marketingIcon, styles.desktopViewNone)}>
+        <SearchOutlined className={styles.marketingIconStyle} />
+        <FilterOutlined className={styles.marketingIconStyle} />
+        <PlusSquareFilled className={styles.plusIconStyle} onClick={() => setModalShowing(true)} />
+      </div>
+      <div className={classNames(styles.marketingSource, styles.mobileViewNone)}>
+        <Input
+          className={styles.searchMarketingStyle}
+          placeholder="Search"
+          value={marketingSourceSearch}
+          onChange={(e) => setMarketingSourceSearch(e.target.value)}
+          suffix={<SearchOutlined style={{ color: '#8C8C8C' }} />}
+          autoFocus
+        />
+        <Popover
+          trigger="click"
+          content={filterContent}
+          placement="bottomRight"
+          overlayClassName={styles.filterPopover}
+        >
+          <Button className={styles.filterBtn}>
+            <FilterOutlined /> Filter
           </Button>
-        </div>
-      )}
+        </Popover>
+        <Button
+          className={styles.createSourceBtn}
+          type="primary"
+          onClick={() => setModalShowing(true)}
+        >
+          {newButtonText}
+        </Button>
+      </div>
       <Modal
         onCancel={() => setModalShowing(false)}
         onOk={() => formRef?.submitForm()}

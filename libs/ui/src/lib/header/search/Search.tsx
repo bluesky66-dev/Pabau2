@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons'
 import User from '../../../assets/images/user.png'
 import classNames from 'classnames'
-import { isMobile, isTablet } from 'react-device-detect'
+// import { isMobile, isTablet } from 'react-device-detect'
 
 const WAIT_INTERVAL = 400
 interface P {
@@ -136,27 +136,26 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
   const advanceSearchMenu = () => {
     return (
       <div className={classNames(styles.advanceSearchModal, styles.advSearchBody)}>
-        {!isMobile && (
-          <div className={styles.backToSearch}>
-            <div
-              className={styles.basicSearchAlign}
+        <div className={classNames(styles.backToSearch, styles.mobileViewNone)}>
+          <div
+            className={styles.basicSearchAlign}
+            onClick={() => {
+              setAdvanceSearch((e) => !e)
+            }}
+          >
+            <LeftOutlined className={styles.rightArrowColor} />
+            <h6> Back to basic search</h6>
+          </div>
+          <div>
+            <CloseOutlined
+              style={{ color: 'var(--light-grey-color)', fontSize: '12px' }}
               onClick={() => {
                 setAdvanceSearch((e) => !e)
               }}
-            >
-              <LeftOutlined className={styles.rightArrowColor} />
-              <h6> Back to basic search</h6>
-            </div>
-            <div>
-              <CloseOutlined
-                style={{ color: 'var(--light-grey-color)', fontSize: '12px' }}
-                onClick={() => {
-                  setAdvanceSearch((e) => !e)
-                }}
-              />
-            </div>
+            />
           </div>
-        )}
+        </div>
+
         <div className={styles.advanceSearchText}>
           <h1>Advance Search</h1>
         </div>
@@ -213,9 +212,9 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
           <Checkbox>
             <span className={styles.inactiveClientText}> Show inactive clients</span>{' '}
           </Checkbox>
-          <div className={classNames(styles.buttonEnd, isMobile && styles.searchBtnBlock)}>
+          <div className={classNames(styles.buttonEnd, styles.searchBtnBlock)}>
             <Button
-              className={classNames(styles.btnDisableStyle, isMobile && styles.mobileviewBtnSize)}
+              className={classNames(styles.btnDisableStyle, styles.mobileviewBtnSize)}
               disabled={true}
               size="large"
             >
@@ -236,11 +235,14 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
 
   return (
     <div style={{ width: '100%' }}>
-      {isTablet || !isMobile ? (
+      <div className={styles.mobileViewNone}>
         <Popover
           content={renderMenu}
           visible={searchPopUp}
-          overlayClassName={advanceSearch ? styles.advanceSearchModal : styles.searchInput}
+          overlayClassName={classNames(
+            advanceSearch ? styles.advanceSearchModal : styles.searchInput,
+            styles.mobileViewNone
+          )}
         >
           <Input
             className={styles.searchInputStyle}
@@ -261,9 +263,10 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
             }
           />
         </Popover>
-      ) : (
+      </div>
+      <div className={styles.desktopViewNone}>
         <Input
-          className={styles.searchInputStyle}
+          className={classNames(styles.searchInputStyle)}
           placeholder="Search clients or leads"
           value={searchTerm}
           prefix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
@@ -272,8 +275,7 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
             setSearchDrawer((e) => !e)
           }}
         />
-      )}
-
+      </div>
       <Drawer
         visible={searchDrawer}
         placement="left"

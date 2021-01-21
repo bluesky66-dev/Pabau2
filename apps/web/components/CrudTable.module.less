@@ -113,7 +113,18 @@
     padding-top: 14px;
   }
 }
-@media (min-width: 240px) and (max-width: 767px) {
+
+.desktop-view-none {
+  display: none;
+}
+
+@media (min-width: 200px) and (max-width: 767px) {
+  .mobile-view-none {
+    display: none;
+  }
+  .desktop-view-none {
+    display: block;
+  }
   .marketing-source-page {
     .marketing-text-style {
       display: flex;

@@ -16,7 +16,8 @@ import { Button, Dropdown as AvatarDropDown } from '@pabau/ui'
 import { Search } from './search/Search'
 import PabauNotification from './notification/Notification'
 import PabauMessages from './messages/Messages'
-import { isMobile, isTablet } from 'react-device-detect'
+import classNames from 'classnames'
+// import { isMobile, isTablet } from 'react-device-detect'
 const AntHeader = Layout.Header
 
 interface P {
@@ -58,49 +59,48 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
   )
   return (
     <>
-      {isTablet || !isMobile ? (
-        <AntHeader className={styles.pabauHeader}>
-          <div
-            style={{
-              paddingLeft: '30px',
-              paddingRight: '30px',
-              height: '100%',
-              alignItems: 'center',
-            }}
-          >
-            <Row>
-              <Col md={8}>
-                <Logo />
-              </Col>
-              <Col md={8} className={styles.headerSearchCenter}>
-                <div style={{ width: '360px' }}>
-                  {searchRender ? searchRender(<Search />) : <Search />}
+      <AntHeader className={classNames(styles.pabauHeader, styles.mobileViewNone)}>
+        <div
+          style={{
+            paddingLeft: '30px',
+            paddingRight: '30px',
+            height: '100%',
+            alignItems: 'center',
+          }}
+        >
+          <Row>
+            <Col md={6} lg={8}>
+              <Logo />
+            </Col>
+            <Col md={8} lg={8} className={styles.headerSearchCenter}>
+              <div style={{ width: '360px' }}>
+                {searchRender ? searchRender(<Search />) : <Search />}
+              </div>
+            </Col>
+            <Col md={10} lg={8} className={styles.headerIconEnd}>
+              <div className={styles.headerAlign}>
+                <BellOutlined
+                  className={styles.headerIcon}
+                  onClick={() => setNotificationDrawer((e) => !e)}
+                />
+                <MailOutlined
+                  className={styles.headerIcon}
+                  onClick={() => setMessageDrawer((e) => !e)}
+                />
+                <div>
+                  <Dropdown overlay={overlay}>
+                    <Button type="default" className={styles.createBtnStyle}>
+                      <PlusCircleFilled /> Create
+                    </Button>
+                  </Dropdown>
                 </div>
-              </Col>
-              <Col md={8} className={styles.headerIconEnd}>
-                <div className={styles.headerAlign}>
-                  <BellOutlined
-                    className={styles.headerIcon}
-                    onClick={() => setNotificationDrawer((e) => !e)}
-                  />
-                  <MailOutlined
-                    className={styles.headerIcon}
-                    onClick={() => setMessageDrawer((e) => !e)}
-                  />
-                  <div>
-                    <Dropdown overlay={overlay}>
-                      <Button type="default" className={styles.createBtnStyle}>
-                        <PlusCircleFilled /> Create
-                      </Button>
-                    </Dropdown>
-                  </div>
-                  <AvatarDropDown />
-                </div>
-              </Col>
-            </Row>
-          </div>
-        </AntHeader>
-      ) : null}
+                <AvatarDropDown />
+              </div>
+            </Col>
+          </Row>
+        </div>
+      </AntHeader>
+
       {openNotificationDrawer && (
         <PabauNotification
           openDrawer={openNotificationDrawer}

@@ -6,9 +6,10 @@ import { Breadcrumb } from '@pabau/ui'
 import { Typography } from 'antd'
 import pluralize from 'pluralize'
 import styles from './CrudTable.module.less'
-import { isMobile, isTablet } from 'react-device-detect'
+// import { isMobile, isTablet } from 'react-device-detect'
 import Layout from './Layout/Layout'
 import { LeftOutlined } from '@ant-design/icons'
+import classNames from 'classnames'
 const { Title } = Typography
 // import DeleteButton from './DeleteButton'
 
@@ -32,29 +33,27 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery }) => {
 
   return (
     <>
-      {!isTablet && isMobile ? (
-        <div className={styles.marketingSourcePage}>
-          <MobileHeader className={styles.marketingSourceHeader}>
-            <div className={styles.allContentAlignMobile}>
-              <div className={styles.marketingTextStyle}>
-                <LeftOutlined />
-                <p> Marketing sources </p>
-              </div>
-              {addQuery && <AddButton addQuery={addQuery} listQuery={listQuery} schema={schema} />}
-            </div>
-          </MobileHeader>
-        </div>
-      ) : null}
-      <Layout>
-        {isTablet || !isMobile ? (
-          <div className={styles.tableMainHeading}>
-            <div style={{ background: '#FFF' }}>
-              <Breadcrumb breadcrumbItems={['Setup', pluralize(schema.full || schema.short)]} />
-              <Title>{pluralize(schema.full || schema.short)}</Title>
+      <div className={classNames(styles.marketingSourcePage, styles.desktopViewNone)}>
+        <MobileHeader className={styles.marketingSourceHeader}>
+          <div className={styles.allContentAlignMobile}>
+            <div className={styles.marketingTextStyle}>
+              <LeftOutlined />
+              <p> Marketing sources </p>
             </div>
             {addQuery && <AddButton addQuery={addQuery} listQuery={listQuery} schema={schema} />}
           </div>
-        ) : null}
+        </MobileHeader>
+      </div>
+
+      <Layout>
+        <div className={classNames(styles.tableMainHeading, styles.mobileViewNone)}>
+          <div style={{ background: '#FFF' }}>
+            <Breadcrumb breadcrumbItems={['Setup', pluralize(schema.full || schema.short)]} />
+            <Title>{pluralize(schema.full || schema.short)}</Title>
+          </div>
+          {addQuery && <AddButton addQuery={addQuery} listQuery={listQuery} schema={schema} />}
+        </div>
+
         <Table
           loading={loading}
           style={{ height: '100%' }}
