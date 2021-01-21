@@ -7,6 +7,8 @@ interface P {
   addQuery?: DocumentNode
   deleteQuery?: DocumentNode
   listQuery: DocumentNode
+  filterQuery: DocumentNode
+  searchQuery: DocumentNode
 }
 
 const CrudLayout: FC<P> = ({ ...props }) => <CrudTable {...props} />

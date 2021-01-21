@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Table as AntTable } from 'antd'
+import { Button, Table as AntTable } from 'antd'
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc'
 import { MenuOutlined } from '@ant-design/icons'
 import styles from './Table.module.less'
@@ -66,8 +66,27 @@ export const Table: FC<TableProps<never> & DragProps> = ({
       return <DragHandle />
     },
   }
+  const renderActiveButton = (isActive) => {
+    return (
+      <Button
+        className={isActive ? styles.activeBtn : styles.disableSourceBtn}
+        disabled={!isActive}
+      >
+        {isActive ? 'Active' : 'Inactive'}
+      </Button>
+    )
+  }
 
   const renderSortHandler = () => {
+    if (props && props.columns) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      props.columns?.map((col: any) => {
+        if (col && col.dataIndex === 'is_active') {
+          col.render = renderActiveButton
+        }
+        return col
+      })
+    }
     return props.draggable ? [{ ...dragColumn }, ...(props.columns || [])] : props.columns
   }
 

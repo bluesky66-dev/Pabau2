@@ -1,33 +1,48 @@
 import { DocumentNode, useMutation } from '@apollo/client'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { BasicModal as Modal, Button } from '@pabau/ui'
 import Form from './Form'
-import { useKeyPressEvent } from 'react-use'
+// import { useKeyPressEvent } from 'react-use'
 import styles from './CrudTable.module.less'
 import { FilterOutlined, PlusSquareFilled, SearchOutlined } from '@ant-design/icons'
 import { Input, Radio, Popover } from 'antd'
 import classNames from 'classnames'
 // import { isMobile, isTablet } from 'react-device-detect'
+
+const WAIT_INTERVAL = 400
 interface P {
   schema: Schema
   addQuery: DocumentNode
   listQuery: DocumentNode
   newButtonText?: string
+  onFilterSource: (filter: boolean) => void
+  onSearch: (term: string) => void
 }
 const AddButton: FC<P> = ({
   schema,
   addQuery,
   listQuery,
   newButtonText = 'Create ' + schema.short,
+  onFilterSource,
+  onSearch,
 }) => {
   const [addMutation] = useMutation(addQuery)
   const [modalShowing, setModalShowing] = useState(false)
   const [isActive, setIsActive] = useState(true)
   const [marketingSourceSearch, setMarketingSourceSearch] = useState('')
   let formRef: { submitForm: () => void } | null = null
-  useKeyPressEvent('n', () => {
-    setModalShowing(true)
-  })
+  // useKeyPressEvent('n', () => {
+  //   setModalShowing(true)
+  // })
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onSearch && onSearch(marketingSourceSearch)
+    }, WAIT_INTERVAL)
+
+    return () => clearTimeout(timer)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [marketingSourceSearch])
 
   const filterContent = (
     <div className={styles.filterContent}>
@@ -36,7 +51,13 @@ const AddButton: FC<P> = ({
         <p>Status</p>
       </div>
       <div className={styles.radioTextStyle}>
-        <Radio.Group onChange={(e) => setIsActive(e.target.value)} value={isActive}>
+        <Radio.Group
+          onChange={(e) => {
+            setIsActive(e.target.value)
+            onFilterSource(e.target.value)
+          }}
+          value={isActive}
+        >
           <Radio value={true}>
             <span>Active</span>
           </Radio>

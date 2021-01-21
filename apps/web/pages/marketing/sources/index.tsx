@@ -13,6 +13,28 @@ const LIST_QUERY = gql`
     }
   }
 `
+const FILTER_QUERY = gql`
+  query marketing_sources($isActive: Boolean = true) {
+    marketing_source(where: { is_active: { _eq: $isActive } }) {
+      __typename
+      id
+      name
+      is_active
+    }
+  }
+`
+
+const SEARCH_QUERY = gql`
+  query marketing_sources($searchTerm: String) {
+    marketing_source(where: { _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }] }) {
+      __typename
+      id
+      name
+      is_active
+    }
+  }
+`
+
 const DELETE_MUTATION = gql`
   mutation delete_marketing_source($id: uuid!) {
     delete_marketing_source_by_pk(id: $id) {
@@ -61,6 +83,8 @@ export const Index: NextPage = () => {
       addQuery={ADD_MUTATION}
       deleteQuery={DELETE_MUTATION}
       listQuery={LIST_QUERY}
+      filterQuery={FILTER_QUERY}
+      searchQuery={SEARCH_QUERY}
     />
   )
 }
