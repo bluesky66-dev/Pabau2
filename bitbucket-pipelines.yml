@@ -6,9 +6,7 @@ options:
 definitions:
   caches:
     nodemodules: 'node_modules/'
-#    nextcache: 'dist/**/.next/cache'
     yarncustom: '/usr/local/share/.cache/yarn'
-#    nxcache: 'dist/'
     cypress: '/root/.cache/Cypress'
 #  services:
 #    docker:
@@ -42,10 +40,6 @@ pipelines:
             - yarn affected --base=origin/master --target=export --prod
             - yarn affected --base=origin/master --target=deploy
 
-    #          - yarn run nx affected --all --target=build
-    #          - yarn run nx affected --target=lint --base=master~1
-    #          - yarn run nx affected --target=test --base=master~1 --head=master
-    #          - yarn run nx affected --target=build --base=master~1
 
   default:
     - step:
@@ -75,41 +69,42 @@ pipelines:
   branches:
     master:
       - step:
-          #size: 2x
           name: Production
           caches:
             - nodemodules
             - yarncustom
-#            - cypress
           script:
             - export LAST_COMMIT_LOG=$(git log HEAD~1 -1 | tail -n +4 | perl -p -e 's/[\r\n]//' | awk '{$1=$1;print}')
             - echo "${LAST_COMMIT_LOG}"
             - if [ "${LAST_COMMIT_LOG}" == "[skip ci] bumping version (patch)" ]; then (echo yes && export LAST_COMMIT_LOG=$(git log HEAD~2 -1 | tail -n +4 | perl -p -e 's/[\r\n]//' | awk '{$1=$1;print}')); fi
             - yarn install --pure-lockfile --prefer-offline
-#            - yarn affected:lint --base=HEAD~1
             - yarn affected:lint --base=HEAD~1 --with-deps --parallel
-#            - yarn affected:test --base=HEAD~1 --with-deps
-#            - yarn affected:build --base=HEAD~1 --prod
-#            - apt update -y && apt install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
-#            - yarn cypress install || true
-#            - yarn affected:e2e --base=HEAD~1 || true
+
+      - step:
+          size: 2x
+          name: e2e
+          caches:
+            - cypress
+          script:
+            - apt update -y && apt install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+            - yarn cypress install || true
+            - yarn affected:e2e --base=HEAD~1 || true
+
+      - step:
+          name: deploy
+          deployment: production
+          caches:
+            - nodemodules
+          script:
 
             # Get an oauth access token using the client credentials, parsing out the token with jq.
             - apt-get update && apt-get install -y curl jq && jq --version && curl --version
             - git remote set-url origin "${BITBUCKET_GIT_SSH_ORIGIN}"
 
-            #            - git config user.name "Pipeline"
-            #            - git config user.email nobody@pabau.com
             - yarn version --message "[skip ci] bumping version (patch)" --patch --non-interactive --no-progress
             - git push && git push --tags
             - export PACKAGE_JSON_VERSION=$(jq -r .version < package.json)
 
             - yarn affected --base=HEAD~2 --target=export --prod
+            - yarn affected --base=HEAD~2 --target=build-storybook --prod
             - yarn affected --base=HEAD~2 --target=deploy --prod
-#      - step:
-#          size: 2x
-#          name: e2e
-#          caches:
-#            - nextcache
-#
-
