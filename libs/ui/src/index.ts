@@ -16,4 +16,3 @@ export * from './lib/modal/basicmodal'
 export * from './lib/pagination/Pagination'
 export * from './lib/sidebar/Sidebar'
 export * from './lib/table/Table'
-
