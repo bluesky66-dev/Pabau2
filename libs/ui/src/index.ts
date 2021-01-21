@@ -1,3 +1,4 @@
+export * from './lib/richedit/Richedit'
 export * from './lib/password-with-helper/PasswordWithHelper'
 export * from './lib/avatar/Avatar'
 export * from './lib/passcode/Passcode'
