@@ -1,3 +1,4 @@
+export * from './lib/avatar/Avatar'
 export * from './lib/passcode/Passcode'
 export * from './hooks/useLiveQuery'
 export * from './lib/breadcrumb/Breadcrumb'
