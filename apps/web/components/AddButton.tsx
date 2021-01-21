@@ -73,7 +73,11 @@ const AddButton: FC<P> = ({
                 }
               },
             })
-            Notification.openNotification('success', 'Created marketing source successfully', 3)
+            Notification.openNotification(
+              'success',
+              'Success! You have successfully created a marketing source',
+              3
+            )
             setModalShowing(false)
           }}
         />
