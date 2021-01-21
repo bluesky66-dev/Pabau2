@@ -1,4 +1,3 @@
-export * from './lib/richedit/Richedit'
 export * from './hooks/useLiveQuery'
 export * from './lib/breadcrumb/Breadcrumb'
 export * from './lib/button/button'
@@ -17,3 +16,4 @@ export * from './lib/modal/basicmodal'
 export * from './lib/pagination/Pagination'
 export * from './lib/sidebar/Sidebar'
 export * from './lib/table/Table'
+
