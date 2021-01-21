@@ -60,6 +60,14 @@
       - name
       - is_active
       filter: {}
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - name
+      filter: {}
+      check: null
   delete_permissions:
   - role: public
     permission:

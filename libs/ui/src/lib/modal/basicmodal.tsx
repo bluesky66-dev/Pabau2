@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState } from 'react'
+import React, { PropsWithChildren } from 'react'
 import { Modal } from 'antd'
 import Button from '../button/button'
 import NotActiveSVG from '../../assets/images/notactive.svg'
@@ -8,6 +8,7 @@ import styles from './basicmodal.module.less'
 interface P {
   onOk?: () => void
   onCancel?: () => void
+  onDelete?: () => void
   visible?: boolean
   newButtonText?: string
   title?: string
@@ -27,11 +28,14 @@ interface P {
    * Creates a special tickbox next to the OK button
    */
   specialBooleanValue?: boolean
+
+  dangerButtonText?: string
 }
 
 export function BasicModal({
   onOk,
   onCancel,
+  onDelete,
   visible,
   children,
   title,
@@ -40,6 +44,7 @@ export function BasicModal({
   specialBooleanValue,
   onSpecialBooleanClick,
   newButtonText = 'OK',
+  dangerButtonText,
 }: PropsWithChildren<P>): JSX.Element {
   return (
     <Modal
@@ -56,11 +61,16 @@ export function BasicModal({
     >
       <div className={styles.modalBody}>{children}</div>
       <div className={styles.modalFooter}>
-        {specialBooleanLabel && (
+        {dangerButtonText && (
+          <Button type="primary" danger onClick={() => onDelete?.()}>
+            {dangerButtonText}
+          </Button>
+        )}
+        {specialBooleanLabel && onSpecialBooleanClick && (
           <div
             className={'pretty p-svg p-toggle p-plain'}
             onClick={() => {
-              onSpecialBooleanClick?.()
+              onSpecialBooleanClick()
             }}
           >
             <div>

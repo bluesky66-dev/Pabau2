@@ -29,6 +29,14 @@ const ADD_MUTATION = gql`
     }
   }
 `
+const EDIT_MUTATION = gql`
+  mutation update_marketing_source_by_pk($id: uuid!, $name: String!) {
+    update_marketing_source_by_pk(pk_columns: { id: $id }, _set: { name: $name }) {
+      __typename
+      id
+    }
+  }
+`
 
 const schema: Schema = {
   full: 'Marketing Source',
@@ -50,6 +58,7 @@ const schema: Schema = {
     is_active: {
       full: 'Active',
       type: 'boolean',
+      default: false,
     },
   },
 }
@@ -61,6 +70,7 @@ export const Index: NextPage = () => {
       addQuery={ADD_MUTATION}
       deleteQuery={DELETE_MUTATION}
       listQuery={LIST_QUERY}
+      editQuery={EDIT_MUTATION}
     />
   )
 }

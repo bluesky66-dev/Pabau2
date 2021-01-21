@@ -1,10 +1,10 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { Table as AntTable } from 'antd'
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc'
 import { MenuOutlined } from '@ant-design/icons'
 import styles from './Table.module.less'
 import { TableProps } from 'antd/es/table'
-import BasicModal from '../modal/basicmodal'
+
 export interface DragProps {
   draggable?: boolean
   updateDataSource?: ({ newData, oldIndex, newIndex }) => void
