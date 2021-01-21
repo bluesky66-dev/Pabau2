@@ -24,7 +24,7 @@ import './Avatar.module.less'
 
 export interface AvatarProps {
   imgSrc?: string
-  avatarSize?: Int16Array
+  avatarSize?: number
   name?: string
   background?: string
 }
