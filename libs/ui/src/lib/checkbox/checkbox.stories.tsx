@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import React from 'react'
+import ButtonCheckbox from './buttonCheckbox'
 import Checkbox from './checkbox'
 import CustomCheckbox from './customCheckbox'
 
@@ -30,5 +31,12 @@ const CustomCheckboxStory = ({ ...args }) => <CustomCheckbox {...args}></CustomC
 export const CustomCheckBox = CustomCheckboxStory.bind({})
 CustomCheckBox.args = {
   label: 'Activate',
+  disabled: false
+}
+
+const ButtonCheckboxStory = ({ ...args }) => <ButtonCheckbox {...args}></ButtonCheckbox>
+export const ButtonCheckBox = ButtonCheckboxStory.bind({})
+ButtonCheckBox.args = {
+  label: 'Checkbox',
   disabled: false
 }

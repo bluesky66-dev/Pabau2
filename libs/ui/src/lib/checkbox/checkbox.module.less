@@ -1,24 +1,50 @@
 .custom-checkbox {
   .pretty {
-    margin-right: 2em
+    margin-right: 2em;
   }
-  .pretty .state label{
+  .pretty .state label {
     line-height: 28px;
     text-indent: 2.5em;
     font-size: 14px;
     color: #9292a3;
   }
-  .pretty.p-svg .state .svg{
+  .pretty.p-svg .state .svg {
     font-size: 24px;
     top: 0;
   }
-  input[type="checkbox"]{
+  input[type='checkbox'] {
     height: 24px;
   }
   .pretty .state label:before {
-    color: #D5D5DB;
+    color: #d5d5db;
   }
   .ant-checkbox + span {
     padding-right: 24px !important;
+  }
+}
+
+.button-checkbox {
+  span {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+  }
+  .chkActive {
+    background: #eef7fb;
+    border: 1px solid #24bee1;
+    box-sizing: border-box;
+    border-radius: 22px;
+    span {
+      color: #24bee1;
+    }
+  }
+  .chkInActive {
+    background: rgba(207, 207, 207, 0.1);
+    border: 1px solid #c0c0c0;
+    box-sizing: border-box;
+    border-radius: 22px;
+    span {
+      color: #c0c0c0;
+    }
   }
 }
