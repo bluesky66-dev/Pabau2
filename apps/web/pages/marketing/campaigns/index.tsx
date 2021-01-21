@@ -57,6 +57,8 @@ export const Index: NextPage = () => {
         addQuery={ADD_MUTATION}
         deleteQuery={DELETE_MUTATION}
         listQuery={LIST_QUERY}
+        filterQuery={LIST_QUERY}
+        searchQuery={LIST_QUERY}
       />
     </Layout>
   )
