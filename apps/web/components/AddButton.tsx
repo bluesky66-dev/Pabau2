@@ -3,6 +3,7 @@ import React, { FC, useState } from 'react'
 import { BasicModal as Modal, Button } from '@pabau/ui'
 import Form from './Form'
 import { useKeyPressEvent } from 'react-use'
+import { Notification } from '@pabau/ui'
 
 interface P {
   schema: Schema
@@ -72,6 +73,7 @@ const AddButton: FC<P> = ({
                 }
               },
             })
+            Notification.openNotification('success', 'Created marketing source successfully', 3)
             setModalShowing(false)
           }}
         />
