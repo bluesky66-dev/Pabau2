@@ -12,7 +12,7 @@ interface P {
   addQuery?: DocumentNode
   deleteQuery?: DocumentNode
   listQuery: DocumentNode
-  editQuery?: DocumentNode
+  editQuery: DocumentNode
 }
 
 const CrudLayout: FC<P> = ({ ...props }) => (

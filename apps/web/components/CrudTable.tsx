@@ -10,11 +10,12 @@ interface P {
   addQuery?: DocumentNode
   deleteQuery?: DocumentNode
   listQuery: DocumentNode
-  editQuery?: DocumentNode
+  editQuery: DocumentNode
 }
 
 const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, editQuery }) => {
   const { data, error, loading } = useLiveQuery(listQuery)
+  // eslint-disable-next-line graphql/template-strings
   const [editMutation] = useMutation(editQuery)
   const [addMutation] = useMutation(addQuery)
   const [sourceData, setSourceData] = useState(null)

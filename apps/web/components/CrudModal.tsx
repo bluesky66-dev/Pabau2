@@ -24,7 +24,9 @@ const CrudModal: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, onClose, e
   const specialFormElement = schemaForm.fields['is_active']
   delete schemaForm.fields['is_active']
   const [specialBoolean, setSpecialBoolean] = useState<boolean>(
-    (typeof specialFormElement.default === 'boolean' && specialFormElement.default) || true
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    (typeof specialFormElement?.default === 'boolean' && specialFormElement.default) || true
   )
 
   return (
