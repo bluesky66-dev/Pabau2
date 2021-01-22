@@ -95,11 +95,7 @@ export function BasicModal({
             }}
           >
             <div>
-              {!specialBooleanValue ? (
-                <img className="svg" src={NotActiveSVG} alt="none-active-state" />
-              ) : (
-                <img className="svg" src={ActiveSVG} alt="active-state" />
-              )}
+              {!specialBooleanValue ? <>(unticked)</> : <>(ticked)</>}
               <label>{specialBooleanLabel}</label>
             </div>
           </div>
