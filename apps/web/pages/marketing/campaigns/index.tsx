@@ -63,7 +63,7 @@ export const Index: NextPage = () => {
       deleteQuery={DELETE_MUTATION}
       listQuery={LIST_QUERY}
       editQuery={EDIT_MUTATION}
-        searchQuery={LIST_QUERY} // Temparary added
+      searchQuery={LIST_QUERY} // Temparary added
     />
   )
 }
