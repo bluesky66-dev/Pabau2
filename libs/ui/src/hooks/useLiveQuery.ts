@@ -22,6 +22,12 @@ function convert(doc: DocumentNode): DocumentNode {
   return gql(`subscription ${snipped}`)
 }
 
+/**
+ * Like useQuery + useSubscription combined =]
+ *
+ * @param query
+ * @param options
+ */
 export function useLiveQuery<T>(
   query: DocumentNode,
   options?: QueryHookOptions<T> & { subscription?: DocumentNode }
