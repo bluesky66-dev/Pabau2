@@ -4,7 +4,7 @@ import { Menu } from './Menu'
 
 export default {
   component: Menu,
-  title: 'Layout/Menu',
+  title: 'Mobile/MobileSidebar',
 }
 
 export const primary = () => {

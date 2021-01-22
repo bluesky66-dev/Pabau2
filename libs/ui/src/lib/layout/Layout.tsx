@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import { ReactComponent as IllustrationSvg } from './example.svg'
 import { Card, Layout as AntLayout } from 'antd'
-import { Footer, Header, Sidebar } from '@pabau/ui'
+import { Footer, Header, Menu } from '@pabau/ui'
 import styles from './Layout.module.less'
 import classNames from 'classnames'
 // import { isMobile, isTablet } from 'react-device-detect'
@@ -36,8 +36,7 @@ export const Layout: FC<LayoutProps> = ({
         {/* {(isTablet || !isMobile) && <Header searchRender={searchRender} />} */}
         <Header searchRender={searchRender} />
         <AntLayout className={styles.headerMargin}>
-          {/* {(isTablet || !isMobile) && <Sidebar onSideBarCollapsed={onSideBarCollapsed} />} */}
-          <Sidebar onSideBarCollapsed={onSideBarCollapsed} />
+          <Menu onSideBarCollapsed={onSideBarCollapsed} />
           <Content
             className={classNames(
               styles.layoutContent,

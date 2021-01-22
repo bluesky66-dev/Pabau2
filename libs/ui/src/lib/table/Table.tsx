@@ -32,7 +32,7 @@ function array_move(arr, old_index, new_index) {
 }
 
 type P = {
-  onRowClick: (e) => void
+  onRowClick?: (e) => void
 } & TableProps<never> &
   DragProps
 

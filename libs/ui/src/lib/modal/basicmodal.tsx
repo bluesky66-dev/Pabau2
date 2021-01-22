@@ -87,7 +87,24 @@ export function BasicModal({
             {dangerButtonText}
           </Button>
         )}
-        <Button type="primary" className={styles.createBtn} onClick={() => onOk?.()}>
+        {specialBooleanLabel && (
+          <div
+            className={'pretty p-svg p-toggle p-plain'}
+            onClick={() => {
+              onSpecialBooleanClick?.()
+            }}
+          >
+            <div>
+              {!specialBooleanValue ? (
+                <img className="svg" src={NotActiveSVG} alt="none-active-state" />
+              ) : (
+                <img className="svg" src={ActiveSVG} alt="active-state" />
+              )}
+              <label>{specialBooleanLabel}</label>
+            </div>
+          </div>
+        )}
+        <Button type="primary" onClick={() => onOk?.()}>
           {newButtonText}
         </Button>
       </div>
