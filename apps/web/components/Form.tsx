@@ -3,12 +3,10 @@ import { Form as AntForm, Input } from 'formik-antd'
 
 interface P {
   schema: Schema
-  initialValues: Record<string, string | boolean | number>
 }
 
-const Form: FC<P> = ({ schema, initialValues }) => {
+const Form: FC<P> = ({ schema }) => {
   const { fields } = schema
-  console.log('Form.tsx initialvalues are', initialValues)
   return (
     <AntForm layout="vertical">
       {Object.entries(fields).map(

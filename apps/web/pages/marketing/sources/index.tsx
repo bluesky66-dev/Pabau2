@@ -22,18 +22,22 @@ const DELETE_MUTATION = gql`
   }
 `
 const ADD_MUTATION = gql`
-  mutation add_marketing_source($name: String!) {
-    insert_marketing_source_one(object: { name: $name }) {
+  mutation add_marketing_source($name: String!, $is_active: Boolean) {
+    insert_marketing_source_one(object: { name: $name, is_active: $is_active }) {
       __typename
       id
     }
   }
 `
 const EDIT_MUTATION = gql`
-  mutation update_marketing_source_by_pk($id: uuid!, $name: String!) {
-    update_marketing_source_by_pk(pk_columns: { id: $id }, _set: { name: $name }) {
+  mutation update_marketing_source_by_pk($id: uuid!, $name: String!, $is_active: Boolean) {
+    update_marketing_source_by_pk(
+      pk_columns: { id: $id }
+      _set: { name: $name, is_active: $is_active }
+    ) {
       __typename
       id
+      is_active
     }
   }
 `
@@ -58,7 +62,7 @@ const schema: Schema = {
     is_active: {
       full: 'Active',
       type: 'boolean',
-      default: false,
+      default: true,
     },
   },
 }

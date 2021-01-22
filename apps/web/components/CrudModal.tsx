@@ -1,5 +1,5 @@
 import Form from './Form'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { BasicModal as Modal } from '@pabau/ui'
 import { DocumentNode, useMutation } from '@apollo/client'
 import { useFormikContext } from 'formik'
@@ -26,8 +26,28 @@ const CrudModal: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, onClose, e
   const [specialBoolean, setSpecialBoolean] = useState<boolean>(
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    (typeof specialFormElement?.default === 'boolean' && specialFormElement.default) || true
+    (editingRow && editingRow.id && editingRow.is_active) ??
+      (typeof specialFormElement?.default === 'boolean' && specialFormElement.default) ??
+      true
   )
+
+  useEffect(() => {
+    setSpecialBoolean(
+      (editingRow && editingRow.id && (editingRow.is_active as boolean)) ??
+        (typeof specialFormElement?.default === 'boolean' &&
+          (specialFormElement.default as boolean)) ??
+        true
+    )
+  }, [editingRow, specialFormElement])
+
+  console.log('editingRow', editingRow)
+  console.log(
+    'initial value of specialBoolean set to',
+    (editingRow && editingRow.id && editingRow.is_active) ??
+      (typeof specialFormElement?.default === 'boolean' && specialFormElement.default) ??
+      true
+  )
+  console.log('currently is', specialBoolean)
 
   return (
     <Modal
@@ -66,12 +86,17 @@ const CrudModal: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, onClose, e
       dangerButtonText={(editingRow as any)?.id && `Delete`}
       specialBooleanLabel={!!specialFormElement && 'Active?'}
       specialBooleanValue={specialBoolean}
-      onSpecialBooleanClick={() => setSpecialBoolean((e) => !e)}
+      onSpecialBooleanClick={() => {
+        setSpecialBoolean((e) => {
+          formik.setFieldValue('is_active', !e)
+          return !e
+        })
+      }}
     >
       <Form
         // ref={formRef} typeof editingRow === 'object' ? editingRow : undefined}
         schema={schemaForm}
-        initialValues={typeof editingRow === 'object' ? editingRow : { name: 'erm' }}
+        //initialValues={typeof editingRow === 'object' ? editingRow : { name: 'erm' }}
         // onSubmit={async (form: Record<string, unknown>) => {
         //   console.log('ONsUBMIT', form)
         //   return

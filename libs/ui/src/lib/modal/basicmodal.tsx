@@ -55,8 +55,8 @@ export function BasicModal({
       footer={null}
       cancelText={null}
       width={modalWidth}
-      destroyOnClose={true}
-      modalRender={(E) => E}
+      // destroyOnClose={true}
+      // modalRender={(E) => E}
       wrapClassName={styles.modal}
     >
       <div className={styles.modalBody}>{children}</div>
