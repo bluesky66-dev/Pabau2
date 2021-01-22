@@ -28,7 +28,7 @@ export function useLiveQuery<T>(
 ): Omit<QueryResult, 'subscribeToMore'> {
   const { subscribeToMore, ...rest } = useQuery<T>(query, {
     //ssr: typeof window === 'undefined',
-    ssr: false,
+    ssr: true,
     skip: typeof window === 'undefined',
     onCompleted: (data1) => {
       console.log('GOT QUERY DATA', data1)

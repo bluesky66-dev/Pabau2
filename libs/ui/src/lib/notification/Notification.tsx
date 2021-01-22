@@ -13,13 +13,13 @@ export enum NotificationType {
 export const openNotification = (notificationType: string, text: string, delay: number): void => {
   if (notificationType === NotificationType.connect) {
     message.open({
-      type: '',
+      type: 'success',
       content: <Reconnect message="" delay={delay} />,
       duration: delay,
     })
   } else if (notificationType === NotificationType.success) {
     message.open({
-      type: '',
+      type: 'success',
       content: (
         <div className={styles.successNotification}>
           <span>{text}</span>
@@ -29,7 +29,7 @@ export const openNotification = (notificationType: string, text: string, delay: 
     })
   } else if (notificationType === NotificationType.edit) {
     message.open({
-      type: '',
+      type: 'success',
       content: (
         <div className={styles.editNotification}>
           <span>{text}</span>
@@ -39,7 +39,7 @@ export const openNotification = (notificationType: string, text: string, delay: 
     })
   } else if (notificationType === NotificationType.delete) {
     message.open({
-      type: '',
+      type: 'success',
       content: (
         <div className={styles.deleteNotification}>
           <span>{text}</span>
