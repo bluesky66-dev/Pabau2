@@ -1,3 +1,6 @@
+export * from './lib/statuslabel/Statuslabel'
+export * from './lib/security/SecurityScore'
+export * from './lib/notificationBanner/NotificationBanner'
 export * from './lib/button/button'
 export * from './lib/menu/Menu'
 export * from './lib/layout/Layout'
