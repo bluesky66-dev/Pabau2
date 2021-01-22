@@ -1,8 +1,8 @@
 import React, { PropsWithChildren, useState } from 'react'
-import styles from './checkbox.module.less'
-import '../../assets/less/pretty-checkbox.less'
 import ActiveSVG from '../../assets/images/active.svg'
 import NotActiveSVG from '../../assets/images/notactive.svg'
+import '../../assets/less/pretty-checkbox.less'
+import styles from './checkbox.module.less'
 
 export interface CheckboxProps {
   label?: string

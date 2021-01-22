@@ -3,13 +3,13 @@ import { Button } from 'antd'
 import React, { PropsWithChildren, useState } from 'react'
 import styles from './checkbox.module.less'
 
-export interface CheckboxProps {
+interface CheckboxProps {
   label?: string
   disabled?: boolean
   onChange?: () => void
 }
 
-export function Checkbox({
+export function ButtonCheckbox({
   label,
   disabled,
   onChange,
@@ -30,4 +30,4 @@ export function Checkbox({
   )
 }
 
-export default Checkbox
+export default ButtonCheckbox

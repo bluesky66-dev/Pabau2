@@ -3,7 +3,7 @@ import { Input } from 'antd'
 import React, { FC } from 'react'
 import './Passcode.module.less'
 
-const Passcode: FC = () => {
+export const Passcode: FC = () => {
   return (
     <Input.Password
       maxLength={4}
