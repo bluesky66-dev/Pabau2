@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
 import { Form as AntForm, Input } from 'formik-antd'
-
 interface P {
   schema: Schema
 }
@@ -8,7 +7,7 @@ interface P {
 const Form: FC<P> = ({ schema }) => {
   const { fields } = schema
   return (
-    <AntForm layout="vertical">
+    <AntForm layout="vertical" requiredMark={false}>
       {Object.entries(fields).map(
         ([name, { short, shortLower, example, description, extra, min }], i) => (
           <AntForm.Item
@@ -16,7 +15,7 @@ const Form: FC<P> = ({ schema }) => {
             label={short}
             name={name}
             required={!!min}
-            tooltip={`${description} for this ${shortLower}, eg: ${example}`}
+            // tooltip={`${description} for this ${shortLower}, eg: ${example}`}
             // showValidateSuccess={!!min}
             extra={extra && <div>{extra}</div>}
           >

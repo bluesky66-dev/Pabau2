@@ -237,3 +237,16 @@
   line-height: 22px;
   margin-bottom: 22px;
 }
+
+@media (min-width: 200px) and (max-width: 767px) {
+  .notification-drawer {
+    :global {
+      .ant-drawer-content-wrapper {
+        width: 100% !important;
+      }
+      .ant-drawer-body {
+        padding: 0;
+      }
+    }
+  }
+}

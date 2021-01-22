@@ -8,11 +8,14 @@
   user-select: none;
   .sidebar {
     height: 100%;
-    border-right: 0; 
+    border-right: 0;
   }
   :global {
     .ant-menu-light {
-      padding-top: 30px;
+      padding-top: 110px;
+    }
+    .ant-menu-inline .ant-menu-item {
+      margin: 0;
     }
     .ant-menu-inline .ant-menu-item::after {
       left: 0px;
@@ -85,8 +88,9 @@
     padding-left: 32px;
   }
 }
-@media (min-width:240px) and (max-width:767px) {
-  .pabau-sidebar {
+
+@media (min-width:200px) and (max-width:767px)  {
+  .mobile-view-none {
     display: none;
   }
 }

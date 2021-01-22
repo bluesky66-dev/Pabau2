@@ -4,8 +4,8 @@ import React from 'react'
 import CrudLayout from '../../../components/CrudLayout/CrudLayout'
 
 const LIST_QUERY = gql`
-  query marketing_sources {
-    marketing_source(order_by: { created_at: desc }) {
+  query marketing_sources($isActive: Boolean = true) {
+    marketing_source(order_by: { created_at: desc }, where: { is_active: { _eq: $isActive } }) {
       __typename
       id
       name
@@ -13,6 +13,20 @@ const LIST_QUERY = gql`
     }
   }
 `
+
+const SEARCH_QUERY = gql`
+  query marketing_sources($isActive: Boolean = true, $searchTerm: String) {
+    marketing_source(
+      where: { is_active: { _eq: $isActive }, _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }] }
+    ) {
+      __typename
+      id
+      name
+      is_active
+    }
+  }
+`
+
 const DELETE_MUTATION = gql`
   mutation delete_marketing_source($id: uuid!) {
     delete_marketing_source_by_pk(id: $id) {
@@ -75,6 +89,7 @@ export const Index: NextPage = () => {
       deleteQuery={DELETE_MUTATION}
       listQuery={LIST_QUERY}
       editQuery={EDIT_MUTATION}
+      searchQuery={SEARCH_QUERY}
     />
   )
 }

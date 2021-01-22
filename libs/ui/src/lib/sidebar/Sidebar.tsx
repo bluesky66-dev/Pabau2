@@ -45,13 +45,14 @@ export const Sidebar: FC<SidebarProps> = ({ onSideBarCollapsed }) => {
   return (
     <Sider
       trigger={null}
-      className={styles.pabauSidebar}
+      className={classNames(styles.pabauSidebar, styles.mobileViewNone)}
       collapsed={collapsed}
       style={{
         overflow: 'auto',
         height: '100vh',
         position: 'fixed',
         left: 0,
+        top: 0,
       }}
     >
       <Menu
@@ -88,12 +89,15 @@ export const Sidebar: FC<SidebarProps> = ({ onSideBarCollapsed }) => {
             <SettingOutlined className={styles.sidebarMenu} />
           ) : (
             <Link href="/setup">
-              <Button
-                icon={<SettingOutlined className={styles.sidebarMenu} />}
-                className={styles.setupBtn}
-              >
-                Setup
-              </Button>
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+              <a>
+                <Button
+                  icon={<SettingOutlined className={styles.sidebarMenu} />}
+                  className={styles.setupBtn}
+                >
+                  Setup
+                </Button>
+              </a>
             </Link>
           )}
         </div>

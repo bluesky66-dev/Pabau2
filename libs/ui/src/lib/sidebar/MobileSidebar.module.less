@@ -6,6 +6,22 @@
     .ant-drawer-body {
       padding: 0;
     }
+    // .ant-menu-inline {
+    //   height: auto !important;
+    // }
+    .ant-menu-inline .ant-menu-item,
+    .ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title,
+    .ant-menu-sub.ant-menu-inline > .ant-menu-item {
+      height: 48px;
+      line-height: 48px;
+    }
+    .ant-menu-inline .ant-menu-submenu-title {
+      margin: 0px;
+    }
+    .ant-menu-inline .ant-menu-item::after {
+      right: unset;
+      left: 0;
+    }
   }
 }
 .divborder {
@@ -65,7 +81,7 @@
   }
   p {
     margin-bottom: 0px;
-    font-family: Circular-Std-Bold;
+    font-family: Circular-Std-Medium;
     font-style: normal;
     font-weight: 500;
     font-size: 17px;
@@ -82,29 +98,14 @@
   align-items: center;
   padding-left: 24px;
   padding-right: 24px;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background-color: #fff;
 }
 .searchBox {
   padding: 16px 24px;
   border: 1px solid var(--border-color-base);
-}
-
-:global {
-  // .ant-menu-inline {
-  //   height: auto !important;
-  // }
-  .ant-menu-inline .ant-menu-item,
-  .ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title,
-  .ant-menu-sub.ant-menu-inline > .ant-menu-item {
-    height: 48px;
-    line-height: 48px;
-  }
-  .ant-menu-inline .ant-menu-submenu-title {
-    margin: 0px;
-  }
-  .ant-menu-inline .ant-menu-item::after {
-    right: unset;
-    left: 0;
-  }
 }
 
 .sidebarSubMenu {
@@ -136,15 +137,14 @@
   padding-right: 16px;
   margin-top: 8px;
   .buttonStyles {
-    width:100%;
+    width: 100%;
     height: 40px;
     background: #ffffff;
-    
+
     border: 1px solid #e4e6ea;
     box-sizing: border-box;
     border-radius: 4px;
     font-size: 14px;
-    
   }
   .create-btn {
     color: var(--primary-color);
@@ -165,5 +165,12 @@
       }
     }
   }
- 
+}
+.profile-menu {
+  span:nth-child(2) {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }

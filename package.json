@@ -62,6 +62,7 @@
     "r7insight_node": "^2.1.0",
     "rc-queue-anim": "^1.8.5",
     "react": "17.0.1",
+    "react-device-detect": "^1.15.0",
     "react-dom": "17.0.1",
     "react-grid-layout": "^1.2.0",
     "react-native": "0.63.4",

@@ -1,0 +1,38 @@
+.pabau-mobile-header {
+  background-color: #fff;
+}
+.menu-header-icon-color {
+  color: #9292a3;
+  font-size: 18px;
+}
+.mobile-view-header-heading {
+  display: flex;
+  align-items: center;
+  span {
+    color: var(--light-grey-color);
+    font-size: 17px;
+  }
+  p {
+    margin-bottom: 0px;
+    font-family: Circular-Std-Medium;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 22px;
+    text-transform: capitalize;
+    color: var(--grey-text-color);
+    padding-left: 10px;
+  }
+}
+.desktop-view-none {
+  display: none;
+}
+@media (min-width:200px) and (max-width:767px)  {
+  .mobile-view-none {
+    display: none;
+  }
+  .desktop-view-none {
+    display: block;
+  }
+   
+}

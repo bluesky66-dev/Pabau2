@@ -4,6 +4,7 @@ import { Card, Layout as AntLayout } from 'antd'
 import { Footer, Header, Sidebar } from '@pabau/ui'
 import styles from './Layout.module.less'
 import classNames from 'classnames'
+// import { isMobile, isTablet } from 'react-device-detect'
 
 const { Content } = AntLayout
 export interface LayoutProps {
@@ -32,8 +33,10 @@ export const Layout: FC<LayoutProps> = ({
   return (
     <AntLayout {...rest} className={styles.main}>
       <AntLayout style={{ background: '#F7F7F9' }}>
+        {/* {(isTablet || !isMobile) && <Header searchRender={searchRender} />} */}
         <Header searchRender={searchRender} />
         <AntLayout className={styles.headerMargin}>
+          {/* {(isTablet || !isMobile) && <Sidebar onSideBarCollapsed={onSideBarCollapsed} />} */}
           <Sidebar onSideBarCollapsed={onSideBarCollapsed} />
           <Content
             className={classNames(
