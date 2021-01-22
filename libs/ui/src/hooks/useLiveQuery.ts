@@ -22,13 +22,19 @@ function convert(doc: DocumentNode): DocumentNode {
   return gql(`subscription ${snipped}`)
 }
 
+/**
+ * Like useQuery + useSubscription combined =]
+ *
+ * @param query
+ * @param options
+ */
 export function useLiveQuery<T>(
   query: DocumentNode,
   options?: QueryHookOptions<T> & { subscription?: DocumentNode }
 ): Omit<QueryResult, 'subscribeToMore'> {
   const { subscribeToMore, ...rest } = useQuery<T>(query, {
     //ssr: typeof window === 'undefined',
-    ssr: false,
+    ssr: true,
     skip: typeof window === 'undefined',
     onCompleted: (data1) => {
       console.log('GOT QUERY DATA', data1)

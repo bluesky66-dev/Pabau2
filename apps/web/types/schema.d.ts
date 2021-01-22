@@ -16,4 +16,5 @@ interface SchemaItem {
   extra?: JSX.Element
   cssWidth?: string
   type?: 'string' | 'boolean'
+  default?: string | number | boolean
 }

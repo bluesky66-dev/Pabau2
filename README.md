@@ -58,7 +58,15 @@ Now add `import { } from '@pabau/ui'` at top of the new page file and fill in th
 * Best to use jsx ternary rather than display none in react
 * Best to make each component responsive on its own (Storybook even has a mobile preview button), rather than based on outside props.
 * Open to all disagreements and other ideas. Please raise threads about problems you see in the code, my code, or future code.
-  
+
+## Delineation between /apps/web/components/ ("App components") and /libs/ui/ ("UI components")
+
+* Most components should be a UI component, because most elements on a page should be "natural" to the user.
+* Only UI components can be shown in Storybook
+* UI components cannot access database
+* UI components have to expose full control via Storyboard Controls
+* App components usually will involve Database interaction (via Apollo Client)
+* Maybe for a one-off type widget, App component is fine
 
 ## Our Stack
 
