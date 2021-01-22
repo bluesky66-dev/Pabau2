@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from 'react'
-import { Button } from '@pabau/ui'
-import styles from './CrudTable.module.less'
+import { Button, MobileHeader } from '@pabau/ui'
+import styles from './AddButton.module.less'
 import { FilterOutlined, PlusSquareFilled, SearchOutlined } from '@ant-design/icons'
-import { Input, Radio, Popover } from 'antd'
+import { Input, Radio, Popover, Drawer } from 'antd'
 import classNames from 'classnames'
 // import { isMobile, isTablet } from 'react-device-detect'
 // import { useKeyPressEvent } from 'react-use'
@@ -17,6 +17,7 @@ interface P {
 
 const AddButton: FC<P> = ({ schema, onClick, children, onFilterSource, onSearch }) => {
   const [isActive, setIsActive] = useState(true)
+  const [mobFilterDrawer, setMobFilterDrawer] = useState(false)
   const [marketingSourceSearch, setMarketingSourceSearch] = useState('')
 
   // useKeyPressEvent('n', () => {
@@ -32,17 +33,19 @@ const AddButton: FC<P> = ({ schema, onClick, children, onFilterSource, onSearch 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [marketingSourceSearch])
 
-  const filterContent = (
+  const filterContent = (isMobile = false) => (
     <div className={styles.filterContent}>
-      <div className={styles.filterHeader}>
-        <h6>Filter by</h6>
-        <p>Status</p>
-      </div>
+      {!isMobile && (
+        <div className={classNames(styles.filterHeader)}>
+          <h6>Filter by</h6>
+          <p>Status</p>
+        </div>
+      )}
       <div className={styles.radioTextStyle}>
         <Radio.Group
           onChange={(e) => {
             setIsActive(e.target.value)
-            onFilterSource(e.target.value)
+            !isMobile && onFilterSource(e.target.value)
           }}
           value={isActive}
         >
@@ -56,13 +59,42 @@ const AddButton: FC<P> = ({ schema, onClick, children, onFilterSource, onSearch 
       </div>
     </div>
   )
+
   return (
     <>
+      {/* Mobile header */}
       <div className={classNames(styles.marketingIcon, styles.desktopViewNone)}>
         <SearchOutlined className={styles.marketingIconStyle} />
-        <FilterOutlined className={styles.marketingIconStyle} />
+        <FilterOutlined
+          className={styles.marketingIconStyle}
+          onClick={() => setMobFilterDrawer((e) => !e)}
+        />
         <PlusSquareFilled className={styles.plusIconStyle} onClick={() => onClick?.()} />
       </div>
+      <Drawer visible={mobFilterDrawer} className={styles.mobFilterDrawer} closable={false}>
+        <MobileHeader className={styles.marketingSourceFilterHeader}>
+          <div className={styles.allContentAlignMobile}>
+            <div className={styles.marketingTextStyle}>
+              <span>Reset</span>
+              <p> Filter </p>
+              <span>Cancel</span>
+            </div>
+          </div>
+        </MobileHeader>
+        <div style={{ marginTop: '91px', paddingLeft: '24px' }}>{filterContent(true)}</div>
+        <Button
+          type="primary"
+          className={styles.applyButton}
+          onClick={() => {
+            onFilterSource(isActive)
+            setMobFilterDrawer((e) => !e)
+          }}
+        >
+          Apply
+        </Button>
+      </Drawer>
+
+      {/* Desktop header */}
       <div className={classNames(styles.marketingSource, styles.mobileViewNone)}>
         <Input
           className={styles.searchMarketingStyle}

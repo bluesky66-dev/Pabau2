@@ -1,8 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import { Modal } from 'antd'
 import Button from '../button/button'
-import NotActiveSVG from '../../assets/images/notactive.svg'
-import ActiveSVG from '../../assets/images/active.svg'
+import { Checkbox } from '@pabau/ui'
 import styles from './basicmodal.module.less'
 import { ModalProps } from 'antd/lib/modal'
 interface P {
@@ -64,21 +63,24 @@ export function BasicModal({
       <div className={styles.modalBody}>{children}</div>
       <div className={styles.modalFooter}>
         {specialBooleanLabel && onSpecialBooleanClick && (
-          <div
-            className={'pretty p-svg p-toggle p-plain'}
-            onClick={() => {
-              onSpecialBooleanClick()
-            }}
-          >
-            <div className={styles.alignCheckboxLabel}>
-              {!specialBooleanValue ? (
-                <img className="svg" src={NotActiveSVG} alt="none-active-state" />
-              ) : (
-                <img className="svg" src={ActiveSVG} alt="active-state" />
-              )}
-              <label>{specialBooleanLabel}</label>
-            </div>
-          </div>
+          <Checkbox defaultChecked={specialBooleanValue} onClick={onSpecialBooleanClick}>
+            {specialBooleanLabel}
+          </Checkbox>
+          // <div
+          //   className={'pretty p-svg p-toggle p-plain'}
+          //   onClick={() => {
+          //     onSpecialBooleanClick()
+          //   }}
+          // >
+          //   <div className={styles.alignCheckboxLabel}>
+          //     {!specialBooleanValue ? (
+          //       <img className="svg" src={NotActiveSVG} alt="none-active-state" />
+          //     ) : (
+          //       <img className="svg" src={ActiveSVG} alt="active-state" />
+          //     )}
+          //     <label>{specialBooleanLabel}</label>
+          //   </div>
+          // </div>
         )}
         {dangerButtonText && (
           <Button type="default" className={styles.deleteBtnStyle} onClick={() => onDelete?.()}>

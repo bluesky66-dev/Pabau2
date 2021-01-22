@@ -26,7 +26,7 @@ const CrudModal: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, onClose, e
   const [specialBoolean, setSpecialBoolean] = useState<boolean>(
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    editingRow && editingRow.is_active ? editingRow.is_active : true
+    editingRow.id ? editingRow.is_active : true
   )
 
   console.log('editingRow editingRow ', editingRow)
