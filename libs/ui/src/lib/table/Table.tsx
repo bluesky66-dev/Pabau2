@@ -112,6 +112,9 @@ export const Table: FC<P> = ({ dataSource = [], updateDataSource, onRowClick, ..
       columns={renderSortHandler()}
       rowKey="key"
       className={styles.dragTable}
+      locale={{
+        emptyText: 'No results found',
+      }}
       components={{
         body: {
           wrapper: DraggableContainer,

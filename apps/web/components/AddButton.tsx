@@ -1,14 +1,11 @@
-import { DocumentNode, useMutation } from '@apollo/client'
 import React, { FC, useEffect, useState } from 'react'
-import { BasicModal as Modal, Button } from '@pabau/ui'
-import Form from './Form'
-// import { useKeyPressEvent } from 'react-use'
+import { Button } from '@pabau/ui'
 import styles from './CrudTable.module.less'
 import { FilterOutlined, PlusSquareFilled, SearchOutlined } from '@ant-design/icons'
 import { Input, Radio, Popover } from 'antd'
 import classNames from 'classnames'
 // import { isMobile, isTablet } from 'react-device-detect'
-import { useKeyPressEvent } from 'react-use'
+// import { useKeyPressEvent } from 'react-use'
 
 const WAIT_INTERVAL = 400
 interface P {
@@ -22,9 +19,9 @@ const AddButton: FC<P> = ({ schema, onClick, children, onFilterSource, onSearch 
   const [isActive, setIsActive] = useState(true)
   const [marketingSourceSearch, setMarketingSourceSearch] = useState('')
 
-  useKeyPressEvent('n', () => {
-    onClick?.()
-  })
+  // useKeyPressEvent('n', () => {
+  //   onClick?.()
+  // })
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -85,11 +82,7 @@ const AddButton: FC<P> = ({ schema, onClick, children, onFilterSource, onSearch 
             <FilterOutlined /> Filter
           </Button>
         </Popover>
-        <Button
-          className={styles.createSourceBtn}
-          type="primary"
-          onClick={() => onClick?.()}
-        >
+        <Button className={styles.createSourceBtn} type="primary" onClick={() => onClick?.()}>
           {'Create ' + schema.short}
         </Button>
       </div>

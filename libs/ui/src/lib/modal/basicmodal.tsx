@@ -4,7 +4,7 @@ import Button from '../button/button'
 import NotActiveSVG from '../../assets/images/notactive.svg'
 import ActiveSVG from '../../assets/images/active.svg'
 import styles from './basicmodal.module.less'
-
+import { ModalProps } from 'antd/lib/modal'
 interface P {
   onOk?: () => void
   onCancel?: () => void
@@ -45,7 +45,8 @@ export function BasicModal({
   onSpecialBooleanClick,
   newButtonText = 'OK',
   dangerButtonText,
-}: PropsWithChildren<P>): JSX.Element {
+  ...props
+}: PropsWithChildren<P & ModalProps>): JSX.Element {
   return (
     <Modal
       title={title}
@@ -58,14 +59,10 @@ export function BasicModal({
       destroyOnClose={true}
       modalRender={(E) => E}
       wrapClassName={styles.modal}
+      {...props}
     >
       <div className={styles.modalBody}>{children}</div>
       <div className={styles.modalFooter}>
-        {dangerButtonText && (
-          <Button type="primary" danger onClick={() => onDelete?.()}>
-            {dangerButtonText}
-          </Button>
-        )}
         {specialBooleanLabel && onSpecialBooleanClick && (
           <div
             className={'pretty p-svg p-toggle p-plain'}
@@ -73,7 +70,7 @@ export function BasicModal({
               onSpecialBooleanClick()
             }}
           >
-            <div>
+            <div className={styles.alignCheckboxLabel}>
               {!specialBooleanValue ? (
                 <img className="svg" src={NotActiveSVG} alt="none-active-state" />
               ) : (
@@ -83,7 +80,12 @@ export function BasicModal({
             </div>
           </div>
         )}
-        <Button type="primary" onClick={() => onOk?.()}>
+        {dangerButtonText && (
+          <Button type="default" className={styles.deleteBtnStyle} onClick={() => onDelete?.()}>
+            {dangerButtonText}
+          </Button>
+        )}
+        <Button type="primary" className={styles.createBtn} onClick={() => onOk?.()}>
           {newButtonText}
         </Button>
       </div>

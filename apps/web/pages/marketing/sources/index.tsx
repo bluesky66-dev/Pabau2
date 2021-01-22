@@ -4,18 +4,8 @@ import React from 'react'
 import CrudLayout from '../../../components/CrudLayout/CrudLayout'
 
 const LIST_QUERY = gql`
-  query marketing_sources {
-    marketing_source(order_by: { created_at: desc }) {
-      __typename
-      id
-      name
-      is_active
-    }
-  }
-`
-const FILTER_QUERY = gql`
   query marketing_sources($isActive: Boolean = true) {
-    marketing_source(where: { is_active: { _eq: $isActive } }) {
+    marketing_source(order_by: { created_at: desc }, where: { is_active: { _eq: $isActive } }) {
       __typename
       id
       name
@@ -25,8 +15,10 @@ const FILTER_QUERY = gql`
 `
 
 const SEARCH_QUERY = gql`
-  query marketing_sources($searchTerm: String) {
-    marketing_source(where: { _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }] }) {
+  query marketing_sources($isActive: Boolean = true, $searchTerm: String) {
+    marketing_source(
+      where: { is_active: { _eq: $isActive }, _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }] }
+    ) {
       __typename
       id
       name
@@ -52,8 +44,11 @@ const ADD_MUTATION = gql`
   }
 `
 const EDIT_MUTATION = gql`
-  mutation update_marketing_source_by_pk($id: uuid!, $name: String!) {
-    update_marketing_source_by_pk(pk_columns: { id: $id }, _set: { name: $name }) {
+  mutation update_marketing_source_by_pk($id: uuid!, $name: String!, $is_active: Boolean!) {
+    update_marketing_source_by_pk(
+      pk_columns: { id: $id }
+      _set: { name: $name, is_active: $is_active }
+    ) {
       __typename
       id
     }
@@ -93,6 +88,7 @@ export const Index: NextPage = () => {
       deleteQuery={DELETE_MUTATION}
       listQuery={LIST_QUERY}
       editQuery={EDIT_MUTATION}
+      searchQuery={SEARCH_QUERY}
     />
   )
 }

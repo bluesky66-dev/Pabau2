@@ -38,7 +38,7 @@
     justify-content: space-between;
     :global {
       .anticon-close {
-        color: #9292a3;
+        color: var(--light-grey-color);
         font-size: 14px;
       }
     }
@@ -56,14 +56,14 @@
     line-height: 24px;
     display: flex;
     align-items: center;
-    color: #9292a3;
+    color: var(--light-grey-color);
   }
   .input-field .ant-form-item-label {
     padding: 0 !important;
   }
   .input-field .input-style {
     font-family: Circular-Std-Book;
-    border: 1px solid #ecedf0 !important;
+    border: 1px solid var(--border-color-base) !important;
     border-radius: 4px !important;
     height: 40px !important;
     border-radius: 2px;
@@ -89,13 +89,13 @@
 
   :global {
     .pretty {
-      margin-right: 2em;
+      margin-right: 24px;
     }
     .pretty .state label {
       line-height: 28px;
       text-indent: 2.5em;
       font-size: 14px;
-      color: #9292a3;
+      color: var(--light-grey-color);
     }
     .pretty.p-svg .state .svg {
       font-size: 24px;
@@ -127,5 +127,28 @@
     font-size: 14px;
     line-height: 18px;
     text-transform: capitalize;
+    min-width: 63px;
+    height: 40px;
+    font-family: 'Circular-Std-Medium';
+  }
+  .delete-btn-style {
+    min-width: 74px;
+    height: 40px;
+    border: 1px solid var(--border-color-base);
+    font-size: 14px;
+    border-radius: 4px;
+    margin-right: 16px;
+    color: var(--light-grey-color);
+    font-family: 'Circular-Std-Medium';
+  }
+
+  .align-checkbox-label {
+    display: flex;
+    align-items: center;
+    label {
+      padding-left:10px;
+      color: var(--light-grey-color);
+      font-size: 14px;
+    }
   }
 }

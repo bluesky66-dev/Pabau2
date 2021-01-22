@@ -52,6 +52,7 @@ export const Sidebar: FC<SidebarProps> = ({ onSideBarCollapsed }) => {
         height: '100vh',
         position: 'fixed',
         left: 0,
+        top: 0,
       }}
     >
       <Menu

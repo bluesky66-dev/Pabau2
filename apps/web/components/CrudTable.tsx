@@ -22,21 +22,12 @@ interface P {
   deleteQuery?: DocumentNode
   listQuery: DocumentNode
   editQuery: DocumentNode
+  searchQuery?: DocumentNode
 }
 
-const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, editQuery }) => {
-  const [isFilterData, setFilterData] = useState(false)
+const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, editQuery, searchQuery }) => {
   const [isActive, setIsActive] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
-
-  // const { data: marketingSourceData, error, loading } = useLiveQuery(listQuery, {
-  //   skip: isFilterData,
-  // })
-  // const { data: marketingSourceFilterData } = useLiveQuery(filterQuery, { variables: { isActive } })
-  // const { data: marketingSourceSearchData } = useLiveQuery(searchQuery, {
-  //   variables: { searchTerm: '%' + searchTerm + '%' },
-  // })
-  const { data, error, loading } = useLiveQuery(listQuery)
   // eslint-disable-next-line graphql/template-strings
   const [editMutation] = useMutation(editQuery)
   const [addMutation] = useMutation(addQuery)
@@ -45,26 +36,25 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, editQuery 
     Record<string, string | boolean | number> | false
   >(false)
 
-  // useEffect(() => {
-  //   if (isFilterData) {
-  //     setSourceData(marketingSourceFilterData)
-  //   } else if (searchTerm) {
-  //     setSourceData(marketingSourceSearchData)
-  //   } else {
-  //     setSourceData(marketingSourceData)
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [marketingSourceData, marketingSourceFilterData, marketingSourceSearchData])
+  const { data, error, loading } = useLiveQuery(listQuery, { variables: { isActive } })
+  const { data: searchData } = useLiveQuery(searchQuery, {
+    variables: { isActive, searchTerm: '%' + searchTerm + '%' },
+  })
+
+  useEffect(() => {
+    if (searchTerm) {
+      setSourceData(searchData)
+    } else {
+      setSourceData(data)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, searchData])
 
   const onFilterMarketingSource = (isActive) => {
     setIsActive(isActive)
-    setFilterData(true)
   }
 
-  const onSearch = (val) => {
-    if (val) {
-      setFilterData(false)
-    }
+  const onSearch = async (val) => {
     setSearchTerm(val)
   }
 
@@ -169,23 +159,17 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, editQuery 
             </div>
           </MobileHeader>
         </div>
-        {addQuery && (
-          <AddButton
-            onClick={() => setModalShowing({ name: '' })}
-            onFilterSource={onFilterMarketingSource}
-            onSearch={onSearch}
+
+        {modalShowing && (
+          <CrudModal
             schema={schema}
+            editingRow={modalShowing}
+            addQuery={addQuery}
+            listQuery={listQuery}
+            deleteQuery={deleteQuery}
+            onClose={() => setModalShowing(false)}
           />
         )}
-
-        <CrudModal
-          schema={schema}
-          editingRow={modalShowing}
-          addQuery={addQuery}
-          listQuery={listQuery}
-          deleteQuery={deleteQuery}
-          onClose={() => setModalShowing(false)}
-        />
 
         <Layout>
           <div className={classNames(styles.tableMainHeading, styles.mobileViewNone)}>
@@ -195,7 +179,7 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, editQuery 
             </div>
             {addQuery && (
               <AddButton
-                onClick={() => setModalShowing({ name: '' })}
+                onClick={() => setModalShowing({ name: '', isCreate: true })}
                 onFilterSource={onFilterMarketingSource}
                 onSearch={onSearch}
                 schema={schema}
@@ -249,8 +233,8 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, editQuery 
             }}
             onRowClick={(e) => setModalShowing(e)}
           />
+          <Pagination total={50} defaultPageSize={10} defaultCurrent={1} />
         </Layout>
-        <Pagination total={50} defaultPageSize={10} defaultCurrent={1} />
       </>
     </Formik>
   )
