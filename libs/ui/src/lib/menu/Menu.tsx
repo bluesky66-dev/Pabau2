@@ -9,11 +9,11 @@ import { sidebarMenu } from './sidebarMenu'
 const { SubMenu } = AntMenu
 const { Sider } = Layout
 
-interface SidebarProps {
+interface P {
   onSideBarCollapsed?: (collapsed: boolean) => void
 }
 
-export const Menu: FC<SidebarProps> = ({ onSideBarCollapsed }) => {
+export const Menu: FC<P> = ({ onSideBarCollapsed }) => {
   const [collapsed, setCollapsed] = useState(false)
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([])
@@ -54,7 +54,7 @@ export const Menu: FC<SidebarProps> = ({ onSideBarCollapsed }) => {
         left: 0,
       }}
     >
-      <Menu
+      <AntMenu
         mode="inline"
         className={styles.sidebar}
         openKeys={openKeys}
@@ -107,7 +107,7 @@ export const Menu: FC<SidebarProps> = ({ onSideBarCollapsed }) => {
             onClick: handleSidebarCollapse,
           })}
         </div>
-      </Menu>
+      </AntMenu>
     </Sider>
   )
 }
