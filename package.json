@@ -158,7 +158,7 @@
     "skipCI": true,
     "hooks": {
       "pre-commit": "yarn run affected:lint --uncommitted=true",
-      "pre-push": "yarn run affected:test --uncommitted=true"
+      "pre-push": "yarn run affected:test --base=origin/master"
     }
   }
 }
