@@ -59,16 +59,6 @@ if [ -z "${BITBUCKET_PR_ID}" ]; then
   echo "last line: ${LAST_LINE}"
 
   message_body=''
-  read_heredoc message_body <<'HEREDOC'
-*New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}
-
-${LAST_LINE}
-
-${LAST_COMMIT_LOG}
-HEREDOC
-echo "v1 ${message_body}"
-
-  message_body=''
   read_heredoc message_body <<HEREDOC
 *New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}
 
@@ -76,7 +66,6 @@ ${LAST_LINE}
 
 ${LAST_COMMIT_LOG}
 HEREDOC
-echo "v2 ${message_body}"
 
   cat tools/cicd/slack_notification.json > /dev/null || (echo "ERROR: JSON not found"; exit 1)
   jq '.' tools/cicd/slack_notification.json > /dev/null || (echo "ERROR: Invalid JSON"; exit 1)

@@ -8,32 +8,23 @@ import { FilterOutlined, PlusSquareFilled, SearchOutlined } from '@ant-design/ic
 import { Input, Radio, Popover } from 'antd'
 import classNames from 'classnames'
 // import { isMobile, isTablet } from 'react-device-detect'
+import { useKeyPressEvent } from 'react-use'
 
 const WAIT_INTERVAL = 400
 interface P {
   schema: Schema
-  addQuery: DocumentNode
-  listQuery: DocumentNode
-  newButtonText?: string
+  onClick?: () => void
   onFilterSource: (filter: boolean) => void
   onSearch: (term: string) => void
 }
-const AddButton: FC<P> = ({
-  schema,
-  addQuery,
-  listQuery,
-  newButtonText = 'Create ' + schema.short,
-  onFilterSource,
-  onSearch,
-}) => {
-  const [addMutation] = useMutation(addQuery)
-  const [modalShowing, setModalShowing] = useState(false)
+
+const AddButton: FC<P> = ({ schema, onClick, children, onFilterSource, onSearch }) => {
   const [isActive, setIsActive] = useState(true)
   const [marketingSourceSearch, setMarketingSourceSearch] = useState('')
-  let formRef: { submitForm: () => void } | null = null
-  // useKeyPressEvent('n', () => {
-  //   setModalShowing(true)
-  // })
+
+  useKeyPressEvent('n', () => {
+    onClick?.()
+  })
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -73,7 +64,7 @@ const AddButton: FC<P> = ({
       <div className={classNames(styles.marketingIcon, styles.desktopViewNone)}>
         <SearchOutlined className={styles.marketingIconStyle} />
         <FilterOutlined className={styles.marketingIconStyle} />
-        <PlusSquareFilled className={styles.plusIconStyle} onClick={() => setModalShowing(true)} />
+        <PlusSquareFilled className={styles.plusIconStyle} onClick={() => onClick?.()} />
       </div>
       <div className={classNames(styles.marketingSource, styles.mobileViewNone)}>
         <Input
@@ -97,48 +88,11 @@ const AddButton: FC<P> = ({
         <Button
           className={styles.createSourceBtn}
           type="primary"
-          onClick={() => setModalShowing(true)}
+          onClick={() => onClick?.()}
         >
-          {newButtonText}
+          {'Create ' + schema.short}
         </Button>
       </div>
-      <Modal
-        onCancel={() => setModalShowing(false)}
-        onOk={() => formRef?.submitForm()}
-        visible={modalShowing}
-        title={`Create ${schema.full}`}
-        newButtonText={`Create ${schema.short}`}
-      >
-        <Form
-          onRef={(ref) => {
-            formRef = ref
-          }}
-          schema={schema}
-          onSubmit={async (form: Record<string, unknown>) => {
-            await addMutation({
-              variables: form,
-              optimisticResponse: {},
-              update: (proxy) => {
-                if (listQuery) {
-                  const existing = proxy.readQuery({
-                    query: listQuery,
-                  })
-                  if (existing) {
-                    const key = Object.keys(existing)[0]
-                    proxy.writeQuery({
-                      query: listQuery,
-                      data: {
-                        [key]: [...existing[key], form],
-                      },
-                    })
-                  }
-                }
-              },
-            })
-            setModalShowing(false)
-          }}
-        />
-      </Modal>
     </>
   )
 }
