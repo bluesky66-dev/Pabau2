@@ -2,8 +2,8 @@
 import React from 'react'
 
 import styles from './Security.module.less'
-import { Row, Col, Progress } from 'antd'
-import { Button } from '../../lib/button/button'
+import { Progress } from 'antd'
+import { Button } from '@pabau/ui'
 
 export interface SecurityScoreProps {
   percent?: number
