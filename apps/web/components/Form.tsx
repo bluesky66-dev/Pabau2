@@ -1,15 +1,11 @@
 import React, { FC } from 'react'
 import { Form as AntForm, Input } from 'formik-antd'
-import { FormProps } from 'antd/lib/form'
-
 interface P {
   schema: Schema
-  initialValues: Record<string, string | boolean | number>
 }
 
-const Form: FC<P & FormProps> = ({ schema, initialValues, ...props }) => {
+const Form: FC<P> = ({ schema }) => {
   const { fields } = schema
-  console.log('Form.tsx initialvalues are', initialValues)
   return (
     <AntForm layout="vertical" requiredMark={false}>
       {Object.entries(fields).map(

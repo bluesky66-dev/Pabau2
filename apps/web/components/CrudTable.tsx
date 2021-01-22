@@ -109,8 +109,6 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, editQuery,
     setModalShowing(false)
   }
 
-  console.log('initial values set are', modalShowing)
-
   return (
     <Formik
       enableReinitialize={true}
@@ -135,7 +133,10 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, editQuery,
       }}
       //initialValues={typeof modalShowing === 'object' ? modalShowing : undefined}
       initialValues={
-        typeof modalShowing === 'object' ? modalShowing : { name: '..', is_active: false }
+        // eslint-disable-next-line
+        typeof modalShowing === 'object' && (modalShowing as any)?.id
+          ? modalShowing
+          : { name: 'ee', is_active: true } //TODO: remove this, it should come from schema.fields[].*
       }
     >
       <>
