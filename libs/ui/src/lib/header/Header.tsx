@@ -4,7 +4,6 @@ import {
   BellOutlined,
   CalendarOutlined,
   MailOutlined,
-  MenuOutlined,
   PlusCircleFilled,
   PoundOutlined,
   SmileOutlined,
@@ -17,7 +16,9 @@ import { Button, Dropdown as AvatarDropDown } from '@pabau/ui'
 import { Search } from './search/Search'
 import PabauNotification from './notification/Notification'
 import PabauMessages from './messages/Messages'
-import { Sidebar } from '../sidebar/MobileSidebar'
+// import { Sidebar } from '../menu/MobileSidebar'
+import classNames from 'classnames'
+// import { isMobile, isTablet } from 'react-device-detect'
 const AntHeader = Layout.Header
 
 interface P {
@@ -46,7 +47,6 @@ const items = [
 export const Header: FC<P> = ({ searchRender, ...props }) => {
   const [openNotificationDrawer, setNotificationDrawer] = useState<boolean>(false)
   const [openMessageDrawer, setMessageDrawer] = useState<boolean>(false)
-  const [openMenuDrawer, setMenuDrawer] = useState<boolean>(false)
 
   const handleMenuClick = useCallback(() => alert('Not yet done'), [])
   const overlay = (
@@ -60,7 +60,7 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
   )
   return (
     <>
-      <AntHeader className={styles.pabauHeader}>
+      <AntHeader className={classNames(styles.pabauHeader, styles.mobileViewNone)}>
         <div
           style={{
             paddingLeft: '30px',
@@ -70,17 +70,16 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
           }}
         >
           <Row>
-            <Col md={8}>
+            <Col md={6} lg={8}>
               <Logo />
             </Col>
-            <Col md={8} className={styles.headerSearchCenter}>
+            <Col md={8} lg={8} className={styles.headerSearchCenter}>
               <div style={{ width: '360px' }}>
                 {searchRender ? searchRender(<Search />) : <Search />}
               </div>
             </Col>
-            <Col md={8} className={styles.headerIconEnd}>
+            <Col md={10} lg={8} className={styles.headerIconEnd}>
               <div className={styles.headerAlign}>
-                {/* <SettingOutlined className={styles.headerIcon} /> */}
                 <BellOutlined
                   className={styles.headerIcon}
                   onClick={() => setNotificationDrawer((e) => !e)}
@@ -102,6 +101,7 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
           </Row>
         </div>
       </AntHeader>
+
       {openNotificationDrawer && (
         <PabauNotification
           openDrawer={openNotificationDrawer}
@@ -114,29 +114,6 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
           closeDrawer={() => setMessageDrawer((e) => !e)}
         />
       )}
-      {/* mobile responsive header start */}
-      <AntHeader className={styles.pabauMobileHeader}>
-        <div className={styles.mobileViewAlign}>
-          <div className={styles.mobileViewHeaderHeading}>
-            <MenuOutlined
-              className="menuHeaderIconColor"
-              onClick={() => {
-                setMenuDrawer((e) => !openMenuDrawer)
-              }}
-            />
-            <p>Setup</p>
-          </div>
-        </div>
-      </AntHeader>
-      {openMenuDrawer && (
-        <Sidebar
-          searchRender={searchRender}
-          onSideBarClosed={() => setMenuDrawer((e) => !openMenuDrawer)}
-          onClickNotificationDrawer={() => setNotificationDrawer((e) => !e)}
-          onClickChatDrawer={() => setMessageDrawer((e) => !e)}
-        />
-      )}
-      {/* mobile responsive header end */}
     </>
   )
 }

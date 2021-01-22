@@ -18,46 +18,54 @@
 .drag-table {
   :global {
     .ant-table-thead > tr > th {
-      background: #FFFFFF;
-      border-top: 1px solid #F1F1F1;
+      background: #ffffff;
+      border-top: 1px solid #f1f1f1;
     }
     .ant-table-tbody {
       tr {
-        border-bottom: 1px solid #F1F1F1;
+        border-bottom: 1px solid #f1f1f1;
       }
     }
     tr:hover {
       background-color: #eef7fb;
+      cursor: pointer;
       td {
-        color: var(--primary-color)
+        // color: var(--primary-color);
       }
     }
     .ant-table-cell .drag-visible {
       cursor: pointer !important;
+    }
+    .ant-table-cell {
+      .ant-table-expanded-row-fixed {
+        text-align: center;
+        padding: 24px;
+        font-family: 'Circular-Std-Book';
+        font-size: 14px;
+        font-weight: 500;
+      }
     }
     .align-center {
       text-align: center;
     }
   }
 }
-:global {
-  .ant-table-cell > .ant-btn {
-    background: rgba(84, 178, 211, 0.05);
-    border-radius: 4px;
-    border: 1px solid rgba(84, 178, 211, 0.5);
-    color: var(--primary-color);
-    cursor: pointer;
-    font-family: Circular-Std-Book;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 20px;
-    padding: 1px 12px;
-    width: 106px;
-    text-transform: none;
-  }
+.active-btn {
+  background: rgba(84, 178, 211, 0.05);
+  border-radius: 4px;
+  border: 1px solid rgba(84, 178, 211, 0.5);
+  color: var(--primary-color);
+  cursor: pointer;
+  font-family: Circular-Std-Book;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 20px;
+  padding: 1px 12px;
+  width: 106px;
+  text-transform: none;
+  height: 24px;
 }
-
 
 .disable-source-btn {
   background: rgba(165, 169, 170, 0.05);
@@ -71,6 +79,7 @@
   padding: 1px 12px;
   width: 106px;
   border-radius: 4px;
+  height: 24px;
   text-transform: none;
   cursor: not-allowed;
 }

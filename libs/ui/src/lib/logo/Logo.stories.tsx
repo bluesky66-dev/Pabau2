@@ -4,7 +4,7 @@ import { Logo } from './Logo'
 
 export default {
   component: Logo,
-  title: 'Logo',
+  title: 'Basics/Brands/Logo',
 }
 
 export const primary = () => {

@@ -4,9 +4,9 @@ import { Menu } from './Menu'
 
 export default {
   component: Menu,
-  title: 'Menu',
+  title: 'Layout/Menu',
 }
 
 export const primary = () => {
-  return <Menu />
+  return <div style={{ background: "#9292A3", border: "1px solid #9292A3" }} ><Menu /></div>
 }

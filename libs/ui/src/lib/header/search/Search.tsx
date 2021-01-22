@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import { Checkbox } from '@pabau/ui'
 import styles from './Search.module.less'
-import { Input, Popover, Avatar, Image, Form, Button } from 'antd'
+import { Input, Popover, Avatar, Image, Form, Button, Drawer } from 'antd'
 import {
   SearchOutlined,
   UserAddOutlined,
@@ -12,6 +12,7 @@ import {
 } from '@ant-design/icons'
 import User from '../../../assets/images/user.png'
 import classNames from 'classnames'
+// import { isMobile, isTablet } from 'react-device-detect'
 
 const WAIT_INTERVAL = 400
 interface P {
@@ -25,6 +26,7 @@ interface P {
 }
 
 export const Search: FC<P> = ({ onChange, searchResults }) => {
+  const [searchDrawer, setSearchDrawer] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const [searchPopUp, setSearchPopUp] = useState(false)
   const [searchTab, setSearchTab] = useState('Clients')
@@ -47,12 +49,6 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
   const searchMenu = () => {
     return (
       <div className={styles.searchBox}>
-        <div className={styles.closeIconRight}>
-          <CloseOutlined
-            className={styles.closeIconStyle}
-            onClick={() => setSearchPopUp((e) => !e)}
-          />
-        </div>
         <div className={styles.cusTabs}>
           <button
             className={classNames(
@@ -140,7 +136,7 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
   const advanceSearchMenu = () => {
     return (
       <div className={classNames(styles.advanceSearchModal, styles.advSearchBody)}>
-        <div className={styles.backToSearch}>
+        <div className={classNames(styles.backToSearch, styles.mobileViewNone)}>
           <div
             className={styles.basicSearchAlign}
             onClick={() => {
@@ -159,6 +155,7 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
             />
           </div>
         </div>
+
         <div className={styles.advanceSearchText}>
           <h1>Advance Search</h1>
         </div>
@@ -215,8 +212,12 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
           <Checkbox>
             <span className={styles.inactiveClientText}> Show inactive clients</span>{' '}
           </Checkbox>
-          <div className={styles.buttonEnd}>
-            <Button className={styles.btnDisableStyle} disabled={true} size="large">
+          <div className={classNames(styles.buttonEnd, styles.searchBtnBlock)}>
+            <Button
+              className={classNames(styles.btnDisableStyle, styles.mobileviewBtnSize)}
+              disabled={true}
+              size="large"
+            >
               Search
             </Button>
           </div>
@@ -234,30 +235,88 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
 
   return (
     <div style={{ width: '100%' }}>
-      <Popover
-        content={renderMenu}
-        visible={searchPopUp}
-        overlayClassName={advanceSearch ? styles.advanceSearchModal : styles.searchInput}
-      >
+      <div className={styles.mobileViewNone}>
+        <Popover
+          content={renderMenu}
+          visible={searchPopUp}
+          overlayClassName={classNames(
+            advanceSearch ? styles.advanceSearchModal : styles.searchInput,
+            styles.mobileViewNone
+          )}
+        >
+          <Input
+            className={styles.searchInputStyle}
+            placeholder="Search clients or leads"
+            value={searchTerm}
+            prefix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            suffix={
+              searchTerm && (
+                <CloseCircleFilled
+                  style={{ color: '#BFBFBF' }}
+                  onClick={() => {
+                    setSearchPopUp(false)
+                    setSearchTerm('')
+                  }}
+                />
+              )
+            }
+          />
+        </Popover>
+      </div>
+      <div className={styles.desktopViewNone}>
         <Input
-          className={styles.searchInputStyle}
+          className={classNames(styles.searchInputStyle)}
           placeholder="Search clients or leads"
           value={searchTerm}
           prefix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
           onChange={(e) => setSearchTerm(e.target.value)}
-          suffix={
-            searchTerm && (
-              <CloseCircleFilled
-                style={{ color: '#BFBFBF' }}
-                onClick={() => {
-                  setSearchPopUp(false)
-                  setSearchTerm('')
-                }}
-              />
-            )
-          }
+          onFocus={() => {
+            setSearchDrawer((e) => !e)
+          }}
         />
-      </Popover>
+      </div>
+      <Drawer
+        visible={searchDrawer}
+        placement="left"
+        closable={false}
+        className={styles.mobileSearchBar}
+      >
+        <div className={styles.fixedSearchBar}>
+          <div className={styles.searchHeader}>
+            <LeftOutlined
+              onClick={() => {
+                if (advanceSearch) {
+                  setAdvanceSearch((e) => !e)
+                } else {
+                  setSearchDrawer((e) => !e)
+                }
+              }}
+            />
+            <Input
+              className={classNames(styles.searchInputStyle, styles.resSearchInputStyle)}
+              placeholder="Search clients or leads"
+              value={searchTerm}
+              prefix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              suffix={
+                searchTerm && (
+                  <CloseCircleFilled
+                    style={{ color: '#BFBFBF' }}
+                    onClick={() => {
+                      setSearchPopUp(false)
+                      setSearchTerm('')
+                    }}
+                  />
+                )
+              }
+              autoFocus
+            />
+          </div>
+          <div className={styles.searchBarBorder}></div>
+        </div>
+        {advanceSearch ? advanceSearchMenu() : searchMenu()}
+      </Drawer>
     </div>
   )
 }

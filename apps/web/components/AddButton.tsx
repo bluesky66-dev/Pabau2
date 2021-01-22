@@ -1,87 +1,123 @@
-import { DocumentNode, useMutation } from '@apollo/client'
-import React, { FC, useState } from 'react'
-import { BasicModal as Modal, Button } from '@pabau/ui'
-import Form from './Form'
-import { useKeyPressEvent } from 'react-use'
-import { Notification } from '@pabau/ui'
+import React, { FC, useEffect, useState } from 'react'
+import { Button, MobileHeader } from '@pabau/ui'
+import styles from './AddButton.module.less'
+import { FilterOutlined, PlusSquareFilled, SearchOutlined } from '@ant-design/icons'
+import { Input, Radio, Popover, Drawer } from 'antd'
+import classNames from 'classnames'
+// import { isMobile, isTablet } from 'react-device-detect'
+// import { useKeyPressEvent } from 'react-use'
 
+const WAIT_INTERVAL = 400
 interface P {
   schema: Schema
-  addQuery: DocumentNode
-  listQuery: DocumentNode
-  newButtonText?: string
+  onClick?: () => void
+  onFilterSource: (filter: boolean) => void
+  onSearch: (term: string) => void
 }
-const AddButton: FC<P> = ({
-  schema,
-  addQuery,
-  listQuery,
-  newButtonText = 'Create ' + schema.short,
-}) => {
-  const [addMutation] = useMutation(addQuery)
-  const [modalShowing, setModalShowing] = useState(false)
-  let formRef: { submitForm: () => void } | null = null
-  useKeyPressEvent('n', () => {
-    setModalShowing(true)
-  })
+
+const AddButton: FC<P> = ({ schema, onClick, children, onFilterSource, onSearch }) => {
+  const [isActive, setIsActive] = useState(true)
+  const [mobFilterDrawer, setMobFilterDrawer] = useState(false)
+  const [marketingSourceSearch, setMarketingSourceSearch] = useState('')
+
+  // useKeyPressEvent('n', () => {
+  //   onClick?.()
+  // })
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onSearch && onSearch(marketingSourceSearch)
+    }, WAIT_INTERVAL)
+
+    return () => clearTimeout(timer)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [marketingSourceSearch])
+
+  const filterContent = (isMobile = false) => (
+    <div className={styles.filterContent}>
+      {!isMobile && (
+        <div className={classNames(styles.filterHeader)}>
+          <h6>Filter by</h6>
+          <p>Status</p>
+        </div>
+      )}
+      <div className={styles.radioTextStyle}>
+        <Radio.Group
+          onChange={(e) => {
+            setIsActive(e.target.value)
+            !isMobile && onFilterSource(e.target.value)
+          }}
+          value={isActive}
+        >
+          <Radio value={true}>
+            <span>Active</span>
+          </Radio>
+          <Radio value={false}>
+            <span>Inactive</span>
+          </Radio>
+        </Radio.Group>
+      </div>
+    </div>
+  )
+
   return (
     <>
-      <Button
-        style={{
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          margin: '1em 28px',
-          height: '40px',
-          minWidth: '124px',
-          fontSize: '14px',
-        }}
-        type="primary"
-        onClick={() => setModalShowing(true)}
-      >
-        {newButtonText}
-      </Button>
-      <Modal
-        onCancel={() => setModalShowing(false)}
-        onOk={() => formRef?.submitForm()}
-        visible={modalShowing}
-        title={`Create ${schema.full}`}
-        newButtonText={`Create ${schema.short}`}
-      >
-        <Form
-          onRef={(ref) => {
-            formRef = ref
-          }}
-          schema={schema}
-          onSubmit={async (form: Record<string, unknown>) => {
-            await addMutation({
-              variables: form,
-              optimisticResponse: {},
-              update: (proxy) => {
-                if (listQuery) {
-                  const existing = proxy.readQuery({
-                    query: listQuery,
-                  })
-                  if (existing) {
-                    const key = Object.keys(existing)[0]
-                    proxy.writeQuery({
-                      query: listQuery,
-                      data: {
-                        [key]: [...existing[key], form],
-                      },
-                    })
-                  }
-                }
-              },
-            })
-            Notification.openNotification(
-              'success',
-              'Success! You have successfully created a marketing source',
-              3
-            )
-            setModalShowing(false)
-          }}
+      {/* Mobile header */}
+      <div className={classNames(styles.marketingIcon, styles.desktopViewNone)}>
+        <SearchOutlined className={styles.marketingIconStyle} />
+        <FilterOutlined
+          className={styles.marketingIconStyle}
+          onClick={() => setMobFilterDrawer((e) => !e)}
         />
-      </Modal>
+        <PlusSquareFilled className={styles.plusIconStyle} onClick={() => onClick?.()} />
+      </div>
+      <Drawer visible={mobFilterDrawer} className={styles.mobFilterDrawer} closable={false}>
+        <MobileHeader className={styles.marketingSourceFilterHeader}>
+          <div className={styles.allContentAlignMobile}>
+            <div className={styles.marketingTextStyle}>
+              <span>Reset</span>
+              <p> Filter </p>
+              <span>Cancel</span>
+            </div>
+          </div>
+        </MobileHeader>
+        <div style={{ marginTop: '91px', paddingLeft: '24px' }}>{filterContent(true)}</div>
+        <Button
+          type="primary"
+          className={styles.applyButton}
+          onClick={() => {
+            onFilterSource(isActive)
+            setMobFilterDrawer((e) => !e)
+          }}
+        >
+          Apply
+        </Button>
+      </Drawer>
+
+      {/* Desktop header */}
+      <div className={classNames(styles.marketingSource, styles.mobileViewNone)}>
+        <Input
+          className={styles.searchMarketingStyle}
+          placeholder="Search"
+          value={marketingSourceSearch}
+          onChange={(e) => setMarketingSourceSearch(e.target.value)}
+          suffix={<SearchOutlined style={{ color: '#8C8C8C' }} />}
+          autoFocus
+        />
+        <Popover
+          trigger="click"
+          content={filterContent}
+          placement="bottomRight"
+          overlayClassName={styles.filterPopover}
+        >
+          <Button className={styles.filterBtn}>
+            <FilterOutlined /> Filter
+          </Button>
+        </Popover>
+        <Button className={styles.createSourceBtn} type="primary" onClick={() => onClick?.()}>
+          {'Create ' + schema.short}
+        </Button>
+      </div>
     </>
   )
 }

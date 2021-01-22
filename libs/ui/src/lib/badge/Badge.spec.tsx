@@ -1,11 +1,10 @@
 import React from 'react'
 import { render } from '@testing-library/react'
+import Badge from './Badge'
 
-import Sidebar from './Sidebar'
-
-describe('Sidebar', () => {
+describe('Badge', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Sidebar />)
+    const { baseElement } = render(<Badge />)
     expect(baseElement).toBeTruthy()
   })
 })

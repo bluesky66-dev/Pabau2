@@ -3,7 +3,7 @@ import Button from './button'
 
 export default {
   component: Button,
-  title: 'Button',
+  title: 'Basics/Button',
   args: { label: 'Pabau', disabled: false, type: '', size: 'medium' },
   argTypes: {
     label: { control: { type: 'text' } },
