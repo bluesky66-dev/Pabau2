@@ -5,7 +5,7 @@ import styles from './Security.module.less'
 import { Progress } from 'antd'
 import { Button } from '@pabau/ui'
 
-export interface SecurityScoreProps {
+interface SecurityScoreProps {
   percent?: number
 }
 

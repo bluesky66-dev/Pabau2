@@ -1,14 +1,14 @@
 /* eslint-disable */
 import React from 'react'
 import styles from './Security.module.less'
-import { Statuslabel } from '../../lib/statuslabel/Statuslabel'
+import { Badge } from '../badge/Badge'
 
 import icon_force2fa from '../../assets/images/security/force2fa.svg'
 import icon_authdevice from '../../assets/images/security/authdevice.svg'
 import icon_pwdpolicy from '../../assets/images/security/pwdpolicy.svg'
 
 /* eslint-disable-next-line */
-export interface SecurityProps {}
+interface SecurityProps {}
 
 export function SecurityTools(props: SecurityProps) {
   return (
@@ -21,7 +21,7 @@ export function SecurityTools(props: SecurityProps) {
           <span className={styles.p2}>Strat a video call from your conversations</span>
         </div>
         <div className={styles.statelabel}>
-          <Statuslabel/>
+          <Badge/>
         </div> 
       </div>
       <hr className={styles.securityToolsline}/>
@@ -33,7 +33,7 @@ export function SecurityTools(props: SecurityProps) {
           <span className={styles.p2}>Create details and send conversations to Pipedrive</span>
         </div>
         <div className={styles.statelabel}>
-          <Statuslabel/>
+          <Badge/>
         </div> 
       </div>
       <hr className={styles.securityToolsline}/>
@@ -46,7 +46,7 @@ export function SecurityTools(props: SecurityProps) {
           <span className={styles.p2}>Create details and send conversations to Pipedrive</span>
         </div>
         <div className={styles.statelabel}>
-          <Statuslabel/>
+          <Badge/>
         </div> 
       </div>
       
@@ -59,7 +59,7 @@ export function SecurityTools(props: SecurityProps) {
           <span className={styles.p2}>Create details and send conversations to Pipedrive</span>
         </div>
         <div className={styles.statelabel}>
-          <Statuslabel/>
+          <Badge/>
         </div> 
       </div>
 
@@ -71,7 +71,7 @@ export function SecurityTools(props: SecurityProps) {
           <span className={styles.p2}>Create details and send conversations to Pipedrive</span>
         </div>
         <div className={styles.statelabel}>
-          <Statuslabel disabled={false} />
+          <Badge disabled={false} />
         </div> 
       </div>
     </div>

@@ -7,7 +7,7 @@ import SecurityTools from './SecurityTools'
 
 export default {
   component: SecurityScore,
-  title: 'Security',
+  title: 'Misc/Security',
   args: { percent: 30},
   argTypes: {
     percent: { control: { type: 'number' } },

@@ -3,7 +3,7 @@ import React from 'react'
 import styles from './Stepper.module.less'
 
 /* eslint-disable-next-line */
-export interface StepperProps {
+interface StepperProps {
   datasource : Array<any>,
   step : number
 }
@@ -26,14 +26,14 @@ class Stepper extends React.Component<StepperProps> {
 
 export default Stepper
 
-export interface StepProps {
+interface StepProps {
   isLast? : boolean,
   item : ItemInfo,
   status : boolean,
   progress : boolean
 }
 
-export interface ItemInfo {
+interface ItemInfo {
   imgPath: string,
   name : string
 }

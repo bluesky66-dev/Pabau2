@@ -5,7 +5,7 @@ import { Button } from '../button/button'
 import styles from './NotificationBanner.module.less'
 import { Row, Col } from 'antd'
 import iconClose from '../../assets/images/icon_close.svg'
-export interface NotificationBannerProps {
+interface NotificationBannerProps {
   title?: string,
   desc?: string,
   imgPath?: string,
