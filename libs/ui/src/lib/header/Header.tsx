@@ -16,9 +16,7 @@ import { Button, Dropdown as AvatarDropDown } from '@pabau/ui'
 import { Search } from './search/Search'
 import PabauNotification from './notification/Notification'
 import PabauMessages from './messages/Messages'
-import { Sidebar } from '../menu/MobileSidebar'
 import classNames from 'classnames'
-// import { isMobile, isTablet } from 'react-device-detect'
 const AntHeader = Layout.Header
 
 interface P {
