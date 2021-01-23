@@ -6,7 +6,7 @@ import { data, dataItems } from './mock'
 
 export default {
   component: RadioButton,
-  title: 'Radio Button',
+  title: 'Forms/Radio Button',
   args: {
     group: 'Group Name',
     Items: data
