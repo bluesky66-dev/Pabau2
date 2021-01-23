@@ -2,19 +2,19 @@ import { CheckCircleFilled } from '@ant-design/icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import * as Icons from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { PropsWithChildren, useState } from 'react'
+import React, { FC, useState } from 'react'
 import styles from './FontIcon.module.less'
 
 /* eslint-disable-next-line */
 export interface FontIconProps {
   max?: number
 }
-
-export function FontIcon({ max }: PropsWithChildren<FontIconProps>) {
+const FontIcon: FC<FontIconProps> = ({ max }) => {
   const iconList = Object.keys(Icons)
-    .slice(0, max)
     .filter((key) => key !== 'fas' && key !== 'prefix')
+    .slice(0, max)
     .map((icon) => Icons[icon])
+  library.add(...iconList)
   library.add(...iconList)
   const [activate, setActivate] = useState('')
   return (
