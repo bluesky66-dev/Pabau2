@@ -59,7 +59,6 @@ const schema: Schema = {
 
 export const Index: NextPage = () => {
   return (
-<<<<<<< HEAD
     <Layout pageTitle={pluralize(schema.full)}>
       <CrudTable
         schema={schema}
@@ -69,7 +68,6 @@ export const Index: NextPage = () => {
         editQuery={EDIT_MUTATION}
       />
     </Layout>
-=======
     <CrudLayout
       schema={schema}
       addQuery={ADD_MUTATION}
@@ -78,7 +76,6 @@ export const Index: NextPage = () => {
       editQuery={EDIT_MUTATION}
       searchQuery={LIST_QUERY} // Temparary added
     />
->>>>>>> 94600044cdc093c187ca41f790dcac5ffabd0660
   )
 }
 
