@@ -15,7 +15,6 @@ const FontIcon: FC<FontIconProps> = ({ max }) => {
     .slice(0, max)
     .map((icon) => Icons[icon])
   library.add(...iconList)
-  library.add(...iconList)
   const [activate, setActivate] = useState('')
   return (
     <div className={styles.iconPanel}>
