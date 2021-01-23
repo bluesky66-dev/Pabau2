@@ -25,5 +25,5 @@ defaultStatusLabel.args = {
 const PabauPlusStory = ({ ...args }) => <PabauPlus {...args} />;
 export const pabauPlus = PabauPlusStory.bind({});
 pabauPlus.args = {
-    label: 'Pabau Plus',
+    label: 'Plus',
 };

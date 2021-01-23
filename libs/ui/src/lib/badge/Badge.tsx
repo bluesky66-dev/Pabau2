@@ -27,11 +27,11 @@ export function Badge(props: P) {
 export default Badge
 
 export function PabauPlus(props: P) {
-  const { label = 'Pabau Label' } = props
+  const { label = 'Plus' } = props
 
   return (
-    <div >
-        <Button type='primary' className={styles.pabauPlusBtn}>{label}</Button>
+    <div className={styles.pabauPlusBtn}>
+      {label}
     </div>
   )
 }
