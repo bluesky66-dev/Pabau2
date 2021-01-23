@@ -1,5 +1,7 @@
 import React from 'react'
+import { Menu } from 'antd'
 import Button from './button'
+import DropdownButton from './dropdownButton'
 
 export default {
   component: Button,
@@ -30,6 +32,7 @@ export default {
 }
 
 const ButtonStory = ({ ...args }) => <Button {...args}>{args.label}</Button>
+const DropdownButtonStory = ({ ...args }) => <DropdownButton {...args}>{args.label}</DropdownButton>
 
 export const defaultBtn = ButtonStory.bind({})
 defaultBtn.args = {
@@ -73,4 +76,25 @@ CustomButton.args = {
   size: 'large',
   color: '#000',
   backgroundColor: '#54B2D3',
+}
+
+export const dropdownButton = DropdownButtonStory.bind({})
+dropdownButton.args = {
+  label: 'Manage Option',
+  size: 'large',
+  color: '#40A0C1',
+  menu: (
+    <Menu>
+      <Menu.Item>
+        <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/">
+          Pause notification
+        </a>
+      </Menu.Item>
+      <Menu.Item>
+        <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/">
+          See message log
+        </a>
+      </Menu.Item>
+    </Menu>
+  ),
 }
