@@ -5,7 +5,7 @@ import { Input } from './input'
 
 export default {
   component: Input,
-  title: 'Input',
+  title: 'Forms/Input',
   args: {
     text: 'Facebook',
     disabled: false,

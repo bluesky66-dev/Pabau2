@@ -6,7 +6,7 @@ import { Webinar as FooterWebinar } from './Webinar'
 
 export default {
   component: Footer,
-  title: 'Footer',
+  title: 'Layout/Footer',
 }
 
 export const primary = () => {

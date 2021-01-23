@@ -5,7 +5,7 @@ import { Button } from 'antd'
 
 export default {
   component: Notification,
-  title: 'Notification',
+  title: 'UI/Notification',
   args: { text: 'Notification', type: 'success' },
   argTypes: {
     type: {

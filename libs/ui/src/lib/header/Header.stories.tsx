@@ -9,7 +9,7 @@ import User5 from '../../assets/images/user5.png'
 
 export default {
   component: Header,
-  title: 'Header',
+  title: 'Layout/Header',
 }
 
 const searchResults = [

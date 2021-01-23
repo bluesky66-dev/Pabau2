@@ -1,10 +1,10 @@
 /* eslint-disable */
 import React from 'react'
-import Statuslabel from './Statuslabel'
+import Badge from './Badge'
 
 export default {
-  component: Statuslabel,
-  title: 'StatusLabel',
+  component: Badge,
+  title: 'Basics/Badge',
   args: { label: 'Enabled', disabled: false },
   argTypes: {
     label: { control: { type: 'text' } },
@@ -14,9 +14,9 @@ export default {
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 
-const StatuslabelStory = ({ ...args }) => <Statuslabel {...args}></Statuslabel>
+const BadgeStory = ({ ...args }) => <Badge {...args}/>
 
-export const defaultStatusLabel = StatuslabelStory.bind({})
+export const defaultStatusLabel = BadgeStory.bind({})
 defaultStatusLabel.args = {
   label: 'Enabled',
   disabled: false,

@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import { Drawer, Menu } from 'antd'
-import { Button, Search } from '@pabau/ui'
+import { Button, Search, Dropdown as AvatarDropDown } from '@pabau/ui'
 import styles from './MobileSidebar.module.less'
 import classNames from 'classnames'
 import { sidebarMenu, SidebarMenuItem } from './sidebarMenu'
@@ -9,11 +9,13 @@ import {
   CloseOutlined,
   MailOutlined,
   PlusCircleFilled,
+  RightOutlined,
   SettingOutlined,
-  UserOutlined,
 } from '@ant-design/icons'
 import Avatar from 'antd/lib/avatar/avatar'
+import User from '../../assets/images/users/stephen.png'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const { SubMenu } = Menu
 
@@ -24,14 +26,16 @@ interface SidebarProps {
   onClickChatDrawer: () => void
 }
 
-export const Sidebar: FC<SidebarProps> = ({
+export const MobileSidebar: FC<SidebarProps> = ({
   searchRender,
   onSideBarClosed,
   onClickNotificationDrawer,
   onClickChatDrawer,
 }) => {
+  const router = useRouter()
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([])
+  const [openProfileDrawer, setProfileDrawer] = useState<boolean>(false)
 
   const mobileSidebar: SidebarMenuItem[] = [
     {
@@ -67,6 +71,9 @@ export const Sidebar: FC<SidebarProps> = ({
       onClickNotificationDrawer()
     } else if (e.key.includes('Chat')) {
       onClickChatDrawer()
+    }
+    if (e.key.includes('Marketing')) {
+      router.push('/marketing/sources')
     }
   }
 
@@ -113,11 +120,21 @@ export const Sidebar: FC<SidebarProps> = ({
           return renderMenu(menuData.menuName + index, menuData.menuName, menuData.icon)
         })}
         <Menu.Item
-          className={styles.sidebarMenu}
-          icon={<Avatar size={24} icon={<UserOutlined />} />}
+          className={classNames(styles.sidebarMenu, styles.profileMenu)}
+          icon={<Avatar size={24} src={User} />}
+          onClick={() => {
+            setProfileDrawer(true)
+          }}
         >
           Profile
+          <RightOutlined style={{ fontSize: '14px' }} />
         </Menu.Item>
+        {openProfileDrawer && (
+          <AvatarDropDown
+            isOpen={openProfileDrawer}
+            onCloseDrawer={() => setProfileDrawer((e) => !e)}
+          />
+        )}
         <div className={styles.buttonMenu}>
           <Button
             className={classNames(styles.buttonStyles, styles.createBtn)}
@@ -128,12 +145,15 @@ export const Sidebar: FC<SidebarProps> = ({
         </div>
         <div className={styles.buttonMenu}>
           <Link href="/setup">
-            <Button
-              className={classNames(styles.buttonStyles, styles.setUpBtn)}
-              icon={<SettingOutlined />}
-            >
-              Setup
-            </Button>
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+            <a style={{ width: '100%' }}>
+              <Button
+                className={classNames(styles.buttonStyles, styles.setUpBtn)}
+                icon={<SettingOutlined />}
+              >
+                Setup
+              </Button>
+            </a>
           </Link>
         </div>
       </Menu>
@@ -141,4 +161,4 @@ export const Sidebar: FC<SidebarProps> = ({
   )
 }
 
-export default Sidebar
+export default MobileSidebar

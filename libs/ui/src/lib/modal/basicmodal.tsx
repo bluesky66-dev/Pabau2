@@ -1,10 +1,9 @@
 import React, { PropsWithChildren } from 'react'
 import { Modal } from 'antd'
 import Button from '../button/button'
-import NotActiveSVG from '../../assets/images/notactive.svg'
-import ActiveSVG from '../../assets/images/active.svg'
+import { Checkbox } from '@pabau/ui'
 import styles from './basicmodal.module.less'
-
+import { ModalProps } from 'antd/lib/modal'
 interface P {
   onOk?: () => void
   onCancel?: () => void
@@ -45,7 +44,8 @@ export function BasicModal({
   onSpecialBooleanClick,
   newButtonText = 'OK',
   dangerButtonText,
-}: PropsWithChildren<P>): JSX.Element {
+  ...props
+}: PropsWithChildren<P & ModalProps>): JSX.Element {
   return (
     <Modal
       title={title}
@@ -55,30 +55,47 @@ export function BasicModal({
       footer={null}
       cancelText={null}
       width={modalWidth}
-      destroyOnClose={true}
-      modalRender={(E) => E}
+      // destroyOnClose={true}
+      // modalRender={(E) => E}
       wrapClassName={styles.modal}
+      {...props}
     >
       <div className={styles.modalBody}>{children}</div>
       <div className={styles.modalFooter}>
+        {specialBooleanLabel && onSpecialBooleanClick && (
+          <Checkbox defaultChecked={specialBooleanValue} onClick={onSpecialBooleanClick}>
+            {specialBooleanLabel}
+          </Checkbox>
+          // <div
+          //   className={'pretty p-svg p-toggle p-plain'}
+          //   onClick={() => {
+          //     onSpecialBooleanClick()
+          //   }}
+          // >
+          //   <div className={styles.alignCheckboxLabel}>
+          //     {!specialBooleanValue ? (
+          //       <img className="svg" src={NotActiveSVG} alt="none-active-state" />
+          //     ) : (
+          //       <img className="svg" src={ActiveSVG} alt="active-state" />
+          //     )}
+          //     <label>{specialBooleanLabel}</label>
+          //   </div>
+          // </div>
+        )}
         {dangerButtonText && (
-          <Button type="primary" danger onClick={() => onDelete?.()}>
+          <Button type="default" className={styles.deleteBtnStyle} onClick={() => onDelete?.()}>
             {dangerButtonText}
           </Button>
         )}
-        {specialBooleanLabel && onSpecialBooleanClick && (
+        {specialBooleanLabel && (
           <div
             className={'pretty p-svg p-toggle p-plain'}
             onClick={() => {
-              onSpecialBooleanClick()
+              onSpecialBooleanClick?.()
             }}
           >
             <div>
-              {!specialBooleanValue ? (
-                <img className="svg" src={NotActiveSVG} alt="none-active-state" />
-              ) : (
-                <img className="svg" src={ActiveSVG} alt="active-state" />
-              )}
+              {!specialBooleanValue ? <>(unticked)</> : <>(ticked)</>}
               <label>{specialBooleanLabel}</label>
             </div>
           </div>

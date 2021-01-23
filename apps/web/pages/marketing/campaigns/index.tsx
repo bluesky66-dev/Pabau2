@@ -1,9 +1,7 @@
-import { Layout } from '@pabau/ui'
 import { gql } from '@apollo/client'
 import { NextPage } from 'next'
 import React from 'react'
-import CrudTable from '../../../components/CrudTable'
-import pluralize from 'pluralize'
+import CrudLayout from '../../../components/CrudLayout/CrudLayout'
 
 const LIST_QUERY = gql`
   query marketing_campaigns {
@@ -59,15 +57,14 @@ const schema: Schema = {
 
 export const Index: NextPage = () => {
   return (
-    <Layout pageTitle={pluralize(schema.full)}>
-      <CrudTable
-        schema={schema}
-        addQuery={ADD_MUTATION}
-        deleteQuery={DELETE_MUTATION}
-        listQuery={LIST_QUERY}
-        editQuery={EDIT_MUTATION}
-      />
-    </Layout>
+    <CrudLayout
+      schema={schema}
+      addQuery={ADD_MUTATION}
+      deleteQuery={DELETE_MUTATION}
+      listQuery={LIST_QUERY}
+      editQuery={EDIT_MUTATION}
+      searchQuery={LIST_QUERY} // Temparary added
+    />
   )
 }
 

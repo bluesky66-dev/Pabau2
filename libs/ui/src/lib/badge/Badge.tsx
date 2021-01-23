@@ -1,17 +1,17 @@
 /* eslint-disable */
 import React from 'react'
 
-import './Statuslabel.module.less'
+// import './Badge.module.less'
 import btn_enable from '../../assets/images/security/btn_enable.svg'
 import btn_disabled from '../../assets/images/security/close.svg'
-import styles from './Statuslabel.module.less'
+import styles from './Badge.module.less'
 
-export interface StatuslabelProps {
+export interface P {
   label?: string
   disabled? : boolean
 }
 
-export function Statuslabel(props: StatuslabelProps) {
+export function Badge(props: P) {
   const { label = 'Enabled', disabled = true } = props
 
   return (
@@ -24,4 +24,4 @@ export function Statuslabel(props: StatuslabelProps) {
   )
 }
 
-export default Statuslabel
+export default Badge

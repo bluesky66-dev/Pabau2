@@ -1,88 +1,114 @@
-import React, { FC } from 'react'
-import { CalendarOutlined, PoundOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons'
-import { Button } from 'antd'
+import React, { FC, useState } from 'react'
+import { Layout, Menu as AntMenu } from 'antd'
+import { SettingOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
+import { Button } from '@pabau/ui'
+import styles from './Menu.module.less'
+import classNames from 'classnames'
 import Link from 'next/link'
-import { useKeyPressEvent } from 'react-use'
-import { useRouter } from 'next/router'
+import { sidebarMenu } from './sidebarMenu'
+const { SubMenu } = AntMenu
+const { Sider } = Layout
 
-const items = [
-  {
-    name: 'Dashboard',
-    icon: <UserOutlined />,
-    url: '/',
-  },
-  {
-    name: 'Calendar',
-    icon: <SmileOutlined />,
-    url: '/cal',
-  },
-  {
-    name: 'Clients',
-    icon: <CalendarOutlined />,
-  },
-  {
-    name: 'Leads',
-    icon: <PoundOutlined />,
-  },
-  {
-    name: 'Reports',
-    icon: <PoundOutlined />,
-  },
-  {
-    name: 'Stock',
-    icon: <PoundOutlined />,
-  },
-  {
-    name: 'Marketing',
-    icon: <PoundOutlined />,
-    url: '/marketing',
-  },
-  {
-    name: 'Financials',
-    icon: <PoundOutlined />,
-  },
-]
+interface P {
+  onSideBarCollapsed?: (collapsed: boolean) => void
+}
 
-export const Menu: FC = () => {
-  const router = useRouter()
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  useKeyPressEvent(['1', '2', '3', '4', '5', '6', '7', '8', '9'], (e) => {
-    console.log('key pressed', e)
-    try {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      router.push(items[parseInt(e.key) - 1].url)
-      // eslint-disable-next-line no-empty
-    } catch {}
-  })
+export const Menu: FC<P> = ({ onSideBarCollapsed }) => {
+  const [collapsed, setCollapsed] = useState(false)
+  const [openKeys, setOpenKeys] = useState<string[]>([])
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([])
+
+  const handleSidebarCollapse = () => {
+    setCollapsed((e) => {
+      onSideBarCollapsed && onSideBarCollapsed(!e)
+      return !e
+    })
+  }
+
+  const onOpenChange = (keys) => {
+    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1)
+    setOpenKeys(latestOpenKey ? [latestOpenKey] : [])
+  }
+
+  const renderMenu = (index, menuName, icon) => {
+    return (
+      <AntMenu.Item key={index} icon={icon} className={styles.sidebarMenu}>
+        {menuName}
+      </AntMenu.Item>
+    )
+  }
+
+  const onClickMenu = (e) => {
+    setSelectedKeys([e.key])
+  }
+
   return (
-    <div className="main">
-      <style jsx>{`
-        .main {
-          background-color: #dbf7ff;
-          height: 56px;
-          line-height: 56px;
-          padding: 0 1em;
-          overflow: hidden;
-        }
-      `}</style>
-      {items.map(({ name, icon = <PoundOutlined />, url = '/' }) => (
-        <Link key={name} href={url} prefetch={false}>
-          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <a style={{ height: '100%' }}>
-            <Button
-              style={{ height: '100%' }}
-              type="text"
-              // onClick={() => url && router.replace(url)}
+    <Sider
+      trigger={null}
+      className={styles.pabauSidebar}
+      collapsed={collapsed}
+      style={{
+        overflow: 'auto',
+        height: '100vh',
+        position: 'fixed',
+        left: 0,
+      }}
+    >
+      <AntMenu
+        mode="inline"
+        className={styles.sidebar}
+        openKeys={openKeys}
+        onOpenChange={onOpenChange}
+        multiple={false}
+        selectedKeys={selectedKeys}
+        onClick={onClickMenu}
+      >
+        {sidebarMenu.map((menuData, index) => {
+          return !menuData.children ? (
+            renderMenu(menuData.menuName + index, menuData.menuName, menuData.icon)
+          ) : (
+            <SubMenu
+              key={menuData.menuName + index}
+              icon={menuData.icon}
+              title={menuData.menuName}
+              onTitleClick={onClickMenu}
+              className={classNames(
+                styles.sidebarMenu,
+                selectedKeys.includes(menuData.menuName + index) && styles.subMenuActive
+              )}
             >
-              {icon}
-              <span style={{ fontWeight: 600 }}>{name}</span>
-            </Button>
-          </a>
-        </Link>
-      ))}
-    </div>
+              {menuData.children.map((subMenu, subIndex) => {
+                return renderMenu(subMenu.menuName + subIndex, subMenu.menuName, subMenu?.icon)
+              })}
+            </SubMenu>
+          )
+        })}
+        <div className={styles.sidebarBtnAlign}>
+          {collapsed ? (
+            <SettingOutlined className={styles.sidebarMenu} />
+          ) : (
+            <Link href="/setup">
+              <Button
+                icon={<SettingOutlined className={styles.sidebarMenu} />}
+                className={styles.setupBtn}
+              >
+                Setup
+              </Button>
+            </Link>
+          )}
+        </div>
+        <div>
+          {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+            className: classNames(
+              styles.sidebarCollapseIcon,
+              styles.sidebarMenu,
+              collapsed && styles.sidebarCollapsed
+            ),
+            onClick: handleSidebarCollapse,
+          })}
+        </div>
+      </AntMenu>
+    </Sider>
   )
 }
 

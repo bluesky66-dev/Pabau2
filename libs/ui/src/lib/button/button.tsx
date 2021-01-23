@@ -10,14 +10,14 @@ export enum ButtonTypes {
   link = 'link',
   text = 'text',
 }
-export type P = {
+interface P extends NativeButtonProps {
   // type?: ButtonTypes
   disabled?: boolean
   color?: string
   backgroundColor?: string
   style?: HTMLProps<HTMLElement>['style']
   className?: string
-} & NativeButtonProps
+}
 
 export const Button: FC<P> = ({
   className,
