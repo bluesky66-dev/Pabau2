@@ -1,28 +1,30 @@
-import React, { FC, useState } from 'react'
-import { Menu, Badge, Avatar, Popover, Image, Drawer } from 'antd'
 import {
+  CaretDownOutlined,
+  CheckCircleFilled,
+  ExclamationOutlined,
+  ExportOutlined,
+  GlobalOutlined,
+  InfoCircleOutlined,
+  LeftOutlined,
+  NotificationOutlined,
+  PlaySquareOutlined,
+  QuestionCircleOutlined,
   RightOutlined,
   UserOutlined,
-  NotificationOutlined,
-  QuestionCircleOutlined,
-  GlobalOutlined,
-  ExportOutlined,
-  LeftOutlined,
-  CheckCircleFilled,
-  InfoCircleOutlined,
-  ExclamationOutlined,
-  PlaySquareOutlined,
-  CaretDownOutlined,
 } from '@ant-design/icons'
-import { ReactComponent as PABAULOGO } from '../../assets/images/pabaulogo.svg'
-import { ReactComponent as LaunchSVG } from '../../assets/images/launch.svg'
+import { Avatar, Badge, Drawer, Image, Menu, Popover } from 'antd'
+import classNames from 'classnames'
+import Link from 'next/link'
+import QueueAnim from 'rc-queue-anim'
+import React, { FC, useState } from 'react'
 import { ReactComponent as JASVG } from '../../assets/images/JA.svg'
+import { languageMenu } from '../../assets/images/lang-logos'
+import { ReactComponent as LaunchSVG } from '../../assets/images/launch.svg'
+import { ReactComponent as PABAULOGO } from '../../assets/images/pabaulogo.svg'
 import { ReactComponent as UPSVG } from '../../assets/images/UP.svg'
 import { ReactComponent as TaskSVG } from '../../assets/images/Vector.svg'
-import { languageMenu } from '../../assets/images/lang-logos'
 import styles from './dropdown.module.less'
-import classNames from 'classnames'
-import QueueAnim from 'rc-queue-anim'
+
 // import { isMobile, isTablet } from 'react-device-detect'
 export interface DropDownInterface {
   isOpen?: boolean
@@ -58,7 +60,9 @@ export const Dropdown: FC<DropDownInterface> = ({ isOpen, onCloseDrawer }): JSX.
       <Menu.Item className={classNames(styles.dropdownMenu, styles.avatarSpaceTop)}>
         <div className={styles.dropdownHeader}>
           <UserOutlined style={{ color: '#9292A3' }} />
-          <span className={styles.headerText}>Account Settings</span>
+          <Link href="/account/settings">
+            <span className={styles.headerText}>Account Settings</span>
+          </Link>
         </div>
         <LaunchSVG className={styles.launchLogo} />
       </Menu.Item>

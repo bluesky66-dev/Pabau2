@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react'
 import React from 'react'
-import Input from './input'
+import Avatar from './Avatar'
 
-describe('Input', () => {
+describe('Avatar', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Input />)
+    const { baseElement } = render(<Avatar />)
     expect(baseElement).toBeTruthy()
   })
 })
