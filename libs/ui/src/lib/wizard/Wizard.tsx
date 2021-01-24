@@ -3,10 +3,6 @@ import React from "react";
 
 import styels from "./Wizard.module.less";
 import {Button} from '@pabau/ui';
-import Stepper from '../stepper/Stepper';
-import Card from '../card/Card';
-import { data } from './mock';
-import { cardData } from './mockcard';
 
 
 /* eslint-disable-next-line */
@@ -14,11 +10,15 @@ interface WizardProps {
 	onPrev: () => void
 	onNext: () => void
 	active: number
+	allSteps: number
+	breadcrumb : string
+	header : string
+	children?: any
 }
 
 export function Wizard(props: WizardProps) {
 
-	const { onPrev, onNext, active } = props
+	const { onPrev, onNext, active, allSteps, breadcrumb, header, children } = props
 
 	function prevClick() {
 		onPrev()
@@ -33,21 +33,21 @@ export function Wizard(props: WizardProps) {
             <div className={styels.headerSection}>
 				<div className={styels.breadcrumbsection}>
 					<div className = {styels.breadcrumb}>
-						<span className={styels.breadcrumbgraytxt}>Setup</span><span className={styels.breadcrumblighttxt}>{'>'} Lead Capture</span>
+						<span className={styels.breadcrumbgraytxt}>{breadcrumb}</span><span className={styels.breadcrumblighttxt}>{'> '}{header}</span>
 					</div>
-					<span className={styels.blackbold}>Lead Capture</span>
+					<span className={styels.blackbold}>{header}</span>
 				</div>
-				<Button type='primary'>Share</Button>
 			</div>
 
 			<hr className={ styels.line } />
-
+			{children}
 			<hr className={ styels.bottomline } />
 
 			<div className={styels.footer}>
 				<Button onClick = { event => prevClick()}>Previous Step</Button>
-				<span className={styels.breadcrumbgraytxt}>Step {active}/4</span>
-				<Button onClick = { event => nextClick()} type='primary'>Next Step</Button>
+				<span className={styels.breadcrumbgraytxt}>Step {active+1}/{allSteps}</span>
+				{active < allSteps - 1 ? <Button type='primary' onClick = { event => nextClick()}>Next Step</Button> : <Button disabled onClick = { event => nextClick()}>Next Step</Button>}
+				
 			</div>
         </div>
     );

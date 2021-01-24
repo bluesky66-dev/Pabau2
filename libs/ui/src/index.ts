@@ -1,3 +1,4 @@
+export * from './lib/wstepper/WStepper'
 export * from './lib/wizard/Wizard'
 export * from './lib/card/Card'
 export * from './lib/badge/Badge'

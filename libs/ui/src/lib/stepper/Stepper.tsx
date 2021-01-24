@@ -55,13 +55,33 @@ function Step(props: StepProps) {
 }
 
 function StepperList(props) {
-  const {datasource = [], step = 1} = props
+  const {datasource = [], step = 0} = props
   const length = datasource.length
+
+  function isActive(data, index) {
+	return (index <= step)
+	// return data.isActive
+  }
+
+  function isBarEnabled(index) {
+    return (index < step)
+  }
 
   return (
     <div className={styles.horizonstepper}>
       {datasource.map((el, index) =>
-        <Step item={el} progress={index + 1 < step} status={index < step} isLast={index === (datasource.length - 1)}/>
+        <>
+			<div className={styles.steplinediv}>
+				<div className={styles.imglabeldiv}>
+					<div className={ isActive(el, index) ? styles.iconenablecircle : styles.icondisablecircle}>
+					<img src={el.imgPath} alt=""/>
+					</div>
+					<span className={isActive(el, index)? styles.enablespantxt : styles.disablespantxt}>{el.name}</span>
+				</div>
+			{index < datasource.length-1 && <hr className={isBarEnabled(index) ? styles.stepperlineenable : styles.stepperlinedisable}/>}
+			</div>
+        </>
+        
       )}
     </div>
   );
