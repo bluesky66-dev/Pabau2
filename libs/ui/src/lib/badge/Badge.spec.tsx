@@ -1,11 +1,10 @@
 import React from 'react'
 import { render } from '@testing-library/react'
+import Badge from './Badge'
 
-import Statuslabel from './Statuslabel'
-
-describe('Statuslabel', () => {
+describe('Badge', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Statuslabel />)
+    const { baseElement } = render(<Badge />)
     expect(baseElement).toBeTruthy()
   })
 })

@@ -35,7 +35,7 @@ const columns = [
 
 export default {
   component: Table,
-  title: 'Table',
+  title: 'Basics/Table',
   args: {
     draggable: true,
     dataSource: data,
@@ -54,3 +54,12 @@ const DragFeatureStory: FC = ({ ...args }) => {
   return <Table {...args} dataSource={dataSource} updateDataSource={updateDataSource} />
 }
 export const TableWithDragFeature = DragFeatureStory.bind({})
+
+const NoDragFeatureStory: FC = ({ ...args }) => {
+  const [dataSource, setDataSource]: any = useState(data)
+  const updateDataSource = ({ newData, oldIndex, newIndex }) => {
+    setDataSource(newData)
+  }
+  return <Table {...args} draggable={false} dataSource={dataSource} updateDataSource={updateDataSource} />
+}
+export const TableWithNoDragFeature = NoDragFeatureStory.bind({})

@@ -16,11 +16,33 @@
   margin-left: 80px
 }
 
-@media (min-width:240px) and (max-width:767px) {
+@media (min-width:200px) and (max-width:767px) {
   .sidebar-margin {
     margin-left: 0px;
   }
   .layout-content {
     padding: 0px;
+  }
+  :global {
+    .ant-layout-header {
+      padding-top: 21px;
+      padding-bottom: 21px;
+      padding-left: 16px;
+      padding-right: 16px;
+      position: fixed;
+      z-index: 1;
+      width: 100%;
+      line-height: 0px;
+    }
+    
+
+  }
+
+
+
+}
+@media (min-width:768px) and (max-width:1024px) {
+  .layout-content {
+    padding: 16px;
   }
 }

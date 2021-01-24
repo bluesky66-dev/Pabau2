@@ -21,8 +21,7 @@
   }
   .chat-icon-style {
     font-size: 16px;
-    color: #9292A3;
-
+    color: #9292a3;
   }
   .close-icon {
     padding-right: 24px;
@@ -42,7 +41,7 @@
       font-size: 16px;
       font-weight: 600;
       margin-bottom: 0;
-      color: #3D3D46;
+      color: #3d3d46;
       padding-left: 24px;
     }
     h2 {
@@ -160,7 +159,7 @@
       font-weight: normal;
       font-size: 12px;
       letter-spacing: 1px;
-      line-height: 15px;;
+      line-height: 15px;
       text-transform: uppercase;
     }
   }
@@ -241,7 +240,7 @@
           font-weight: normal;
           font-size: 16px;
           line-height: 20px;
-          color: #9292A3;
+          color: #9292a3;
           margin: 0;
           margin-left: 5px;
         }
@@ -300,7 +299,7 @@
       flex-direction: row;
       justify-content: flex-start;
       align-items: center;
-      background-color: #F7F7F9;
+      background-color: #f7f7f9;
       border-radius: 5px;
       margin-bottom: 16px;
       .received-message-text {
@@ -309,14 +308,14 @@
         font-size: 14px;
         line-height: 18px;
         margin: 0;
-        color: #3D3D46;
+        color: #3d3d46;
       }
       .received-message-time {
         font-family: Circular-Std-Medium;
         font-weight: 400;
         font-size: 12px;
         line-height: 15px;
-        color: #9292A3;
+        color: #9292a3;
         margin: 0;
         margin-left: 10px;
       }
@@ -335,7 +334,7 @@
       flex-direction: row;
       justify-content: flex-end;
       align-items: center;
-      background-color: #54B2D3;
+      background-color: #54b2d3;
       border-radius: 5px;
       margin-bottom: 16px;
       .send-message-text {
@@ -351,7 +350,7 @@
         font-weight: 400;
         font-size: 12px;
         line-height: 15px;
-        color: #A5E7FE;
+        color: #a5e7fe;
         margin: 0;
         margin-left: 10px;
       }
@@ -361,16 +360,16 @@
 
 .member-modal {
   .modal-add-button {
-    color: #9292A3;
+    color: #9292a3;
     margin-bottom: 9px;
   }
   .modal-search-input {
     border-radius: 5px;
     margin-bottom: 20px;
-    :global{
+    :global {
       .anticon-search {
-        color: #9292A3;
-      } 
+        color: #9292a3;
+      }
     }
   }
   .modal-member {
@@ -387,7 +386,7 @@
         font-weight: normal;
         font-size: 14px;
         line-height: 22px;
-        color: #3D3D46;
+        color: #3d3d46;
       }
     }
   }
@@ -422,9 +421,24 @@
         font-weight: normal;
         font-size: 14px;
         line-height: 22px;
-        color: #3D3D46;
+        color: #3d3d46;
       }
     }
   }
 }
 
+@media (min-width: 200px) and (max-width: 767px) {
+  .messages-drawer {
+    :global {
+      .ant-drawer-content-wrapper {
+        width: 100% !important;
+      }
+      .ant-drawer-body {
+        padding: 0;
+      }
+    }
+    .message-box {
+      width: 100%;
+    }
+  }
+}

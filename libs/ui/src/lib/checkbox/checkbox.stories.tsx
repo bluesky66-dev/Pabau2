@@ -7,7 +7,7 @@ import CustomCheckbox from './customCheckbox'
 
 export default {
   component: Checkbox,
-  title: 'Checkbox',
+  title: 'Forms/Checkbox',
   args: {
     label: 'Pabau',
     disabled: false,

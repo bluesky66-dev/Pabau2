@@ -6,7 +6,7 @@ import ConfirmModalStory from './confirmmodal'
 
 export default {
   component: BasicModalStory,
-  title: 'BasicModal',
+  title: 'Modals/BasicModal',
   args: { title: "Basic Modal", modalWidth: 600 },
   argTypes: { onClick: { action: 'clicked' } },
   actions: { argTypesRegex: '^on[A-Z].*' },
