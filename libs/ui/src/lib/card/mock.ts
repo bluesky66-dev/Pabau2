@@ -18,7 +18,7 @@ export const data = [
     imgPath: 'static/media/pen.5dc555ce.png',
   },
   {
-    index: 'basic3',
+    id: 'basic3',
     title: 'Basic3',
     name: 'this is test cardsss4',
     imgPath: 'static/media/pen.5dc555ce.png',

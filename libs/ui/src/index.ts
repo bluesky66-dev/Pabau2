@@ -1,3 +1,4 @@
+export * from './lib/wizard/Wizard'
 export * from './lib/card/Card'
 export * from './lib/badge/Badge'
 export * from './lib/button/button'
