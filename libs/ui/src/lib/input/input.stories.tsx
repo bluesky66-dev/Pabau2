@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import React from 'react'
+import { HelpTooltip } from './helptooltip'
 import { Input } from './input'
 
 export default {
@@ -27,5 +28,10 @@ export default {
 }
 
 const InputStory = ({ ...args }) => <Input {...args} />
-
 export const InputWithFormControl = InputStory.bind({})
+
+const HelpTooltipStory = ({ ...args }) =>  <HelpTooltip {...args} />
+export const HelpTooltipControl = HelpTooltipStory.bind({})
+HelpTooltipControl.args = {
+  helpText:"Hello!!! Nice to meet you"
+}
