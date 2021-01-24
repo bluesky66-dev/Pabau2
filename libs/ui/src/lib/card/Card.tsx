@@ -1,38 +1,28 @@
 /* eslint-disable */
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
-import styles from './Wizard.module.less'
+import styles from './Card.module.less'
 import icon_check from '../../assets/images/wizard/check.png'
-
-
 /* eslint-disable-next-line */
-interface WizardProps {
-	datasource : Array<any>,
+export interface CardProps {
+  datasource : Array<any>,
 	active : number
 }
 
-class Wizard extends React.Component < WizardProps> {
-	constructor(props){
-		super(props);
-		const { datasource = [], active = 1 } = this.props
-    	this.state = {}
-	}
-
-  	render() {
-		const { datasource = [] , active = 1} = this.props
-		return (
-			<CardLists datasource={datasource} active={active} />
-		)
-	}	
+export function Card(props: CardProps) {
+  const { datasource = [], active = 1 } = props
+  return (
+    <CardLists datasource={datasource} active={active} />
+  )
 }
 
-export default Wizard
+export default Card
 
-interface CardProps {
+interface P {
 	card : CardInfo,
 	active : boolean,
 	onClick: () => void
-  }
+}
 
 interface CardInfo {
 	id : string
@@ -41,7 +31,7 @@ interface CardInfo {
 	imgPath: string
 }
 
-function Card(props: CardProps) {
+function CardItem(props: P) {
 	const { card, active, onClick } = props
 
 	function handleClick() {
@@ -71,7 +61,7 @@ function CardLists (props) {
 	return (
 		<div className={styles.container}>
 			{datasource.map((el, i) => 
-				<Card card={el} active={el.id === selectedId} onClick={() => setSelectedId(el.id)} />
+				<CardItem card={el} active={el.id === selectedId} onClick={() => setSelectedId(el.id)} />
 			)}
 		</div>
 	)

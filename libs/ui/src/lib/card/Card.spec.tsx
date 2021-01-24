@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import Wizard from './Wizard'
+import Card from './Card'
 
-describe('Wizard', () => {
+describe('Card', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Wizard />)
+    const { baseElement } = render(<Card />)
     expect(baseElement).toBeTruthy()
   })
 })

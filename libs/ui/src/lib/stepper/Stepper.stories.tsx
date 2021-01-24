@@ -5,7 +5,7 @@ import { data } from './mock'
 
 export default {
   component: Stepper,
-  title: 'Stepper',
+  title: 'Wizard/Step',
   args: { 
     datasource: data,
   },
@@ -22,8 +22,8 @@ return (
 )
 }
 
-export const wizard = StepperStory.bind({})
-wizard.args = {
+export const step = StepperStory.bind({})
+step.args = {
   datasource: data,
   step : 1
 }
