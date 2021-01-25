@@ -39,7 +39,7 @@ export function Input({
         rules={[
           {
             type: type === 'email' ? 'email' : undefined,
-            message: 'Email is not a valid email!',
+            message: 'Please enter valid email!',
           },
           {
             required: true,
