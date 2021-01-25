@@ -12,7 +12,7 @@ export interface AvatarProps extends NativeAvatarProps {
   name?: string
 }
 
-const Avatar: FC<AvatarProps> = ({
+export const Avatar: FC<AvatarProps> = ({
   isLoading = false,
   zIndex = 1,
   marginLeft = '0',
@@ -20,7 +20,7 @@ const Avatar: FC<AvatarProps> = ({
   ...props
 }) => {
   return (
-    <div style={{ zIndex, marginLeft }}>
+    <div className={styles.avatarContainer} style={{ zIndex, marginLeft }}>
       {isLoading ? (
         <div className={styles.avatarLoading}>
           <AntAvatar {...props} icon={<UserOutlined />} src={''} shape="circle" />
