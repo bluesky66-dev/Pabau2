@@ -13,7 +13,6 @@ export default {
   args: {
     mediaIcon: [{ label: 'facebook', link: null, icon: <FacebookOutlined /> }],
     onClick: (activeLabels: string[]): string[] => {
-      console.log('call--->', activeLabels)
       return activeLabels
     },
   },
