@@ -1,4 +1,5 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
+import stc from 'string-to-color'
 import { Avatar as AntAvatar, Tooltip } from 'antd'
 import { AvatarProps as NativeAvatarProps } from 'antd/lib/avatar/avatar'
 import { UserOutlined } from '@ant-design/icons'
@@ -10,6 +11,7 @@ export interface AvatarProps extends NativeAvatarProps {
   zIndex?: number
   marginLeft?: string
   name?: string
+  src?: string
 }
 
 export const Avatar: FC<AvatarProps> = ({
@@ -17,8 +19,29 @@ export const Avatar: FC<AvatarProps> = ({
   zIndex = 1,
   marginLeft = '0',
   name = '',
+  src = '',
   ...props
 }) => {
+  const [load, setLoad] = useState(false)
+  const [shortName, setShortName] = useState('')
+  useEffect(() => {
+    const img = new Image()
+    img.onload = () => {
+      setLoad(true)
+    }
+    img.onerror = () => {
+      setLoad(false)
+    }
+    img.src = src
+    setShortName(
+      name
+        .toUpperCase()
+        .split(' ')
+        .map((item) => item.charAt(0))
+        .join('')
+    )
+  }, [name, src])
+
   return (
     <div className={styles.avatarContainer} style={{ zIndex, marginLeft }}>
       {isLoading ? (
@@ -27,7 +50,13 @@ export const Avatar: FC<AvatarProps> = ({
         </div>
       ) : (
         <Tooltip title={name} placement="bottom" overlayClassName={styles.overlay}>
-          <AntAvatar {...props} shape="circle" />
+          {load ? (
+            <AntAvatar {...props} src={src} shape="circle" />
+          ) : (
+            <AntAvatar {...props} shape="circle" src="" style={{ backgroundColor: stc(name) }}>
+              {shortName}
+            </AntAvatar>
+          )}
         </Tooltip>
       )}
     </div>
