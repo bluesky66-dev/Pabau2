@@ -1,5 +1,5 @@
 import { Button, Col, Row, Tooltip } from 'antd'
-import React from 'react'
+import React, { FC } from 'react'
 import consentIcon from '../../assets/images/consent.png'
 import epaperIcon from '../../assets/images/epaper.png'
 import labFormIcon from '../../assets/images/lab-form.png'
@@ -9,9 +9,8 @@ import treatmentIcon from '../../assets/images/treatment.png'
 import styles from './Formtype.module.less'
 
 /* eslint-disable-next-line */
-export interface FormtypeProps {}
-
-export function Formtype(props: FormtypeProps) {
+interface FormtypeProps {}
+const Formtype: FC<FormtypeProps> = () => {
   const formTypeInfos = [
     {
       index: 1,
@@ -52,7 +51,7 @@ export function Formtype(props: FormtypeProps) {
       icon: labFormIcon,
     },
   ]
-  console.log('formTypeInfos = ', formTypeInfos)
+
   return (
     <Row>
       {formTypeInfos.map(({ label, desc, icon, index }) => (
