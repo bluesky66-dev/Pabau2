@@ -5,6 +5,7 @@ import styles from './radiobutton.module.less'
 
 const RadioGroup = AntRadiobutton.Group
 
+// Radio button property interface
 export interface RadiobuttonProps {
   group: string
   Items: dataItems[]

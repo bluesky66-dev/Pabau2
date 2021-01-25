@@ -1,1 +1,3 @@
-{ "extends": "../../.eslintrc.json", "ignorePatterns": ["!**/*"], "rules": {} }
+{ "extends": ["../../.eslintrc.json","prettier"], "plugins": [
+      "prettier"
+    ],"ignorePatterns": ["!**/*"], "rules": {"prettier/prettier": ["error", {"endOfLine": "auto"}]} }
