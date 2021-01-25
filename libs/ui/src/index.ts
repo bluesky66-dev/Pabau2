@@ -1,3 +1,4 @@
+export * from './lib/avatar-list/AvatarList'
 export * from './lib/avatar/Avatar'
 export * from './lib/badge/Badge'
 export * from './lib/security/SecurityScore'
