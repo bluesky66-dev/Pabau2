@@ -1,3 +1,4 @@
+export * from './lib/vacation/Vacation'
 export * from './lib/badge/Badge'
 export * from './lib/security/SecurityScore'
 export * from './lib/notificationBanner/NotificationBanner'
