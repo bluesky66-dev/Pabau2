@@ -101,9 +101,10 @@
   }
 }
 .calendar-settings-appearance {
-  .appearance-controls {
+  .general-controls {
     padding-top: 30px;
     padding-left: 24px;
+    border-bottom: 1px solid var(--border-color-base);
     :global {
       .ant-checkbox-wrapper {
         padding-bottom: 22px;
@@ -118,6 +119,62 @@
       color: var(--grey-text-color);
     }
     .appointment-icon {
+      font-size: 14px;
+      color: var(--light-grey-color);
+    }
+  }
+  .font-controls {
+    padding-top: 30px;
+    padding-left: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-color-base);
+    .font-size-select {
+      :global {
+        .ant-select {
+          width: 40% !important;
+        }
+        .ant-select-selector {
+          min-height: 40px;
+          display: flex;
+          align-items: center;
+          border: 1px solid #ecedf0;
+          border-radius: 4px;
+        }
+
+        .ant-select-selection-item {
+          color: var(--grey-text-color);
+          font-size: 16px;
+          font-family: 'Circular-Std-Book';
+        }
+      }
+    }
+  }
+  .block-text {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: bold;
+    font-family: Circular-Std-Book;
+    font-style: normal;
+  }
+}
+.calendar-settings-advanced {
+  .advanced-controls {
+    padding-top: 30px;
+    padding-left: 24px;
+    :global {
+      .ant-checkbox-wrapper {
+        padding-bottom: 22px;
+      }
+    }
+    .advanced-text {
+      font-family: Circular-Std-Book;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 18px;
+      color: var(--grey-text-color);
+    }
+    .advanced-icon {
       font-size: 14px;
       color: var(--light-grey-color);
     }
