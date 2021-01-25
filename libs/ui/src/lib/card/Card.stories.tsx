@@ -9,7 +9,7 @@ export default {
   title: 'Wizard/Card',
   args: { active: 1, datasource : data },
   argTypes: {
-    onClick: { action: 'clicked' }, 
+    onClick: { action: 'clicked' },
   },
   actions: { argTypesRegex: '^on[A-Z].*' },
 }

@@ -1,6 +1,5 @@
 .scoreTitle1{
-    
-    // font-family: Circular Std;
+    font-family: 'Circular-Std-Medium';
     font-size: 14px;
     font-style: normal;
     font-weight: 700;
@@ -9,21 +8,14 @@
     text-align: left;
 }
 .btnScore {
-    // position: absolute;
-    // width: 203px;
-    // height: 22px;
     padding: 0px;
-    
-    // font-family: Circular Std;
+    font-family: 'Circular-Std-Medium';
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
     line-height: 22px;
-    /* identical to box height, or 157% */
-    
     display: flex;
     align-items: center;
-    
     color: #54B2D3;
 }
 
@@ -34,7 +26,7 @@
 }
 
 .p1 {
-    // font-family: Circular Std;
+    font-family: 'Circular-Std-Medium';
     font-style: normal;
     font-weight: bold;
     font-size: 15px;
@@ -43,7 +35,7 @@
 }
 
 .p2 {
-    // font-family: Circular Std;
+    font-family: 'Circular-Std-Medium';
     font-style: normal;
     font-weight: normal;
     font-size: 15px;
@@ -53,16 +45,11 @@
 }
 
 .phead{
-    // font-family: Circular Std;
+    font-family: 'Circular-Std-Medium';
     font-style: normal;
     font-weight: bold;
     font-size: 14px;
     line-height: 18px;
-    /* identical to box height */
-
-
-    /* Text Main */
-
     color: #3D3D46;
 }
 
@@ -79,12 +66,20 @@
 }
 
 .container{
+    padding: 10px;
     position: relative;
     display: flex;
     flex-direction: row;
-    // justify-content: center;
     align-items: center;
     justify-content: space-between;
+    border: 1px solid white;
+
+    &:hover, &:active {
+        border: solid 1px #CCC;
+    -moz-box-shadow: 1px 1px 5px #999;
+    -webkit-box-shadow: 1px 1px 5px #999;
+        box-shadow: 1px 1px 5px #999;
+    }    
 }
 
 .containercol{
@@ -104,13 +99,13 @@
 
 .statelabel{
     position: absolute;
-    top: 0px;
+    top: 10px;
     right: 24px;
 
 } 
 
 .scorePercent {
-    // font-family: Circular Std;
+    font-family: 'Circular-Std-Medium';
     font-style: normal;
     font-weight: normal;
     line-height: 38px;
@@ -131,7 +126,7 @@
 }
 
 @media screen and (min-width: 0px) and (max-width: 768px) {
-    .statelabel { top: -5px; right: 0;}  /* show it on small screens */
+    .statelabel { top: 5px; right: 3px;}  /* show it on small screens */
 }
 
 .scoreBody {
@@ -175,12 +170,10 @@
 }
 
 .scoreTitle{
-
-
-// font-family: Circular Std;
-font-style: normal;
-font-weight: bold;
-font-size: 14px;
-line-height: 18px;
-color: #3D3D46;
+    font-family: 'Circular-Std-Medium';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 18px;
+    color: #3D3D46;
 }

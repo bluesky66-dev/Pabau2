@@ -4,16 +4,16 @@ import React, { useState } from 'react'
 import styles from './Card.module.less'
 import icon_check from '../../assets/images/wizard/check.png'
 /* eslint-disable-next-line */
-export interface CardProps {
+interface CardProps {
   datasource : Array<any>,
 	active : number
 }
 
 export function Card(props: CardProps) {
-  const { datasource = [], active = 1 } = props
-  return (
-    <CardLists datasource={datasource} active={active} />
-  )
+  	const { datasource = [], active = 1 } = props
+  	return (
+    	<CardLists datasource={datasource} active={active} />
+  	)
 }
 
 export default Card
