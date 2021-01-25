@@ -11,19 +11,18 @@ export default {
   component: SocialMediaCheckbox,
   title: 'Forms/SocialMediaCheckBox',
   args: {
-    selected: [],
     mediaIcon: [{ label: 'facebook', link: null, icon: <FacebookOutlined /> }],
+    onClick: (activeLabels: string[]): string[] => {
+      console.log('call--->', activeLabels)
+      return activeLabels
+    },
   },
-  argTypes: {
-    label: { control: { type: 'text' } },
-  },
-  onChange: { action: 'onChange' },
+  onClick: { action: 'onClick' },
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 
-const SocialMediaCheckboxStory = ({ ...args }) => (
-  <SocialMediaCheckbox {...args}></SocialMediaCheckbox>
-)
+const SocialMediaCheckboxStory = ({ ...args }) => <SocialMediaCheckbox {...args} />
+
 export const SocialCheckBox = SocialMediaCheckboxStory.bind({})
 SocialCheckBox.args = {
   mediaIcon: [

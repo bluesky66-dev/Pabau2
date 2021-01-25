@@ -1,7 +1,7 @@
 import React, { ReactNode, useState } from 'react'
-import styles from './SocialMediaCheckbox.module.less'
-import classNames from 'classnames'
 import { Checkbox, Collapse, Popover } from 'antd'
+import classNames from 'classnames'
+import styles from './SocialMediaCheckbox.module.less'
 
 const { Panel } = Collapse
 
@@ -12,10 +12,8 @@ export interface mediaIconType {
 }
 
 export interface SocialMediaCheckboxProps {
-  label?: string
-  icon?: ReactNode
   mediaIcon?: mediaIconType[]
-  onChange?: () => void
+  onClick?: (activeLabel: string[]) => void
 }
 
 const content = (
@@ -26,17 +24,18 @@ const content = (
 
 export function SocialMediaCheckbox(props: SocialMediaCheckboxProps): JSX.Element {
   const [activate, setActivate] = useState(true)
-  const [activeLabel, setactiveLabel] = useState<string[]>([])
+  const [activeLabel, setActiveLabel] = useState<string[]>([])
 
-  const handleChange = (label) => {
+  const handleClick = (label) => {
     setActivate(!activate)
     const index = activeLabel.indexOf(label)
     index !== -1 ? activeLabel.splice(index, 1) : activeLabel.push(label)
-    setactiveLabel(activeLabel)
+    setActiveLabel(activeLabel)
+    props.onClick?.(activeLabel)
   }
 
   return (
-    <div>
+    <div className="social-media-icons">
       <Collapse>
         <Panel header="Social media icons" key="1">
           {props.mediaIcon &&
@@ -48,7 +47,7 @@ export function SocialMediaCheckbox(props: SocialMediaCheckboxProps): JSX.Elemen
                   socialIcon.link === null && styles.socialBorderRed,
                   activeLabel.includes(socialIcon.label) && styles.iconColor
                 )}
-                onClick={() => handleChange(socialIcon.label)}
+                onClick={() => handleClick(socialIcon.label)}
               >
                 {socialIcon.link === null ? (
                   <Popover placement="bottomLeft" content={content} trigger="hover">
