@@ -1,5 +1,20 @@
+import * as Icons from '@ant-design/icons'
 import React from 'react'
 import Button from './button'
+import IconButton from './iconbutton'
+
+const iConLists = Object.keys(Icons)
+  .filter(
+    (iconName) =>
+      iconName !== 'IconProvider' &&
+      iconName !== 'setTwoToneColor' &&
+      iconName !== 'getTwoToneColor' &&
+      iconName !== 'createFromIconfontCN' &&
+      iconName !== 'default'
+  )
+  .map((iconName) => {
+    return iconName
+  })
 
 export default {
   component: Button,
@@ -24,6 +39,13 @@ export default {
     },
     backgroundColor: {
       control: { type: 'color' },
+    },
+    icons: {
+      control: {
+        type: 'select',
+        selected: 'primary',
+        options: iConLists,
+      },
     },
   },
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -73,4 +95,13 @@ CustomButton.args = {
   size: 'large',
   color: '#000',
   backgroundColor: '#54B2D3',
+}
+
+const IconButtonStory = ({ ...args }) => <IconButton {...args}>{args.label}</IconButton>
+
+export const IconButtonControl = IconButtonStory.bind({})
+IconButtonControl.args = {
+  type: 'primary',
+  disabled: false,
+  icons: 'AccountBookFilled',
 }
