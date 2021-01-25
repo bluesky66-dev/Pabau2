@@ -1,0 +1,91 @@
+.iconSecuritytools {
+  max-width: 100%;
+  color: #54b2d3;
+  font-size: 21px;
+}
+
+.p1 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 18px;
+  color: #3d3d46;
+}
+
+.p2 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: #9292a3;
+  margin-top: 4px;
+}
+
+.colStatusLabel {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(238, 247, 251, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.containerCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 16px;
+  justify-content: space-between;
+  flex: auto;
+}
+
+.stateLabel {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+.badgeLabel {
+  div {
+    display: flex;
+    justify-content: flex-end;
+    span {
+      margin-left: 5px;
+    }
+  }
+}
+
+.smartLabel {
+  text-align: right;
+  margin-top: 7px;
+  span {
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 13px;
+    color: #54b2d3;
+    display: block;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 768px) {
+  .statelabel {
+    top: -5px;
+    right: 0;
+  } /* show it on small screens */
+}
+
+.scoreBody {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-top: 1px solid #ecedf0;
+}
