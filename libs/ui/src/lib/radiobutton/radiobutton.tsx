@@ -17,7 +17,7 @@ export function RadioButton({ group, Items }: PropsWithChildren<RadiobuttonProps
       <RadioGroup name={group}>
         {Items.map((menu: dataItems, i) => {
           return (
-            <AntRadiobutton key={i} value={menu.value} checked={menu.checked}>
+            <AntRadiobutton key={i} value={menu.value} checked={menu.check}>
               {menu.label}
             </AntRadiobutton>
           )

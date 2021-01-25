@@ -2,37 +2,37 @@ export interface dataItems {
   key: string
   label: string
   value: string
-  checked: string
+  check: boolean
 }
 export const data: dataItems[] = [
   {
     key: '1',
     label: 'A',
     value: 'A',
-    checked: 'checked',
+    check: true,
   },
   {
     key: '2',
     label: 'B',
     value: 'B',
-    checked: '',
+    check: false,
   },
   {
     key: '3',
     label: 'C',
     value: 'C',
-    checked: '',
+    check: false,
   },
   {
     key: '4',
     label: 'D',
     value: 'D',
-    checked: '',
+    check: false,
   },
   {
     key: '5',
     label: 'E',
     value: 'E',
-    checked: '',
+    check: false,
   },
 ]
