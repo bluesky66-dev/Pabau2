@@ -39,7 +39,6 @@ const Vacation: FC<VacationProps> = (props) => {
         }
         color="white"
         placement="bottomLeft"
-        trigger="click"
       >
         <Image src={vacation} preview={false} width={32} />
       </Tooltip>
