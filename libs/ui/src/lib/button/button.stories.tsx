@@ -1,5 +1,4 @@
 import React from 'react'
-import { Menu } from 'antd'
 import Button from './button'
 import DropdownButton from './dropdownButton'
 
@@ -83,18 +82,4 @@ dropdownButton.args = {
   label: 'Manage Option',
   size: 'large',
   color: '#40A0C1',
-  menu: (
-    <Menu>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/">
-          Pause notification
-        </a>
-      </Menu.Item>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/">
-          See message log
-        </a>
-      </Menu.Item>
-    </Menu>
-  ),
 }

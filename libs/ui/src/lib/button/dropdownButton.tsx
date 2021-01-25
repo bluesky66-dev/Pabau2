@@ -1,6 +1,9 @@
-import React, { FC, HTMLProps, ReactElement } from 'react'
+import React, { FC, HTMLProps } from 'react'
 import { Button as AntButton, Dropdown } from 'antd'
 import { NativeButtonProps } from 'antd/lib/button/button'
+import { Menu } from 'antd'
+import { PauseCircleOutlined, MessageOutlined } from '@ant-design/icons'
+import styles from './button.module.less'
 
 export enum ButtonTypes {
   default = 'default',
@@ -17,8 +20,34 @@ interface P extends NativeButtonProps {
   backgroundColor?: string
   style?: HTMLProps<HTMLElement>['style']
   className?: string
-  menu: ReactElement
 }
+
+const menu = (
+  <Menu>
+    <Menu.Item>
+      <a
+        className={styles.linkAction}
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.google.com/"
+      >
+        <PauseCircleOutlined />
+        Pause notifications
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a
+        className={styles.linkAction}
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.google.com/"
+      >
+        <MessageOutlined />
+        See message log
+      </a>
+    </Menu.Item>
+  </Menu>
+)
 
 export const DropDownButton: FC<P> = ({
   className,
@@ -27,11 +56,10 @@ export const DropDownButton: FC<P> = ({
   backgroundColor,
   children,
   style,
-  menu,
   ...props
 }) => {
   return (
-    <Dropdown overlay={menu} placement="bottomLeft" arrow>
+    <Dropdown overlay={menu} className="dropdown-btn" placement="bottomLeft" arrow>
       <AntButton
         style={{ ...style, ...{ backgroundColor: backgroundColor } }}
         //size={ButtonSize.large}
