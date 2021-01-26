@@ -6,13 +6,14 @@ import styles from "./NotificationBanner.module.less";
 import { Row, Col } from "antd";
 import iconClose from "../../assets/images/icon_close.svg";
 interface P {
-    title?: string;
-    desc?: string;
-	imgPath?: string;
+    title?: string
+    desc?: string
+    imgPath?: string
+    allowClose? : boolean
 }
 
 export function NotificationBanner(props: P) {
-    const { title = "", desc = "", imgPath = "" } = props;
+    const { title = "", desc = "", imgPath = "", allowClose = true} = props;
 
     const [ isHide , setHide] = useState(false)
 
@@ -31,7 +32,7 @@ export function NotificationBanner(props: P) {
                         Enable Payments
                     </Button>
                 </Col>
-                <img className={styles.iconClose} src={iconClose} onClick={ () => setHide(true)} alt="" />
+                {allowClose && <img className={styles.iconClose} src={iconClose} onClick={ () => setHide(true)} alt="" />}
                 <img className={styles.backgroundImg} src={imgPath} alt="" />
             </Row>
         </div>

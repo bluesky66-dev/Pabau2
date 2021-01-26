@@ -9,12 +9,14 @@ export default {
     title: "Notification/Banner",
     args: {
         title: "Enable online payment",
-		desc: "Activate payments with Fresha to benefit from tip collection during and after sale and get access to no show protection, payment terminals, safe online payments and many more.",
+        desc: "Activate payments with Fresha to benefit from tip collection during and after sale and get access to no show protection, payment terminals, safe online payments and many more.",
+        allowClose: true,
     },
     argTypes: {
         title: { control: { type: "text" } },
         desc: { control: { type: "text" } },
-		imgPath: { control: { type: "text" } },
+        imgPath: { control: { type: "text" } },
+        allowClose: { control: { type: "boolean" } },
 		onClick: { action : 'clicked'},
     },
 };
@@ -26,4 +28,5 @@ Banner.args = {
     title: "Enable online payment",
     desc: "Activate payments with Fresha to benefit from tip collection during and after sale and get access to no show protection, payment terminals, safe online payments and many more.",
     imgPath: icon,
+    allowClose: true
 };
