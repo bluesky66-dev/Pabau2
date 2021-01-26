@@ -10,7 +10,11 @@ export enum NotificationType {
   delete = 'delete',
 }
 
-export const openNotification = (notificationType: string, text: string, delay: number): void => {
+export const openNotification = (
+  notificationType: string,
+  text: string,
+  delay: number
+): void => {
   if (notificationType === NotificationType.connect) {
     message.open({
       type: 'success',

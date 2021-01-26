@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import fetch from 'node-fetch'
 
 interface JsonType {
-  results: { name: { first: string, last: string } }
+  results: { name: { first: string; last: string } }
 }
 
 @Injectable()

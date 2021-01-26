@@ -6,9 +6,9 @@ import styles from './NotificationBanner.module.less'
 import { Row, Col } from 'antd'
 import iconClose from '../../assets/images/icon_close.svg'
 export interface NotificationBannerProps {
-  title?: string,
-  desc?: string,
-  imgPath?: string,
+  title?: string
+  desc?: string
+  imgPath?: string
 }
 
 export function NotificationBanner(props: NotificationBannerProps) {
@@ -38,7 +38,7 @@ export function NotificationBanner(props: NotificationBannerProps) {
 }
 
 // const NotificationBanner: React.FunctionComponent<NotificationBannerProps> = (props) => (
-  
+
 // )
 
 export default NotificationBanner

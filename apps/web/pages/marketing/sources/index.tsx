@@ -5,7 +5,10 @@ import CrudLayout from '../../../components/CrudLayout/CrudLayout'
 
 const LIST_QUERY = gql`
   query marketing_sources($isActive: Boolean = true) {
-    marketing_source(order_by: { created_at: desc }, where: { is_active: { _eq: $isActive } }) {
+    marketing_source(
+      order_by: { created_at: desc }
+      where: { is_active: { _eq: $isActive } }
+    ) {
       __typename
       id
       name
@@ -17,7 +20,10 @@ const LIST_QUERY = gql`
 const SEARCH_QUERY = gql`
   query marketing_sources($isActive: Boolean = true, $searchTerm: String) {
     marketing_source(
-      where: { is_active: { _eq: $isActive }, _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }] }
+      where: {
+        is_active: { _eq: $isActive }
+        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
+      }
     ) {
       __typename
       id
@@ -37,14 +43,20 @@ const DELETE_MUTATION = gql`
 `
 const ADD_MUTATION = gql`
   mutation add_marketing_source($name: String!, $is_active: Boolean) {
-    insert_marketing_source_one(object: { name: $name, is_active: $is_active }) {
+    insert_marketing_source_one(
+      object: { name: $name, is_active: $is_active }
+    ) {
       __typename
       id
     }
   }
 `
 const EDIT_MUTATION = gql`
-  mutation update_marketing_source_by_pk($id: uuid!, $name: String!, $is_active: Boolean) {
+  mutation update_marketing_source_by_pk(
+    $id: uuid!
+    $name: String!
+    $is_active: Boolean
+  ) {
     update_marketing_source_by_pk(
       pk_columns: { id: $id }
       _set: { name: $name, is_active: $is_active }

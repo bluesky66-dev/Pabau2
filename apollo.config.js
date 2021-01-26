@@ -9,6 +9,6 @@ module.exports = {
       },
       // optional disable SSL validation check
       //skipSSLValidation: true
-    }
-  }
-};
+    },
+  },
+}
