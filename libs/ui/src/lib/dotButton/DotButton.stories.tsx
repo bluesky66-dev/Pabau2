@@ -22,8 +22,10 @@ const menuList = [
   },
 ]
 
-export const DotMenuButton = () => (
-  <div>
+export function DotMenuButton(): JSX.Element {
+  return (
+    <div>
       <DotButton menuList={menuList} />
-  </div>
-)
+    </div>
+  )
+}

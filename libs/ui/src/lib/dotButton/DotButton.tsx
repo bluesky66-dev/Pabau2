@@ -21,12 +21,13 @@ export const DotButton: FC<DotButtonProps> = (props) => {
   const prepareContent = () => {
     return (
       <div className={styles.dotWrapper}>
-        {menuList.map((i, index) => (
-          <div className={styles.dotList} key={`three-dot-menu-content-${index}`}>
-            {i.icon}
-            <p>{i.label}</p>
-          </div>
-        ))}
+        {menuList &&
+          menuList.map((i, index) => (
+            <div className={styles.dotList} key={`three-dot-menu-content-${index}`}>
+              {i.icon}
+              <p>{i.label}</p>
+            </div>
+          ))}
       </div>
     )
   }
