@@ -11,7 +11,7 @@ export default {
 
 const DailyStory = ({ ...args }) => <Daily {...args} />
 
-export const defaultBtn = DailyStory.bind({})
-defaultBtn.args = {
+export const Basic = DailyStory.bind({})
+Basic.args = {
   tickedDays: [1, 2],
 }
