@@ -1,3 +1,4 @@
+export * from './lib/rightsidebar/Rightsidebar'
 export * from './lib/badge/Badge'
 export * from './lib/security/SecurityScore'
 export * from './lib/notificationBanner/NotificationBanner'
