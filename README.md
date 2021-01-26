@@ -7,13 +7,19 @@ This monorepo contains all of our code (with the exception of `/.env`). The mono
 
 
 ### Paths
-- `/apps` - where most of our projects reside.
-- `/apps/web` - the main application Frontend.
-- `/apps/*-e2e` - End-to-end testing with Cypress.
-- `/libs` - where any shared libraries reside. These can be referenced (used) in any app.
-- `/libs/ui` - our shared UI (React Components).
-- `/tools` - repo-level tooling.
-- `**/cicd` - devops only.
+- `/` -
+- `/.run/` - scripts for all devs (and Jetbrains IDE's)
+- `/.storybook/` - global Storybook config
+- `/.vscode/` - vscode specific settings for all devs
+- `/apps/` - where most of our projects reside.
+- `/apps/web/` - the main application Frontend.
+- `/apps/*-e2e/` - End-to-end testing with Cypress.
+- `/dist/` - temporary directory (local only)
+- `/hasura/` - our database configuration
+- `/libs/` - where any shared libraries reside. These can be referenced (used) in any app.
+- `/libs/ui/` - our shared UI (React Components).
+- `/tools/` - repo-level tooling.
+- `**/cicd/` - devops only.
 
 
 ## Setup
@@ -21,6 +27,8 @@ This monorepo contains all of our code (with the exception of `/.env`). The mono
 1. Install Node 14 LTS (Opt in for the extra build tools)
 1. Install yarn: `npm i -g yarn` (`yarn --version` \>=1.22.10 && <2 is fine)
 1. Ensure your terminal is BASH (cmd and PS not supported. Vscode: `"terminal.integrated.shell.windows": "c:/program files/git/bin/bash.exe",`)
+1. Ensure your IDE has eslint plugin setup and configured to auto-fix on save.
+1. Ensure your Git config user.name is your full name, and user.email is the same email you registered as with Bitbucket.org.
 
 
 ### Storybook
@@ -33,7 +41,7 @@ yarn run nx g @nrwl/react:component --project=ui --style=less --export --pascalC
 
 
 ### Frontend
-To view the Frontend, you can either visit [https://prelive-crm.new.pabau.com](https://prelive-crm.new.pabau.com) or run `yarn start` to develop on it locally with live reloading.
+To view the Frontend, you can either visit [https://prelive-crm.new.pabau.com](https://prelive-crm.new.pabau.com) or run `yarn start` to develop on it locally with live reloading (HMR).
 
 Each Page on the Frontend should use as many components as possible from our Storybook.
 
@@ -45,6 +53,14 @@ yarn run nx g @nrwl/next:page --project=web --style=less --directory marketing s
 Now add `import { } from '@pabau/ui'` at top of the new page file and fill in the {} with components you need.
 
 
+## Backend
+The backend is a REST MVC framework. We are using NestJS and converting it into Serverless Vercel Functions at compile-time.
+
+The backend is designed to only be called from Hasura (Webhooks and Actions).
+
+To view the Backend, you can either visit [https://backend.new.pabau.com](https://backend.new.pabau.com) or run `yarn nx serve backend` to develop on it locally with live reloading (HMR).
+
+
 ## Code Rules
 
 * Branch from master, PR back to master.
@@ -52,12 +68,20 @@ Now add `import { } from '@pabau/ui'` at top of the new page file and fill in th
   - Tag your commits and/or PR with the JIRA issue ID.
 * Keep eye on your build pipeline status. If it fails, the onus is on your to make it green.
 * Never do `import './MyComponent.less'` - always change it to `import styles from './MyComponent.module.less'`
-* Never run your IDE or npm/yarn/npx as root or Administrator.
+* Never run your IDE or npm/yarn/npx with sudo or as root/Administrator.
 * Never commit secrets, passwords, or tokens to this repo.
 * To help keep DRY maybe you can tag me in a PR early on in any new component you are writing, so I can primarily help with the naming of things (as they saying goes "naming things is hard"). Or a screenshare, or just type out your plan more. Also have you looked at a wide variety of FIGMA designs? that would help. Also check out https://vimeo.com/user30916972 for some videos of our old system, to get an idea for the domain and intended user.
 * Best to use jsx ternary rather than display none in react
 * Best to make each component responsive on its own (Storybook even has a mobile preview button), rather than based on outside props.
 * Open to all disagreements and other ideas. Please raise threads about problems you see in the code, my code, or future code.
+* Don't use index key in JSX
+* Never use the CR character
+* Configure your IDE's eslint to autofix on save
+* Is master build broken? please hotfix it on its own branch (eg hf_master_build) then other devs can merge that branch into theirs, allowing us all to continue work.
+* `husky` lints your code as you `git commit`, and tests your code as you `git push`.
+* Keep assets close to the components which use them
+* Don't `import '../../..` across project boundaries - use `import { ... } from '@pabau/ui'` instead.
+
 
 ## Delineation between /apps/web/components/ ("App components") and /libs/ui/ ("UI components")
 
@@ -65,8 +89,9 @@ Now add `import { } from '@pabau/ui'` at top of the new page file and fill in th
 * Only UI components can be shown in Storybook
 * UI components cannot access database
 * UI components have to expose full control via Storyboard Controls
-* App components usually will involve Database interaction (via Apollo Client)
+* App components will involve Database interaction (via Apollo Client)
 * Maybe for a one-off type widget, App component is fine
+
 
 ## Our Stack
 
@@ -89,6 +114,8 @@ Now add `import { } from '@pabau/ui'` at top of the new page file and fill in th
 * [Husky](https://github.com/typicode/husky#readme) - pre-commit and pre-push hooks to ensure no errors exist in code
 * [Sentry](https://sentry.io/for/react/) - [TODO] production app error logging and reporting
 * [yup]() - [TODO] write business-level validation once that's used in frontend and backend
+* Twilio Video + Sendgrid
+* Atlassian: JIRA, Bitbucket (& Pipelines)
 
 
 ## To do (big engineering items)
@@ -103,3 +130,10 @@ Now add `import { } from '@pabau/ui'` at top of the new page file and fill in th
 * graphql-code-generator
 * Convert from 'next export' to full on next server with ssr (i'm not sure)
 * proper next i18n at build time
+* Install a working serverless adapter for NestJS
+* stylelint within eslint
+* eslint should capture tsc errors too
+* Create a bridge to our old LAMP app
+  1. generate jwt in php
+  2. ...?
+  
