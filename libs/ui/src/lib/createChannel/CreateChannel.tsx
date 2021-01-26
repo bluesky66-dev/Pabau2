@@ -16,7 +16,9 @@ export function CreateChannel(props: CreateChannelProps): JSX.Element {
   const [isPrivate, setIsPrivate] = useState(false)
 
   const handleNameChange = (e): void => {
-    setName(e.target.value)
+    if (e.target.value.length < 80) {
+      setName(e.target.value)
+    }
   }
 
   const handleDescriptionChange = (e) => {
@@ -55,6 +57,7 @@ export function CreateChannel(props: CreateChannelProps): JSX.Element {
           className={styles.nameInput}
           placeholder="# e.g. plan-budget"
           onChange={handleNameChange}
+          value={name}
           suffix={80 - name.length}
         />
       </div>
