@@ -1,0 +1,72 @@
+.modalContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (min-width: 769px) {
+        flex-direction: row;
+
+    }    
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+    }
+}
+
+.leftpane{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex : 1;
+    
+    @media screen and (min-width: 769px) {
+        margin-right: 10px;
+
+    }    
+    @media screen and (max-width: 768px) {
+        margin-right: 0px;
+    }
+}
+
+.rightpane {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex : 1
+}
+
+.customDropdown {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+}
+
+.modalType2Span {
+    font-family: 'Circular-Std-Medium';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: #9292A3;
+}
+
+.modalGreyText {
+    font-family: 'Circular-Std-Medium';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 150%;
+    color: #9292A3;
+}
+
+.modalTitleText {
+    font-family: 'Circular-Std-Medium';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 28px;
+    text-transform: capitalize;
+    color: #3D3D46;
+}

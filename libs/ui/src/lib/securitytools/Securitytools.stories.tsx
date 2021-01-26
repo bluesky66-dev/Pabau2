@@ -5,19 +5,20 @@ import { data } from './mock';
 
 export default {
     component: SecurityTools,
-    title: "Misc/Securitytools",
-    args: {datasource: data},
+    title: "Misc/Securitytool",
+    args: { title: 'Security tools', datasource: data},
     argTypes: {
+		title: { control: { type: 'text' } },
 		onClick: { action: 'clicked' },
-        // percent: { control: { type: 'number' } },
 	},
 	actions: { argTypesRegex: '^on[A-Z].*' },
 };
 
 
-const SecuritytoolsStory = ({ ...args }) => <SecurityTools {...args} datasource={args.datasource}></SecurityTools>
+const SecuritytoolsStory = ({ ...args }) => <SecurityTools {...args} datasource={args.datasource} title={args.title}></SecurityTools>
 
-export const securityTools = SecuritytoolsStory.bind({})
-securityTools.args = {
-  datasource : data
+export const Securitytool = SecuritytoolsStory.bind({})
+Securitytool.args = {
+	title : 'Security Tools',
+  	datasource : data
 }

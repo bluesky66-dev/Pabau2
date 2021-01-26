@@ -1,27 +1,30 @@
 /* eslint-disable */
 import React, { useState } from "react";
 import styles from "./Securitytools.module.less";
-import { Badge } from "../badge/Badge";
-
-import icon_force2fa from "../../assets/images/security/force2fa.svg";
-import icon_authdevice from "../../assets/images/security/authdevice.svg";
-import icon_pwdpolicy from "../../assets/images/security/pwdpolicy.svg";
+import { Badge } from "@pabau/ui";
 
 /* eslint-disable-next-line */
 interface P {
     datasource: Array<any>
+    title : string
+    onItemClick: (index) => void
 }
 
 export function SecurityTools(props: P) {
     
-    const { datasource = [] } = props
+    const { datasource = [], title = '', onItemClick } = props
     const [selectedId, setSelectedId] = useState(0)
+
+    function handleItemClick(index) {
+        setSelectedId(selectedId)
+        onItemClick(index)
+    }
 
     return (
         <div className={styles.scoreBody}>
-            <p className={styles.phead}>Security Tools</p>
+            <p className={styles.phead}>{title}</p>
             { datasource.map((el, i) => 
-                <Item item={el} onClick={() => setSelectedId(el.id)} />
+                <Item item={el} onClick={() => handleItemClick(i)} />
 			)}
         </div>
     )
@@ -41,13 +44,14 @@ interface ItemInfo {
 	name : string
     imgPath: string
     isActive : boolean
+    modalType : number
 }
 
 function Item(props: ItemProps) {
     const { onClick, item } = props
 
     function handleClick() {
-		onClick()
+        onClick()
     }
     
     return (

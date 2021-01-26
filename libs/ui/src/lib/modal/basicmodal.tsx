@@ -100,9 +100,11 @@ export function BasicModal({
             </div>
           </div>
         )}
-        <Button type="primary" onClick={() => onOk?.()}>
-          {newButtonText}
-        </Button>
+        {newButtonText !== 'null' && (
+          <Button className={styles.primaryBtn} type="primary" onClick={() => onOk?.()}>
+            {newButtonText}
+          </Button>
+        )}
       </div>
     </Modal>
   )

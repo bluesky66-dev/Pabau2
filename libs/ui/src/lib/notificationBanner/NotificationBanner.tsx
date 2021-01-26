@@ -5,13 +5,13 @@ import { Button } from "../button/button";
 import styles from "./NotificationBanner.module.less";
 import { Row, Col } from "antd";
 import iconClose from "../../assets/images/icon_close.svg";
-interface NotificationBannerProps {
+interface P {
     title?: string;
     desc?: string;
 	imgPath?: string;
 }
 
-export function NotificationBanner(props: NotificationBannerProps) {
+export function NotificationBanner(props: P) {
     const { title = "", desc = "", imgPath = "" } = props;
 
     const [ isHide , setHide] = useState(false)

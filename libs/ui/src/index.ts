@@ -1,3 +1,4 @@
+export * from './lib/customModal/CustomModal'
 export * from './lib/securitytools/Securitytools'
 export * from './lib/wstepper/WStepper'
 export * from './lib/wizard/Wizard'

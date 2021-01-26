@@ -6,7 +6,7 @@ import btn_disabled from '../../assets/images/security/close.svg'
 import styles from './Badge.module.less'
 import { Button } from '@pabau/ui'
 
-export interface P {
+interface P {
   label?: string
   disabled? : boolean
 }
