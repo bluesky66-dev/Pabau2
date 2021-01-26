@@ -253,7 +253,10 @@ const CrudTable: FC<P> = ({
               // },
             ]}
             // eslint-disable-next-line
-            dataSource={sourceData?.map((e: { id: any }) => ({ key: e.id, ...e }))}
+            dataSource={sourceData?.map((e: { id: any }) => ({
+              key: e.id,
+              ...e,
+            }))}
             updateDataSource={({ newData, oldIndex, newIndex }) => {
               setSourceData(newData)
               console.log('newData, oldIndex, newIndex ', {

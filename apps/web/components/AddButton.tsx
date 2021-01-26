@@ -6,12 +6,13 @@ import {
   PlusSquareFilled,
   SearchOutlined,
 } from '@ant-design/icons'
-import { Input, Radio, Popover, Drawer } from 'antd'
+import { Drawer, Input, Popover, Radio } from 'antd'
 import classNames from 'classnames'
 // import { isMobile, isTablet } from 'react-device-detect'
 // import { useKeyPressEvent } from 'react-use'
 
 const WAIT_INTERVAL = 400
+
 interface P {
   schema: Schema
   onClick?: () => void

@@ -18,7 +18,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true, // Allows for the parsing of JSX
     },
-    project: path.resolve(__dirname, './tsconfig.eslint.json')
+    project: path.resolve(__dirname, './tsconfig.eslint.json'),
   },
   settings: {
     react: {
