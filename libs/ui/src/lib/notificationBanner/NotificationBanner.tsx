@@ -9,16 +9,16 @@ interface P {
     title?: string
     desc?: string
     imgPath?: string
-    allowClose? : boolean
+    allowClose?: boolean
 }
 
 export function NotificationBanner(props: P) {
-    const { title = "", desc = "", imgPath = "", allowClose = true} = props;
+    const { title = "", desc = "", imgPath = "", allowClose = true } = props;
 
-    const [ isHide , setHide] = useState(false)
+    const [isHide, setHide] = useState(false)
 
     return (
-        <div className={ isHide? styles.hideBlock : styles.notificationBody}>
+        <div className={isHide ? styles.hideBlock : styles.notificationBody}>
             <Row className={styles.rowPosition}>
                 <Col md={16} sm={12}>
                     <p className={styles.title1}>{title}</p>
@@ -32,15 +32,11 @@ export function NotificationBanner(props: P) {
                         Enable Payments
                     </Button>
                 </Col>
-                {allowClose && <img className={styles.iconClose} src={iconClose} onClick={ () => setHide(true)} alt="" />}
+                {allowClose && <img className={styles.iconClose} src={iconClose} onClick={() => setHide(true)} alt="" />}
                 <img className={styles.backgroundImg} src={imgPath} alt="" />
             </Row>
         </div>
     );
 }
-
-// const NotificationBanner: React.FunctionComponent<NotificationBannerProps> = (props) => (
-
-// )
 
 export default NotificationBanner;
