@@ -1,3 +1,4 @@
+export * from './lib/time-input/TimeInput'
 export * from './lib/badge/Badge'
 export * from './lib/security/SecurityScore'
 export * from './lib/notificationBanner/NotificationBanner'
