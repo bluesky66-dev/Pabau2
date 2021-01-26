@@ -1,4 +1,5 @@
 import React from 'react'
+import { notification } from 'antd'
 import SimpleDropdown, { SimpleDropdownProps } from './SimpleDropdown'
 
 export default {
@@ -16,9 +17,15 @@ export const Basic = SimpleDropdownStory.bind({})
 Basic.args = {
   label: 'Reverse Family Relation',
   menuItems: ['a', 'b'],
+  onSelected: (val) => {
+    notification.open({ message: `Select ${val}` })
+  },
 }
 
 export const NoLabel = SimpleDropdownStory.bind({})
 NoLabel.args = {
   menuItems: ['a', 'b'],
+  onSelected: (val) => {
+    notification.open({ message: `Select ${val}` })
+  },
 }

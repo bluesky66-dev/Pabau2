@@ -7,12 +7,14 @@ import styles from './SimpleDropdown.module.less'
 export interface SimpleDropdownProps {
   label?: string
   menuItems: Array<string>
+  onSelected(val): void
 }
 
-export const SimpleDropdown: FC<SimpleDropdownProps> = ({ label, menuItems }) => {
+export const SimpleDropdown: FC<SimpleDropdownProps> = ({ label, menuItems, onSelected }) => {
   const [selected, setSelected] = useState('')
   const handleMenuClick = (e) => {
     setSelected(e.key)
+    onSelected(e.key)
   }
   const menu = (
     <Menu onClick={(e) => handleMenuClick(e)}>
