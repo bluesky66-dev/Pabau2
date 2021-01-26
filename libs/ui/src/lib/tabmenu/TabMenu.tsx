@@ -29,7 +29,11 @@ export const TabMenu: FC<P> = ({ tabPosition = 'left' }) => {
   ]
   return (
     <div className={styles.calendarSettings}>
-      <Tabs defaultActiveKey="2" tabPosition={tabPosition} style={{ minHeight: '100vh' }}>
+      <Tabs
+        defaultActiveKey="2"
+        tabPosition={tabPosition}
+        style={{ minHeight: '100vh' }}
+      >
         {calendarSettingsMenu.map((menu, i) => (
           <TabPane tab={menu.menuName} key={i}>
             {menu.component}

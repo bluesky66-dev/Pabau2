@@ -10,13 +10,25 @@ export default {
     disabled: { control: { type: 'boolean' } },
     onClick: { action: 'clicked' },
     size: {
-      control: { type: 'select', selected: 'medium', options: ['small', 'medium', 'large'] },
+      control: {
+        type: 'select',
+        selected: 'medium',
+        options: ['small', 'medium', 'large'],
+      },
     },
     type: {
       control: {
         type: 'select',
         selected: 'primary',
-        options: ['default', 'primary', 'ghost', 'dashed', 'link', 'text', 'danger'],
+        options: [
+          'default',
+          'primary',
+          'ghost',
+          'dashed',
+          'link',
+          'text',
+          'danger',
+        ],
       },
     },
     color: {

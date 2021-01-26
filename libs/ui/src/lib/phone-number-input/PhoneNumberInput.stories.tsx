@@ -19,7 +19,9 @@ export default {
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 
-const PhoneNumberInputStory = ({ ...args }: PhoneNumberInputProps) => <PhoneNumberInput {...args} />
+const PhoneNumberInputStory = ({ ...args }: PhoneNumberInputProps) => (
+  <PhoneNumberInput {...args} />
+)
 
 export const Basic = PhoneNumberInputStory.bind({})
 Basic.args = {
