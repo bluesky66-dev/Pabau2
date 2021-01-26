@@ -1,3 +1,4 @@
+export * from './lib/daily/Daily'
 export * from './lib/background/Background'
 export * from './lib/badge/Badge'
 export * from './lib/security/SecurityScore'
