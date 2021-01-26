@@ -14,8 +14,17 @@ export const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
   onChange,
 }) => {
   const [phoneCode, setPhoneCode] = useState('+44')
+  const [phoneNumber, setPhoneNumber] = useState('')
   const handleMenuClick = (e) => {
     setPhoneCode(`+${PhoneNumberAreaCodes[e.key][1]}`)
+  }
+  const handleChangeInput = (e) => {
+    const { value } = e.target
+    const pattern = new RegExp(/^\d*$/i)
+    if (pattern.test(value)) {
+      setPhoneNumber(value)
+      onChange(`${phoneCode}${value}`)
+    }
   }
   const menu = (
     <Menu className={styles.menuContainer} onClick={(e) => handleMenuClick(e)}>
@@ -46,7 +55,8 @@ export const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
       <div className={styles.phoneNumberInput}>
         <Input
           addonBefore={selectBefore}
-          onChange={(e) => onChange(phoneCode + e.target.value)}
+          value={phoneNumber}
+          onChange={(e) => handleChangeInput(e)}
         />
       </div>
     </div>
