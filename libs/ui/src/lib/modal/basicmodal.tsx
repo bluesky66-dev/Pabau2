@@ -10,6 +10,7 @@ interface P {
   onDelete?: () => void
   visible?: boolean
   newButtonText?: string
+  newButtonDisable?: boolean
   title?: string
   modalWidth?: number
 
@@ -43,6 +44,7 @@ export function BasicModal({
   specialBooleanValue,
   onSpecialBooleanClick,
   newButtonText = 'OK',
+  newButtonDisable = false,
   dangerButtonText,
   ...props
 }: PropsWithChildren<P & ModalProps>): JSX.Element {
@@ -100,7 +102,7 @@ export function BasicModal({
             </div>
           </div>
         )}
-        <Button type="primary" onClick={() => onOk?.()}>
+        <Button type="primary" disabled={newButtonDisable} onClick={() => onOk?.()}>
           {newButtonText}
         </Button>
       </div>
