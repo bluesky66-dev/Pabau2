@@ -1,4 +1,5 @@
 import React from 'react'
+import { EyeOutlined } from '@ant-design/icons'
 import Button from './button'
 import DropdownButton from './dropdownButton'
 
@@ -79,6 +80,12 @@ export const diabled = ButtonStory.bind({})
 diabled.args = {
   type: 'primary',
   disabled: true,
+}
+
+export const preview = ButtonStory.bind({})
+preview.args = {
+  label: 'Preview',
+  icon: <EyeOutlined />,
 }
 
 export const CustomButton = ButtonStory.bind({})
