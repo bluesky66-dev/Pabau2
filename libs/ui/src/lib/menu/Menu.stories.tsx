@@ -8,5 +8,9 @@ export default {
 }
 
 export const primary = () => {
-  return <div style={{ background: "#9292A3", border: "1px solid #9292A3" }} ><Menu /></div>
+  return (
+    <div style={{ background: '#9292A3', border: '1px solid #9292A3' }}>
+      <Menu />
+    </div>
+  )
 }

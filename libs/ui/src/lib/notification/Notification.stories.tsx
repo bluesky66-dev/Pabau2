@@ -23,12 +23,17 @@ export default {
 const Notification2Types = ['success', 'edit', 'delete']
 
 export const Notification1 = () => (
-  <Button onClick={() => Notification.openNotification('connect', '', 15)}>Click</Button>
+  <Button onClick={() => Notification.openNotification('connect', '', 15)}>
+    Click
+  </Button>
 )
 export const Notification2 = () => (
   <div>
     {Notification2Types.map((type) => (
-      <Button key={type} onClick={() => Notification.openNotification(type, 'Message', 10)}>
+      <Button
+        key={type}
+        onClick={() => Notification.openNotification(type, 'Message', 10)}
+      >
         Click
       </Button>
     ))}

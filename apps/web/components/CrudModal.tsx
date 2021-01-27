@@ -13,7 +13,14 @@ interface P {
   onClose?: () => void
 }
 
-const CrudModal: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, onClose, editingRow }) => {
+const CrudModal: FC<P> = ({
+  schema,
+  addQuery,
+  deleteQuery,
+  listQuery,
+  onClose,
+  editingRow,
+}) => {
   const [openDeleteModal, setDeleteModal] = useState(false)
   const [deleteMutation] = useMutation(deleteQuery)
   const formik = useFormikContext<unknown>()
@@ -27,7 +34,8 @@ const CrudModal: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, onClose, e
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     (editingRow && editingRow.id && editingRow.is_active) ??
-      (typeof specialFormElement?.default === 'boolean' && specialFormElement.default) ??
+      (typeof specialFormElement?.default === 'boolean' &&
+        specialFormElement.default) ??
       true
   )
 
@@ -44,7 +52,8 @@ const CrudModal: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, onClose, e
   console.log(
     'initial value of specialBoolean set to',
     (editingRow && editingRow.id && editingRow.is_active) ??
-      (typeof specialFormElement?.default === 'boolean' && specialFormElement.default) ??
+      (typeof specialFormElement?.default === 'boolean' &&
+        specialFormElement.default) ??
       true
   )
   console.log('currently is', specialBoolean)
@@ -76,7 +85,9 @@ const CrudModal: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, onClose, e
                   data: {
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-ignore
-                    [key]: (existing[key] as Record<string, never>).filter((e) => e.id !== id),
+                    [key]: (existing[key] as Record<string, never>).filter(
+                      (e) => e.id !== id
+                    ),
                   },
                 })
               }
@@ -98,7 +109,8 @@ const CrudModal: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, onClose, e
             color: '#9292A3',
           }}
         >
-          {editingRow && editingRow?.name} will be deleted. This action is irreversable
+          {editingRow && editingRow?.name} will be deleted. This action is
+          irreversable
         </span>
       </Modal>
       <Modal
@@ -113,7 +125,11 @@ const CrudModal: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, onClose, e
             ? `Create ${schema.full}`
             : `Edit ${schema.full}`
         }
-        newButtonText={typeof editingRow === 'object' && editingRow.isCreate ? `Create` : 'Save'}
+        newButtonText={
+          typeof editingRow === 'object' && editingRow.isCreate
+            ? `Create`
+            : 'Save'
+        }
         // eslint-disable-next-line
         dangerButtonText={(editingRow as any)?.id && `Delete`}
         specialBooleanLabel={!!specialFormElement && 'Activate'}

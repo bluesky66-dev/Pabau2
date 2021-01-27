@@ -1,6 +1,10 @@
 import React, { FC } from 'react'
 import { Button, Table as AntTable } from 'antd'
-import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc'
+import {
+  SortableContainer,
+  SortableElement,
+  SortableHandle,
+} from 'react-sortable-hoc'
 import { MenuOutlined } from '@ant-design/icons'
 import styles from './Table.module.less'
 import { TableProps } from 'antd/es/table'
@@ -14,7 +18,9 @@ const DragHandle = SortableHandle(() => (
   <MenuOutlined style={{ cursor: 'pointer', color: '#999' }} />
 ))
 
-const SortItem = SortableElement((props) => <tr {...props} className={styles.abc} />)
+const SortItem = SortableElement((props) => (
+  <tr {...props} className={styles.abc} />
+))
 const SortContainer = SortableContainer((props) => <tbody {...props} />)
 
 function array_move(arr, old_index, new_index) {
@@ -36,7 +42,12 @@ type P = {
 } & TableProps<never> &
   DragProps
 
-export const Table: FC<P> = ({ dataSource = [], updateDataSource, onRowClick, ...props }) => {
+export const Table: FC<P> = ({
+  dataSource = [],
+  updateDataSource,
+  onRowClick,
+  ...props
+}) => {
   const onSortEnd = ({ oldIndex, newIndex }) => {
     if (oldIndex !== newIndex) {
       const newData = array_move(dataSource, oldIndex, newIndex)
@@ -46,7 +57,9 @@ export const Table: FC<P> = ({ dataSource = [], updateDataSource, onRowClick, ..
 
   const DraggableBodyRow = ({ className, style, ...restProps }) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const index = dataSource.findIndex((x: any) => x.key === restProps['data-row-key'])
+    const index = dataSource.findIndex(
+      (x: { key: string }) => x.key === restProps['data-row-key']
+    )
     return <SortItem index={index} {...restProps} />
   }
 
@@ -89,7 +102,9 @@ export const Table: FC<P> = ({ dataSource = [], updateDataSource, onRowClick, ..
         return col
       })
     }
-    return props.draggable ? [{ ...dragColumn }, ...(props.columns || [])] : props.columns
+    return props.draggable
+      ? [{ ...dragColumn }, ...(props.columns || [])]
+      : props.columns
   }
 
   return (
