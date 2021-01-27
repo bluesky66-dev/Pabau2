@@ -12,4 +12,4 @@ export default {
 }
 
 export const Left = (args: any) => <TabMenu {...args} />
-export const Top = (args: any) => <TabMenu {...args} tabPosition="top"   />
+export const Top = (args: any) => <TabMenu {...args} tabPosition="top" />
