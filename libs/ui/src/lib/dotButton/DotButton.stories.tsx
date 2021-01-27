@@ -1,5 +1,9 @@
 import React from 'react'
-import { CopyOutlined, ShareAltOutlined, DeleteOutlined } from '@ant-design/icons'
+import {
+  CopyOutlined,
+  ShareAltOutlined,
+  DeleteOutlined,
+} from '@ant-design/icons'
 import DotButton from './DotButton'
 
 export default {

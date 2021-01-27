@@ -23,7 +23,10 @@ export const DotButton: FC<DotButtonProps> = (props) => {
       <div className={styles.dotWrapper}>
         {menuList &&
           menuList.map((i, index) => (
-            <div className={styles.dotList} key={`three-dot-menu-content-${index}`}>
+            <div
+              className={styles.dotList}
+              key={`three-dot-menu-content-${index}`}
+            >
               {i.icon}
               <p>{i.label}</p>
             </div>
@@ -34,7 +37,11 @@ export const DotButton: FC<DotButtonProps> = (props) => {
 
   return (
     <Popover content={prepareContent()} placement="leftTop" trigger="click">
-      <Button className={styles.btnCircle} shape="circle" icon={<MoreOutlined />} />
+      <Button
+        className={styles.btnCircle}
+        shape="circle"
+        icon={<MoreOutlined />}
+      />
     </Popover>
   )
 }
