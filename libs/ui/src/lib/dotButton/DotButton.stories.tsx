@@ -13,14 +13,17 @@ export default {
 
 const menuList = [
   {
+    key: 1,
     icon: <CopyOutlined />,
     label: 'Clone',
   },
   {
+    key: 2,
     icon: <ShareAltOutlined />,
     label: 'Share',
   },
   {
+    key: 3,
     icon: <DeleteOutlined />,
     label: 'Delete',
   },

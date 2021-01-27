@@ -5,27 +5,28 @@ import { MoreOutlined } from '@ant-design/icons'
 import styles from './DotButton.module.less'
 
 interface IOption {
+  key: number
   icon: ReactNode
   label: string
   onClick?(): void
 }
 
 /* eslint-disable-next-line */
-export interface DotButtonProps {
+export interface P {
   menuList: IOption[]
 }
 
-export const DotButton: FC<DotButtonProps> = (props) => {
+export const DotButton: FC<P> = (props) => {
   const { menuList } = props
 
   const prepareContent = () => {
     return (
       <div className={styles.dotWrapper}>
         {menuList &&
-          menuList.map((i, index) => (
+          menuList.map((i) => (
             <div
               className={styles.dotList}
-              key={`three-dot-menu-content-${index}`}
+              key={`three-dot-menu-content-${i.key}`}
             >
               {i.icon}
               <p>{i.label}</p>
