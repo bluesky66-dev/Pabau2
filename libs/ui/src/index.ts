@@ -1,3 +1,4 @@
+export * from './lib/socialMediaCheckbox/SocialMediaCheckbox'
 export * from './lib/gridvslist/GridVsList'
 export * from './lib/avatar-list/AvatarList'
 export * from './lib/avatar/Avatar'
