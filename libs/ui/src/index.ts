@@ -1,5 +1,6 @@
 export * from './lib/avatar/Avatar'
 export * from './lib/avatar-list/AvatarList'
+export * from './lib/slider/Slider'
 export * from './lib/background/Background'
 export * from './lib/rightsidebar/RightSidebar'
 export * from './lib/badge/Badge'
