@@ -6,7 +6,7 @@ import btn_enable from '../../assets/images/security/btn_enable.svg'
 import btn_disabled from '../../assets/images/security/close.svg'
 import styles from './Badge.module.less'
 
-export interface P {
+interface P {
   label?: string
   disabled?: boolean
 }
