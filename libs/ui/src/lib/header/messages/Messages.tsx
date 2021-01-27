@@ -158,7 +158,8 @@ export const PabauMessages: FC<MessagesProps> = ({
     },
     {
       userName: 'Walter Brown',
-      message: 'We can schedule a meeting at 8:00 PM today. I think we will discuss...',
+      message:
+        'We can schedule a meeting at 8:00 PM today. I think we will discuss...',
       dateTime: '11:20 AM',
       isOnline: true,
       profileURL: Walter,
@@ -201,7 +202,10 @@ export const PabauMessages: FC<MessagesProps> = ({
     const results = Array<Member>()
     for (const groupKey in groupData) {
       for (const key in groupData[groupKey]) {
-        if (value !== '' && groupData[groupKey][key].userName.indexOf(value) !== -1) {
+        if (
+          value !== '' &&
+          groupData[groupKey][key].userName.indexOf(value) !== -1
+        ) {
           results.push(groupData[groupKey][key])
         }
       }
@@ -212,7 +216,10 @@ export const PabauMessages: FC<MessagesProps> = ({
   const searchGroupMember = (value) => {
     const results = Array<Member>()
     for (const key in groupData[selectedGroup]) {
-      if (value !== '' && groupData[selectedGroup][key].userName.indexOf(value) !== -1) {
+      if (
+        value !== '' &&
+        groupData[selectedGroup][key].userName.indexOf(value) !== -1
+      ) {
         results.push(groupData[selectedGroup][key])
       }
     }
@@ -236,10 +243,18 @@ export const PabauMessages: FC<MessagesProps> = ({
             </div>
             <div>
               <EditOutlined
-                className={classNames(styles.grayTextColor, styles.pr5, styles.chatIconStyle)}
+                className={classNames(
+                  styles.grayTextColor,
+                  styles.pr5,
+                  styles.chatIconStyle
+                )}
               />
               <SearchOutlined
-                className={classNames(styles.grayTextColor, styles.pr5, styles.chatIconStyle)}
+                className={classNames(
+                  styles.grayTextColor,
+                  styles.pr5,
+                  styles.chatIconStyle
+                )}
               />
               {!showChatBox && !showGroupChatBox && (
                 <CloseOutlined
@@ -253,7 +268,12 @@ export const PabauMessages: FC<MessagesProps> = ({
               )}
             </div>
           </div>
-          <div className={classNames(styles.messagesTabs, styles.topSpaceNotification)}>
+          <div
+            className={classNames(
+              styles.messagesTabs,
+              styles.topSpaceNotification
+            )}
+          >
             <button
               className={classNames(
                 styles.messagesTabDesign,
@@ -289,11 +309,18 @@ export const PabauMessages: FC<MessagesProps> = ({
                 className={classNames(styles.channelsText, styles.dFlex)}
                 style={{ cursor: 'pointer', transition: 'all 0.5s' }}
               >
-                <span className={classNames(styles.textSm, styles.grayTextColor)}>channels</span>
+                <span
+                  className={classNames(styles.textSm, styles.grayTextColor)}
+                >
+                  channels
+                </span>
 
                 <PlusCircleFilled
                   className={styles.addChannelIcon}
-                  style={{ color: 'var(--primary-color)', fontSize: 'var(--font-size-base)' }}
+                  style={{
+                    color: 'var(--primary-color)',
+                    fontSize: 'var(--font-size-base)',
+                  }}
                 />
               </div>
               <div
@@ -326,7 +353,9 @@ export const PabauMessages: FC<MessagesProps> = ({
                     11: 20 AM
                   </h6>
                 </div>
-                <div className={classNames(styles.dFlex, styles.channelMessage)}>
+                <div
+                  className={classNames(styles.dFlex, styles.channelMessage)}
+                >
                   <p
                     className={classNames(
                       styles.grayTextColor,
@@ -337,7 +366,13 @@ export const PabauMessages: FC<MessagesProps> = ({
                   >
                     6 unread messages
                   </p>
-                  <h6 className={classNames(styles.grayTextColor, styles.textSm, styles.mb)}>
+                  <h6
+                    className={classNames(
+                      styles.grayTextColor,
+                      styles.textSm,
+                      styles.mb
+                    )}
+                  >
                     <Badge count={6} style={{ backgroundColor: '#54B2D3' }} />
                   </h6>
                 </div>
@@ -373,7 +408,9 @@ export const PabauMessages: FC<MessagesProps> = ({
                     11: 20 AM
                   </h6>
                 </div>
-                <div className={classNames(styles.dFlex, styles.channelMessage)}>
+                <div
+                  className={classNames(styles.dFlex, styles.channelMessage)}
+                >
                   <p
                     className={classNames(
                       styles.grayTextColor,
@@ -387,8 +424,12 @@ export const PabauMessages: FC<MessagesProps> = ({
                 </div>
               </div>
               <div className={styles.chatBorder}></div>
-              <div className={classNames(styles.channelsText, styles.chatTopSpace)}>
-                <p className={classNames(styles.grayTextColor, styles.textSm)}>chats</p>
+              <div
+                className={classNames(styles.channelsText, styles.chatTopSpace)}
+              >
+                <p className={classNames(styles.grayTextColor, styles.textSm)}>
+                  chats
+                </p>
               </div>
             </>
           )}
@@ -401,7 +442,9 @@ export const PabauMessages: FC<MessagesProps> = ({
                   if (notifyTab === 'Contacts') onClickContact(index)
                 }}
               >
-                <div className={classNames(styles.flex, styles.porfileChatSpace)}>
+                <div
+                  className={classNames(styles.flex, styles.porfileChatSpace)}
+                >
                   <div className={styles.chatProfile}>
                     <Badge
                       dot
@@ -414,7 +457,9 @@ export const PabauMessages: FC<MessagesProps> = ({
                     </Badge>
                   </div>
                   <div className={styles.chatText}>
-                    <div className={classNames(styles.dFlex, styles.userDetails)}>
+                    <div
+                      className={classNames(styles.dFlex, styles.userDetails)}
+                    >
                       <p
                         className={classNames(
                           styles.textBlack,
@@ -425,7 +470,13 @@ export const PabauMessages: FC<MessagesProps> = ({
                       >
                         {chat.userName}
                       </p>
-                      <p className={classNames(styles.grayTextColor, styles.mb, styles.textSm)}>
+                      <p
+                        className={classNames(
+                          styles.grayTextColor,
+                          styles.mb,
+                          styles.textSm
+                        )}
+                      >
                         {chat.dateTime}
                       </p>
                     </div>
@@ -441,9 +492,18 @@ export const PabauMessages: FC<MessagesProps> = ({
                       >
                         {chat.message}
                       </p>
-                      <h6 className={classNames(styles.grayTextColor, styles.textSm, styles.mb)}>
+                      <h6
+                        className={classNames(
+                          styles.grayTextColor,
+                          styles.textSm,
+                          styles.mb
+                        )}
+                      >
                         {chat.unread && (
-                          <Badge count={chat.unread} style={{ backgroundColor: '#54B2D3' }} />
+                          <Badge
+                            count={chat.unread}
+                            style={{ backgroundColor: '#54B2D3' }}
+                          />
                         )}
                       </h6>
                     </div>
@@ -469,13 +529,19 @@ export const PabauMessages: FC<MessagesProps> = ({
                 >
                   <Avatar size={40} src={selectedContact.profileURL} />
                 </Badge>
-                <p className={styles.chatHeaderName}>{selectedContact.userName}</p>
+                <p className={styles.chatHeaderName}>
+                  {selectedContact.userName}
+                </p>
               </div>
             )}
             <div className={styles.chatHeader}>
               <ChatPopIcon style={{ margin: '0 20px' }} />
               <CloseOutlined
-                className={classNames(styles.grayTextColor, styles.chatIconStyle, styles.closeIcon)}
+                className={classNames(
+                  styles.grayTextColor,
+                  styles.chatIconStyle,
+                  styles.closeIcon
+                )}
                 onClick={closeDrawerMenu}
               />
             </div>
@@ -483,19 +549,27 @@ export const PabauMessages: FC<MessagesProps> = ({
           <div className={styles.messageContainer}>
             <div className={styles.receivedAlign}>
               <div className={styles.receivedMessage}>
-                <p className={styles.receivedMessageText}>I will search some reference for that</p>
+                <p className={styles.receivedMessageText}>
+                  I will search some reference for that
+                </p>
                 <p className={styles.receivedMessageTime}>11:24 AM</p>
               </div>
             </div>
             <div className={styles.sendAlign}>
               <div className={styles.sendMessage}>
-                <p className={styles.sendMessageText}>I will search some reference for that</p>
+                <p className={styles.sendMessageText}>
+                  I will search some reference for that
+                </p>
                 <p className={styles.sendMessageTime}>11:24 AM</p>
               </div>
             </div>
           </div>
           <div className={styles.messageInputContainer}>
-            <input className={styles.messageInput} type="text" placeholder={'Message'} />
+            <input
+              className={styles.messageInput}
+              type="text"
+              placeholder={'Message'}
+            />
             <EmojiIcon />
           </div>
         </div>
@@ -505,10 +579,16 @@ export const PabauMessages: FC<MessagesProps> = ({
           <div className={styles.chatHeaderContainer}>
             <p className={styles.chatHeaderName}>#{selectedGroup}</p>
             <div className={styles.chatHeader}>
-              <div className={styles.userImageList} onClick={() => setIsGroupModalVisible(true)}>
+              <div
+                className={styles.userImageList}
+                onClick={() => setIsGroupModalVisible(true)}
+              >
                 {selectedGroup && (
                   <>
-                    <Avatar size={25} src={groupData[selectedGroup][0].profileURL} />
+                    <Avatar
+                      size={25}
+                      src={groupData[selectedGroup][0].profileURL}
+                    />
                     <Avatar
                       className={styles.userImage}
                       size={25}
@@ -519,7 +599,9 @@ export const PabauMessages: FC<MessagesProps> = ({
                       size={25}
                       src={groupData[selectedGroup][2].profileURL}
                     />
-                    <p className={styles.groupCount}>{groupData[selectedGroup].length}</p>
+                    <p className={styles.groupCount}>
+                      {groupData[selectedGroup].length}
+                    </p>
                   </>
                 )}
                 <Modal
@@ -566,7 +648,9 @@ export const PabauMessages: FC<MessagesProps> = ({
                             size={32}
                             src={member.profileURL}
                           />
-                          <span className={styles.memberName}>{member.userName}</span>
+                          <span className={styles.memberName}>
+                            {member.userName}
+                          </span>
                         </div>
                         <Button type="default" size="middle">
                           Remove
@@ -582,7 +666,9 @@ export const PabauMessages: FC<MessagesProps> = ({
                             size={32}
                             src={member.profileURL}
                           />
-                          <span className={styles.memberName}>{member.userName}</span>
+                          <span className={styles.memberName}>
+                            {member.userName}
+                          </span>
                         </div>
                         <Button type="default" size="middle">
                           Remove
@@ -622,7 +708,9 @@ export const PabauMessages: FC<MessagesProps> = ({
                             size={32}
                             src={member.profileURL}
                           />
-                          <span className={styles.memberName}>{member.userName}</span>
+                          <span className={styles.memberName}>
+                            {member.userName}
+                          </span>
                         </div>
                         <Button type="default" size="middle">
                           Add
@@ -633,7 +721,11 @@ export const PabauMessages: FC<MessagesProps> = ({
               </div>
               <AddUserIcon style={{ margin: '0 20px' }} />
               <CloseOutlined
-                className={classNames(styles.grayTextColor, styles.chatIconStyle, styles.closeIcon)}
+                className={classNames(
+                  styles.grayTextColor,
+                  styles.chatIconStyle,
+                  styles.closeIcon
+                )}
                 onClick={closeDrawerMenu}
               />
             </div>
@@ -641,19 +733,27 @@ export const PabauMessages: FC<MessagesProps> = ({
           <div className={styles.messageContainer}>
             <div className={styles.receivedAlign}>
               <div className={styles.receivedMessage}>
-                <p className={styles.receivedMessageText}>I will search some reference for that</p>
+                <p className={styles.receivedMessageText}>
+                  I will search some reference for that
+                </p>
                 <p className={styles.receivedMessageTime}>11:24 AM</p>
               </div>
             </div>
             <div className={styles.sendAlign}>
               <div className={styles.sendMessage}>
-                <p className={styles.sendMessageText}>I will search some reference for that</p>
+                <p className={styles.sendMessageText}>
+                  I will search some reference for that
+                </p>
                 <p className={styles.sendMessageTime}>11:24 AM</p>
               </div>
             </div>
           </div>
           <div className={styles.messageInputContainer}>
-            <input className={styles.messageInput} type="text" placeholder={'Message'} />
+            <input
+              className={styles.messageInput}
+              type="text"
+              placeholder={'Message'}
+            />
             <EmojiIcon />
           </div>
         </div>

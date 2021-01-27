@@ -3,17 +3,23 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const rootWebpackConfig = require('../../../.storybook/webpack.config')
 
-console.log("reading less vars...")
-const lessToJs = require('less-vars-to-js');
-const fs = require('fs');
-const path = require('path');
+console.log('reading less vars...')
+const lessToJs = require('less-vars-to-js')
+const fs = require('fs')
+const path = require('path')
 
 // Read the less file in as string
-const paletteLess = fs.readFileSync(path.resolve(__dirname, '../src/styles/antd.less'), 'utf8');
+const paletteLess = fs.readFileSync(
+  path.resolve(__dirname, '../src/styles/antd.less'),
+  'utf8'
+)
 
 // Pass in file contents
-const lessVars = lessToJs(paletteLess, {resolveVariables: true, stripPrefix: true});
-console.log("read less vars: ", lessVars)
+const lessVars = lessToJs(paletteLess, {
+  resolveVariables: true,
+  stripPrefix: true,
+})
+console.log('read less vars: ', lessVars)
 
 /**
  * Export a function. Accept the base config as the only param.
@@ -52,19 +58,19 @@ module.exports = async ({ config, mode }) => {
       {
         loader: 'css-loader',
         options: {
-          localsConvention: "camelCase",
+          localsConvention: 'camelCase',
           modules: {
-            mode: "local",
-            localIdentName: "[local]--[hash:base64:5]",
+            mode: 'local',
+            localIdentName: '[local]--[hash:base64:5]',
           },
-        }
+        },
       },
       {
         loader: 'less-loader',
         options: {
           lessOptions: {
             javascriptEnabled: true,
-            modifyVars: lessVars
+            modifyVars: lessVars,
           },
         },
       },
@@ -81,15 +87,14 @@ module.exports = async ({ config, mode }) => {
       },
       {
         loader: 'css-loader',
-        options: {
-        }
+        options: {},
       },
       {
         loader: 'less-loader',
         options: {
           lessOptions: {
             javascriptEnabled: true,
-            modifyVars: lessVars
+            modifyVars: lessVars,
           },
         },
       },

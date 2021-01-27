@@ -29,21 +29,23 @@ export function SecurityScore(props: SecurityScoreProps) {
     <div className={styles.scoreBody}>
       <p className={styles.scoreTitle}>Pabau Baseline Standard</p>
       <div className={styles.seconddivrow}>
-        <span className={styles.scorePercent}> {percent || 0}% {stateStr}</span>
+        <span className={styles.scorePercent}>
+          {' '}
+          {percent || 0}% {stateStr}
+        </span>
         <Progress
-            className={styles.scoreProgress}
-            percent={percent || 0}
-            strokeColor={progressColor}
-            showInfo={false}
-          />
+          className={styles.scoreProgress}
+          percent={percent || 0}
+          strokeColor={progressColor}
+          showInfo={false}
+        />
       </div>
-      <div className={styles.thirddivrow}> 
+      <div className={styles.thirddivrow}>
         <span className={styles.scoreTitle1}>of the standart met</span>
         <Button className={styles.btnScore} size="middle" type="link">
-              How do we calculate this score?
+          How do we calculate this score?
         </Button>
       </div>
-      
     </div>
   )
 }

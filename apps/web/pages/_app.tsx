@@ -73,8 +73,14 @@ const wsLink = process.browser
 const terminatingLink = wsLink
   ? split(
       ({ query }) => {
-        const { kind, operation } = getMainDefinition(query) as OperationDefinitionNode
-        return kind === 'OperationDefinition' && operation === 'subscription' && process.browser
+        const { kind, operation } = getMainDefinition(
+          query
+        ) as OperationDefinitionNode
+        return (
+          kind === 'OperationDefinition' &&
+          operation === 'subscription' &&
+          process.browser
+        )
       },
       wsLink,
       httpLink
@@ -125,7 +131,10 @@ const client = new ApolloClient({
   cache,
 })
 
-export default function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
+export default function CustomApp({
+  Component,
+  pageProps,
+}: AppProps): JSX.Element {
   return (
     <ApolloProvider client={client}>
       <style jsx global>{`
