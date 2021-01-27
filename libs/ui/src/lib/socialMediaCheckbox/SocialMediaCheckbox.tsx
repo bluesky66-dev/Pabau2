@@ -5,14 +5,14 @@ import styles from './SocialMediaCheckbox.module.less'
 
 const { Panel } = Collapse
 
-export interface mediaIconType {
+export interface MediaIcon {
   label: string
   link: string
   icon: ReactNode
 }
 
 interface P {
-  mediaIcon?: mediaIconType[]
+  mediaIcon?: MediaIcon[]
   onClick?: (activeLabel: string[]) => void
 }
 

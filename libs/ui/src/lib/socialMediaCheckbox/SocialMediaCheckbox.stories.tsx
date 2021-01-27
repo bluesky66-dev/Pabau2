@@ -12,11 +12,10 @@ export default {
   title: 'Forms/SocialMediaCheckBox',
   args: {
     mediaIcon: [{ label: 'facebook', link: null, icon: <FacebookOutlined /> }],
-    onClick: (activeLabels: string[]): string[] => {
-      return activeLabels
-    },
   },
-  onClick: { action: 'onClick' },
+  argTypes: {
+    onClick: { action: 'onClick' },
+  },
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 
