@@ -32,9 +32,16 @@ export default class ShowcaseLayout extends React.Component {
     // @ts-ignore
     return _.map(this.state.layouts.lg, function (l, i) {
       return (
-        <div key={i} className={l.static ? 'static' : ''} style={{ backgroundColor: 'green' }}>
+        <div
+          key={i}
+          className={l.static ? 'static' : ''}
+          style={{ backgroundColor: 'green' }}
+        >
           {l.static ? (
-            <span className="text" title="This item is static and cannot be removed or resized.">
+            <span
+              className="text"
+              title="This item is static and cannot be removed or resized."
+            >
               Static - {i}
             </span>
           ) : (

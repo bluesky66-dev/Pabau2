@@ -114,9 +114,10 @@ pipelines:
       - step:
           name: deploy
           deployment: Production
-          caches:
-            - nodemodules
+#          caches:
+#            - nodemodules
           script:
+            - yarn install --pure-lockfile --prefer-offline
 
             # get the commit message for this merge
             - export LAST_COMMIT_LOG=$(git log HEAD -1 | tail -n +4 | perl -p -e 's/[\r\n]//' | awk '{$1=$1;print}')

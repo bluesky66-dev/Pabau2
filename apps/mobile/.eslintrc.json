@@ -2,7 +2,13 @@
   "extends": ["plugin:@nrwl/nx/react", "../../.eslintrc.json"],
   "ignorePatterns": ["!**/*"],
   "overrides": [
-    { "files": ["*.tsx", "*.ts"], "rules": { "@typescript-eslint/ban-ts-comment": "off" } },
-    { "files": ["*.js", "*.jsx"], "rules": { "@typescript-eslint/no-var-requires": "off" } }
+    {
+      "files": ["*.tsx", "*.ts"],
+      "rules": { "@typescript-eslint/ban-ts-comment": "off" }
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "rules": { "@typescript-eslint/no-var-requires": "off" }
+    }
   ]
 }

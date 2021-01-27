@@ -11,7 +11,9 @@ export default {
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 
-const TimeInputStory = ({ ...args }) => <TimeInput {...args}>{args.label}</TimeInput>
+const TimeInputStory = ({ ...args }) => (
+  <TimeInput {...args}>{args.label}</TimeInput>
+)
 
 export const Basic = TimeInputStory.bind({})
 Basic.args = {

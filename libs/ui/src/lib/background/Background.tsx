@@ -36,11 +36,15 @@ export function Background(props: BackgroundProps): JSX.Element {
                 <div
                   style={{ background: thread.color }}
                   className={
-                    selected === thread.name ? `${styles.box} ${styles.selectedBox}` : styles.box
+                    selected === thread.name
+                      ? `${styles.box} ${styles.selectedBox}`
+                      : styles.box
                   }
                   onClick={() => handleChange(thread.name)}
                 >
-                  {thread.name === 'None' && <StopOutlined className={styles.noneIcon} />}
+                  {thread.name === 'None' && (
+                    <StopOutlined className={styles.noneIcon} />
+                  )}
                 </div>
                 <p className={styles.name}>{thread.name}</p>
               </div>
