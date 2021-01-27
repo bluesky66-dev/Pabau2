@@ -13,7 +13,6 @@ module.exports = async ({ config, mode }) => {
   //   "@babel/plugin-transform-runtime"
   // )
 
-
   // Return the altered config
   return config
 }

@@ -39,7 +39,10 @@ export const Webinar: FC<WebinarProps> = ({
             <div>
               <h4 className={styles.time}> {timeLeft} elapsed </h4>
               <div className={styles.joinBtnTopSpace}>
-                <Button className={styles.joinBtn} icon={<PlayCircleOutlined />}>
+                <Button
+                  className={styles.joinBtn}
+                  icon={<PlayCircleOutlined />}
+                >
                   Join class
                 </Button>
               </div>

@@ -1,10 +1,5 @@
 {
-  "presets": [
-    "@nrwl/web/babel"
-  ],
-  "babelrcRoots": [
-    "*"
-  ],
-  "plugins": [
-  ]
+  "presets": ["@nrwl/web/babel"],
+  "babelrcRoots": ["*"],
+  "plugins": []
 }

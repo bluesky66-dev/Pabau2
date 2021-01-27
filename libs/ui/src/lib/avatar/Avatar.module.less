@@ -1,0 +1,72 @@
+@keyframes fadeAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes fadeAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fadeAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.avatar-container {
+  border-radius: 50%;
+  border: 2px solid white;
+  background-color: white;
+}
+
+.avatar-loading {
+  -webkit-animation: fadeAnimation 1s infinite;
+  -moz-animation: fadeAnimation 1s infinite;
+  -o-animation: fadeAnimation 1s infinite;
+  animation: fadeAnimation 1s infinite;
+}
+
+.overlay {
+  padding: 0;
+  :global {
+    .ant-tooltip-content {
+      .ant-tooltip-arrow {
+        display: none;
+      }
+      .ant-tooltip-inner {
+        padding: 0 5px;
+        min-height: auto;
+      }
+    }
+  }
+}

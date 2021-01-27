@@ -9,7 +9,10 @@ const Form: FC<P> = ({ schema }) => {
   return (
     <AntForm layout="vertical" requiredMark={false}>
       {Object.entries(fields).map(
-        ([name, { short, shortLower, example, description, extra, min }], i) => (
+        (
+          [name, { short, shortLower, example, description, extra, min }],
+          i
+        ) => (
           <AntForm.Item
             key={name}
             label={short}
