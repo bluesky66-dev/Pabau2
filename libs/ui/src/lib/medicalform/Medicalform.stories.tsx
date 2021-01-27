@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react'
-import MeicalForm from './Medicalform'
-import ShortAnswer from './Shortanswer'
+import MeicalForm from './MedicalForm'
+import ShortAnswer from './ShortAnswer'
 
 export default {
   component: MeicalForm,

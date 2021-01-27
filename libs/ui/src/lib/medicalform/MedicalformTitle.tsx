@@ -1,4 +1,6 @@
 import React, { FC } from 'react'
+import styles from './MedicalForm.module.less'
+
 interface P {
   iconUrl?: string
   bgcolor?: string
@@ -6,18 +8,13 @@ interface P {
   desc?: string
 }
 
-export const MedicalFormTitle: FC<P> = ({
-  iconUrl,
-  bgcolor,
-  title,
-  desc,
-}): JSX.Element => {
+const MedicalFormTitle: FC<P> = ({ iconUrl, bgcolor, title, desc }) => {
   return (
-    <div className="formTitle formCommon">
-      <div className="titleImg" style={{ background: bgcolor }}>
+    <div className={`${styles.formTitle} ${styles.formCommon}`}>
+      <div className={styles.titleImg} style={{ background: bgcolor }}>
         <img src={iconUrl} alt="" />
       </div>
-      <div className="titleDesc">
+      <div className={styles.titleDesc}>
         <h1>{title}</h1>
         <span>{desc}</span>
       </div>

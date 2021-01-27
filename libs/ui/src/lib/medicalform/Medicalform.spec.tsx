@@ -1,11 +1,10 @@
-import React from 'react'
 import { render } from '@testing-library/react'
-
-import Medicalform from './Medicalform'
+import React from 'react'
+import MedicalForm from './MedicalForm'
 
 describe('Medicalform', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Medicalform />)
+    const { baseElement } = render(<MedicalForm />)
     expect(baseElement).toBeTruthy()
   })
 })

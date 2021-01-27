@@ -3,9 +3,9 @@ import { Button, ButtonTypes } from '@pabau/ui'
 import { Input, Radio } from 'antd'
 import React, { FC, useState } from 'react'
 import shortAnswerIcon from '../../assets/images/medicalform_shortanswer.svg'
-import styles from './Medicalform.module.less'
-import MedicalformBottom from './MedicalformBottom'
-import MedicalformTitle from './MedicalformTitle'
+import styles from './MedicalForm.module.less'
+import MedicalFormBottom from './MedicalFormBottom'
+import MedicalFormTitle from './MedicalFormTitle'
 
 const typeOptions = [
   { label: 'Text', value: 'text' },
@@ -14,31 +14,32 @@ const typeOptions = [
   { label: 'Date', value: 'date' },
 ]
 
-export const ShortAnswer: FC = (): JSX.Element => {
+const ShortAnswer: FC = () => {
   const [selOption, setSelOption] = useState('text')
   const [advanced, setAdvanced] = useState(false)
 
   return (
-    <div className={styles.headingForm}>
-      <div className="formItem">
-        <div className="formCaption formCommon">
+    <div className={styles.mainBody}>
+      <div className={styles.formItem}>
+        <div className={`${styles.formCaption} ${styles.formCommon}`}>
           <span>component settings</span>
         </div>
       </div>
-      <div className="formItem">
-        <MedicalformTitle
+      <div className={styles.formItem}>
+        <MedicalFormTitle
           iconUrl={shortAnswerIcon}
           bgcolor="#6383F1"
           title="Short answer"
           desc="Ask a question with a short answer"
         />
       </div>
-      <div className="formItem">
-        <div className="formQuestion formCommon">
+      <div className={styles.formItem}>
+        <div className={`${styles.formQuestion} ${styles.formCommon}`}>
           <p style={{ marginTop: '5px' }}>Question</p>
           <Input placeholder="Enter your question" />
           <p style={{ marginTop: '20px' }}>Input type</p>
           <Radio.Group
+            className={styles.aaaaa}
             options={typeOptions}
             value={selOption}
             onChange={(e) => setSelOption(e.target.value)}
@@ -69,7 +70,7 @@ export const ShortAnswer: FC = (): JSX.Element => {
           <Button
             type={ButtonTypes.default}
             style={{ marginTop: '15px' }}
-            onClick={(e) => setAdvanced(!advanced)}
+            onClick={(e) => setAdvanced((advanced) => !advanced)}
             size="small"
           >
             {!advanced && `Show advanced settings`}
@@ -77,8 +78,8 @@ export const ShortAnswer: FC = (): JSX.Element => {
           </Button>
         </div>
       </div>
-      <div className="formItem" style={{ borderBottom: 'none' }}>
-        <MedicalformBottom needLeft={true} />
+      <div className={styles.formItem} style={{ borderBottom: 'none' }}>
+        <MedicalFormBottom needLeft={true} />
       </div>
     </div>
   )
