@@ -46,14 +46,28 @@ export const Avatar: FC<AvatarProps> = ({
     <div className={styles.avatarContainer} style={{ zIndex, marginLeft }}>
       {isLoading ? (
         <div className={styles.avatarLoading}>
-          <AntAvatar {...props} icon={<UserOutlined />} src={''} shape="circle" />
+          <AntAvatar
+            {...props}
+            icon={<UserOutlined />}
+            src={''}
+            shape="circle"
+          />
         </div>
       ) : (
-        <Tooltip title={name} placement="bottom" overlayClassName={styles.overlay}>
+        <Tooltip
+          title={name}
+          placement="bottom"
+          overlayClassName={styles.overlay}
+        >
           {load ? (
             <AntAvatar {...props} src={src} shape="circle" />
           ) : (
-            <AntAvatar {...props} shape="circle" src="" style={{ backgroundColor: stc(name) }}>
+            <AntAvatar
+              {...props}
+              shape="circle"
+              src=""
+              style={{ backgroundColor: stc(name) }}
+            >
               {shortName}
             </AntAvatar>
           )}

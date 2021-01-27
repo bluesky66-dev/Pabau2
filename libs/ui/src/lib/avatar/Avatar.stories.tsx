@@ -10,7 +10,11 @@ export default {
     isLoading: { control: { type: 'boolean' } },
     name: { control: { type: 'text' } },
     size: {
-      control: { type: 'select', selected: 'medium', options: ['small', 'medium', 'large'] },
+      control: {
+        type: 'select',
+        selected: 'medium',
+        options: ['small', 'medium', 'large'],
+      },
     },
   },
 }

@@ -8,18 +8,24 @@ import styles from './Badge.module.less'
 
 export interface P {
   label?: string
-  disabled? : boolean
+  disabled?: boolean
 }
 
 export function Badge(props: P) {
   const { label = 'Enabled', disabled = true } = props
 
   return (
-    <div >
-        <button className={disabled ? styles.enabledStatus : styles.disabledStatus}>
-          <img src={disabled ? btn_enable : btn_disabled} alt="" />
-          <span className={disabled ?  styles.imgtextspan : styles.imgtextspanDisable}>{disabled ? 'Enabled' : 'Disabled'}</span>
-        </button>
+    <div>
+      <button
+        className={disabled ? styles.enabledStatus : styles.disabledStatus}
+      >
+        <img src={disabled ? btn_enable : btn_disabled} alt="" />
+        <span
+          className={disabled ? styles.imgtextspan : styles.imgtextspanDisable}
+        >
+          {disabled ? 'Enabled' : 'Disabled'}
+        </span>
+      </button>
     </div>
   )
 }

@@ -60,7 +60,10 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
             Clients
           </button>
           <button
-            className={classNames(styles.cusTabDesign, searchTab === 'Leads' && styles.activeTabs)}
+            className={classNames(
+              styles.cusTabDesign,
+              searchTab === 'Leads' && styles.activeTabs
+            )}
             onClick={() => setSearchTab('Leads')}
           >
             Leads
@@ -79,7 +82,11 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
                     <Avatar size={40} src={<Image src={User} />} />
                   </div>
                   <div className={styles.clientProfileText}>
-                    <h1>{searchResults[0].firstName + ' ' + searchResults[0].lastName}</h1>
+                    <h1>
+                      {searchResults[0].firstName +
+                        ' ' +
+                        searchResults[0].lastName}
+                    </h1>
                     <p>3893312</p>
                   </div>
                 </div>
@@ -87,7 +94,12 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
             )}
             {searchResults && searchResults.length > 1 && (
               <>
-                <div className={classNames(styles.resultText, styles.resultTextTopSpace)}>
+                <div
+                  className={classNames(
+                    styles.resultText,
+                    styles.resultTextTopSpace
+                  )}
+                >
                   <h1>All results</h1>
                 </div>
                 {searchResults
@@ -95,7 +107,10 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
                   .map(({ id, avatarUrl, firstName, lastName }) => (
                     <div key={id} className={styles.contentAlignProfile}>
                       <div className={styles.clientProfile}>
-                        <Avatar size={40} src={<Image src={avatarUrl ?? User} />} />
+                        <Avatar
+                          size={40}
+                          src={<Image src={avatarUrl ?? User} />}
+                        />
                       </div>
                       <div className={styles.clientProfileText}>
                         <h1>{firstName + ' ' + lastName}</h1>
@@ -109,7 +124,11 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
               <div className={styles.clientProfile}>
                 <Avatar
                   size={40}
-                  icon={<UserAddOutlined style={{ color: 'var(--grey-text-color)' }} />}
+                  icon={
+                    <UserAddOutlined
+                      style={{ color: 'var(--grey-text-color)' }}
+                    />
+                  }
                   className={styles.addNewClient}
                 />
               </div>
@@ -135,7 +154,9 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
 
   const advanceSearchMenu = () => {
     return (
-      <div className={classNames(styles.advanceSearchModal, styles.advSearchBody)}>
+      <div
+        className={classNames(styles.advanceSearchModal, styles.advSearchBody)}
+      >
         <div className={classNames(styles.backToSearch, styles.mobileViewNone)}>
           <div
             className={styles.basicSearchAlign}
@@ -170,7 +191,10 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
             Clients
           </button>
           <button
-            className={classNames(styles.cusTabDesign, searchTab === 'Leads' && styles.activeTabs)}
+            className={classNames(
+              styles.cusTabDesign,
+              searchTab === 'Leads' && styles.activeTabs
+            )}
             onClick={() => setSearchTab('Leads')}
           >
             Leads
@@ -201,7 +225,10 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
             <Input className={styles.advSearchInput} placeholder="Post code" />
           </Form.Item>
           <Form.Item className={styles.searchForm} label="Policy number">
-            <Input className={styles.advSearchInput} placeholder="Policy number" />
+            <Input
+              className={styles.advSearchInput}
+              placeholder="Policy number"
+            />
           </Form.Item>
           <Form.Item className={styles.searchForm} label="Patient ID">
             <Input className={styles.advSearchInput} placeholder="Patient ID" />
@@ -210,11 +237,17 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
             <Input className={styles.advSearchInput} placeholder="Invoice NO" />
           </Form.Item>
           <Checkbox>
-            <span className={styles.inactiveClientText}> Show inactive clients</span>{' '}
+            <span className={styles.inactiveClientText}>
+              {' '}
+              Show inactive clients
+            </span>{' '}
           </Checkbox>
           <div className={classNames(styles.buttonEnd, styles.searchBtnBlock)}>
             <Button
-              className={classNames(styles.btnDisableStyle, styles.mobileviewBtnSize)}
+              className={classNames(
+                styles.btnDisableStyle,
+                styles.mobileviewBtnSize
+              )}
               disabled={true}
               size="large"
             >
@@ -294,7 +327,10 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
               }}
             />
             <Input
-              className={classNames(styles.searchInputStyle, styles.resSearchInputStyle)}
+              className={classNames(
+                styles.searchInputStyle,
+                styles.resSearchInputStyle
+              )}
               placeholder="Search clients or leads"
               value={searchTerm}
               prefix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
