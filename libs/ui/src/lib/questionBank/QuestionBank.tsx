@@ -70,7 +70,7 @@ export const QuestionBank: FC<P> = (props) => {
     <>
       {prepareContent()}
       <div className={styles.questionCountBlock}>
-        <span className={styles.questionCount}>{questions.length}</span>
+        <span className={styles.questionCount}>{questions?.length}</span>
         <span className={styles.questionLength}> QUESTIONS</span>
       </div>
     </>
