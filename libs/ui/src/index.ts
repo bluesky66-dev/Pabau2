@@ -1,3 +1,4 @@
+export * from './lib/dotButton/DotButton'
 export * from './lib/medicalform/MedicalForm'
 export * from './lib/socialMediaCheckbox/SocialMediaCheckbox'
 export * from './lib/gridvslist/GridVsList'
