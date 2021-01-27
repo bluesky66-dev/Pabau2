@@ -1,6 +1,6 @@
 {
   "name": "pabau",
-  "version": "2.0.55",
+  "version": "2.0.58",
   "license": "Copyright Hambrand Technologies Ltd",
   "scripts": {
     "nx": "nx",
@@ -70,6 +70,7 @@
     "react-use": "^15.3.8",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.6.3",
+    "string-to-color": "^2.2.2",
     "subscriptions-transport-ws": "^0.9.18",
     "tslib": "^2.1.0",
     "yup": "^0.32.8"

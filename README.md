@@ -80,6 +80,7 @@ To view the Backend, you can either visit [https://backend.new.pabau.com](https:
 - `husky` lints your code as you `git commit`, and tests your code as you `git push`.
 - Keep assets close to the components which use them
 - Don't `import '../../..` across project boundaries - use `import { ... } from '@pabau/ui'` instead.
+- Dont do `setBlah(!blah)`, it's `setBlah(e => !e)`
 
 ## Delineation between /apps/web/components/ ("App components") and /libs/ui/ ("UI components")
 
