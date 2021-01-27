@@ -11,9 +11,8 @@ interface IOption {
   onClick?(): void
 }
 
-/* eslint-disable-next-line */
-export interface P {
-  menuList: IOption[]
+interface P {
+  menuList?: IOption[]
 }
 
 export const DotButton: FC<P> = (props) => {
@@ -22,16 +21,12 @@ export const DotButton: FC<P> = (props) => {
   const prepareContent = () => {
     return (
       <div className={styles.dotWrapper}>
-        {menuList &&
-          menuList.map((i) => (
-            <div
-              className={styles.dotList}
-              key={`three-dot-menu-content-${i.key}`}
-            >
-              {i.icon}
-              <p>{i.label}</p>
-            </div>
-          ))}
+        {menuList?.map(({ key, icon, label }) => (
+          <div className={styles.dotList} key={`three-dot-menu-content-${key}`}>
+            {icon}
+            <p>{label}</p>
+          </div>
+        ))}
       </div>
     )
   }
