@@ -1,0 +1,204 @@
+.chipBox {
+    display: flex;
+    background: #FFFFFF;
+    border: 1px solid #ECEDF0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    height: 56px;
+    // width: 270px;
+    width: 24%;
+    margin-right: 1.4%;
+    @media screen and (max-width: 767px) {
+      width: 24%;
+    }
+    &:last-child {  
+        margin-right: 0;
+    }
+
+    .chipImage {
+        margin: 18px 14px 18px 18px;
+
+        > span {
+            color: #54B2D3;
+            height: 20px;
+            width: 20px;
+            text-align: center;
+            svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+
+    .chipTitle {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 18px;
+        color: #9292A3;
+        margin-top: 11px;
+    }
+
+    .chipSubTitle {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 18px;
+        color: #B8B8C0;
+    }
+}
+.gridWrapper {
+    border: 1px solid #ECEDF0;
+    width: 31.2%;
+    margin: 16px 2% 0 0;
+    &:nth-of-type(3n) {
+      margin-right: 0;
+    }
+    @media screen and (min-width: 1366px) { 
+      width: 31.2%;
+    }
+    .imgWrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 12px 55px;
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+    .listDetails {
+        display: flex;
+        flex-direction: column;
+        .listItem {
+            border-bottom: 1px solid #ECEDF0;
+            padding: 9px 16px;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 20px;
+            text-transform: capitalize;
+            color: #9292A3;
+            cursor: pointer;
+            &:first-child {
+                border-top: 1px solid #ECEDF0;
+                font-weight: 600;
+            }
+        } 
+    }
+}
+
+.webinar-banner {
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 157px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 124px;
+}
+.webinar-box {
+  width: 270px;
+  height: 180px;
+  background-color: #ffffff;
+  border: 1px solid #ECEDF0;
+  border-radius: 4px;
+  position: relative;
+}
+.webinar-text {
+  padding: 15px;
+  p {
+    color: #9292a3;
+    font-size: 12px;
+    margin-bottom: 0px;
+    font-family: 'Circular-Std-Bold';
+    @media screen and (min-width:1366px) {
+      font-size: 14px;
+    }
+  }
+  h6 {
+    color: #b8b8c0;
+    font-size: 10px;
+    letter-spacing: 1px;
+    font-family: 'Circular-Std-Book';
+    margin-bottom: 0px;
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+  h5 {
+    color: #b8b8c0;
+    font-size: 8px;
+    letter-spacing: 1px;
+    font-family: 'Circular-Std-Book';
+    margin-top: 14px;
+    margin-bottom: 0px;
+    text-transform: uppercase;
+    @media screen and (min-width: 1366px) {
+      font-size: 10px;
+    }
+  }
+  .time {
+    color: #54b2d3;
+    letter-spacing: 1px;
+    font-family: 'Circular-Std-Book';
+    margin-top: 7px;
+    font-size: 10px;
+    margin-bottom: 0px;
+    text-transform: uppercase;
+  }
+  .countTime {
+    color: #B8B8C0;
+    letter-spacing: 1px;
+    font-family: 'Circular-Std-Book';
+    margin-top: 7px;
+    font-size: 10px;
+    margin-bottom: 0px;
+    text-transform: uppercase;
+  }
+}
+.join-btn {
+  background: #54b2d3;
+  border-radius: 4px;
+  padding: 1px 10px;
+  text-align: center;
+  font-size: 12px;
+  color: #ffffff;
+  text-transform: none;
+  min-width: 90px;
+  height: 25px;
+  @media screen and (min-width:1366px) {
+    font-size: 14px;
+    min-width: 100px;
+    padding: 1px 12px;
+    span {
+      margin-left: 3px !important;
+    }
+  }
+}
+.count-btn {
+  background: #FFFFFF;
+  border-radius: 4px;
+  padding: 1px 7px;
+  text-align: center;
+  font-size: 11px;
+  color: #9292A3;
+  text-transform: none;
+  min-width: 90px;
+  height: 25px;
+  span {
+    margin-left: 3px !important;
+  }
+  @media screen and (min-width:1366px) {
+    font-size: 12px;
+    min-width: 100px;
+    padding: 1px 10px;
+   
+  }
+}
+.join-btn-top-space {
+  margin-top: 15px;
+}
+.webinar-banner-end {
+  display: flex;
+  justify-content: flex-end;
+}

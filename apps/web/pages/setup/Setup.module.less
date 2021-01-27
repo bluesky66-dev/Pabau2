@@ -36,3 +36,44 @@
   }
    
 }
+
+.headerChipWrapper {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 16px;
+    border-bottom: 1px solid #ECEDF0;
+}
+
+.gridWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100% - 23.8%);
+} 
+.mainWrap {
+  display: flex;
+  .rightSide {
+    margin-top: 16px;
+    width: 23.8%;
+    
+    @media screen and (max-width:767px) {
+      width: 100%;
+    }
+    .textTitle {
+      color: #3D3D46;
+      font-weight: 500;
+      font-size: 14px;
+      margin-bottom: 0;
+      line-height: 20px;
+    }
+  }
+}
+
+.btnView {
+  width: 100%;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  text-transform: capitalize;
+  margin-top: 16px;
+  color: #9292A3;
+}

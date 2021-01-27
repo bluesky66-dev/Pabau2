@@ -1,3 +1,6 @@
+export * from './lib/setup-chip/SetupChip'
+export * from './lib/setup-chip/SetupGrid'
+export * from './lib/setup-chip/SetupWebinar'
 export * from './lib/badge/Badge'
 export * from './lib/security/SecurityScore'
 export * from './lib/notificationBanner/NotificationBanner'
