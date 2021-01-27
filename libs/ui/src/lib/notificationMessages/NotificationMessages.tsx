@@ -1,8 +1,8 @@
-import React, { ReactNode } from 'react'
+import React, { FC, ReactNode } from 'react'
 import { Badge } from '../..'
 import styles from './NotificationMessages.module.less'
 
-export interface notificationDataType {
+export interface NotificationData {
   header: string
   description: string
   icon: ReactNode
@@ -10,12 +10,12 @@ export interface notificationDataType {
   link: string
 }
 
-export interface NotificationMessagesProps {
-  notificationData?: notificationDataType[]
+export interface P {
+  notificationData?: NotificationData[]
   onClick?: (selectedLink: string) => void
 }
 
-export function NotificationMessages(props: NotificationMessagesProps): JSX.Element {
+const NotificationMessages: FC<P> = (props) => {
   const handleClick = (notification) => {
     props.onClick?.(notification)
   }
@@ -25,12 +25,14 @@ export function NotificationMessages(props: NotificationMessagesProps): JSX.Elem
       {props?.notificationData?.map((notification, index) => (
         <div
           className={styles.scoreBody}
-          key={index}
+          key={notification.header}
           onClick={() => handleClick(notification.link)}
         >
           <div className={styles.container}>
             <div className={styles.colStatusLabel}>
-              <span className={styles.iconSecuritytools}>{notification.icon}</span>
+              <span className={styles.iconSecuritytools}>
+                {notification.icon}
+              </span>
             </div>
             <div className={styles.containerCol}>
               <span className={styles.p1}>{notification.header}</span>

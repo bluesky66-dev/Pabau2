@@ -31,7 +31,8 @@ export default {
     notificationData: [
       {
         header: 'New appointment is booked',
-        description: 'Automatically sends to clients when they book their appointment',
+        description:
+          'Automatically sends to clients when they book their appointment',
         icon: <ScheduleOutlined />,
         smartDelivery: false,
       },
@@ -53,7 +54,8 @@ NotificationAppointment.args = {
   notificationData: [
     {
       header: 'New appointment is booked',
-      description: 'Automatically sends to clients when they book their appointment',
+      description:
+        'Automatically sends to clients when they book their appointment',
       icon: <ScheduleOutlined />,
       smartDelivery: true,
       link: null,
@@ -67,35 +69,40 @@ NotificationAppointment.args = {
     },
     {
       header: 'Rescheduled appointment',
-      description: 'Automatically sends to clients when their appointment start time is changed',
+      description:
+        'Automatically sends to clients when their appointment start time is changed',
       icon: <SyncOutlined />,
       smartDelivery: false,
       link: null,
     },
     {
       header: 'Request feedback',
-      description: 'Automatically sends to clients when an appointment is checked out',
+      description:
+        'Automatically sends to clients when an appointment is checked out',
       icon: <StarOutlined />,
       smartDelivery: true,
       link: null,
     },
     {
       header: 'Cancelled appointment',
-      description: 'Automatically sends to clients when an appointment is cancelled',
+      description:
+        'Automatically sends to clients when an appointment is cancelled',
       icon: <CloseCircleOutlined />,
       smartDelivery: false,
       link: null,
     },
     {
       header: 'No-show appointment',
-      description: 'Automatically sends to clients when an appointment is marked as no show',
+      description:
+        'Automatically sends to clients when an appointment is marked as no show',
       icon: <UserDeleteOutlined />,
       smartDelivery: false,
       link: null,
     },
     {
       header: 'Wait list',
-      description: 'Automatically sends to clients when an appointment slot becomes available',
+      description:
+        'Automatically sends to clients when an appointment slot becomes available',
       icon: <FileSyncOutlined />,
       smartDelivery: false,
       link: null,
@@ -108,28 +115,32 @@ NotificationClasses.args = {
   notificationData: [
     {
       header: 'Booked onto class',
-      description: "Automatically sends to clients when they're booked for a class",
+      description:
+        "Automatically sends to clients when they're booked for a class",
       icon: <ScheduleOutlined />,
       smartDelivery: false,
       link: null,
     },
     {
       header: 'Booked onto class (group)',
-      description: "Automatically sends to clients when they're booked for a class (group)",
+      description:
+        "Automatically sends to clients when they're booked for a class (group)",
       icon: <UsergroupAddOutlined />,
       smartDelivery: false,
       link: null,
     },
     {
       header: 'Cancelled a class booking',
-      description: 'Automatically sends to clients when they cancel a class booking',
+      description:
+        'Automatically sends to clients when they cancel a class booking',
       icon: <CloseCircleOutlined />,
       smartDelivery: false,
       link: null,
     },
     {
       header: 'Missed a class',
-      description: "Automatically sends to clients when they don't show for a class",
+      description:
+        "Automatically sends to clients when they don't show for a class",
       icon: <UserDeleteOutlined />,
       smartDelivery: false,
       link: null,
@@ -143,21 +154,24 @@ NotificationClasses.args = {
     },
     {
       header: 'Reminder for class',
-      description: 'Automatically sends a reminder to a client who has registered to a class',
+      description:
+        'Automatically sends a reminder to a client who has registered to a class',
       icon: <BellOutlined />,
       smartDelivery: false,
       link: null,
     },
     {
       header: 'Class wait list',
-      description: 'Automatically sends to clients when a class becomes available',
+      description:
+        'Automatically sends to clients when a class becomes available',
       icon: <FileSyncOutlined />,
       smartDelivery: false,
       link: null,
     },
     {
       header: 'Classes spot available',
-      description: 'Automatically sends to clients when a class slot becomes available',
+      description:
+        'Automatically sends to clients when a class slot becomes available',
       icon: <FileDoneOutlined />,
       smartDelivery: false,
       link: null,
@@ -178,7 +192,8 @@ Engagement.args = {
     },
     {
       header: 'Invoice',
-      description: 'The default email template you will send with a clients invoice attached',
+      description:
+        'The default email template you will send with a clients invoice attached',
       icon: <MoneyCollectOutlined />,
       smartDelivery: false,
       link: null,
@@ -193,7 +208,8 @@ Engagement.args = {
     },
     {
       header: 'Gift vouchers',
-      description: 'The default email template you will send when clients purchase a gift voucher',
+      description:
+        'The default email template you will send when clients purchase a gift voucher',
       icon: <GiftOutlined />,
       smartDelivery: false,
       link: null,
@@ -222,28 +238,32 @@ Other.args = {
     },
     {
       header: 'Clinic emailing timeline',
-      description: "The email you will send when you are emailing a client's timeline",
+      description:
+        "The email you will send when you are emailing a client's timeline",
       icon: <BarChartOutlined />,
       smartDelivery: false,
       link: null,
     },
     {
       header: 'Secure email template',
-      description: 'The default secure email template which gets sent out via email',
+      description:
+        'The default secure email template which gets sent out via email',
       icon: <SafetyOutlined />,
       smartDelivery: false,
       link: null,
     },
     {
       header: 'Connect registration',
-      description: 'The email the client receives when they register to your Online Booking portal',
+      description:
+        'The email the client receives when they register to your Online Booking portal',
       icon: <InteractionOutlined />,
       smartDelivery: false,
       link: null,
     },
     {
       header: 'Medical forms',
-      description: 'The email you will send when you email someone a copy of their prescription',
+      description:
+        'The email you will send when you email someone a copy of their prescription',
       icon: <ReconciliationOutlined />,
       smartDelivery: false,
       link: null,
@@ -266,7 +286,8 @@ Other.args = {
     },
     {
       header: 'Birthdays',
-      description: "The default email template you will send if it's a client's birthday",
+      description:
+        "The default email template you will send if it's a client's birthday",
       icon: <CrownOutlined />,
       smartDelivery: false,
       link: null,
