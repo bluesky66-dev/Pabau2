@@ -1,5 +1,10 @@
 import React, { FC, useState } from 'react'
-import { MobileHeader, MobileSidebar, PabauNotification, PabauMessages } from '@pabau/ui'
+import {
+  MobileHeader,
+  MobileSidebar,
+  PabauNotification,
+  PabauMessages,
+} from '@pabau/ui'
 import { MenuOutlined } from '@ant-design/icons'
 import Search from '../../components/Search'
 import styles from './Setup.module.less'
@@ -7,7 +12,9 @@ import classNames from 'classnames'
 
 const CommonHeader: FC = () => {
   const [openMenuDrawer, setMenuDrawer] = useState<boolean>(false)
-  const [openNotificationDrawer, setNotificationDrawer] = useState<boolean>(false)
+  const [openNotificationDrawer, setNotificationDrawer] = useState<boolean>(
+    false
+  )
   const [openMessageDrawer, setMessageDrawer] = useState<boolean>(false)
 
   return (

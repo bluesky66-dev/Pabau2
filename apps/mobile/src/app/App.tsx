@@ -10,7 +10,11 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
-import { Colors, DebugInstructions, ReloadInstructions } from 'react-native/Libraries/NewAppScreen'
+import {
+  Colors,
+  DebugInstructions,
+  ReloadInstructions,
+} from 'react-native/Libraries/NewAppScreen'
 // @ts-ignore
 import openURLInBrowser from 'react-native/Libraries/Core/Devtools/openURLInBrowser'
 
@@ -19,7 +23,10 @@ const App = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
-        <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
+        <ScrollView
+          contentInsetAdjustmentBehavior="automatic"
+          style={styles.scrollView}
+        >
           <View style={styles.header}>
             <Image style={styles.logo} source={require('./logo.png')} />
             <Text style={styles.heading} testID="heading">
@@ -30,15 +37,16 @@ const App = () => {
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Step One</Text>
               <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>apps/mobile/App.tsx</Text> to change this screen
-                and then come back to see your edits.
+                Edit <Text style={styles.highlight}>apps/mobile/App.tsx</Text>{' '}
+                to change this screen and then come back to see your edits.
               </Text>
             </View>
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>See Your Changes</Text>
               <Text style={styles.sectionDescription}>
-                <ReloadInstructions /> Alternatively, press <Text style={styles.highlight}>R</Text>{' '}
-                in the bundler terminal window.
+                <ReloadInstructions /> Alternatively, press{' '}
+                <Text style={styles.highlight}>R</Text> in the bundler terminal
+                window.
               </Text>
             </View>
             <View style={styles.sectionContainer}>
@@ -54,7 +62,8 @@ const App = () => {
                 onPress={() => openURLInBrowser('https://nx.dev')}
               >
                 <Text style={styles.sectionDescription}>
-                  Visit <Text style={styles.link}>nx.dev</Text> for more info about Nx.
+                  Visit <Text style={styles.link}>nx.dev</Text> for more info
+                  about Nx.
                 </Text>
               </TouchableOpacity>
             </View>

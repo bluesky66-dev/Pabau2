@@ -14,14 +14,13 @@ export default {
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 
-const BadgeStory = ({ ...args }) => <Badge {...args}/>
+const BadgeStory = ({ ...args }) => <Badge {...args} />
 
 export const defaultStatusLabel = BadgeStory.bind({})
 defaultStatusLabel.args = {
   label: 'Enabled',
   disabled: false,
 }
-
 
 // export const CustomButton = ButtonStory.bind({})
 // CustomButton.args = {

@@ -13,7 +13,11 @@ export function Index() {
       <h2>Resources &amp; Tools</h2>
       <p>Thank you for using and showing some ♥ for Nx.</p>
       <div className="flex github-star-container">
-        <a href="https://github.com/nrwl/nx" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://github.com/nrwl/nx"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {' '}
           If you like Nx, please give it a star:
           <div className="github-star-badge">
@@ -33,12 +37,18 @@ export function Index() {
           </a>
         </li>
         <li className="col-span-2">
-          <a className="resource flex" href="https://nx.dev/react/getting-started/what-is-nx">
+          <a
+            className="resource flex"
+            href="https://nx.dev/react/getting-started/what-is-nx"
+          >
             Nx video tutorial
           </a>
         </li>
         <li className="col-span-2">
-          <a className="resource flex" href="https://nx.dev/react/tutorial/01-create-application">
+          <a
+            className="resource flex"
+            href="https://nx.dev/react/tutorial/01-create-application"
+          >
             Interactive tutorial
           </a>
         </li>
