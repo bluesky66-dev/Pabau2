@@ -22,7 +22,7 @@ const LongAnswer: FC = () => {
           iconUrl={longAnswerIcon}
           bgcolor="#6383F1"
           title="Long answer"
-          desc="Ask a question with a long answer             "
+          desc="Ask a question with a long answer"
         />
       </div>
       <div className={styles.formItem}>
