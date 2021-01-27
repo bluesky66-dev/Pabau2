@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react'
 import React from 'react'
-import Rightsidebar from './Rightsidebar'
+import RightSidebar from './RightSidebar'
 
-describe('Rightsidebar', () => {
+describe('RightSidebar', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Rightsidebar />)
+    const { baseElement } = render(<RightSidebar />)
     expect(baseElement).toBeTruthy()
   })
 })

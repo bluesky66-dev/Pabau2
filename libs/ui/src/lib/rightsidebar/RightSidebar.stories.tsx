@@ -1,13 +1,13 @@
 /* eslint-disable */
 import React from 'react'
-import Rightsidebar from './Rightsidebar'
+import RightSidebar from './RightSidebar'
 
 export default {
-  component: Rightsidebar,
+  component: RightSidebar,
   title: 'UI/Right Sidebar',
-  args: { componetName: 'heading', display: 'show' },
+  args: { componentName: 'heading', display: 'show' },
   argTypes: {
-    componetName: {
+    componentName: {
       control: {
         type: 'select',
         selected: 'heading',
@@ -24,8 +24,8 @@ export default {
   }
 }
 
-const RightsidebarStory = ({ ...args }) => <Rightsidebar {...args}></Rightsidebar>
+const RightSidebarStory = ({ ...args }) => <RightSidebar {...args}></RightSidebar>
 
-export const RightsidebarPanel = RightsidebarStory.bind({})
-RightsidebarPanel.args = {}
+export const RightSidebarPanel = RightSidebarStory.bind({})
+RightSidebarPanel.args = {}
 
