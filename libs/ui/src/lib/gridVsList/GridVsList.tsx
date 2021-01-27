@@ -24,7 +24,7 @@ export function GridVsList(props: GridVsListProps): JSX.Element {
       {props.displayTypes?.map((display, index) => (
         <Radio.Button
           value={display.title}
-          key={index}
+          key={display.title}
           style={{ marginRight: 16 }}
         >
           {display.icon}
