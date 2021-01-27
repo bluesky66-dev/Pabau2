@@ -39,7 +39,7 @@ export const QuestionBank: FC<P> = (props) => {
   const prepareContent = () => {
     return (
       <div className={styles.questionBankContainer}>
-        {questions.map(({ key, question, showDropdown, selectedValue }) => (
+        {questions?.map(({ key, question, showDropdown, selectedValue }) => (
           <Row
             key={`question-${key}`}
             className={styles.questionRow}
