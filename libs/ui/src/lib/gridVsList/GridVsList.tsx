@@ -21,7 +21,7 @@ export function GridVsList(props: GridVsListProps): JSX.Element {
       defaultValue={props.displayTypes?.[0].title}
       onChange={selectedType}
     >
-      {props.displayTypes?.map((display, index) => (
+      {props.displayTypes?.map((display) => (
         <Radio.Button
           value={display.title}
           key={display.title}
