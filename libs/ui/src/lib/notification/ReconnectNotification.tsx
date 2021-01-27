@@ -16,7 +16,9 @@ interface Props {
 }
 
 export const Reconnect: FC<Props> = ({ message, delay }) => {
-  const [text, setText] = useState('Connection lost. Reconnecting in ' + delay + ' seconds...')
+  const [text, setText] = useState(
+    'Connection lost. Reconnecting in ' + delay + ' seconds...'
+  )
   const [secondCount, setSecondCount] = useState(delay)
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

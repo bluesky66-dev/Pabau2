@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import QuestionBank from './QuestionBank'
 
-import { data } from './mock'
+import { data, menuOptions } from './mock'
 
 export default {
   component: QuestionBank,
@@ -9,9 +9,24 @@ export default {
 }
 
 export function QuestionBankStory(): JSX.Element {
+  const [questions, setQuestions] = useState(data)
+
+  const handleChange = (e, key: number) => {
+    const data = menuOptions.filter(({ key }) => key === e.key)
+    setQuestions(
+      questions.map((i) =>
+        i.key === key ? { ...i, selectedValue: data[0].value } : i
+      )
+    )
+  }
+
   return (
     <div>
-      <QuestionBank questions={data} />
+      <QuestionBank
+        questions={questions}
+        options={menuOptions}
+        onClick={handleChange}
+      />
     </div>
   )
 }
