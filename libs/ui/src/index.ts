@@ -1,4 +1,5 @@
 export * from './lib/medicalform/Medicalform'
+export * from './lib/gridvslist/GridVsList'
 export * from './lib/avatar-list/AvatarList'
 export * from './lib/avatar/Avatar'
 export * from './lib/background/Background'
