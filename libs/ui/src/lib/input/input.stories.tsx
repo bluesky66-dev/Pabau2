@@ -3,21 +3,27 @@
 import React from 'react'
 import { HelpTooltip } from './helptooltip'
 import { Input } from './input'
+import { UserOutlined } from '@ant-design/icons/lib'
 
 export default {
   component: Input,
   title: 'Forms/Input',
   args: {
     text: 'Facebook',
+    label: 'Name',
     disabled: false,
     size: 'medium',
+    value:'Data',
     placeHolderText: 'Enter marketing source name',
-    requiredMark: false,
-    reqiredMsg: 'Marketing source name is required!',
+    requiredMark: true,
+    layout:'Vertical',
+    requiredMsg: 'Marketing source name is required!',
+    prefix: <UserOutlined />,
+    suffix: '',
   },
   argTypes: {
     text: { control: { type: 'text' } },
-    reqiredMsg: { control: { type: 'text', name: 'Required Message' } },
+    requiredMsg: { control: { type: 'text', name: 'Required Message' } },
     disabled: { control: { type: 'boolean' } },
     requiredMark: { control: { type: 'boolean' } },
     size: {

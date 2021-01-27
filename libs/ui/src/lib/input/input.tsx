@@ -1,6 +1,7 @@
-import React, { PropsWithChildren } from 'react'
-import { Input as AntInput, Form } from 'antd'
-import { FormProps } from 'antd/lib/form'
+import React, { ChangeEvent, PropsWithChildren, ReactNode } from 'react'
+import { Input as AntInput } from 'antd'
+import classNames from 'classnames'
+import styles from './input.module.less'
 
 enum ButtonSize {
   small = 'small',
@@ -8,12 +9,19 @@ enum ButtonSize {
   large = 'large',
 }
 
-export interface CheckBoxProps extends FormProps {
+export interface CheckBoxProps {
   text?: string
+  label?: string
   size?: ButtonSize
+  requiredMark?: boolean
   disabled?: boolean
+  layout?: string
+  prefix?: string | ReactNode
+  suffix?: string | ReactNode
   placeHolderText?: string
-  reqiredMsg?: string
+  value?: string
+  requiredMsg?: string
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 export function Input({
@@ -21,34 +29,50 @@ export function Input({
   size,
   disabled,
   placeHolderText,
-  requiredMark = false,
-  reqiredMsg,
+  requiredMark,
+  label,
+  prefix,
+  layout,
+  requiredMsg,
+  value,
+  suffix,
+  onChange,
   ...props
 }: PropsWithChildren<CheckBoxProps>): JSX.Element {
-  const [form] = Form.useForm()
-
   return (
-    <Form form={form} requiredMark={requiredMark} layout="vertical" {...props}>
-      <Form.Item
-        label="Name"
-        name="marketingSorce"
-        rules={[
-          {
-            required: true,
-            message: reqiredMsg,
-          },
-        ]}
+    <>
+      <div
+        className={classNames(
+          layout?.toLowerCase() === 'horizontal' && styles.displayFlex
+        )}
       >
-        <AntInput
-          className="input-style"
-          placeholder={placeHolderText}
-          value={text}
-          size={size}
-          defaultValue={text}
-          disabled={disabled}
-        />
-      </Form.Item>
-    </Form>
+        <div>
+          {label} {requiredMark && <span className={styles.colorError}>*</span>}
+        </div>
+        <div>
+          <AntInput
+            className="input-style"
+            placeholder={placeHolderText}
+            value={text}
+            size={size}
+            defaultValue={text}
+            disabled={disabled}
+            prefix={prefix || ''}
+            suffix={suffix || ''}
+            onChange={(e) => onChange?.(e)}
+            {...props}
+          />
+        </div>
+      </div>
+      <span
+        className={classNames(
+          styles.colorError,
+          layout?.toLowerCase() === 'horizontal' && styles.pl45
+        )}
+      >
+        {!value && requiredMsg}
+      </span>
+    </>
   )
 }
 
