@@ -10,12 +10,12 @@ export interface NotificationData {
   link: string
 }
 
-export interface P {
+export interface NotificationMessagesProps {
   notificationData?: NotificationData[]
   onClick?: (selectedLink: string) => void
 }
 
-const NotificationMessages: FC<P> = (props) => {
+const NotificationMessages: FC<NotificationMessagesProps> = (props) => {
   const handleClick = (notification) => {
     props.onClick?.(notification)
   }
