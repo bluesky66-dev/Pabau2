@@ -25,6 +25,7 @@ export const data = [
     key: 2,
     question: 'How would you rate your consultation?',
     showDropdown: false,
+    selectedValue: '',
   },
   {
     key: 3,
@@ -37,6 +38,7 @@ export const data = [
     key: 4,
     question: 'How would you rate your consultation?',
     showDropdown: false,
+    selectedValue: '',
   },
   {
     key: 5,
@@ -49,6 +51,7 @@ export const data = [
     key: 6,
     question: 'How would you rate your consultation?',
     showDropdown: false,
+    selectedValue: '',
   },
   {
     key: 7,

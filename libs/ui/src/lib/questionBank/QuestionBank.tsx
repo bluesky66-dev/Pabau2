@@ -7,7 +7,7 @@ import styles from './QuestionBank.module.less'
 interface IQuestionOptions {
   key: number
   question: string
-  showDropdown?: boolean
+  showDropdown: boolean
   selectedValue?: string
   onClick?(): void
 }
