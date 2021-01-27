@@ -59,7 +59,12 @@ export const DropDownButton: FC<P> = ({
   ...props
 }) => {
   return (
-    <Dropdown overlay={menu} className="dropdown-btn" placement="bottomLeft" arrow>
+    <Dropdown
+      overlay={menu}
+      className="dropdown-btn"
+      placement="bottomLeft"
+      arrow
+    >
       <AntButton
         style={{ ...style, ...{ backgroundColor: backgroundColor } }}
         //size={ButtonSize.large}

@@ -8,7 +8,10 @@ interface P {
   previewComponent?: React.ReactNode
 }
 
-export const ClientNotification: FC<P> = ({ tabComponent, previewComponent }) => {
+export const ClientNotification: FC<P> = ({
+  tabComponent,
+  previewComponent,
+}) => {
   const { TabPane } = Tabs
 
   function callback(key) {
@@ -26,144 +29,174 @@ export const ClientNotification: FC<P> = ({ tabComponent, previewComponent }) =>
           </div>
         </div>
         <div>
-          <Tabs className={styles.customTab} defaultActiveKey="1" onChange={callback}>
+          <Tabs
+            className={styles.customTab}
+            defaultActiveKey="1"
+            onChange={callback}
+          >
             <TabPane tab="Standard" key="1">
               <div className={styles.tabPane1Content}>
                 <p>
-                  <strong>Note:</strong> The -webkit-scrollbar is not supported in Firefox or in
-                  Edge, prior version 79.
+                  <strong>Note:</strong> The -webkit-scrollbar is not supported
+                  in Firefox or in Edge, prior version 79.
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
                 <p>
-                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem
-                  ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
-                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum{' '}
+                  Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+                  lorem ipsum lorem ipsum{' '}
                 </p>
               </div>
             </TabPane>
             <TabPane tab="Custom" key="2">
               <div className={styles.tabPane2Content}>
                 <span>
-                  <strong>Note:</strong> The -webkit-scrollbar is not supported in Firefox or in
-                  Edge, prior version 79.
+                  <strong>Note:</strong> The -webkit-scrollbar is not supported
+                  in Firefox or in Edge, prior version 79.
                 </span>
                 <span>
-                  The particularly nice bit here is that the scrollbar is on the body element, yet
-                  the scrollbar isn’t stuck to the top, bottom, or right edge of the browser window
-                  as scroll bars normally are. I made a test page with copy-and-pasteable code to
-                  achieve that a similar effect: View Demo On Forrst, they use custom scollbars on
-                  code snippets which are also pretty nice. They are less visually intense and so
-                  don’t fight as much with the code highlighting.On Forrst, they use custom
-                  scollbars on code snippets which are also pretty nice. They are less visually
-                  intense and so don’t fight as much with the code highlighting.On Forrst, they use
-                  custom scollbars on code snippets which are also pretty nice. They are less
-                  visually intense and so don’t fight as much with the code highlighting.On Forrst,
-                  they use custom scollbars on code snippets which are also pretty nice. They are
-                  less visually intense and so don’t fight as much with the code highlighting.
+                  The particularly nice bit here is that the scrollbar is on the
+                  body element, yet the scrollbar isn’t stuck to the top,
+                  bottom, or right edge of the browser window as scroll bars
+                  normally are. I made a test page with copy-and-pasteable code
+                  to achieve that a similar effect: View Demo On Forrst, they
+                  use custom scollbars on code snippets which are also pretty
+                  nice. They are less visually intense and so don’t fight as
+                  much with the code highlighting.On Forrst, they use custom
+                  scollbars on code snippets which are also pretty nice. They
+                  are less visually intense and so don’t fight as much with the
+                  code highlighting.On Forrst, they use custom scollbars on code
+                  snippets which are also pretty nice. They are less visually
+                  intense and so don’t fight as much with the code
+                  highlighting.On Forrst, they use custom scollbars on code
+                  snippets which are also pretty nice. They are less visually
+                  intense and so don’t fight as much with the code highlighting.
                 </span>
               </div>
             </TabPane>
@@ -175,7 +208,9 @@ export const ClientNotification: FC<P> = ({ tabComponent, previewComponent }) =>
             Setup templates in your clients preferred language
           </span>
           <div className={styles.clientLanguageContainer}>
-            <ClientLanguage selectLanguageHook={[selectLanguage, SetSelectLanguage]} />
+            <ClientLanguage
+              selectLanguageHook={[selectLanguage, SetSelectLanguage]}
+            />
           </div>
           <div>{selectLanguage}</div>
         </div>

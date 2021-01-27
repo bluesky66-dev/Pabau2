@@ -141,14 +141,17 @@ const NotificationPreview: FC<P> = ({
       <Row gutter={[0, 4]}>
         <Col>
           <span>{selectLangData.date}</span>
-          {allowRescheduling && <span className={styles.anchor}>{selectLangData.reschedule}</span>}
+          {allowRescheduling && (
+            <span className={styles.anchor}>{selectLangData.reschedule}</span>
+          )}
         </Col>
       </Row>
       <Row gutter={[0, 4]}>
         {showService && (
           <Col>
             <span>
-              {selectLangData.service} {showEmployeeName ? selectLangData.employee : ''}
+              {selectLangData.service}{' '}
+              {showEmployeeName ? selectLangData.employee : ''}
             </span>
           </Col>
         )}

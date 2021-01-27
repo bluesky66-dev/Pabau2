@@ -12,7 +12,11 @@ const Index: FC = () => {
     <Layout>
       <div style={{ backgroundColor: '#FFF' }}>
         <Breadcrumb
-          breadcrumbItems={['Setup', 'Notification Messages', 'New Appointment is booked']}
+          breadcrumbItems={[
+            'Setup',
+            'Notification Messages',
+            'New Appointment is booked',
+          ]}
         />
         <Title>New Appointment is booked</Title>
       </div>
@@ -27,7 +31,10 @@ const Index: FC = () => {
           fontSize: '14px',
         }}
       >
-        <Button style={{ margin: '1em 8px', height: '40px', fontSize: '14px' }} type="default">
+        <Button
+          style={{ margin: '1em 8px', height: '40px', fontSize: '14px' }}
+          type="default"
+        >
           Send Test Email
         </Button>
         <Button

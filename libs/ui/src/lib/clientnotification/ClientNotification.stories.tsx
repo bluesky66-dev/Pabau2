@@ -5,7 +5,11 @@ import ClientNotification from './ClientNotification'
 
 export default {
   component: ClientNotification,
-  title: 'UI/ClientNotification'
+  title: 'UI/ClientNotification',
 }
 
-export const DefaultClientNotification = () => <div ><ClientNotification /></div>
+export const DefaultClientNotification = () => (
+  <div>
+    <ClientNotification />
+  </div>
+)

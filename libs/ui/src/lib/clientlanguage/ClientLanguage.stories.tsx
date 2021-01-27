@@ -11,7 +11,9 @@ export const DefaultClientLanguage: FC = () => {
 
   return (
     <div style={{ width: '350px' }}>
-      <ClientLanguage selectLanguageHook={[selectLanguage, SetSelectLanguage]} />
+      <ClientLanguage
+        selectLanguageHook={[selectLanguage, SetSelectLanguage]}
+      />
       <div style={{ width: '100px', height: '100px' }}>{selectLanguage}</div>
     </div>
   )

@@ -28,7 +28,10 @@ const Index: FC = () => {
           displayPolicyHook={[displayPolicy, setDisplayPolicy]}
           showServiceHook={[showService, setShowService]}
           showEmployeeNameHook={[showEmployeeName, setShowEmployeeName]}
-          addMedicalHisButtonHook={[addMedicalHisButton, setAddMedicalHisButton]}
+          addMedicalHisButtonHook={[
+            addMedicalHisButton,
+            setAddMedicalHisButton,
+          ]}
           selectLanguageHook={[selectLanguage, setSelectLanguage]}
           backGroundColorHook={[backGroundColor, setBackGroundColor]}
           buttonColorHook={[buttonColor, setButtonColor]}

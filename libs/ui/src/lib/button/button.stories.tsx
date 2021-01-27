@@ -44,7 +44,9 @@ export default {
 }
 
 const ButtonStory = ({ ...args }) => <Button {...args}>{args.label}</Button>
-const DropdownButtonStory = ({ ...args }) => <DropdownButton {...args}>{args.label}</DropdownButton>
+const DropdownButtonStory = ({ ...args }) => (
+  <DropdownButton {...args}>{args.label}</DropdownButton>
+)
 
 export const defaultBtn = ButtonStory.bind({})
 defaultBtn.args = {

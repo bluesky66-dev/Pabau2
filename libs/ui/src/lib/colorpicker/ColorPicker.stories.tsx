@@ -24,10 +24,18 @@ export const DefaultColorPicker: FC<P> = ({ heading }) => {
         onSelected={(val) => setSelectColor(val)}
         onHover={(val) => setHoverolor(val)}
       />
-      <div style={{ width: '100px', height: '100px', backgroundColor: selectColor }}>
+      <div
+        style={{
+          width: '100px',
+          height: '100px',
+          backgroundColor: selectColor,
+        }}
+      >
         Selected Color
       </div>
-      <div style={{ width: '100px', height: '100px', backgroundColor: hoverColor }}>
+      <div
+        style={{ width: '100px', height: '100px', backgroundColor: hoverColor }}
+      >
         Hover Color
       </div>
     </div>

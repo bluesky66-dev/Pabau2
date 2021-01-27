@@ -1,17 +1,38 @@
 import React, { FC } from 'react'
-import { Collapse, Checkbox, Row, Col, Tabs, Select, Input, Tooltip } from 'antd'
+import {
+  Collapse,
+  Checkbox,
+  Row,
+  Col,
+  Tabs,
+  Select,
+  Input,
+  Tooltip,
+} from 'antd'
 import { QuestionCircleOutlined } from '@ant-design/icons'
 import { ColorPicker, ClientLanguage } from '@pabau/ui'
 import styles from './StandardTab.module.less'
 
 interface P {
   requestConfirmHook?: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
-  allowReschedulingHook?: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
-  allowCancellationHook?: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
+  allowReschedulingHook?: [
+    boolean,
+    React.Dispatch<React.SetStateAction<boolean>>
+  ]
+  allowCancellationHook?: [
+    boolean,
+    React.Dispatch<React.SetStateAction<boolean>>
+  ]
   displayPolicyHook?: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
   showServiceHook?: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
-  showEmployeeNameHook?: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
-  addMedicalHisButtonHook?: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
+  showEmployeeNameHook?: [
+    boolean,
+    React.Dispatch<React.SetStateAction<boolean>>
+  ]
+  addMedicalHisButtonHook?: [
+    boolean,
+    React.Dispatch<React.SetStateAction<boolean>>
+  ]
   selectLanguageHook?: [string, React.Dispatch<React.SetStateAction<string>>]
   backGroundColorHook?: [string, React.Dispatch<React.SetStateAction<string>>]
   buttonColorHook?: [string, React.Dispatch<React.SetStateAction<string>>]
@@ -41,8 +62,8 @@ const StandardTab: FC<P> = ({
           <div style={{ padding: '10px 9px' }}>
             <Row style={{ padding: '0 15px' }}>
               <span>
-                This notification automatically sends to clients the moment their appointment is
-                booked.
+                This notification automatically sends to clients the moment
+                their appointment is booked.
                 <span className={styles.anchor}>&nbsp;Learn more</span>
               </span>
             </Row>
@@ -53,14 +74,24 @@ const StandardTab: FC<P> = ({
               expandIconPosition="right"
               style={{ backgroundColor: 'white' }}
             >
-              <Panel className={styles.panelAlign} header="Reminder timeframe" key="1">
+              <Panel
+                className={styles.panelAlign}
+                header="Reminder timeframe"
+                key="1"
+              >
                 <Row>
-                  <Checkbox className={styles.checkboxStyle} value="enable_reminder">
+                  <Checkbox
+                    className={styles.checkboxStyle}
+                    value="enable_reminder"
+                  >
                     Enable reminders via email
                   </Checkbox>
                 </Row>
                 <Row align="middle">
-                  <Checkbox className={styles.checkboxStyle} value="smart_delivery">
+                  <Checkbox
+                    className={styles.checkboxStyle}
+                    value="smart_delivery"
+                  >
                     Smart delivery
                   </Checkbox>
                   <Tooltip
@@ -73,8 +104,8 @@ const StandardTab: FC<P> = ({
                 </Row>
                 <Row gutter={[0, 16]}>
                   <Col>
-                    Choose how far in advance your reminder notification messages are sent to
-                    clients
+                    Choose how far in advance your reminder notification
+                    messages are sent to clients
                   </Col>
                 </Row>
                 <Row>
@@ -92,7 +123,9 @@ const StandardTab: FC<P> = ({
                     className={styles.checkboxStyle}
                     value="request_confirmation"
                     checked={requestConfirmation}
-                    onChange={() => setRequestConfirmation(!requestConfirmation)}
+                    onChange={() =>
+                      setRequestConfirmation(!requestConfirmation)
+                    }
                   >
                     Request confirmation
                   </Checkbox>
@@ -155,25 +188,34 @@ const StandardTab: FC<P> = ({
                   </Checkbox>
                 </Row>
                 <Row>
-                  <span className={styles.separateText}>Medical History settings</span>
+                  <span className={styles.separateText}>
+                    Medical History settings
+                  </span>
                 </Row>
                 <Row>
                   <Checkbox
                     className={styles.checkboxStyle}
                     value="add_his_button"
                     checked={addMedicalHisButton}
-                    onChange={() => setAddMedicalHisButton(!addMedicalHisButton)}
+                    onChange={() =>
+                      setAddMedicalHisButton(!addMedicalHisButton)
+                    }
                   >
                     Add Medical History button
                   </Checkbox>
                 </Row>
                 <Row>
-                  <Checkbox className={styles.checkboxStyle} value="hide_his_completed">
+                  <Checkbox
+                    className={styles.checkboxStyle}
+                    value="hide_his_completed"
+                  >
                     Hide if history is already completed
                   </Checkbox>
                 </Row>
                 <Row>
-                  <span className={styles.textareaLabel}>Medical History message</span>
+                  <span className={styles.textareaLabel}>
+                    Medical History message
+                  </span>
                 </Row>
                 <Row>
                   <TextArea
@@ -185,7 +227,10 @@ const StandardTab: FC<P> = ({
                   heading="Background color"
                   onSelected={(val) => setBackGroundColor(val)}
                 />
-                <ColorPicker heading="Buttons color" onSelected={(val) => setButtonColor(val)} />
+                <ColorPicker
+                  heading="Buttons color"
+                  onSelected={(val) => setButtonColor(val)}
+                />
                 <Row>
                   <span className={styles.textareaLabel}>Information</span>
                 </Row>
@@ -197,12 +242,18 @@ const StandardTab: FC<P> = ({
                   />
                 </Row>
               </Panel>
-              <Panel className={styles.panelAlign} header="Client languages" key="3">
+              <Panel
+                className={styles.panelAlign}
+                header="Client languages"
+                key="3"
+              >
                 <Row>
                   <Col>Setup templates in your clients preferred language</Col>
                 </Row>
                 <Row>
-                  <ClientLanguage selectLanguageHook={[selectLanguage, setSelectLanguage]} />
+                  <ClientLanguage
+                    selectLanguageHook={[selectLanguage, setSelectLanguage]}
+                  />
                 </Row>
               </Panel>
             </Collapse>

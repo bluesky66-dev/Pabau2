@@ -34,8 +34,8 @@ export default {
 const InputStory = ({ ...args }) => <Input {...args} />
 export const InputWithFormControl = InputStory.bind({})
 
-const HelpTooltipStory = ({ ...args }) =>  <HelpTooltip {...args} />
+const HelpTooltipStory = ({ ...args }) => <HelpTooltip {...args} />
 export const HelpTooltipControl = HelpTooltipStory.bind({})
 HelpTooltipControl.args = {
-  helpText:"Hello!!! Nice to meet you"
+  helpText: 'Hello!!! Nice to meet you',
 }
