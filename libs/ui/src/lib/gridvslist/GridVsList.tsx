@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { FC, ReactNode } from 'react'
 import { Radio } from 'antd'
 
 export interface displayTypes {
@@ -6,22 +6,19 @@ export interface displayTypes {
   icon: ReactNode
 }
 
-export interface GridVsListProps {
+interface P {
   displayTypes?: displayTypes[]
   onChange?: (type?: string) => void
 }
 
-export function GridVsList(props: GridVsListProps): JSX.Element {
+const GridVsList: FC<P> = ({ displayTypes, onChange }) => {
   const selectedType = (e) => {
-    props.onChange?.(e.target.value)
+    onChange?.(e.target.value)
   }
 
   return (
-    <Radio.Group
-      defaultValue={props.displayTypes?.[0].title}
-      onChange={selectedType}
-    >
-      {props.displayTypes?.map((display) => (
+    <Radio.Group defaultValue={displayTypes?.[0].title} onChange={selectedType}>
+      {displayTypes?.map((display) => (
         <Radio.Button
           value={display.title}
           key={display.title}
