@@ -7,15 +7,7 @@ import styles from './MedicalForm.module.less'
 import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormTitle from './MedicalFormTitle'
 
-const typeOptions = [
-  { label: 'Text', value: 'text' },
-  { label: 'Email', value: 'email' },
-  { label: 'Number', value: 'number' },
-  { label: 'Date', value: 'date' },
-]
-
 const LongAnswer: FC = () => {
-  const [selOption, setSelOption] = useState('text')
   const [advanced, setAdvanced] = useState(false)
 
   return (
