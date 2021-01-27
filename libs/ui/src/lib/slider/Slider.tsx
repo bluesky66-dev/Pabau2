@@ -7,7 +7,7 @@ interface P {
   title: string
   value: number
   calculatedValue: string
-  onChange?: (value: number) => void
+  onChange: (value: number) => void
 }
 
 const Slider: FC<P> = (props) => {
