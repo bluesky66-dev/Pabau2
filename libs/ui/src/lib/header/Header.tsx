@@ -43,7 +43,9 @@ const items = [
 ]
 
 export const Header: FC<P> = ({ searchRender, ...props }) => {
-  const [openNotificationDrawer, setNotificationDrawer] = useState<boolean>(false)
+  const [openNotificationDrawer, setNotificationDrawer] = useState<boolean>(
+    false
+  )
   const [openMessageDrawer, setMessageDrawer] = useState<boolean>(false)
 
   const handleMenuClick = useCallback(() => alert('Not yet done'), [])
@@ -58,7 +60,9 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
   )
   return (
     <>
-      <AntHeader className={classNames(styles.pabauHeader, styles.mobileViewNone)}>
+      <AntHeader
+        className={classNames(styles.pabauHeader, styles.mobileViewNone)}
+      >
         <div
           style={{
             paddingLeft: '30px',

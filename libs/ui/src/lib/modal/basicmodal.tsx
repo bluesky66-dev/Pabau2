@@ -63,7 +63,10 @@ export function BasicModal({
       <div className={styles.modalBody}>{children}</div>
       <div className={styles.modalFooter}>
         {specialBooleanLabel && onSpecialBooleanClick && (
-          <Checkbox defaultChecked={specialBooleanValue} onClick={onSpecialBooleanClick}>
+          <Checkbox
+            defaultChecked={specialBooleanValue}
+            onClick={onSpecialBooleanClick}
+          >
             {specialBooleanLabel}
           </Checkbox>
           // <div
@@ -83,7 +86,11 @@ export function BasicModal({
           // </div>
         )}
         {dangerButtonText && (
-          <Button type="default" className={styles.deleteBtnStyle} onClick={() => onDelete?.()}>
+          <Button
+            type="default"
+            className={styles.deleteBtnStyle}
+            onClick={() => onDelete?.()}
+          >
             {dangerButtonText}
           </Button>
         )}

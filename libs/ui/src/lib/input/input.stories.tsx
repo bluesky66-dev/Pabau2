@@ -12,7 +12,7 @@ export default {
     size: 'medium',
     placeHolderText: 'Enter marketing source name',
     requiredMark: false,
-    reqiredMsg: 'Marketing source name is required!'
+    reqiredMsg: 'Marketing source name is required!',
   },
   argTypes: {
     text: { control: { type: 'text' } },
@@ -20,7 +20,11 @@ export default {
     disabled: { control: { type: 'boolean' } },
     requiredMark: { control: { type: 'boolean' } },
     size: {
-      control: { type: 'select', selected: 'medium', options: ['small', 'medium', 'large'] },
+      control: {
+        type: 'select',
+        selected: 'medium',
+        options: ['small', 'medium', 'large'],
+      },
     },
   },
   actions: { argTypesRegex: '^on[A-Z].*' },
