@@ -1,3 +1,4 @@
+export * from './lib/gridVsList/GridVsList'
 export * from './lib/avatar-list/AvatarList'
 export * from './lib/avatar/Avatar'
 export * from './lib/background/Background'
