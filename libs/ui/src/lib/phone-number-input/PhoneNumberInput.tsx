@@ -2,6 +2,8 @@ import React, { FC, useState, useEffect } from 'react'
 import { Input, Dropdown, Menu } from 'antd'
 import { DownOutlined } from '@ant-design/icons'
 import PhoneNumberAreaCodes from './PhoneNumberAreaCodes'
+import PhoneInput from 'react-phone-number-input/input'
+import { formatPhoneNumber } from 'react-phone-number-input'
 import styles from './PhoneNumberInput.module.less'
 
 export interface PhoneNumberInputProps {
@@ -15,8 +17,13 @@ export const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
 }) => {
   const [phoneCode, setPhoneCode] = useState('+44')
   const [phoneNumber, setPhoneNumber] = useState('')
+  const [number, setNumber] = useState('')
   const handleMenuClick = (e) => {
     setPhoneCode(`+${PhoneNumberAreaCodes[e.key][1]}`)
+  }
+  const handleChangePhoneNumber = (val) => {
+    const value = formatPhoneNumber(val)
+    setNumber(value)
   }
   const handleChangeInput = (e) => {
     const { value } = e.target
@@ -57,6 +64,11 @@ export const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
           addonBefore={selectBefore}
           value={phoneNumber}
           onChange={(e) => handleChangeInput(e)}
+        />
+        <PhoneInput
+          country={countryCode}
+          value={number}
+          onChange={(val) => handleChangePhoneNumber(val)}
         />
       </div>
     </div>
