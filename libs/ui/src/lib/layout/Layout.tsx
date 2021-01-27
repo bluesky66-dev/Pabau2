@@ -53,7 +53,10 @@ export const Layout: FC<LayoutProps> = ({
               }}
             >
               {card ? (
-                <Card title={pageTitle} style={{ width: '50vmin', margin: '0 auto' }}>
+                <Card
+                  title={pageTitle}
+                  style={{ width: '50vmin', margin: '0 auto' }}
+                >
                   {children}
                 </Card>
               ) : (

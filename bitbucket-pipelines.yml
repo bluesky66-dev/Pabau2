@@ -114,14 +114,15 @@ pipelines:
       - step:
           name: deploy
           deployment: Production
-          caches:
-            - nodemodules
+#          caches:
+#            - nodemodules
           script:
+            - yarn install --pure-lockfile --prefer-offline
 
             # get the commit message for this merge
-            - export LAST_COMMIT_LOG=$(git log HEAD~1 -1 | tail -n +4 | perl -p -e 's/[\r\n]//' | awk '{$1=$1;print}')
+            - export LAST_COMMIT_LOG=$(git log HEAD -1 | tail -n +4 | perl -p -e 's/[\r\n]//' | awk '{$1=$1;print}')
             - echo "${LAST_COMMIT_LOG}"
-            - if [ "${LAST_COMMIT_LOG}" == "[skip ci] bumping version (patch)" ]; then (echo yes && export LAST_COMMIT_LOG=$(git log HEAD~2 -1 | tail -n +4 | perl -p -e 's/[\r\n]//' | awk '{$1=$1;print}')); fi
+            - if [ "${LAST_COMMIT_LOG}" == "[skip ci] bumping version (patch)" ]; then (echo yes && export LAST_COMMIT_LOG=$(git log HEAD~1 -1 | tail -n +4)); fi
             - echo "${LAST_COMMIT_LOG}"
 
             # Get an oauth access token using the client credentials, parsing out the token with jq.
@@ -133,6 +134,6 @@ pipelines:
             - git push && git push --tags
             - export PACKAGE_JSON_VERSION=$(jq -r .version < package.json)
 
-            - yarn affected --base=HEAD~2 --target=export --prod
-            - yarn affected --base=HEAD~2 --target=build-storybook --prod
-            - yarn affected --base=HEAD~2 --target=deploy --prod
+            - yarn affected --base=HEAD~2 --head=HEAD~1 --target=export --prod
+            - yarn affected --base=HEAD~2 --head=HEAD~1 --target=build-storybook --prod
+            - yarn affected --base=HEAD~2 --head=HEAD~1 --target=deploy --prod

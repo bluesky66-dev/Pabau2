@@ -20,14 +20,20 @@ export default {
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 
-const SocialMediaCheckboxStory = ({ ...args }) => <SocialMediaCheckbox {...args} />
+const SocialMediaCheckboxStory = ({ ...args }) => (
+  <SocialMediaCheckbox {...args} />
+)
 
 export const SocialCheckBox = SocialMediaCheckboxStory.bind({})
 SocialCheckBox.args = {
   mediaIcon: [
     { label: 'facebook', link: 'www.facebook.com', icon: <FacebookOutlined /> },
     { label: 'linksIn', link: 'www.linkin.com', icon: <LinkedinOutlined /> },
-    { label: 'instagram', link: 'www.instagram.com', icon: <InstagramOutlined /> },
+    {
+      label: 'instagram',
+      link: 'www.instagram.com',
+      icon: <InstagramOutlined />,
+    },
     { label: 'twitter', link: null, icon: <TwitterOutlined /> },
   ],
 }

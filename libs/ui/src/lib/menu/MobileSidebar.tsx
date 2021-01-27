@@ -78,14 +78,24 @@ export const MobileSidebar: FC<SidebarProps> = ({
   }
 
   return (
-    <Drawer visible={true} placement="left" closable={false} className={styles.mobileSidebar}>
+    <Drawer
+      visible={true}
+      placement="left"
+      closable={false}
+      className={styles.mobileSidebar}
+    >
       <div className={styles.mobileViewAlign}>
         <div className={styles.menuHeaderHeading}>
-          <CloseOutlined className="menuHeaderIconColor" onClick={onSideBarClosed} />
+          <CloseOutlined
+            className="menuHeaderIconColor"
+            onClick={onSideBarClosed}
+          />
           <p>Menu</p>
         </div>
       </div>
-      <div className={styles.searchBox}>{searchRender ? searchRender(<Search />) : <Search />}</div>
+      <div className={styles.searchBox}>
+        {searchRender ? searchRender(<Search />) : <Search />}
+      </div>
       <Menu
         className={styles.sidebar}
         mode="inline"
@@ -97,7 +107,11 @@ export const MobileSidebar: FC<SidebarProps> = ({
       >
         {sidebarMenu.map((menuData, index) => {
           return !menuData.children ? (
-            renderMenu(menuData.menuName + index, menuData.menuName, menuData.icon)
+            renderMenu(
+              menuData.menuName + index,
+              menuData.menuName,
+              menuData.icon
+            )
           ) : (
             <SubMenu
               key={menuData.menuName + index}
@@ -106,18 +120,27 @@ export const MobileSidebar: FC<SidebarProps> = ({
               onTitleClick={onClickMenu}
               className={classNames(
                 styles.sidebarSubMenu,
-                selectedKeys.includes(menuData.menuName + index) && styles.subMenuActive
+                selectedKeys.includes(menuData.menuName + index) &&
+                  styles.subMenuActive
               )}
             >
               {menuData.children.map((subMenu, subIndex) => {
-                return renderMenu(subMenu.menuName + subIndex, subMenu.menuName, subMenu?.icon)
+                return renderMenu(
+                  subMenu.menuName + subIndex,
+                  subMenu.menuName,
+                  subMenu?.icon
+                )
               })}
             </SubMenu>
           )
         })}
         <div className={styles.divborder}></div>
         {mobileSidebar.map((menuData, index) => {
-          return renderMenu(menuData.menuName + index, menuData.menuName, menuData.icon)
+          return renderMenu(
+            menuData.menuName + index,
+            menuData.menuName,
+            menuData.icon
+          )
         })}
         <Menu.Item
           className={classNames(styles.sidebarMenu, styles.profileMenu)}
