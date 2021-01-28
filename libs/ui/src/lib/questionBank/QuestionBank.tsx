@@ -20,7 +20,7 @@ interface IMenuOptions {
 interface P {
   questions: IQuestionOptions[]
   options: IMenuOptions[]
-  onClick?(e, key: number): void
+  onClick(e, key: number): void
 }
 
 export const QuestionBank: FC<P> = (props) => {
