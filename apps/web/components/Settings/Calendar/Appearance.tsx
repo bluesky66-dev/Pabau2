@@ -1,26 +1,30 @@
 import React from 'react'
 import styles from './calendar.module.less'
 import { Typography, Checkbox, Select } from 'antd'
-import { QuestionCircleOutlined } from '@ant-design/icons'
+import { HelpTooltip } from '@pabau/ui'
 
 const { Title } = Typography
 
 interface AppearanceGeneralItems {
   type: string
   value: boolean
+  help: string
 }
 const AppearanceGeneralItems: AppearanceGeneralItems[] = [
   {
     type: 'Enable initials',
     value: true,
+    help: 'Enable initials',
   },
   {
     type: 'Hide surnames',
     value: false,
+    help: 'Hide surnames',
   },
   {
     type: 'Hide appointment times',
     value: true,
+    help: 'Hide appointment times',
   },
 ]
 const options = [{ value: 'Small' }, { value: 'Medium' }, { value: 'Large' }]
@@ -45,7 +49,7 @@ const Appearance = () => (
               <Checkbox defaultChecked={general.value}>
                 <span className={styles.appointmentText}>{general.type}</span>
               </Checkbox>
-              <QuestionCircleOutlined className={styles.appointmentIcon} />
+              <HelpTooltip helpText={general.help} />
               <br />
             </>
           )
