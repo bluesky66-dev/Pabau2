@@ -11,7 +11,7 @@ export default {
       control: {
         type: 'select',
         selected: 'heading',
-        options: ['heading', 'signature', 'ghost', 'shortanswer', 'longanswer'],
+        options: ['Conditions','Dob','Drawing','Dropdown','Drugs','LabTest','LongAnswer','Heading','MultipleChoice','ShortAnswer','Signature','SingleChoice','TravelDestination','VaccineHistory','VaccineScheduler'],
       },
     },
     display: {
@@ -27,5 +27,7 @@ export default {
 const RightSidebarStory = ({ ...args }) => <RightSidebar {...args}></RightSidebar>
 
 export const RightSidebarPanel = RightSidebarStory.bind({})
-RightSidebarPanel.args = {}
+RightSidebarPanel.args = {
+  componentName: 'Heading'
+}
 
