@@ -24,7 +24,10 @@ export const NotificationBanner: FC<P> = ({
   // const [isHide, setHide] = useState(false)
 }) => {
   return (
-    <div className={isHide ? styles.hideBlock : styles.notificationBody}>
+    <div
+      className={isHide ? styles.hideBlock : styles.notificationBody}
+      style={{ backgroundImage: `url(${imgPath})` }}
+    >
       <Row className={styles.rowPosition}>
         <Col md={16} sm={12}>
           <p className={styles.title1}>{title}</p>
@@ -46,7 +49,6 @@ export const NotificationBanner: FC<P> = ({
             alt=""
           />
         )}
-        <img className={styles.backgroundImg} src={imgPath} alt="" />
       </Row>
     </div>
   )
