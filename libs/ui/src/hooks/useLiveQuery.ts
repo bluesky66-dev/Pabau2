@@ -71,9 +71,11 @@ export function useLiveQuery<T>(
   }, [query, subscribeToMore, options])
 
   const data = rest.data
-    ? (rest.data as Record<string, unknown>)[
-        Object.keys(rest.data as Record<string, unknown>)[0]
-      ]
+    ? Object.keys(rest.data).length > 1
+      ? rest.data
+      : (rest.data as Record<string, unknown>)[
+          Object.keys(rest.data as Record<string, unknown>)[0]
+        ]
     : undefined
   return { ...rest, data }
 }
