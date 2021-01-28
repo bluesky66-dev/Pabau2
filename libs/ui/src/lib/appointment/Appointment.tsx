@@ -25,7 +25,6 @@ interface P {
   backgroundColor?: string
   buttonColor?: string
 }
-
 export const Appointment: FC<P> = ({
   title,
   iconPath,

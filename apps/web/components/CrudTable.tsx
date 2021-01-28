@@ -181,7 +181,7 @@ const CrudTable: FC<P> = ({
         // eslint-disable-next-line
         typeof modalShowing === 'object' && (modalShowing as any)?.id
           ? modalShowing
-          : { name: 'ee', is_active: true } //TODO: remove this, it should come from schema.fields[].*
+          : { name: '', is_active: true } //TODO: remove this, it should come from schema.fields[].*
       }
     >
       <>
