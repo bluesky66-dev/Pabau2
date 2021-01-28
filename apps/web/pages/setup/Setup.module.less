@@ -49,24 +49,6 @@
   flex-wrap: wrap;
   width: calc(100% - 23.8%);
 }
-.mainWrap {
-  display: flex;
-  .rightSide {
-    margin-top: 16px;
-    width: 23.8%;
-
-    @media screen and (max-width:767px) {
-      width: 100%;
-    }
-    .textTitle {
-      color: #3D3D46;
-      font-weight: 500;
-      font-size: 14px;
-      margin-bottom: 0;
-      line-height: 20px;
-    }
-  }
-}
 
 .btnView {
   width: 100%;
@@ -76,4 +58,95 @@
   text-transform: capitalize;
   margin-top: 16px;
   color: #9292A3;
+}
+
+.cardWrapper{
+  .titleWrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    .title{
+      font-style: normal;
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 25px;
+      letter-spacing: -0.02em;
+      color: #3D3D46;
+    }
+    .search{
+      width: 208px;
+    }
+  }
+  .mainWrap {
+    display: flex;
+    align-items: flex-start;
+    .rightSide {
+      margin-top: 16px;
+      width: 23.8%;
+
+      @media screen and (max-width:767px) {
+        width: 100%;
+      }
+      .textTitle {
+        color: #3D3D46;
+        font-weight: 500;
+        font-size: 14px;
+        margin-bottom: 0;
+        line-height: 20px;
+      }
+    }
+  }
+}
+
+.search-results-card {
+  background: #FFFFFF;
+  border: 1px solid #ECEDF0;
+  border-radius: 4px;
+  .search-body {
+    padding: 4px 12px;
+    .search-list {
+      padding: 10px 0;
+      border-bottom: 1px solid #ECEDF0;
+      &:last-child {
+        border-bottom: none;
+      }
+      .highlight{
+        color: #54B2D3;
+        padding: 0;
+        background: none;
+      }
+      span {
+        color: #9292A3;
+        .search-title {
+          color: #B8B8C0;
+        }
+      }
+    }
+  }
+}
+
+.empty-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-style: normal;
+
+  img{
+    width: 576px;
+    height: 384px;
+  }
+  .empty-title{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #3D3D46;
+  }
+  .empty-desc{
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+  }
 }

@@ -2,12 +2,12 @@ import React, { FC } from 'react'
 import SetupChip from './SetupChip'
 import SetupGrid from './SetupGrid'
 import Webinar from './SetupWebinar'
+import SetupSearchInput from './SetupSearchInput'
 import { EditOutlined } from '@ant-design/icons'
 import clinicImage from '../../assets/images/our-clinic.png'
 import backgroundImage from '../../assets/images/footer.png'
 
 export default {
-  component: SetupChip,
   title: 'Basics/SetupChip',
 }
 
@@ -62,4 +62,13 @@ webinarStory.args = {
   timeLeft: '18:28',
   backgroundImage,
   isJoin: true,
+}
+
+const searchInputStory = ({ ...args }) => <SetupSearchInput {...args} />
+
+export const setupSearchInput = searchInputStory.bind({})
+setupSearchInput.args = {
+  onChange: (searchTerm: string): string => {
+    return searchTerm
+  },
 }
