@@ -1,17 +1,22 @@
-/* eslint-disable */
 import React from 'react'
 
 import styles from './Security.module.less'
-import { Row, Col, Progress } from 'antd'
-import { Button } from '../../lib/button/button'
+import { Progress } from 'antd'
+import { Button } from '@pabau/ui'
 
-export interface SecurityScoreProps {
-  percent?: number
+interface P {
+  percent: number
+  title1: string
+  title2: string
+  buttonTitle: string
 }
 
-export function SecurityScore(props: SecurityScoreProps) {
-  const { percent = 0 } = props
-
+export const SecurityScore: React.FC<P> = ({
+  percent,
+  title1,
+  title2,
+  buttonTitle,
+}) => {
   let progressColor, stateStr
 
   if (percent < 30) {
@@ -27,7 +32,7 @@ export function SecurityScore(props: SecurityScoreProps) {
 
   return (
     <div className={styles.scoreBody}>
-      <p className={styles.scoreTitle}>Pabau Baseline Standard</p>
+      <p className={styles.scoreTitle}>{title1}</p>
       <div className={styles.seconddivrow}>
         <span className={styles.scorePercent}>
           {' '}
@@ -41,9 +46,9 @@ export function SecurityScore(props: SecurityScoreProps) {
         />
       </div>
       <div className={styles.thirddivrow}>
-        <span className={styles.scoreTitle1}>of the standart met</span>
+        <span className={styles.scoreTitle1}>{title2}</span>
         <Button className={styles.btnScore} size="middle" type="link">
-          How do we calculate this score?
+          {buttonTitle}
         </Button>
       </div>
     </div>

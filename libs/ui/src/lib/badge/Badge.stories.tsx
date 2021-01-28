@@ -1,6 +1,5 @@
-/* eslint-disable */
 import React from 'react'
-import Badge from './Badge'
+import { Badge, PabauPlus } from './Badge'
 
 export default {
   component: Badge,
@@ -22,10 +21,8 @@ defaultStatusLabel.args = {
   disabled: false,
 }
 
-// export const CustomButton = ButtonStory.bind({})
-// CustomButton.args = {
-//   label: 'Hello World',
-//   size: 'large',
-//   color: '#000',
-//   backgroundColor: '#54B2D3',
-// }
+const PabauPlusStory = ({ ...args }) => <PabauPlus {...args} />
+export const pabauPlus = PabauPlusStory.bind({})
+pabauPlus.args = {
+  label: 'Plus',
+}
