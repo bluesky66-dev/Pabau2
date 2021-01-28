@@ -1,3 +1,4 @@
+export * from './lib/addQuestion/AddQuestion'
 export * from './lib/avatar/Avatar'
 export * from './lib/avatar-list/AvatarList'
 export * from './lib/background/Background'
