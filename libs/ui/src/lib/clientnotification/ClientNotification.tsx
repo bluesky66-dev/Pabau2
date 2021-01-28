@@ -210,6 +210,7 @@ export const ClientNotification: FC<P> = ({
           <div className={styles.clientLanguageContainer}>
             <ClientLanguage
               selectLanguageHook={[selectLanguage, SetSelectLanguage]}
+              defaultLanguage="EN"
             />
           </div>
           <div>{selectLanguage}</div>

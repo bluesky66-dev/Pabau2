@@ -1,15 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import QuestionBank from './QuestionBank'
+import { IQuestionOptions } from './QuestionBank'
 
 import { data, menuOptions } from './mock'
 
 export default {
   component: QuestionBank,
   title: 'UI/QuestionBank',
+  args: { data: data },
+  argTypes: {
+    data: { control: { type: 'object' } },
+  },
 }
 
-export function QuestionBankStory(): JSX.Element {
+interface P {
+  data: IQuestionOptions[]
+}
+
+export const QuestionBankStory = ({ data }: P): JSX.Element => {
   const [questions, setQuestions] = useState(data)
+
+  useEffect(() => {
+    setQuestions(data)
+  }, [data])
 
   const handleChange = (e, key: number) => {
     const data = menuOptions.filter(({ key }) => key === e.key)
@@ -20,12 +33,24 @@ export function QuestionBankStory(): JSX.Element {
     )
   }
 
+  const handleChecked = (key: number) => {
+    setQuestions(
+      questions.map((i) => (i.key === key ? { ...i, checked: !i.checked } : i))
+    )
+  }
+
+  const handleClick = (key: number) => {
+    console.log('Question ' + key + ' is clicked')
+  }
+
   return (
     <div>
       <QuestionBank
         questions={questions}
         options={menuOptions}
-        onClick={handleChange}
+        onSelect={handleChange}
+        onChecked={handleChecked}
+        onClick={handleClick}
       />
     </div>
   )

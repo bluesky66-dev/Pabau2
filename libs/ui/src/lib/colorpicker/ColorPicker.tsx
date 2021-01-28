@@ -114,6 +114,15 @@ export const ColorPicker: FC<PickerProps> = ({
     setColorData([...colors])
     onSelected(color)
   }
+
+  const onHoverColorItem = (index, color) => {
+    const colors = [...colorData]
+    colors.forEach((item, idx) => {
+      item.selected = index === idx
+    })
+    setColorData([...colors])
+    // onSelected(color)
+  }
   return (
     <div style={{ marginTop: '16px' }}>
       <span className={styles.heading}>{heading}</span>
@@ -125,7 +134,10 @@ export const ColorPicker: FC<PickerProps> = ({
             selected={item.selected}
             onClick={() => onClickColorItem(index, item.color)}
             onHover={() => {
-              if (onHover !== undefined) onHover(item.color)
+              if (onHover !== undefined) {
+                onHover(item.color)
+                onHoverColorItem(index, item.color)
+              }
             }}
           />
         ))}

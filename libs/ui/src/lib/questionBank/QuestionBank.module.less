@@ -12,6 +12,12 @@
         border: 1px solid #54B2D3;
         box-sizing: border-box;
         border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+          border: 1px solid #EEF7FB;
+        }
+
         .questionContent {
             margin-bottom: 0;
             color: #3D3D46;
@@ -27,12 +33,15 @@
             }
         }
         .checkCircle {
+            cursor: pointer;
             font-size: 21px;
-            color: #54B2D3;
             display: block;
         }
+        .checked {
+          color: #54B2D3;
+        }
     }
-    
+
 }
 .questionCountBlock {
     padding: 16px 20px;

@@ -4,12 +4,12 @@ import { CheckCircleFilled, DownOutlined } from '@ant-design/icons'
 
 import styles from './QuestionBank.module.less'
 
-interface IQuestionOptions {
+export interface IQuestionOptions {
   key: number
   question: string
   showDropdown: boolean
   selectedValue?: string
-  onClick?(): void
+  checked?: boolean
 }
 
 interface IMenuOptions {
@@ -20,15 +20,17 @@ interface IMenuOptions {
 interface P {
   questions: IQuestionOptions[]
   options: IMenuOptions[]
-  onClick(e, key: number): void
+  onSelect(e, key: number): void
+  onChecked(key: number): void
+  onClick(key: number): void
 }
 
 export const QuestionBank: FC<P> = (props) => {
-  const { questions, options, onClick } = props
+  const { questions, options, onSelect, onChecked, onClick } = props
 
   const prepareOptions = (key: number) => {
     return (
-      <Menu onClick={(e) => onClick(e, key)}>
+      <Menu onClick={(e) => onSelect(e, key)}>
         {options.map(({ key, value }) => (
           <Menu.Item key={key}>{value}</Menu.Item>
         ))}
@@ -39,29 +41,39 @@ export const QuestionBank: FC<P> = (props) => {
   const prepareContent = () => {
     return (
       <div className={styles.questionBankContainer}>
-        {questions?.map(({ key, question, showDropdown, selectedValue }) => (
-          <Row
-            key={`question-${key}`}
-            className={styles.questionRow}
-            justify={'space-between'}
-          >
-            <Col span={21}>
-              <p className={styles.questionContent}>
-                {question}
-                {showDropdown && (
-                  <Dropdown overlay={prepareOptions(key)} trigger={['click']}>
-                    <Button className={styles.customDropdown}>
-                      {selectedValue} <DownOutlined />
-                    </Button>
-                  </Dropdown>
-                )}
-              </p>
-            </Col>
-            <Col span={'auto'}>
-              <CheckCircleFilled className={styles.checkCircle} />
-            </Col>
-          </Row>
-        ))}
+        {questions?.map(
+          ({ key, question, showDropdown, selectedValue, checked }) => (
+            <Row
+              key={`question-${key}`}
+              className={styles.questionRow}
+              justify={'space-between'}
+              onClick={() => onClick(key)}
+            >
+              <Col span={21}>
+                <p className={styles.questionContent}>
+                  {question}
+                  {showDropdown && (
+                    <Dropdown overlay={prepareOptions(key)} trigger={['click']}>
+                      <Button className={styles.customDropdown}>
+                        {selectedValue} <DownOutlined />
+                      </Button>
+                    </Dropdown>
+                  )}
+                </p>
+              </Col>
+              <Col span={'auto'}>
+                <CheckCircleFilled
+                  onClick={() => onChecked(key)}
+                  className={
+                    checked
+                      ? styles.checked + ' ' + styles.checkCircle
+                      : styles.checkCircle
+                  }
+                />
+              </Col>
+            </Row>
+          )
+        )}
       </div>
     )
   }
