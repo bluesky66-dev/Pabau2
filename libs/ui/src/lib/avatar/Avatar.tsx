@@ -34,7 +34,14 @@ export const Avatar: FC<AvatarProps> = ({
   const [load, setLoad] = useState(true)
   const [shortName, setShortName] = useState('')
   useEffect(() => {
-    setLoad(true)
+    const img = new Image()
+    img.onload = () => {
+      setLoad(true)
+    }
+    img.onerror = () => {
+      setLoad(false)
+    }
+    img.src = src
     setShortName(
       name
         .toUpperCase()
@@ -63,15 +70,7 @@ export const Avatar: FC<AvatarProps> = ({
         >
           <div className={styles.avatarDisplay}>
             {load ? (
-              <AntAvatar
-                {...props}
-                src={src}
-                shape="circle"
-                onError={() => {
-                  setLoad(false)
-                  return true
-                }}
-              />
+              <AntAvatar {...props} src={src} shape="circle" />
             ) : (
               <AntAvatar
                 {...props}
