@@ -253,6 +253,7 @@ const StandardTab: FC<P> = ({
                 <Row>
                   <ClientLanguage
                     selectLanguageHook={[selectLanguage, setSelectLanguage]}
+                    defaultLanguage="EN"
                   />
                 </Row>
               </Panel>

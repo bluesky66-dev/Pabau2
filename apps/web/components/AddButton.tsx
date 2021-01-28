@@ -16,7 +16,7 @@ const WAIT_INTERVAL = 400
 interface P {
   schema: Schema
   onClick?: () => void
-  onFilterSource: (filter: boolean) => void
+  onFilterSource: () => void
   onSearch: (term: string) => void
 }
 
@@ -56,7 +56,7 @@ const AddButton: FC<P> = ({
         <Radio.Group
           onChange={(e) => {
             setIsActive(e.target.value)
-            !isMobile && onFilterSource(e.target.value)
+            !isMobile && onFilterSource()
           }}
           value={isActive}
         >
@@ -106,7 +106,7 @@ const AddButton: FC<P> = ({
           type="primary"
           className={styles.applyButton}
           onClick={() => {
-            onFilterSource(isActive)
+            onFilterSource()
             setMobFilterDrawer((e) => !e)
           }}
         >
