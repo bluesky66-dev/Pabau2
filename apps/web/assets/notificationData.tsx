@@ -31,6 +31,7 @@ const notificationData = {
       icon: <ScheduleOutlined />,
       smartDelivery: true,
       link: null,
+      disabled: true,
     },
     {
       header: 'Upcoming appointment reminder',
@@ -38,6 +39,7 @@ const notificationData = {
       icon: <BellOutlined />,
       smartDelivery: true,
       link: null,
+      disabled: true,
     },
     {
       header: 'Rescheduled appointment',
@@ -46,6 +48,7 @@ const notificationData = {
       icon: <SyncOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'Request feedback',
@@ -54,6 +57,7 @@ const notificationData = {
       icon: <StarOutlined />,
       smartDelivery: true,
       link: null,
+      disabled: true,
     },
     {
       header: 'Cancelled appointment',
@@ -62,6 +66,7 @@ const notificationData = {
       icon: <CloseCircleOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'No-show appointment',
@@ -70,6 +75,7 @@ const notificationData = {
       icon: <UserDeleteOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'Wait list',
@@ -78,6 +84,7 @@ const notificationData = {
       icon: <FileSyncOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
   ],
   Classes: [
@@ -88,6 +95,7 @@ const notificationData = {
       icon: <ScheduleOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'Booked onto class (group)',
@@ -96,6 +104,7 @@ const notificationData = {
       icon: <UsergroupAddOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'Cancelled a class booking',
@@ -104,6 +113,7 @@ const notificationData = {
       icon: <CloseCircleOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'Missed a class',
@@ -112,6 +122,7 @@ const notificationData = {
       icon: <UserDeleteOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'Class rescheduled',
@@ -119,6 +130,7 @@ const notificationData = {
       icon: <SyncOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'Reminder for class',
@@ -127,6 +139,7 @@ const notificationData = {
       icon: <BellOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'Class wait list',
@@ -135,6 +148,7 @@ const notificationData = {
       icon: <FileSyncOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'Classes spot available',
@@ -143,6 +157,7 @@ const notificationData = {
       icon: <FileDoneOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
   ],
   Engagement: [
@@ -153,6 +168,7 @@ const notificationData = {
       icon: <GoldOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'Invoice',
@@ -161,6 +177,7 @@ const notificationData = {
       icon: <MoneyCollectOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'Lead responses',
@@ -169,6 +186,7 @@ const notificationData = {
       icon: <RiseOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'Gift vouchers',
@@ -177,6 +195,7 @@ const notificationData = {
       icon: <GiftOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
   ],
   Other: [
@@ -187,6 +206,7 @@ const notificationData = {
       icon: <ScheduleOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'Clinic requested email',
@@ -195,6 +215,7 @@ const notificationData = {
       icon: <MailOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'Clinic emailing timeline',
@@ -203,6 +224,7 @@ const notificationData = {
       icon: <BarChartOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'Secure email template',
@@ -211,6 +233,7 @@ const notificationData = {
       icon: <SafetyOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'Connect registration',
@@ -219,6 +242,7 @@ const notificationData = {
       icon: <InteractionOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'Medical forms',
@@ -227,6 +251,7 @@ const notificationData = {
       icon: <ReconciliationOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'Document shared',
@@ -235,6 +260,7 @@ const notificationData = {
       icon: <ExportOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'Email appointments',
@@ -243,6 +269,7 @@ const notificationData = {
       icon: <CalendarOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
     {
       header: 'Birthdays',
@@ -251,6 +278,7 @@ const notificationData = {
       icon: <CrownOutlined />,
       smartDelivery: false,
       link: null,
+      disabled: true,
     },
   ],
 }
