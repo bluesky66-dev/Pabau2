@@ -2,7 +2,6 @@ import React, { FC } from 'react'
 import { Typography, Modal } from 'antd'
 import { PauseCircleOutlined, MessageOutlined } from '@ant-design/icons'
 import {
-  Button,
   TabMenu,
   Breadcrumb,
   NotificationBanner,
@@ -74,13 +73,11 @@ const Index: FC = () => {
             </div>
             <div className={styles.clientNotificationsOps}>
               <DropDownButton
-                style={{ marginRight: '16px' }}
                 menuItems={options}
                 onMenuClick={(val) => handleOptionClick(val)}
               >
                 Manage Options
               </DropDownButton>
-              <Button type="primary">Save Changes</Button>
             </div>
           </div>
           <div className={styles.clientInnerNotifciationsDesktop}>
