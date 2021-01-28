@@ -1,21 +1,13 @@
 import { PlusOutlined } from '@ant-design/icons'
 import { Button, ButtonTypes } from '@pabau/ui'
-import { Input, Radio } from 'antd'
+import { Input } from 'antd'
 import React, { FC, useState } from 'react'
-import shortAnswerIcon from '../../assets/images/medicalform_shortanswer.svg'
+import longAnswerIcon from '../../assets/images/medicalform_longanswer.svg'
 import styles from './MedicalForm.module.less'
 import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormTitle from './MedicalFormTitle'
 
-const typeOptions = [
-  { label: 'Text', value: 'text' },
-  { label: 'Email', value: 'email' },
-  { label: 'Number', value: 'number' },
-  { label: 'Date', value: 'date' },
-]
-
-const ShortAnswer: FC = () => {
-  const [selOption, setSelOption] = useState('text')
+const LongAnswer: FC = () => {
   const [advanced, setAdvanced] = useState(false)
 
   return (
@@ -27,24 +19,16 @@ const ShortAnswer: FC = () => {
       </div>
       <div className={styles.formItem}>
         <MedicalFormTitle
-          iconUrl={shortAnswerIcon}
+          iconUrl={longAnswerIcon}
           bgcolor="#6383F1"
-          title="Short answer"
-          desc="Ask a question with a short answer"
+          title="Long answer"
+          desc="Ask a question with a long answer"
         />
       </div>
       <div className={styles.formItem}>
         <div className={`${styles.formQuestion} ${styles.formCommon}`}>
           <p style={{ marginTop: '5px' }}>Question</p>
           <Input placeholder="Enter your question" />
-          <p style={{ marginTop: '20px' }}>Input type</p>
-          <Radio.Group
-            options={typeOptions}
-            value={selOption}
-            onChange={(e) => setSelOption(e.target.value)}
-            optionType="button"
-            buttonStyle="solid"
-          />
           {advanced && (
             <>
               <p style={{ marginTop: '20px' }}>Linked field</p>
@@ -84,4 +68,4 @@ const ShortAnswer: FC = () => {
   )
 }
 
-export default ShortAnswer
+export default LongAnswer
