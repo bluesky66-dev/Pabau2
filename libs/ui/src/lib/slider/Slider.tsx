@@ -1,18 +1,23 @@
 import React, { FC } from 'react'
 import { Slider as AntSlider, Row, Col } from 'antd'
+import { SliderSingleProps } from 'antd/lib/slider'
 
 import styles from './Slider.module.less'
 
-interface P {
+export interface SliderProps extends SliderSingleProps {
+  disabled?: boolean
   title: string
   value: number
   calculatedValue: string
-  onChange: (value: number) => void
 }
 
-const Slider: FC<P> = (props) => {
-  const { title, value, calculatedValue, onChange } = props
-
+const Slider: FC<SliderProps> = ({
+  title,
+  disabled,
+  value,
+  calculatedValue,
+  ...props
+}) => {
   return (
     <Row className={styles.sliderContainer}>
       <Col span={24}>
@@ -24,8 +29,9 @@ const Slider: FC<P> = (props) => {
         <Row align="middle">
           <Col span={22} className="gutter-row">
             <AntSlider
+              {...props}
               value={value}
-              onChange={(e) => onChange(e)}
+              disabled={disabled}
               handleStyle={{
                 backgroundColor: '#65CD98',
                 borderColor: '#65CD98',
@@ -34,11 +40,11 @@ const Slider: FC<P> = (props) => {
                 marginTop: '-6px',
               }}
               trackStyle={{ backgroundColor: '#65CD98' }}
-              className={styles.slidermain}
+              className={styles.sliderMain}
             />
           </Col>
           <Col span={2} className="gutter-row">
-            <p className={styles.slidervalue}>{calculatedValue}</p>
+            <p className={styles.sliderValue}>{calculatedValue}</p>
           </Col>
         </Row>
       </Col>
