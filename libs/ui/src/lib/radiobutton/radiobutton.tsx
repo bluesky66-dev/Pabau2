@@ -11,7 +11,10 @@ export interface RadiobuttonProps {
   Items: dataItems[]
 }
 
-export function RadioButton({ group, Items }: PropsWithChildren<RadiobuttonProps>): JSX.Element {
+export function RadioButton({
+  group,
+  Items,
+}: PropsWithChildren<RadiobuttonProps>): JSX.Element {
   return (
     <div className={styles.radioButtonWrapper}>
       <RadioGroup name={group}>

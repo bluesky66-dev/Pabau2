@@ -32,7 +32,11 @@ export const SettingsMenu: FC<P> = (props) => {
   const menuItems = props.items || generalSettingsMenu
   return (
     <div className={styles.settingsMenu}>
-      <Tabs defaultActiveKey="2" tabPosition={'left'} style={{ minHeight: '100vh' }}>
+      <Tabs
+        defaultActiveKey="2"
+        tabPosition={'left'}
+        style={{ minHeight: '100vh' }}
+      >
         {menuItems.map((menu, i) => (
           <TabPane tab={menu.menuName} key={i}>
             {menu.component}
