@@ -3,22 +3,12 @@ import { Button as AntButton, Dropdown } from 'antd'
 import { NativeButtonProps } from 'antd/lib/button/button'
 import { Menu } from 'antd'
 
-export enum ButtonTypes {
-  default = 'default',
-  primary = 'primary',
-  ghost = 'ghost',
-  dashed = 'dashed',
-  link = 'link',
-  text = 'text',
-}
-
 interface MenuItem {
   icon: ReactNode
   title: string
 }
 
 interface P extends NativeButtonProps {
-  // type?: ButtonTypes
   disabled?: boolean
   color?: string
   backgroundColor?: string
@@ -63,7 +53,6 @@ export const DropDownButton: FC<P> = ({
     >
       <AntButton
         style={{ ...style, ...{ backgroundColor: backgroundColor } }}
-        //size={ButtonSize.large}
         disabled={disabled}
         color={color}
         className={className}
