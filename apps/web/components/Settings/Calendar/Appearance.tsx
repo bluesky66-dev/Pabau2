@@ -19,10 +19,6 @@ const AppearanceGeneralItems: AppearanceGeneralItems[] = [
     value: false,
   },
   {
-    type: 'All day at top',
-    value: true,
-  },
-  {
     type: 'Hide appointment times',
     value: true,
   },
@@ -33,8 +29,9 @@ const Appearance = () => (
     <div className={styles.settingContent}>
       <Title className={styles.headerText}>Appearance</Title>
       <span className={styles.description}>
-        Customize the look and feel of the appointment card such <br /> as changing the layout of
-        both the tooltip and the <br /> appointment card itself.
+        Customize the look and feel of the appointment card such <br /> as
+        changing the layout of both the tooltip and the <br /> appointment card
+        itself.
       </span>
     </div>
     <div className={styles.generalControls}>

@@ -3,14 +3,18 @@ import styles from './calendar.module.less'
 import { Select, Typography, Input, Row, Col } from 'antd'
 
 const { Title } = Typography
-const options = [{ value: '15 minutes' }, { value: '30 minutes' }, { value: '45 minutes' }]
+const options = [
+  { value: '15 minutes' },
+  { value: '30 minutes' },
+  { value: '45 minutes' },
+]
 const Configuration = () => (
   <div className={styles.calendarSettingsConfiguration}>
     <div className={styles.settingContent}>
       <Title className={styles.headerText}>Configuration</Title>
       <span className={styles.description}>
-        Configure your calendars start and end time, as well as <br /> setting how big your
-        appointment time slots are.
+        Configure your calendars start and end time, as well as <br /> setting
+        how big your appointment time slots are.
       </span>
     </div>
     <div className={styles.configurationControls}>

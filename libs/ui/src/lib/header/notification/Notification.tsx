@@ -30,7 +30,9 @@ export const PabauNotification: FC<NotificationProps> = ({
 }: PropsWithChildren<NotificationProps>) => {
   const [notificationDrawer, setNotificationDrawer] = useState(openDrawer)
   const [notifyTab, setNotifyTab] = useState('Clients')
-  const [notificationData, setNotificationData] = useState<NotificationData[]>([])
+  const [notificationData, setNotificationData] = useState<NotificationData[]>(
+    []
+  )
 
   useEffect(() => {
     setNotificationData([
@@ -125,9 +127,14 @@ export const PabauNotification: FC<NotificationProps> = ({
       <div className={styles.notificationHeader}>
         <div className={styles.notificationAlign}>
           <h1> Notifications</h1>
-          <CloseOutlined onClick={closeDrawerMenu} className={styles.searchIconSize} />
+          <CloseOutlined
+            onClick={closeDrawerMenu}
+            className={styles.searchIconSize}
+          />
         </div>
-        <div className={classNames(styles.notifyTabs, styles.topSpaceNotification)}>
+        <div
+          className={classNames(styles.notifyTabs, styles.topSpaceNotification)}
+        >
           <button
             className={classNames(
               styles.notifyTabDesign,
@@ -154,7 +161,12 @@ export const PabauNotification: FC<NotificationProps> = ({
           return Object.keys(notify).map((notification) => {
             return (
               <div key={notification}>
-                <div className={classNames(styles.notificationAlign, styles.todayTextTopSpace)}>
+                <div
+                  className={classNames(
+                    styles.notificationAlign,
+                    styles.todayTextTopSpace
+                  )}
+                >
                   <h2>{notification}</h2>
                   <CloseOutlined
                     className={styles.searchIconSize}
@@ -176,10 +188,17 @@ export const PabauNotification: FC<NotificationProps> = ({
                                   : LeadSVG
                               }
                             />
-                            <p className={styles.textSm}>{dayNotify.notificationType}</p>
+                            <p className={styles.textSm}>
+                              {dayNotify.notificationType}
+                            </p>
                           </div>
                           <div className={styles.time}>
-                            <p className={classNames(styles.textMd, styles.grayTextColor)}>
+                            <p
+                              className={classNames(
+                                styles.textMd,
+                                styles.grayTextColor
+                              )}
+                            >
                               {dayNotify.notificationTime}
                             </p>
                           </div>
@@ -198,42 +217,63 @@ export const PabauNotification: FC<NotificationProps> = ({
           })
         })}
 
-      {Array.isArray(notificationData) && notificationData.length === 0 && notifyTab === 'Clients' && (
-        <div className={styles.notificationEmpty}>
-          <EmptySVG />
-          <p className={styles.emptyMessage}>No notifications yet</p>
-          <p className={styles.emptyHint}>
-            Stay tuned! Notifications about your activity will show up here.
-          </p>
-          <a href="#test" className={styles.emptyAnchor}>
-            Notification settings {'>'}
-          </a>
-        </div>
-      )}
+      {Array.isArray(notificationData) &&
+        notificationData.length === 0 &&
+        notifyTab === 'Clients' && (
+          <div className={styles.notificationEmpty}>
+            <EmptySVG />
+            <p className={styles.emptyMessage}>No notifications yet</p>
+            <p className={styles.emptyHint}>
+              Stay tuned! Notifications about your activity will show up here.
+            </p>
+            <a href="#test" className={styles.emptyAnchor}>
+              Notification settings {'>'}
+            </a>
+          </div>
+        )}
 
       {notifyTab === 'Leads' &&
         notificationLeadsData.map((notify, index) => {
           return Object.keys(notify).map((notification) => {
             return (
               <>
-                <div className={classNames(styles.notificationAlign, styles.todayTextTopSpace)}>
+                <div
+                  className={classNames(
+                    styles.notificationAlign,
+                    styles.todayTextTopSpace
+                  )}
+                >
                   <h2>{notification}</h2>
                 </div>
                 {notify[notification].map((dayNotify, index) => {
                   return (
                     <>
-                      <div key={dayNotify.title} className={styles.notificationCard}>
+                      <div
+                        key={dayNotify.title}
+                        className={styles.notificationCard}
+                      >
                         <div className={styles.notifyAlign}>
                           <div className={classNames(styles.logo, styles.flex)}>
-                            {notification === 'Today' ? <Lead1SVG /> : <Lead2SVG />}
-                            <p className={styles.textSm}>{dayNotify.notificationType}</p>
+                            {notification === 'Today' ? (
+                              <Lead1SVG />
+                            ) : (
+                              <Lead2SVG />
+                            )}
+                            <p className={styles.textSm}>
+                              {dayNotify.notificationType}
+                            </p>
                           </div>
                         </div>
                         <div className={styles.leadTitleDesc}>
                           <h1>{dayNotify.title}</h1>
                           <p>{dayNotify.desc}</p>
                         </div>
-                        <span className={classNames(styles.textMd, styles.learnMore)}>
+                        <span
+                          className={classNames(
+                            styles.textMd,
+                            styles.learnMore
+                          )}
+                        >
                           Learn more
                         </span>
                       </div>

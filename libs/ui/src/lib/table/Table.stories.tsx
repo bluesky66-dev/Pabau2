@@ -51,7 +51,13 @@ const DragFeatureStory: FC = ({ ...args }) => {
   const updateDataSource = ({ newData, oldIndex, newIndex }) => {
     setDataSource(newData)
   }
-  return <Table {...args} dataSource={dataSource} updateDataSource={updateDataSource} />
+  return (
+    <Table
+      {...args}
+      dataSource={dataSource}
+      updateDataSource={updateDataSource}
+    />
+  )
 }
 export const TableWithDragFeature = DragFeatureStory.bind({})
 
@@ -60,6 +66,13 @@ const NoDragFeatureStory: FC = ({ ...args }) => {
   const updateDataSource = ({ newData, oldIndex, newIndex }) => {
     setDataSource(newData)
   }
-  return <Table {...args} draggable={false} dataSource={dataSource} updateDataSource={updateDataSource} />
+  return (
+    <Table
+      {...args}
+      draggable={false}
+      dataSource={dataSource}
+      updateDataSource={updateDataSource}
+    />
+  )
 }
 export const TableWithNoDragFeature = NoDragFeatureStory.bind({})

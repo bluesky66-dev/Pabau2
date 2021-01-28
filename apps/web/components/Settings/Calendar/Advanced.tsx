@@ -60,7 +60,9 @@ export const Advanced: FC = () => {
     <div className={styles.calendarSettingsAdvanced}>
       <div className={styles.settingContent}>
         <Title className={styles.headerText}>Advanced</Title>
-        <span className={styles.description}>configure any further settings.</span>
+        <span className={styles.description}>
+          configure any further settings.
+        </span>
       </div>
       <div className={styles.advancedControls}>
         {advancedControls.map((advanced, index) => {

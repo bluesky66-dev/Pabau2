@@ -25,7 +25,14 @@ interface P {
   searchQuery?: DocumentNode
 }
 
-const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, editQuery, searchQuery }) => {
+const CrudTable: FC<P> = ({
+  schema,
+  addQuery,
+  deleteQuery,
+  listQuery,
+  editQuery,
+  searchQuery,
+}) => {
   const [isActive, setIsActive] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   // eslint-disable-next-line graphql/template-strings
@@ -36,7 +43,9 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, editQuery,
     Record<string, string | boolean | number> | false
   >(false)
 
-  const { data, error, loading } = useLiveQuery(listQuery, { variables: { isActive } })
+  const { data, error, loading } = useLiveQuery(listQuery, {
+    variables: { isActive },
+  })
   const { data: searchData } = useLiveQuery(searchQuery, {
     variables: { isActive, searchTerm: '%' + searchTerm + '%' },
   })
@@ -120,7 +129,9 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, editQuery,
             if (c[1].min > e[c[0]].length) {
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
-              a[c[0]] = `The value for ${c[1].shortLower} must be more than ${c[1].min} characters.`
+              a[
+                c[0]
+              ] = `The value for ${c[1].shortLower} must be more than ${c[1].min} characters.`
             }
           }
           return a
@@ -140,7 +151,12 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, editQuery,
       }
     >
       <>
-        <div className={classNames(styles.marketingSourcePage, styles.desktopViewNone)}>
+        <div
+          className={classNames(
+            styles.marketingSourcePage,
+            styles.desktopViewNone
+          )}
+        >
           <MobileHeader className={styles.marketingSourceHeader}>
             <div className={styles.allContentAlignMobile}>
               <div className={styles.marketingTextStyle}>
@@ -173,9 +189,19 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, editQuery,
         )}
 
         <Layout>
-          <div className={classNames(styles.tableMainHeading, styles.mobileViewNone)}>
+          <div
+            className={classNames(
+              styles.tableMainHeading,
+              styles.mobileViewNone
+            )}
+          >
             <div style={{ background: '#FFF' }}>
-              <Breadcrumb breadcrumbItems={['Setup', pluralize(schema.full || schema.short)]} />
+              <Breadcrumb
+                breadcrumbItems={[
+                  'Setup',
+                  pluralize(schema.full || schema.short),
+                ]}
+              />
               <Title>{pluralize(schema.full || schema.short)}</Title>
             </div>
             {addQuery && (
@@ -227,10 +253,17 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, editQuery,
               // },
             ]}
             // eslint-disable-next-line
-            dataSource={sourceData?.map((e: { id: any }) => ({ key: e.id, ...e }))}
+            dataSource={sourceData?.map((e: { id: any }) => ({
+              key: e.id,
+              ...e,
+            }))}
             updateDataSource={({ newData, oldIndex, newIndex }) => {
               setSourceData(newData)
-              console.log('newData, oldIndex, newIndex ', { newData, oldIndex, newIndex })
+              console.log('newData, oldIndex, newIndex ', {
+                newData,
+                oldIndex,
+                newIndex,
+              })
             }}
             onRowClick={(e) => setModalShowing(e)}
           />
