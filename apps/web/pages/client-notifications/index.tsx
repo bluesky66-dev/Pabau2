@@ -55,30 +55,46 @@ const Index: FC = () => {
         imgPath={notificationBannerImage}
       />
       <div className={styles.clientNotificationsContent}>
-        <Breadcrumb breadcrumbItems={['Setup', 'Notification Messages']} />
-        <Title>Notification Messages</Title>
-        <p className={styles.clientNotificationsSubtitle}>
-          Client notifications are crucial to your business. Use this section to
-          customize all outbound notifications (Email/SMS)
-        </p>
-        <div className={styles.clientNotificationsOps}>
-          <DropDownButton
-            style={{ marginRight: '16px' }}
-            menuItems={options}
-            onMenuClick={(val) => handleOptionClick(val)}
-          >
-            Manage Options
-          </DropDownButton>
-          <Button type="primary">Save Changes</Button>
+        <div className={styles.clientNotificationTop}>
+          <div>
+            <Breadcrumb breadcrumbItems={['Setup', 'Notification Messages']} />
+            <Title>Notification Messages</Title>
+            <p className={styles.clientNotificationsSubtitle}>
+              Client notifications are crucial to your business. Use this
+              section to customize all outbound notifications (Email/SMS)
+            </p>
+          </div>
+          <div className={styles.clientNotificationsOps}>
+            <DropDownButton
+              style={{ marginRight: '16px' }}
+              menuItems={options}
+              onMenuClick={(val) => handleOptionClick(val)}
+            >
+              Manage Options
+            </DropDownButton>
+            <Button type="primary">Save Changes</Button>
+          </div>
         </div>
-        <TabMenu tabPosition="left" menuItems={menuItems} minHeight="592px">
-          {menuItems.map((item) => (
-            <NotificationMessages
-              key={item}
-              notificationData={notificationData[item]}
-            />
-          ))}
-        </TabMenu>
+        <div className={styles.clientInnerNotifciationsDesktop}>
+          <TabMenu tabPosition="left" menuItems={menuItems} minHeight="592px">
+            {menuItems.map((item) => (
+              <NotificationMessages
+                key={item}
+                notificationData={notificationData[item]}
+              />
+            ))}
+          </TabMenu>
+        </div>
+        <div className={styles.clientInnerNotifciationsMobile}>
+          <TabMenu tabPosition="top" menuItems={menuItems}>
+            {menuItems.map((item) => (
+              <NotificationMessages
+                key={item}
+                notificationData={notificationData[item]}
+              />
+            ))}
+          </TabMenu>
+        </div>
       </div>
     </Layout>
   )
