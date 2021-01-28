@@ -15,7 +15,7 @@ export interface NotificationMessagesProps {
   onClick?: (selectedLink: string) => void
 }
 
-const NotificationMessages: FC<NotificationMessagesProps> = (props) => {
+export const NotificationMessages: FC<NotificationMessagesProps> = (props) => {
   const handleClick = (notification) => {
     props.onClick?.(notification)
   }
