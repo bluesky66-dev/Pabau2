@@ -16,7 +16,7 @@ export function NotificationBanner(props: NotificationBannerProps) {
   const { desc = 'nil' } = props
   const { imgPath = 'nil' } = props
   return (
-    <div className={styles.notificationBody}>
+    <div className={styles.notificationBody} style={{ backgroundImage: `url(${imgPath})` }}>
       <Row className={styles.rowPosition}>
         <Col md={16} sm={12}>
           <p className={styles.title1}>{title}</p>
@@ -31,7 +31,6 @@ export function NotificationBanner(props: NotificationBannerProps) {
           </Button>
         </Col>
         <img className={styles.iconClose} src={iconClose} alt="" />
-        <img className={styles.backgroundImg} src={imgPath} alt="" />
       </Row>
     </div>
   )
