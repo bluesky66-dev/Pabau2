@@ -1,3 +1,4 @@
+export * from './lib/radio-group/RadioGroup'
 export * from './lib/security/Security'
 export * from './lib/standard/Standard'
 export * from './lib/appointment/Appointment'
