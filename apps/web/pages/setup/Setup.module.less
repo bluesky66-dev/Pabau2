@@ -18,7 +18,7 @@
     font-style: normal;
     font-weight: 500;
     font-size: 17px;
-    line-height: 22px;
+    line-height: 21px;
     text-transform: capitalize;
     color: var(--grey-text-color);
     padding-left: 10px;
@@ -36,18 +36,87 @@
   }
 }
 
-
+.webinar-wrapper {
+  display: flex;
+  flex-direction: column;
+  @media screen and (max-width: 1024px) {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow: auto;
+  }
+}
 .headerChipWrapper {
   display: flex;
   justify-content: space-between;
   padding-bottom: 16px;
     border-bottom: 1px solid #ECEDF0;
+  @media screen and (max-width: 1024px) {
+    flex-wrap: nowrap;
+    overflow: auto;
+    margin-top: 16px;
+  }
+}
+.mobile-view-align {
+  display: flex;
+  position: relative;
+  justify-content: flex-start;
+  align-items: center;
+  .searchInput {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    color: #9292A3;
+    .search{
+      width: 150px;
+    }
+  }
+
 }
 
 .gridWrapper {
   display: flex;
   flex-wrap: wrap;
   width: calc(100% - 23.8%);
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+}
+
+.gridMobileWrapper{
+  .listIcon{
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    height: 64px;
+    line-height: 64px;
+    background: #fff;
+    z-index: 99;
+    width: 100%;
+    svg {
+      position: absolute;
+      left: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9292A3;
+    }
+    .textContent {
+      text-align: center;
+      width: 100%;
+      font-weight: 500;
+      font-size: 17px;
+      line-height: 22px;
+      text-transform: capitalize;
+      color: #3D3D46;
+    }
+
+  }
 }
 
 .btnView {
@@ -61,41 +130,59 @@
 }
 
 .cardWrapper{
-  .titleWrapper{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-    .title{
-      font-style: normal;
-      font-weight: bold;
-      font-size: 20px;
-      line-height: 25px;
-      letter-spacing: -0.02em;
-      color: #3D3D46;
-    }
-    .search{
-      width: 208px;
-    }
+  padding: 24px;
+  background: #FFFFFF;
+  border-radius: 4px;
+  @media screen and (max-width: 767px) {
+    margin-top: 16px;
   }
-  .mainWrap {
-    display: flex;
-    align-items: flex-start;
-    .rightSide {
-      margin-top: 16px;
-      width: 23.8%;
-
-      @media screen and (max-width:767px) {
-        width: 100%;
+    .titleWrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      @media screen and (max-width: 767px) {
+        display: none;
       }
-      .textTitle {
+
+      .title {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 25px;
+        letter-spacing: -0.02em;
         color: #3D3D46;
-        font-weight: 500;
-        font-size: 14px;
-        margin-bottom: 0;
-        line-height: 20px;
+      }
+
+      .search {
+        width: 208px;
       }
     }
+    .mainWrap {
+      display: flex;
+      align-items: flex-start;
+      @media screen and (min-width:768px) and (max-width: 1024px){
+        flex-direction: column;
+      }
+      .rightSide {
+        margin-top: 16px;
+        width: 23.8%;
+
+        @media screen and (max-width: 1024px) {
+          width: 100%;
+        }
+
+        .textTitle {
+          color: #3D3D46;
+          font-weight: 500;
+          font-size: 14px;
+          margin-bottom: 0;
+          line-height: 20px;
+        }
+      }
+    }
+  @media screen and (max-width: 767px) {
+    padding: 16px;
   }
 }
 
@@ -123,30 +210,5 @@
         }
       }
     }
-  }
-}
-
-.empty-wrapper{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-style: normal;
-
-  img{
-    width: 576px;
-    height: 384px;
-  }
-  .empty-title{
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-    color: #3D3D46;
-  }
-  .empty-desc{
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 22px;
   }
 }

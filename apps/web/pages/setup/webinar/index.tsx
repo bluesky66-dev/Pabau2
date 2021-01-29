@@ -61,7 +61,9 @@ const WebinarCard = () => {
   return (
     <div className={styles.rightSide}>
       <div className={styles.textTitle}>Live & Upcoming Webinars</div>
-      {data && data.map((value, index) => <Webinar key={index} {...value} />)}
+      <div className={styles.webinarWrapper}>
+        {data && data.map((value, index) => <Webinar key={index} {...value} />)}
+      </div>
       <Button className={styles.btnView}>View Full Schedule</Button>
     </div>
   )

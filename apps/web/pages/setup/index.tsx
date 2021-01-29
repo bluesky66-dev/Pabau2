@@ -1,11 +1,12 @@
 import React, { FC, useState } from 'react'
 import { Layout } from '@pabau/ui'
-import { Card } from 'antd'
 import CommonHeader from './CommonHeader'
 import HeaderChip from './headerChip'
 import Grid from './grid'
 import WebinarCard from './webinar'
 import SearchResults from './searchResults'
+import GridMobile from './grid/gridMobile'
+import GridSubMenuMobile from './grid/gridSubTitleMobile'
 import { SetupSearchInput, SetupGridProps } from '@pabau/ui'
 import styles from './Setup.module.less'
 
@@ -20,102 +21,128 @@ const Index: FC = () => {
   const [searchValue, setSearchValue] = useState<string>('')
   const [title, setTitle] = useState<string>('Setup')
   const [searchData, setSearchData] = useState([])
+  const [showSubMenu, setShowSubMenu] = useState<boolean>(false)
+  const [selectedMenuData, setMenuData] = useState<SetupGridProps[]>([])
 
   const setupGridData = [
     {
       title: 'Our clinic',
       subDataTitles: [
-        'Bussiness Details',
-        'Users',
-        'Locations',
-        'General settings',
-        'Integrations',
-        'Data',
-        'Pabau Subscription',
+        { title: 'Business Details', data: [] },
+        { title: 'Users', data: ['Users', 'User Groups'] },
+        { title: 'Locations', data: [] },
+        {
+          title: 'General settings',
+          data: [
+            ' Calendar Settings',
+            'Point of Sale Configuration',
+            'Loyalty',
+            'Referral Settings',
+          ],
+        },
+        { title: 'Integrations', data: [] },
+        { title: 'Data', data: ['Custom Fields', 'Data Imports'] },
+        { title: 'Pabau Subscription', data: ['Billing Activity', 'Addons'] },
       ],
       image: clinicImage,
     },
     {
       title: 'Services',
       subDataTitles: [
-        'Services',
-        'Products',
-        'Packages',
-        'Gift Vouchers',
-        'Resources',
-        'Online Booking',
+        { title: 'Services', data: [] },
+        { title: 'Products', data: [] },
+        { title: 'Packages', data: [] },
+        { title: 'Gift Vouchers', data: [] },
+        { title: 'Resources', data: ['Rooms', 'Equipment'] },
+        { title: 'Online Booking', data: [] },
       ],
       image: servicesImage,
     },
     {
       title: 'Clinical',
       subDataTitles: [
-        'Care Pathways',
-        'Medical form templates',
-        'Diagnostic Codes',
-        'Labs',
-        'Drugs',
-        'Medical Conditions',
-        'Vaccine',
-        'Body Charts',
+        { title: 'Care Pathways', data: [] },
+        { title: 'Medical form templates', data: [] },
+        { title: 'Diagnostic Codes', data: [] },
+        { title: 'Labs', data: [] },
+        { title: 'Drugs', data: [] },
+        {
+          title: 'Medical Conditions',
+          data: ['Contraindication', 'Medical Conditions'],
+        },
+        {
+          title: 'Vaccine',
+          data: [' Vaccines', 'Diseases', 'Vaccine Schedules'],
+        },
+        { title: 'Body Charts', data: [] },
       ],
       image: clinicalImage,
     },
     {
       title: 'Marketing & Communication',
       subDataTitles: [
-        'Communications',
-        'Client Portal',
-        'Feedback Survey',
-        'Lead Forms',
-        'Marketing Sources',
+        {
+          title: 'Communications',
+          data: [
+            'Client Notifications',
+            'Sender Addresses',
+            'Templates',
+            'SMS Bundles & Settings',
+          ],
+        },
+        { title: 'Client Portal', data: [] },
+        { title: 'Feedback Survey', data: [] },
+        { title: 'Lead Forms', data: [] },
+        { title: 'Marketing Sources', data: [] },
       ],
       image: marketingImage,
     },
     {
       title: 'Financials',
       subDataTitles: [
-        'Payment Processing',
-        'Discounts',
-        'Taxes',
-        'Invoice Templates',
-        'Payment Types',
-        'Contract Pricing',
-        'Cancellation Policy',
-        'Petty Cash Types',
+        { title: 'Payment Processing', data: [] },
+        { title: 'Discounts', data: [] },
+        { title: 'Taxes', data: [] },
+        { title: 'Invoice Templates', data: [] },
+        { title: 'Payment Types', data: [] },
+        { title: 'Contract Pricing', data: [] },
+        { title: 'Cancellation Policy', data: [] },
+        { title: 'Petty Cash Types', data: [] },
       ],
       image: financialImage,
     },
     {
       title: 'Developer & Other',
       subDataTitles: [
-        'Webhooks',
-        'API keys',
-        'Credit Note Types',
-        'Departments',
-        'Field Capture Labels',
-        'Block Out Options',
-        'Appointment Statuses',
-        'Lead Groups',
+        { title: 'Webhooks', data: [] },
+        { title: 'API keys', data: [] },
+        { title: 'Credit Note Types', data: [] },
+        { title: 'Departments', data: [] },
+        { title: 'Field Capture Labels', data: [] },
+        { title: 'Block Out Options', data: [] },
+        { title: 'Appointment Statuses', data: [] },
+        { title: 'Lead Groups', data: [] },
+        { title: 'Petty Cash Types', data: [] },
       ],
       expandTitle: [
-        'Salutations',
-        'Training titles',
-        'Titles',
-        'Photo Uploader',
-        'Cancellation Reasons',
-        'Lead views',
-        'Lead groups',
-        'Lead assignment rules',
-        'Family relationships',
-        'Doc label manager',
-        'Departments',
-        'Invoice distribution',
-        'Issuing companies',
-        'Commission sheet',
-        'Job statues',
-        'Supplier categories',
-        'Collapse',
+        { title: 'Webhooks', data: [] },
+        { title: 'API keys', data: [] },
+        { title: 'Credit Note Types', data: [] },
+        { title: 'Salutations', data: [] },
+        { title: 'Training titles', data: [] },
+        { title: 'Titles', data: [] },
+        { title: 'Photo Uploader', data: [] },
+        { title: 'Cancellation Reasons', data: [] },
+        { title: 'Lead views', data: [] },
+        { title: 'Lead groups', data: [] },
+        { title: 'Lead assignment rules', data: [] },
+        { title: 'Family relationships', data: [] },
+        { title: 'Doc label manager', data: [] },
+        { title: 'Departments', data: [] },
+        { title: 'Invoice distribution', data: [] },
+        { title: 'Issuing companies', data: [] },
+        { title: 'Job statues', data: [] },
+        { title: 'Supplier categories', data: [] },
       ],
       isExpand: true,
       image: developerImage,
@@ -131,9 +158,14 @@ const Index: FC = () => {
       setupGridData.map((data: SetupGridProps) => {
         const titles = data.expandTitle ? data.expandTitle : data.subDataTitles
         if (titles.length > 0) {
-          titles.map((title) => {
-            if (title.toLowerCase().includes(searchTerm.toLowerCase())) {
-              searchDataArray.push({ subTitle: title, title: data.title })
+          titles.map((subTitle) => {
+            if (
+              subTitle.title.toLowerCase().includes(searchTerm.toLowerCase())
+            ) {
+              searchDataArray.push({
+                subTitle: subTitle.title,
+                title: data.title,
+              })
             }
             return searchDataArray
           })
@@ -147,11 +179,21 @@ const Index: FC = () => {
     }
   }
 
+  const handleShowSubMenuMobile = (title: string) => {
+    const data = setupGridData.filter((thread) => thread.title === title)
+    setShowSubMenu(true)
+    setMenuData(data)
+  }
+
+  const handleBack = () => {
+    setShowSubMenu(false)
+  }
+
   return (
-    <>
-      <CommonHeader />
+    <div>
+      <CommonHeader handleSearch={handleSearch} />
       <Layout>
-        <Card className={styles.cardWrapper}>
+        <div className={styles.cardWrapper}>
           <div className={styles.titleWrapper}>
             <span className={styles.title}>{title}</span>
             <div className={styles.search}>
@@ -160,18 +202,29 @@ const Index: FC = () => {
           </div>
           {!searchValue ? (
             <>
-              <HeaderChip />
+              {showSubMenu ? (
+                <GridSubMenuMobile
+                  data={selectedMenuData}
+                  handleBack={handleBack}
+                />
+              ) : (
+                <GridMobile
+                  data={setupGridData}
+                  handleShowSubMenuMobile={handleShowSubMenuMobile}
+                />
+              )}
+              {!showSubMenu && <HeaderChip />}
               <div className={styles.mainWrap}>
                 <Grid data={setupGridData} />
-                <WebinarCard />
+                {!showSubMenu && <WebinarCard />}
               </div>
             </>
           ) : (
             <SearchResults data={searchData} searchTerm={searchValue} />
           )}
-        </Card>
+        </div>
       </Layout>
-    </>
+    </div>
   )
 }
 

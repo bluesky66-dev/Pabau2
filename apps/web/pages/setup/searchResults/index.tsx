@@ -2,8 +2,8 @@ import React from 'react'
 import { Card } from 'antd'
 import Highlighter from 'react-highlight-words'
 
+import { SetupEmptySearch } from '@pabau/ui'
 import styles from '../Setup.module.less'
-import emptyImage from '../../../assets/images/empty.png'
 
 interface searchProps {
   subTitle: string
@@ -37,17 +37,7 @@ const SearchResults = (props: p) => {
           })}
         </div>
       )}
-      {data && data.length === 0 && (
-        <div className={styles.emptyWrapper}>
-          <img src={emptyImage} alt={'empty'} />
-          <div>
-            <p className={styles.emptyTitle}>No results found</p>
-            <span className={styles.emptyDesc}>
-              Try adjusting your search to find what you’re looking for
-            </span>
-          </div>
-        </div>
-      )}
+      {data && data.length === 0 && <SetupEmptySearch />}
     </Card>
   )
 }
