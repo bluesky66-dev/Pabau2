@@ -1,7 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons'
 import { Button, ButtonTypes } from '@pabau/ui'
 import { Input } from 'antd'
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import singleChoiceIcon from '../../assets/images/medicalform_singlechoice.svg'
 import styles from './MedicalForm.module.less'
 import MedicalFormBottom from './MedicalFormBottom'
@@ -9,13 +9,6 @@ import MedicalFormTitle from './MedicalFormTitle'
 import Options from './Options'
 
 const SingleChoice: FC = () => {
-  const [optionVal, setOptionVal] = useState(1)
-  const radioStyle = {
-    display: 'block',
-    height: '30px',
-    lineHeight: '30px',
-    color: '#9292a3',
-  }
   return (
     <div className={styles.mainBody}>
       <div className={styles.formItem}>

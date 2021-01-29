@@ -3,8 +3,13 @@ import { Button, ButtonTypes } from '@pabau/ui'
 import { Radio } from 'antd'
 import React, { FC, useState } from 'react'
 
+type itemProps = {
+  id: number
+  name?: string
+}
+
 const Options: FC = () => {
-  const [items, setItems] = useState([])
+  const [items, setItems] = useState<itemProps[]>([])
   const [itemName, setItemName] = useState('New Option')
 
   const [optionVal, setOptionVal] = useState(0)
