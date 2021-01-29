@@ -4,26 +4,28 @@ import styles from './ColorPicker.module.less'
 interface P {
   color: string
   selected: boolean
+  hovering: boolean
   onClick(): void
   onHover(): void
 }
 
 const ColorItem: FC<P> = (props: P) => {
-  const { color, selected, onClick, onHover } = props
+  const { color, selected, hovering, onClick, onHover } = props
   return (
     <div
       className={styles.colorItem}
       style={{
         backgroundColor: color,
-        border: selected === true ? '1px solid #54B2D3' : 'none',
+        border: hovering || selected ? '1px solid #54B2D3' : 'none',
         boxSizing: 'border-box',
-        opacity: selected === true ? '1' : '0.2',
+        opacity: hovering || selected ? '1' : '0.2',
       }}
       onClick={() => {
         onClick()
       }}
       onMouseEnter={() => onHover()}
     >
+
       {selected && <CheckBadge className={styles.badge} />}
     </div>
   )
@@ -132,7 +134,8 @@ export const ColorPicker: FC<PickerProps> = ({
           <ColorItem
             key={`${heading}${item.color}`}
             color={item.color}
-            selected={item.selected || item.color === lastColor}
+            selected={item.color === lastColor}
+            hovering={item.selected}
             onClick={() => onClickColorItem(index, item.color)}
             onHover={() => {
               if (onHover !== undefined) {
