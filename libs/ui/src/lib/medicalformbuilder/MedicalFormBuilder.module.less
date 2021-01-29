@@ -8,31 +8,23 @@
   display: block;
 }
 .medicalFormEditLeftPanel {
-  display: block;
+  :global {
+    .ant-collapse-icon-position-right
+      > .ant-collapse-item
+      > .ant-collapse-header {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 15px;
+      text-transform: uppercase;
+      color: #9292a3;
+      background-color: white;
+    }
+  }
 }
 .medicalFormEditLeftPanelCollapse {
   display: block;
 }
-.medicalFormEditLeftPanelCollapsePanel {
-  display: block;
-  .ant-collapse-header {
-    display: none;
-  }
-}
-:global {
-  .ant-collapse-icon-position-right
-    > .ant-collapse-item
-    > .ant-collapse-header {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    text-transform: uppercase;
-    color: #9292a3;
-    background-color: white;
-  }
-}
-
 .medicalFormEditMainPanel {
   display: block;
   margin-left: 15px;
