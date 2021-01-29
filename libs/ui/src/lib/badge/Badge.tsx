@@ -1,7 +1,5 @@
-/* eslint-disable */
-import React from 'react'
+import React, { FC } from 'react'
 
-// import './Badge.module.less'
 import btn_enable from '../../assets/images/security/btn_enable.svg'
 import btn_disabled from '../../assets/images/security/close.svg'
 import styles from './Badge.module.less'
@@ -11,9 +9,7 @@ interface P {
   disabled?: boolean
 }
 
-export function Badge(props: P) {
-  const { label = 'Enabled', disabled = true } = props
-
+export const Badge: FC<P> = ({ label, disabled }) => {
   return (
     <div>
       <button
@@ -23,7 +19,7 @@ export function Badge(props: P) {
         <span
           className={disabled ? styles.imgtextspan : styles.imgtextspanDisable}
         >
-          {disabled ? 'Enabled' : 'Disabled'}
+          {label}
         </span>
       </button>
     </div>
@@ -31,3 +27,7 @@ export function Badge(props: P) {
 }
 
 export default Badge
+
+export const PabauPlus: FC<P> = ({ label, disabled }) => {
+  return <div className={styles.pabauPlusBtn}>{label}</div>
+}

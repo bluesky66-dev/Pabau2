@@ -69,21 +69,6 @@ export function BasicModal({
           >
             {specialBooleanLabel}
           </Checkbox>
-          // <div
-          //   className={'pretty p-svg p-toggle p-plain'}
-          //   onClick={() => {
-          //     onSpecialBooleanClick()
-          //   }}
-          // >
-          //   <div className={styles.alignCheckboxLabel}>
-          //     {!specialBooleanValue ? (
-          //       <img className="svg" src={NotActiveSVG} alt="none-active-state" />
-          //     ) : (
-          //       <img className="svg" src={ActiveSVG} alt="active-state" />
-          //     )}
-          //     <label>{specialBooleanLabel}</label>
-          //   </div>
-          // </div>
         )}
         {dangerButtonText && (
           <Button
@@ -93,19 +78,6 @@ export function BasicModal({
           >
             {dangerButtonText}
           </Button>
-        )}
-        {specialBooleanLabel && (
-          <div
-            className={'pretty p-svg p-toggle p-plain'}
-            onClick={() => {
-              onSpecialBooleanClick?.()
-            }}
-          >
-            <div>
-              {!specialBooleanValue ? <>(unticked)</> : <>(ticked)</>}
-              <label>{specialBooleanLabel}</label>
-            </div>
-          </div>
         )}
         <Button type="primary" onClick={() => onOk?.()}>
           {newButtonText}

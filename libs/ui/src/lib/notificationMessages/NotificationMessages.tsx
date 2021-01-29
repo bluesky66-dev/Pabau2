@@ -8,6 +8,7 @@ export interface NotificationData {
   icon: ReactNode
   smartDelivery: boolean
   link: string
+  disabled: boolean
 }
 
 export interface NotificationMessagesProps {
@@ -15,7 +16,7 @@ export interface NotificationMessagesProps {
   onClick?: (selectedLink: string) => void
 }
 
-const NotificationMessages: FC<NotificationMessagesProps> = (props) => {
+export const NotificationMessages: FC<NotificationMessagesProps> = (props) => {
   const handleClick = (notification) => {
     props.onClick?.(notification)
   }
@@ -40,7 +41,7 @@ const NotificationMessages: FC<NotificationMessagesProps> = (props) => {
             </div>
             <div className={styles.stateLabel}>
               <div className={styles.badgeLabel}>
-                <Badge />
+                <Badge label="Enabled" disabled={notification.disabled} />
               </div>
               <div className={styles.smartLabel}>
                 {notification.smartDelivery && <span> +Smart delivery</span>}
