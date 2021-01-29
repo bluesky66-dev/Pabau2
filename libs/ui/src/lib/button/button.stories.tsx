@@ -1,5 +1,10 @@
 import React from 'react'
-import { EyeOutlined } from '@ant-design/icons'
+import {
+  EyeOutlined,
+  PauseCircleOutlined,
+  MessageOutlined,
+} from '@ant-design/icons'
+import { notification } from 'antd'
 import Button from './button'
 import DropdownButton from './dropdownButton'
 
@@ -103,4 +108,17 @@ dropdownButton.args = {
   label: 'Manage Option',
   size: 'large',
   color: '#40A0C1',
+  menuItems: [
+    {
+      title: 'Pause notifications',
+      icon: <PauseCircleOutlined />,
+    },
+    {
+      title: 'See message log',
+      icon: <MessageOutlined />,
+    },
+  ],
+  onMenuClick: (val) => {
+    notification.open({ message: `Clicked '${val}'` })
+  },
 }

@@ -75,5 +75,5 @@ EmailTemplate.args = {
   allowRescheduling: true,
   allowCancellation: true,
   backgroundColor: '#ffffff',
-  buttonColor: '#333333',
+  // buttonColor: '#ffffff',
 }

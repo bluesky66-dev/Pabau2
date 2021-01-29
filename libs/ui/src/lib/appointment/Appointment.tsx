@@ -41,6 +41,10 @@ export const Appointment: FC<P> = ({
   showService,
   addMedicalHistoryBtn,
   backgroundColor,
+  buttonColor,
+  requestConfirmation,
+  allowCancellation,
+  allowRescheduling,
 }) => {
   return (
     <div
@@ -63,12 +67,17 @@ export const Appointment: FC<P> = ({
 
       <div className={styles.rescheduleContainer}>
         <span className={styles.arial13FontBlack}>{appointDate}</span>
-        <Button type="link">Reschedule</Button>
+        {allowRescheduling && (
+          <Button type="link" className={styles.reschedulBtn}>
+            Reschedule
+          </Button>
+        )}
       </div>
+
       <div className={styles.serviceContainer}>
         {showService && (
           <span className={styles.arial13FontBlack}>
-            {service} with {showEmployeeName && name}
+            {service} {showEmployeeName && <> with {name}</>}
           </span>
         )}
       </div>
@@ -82,10 +91,28 @@ export const Appointment: FC<P> = ({
       </div>
 
       <div className={styles.appointBtnContainer}>
-        <Button className={styles.cancelAppointBtn}>Cancel appointment*</Button>
-        <Button className={styles.confirmAppointBtn} type="primary">
-          Confirm appointment
-        </Button>
+        {allowCancellation && (
+          <Button
+            style={{ borderColor: buttonColor }}
+            className={
+              requestConfirmation
+                ? styles.cancelAppointBtnWithSpace
+                : styles.cancelAppointBtnNoSpace
+            }
+          >
+            Cancel appointment*
+          </Button>
+        )}
+
+        {requestConfirmation && (
+          <Button
+            backgroundColor={buttonColor}
+            className={styles.confirmAppointBtn}
+            type="primary"
+          >
+            Confirm appointment
+          </Button>
+        )}
       </div>
 
       {displayPolicy && (
@@ -99,22 +126,23 @@ export const Appointment: FC<P> = ({
               Cancellation policy
             </Button>
           </div>
+
+          <div>
+            <hr className={styles.wholeLineBottom} />
+          </div>
         </>
       )}
       {addMedicalHistoryBtn && (
         <>
-          <div>
-            <hr className={styles.wholeLineBottom} />
-          </div>
-
           {medicalHistory !== '' && (
             <div>
               <span>{medicalHistory}</span>
             </div>
           )}
-
           <div className={styles.medicalHistoryContainer}>
-            <Button>Complete Medical History</Button>
+            <Button backgroundColor={buttonColor}>
+              Complete Medical History
+            </Button>
           </div>
         </>
       )}
