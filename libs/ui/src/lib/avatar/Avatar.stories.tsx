@@ -52,3 +52,24 @@ Large.args = {
   name: 'user',
   size: 'large',
 }
+
+export const NoImage = AvatarStory.bind({})
+NoImage.args = {
+  src: '',
+  name: 'user',
+  active: 'active',
+}
+
+export const Active = AvatarStory.bind({})
+Active.args = {
+  src: userImage,
+  name: 'user',
+  active: 'active',
+}
+
+export const Inactive = AvatarStory.bind({})
+Inactive.args = {
+  src: userImage,
+  name: 'user',
+  active: 'inactive',
+}
