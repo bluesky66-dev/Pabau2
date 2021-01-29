@@ -25,7 +25,6 @@ const ColorItem: FC<P> = (props: P) => {
       }}
       onMouseEnter={() => onHover()}
     >
-
       {selected && <CheckBadge className={styles.badge} />}
     </div>
   )
