@@ -39,7 +39,6 @@ const ShortAnswer: FC = () => {
           <Input placeholder="Enter your question" />
           <p style={{ marginTop: '20px' }}>Input type</p>
           <Radio.Group
-            className={styles.aaaaa}
             options={typeOptions}
             value={selOption}
             onChange={(e) => setSelOption(e.target.value)}
