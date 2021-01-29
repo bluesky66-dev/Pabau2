@@ -3,7 +3,6 @@ import PhoneInput from 'react-phone-input-2'
 import { PhoneNumberUtil } from 'google-libphonenumber'
 import ClassNames from 'classnames'
 import styles from './PhoneNumberInput.module.less'
-import 'react-phone-input-2/lib/style.css'
 
 const phoneUtil = PhoneNumberUtil.getInstance()
 export interface PhoneNumberInputProps {
