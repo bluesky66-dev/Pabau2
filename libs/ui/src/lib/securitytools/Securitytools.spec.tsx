@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import NotificationBanner from './NotificationBanner'
+import Securitytools from './Securitytools'
 
-describe('NotificationBanner', () => {
+describe('Securitytools', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<NotificationBanner />)
+    const { baseElement } = render(<Securitytools />)
     expect(baseElement).toBeTruthy()
   })
 })

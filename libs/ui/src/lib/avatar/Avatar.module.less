@@ -47,6 +47,7 @@
   border-radius: 50%;
   border: 2px solid white;
   background-color: white;
+  display: inline-block;
 }
 
 .avatar-loading {
@@ -54,6 +55,25 @@
   -moz-animation: fadeAnimation 1s infinite;
   -o-animation: fadeAnimation 1s infinite;
   animation: fadeAnimation 1s infinite;
+}
+
+.avatar-display {
+  position: relative;
+}
+
+.avatar-status {
+  position: absolute;
+  left: calc(87.5% - 4px);
+  bottom: calc(12.5% - 4px);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid white;
+  background-color: #65cd98;
+}
+
+.avatar-inactive {
+  background-color: #9292a3;
 }
 
 .overlay {

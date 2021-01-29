@@ -5,7 +5,7 @@ import {
   SortableElement,
   SortableHandle,
 } from 'react-sortable-hoc'
-import { MenuOutlined } from '@ant-design/icons'
+import { LockOutlined, MenuOutlined } from '@ant-design/icons'
 import styles from './Table.module.less'
 import { TableProps } from 'antd/es/table'
 
@@ -39,11 +39,13 @@ function array_move(arr, old_index, new_index) {
 
 type P = {
   onRowClick?: (e) => void
+  padlocked?: string[]
 } & TableProps<never> &
   DragProps
 
 export const Table: FC<P> = ({
   dataSource = [],
+  padlocked,
   updateDataSource,
   onRowClick,
   ...props
@@ -92,12 +94,35 @@ export const Table: FC<P> = ({
     )
   }
 
+  const checkPadLockField = (val) => {
+    return padlocked && padlocked.includes(val) ? (
+      <>
+        {val} <LockOutlined />
+      </>
+    ) : (
+      val
+    )
+  }
+
+  const checkPadLocks = (record) => {
+    let alloWClicked = true
+    Object.keys(record).map((key) => {
+      if (padlocked && padlocked.includes(record[key])) {
+        alloWClicked = false
+      }
+      return key
+    })
+    return alloWClicked
+  }
+
   const renderSortHandler = () => {
     if (props && props.columns) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       props.columns?.map((col: any) => {
         if (col && col.dataIndex === 'is_active') {
           col.render = renderActiveButton
+        } else {
+          if (checkPadLocks(col)) col.render = checkPadLockField
         }
         return col
       })
@@ -113,8 +138,10 @@ export const Table: FC<P> = ({
       onRow={(record, rowIndex) => {
         return {
           onClick: (event) => {
-            console.log(event, record)
-            onRowClick?.(record)
+            if (checkPadLocks(record)) {
+              onRowClick?.(record)
+              console.log(event, record)
+            }
           }, // click row
           //   onDoubleClick: (event) => {}, // double click row
           //   onContextMenu: (event) => {}, // right button click row
