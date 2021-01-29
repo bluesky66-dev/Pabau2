@@ -6,11 +6,11 @@ import styles from './MedicalFormBuilder.module.less'
 const MedicalFormEditMain: FC = () => {
   return (
     <div className={styles.medicalFormEditMainPanel}>
-      <img src={backgroundImg} />
+      <img src={backgroundImg} alt="" />
       <h1>Start building your form with components</h1>
       <span>Drag and drop components from the left menu here</span>
       <div className={styles.medicalFormEditDesc}>
-        <img src={backImg} />
+        <img src={backImg} alt="" />
         <span>Place your first component here</span>
       </div>
     </div>

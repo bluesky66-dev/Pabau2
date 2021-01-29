@@ -7,10 +7,10 @@ import styles from './MedicalFormBuilder.module.less'
 const menu = (
   <Menu>
     <Menu.Item>
-      <a href="#">Edit Form</a>
+      <a href="javascript:void(0)">Edit Form</a>
     </Menu.Item>
     <Menu.Item>
-      <a href="#">Delete Form</a>
+      <a href="javascript:void(0)">Delete Form</a>
     </Menu.Item>
   </Menu>
 )
