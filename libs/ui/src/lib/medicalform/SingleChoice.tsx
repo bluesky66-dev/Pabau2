@@ -1,11 +1,12 @@
 import { PlusOutlined } from '@ant-design/icons'
 import { Button, ButtonTypes } from '@pabau/ui'
-import { Input, Radio } from 'antd'
+import { Input } from 'antd'
 import React, { FC, useState } from 'react'
 import singleChoiceIcon from '../../assets/images/medicalform_singlechoice.svg'
 import styles from './MedicalForm.module.less'
 import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormTitle from './MedicalFormTitle'
+import Options from './Options'
 
 const SingleChoice: FC = () => {
   const [optionVal, setOptionVal] = useState(1)
@@ -34,19 +35,7 @@ const SingleChoice: FC = () => {
         <div className={`${styles.formQuestion} ${styles.formCommon}`}>
           <p style={{ marginTop: '5px' }}>Question</p>
           <Input placeholder="Enter your question" />
-          <p style={{ marginTop: '20px' }}>Options</p>
-          <Radio.Group
-            size="small"
-            value={optionVal}
-            onChange={(e) => setOptionVal(e.target.value)}
-          >
-            <Radio value={1} style={radioStyle}>
-              Option 1
-            </Radio>
-            <Radio value={2} style={radioStyle}>
-              Add option
-            </Radio>
-          </Radio.Group>
+          <Options />
           <p style={{ marginTop: '20px' }}>Linked field</p>
           <Button
             type={ButtonTypes.default}
