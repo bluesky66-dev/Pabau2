@@ -5,12 +5,14 @@ interface P {
   color: string
   selected: boolean
   hovering: boolean
+  leaving: boolean
   onClick(): void
   onHover(): void
+  onLeave(): void
 }
 
 const ColorItem: FC<P> = (props: P) => {
-  const { color, selected, hovering, onClick, onHover } = props
+  const { color, selected, hovering, onClick, onHover, onLeave } = props
   return (
     <div
       className={styles.colorItem}
@@ -24,6 +26,7 @@ const ColorItem: FC<P> = (props: P) => {
         onClick()
       }}
       onMouseEnter={() => onHover()}
+      onMouseLeave={() => onLeave()}
     >
       {selected && <CheckBadge className={styles.badge} />}
     </div>
@@ -34,12 +37,14 @@ interface PickerProps {
   heading: string
   onSelected(val): void
   onHover?(val): void
+  onLeave?(val): void
 }
 
 export const ColorPicker: FC<PickerProps> = ({
   heading = 'Background color',
   onSelected,
   onHover,
+  onLeave,
 }) => {
   const [colorData, setColorData] = useState([
     {
@@ -112,7 +117,7 @@ export const ColorPicker: FC<PickerProps> = ({
   const onClickColorItem = (index, color) => {
     colors.forEach((item, idx) => {
       item.selected = index === idx
-      lastColor = color
+      setLastColor(color)
     })
     setColorData([...colors])
     onSelected(color)
@@ -125,6 +130,13 @@ export const ColorPicker: FC<PickerProps> = ({
     setColorData([...colors])
   }
 
+  const onLeaveColorItem = (index, color) => {
+    colors.forEach((item, idx) => {
+      if (index === idx) item.selected = false
+    })
+    setColorData([...colors])
+  }
+  const [lastColor, setLastColor] = useState('')
   return (
     <div style={{ marginTop: '16px' }}>
       <span className={styles.heading}>{heading}</span>
@@ -135,11 +147,18 @@ export const ColorPicker: FC<PickerProps> = ({
             color={item.color}
             selected={item.color === lastColor}
             hovering={item.selected}
+            leaving={!item.selected}
             onClick={() => onClickColorItem(index, item.color)}
             onHover={() => {
+              onHoverColorItem(index, item.color)
               if (onHover !== undefined) {
                 onHover(item.color)
-                onHoverColorItem(index, item.color)
+              }
+            }}
+            onLeave={() => {
+              onLeaveColorItem(index, item.color)
+              if (onLeave !== undefined) {
+                onLeave(item.color)
               }
             }}
           />
@@ -149,5 +168,4 @@ export const ColorPicker: FC<PickerProps> = ({
   )
 }
 
-let lastColor = ''
 export default ColorPicker
