@@ -5,7 +5,11 @@ import { Input, Switch } from 'antd'
 import { BasicModal as Modal } from '../..'
 
 export interface CreateChannelProps {
-  onCreateChannel?: (name: string, description: string, isPrivate: boolean) => void
+  onCreateChannel?: (
+    name: string,
+    description: string,
+    isPrivate: boolean
+  ) => void
   isCreateChannelModel?: boolean
   onCancel?: () => void
 }
@@ -48,8 +52,8 @@ export function CreateChannel(props: CreateChannelProps): JSX.Element {
       visible={props.isCreateChannelModel}
     >
       <div className={styles.content}>
-        Channels are where your team communicates. They’re best when organized around a topic –
-        #marketing, for example.
+        Channels are where your team communicates. They’re best when organized
+        around a topic – #marketing, for example.
       </div>
       <div className={styles.textControl}>
         <div>Name</div>
@@ -63,13 +67,17 @@ export function CreateChannel(props: CreateChannelProps): JSX.Element {
       </div>
       <div className={styles.textControl}>
         <div>Description</div>
-        <Input placeholder="What’s this channel about?" onChange={handleDescriptionChange} />
+        <Input
+          placeholder="What’s this channel about?"
+          onChange={handleDescriptionChange}
+        />
       </div>
       <div>
         <div>Make private</div>
         <div className={styles.switchContent}>
           <div className={styles.switchText}>
-            When a channel is set to private, it can be only be viewed or joined by invitation.
+            When a channel is set to private, it can be only be viewed or joined
+            by invitation.
           </div>
           <div className={styles.switch}>
             <Switch onChange={onChangeToPrivate} />
