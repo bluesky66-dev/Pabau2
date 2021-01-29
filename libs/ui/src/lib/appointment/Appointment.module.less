@@ -31,7 +31,6 @@
     width: 100%;
     border: 1px solid #C4DAED;
     margin-top: 12px;
-    margin-bottom: 20px;
 }
 
 .appointContainer{
@@ -85,6 +84,7 @@
 
 .rescheduleContainer{
     display: flex;
+    height: 32px;
 }
 
 .serviceContainer{
@@ -103,9 +103,14 @@
     margin-top: 5px;
 }
 
-.cancelAppointBtn {
+.cancelAppointBtnWithSpace {
     flex: 1;
     margin-right: 20px;
+}
+
+.cancelAppointBtnNoSpace {
+    flex: 1;
+    margin-right: 0px;
 }
 
 .confirmAppointBtn {
@@ -137,7 +142,12 @@
 }
 
 .medicalHistoryContainer{
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.reschedulBtn{
+    padding: 0px 0px 0px 10px;
 }

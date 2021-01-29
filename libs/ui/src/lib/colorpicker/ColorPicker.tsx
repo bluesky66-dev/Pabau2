@@ -17,6 +17,7 @@ const ColorItem: FC<P> = (props: P) => {
         backgroundColor: color,
         border: selected === true ? '1px solid #54B2D3' : 'none',
         boxSizing: 'border-box',
+        opacity: selected === true ? '1' : '0.2',
       }}
       onClick={() => {
         onClick()
@@ -41,88 +42,88 @@ export const ColorPicker: FC<PickerProps> = ({
 }) => {
   const [colorData, setColorData] = useState([
     {
-      color: '#F1F8FB',
+      color: '#03dbfc',
       selected: false,
     },
     {
-      color: '#FCF1F1',
+      color: '#fca903',
       selected: false,
     },
     {
-      color: '#F8F2FA',
+      color: '#8c03fc',
       selected: false,
     },
     {
-      color: '#F2F3F1',
+      color: '#0ffc03',
       selected: false,
     },
     {
-      color: '#F1F8FE',
+      color: '#03fcfc',
       selected: false,
     },
     {
-      color: '#F2F3FA',
+      color: '#5e03fc',
       selected: false,
     },
     {
-      color: '#f0fcfd',
+      color: '#03e7fc',
       selected: false,
     },
     {
-      color: '#EEF6F5',
+      color: '#45fc03',
       selected: false,
     },
     {
-      color: '#f2f9e9',
+      color: '#84fc03',
       selected: false,
     },
     {
-      color: '#FDF9E9',
+      color: '#fcf403',
       selected: false,
     },
     {
-      color: '#F4F1F0',
+      color: '#fcce03',
       selected: false,
     },
     {
-      color: '#F3F3F3',
+      color: '#d2fc03',
       selected: false,
     },
     {
-      color: '#feffd5',
+      color: '#f4fc03',
       selected: false,
     },
     {
-      color: '#F2F4F5',
+      color: '#bf15c2',
       selected: false,
     },
     {
-      color: '#EAEAEA',
+      color: '#486578',
       selected: false,
     },
     {
-      color: '#f9e5f8',
+      color: '#9a3ac9',
       selected: false,
     },
   ])
 
+  const colors = [...colorData]
   const onClickColorItem = (index, color) => {
-    const colors = [...colorData]
     colors.forEach((item, idx) => {
       item.selected = index === idx
+      lastColor = color
     })
     setColorData([...colors])
     onSelected(color)
   }
 
   const onHoverColorItem = (index, color) => {
-    const colors = [...colorData]
     colors.forEach((item, idx) => {
       item.selected = index === idx
     })
     setColorData([...colors])
-    // onSelected(color)
   }
+
   return (
     <div style={{ marginTop: '16px' }}>
       <span className={styles.heading}>{heading}</span>
@@ -131,7 +132,7 @@ export const ColorPicker: FC<PickerProps> = ({
           <ColorItem
             key={`${heading}${item.color}`}
             color={item.color}
-            selected={item.selected}
+            selected={item.selected || item.color === lastColor}
             onClick={() => onClickColorItem(index, item.color)}
             onHover={() => {
               if (onHover !== undefined) {
@@ -146,4 +147,5 @@ export const ColorPicker: FC<PickerProps> = ({
   )
 }
 
+let lastColor = ''
 export default ColorPicker
