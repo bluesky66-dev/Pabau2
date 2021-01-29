@@ -65,44 +65,23 @@ export function BasicModal({
       <div className={styles.modalBody}>{children}</div>
       <div className={styles.modalFooter}>
         {specialBooleanLabel && onSpecialBooleanClick && (
-          <Checkbox defaultChecked={specialBooleanValue} onClick={onSpecialBooleanClick}>
+          <Checkbox
+            defaultChecked={specialBooleanValue}
+            onClick={onSpecialBooleanClick}
+          >
             {specialBooleanLabel}
           </Checkbox>
-          // <div
-          //   className={'pretty p-svg p-toggle p-plain'}
-          //   onClick={() => {
-          //     onSpecialBooleanClick()
-          //   }}
-          // >
-          //   <div className={styles.alignCheckboxLabel}>
-          //     {!specialBooleanValue ? (
-          //       <img className="svg" src={NotActiveSVG} alt="none-active-state" />
-          //     ) : (
-          //       <img className="svg" src={ActiveSVG} alt="active-state" />
-          //     )}
-          //     <label>{specialBooleanLabel}</label>
-          //   </div>
-          // </div>
         )}
         {dangerButtonText && (
-          <Button type="default" className={styles.deleteBtnStyle} onClick={() => onDelete?.()}>
+          <Button
+            type="default"
+            className={styles.deleteBtnStyle}
+            onClick={() => onDelete?.()}
+          >
             {dangerButtonText}
           </Button>
         )}
-        {specialBooleanLabel && (
-          <div
-            className={'pretty p-svg p-toggle p-plain'}
-            onClick={() => {
-              onSpecialBooleanClick?.()
-            }}
-          >
-            <div>
-              {!specialBooleanValue ? <>(unticked)</> : <>(ticked)</>}
-              <label>{specialBooleanLabel}</label>
-            </div>
-          </div>
-        )}
-        <Button type="primary" disabled={newButtonDisable} onClick={() => onOk?.()}>
+        <Button type="primary" onClick={() => onOk?.()}>
           {newButtonText}
         </Button>
       </div>

@@ -3,38 +3,27 @@ import { Tabs } from 'antd'
 import styles from './TabMenu.module.less'
 
 const { TabPane } = Tabs
-
 interface P {
-  tabPosition: 'top' | 'left'
+  tabPosition?: 'top' | 'left'
+  menuItems: Array<string>
+  minHeight?: string
 }
 
-export const TabMenu: FC<P> = ({ tabPosition = 'left' }) => {
-  const calendarSettingsMenu = [
-    {
-      menuName: 'Tab 1',
-      component: <div>1</div>,
-    },
-    {
-      menuName: 'Tab 2',
-      component: <div>2</div>,
-    },
-    {
-      menuName: 'Tab 3',
-      component: <div>3</div>,
-    },
-    {
-      menuName: 'Tab 4',
-      component: <div>4</div>,
-    },
-  ]
+export const TabMenu: FC<P> = ({
+  tabPosition = 'left',
+  children,
+  menuItems,
+  minHeight = '100vh',
+}) => {
   return (
     <div className={styles.calendarSettings}>
-      <Tabs defaultActiveKey="2" tabPosition={tabPosition} style={{ minHeight: '100vh' }}>
-        {calendarSettingsMenu.map((menu, i) => (
-          <TabPane tab={menu.menuName} key={i}>
-            {menu.component}
-          </TabPane>
-        ))}
+      <Tabs tabPosition={tabPosition} style={{ minHeight }}>
+        {Array.isArray(children) &&
+          children.map((tab, i) => (
+            <TabPane tab={menuItems[i]} key={i}>
+              {tab}
+            </TabPane>
+          ))}
       </Tabs>
     </div>
   )

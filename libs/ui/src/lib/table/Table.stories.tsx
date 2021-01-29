@@ -6,6 +6,8 @@ import React, { FC, useState } from 'react'
 import { Table } from './Table'
 import { data } from './mock'
 
+const padlocked = ['Book Now Link', 'Instagram', 'Facebook']
+
 const columns = [
   {
     title: 'Name',
@@ -21,15 +23,8 @@ const columns = [
   },
   {
     title: 'STATUS',
-    dataIndex: 'isActive',
+    dataIndex: 'is_active',
     className: 'drag-visible',
-    render: function ActiveBtn() {
-      return (
-        <Button size="small" className={styles.activeBtn}>
-          Active
-        </Button>
-      )
-    },
   },
 ]
 
@@ -40,6 +35,7 @@ export default {
     draggable: true,
     dataSource: data,
     columns,
+    padlocked,
   },
   argTypes: {
     draggable: { control: { type: 'boolean' } },
@@ -51,7 +47,9 @@ const DragFeatureStory: FC = ({ ...args }) => {
   const updateDataSource = ({ newData, oldIndex, newIndex }) => {
     setDataSource(newData)
   }
-  return <Table {...args} dataSource={dataSource} updateDataSource={updateDataSource} />
+  return (
+    <Table {...args} padlocked={[]} dataSource={dataSource} updateDataSource={updateDataSource} />
+  )
 }
 export const TableWithDragFeature = DragFeatureStory.bind({})
 
@@ -60,6 +58,30 @@ const NoDragFeatureStory: FC = ({ ...args }) => {
   const updateDataSource = ({ newData, oldIndex, newIndex }) => {
     setDataSource(newData)
   }
-  return <Table {...args} draggable={false} dataSource={dataSource} updateDataSource={updateDataSource} />
+  return (
+    <Table
+      {...args}
+      padlocked={[]}
+      draggable={false}
+      dataSource={dataSource}
+      updateDataSource={updateDataSource}
+    />
+  )
 }
 export const TableWithNoDragFeature = NoDragFeatureStory.bind({})
+
+const TableWithReservedWordsStory: FC = ({ ...args }) => {
+  const [dataSource, setDataSource]: any = useState(data)
+  const updateDataSource = ({ newData, oldIndex, newIndex }) => {
+    setDataSource(newData)
+  }
+
+  return (
+    <Table
+      {...args}
+      dataSource={dataSource}
+      updateDataSource={updateDataSource}
+    />
+  )
+}
+export const TableWithReservedWords = TableWithReservedWordsStory.bind({})

@@ -1,6 +1,10 @@
 import React, { FC, useState } from 'react'
 import { Layout, Menu as AntMenu } from 'antd'
-import { SettingOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
+import {
+  SettingOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+} from '@ant-design/icons'
 import { Button } from '@pabau/ui'
 import styles from './Menu.module.less'
 import classNames from 'classnames'
@@ -45,7 +49,7 @@ export const Menu: FC<P> = ({ onSideBarCollapsed }) => {
   return (
     <Sider
       trigger={null}
-      className={styles.pabauSidebar}
+      className={classNames(styles.pabauSidebar, styles.mobileViewNone)}
       collapsed={collapsed}
       style={{
         overflow: 'auto',
@@ -65,7 +69,11 @@ export const Menu: FC<P> = ({ onSideBarCollapsed }) => {
       >
         {sidebarMenu.map((menuData, index) => {
           return !menuData.children ? (
-            renderMenu(menuData.menuName + index, menuData.menuName, menuData.icon)
+            renderMenu(
+              menuData.menuName + index,
+              menuData.menuName,
+              menuData.icon
+            )
           ) : (
             <SubMenu
               key={menuData.menuName + index}
@@ -74,11 +82,16 @@ export const Menu: FC<P> = ({ onSideBarCollapsed }) => {
               onTitleClick={onClickMenu}
               className={classNames(
                 styles.sidebarMenu,
-                selectedKeys.includes(menuData.menuName + index) && styles.subMenuActive
+                selectedKeys.includes(menuData.menuName + index) &&
+                  styles.subMenuActive
               )}
             >
               {menuData.children.map((subMenu, subIndex) => {
-                return renderMenu(subMenu.menuName + subIndex, subMenu.menuName, subMenu?.icon)
+                return renderMenu(
+                  subMenu.menuName + subIndex,
+                  subMenu.menuName,
+                  subMenu?.icon
+                )
               })}
             </SubMenu>
           )
@@ -98,14 +111,17 @@ export const Menu: FC<P> = ({ onSideBarCollapsed }) => {
           )}
         </div>
         <div>
-          {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-            className: classNames(
-              styles.sidebarCollapseIcon,
-              styles.sidebarMenu,
-              collapsed && styles.sidebarCollapsed
-            ),
-            onClick: handleSidebarCollapse,
-          })}
+          {React.createElement(
+            collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
+            {
+              className: classNames(
+                styles.sidebarCollapseIcon,
+                styles.sidebarMenu,
+                collapsed && styles.sidebarCollapsed
+              ),
+              onClick: handleSidebarCollapse,
+            }
+          )}
         </div>
       </AntMenu>
     </Sider>
