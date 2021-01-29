@@ -49,7 +49,7 @@ export const Menu: FC<P> = ({ onSideBarCollapsed }) => {
   return (
     <Sider
       trigger={null}
-      className={styles.pabauSidebar}
+      className={classNames(styles.pabauSidebar, styles.mobileViewNone)}
       collapsed={collapsed}
       style={{
         overflow: 'auto',
