@@ -15,6 +15,9 @@ const AddQuestionStory = ({ ...args }) => <AddQuestion {...args} />
 
 export const Basic = AddQuestionStory.bind({})
 Basic.args = {
+  title: 'Questions',
+  questionLabel: 'Question',
+  addQuestionLabel: 'Add Question',
   description:
     'Choose the way in which you request feedback from clients who visit you',
   questions: [
@@ -22,4 +25,5 @@ Basic.args = {
     'How likely will you recommend us to How likely will you recommend us to',
     'How was your overall experience',
   ],
+  goToButtonLabel: 'Go to Question Bank',
 }

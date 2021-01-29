@@ -8,11 +8,19 @@ import styles from './AddQuestion.module.less'
 export interface AddQuestionProps {
   description?: string
   questions?: string[]
+  title?: string
+  questionLabel?: string
+  addQuestionLabel?: string
+  goToButtonLabel?: string
 }
 
 export const AddQuestion: FC<AddQuestionProps> = ({
   description,
   questions,
+  title,
+  questionLabel,
+  addQuestionLabel,
+  goToButtonLabel,
 }) => {
   const [question, setQuestions] = useState<string[]>([])
 
@@ -39,12 +47,14 @@ export const AddQuestion: FC<AddQuestionProps> = ({
 
   return (
     <div className={styles.questionWrapper}>
-      <h1>Questions</h1>
+      <h1>{title}</h1>
       <div className={styles.para}>{description}</div>
       <div className={styles.questionWrapperList}>
         {question?.map((que, index) => (
           <div className={styles.queList} key={index}>
-            <div>Question {index + 1}</div>
+            <div>
+              {questionLabel} {index + 1}
+            </div>
             <div className={styles.inputWrap}>
               <AntInput
                 value={que}
@@ -62,10 +72,10 @@ export const AddQuestion: FC<AddQuestionProps> = ({
       </div>
       <div className={styles.linkBtn}>
         <div onClick={onAddQuestion}>
-          <PlusOutlined /> Add Question
+          <PlusOutlined /> {addQuestionLabel}
         </div>
       </div>
-      <Button className={styles.btnBank}>Go to Question Bank</Button>
+      <Button className={styles.btnBank}>{goToButtonLabel}</Button>
     </div>
   )
 }
