@@ -12,7 +12,9 @@ export default {
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 
-const SimpleDropdownStory = ({ ...args }: SimpleDropdownProps) => <SimpleDropdown {...args} />
+const SimpleDropdownStory = ({ ...args }: SimpleDropdownProps) => (
+  <SimpleDropdown {...args} />
+)
 export const Basic = SimpleDropdownStory.bind({})
 Basic.args = {
   label: 'Reverse Family Relation',

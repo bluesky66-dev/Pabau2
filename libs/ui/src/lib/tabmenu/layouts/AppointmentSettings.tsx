@@ -39,8 +39,9 @@ export const AppointmentSettings: FC = () => {
       <div className={styles.settingContent}>
         <Title className={styles.headerText}>Appointment settings</Title>
         <span className={styles.description}>
-          Setup your calendar to automatically have your communication <br /> checkbox selected as
-          well as allowing your appointments to <br /> overlap.
+          Setup your calendar to automatically have your communication <br />{' '}
+          checkbox selected as well as allowing your appointments to <br />{' '}
+          overlap.
         </span>
       </div>
       <div className={styles.appointmentsControls}>
@@ -48,7 +49,9 @@ export const AppointmentSettings: FC = () => {
           return (
             <>
               <Checkbox defaultChecked={appointment.value}>
-                <span className={styles.appointmentText}>{appointment.type}</span>
+                <span className={styles.appointmentText}>
+                  {appointment.type}
+                </span>
               </Checkbox>
               <QuestionCircleOutlined className={styles.appointmentIcon} />
               <br />

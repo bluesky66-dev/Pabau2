@@ -1,7 +1,11 @@
 import React, { FC } from 'react'
 import { Button, Table as AntTable } from 'antd'
-import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc'
-import { MenuOutlined } from '@ant-design/icons'
+import {
+  SortableContainer,
+  SortableElement,
+  SortableHandle,
+} from 'react-sortable-hoc'
+import { LockOutlined, MenuOutlined } from '@ant-design/icons'
 import styles from './Table.module.less'
 import { TableProps } from 'antd/es/table'
 
@@ -14,7 +18,9 @@ const DragHandle = SortableHandle(() => (
   <MenuOutlined style={{ cursor: 'pointer', color: '#999' }} />
 ))
 
-const SortItem = SortableElement((props) => <tr {...props} className={styles.abc} />)
+const SortItem = SortableElement((props) => (
+  <tr {...props} className={styles.abc} />
+))
 const SortContainer = SortableContainer((props) => <tbody {...props} />)
 
 function array_move(arr, old_index, new_index) {
@@ -33,10 +39,17 @@ function array_move(arr, old_index, new_index) {
 
 type P = {
   onRowClick?: (e) => void
+  padlocked?: string[]
 } & TableProps<never> &
   DragProps
 
-export const Table: FC<P> = ({ dataSource = [], updateDataSource, onRowClick, ...props }) => {
+export const Table: FC<P> = ({
+  dataSource = [],
+  padlocked,
+  updateDataSource,
+  onRowClick,
+  ...props
+}) => {
   const onSortEnd = ({ oldIndex, newIndex }) => {
     if (oldIndex !== newIndex) {
       const newData = array_move(dataSource, oldIndex, newIndex)
@@ -46,7 +59,9 @@ export const Table: FC<P> = ({ dataSource = [], updateDataSource, onRowClick, ..
 
   const DraggableBodyRow = ({ className, style, ...restProps }) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const index = dataSource.findIndex((x: any) => x.key === restProps['data-row-key'])
+    const index = dataSource.findIndex(
+      (x: { key: string }) => x.key === restProps['data-row-key']
+    )
     return <SortItem index={index} {...restProps} />
   }
 
@@ -79,17 +94,42 @@ export const Table: FC<P> = ({ dataSource = [], updateDataSource, onRowClick, ..
     )
   }
 
+  const checkPadLockField = (val) => {
+    return padlocked && padlocked.includes(val) ? (
+      <>
+        {val} <LockOutlined />
+      </>
+    ) : (
+      val
+    )
+  }
+
+  const checkPadLocks = (record) => {
+    let alloWClicked = true
+    Object.keys(record).map((key) => {
+      if (padlocked && padlocked.includes(record[key])) {
+        alloWClicked = false
+      }
+      return key
+    })
+    return alloWClicked
+  }
+
   const renderSortHandler = () => {
     if (props && props.columns) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       props.columns?.map((col: any) => {
         if (col && col.dataIndex === 'is_active') {
           col.render = renderActiveButton
+        } else {
+          if (checkPadLocks(col)) col.render = checkPadLockField
         }
         return col
       })
     }
-    return props.draggable ? [{ ...dragColumn }, ...(props.columns || [])] : props.columns
+    return props.draggable
+      ? [{ ...dragColumn }, ...(props.columns || [])]
+      : props.columns
   }
 
   return (
@@ -98,8 +138,10 @@ export const Table: FC<P> = ({ dataSource = [], updateDataSource, onRowClick, ..
       onRow={(record, rowIndex) => {
         return {
           onClick: (event) => {
-            console.log(event, record)
-            onRowClick?.(record)
+            if (checkPadLocks(record)) {
+              onRowClick?.(record)
+              console.log(event, record)
+            }
           }, // click row
           //   onDoubleClick: (event) => {}, // double click row
           //   onContextMenu: (event) => {}, // right button click row

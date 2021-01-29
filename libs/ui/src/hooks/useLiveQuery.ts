@@ -1,4 +1,10 @@
-import { DocumentNode, gql, QueryHookOptions, QueryResult, useQuery } from '@apollo/client'
+import {
+  DocumentNode,
+  gql,
+  QueryHookOptions,
+  QueryResult,
+  useQuery,
+} from '@apollo/client'
 import { useEffect } from 'react'
 
 function convert(doc: DocumentNode): DocumentNode {
@@ -17,7 +23,8 @@ function convert(doc: DocumentNode): DocumentNode {
   if (!body) throw new Error('No body found')
   const firstCurly = body.indexOf('{')
   const firstParen = body.indexOf('(')
-  const i = firstParen === -1 || firstCurly < firstParen ? firstCurly : firstParen
+  const i =
+    firstParen === -1 || firstCurly < firstParen ? firstCurly : firstParen
   const snipped = body.substr(i)
   return gql(`subscription ${snipped}`)
 }
@@ -64,7 +71,11 @@ export function useLiveQuery<T>(
   }, [query, subscribeToMore, options])
 
   const data = rest.data
-    ? (rest.data as Record<string, unknown>)[Object.keys(rest.data as Record<string, unknown>)[0]]
+    ? Object.keys(rest.data).length > 1
+      ? rest.data
+      : (rest.data as Record<string, unknown>)[
+          Object.keys(rest.data as Record<string, unknown>)[0]
+        ]
     : undefined
   return { ...rest, data }
 }

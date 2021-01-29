@@ -15,17 +15,17 @@ async function bootstrapDevServer() {
 }
 
 if (!process.env.VERCEL) {
-  console.log("STARTING DEV SERVER")
+  console.log('STARTING DEV SERVER')
   bootstrapDevServer()
 }
 
 function invokeNest(req: NowRequest, res: NowResponse) {
-  NestFactory.create(AppModule).then(async e => {
+  NestFactory.create(AppModule).then(async (e) => {
     const app2 = e.get(AppController)
     res.json(await app2.getData())
   })
 }
 
-export default function(req: NowRequest, res: NowResponse) {
+export default function (req: NowRequest, res: NowResponse) {
   invokeNest(req, res)
 }

@@ -10,7 +10,11 @@ export interface SimpleDropdownProps {
   onSelected(val): void
 }
 
-export const SimpleDropdown: FC<SimpleDropdownProps> = ({ label, menuItems, onSelected }) => {
+export const SimpleDropdown: FC<SimpleDropdownProps> = ({
+  label,
+  menuItems,
+  onSelected,
+}) => {
   const [selected, setSelected] = useState('')
   const handleMenuClick = (e) => {
     setSelected(e.key)
