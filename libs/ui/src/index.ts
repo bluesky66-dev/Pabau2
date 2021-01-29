@@ -1,3 +1,4 @@
+export * from './lib/simple-dropdown/SimpleDropdown'
 export * from './lib/standard/Standard'
 export * from './lib/appointment/Appointment'
 export * from './lib/avatar/Avatar'
