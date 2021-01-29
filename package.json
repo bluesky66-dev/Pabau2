@@ -49,6 +49,7 @@
     "file-loader": "^6.2.0",
     "formik": "^2.2.6",
     "formik-antd": "^2.0.1",
+    "google-libphonenumber": "^3.2.16",
     "graphql": "^15.4.0",
     "husky": "^4.3.8",
     "less": "^3.13.0",
