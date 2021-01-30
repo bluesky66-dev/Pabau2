@@ -1,9 +1,13 @@
-import { DeleteOutlined, EditOutlined, PlusOutlined, SaveOutlined } from '@ant-design/icons'
+import {
+  DeleteOutlined,
+  EditOutlined,
+  PlusOutlined,
+  SaveOutlined,
+} from '@ant-design/icons'
 import { Button, ButtonTypes } from '@pabau/ui'
 import { Checkbox, Input } from 'antd'
 import React, { FC, useState } from 'react'
 import styles from './MedicalForm.module.less'
-
 
 type itemProps = {
   id: number
@@ -20,7 +24,6 @@ const MultiOptions: FC = () => {
     height: '30px',
     lineHeight: '30px',
     color: '#9292a3',
-    // marginLeft: '0px',
   }
 
   const addItem = (event) => {
@@ -103,30 +106,28 @@ const MultiOptions: FC = () => {
               )}
               {!item.editing && (
                 <>
-                <Button
-                className={styles.optionBtn}
-                size="small"
-                type={ButtonTypes.default}
-                onClick={() =>
-                  handleDelete(index)
-                }
-              >
-                <DeleteOutlined />
-              </Button>
-                <Button
-                  className={`${styles.optionBtn} ${styles.optionEdit}`}
-                  size="small"
-                  type={ButtonTypes.default}
-                  onClick={() =>
-                    handleOptions(index, {
-                      name: item.name,
-                      editing: true,
-                    })
-                  }
-                >
-                  <EditOutlined />
-                </Button>
-              </>
+                  <Button
+                    className={styles.optionBtn}
+                    size="small"
+                    type={ButtonTypes.default}
+                    onClick={() => handleDelete(index)}
+                  >
+                    <DeleteOutlined />
+                  </Button>
+                  <Button
+                    className={`${styles.optionBtn} ${styles.optionEdit}`}
+                    size="small"
+                    type={ButtonTypes.default}
+                    onClick={() =>
+                      handleOptions(index, {
+                        name: item.name,
+                        editing: true,
+                      })
+                    }
+                  >
+                    <EditOutlined />
+                  </Button>
+                </>
               )}
             </div>
           ))}

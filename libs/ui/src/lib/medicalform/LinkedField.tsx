@@ -4,7 +4,6 @@ import { Input, Select } from 'antd'
 import React, { FC, useState } from 'react'
 import styles from './MedicalForm.module.less'
 
-
 const { Option } = Select
 
 type linkedFieldProps = {
@@ -96,9 +95,7 @@ const LinkedField: FC<linkedFieldProps> = ({ linkedLabel }) => {
               className={styles.optionBtn}
               size="small"
               type={ButtonTypes.default}
-              onClick={() =>
-                handleDelete(index)
-              }
+              onClick={() => handleDelete(index)}
             >
               <DeleteOutlined />
             </Button>
@@ -121,17 +118,17 @@ const LinkedField: FC<linkedFieldProps> = ({ linkedLabel }) => {
           <br />
         </>
       )}
-      {items.length === 0 &&
+      {items.length === 0 && (
         <Button
-        style={{ marginTop: '5px' }}
-        type={ButtonTypes.default}
-        icon={<PlusOutlined />}
-        size="small"
-        onClick={() => setAddLinkedField((e) => true)}
-      >
-        Add
-      </Button>
-      }
+          style={{ marginTop: '5px' }}
+          type={ButtonTypes.default}
+          icon={<PlusOutlined />}
+          size="small"
+          onClick={() => setAddLinkedField((e) => true)}
+        >
+          Add
+        </Button>
+      )}
     </>
   )
 }

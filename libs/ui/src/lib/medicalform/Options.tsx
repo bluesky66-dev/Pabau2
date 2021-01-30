@@ -1,9 +1,13 @@
-import { DeleteOutlined, EditOutlined, PlusOutlined, SaveOutlined } from '@ant-design/icons'
+import {
+  DeleteOutlined,
+  EditOutlined,
+  PlusOutlined,
+  SaveOutlined,
+} from '@ant-design/icons'
 import { Button, ButtonTypes } from '@pabau/ui'
 import { Input, Radio } from 'antd'
 import React, { FC, useState } from 'react'
 import styles from './MedicalForm.module.less'
-
 
 type itemProps = {
   id: number
@@ -107,9 +111,7 @@ const Options: FC = () => {
                         className={styles.optionBtn}
                         size="small"
                         type={ButtonTypes.default}
-                        onClick={() =>
-                          handleDelete(index)
-                        }
+                        onClick={() => handleDelete(index)}
                       >
                         <DeleteOutlined />
                       </Button>
@@ -126,7 +128,7 @@ const Options: FC = () => {
                       >
                         <EditOutlined />
                       </Button>
-                      </>
+                    </>
                   )}
                 </Radio>
               </div>
