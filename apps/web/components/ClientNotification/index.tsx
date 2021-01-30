@@ -1,7 +1,8 @@
 import React, { FC, useEffect, useState } from 'react'
 import { ClientNotification } from '@pabau/ui'
-import NotificationPreview from './NotificationPreview'
-import StandardTab from './StandardTab'
+
+import Standard from '../../../../libs/ui/src/lib/standard/Standard';
+import Appointment from '../../../../libs/ui/src/lib/appointment/Appointment';
 
 const Index: FC = () => {
   const [requestConfirmation, setRequestConfirmation] = useState(true)
@@ -14,6 +15,8 @@ const Index: FC = () => {
   const [backGroundColor, setBackGroundColor] = useState('')
   const [buttonColor, setButtonColor] = useState('')
   const [selectLanguage, setSelectLanguage] = useState('en')
+  const [medicalMessage, setMedicalMessage] = useState('')
+  const [informationMessage, setInformationMessage] = useState('')
 
   useEffect(() => {
     console.log('object')
@@ -21,7 +24,7 @@ const Index: FC = () => {
   return (
     <ClientNotification
       tabComponent={
-        <StandardTab
+        <Standard
           requestConfirmHook={[requestConfirmation, setRequestConfirmation]}
           allowReschedulingHook={[allowRescheduling, setAllowRescheduling]}
           allowCancellationHook={[allowCancellation, setAllowCancellation]}
@@ -35,10 +38,13 @@ const Index: FC = () => {
           selectLanguageHook={[selectLanguage, setSelectLanguage]}
           backGroundColorHook={[backGroundColor, setBackGroundColor]}
           buttonColorHook={[buttonColor, setButtonColor]}
+          informationMessageHook={[informationMessage, setInformationMessage]}
+          medicalMessageHook={[medicalMessage, setMedicalMessage]}
+
         />
       }
       previewComponent={
-        <NotificationPreview
+        <Appointment
           requestConfirm={requestConfirmation}
           allowRescheduling={allowRescheduling}
           allowCancellation={allowCancellation}
@@ -49,6 +55,8 @@ const Index: FC = () => {
           selectLanguage={selectLanguage}
           backGroundColor={backGroundColor}
           buttonColor={buttonColor}
+          informationMessage={informationMessage}
+          medicalMessage={medicalMessage}
         />
       }
     />

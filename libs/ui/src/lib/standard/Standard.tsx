@@ -34,6 +34,8 @@ interface P {
   selectLanguageHook: [string, React.Dispatch<React.SetStateAction<string>>]
   backGroundColorHook: [string, React.Dispatch<React.SetStateAction<string>>]
   buttonColorHook: [string, React.Dispatch<React.SetStateAction<string>>]
+  informationMessageHook: [string, React.Dispatch<React.SetStateAction<string>>]
+  medicalMessageHook: [string, React.Dispatch<React.SetStateAction<string>>]
 }
 
 const { TabPane } = Tabs
@@ -52,6 +54,8 @@ const Standard: FC<P> = ({
   selectLanguageHook: [selectLanguage, setSelectLanguage],
   backGroundColorHook: [backGroundColor, setBackGroundColor],
   buttonColorHook: [buttonColor, setButtonColor],
+  informationMessageHook: [informationMessage, setInformationMessage],
+  medicalMessageHook: [medicalMessage, setMedicalMessage],
 }) => {
   return (
     <Row className={styles.tabsAlign}>
@@ -204,25 +208,33 @@ const Standard: FC<P> = ({
                     Add Medical History button
                   </Checkbox>
                 </Row>
-                <Row>
-                  <Checkbox
-                    className={styles.checkboxStyle}
-                    value="hide_his_completed"
-                  >
-                    Hide if history is already completed
-                  </Checkbox>
-                </Row>
-                <Row>
-                  <span className={styles.textareaLabel}>
-                    Medical History message
-                  </span>
-                </Row>
-                <Row>
-                  <TextArea
-                    className={styles.textareaStyle}
-                    autoSize={{ minRows: 3, maxRows: 3 }}
-                  />
-                </Row>
+                {addMedicalHisButton && (
+                  <>
+                    <Row>
+                      <Checkbox
+                        className={styles.checkboxStyle}
+                        value="hide_his_completed"
+                      >
+                        Hide if history is already completed
+                      </Checkbox>
+                    </Row>
+
+                    <Row>
+                      <span className={styles.textareaLabel}>
+                        Medical History message
+                      </span>
+                    </Row>
+                    <Row>
+                      <TextArea
+                        className={styles.textareaStyle}
+                        autoSize={{ minRows: 3, maxRows: 3 }}
+                        onChange={(event) =>
+                          setMedicalMessage(event.target.value)
+                        }
+                      />
+                    </Row>
+                  </>
+                )}
                 <ColorPicker
                   heading="Background color"
                   onSelected={(val) => setBackGroundColor(val)}
@@ -239,6 +251,9 @@ const Standard: FC<P> = ({
                     className={styles.textareaStyle}
                     placeholder="e.g. Special offer"
                     autoSize={{ minRows: 3, maxRows: 3 }}
+                    onChange={(event) =>
+                      setInformationMessage(event.target.value)
+                    }
                   />
                 </Row>
               </Panel>
@@ -261,7 +276,10 @@ const Standard: FC<P> = ({
           </div>
         </TabPane>
         <TabPane tab="Custom" key="2">
-          <p>Custom Tab</p>
+          <p>
+            Custom TabCustom TabCustom TabCustom TabCustom TabCustom TabCustom
+            TabCustom TabCustom TabCustom TabCustom TabCustom TabCustom Tab
+          </p>
         </TabPane>
       </Tabs>
     </Row>

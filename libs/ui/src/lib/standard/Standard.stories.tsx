@@ -21,6 +21,8 @@ const Story: React.FC = ({ ...args }) => {
   const [backGroundColor, SetBackGroundColor] = useState('')
   const [buttonColor, SetButtonColor] = useState('')
   const [selectLanguage, SetSelectLanguage] = useState('EN')
+  const [medicalMessage, setMedicalMessage] = useState('')
+  const [informationMessage, setInformationMessage] = useState('')
 
   return (
     <div style={{ width: '392px' }}>
@@ -35,7 +37,10 @@ const Story: React.FC = ({ ...args }) => {
         selectLanguageHook={[selectLanguage, SetSelectLanguage]}
         backGroundColorHook={[backGroundColor, SetBackGroundColor]}
         buttonColorHook={[buttonColor, SetButtonColor]}
+        informationMessageHook={[informationMessage, setInformationMessage]}
+        medicalMessageHook={[medicalMessage, setMedicalMessage]}
       />
+      <p>{medicalMessage}</p>
     </div>
   )
 }
