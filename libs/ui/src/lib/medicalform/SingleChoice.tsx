@@ -1,8 +1,7 @@
-import { PlusOutlined } from '@ant-design/icons'
-import { Button, ButtonTypes } from '@pabau/ui'
 import { Input } from 'antd'
 import React, { FC } from 'react'
 import singleChoiceIcon from '../../assets/images/medicalform_singlechoice.svg'
+import LinkedField from './LinkedField'
 import styles from './MedicalForm.module.less'
 import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormTitle from './MedicalFormTitle'
@@ -29,14 +28,7 @@ const SingleChoice: FC = () => {
           <p style={{ marginTop: '5px' }}>Question</p>
           <Input placeholder="Enter your question" />
           <Options />
-          <p style={{ marginTop: '20px' }}>Linked field</p>
-          <Button
-            type={ButtonTypes.default}
-            icon={<PlusOutlined />}
-            size="small"
-          >
-            Add
-          </Button>
+          <LinkedField linkedLabel="Linked field" />
         </div>
       </div>
       <div className={styles.formItem} style={{ borderBottom: 'none' }}>

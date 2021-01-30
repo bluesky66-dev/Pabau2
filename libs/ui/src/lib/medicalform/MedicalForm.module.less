@@ -1,15 +1,14 @@
 .mainBody {
   width: 408px;
   color: #9292a3;
-}
-
-:global {
-  .ant-btn.ant-btn-default,
-  .ant-radio-button-wrapper {
-    color: #9292a3;
-  }
-  .ant-radio-button-wrapper-checked {
-    color: #ffffff;
+  :global {
+    .ant-btn.ant-btn-default,
+    .ant-radio-button-wrapper {
+      color: #9292a3;
+    }
+    .ant-radio-button-wrapper-checked {
+      color: #ffffff;
+    }
   }
 }
 
@@ -63,6 +62,30 @@
     font-size: 16px;
     line-height: 24px;
     color: #b8b8c0;
+  }
+  .optionInput {
+    font-size: 12px;
+    line-height: 18px;
+    color: #b8b8c0;
+  }
+  .optionBtn {
+    margin-left: 5px;
+    border: none;
+  }
+  .multiOptionBtn {
+    margin-left: 25px;
+    border: none;
+  }
+  .multiOption {
+    :global {
+      .ant-checkbox-wrapper {
+        white-space: nowrap;
+      }
+    }
+  }
+  .linkedField {
+    display: flex;
+    margin-top: 5px;
   }
 }
 .formBottom {

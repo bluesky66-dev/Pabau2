@@ -1,8 +1,8 @@
-import { PlusOutlined } from '@ant-design/icons'
 import { Button, ButtonTypes } from '@pabau/ui'
 import { Input } from 'antd'
 import React, { FC, useState } from 'react'
 import longAnswerIcon from '../../assets/images/medicalform_longanswer.svg'
+import LinkedField from './LinkedField'
 import styles from './MedicalForm.module.less'
 import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormTitle from './MedicalFormTitle'
@@ -31,22 +31,8 @@ const LongAnswer: FC = () => {
           <Input placeholder="Enter your question" />
           {advanced && (
             <>
-              <p style={{ marginTop: '20px' }}>Linked field</p>
-              <Button
-                type={ButtonTypes.default}
-                icon={<PlusOutlined />}
-                size="small"
-              >
-                Add
-              </Button>
-              <p style={{ marginTop: '20px' }}>Default field</p>
-              <Button
-                type={ButtonTypes.default}
-                icon={<PlusOutlined />}
-                size="small"
-              >
-                Add
-              </Button>
+              <LinkedField linkedLabel="Linked field" />
+              <LinkedField linkedLabel="Default field" />
               <br />
             </>
           )}

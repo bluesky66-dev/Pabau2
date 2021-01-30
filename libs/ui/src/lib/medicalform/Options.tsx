@@ -1,11 +1,13 @@
-import { PlusOutlined } from '@ant-design/icons'
+import { EditOutlined, PlusOutlined, SaveOutlined } from '@ant-design/icons'
 import { Button, ButtonTypes } from '@pabau/ui'
-import { Radio } from 'antd'
+import { Input, Radio } from 'antd'
 import React, { FC, useState } from 'react'
+import styles from './MedicalForm.module.less'
 
 type itemProps = {
   id: number
   name?: string
+  editing?: boolean
 }
 
 const Options: FC = () => {
@@ -27,9 +29,20 @@ const Options: FC = () => {
       {
         id: items.length,
         name: itemName,
+        editing: false,
       },
     ])
     setItemName('New Option')
+  }
+
+  const handleOptions = (index, value) => {
+    const tempItems = [...items]
+    const itemValue = {
+      ...items[index],
+      ...value,
+    }
+    tempItems.splice(index, 1, itemValue)
+    setItems(tempItems)
   }
 
   return (
@@ -42,16 +55,61 @@ const Options: FC = () => {
             value={optionVal}
             onChange={(e) => setOptionVal(e.target.value)}
           >
-            {items.map((item) => (
-              <Radio key={item.id} value={item.id} style={radioStyle}>
-                {item.name}
-              </Radio>
+            {items.map((item, index) => (
+              <div key={item.id}>
+                <Radio key={item.id} value={item.id} style={radioStyle}>
+                  {item.editing && (
+                    <>
+                      <Input
+                        className={styles.optionInput}
+                        placeholder="Enter new option"
+                        onChange={(e) =>
+                          handleOptions(index, { name: e.target.value })
+                        }
+                        value={item.name}
+                      />
+                      <Button
+                        className={styles.optionBtn}
+                        size="small"
+                        type={ButtonTypes.default}
+                        onClick={() =>
+                          handleOptions(index, {
+                            name: item.name,
+                            editing: false,
+                          })
+                        }
+                      >
+                        <SaveOutlined />
+                      </Button>
+                    </>
+                  )}
+                  {!item.editing && (
+                    <>
+                      <span>{item.name}</span>{' '}
+                      <Button
+                        className={styles.optionBtn}
+                        size="small"
+                        type={ButtonTypes.default}
+                        onClick={() =>
+                          handleOptions(index, {
+                            name: item.name,
+                            editing: true,
+                          })
+                        }
+                      >
+                        <EditOutlined />
+                      </Button>
+                    </>
+                  )}
+                </Radio>
+              </div>
             ))}
           </Radio.Group>
           <br />
         </>
       )}
       <Button
+        style={{ marginTop: '5px' }}
         type={ButtonTypes.default}
         icon={<PlusOutlined />}
         onClick={addItem}
