@@ -4,6 +4,7 @@ import { Input, Select } from 'antd'
 import React, { FC, useState } from 'react'
 import styles from './MedicalForm.module.less'
 
+
 const { Option } = Select
 
 type linkedFieldProps = {

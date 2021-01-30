@@ -4,6 +4,7 @@ import { Input, Radio } from 'antd'
 import React, { FC, useState } from 'react'
 import styles from './MedicalForm.module.less'
 
+
 type itemProps = {
   id: number
   name?: string
