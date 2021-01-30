@@ -1,26 +1,29 @@
-import React, { FC, useState, useEffect, ReactNode } from 'react'
-import { Radio } from 'antd'
-import styles from './RadioGroup.module.less'
+import React, { FC, useState, useEffect } from 'react'
+import { Radio, Form } from 'antd'
+import { FormProps } from 'antd/lib/form'
+// import styles from './RadioGroup.module.less'
 
 interface RadioItem {
   title: string
 }
 
-export interface RadioGroupProps {
+export interface RadioGroupProps extends FormProps {
   label?: string
-  icon?: ReactNode
   defaultValue: number
   radioItems: RadioItem[]
+  tooltip?: string
   onChange?(val): void
 }
 
 export const RadioGroup: FC<RadioGroupProps> = ({
   label,
-  icon,
   defaultValue = 0,
   radioItems,
+  tooltip,
   onChange,
+  ...props
 }) => {
+  const [form] = Form.useForm()
   const [value, setValue] = useState(0)
   const onRadioChecked = (e) => {
     setValue(e.target.value)
@@ -34,23 +37,19 @@ export const RadioGroup: FC<RadioGroupProps> = ({
   }, [defaultValue, radioItems])
 
   return (
-    <div className={styles.radioGroupContainer}>
-      {label && (
-        <p className={styles.radioGroupLabel}>
-          <span>{label}</span>
-          {icon && icon}
-        </p>
-      )}
-      <Radio.Group onChange={(e) => onRadioChecked(e)} value={value}>
-        {Array.isArray(radioItems) &&
-          radioItems.length > 0 &&
-          radioItems.map((item, index) => (
-            <Radio key={item.title} value={index}>
-              {item.title}
-            </Radio>
-          ))}
-      </Radio.Group>
-    </div>
+    <Form form={form} layout="vertical" {...props}>
+      <Form.Item label={label} tooltip={tooltip ? tooltip : ''}>
+        <Radio.Group onChange={(e) => onRadioChecked(e)} value={value}>
+          {Array.isArray(radioItems) &&
+            radioItems.length > 0 &&
+            radioItems.map((item, index) => (
+              <Radio key={item.title} value={index}>
+                {item.title}
+              </Radio>
+            ))}
+        </Radio.Group>
+      </Form.Item>
+    </Form>
   )
 }
 

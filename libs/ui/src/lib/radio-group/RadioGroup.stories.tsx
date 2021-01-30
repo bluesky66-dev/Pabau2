@@ -1,5 +1,4 @@
 import React from 'react'
-import { QuestionCircleOutlined } from '@ant-design/icons'
 import { notification } from 'antd'
 import RadioGroup, { RadioGroupProps } from './RadioGroup'
 
@@ -21,9 +20,9 @@ const RadioGroupStory = ({ ...args }: RadioGroupProps) => (
 export const Default = RadioGroupStory.bind({})
 Default.args = {
   label: 'Secure Medical Forms',
-  icon: <QuestionCircleOutlined />,
   defaultValue: 0,
   radioItems: [{ title: 'Yes' }, { title: 'No' }],
+  tooltip: 'Secure Medical Forms',
   onChange: (selectedItem) => {
     notification.open({ message: `${selectedItem.title}` })
   },
