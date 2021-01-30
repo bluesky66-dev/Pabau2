@@ -28,7 +28,7 @@ const InnerSingleChoice: FC = () => {
       onClick={(e) => setClicked((e) => !e)}
     >
       <InnerMedicalFormEditIcon />
-      <div className={styles.formItem}>
+      <div className={styles.formItem} style={{ borderTop: 'none' }}>
         <InnerMedicalFormTitle
           iconUrl={singleChoiceIcon}
           bgcolor="#65CD98"

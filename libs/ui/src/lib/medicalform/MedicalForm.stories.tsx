@@ -5,7 +5,10 @@ import Dob from './Dob'
 import Drawing from './Drawing'
 import Dropdown from './Dropdown'
 import Drugs from './Drugs'
+import InnerDrawing from './InnerDrawing'
+import InnerSignature from './InnerSignature'
 import InnerSingleChoice from './InnerSingleChoice'
+import InnerTextBlock from './InnerTextBlock'
 import LabTest from './LabTest'
 import LongAnswer from './LongAnswer'
 import MeicalForm from './MedicalForm'
@@ -38,3 +41,6 @@ export const VaccineHistoryForm = () => <VaccineHistory />
 export const VaccineSchedulerForm = () => <VaccineScheduler />
 export const DobForm = () => <Dob />
 export const InnerSingleChoiceForm = () => <InnerSingleChoice />
+export const InnerSignatureForm = () => <InnerSignature />
+export const InnerTextBlockForm = () => <InnerTextBlock />
+export const InnerDrawingBlockForm = () => <InnerDrawing />
