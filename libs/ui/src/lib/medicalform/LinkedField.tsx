@@ -1,4 +1,4 @@
-import { PlusOutlined, SaveOutlined } from '@ant-design/icons'
+import { DeleteOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button, ButtonTypes } from '@pabau/ui'
 import { Input, Select } from 'antd'
 import React, { FC, useState } from 'react'
@@ -72,6 +72,12 @@ const LinkedField: FC<linkedFieldProps> = ({ linkedLabel }) => {
     setItems(tempItems)
   }
 
+  const handleDelete = (index) => {
+    const tempItems = [...items]
+    tempItems.splice(index, 1)
+    setItems(tempItems)
+  }
+
   return (
     <>
       <p style={{ marginTop: '20px' }}>{linkedLabel}</p>
@@ -81,6 +87,7 @@ const LinkedField: FC<linkedFieldProps> = ({ linkedLabel }) => {
             <Input
               className={styles.optionInput}
               placeholder="Enter new option"
+              readOnly={true}
               value={item.name}
               onChange={(e) => handleOptions(index, { name: e.target.value })}
             />
@@ -88,8 +95,11 @@ const LinkedField: FC<linkedFieldProps> = ({ linkedLabel }) => {
               className={styles.optionBtn}
               size="small"
               type={ButtonTypes.default}
+              onClick={() =>
+                handleDelete(index)
+              }
             >
-              <SaveOutlined />
+              <DeleteOutlined />
             </Button>
           </div>
         ))}
@@ -110,7 +120,8 @@ const LinkedField: FC<linkedFieldProps> = ({ linkedLabel }) => {
           <br />
         </>
       )}
-      <Button
+      {items.length === 0 &&
+        <Button
         style={{ marginTop: '5px' }}
         type={ButtonTypes.default}
         icon={<PlusOutlined />}
@@ -119,6 +130,7 @@ const LinkedField: FC<linkedFieldProps> = ({ linkedLabel }) => {
       >
         Add
       </Button>
+      }
     </>
   )
 }

@@ -1,4 +1,4 @@
-import { EditOutlined, PlusOutlined, SaveOutlined } from '@ant-design/icons'
+import { DeleteOutlined, EditOutlined, PlusOutlined, SaveOutlined } from '@ant-design/icons'
 import { Button, ButtonTypes } from '@pabau/ui'
 import { Input, Radio } from 'antd'
 import React, { FC, useState } from 'react'
@@ -29,7 +29,7 @@ const Options: FC = () => {
       {
         id: items.length,
         name: itemName,
-        editing: false,
+        editing: true,
       },
     ])
     setItemName('New Option')
@@ -45,6 +45,21 @@ const Options: FC = () => {
     setItems(tempItems)
   }
 
+  const handleDelete = (index) => {
+    const tempItems = [...items]
+    tempItems.splice(index, 1)
+    setItems(tempItems)
+  }
+
+  const onKeyUp = (event, index, item) => {
+    if (event.charCode === 13) {
+      handleOptions(index, {
+        name: item.name,
+        editing: false,
+      })
+    }
+  }
+
   return (
     <>
       <p style={{ marginTop: '20px' }}>Options</p>
@@ -56,7 +71,7 @@ const Options: FC = () => {
             onChange={(e) => setOptionVal(e.target.value)}
           >
             {items.map((item, index) => (
-              <div key={item.id}>
+              <div key={item.id} className={styles.optionItem}>
                 <Radio key={item.id} value={item.id} style={radioStyle}>
                   {item.editing && (
                     <>
@@ -67,6 +82,7 @@ const Options: FC = () => {
                           handleOptions(index, { name: e.target.value })
                         }
                         value={item.name}
+                        onKeyPress={(e) => onKeyUp(e, index, item)}
                       />
                       <Button
                         className={styles.optionBtn}
@@ -91,6 +107,16 @@ const Options: FC = () => {
                         size="small"
                         type={ButtonTypes.default}
                         onClick={() =>
+                          handleDelete(index)
+                        }
+                      >
+                        <DeleteOutlined />
+                      </Button>
+                      <Button
+                        className={`${styles.optionBtn} ${styles.optionEdit}`}
+                        size="small"
+                        type={ButtonTypes.default}
+                        onClick={() =>
                           handleOptions(index, {
                             name: item.name,
                             editing: true,
@@ -99,7 +125,7 @@ const Options: FC = () => {
                       >
                         <EditOutlined />
                       </Button>
-                    </>
+                      </>
                   )}
                 </Radio>
               </div>

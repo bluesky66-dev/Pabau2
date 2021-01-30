@@ -1,4 +1,4 @@
-import { EditOutlined, PlusOutlined, SaveOutlined } from '@ant-design/icons'
+import { DeleteOutlined, EditOutlined, PlusOutlined, SaveOutlined } from '@ant-design/icons'
 import { Button, ButtonTypes } from '@pabau/ui'
 import { Checkbox, Input } from 'antd'
 import React, { FC, useState } from 'react'
@@ -29,7 +29,7 @@ const MultiOptions: FC = () => {
       {
         id: items.length,
         name: itemName,
-        editing: false,
+        editing: true,
       },
     ])
     setItemName('New Option')
@@ -43,6 +43,21 @@ const MultiOptions: FC = () => {
     }
     tempItems.splice(index, 1, itemValue)
     setItems(tempItems)
+  }
+
+  const handleDelete = (index) => {
+    const tempItems = [...items]
+    tempItems.splice(index, 1)
+    setItems(tempItems)
+  }
+
+  const onKeyUp = (event, index, item) => {
+    if (event.charCode === 13) {
+      handleOptions(index, {
+        name: item.name,
+        editing: false,
+      })
+    }
   }
 
   return (
@@ -60,6 +75,7 @@ const MultiOptions: FC = () => {
                     onChange={(e) =>
                       handleOptions(index, { name: e.target.value })
                     }
+                    onKeyPress={(e) => onKeyUp(e, index, item)}
                     value={item.name}
                   />
                 )}
@@ -85,8 +101,19 @@ const MultiOptions: FC = () => {
                 </Button>
               )}
               {!item.editing && (
+                <>
                 <Button
-                  className={styles.optionBtn}
+                className={styles.optionBtn}
+                size="small"
+                type={ButtonTypes.default}
+                onClick={() =>
+                  handleDelete(index)
+                }
+              >
+                <DeleteOutlined />
+              </Button>
+                <Button
+                  className={`${styles.optionBtn} ${styles.optionEdit}`}
                   size="small"
                   type={ButtonTypes.default}
                   onClick={() =>
@@ -98,6 +125,7 @@ const MultiOptions: FC = () => {
                 >
                   <EditOutlined />
                 </Button>
+              </>
               )}
             </div>
           ))}
