@@ -1,8 +1,9 @@
 import React, { FC, useEffect, useState } from 'react'
 import { ClientNotification } from '@pabau/ui'
-
-import Standard from '../../../../libs/ui/src/lib/standard/Standard';
-import Appointment from '../../../../libs/ui/src/lib/appointment/Appointment';
+// eslint-disable-next-line
+import Standard from '../../../../libs/ui/src/lib/standard/Standard'
+// eslint-disable-next-line
+import Appointment from '../../../../libs/ui/src/lib/appointment/Appointment'
 
 const Index: FC = () => {
   const [requestConfirmation, setRequestConfirmation] = useState(true)
@@ -40,7 +41,6 @@ const Index: FC = () => {
           buttonColorHook={[buttonColor, setButtonColor]}
           informationMessageHook={[informationMessage, setInformationMessage]}
           medicalMessageHook={[medicalMessage, setMedicalMessage]}
-
         />
       }
       previewComponent={
