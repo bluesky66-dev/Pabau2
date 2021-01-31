@@ -5,7 +5,7 @@ import RadioGroup from './RadioGroup'
 
 describe('RadioGroup', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<RadioGroup />)
+    const { baseElement } = render(<RadioGroup radioItems={[]} value="" />)
     expect(baseElement).toBeTruthy()
   })
 })
