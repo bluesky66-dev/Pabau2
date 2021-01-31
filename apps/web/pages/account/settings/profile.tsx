@@ -1,4 +1,4 @@
-import { Language, MyAvatar } from '@pabau/ui'
+import { LanguageDropdown, Avatar } from '@pabau/ui'
 import {
   Button,
   Col,
@@ -38,13 +38,12 @@ const Profile: FC = () => {
       <Divider />
       <Form layout="vertical">
         <Form.Item>
-          <MyAvatar
-            imgSrc={
+          <Avatar
+            src={
               'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'
             }
-            avatarSize={128}
+            size={128}
             name={'Zhen'}
-            background={'#f0f2f5'}
           />
           <Button
             style={{ margin: '0 16px', verticalAlign: 'middle' }}
@@ -92,9 +91,7 @@ const Profile: FC = () => {
         </Row>
         <Row>
           <Col span={24}>
-            <Form.Item label="Language">
-              <Language />
-            </Form.Item>
+            <LanguageDropdown label={'Language'} />
           </Col>
         </Row>
         <Row>
