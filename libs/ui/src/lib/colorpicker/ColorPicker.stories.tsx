@@ -23,6 +23,7 @@ export const DefaultColorPicker: FC<P> = ({ heading }) => {
         heading={heading}
         onSelected={(val) => setSelectColor(val)}
         onHover={(val) => setHoverolor(val)}
+        onLeave={(val) => setHoverolor('')}
       />
       <div
         style={{
