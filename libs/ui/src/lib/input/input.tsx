@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react'
-import { Input as AntInput, Form } from 'antd'
+import { Form, Input as AntInput } from 'antd'
 import { FormProps } from 'antd/lib/form'
 import styles from './input.module.less'
 
