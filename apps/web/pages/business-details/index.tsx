@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Typography } from 'antd'
-import { Button, TabMenu, Breadcrumb, Security } from '@pabau/ui'
+import { TabMenu, Breadcrumb, Security, System } from '@pabau/ui'
 import Layout from '../../components/Layout/Layout'
 import CommonHeader from '../setup/CommonHeader'
 import { securityToolsData, percent } from '../../assets/securityData'
@@ -15,21 +15,14 @@ export const Index: FC = () => {
       <CommonHeader />
       <Layout>
         <div className={styles.businessDetailsContainer}>
-          <div className={styles.businessDetailsTop}>
-            <div>
-              <Breadcrumb breadcrumbItems={['Setup', 'Business Details']} />
-              <Title>Business Details</Title>
-            </div>
-            <div className={styles.businessDetailsOps}>
-              <Button type="primary">Save Changes</Button>
-            </div>
-          </div>
+          <Breadcrumb breadcrumbItems={['Setup', 'Business Details']} />
+          <Title>Business Details</Title>
         </div>
         <div className={styles.tabsForDesktop}>
           <TabMenu tabPosition="left" menuItems={tabMenuItems} minHeight="auto">
             <div>1</div>
             <div>1</div>
-            <div>1</div>
+            <System />
             <Security percent={percent} data={securityToolsData} />
           </TabMenu>
         </div>
@@ -37,7 +30,7 @@ export const Index: FC = () => {
           <TabMenu tabPosition="top" menuItems={tabMenuItems} minHeight="auto">
             <div>1</div>
             <div>1</div>
-            <div>1</div>
+            <System />
             <Security percent={percent} data={securityToolsData} />
           </TabMenu>
         </div>

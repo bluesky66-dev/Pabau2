@@ -1,30 +1,26 @@
 import React, { FC, useState, useEffect } from 'react'
 import { Radio, Form } from 'antd'
 import { FormProps } from 'antd/lib/form'
-// import styles from './RadioGroup.module.less'
-
-interface RadioItem {
-  title: string
-}
+import styles from './RadioGroup.module.less'
 
 export interface RadioGroupProps extends FormProps {
   label?: string
-  defaultValue: number
-  radioItems: RadioItem[]
+  value: string
+  radioItems: Array<string>
   tooltip?: string
   onChange?(val): void
 }
 
 export const RadioGroup: FC<RadioGroupProps> = ({
   label,
-  defaultValue = 0,
+  value = 0,
   radioItems,
   tooltip,
   onChange,
   ...props
 }) => {
   const [form] = Form.useForm()
-  const [value, setValue] = useState(0)
+  const [_value, setValue] = useState(0)
   const onRadioChecked = (e) => {
     setValue(e.target.value)
     if (onChange) {
@@ -33,23 +29,30 @@ export const RadioGroup: FC<RadioGroupProps> = ({
   }
 
   useEffect(() => {
-    setValue(defaultValue)
-  }, [defaultValue, radioItems])
+    const elIndex = radioItems.findIndex((el) => el === value)
+    if (elIndex < 0) {
+      setValue(0)
+    } else {
+      setValue(elIndex)
+    }
+  }, [value, radioItems])
 
   return (
-    <Form form={form} layout="vertical" {...props}>
-      <Form.Item label={label} tooltip={tooltip ? tooltip : ''}>
-        <Radio.Group onChange={(e) => onRadioChecked(e)} value={value}>
-          {Array.isArray(radioItems) &&
-            radioItems.length > 0 &&
-            radioItems.map((item, index) => (
-              <Radio key={item.title} value={index}>
-                {item.title}
-              </Radio>
-            ))}
-        </Radio.Group>
-      </Form.Item>
-    </Form>
+    <div className={styles.radioGroupContainer}>
+      <Form form={form} layout="vertical" {...props}>
+        <Form.Item label={label} tooltip={tooltip ? tooltip : ''}>
+          <Radio.Group onChange={(e) => onRadioChecked(e)} value={_value}>
+            {Array.isArray(radioItems) &&
+              radioItems.length > 0 &&
+              radioItems.map((item, index) => (
+                <Radio key={item} value={index}>
+                  {item}
+                </Radio>
+              ))}
+          </Radio.Group>
+        </Form.Item>
+      </Form>
+    </div>
   )
 }
 
