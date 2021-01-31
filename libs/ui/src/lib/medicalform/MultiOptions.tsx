@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons'
 import { Button, ButtonTypes } from '@pabau/ui'
 import { Checkbox, Input } from 'antd'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
 import styles from './MedicalForm.module.less'
 
 type itemProps = {
@@ -30,11 +30,11 @@ const MultiOptions: FC<P> = ({ onChange }) => {
     color: '#9292a3',
   }
 
-  useEffect(() => {
-    if (onChange) {
-      onChange(items.length)
-    }
-  }, [items])
+  // useEffect(() => {
+  //   if (onChange) {
+  //     onChange(items.length)
+  //   }
+  // }, [items])
 
   const addItem = (event) => {
     event.preventDefault()
@@ -60,12 +60,18 @@ const MultiOptions: FC<P> = ({ onChange }) => {
     }
     tempItems.splice(index, 1, itemValue)
     setItems(tempItems)
+    if (onChange) {
+      onChange(items.length)
+    }
   }
 
   const handleDelete = (index) => {
     const tempItems = [...items]
     tempItems.splice(index, 1)
     setItems(tempItems)
+    if (onChange) {
+      onChange(items.length)
+    }
   }
 
   const onKeyUp = (event, index, item) => {

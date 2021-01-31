@@ -12,7 +12,7 @@ interface P {
 const LabTest: FC<P> = ({ hideSideBar }) => {
   const [addedOption, setAddedOption] = useState('')
   const saveFunc = () => {
-    if (hideSideBar && addedOption != '') {
+    if (hideSideBar && addedOption !== '') {
       hideSideBar()
     }
   }
