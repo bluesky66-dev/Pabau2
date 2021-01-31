@@ -1,6 +1,13 @@
 import React, { FC } from 'react'
 import { Typography } from 'antd'
-import { TabMenu, Breadcrumb, Security, System, Terminology } from '@pabau/ui'
+import {
+  TabMenu,
+  Breadcrumb,
+  Security,
+  System,
+  Terminology,
+  BusinessDetails,
+} from '@pabau/ui'
 import Layout from '../../components/Layout/Layout'
 import CommonHeader from '../setup/CommonHeader'
 import { securityToolsData, percent } from '../../assets/securityData'
@@ -20,7 +27,7 @@ export const Index: FC = () => {
         </div>
         <div className={styles.tabsForDesktop}>
           <TabMenu tabPosition="left" menuItems={tabMenuItems} minHeight="auto">
-            <div>1</div>
+            <BusinessDetails />
             <Terminology />
             <System />
             <Security percent={percent} data={securityToolsData} />
@@ -28,7 +35,7 @@ export const Index: FC = () => {
         </div>
         <div className={styles.tabsForMobile}>
           <TabMenu tabPosition="top" menuItems={tabMenuItems} minHeight="auto">
-            <div>1</div>
+            <BusinessDetails />
             <Terminology />
             <System />
             <Security percent={percent} data={securityToolsData} />

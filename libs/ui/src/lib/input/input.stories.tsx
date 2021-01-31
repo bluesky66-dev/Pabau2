@@ -2,7 +2,6 @@ import React from 'react'
 import { HelpTooltip } from './helptooltip'
 import { Input } from './input'
 import { notification } from 'antd'
-import { Language as LanguageBox } from './Language'
 import { Passcode as PasscodeBox } from './Passcode'
 import { PasswordWithHelper as PasswordWithHelperBox } from './PasswordWithHelper'
 
@@ -61,9 +60,6 @@ InputEmailAddress.args = {
 
 const PasscodeStory = ({ ...args }) => <PasscodeBox {...args}></PasscodeBox>
 export const Passcode = PasscodeStory.bind({})
-
-const LanguageStory = ({ ...args }) => <LanguageBox {...args}></LanguageBox>
-export const Language = LanguageStory.bind({})
 
 const PasswordWithHelperStory = ({ ...args }) => (
   <PasswordWithHelperBox {...args}></PasswordWithHelperBox>
