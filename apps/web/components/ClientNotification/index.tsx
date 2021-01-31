@@ -59,6 +59,7 @@ const Index: FC = () => {
           medicalMessage={medicalMessage}
         />
       }
+      smsComponent={<div>this is sms component</div>}
     />
   )
 }

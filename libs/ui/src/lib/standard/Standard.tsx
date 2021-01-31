@@ -13,6 +13,7 @@ import {
 import { QuestionCircleOutlined } from '@ant-design/icons'
 import { ColorPicker, ClientLanguage } from '@pabau/ui'
 import styles from './Standard.module.less'
+import { PabauPlus } from '../badge/Badge'
 
 interface P {
   requestConfirmHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
@@ -257,6 +258,9 @@ const Standard: FC<P> = ({
                   />
                 </Row>
               </Panel>
+              <div className={styles.papauPlusContainer}>
+                <PabauPlus label="Plus" />
+              </div>
               <Panel
                 className={styles.panelAlign}
                 header="Client languages"
