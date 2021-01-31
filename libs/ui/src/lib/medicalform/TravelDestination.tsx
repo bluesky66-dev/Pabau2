@@ -5,7 +5,16 @@ import styles from './MedicalForm.module.less'
 import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormTitle from './MedicalFormTitle'
 
-const TravelDesctination: FC = () => {
+interface P {
+  hideSideBar?: () => void
+}
+
+const TravelDesctination: FC<P> = ({ hideSideBar }) => {
+  const saveFunc = () => {
+    if (hideSideBar) {
+      hideSideBar()
+    }
+  }
   return (
     <div className={styles.mainBody}>
       <div className={styles.formItem}>
@@ -28,7 +37,7 @@ const TravelDesctination: FC = () => {
         </div>
       </div>
       <div className={styles.formItem} style={{ borderBottom: 'none' }}>
-        <MedicalFormBottom needLeft={true} />
+        <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
       </div>
     </div>
   )

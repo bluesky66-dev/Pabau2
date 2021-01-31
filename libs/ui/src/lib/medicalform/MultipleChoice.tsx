@@ -8,8 +8,22 @@ import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormTitle from './MedicalFormTitle'
 import MultiOptions from './MultiOptions'
 
-const MultipleChoice: FC = () => {
+interface P {
+  hideSideBar?: () => void
+}
+
+const MultipleChoice: FC<P> = ({ hideSideBar }) => {
   const [advanced, setAdvanced] = useState(false)
+  const [addedOption, setAddedOption] = useState(0)
+  const eventhandler = (count) => {
+    setAddedOption(count)
+  }
+
+  const saveFunc = () => {
+    if (hideSideBar && addedOption > 0) {
+      hideSideBar()
+    }
+  }
   return (
     <div className={styles.mainBody}>
       <div className={styles.formItem}>
@@ -29,7 +43,7 @@ const MultipleChoice: FC = () => {
         <div className={`${styles.formQuestion} ${styles.formCommon}`}>
           <p style={{ marginTop: '5px' }}>Question</p>
           <Input placeholder="Enter your question" />
-          <MultiOptions />
+          <MultiOptions onChange={eventhandler} />
           {advanced && <LinkedField linkedLabel="Linked field" />}
           <br />
           <Button
@@ -44,7 +58,7 @@ const MultipleChoice: FC = () => {
         </div>
       </div>
       <div className={styles.formItem} style={{ borderBottom: 'none' }}>
-        <MedicalFormBottom needLeft={true} />
+        <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
       </div>
     </div>
   )

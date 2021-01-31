@@ -7,6 +7,10 @@ import styles from './MedicalForm.module.less'
 import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormTitle from './MedicalFormTitle'
 
+interface P {
+  hideSideBar?: () => void
+}
+
 const typeOptions = [
   { label: 'Text', value: 'text' },
   { label: 'Email', value: 'email' },
@@ -14,10 +18,14 @@ const typeOptions = [
   { label: 'Date', value: 'date' },
 ]
 
-const ShortAnswer: FC = () => {
+const ShortAnswer: FC<P> = ({ hideSideBar }) => {
   const [selOption, setSelOption] = useState('text')
   const [advanced, setAdvanced] = useState(false)
-
+  const saveFunc = () => {
+    if (hideSideBar) {
+      hideSideBar()
+    }
+  }
   return (
     <div className={styles.mainBody}>
       <div className={styles.formItem}>
@@ -64,7 +72,7 @@ const ShortAnswer: FC = () => {
         </div>
       </div>
       <div className={styles.formItem} style={{ borderBottom: 'none' }}>
-        <MedicalFormBottom needLeft={true} />
+        <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
       </div>
     </div>
   )

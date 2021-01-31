@@ -8,7 +8,17 @@ import MedicalFormTitle from './MedicalFormTitle'
 
 const { Dragger } = Upload
 
-const Drawing: FC = () => {
+interface P {
+  hideSideBar?: () => void
+}
+
+const Drawing: FC<P> = ({ hideSideBar }) => {
+  const saveFunc = () => {
+    if (hideSideBar) {
+      hideSideBar()
+    }
+  }
+
   const drawingStyle = {
     height: '176px',
   }
@@ -43,7 +53,7 @@ const Drawing: FC = () => {
         </div>
       </div>
       <div className={styles.formItem} style={{ borderBottom: 'none' }}>
-        <MedicalFormBottom needLeft={true} />
+        <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
       </div>
     </div>
   )

@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons'
 import { Button, ButtonTypes } from '@pabau/ui'
 import { Input, Radio } from 'antd'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import styles from './MedicalForm.module.less'
 
 type itemProps = {
@@ -15,7 +15,11 @@ type itemProps = {
   editing?: boolean
 }
 
-const Options: FC = () => {
+interface P {
+  onChange?: (count) => void
+}
+
+const Options: FC<P> = ({ onChange }) => {
   const [items, setItems] = useState<itemProps[]>([])
   const [itemName, setItemName] = useState('')
 
@@ -26,6 +30,12 @@ const Options: FC = () => {
     lineHeight: '30px',
     color: '#9292a3',
   }
+
+  useEffect(() => {
+    if (onChange) {
+      onChange(items.length)
+    }
+  }, [items])
 
   const addItem = (event) => {
     event.preventDefault()

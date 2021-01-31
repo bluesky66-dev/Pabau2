@@ -1,13 +1,21 @@
 import { Select } from 'antd'
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import labTestIcon from '../../assets/images/medicalform_labtest.svg'
 import styles from './MedicalForm.module.less'
 import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormTitle from './MedicalFormTitle'
 
 const { Option } = Select
-
-const LabTest: FC = () => {
+interface P {
+  hideSideBar?: () => void
+}
+const LabTest: FC<P> = ({ hideSideBar }) => {
+  const [addedOption, setAddedOption] = useState('')
+  const saveFunc = () => {
+    if (hideSideBar && addedOption != '') {
+      hideSideBar()
+    }
+  }
   const optionLabels = [
     { key: '1', label: 'Accent Prime' },
     { key: '2', label: 'All-inclusive' },
@@ -18,6 +26,10 @@ const LabTest: FC = () => {
     { key: '7', label: 'Consultation' },
     { key: '8', label: 'Cooltech' },
   ]
+
+  const handleChange = (value) => {
+    setAddedOption(value)
+  }
 
   return (
     <div className={styles.mainBody}>
@@ -36,12 +48,13 @@ const LabTest: FC = () => {
       </div>
       <div className={styles.formItem}>
         <div className={`${styles.formQuestion} ${styles.formCommon}`}>
-          <p style={{ marginTop: '5px' }}>Question</p>
+          <p style={{ marginTop: '5px' }}>Choose tests</p>
           <Select
             mode="multiple"
             allowClear
             style={{ width: '100%' }}
             placeholder="Please select"
+            onChange={handleChange}
           >
             {optionLabels.map(({ key, label }) => (
               <Option key={key} value={key}>
@@ -52,7 +65,7 @@ const LabTest: FC = () => {
         </div>
       </div>
       <div className={styles.formItem} style={{ borderBottom: 'none' }}>
-        <MedicalFormBottom needLeft={true} />
+        <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
       </div>
     </div>
   )

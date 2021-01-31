@@ -31,11 +31,6 @@ const InnerDob: FC<P> = ({ required }) => {
             title="DOB"
           />
         </div>
-        <div className={styles.formItem}>
-          <div className={styles.formCommon}>
-            <p></p>
-          </div>
-        </div>
       </div>
     </div>
   )

@@ -17,8 +17,8 @@ export default {
     display: {
       control: {
         type: 'radio',
-        selected: 'show',
-        options: ['show', 'hide'],
+        selected: true,
+        options: [true, false],
       },
     }
   }
@@ -28,6 +28,7 @@ const RightSidebarStory = ({ ...args }) => <RightSidebar {...args}></RightSideba
 
 export const RightSidebarPanel = RightSidebarStory.bind({})
 RightSidebarPanel.args = {
-  componentName: 'Heading'
+  componentName: 'Heading',
+  display: true
 }
 

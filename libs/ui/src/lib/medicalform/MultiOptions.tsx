@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons'
 import { Button, ButtonTypes } from '@pabau/ui'
 import { Checkbox, Input } from 'antd'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import styles from './MedicalForm.module.less'
 
 type itemProps = {
@@ -15,7 +15,11 @@ type itemProps = {
   editing?: boolean
 }
 
-const MultiOptions: FC = () => {
+interface P {
+  onChange?: (count) => void
+}
+
+const MultiOptions: FC<P> = ({ onChange }) => {
   const [items, setItems] = useState<itemProps[]>([])
   const [itemName, setItemName] = useState('')
 
@@ -25,6 +29,12 @@ const MultiOptions: FC = () => {
     lineHeight: '30px',
     color: '#9292a3',
   }
+
+  useEffect(() => {
+    if (onChange) {
+      onChange(items.length)
+    }
+  }, [items])
 
   const addItem = (event) => {
     event.preventDefault()
