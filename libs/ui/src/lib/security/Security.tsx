@@ -28,8 +28,8 @@ export const Security: FC<SecurityProps> = ({ percent, data }) => {
         <div className={styles.securityScoreContainer}>
           <SecurityScore
             percent={percent}
-            title1="Pabau Baseline Standart"
-            title2="of the standart met"
+            title1="Pabau Baseline Standard"
+            title2="of the standard met"
             buttonTitle="How do we calculate this score?"
           />
         </div>
