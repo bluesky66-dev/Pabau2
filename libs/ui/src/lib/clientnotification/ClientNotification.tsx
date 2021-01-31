@@ -5,12 +5,15 @@ import styles from './ClientNotification.module.less'
 interface P {
   tabComponent?: React.ReactNode
   previewComponent?: React.ReactNode
+  smsComponent?: React.ReactNode
 }
 
 export const ClientNotification: FC<P> = ({
   tabComponent,
   previewComponent,
+  smsComponent,
 }) => {
+  const [previewStatus, setPreviewStatus] = React.useState(1)
   return (
     <Row wrap={false} className={styles.notificationPage}>
       <Col flex={'400px'} className={styles.builderColumn}>
@@ -25,17 +28,32 @@ export const ClientNotification: FC<P> = ({
         </Row>
         <Row justify="center" className={styles.previewButtonGroup}>
           <Radio.Group defaultValue="a" buttonStyle="solid">
-            <Radio.Button className={styles.radioLeftButton} value="a">
+            <Radio.Button
+              className={styles.radioLeftButton}
+              value="a"
+              onClick={() => setPreviewStatus(1)}
+            >
               Email
             </Radio.Button>
-            <Radio.Button className={styles.radioRightButton} value="b">
+            <Radio.Button
+              className={styles.radioRightButton}
+              value="b"
+              onClick={() => setPreviewStatus(2)}
+            >
               SMS Text
             </Radio.Button>
           </Radio.Group>
         </Row>
-        <Row justify="center">
-          <div className={styles.previewCard}>{previewComponent}</div>
-        </Row>
+        {previewStatus === 1 && (
+          <Row justify="center">
+            <div className={styles.previewCard}>{previewComponent}</div>
+          </Row>
+        )}
+        {previewStatus === 2 && (
+          <Row justify="center">
+            <div className={styles.previewCard}>{smsComponent}</div>
+          </Row>
+        )}
       </Col>
     </Row>
   )

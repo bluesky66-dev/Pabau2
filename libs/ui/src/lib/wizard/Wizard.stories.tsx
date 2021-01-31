@@ -18,7 +18,7 @@ export default {
 }
 
 const WizardStory = ({ ...args }) => {
-  const { active = 0 } = args
+  const { active = 1 } = args
   const [index, setIndex] = React.useState(active)
   return (
     <Wizard
