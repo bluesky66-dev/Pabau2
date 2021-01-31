@@ -1,9 +1,18 @@
+.mainBorder {
+  width: 648px;
+  border: 1px solid #ecedf0;
+  border-radius: 4px;
+}
+.mainBorder.activate {
+  border: 1px solid #fff;
+}
+
 .mainBody {
   position: relative;
   width: 648px;
   color: #9292a3;
-  border-radius: 4px;
   border-left: 4px solid #ffffff;
+  border-radius: 4px;
   cursor: pointer;
   :global {
     .ant-btn.ant-btn-default,
@@ -75,6 +84,20 @@
 .editIcon {
   position: absolute;
   right: 10px;
-  top: 10px;
+  top: 15px;
   display: none;
+}
+.requiredDiv {
+  position: absolute;
+  right: 40px;
+  top: 17px;
+  font-size: 12px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  color: #9292a3;
 }

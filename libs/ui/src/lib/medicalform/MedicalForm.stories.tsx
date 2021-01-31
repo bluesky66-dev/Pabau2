@@ -5,10 +5,21 @@ import Dob from './Dob'
 import Drawing from './Drawing'
 import Dropdown from './Dropdown'
 import Drugs from './Drugs'
+import InnerConditions from './InnerConditions'
+import InnerDob from './InnerDob'
 import InnerDrawing from './InnerDrawing'
+import InnerDropdown from './InnerDropdown'
+import InnerDrugs from './InnerDrugs'
+import InnerHeading from './InnerHeading'
+import InnerLabTest from './InnerLabTest'
+import InnerLongAnswer from './InnerLongAnswer'
+import InnerMultiChoice from './InnerMultiChoice'
+import InnerShortAnswer from './InnerShortAnswer'
 import InnerSignature from './InnerSignature'
 import InnerSingleChoice from './InnerSingleChoice'
 import InnerTextBlock from './InnerTextBlock'
+import InnerVaccineHistory from './InnerVaccineHistory'
+import InnerVaccineScheduler from './InnerVaccineScheduler'
 import LabTest from './LabTest'
 import LongAnswer from './LongAnswer'
 import MeicalForm from './MedicalForm'
@@ -40,7 +51,24 @@ export const LabTestForm = () => <LabTest />
 export const VaccineHistoryForm = () => <VaccineHistory />
 export const VaccineSchedulerForm = () => <VaccineScheduler />
 export const DobForm = () => <Dob />
-export const InnerSingleChoiceForm = () => <InnerSingleChoice />
-export const InnerSignatureForm = () => <InnerSignature />
-export const InnerTextBlockForm = () => <InnerTextBlock />
-export const InnerDrawingBlockForm = () => <InnerDrawing />
+export const InnerHeadingForm = () => <InnerHeading required={false} />
+export const InnerShortAnswerForm = () => <InnerShortAnswer required={false} />
+export const InnerLongAnswerForm = () => <InnerLongAnswer required={false} />
+export const InnerTextBlockForm = () => <InnerTextBlock required={false} />
+export const InnerVaccineSchedulerForm = () => (
+  <InnerVaccineScheduler required={false} />
+)
+export const InnerVaccineHistoryForm = () => (
+  <InnerVaccineHistory required={false} />
+)
+export const InnerLabTestForm = () => <InnerLabTest required={true} />
+export const InnerConditionsForm = () => <InnerConditions required={false} />
+export const InnerDrugsForm = () => <InnerDrugs required={false} />
+export const InnerSingleChoiceForm = () => (
+  <InnerSingleChoice required={false} />
+)
+export const InnerDropdownForm = () => <InnerDropdown required={true} />
+export const InnerMultiChoiceForm = () => <InnerMultiChoice required={true} />
+export const InnerDrawingBlockForm = () => <InnerDrawing required={false} />
+export const InnerSignatureForm = () => <InnerSignature required={false} />
+export const InnerDobForm = () => <InnerDob required={false} />

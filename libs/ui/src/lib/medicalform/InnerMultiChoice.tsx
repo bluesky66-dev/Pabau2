@@ -1,5 +1,6 @@
+import { Checkbox } from 'antd'
 import React, { FC, useState } from 'react'
-import textBlockIcon from '../../assets/images/medicalform_textblock.svg'
+import multipleChoiceIcon from '../../assets/images/medicalform_multiplechoice.svg'
 import styles from './InnerMedicalForm.module.less'
 import InnerMedicalFormEditIcon from './InnerMedicalFormEditIcon'
 import InnerMedicalFormRequired from './InnerMedicalFormRequired'
@@ -8,8 +9,22 @@ import InnerMedicalFormTitle from './InnerMedicalFormTitle'
 interface P {
   required?: boolean
 }
-const InnerTextBlock: FC<P> = ({ required }) => {
+const InnerMultiChoice: FC<P> = ({ required }) => {
   const [clicked, setClicked] = useState(false)
+
+  const checkboxStyle = {
+    display: 'block',
+    height: '30px',
+    lineHeight: '30px',
+    color: '#9292a3',
+    marginLeft: '0px',
+  }
+  const multiChoiceOptions = [
+    { id: 1, label: 'Option 1' },
+    { id: 2, label: 'Option 2' },
+    { id: 3, label: 'Option 3' },
+    { id: 4, label: 'Option 4' },
+  ]
   return (
     <div
       className={
@@ -26,18 +41,21 @@ const InnerTextBlock: FC<P> = ({ required }) => {
         <InnerMedicalFormEditIcon />
         <div className={styles.formItem} style={{ borderTop: 'none' }}>
           <InnerMedicalFormTitle
-            iconUrl={textBlockIcon}
-            bgcolor="#6383F1"
-            title="Text block"
+            iconUrl={multipleChoiceIcon}
+            bgcolor="#65CD98"
+            title="Multiple choices"
           />
         </div>
         <div className={styles.formItem}>
           <div className={styles.formCommon}>
-            <p>
-              At Day Space Wellington we believe you deserve to make the most of
-              your me-time. To say no to stress and push pause on life. To
-              relax, unwind, recharge and simply, live better.
-            </p>
+            <p>Some question</p>
+          </div>
+          <div className={`${styles.formCommon} ${styles.first}`}>
+            {multiChoiceOptions.map((item, index) => (
+              <Checkbox key={index} value={item.id} style={checkboxStyle}>
+                {item.label}
+              </Checkbox>
+            ))}
           </div>
         </div>
       </div>
@@ -45,4 +63,4 @@ const InnerTextBlock: FC<P> = ({ required }) => {
   )
 }
 
-export default InnerTextBlock
+export default InnerMultiChoice

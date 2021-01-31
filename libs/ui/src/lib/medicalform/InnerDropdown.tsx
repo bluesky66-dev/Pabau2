@@ -1,6 +1,6 @@
 import { Radio } from 'antd'
 import React, { FC, useState } from 'react'
-import singleChoiceIcon from '../../assets/images/medicalform_singlechoice.svg'
+import dropdownIcon from '../../assets/images/medicalform_dropdown.svg'
 import styles from './InnerMedicalForm.module.less'
 import InnerMedicalFormEditIcon from './InnerMedicalFormEditIcon'
 import InnerMedicalFormRequired from './InnerMedicalFormRequired'
@@ -9,7 +9,7 @@ import InnerMedicalFormTitle from './InnerMedicalFormTitle'
 interface P {
   required?: boolean
 }
-const InnerSingleChoice: FC<P> = ({ required }) => {
+const InnerDropdown: FC<P> = ({ required }) => {
   const [clicked, setClicked] = useState(false)
   const [optionVal, setOptionVal] = useState(1)
   const radioStyle = {
@@ -18,11 +18,11 @@ const InnerSingleChoice: FC<P> = ({ required }) => {
     lineHeight: '30px',
     color: '#9292a3',
   }
-  const singleChoiceOptions = [
-    { id: 1, label: 'Dry' },
-    { id: 2, label: 'Normal' },
-    { id: 3, label: 'Oily' },
-    { id: 4, label: 'Combination' },
+  const dropdownOptions = [
+    { id: 1, label: 'Option 1' },
+    { id: 2, label: 'Option 2' },
+    { id: 3, label: 'Option 3' },
+    { id: 4, label: 'Option 4' },
   ]
   return (
     <div
@@ -40,14 +40,14 @@ const InnerSingleChoice: FC<P> = ({ required }) => {
         <InnerMedicalFormEditIcon />
         <div className={styles.formItem} style={{ borderTop: 'none' }}>
           <InnerMedicalFormTitle
-            iconUrl={singleChoiceIcon}
+            iconUrl={dropdownIcon}
             bgcolor="#65CD98"
-            title="Single choice"
+            title="Dropdown"
           />
         </div>
         <div className={styles.formItem}>
           <div className={styles.formCommon}>
-            <p>Do you have concerns about any of following?</p>
+            <p>Some question</p>
           </div>
           <div className={`${styles.formCommon} ${styles.first}`}>
             <Radio.Group
@@ -55,7 +55,7 @@ const InnerSingleChoice: FC<P> = ({ required }) => {
               value={optionVal}
               onChange={(e) => setOptionVal(e.target.value)}
             >
-              {singleChoiceOptions.map((item, index) => (
+              {dropdownOptions.map((item, index) => (
                 <Radio key={index} value={item.id} style={radioStyle}>
                   {item.label}
                 </Radio>
@@ -68,4 +68,4 @@ const InnerSingleChoice: FC<P> = ({ required }) => {
   )
 }
 
-export default InnerSingleChoice
+export default InnerDropdown

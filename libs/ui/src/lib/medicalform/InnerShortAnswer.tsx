@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import textBlockIcon from '../../assets/images/medicalform_textblock.svg'
+import shortAnswerIcon from '../../assets/images/medicalform_shortanswer.svg'
 import styles from './InnerMedicalForm.module.less'
 import InnerMedicalFormEditIcon from './InnerMedicalFormEditIcon'
 import InnerMedicalFormRequired from './InnerMedicalFormRequired'
@@ -8,7 +8,7 @@ import InnerMedicalFormTitle from './InnerMedicalFormTitle'
 interface P {
   required?: boolean
 }
-const InnerTextBlock: FC<P> = ({ required }) => {
+const InnerShortAnswer: FC<P> = ({ required }) => {
   const [clicked, setClicked] = useState(false)
   return (
     <div
@@ -26,18 +26,14 @@ const InnerTextBlock: FC<P> = ({ required }) => {
         <InnerMedicalFormEditIcon />
         <div className={styles.formItem} style={{ borderTop: 'none' }}>
           <InnerMedicalFormTitle
-            iconUrl={textBlockIcon}
+            iconUrl={shortAnswerIcon}
             bgcolor="#6383F1"
-            title="Text block"
+            title="Short answer"
           />
         </div>
         <div className={styles.formItem}>
           <div className={styles.formCommon}>
-            <p>
-              At Day Space Wellington we believe you deserve to make the most of
-              your me-time. To say no to stress and push pause on life. To
-              relax, unwind, recharge and simply, live better.
-            </p>
+            <p>Welcome to Day Spa Wellington</p>
           </div>
         </div>
       </div>
@@ -45,4 +41,4 @@ const InnerTextBlock: FC<P> = ({ required }) => {
   )
 }
 
-export default InnerTextBlock
+export default InnerShortAnswer

@@ -1,5 +1,6 @@
+import { Button, ButtonTypes } from '@pabau/ui'
 import React, { FC, useState } from 'react'
-import textBlockIcon from '../../assets/images/medicalform_textblock.svg'
+import labTestIcon from '../../assets/images/medicalform_labtest.svg'
 import styles from './InnerMedicalForm.module.less'
 import InnerMedicalFormEditIcon from './InnerMedicalFormEditIcon'
 import InnerMedicalFormRequired from './InnerMedicalFormRequired'
@@ -8,7 +9,7 @@ import InnerMedicalFormTitle from './InnerMedicalFormTitle'
 interface P {
   required?: boolean
 }
-const InnerTextBlock: FC<P> = ({ required }) => {
+const InnerLabTest: FC<P> = ({ required }) => {
   const [clicked, setClicked] = useState(false)
   return (
     <div
@@ -26,18 +27,23 @@ const InnerTextBlock: FC<P> = ({ required }) => {
         <InnerMedicalFormEditIcon />
         <div className={styles.formItem} style={{ borderTop: 'none' }}>
           <InnerMedicalFormTitle
-            iconUrl={textBlockIcon}
-            bgcolor="#6383F1"
-            title="Text block"
+            iconUrl={labTestIcon}
+            bgcolor="#FAAD14"
+            title="Lab tests"
           />
         </div>
         <div className={styles.formItem}>
           <div className={styles.formCommon}>
-            <p>
-              At Day Space Wellington we believe you deserve to make the most of
-              your me-time. To say no to stress and push pause on life. To
-              relax, unwind, recharge and simply, live better.
-            </p>
+            <Button type={ButtonTypes.default} size="small">
+              Blood Test Group
+            </Button>
+            <Button
+              type={ButtonTypes.default}
+              size="small"
+              style={{ marginLeft: '10px' }}
+            >
+              TL Profile Group
+            </Button>
           </div>
         </div>
       </div>
@@ -45,4 +51,4 @@ const InnerTextBlock: FC<P> = ({ required }) => {
   )
 }
 
-export default InnerTextBlock
+export default InnerLabTest
