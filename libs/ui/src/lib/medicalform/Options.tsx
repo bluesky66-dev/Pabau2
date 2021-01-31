@@ -17,7 +17,7 @@ type itemProps = {
 
 const Options: FC = () => {
   const [items, setItems] = useState<itemProps[]>([])
-  const [itemName, setItemName] = useState('New Option')
+  const [itemName, setItemName] = useState('')
 
   const [optionVal, setOptionVal] = useState(0)
   const radioStyle = {
@@ -37,10 +37,13 @@ const Options: FC = () => {
         editing: true,
       },
     ])
-    setItemName('New Option')
+    setItemName('')
   }
 
   const handleOptions = (index, value) => {
+    if (value.name === '') {
+      return
+    }
     const tempItems = [...items]
     const itemValue = {
       ...items[index],
@@ -81,6 +84,7 @@ const Options: FC = () => {
                   {item.editing && (
                     <>
                       <Input
+                        autoFocus
                         className={styles.optionInput}
                         placeholder="Enter new option"
                         onChange={(e) =>
@@ -144,7 +148,7 @@ const Options: FC = () => {
         onClick={addItem}
         size="small"
       >
-        Add
+        Add option
       </Button>
     </>
   )

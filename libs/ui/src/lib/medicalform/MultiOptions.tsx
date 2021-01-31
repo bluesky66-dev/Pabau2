@@ -17,7 +17,7 @@ type itemProps = {
 
 const MultiOptions: FC = () => {
   const [items, setItems] = useState<itemProps[]>([])
-  const [itemName, setItemName] = useState('New Option')
+  const [itemName, setItemName] = useState('')
 
   const checkboxStyle = {
     display: 'inline-block',
@@ -36,10 +36,13 @@ const MultiOptions: FC = () => {
         editing: true,
       },
     ])
-    setItemName('New Option')
+    setItemName('')
   }
 
   const handleOptions = (index, value) => {
+    if (value.name === '') {
+      return
+    }
     const tempItems = [...items]
     const itemValue = {
       ...items[index],
@@ -74,6 +77,7 @@ const MultiOptions: FC = () => {
               <Checkbox key={index} value={item.id} style={checkboxStyle}>
                 {item.editing && (
                   <Input
+                    autoFocus
                     className={styles.optionInput}
                     placeholder="Enter new option"
                     onChange={(e) =>
@@ -140,7 +144,7 @@ const MultiOptions: FC = () => {
         onClick={addItem}
         size="small"
       >
-        Add
+        Add option
       </Button>
     </>
   )
