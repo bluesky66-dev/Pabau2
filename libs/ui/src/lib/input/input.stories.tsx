@@ -1,8 +1,7 @@
-/* eslint-disable */
-
 import React from 'react'
 import { HelpTooltip } from './helptooltip'
 import { Input } from './input'
+import { notification } from 'antd'
 
 export default {
   component: Input,
@@ -35,7 +34,11 @@ export default {
 }
 
 const InputStory = ({ ...args }) => <Input {...args} />
-export const InputWithFormControl = InputStory.bind({})
+export const InputWithFormControl = InputStory.bind({
+  onChange: (val) => {
+    notification.open({ message: val })
+  },
+})
 
 const HelpTooltipStory = ({ ...args }) => <HelpTooltip {...args} />
 export const HelpTooltipControl = HelpTooltipStory.bind({})
@@ -51,4 +54,4 @@ InputEmailAddress.args = {
   type: 'email',
   placeHolderText: 'Enter email',
   reqiredMsg: 'Email is required!',
-};
+}

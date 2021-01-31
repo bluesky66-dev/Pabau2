@@ -1,3 +1,4 @@
+export * from './lib/terminology/Terminology'
 export * from './lib/system/System'
 export * from './lib/radio-group/RadioGroup'
 export * from './lib/security/Security'
