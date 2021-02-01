@@ -14,6 +14,7 @@ import alex from '../../../../libs/ui/src/assets/images/users/alex.png'
 const dummyUsers = [
   //TODO Remove once users endpoints are implemented
   {
+    id: 1,
     name: 'Joseph',
     surname: 'Howard',
     title: 'Managing Director',
@@ -23,6 +24,7 @@ const dummyUsers = [
     active: true,
   },
   {
+    id: 2,
     name: 'Andrew',
     surname: 'Davis',
     title: 'Aesthetician',
@@ -32,6 +34,7 @@ const dummyUsers = [
     active: true,
   },
   {
+    id: 3,
     name: 'Frances',
     surname: 'Butler',
     title: 'Manager',
@@ -41,6 +44,7 @@ const dummyUsers = [
     available: true,
   },
   {
+    id: 4,
     name: 'Joseph',
     surname: 'Howard',
     title: 'Managing Director',
@@ -50,6 +54,7 @@ const dummyUsers = [
     img: james,
   },
   {
+    id: 5,
     name: 'Andrew',
     surname: 'Davis',
     title: 'Aesthetician',
@@ -57,6 +62,7 @@ const dummyUsers = [
     active: true,
   },
   {
+    id: 6,
     name: 'Frances',
     surname: 'Butler',
     title: 'Manager',
@@ -66,6 +72,7 @@ const dummyUsers = [
     available: true,
   },
   {
+    id: 7,
     name: 'Joseph',
     surname: 'Howard',
     title: 'Managing Director',
@@ -75,6 +82,7 @@ const dummyUsers = [
     img: austin,
   },
   {
+    id: 8,
     name: 'Andrew',
     surname: 'Davis',
     title: 'Aesthetician',
@@ -82,6 +90,7 @@ const dummyUsers = [
     active: true,
   },
   {
+    id: 9,
     name: 'Frances',
     surname: 'Butler',
     title: 'Manager',
@@ -91,6 +100,7 @@ const dummyUsers = [
     available: false,
   },
   {
+    id: 10,
     name: 'Joseph',
     surname: 'Howard',
     title: 'Managing Director',
@@ -100,6 +110,7 @@ const dummyUsers = [
     img: austin,
   },
   {
+    id: 11,
     name: 'Andrew',
     surname: 'Davis',
     title: 'Aesthetician',
@@ -107,6 +118,7 @@ const dummyUsers = [
     active: true,
   },
   {
+    id: 22,
     name: 'Frances',
     surname: 'Butler',
     title: 'Manager',
@@ -116,6 +128,7 @@ const dummyUsers = [
     available: true,
   },
   {
+    id: 23,
     name: 'Andrew',
     surname: 'Davis',
     title: 'Aesthetician',
@@ -123,6 +136,7 @@ const dummyUsers = [
     active: true,
   },
   {
+    id: 24,
     name: 'Frances',
     surname: 'Butler',
     title: 'Manager',
@@ -132,6 +146,7 @@ const dummyUsers = [
     available: false,
   },
   {
+    id: 25,
     name: 'Andrew',
     surname: 'Davis',
     title: 'Aesthetician',
@@ -139,6 +154,7 @@ const dummyUsers = [
     active: true,
   },
   {
+    id: 26,
     name: 'Frances',
     surname: 'Butler',
     title: 'Manager',
@@ -157,10 +173,10 @@ const Index: FunctionComponent = () => {
         <Layout>
           <div className={styles.container}>
             {dummyUsers &&
-              dummyUsers.map((user, key) => {
+              dummyUsers.map((user) => {
                 return (
                   <UserTile
-                    key={key}
+                    key={user.id}
                     name={user.name}
                     surname={user.surname}
                     title={user.title}
