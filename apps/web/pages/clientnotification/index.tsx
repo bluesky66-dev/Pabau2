@@ -15,10 +15,10 @@ const Index: FC = () => {
           breadcrumbItems={[
             'Setup',
             'Notification Messages',
-            'New Appointment is booked',
+            'Upcoming appointment reminder',
           ]}
         />
-        <Title>New Appointment is booked</Title>
+        <Title>Upcoming appointment reminder</Title>
       </div>
       <div
         style={{
@@ -42,12 +42,10 @@ const Index: FC = () => {
             margin: '1em 8px',
             height: '40px',
             fontSize: '14px',
-            color: 'white',
           }}
-          type="default"
-          backgroundColor="#D4D4D4"
+          type="primary"
         >
-          Edit
+          Save
         </Button>
       </div>
       <ClientNotification />

@@ -1,8 +1,8 @@
-import { PlusOutlined } from '@ant-design/icons'
 import { Button, ButtonTypes } from '@pabau/ui'
 import { Input, Radio } from 'antd'
 import React, { FC, useState } from 'react'
 import shortAnswerIcon from '../../assets/images/medicalform_shortanswer.svg'
+import LinkedField from './LinkedField'
 import styles from './MedicalForm.module.less'
 import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormTitle from './MedicalFormTitle'
@@ -47,22 +47,8 @@ const ShortAnswer: FC = () => {
           />
           {advanced && (
             <>
-              <p style={{ marginTop: '20px' }}>Linked field</p>
-              <Button
-                type={ButtonTypes.default}
-                icon={<PlusOutlined />}
-                size="small"
-              >
-                Add
-              </Button>
-              <p style={{ marginTop: '20px' }}>Default field</p>
-              <Button
-                type={ButtonTypes.default}
-                icon={<PlusOutlined />}
-                size="small"
-              >
-                Add
-              </Button>
+              <LinkedField linkedLabel="Linked field" />
+              <LinkedField linkedLabel="Default field" />
               <br />
             </>
           )}

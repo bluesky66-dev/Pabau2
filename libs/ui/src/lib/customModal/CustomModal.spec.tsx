@@ -5,7 +5,7 @@ import CustomModal from './CustomModal'
 
 describe('BSecuritytool', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<CustomModal />)
+    const { baseElement } = render(<CustomModal datasource={[]} />)
     expect(baseElement).toBeTruthy()
   })
 })

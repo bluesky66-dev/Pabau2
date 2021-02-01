@@ -1,7 +1,10 @@
 import React from 'react'
 
 import styels from './Wizard.module.less'
-import { Button } from '@pabau/ui'
+import { Button, Breadcrumb } from '@pabau/ui'
+import { Typography } from 'antd'
+
+const { Title } = Typography
 
 interface WizardProps {
   onPrev: () => void
@@ -31,17 +34,9 @@ export const Wizard: React.FC<WizardProps> = ({
 
   return (
     <div className={styels.container}>
-      <div className={styels.headerSection}>
-        <div className={styels.breadcrumbsection}>
-          <div className={styels.breadcrumb}>
-            <span className={styels.breadcrumbgraytxt}>{breadcrumb}</span>
-            <span className={styels.breadcrumblighttxt}>
-              {'> '}
-              {header}
-            </span>
-          </div>
-          <span className={styels.blackbold}>{header}</span>
-        </div>
+      <div style={{ backgroundColor: '#FFF' }}>
+        <Breadcrumb breadcrumbItems={[breadcrumb, header]} />
+        <Title>{header}</Title>
       </div>
 
       <hr className={styels.line} />
@@ -49,19 +44,20 @@ export const Wizard: React.FC<WizardProps> = ({
       <hr className={styels.bottomline} />
 
       <div className={styels.footer}>
-        <Button onClick={(event) => prevClick()}>Previous Step</Button>
+        <Button onClick={(event) => prevClick()} disabled={active <= 1}>
+          Previous Step
+        </Button>
         <span className={styels.breadcrumbgraytxt}>
-          Step {active + 1}/{allSteps}
+          Step {active}/{allSteps}
         </span>
-        {active < allSteps - 1 ? (
-          <Button type="primary" onClick={(event) => nextClick()}>
-            Next Step
-          </Button>
-        ) : (
-          <Button disabled onClick={(event) => nextClick()}>
-            Next Step
-          </Button>
-        )}
+
+        <Button
+          type="primary"
+          onClick={(event) => nextClick()}
+          disabled={active >= allSteps}
+        >
+          Next Step
+        </Button>
       </div>
     </div>
   )
