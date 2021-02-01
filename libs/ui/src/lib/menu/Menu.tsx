@@ -101,12 +101,15 @@ export const Menu: FC<P> = ({ onSideBarCollapsed }) => {
             <SettingOutlined className={styles.sidebarMenu} />
           ) : (
             <Link href="/setup">
-              <Button
-                icon={<SettingOutlined className={styles.sidebarMenu} />}
-                className={styles.setupBtn}
-              >
-                Setup
-              </Button>
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+              <a>
+                <Button
+                  icon={<SettingOutlined className={styles.sidebarMenu} />}
+                  className={styles.setupBtn}
+                >
+                  Setup
+                </Button>
+              </a>
             </Link>
           )}
         </div>

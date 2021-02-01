@@ -1,12 +1,12 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import SecurityScore from './SecurityScore'
+import { Pagination } from './Pagination'
 
-describe('Security', () => {
+describe('Pagination', () => {
   it('should render successfully', () => {
     const { baseElement } = render(
-      <SecurityScore percent={0} buttonTitle={''} title1={''} title2={''} />
+      <Pagination showingRecords={10} total={50} />
     )
     expect(baseElement).toBeTruthy()
   })

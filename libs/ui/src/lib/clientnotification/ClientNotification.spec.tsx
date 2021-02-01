@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import CustomModal from './CustomModal'
+import ClientNotification from './ClientNotification'
 
-describe('BSecuritytool', () => {
+describe('ClientNotification', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<CustomModal datasource={[]} />)
+    const { baseElement } = render(<ClientNotification />)
     expect(baseElement).toBeTruthy()
   })
 })

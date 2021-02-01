@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import CustomModal from './CustomModal'
+import { Breadcrumb } from './Breadcrumb'
 
-describe('BSecuritytool', () => {
+describe('Breadcrumb', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<CustomModal datasource={[]} />)
+    const { baseElement } = render(<Breadcrumb breadcrumbItems={[]} />)
     expect(baseElement).toBeTruthy()
   })
 })
