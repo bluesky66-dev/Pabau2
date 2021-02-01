@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import { Row, Col, Divider, Image } from 'antd'
+import { Row, Col, Divider } from 'antd'
 import {
   Button,
   Input,
@@ -9,7 +9,7 @@ import {
   BusinessTypes,
   BusinessLocation,
 } from '@pabau/ui'
-import ClinicLogo from '../../assets/images/normal-clinic-logo.svg'
+import { ReactComponent as NormalClinicLogo } from '../../assets/images/normal-clinic-logo.svg'
 import styles from './BusinessDetails.module.less'
 
 interface BasicInformation {
@@ -110,7 +110,7 @@ export const BusinessDetails: FC<BusinessDetailsProps> = ({
           Basic Information
         </p>
         <div className={styles.normalClinicLogo}>
-          <Image src={ClinicLogo} preview={false} />
+          <NormalClinicLogo />
         </div>
         <Row gutter={[32, 28]} style={{ marginTop: '14px' }}>
           <Col className="gutter-row" xs={24} sm={12}>

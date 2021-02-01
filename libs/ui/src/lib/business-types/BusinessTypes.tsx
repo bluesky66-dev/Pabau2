@@ -1,31 +1,13 @@
 import React, { FC, useEffect, useState } from 'react'
 import ClassNames from 'classnames'
-import { Row, Col, Image } from 'antd'
-import PabauLogo from '../../assets/images/pabau-logo.svg'
+import { Row, Col } from 'antd'
+import { bizTypes } from '../../assets/images/biz-types'
 import styles from './BusinessTypes.module.less'
 
 export interface BusinessTypesProps {
   onSelected?(val): void
   value?: string
 }
-
-const types = [
-  { title: 'Hair Salon', img: '' },
-  { title: 'Nail Salon', img: '' },
-  { title: 'Barbershop', img: '' },
-  { title: 'Beauty Salon', img: '' },
-  { title: 'Aesthetics', img: '' },
-  { title: 'Spa', img: '' },
-  { title: 'Massage', img: '' },
-  { title: 'Waxing Salon', img: '' },
-  { title: 'Tanning Studio', img: '' },
-  { title: 'Eyebrows & Lashes', img: '' },
-  { title: 'Tattoo & Piercing', img: '' },
-  { title: 'Therapy Center', img: '' },
-  { title: 'Weight Loss', img: '' },
-  { title: 'Personal Trainer', img: '' },
-  { title: 'Gym & Fitness', img: '' },
-]
 
 export const BusinessTypes: FC<BusinessTypesProps> = ({
   value = 'Nail Salon',
@@ -46,8 +28,8 @@ export const BusinessTypes: FC<BusinessTypesProps> = ({
       <p>How would you best describe your main type of business</p>
       <div className={styles.businessTypes}>
         <Row gutter={[8, 8]}>
-          {types.map((type) => (
-            <Col xl={2} lg={3} md={4} sm={6} xs={8} key={type.title}>
+          {bizTypes.map((type) => (
+            <Col xl={3} md={4} sm={6} xs={8} key={type.title}>
               <div
                 className={
                   type.title === selected
@@ -60,7 +42,7 @@ export const BusinessTypes: FC<BusinessTypesProps> = ({
                 onClick={() => handleClickItem(type.title)}
               >
                 <div className={styles.businessTypeContent}>
-                  <Image src={PabauLogo} width="70%" preview={false} />
+                  <img src={type.img} width="70%" alt="biz type" />
                   <p>{type.title}</p>
                 </div>
               </div>
