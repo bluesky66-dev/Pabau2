@@ -80,8 +80,8 @@ export const SetupGridMobileStory: FC = () => {
 export const GridSubMenuMobile: FC = () => {
   const props = {
     subTitleData: {
-      title: 'Business Details',
-      data: [''],
+      title: 'Users',
+      data: ['Users', 'User Groups'],
     },
   }
   return <SetupGridSubMenuMobile {...props} />
