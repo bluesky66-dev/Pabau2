@@ -1,5 +1,6 @@
+import { Radio } from 'antd'
 import React, { FC, useState } from 'react'
-import dobIcon from '../../assets/images/medicalform_dob.svg'
+import genderIcon from '../../assets/images/medicalform_singlechoice.svg'
 import styles from './InnerMedicalForm.module.less'
 import InnerMedicalFormEditIcon from './InnerMedicalFormEditIcon'
 import InnerMedicalFormRequired from './InnerMedicalFormRequired'
@@ -8,8 +9,19 @@ import InnerMedicalFormTitle from './InnerMedicalFormTitle'
 interface P {
   required?: boolean
 }
-const InnerDob: FC<P> = ({ required }) => {
+const InnerGender: FC<P> = ({ required }) => {
   const [clicked, setClicked] = useState(false)
+  const [optionVal, setOptionVal] = useState(1)
+  const radioStyle = {
+    display: 'block',
+    height: '30px',
+    lineHeight: '30px',
+    color: '#9292a3',
+  }
+  const genderOptions = [
+    { id: 1, label: 'Male' },
+    { id: 2, label: 'Female' },
+  ]
   return (
     <div
       className={
@@ -26,14 +38,27 @@ const InnerDob: FC<P> = ({ required }) => {
         <InnerMedicalFormEditIcon />
         <div className={styles.formItem} style={{ borderTop: 'none' }}>
           <InnerMedicalFormTitle
-            iconUrl={dobIcon}
-            bgcolor="#20BAB1"
-            title="DOB"
+            iconUrl={genderIcon}
+            bgcolor="#65CD98"
+            title="Gender"
           />
         </div>
         <div className={styles.formItem}>
           <div className={styles.formCommon}>
-            <p>Please enter your DOB</p>
+            <p>What is your gender?</p>
+          </div>
+          <div className={`${styles.formCommon} ${styles.first}`}>
+            <Radio.Group
+              size="small"
+              value={optionVal}
+              onChange={(e) => setOptionVal(e.target.value)}
+            >
+              {genderOptions.map((item, index) => (
+                <Radio key={index} value={item.id} style={radioStyle}>
+                  {item.label}
+                </Radio>
+              ))}
+            </Radio.Group>
           </div>
         </div>
       </div>
@@ -41,4 +66,4 @@ const InnerDob: FC<P> = ({ required }) => {
   )
 }
 
-export default InnerDob
+export default InnerGender
