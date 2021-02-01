@@ -11,38 +11,52 @@ export default {
 }
 
 const Story: React.FC = ({ ...args }) => {
-  const [enableReminder, SetEnableReminder] = useState(true)
-  const [smartDelivery, SetSmartDelivery] = useState(true)
-  const [requestConfirmation, SetRequestConfirmation] = useState(true)
-  const [allowRescheduling, SetAllowRescheduling] = useState(true)
-  const [allowCancellation, SetAllowCancellation] = useState(true)
-  const [displayPolicy, SetDisplayPolicy] = useState(true)
-  const [showService, SetShowService] = useState(true)
-  const [showEmployeeName, SetShowEmployeeName] = useState(true)
-  const [addMedicalHisButton, SetAddMedicalHisButton] = useState(true)
-  const [backGroundColor, SetBackGroundColor] = useState('')
-  const [buttonColor, SetButtonColor] = useState('')
-  const [selectLanguage, SetSelectLanguage] = useState('EN')
+  const [enableReminder, setEnableReminder] = useState(true)
+  const [smartDelivery, setSmartDelivery] = useState(true)
+  const [requestConfirmation, setRequestConfirmation] = useState(true)
+  const [allowRescheduling, setAllowRescheduling] = useState(true)
+  const [allowCancellation, setAllowCancellation] = useState(true)
+  const [displayPolicy, setDisplayPolicy] = useState(true)
+  const [showService, setShowService] = useState(true)
+  const [showEmployeeName, setShowEmployeeName] = useState(true)
+  const [addMedicalHisButton, setAddMedicalHisButton] = useState(true)
+  const [backGroundColor, setBackGroundColor] = useState('')
+  const [buttonColor, setButtonColor] = useState('')
+  const [selectLanguage, setSelectLanguage] = useState('EN')
   const [medicalMessage, setMedicalMessage] = useState('')
   const [informationMessage, setInformationMessage] = useState('')
 
   return (
     <div style={{ width: '392px' }}>
       <Standard
-        enableReminderHook={[enableReminder, SetEnableReminder]}
-        smartDeliveryHook={[smartDelivery, SetSmartDelivery]}
-        requestConfirmHook={[requestConfirmation, SetRequestConfirmation]}
-        allowReschedulingHook={[allowRescheduling, SetAllowRescheduling]}
-        allowCancellationHook={[allowCancellation, SetAllowCancellation]}
-        displayPolicyHook={[displayPolicy, SetDisplayPolicy]}
-        showServiceHook={[showService, SetShowService]}
-        showEmployeeNameHook={[showEmployeeName, SetShowEmployeeName]}
-        addMedicalHisButtonHook={[addMedicalHisButton, SetAddMedicalHisButton]}
-        selectLanguageHook={[selectLanguage, SetSelectLanguage]}
-        backGroundColorHook={[backGroundColor, SetBackGroundColor]}
-        buttonColorHook={[buttonColor, SetButtonColor]}
-        informationMessageHook={[informationMessage, setInformationMessage]}
-        medicalMessageHook={[medicalMessage, setMedicalMessage]}
+        enableReminder={enableReminder}
+        onEnableReminder={(value) => setEnableReminder(value)}
+        smartDelivery={smartDelivery}
+        onSmartDelivery={(value) => setSmartDelivery(value)}
+        requestConfirmation={requestConfirmation}
+        onRequestConfirmation={(value) => setRequestConfirmation(value)}
+        allowRescheduling={allowRescheduling}
+        onAllowRescheduling={(value) => setAllowRescheduling(value)}
+        allowCancellation={allowCancellation}
+        onAllowCancellation={(value) => setAllowCancellation(value)}
+        displayPolicy={displayPolicy}
+        onDisplayPolicy={(value) => setDisplayPolicy(value)}
+        showService={showService}
+        onShowService={(value) => setShowService(value)}
+        showEmployeeName={showEmployeeName}
+        onShowEmployeeName={(value) => setShowEmployeeName(value)}
+        addMedicalHisButton={addMedicalHisButton}
+        onAddMedicalHisButton={(value) => setAddMedicalHisButton(value)}
+        backGroundColor={backGroundColor}
+        onBackGroundColor={(value) => setBackGroundColor(value)}
+        buttonColor={buttonColor}
+        onButtonColor={(value) => setButtonColor(value)}
+        selectLanguage={selectLanguage}
+        onSelectLanguage={(value) => setSelectLanguage(value)}
+        medicalMessage={medicalMessage}
+        onMedicalMessage={(value) => setMedicalMessage(value)}
+        informationMessage={informationMessage}
+        onInformationMessage={(value) => setInformationMessage(value)}
       />
       <p>{medicalMessage}</p>
     </div>

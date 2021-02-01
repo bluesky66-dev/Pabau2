@@ -27,7 +27,7 @@ function StepperList(props) {
 
   return (
     <div className={styles.horizonstepper}>
-      {datasource.map((el, index) => (
+      {datasource.map((element, index) => (
         <div key={index} className={styles.steplinediv}>
           <div className={styles.imglabeldiv}>
             <div
@@ -37,14 +37,14 @@ function StepperList(props) {
                   : styles.icondisablecircle
               }
             >
-              <img src={el.imgPath} alt="" />
+              <img src={element.imgPath} alt="" />
             </div>
             <span
               className={
                 isActive(index) ? styles.enablespantxt : styles.disablespantxt
               }
             >
-              {el.name}
+              {element.name}
             </span>
           </div>
           {index < datasource.length - 1 && (

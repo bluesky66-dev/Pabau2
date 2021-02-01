@@ -14,12 +14,7 @@ export default {
 }
 
 const Story = ({ ...args }) => {
-  return (
-    <Smstext
-      {...args}
-
-    ></Smstext>
-  )
+  return <Smstext {...args}></Smstext>
 }
 
 export const smstext = Story.bind({})

@@ -113,7 +113,7 @@ interface P {
   medicalMessage?: string
 }
 
-const Appointment: FC<P> = ({
+export const Appointment: FC<P> = ({
   requestConfirm,
   allowRescheduling,
   allowCancellation,
