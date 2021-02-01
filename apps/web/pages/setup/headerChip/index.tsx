@@ -1,5 +1,5 @@
 import React from 'react'
-import { SetupChip, SetupGridMobile } from '@pabau/ui'
+import { SetupChip } from '@pabau/ui'
 import styles from '../Setup.module.less'
 
 import {
