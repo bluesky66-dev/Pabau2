@@ -21,7 +21,7 @@ const VaccineScheduler: FC = () => {
         />
       </div>
       <div className={styles.formItem} style={{ borderBottom: 'none' }}>
-        <MedicalFormBottom needLeft={true} />
+        <MedicalFormBottom needLeft={false} />
       </div>
     </div>
   )
