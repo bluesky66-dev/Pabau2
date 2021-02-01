@@ -54,9 +54,12 @@ export function SetupGrid(props: SetupGridProps): JSX.Element {
                   className={styles.collapsePanel}
                 >
                   {subTitle.data.map((thread, index) => {
+                    const url = thread.toLowerCase().replace(' ', '-')
                     return (
                       <div key={index} className={styles.panelItem}>
-                        <span>{thread}</span>
+                        <a style={{ color: '#9292A3 ' }} href={`/setup/${url}`}>
+                          <span>{thread}</span>
+                        </a>
                       </div>
                     )
                   })}
