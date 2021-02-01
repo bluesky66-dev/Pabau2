@@ -39,11 +39,7 @@ export const System: FC<SystemProps> = ({ config, onSave }) => {
   }
 
   useEffect(() => {
-    if (config) {
-      setConfig(config)
-    } else {
-      setConfig(defaultConfig)
-    }
+    setConfig(config || defaultConfig)
   }, [config])
 
   return (
