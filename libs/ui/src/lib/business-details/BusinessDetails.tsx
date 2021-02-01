@@ -7,6 +7,7 @@ import {
   LanguageDropdown,
   PhoneNumberInput,
   BusinessTypes,
+  BusinessLocation,
 } from '@pabau/ui'
 import ClinicLogo from '../../assets/images/normal-clinic-logo.svg'
 import styles from './BusinessDetails.module.less'
@@ -220,6 +221,10 @@ export const BusinessDetails: FC<BusinessDetailsProps> = ({
         <p className={styles.sectionTitle} style={{ marginBottom: '20px' }}>
           Business Location
         </p>
+        <BusinessLocation
+          value={bizLocation}
+          onChange={(value) => setBizLocation(value)}
+        />
       </div>
     </div>
   )
