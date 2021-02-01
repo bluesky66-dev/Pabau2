@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect, useCallback } from 'react'
 import { Row, Col, Modal } from 'antd'
+import fetch from 'node-fetch'
 import { Input } from '@pabau/ui'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
 import styles from './BusinessLocation.module.less'
