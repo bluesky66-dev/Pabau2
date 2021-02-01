@@ -17,6 +17,8 @@ import { PabauPlus } from '../badge/Badge'
 
 interface P {
   requestConfirmHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
+  enableReminderHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
+  smartDeliveryHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
   allowReschedulingHook: [
     boolean,
     React.Dispatch<React.SetStateAction<boolean>>
@@ -45,6 +47,8 @@ const { Option } = Select
 const { TextArea } = Input
 
 const Standard: FC<P> = ({
+  enableReminderHook: [enableReminder, SetEnableReminder],
+  smartDeliveryHook: [smartDelivery, SetSmartDelivery],
   requestConfirmHook: [requestConfirmation, setRequestConfirmation],
   allowReschedulingHook: [allowRescheduling, setAllowRescheduling],
   allowCancellationHook: [allowCancellation, setAllowCancellation],
@@ -88,6 +92,10 @@ const Standard: FC<P> = ({
                   <Checkbox
                     className={styles.checkboxStyle}
                     value="enable_reminder"
+                    checked={enableReminder}
+                    onChange={() =>
+                      SetEnableReminder(!enableReminder)
+                    }
                   >
                     Enable reminders via email
                   </Checkbox>
@@ -96,6 +104,10 @@ const Standard: FC<P> = ({
                   <Checkbox
                     className={styles.checkboxStyle}
                     value="smart_delivery"
+                    checked={smartDelivery}
+                    onChange={() =>
+                      SetSmartDelivery(!smartDelivery)
+                    }
                   >
                     Smart delivery
                   </Checkbox>
@@ -280,10 +292,59 @@ const Standard: FC<P> = ({
           </div>
         </TabPane>
         <TabPane tab="Custom" key="2">
-          <p>
-            Custom TabCustom TabCustom TabCustom TabCustom TabCustom TabCustom
-            TabCustom TabCustom TabCustom TabCustom TabCustom TabCustom Tab
-          </p>
+          <div style={{ padding: '10px 9px' }}>
+            <Row style={{ padding: '0 15px' }}>
+              <span>
+                Design or upload your own custom email from your
+                <span className={styles.anchor}>
+                  <Button type="link">message templates</Button>
+                </span>
+              </span>
+            </Row>
+            <Row style={{ padding: '0 15px' }}>
+              <Col>Reminder advance notice</Col>
+            </Row>
+
+            <Row style={{ padding: '0 15px' }}>
+              <Select defaultValue="24" style={{ width: '100%' }}>
+                <Option value="24">24 hours</Option>
+                <Option value="12">12 hours</Option>
+                <Option value="6">6 hours</Option>
+              </Select>
+            </Row>
+
+
+
+
+            <div className={styles.papauPlusContainer}>
+              <PabauPlus label="Plus" />
+            </div>
+
+            <Collapse
+              className={styles.collapseAlignFirst}
+              bordered={false}
+              defaultActiveKey={['1']}
+              expandIconPosition="right"
+              style={{ backgroundColor: 'white' }}
+            >
+              <Panel
+                className={styles.panelAlign}
+                header="Clinent languages"
+                key="1"
+              >
+                <Row>
+                  <Col>Setup templates in your clients preferred language</Col>
+                </Row>
+                <Row>
+                  <ClientLanguage
+                    selectLanguageHook={[selectLanguage, setSelectLanguage]}
+                    defaultLanguage="EN"
+                  />
+                </Row>
+              </Panel>
+            </Collapse>
+
+          </div>
         </TabPane>
       </Tabs>
     </Row>

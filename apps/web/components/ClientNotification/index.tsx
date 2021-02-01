@@ -1,11 +1,14 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
 import { ClientNotification } from '@pabau/ui'
 // eslint-disable-next-line
 import Standard from '../../../../libs/ui/src/lib/standard/Standard'
 // eslint-disable-next-line
 import Appointment from '../../../../libs/ui/src/lib/appointment/Appointment'
+import Smstext from 'libs/ui/src/lib/smstext/Smstext'
 
 const Index: FC = () => {
+  const [enableReminder, SetEnableReminder] = useState(false)
+  const [smartDelivery, SetSmartDelivery] = useState(false)
   const [requestConfirmation, setRequestConfirmation] = useState(true)
   const [allowRescheduling, setAllowRescheduling] = useState(true)
   const [allowCancellation, setAllowCancellation] = useState(true)
@@ -19,13 +22,12 @@ const Index: FC = () => {
   const [medicalMessage, setMedicalMessage] = useState('')
   const [informationMessage, setInformationMessage] = useState('')
 
-  useEffect(() => {
-    console.log('object')
-  })
   return (
     <ClientNotification
       tabComponent={
         <Standard
+          enableReminderHook={[enableReminder, SetEnableReminder]}
+          smartDeliveryHook={[smartDelivery, SetSmartDelivery]}
           requestConfirmHook={[requestConfirmation, setRequestConfirmation]}
           allowReschedulingHook={[allowRescheduling, setAllowRescheduling]}
           allowCancellationHook={[allowCancellation, setAllowCancellation]}
@@ -59,7 +61,12 @@ const Index: FC = () => {
           medicalMessage={medicalMessage}
         />
       }
-      smsComponent={<div>this is sms component</div>}
+      smsComponent={
+        <Smstext
+        // enableReminder={enableReminder}
+        // smartDelivery={smartDelivery}
+        />
+      }
     />
   )
 }

@@ -4,13 +4,15 @@ import Standard from './Standard'
 
 export default {
   component: Standard,
-  title: 'Notification/DefaultStandard',
+  title: 'Notification/Standardtab',
   args: {},
   argTypes: {},
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 
 const Story: React.FC = ({ ...args }) => {
+  const [enableReminder, SetEnableReminder] = useState(true)
+  const [smartDelivery, SetSmartDelivery] = useState(true)
   const [requestConfirmation, SetRequestConfirmation] = useState(true)
   const [allowRescheduling, SetAllowRescheduling] = useState(true)
   const [allowCancellation, SetAllowCancellation] = useState(true)
@@ -27,6 +29,8 @@ const Story: React.FC = ({ ...args }) => {
   return (
     <div style={{ width: '392px' }}>
       <Standard
+        enableReminderHook={[enableReminder, SetEnableReminder]}
+        smartDeliveryHook={[smartDelivery, SetSmartDelivery]}
         requestConfirmHook={[requestConfirmation, SetRequestConfirmation]}
         allowReschedulingHook={[allowRescheduling, SetAllowRescheduling]}
         allowCancellationHook={[allowCancellation, SetAllowCancellation]}
@@ -45,5 +49,5 @@ const Story: React.FC = ({ ...args }) => {
   )
 }
 
-export const DefaultStandard = Story.bind({})
-DefaultStandard.args = {}
+export const Standardtab = Story.bind({})
+Standardtab.args = {}

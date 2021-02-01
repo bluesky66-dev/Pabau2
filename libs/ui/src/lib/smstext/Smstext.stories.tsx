@@ -14,15 +14,10 @@ export default {
 }
 
 const Story = ({ ...args }) => {
-  // const [message, setmessage] = React.useState(args.message)
-  // const [manageAppointment, setmanageAppointment] = React.useState(
-  //   args.manageAppointment
-  // )
   return (
     <Smstext
       {...args}
-      // message={message}
-      // manageAppointment={manageAppointment}
+
     ></Smstext>
   )
 }
