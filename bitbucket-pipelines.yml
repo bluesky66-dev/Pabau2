@@ -137,3 +137,4 @@ pipelines:
             - yarn affected --base=HEAD~2 --head=HEAD~1 --target=export --prod
             - yarn affected --base=HEAD~2 --head=HEAD~1 --target=build-storybook --prod
             - yarn affected --base=HEAD~2 --head=HEAD~1 --target=deploy --prod
+            - cat /tmp/bot_message.txt
