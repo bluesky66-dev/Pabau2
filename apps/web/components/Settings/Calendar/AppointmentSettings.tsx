@@ -50,13 +50,13 @@ const AppointmentSettings = () => (
     <div className={styles.appointmentsControls}>
       {appointmentsControls.map((appointment, index) => {
         return (
-          <>
+          <div key={index}>
             <Checkbox key={index} defaultChecked={appointment.value}>
               <span className={styles.appointmentText}>{appointment.type}</span>
             </Checkbox>
             <HelpTooltip helpText={appointment.label} />
             <br />
-          </>
+          </div>
         )
       })}
     </div>

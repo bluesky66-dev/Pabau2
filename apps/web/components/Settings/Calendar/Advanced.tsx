@@ -79,13 +79,13 @@ export const Advanced: FC = () => {
       <div className={styles.advancedControls}>
         {advancedControls.map((advanced, index) => {
           return (
-            <>
+            <div key={index}>
               <Checkbox key={index} defaultChecked={advanced.value}>
                 <span className={styles.appointmentText}>{advanced.type}</span>
               </Checkbox>
               <HelpTooltip helpText={advanced.help} />
               <br />
-            </>
+            </div>
           )
         })}
       </div>

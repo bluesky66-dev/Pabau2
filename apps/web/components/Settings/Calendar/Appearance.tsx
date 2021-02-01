@@ -45,13 +45,13 @@ const Appearance = () => (
         </Title>
         {AppearanceGeneralItems.map((general, index) => {
           return (
-            <>
-              <Checkbox defaultChecked={general.value} key={index}>
+            <div key={index}>
+              <Checkbox key={index} defaultChecked={general.value}>
                 <span className={styles.appointmentText}>{general.type}</span>
               </Checkbox>
               <HelpTooltip helpText={general.help} />
               <br />
-            </>
+            </div>
           )
         })}
       </div>
