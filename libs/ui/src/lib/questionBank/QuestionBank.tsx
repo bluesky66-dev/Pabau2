@@ -17,7 +17,7 @@ interface IMenuOptions {
   value: string
 }
 
-interface P {
+export interface QuestionBankProps {
   questions: IQuestionOptions[]
   options: IMenuOptions[]
   onSelect(e, key: number): void
@@ -25,7 +25,7 @@ interface P {
   onClick(key: number): void
 }
 
-export const QuestionBank: FC<P> = (props) => {
+export const QuestionBank: FC<QuestionBankProps> = (props) => {
   const { questions, options, onSelect, onChecked, onClick } = props
 
   const prepareOptions = (key: number) => {
