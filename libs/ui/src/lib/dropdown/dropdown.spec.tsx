@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import CustomModal from './CustomModal'
+import Dropdown from './dropdown'
 
-describe('BSecuritytool', () => {
+describe('Avatar Dropdown', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<CustomModal datasource={[]} />)
+    const { baseElement } = render(<Dropdown />)
     expect(baseElement).toBeTruthy()
   })
 })

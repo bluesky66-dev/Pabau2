@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import CustomModal from './CustomModal'
+import Checkbox from './checkbox'
 
-describe('BSecuritytool', () => {
+describe('Checkbox', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<CustomModal datasource={[]} />)
+    const { baseElement } = render(<Checkbox />)
     expect(baseElement).toBeTruthy()
   })
 })
