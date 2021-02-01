@@ -1,20 +1,15 @@
-import { PlusOutlined } from '@ant-design/icons'
 import { Button, ButtonTypes } from '@pabau/ui'
-import { Input, Radio } from 'antd'
+import { Input } from 'antd'
 import React, { FC, useState } from 'react'
 import singleChoiceIcon from '../../assets/images/medicalform_singlechoice.svg'
+import LinkedField from './LinkedField'
 import styles from './MedicalForm.module.less'
 import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormTitle from './MedicalFormTitle'
+import Options from './Options'
 
 const SingleChoice: FC = () => {
-  const [optionVal, setOptionVal] = useState(1)
-  const radioStyle = {
-    display: 'block',
-    height: '30px',
-    lineHeight: '30px',
-    color: '#9292a3',
-  }
+  const [advanced, setAdvanced] = useState(false)
   return (
     <div className={styles.mainBody}>
       <div className={styles.formItem}>
@@ -34,26 +29,17 @@ const SingleChoice: FC = () => {
         <div className={`${styles.formQuestion} ${styles.formCommon}`}>
           <p style={{ marginTop: '5px' }}>Question</p>
           <Input placeholder="Enter your question" />
-          <p style={{ marginTop: '20px' }}>Options</p>
-          <Radio.Group
-            size="small"
-            value={optionVal}
-            onChange={(e) => setOptionVal(e.target.value)}
-          >
-            <Radio value={1} style={radioStyle}>
-              Option 1
-            </Radio>
-            <Radio value={2} style={radioStyle}>
-              Add option
-            </Radio>
-          </Radio.Group>
-          <p style={{ marginTop: '20px' }}>Linked field</p>
+          <Options />
+          {advanced && <LinkedField linkedLabel="Linked field" />}
+          <br />
           <Button
             type={ButtonTypes.default}
-            icon={<PlusOutlined />}
+            style={{ marginTop: '15px' }}
+            onClick={(e) => setAdvanced((advanced) => !advanced)}
             size="small"
           >
-            Add
+            {!advanced && `Show advanced settings`}
+            {advanced && `Hide advanced settings`}
           </Button>
         </div>
       </div>

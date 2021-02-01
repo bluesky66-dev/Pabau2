@@ -1,20 +1,15 @@
-import { PlusOutlined } from '@ant-design/icons'
 import { Button, ButtonTypes } from '@pabau/ui'
-import { Checkbox, Input } from 'antd'
-import React, { FC } from 'react'
+import { Input } from 'antd'
+import React, { FC, useState } from 'react'
 import multipleChoiceIcon from '../../assets/images/medicalform_multiplechoice.svg'
+import LinkedField from './LinkedField'
 import styles from './MedicalForm.module.less'
 import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormTitle from './MedicalFormTitle'
+import MultiOptions from './MultiOptions'
 
 const MultipleChoice: FC = () => {
-  const checkboxStyle = {
-    display: 'block',
-    height: '30px',
-    lineHeight: '30px',
-    color: '#9292a3',
-    marginLeft: '0px',
-  }
+  const [advanced, setAdvanced] = useState(false)
   return (
     <div className={styles.mainBody}>
       <div className={styles.formItem}>
@@ -34,20 +29,17 @@ const MultipleChoice: FC = () => {
         <div className={`${styles.formQuestion} ${styles.formCommon}`}>
           <p style={{ marginTop: '5px' }}>Question</p>
           <Input placeholder="Enter your question" />
-          <p style={{ marginTop: '20px' }}>Options</p>
-          <Checkbox value="C" style={checkboxStyle}>
-            Option 1
-          </Checkbox>
-          <Checkbox value="C" style={checkboxStyle}>
-            Add option
-          </Checkbox>
-          <p style={{ marginTop: '20px' }}>Linked field</p>
+          <MultiOptions />
+          {advanced && <LinkedField linkedLabel="Linked field" />}
+          <br />
           <Button
             type={ButtonTypes.default}
-            icon={<PlusOutlined />}
+            style={{ marginTop: '15px' }}
+            onClick={(e) => setAdvanced((advanced) => !advanced)}
             size="small"
           >
-            Add
+            {!advanced && `Show advanced settings`}
+            {advanced && `Hide advanced settings`}
           </Button>
         </div>
       </div>
