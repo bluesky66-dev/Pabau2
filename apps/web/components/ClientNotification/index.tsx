@@ -1,7 +1,11 @@
 import React, { FC, useState } from 'react'
 import { ClientNotification, Standard, Appointment, Smstext } from '@pabau/ui'
 
-const Index: FC = () => {
+interface P {
+  onSeletedTab: (number) => void
+}
+
+const Index: FC<P> = ({ onSeletedTab }) => {
   const [enableReminder, setEnableReminder] = useState(false)
   const [smartDelivery, setSmartDelivery] = useState(false)
   const [requestConfirmation, setRequestConfirmation] = useState(true)
@@ -13,12 +17,26 @@ const Index: FC = () => {
   const [addMedicalHisButton, setAddMedicalHisButton] = useState(true)
   const [backGroundColor, setBackGroundColor] = useState('')
   const [buttonColor, setButtonColor] = useState('')
-  const [selectLanguage, setSelectLanguage] = useState('en')
+  const [selectLanguage, setSelectLanguage] = useState('fr')
   const [medicalMessage, setMedicalMessage] = useState('')
   const [informationMessage, setInformationMessage] = useState('')
 
+  function handleSelectedTab(value) {
+    onSeletedTab(value)
+  }
   return (
     <ClientNotification
+      onSmsTabChanged={(value) => {
+        if (value === 2) {
+          handleSelectedTab(value)
+          setEnableReminder(true)
+          setSmartDelivery(true)
+        } else {
+          handleSelectedTab(value)
+          setEnableReminder(false)
+          setSmartDelivery(false)
+        }
+      }}
       tabComponent={
         <Standard
           enableReminder={enableReminder}

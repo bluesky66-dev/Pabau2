@@ -346,7 +346,7 @@ export const Standard: FC<P> = ({
                 <Row>
                   <ClientLanguage
                     selectLanguageHook={[selectLanguage, onSelectLanguage]}
-                    defaultLanguage="EN"
+                    defaultLanguage="FR"
                   />
                 </Row>
               </Panel>

@@ -106,7 +106,7 @@ interface P {
   showService?: boolean
   showEmployeeName?: boolean
   addMedicalHisButton?: boolean
-  selectLanguage?: string
+  selectLanguage: string
   backGroundColor?: string
   buttonColor?: string
   informationMessage?: string
@@ -127,13 +127,15 @@ export const Appointment: FC<P> = ({
   backGroundColor,
   buttonColor,
 }) => {
-  // const [selectLangData, setSelectLangData] = useState<Email>(langData['en'])
-  const selectLangData = langData['en']
-  // useEffect(() => {
-  //   if (langData[`${selectLanguage.toLowerCase()}`]) {
-  //     setSelectLangData({ ...langData[`${selectLanguage.toLowerCase()}`] })
-  //   }
-  // }, [selectLanguage])
+  const [selectLangData, setSelectLangData] = React.useState<Email>(
+    langData['en']
+  )
+  // const selectLangData = langData['en']
+  React.useEffect(() => {
+    if (langData[`${selectLanguage.toLowerCase()}`]) {
+      setSelectLangData({ ...langData[`${selectLanguage.toLowerCase()}`] })
+    }
+  }, [selectLanguage])
 
   return (
     <div
