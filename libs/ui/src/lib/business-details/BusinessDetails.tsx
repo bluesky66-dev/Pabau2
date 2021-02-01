@@ -6,6 +6,7 @@ import {
   SimpleDropdown,
   LanguageDropdown,
   PhoneNumberInput,
+  BusinessTypes,
 } from '@pabau/ui'
 import ClinicLogo from '../../assets/images/normal-clinic-logo.svg'
 import styles from './BusinessDetails.module.less'
@@ -138,6 +139,10 @@ export const BusinessDetails: FC<BusinessDetailsProps> = ({
             />
           </Col>
         </Row>
+        <BusinessTypes
+          value={basicInfo.businessType}
+          onSelected={(val) => handleBasicInfoChange('businessType', val)}
+        />
       </div>
       <Divider />
       <div className={styles.languageSettingSection}>
