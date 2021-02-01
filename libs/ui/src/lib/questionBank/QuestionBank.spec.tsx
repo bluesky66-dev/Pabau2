@@ -1,9 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-describe('Standard', () => {
+import QuestionBank from './QuestionBank'
+
+describe('QuestionBank', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<div />)
+    const { baseElement } = render(<QuestionBank />)
     expect(baseElement).toBeTruthy()
   })
 })
