@@ -9,20 +9,24 @@ enum ButtonSize {
 }
 
 export interface CheckBoxProps extends FormProps {
+  label?: string
   text?: string
   size?: ButtonSize
   disabled?: boolean
   placeHolderText?: string
   reqiredMsg?: string
+  type?: string
 }
 
 export function Input({
   text,
+  label,
   size,
   disabled,
   placeHolderText,
   requiredMark = false,
   reqiredMsg,
+  type,
   ...props
 }: PropsWithChildren<CheckBoxProps>): JSX.Element {
   const [form] = Form.useForm()
@@ -30,9 +34,13 @@ export function Input({
   return (
     <Form form={form} requiredMark={requiredMark} layout="vertical" {...props}>
       <Form.Item
-        label="Name"
+        label={label}
         name="marketingSorce"
         rules={[
+          {
+            type: type === 'email' ? 'email' : undefined,
+            message: 'Please enter valid email!',
+          },
           {
             required: true,
             message: reqiredMsg,

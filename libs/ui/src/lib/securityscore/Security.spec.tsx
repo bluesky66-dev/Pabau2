@@ -5,7 +5,9 @@ import SecurityScore from './SecurityScore'
 
 describe('Security', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<SecurityScore percent={0} />)
+    const { baseElement } = render(
+      <SecurityScore percent={0} buttonTitle={''} title1={''} title2={''} />
+    )
     expect(baseElement).toBeTruthy()
   })
 })

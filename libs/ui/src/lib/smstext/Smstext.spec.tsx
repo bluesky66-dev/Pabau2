@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import Standard from './Standard'
+import Smstext from './Smstext'
 
-describe('Standard', () => {
+describe('Smstext', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Standard />)
+    const { baseElement } = render(<Smstext />)
     expect(baseElement).toBeTruthy()
   })
 })
