@@ -1,0 +1,23 @@
+@desktop:   ~"only screen and (min-width: 960px)";
+@tablet:    ~"only screen and (min-width: 720px) and (max-width: 959px)";
+
+.container {
+  background: #FFFFFF;
+  width: 100%;
+  border-radius: 4px;
+}
+@media @desktop {
+  .container {
+    padding: 24px;
+    display: inline-grid;
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media @tablet {
+  .container {
+    padding: 24px;
+    display: inline-grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
