@@ -19,6 +19,9 @@ export const SetupChipStory: FC = () => {
     title: 'Blog',
     subTitle: '53 posts',
     image: <EditOutlined />,
+    onClick: (title: string): string => {
+      return title
+    },
   }
 
   return <SetupChip {...props} />

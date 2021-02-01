@@ -1,5 +1,5 @@
 import React from 'react'
-import { SetupChip } from '@pabau/ui'
+import { SetupChip, SetupGridMobile } from '@pabau/ui'
 import styles from '../Setup.module.less'
 
 import {
@@ -33,9 +33,16 @@ const data = [
 ]
 
 const HeaderChip = () => {
+  const handleChipClick = (title: string) => {
+    // console.log(title)
+  }
+
   return (
     <div className={styles.headerChipWrapper}>
-      {data && data.map((value, index) => <SetupChip key={index} {...value} />)}
+      {data &&
+        data.map((value, index) => (
+          <SetupChip key={index} {...value} onClick={handleChipClick} />
+        ))}
     </div>
   )
 }
