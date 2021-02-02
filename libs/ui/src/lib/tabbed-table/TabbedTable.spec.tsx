@@ -5,7 +5,7 @@ import TabbedTable from './TabbedTable'
 
 describe('TabbedTable', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<TabbedTable />)
+    const { baseElement } = render(<TabbedTable tabItems={[]} tableData={{}} />)
     expect(baseElement).toBeTruthy()
   })
 })

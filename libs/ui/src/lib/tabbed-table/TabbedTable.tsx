@@ -19,10 +19,9 @@ export const TabbedTable: FC<TabbedTableProps> = ({ tabItems, tableData }) => {
   return (
     <div className={styles.tabbedTableContainer}>
       {valid && (
-        <TabMenu menuItems={tabItems} tabPosition="top">
-          {tabItems.map((item) => (
-            <Table key={item} {...tableData[item]} />
-          ))}
+        <TabMenu menuItems={tabItems || []} tabPosition="top">
+          {tabItems &&
+            tabItems.map((item) => <Table key={item} {...tableData[item]} />)}
         </TabMenu>
       )}
     </div>
