@@ -1,18 +1,30 @@
-import React, { FC, ReactNode } from 'react'
-import { TabMenu } from '@pabau/ui'
+import React, { FC, useState, useEffect } from 'react'
+import { TabMenu, Table, TableType } from '@pabau/ui'
 import styles from './TabbedTable.module.less'
 
+interface TableData {
+  [key: string]: TableType
+}
 export interface TabbedTableProps {
   tabItems: Array<string>
-  children: Array<ReactNode>
+  tableData: TableData
 }
 
-export const TabbedTable: FC<TabbedTableProps> = ({ tabItems, children }) => {
+export const TabbedTable: FC<TabbedTableProps> = ({ tabItems, tableData }) => {
+  const [valid, setValid] = useState(false)
+  useEffect(() => {
+    const broken = tabItems.findIndex((item) => tableData[item] === undefined)
+    setValid(broken >= 0)
+  }, [tabItems, tableData])
   return (
     <div className={styles.tabbedTableContainer}>
-      <TabMenu menuItems={tabItems} tabPosition="top">
-        {children.map((child) => child)}
-      </TabMenu>
+      {valid && (
+        <TabMenu menuItems={tabItems} tabPosition="top">
+          {tabItems.map((item) => (
+            <Table key={item} {...tableData[item]} />
+          ))}
+        </TabMenu>
+      )}
     </div>
   )
 }
