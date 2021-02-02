@@ -4,11 +4,28 @@
      padding: 23px 16px 12px;
     }
   }
+  :global .ant-modal-close {
+    @media screen and (max-width: 767px) {
+      display: none;
+    }
+  }
   .modal-with-image-body {
     padding: 0 40px 40px;
     @media screen and (max-width: 767px){
       padding: 0 16px 16px;
+      img {
+        display: none;
+      }
     }
+    .modal-content {
+      div {
+        max-width: 50%;
+        @media screen and (max-width: 767px){
+          max-width: 100%;
+        }
+      }
+    }
+
     .right-image {
       padding-left: 40px;
       img {
@@ -37,6 +54,10 @@
         border-radius: 4px;
         padding: 9px 16px;
         height: auto;
+        display: none;
+        @media screen and (max-width: 767px){
+          display: block;
+        }
       }
       .modal-enable-btn {
         background: #54B2D3;
