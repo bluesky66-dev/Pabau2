@@ -6,7 +6,7 @@ import {
   MessageOutlined,
   MailOutlined,
   WalletOutlined,
-  CloseOutlined
+  CloseOutlined,
 } from '@ant-design/icons'
 import { Popover } from 'antd'
 import { Button } from '@pabau/ui'
@@ -17,7 +17,10 @@ export const QuickCreate: FC = () => {
 
   const QuickCreateContent = () => (
     <div className={styles.quickCreateContentConatiner}>
-      <div className={styles.quickCreateContentClose} onClick={() => setVisible(false)}>
+      <div
+        className={styles.quickCreateContentClose}
+        onClick={() => setVisible(false)}
+      >
         <CloseOutlined />
       </div>
       <p>Create</p>
@@ -63,7 +66,11 @@ export const QuickCreate: FC = () => {
         trigger="click"
         visible={visible}
       >
-        <Button type="default" className={styles.createBtnStyle} onClick={() => setVisible(true)}>
+        <Button
+          type="default"
+          className={styles.createBtnStyle}
+          onClick={() => setVisible(true)}
+        >
           <PlusCircleFilled /> Create
         </Button>
       </Popover>
