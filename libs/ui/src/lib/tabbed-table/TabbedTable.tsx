@@ -14,7 +14,7 @@ export const TabbedTable: FC<TabbedTableProps> = ({ tabItems, tableData }) => {
   const [valid, setValid] = useState(false)
   useEffect(() => {
     const broken = tabItems.findIndex((item) => tableData[item] === undefined)
-    setValid(broken >= 0)
+    setValid(broken === -1)
   }, [tabItems, tableData])
   return (
     <div className={styles.tabbedTableContainer}>
