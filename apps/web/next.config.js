@@ -3,6 +3,9 @@ const withImages = require('next-images')
 const withNx = require('@nrwl/next/plugins/with-nx')
 
 module.exports = {
+  env: {
+    google_api_key: 'AIzaSyC43U2-wqXxYEk1RBrTLdkYt3aDoOxO4Fw'
+  },
   trailingSlash: false,
   ...withImages({
     fileExtensions: [
