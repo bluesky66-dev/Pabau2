@@ -17,10 +17,10 @@ const Index: FC<P> = ({ onSeletedTab }) => {
   const [addMedicalHisButton, setAddMedicalHisButton] = useState(true)
   const [backGroundColor, setBackGroundColor] = useState('')
   const [buttonColor, setButtonColor] = useState('')
-  const [selectLanguage, setSelectLanguage] = useState('fr')
+  const [selectLanguage, setSelectLanguage] = useState('en')
   const [medicalMessage, setMedicalMessage] = useState('')
   const [informationMessage, setInformationMessage] = useState('')
-
+  const [standardTapIndex, setStandardTap] = useState('1')
   function handleSelectedTab(value) {
     onSeletedTab(value)
   }
@@ -39,6 +39,7 @@ const Index: FC<P> = ({ onSeletedTab }) => {
       }}
       tabComponent={
         <Standard
+          onStandardTabChanged={(value) => setStandardTap(value)}
           enableReminder={enableReminder}
           onEnableReminder={(value) => setEnableReminder(value)}
           smartDelivery={smartDelivery}
@@ -83,6 +84,7 @@ const Index: FC<P> = ({ onSeletedTab }) => {
           buttonColor={buttonColor}
           informationMessage={informationMessage}
           medicalMessage={medicalMessage}
+          standardTapIndex={standardTapIndex}
         />
       }
       smsComponent={

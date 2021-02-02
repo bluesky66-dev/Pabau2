@@ -111,6 +111,7 @@ interface P {
   buttonColor?: string
   informationMessage?: string
   medicalMessage?: string
+  standardTapIndex?: string
 }
 
 export const Appointment: FC<P> = ({
@@ -126,6 +127,7 @@ export const Appointment: FC<P> = ({
   medicalMessage,
   backGroundColor,
   buttonColor,
+  standardTapIndex,
 }) => {
   const [selectLangData, setSelectLangData] = React.useState<Email>(
     langData['en']
@@ -138,115 +140,132 @@ export const Appointment: FC<P> = ({
   }, [selectLanguage])
 
   return (
-    <div
-      className={styles.cardAppointment}
-      style={{ backgroundColor: backGroundColor }}
-    >
-      <Row justify="center" className={styles.logo}>
-        <Col>
-          <NormalClinicLogo />
-        </Col>
-      </Row>
-      <Row gutter={[0, 4]}>
-        <Col>
-          <span className={styles.greetingText}>{selectLangData.greeting}</span>
-        </Col>
-      </Row>
-      <Divider className={styles.divider} />
-      <Row justify="start" align="middle" gutter={[0, 4]}>
-        <Col>
-          <Calendar />
-          <span style={{ marginLeft: '5px' }}>{selectLangData.detail}</span>
-        </Col>
-      </Row>
-      <Row gutter={[0, 4]}>
-        <Col>
-          <span>{selectLangData.date}</span>
-          {allowRescheduling && (
-            <Button type="link" className={styles.anchor}>
-              {selectLangData.reschedule}
-            </Button>
+    <div>
+      {standardTapIndex === '1' ? (
+        <div
+          className={styles.cardAppointment}
+          style={{ backgroundColor: backGroundColor }}
+        >
+          <Row justify="center" className={styles.logo}>
+            <Col>
+              <NormalClinicLogo />
+            </Col>
+          </Row>
+          <Row gutter={[0, 4]}>
+            <Col>
+              <span className={styles.greetingText}>
+                {selectLangData.greeting}
+              </span>
+            </Col>
+          </Row>
+          <Divider className={styles.divider} />
+          <Row justify="start" align="middle" gutter={[0, 4]}>
+            <Col>
+              <Calendar />
+              <span style={{ marginLeft: '5px' }}>{selectLangData.detail}</span>
+            </Col>
+          </Row>
+          <Row gutter={[0, 4]}>
+            <Col>
+              <span>{selectLangData.date}</span>
+              {allowRescheduling && (
+                <Button type="link" className={styles.anchor}>
+                  {selectLangData.reschedule}
+                </Button>
+              )}
+            </Col>
+          </Row>
+          <Row gutter={[0, 4]}>
+            {showService && (
+              <Col>
+                <span>
+                  {selectLangData.service}{' '}
+                  {showEmployeeName ? selectLangData.employee : ''}
+                </span>
+              </Col>
+            )}
+          </Row>
+          <Row gutter={[0, 4]}>
+            <Col>
+              <span className={styles.mainAppointment}>
+                {selectLangData.title}
+              </span>
+            </Col>
+          </Row>
+          <Row gutter={[0, 16]}>
+            <Col>
+              <span className={styles.address}>{selectLangData.address}</span>
+            </Col>
+          </Row>
+          <Row gutter={[0, 16]} justify="space-between">
+            {allowCancellation && (
+              <Col>
+                <Button
+                  type="default"
+                  className={styles.button}
+                  backgroundColor={buttonColor}
+                >
+                  {selectLangData.cancelButton}
+                </Button>
+              </Col>
+            )}
+            {requestConfirm && (
+              <Col>
+                <Button type="primary" backgroundColor={buttonColor}>
+                  {selectLangData.confirmButton}
+                </Button>
+              </Col>
+            )}
+          </Row>
+          {displayPolicy && (
+            <>
+              <Row gutter={[0, 8]}>
+                <Col>
+                  <span>{selectLangData.policy}</span>
+                </Col>
+              </Row>
+              <Row gutter={[0, 8]}>
+                <Col>
+                  <Button type="link" className={styles.anchor}>
+                    {selectLangData.cancelPolicy}
+                  </Button>
+                </Col>
+              </Row>
+            </>
           )}
-        </Col>
-      </Row>
-      <Row gutter={[0, 4]}>
-        {showService && (
-          <Col>
-            <span>
-              {selectLangData.service}{' '}
-              {showEmployeeName ? selectLangData.employee : ''}
-            </span>
-          </Col>
-        )}
-      </Row>
-      <Row gutter={[0, 4]}>
-        <Col>
-          <span className={styles.mainAppointment}>{selectLangData.title}</span>
-        </Col>
-      </Row>
-      <Row gutter={[0, 16]}>
-        <Col>
-          <span className={styles.address}>{selectLangData.address}</span>
-        </Col>
-      </Row>
-      <Row gutter={[0, 16]} justify="space-between">
-        {allowCancellation && (
-          <Col>
-            <Button
-              type="default"
-              className={styles.button}
-              backgroundColor={buttonColor}
-            >
-              {selectLangData.cancelButton}
-            </Button>
-          </Col>
-        )}
-        {requestConfirm && (
-          <Col>
-            <Button type="primary" backgroundColor={buttonColor}>
-              {selectLangData.confirmButton}
-            </Button>
-          </Col>
-        )}
-      </Row>
-      {displayPolicy && (
-        <>
-          <Row gutter={[0, 8]}>
-            <Col>
-              <span>{selectLangData.policy}</span>
-            </Col>
+
+          <Divider />
+
+          <Row justify="center" style={{ marginBottom: '20px' }}>
+            <span>{medicalMessage}</span>
           </Row>
-          <Row gutter={[0, 8]}>
-            <Col>
-              <Button type="link" className={styles.anchor}>
-                {selectLangData.cancelPolicy}
+
+          <Row justify="center">
+            {addMedicalHisButton && (
+              <Button
+                type="default"
+                className={styles.button}
+                backgroundColor={buttonColor}
+              >
+                {selectLangData.complete}
               </Button>
-            </Col>
+            )}
           </Row>
-        </>
-      )}
 
-      <Divider />
-
-      <Row justify="center">
-        <span>{medicalMessage}</span>
-      </Row>
-
-      <Row justify="center">
-        {addMedicalHisButton && (
-          <Button
-            type="default"
-            className={styles.button}
-            backgroundColor={buttonColor}
-          >
-            {selectLangData.complete}
+          <Row justify="center" style={{ marginTop: '20px' }}>
+            <span>{informationMessage}</span>
+          </Row>
+        </div>
+      ) : (
+        <div
+          className={styles.cardAddTemplateContainer}
+          style={{ backgroundColor: backGroundColor }}
+        >
+          <Button type="default" className={styles.addTemplateTxt}>
+            +Add Template
           </Button>
-        )}
-      </Row>
-
-      <Row justify="center">
-        <span>{informationMessage}</span>
-      </Row>
+        </div>
+      )}
     </div>
   )
 }
