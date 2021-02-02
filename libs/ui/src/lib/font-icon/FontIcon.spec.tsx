@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import Appointment from './Appointment'
+import FontIcon from './FontIcon'
 
-describe('Appointment', () => {
+describe('FontIcon', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Appointment selectLanguage="en" />)
+    const { baseElement } = render(<FontIcon />)
     expect(baseElement).toBeTruthy()
   })
 })

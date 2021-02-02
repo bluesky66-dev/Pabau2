@@ -2,6 +2,7 @@ export const data = [
   {
     key: '1',
     name: 'Book Now Link',
+    color: '#B6CDFF',
     createdDate: 'Tuesday, 5 Feb 2019',
     is_active: true,
     isLocked: true,
@@ -10,6 +11,7 @@ export const data = [
   {
     key: '2',
     name: 'From a friend',
+    color: '#9CF075',
     createdDate: 'Monday, 4 Feb 2019',
     is_active: false,
     isLocked: false,
@@ -18,6 +20,7 @@ export const data = [
   {
     key: '3',
     name: 'Instagram',
+    color: '#F49598',
     createdDate: 'Tuesday, 5 Feb 2019',
     is_active: true,
     isLocked: true,
@@ -26,6 +29,7 @@ export const data = [
   {
     key: '4',
     name: 'Imported',
+    color: '#4899DF',
     createdDate: 'Tuesday, 5 Feb 2019',
     is_active: true,
     isLocked: false,
@@ -42,6 +46,7 @@ export const data = [
   {
     key: '6',
     name: 'Facebook',
+    color: 'blue',
     createdDate: 'Saturday, 14 April 2018',
     is_active: true,
     isLocked: false,

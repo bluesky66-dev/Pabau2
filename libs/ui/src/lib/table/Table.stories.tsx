@@ -85,3 +85,21 @@ const TableWithReservedWordsStory: FC = ({ ...args }) => {
   )
 }
 export const TableWithReservedWords = TableWithReservedWordsStory.bind({})
+
+const TableWithCustomColorStory: FC = ({ ...args }) => {
+  const [dataSource, setDataSource]: any = useState(data)
+  const updateDataSource = ({ newData, oldIndex, newIndex }) => {
+    setDataSource(newData)
+  }
+
+  return (
+    <Table
+      {...args}
+      padlocked={[]}
+      dataSource={dataSource}
+      isCustomColorExist={true}
+      updateDataSource={updateDataSource}
+    />
+  )
+}
+export const TableWithCustomColor = TableWithCustomColorStory.bind({})
