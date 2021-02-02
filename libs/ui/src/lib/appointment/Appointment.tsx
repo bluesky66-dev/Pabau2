@@ -257,15 +257,15 @@ export const Appointment: FC<P> = ({
           </Row>
         </div>
       ) : (
-          <div
-            className={styles.cardAddTemplateContainer}
-            style={{ backgroundColor: backGroundColor }}
-          >
-            <Button type="default" className={styles.addTemplateTxt}>
-              +Add Template
+        <div
+          className={styles.cardAddTemplateContainer}
+          style={{ backgroundColor: backGroundColor }}
+        >
+          <Button type="default" className={styles.addTemplateTxt}>
+            +Add Template
           </Button>
-          </div>
-        )}
+        </div>
+      )}
     </div>
   )
 }

@@ -51,6 +51,7 @@
     "file-loader": "^6.2.0",
     "formik": "^2.2.6",
     "formik-antd": "^2.0.1",
+    "global": "^4.4.0",
     "google-libphonenumber": "^3.2.16",
     "graphql": "^15.4.0",
     "husky": "^4.3.8",
@@ -78,6 +79,7 @@
     "string-to-color": "^2.2.2",
     "subscriptions-transport-ws": "^0.9.18",
     "tslib": "^2.1.0",
+    "yarn": "^1.22.10",
     "yup": "^0.32.8"
   },
   "devDependencies": {
