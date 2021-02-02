@@ -1,6 +1,6 @@
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, useEffect, useState } from 'react'
 import { Form, Input as AntInput } from 'antd'
-import { FormProps } from 'antd/lib/form'
+import { FormProps, Rule } from 'antd/lib/form'
 import styles from './input.module.less'
 
 enum ButtonSize {
@@ -33,38 +33,51 @@ export function Input({
   ...props
 }: PropsWithChildren<CheckBoxProps>): JSX.Element {
   const [form] = Form.useForm()
+  const [rules, setRules] = useState<Rule[]>([])
   const handleInputChange = (e) => {
     onChange && onChange(e.target.value)
   }
 
+  useEffect(() => {
+    let items: Rule[] = []
+    if (requiredMark) {
+      items = [
+        ...items,
+        {
+          required: true,
+          message: reqiredMsg ? reqiredMsg : '',
+        },
+      ]
+      console.log('requiredMark', items)
+    }
+    if (type === 'email') {
+      items = [
+        ...items,
+        {
+          type: 'email',
+          message: 'Please enter valid email!',
+        },
+      ]
+      console.log('type === email', items)
+    }
+    setRules(items)
+  }, [requiredMark, reqiredMsg, type])
+
   return (
     <div className={styles.inputContainer}>
       <Form
+        {...props}
         form={form}
         requiredMark={requiredMark}
         layout="vertical"
-        {...props}
       >
-        <Form.Item
-          label={label ? label : ''}
-          name="marketingSorce"
-          rules={[
-            {
-              type: type === 'email' ? 'email' : undefined,
-              message: 'Please enter valid email!',
-            },
-            {
-              required: true,
-              message: reqiredMsg,
-            },
-          ]}
-        >
+        <Form.Item label={label ? label : ''} name="input-item" rules={rules}>
           <AntInput
             className="input-style"
             placeholder={placeHolderText}
             value={text}
-            size={size}
             defaultValue={text}
+            size={size}
             disabled={disabled}
             onChange={(e) => handleInputChange(e)}
           />

@@ -29,7 +29,7 @@ export const BusinessTypes: FC<BusinessTypesProps> = ({
       <div className={styles.businessTypes}>
         <Row gutter={[8, 8]}>
           {bizTypes.map((type) => (
-            <Col xl={3} md={4} sm={6} xs={8} key={type.title}>
+            <Col md={4} sm={6} xs={8} key={type.title}>
               <div
                 className={
                   type.title === selected
@@ -42,7 +42,7 @@ export const BusinessTypes: FC<BusinessTypesProps> = ({
                 onClick={() => handleClickItem(type.title)}
               >
                 <div className={styles.businessTypeContent}>
-                  <img src={type.img} width="70%" alt="biz type" />
+                  <img src={type.img} width="90%" height="50%" alt="biz type" />
                   <p>{type.title}</p>
                 </div>
               </div>

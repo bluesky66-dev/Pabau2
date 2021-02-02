@@ -76,16 +76,20 @@ export const BusinessDetails: FC<BusinessDetailsProps> = ({
       })
   }
   const handleBasicInfoChange = (key, value) => {
-    basicInfo[key] = value
+    const _basicInfo: BasicInformation = { ...basicInfo }
+    _basicInfo[key] = value
+    setBasicInfo(_basicInfo)
   }
   const handleLangSettingChange = (key, value) => {
-    langSetting[key] = value
+    const _langSetting: LanguageSetting = { ...langSetting }
+    _langSetting[key] = value
+    setLangSetting(_langSetting)
   }
 
   useEffect(() => {
-    setBasicInfo(basicInformation ? basicInformation : defaultBasicInfo)
-    setLangSetting(languageSetting ? languageSetting : defaultLangSetting)
-    setBizLocation(businessLocation ? businessLocation : defaultBizLocation)
+    setBasicInfo(basicInformation || defaultBasicInfo)
+    setLangSetting(languageSetting || defaultLangSetting)
+    setBizLocation(businessLocation || defaultBizLocation)
   }, [basicInformation, languageSetting, businessLocation])
 
   return (
@@ -116,13 +120,18 @@ export const BusinessDetails: FC<BusinessDetailsProps> = ({
           <Col className="gutter-row" xs={24} sm={12}>
             <Input
               label="Business Name"
+              requiredMark={true}
+              reqiredMsg="Please enter your business name."
               text={basicInfo.businessName}
               onChange={(val) => handleBasicInfoChange('businessName', val)}
             />
           </Col>
           <Col className="gutter-row" xs={24} sm={12}>
             <Input
+              type="email"
               label="Company Email"
+              requiredMark={true}
+              reqiredMsg="Please enter your company email."
               text={basicInfo.companyEmail}
               onChange={(val) => handleBasicInfoChange('companyEmail', val)}
             />
