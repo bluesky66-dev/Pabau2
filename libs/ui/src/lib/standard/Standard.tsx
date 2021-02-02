@@ -44,6 +44,7 @@ interface P {
   onMedicalMessage: (string) => void
   informationMessage: string
   onInformationMessage: (string) => void
+  onStandardTabChanged: (string) => void
 }
 
 const { TabPane } = Tabs
@@ -80,10 +81,16 @@ export const Standard: FC<P> = ({
   onMedicalMessage,
   informationMessage,
   onInformationMessage,
+  onStandardTabChanged
 }) => {
+
+  function callback(key) {
+    onStandardTabChanged(key)
+  }
+
   return (
     <Row className={styles.tabsAlign}>
-      <Tabs>
+      <Tabs defaultActiveKey="1" onChange={callback}>
         <TabPane tab="Standard" key="1">
           <div style={{ padding: '10px 9px' }}>
             <Row style={{ padding: '0 15px' }}>
@@ -115,6 +122,16 @@ export const Standard: FC<P> = ({
                     onChange={() => onEnableReminder(!enableReminder)}
                   >
                     Enable reminders via email
+                  </Checkbox>
+                </Row>
+                <Row>
+                  <Checkbox
+                    className={styles.checkboxStyle}
+                    value="enable_reminder"
+                    checked={enableReminder}
+                    onChange={() => onEnableReminder(!enableReminder)}
+                  >
+                    Enable reminders via sms
                   </Checkbox>
                 </Row>
                 <Row align="middle">
@@ -337,7 +354,7 @@ export const Standard: FC<P> = ({
             >
               <Panel
                 className={styles.panelAlign}
-                header="Clinent languages"
+                header="Client languages"
                 key="1"
               >
                 <Row>
@@ -346,7 +363,7 @@ export const Standard: FC<P> = ({
                 <Row>
                   <ClientLanguage
                     selectLanguageHook={[selectLanguage, onSelectLanguage]}
-                    defaultLanguage="FR"
+                    defaultLanguage="EN"
                   />
                 </Row>
               </Panel>

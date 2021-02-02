@@ -48,7 +48,7 @@ export const ColorPicker: FC<PickerProps> = ({
 }) => {
   const [colorData, setColorData] = useState([
     {
-      color: '#03dbfc',
+      color: '#54b2d3',
       selected: false,
     },
     {
