@@ -16,27 +16,34 @@ import styles from './Standard.module.less'
 import { PabauPlus } from '../badge/Badge'
 
 interface P {
-  requestConfirmHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
-  allowReschedulingHook: [
-    boolean,
-    React.Dispatch<React.SetStateAction<boolean>>
-  ]
-  allowCancellationHook: [
-    boolean,
-    React.Dispatch<React.SetStateAction<boolean>>
-  ]
-  displayPolicyHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
-  showServiceHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
-  showEmployeeNameHook: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
-  addMedicalHisButtonHook: [
-    boolean,
-    React.Dispatch<React.SetStateAction<boolean>>
-  ]
-  selectLanguageHook: [string, React.Dispatch<React.SetStateAction<string>>]
-  backGroundColorHook: [string, React.Dispatch<React.SetStateAction<string>>]
-  buttonColorHook: [string, React.Dispatch<React.SetStateAction<string>>]
-  informationMessageHook: [string, React.Dispatch<React.SetStateAction<string>>]
-  medicalMessageHook: [string, React.Dispatch<React.SetStateAction<string>>]
+  enableReminder: boolean
+  onEnableReminder: (boolean) => void
+  smartDelivery: boolean
+  onSmartDelivery: (boolean) => void
+  requestConfirmation: boolean
+  onRequestConfirmation: (boolean) => void
+  allowRescheduling: boolean
+  onAllowRescheduling: (boolean) => void
+  allowCancellation: boolean
+  onAllowCancellation: (boolean) => void
+  displayPolicy: boolean
+  onDisplayPolicy: (boolean) => void
+  showService: boolean
+  onShowService: (boolean) => void
+  showEmployeeName: boolean
+  onShowEmployeeName: (boolean) => void
+  addMedicalHisButton: boolean
+  onAddMedicalHisButton: (boolean) => void
+  backGroundColor: string
+  onBackGroundColor: (string) => void
+  buttonColor: string
+  onButtonColor: (string) => void
+  selectLanguage: string
+  onSelectLanguage: (string) => void
+  medicalMessage: string
+  onMedicalMessage: (string) => void
+  informationMessage: string
+  onInformationMessage: (string) => void
 }
 
 const { TabPane } = Tabs
@@ -44,19 +51,35 @@ const { Panel } = Collapse
 const { Option } = Select
 const { TextArea } = Input
 
-const Standard: FC<P> = ({
-  requestConfirmHook: [requestConfirmation, setRequestConfirmation],
-  allowReschedulingHook: [allowRescheduling, setAllowRescheduling],
-  allowCancellationHook: [allowCancellation, setAllowCancellation],
-  displayPolicyHook: [displayPolicy, setDisplayPolicy],
-  showServiceHook: [showService, setShowService],
-  showEmployeeNameHook: [showEmployeeName, setShowEmployeeName],
-  addMedicalHisButtonHook: [addMedicalHisButton, setAddMedicalHisButton],
-  selectLanguageHook: [selectLanguage, setSelectLanguage],
-  backGroundColorHook: [backGroundColor, setBackGroundColor],
-  buttonColorHook: [buttonColor, setButtonColor],
-  informationMessageHook: [informationMessage, setInformationMessage],
-  medicalMessageHook: [medicalMessage, setMedicalMessage],
+export const Standard: FC<P> = ({
+  enableReminder,
+  onEnableReminder,
+  smartDelivery,
+  onSmartDelivery,
+  requestConfirmation,
+  onRequestConfirmation,
+  allowRescheduling,
+  onAllowRescheduling,
+  allowCancellation,
+  onAllowCancellation,
+  displayPolicy,
+  onDisplayPolicy,
+  showService,
+  onShowService,
+  showEmployeeName,
+  onShowEmployeeName,
+  addMedicalHisButton,
+  onAddMedicalHisButton,
+  backGroundColor,
+  onBackGroundColor,
+  buttonColor,
+  onButtonColor,
+  selectLanguage,
+  onSelectLanguage,
+  medicalMessage,
+  onMedicalMessage,
+  informationMessage,
+  onInformationMessage,
 }) => {
   return (
     <Row className={styles.tabsAlign}>
@@ -88,6 +111,8 @@ const Standard: FC<P> = ({
                   <Checkbox
                     className={styles.checkboxStyle}
                     value="enable_reminder"
+                    checked={enableReminder}
+                    onChange={() => onEnableReminder(!enableReminder)}
                   >
                     Enable reminders via email
                   </Checkbox>
@@ -96,6 +121,8 @@ const Standard: FC<P> = ({
                   <Checkbox
                     className={styles.checkboxStyle}
                     value="smart_delivery"
+                    checked={smartDelivery}
+                    onChange={() => onSmartDelivery(!smartDelivery)}
                   >
                     Smart delivery
                   </Checkbox>
@@ -128,9 +155,7 @@ const Standard: FC<P> = ({
                     className={styles.checkboxStyle}
                     value="request_confirmation"
                     checked={requestConfirmation}
-                    onChange={() =>
-                      setRequestConfirmation(!requestConfirmation)
-                    }
+                    onChange={() => onRequestConfirmation(!requestConfirmation)}
                   >
                     Request confirmation
                   </Checkbox>
@@ -147,7 +172,7 @@ const Standard: FC<P> = ({
                     className={styles.checkboxStyle}
                     value="allow_reschedule"
                     checked={allowRescheduling}
-                    onChange={() => setAllowRescheduling(!allowRescheduling)}
+                    onChange={() => onAllowRescheduling(!allowRescheduling)}
                   >
                     Allow rescheduling
                   </Checkbox>
@@ -157,7 +182,7 @@ const Standard: FC<P> = ({
                     className={styles.checkboxStyle}
                     value="allow_cancellation"
                     checked={allowCancellation}
-                    onChange={() => setAllowCancellation(!allowCancellation)}
+                    onChange={() => onAllowCancellation(!allowCancellation)}
                   >
                     Allow cancellation
                   </Checkbox>
@@ -167,7 +192,7 @@ const Standard: FC<P> = ({
                     className={styles.checkboxStyle}
                     value="display_policy"
                     checked={displayPolicy}
-                    onChange={() => setDisplayPolicy(!displayPolicy)}
+                    onChange={() => onDisplayPolicy(!displayPolicy)}
                   >
                     Display policy
                   </Checkbox>
@@ -177,7 +202,7 @@ const Standard: FC<P> = ({
                     className={styles.checkboxStyle}
                     value="show_service"
                     checked={showService}
-                    onChange={() => setShowService(!showService)}
+                    onChange={() => onShowService(!showService)}
                   >
                     Show service
                   </Checkbox>
@@ -187,7 +212,7 @@ const Standard: FC<P> = ({
                     className={styles.checkboxStyle}
                     value="show_employee_name"
                     checked={showEmployeeName}
-                    onChange={() => setShowEmployeeName(!showEmployeeName)}
+                    onChange={() => onShowEmployeeName(!showEmployeeName)}
                   >
                     Show employee name
                   </Checkbox>
@@ -202,9 +227,7 @@ const Standard: FC<P> = ({
                     className={styles.checkboxStyle}
                     value="add_his_button"
                     checked={addMedicalHisButton}
-                    onChange={() =>
-                      setAddMedicalHisButton(!addMedicalHisButton)
-                    }
+                    onChange={() => onAddMedicalHisButton(!addMedicalHisButton)}
                   >
                     Add Medical History button
                   </Checkbox>
@@ -230,7 +253,7 @@ const Standard: FC<P> = ({
                         className={styles.textareaStyle}
                         autoSize={{ minRows: 3, maxRows: 3 }}
                         onChange={(event) =>
-                          setMedicalMessage(event.target.value)
+                          onMedicalMessage(event.target.value)
                         }
                       />
                     </Row>
@@ -238,11 +261,11 @@ const Standard: FC<P> = ({
                 )}
                 <ColorPicker
                   heading="Background color"
-                  onSelected={(val) => setBackGroundColor(val)}
+                  onSelected={(val) => onBackGroundColor(val)}
                 />
                 <ColorPicker
                   heading="Buttons color"
-                  onSelected={(val) => setButtonColor(val)}
+                  onSelected={(val) => onButtonColor(val)}
                 />
                 <Row>
                   <span className={styles.textareaLabel}>Information</span>
@@ -253,7 +276,7 @@ const Standard: FC<P> = ({
                     placeholder="e.g. Special offer"
                     autoSize={{ minRows: 3, maxRows: 3 }}
                     onChange={(event) =>
-                      setInformationMessage(event.target.value)
+                      onInformationMessage(event.target.value)
                     }
                   />
                 </Row>
@@ -271,7 +294,7 @@ const Standard: FC<P> = ({
                 </Row>
                 <Row>
                   <ClientLanguage
-                    selectLanguageHook={[selectLanguage, setSelectLanguage]}
+                    selectLanguageHook={[selectLanguage, onSelectLanguage]}
                     defaultLanguage="EN"
                   />
                 </Row>
@@ -280,10 +303,55 @@ const Standard: FC<P> = ({
           </div>
         </TabPane>
         <TabPane tab="Custom" key="2">
-          <p>
-            Custom TabCustom TabCustom TabCustom TabCustom TabCustom TabCustom
-            TabCustom TabCustom TabCustom TabCustom TabCustom TabCustom Tab
-          </p>
+          <div style={{ padding: '10px 9px' }}>
+            <Row style={{ padding: '0 15px' }}>
+              <span>
+                Design or upload your own custom email from your
+                <span className={styles.anchor}>
+                  <Button type="link">message templates</Button>
+                </span>
+              </span>
+            </Row>
+            <Row style={{ padding: '0 15px' }}>
+              <Col>Reminder advance notice</Col>
+            </Row>
+
+            <Row style={{ padding: '0 15px' }}>
+              <Select defaultValue="24" style={{ width: '100%' }}>
+                <Option value="24">24 hours</Option>
+                <Option value="12">12 hours</Option>
+                <Option value="6">6 hours</Option>
+              </Select>
+            </Row>
+
+            <div className={styles.papauPlusContainer}>
+              <PabauPlus label="Plus" />
+            </div>
+
+            <Collapse
+              className={styles.collapseAlignFirst}
+              bordered={false}
+              defaultActiveKey={['1']}
+              expandIconPosition="right"
+              style={{ backgroundColor: 'white' }}
+            >
+              <Panel
+                className={styles.panelAlign}
+                header="Clinent languages"
+                key="1"
+              >
+                <Row>
+                  <Col>Setup templates in your clients preferred language</Col>
+                </Row>
+                <Row>
+                  <ClientLanguage
+                    selectLanguageHook={[selectLanguage, onSelectLanguage]}
+                    defaultLanguage="FR"
+                  />
+                </Row>
+              </Panel>
+            </Collapse>
+          </div>
         </TabPane>
       </Tabs>
     </Row>

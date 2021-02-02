@@ -107,7 +107,6 @@ const Index: FC = () => {
         { title: 'Payment Types', data: [] },
         { title: 'Contract Pricing', data: [] },
         { title: 'Cancellation Policy', data: [] },
-        { title: 'Petty Cash Types', data: [] },
       ],
       image: financialImage,
     },
