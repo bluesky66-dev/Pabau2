@@ -1,6 +1,6 @@
 {
   "name": "pabau",
-  "version": "2.0.79",
+  "version": "2.0.80",
   "license": "Copyright Hambrand Technologies Ltd",
   "scripts": {
     "nx": "nx",
