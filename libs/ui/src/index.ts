@@ -1,4 +1,5 @@
 export * from './lib/tabbed-table/TabbedTable'
+export * from './lib/full-screen-report-modal/FullScreenReportModal'
 export * from './lib/questionBank/QuestionBank'
 export * from './lib/dotButton/DotButton'
 export * from './lib/medicalform/MedicalForm'
