@@ -1,6 +1,6 @@
 {
   "name": "pabau",
-  "version": "2.0.55",
+  "version": "2.0.79",
   "license": "Copyright Hambrand Technologies Ltd",
   "scripts": {
     "nx": "nx",
@@ -52,6 +52,7 @@
     "file-loader": "^6.2.0",
     "formik": "^2.2.6",
     "formik-antd": "^2.0.1",
+    "google-libphonenumber": "^3.2.16",
     "graphql": "^15.4.0",
     "husky": "^4.3.8",
     "less": "^3.13.0",
@@ -68,11 +69,14 @@
     "react-device-detect": "^1.15.0",
     "react-dom": "17.0.1",
     "react-grid-layout": "^1.2.0",
+    "react-highlight-words": "^0.17.0",
     "react-native": "0.63.4",
+    "react-phone-input-2": "^2.13.9",
     "react-sortable-hoc": "^1.11.0",
     "react-use": "^15.3.8",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.6.3",
+    "string-to-color": "^2.2.2",
     "subscriptions-transport-ws": "^0.9.18",
     "tslib": "^2.1.0",
     "yup": "^0.32.8"
@@ -161,8 +165,7 @@
   "husky": {
     "skipCI": true,
     "hooks": {
-      "pre-commit": "yarn run affected:lint --uncommitted=true",
-      "pre-push": "yarn run affected:test --base=origin/master"
+      "pre-push": "yarn run affected:lint --base=origin/master && yarn run affected:test --base=origin/master"
     }
   }
 }

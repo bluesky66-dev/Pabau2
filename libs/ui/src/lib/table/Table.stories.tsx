@@ -6,6 +6,8 @@ import React, { FC, useState } from 'react'
 import { Table } from './Table'
 import { data } from './mock'
 
+const padlocked = ['Book Now Link', 'Instagram', 'Facebook']
+
 const columns = [
   {
     title: 'Name',
@@ -21,15 +23,8 @@ const columns = [
   },
   {
     title: 'STATUS',
-    dataIndex: 'isActive',
+    dataIndex: 'is_active',
     className: 'drag-visible',
-    render: function ActiveBtn() {
-      return (
-        <Button size="small" className={styles.activeBtn}>
-          Active
-        </Button>
-      )
-    },
   },
 ]
 
@@ -40,6 +35,7 @@ export default {
     draggable: true,
     dataSource: data,
     columns,
+    padlocked,
   },
   argTypes: {
     draggable: { control: { type: 'boolean' } },
@@ -52,11 +48,7 @@ const DragFeatureStory: FC = ({ ...args }) => {
     setDataSource(newData)
   }
   return (
-    <Table
-      {...args}
-      dataSource={dataSource}
-      updateDataSource={updateDataSource}
-    />
+    <Table {...args} padlocked={[]} dataSource={dataSource} updateDataSource={updateDataSource} />
   )
 }
 export const TableWithDragFeature = DragFeatureStory.bind({})
@@ -69,6 +61,7 @@ const NoDragFeatureStory: FC = ({ ...args }) => {
   return (
     <Table
       {...args}
+      padlocked={[]}
       draggable={false}
       dataSource={dataSource}
       updateDataSource={updateDataSource}
@@ -76,3 +69,37 @@ const NoDragFeatureStory: FC = ({ ...args }) => {
   )
 }
 export const TableWithNoDragFeature = NoDragFeatureStory.bind({})
+
+const TableWithReservedWordsStory: FC = ({ ...args }) => {
+  const [dataSource, setDataSource]: any = useState(data)
+  const updateDataSource = ({ newData, oldIndex, newIndex }) => {
+    setDataSource(newData)
+  }
+
+  return (
+    <Table
+      {...args}
+      dataSource={dataSource}
+      updateDataSource={updateDataSource}
+    />
+  )
+}
+export const TableWithReservedWords = TableWithReservedWordsStory.bind({})
+
+const TableWithCustomColorStory: FC = ({ ...args }) => {
+  const [dataSource, setDataSource]: any = useState(data)
+  const updateDataSource = ({ newData, oldIndex, newIndex }) => {
+    setDataSource(newData)
+  }
+
+  return (
+    <Table
+      {...args}
+      padlocked={[]}
+      dataSource={dataSource}
+      isCustomColorExist={true}
+      updateDataSource={updateDataSource}
+    />
+  )
+}
+export const TableWithCustomColor = TableWithCustomColorStory.bind({})

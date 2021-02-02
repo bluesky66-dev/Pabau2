@@ -1,5 +1,12 @@
 import React from 'react'
+import {
+  EyeOutlined,
+  PauseCircleOutlined,
+  MessageOutlined,
+} from '@ant-design/icons'
+import { notification } from 'antd'
 import Button from './button'
+import DropdownButton from './dropdownButton'
 
 export default {
   component: Button,
@@ -42,6 +49,9 @@ export default {
 }
 
 const ButtonStory = ({ ...args }) => <Button {...args}>{args.label}</Button>
+const DropdownButtonStory = ({ ...args }) => (
+  <DropdownButton {...args}>{args.label}</DropdownButton>
+)
 
 export const defaultBtn = ButtonStory.bind({})
 defaultBtn.args = {
@@ -79,10 +89,36 @@ diabled.args = {
   disabled: true,
 }
 
+export const preview = ButtonStory.bind({})
+preview.args = {
+  label: 'Preview',
+  icon: <EyeOutlined />,
+}
+
 export const CustomButton = ButtonStory.bind({})
 CustomButton.args = {
   label: 'Hello World',
   size: 'large',
   color: '#000',
   backgroundColor: '#54B2D3',
+}
+
+export const dropdownButton = DropdownButtonStory.bind({})
+dropdownButton.args = {
+  label: 'Manage Option',
+  size: 'large',
+  color: '#40A0C1',
+  menuItems: [
+    {
+      title: 'Pause notifications',
+      icon: <PauseCircleOutlined />,
+    },
+    {
+      title: 'See message log',
+      icon: <MessageOutlined />,
+    },
+  ],
+  onMenuClick: (val) => {
+    notification.open({ message: `Clicked '${val}'` })
+  },
 }

@@ -4,8 +4,6 @@ import * as Icons from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { FC, useState } from 'react'
 import styles from './FontIcon.module.less'
-
-/* eslint-disable-next-line */
 export interface FontIconProps {
   max?: number
 }
@@ -24,7 +22,11 @@ const FontIcon: FC<FontIconProps> = ({ max }) => {
           return (
             <div
               key={index}
-              className={activate === icon.iconName ? styles.iconItemActive : styles.iconItem}
+              className={
+                activate === icon.iconName
+                  ? styles.iconItemActive
+                  : styles.iconItem
+              }
               onClick={() => setActivate(icon.iconName)}
             >
               {activate === icon.iconName && <CheckCircleFilled />}

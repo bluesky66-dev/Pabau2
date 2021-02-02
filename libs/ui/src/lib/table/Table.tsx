@@ -5,12 +5,13 @@ import {
   SortableElement,
   SortableHandle,
 } from 'react-sortable-hoc'
-import { MenuOutlined } from '@ant-design/icons'
+import { LockOutlined, MenuOutlined } from '@ant-design/icons'
 import styles from './Table.module.less'
 import { TableProps } from 'antd/es/table'
 
 export interface DragProps {
   draggable?: boolean
+  isCustomColorExist?: boolean
   updateDataSource?: ({ newData, oldIndex, newIndex }) => void
 }
 
@@ -39,11 +40,14 @@ function array_move(arr, old_index, new_index) {
 
 type P = {
   onRowClick?: (e) => void
+  padlocked?: string[]
 } & TableProps<never> &
   DragProps
 
 export const Table: FC<P> = ({
   dataSource = [],
+  padlocked,
+  isCustomColorExist = false,
   updateDataSource,
   onRowClick,
   ...props
@@ -92,16 +96,57 @@ export const Table: FC<P> = ({
     )
   }
 
+  const checkPadLockField = (val, rowData) => {
+    return padlocked && padlocked.includes(val) ? (
+      <div className={styles.alignItems}>
+        {renderCustomColor(val, rowData)}
+        <div style={{ marginLeft: '6px' }}>
+          <LockOutlined />
+        </div>
+      </div>
+    ) : (
+      renderCustomColor(val, rowData)
+    )
+  }
+
+  const renderCustomColor = (val, rowData) => {
+    return isCustomColorExist ? (
+      <div className={styles.alignItems}>
+        <div
+          style={{ background: rowData.color }}
+          className={styles.customColor}
+        ></div>
+        {val}
+      </div>
+    ) : (
+      val
+    )
+  }
+
+  const checkPadLocks = (record) => {
+    let alloWClicked = true
+    Object.keys(record).map((key) => {
+      if (padlocked && padlocked.includes(record[key])) {
+        alloWClicked = false
+      }
+      return key
+    })
+    return alloWClicked
+  }
+
   const renderSortHandler = () => {
     if (props && props.columns) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       props.columns?.map((col: any) => {
         if (col && col.dataIndex === 'is_active') {
           col.render = renderActiveButton
+        } else {
+          col.render = checkPadLockField
         }
         return col
       })
     }
+
     return props.draggable
       ? [{ ...dragColumn }, ...(props.columns || [])]
       : props.columns
@@ -113,8 +158,10 @@ export const Table: FC<P> = ({
       onRow={(record, rowIndex) => {
         return {
           onClick: (event) => {
-            console.log(event, record)
-            onRowClick?.(record)
+            if (checkPadLocks(record)) {
+              onRowClick?.(record)
+              console.log(event, record)
+            }
           }, // click row
           //   onDoubleClick: (event) => {}, // double click row
           //   onContextMenu: (event) => {}, // right button click row

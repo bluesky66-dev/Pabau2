@@ -80,6 +80,7 @@ To view the Backend, you can either visit [https://backend.new.pabau.com](https:
 - `husky` lints your code as you `git commit`, and tests your code as you `git push`.
 - Keep assets close to the components which use them
 - Don't `import '../../..` across project boundaries - use `import { ... } from '@pabau/ui'` instead.
+- Dont do `setBlah(!blah)`, it's `setBlah(e => !e)`
 
 ## Delineation between /apps/web/components/ ("App components") and /libs/ui/ ("UI components")
 
@@ -113,6 +114,21 @@ To view the Backend, you can either visit [https://backend.new.pabau.com](https:
 - [yup]() - [TODO] write business-level validation once that's used in frontend and backend
 - Twilio Video + Sendgrid
 - Atlassian: JIRA, Bitbucket (& Pipelines)
+
+## Ticket workflow
+
+1. Plan your work. Make sure you have all design requirements in order.
+1. Meet with James or Dipak to discuss your plan. Eg what npm libraries are you planning on using.
+1. On the JIRA sub-task, click Create new branch (from master)
+1. Checkout this in your IDE and code away :)
+1. Commit often. Push once or twice a day at least.
+1. When you feel very much finished, do a final push and open up a PR for it (to master)
+1. Configure Bitbucket to receive email upon code comment, 'Changes requested', or merged
+1. Of course, start your next ticket immediately while you follow through the remaining steps
+1. After 10 mins or so, release-bot will post in the channel. Reply to the message with a link to a more specific page that highlights the work done. Also copy the vercel URL and paste it into the JIRA ticket as a comment. Finally, change the JIRA status to CODE REVIEW. This will let William browse all CODE REVIEW's and click the direct vercel link to see changes. 
+1. If you receive an email that require you to make more changes: code, push, wait for the slack bot to post another url, reply to that tagging in @James and @Dipak
+1. When you receive an email that your code is merged, you should also find your ticket is moved to 'QA' status.
+
 
 ## To do (big engineering items)
 
