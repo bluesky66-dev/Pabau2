@@ -36,34 +36,50 @@ pipelines:
               export PR_AUTHOR=$(curl -sS -H "Authorization: Bearer ${access_token}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}" | jq -r '.author.display_name')
 
             - yarn install --frozen-lockfile --prefer-offline
+
+            # TODO: move these to eslint so that `yarn lint` picks up these errors instead
+            - npm i -g typescript
+            - tsc --noEmit -p apps/backend/
+            - tsc --noEmit -p apps/connect/
+            - tsc --noEmit -p apps/connect-e2e/
+            - tsc --noEmit -p apps/mgmt/
+            - tsc --noEmit -p apps/mgmt-e2e/
+            - tsc --noEmit -p apps/ui-e2e/
+            - tsc --noEmit -p apps/web/
+            - tsc --noEmit -p apps/web-e2e/
+            - tsc --noEmit -p libs/ui/tsconfig.lib.json
+            - tsc --noEmit -p libs/yup/tsconfig.lib.json
+
             - yarn affected --base=origin/master --target=lint --with-deps --parallel
+            - yarn affected --base=origin/master --target=test --parallel
             - yarn affected --base=origin/master --target=export --prod
             - yarn affected --base=origin/master --target=deploy
 
 
-  default:
-    - step:
-        name: Build and Test branch
-        caches:
-          - nodemodules
-          - yarncustom
-        script:
-          - git fetch origin master --refmap="+refs/heads/*:refs/remotes/origin/*"
-          - yarn install --frozen-lockfile --prefer-offline
-          - yarn affected --base=origin/master --target=lint --parallel
-
-          # TODO: move these to eslint so that `yarn lint` picks up these errors instead
-          - npm i -g typescript
-          - tsc --noEmit -p apps/backend/
-          - tsc --noEmit -p apps/connect/
-          - tsc --noEmit -p apps/connect-e2e/
-          - tsc --noEmit -p apps/mgmt/
-          - tsc --noEmit -p apps/mgmt-e2e/
-          - tsc --noEmit -p apps/ui-e2e/
-          - tsc --noEmit -p apps/web/
-          - tsc --noEmit -p apps/web-e2e/
-          - tsc --noEmit -p libs/ui/tsconfig.lib.json
-          - tsc --noEmit -p libs/yup/tsconfig.lib.json
+#TO SAVE MONEY, JAMES DISABLED NON-PR COMMITS:
+#  default:
+#    - step:
+#        name: Build and Test branch
+#        caches:
+#          - nodemodules
+#          - yarncustom
+#        script:
+#          - git fetch origin master --refmap="+refs/heads/*:refs/remotes/origin/*"
+#          - yarn install --frozen-lockfile --prefer-offline
+#          - yarn affected --base=origin/master --target=lint --parallel
+#
+#          # TODO: move these to eslint so that `yarn lint` picks up these errors instead
+#          - npm i -g typescript
+#          - tsc --noEmit -p apps/backend/
+#          - tsc --noEmit -p apps/connect/
+#          - tsc --noEmit -p apps/connect-e2e/
+#          - tsc --noEmit -p apps/mgmt/
+#          - tsc --noEmit -p apps/mgmt-e2e/
+#          - tsc --noEmit -p apps/ui-e2e/
+#          - tsc --noEmit -p apps/web/
+#          - tsc --noEmit -p apps/web-e2e/
+#          - tsc --noEmit -p libs/ui/tsconfig.lib.json
+#          - tsc --noEmit -p libs/yup/tsconfig.lib.json
 
 
   branches:
@@ -117,6 +133,7 @@ pipelines:
 #          caches:
 #            - nodemodules
           script:
+            - touch /tmp/bot_message.txt
             - yarn install --frozen-lockfile --prefer-offline
 
             # get the commit message for this merge
@@ -137,3 +154,4 @@ pipelines:
             - yarn affected --base=HEAD~2 --head=HEAD~1 --target=export --prod
             - yarn affected --base=HEAD~2 --head=HEAD~1 --target=build-storybook --prod
             - yarn affected --base=HEAD~2 --head=HEAD~1 --target=deploy --prod
+            - cat /tmp/bot_message.txt

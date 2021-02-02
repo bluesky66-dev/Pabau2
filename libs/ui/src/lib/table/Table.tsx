@@ -11,6 +11,7 @@ import { TableProps } from 'antd/es/table'
 
 export interface DragProps {
   draggable?: boolean
+  isCustomColorExist?: boolean
   updateDataSource?: ({ newData, oldIndex, newIndex }) => void
 }
 
@@ -46,6 +47,7 @@ type P = {
 export const Table: FC<P> = ({
   dataSource = [],
   padlocked,
+  isCustomColorExist = false,
   updateDataSource,
   onRowClick,
   ...props
@@ -94,11 +96,28 @@ export const Table: FC<P> = ({
     )
   }
 
-  const checkPadLockField = (val) => {
+  const checkPadLockField = (val, rowData) => {
     return padlocked && padlocked.includes(val) ? (
-      <>
-        {val} <LockOutlined />
-      </>
+      <div className={styles.alignItems}>
+        {renderCustomColor(val, rowData)}
+        <div style={{ marginLeft: '6px' }}>
+          <LockOutlined />
+        </div>
+      </div>
+    ) : (
+      renderCustomColor(val, rowData)
+    )
+  }
+
+  const renderCustomColor = (val, rowData) => {
+    return isCustomColorExist ? (
+      <div className={styles.alignItems}>
+        <div
+          style={{ background: rowData.color }}
+          className={styles.customColor}
+        ></div>
+        {val}
+      </div>
     ) : (
       val
     )
@@ -122,11 +141,12 @@ export const Table: FC<P> = ({
         if (col && col.dataIndex === 'is_active') {
           col.render = renderActiveButton
         } else {
-          if (checkPadLocks(col)) col.render = checkPadLockField
+          col.render = checkPadLockField
         }
         return col
       })
     }
+
     return props.draggable
       ? [{ ...dragColumn }, ...(props.columns || [])]
       : props.columns
