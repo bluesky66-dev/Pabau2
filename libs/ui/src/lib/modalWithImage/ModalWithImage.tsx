@@ -1,5 +1,7 @@
 import React, { FC } from 'react'
-import { Modal, Row, Col, Button } from 'antd'
+import { Row, Col, Button } from 'antd'
+
+import BasicModal from '../modal/basicmodal'
 
 import customStyles from './ModalWithImage.module.less'
 import styles from '../modal/basicmodal.module.less'
@@ -24,8 +26,8 @@ const ModalWithImage: FC<ModalWithImageProps> = ({
 }): JSX.Element => {
   return (
     <div>
-      <Modal
-        footer={null}
+      <BasicModal
+        footer={false}
         title={title}
         visible={visible}
         centered={true}
@@ -33,9 +35,7 @@ const ModalWithImage: FC<ModalWithImageProps> = ({
         onCancel={() => onCancel()}
         {...props}
       >
-        <div
-          className={styles.modalBody + ' ' + customStyles.modalWithImageBody}
-        >
+        <div className={customStyles.modalWithImageBody}>
           <Row className={customStyles.modalContent}>
             <Col>
               {description?.map((content) => (
@@ -63,7 +63,7 @@ const ModalWithImage: FC<ModalWithImageProps> = ({
             </Col>
           </Row>
         </div>
-      </Modal>
+      </BasicModal>
     </div>
   )
 }

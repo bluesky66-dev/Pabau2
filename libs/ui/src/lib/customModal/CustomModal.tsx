@@ -37,7 +37,6 @@ export function CustomModal(props: P) {
         selectedData.modalType === 1 &&
         (width > 768 ? (
           <BasicModal
-            footer={null}
             title={selectedData ? selectedData.modalTitle : ''}
             visible={Boolean(selectedData)}
             onCancel={() => setSelectedData(null)}
@@ -53,7 +52,6 @@ export function CustomModal(props: P) {
           </BasicModal>
         ) : (
             <BasicModal
-              footer={null}
               title={selectedData ? selectedData.modalTitle : ''}
               visible={Boolean(selectedData)}
               onCancel={() => setSelectedData(null)}
@@ -148,7 +146,7 @@ export function CustomModal(props: P) {
           onCancel={() => setSelectedData(null)}
           centered={true}
         >
-          {selectedData ? selectedData.name : ''}
+          <div className={styles.modalGreyText}>{selectedData ? selectedData.name : ''}</div>
         </BasicModal>
       )}
     </div>
