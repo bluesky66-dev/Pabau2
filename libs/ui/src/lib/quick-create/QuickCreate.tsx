@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import {
   PlusCircleFilled,
   UserAddOutlined,
@@ -6,58 +6,64 @@ import {
   MessageOutlined,
   MailOutlined,
   WalletOutlined,
+  CloseOutlined
 } from '@ant-design/icons'
 import { Popover } from 'antd'
 import { Button } from '@pabau/ui'
 import styles from './QuickCreate.module.less'
 
-export const QuickCreateContent: FC = () => (
-  <div className={styles.quickCreateContentConatiner}>
-    <p>Create</p>
-    <div className={styles.quickCreateItemsContainer}>
-      <div className={styles.quickCreateItem}>
-        <div className={styles.quickCreateItemIcon}>
-          <UserAddOutlined />
-        </div>
-        <p>Client</p>
+export const QuickCreate: FC = () => {
+  const [visible, setVisible] = useState(false)
+
+  const QuickCreateContent = () => (
+    <div className={styles.quickCreateContentConatiner}>
+      <div className={styles.quickCreateContentClose} onClick={() => setVisible(false)}>
+        <CloseOutlined />
       </div>
-      <div className={styles.quickCreateItem}>
-        <div className={styles.quickCreateItemIcon}>
-          <RiseOutlined />
+      <p>Create</p>
+      <div className={styles.quickCreateItemsContainer}>
+        <div className={styles.quickCreateItem}>
+          <div className={styles.quickCreateItemIcon}>
+            <UserAddOutlined />
+          </div>
+          <p>Client</p>
         </div>
-        <p>Lead</p>
-      </div>
-      <div className={styles.quickCreateItem}>
-        <div className={styles.quickCreateItemIcon}>
-          <MessageOutlined />
+        <div className={styles.quickCreateItem}>
+          <div className={styles.quickCreateItemIcon}>
+            <RiseOutlined />
+          </div>
+          <p>Lead</p>
         </div>
-        <p>SMS</p>
-      </div>
-      <div className={styles.quickCreateItem}>
-        <div className={styles.quickCreateItemIcon}>
-          <WalletOutlined />
+        <div className={styles.quickCreateItem}>
+          <div className={styles.quickCreateItemIcon}>
+            <MessageOutlined />
+          </div>
+          <p>SMS</p>
         </div>
-        <p>Sale</p>
-      </div>
-      <div className={styles.quickCreateItem}>
-        <div className={styles.quickCreateItemIcon}>
-          <MailOutlined />
+        <div className={styles.quickCreateItem}>
+          <div className={styles.quickCreateItemIcon}>
+            <WalletOutlined />
+          </div>
+          <p>Sale</p>
         </div>
-        <p>Newsletter</p>
+        <div className={styles.quickCreateItem}>
+          <div className={styles.quickCreateItemIcon}>
+            <MailOutlined />
+          </div>
+          <p>Newsletter</p>
+        </div>
       </div>
     </div>
-  </div>
-)
-
-export const QuickCreate: FC = () => {
+  )
   return (
     <div className={styles.quickCreateContainer}>
       <Popover
-        placement="rightBottom"
+        placement="bottomRight"
         content={QuickCreateContent}
         trigger="click"
+        visible={visible}
       >
-        <Button type="default" className={styles.createBtnStyle}>
+        <Button type="default" className={styles.createBtnStyle} onClick={() => setVisible(true)}>
           <PlusCircleFilled /> Create
         </Button>
       </Popover>

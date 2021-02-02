@@ -16,12 +16,24 @@
 }
 
 .quick-create-content-conatiner {
+  position: relative;
   padding: 28px 24px;
   > p {
     font-family: 'Circular-Std-Book';
     font-size: 22px;
     line-height: 22.71px;
+    margin: 0;
+    margin-bottom: 28px;
   }
+}
+
+.quick-create-content-close {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  font-size: 15px;
+  color: #9292a3;
+  cursor: pointer;
 }
 
 .quick-create-items-container {
@@ -53,7 +65,7 @@
     }
     .quick-create-item-icon {
       color: #54b2a3;
-      border: 1px solid transparent;
+      border: 1px solid #54b2d3;
       background-color: #F5FAFD;
     }
   }
