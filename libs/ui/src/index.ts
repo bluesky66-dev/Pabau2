@@ -1,3 +1,4 @@
+export * from './lib/quick-create/QuickCreate'
 export * from './lib/questionBank/QuestionBank'
 export * from './lib/dotButton/DotButton'
 export * from './lib/medicalform/MedicalForm'
