@@ -66,7 +66,7 @@ ${LAST_LINE}
 
 ${LAST_COMMIT_LOG}
 HEREDOC
-  cat "${message_body}" >> /tmp/bot_message.txt
+  echo "${message_body}" >> /tmp/bot_message.txt
 
   cat tools/cicd/slack_notification.json > /dev/null || (echo "ERROR: JSON not found"; exit 1)
   jq '.' tools/cicd/slack_notification.json > /dev/null || (echo "ERROR: Invalid JSON"; exit 1)
