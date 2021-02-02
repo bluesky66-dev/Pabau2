@@ -1,6 +1,6 @@
 {
   "name": "pabau",
-  "version": "2.0.79",
+  "version": "2.0.81",
   "license": "Copyright Hambrand Technologies Ltd",
   "scripts": {
     "nx": "nx",
@@ -37,6 +37,9 @@
     "@ant-design/icons": "^4.4.0",
     "@apollo/client": "^3.3.7",
     "@babel/runtime": "^7.12.5",
+    "@fortawesome/fontawesome-svg-core": "^1.2.34",
+    "@fortawesome/free-solid-svg-icons": "^5.15.2",
+    "@fortawesome/react-fontawesome": "^0.1.14",
     "@nestjs/common": "^7.6.6",
     "@nestjs/core": "^7.6.6",
     "@nestjs/platform-express": "^7.6.6",
