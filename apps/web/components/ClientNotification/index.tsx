@@ -5,9 +5,7 @@ interface P {
   onSeletedTab: (number) => void
 }
 
-const Index: FC<P> = ({
-  onSeletedTab
-}) => {
+const Index: FC<P> = ({ onSeletedTab }) => {
   const [enableReminder, setEnableReminder] = useState(false)
   const [smartDelivery, setSmartDelivery] = useState(false)
   const [requestConfirmation, setRequestConfirmation] = useState(true)
@@ -23,7 +21,7 @@ const Index: FC<P> = ({
   const [medicalMessage, setMedicalMessage] = useState('')
   const [informationMessage, setInformationMessage] = useState('')
 
-  const [standardTapIndex, setStandardTap] = useState("1")
+  const [standardTapIndex, setStandardTap] = useState('1')
 
   function handleSelectedTab(value) {
     onSeletedTab(value)
@@ -89,7 +87,6 @@ const Index: FC<P> = ({
           informationMessage={informationMessage}
           medicalMessage={medicalMessage}
           standardTapIndex={standardTapIndex}
-
         />
       }
       smsComponent={

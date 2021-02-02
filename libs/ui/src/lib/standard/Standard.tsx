@@ -81,9 +81,8 @@ export const Standard: FC<P> = ({
   onMedicalMessage,
   informationMessage,
   onInformationMessage,
-  onStandardTabChanged
+  onStandardTabChanged,
 }) => {
-
   function callback(key) {
     onStandardTabChanged(key)
   }
