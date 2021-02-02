@@ -23,6 +23,7 @@ interface P {
   listQuery: DocumentNode
   editQuery: DocumentNode
   aggregateQuery?: DocumentNode
+  tableSearch?: boolean
 }
 
 const CrudTable: FC<P> = ({
@@ -32,6 +33,7 @@ const CrudTable: FC<P> = ({
   listQuery,
   editQuery,
   aggregateQuery,
+  tableSearch = true,
 }) => {
   const [isActive, setIsActive] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
@@ -205,6 +207,7 @@ const CrudTable: FC<P> = ({
                   onFilterSource={onFilterMarketingSource}
                   onSearch={onSearch}
                   schema={schema}
+                  tableSearch={tableSearch}
                 />
               )}
             </div>
@@ -244,6 +247,7 @@ const CrudTable: FC<P> = ({
                 onFilterSource={onFilterMarketingSource}
                 onSearch={onSearch}
                 schema={schema}
+                tableSearch={tableSearch}
               />
             )}
           </div>
