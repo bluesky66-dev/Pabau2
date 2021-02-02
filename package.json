@@ -1,6 +1,6 @@
 {
   "name": "pabau",
-  "version": "2.0.74",
+  "version": "2.0.76",
   "license": "Copyright Hambrand Technologies Ltd",
   "scripts": {
     "nx": "nx",
@@ -162,8 +162,7 @@
   "husky": {
     "skipCI": true,
     "hooks": {
-      "pre-commit": "yarn run affected:lint --uncommitted=true",
-      "pre-push": "yarn run affected:test --base=origin/master"
+      "pre-push": "yarn run affected:lint --base=origin/master && yarn run affected:test --base=origin/master"
     }
   }
 }
