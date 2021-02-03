@@ -1,7 +1,8 @@
 import { Button, ButtonTypes } from '@pabau/ui'
-import { Input, Radio } from 'antd'
+import { Radio } from 'antd'
 import React, { FC, useState } from 'react'
 import customTelePhoneIcon from '../../assets/images/medicalform_custom_tele_phone.svg'
+import ElementQuestion from './ElementQuestion'
 import LinkedField from './LinkedField'
 import styles from './MedicalForm.module.less'
 import MedicalFormBottom from './MedicalFormBottom'
@@ -35,9 +36,8 @@ const CustomTelephoneNumber: FC = () => {
       </div>
       <div className={styles.formItem}>
         <div className={`${styles.formQuestion} ${styles.formCommon}`}>
-          <p style={{ marginTop: '5px' }}>Question</p>
-          <Input placeholder="Enter your question" />
-          <p style={{ marginTop: '20px' }}>Input type</p>
+          <ElementQuestion desc="Enter your question" title="Question" />
+          <h3 style={{ marginTop: '20px' }}>Input type</h3>
           <Radio.Group
             options={typeOptions}
             value={selOption}
