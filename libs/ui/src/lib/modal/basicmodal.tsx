@@ -46,7 +46,6 @@ export function BasicModal({
   newButtonText = 'OK',
   dangerButtonText,
   footer = true,
-  wrapClassName,
   ...props
 }: PropsWithChildren<P & ModalProps>): JSX.Element {
   return (
@@ -60,7 +59,7 @@ export function BasicModal({
       width={modalWidth}
       // destroyOnClose={true}
       // modalRender={(E) => E}
-      wrapClassName={styles.modal + ' ' + wrapClassName}
+      wrapClassName={styles.modal}
       {...props}
     >
       <div>{children}</div>

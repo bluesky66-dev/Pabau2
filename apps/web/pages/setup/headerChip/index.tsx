@@ -33,16 +33,9 @@ const data = [
 ]
 
 const HeaderChip = () => {
-  const handleChipClick = (title: string) => {
-    // console.log(title)
-  }
-
   return (
     <div className={styles.headerChipWrapper}>
-      {data &&
-        data.map((value, index) => (
-          <SetupChip key={index} {...value} onClick={handleChipClick} />
-        ))}
+      {data && data.map((value, index) => <SetupChip key={index} {...value} />)}
     </div>
   )
 }

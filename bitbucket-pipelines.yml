@@ -1,7 +1,7 @@
 image: node:14-buster
 
 options:
-  max-time: 45 # max time in minutes for each step
+  max-time: 20 # max time in minutes for each step
 
 definitions:
   caches:
@@ -35,7 +35,6 @@ pipelines:
             - >
               export PR_AUTHOR=$(curl -sS -H "Authorization: Bearer ${access_token}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}" | jq -r '.author.display_name')
 
-            - touch /tmp/bot_message.txt
             - yarn install --frozen-lockfile --prefer-offline
 
             # TODO: move these to eslint so that `yarn lint` picks up these errors instead
@@ -55,11 +54,67 @@ pipelines:
             - yarn affected --base=origin/master --target=test --parallel
             - yarn affected --base=origin/master --target=export --prod
             - yarn affected --base=origin/master --target=deploy
-            - cat /tmp/bot_message.txt
+
+
+#TO SAVE MONEY, JAMES DISABLED NON-PR COMMITS:
+#  default:
+#    - step:
+#        name: Build and Test branch
+#        caches:
+#          - nodemodules
+#          - yarncustom
+#        script:
+#          - git fetch origin master --refmap="+refs/heads/*:refs/remotes/origin/*"
+#          - yarn install --frozen-lockfile --prefer-offline
+#          - yarn affected --base=origin/master --target=lint --parallel
+#
+#          # TODO: move these to eslint so that `yarn lint` picks up these errors instead
+#          - npm i -g typescript
+#          - tsc --noEmit -p apps/backend/
+#          - tsc --noEmit -p apps/connect/
+#          - tsc --noEmit -p apps/connect-e2e/
+#          - tsc --noEmit -p apps/mgmt/
+#          - tsc --noEmit -p apps/mgmt-e2e/
+#          - tsc --noEmit -p apps/ui-e2e/
+#          - tsc --noEmit -p apps/web/
+#          - tsc --noEmit -p apps/web-e2e/
+#          - tsc --noEmit -p libs/ui/tsconfig.lib.json
+#          - tsc --noEmit -p libs/yup/tsconfig.lib.json
 
 
   branches:
     master:
+      - parallel:
+        - step:
+            name: lint
+            caches:
+              - nodemodules
+              - yarncustom
+            script:
+              - yarn install --frozen-lockfile --prefer-offline
+              - yarn affected:lint --base=HEAD~1 --with-deps --parallel
+
+              # TODO: move these to eslint so that `yarn lint` picks up these errors instead
+              - npm i -g typescript
+              - tsc --noEmit -p apps/backend/
+              - tsc --noEmit -p apps/connect/
+              - tsc --noEmit -p apps/connect-e2e/
+              - tsc --noEmit -p apps/mgmt/
+              - tsc --noEmit -p apps/mgmt-e2e/
+              - tsc --noEmit -p apps/ui-e2e/
+              - tsc --noEmit -p apps/web/
+              - tsc --noEmit -p apps/web-e2e/
+              - tsc --noEmit -p libs/ui/tsconfig.lib.json
+              - tsc --noEmit -p libs/yup/tsconfig.lib.json
+
+        - step:
+            name: test
+            caches:
+              - nodemodules
+              - yarncustom
+            script:
+              - yarn install --frozen-lockfile --prefer-offline
+              - yarn affected:test --base=HEAD~1 --with-deps --parallel
 
 #        - step:
 #            size: 2x
@@ -73,16 +128,13 @@ pipelines:
 #              - yarn affected:e2e --base=HEAD~1
 
       - step:
-          name: test (lint+unit), build, deploy
+          name: deploy
           deployment: Production
-          caches:
-            - nodemodules
+#          caches:
+#            - nodemodules
           script:
             - touch /tmp/bot_message.txt
             - yarn install --frozen-lockfile --prefer-offline
-
-            - yarn affected:lint --base=HEAD~1 --with-deps --parallel
-            - yarn affected:test --base=HEAD~1 --parallel
 
             # get the commit message for this merge
             - export LAST_COMMIT_LOG=$(git log HEAD -1 | tail -n +4 | perl -p -e 's/[\r\n]//' | awk '{$1=$1;print}')

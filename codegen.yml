@@ -1,8 +1,6 @@
 overwrite: true
 schema: "https://api.new.pabau.com/v1/graphql"
-documents:
-  - "**/*.tsx"
-#  - "!**/components/*.tsx"
+documents: "**/*.tsx"
 generates:
 #  src/generated/graphql.ts:
 #    plugins:
@@ -15,13 +13,6 @@ generates:
 #  src/generated/graphql.d.ts:
 #    plugins:
 #      - "typescript-graphql-files-modules"
-
-#  file.graphql:
-#    plugins:
-#      - schema-ast
-#    config:
-#      includeDirectives: true
-
   ./graphql.schema.json:
     plugins:
       - "introspection"
