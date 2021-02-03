@@ -38,13 +38,13 @@ function array_move(arr, old_index, new_index) {
   })
 }
 
-type P = {
+export type TableType = {
   onRowClick?: (e) => void
   padlocked?: string[]
 } & TableProps<never> &
   DragProps
 
-export const Table: FC<P> = ({
+export const Table: FC<TableType> = ({
   dataSource = [],
   padlocked,
   isCustomColorExist = false,
