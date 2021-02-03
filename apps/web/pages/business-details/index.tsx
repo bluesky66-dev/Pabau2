@@ -11,7 +11,6 @@ import {
 } from '@pabau/ui'
 import Layout from '../../components/Layout/Layout'
 import CommonHeader from '../setup/CommonHeader'
-import { securityToolsData, percent } from '../../assets/securityData'
 import styles from './index.module.less'
 
 const { Title } = Typography
@@ -37,7 +36,7 @@ export const Index: FC = () => {
             <BusinessDetails />
             <Terminology />
             <System />
-            <Security percent={percent} data={securityToolsData} />
+            <Security />
             <BusinessDetailsNotifications />
           </TabMenu>
         </div>
@@ -46,7 +45,7 @@ export const Index: FC = () => {
             <BusinessDetails />
             <Terminology />
             <System />
-            <Security percent={percent} data={securityToolsData} />
+            <Security />
             <BusinessDetailsNotifications />
           </TabMenu>
         </div>

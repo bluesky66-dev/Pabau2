@@ -1,18 +1,9 @@
 import React, { FC } from 'react'
-import {
-  SecurityScore,
-  SecurityTools,
-  SecurityToolsItemInfo,
-  Button,
-} from '@pabau/ui'
+import { SecurityScore, Button, CustomModal } from '@pabau/ui'
+import { percent, securityToolsData } from '../../assets/securityData'
 import styles from './Security.module.less'
 
-export interface SecurityProps {
-  percent: number
-  data: SecurityToolsItemInfo[]
-}
-
-export const Security: FC<SecurityProps> = ({ percent, data }) => {
+export const Security: FC = () => {
   return (
     <div className={styles.SecurityContainer}>
       <div className={styles.securitySubContainer}>
@@ -34,13 +25,7 @@ export const Security: FC<SecurityProps> = ({ percent, data }) => {
         </div>
       </div>
       <div className={styles.securityToolsContainer}>
-        <SecurityTools
-          title="Security Tools"
-          datasource={data}
-          onItemClick={(val) => {
-            console.log(val)
-          }}
-        />
+        <CustomModal datasource={securityToolsData} />
       </div>
     </div>
   )
