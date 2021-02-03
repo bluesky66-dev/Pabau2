@@ -29,7 +29,7 @@ export const BusinessTypes: FC<BusinessTypesProps> = ({
       <div className={styles.businessTypes}>
         <Row gutter={[8, 8]}>
           {bizTypes.map((type) => (
-            <Col md={4} sm={6} xs={8} key={type.title}>
+            <Col xl={2} lg={3} md={4} sm={6} xs={8} key={type.title}>
               <div
                 className={
                   type.title === selected

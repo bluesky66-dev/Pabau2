@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
-import { Divider, Button, Row, Col } from 'antd'
+import { Divider, Button, Row, Col, notification } from 'antd'
 import { Input } from '@pabau/ui'
 import styles from './Terminology.module.less'
 
@@ -146,6 +146,7 @@ export const Terminology: FC<TerminologyProps> = ({
     setOptIns(OptInsItems)
   }
   const handleSaveChanges = () => {
+    notification.open({ message: 'Saved changes' })
     onSave &&
       onSave({
         config: _config,

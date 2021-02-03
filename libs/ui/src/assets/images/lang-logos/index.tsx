@@ -15,8 +15,14 @@ import RUSSVG from './russian.svg'
 
 export const languageMenu = [
   {
-    label: 'English',
-    shortLabel: 'EN',
+    label: 'English (UK)',
+    shortLabel: 'EN-UK',
+    logo: ENSVG,
+    selected: true,
+  },
+  {
+    label: 'English (US)',
+    shortLabel: 'EN-US',
     logo: ENSVG,
     selected: true,
   },

@@ -67,7 +67,11 @@ export const BusinessLocation: FC<BusinessLocationProps> = ({
             const detailedAddress: AddressDetails = {
               address: route ? route.long_name : '',
               postcode: postcode ? postcode.long_name : '',
-              city: locality ? locality.long_name : '',
+              city: locality
+                ? locality.long_name
+                : area2
+                ? area2.long_name
+                : '',
               region: [
                 area1 ? area1.long_name : '',
                 area2 ? area2.long_name : '',

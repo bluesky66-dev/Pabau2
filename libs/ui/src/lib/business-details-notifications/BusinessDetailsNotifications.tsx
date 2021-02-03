@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import { Divider } from 'antd'
+import { Divider, notification, Form } from 'antd'
 import { Button, ButtonCheckbox } from '@pabau/ui'
 import styles from './BusinessDetailsNotifications.module.less'
 
@@ -10,6 +10,7 @@ interface NotificationSetting {
 
 interface NotificationConfig {
   title: string
+  tooltip?: string
   settings: NotificationSetting[]
 }
 
@@ -86,6 +87,7 @@ const defaultConfigs: NotificationConfig[] = [
   },
   {
     title: 'When a staff member requests a holiday.',
+    tooltip: 'Only admins will receive this notification',
     settings: [
       {
         setting: 'Notification',
@@ -118,6 +120,7 @@ export const BusinessDetailsNotifications: FC<BusinessDetailsNotificationsProps>
 }) => {
   const [configs, setConfigs] = useState<NotificationConfig[]>([])
   const handleSaveChanges = () => {
+    notification.open({ message: 'Saved Changes' })
     onSave && onSave(configs)
   }
 
@@ -143,16 +146,17 @@ export const BusinessDetailsNotifications: FC<BusinessDetailsNotificationsProps>
         <>
           <Divider />
           <div className={styles.sectionContainer}>
-            <p className={styles.sectionTitle}>{config.title}</p>
-            <div className={styles.sectionContent}>
-              {config.settings.map((setting) => (
-                <ButtonCheckbox
-                  key={setting.setting}
-                  label={setting.setting}
-                  disabled={setting.disabled}
-                />
-              ))}
-            </div>
+            <Form layout="vertical">
+              <Form.Item label={config.title} tooltip={config.tooltip}>
+                {config.settings.map((setting) => (
+                  <ButtonCheckbox
+                    key={setting.setting}
+                    label={setting.setting}
+                    disabled={setting.disabled}
+                  />
+                ))}
+              </Form.Item>
+            </Form>
           </div>
         </>
       ))}

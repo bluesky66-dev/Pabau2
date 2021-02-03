@@ -19,7 +19,6 @@ export const Security: FC<SecurityProps> = ({ percent, data }) => {
         <div className={styles.securityHeaderContainer}>
           <p className={styles.tabTitle}>Security</p>
           <div className={styles.securityOpsContainer}>
-            <Button type="primary">Save Changes</Button>
             <Button type="ghost">Manage Bulk Actions</Button>
           </div>
         </div>

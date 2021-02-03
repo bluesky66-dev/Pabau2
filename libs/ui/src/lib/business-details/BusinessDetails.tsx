@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import { Row, Col, Divider } from 'antd'
+import { Row, Col, Divider, notification } from 'antd'
 import {
   Button,
   Input,
@@ -9,6 +9,8 @@ import {
   BusinessTypes,
   BusinessLocation,
 } from '@pabau/ui'
+import timezones from '../../assets/timezone'
+import currency from '../../assets/currency'
 import { ReactComponent as NormalClinicLogo } from '../../assets/images/normal-clinic-logo.svg'
 import styles from './BusinessDetails.module.less'
 
@@ -45,11 +47,11 @@ const defaultBasicInfo: BasicInformation = {
 }
 
 const defaultLangSetting: LanguageSetting = {
-  defaultLanuageStaff: 'English',
-  defaultLanuageClients: 'English',
-  timezone: '(GMT+00:00) London',
-  currency: 'British Pound',
-  dateFormat: '',
+  defaultLanuageStaff: 'English (UK)',
+  defaultLanuageClients: 'English (UK)',
+  timezone: '(GMT +00:00) London',
+  currency: 'Pound sterling',
+  dateFormat: 'd/m/Y',
   weekStart: 'Monday',
 }
 
@@ -68,6 +70,7 @@ export const BusinessDetails: FC<BusinessDetailsProps> = ({
   const [bizLocation, setBizLocation] = useState(defaultBizLocation)
 
   const handleSaveChanges = () => {
+    notification.open({ message: 'Saved Changes' })
     onSave &&
       onSave({
         basicInformation: basicInfo,
@@ -187,7 +190,7 @@ export const BusinessDetails: FC<BusinessDetailsProps> = ({
             <SimpleDropdown
               label="Timezone"
               value={langSetting.timezone}
-              dropdownItems={['(GMT+00:00) London']}
+              dropdownItems={timezones.map((timezone) => timezone.text || '')}
               onSelected={(val) => handleLangSettingChange('timezone', val)}
             />
           </Col>
@@ -195,15 +198,16 @@ export const BusinessDetails: FC<BusinessDetailsProps> = ({
             <SimpleDropdown
               label="Currency"
               value={langSetting.currency}
-              dropdownItems={['British Pound']}
+              dropdownItems={currency}
               onSelected={(val) => handleLangSettingChange('currency', val)}
             />
           </Col>
           <Col className="gutter-row" xs={24} sm={12}>
-            <Input
+            <SimpleDropdown
               label="Date Format"
-              text={langSetting.dateFormat}
-              onChange={(val) => handleLangSettingChange('dateFormat', val)}
+              value={langSetting.dateFormat}
+              dropdownItems={['d/m/Y', 'm/d/Y']}
+              onSelected={(val) => handleLangSettingChange('dateFormat', val)}
             />
           </Col>
           <Col className="gutter-row" xs={24} sm={12}>
