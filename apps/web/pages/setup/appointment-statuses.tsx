@@ -2,7 +2,7 @@
 import { gql } from '@apollo/client'
 import { NextPage } from 'next'
 import React from 'react'
-import CrudLayout from '../../../components/CrudLayout/CrudLayout'
+import CrudLayout from '../../components/CrudLayout/CrudLayout'
 
 const LIST_QUERY = gql`
   query marketing_sources(
@@ -80,10 +80,10 @@ const EDIT_MUTATION = gql`
 `
 
 const schema: Schema = {
-  full: 'Marketing Source',
-  fullLower: 'marketing source',
-  short: 'Source',
-  shortLower: 'source',
+  full: 'Appointment Status',
+  fullLower: 'appointment status',
+  short: 'Appointment Status',
+  shortLower: 'appointment statuses',
   fields: {
     name: {
       full: 'Friendly Name',
@@ -104,10 +104,11 @@ const schema: Schema = {
   },
 }
 
-export const Index: NextPage = () => {
+export const AppointmentStatuses: NextPage = () => {
   return (
     <CrudLayout
       schema={schema}
+      tableSearch={false}
       addQuery={ADD_MUTATION}
       deleteQuery={DELETE_MUTATION}
       listQuery={LIST_QUERY}
@@ -117,4 +118,4 @@ export const Index: NextPage = () => {
   )
 }
 
-export default Index
+export default AppointmentStatuses

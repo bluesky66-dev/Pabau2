@@ -97,7 +97,7 @@ const CrudModal: FC<P> = ({
           onClose?.()
         }}
         visible={openDeleteModal}
-        title={'Delete Marketing Source?'}
+        title={`Delete ${schema.short}?`}
         newButtonText={'Yes, delete source'}
       >
         <span

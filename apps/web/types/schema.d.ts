@@ -11,10 +11,10 @@ interface SchemaItem {
   short?: string
   shortLower?: string
   min?: number
-  example?: string
+  example?: string | number
   description?: string
   extra?: JSX.Element
   cssWidth?: string
-  type?: 'string' | 'boolean'
+  type?: 'string' | 'boolean' | 'number'
   default?: string | number | boolean
 }

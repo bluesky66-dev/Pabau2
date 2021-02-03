@@ -10,7 +10,7 @@ const Form: FC<P> = ({ schema }) => {
     <AntForm layout="vertical" requiredMark={false}>
       {Object.entries(fields).map(
         (
-          [name, { short, shortLower, example, description, extra, min }],
+          [name, { short, shortLower, example, description, extra, min, type }],
           i
         ) => (
           <AntForm.Item
@@ -18,13 +18,17 @@ const Form: FC<P> = ({ schema }) => {
             label={short}
             name={name}
             required={!!min}
-            // tooltip={`${description} for this ${shortLower}, eg: ${example}`}
+            tooltip={
+              description &&
+              `${description} for this ${shortLower}, eg: ${example}`
+            }
             // showValidateSuccess={!!min}
             extra={extra && <div>{extra}</div>}
           >
             <Input
               //disabled={isSubmitting}
               name={name}
+              type={type}
               placeholder={example && `eg ${example}`}
               autoFocus={i === 0}
             />
