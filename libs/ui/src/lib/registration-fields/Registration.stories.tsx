@@ -1,11 +1,22 @@
 /* eslint-disable */
-import React from 'react'
-import RegistrationFields, {FieldType} from './RegistrationFields'
+import React, { useEffect, useState, FC } from 'react'
+import RegistrationFields, { FieldType } from './RegistrationFields'
+import { CheckboxChangeEvent } from 'antd/lib/checkbox'
+import { customFieldTitle, fields, description, requiredTitle, customFields, fieldTitle, title, visibleTitle } from './mock'
 
 export default {
     component: RegistrationFields,
     title: 'UI/Registration Fields',
-    args: {},
+    args: {
+        customFieldTitle,
+        fields,
+        description,
+        requiredTitle,
+        customFields,
+        fieldTitle,
+        title,
+        visibleTitle
+    },
     argTypes: {
         title: { control: { type: 'text' } },
         description: { control: { type: 'text' } },
@@ -19,111 +30,84 @@ export default {
     onChange: { action: 'onChange' },
 }
 
-const RegistrationFieldsStory = ({ ...args }) => <RegistrationFields {...args}></RegistrationFields>
+interface P {
+    customFieldTitle: string,
+    fields: FieldType[],
+    description: string,
+    requiredTitle: string,
+    customFields: FieldType[],
+    fieldTitle: string,
+    title: string,
+    visibleTitle: string
+}
 
-export const RegistrationField = RegistrationFieldsStory.bind({})
-RegistrationField.args = {
-    title: 'Registration Fields',
-    description: 'Choose which fields you would like to be visible or mandatory on the registration page',
-    fieldTitle: 'Field Name',
-    customFieldTitle: 'Custom Fields',
-    visibleTitle: 'Visible',
-    requiredTitle: 'Required',
-    fields: [
-        {
-            fieldName: 'Salutation',
-            visible: false,
-            required: false,
-            key: 1
-        },
-        {
-            fieldName: 'First Name',
-            visible: true,
-            required: true,
-            disabled: true,
-            key: 2
-        },
-        {
-            fieldName: 'Last Name',
-            visible: true,
-            required: true,
-            disabled: true,
-            key: 3
-        },
-        {
-            fieldName: 'Gender',
-            visible: false,
-            required: false,
-            key: 4
-        },
-        {
-            fieldName: 'Date of Birth',
-            visible: false,
-            required: false,
-            key: 5
-        },
-        {
-            fieldName: 'Mobile',
-            visible: false,
-            required: false,
-            key: 6
-        },
-        {
-            fieldName: 'Address',
-            visible: false,
-            required: false,
-            key: 7
-        },
-        {
-            fieldName: 'City',
-            visible: false,
-            required: false,
-            key: 8
-        },
-        {
-            fieldName: 'Country',
-            visible: false,
-            required: false,
-            key: 9
-        },
-        {
-            fieldName: 'Post code',
-            visible: false,
-            required: false,
-            key: 10
-        },
-        {
-            fieldName: 'How did you hear about us?',
-            visible: false,
-            required: false,
-            key: 11
+export const RegistrationFieldsStory: FC<P> = ({ customFieldTitle,
+    fields,
+    description,
+    requiredTitle,
+    customFields,
+    fieldTitle,
+    title,
+    visibleTitle }) => {
+    const [mainFields, setMainFields] = useState<FieldType[]>([])
+    const [customField, setCustomField] = useState<FieldType[]>([])
+    console.log('asdsad')
+
+    useEffect(() => {
+        if (fields) {
+            setMainFields([...fields])
         }
-    ],
-    customFields: [
-        {
-            fieldName: 'GP Name',
-            visible: false,
-            required: false,
-            key: 1
-        },
-        {
-            fieldName: 'GP Address',
-            visible: false,
-            required: false,
-            key: 2
-        },
-        {
-            fieldName: 'Gender',
-            visible: false,
-            required: false,
-            key: 3
-        },
-        {
-            fieldName: 'Test MC',
-            visible: false,
-            required: false,
-            key: 4
+
+        if (customFields) {
+            setCustomField([...customFields])
         }
-    ],
-    onChange: (mainField: FieldType[], customField: FieldType[]) => { console.log('changed', mainField, customField) }
+    }, [fields, customFields])
+
+    const onChange = (mainField: FieldType[], customField: FieldType[]) => {
+        console.log('changed', mainField, customField)
+    }
+
+    const onMainFieldCheckboxChange = (
+        e: CheckboxChangeEvent,
+        key: number,
+        checkboxField: string
+    ) => {
+        const records = [...mainFields]
+        records.forEach((record) => {
+            if (record.key === key) {
+                record[checkboxField] = e.target.checked
+            }
+        })
+        setMainFields([...records])
+        onChange?.(mainFields, customField)
+    }
+
+    const onCustomFieldCheckboxChange = (
+        e: CheckboxChangeEvent,
+        key: number,
+        checkboxField: string
+    ) => {
+        const records = [...customField]
+        records.forEach((record) => {
+            if (record.key === key) {
+                record[checkboxField] = e.target.checked
+            }
+        })
+        setCustomField([...records])
+        onChange?.(mainFields, customField)
+    }
+    return (
+        <RegistrationFields
+            customFieldTitle={customFieldTitle}
+            fields={mainFields}
+            description={description}
+            requiredTitle={requiredTitle}
+            customFields={customField}
+            fieldTitle={fieldTitle}
+            title={title}
+            visibleTitle={visibleTitle}
+            onCustomFieldCheckboxChange={onCustomFieldCheckboxChange}
+            onMainFieldCheckboxChange={onMainFieldCheckboxChange}
+        />
+    )
 }

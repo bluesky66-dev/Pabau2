@@ -1,7 +1,6 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import { Checkbox } from 'antd'
 import { CheckboxChangeEvent } from 'antd/lib/checkbox'
-
 import styles from './RegistrationFields.module.less'
 
 export interface FieldType {
@@ -22,7 +21,16 @@ export interface RegistrationFieldsProps {
   requiredTitle?: string
   fields?: FieldType[]
   customFields?: FieldType[]
-  onChange?: (mainField: FieldType[], customField: FieldType[]) => void
+  onCustomFieldCheckboxChange?: (
+    e: CheckboxChangeEvent,
+    key: number,
+    checkboxField: string
+  ) => void
+  onMainFieldCheckboxChange?: (
+    e: CheckboxChangeEvent,
+    key: number,
+    checkboxField: string
+  ) => void
 }
 
 export const RegistrationFields: FC<RegistrationFieldsProps> = ({
@@ -34,51 +42,9 @@ export const RegistrationFields: FC<RegistrationFieldsProps> = ({
   customFields,
   visibleTitle,
   requiredTitle,
-  onChange,
+  onCustomFieldCheckboxChange,
+  onMainFieldCheckboxChange,
 }) => {
-  const [mainFields, setMainFields] = useState<FieldType[]>([])
-  const [customField, setCustomField] = useState<FieldType[]>([])
-
-  useEffect(() => {
-    if (fields) {
-      setMainFields([...fields])
-    }
-
-    if (customFields) {
-      setCustomField([...customFields])
-    }
-  }, [fields, customFields])
-
-  const onMainFieldCheckboxChange = (
-    e: CheckboxChangeEvent,
-    key: number,
-    checkboxField: string
-  ) => {
-    const records = [...mainFields]
-    records.forEach((record) => {
-      if (record.key === key) {
-        record[checkboxField] = e.target.checked
-      }
-    })
-    setMainFields([...records])
-    onChange?.(mainFields, customField)
-  }
-
-  const onCustomFieldCheckboxChange = (
-    e: CheckboxChangeEvent,
-    key: number,
-    checkboxField: string
-  ) => {
-    const records = [...customField]
-    records.forEach((record) => {
-      if (record.key === key) {
-        record[checkboxField] = e.target.checked
-      }
-    })
-    setCustomField([...records])
-    onChange?.(mainFields, customField)
-  }
-
   return (
     <div className={styles.registrationWrap}>
       <div className={styles.title}>{title}</div>
@@ -89,21 +55,21 @@ export const RegistrationFields: FC<RegistrationFieldsProps> = ({
         <div className={styles.headTitle}>{requiredTitle}</div>
       </div>
       <div>
-        {mainFields?.map((field) => (
+        {fields?.map((field) => (
           <div key={field.key} className={styles.fieldItemWrap}>
             <p>{field.fieldName}</p>
             <Checkbox
-              defaultChecked={field.visible}
+              checked={field.visible}
               disabled={field.disabled ?? false}
               onChange={(e) =>
-                onMainFieldCheckboxChange(e, field.key, 'visible')
+                onMainFieldCheckboxChange?.(e, field.key, 'visible')
               }
             />
             <Checkbox
-              defaultChecked={field.visible}
+              checked={field.required}
               disabled={field.disabled ?? false}
               onChange={(e) =>
-                onMainFieldCheckboxChange(e, field.key, 'required')
+                onMainFieldCheckboxChange?.(e, field.key, 'required')
               }
             />
           </div>
@@ -115,21 +81,21 @@ export const RegistrationFields: FC<RegistrationFieldsProps> = ({
         <div className={styles.headTitle}>{requiredTitle}</div>
       </div>
       <div>
-        {customField?.map((field) => (
+        {customFields?.map((field) => (
           <div key={field.key} className={styles.fieldItemWrap}>
             <p>{field.fieldName}</p>
             <Checkbox
-              defaultChecked={field.visible}
+              checked={field.visible}
               disabled={field.disabled ?? false}
               onChange={(e) =>
-                onCustomFieldCheckboxChange(e, field.key, 'visible')
+                onCustomFieldCheckboxChange?.(e, field.key, 'visible')
               }
             />
             <Checkbox
-              defaultChecked={field.visible}
+              checked={field.required}
               disabled={field.disabled ?? false}
               onChange={(e) =>
-                onCustomFieldCheckboxChange(e, field.key, 'required')
+                onCustomFieldCheckboxChange?.(e, field.key, 'required')
               }
             />
           </div>
