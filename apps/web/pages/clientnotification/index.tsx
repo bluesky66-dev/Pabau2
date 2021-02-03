@@ -12,6 +12,15 @@ import ClientNotification from '../../components/ClientNotification/index'
 
 const { Title } = Typography
 
+export enum NotificationType {
+  info = 'info',
+  success = 'success',
+  error = 'error',
+  warning = 'warning',
+  loading = 'loading',
+  connect = 'connect',
+}
+
 const Index: FC = () => {
   const [setIndexTab, setSelectedTab] = React.useState(1)
   const [sendEmail, setSendEmail] = React.useState(false)
@@ -22,9 +31,9 @@ const Index: FC = () => {
 
   function showNotification() {
     if (setIndexTab === 1) {
-      Notification('success', 'Test a message')
+      Notification(NotificationType.success, 'Test a message')
     } else {
-      Notification('success', 'Test a message')
+      Notification(NotificationType.success, 'Test a message')
     }
   }
 
