@@ -1,6 +1,12 @@
 import React, { FC, useEffect, useState } from 'react'
-import { Row, Col, Divider, notification } from 'antd'
-import { Button, SimpleDropdown, RadioGroup } from '@pabau/ui'
+import { Row, Col, Divider } from 'antd'
+import {
+  Button,
+  SimpleDropdown,
+  RadioGroup,
+  Notification,
+  NotificationType,
+} from '@pabau/ui'
 import styles from './System.module.less'
 
 interface MedicalConfig {
@@ -29,7 +35,7 @@ const defaultConfig: MedicalConfig = {
 export const System: FC<SystemProps> = ({ config, onSave }) => {
   const [_config, setConfig] = useState<MedicalConfig>(defaultConfig)
   const handleSaveChanges = () => {
-    notification.open({ message: 'Saved Changes' })
+    Notification(NotificationType.success, 'Successfully saved changes')
     onSave && onSave(_config)
   }
   const handleItemChange = (change) => {

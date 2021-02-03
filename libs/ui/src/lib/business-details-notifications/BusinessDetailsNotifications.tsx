@@ -1,6 +1,11 @@
 import React, { FC, useEffect, useState } from 'react'
-import { Divider, notification, Form } from 'antd'
-import { Button, ButtonCheckbox } from '@pabau/ui'
+import { Divider, Form } from 'antd'
+import {
+  Button,
+  ButtonCheckbox,
+  Notification,
+  NotificationType,
+} from '@pabau/ui'
 import styles from './BusinessDetailsNotifications.module.less'
 
 interface NotificationSetting {
@@ -120,7 +125,7 @@ export const BusinessDetailsNotifications: FC<BusinessDetailsNotificationsProps>
 }) => {
   const [configs, setConfigs] = useState<NotificationConfig[]>([])
   const handleSaveChanges = () => {
-    notification.open({ message: 'Saved Changes' })
+    Notification(NotificationType.success, 'Successfully saved changes')
     onSave && onSave(configs)
   }
 

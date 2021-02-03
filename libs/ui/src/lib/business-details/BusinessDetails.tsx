@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import { Row, Col, Divider, notification } from 'antd'
+import { Row, Col, Divider } from 'antd'
 import {
   Button,
   Input,
@@ -8,6 +8,8 @@ import {
   PhoneNumberInput,
   BusinessTypes,
   BusinessLocation,
+  Notification,
+  NotificationType,
 } from '@pabau/ui'
 import timezones from '../../assets/timezone'
 import currency from '../../assets/currency'
@@ -70,7 +72,7 @@ export const BusinessDetails: FC<BusinessDetailsProps> = ({
   const [bizLocation, setBizLocation] = useState(defaultBizLocation)
 
   const handleSaveChanges = () => {
-    notification.open({ message: 'Saved Changes' })
+    Notification(NotificationType.success, 'Successfully saved changes')
     onSave &&
       onSave({
         basicInformation: basicInfo,
