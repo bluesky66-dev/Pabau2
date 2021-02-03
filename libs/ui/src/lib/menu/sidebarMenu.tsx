@@ -14,6 +14,7 @@ import {
 export interface SidebarMenuItem {
   menuName: string
   icon?: JSX.Element
+  path?: string
   children?: SidebarMenuItem[]
 }
 
@@ -21,10 +22,12 @@ export const sidebarMenu: SidebarMenuItem[] = [
   {
     menuName: 'Dashboard',
     icon: <DashboardOutlined />,
+    path: '/dashboard',
   },
   {
     menuName: 'Calendar',
     icon: <CalendarOutlined />,
+    path: '/calendar',
   },
   {
     menuName: 'Team',
@@ -32,36 +35,27 @@ export const sidebarMenu: SidebarMenuItem[] = [
     children: [
       {
         menuName: 'Staff Manager',
+        path: '/team/staffmanager',
       },
       {
         menuName: 'Staff Targets',
+        path: '/team/stafftargets',
       },
       {
         menuName: 'Schedule',
+        path: '/team/schedule',
       },
     ],
   },
   {
     menuName: 'Leads',
     icon: <RiseOutlined />,
-    children: [
-      {
-        menuName: 'Leads',
-      },
-      {
-        menuName: 'Lead groups',
-      },
-      {
-        menuName: 'Lead views',
-      },
-      {
-        menuName: 'New leads',
-      },
-    ],
+    path: '/leads',
   },
   {
     menuName: 'Reports',
     icon: <FundOutlined />,
+    path: '/reports',
   },
   {
     menuName: 'Stock',
@@ -69,15 +63,19 @@ export const sidebarMenu: SidebarMenuItem[] = [
     children: [
       {
         menuName: 'Products',
+        path: '/stock/products',
       },
       {
         menuName: 'Inventory count',
+        path: '/stock/inventorycount',
       },
       {
         menuName: 'Purchase order',
+        path: '/stock/purchaseorder',
       },
       {
         menuName: 'Suppliers',
+        path: '/stock/suppliers',
       },
     ],
   },
@@ -86,25 +84,24 @@ export const sidebarMenu: SidebarMenuItem[] = [
     icon: <NotificationOutlined />,
     children: [
       {
-        menuName: 'SMS campaign',
+        menuName: 'Campaigns',
+        path: '/marketing/campaigns',
       },
       {
-        menuName: 'Birthday mailer',
-      },
-      {
-        menuName: 'Newsletter',
-      },
-      {
-        menuName: 'Feedback Survey',
+        menuName: 'Reviews',
+        path: '/marketing/reviews',
       },
       {
         menuName: 'Gift Vouchers',
+        path: '/marketing/giftvouchers',
       },
       {
         menuName: 'Referral tracker',
+        path: '/marketing/referraltracker',
       },
       {
         menuName: 'Loyalty',
+        path: '/marketing/loyalty',
       },
     ],
   },
@@ -114,9 +111,11 @@ export const sidebarMenu: SidebarMenuItem[] = [
     children: [
       {
         menuName: 'Accounts',
+        path: '/financials/accounts',
       },
       {
         menuName: 'Cashup',
+        path: '/financials/cashup',
       },
     ],
   },
@@ -126,9 +125,11 @@ export const sidebarMenu: SidebarMenuItem[] = [
     children: [
       {
         menuName: 'Clients',
+        path: '/contacts/clients',
       },
       {
         menuName: 'Case manager',
+        path: '/contacts/casemanager',
       },
     ],
   },

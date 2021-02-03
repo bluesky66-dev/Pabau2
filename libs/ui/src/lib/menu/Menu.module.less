@@ -7,8 +7,13 @@
 .pabau-sidebar {
   user-select: none;
   .sidebar {
-    height: 100%;
     border-right: 0;
+    .removeSelected{
+      color: var(--light-grey-color);
+      &:after {
+        display: none;
+      }
+    }
   }
   :global {
     .ant-menu-light {
@@ -49,6 +54,9 @@
     font-size: 14px;
     font-family: 'Circular-Std-Book';
     font-weight: 400;
+    a{
+      color: var(--light-grey-color);
+    }
     :hover {
       color: var(--primary-color) !important;
     }
@@ -78,7 +86,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 16px;
+    padding: 16px 0;
+    cursor: pointer;
+    .activeSidebarMenu{
+      color: var(--primary-color);
+    }
   }
   .sidebar-collapse-icon {
     padding-left: 24px;
