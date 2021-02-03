@@ -9,7 +9,6 @@ import InnerMedicalFormTitle from './InnerMedicalFormTitle'
 interface P {
   required?: boolean
 }
-
 const InnerGender: FC<P> = ({ required }) => {
   const [clicked, setClicked] = useState(false)
   const [optionVal, setOptionVal] = useState(1)
