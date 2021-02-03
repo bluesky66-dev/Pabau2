@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { FC } from 'react'
+import { Table } from '@pabau/ui'
 import TabbedTable, { TabbedTableProps } from './TabbedTable'
 import { data } from './mock'
 
@@ -30,15 +31,25 @@ const columns = [
   },
 ]
 
-const TabbedTableStory = ({ ...args }: TabbedTableProps) => (
-  <TabbedTable {...args} />
+export const TabbedTableStory: FC<TabbedTableProps> = ({ ...args }) => (
+  <TabbedTable {...args} tabItems={['Custom', 'Library', 'Triggers']}>
+    <Table
+      dataSource={data}
+      padlocked={[]}
+      draggable={true}
+      columns={columns}
+    />
+    <Table
+      dataSource={data}
+      padlocked={[]}
+      draggable={true}
+      columns={columns}
+    />
+    <Table
+      dataSource={data}
+      padlocked={[]}
+      draggable={false}
+      columns={columns}
+    />
+  </TabbedTable>
 )
-export const Basic = TabbedTableStory.bind({})
-Basic.args = {
-  tabItems: ['Custom', 'Library', 'Triggers'],
-  tableData: {
-    Custom: { dataSource: data, padlocked: [], draggable: true, columns },
-    Library: { dataSource: data, padlocked: [], draggable: true, columns },
-    Triggers: { dataSource: data, padlocked: [], draggable: false, columns },
-  },
-}
