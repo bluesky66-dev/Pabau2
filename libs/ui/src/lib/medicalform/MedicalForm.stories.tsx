@@ -1,6 +1,19 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React from 'react'
 import Conditions from './Conditions'
+import CustomAuthorizationCode from './CustomAuthorizationCode'
+import CustomCompany from './CustomCompany'
+import CustomDob from './CustomDob'
+import CustomEmailMarketing from './CustomEmailMarketing'
+import CustomGender from './CustomGender'
+import CustomLetterMarketing from './CustomLetterMarketing'
+import CustomMembershipNumber from './CustomMembershipNumber'
+import CustomPhoneCall from './CustomPhoneCall'
+import CustomPhysicalAddress from './CustomPhysicalAddress'
+import CustomPostalAddress from './CustomPostalAddress'
+import CustomReferredBy from './CustomReferredBy'
+import CustomSmsTextMarketing from './CustomSmsTextMarketing'
+import CustomTelephoneNumber from './CustomTelephoneNumber'
 import Dob from './Dob'
 import Drawing from './Drawing'
 import Dropdown from './Dropdown'
@@ -10,6 +23,7 @@ import InnerDob from './InnerDob'
 import InnerDrawing from './InnerDrawing'
 import InnerDropdown from './InnerDropdown'
 import InnerDrugs from './InnerDrugs'
+import InnerGender from './InnerGender'
 import InnerHeading from './InnerHeading'
 import InnerLabTest from './InnerLabTest'
 import InnerLongAnswer from './InnerLongAnswer'
@@ -72,3 +86,18 @@ export const InnerMultiChoiceForm = () => <InnerMultiChoice required={true} />
 export const InnerDrawingBlockForm = () => <InnerDrawing required={false} />
 export const InnerSignatureForm = () => <InnerSignature required={false} />
 export const InnerDobForm = () => <InnerDob required={false} />
+export const InnerGenderForm = () => <InnerGender required={false} />
+
+export const CustomEmailMarketingForm = () => <CustomEmailMarketing />
+export const CustomSmsTextMarketingForm = () => <CustomSmsTextMarketing />
+export const CustomPhoneCallForm = () => <CustomPhoneCall />
+export const CustomLetterMarketingForm = () => <CustomLetterMarketing />
+export const CustomMembershipNumberForm = () => <CustomMembershipNumber />
+export const CustomAuthorizationCodeForm = () => <CustomAuthorizationCode />
+export const CustomCompanyForm = () => <CustomCompany />
+export const CustomDobForm = () => <CustomDob />
+export const CustomGenderForm = () => <CustomGender />
+export const CustomPhysicalAddressForm = () => <CustomPhysicalAddress />
+export const CustomPostalAddressForm = () => <CustomPostalAddress />
+export const CustomReferredByForm = () => <CustomReferredBy />
+export const CustomTelephoneNumberForm = () => <CustomTelephoneNumber />
