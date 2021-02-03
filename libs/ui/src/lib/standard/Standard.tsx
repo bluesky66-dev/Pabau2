@@ -45,6 +45,9 @@ interface P {
   informationMessage: string
   onInformationMessage: (string) => void
   onStandardTabChanged: (string) => void
+  hideAppearanceTabPane: boolean
+  smsMessage: string
+  onSmsMessage: (string) => void
 }
 
 const { TabPane } = Tabs
@@ -82,6 +85,9 @@ export const Standard: FC<P> = ({
   informationMessage,
   onInformationMessage,
   onStandardTabChanged,
+  hideAppearanceTabPane,
+  smsMessage,
+  onSmsMessage,
 }) => {
   function callback(key) {
     onStandardTabChanged(key)
@@ -163,139 +169,167 @@ export const Standard: FC<P> = ({
                   <Option value="12">12 hours</Option>
                   <Option value="6">6 hours</Option>
                 </Select>
-              </Panel>
-              <Panel className={styles.panelAlign} header="Appearance" key="2">
-                <Row align="middle">
-                  <Checkbox
-                    className={styles.checkboxStyle}
-                    value="request_confirmation"
-                    checked={requestConfirmation}
-                    onChange={() => onRequestConfirmation(!requestConfirmation)}
-                  >
-                    Request confirmation
-                  </Checkbox>
-                  <Tooltip
-                    placement="topLeft"
-                    color="#595959"
-                    title={`"We will intelligently schedule additional confirmations to clients who have a history of forgetting"`}
-                  >
-                    <QuestionCircleOutlined />
-                  </Tooltip>
-                </Row>
-                <Row>
-                  <Checkbox
-                    className={styles.checkboxStyle}
-                    value="allow_reschedule"
-                    checked={allowRescheduling}
-                    onChange={() => onAllowRescheduling(!allowRescheduling)}
-                  >
-                    Allow rescheduling
-                  </Checkbox>
-                </Row>
-                <Row>
-                  <Checkbox
-                    className={styles.checkboxStyle}
-                    value="allow_cancellation"
-                    checked={allowCancellation}
-                    onChange={() => onAllowCancellation(!allowCancellation)}
-                  >
-                    Allow cancellation
-                  </Checkbox>
-                </Row>
-                <Row>
-                  <Checkbox
-                    className={styles.checkboxStyle}
-                    value="display_policy"
-                    checked={displayPolicy}
-                    onChange={() => onDisplayPolicy(!displayPolicy)}
-                  >
-                    Display policy
-                  </Checkbox>
-                </Row>
-                <Row>
-                  <Checkbox
-                    className={styles.checkboxStyle}
-                    value="show_service"
-                    checked={showService}
-                    onChange={() => onShowService(!showService)}
-                  >
-                    Show service
-                  </Checkbox>
-                </Row>
-                <Row>
-                  <Checkbox
-                    className={styles.checkboxStyle}
-                    value="show_employee_name"
-                    checked={showEmployeeName}
-                    onChange={() => onShowEmployeeName(!showEmployeeName)}
-                  >
-                    Show employee name
-                  </Checkbox>
-                </Row>
-                <Row>
-                  <span className={styles.separateText}>
-                    Medical History settings
-                  </span>
-                </Row>
-                <Row>
-                  <Checkbox
-                    className={styles.checkboxStyle}
-                    value="add_his_button"
-                    checked={addMedicalHisButton}
-                    onChange={() => onAddMedicalHisButton(!addMedicalHisButton)}
-                  >
-                    Add Medical History button
-                  </Checkbox>
-                </Row>
-                {addMedicalHisButton && (
+
+                {!hideAppearanceTabPane && (
                   <>
                     <Row>
-                      <Checkbox
-                        className={styles.checkboxStyle}
-                        value="hide_his_completed"
-                      >
-                        Hide if history is already completed
-                      </Checkbox>
-                    </Row>
-
-                    <Row>
-                      <span className={styles.textareaLabel}>
-                        Medical History message
-                      </span>
+                      <span className={styles.textareaLabel}>Message</span>
                     </Row>
                     <Row>
                       <TextArea
                         className={styles.textareaStyle}
                         autoSize={{ minRows: 3, maxRows: 3 }}
-                        onChange={(event) =>
-                          onMedicalMessage(event.target.value)
-                        }
+                        onChange={(event) => onSmsMessage(event.target.value)}
+                        value={smsMessage}
                       />
                     </Row>
                   </>
                 )}
-                <ColorPicker
-                  heading="Background color"
-                  onSelected={(val) => onBackGroundColor(val)}
-                />
-                <ColorPicker
-                  heading="Buttons color"
-                  onSelected={(val) => onButtonColor(val)}
-                />
-                <Row>
-                  <span className={styles.textareaLabel}>Information</span>
-                </Row>
-                <Row>
-                  <TextArea
-                    className={styles.textareaStyle}
-                    placeholder="e.g. Special offer"
-                    autoSize={{ minRows: 3, maxRows: 3 }}
-                    onChange={(event) =>
-                      onInformationMessage(event.target.value)
-                    }
-                  />
-                </Row>
               </Panel>
+              {hideAppearanceTabPane && (
+                <Panel
+                  className={styles.panelAlign}
+                  header="Appearance"
+                  key="2"
+                >
+                  <Row align="middle">
+                    <Checkbox
+                      className={styles.checkboxStyle}
+                      value="request_confirmation"
+                      checked={requestConfirmation}
+                      onChange={() =>
+                        onRequestConfirmation(!requestConfirmation)
+                      }
+                    >
+                      Request confirmation
+                    </Checkbox>
+                    <Tooltip
+                      placement="topLeft"
+                      color="#595959"
+                      title={`"We will intelligently schedule additional confirmations to clients who have a history of forgetting"`}
+                    >
+                      <QuestionCircleOutlined />
+                    </Tooltip>
+                  </Row>
+                  <Row>
+                    <Checkbox
+                      className={styles.checkboxStyle}
+                      value="allow_reschedule"
+                      checked={allowRescheduling}
+                      onChange={() => onAllowRescheduling(!allowRescheduling)}
+                    >
+                      Allow rescheduling
+                    </Checkbox>
+                  </Row>
+                  <Row>
+                    <Checkbox
+                      className={styles.checkboxStyle}
+                      value="allow_cancellation"
+                      checked={allowCancellation}
+                      onChange={() => onAllowCancellation(!allowCancellation)}
+                    >
+                      Allow cancellation
+                    </Checkbox>
+                  </Row>
+                  <Row>
+                    <Checkbox
+                      className={styles.checkboxStyle}
+                      value="display_policy"
+                      checked={displayPolicy}
+                      onChange={() => onDisplayPolicy(!displayPolicy)}
+                    >
+                      Display policy
+                    </Checkbox>
+                  </Row>
+                  <Row>
+                    <Checkbox
+                      className={styles.checkboxStyle}
+                      value="show_service"
+                      checked={showService}
+                      onChange={() => onShowService(!showService)}
+                    >
+                      Show service
+                    </Checkbox>
+                  </Row>
+                  <Row>
+                    <Checkbox
+                      className={styles.checkboxStyle}
+                      value="show_employee_name"
+                      checked={showEmployeeName}
+                      onChange={() => onShowEmployeeName(!showEmployeeName)}
+                    >
+                      Show employee name
+                    </Checkbox>
+                  </Row>
+                  <Row>
+                    <span className={styles.separateText}>
+                      Medical History settings
+                    </span>
+                  </Row>
+                  <Row>
+                    <Checkbox
+                      className={styles.checkboxStyle}
+                      value="add_his_button"
+                      checked={addMedicalHisButton}
+                      onChange={() =>
+                        onAddMedicalHisButton(!addMedicalHisButton)
+                      }
+                    >
+                      Add Medical History button
+                    </Checkbox>
+                  </Row>
+                  {addMedicalHisButton && (
+                    <>
+                      <Row>
+                        <Checkbox
+                          className={styles.checkboxStyle}
+                          value="hide_his_completed"
+                        >
+                          Hide if history is already completed
+                        </Checkbox>
+                      </Row>
+
+                      <Row>
+                        <span className={styles.textareaLabel}>
+                          Medical History message
+                        </span>
+                      </Row>
+                      <Row>
+                        <TextArea
+                          className={styles.textareaStyle}
+                          autoSize={{ minRows: 3, maxRows: 3 }}
+                          onChange={(event) =>
+                            onMedicalMessage(event.target.value)
+                          }
+                        />
+                      </Row>
+                    </>
+                  )}
+                  <ColorPicker
+                    heading="Background color"
+                    onSelected={(val) => onBackGroundColor(val)}
+                    defaultColor="#ffffff"
+                  />
+                  <ColorPicker
+                    heading="Buttons color"
+                    onSelected={(val) => onButtonColor(val)}
+                    defaultColor="#54b2d3"
+                  />
+                  <Row>
+                    <span className={styles.textareaLabel}>Information</span>
+                  </Row>
+                  <Row>
+                    <TextArea
+                      className={styles.textareaStyle}
+                      placeholder="e.g. Special offer"
+                      autoSize={{ minRows: 3, maxRows: 3 }}
+                      onChange={(event) =>
+                        onInformationMessage(event.target.value)
+                      }
+                    />
+                  </Row>
+                </Panel>
+              )}
               <div className={styles.papauPlusContainer}>
                 <PabauPlus label="Plus" />
               </div>

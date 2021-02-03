@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Typography, Input } from 'antd'
-import { Button, Breadcrumb, BasicModal } from '@pabau/ui'
+import { Button, Breadcrumb, BasicModal, PhoneNumberInput } from '@pabau/ui'
 import Layout from '../../components/Layout/Layout'
 import ClientNotification from '../../components/ClientNotification/index'
 
@@ -60,8 +60,13 @@ const Index: FC = () => {
             </div>
           ) : (
             <div>
-              <p style={{ color: '#9292A3' }}>Phone Number</p>
-              <Input placeholder="phone number" />
+              {/* <p style={{ color: '#9292A3' }}>Phone Number</p> */}
+              <PhoneNumberInput
+                countryCode={'GB'}
+                onChange={(val) => {
+                  console.log(val)
+                }}
+              />
             </div>
           )}
         </BasicModal>

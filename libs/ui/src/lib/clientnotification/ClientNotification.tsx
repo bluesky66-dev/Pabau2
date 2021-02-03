@@ -60,7 +60,7 @@ export const ClientNotification: FC<P> = ({
         )}
         {previewStatus === 2 && (
           <Row justify="center">
-            <div className={styles.previewCard}>{smsComponent}</div>
+            <div className={styles.previewSms}>{smsComponent}</div>
           </Row>
         )}
       </Col>

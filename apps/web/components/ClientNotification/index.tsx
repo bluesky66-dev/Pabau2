@@ -21,6 +21,8 @@ const Index: FC<P> = ({ onSeletedTab }) => {
   const [medicalMessage, setMedicalMessage] = useState('')
   const [informationMessage, setInformationMessage] = useState('')
   const [standardTapIndex, setStandardTap] = useState('1')
+  const [hideAppearanceTabPane, setHideAppearanceTabPane] = useState(true)
+  const [smsMessage, setSmsMessage] = useState('Hi, Kristy')
   function handleSelectedTab(value) {
     onSeletedTab(value)
   }
@@ -31,10 +33,12 @@ const Index: FC<P> = ({ onSeletedTab }) => {
           handleSelectedTab(value)
           setEnableReminder(true)
           setSmartDelivery(true)
+          setHideAppearanceTabPane(false)
         } else {
           handleSelectedTab(value)
           setEnableReminder(false)
           setSmartDelivery(false)
+          setHideAppearanceTabPane(true)
         }
       }}
       tabComponent={
@@ -68,6 +72,9 @@ const Index: FC<P> = ({ onSeletedTab }) => {
           onMedicalMessage={(value) => setMedicalMessage(value)}
           informationMessage={informationMessage}
           onInformationMessage={(value) => setInformationMessage(value)}
+          hideAppearanceTabPane={hideAppearanceTabPane}
+          smsMessage={smsMessage}
+          onSmsMessage={(value) => setSmsMessage(value)}
         />
       }
       previewComponent={
@@ -89,8 +96,9 @@ const Index: FC<P> = ({ onSeletedTab }) => {
       }
       smsComponent={
         <Smstext
-        // enableReminder={enableReminder}
-        // smartDelivery={smartDelivery}
+          smsMessage={smsMessage}
+          // enableReminder={enableReminder}
+          // smartDelivery={smartDelivery}
         />
       }
     />

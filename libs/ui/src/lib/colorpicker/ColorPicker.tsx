@@ -38,6 +38,7 @@ interface PickerProps {
   onSelected(val): void
   onHover?(val): void
   onLeave?(val): void
+  defaultColor?: string
 }
 
 export const ColorPicker: FC<PickerProps> = ({
@@ -45,10 +46,11 @@ export const ColorPicker: FC<PickerProps> = ({
   onSelected,
   onHover,
   onLeave,
+  defaultColor,
 }) => {
   const [colorData, setColorData] = useState([
     {
-      color: '#03dbfc',
+      color: '#ffffff',
       selected: false,
     },
     {
@@ -113,7 +115,12 @@ export const ColorPicker: FC<PickerProps> = ({
     },
   ])
 
+  if (defaultColor) {
+    colorData[0].color = defaultColor
+  }
+
   const colors = [...colorData]
+
   const onClickColorItem = (index, color) => {
     colors.forEach((item, idx) => {
       item.selected = index === idx
