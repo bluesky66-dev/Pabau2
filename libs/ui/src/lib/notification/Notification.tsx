@@ -2,54 +2,66 @@ import React from 'react'
 import { message } from 'antd'
 import styles from './Notification.module.less'
 import Reconnect from './ReconnectNotification'
+import {
+  CheckCircleFilled,
+  CloseCircleOutlined,
+  CloseOutlined,
+  ExclamationCircleOutlined,
+  InfoCircleOutlined,
+} from '@ant-design/icons'
 
 export enum NotificationType {
-  connect = 'connect',
+  info = 'info',
   success = 'success',
-  edit = 'edit',
-  delete = 'delete',
+  error = 'error',
+  warning = 'warning',
+  loading = 'loading',
+  connect = 'connect',
 }
 
-export const openNotification = (
-  notificationType: string,
+export const Notification = (
+  notificationType: NotificationType,
   text: string,
-  delay: number
+  delay = 2
 ): void => {
+  let notify
+  const onClose = () => {
+    notify()
+  }
+
+  const notifyIcon = () => {
+    if (notificationType === NotificationType.success) {
+      return <CheckCircleFilled className={styles.notifyIcon} />
+    } else if (notificationType === NotificationType.error) {
+      return <CloseCircleOutlined className={styles.notifyIcon} />
+    } else if (notificationType === NotificationType.info) {
+      return <InfoCircleOutlined className={styles.notifyIcon} />
+    } else if (notificationType === NotificationType.warning) {
+      return <ExclamationCircleOutlined className={styles.notifyIcon} />
+    }
+  }
+
   if (notificationType === NotificationType.connect) {
     message.open({
       type: 'success',
       content: <Reconnect message="" delay={delay} />,
+      className: styles.notifyReconnect,
       duration: delay,
     })
-  } else if (notificationType === NotificationType.success) {
-    message.open({
-      type: 'success',
+  } else {
+    notify = message.open({
+      type: notificationType,
       content: (
-        <div className={styles.successNotification}>
-          <span>{text}</span>
+        <div className={styles.notificationContent}>
+          <span className={styles.notifyText}>{text}</span>
+          <CloseOutlined className={styles.closeIcon} onClick={onClose} />
         </div>
       ),
-      duration: delay,
-    })
-  } else if (notificationType === NotificationType.edit) {
-    message.open({
-      type: 'success',
-      content: (
-        <div className={styles.editNotification}>
-          <span>{text}</span>
-        </div>
-      ),
-      duration: delay,
-    })
-  } else if (notificationType === NotificationType.delete) {
-    message.open({
-      type: 'success',
-      content: (
-        <div className={styles.deleteNotification}>
-          <span>{text}</span>
-        </div>
-      ),
+      icon: notifyIcon(),
+      className: styles.notifyStyles,
       duration: delay,
     })
   }
 }
+
+export default Notification
