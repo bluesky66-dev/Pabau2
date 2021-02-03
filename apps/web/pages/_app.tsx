@@ -60,32 +60,32 @@ const httpLink = new HttpLink({
 
 const wsLink = process.browser
   ? new WebSocketLink({
-    uri: GRAPHQL_ENDPOINT,
-    options: {
-      reconnect: true,
-      connectionParams: {
-        authToken: 'user.authToken goes here',
+      uri: GRAPHQL_ENDPOINT,
+      options: {
+        reconnect: true,
+        connectionParams: {
+          authToken: 'user.authToken goes here',
+        },
       },
-    },
-  })
+    })
   : null
 
 // Let Apollo figure out if the request is over ws or http
 const terminatingLink = wsLink
   ? split(
-    ({ query }) => {
-      const { kind, operation } = getMainDefinition(
-        query
-      ) as OperationDefinitionNode
-      return (
-        kind === 'OperationDefinition' &&
-        operation === 'subscription' &&
-        process.browser
-      )
-    },
-    wsLink,
-    httpLink
-  )
+      ({ query }) => {
+        const { kind, operation } = getMainDefinition(
+          query
+        ) as OperationDefinitionNode
+        return (
+          kind === 'OperationDefinition' &&
+          operation === 'subscription' &&
+          process.browser
+        )
+      },
+      wsLink,
+      httpLink
+    )
   : httpLink
 
 const client = new ApolloClient({

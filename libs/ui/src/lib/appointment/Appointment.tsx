@@ -1,5 +1,11 @@
 import React, { FC } from 'react'
 import { Row, Col, Divider } from 'antd'
+import {
+  InstagramOutlined,
+  FacebookOutlined,
+  LinkedinOutlined,
+  TwitterOutlined,
+} from '@ant-design/icons'
 import { Button } from '@pabau/ui'
 import styles from './Appointment.module.less'
 import { ReactComponent as NormalClinicLogo } from '../../assets/images/normal-clinic-logo.svg'
@@ -112,6 +118,7 @@ interface P {
   informationMessage?: string
   medicalMessage?: string
   standardTapIndex?: string
+  activeSocialIcons?: string[]
 }
 
 export const Appointment: FC<P> = ({
@@ -128,6 +135,7 @@ export const Appointment: FC<P> = ({
   backGroundColor,
   buttonColor,
   standardTapIndex,
+  activeSocialIcons = [],
 }) => {
   const [selectLangData, setSelectLangData] = React.useState<Email>(
     langData['en']
@@ -138,6 +146,18 @@ export const Appointment: FC<P> = ({
       setSelectLangData({ ...langData[`${selectLanguage.toLowerCase()}`] })
     }
   }, [selectLanguage])
+
+  function setSocialIcon(value) {
+    if (value.includes('facebook')) {
+      return <FacebookOutlined style={{ padding: '5px' }} />
+    } else if (value.includes('linksIn')) {
+      return <LinkedinOutlined style={{ padding: '5px' }} />
+    } else if (value.includes('instagram')) {
+      return <InstagramOutlined style={{ padding: '5px' }} />
+    } else if (value.includes('twitter')) {
+      return <TwitterOutlined style={{ padding: '5px' }} />
+    }
+  }
 
   return (
     <div>
@@ -254,6 +274,10 @@ export const Appointment: FC<P> = ({
 
           <Row justify="center" style={{ marginTop: '20px' }}>
             <span>{informationMessage}</span>
+          </Row>
+
+          <Row justify="center" style={{ marginTop: '20px' }}>
+            {activeSocialIcons.map((value, index) => setSocialIcon(value))}
           </Row>
         </div>
       ) : (

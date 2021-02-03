@@ -1,6 +1,12 @@
 import React, { FC } from 'react'
 import { Typography, Input } from 'antd'
-import { Button, Breadcrumb, BasicModal, PhoneNumberInput } from '@pabau/ui'
+import {
+  Button,
+  Breadcrumb,
+  BasicModal,
+  PhoneNumberInput,
+  Notification,
+} from '@pabau/ui'
 import Layout from '../../components/Layout/Layout'
 import ClientNotification from '../../components/ClientNotification/index'
 
@@ -9,8 +15,17 @@ const { Title } = Typography
 const Index: FC = () => {
   const [setIndexTab, setSelectedTab] = React.useState(1)
   const [sendEmail, setSendEmail] = React.useState(false)
+
   function handleSendEmailBtn(value) {
     setSendEmail(value)
+  }
+
+  function showNotification() {
+    if (setIndexTab === 1) {
+      Notification('success', 'Test a message')
+    } else {
+      Notification('success', 'Test a message')
+    }
   }
 
   return (
@@ -52,6 +67,7 @@ const Index: FC = () => {
           centered={true}
           newButtonText={'Send'}
           dangerButtonText={'Cancel'}
+          onOk={() => showNotification()}
         >
           {setIndexTab === 1 ? (
             <div>

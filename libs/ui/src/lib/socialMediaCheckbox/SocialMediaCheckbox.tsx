@@ -1,9 +1,7 @@
 import React, { FC, ReactNode, useState } from 'react'
-import { Checkbox, Collapse, Popover } from 'antd'
+import { Checkbox, Popover } from 'antd'
 import classNames from 'classnames'
 import styles from './SocialMediaCheckbox.module.less'
-
-const { Panel } = Collapse
 
 export interface MediaIcon {
   label: string
@@ -21,7 +19,7 @@ const content = (
     <p>You have not setup a link for this particular social network</p>
   </div>
 )
-const SocialMediaCheckbox: FC<P> = (props) => {
+export const SocialMediaCheckbox: FC<P> = (props) => {
   const [activate, setActivate] = useState(true)
   const [activeLabel, setActiveLabel] = useState<string[]>([])
 
@@ -35,34 +33,26 @@ const SocialMediaCheckbox: FC<P> = (props) => {
 
   return (
     <div className="social-media-icons">
-      <Collapse>
-        <Panel header="Social media icons" key="1">
-          {props?.mediaIcon?.map((socialIcon) => (
-            <span
-              key={socialIcon.label}
-              className={classNames(
-                styles.socialBorder,
-                socialIcon.link === null && styles.socialBorderRed,
-                activeLabel.includes(socialIcon.label) && styles.iconColor
-              )}
-              onClick={() => handleClick(socialIcon.label)}
-            >
-              {socialIcon.link === null ? (
-                <Popover
-                  placement="bottomLeft"
-                  content={content}
-                  trigger="hover"
-                >
-                  {socialIcon.icon}
-                </Popover>
-              ) : (
-                socialIcon.icon
-              )}
-              <Checkbox checked={activeLabel.includes(socialIcon.label)} />
-            </span>
-          ))}
-        </Panel>
-      </Collapse>
+      {props?.mediaIcon?.map((socialIcon) => (
+        <span
+          key={socialIcon.label}
+          className={classNames(
+            styles.socialBorder,
+            socialIcon.link === null && styles.socialBorderRed,
+            activeLabel.includes(socialIcon.label) && styles.iconColor
+          )}
+          onClick={() => handleClick(socialIcon.label)}
+        >
+          {socialIcon.link === null ? (
+            <Popover placement="bottomLeft" content={content} trigger="hover">
+              {socialIcon.icon}
+            </Popover>
+          ) : (
+            socialIcon.icon
+          )}
+          <Checkbox checked={activeLabel.includes(socialIcon.label)} />
+        </span>
+      ))}
     </div>
   )
 }

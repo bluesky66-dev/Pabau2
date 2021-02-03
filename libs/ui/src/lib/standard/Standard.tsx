@@ -10,8 +10,14 @@ import {
   Tooltip,
   Button,
 } from 'antd'
+import {
+  InstagramOutlined,
+  FacebookOutlined,
+  LinkedinOutlined,
+  TwitterOutlined,
+} from '@ant-design/icons'
 import { QuestionCircleOutlined } from '@ant-design/icons'
-import { ColorPicker, ClientLanguage } from '@pabau/ui'
+import { ColorPicker, ClientLanguage, SocialMediaCheckbox } from '@pabau/ui'
 import styles from './Standard.module.less'
 import { PabauPlus } from '../badge/Badge'
 
@@ -48,6 +54,7 @@ interface P {
   hideAppearanceTabPane: boolean
   smsMessage: string
   onSmsMessage: (string) => void
+  onActiveSocialIcon: (value: string[]) => void
 }
 
 const { TabPane } = Tabs
@@ -88,6 +95,7 @@ export const Standard: FC<P> = ({
   hideAppearanceTabPane,
   smsMessage,
   onSmsMessage,
+  onActiveSocialIcon,
 }) => {
   function callback(key) {
     onStandardTabChanged(key)
@@ -330,13 +338,48 @@ export const Standard: FC<P> = ({
                   </Row>
                 </Panel>
               )}
+              <Panel
+                className={styles.panelAlign}
+                header="Social media icons"
+                key="3"
+              >
+                <Row>
+                  <SocialMediaCheckbox
+                    mediaIcon={[
+                      {
+                        label: 'facebook',
+                        link: 'www.facebook.com',
+                        icon: <FacebookOutlined />,
+                      },
+                      {
+                        label: 'linksIn',
+                        link: 'www.linkin.com',
+                        icon: <LinkedinOutlined />,
+                      },
+                      {
+                        label: 'instagram',
+                        link: 'www.instagram.com',
+                        icon: <InstagramOutlined />,
+                      },
+                      {
+                        label: 'twitter',
+                        link: 'null',
+                        icon: <TwitterOutlined />,
+                      },
+                    ]}
+                    onClick={(values) => {
+                      onActiveSocialIcon(values)
+                    }}
+                  />
+                </Row>
+              </Panel>
               <div className={styles.papauPlusContainer}>
                 <PabauPlus label="Plus" />
               </div>
               <Panel
                 className={styles.panelAlign}
                 header="Client languages"
-                key="3"
+                key="4"
               >
                 <Row>
                   <Col>Setup templates in your clients preferred language</Col>

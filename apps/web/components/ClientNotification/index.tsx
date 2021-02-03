@@ -23,6 +23,12 @@ const Index: FC<P> = ({ onSeletedTab }) => {
   const [standardTapIndex, setStandardTap] = useState('1')
   const [hideAppearanceTabPane, setHideAppearanceTabPane] = useState(true)
   const [smsMessage, setSmsMessage] = useState('Hi, Kristy')
+
+  const [activeSocialIcons, setActiveSocialIcons] = React.useState([])
+  React.useEffect(() => {
+    console.log(activeSocialIcons)
+  }, [activeSocialIcons])
+
   function handleSelectedTab(value) {
     onSeletedTab(value)
   }
@@ -75,6 +81,9 @@ const Index: FC<P> = ({ onSeletedTab }) => {
           hideAppearanceTabPane={hideAppearanceTabPane}
           smsMessage={smsMessage}
           onSmsMessage={(value) => setSmsMessage(value)}
+          onActiveSocialIcon={(value) => {
+            setActiveSocialIcons(value.map((e) => e))
+          }}
         />
       }
       previewComponent={
@@ -92,6 +101,7 @@ const Index: FC<P> = ({ onSeletedTab }) => {
           informationMessage={informationMessage}
           medicalMessage={medicalMessage}
           standardTapIndex={standardTapIndex}
+          activeSocialIcons={activeSocialIcons}
         />
       }
       smsComponent={
