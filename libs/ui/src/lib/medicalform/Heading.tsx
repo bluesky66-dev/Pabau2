@@ -1,32 +1,28 @@
 import React, { FC } from 'react'
-import multipleChoiceIcon from '../../assets/images/medicalform_multiplechoice.svg'
+import headingIcon from '../../assets/images/medicalform_heading.svg'
 import BasicElement from './BasicElement'
-import ElementAdvanced from './ElementAdvanced'
 import ElementQuestion from './ElementQuestion'
 import MedicalFormBody from './MedicalFormBody'
 import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormHeader from './MedicalFormHeader'
 import MedicalFormTitle from './MedicalFormTitle'
-import MultiOptions from './MultiOptions'
 
-const MultipleChoice: FC = () => {
+const Heading: FC = () => {
   return (
     <BasicElement>
       <MedicalFormHeader title="component settings" />
       <MedicalFormTitle
-        iconUrl={multipleChoiceIcon}
-        bgcolor="#65CD98"
-        title="Multiple choices"
-        desc="Ask for a several choices"
+        iconUrl={headingIcon}
+        bgcolor="#6383F1"
+        title="Heading"
+        desc="Create a heading for a section"
       />
       <MedicalFormBody>
         <ElementQuestion desc="Enter your question" title="Question" />
-        <MultiOptions />
-        <ElementAdvanced />
       </MedicalFormBody>
-      <MedicalFormBottom needLeft={true} />
+      <MedicalFormBottom needLeft={false} />
     </BasicElement>
   )
 }
 
-export default MultipleChoice
+export default Heading

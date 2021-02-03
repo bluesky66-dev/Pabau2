@@ -18,6 +18,7 @@ import Dob from './Dob'
 import Drawing from './Drawing'
 import Dropdown from './Dropdown'
 import Drugs from './Drugs'
+import Heading from './Heading'
 import InnerConditions from './InnerConditions'
 import InnerDob from './InnerDob'
 import InnerDrawing from './InnerDrawing'
@@ -36,7 +37,7 @@ import InnerVaccineHistory from './InnerVaccineHistory'
 import InnerVaccineScheduler from './InnerVaccineScheduler'
 import LabTest from './LabTest'
 import LongAnswer from './LongAnswer'
-import MeicalForm from './MedicalForm'
+import MedicalForm from './MedicalForm'
 import MultipleChoice from './MultipleChoice'
 import ShortAnswer from './ShortAnswer'
 import Signature from './Signature'
@@ -46,11 +47,11 @@ import VaccineHistory from './VaccineHistory'
 import VaccineScheduler from './VaccineScheduler'
 
 export default {
-  component: MeicalForm,
+  component: MedicalForm,
   title: 'UI/Medical Form',
 }
 
-export const Heading = () => <MeicalForm />
+export const HeadingForm = () => <Heading />
 export const ShortAnswerForm = () => <ShortAnswer />
 export const LongAnswerForm = () => <LongAnswer />
 export const SingleChoiceForm = () => <SingleChoice />
