@@ -5,13 +5,13 @@ import React from 'react'
 import CrudLayout from '../../components/CrudLayout/CrudLayout'
 
 const LIST_QUERY = gql`
-  query marketing_sources(
+  query credit_note_types(
     $isActive: Boolean = true
-    $searchTerm: String = ""
     $offset: Int
     $limit: Int
+    $searchTerm: String = ""
   ) {
-    marketing_source(
+    credit_note_type(
       offset: $offset
       limit: $limit
       order_by: { created_at: desc }
@@ -20,19 +20,20 @@ const LIST_QUERY = gql`
         _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
       }
     ) {
-      __typename
       id
       name
+      code
+      invoice_prefix
       is_active
     }
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query marketing_source_aggregate(
+  query credit_note_type_aggregate(
     $isActive: Boolean = true
     $searchTerm: String = ""
   ) {
-    marketing_source_aggregate(
+    credit_note_type_aggregate(
       where: {
         is_active: { _eq: $isActive }
         _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
@@ -45,30 +46,40 @@ const LIST_AGGREGATE_QUERY = gql`
   }
 `
 const DELETE_MUTATION = gql`
-  mutation delete_marketing_source($id: uuid!) {
-    delete_marketing_source_by_pk(id: $id) {
+  mutation delete_credit_note_type($id: uuid!) {
+    delete_credit_note_type_by_pk(id: $id) {
       __typename
       id
     }
   }
 `
 const ADD_MUTATION = gql`
-  mutation add_marketing_source($name: String!, $is_active: Boolean) {
-    insert_marketing_source_one(
-      object: { name: $name, is_active: $is_active }
+  mutation add_credit_note_types(
+    $name: String!
+    $code: Int
+    $invoice_prefix: String
+    $is_active: Boolean
+  ) {
+    insert_credit_note_type_one(
+      object: {
+        name: $name
+        is_active: $is_active
+        code: $code
+        invoice_prefix: $invoice_prefix
+      }
     ) {
-      __typename
+      name
       id
     }
   }
 `
 const EDIT_MUTATION = gql`
-  mutation update_marketing_source_by_pk(
+  mutation update_credit_note_type_by_pk(
     $id: uuid!
     $name: String!
     $is_active: Boolean
   ) {
-    update_marketing_source_by_pk(
+    update_credit_note_type_by_pk(
       pk_columns: { id: $id }
       _set: { name: $name, is_active: $is_active }
     ) {
@@ -82,8 +93,8 @@ const EDIT_MUTATION = gql`
 const schema: Schema = {
   full: 'Credit note type',
   fullLower: 'Credit note type',
-  short: 'Credit note type',
-  shortLower: 'Credit note type',
+  short: 'Credit Note Type',
+  shortLower: 'credit note type',
   fields: {
     name: {
       full: 'Friendly Name',
@@ -91,9 +102,30 @@ const schema: Schema = {
       short: 'Name',
       shortLower: 'name',
       min: 2,
-      example: 'Facebook',
-      description: 'A friendly name',
+      example: 'Insurance Shortfall',
+      // description: 'A friendly name',
       // extra: <i>Please note: blah blah blahh</i>,
+      cssWidth: 'max',
+    },
+    code: {
+      full: 'Code',
+      fullLower: 'code',
+      short: 'Code',
+      shortLower: 'code',
+      min: 0,
+      example: 2,
+      description: 'A code',
+      cssWidth: 'max',
+      type: 'number',
+    },
+    invoice_prefix: {
+      full: 'Invoice Prefix',
+      fullLower: 'invoice prefix',
+      short: 'Invoice Prefix',
+      shortLower: 'invoice prefix',
+      min: 0,
+      example: 'RCN',
+      description: 'A invoice prefix',
       cssWidth: 'max',
     },
     is_active: {
