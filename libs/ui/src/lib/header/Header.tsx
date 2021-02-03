@@ -1,18 +1,10 @@
-import React, { FC, useCallback, useState } from 'react'
-import { Col, Dropdown, Layout, Menu, Row } from 'antd'
-import {
-  BellOutlined,
-  CalendarOutlined,
-  MailOutlined,
-  PlusCircleFilled,
-  PoundOutlined,
-  SmileOutlined,
-  UserOutlined,
-} from '@ant-design/icons'
+import React, { FC, useState } from 'react'
+import { Col, Layout, Row } from 'antd'
+import { BellOutlined, MailOutlined } from '@ant-design/icons'
 
 import { Logo } from '../logo/Logo'
 import styles from './Header.module.less'
-import { Button, Dropdown as AvatarDropDown } from '@pabau/ui'
+import { Dropdown as AvatarDropDown, QuickCreate } from '@pabau/ui'
 import { Search } from './search/Search'
 import PabauNotification from './notification/Notification'
 import PabauMessages from './messages/Messages'
@@ -23,41 +15,11 @@ interface P {
   searchRender?: (innerComponent: JSX.Element) => JSX.Element
 }
 
-const items = [
-  {
-    name: 'Contact',
-    icon: <UserOutlined />,
-  },
-  {
-    name: 'Lead',
-    icon: <SmileOutlined />,
-  },
-  {
-    name: 'Appointment',
-    icon: <CalendarOutlined />,
-  },
-  {
-    name: 'Invoice',
-    icon: <PoundOutlined />,
-  },
-]
-
 export const Header: FC<P> = ({ searchRender, ...props }) => {
   const [openNotificationDrawer, setNotificationDrawer] = useState<boolean>(
     false
   )
   const [openMessageDrawer, setMessageDrawer] = useState<boolean>(false)
-
-  const handleMenuClick = useCallback(() => alert('Not yet done'), [])
-  const overlay = (
-    <Menu onClick={handleMenuClick}>
-      {items.map(({ name, icon }) => (
-        <Menu.Item key={name} icon={icon}>
-          {name}
-        </Menu.Item>
-      ))}
-    </Menu>
-  )
   return (
     <>
       <AntHeader
@@ -91,11 +53,7 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
                   onClick={() => setMessageDrawer((e) => !e)}
                 />
                 <div>
-                  <Dropdown overlay={overlay}>
-                    <Button type="default" className={styles.createBtnStyle}>
-                      <PlusCircleFilled /> Create
-                    </Button>
-                  </Dropdown>
+                  <QuickCreate />
                 </div>
                 <AvatarDropDown />
               </div>
