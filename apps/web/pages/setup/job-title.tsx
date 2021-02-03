@@ -5,13 +5,13 @@ import React from 'react'
 import CrudLayout from '../../components/CrudLayout/CrudLayout'
 
 const LIST_QUERY = gql`
-  query marketing_sources(
+  query job_title(
     $isActive: Boolean = true
-    $searchTerm: String = ""
     $offset: Int
     $limit: Int
+    $searchTerm: String = ""
   ) {
-    marketing_source(
+    job_title(
       offset: $offset
       limit: $limit
       order_by: { created_at: desc }
@@ -28,11 +28,11 @@ const LIST_QUERY = gql`
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query marketing_source_aggregate(
+  query job_title_aggregate(
     $isActive: Boolean = true
     $searchTerm: String = ""
   ) {
-    marketing_source_aggregate(
+    job_title_aggregate(
       where: {
         is_active: { _eq: $isActive }
         _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
@@ -45,30 +45,28 @@ const LIST_AGGREGATE_QUERY = gql`
   }
 `
 const DELETE_MUTATION = gql`
-  mutation delete_marketing_source($id: uuid!) {
-    delete_marketing_source_by_pk(id: $id) {
+  mutation delete_job_title_by_pk($id: uuid!) {
+    delete_job_title_by_pk(id: $id) {
       __typename
       id
     }
   }
 `
 const ADD_MUTATION = gql`
-  mutation add_marketing_source($name: String!, $is_active: Boolean) {
-    insert_marketing_source_one(
-      object: { name: $name, is_active: $is_active }
-    ) {
+  mutation insert_job_title_one($name: String!, $is_active: Boolean) {
+    insert_job_title_one(object: { name: $name, is_active: $is_active }) {
       __typename
       id
     }
   }
 `
 const EDIT_MUTATION = gql`
-  mutation update_marketing_source_by_pk(
+  mutation update_job_title_by_pk(
     $id: uuid!
     $name: String!
     $is_active: Boolean
   ) {
-    update_marketing_source_by_pk(
+    update_job_title_by_pk(
       pk_columns: { id: $id }
       _set: { name: $name, is_active: $is_active }
     ) {
@@ -82,17 +80,17 @@ const EDIT_MUTATION = gql`
 const schema: Schema = {
   full: 'Job Title',
   fullLower: 'job title',
-  short: 'job title',
+  short: 'Job Title',
   shortLower: 'job title',
   fields: {
     name: {
-      full: 'Friendly Name',
+      full: 'Job Name',
       fullLower: 'friendly name',
       short: 'Name',
       shortLower: 'name',
       min: 2,
       example: 'Facebook',
-      description: 'A friendly name',
+      // description: 'A friendly name',
       // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
     },
