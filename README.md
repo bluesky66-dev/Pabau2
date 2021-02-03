@@ -117,8 +117,8 @@ To view the Backend, you can either visit [https://backend.new.pabau.com](https:
 
 ## Ticket workflow
 
-1. Plan your work. Make sure you have all design requirements in order.
-1. Meet with James or Dipak to discuss your plan. Eg what npm libraries are you planning on using.
+1. Gather requirements, designs, and tests (BDD). Plan and research for an hour or so. Arrive at a rational conclusion to which npm modules, ant design components, and Pabau ui are needed.
+1. Arrange a 2-5 minute call with James (or Dipak if James is unavailable) to discuss your plan. Or thread in main channel.
 1. On the JIRA sub-task, click Create new branch (from master)
 1. Checkout this in your IDE and code away :)
 1. Commit often. Push once or twice a day at least.
@@ -128,6 +128,30 @@ To view the Backend, you can either visit [https://backend.new.pabau.com](https:
 1. After 10 mins or so, release-bot will post in the channel. Reply to the message with a link to a more specific page that highlights the work done. Also copy the vercel URL and paste it into the JIRA ticket as a comment. Finally, change the JIRA status to CODE REVIEW. This will let William browse all CODE REVIEW's and click the direct vercel link to see changes. 
 1. If you receive an email that require you to make more changes: code, push, wait for the slack bot to post another url, reply to that tagging in @James and @Dipak
 1. When you receive an email that your code is merged, you should also find your ticket is moved to 'QA' status.
+
+
+## GraphQL workflow
+
+1. [optional] Please install Hasura locally. On Linux it's very easy. 
+1. Create a hasura/.env file:
+   HASURA_GRAPHQL_ADMIN_SECRET=madskills
+   HASURA_GRAPHQL_ENDPOINT=https://api.new.pabau.com/
+
+1. Edit the database:
+  1. Open the hasura console
+  1. Create a new table (in the singular tense ie 'user' not 'users')
+  1. Insert 3 'Frequently used columns' - the ID being GUID, and the created_at and updated_at
+  1. Add a very clear comment for the table. Customers will see this.
+  1. Change the table permissions so that 'public' role can do pretty much everything (for now).
+  1. Check your table's public role permission for SELECT has the Aggregation queries permissions enabled.
+  1. Oh hey there's a nice Clone Permissions feature
+  1. Now run `yarn hasura:export` in your IDE, commit the changes to your branch.
+
+
+
+  
+   then yarn hasura:export
+
 
 
 ## To do (big engineering items)

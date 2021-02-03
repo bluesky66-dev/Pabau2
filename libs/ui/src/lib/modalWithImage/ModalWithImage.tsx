@@ -4,7 +4,6 @@ import { Row, Col, Button } from 'antd'
 import BasicModal from '../modal/basicmodal'
 
 import customStyles from './ModalWithImage.module.less'
-import styles from '../modal/basicmodal.module.less'
 
 export interface ModalWithImageProps {
   visible: boolean
@@ -31,7 +30,7 @@ const ModalWithImage: FC<ModalWithImageProps> = ({
         title={title}
         visible={visible}
         centered={true}
-        wrapClassName={styles.modal + ' ' + customStyles.modalWithImage}
+        wrapClassName={customStyles.modalWithImage}
         onCancel={() => onCancel()}
         {...props}
       >
