@@ -7,7 +7,7 @@ interface P {
   manageAppointment?: boolean
 }
 
-const Smstext: React.FC<P> = ({ message, manageAppointment }) => {
+export const Smstext: React.FC<P> = ({ message, manageAppointment }) => {
   return (
     <div>
       <h1>Welcome to Smstext!</h1>

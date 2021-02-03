@@ -19,6 +19,9 @@ export const SetupChipStory: FC = () => {
     title: 'Blog',
     subTitle: '53 posts',
     image: <EditOutlined />,
+    onClick: (title: string): string => {
+      return title
+    },
   }
 
   return <SetupChip {...props} />
@@ -80,8 +83,8 @@ export const SetupGridMobileStory: FC = () => {
 export const GridSubMenuMobile: FC = () => {
   const props = {
     subTitleData: {
-      title: 'Business Details',
-      data: [''],
+      title: 'Users',
+      data: ['Users', 'User Groups'],
     },
   }
   return <SetupGridSubMenuMobile {...props} />

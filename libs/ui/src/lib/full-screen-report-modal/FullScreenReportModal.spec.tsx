@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import Appointment from './Appointment'
+import FullScreenReportModal from './FullScreenReportModal'
 
-describe('Appointment', () => {
+describe('FullScreenReportModal', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Appointment selectLanguage="en" />)
+    const { baseElement } = render(<FullScreenReportModal />)
     expect(baseElement).toBeTruthy()
   })
 })

@@ -1,2 +1,3 @@
 yarn.lock binary merge=ours
 package-lock.json binary merge=ours
+graphql.schema.json binary
