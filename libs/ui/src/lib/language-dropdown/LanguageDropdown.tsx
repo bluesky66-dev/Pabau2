@@ -22,17 +22,17 @@ export const LanguageDropdown: FC<LanguageDropdownProps> = ({
   ...props
 }) => {
   const [form] = Form.useForm()
-  const [selected, setSelected] = useState('English')
+  const [selected, setSelected] = useState('English (UK)')
   const handleClickSelect = (e) => {
-    const text = e.target.innerText.replace(/\s/g, '')
-    setSelected(text)
+    const text = e.target.innerText
+    setSelected(text.substring(1, text.length))
     onSelected && onSelected(text)
   }
   useEffect(() => {
     if (value) {
       setSelected(value)
     } else {
-      setSelected('English')
+      setSelected('English (UK)')
     }
   }, [value, label, tooltip])
   return (

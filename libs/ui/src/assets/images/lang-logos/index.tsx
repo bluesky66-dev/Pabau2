@@ -1,4 +1,5 @@
 import ENSVG from './en.svg'
+import USSVG from './us.svg'
 import FRSVG from './french.svg'
 import SPSVG from './spanish.svg'
 import ARSVG from './arabic.svg'
@@ -23,7 +24,7 @@ export const languageMenu = [
   {
     label: 'English (US)',
     shortLabel: 'EN-US',
-    logo: ENSVG,
+    logo: USSVG,
     selected: true,
   },
   {
