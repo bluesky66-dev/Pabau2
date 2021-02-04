@@ -294,7 +294,9 @@ const CrudTable: FC<P> = ({
                 dataIndex: k,
                 width: v.cssWidth,
                 title: v.short || v.full,
-                visible: v.hasOwnProperty('visible') ? v.visible : true,
+                visible: Object.prototype.hasOwnProperty.call(v, 'visible')
+                  ? v.visible
+                  : true,
               })),
               // {
               //   title: 'Actions',
