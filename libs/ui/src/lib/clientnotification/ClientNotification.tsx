@@ -3,7 +3,7 @@ import { Row, Col, Radio, Input } from 'antd'
 import styles from './ClientNotification.module.less'
 import { Button, BasicModal, Notification } from '@pabau/ui'
 
-export enum NotificationType {
+enum NotificationType {
   info = 'info',
   success = 'success',
   error = 'error',
