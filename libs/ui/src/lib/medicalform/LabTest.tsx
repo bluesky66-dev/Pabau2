@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import labTestIcon from '../../assets/images/medicalform_labtest.svg'
-import BaiscElement from './BaiscElement'
+import BasicElement from './BasicElement'
 import MedicalFormBody from './MedicalFormBody'
 import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormHeader from './MedicalFormHeader'
@@ -19,7 +19,7 @@ const LabTest: FC = () => {
     { id: 8, label: 'Cooltech' },
   ]
   return (
-    <BaiscElement>
+    <BasicElement>
       <MedicalFormHeader title="component settings" />
       <MedicalFormTitle
         iconUrl={labTestIcon}
@@ -31,7 +31,7 @@ const LabTest: FC = () => {
         <MultiSelect title="Question" options={optionLabels} />
       </MedicalFormBody>
       <MedicalFormBottom needLeft={true} />
-    </BaiscElement>
+    </BasicElement>
   )
 }
 

@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import singleChoiceIcon from '../../assets/images/medicalform_singlechoice.svg'
-import BaiscElement from './BaiscElement'
+import BasicElement from './BasicElement'
 import ElementAdvanced from './ElementAdvanced'
 import ElementQuestion from './ElementQuestion'
 import MedicalFormBody from './MedicalFormBody'
@@ -11,7 +11,7 @@ import Options from './Options'
 
 const SingleChoice: FC = () => {
   return (
-    <BaiscElement>
+    <BasicElement>
       <MedicalFormHeader title="component settings" />
       <MedicalFormTitle
         iconUrl={singleChoiceIcon}
@@ -25,7 +25,7 @@ const SingleChoice: FC = () => {
         <ElementAdvanced />
       </MedicalFormBody>
       <MedicalFormBottom needLeft={true} />
-    </BaiscElement>
+    </BasicElement>
   )
 }
 

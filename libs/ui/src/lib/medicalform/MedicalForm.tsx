@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 const MedicalForm: FC = () => {
-  return <></>
+  return <div></div>
 }
 
 export default MedicalForm

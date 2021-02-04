@@ -1,13 +1,13 @@
 import React, { FC } from 'react'
 import vaccineHistoryIcon from '../../assets/images/medicalform_vaccinehistory.svg'
-import BaiscElement from './BaiscElement'
+import BasicElement from './BasicElement'
 import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormHeader from './MedicalFormHeader'
 import MedicalFormTitle from './MedicalFormTitle'
 
 const VaccineHistory: FC = () => {
   return (
-    <BaiscElement>
+    <BasicElement>
       <MedicalFormHeader title="component settings" />
       <MedicalFormTitle
         iconUrl={vaccineHistoryIcon}
@@ -16,7 +16,7 @@ const VaccineHistory: FC = () => {
         desc="Description"
       />
       <MedicalFormBottom needLeft={false} />
-    </BaiscElement>
+    </BasicElement>
   )
 }
 

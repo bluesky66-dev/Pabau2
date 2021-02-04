@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import shortAnswerIcon from '../../assets/images/medicalform_shortanswer.svg'
-import BaiscElement from './BaiscElement'
+import BasicElement from './BasicElement'
 import ElementAdvanced from './ElementAdvanced'
 import ElementQuestion from './ElementQuestion'
 import ElementTypeOption from './ElementTypeOption'
@@ -11,7 +11,7 @@ import MedicalFormTitle from './MedicalFormTitle'
 
 const ShortAnswer: FC = () => {
   return (
-    <BaiscElement>
+    <BasicElement>
       <MedicalFormHeader title="component settings" />
       <MedicalFormTitle
         iconUrl={shortAnswerIcon}
@@ -25,7 +25,7 @@ const ShortAnswer: FC = () => {
         <ElementAdvanced />
       </MedicalFormBody>
       <MedicalFormBottom needLeft={true} />
-    </BaiscElement>
+    </BasicElement>
   )
 }
 

@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import signatureIcon from '../../assets/images/medicalform_signature.svg'
-import BaiscElement from './BaiscElement'
+import BasicElement from './BasicElement'
 import ElementQuestion from './ElementQuestion'
 import MedicalFormBody from './MedicalFormBody'
 import MedicalFormBottom from './MedicalFormBottom'
@@ -9,7 +9,7 @@ import MedicalFormTitle from './MedicalFormTitle'
 
 const Signature: FC = () => {
   return (
-    <BaiscElement>
+    <BasicElement>
       <MedicalFormHeader title="component settings" />
       <MedicalFormTitle
         iconUrl={signatureIcon}
@@ -21,7 +21,7 @@ const Signature: FC = () => {
         <ElementQuestion desc="Enter your title" title="Title" />
       </MedicalFormBody>
       <MedicalFormBottom needLeft={true} />
-    </BaiscElement>
+    </BasicElement>
   )
 }
 

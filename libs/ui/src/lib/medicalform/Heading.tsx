@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import headingIcon from '../../assets/images/medicalform_heading.svg'
-import BaiscElement from './BaiscElement'
+import BasicElement from './BasicElement'
 import ElementQuestion from './ElementQuestion'
 import MedicalFormBody from './MedicalFormBody'
 import MedicalFormBottom from './MedicalFormBottom'
@@ -9,7 +9,7 @@ import MedicalFormTitle from './MedicalFormTitle'
 
 const Heading: FC = () => {
   return (
-    <BaiscElement>
+    <BasicElement>
       <MedicalFormHeader title="component settings" />
       <MedicalFormTitle
         iconUrl={headingIcon}
@@ -21,7 +21,7 @@ const Heading: FC = () => {
         <ElementQuestion desc="Enter your question" title="Question" />
       </MedicalFormBody>
       <MedicalFormBottom needLeft={false} />
-    </BaiscElement>
+    </BasicElement>
   )
 }
 

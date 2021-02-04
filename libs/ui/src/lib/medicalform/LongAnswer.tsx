@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import longAnswerIcon from '../../assets/images/medicalform_longanswer.svg'
-import BaiscElement from './BaiscElement'
+import BasicElement from './BasicElement'
 import ElementAdvanced from './ElementAdvanced'
 import ElementQuestion from './ElementQuestion'
 import MedicalFormBody from './MedicalFormBody'
@@ -10,7 +10,7 @@ import MedicalFormTitle from './MedicalFormTitle'
 
 const LongAnswer: FC = () => {
   return (
-    <BaiscElement>
+    <BasicElement>
       <MedicalFormHeader title="component settings" />
       <MedicalFormTitle
         iconUrl={longAnswerIcon}
@@ -23,7 +23,7 @@ const LongAnswer: FC = () => {
         <ElementAdvanced />
       </MedicalFormBody>
       <MedicalFormBottom needLeft={true} />
-    </BaiscElement>
+    </BasicElement>
   )
 }
 

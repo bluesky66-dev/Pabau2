@@ -1,13 +1,13 @@
 import React, { FC } from 'react'
 import vaccineSchedulerIcon from '../../assets/images/medicalform_vaccinescheduler.svg'
-import BaiscElement from './BaiscElement'
+import BasicElement from './BasicElement'
 import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormHeader from './MedicalFormHeader'
 import MedicalFormTitle from './MedicalFormTitle'
 
 const VaccineScheduler: FC = () => {
   return (
-    <BaiscElement>
+    <BasicElement>
       <MedicalFormHeader title="component settings" />
       <MedicalFormTitle
         iconUrl={vaccineSchedulerIcon}
@@ -16,7 +16,7 @@ const VaccineScheduler: FC = () => {
         desc="Description"
       />
       <MedicalFormBottom needLeft={false} />
-    </BaiscElement>
+    </BasicElement>
   )
 }
 
