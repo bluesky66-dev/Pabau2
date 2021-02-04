@@ -17,6 +17,7 @@ export interface AddQuestionProps {
   questionLabel?: string
   addQuestionLabel?: string
   goToButtonLabel?: string
+  isDeleteDisable?: boolean
   onChange?: (value: string, index: number) => void
   onAddQuestion?: () => void
   onDeleteButton?: (index: number) => void
@@ -29,6 +30,7 @@ export const AddQuestion: FC<AddQuestionProps> = ({
   questionLabel,
   addQuestionLabel,
   goToButtonLabel,
+  isDeleteDisable,
   onChange,
   onAddQuestion,
   onDeleteButton,
@@ -49,8 +51,8 @@ export const AddQuestion: FC<AddQuestionProps> = ({
                 onChange={(e) => onChange?.(e.target.value, index)}
               />
               <div
-                className={styles.close}
-                onClick={() => onDeleteButton?.(que.key)}
+                className={isDeleteDisable ? styles.inActive : styles.active}
+                onClick={() => !isDeleteDisable && onDeleteButton?.(que.key)}
               >
                 <CloseOutlined />
               </div>

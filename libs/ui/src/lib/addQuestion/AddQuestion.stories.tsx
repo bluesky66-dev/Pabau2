@@ -36,6 +36,7 @@ export const AddQuestionStory: FC<AddQuestionProps> = ({
   questionLabel,
 }) => {
   const [question, setQuestions] = useState<QuestionField[]>([])
+  const [isDeleteDisable, setDeleteDisable] = useState<boolean>(false)
 
   const onChange = (value: string, index: number) => {
     const tempQuestions = [...question]
@@ -48,7 +49,10 @@ export const AddQuestionStory: FC<AddQuestionProps> = ({
   }
 
   const onAddQuestion = useCallback(() => {
-    const data = [...question, { title: '', key: question.length + 1 }]
+    const data = [
+      ...question,
+      { title: '', key: question.length + Math.floor(Math.random() * 100) },
+    ]
     setQuestions(data)
   }, [question])
 
@@ -62,6 +66,14 @@ export const AddQuestionStory: FC<AddQuestionProps> = ({
     if (questions) setQuestions([...questions])
   }, [questions])
 
+  useEffect(() => {
+    if (question?.length === 1) {
+      setDeleteDisable(true)
+    } else {
+      setDeleteDisable(false)
+    }
+  }, [question])
+
   return (
     <AddQuestion
       description={description}
@@ -73,6 +85,7 @@ export const AddQuestionStory: FC<AddQuestionProps> = ({
       onChange={onChange}
       onAddQuestion={onAddQuestion}
       onDeleteButton={onDeleteButton}
+      isDeleteDisable={isDeleteDisable}
     />
   )
 }
