@@ -15,3 +15,5 @@ export const Breadcrumb: FC<P> = ({ breadcrumbItems }) => {
     </AntBreadcrumb>
   )
 }
+
+export default Breadcrumb
