@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 
 interface P {
   title?: string
-  options?: any
+  options?: any[]
 }
 const InnerCheckbox: FC<P> = ({ title, options }) => {
   const checkboxStyle = {
@@ -16,7 +16,7 @@ const InnerCheckbox: FC<P> = ({ title, options }) => {
   return (
     <>
       <h3>{title}</h3>
-      {options.map((item, index) => (
+      {options?.map((item, index) => (
         <Checkbox key={index} value={item.id} style={checkboxStyle}>
           {item.label}
         </Checkbox>

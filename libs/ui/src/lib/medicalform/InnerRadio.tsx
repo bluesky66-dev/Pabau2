@@ -3,7 +3,7 @@ import React, { FC, useState } from 'react'
 
 interface P {
   title?: string
-  options?: any
+  options?: any[]
 }
 const InnerRadio: FC<P> = ({ title, options }) => {
   const [optionVal, setOptionVal] = useState(1)
@@ -21,7 +21,7 @@ const InnerRadio: FC<P> = ({ title, options }) => {
         value={optionVal}
         onChange={(e) => setOptionVal(e.target.value)}
       >
-        {options.map((item, index) => (
+        {options?.map((item, index) => (
           <Radio key={index} value={item.id} style={radioStyle}>
             {item.label}
           </Radio>
