@@ -1,24 +1,24 @@
 import { Checkbox } from 'antd'
 import React, { FC } from 'react'
+import styles from './InnerMedicalForm.module.less'
+
+interface OPTION_TYPE {
+  id: number
+  label: string
+}
 
 interface P {
   title?: string
-  options?: any[]
+  options?: OPTION_TYPE[]
 }
+
 const InnerCheckbox: FC<P> = ({ title, options }) => {
-  const checkboxStyle = {
-    display: 'block',
-    height: '30px',
-    lineHeight: '30px',
-    color: '#9292a3',
-    marginLeft: '0px',
-  }
   return (
     <>
       <h3>{title}</h3>
-      {options?.map((item, index) => (
-        <Checkbox key={index} value={item.id} style={checkboxStyle}>
-          {item.label}
+      {options?.map(({ id, label }) => (
+        <Checkbox key={id} value={id} className={styles.checkbox}>
+          {label}
         </Checkbox>
       ))}
     </>
