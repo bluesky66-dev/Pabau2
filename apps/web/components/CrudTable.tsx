@@ -49,22 +49,28 @@ const CrudTable: FC<P> = ({
     onCompleted(data) {
       Notification(
         NotificationType.success,
-        'Success! Marketing source updated.'
+        `Success! ${schema.messages.update.success}`
       )
     },
     onError(err) {
-      Notification(NotificationType.error, 'Error! Marketing source update.')
+      Notification(
+        NotificationType.error,
+        `Error! ${schema.messages.update.error}`
+      )
     },
   })
   const [addMutation] = useMutation(addQuery, {
     onCompleted(data) {
       Notification(
         NotificationType.success,
-        'Success! New marketings source created.'
+        `Success! ${schema.messages.create.success}`
       )
     },
     onError(err) {
-      Notification(NotificationType.error, 'Error! Marketing source create.')
+      Notification(
+        NotificationType.error,
+        `Error! ${schema.messages.create.error}`
+      )
     },
   })
   const [sourceData, setSourceData] = useState(null)
@@ -134,7 +140,7 @@ const CrudTable: FC<P> = ({
 
   const { fields } = schema
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values, { resetForm }) => {
     console.log('got submittal!', values)
     if (values.id)
       await editMutation({
@@ -178,6 +184,7 @@ const CrudTable: FC<P> = ({
           }
         },
       })
+    resetForm()
     setModalShowing(false)
   }
 
@@ -201,9 +208,9 @@ const CrudTable: FC<P> = ({
           // eslint-disable-next-line
         }, {} as FormikErrors<any>)
       }
-      onSubmit={(values) => {
+      onSubmit={(values, { resetForm }) => {
         console.log('formik onsubmit', values)
-        onSubmit(values)
+        onSubmit(values, { resetForm })
       }}
       //initialValues={typeof modalShowing === 'object' ? modalShowing : undefined}
       initialValues={
@@ -261,12 +268,9 @@ const CrudTable: FC<P> = ({
           >
             <div style={{ background: '#FFF' }}>
               <Breadcrumb
-                breadcrumbItems={[
-                  'Setup',
-                  pluralize(schema.full || schema.short),
-                ]}
+                breadcrumbItems={['Setup', schema.full || schema.short]}
               />
-              <Title>{pluralize(schema.full || schema.short)}</Title>
+              <Title>{schema.full || schema.short}</Title>
             </div>
             {addQuery && (
               <AddButton
@@ -290,6 +294,7 @@ const CrudTable: FC<P> = ({
                 dataIndex: k,
                 width: v.cssWidth,
                 title: v.short || v.full,
+                visible: v.visible || true,
               })),
               // {
               //   title: 'Actions',

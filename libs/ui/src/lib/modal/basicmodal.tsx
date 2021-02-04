@@ -12,6 +12,7 @@ interface P {
   newButtonText?: string
   title?: string
   modalWidth?: number
+  isValidate?: boolean
 
   /**
    * Creates a special tickbox next to the OK button
@@ -44,6 +45,7 @@ export function BasicModal({
   onSpecialBooleanClick,
   newButtonText = 'OK',
   dangerButtonText,
+  isValidate,
   ...props
 }: PropsWithChildren<P & ModalProps>): JSX.Element {
   return (
@@ -79,7 +81,7 @@ export function BasicModal({
             {dangerButtonText}
           </Button>
         )}
-        <Button type="primary" onClick={() => onOk?.()}>
+        <Button type="primary" onClick={() => onOk?.()} disabled={!isValidate}>
           {newButtonText}
         </Button>
       </div>

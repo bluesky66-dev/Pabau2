@@ -84,6 +84,21 @@ const schema: Schema = {
   fullLower: 'marketing source',
   short: 'Source',
   shortLower: 'source',
+  messages: {
+    create: {
+      success: 'New marketings source created.',
+      error: 'While creating marketing source.',
+    },
+    update: {
+      success: 'Marketings source updated.',
+      error: 'While updating marketings source.',
+    },
+    delete: {
+      success: 'Marketings source deleted.',
+      error: 'While deleting marketing sources.',
+    },
+  },
+  deleteBtnLabel: 'Yes, Delete Source',
   fields: {
     name: {
       full: 'Friendly Name',

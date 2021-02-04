@@ -26,14 +26,18 @@ const CrudModal: FC<P> = ({
     onCompleted(data) {
       Notification(
         NotificationType.success,
-        'Success! Marketing source deleted.'
+        `Success! ${schema.messages.delete.success}`
       )
     },
     onError(err) {
-      Notification(NotificationType.error, 'Error! Marketing source delete.')
+      Notification(
+        NotificationType.error,
+        `Error! ${schema.messages.delete.error}`
+      )
     },
   })
   const formik = useFormikContext<unknown>()
+
   //let formRef: { submitForm: () => void } | null = null
   // const formRef = useEnsuredForwardedRef<{ submitForm: () => void }>(null)
 
@@ -67,6 +71,9 @@ const CrudModal: FC<P> = ({
       true
   )
   console.log('currently is', specialBoolean)
+
+  console.log('schemaForm ', schemaForm)
+  console.log('formik ', formik)
 
   return (
     <>
@@ -108,7 +115,8 @@ const CrudModal: FC<P> = ({
         }}
         visible={openDeleteModal}
         title={`Delete ${schema.short}?`}
-        newButtonText={'Yes, delete source'}
+        newButtonText={schema.deleteBtnLabel || 'Yes, Delete'}
+        isValidate={true}
       >
         <span
           style={{
@@ -126,7 +134,10 @@ const CrudModal: FC<P> = ({
       <Modal
         modalWidth={682}
         centered={true}
-        onCancel={() => onClose?.()}
+        onCancel={() => {
+          onClose?.()
+          formik.resetForm()
+        }}
         onDelete={() => setDeleteModal(true)}
         onOk={() => formik.submitForm()}
         visible={editingRow !== false && !openDeleteModal}
@@ -142,7 +153,7 @@ const CrudModal: FC<P> = ({
         }
         // eslint-disable-next-line
         dangerButtonText={(editingRow as any)?.id && `Delete`}
-        specialBooleanLabel={!!specialFormElement && 'Activate'}
+        specialBooleanLabel={!!specialFormElement && 'Active'}
         specialBooleanValue={specialBoolean}
         onSpecialBooleanClick={() => {
           setSpecialBoolean((e) => !e)
@@ -150,6 +161,11 @@ const CrudModal: FC<P> = ({
             editingRow.is_active = !specialBoolean
           }
         }}
+        isValidate={
+          editingRow && editingRow.isCreate
+            ? formik.dirty && formik.isValid
+            : formik.isValid
+        }
       >
         <Form
           // ref={formRef} typeof editingRow === 'object' ? editingRow : undefined}

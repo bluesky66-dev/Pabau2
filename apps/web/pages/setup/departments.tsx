@@ -78,10 +78,24 @@ const EDIT_MUTATION = gql`
 `
 
 const schema: Schema = {
-  full: 'Departments',
+  full: 'Department',
   fullLower: 'department',
   short: 'Department',
   shortLower: 'department',
+  messages: {
+    create: {
+      success: 'You have successfully created a department',
+      error: 'While creating a department',
+    },
+    update: {
+      success: 'You have successfully updated a department',
+      error: 'While updating a department',
+    },
+    delete: {
+      success: 'You have successfully deleted a department',
+      error: 'While deleting a department',
+    },
+  },
   fields: {
     name: {
       full: 'Department Name',
