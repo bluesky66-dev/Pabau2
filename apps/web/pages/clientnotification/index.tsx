@@ -103,16 +103,16 @@ const Index: FC = () => {
               />
             </div>
           ) : (
-              <div>
-                {/* <p style={{ color: '#9292A3' }}>Phone Number</p> */}
-                <PhoneNumberInput
-                  countryCode={'GB'}
-                  onChange={(val) => {
-                    console.log(val)
-                  }}
-                />
-              </div>
-            )}
+            <div>
+              {/* <p style={{ color: '#9292A3' }}>Phone Number</p> */}
+              <PhoneNumberInput
+                countryCode={'GB'}
+                onChange={(val) => {
+                  console.log(val)
+                }}
+              />
+            </div>
+          )}
         </BasicModal>
         {setIndexTab === 1 && (
           <Button
