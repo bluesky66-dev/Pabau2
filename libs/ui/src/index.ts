@@ -1,3 +1,4 @@
+export * from './lib/tabbed-table/TabbedTable'
 export * from './lib/quick-create/QuickCreate'
 export * from './lib/full-screen-report-modal/FullScreenReportModal'
 export * from './lib/questionBank/QuestionBank'
