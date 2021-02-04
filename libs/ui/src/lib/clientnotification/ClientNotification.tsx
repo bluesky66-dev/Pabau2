@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import { Row, Col, Radio, Input } from 'antd'
+import { Row, Col, Radio, Input, Modal } from 'antd'
 import styles from './ClientNotification.module.less'
-import { Button, BasicModal, Notification } from '@pabau/ui'
+import { Button, Notification } from '@pabau/ui'
 
 enum NotificationType {
   info = 'info',
@@ -28,6 +28,7 @@ export const ClientNotification: FC<P> = ({
   const [previewStatus, setPreviewStatus] = React.useState(1)
 
   function handleSmsTabChanged(value) {
+    console.log(value)
     setPreviewStatus(value)
     if (onSmsTabChanged) {
       onSmsTabChanged(value)
@@ -78,15 +79,14 @@ export const ClientNotification: FC<P> = ({
             </Button>
           </Col>
         </Row>
-        <BasicModal
+
+        <Modal
           title={'Send Test Email'}
           visible={visibleModal}
           onCancel={() => setVisibleModal(false)}
           centered={true}
-          newButtonText={'Send'}
-          dangerButtonText={'Cancel'}
-          onOk={() => showNotification()}
-          onDelete={() => setVisibleModal(false)}
+          wrapClassName={styles.modal}
+          footer={null}
         >
           <div>
             <p style={{ color: '#9292A3' }}>Email</p>
@@ -94,8 +94,25 @@ export const ClientNotification: FC<P> = ({
               placeholder="client@email.com"
               onChange={(event) => isEmail(event.target.value)}
             />
+
+            <div className={styles.footerBtnGroup}>
+              <Button
+                type="default"
+                style={{ marginRight: '10px' }}
+                onClick={() => setVisibleModal(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="primary"
+                disabled={valideEmail ? false : true}
+                onClick={() => showNotification()}
+              >
+                Send
+              </Button>
+            </div>
           </div>
-        </BasicModal>
+        </Modal>
       </Col>
       <Col className={styles.previewColumn}>
         <Row className={styles.headerStyle}>

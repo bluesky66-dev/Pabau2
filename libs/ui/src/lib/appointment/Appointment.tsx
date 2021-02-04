@@ -45,7 +45,7 @@ const langData: LangData = {
     confirmButton: 'Confirm appointment',
     policy: '*Please, avoid cancelling within 48 hours notice',
     cancelPolicy: 'Cancellation policy',
-    complete: 'Complete MedicalHistory',
+    complete: 'Complete Medical History',
   },
   sp: {
     greeting: 'Hola Kristy, ¡hasta pronto!',
@@ -60,7 +60,7 @@ const langData: LangData = {
     confirmButton: 'Confirmar cita',
     policy: '* Por favor, evite cancelar con 48 horas de anticipación',
     cancelPolicy: 'Política de cancelación',
-    complete: 'Complete MedicalHistory',
+    complete: 'Complete Medical History',
   },
   fr: {
     greeting: 'Salut Kristy, à bientôt!',

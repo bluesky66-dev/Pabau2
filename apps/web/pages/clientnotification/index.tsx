@@ -1,12 +1,6 @@
 import React, { FC } from 'react'
-import { Typography, Input } from 'antd'
-import {
-  Button,
-  Breadcrumb,
-  BasicModal,
-  PhoneNumberInput,
-  Notification,
-} from '@pabau/ui'
+import { Typography, Input, Modal } from 'antd'
+import { Button, Breadcrumb, PhoneNumberInput, Notification } from '@pabau/ui'
 import Layout from '../../components/Layout/Layout'
 import ClientNotification from '../../components/ClientNotification/index'
 import styles from './index.module.less'
@@ -84,36 +78,59 @@ const Index: FC = () => {
         >
           {setIndexTab === 1 ? 'Send Test Email' : 'Send Test SMS'}
         </Button>
-        <BasicModal
+        <Modal
           title={setIndexTab === 1 ? 'Send Test Email' : 'Send Test Message'}
           visible={sendEmail}
           onCancel={() => setSendEmail(false)}
           centered={true}
-          newButtonText={'Send'}
-          dangerButtonText={'Cancel'}
-          onOk={() => showNotification()}
-          onDelete={() => setSendEmail(false)}
+          wrapClassName={styles.modal}
+          footer={null}
         >
-          {setIndexTab === 1 ? (
-            <div>
-              <p style={{ color: '#9292A3' }}>Email</p>
-              <Input
-                placeholder="client@email.com"
-                onChange={(event) => isEmail(event.target.value)}
-              />
+          <div>
+            {setIndexTab === 1 ? (
+              <div>
+                <p style={{ color: '#9292A3' }}>Email</p>
+                <Input
+                  placeholder="client@email.com"
+                  onChange={(event) => isEmail(event.target.value)}
+                />
+              </div>
+            ) : (
+              <div>
+                <PhoneNumberInput
+                  countryCode={'GB'}
+                  onChange={(val) => {
+                    console.log(val)
+                  }}
+                />
+              </div>
+            )}
+
+            <div className={styles.footerBtnGroup}>
+              <Button
+                type="default"
+                style={{ marginRight: '10px' }}
+                onClick={() => setSendEmail(false)}
+              >
+                Cancel
+              </Button>
+              {setIndexTab === 1 && (
+                <Button
+                  type="primary"
+                  disabled={valideEmail ? false : true}
+                  onClick={() => showNotification()}
+                >
+                  Send
+                </Button>
+              )}
+              {setIndexTab === 2 && (
+                <Button type="primary" onClick={() => showNotification()}>
+                  Send
+                </Button>
+              )}
             </div>
-          ) : (
-            <div>
-              {/* <p style={{ color: '#9292A3' }}>Phone Number</p> */}
-              <PhoneNumberInput
-                countryCode={'GB'}
-                onChange={(val) => {
-                  console.log(val)
-                }}
-              />
-            </div>
-          )}
-        </BasicModal>
+          </div>
+        </Modal>
         {setIndexTab === 1 && (
           <Button
             className={styles.notificationSaveButton}

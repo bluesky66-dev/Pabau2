@@ -252,7 +252,7 @@ export const ClientLanguage: FC<ClientLanguageProps> = ({
               <div
                 key={item.label}
                 className={styles.preferredLanguage}
-                onClick={() => setSelectLanguage(item.shortLabel)}
+                onMouseEnter={() => setSelectLanguage(item.shortLabel)}
               >
                 <Image
                   key={item.label}
