@@ -30,7 +30,7 @@ const Options: FC<P> = ({ onChange }) => {
     if (onChange) {
       onChange(addedItems.length)
     }
-  }, [items])
+  }, [addedItems])
 
   const addItem = (event) => {
     event.preventDefault()

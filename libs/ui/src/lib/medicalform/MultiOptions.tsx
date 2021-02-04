@@ -28,7 +28,7 @@ const MultiOptions: FC<P> = ({ onChange }) => {
     if (onChange) {
       onChange(addedItems.length)
     }
-  }, [items])
+  }, [addedItems])
 
   const addItem = (event) => {
     event.preventDefault()
