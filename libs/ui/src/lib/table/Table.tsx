@@ -9,6 +9,13 @@ import { LockOutlined, MenuOutlined } from '@ant-design/icons'
 import styles from './Table.module.less'
 import { TableProps } from 'antd/es/table'
 
+export interface columnInterface {
+  dataIndex: string
+  width: string
+  title: string
+  visible: boolean
+  render: (value, dataRow) => void
+}
 export interface DragProps {
   draggable?: boolean
   isCustomColorExist?: boolean
@@ -136,15 +143,18 @@ export const Table: FC<TableType> = ({
 
   const renderSortHandler = () => {
     if (props && props.columns) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      props.columns?.map((col: any) => {
-        if (col && col.dataIndex === 'is_active') {
-          col.render = renderActiveButton
-        } else {
-          col.render = checkPadLockField
-        }
-        return col
-      })
+      props.columns = props.columns
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ?.filter((col: any) => col.visible === true)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        .map((col: any) => {
+          if (col && col.dataIndex === 'is_active') {
+            col.render = renderActiveButton
+          } else {
+            col.render = checkPadLockField
+          }
+          return col
+        })
     }
 
     return props.draggable

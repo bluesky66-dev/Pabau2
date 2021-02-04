@@ -11,7 +11,7 @@ import { DocumentNode, useMutation } from '@apollo/client'
 import AddButton from './AddButton'
 import { Breadcrumb } from '@pabau/ui'
 import { Typography } from 'antd'
-import pluralize from 'pluralize'
+// import pluralize from 'pluralize'
 import styles from './CrudTable.module.less'
 // import DeleteButton from './DeleteButton'
 import CrudModal from './CrudModal'
@@ -294,7 +294,7 @@ const CrudTable: FC<P> = ({
                 dataIndex: k,
                 width: v.cssWidth,
                 title: v.short || v.full,
-                visible: v.visible || true,
+                visible: v.hasOwnProperty('visible') ? v.visible : true,
               })),
               // {
               //   title: 'Actions',

@@ -109,7 +109,7 @@ const schema: Schema = {
       cssWidth: 'max',
     },
     is_active: {
-      full: 'Active',
+      full: 'Status',
       type: 'boolean',
       default: true,
     },

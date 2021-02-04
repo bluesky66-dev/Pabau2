@@ -1,7 +1,7 @@
 interface messages {
-  create: { success: string, error: string },
-  update: { success: string, error: string },
-  delete: { success: string, error: string }
+  create: { success: string; error: string }
+  update: { success: string; error: string }
+  delete: { success: string; error: string }
 }
 interface Schema {
   full: string

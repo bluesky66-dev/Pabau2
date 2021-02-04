@@ -82,6 +82,20 @@ const schema: Schema = {
   fullLower: 'job title',
   short: 'Job Title',
   shortLower: 'job title',
+  messages: {
+    create: {
+      success: 'You have successfully created a job title',
+      error: 'While creating a job title',
+    },
+    update: {
+      success: 'You have successfully updated a job title',
+      error: 'While updating a job title',
+    },
+    delete: {
+      success: 'You have successfully deleted a job title',
+      error: 'While deleting a job title',
+    },
+  },
   fields: {
     name: {
       full: 'Job Name',
@@ -89,13 +103,13 @@ const schema: Schema = {
       short: 'Name',
       shortLower: 'name',
       min: 2,
-      example: 'Facebook',
+      example: 'Therapist',
       // description: 'A friendly name',
       // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
     },
     is_active: {
-      full: 'Active',
+      full: 'Status',
       type: 'boolean',
       default: true,
     },

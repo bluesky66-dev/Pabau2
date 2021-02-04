@@ -95,6 +95,20 @@ const schema: Schema = {
   fullLower: 'Credit note type',
   short: 'Credit Note Type',
   shortLower: 'credit note type',
+  messages: {
+    create: {
+      success: 'You have successfully created a credit note',
+      error: 'While creating a credit note',
+    },
+    update: {
+      success: 'You have successfully updated a credit note',
+      error: 'While updating a credit note',
+    },
+    delete: {
+      success: 'You have successfully deleted a credit note',
+      error: 'While deleting a credit note',
+    },
+  },
   fields: {
     name: {
       full: 'Friendly Name',
@@ -117,6 +131,7 @@ const schema: Schema = {
       description: 'A code',
       cssWidth: 'max',
       type: 'number',
+      visible: false,
     },
     invoice_prefix: {
       full: 'Invoice Prefix',
@@ -127,9 +142,10 @@ const schema: Schema = {
       example: 'RCN',
       description: 'A invoice prefix',
       cssWidth: 'max',
+      visible: false,
     },
     is_active: {
-      full: 'Active',
+      full: 'Status',
       type: 'boolean',
       default: true,
     },
