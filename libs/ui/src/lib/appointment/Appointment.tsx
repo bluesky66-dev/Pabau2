@@ -286,7 +286,7 @@ export const Appointment: FC<P> = ({
           style={{ backgroundColor: backGroundColor }}
         >
           <Button type="default" className={styles.addTemplateTxt}>
-            +Add Template
+            +Add {selectLanguage} Template
           </Button>
         </div>
       )}
