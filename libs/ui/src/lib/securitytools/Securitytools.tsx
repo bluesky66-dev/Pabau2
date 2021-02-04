@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, ReactNode } from 'react'
 import styles from './Securitytools.module.less'
 import { Badge } from '@pabau/ui'
 
 interface P {
-  datasource: []
+  datasource: SecurityToolsItemInfo[]
   title: string
   onItemClick: (index) => void
 }
@@ -34,15 +34,15 @@ export const SecurityTools: React.FC<P> = ({
 export default SecurityTools
 
 interface ItemProps {
-  item: ItemInfo
+  item: SecurityToolsItemInfo
   onClick: () => void
 }
 
-interface ItemInfo {
+export interface SecurityToolsItemInfo {
   id: string
   title: string
   name: string
-  imgPath: string
+  imgPath: ReactNode
   isActive: boolean
   modalType: number
 }
@@ -57,9 +57,7 @@ function Item(props: ItemProps) {
   return (
     <div onClick={(event) => handleClick()}>
       <div className={styles.container}>
-        <div className={styles.colStatusLabel}>
-          <img className={styles.iconSecuritytools} src={item.imgPath} alt="" />
-        </div>
+        <div className={styles.colStatusLabel}>{item.imgPath}</div>
         <div className={styles.containercol}>
           <span className={styles.p1}>{item.title}</span>
           <span className={styles.p2}>{item.name}</span>

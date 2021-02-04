@@ -2,13 +2,13 @@
 import React, { useEffect, useState } from 'react'
 
 import styles from './CustomModal.module.less'
-import SecurityTools from '../securitytools/Securitytools'
+import { SecurityTools, SecurityToolsItemInfo } from '@pabau/ui'
 import BasicModal from '../modal/basicmodal'
 import { Menu, Dropdown, Button, Modal } from 'antd'
 import { DownOutlined, UserOutlined } from '@ant-design/icons'
 
 interface P {
-  datasource: []
+  datasource: SecurityToolsItemInfo[]
 }
 
 export function CustomModal(props: P) {

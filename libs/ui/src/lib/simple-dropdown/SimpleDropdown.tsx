@@ -1,46 +1,59 @@
 import React, { FC, useState, useEffect } from 'react'
-import { Dropdown, Menu } from 'antd'
-import { DownOutlined } from '@ant-design/icons'
+import { Select, Form } from 'antd'
+import { FormProps } from 'antd/lib/form'
+import { SizeType } from 'antd/es/config-provider/SizeContext'
 import styles from './SimpleDropdown.module.less'
 
-/* eslint-disable-next-line */
-export interface SimpleDropdownProps {
+export interface SimpleDropdownProps extends FormProps {
   label?: string
-  menuItems: Array<string>
+  value?: string
+  tooltip?: string
+  size?: SizeType
+  dropdownItems: Array<string>
   onSelected(val): void
 }
 
 export const SimpleDropdown: FC<SimpleDropdownProps> = ({
   label,
-  menuItems,
+  value,
+  dropdownItems,
+  tooltip,
+  size = 'middle',
   onSelected,
+  ...props
 }) => {
+  const [form] = Form.useForm()
   const [selected, setSelected] = useState('')
-  const handleMenuClick = (e) => {
-    setSelected(e.key)
-    onSelected(e.key)
+  const handleClickSelect = (value) => {
+    setSelected(value)
+    onSelected(value)
   }
-  const menu = (
-    <Menu onClick={(e) => handleMenuClick(e)}>
-      {Array.isArray(menuItems) &&
-        menuItems.length > 0 &&
-        menuItems.map((item) => <Menu.Item key={item}>{item}</Menu.Item>)}
-    </Menu>
-  )
   useEffect(() => {
-    if (menuItems.length > 0) {
-      setSelected(menuItems[0])
+    if (value) {
+      setSelected(value)
+    } else {
+      dropdownItems.length > 0 && setSelected(dropdownItems[0])
     }
-  }, [menuItems])
+  }, [value, dropdownItems, label, tooltip])
   return (
     <div className={styles.simpleDropdownContainer}>
-      {label && <p>{label}</p>}
-      <Dropdown overlay={menu}>
-        <div className={styles.simpleDropdownDisplay}>
-          <p>{selected}</p>
-          <DownOutlined />
-        </div>
-      </Dropdown>
+      <Form form={form} layout="vertical" {...props}>
+        <Form.Item label={label ? label : ''} tooltip={tooltip ? tooltip : ''}>
+          <Select
+            value={selected}
+            onChange={(value) => handleClickSelect(value)}
+            size={size}
+          >
+            {Array.isArray(dropdownItems) &&
+              dropdownItems.length > 0 &&
+              dropdownItems.map((item) => (
+                <Select.Option key={item} value={item}>
+                  {item}
+                </Select.Option>
+              ))}
+          </Select>
+        </Form.Item>
+      </Form>
     </div>
   )
 }

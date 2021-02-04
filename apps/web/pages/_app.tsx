@@ -12,6 +12,8 @@ import { WebSocketLink } from '@apollo/client/link/ws'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { OperationDefinitionNode } from 'graphql'
 
+require('react-phone-input-2/lib/style.css')
+require('react-google-places-autocomplete/dist/index.min.css')
 require('../styles/global.less')
 require('../../../libs/ui/src/styles/antd.less')
 
