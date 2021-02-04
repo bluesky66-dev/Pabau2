@@ -23,7 +23,6 @@ const Options: FC<P> = ({ onChange }) => {
   const [items, setItems] = useState<itemProps[]>([])
   const [addedItems, setaddedItems] = useState<itemProps[]>([])
   const [itemName, setItemName] = useState('')
-
   const [optionVal, setOptionVal] = useState(0)
 
   const addItem = (event) => {
