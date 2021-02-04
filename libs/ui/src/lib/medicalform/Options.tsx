@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons'
 import { Button, ButtonTypes } from '@pabau/ui'
 import { Input, Radio } from 'antd'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
 import styles from './MedicalForm.module.less'
 
 type itemProps = {
@@ -25,12 +25,6 @@ const Options: FC<P> = ({ onChange }) => {
   const [itemName, setItemName] = useState('')
 
   const [optionVal, setOptionVal] = useState(0)
-
-  useEffect(() => {
-    if (onChange) {
-      onChange(addedItems.length)
-    }
-  }, [addedItems])
 
   const addItem = (event) => {
     event.preventDefault()
@@ -59,6 +53,9 @@ const Options: FC<P> = ({ onChange }) => {
     tempItems.splice(index, 1, itemValue)
     setItems(tempItems)
     setaddedItems(tempItems)
+    if (onChange) {
+      onChange(addedItems.length)
+    }
   }
 
   const handleDelete = (index) => {
@@ -66,6 +63,9 @@ const Options: FC<P> = ({ onChange }) => {
     tempItems.splice(index, 1)
     setItems(tempItems)
     setaddedItems(tempItems)
+    if (onChange) {
+      onChange(addedItems.length)
+    }
   }
 
   const onKeyUp = (event, index, item) => {
