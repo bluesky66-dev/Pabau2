@@ -3,7 +3,7 @@ import TextTranslation from './TextTranslation'
 
 export default {
   component: TextTranslation,
-  title: 'Basics/TextTranslation'
+  title: 'Basics/TextTranslation',
 }
 
 const TextTranslationStory: FC = () => <TextTranslation />
