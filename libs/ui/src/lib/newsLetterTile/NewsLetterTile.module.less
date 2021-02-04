@@ -1,0 +1,37 @@
+.pop-over-modal {
+  .custom-tooltip {
+    display: flex;
+    align-items: center;
+    p {
+      color: #595959;
+      margin: 0 8px 0 0;
+    }
+    &:hover {
+      p {
+        color: #64b2d5;
+      }
+    }
+    :global .ant-progress {
+      .ant-progress-outer {
+        .ant-progress-inner {
+          background: #afd8ea;
+          .ant-progress-bg {
+            background: #64b2d5;
+          }
+        }
+      }
+    }
+  }
+}
+:global .ant-popover-arrow {
+  border-top-color: #595959 !important;
+  border-left-color: #595959 !important;
+}
+:global .ant-popover-inner {
+  background: #595959 !important;
+  border-radius: 4px;
+
+  .ant-popover-inner-content {
+    color: #fff !important;
+  }
+}
