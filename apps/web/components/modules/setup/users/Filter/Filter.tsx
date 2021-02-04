@@ -3,17 +3,12 @@ import { Button, MobileHeader } from '@pabau/ui'
 import addButtonStyles from '../../../../AddButton.module.less'
 import styles from './Filter.module.less'
 import {
-  AppstoreOutlined,
   FilterOutlined,
-  MenuOutlined,
   PlusSquareFilled,
   SearchOutlined,
 } from '@ant-design/icons'
 import { Drawer, Input, Popover, Radio } from 'antd'
 import classNames from 'classnames'
-import GridVsList from '../../../../../../../libs/ui/src/lib/gridvslist/GridVsList'
-// import { isMobile, isTablet } from 'react-device-detect'
-// import { useKeyPressEvent } from 'react-use'
 
 const WAIT_INTERVAL = 400
 
@@ -23,24 +18,14 @@ interface P {
   onFilterSource: () => void
   onSearch: (term: string) => void
 }
-const displayTypes = [
-  { title: 'Grid', icon: <AppstoreOutlined /> },
-  { title: 'List', icon: <MenuOutlined /> },
-]
 export const Filter: FunctionComponent<P> = ({
-  schema,
   onClick,
-  children,
   onFilterSource,
   onSearch,
 }) => {
   const [isActive, setIsActive] = useState(true)
   const [mobFilterDrawer, setMobFilterDrawer] = useState(false)
   const [marketingSourceSearch, setMarketingSourceSearch] = useState('')
-
-  // useKeyPressEvent('n', () => {
-  //   onClick?.()
-  // })
 
   useEffect(() => {
     const timer = setTimeout(() => {
