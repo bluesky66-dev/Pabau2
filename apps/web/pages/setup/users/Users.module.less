@@ -1,23 +1,33 @@
 @desktop:   ~"only screen and (min-width: 960px)";
 @tablet:    ~"only screen and (min-width: 720px) and (max-width: 959px)";
+@defaultPadding: 24px;
 
+
+.header {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  background: #FFFFFF;
+
+}
+.tabWrapper{
+  background: #FFFFFF;
+}
 .container {
   background: #FFFFFF;
   width: 100%;
   border-radius: 4px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: @defaultPadding;
+  padding-top: @defaultPadding;
+
 }
 @media @desktop {
   .container {
-    padding: 24px;
-    display: inline-grid;
-    grid-template-columns: repeat(6, 1fr);
   }
 }
 
 @media @tablet {
   .container {
-    padding: 24px;
-    display: inline-grid;
-    grid-template-columns: repeat(3, 1fr);
   }
 }

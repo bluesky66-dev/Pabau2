@@ -1,17 +1,10 @@
-import React, { FunctionComponent } from 'react'
-import Layout from '../../components/Layout/Layout'
-import CommonHeader from '../../pages/setup/CommonHeader'
-import { UserTile } from '@pabau/ui'
-import styles from './Users.module.less'
+import austin from '../../../../../../libs/ui/src/assets/images/users/austin.png'
+import james from '../../../../../../libs/ui/src/assets/images/users/james.png'
+import linda from '../../../../../../libs/ui/src/assets/images/users/linda.png'
+import arya from '../../../../../../libs/ui/src/assets/images/users/arya.png'
+import alex from '../../../../../../libs/ui/src/assets/images/users/alex.png'
 
-//TODO Using dummy images, refactor later on for production
-import austin from '../../../../libs/ui/src/assets/images/users/austin.png'
-import james from '../../../../libs/ui/src/assets/images/users/james.png'
-import linda from '../../../../libs/ui/src/assets/images/users/linda.png'
-import arya from '../../../../libs/ui/src/assets/images/users/arya.png'
-import alex from '../../../../libs/ui/src/assets/images/users/alex.png'
-
-const dummyUsers = [
+export const mockUsers = [
   //TODO Remove once users endpoints are implemented
   {
     id: 1,
@@ -164,34 +157,3 @@ const dummyUsers = [
     available: false,
   },
 ]
-
-const Index: FunctionComponent = () => {
-  return (
-    <>
-      <CommonHeader />
-      <div>
-        <Layout>
-          <div className={styles.container}>
-            {dummyUsers &&
-              dummyUsers.map((user) => {
-                return (
-                  <UserTile
-                    key={user.id}
-                    name={user.name}
-                    surname={user.surname}
-                    title={user.title}
-                    vacation={user.vacationPending}
-                    active={user.active}
-                    available={user.available}
-                    img={user.img}
-                  />
-                )
-              })}
-          </div>
-        </Layout>
-      </div>
-    </>
-  )
-}
-
-export default Index
