@@ -1,60 +1,37 @@
-import { Select } from 'antd'
 import React, { FC } from 'react'
 import labTestIcon from '../../assets/images/medicalform_labtest.svg'
-import styles from './MedicalForm.module.less'
+import BaiscElement from './BaiscElement'
+import MedicalFormBody from './MedicalFormBody'
 import MedicalFormBottom from './MedicalFormBottom'
+import MedicalFormHeader from './MedicalFormHeader'
 import MedicalFormTitle from './MedicalFormTitle'
-
-const { Option } = Select
+import MultiSelect from './MultiSelect'
 
 const LabTest: FC = () => {
   const optionLabels = [
-    { key: '1', label: 'Accent Prime' },
-    { key: '2', label: 'All-inclusive' },
-    { key: '3', label: 'Botox' },
-    { key: '4', label: 'Category (V)' },
-    { key: '5', label: 'Class maggie' },
-    { key: '6', label: 'CO2 Laser' },
-    { key: '7', label: 'Consultation' },
-    { key: '8', label: 'Cooltech' },
+    { id: 1, label: 'Accent Prime' },
+    { id: 2, label: 'All-inclusive' },
+    { id: 3, label: 'Botox' },
+    { id: 4, label: 'Category (V)' },
+    { id: 5, label: 'Class maggie' },
+    { id: 6, label: 'CO2 Laser' },
+    { id: 7, label: 'Consultation' },
+    { id: 8, label: 'Cooltech' },
   ]
-
   return (
-    <div className={styles.mainBody}>
-      <div className={styles.formItem}>
-        <div className={`${styles.formCaption} ${styles.formCommon}`}>
-          <span>component settings</span>
-        </div>
-      </div>
-      <div className={styles.formItem}>
-        <MedicalFormTitle
-          iconUrl={labTestIcon}
-          bgcolor="#FAAD14"
-          title="Lab tests"
-          desc="Description"
-        />
-      </div>
-      <div className={styles.formItem}>
-        <div className={`${styles.formQuestion} ${styles.formCommon}`}>
-          <p style={{ marginTop: '5px' }}>Question</p>
-          <Select
-            mode="multiple"
-            allowClear
-            style={{ width: '100%' }}
-            placeholder="Please select"
-          >
-            {optionLabels.map(({ key, label }) => (
-              <Option key={key} value={key}>
-                {label}
-              </Option>
-            ))}
-          </Select>
-        </div>
-      </div>
-      <div className={styles.formItem} style={{ borderBottom: 'none' }}>
-        <MedicalFormBottom needLeft={true} />
-      </div>
-    </div>
+    <BaiscElement>
+      <MedicalFormHeader title="component settings" />
+      <MedicalFormTitle
+        iconUrl={labTestIcon}
+        bgcolor="#FAAD14"
+        title="Lab tests"
+        desc="Description"
+      />
+      <MedicalFormBody>
+        <MultiSelect title="Question" options={optionLabels} />
+      </MedicalFormBody>
+      <MedicalFormBottom needLeft={true} />
+    </BaiscElement>
   )
 }
 

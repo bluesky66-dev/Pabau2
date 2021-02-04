@@ -1,30 +1,28 @@
 import React, { FC } from 'react'
-import longAnswerIcon from '../../assets/images/medicalform_longanswer.svg'
+import headingIcon from '../../assets/images/medicalform_heading.svg'
 import BaiscElement from './BaiscElement'
-import ElementAdvanced from './ElementAdvanced'
 import ElementQuestion from './ElementQuestion'
 import MedicalFormBody from './MedicalFormBody'
 import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormHeader from './MedicalFormHeader'
 import MedicalFormTitle from './MedicalFormTitle'
 
-const LongAnswer: FC = () => {
+const Heading: FC = () => {
   return (
     <BaiscElement>
       <MedicalFormHeader title="component settings" />
       <MedicalFormTitle
-        iconUrl={longAnswerIcon}
+        iconUrl={headingIcon}
         bgcolor="#6383F1"
-        title="Long answer"
-        desc="Ask a question with a long answer"
+        title="Heading"
+        desc="Create a heading for a section"
       />
       <MedicalFormBody>
         <ElementQuestion desc="Enter your question" title="Question" />
-        <ElementAdvanced />
       </MedicalFormBody>
-      <MedicalFormBottom needLeft={true} />
+      <MedicalFormBottom needLeft={false} />
     </BaiscElement>
   )
 }
 
-export default LongAnswer
+export default Heading

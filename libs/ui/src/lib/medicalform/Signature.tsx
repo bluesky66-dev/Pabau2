@@ -1,36 +1,27 @@
-import { Input } from 'antd'
 import React, { FC } from 'react'
 import signatureIcon from '../../assets/images/medicalform_signature.svg'
-import styles from './MedicalForm.module.less'
+import BaiscElement from './BaiscElement'
+import ElementQuestion from './ElementQuestion'
+import MedicalFormBody from './MedicalFormBody'
 import MedicalFormBottom from './MedicalFormBottom'
+import MedicalFormHeader from './MedicalFormHeader'
 import MedicalFormTitle from './MedicalFormTitle'
 
 const Signature: FC = () => {
   return (
-    <div className={styles.mainBody}>
-      <div className={styles.formItem}>
-        <div className={`${styles.formCaption} ${styles.formCommon}`}>
-          <span>component settings</span>
-        </div>
-      </div>
-      <div className={styles.formItem}>
-        <MedicalFormTitle
-          iconUrl={signatureIcon}
-          bgcolor="#F78561"
-          title="Signature"
-          desc="Description"
-        />
-      </div>
-      <div className={styles.formItem}>
-        <div className={`${styles.formQuestion} ${styles.formCommon}`}>
-          <p style={{ marginTop: '5px' }}>Title</p>
-          <Input placeholder="Enter your title" />
-        </div>
-      </div>
-      <div className={styles.formItem} style={{ borderBottom: 'none' }}>
-        <MedicalFormBottom needLeft={true} />
-      </div>
-    </div>
+    <BaiscElement>
+      <MedicalFormHeader title="component settings" />
+      <MedicalFormTitle
+        iconUrl={signatureIcon}
+        bgcolor="#F78561"
+        title="Signature"
+        desc="Description"
+      />
+      <MedicalFormBody>
+        <ElementQuestion desc="Enter your title" title="Title" />
+      </MedicalFormBody>
+      <MedicalFormBottom needLeft={true} />
+    </BaiscElement>
   )
 }
 
