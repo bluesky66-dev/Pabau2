@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
-import { Input as AntInput, Button } from 'antd'
+import { Input as AntInput } from 'antd'
+import { Button } from '@pabau/ui'
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons'
 
 import styles from './AddQuestion.module.less'
@@ -62,7 +63,9 @@ export const AddQuestion: FC<AddQuestionProps> = ({
           <PlusOutlined /> {addQuestionLabel}
         </div>
       </div>
-      <Button className={styles.btnBank}>{goToButtonLabel}</Button>
+      <Button type="primary" className={styles.btnBank}>
+        {goToButtonLabel}
+      </Button>
     </div>
   )
 }
