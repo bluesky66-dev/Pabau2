@@ -183,7 +183,7 @@ export const BusinessDetails: FC<BusinessDetailsProps> = ({
             <LanguageDropdown
               label="Default language for your clients"
               value={langSetting.defaultLanuageClients}
-              onChange={(val) =>
+              onSelected={(val) =>
                 handleLangSettingChange('defaultLanuageClients', val)
               }
             />

@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
-import { Button, Formtype } from '@pabau/ui'
+import { Button, Formtype, LanguageDropdown } from '@pabau/ui'
 import { Popover } from 'antd'
 import { FilterOutlined } from '@ant-design/icons'
 import styles from './MedicalFilter.module.less'
@@ -48,7 +48,13 @@ export const MedicalFilter: FC<MedicalFilterProps> = ({ filter, onApply }) => {
     filterSetting.status = val
     setFilters({ ...filterSetting })
   }
+  const handleChangeLanguage = (val) => {
+    const filterSetting = { ...filters }
+    filterSetting.language = val
+    setFilters({ ...filterSetting })
+  }
   const handleApply = () => {
+    setVisible(false)
     onApply(filters)
   }
   const FilterViewer = () => (
@@ -80,7 +86,12 @@ export const MedicalFilter: FC<MedicalFilterProps> = ({ filter, onApply }) => {
         setting={filters.formtype}
         onChangeSetting={(val) => handleChangeSetting(val)}
       />
-      <Button block onClick={() => handleApply()}>
+      <p className={styles.filterViewerSubTitle}>Language</p>
+      <LanguageDropdown
+        value={filters.language}
+        onSelected={(val) => handleChangeLanguage(val)}
+      />
+      <Button block onClick={() => handleApply()} style={{ marginTop: '1rem' }}>
         Apply
       </Button>
     </div>
@@ -95,10 +106,11 @@ export const MedicalFilter: FC<MedicalFilterProps> = ({ filter, onApply }) => {
         content={FilterViewer}
         trigger="click"
         visible={visible}
+        onVisibleChange={(val) => {
+          setVisible(val)
+        }}
       >
-        <Button icon={<FilterOutlined />} onClick={() => setVisible(true)}>
-          Filter
-        </Button>
+        <Button icon={<FilterOutlined />}>Filter</Button>
       </Popover>
     </div>
   )

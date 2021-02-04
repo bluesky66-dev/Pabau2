@@ -26,4 +26,5 @@ const MedicalFilterStory: FC<MedicalFilterProps> = ({ ...props }) => (
 export const Basic = MedicalFilterStory.bind({})
 Basic.args = {
   filter: defaultFilter,
+  onApply: (filter) => console.log(filter),
 }
