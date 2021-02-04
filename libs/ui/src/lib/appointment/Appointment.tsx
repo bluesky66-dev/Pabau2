@@ -257,7 +257,7 @@ export const Appointment: FC<P> = ({
           <Divider />
 
           <Row justify="center" style={{ marginBottom: '20px' }}>
-            <span>{medicalMessage}</span>
+            <span className={styles.breaktext}>{medicalMessage}</span>
           </Row>
 
           <Row justify="center">
@@ -273,7 +273,7 @@ export const Appointment: FC<P> = ({
           </Row>
 
           <Row justify="center" style={{ marginTop: '20px' }}>
-            <span>{informationMessage}</span>
+            <span className={styles.breaktext}>{informationMessage}</span>
           </Row>
 
           <Row justify="center" style={{ marginTop: '20px' }}>

@@ -100,6 +100,39 @@ export const Standard: FC<P> = ({
   function callback(key) {
     onStandardTabChanged(key)
   }
+
+  const size = useWindowSize()
+  function useWindowSize() {
+    // Initialize state with undefined width/height so server and client renders match
+    // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
+    const [windowSize, setWindowSize] = React.useState({
+      width: 0,
+      height: 0,
+    })
+
+    React.useEffect(() => {
+      // Handler to call on window resize
+      function handleResize() {
+        // Set window width/height to state
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        })
+      }
+
+      // Add event listener
+      window.addEventListener('resize', handleResize)
+
+      // Call handler right away so state gets updated with initial window size
+      handleResize()
+
+      // Remove event listener on cleanup
+      return () => window.removeEventListener('resize', handleResize)
+    }, []) // Empty array ensures that effect is only run on mount
+
+    return windowSize
+  }
+
   return (
     <Row className={styles.tabsAlign}>
       <Tabs defaultActiveKey="1" onChange={callback}>
@@ -188,6 +221,7 @@ export const Standard: FC<P> = ({
                         className={styles.textareaStyle}
                         autoSize={{ minRows: 3, maxRows: 3 }}
                         onChange={(event) => onSmsMessage(event.target.value)}
+                        maxLength={size.width > 768 ? 500 : 160}
                         value={smsMessage}
                       />
                     </Row>
@@ -306,6 +340,7 @@ export const Standard: FC<P> = ({
                         <TextArea
                           className={styles.textareaStyle}
                           autoSize={{ minRows: 3, maxRows: 3 }}
+                          maxLength={size.width > 768 ? 500 : 160}
                           onChange={(event) =>
                             onMedicalMessage(event.target.value)
                           }
@@ -331,6 +366,7 @@ export const Standard: FC<P> = ({
                       className={styles.textareaStyle}
                       placeholder="e.g. Special offer"
                       autoSize={{ minRows: 3, maxRows: 3 }}
+                      maxLength={size.width > 768 ? 500 : 160}
                       onChange={(event) =>
                         onInformationMessage(event.target.value)
                       }
@@ -338,41 +374,44 @@ export const Standard: FC<P> = ({
                   </Row>
                 </Panel>
               )}
-              <Panel
-                className={styles.panelAlign}
-                header="Social media icons"
-                key="3"
-              >
-                <Row>
-                  <SocialMediaCheckbox
-                    mediaIcon={[
-                      {
-                        label: 'facebook',
-                        link: 'www.facebook.com',
-                        icon: <FacebookOutlined />,
-                      },
-                      {
-                        label: 'linksIn',
-                        link: 'www.linkin.com',
-                        icon: <LinkedinOutlined />,
-                      },
-                      {
-                        label: 'instagram',
-                        link: 'www.instagram.com',
-                        icon: <InstagramOutlined />,
-                      },
-                      {
-                        label: 'twitter',
-                        link: 'null',
-                        icon: <TwitterOutlined />,
-                      },
-                    ]}
-                    onClick={(values) => {
-                      onActiveSocialIcon(values)
-                    }}
-                  />
-                </Row>
-              </Panel>
+
+              {hideAppearanceTabPane && (
+                <Panel
+                  className={styles.panelAlign}
+                  header="Social media icons"
+                  key="3"
+                >
+                  <Row>
+                    <SocialMediaCheckbox
+                      mediaIcon={[
+                        {
+                          label: 'facebook',
+                          link: 'www.facebook.com',
+                          icon: <FacebookOutlined />,
+                        },
+                        {
+                          label: 'linksIn',
+                          link: 'www.linkin.com',
+                          icon: <LinkedinOutlined />,
+                        },
+                        {
+                          label: 'instagram',
+                          link: 'www.instagram.com',
+                          icon: <InstagramOutlined />,
+                        },
+                        {
+                          label: 'twitter',
+                          link: 'null',
+                          icon: <TwitterOutlined />,
+                        },
+                      ]}
+                      onClick={(values) => {
+                        onActiveSocialIcon(values)
+                      }}
+                    />
+                  </Row>
+                </Panel>
+              )}
               <div className={styles.papauPlusContainer}>
                 <PabauPlus label="Plus" />
               </div>

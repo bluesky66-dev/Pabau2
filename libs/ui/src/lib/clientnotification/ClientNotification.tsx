@@ -1,6 +1,16 @@
 import React, { FC } from 'react'
-import { Row, Col, Radio } from 'antd'
+import { Row, Col, Radio, Input } from 'antd'
 import styles from './ClientNotification.module.less'
+import { Button, BasicModal, Notification } from '@pabau/ui'
+
+export enum NotificationType {
+  info = 'info',
+  success = 'success',
+  error = 'error',
+  warning = 'warning',
+  loading = 'loading',
+  connect = 'connect',
+}
 
 interface P {
   tabComponent?: React.ReactNode
@@ -23,15 +33,71 @@ export const ClientNotification: FC<P> = ({
       onSmsTabChanged(value)
     }
   }
+
+  const [visibleModal, setVisibleModal] = React.useState(false)
+  const [valideEmail, setValidEmail] = React.useState(false)
+
+  function showNotification() {
+    if (valideEmail) {
+      Notification(NotificationType.success, 'Test message sent')
+      setVisibleModal(false)
+    }
+  }
+
+  function isEmail(search) {
+    const regexp = new RegExp(
+      /* eslint-disable-next-line */
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    )
+    const serchfind = regexp.test(search)
+    setValidEmail(serchfind)
+  }
+
   return (
-    <Row wrap={false} className={styles.notificationPage}>
-      <Col flex={'400px'} className={styles.builderColumn}>
+    <Row className={styles.notificationPage}>
+      <Col className={styles.builderColumn}>
         <Row className={styles.headerStyle}>
           <div>BUILDER</div>
         </Row>
         <Row className={styles.tabsAlign}>{tabComponent}</Row>
       </Col>
-      <Col flex="auto" className={styles.previewColumn}>
+      <Col className={styles.buttionGruop}>
+        <Row>
+          <Col span={12} style={{ padding: '10px' }}>
+            <Button
+              onClick={() => setVisibleModal(true)}
+              type="default"
+              style={{ width: '100%' }}
+            >
+              Send Test Email
+            </Button>
+          </Col>
+          <Col span={12} style={{ padding: '10px' }}>
+            <Button type="primary" style={{ width: '100%' }}>
+              Save
+            </Button>
+          </Col>
+        </Row>
+        <BasicModal
+          title={'Send Test Email'}
+          visible={visibleModal}
+          onCancel={() => setVisibleModal(false)}
+          centered={true}
+          newButtonText={'Send'}
+          dangerButtonText={'Cancel'}
+          onOk={() => showNotification()}
+          onDelete={() => setVisibleModal(false)}
+        >
+          <div>
+            <p style={{ color: '#9292A3' }}>Email</p>
+            <Input
+              placeholder="client@email.com"
+              onChange={(event) => isEmail(event.target.value)}
+            />
+          </div>
+        </BasicModal>
+      </Col>
+      <Col className={styles.previewColumn}>
         <Row className={styles.headerStyle}>
           <div>PREVIEW</div>
         </Row>

@@ -51,7 +51,7 @@ export const ColorPicker: FC<PickerProps> = ({
   const [colorData, setColorData] = useState([
     {
       color: '#ffffff',
-      selected: false,
+      selected: true,
     },
     {
       color: '#fca903',
@@ -114,6 +114,7 @@ export const ColorPicker: FC<PickerProps> = ({
       selected: false,
     },
   ])
+  const [lastColor, setLastColor] = useState(defaultColor)
 
   if (defaultColor) {
     colorData[0].color = defaultColor
@@ -143,7 +144,7 @@ export const ColorPicker: FC<PickerProps> = ({
     })
     setColorData([...colors])
   }
-  const [lastColor, setLastColor] = useState('')
+
   return (
     <div style={{ marginTop: '16px' }}>
       <span className={styles.heading}>{heading}</span>
