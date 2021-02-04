@@ -150,6 +150,7 @@ const Options: FC = () => {
       >
         Add option
       </Button>
+      <br />
     </>
   )
 }

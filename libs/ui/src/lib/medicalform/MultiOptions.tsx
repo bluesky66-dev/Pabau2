@@ -146,6 +146,7 @@ const MultiOptions: FC = () => {
       >
         Add option
       </Button>
+      <br />
     </>
   )
 }

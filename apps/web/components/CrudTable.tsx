@@ -1,4 +1,11 @@
-import { Table, useLiveQuery, Pagination, MobileHeader } from '@pabau/ui'
+import {
+  Table,
+  useLiveQuery,
+  Pagination,
+  MobileHeader,
+  Notification,
+  NotificationType,
+} from '@pabau/ui'
 import React, { FC, useEffect, useState } from 'react'
 import { DocumentNode, useMutation } from '@apollo/client'
 import AddButton from './AddButton'
@@ -38,8 +45,28 @@ const CrudTable: FC<P> = ({
   const [isActive, setIsActive] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   // eslint-disable-next-line graphql/template-strings
-  const [editMutation] = useMutation(editQuery)
-  const [addMutation] = useMutation(addQuery)
+  const [editMutation] = useMutation(editQuery, {
+    onCompleted(data) {
+      Notification(
+        NotificationType.success,
+        'Success! Marketing source updated.'
+      )
+    },
+    onError(err) {
+      Notification(NotificationType.error, 'Error! Marketing source update.')
+    },
+  })
+  const [addMutation] = useMutation(addQuery, {
+    onCompleted(data) {
+      Notification(
+        NotificationType.success,
+        'Success! New marketings source created.'
+      )
+    },
+    onError(err) {
+      Notification(NotificationType.error, 'Error! Marketing source create.')
+    },
+  })
   const [sourceData, setSourceData] = useState(null)
   const [paginateData, setPaginateData] = useState({
     total: 0,
