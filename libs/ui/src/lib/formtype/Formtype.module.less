@@ -1,13 +1,29 @@
+.formTypeContainer {
+  width: 100%;
+}
+
 .formTypeDiv {
+  width: 85px;
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-top: 15px;
   position: relative;
+  margin-bottom: 15px;
+}
+
+.formTypeSelected {
+  > button {
+    border: 1px solid #54B2D3;
+    background-color: #EEF7FB;
+  }
+  > p {
+    color: #54B2D3;
+  }
 }
 
 .formTypeButton {
-  padding: 30px 35px;
+  width: 85px;
+  height: 85px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,9 +39,9 @@
 
 .formTypeChecked {
   display: block !important;
-  color: #9292a3;
+  color: #54B2D3;
   position: absolute;
-  left: 77px;
+  right: 5px;
   top: 5px;
   z-index: 100;
 }
@@ -33,4 +49,19 @@
 .formTypeIcon {
   width: 24px;
   height: 24px;
+}
+
+.formTypeStart {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.formTypeCenter {
+  display: flex;
+  justify-content: center;
+}
+
+.formTypeEnd {
+  display: flex;
+  justify-content: flex-end;
 }
