@@ -5,7 +5,7 @@ import RightSidebar from './RightSidebar'
 export default {
   component: RightSidebar,
   title: 'UI/Right Sidebar',
-  args: { componentName: 'heading', display: 'show' },
+  args: { componentName: 'heading', display: true },
   argTypes: {
     componentName: {
       control: {
@@ -17,8 +17,8 @@ export default {
     display: {
       control: {
         type: 'radio',
-        selected: 'show',
-        options: ['show', 'hide'],
+        selected: true,
+        options: [true, false],
       },
     }
   }
@@ -28,6 +28,7 @@ const RightSidebarStory = ({ ...args }) => <RightSidebar {...args}></RightSideba
 
 export const RightSidebarPanel = RightSidebarStory.bind({})
 RightSidebarPanel.args = {
-  componentName: 'Heading'
+  componentName: 'Heading',
+  display: true
 }
 

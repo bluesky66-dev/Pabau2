@@ -9,7 +9,16 @@ import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormHeader from './MedicalFormHeader'
 import MedicalFormTitle from './MedicalFormTitle'
 
-const ShortAnswer: FC = () => {
+interface P {
+  hideSideBar?: () => void
+}
+
+const ShortAnswer: FC<P> = ({ hideSideBar }) => {
+  const saveFunc = () => {
+    if (hideSideBar) {
+      hideSideBar()
+    }
+  }
   return (
     <BasicElement>
       <MedicalFormHeader title="component settings" />
@@ -24,7 +33,7 @@ const ShortAnswer: FC = () => {
         <ElementTypeOption title="Input type" />
         <ElementAdvanced />
       </MedicalFormBody>
-      <MedicalFormBottom needLeft={true} />
+      <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
     </BasicElement>
   )
 }

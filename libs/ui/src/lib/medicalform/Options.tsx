@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons'
 import { Button, ButtonTypes } from '@pabau/ui'
 import { Input, Radio } from 'antd'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import styles from './MedicalForm.module.less'
 
 type itemProps = {
@@ -15,29 +15,36 @@ type itemProps = {
   editing?: boolean
 }
 
-const Options: FC = () => {
+interface P {
+  onChange?: (count) => void
+}
+
+const Options: FC<P> = ({ onChange }) => {
   const [items, setItems] = useState<itemProps[]>([])
+  const [addedItems, setaddedItems] = useState<itemProps[]>([])
   const [itemName, setItemName] = useState('')
 
   const [optionVal, setOptionVal] = useState(0)
-  const radioStyle = {
-    display: 'block',
-    height: '30px',
-    lineHeight: '30px',
-    color: '#9292a3',
-  }
+
+  useEffect(() => {
+    if (onChange) {
+      onChange(addedItems.length)
+    }
+  }, [items])
 
   const addItem = (event) => {
     event.preventDefault()
-    setItems([
-      ...items,
-      {
-        id: items.length,
-        name: itemName,
-        editing: true,
-      },
-    ])
-    setItemName('')
+    if (items.length === addedItems.length) {
+      setItems([
+        ...items,
+        {
+          id: items.length,
+          name: itemName,
+          editing: true,
+        },
+      ])
+      setItemName('')
+    }
   }
 
   const handleOptions = (index, value) => {
@@ -51,12 +58,14 @@ const Options: FC = () => {
     }
     tempItems.splice(index, 1, itemValue)
     setItems(tempItems)
+    setaddedItems(tempItems)
   }
 
   const handleDelete = (index) => {
     const tempItems = [...items]
     tempItems.splice(index, 1)
     setItems(tempItems)
+    setaddedItems(tempItems)
   }
 
   const onKeyUp = (event, index, item) => {
@@ -80,7 +89,7 @@ const Options: FC = () => {
           >
             {items.map((item, index) => (
               <div key={item.id} className={styles.optionItem}>
-                <Radio key={item.id} value={item.id} style={radioStyle}>
+                <Radio key={item.id} value={item.id} className={styles.radio}>
                   {item.editing && (
                     <>
                       <Input

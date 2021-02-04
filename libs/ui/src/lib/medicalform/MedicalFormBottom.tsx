@@ -6,9 +6,10 @@ import styles from './MedicalForm.module.less'
 
 interface P {
   needLeft?: boolean
+  saveFunc?: () => void
 }
 
-const MedicalFormBottom: FC<P> = ({ needLeft }) => {
+const MedicalFormBottom: FC<P> = ({ needLeft, saveFunc }) => {
   return (
     <div className={styles.formItem} style={{ borderBottom: 'none' }}>
       <div className={`${styles.formBottom} ${styles.formCommon}`}>
@@ -30,6 +31,7 @@ const MedicalFormBottom: FC<P> = ({ needLeft }) => {
             type={ButtonTypes.primary}
             icon={<SaveOutlined />}
             size="small"
+            onClick={saveFunc}
           >
             Save component
           </Button>

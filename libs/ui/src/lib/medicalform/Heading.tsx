@@ -7,7 +7,16 @@ import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormHeader from './MedicalFormHeader'
 import MedicalFormTitle from './MedicalFormTitle'
 
-const Heading: FC = () => {
+interface P {
+  hideSideBar?: () => void
+}
+
+const Heading: FC<P> = ({ hideSideBar }) => {
+  const saveFunc = () => {
+    if (hideSideBar) {
+      hideSideBar()
+    }
+  }
   return (
     <BasicElement>
       <MedicalFormHeader title="component settings" />
@@ -20,7 +29,7 @@ const Heading: FC = () => {
       <MedicalFormBody>
         <ElementQuestion desc="Enter your question" title="Question" />
       </MedicalFormBody>
-      <MedicalFormBottom needLeft={false} />
+      <MedicalFormBottom saveFunc={saveFunc} needLeft={false} />
     </BasicElement>
   )
 }

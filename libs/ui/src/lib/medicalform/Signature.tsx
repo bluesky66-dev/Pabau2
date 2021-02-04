@@ -7,7 +7,16 @@ import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormHeader from './MedicalFormHeader'
 import MedicalFormTitle from './MedicalFormTitle'
 
-const Signature: FC = () => {
+interface P {
+  hideSideBar?: () => void
+}
+
+const Signature: FC<P> = ({ hideSideBar }) => {
+  const saveFunc = () => {
+    if (hideSideBar) {
+      hideSideBar()
+    }
+  }
   return (
     <BasicElement>
       <MedicalFormHeader title="component settings" />
@@ -20,7 +29,7 @@ const Signature: FC = () => {
       <MedicalFormBody>
         <ElementQuestion desc="Enter your title" title="Title" />
       </MedicalFormBody>
-      <MedicalFormBottom needLeft={true} />
+      <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
     </BasicElement>
   )
 }
