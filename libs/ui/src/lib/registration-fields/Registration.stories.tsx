@@ -51,7 +51,6 @@ export const RegistrationFieldsStory: FC<P> = ({ customFieldTitle,
     visibleTitle }) => {
     const [mainFields, setMainFields] = useState<FieldType[]>([])
     const [customField, setCustomField] = useState<FieldType[]>([])
-    console.log('asdsad')
 
     useEffect(() => {
         if (fields) {
