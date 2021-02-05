@@ -52,6 +52,11 @@ yarn run nx g @nrwl/next:page --project=web --style=less --directory marketing s
 
 Now add `import { } from '@pabau/ui'` at top of the new page file and fill in the {} with components you need.
 
+### Bridge
+
+To view the GraphQA endpoint which will expose the legacy database run `yarn nx serve bridge-api`
+
+
 ## Backend
 
 The backend is a REST MVC framework. We are using NestJS and converting it into Serverless Vercel Functions at compile-time.
