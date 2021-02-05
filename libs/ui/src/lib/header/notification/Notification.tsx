@@ -19,6 +19,7 @@ interface Notification {
   notificationType: string
   title: string
   desc: string
+  read: boolean
 }
 interface NotificationData {
   [key: string]: Notification[]
@@ -43,12 +44,14 @@ export const PabauNotification: FC<NotificationProps> = ({
             notificationType: 'Appointment',
             title: 'Cancelled appointment',
             desc: 'Your appointment at 17:00 PM with John Smith was cancelled',
+            read: false,
           },
           {
             notificationTime: '1:20 PM',
             notificationType: 'Appointment',
             title: 'Cancelled appointment',
             desc: 'Your appointment at 17:00 PM with John Smith was cancelled',
+            read: false,
           },
         ],
       },
@@ -59,12 +62,14 @@ export const PabauNotification: FC<NotificationProps> = ({
             notificationType: 'Report',
             title: 'New financial report',
             desc: 'Your appointment at 17:00 PM with John Smith was cancelled',
+            read: true,
           },
           {
             notificationTime: '1:20 PM',
             notificationType: 'Lead',
             title: 'New lead',
             desc: 'John Smith has enquired about Botox',
+            read: false,
           },
         ],
       },
@@ -203,9 +208,14 @@ export const PabauNotification: FC<NotificationProps> = ({
                             </p>
                           </div>
                         </div>
-                        <div className={styles.notifyTitleDesc}>
-                          <h1>{dayNotify.title}</h1>
-                          <p>{dayNotify.desc}</p>
+                        <div className={styles.descAlign}>
+                          <div className={styles.notifyTitleDesc}>
+                            <h1>{dayNotify.title}</h1>
+                            <p>{dayNotify.desc}</p>
+                          </div>
+                          <div className={styles.readStatus}>
+                            {!dayNotify.read && <span></span>}
+                          </div>
                         </div>
                       </div>
                       <div className={styles.cardBorder}></div>
