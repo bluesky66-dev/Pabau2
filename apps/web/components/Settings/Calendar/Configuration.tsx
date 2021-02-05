@@ -1,6 +1,8 @@
 import React from 'react'
 import styles from './calendar.module.less'
-import { Select, Typography, Input, Row, Col } from 'antd'
+import { TimeInput } from '@pabau/ui'
+import { Select, Typography, Row, Col } from 'antd'
+import moment from 'moment'
 
 const { Title } = Typography
 const options = [
@@ -32,16 +34,16 @@ const Configuration = () => (
           />
           <Row className={styles.timeInputSpace}>
             <Col md={12} className={styles.colRightSpace}>
-              <Title level={4} className={styles.titleTextStyle}>
-                Start time
-              </Title>
-              <Input placeholder="" defaultValue="13:45" />
+              <TimeInput
+                label="Start time"
+                defaultValue={moment('13:45', 'HH:mm')}
+              />
             </Col>
             <Col md={12} className={styles.colLeftSpace}>
-              <Title level={4} className={styles.titleTextStyle}>
-                End time
-              </Title>
-              <Input defaultValue="13:45" />
+              <TimeInput
+                label="End time"
+                defaultValue={moment('13:45', 'HH:mm')}
+              />
             </Col>
           </Row>
           <Row className={styles.timeInputSpace}>

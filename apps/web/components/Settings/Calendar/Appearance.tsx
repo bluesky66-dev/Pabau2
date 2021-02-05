@@ -9,22 +9,26 @@ interface AppearanceGeneralItems {
   type: string
   value: boolean
   help: string
+  key: number
 }
 const AppearanceGeneralItems: AppearanceGeneralItems[] = [
   {
     type: 'Enable initials',
     value: true,
     help: 'Enable initials',
+    key: 1,
   },
   {
     type: 'Hide surnames',
     value: false,
     help: 'Hide surnames',
+    key: 2,
   },
   {
     type: 'Hide appointment times',
     value: true,
     help: 'Hide appointment times',
+    key: 3,
   },
 ]
 const options = [{ value: 'Small' }, { value: 'Medium' }, { value: 'Large' }]
@@ -43,10 +47,10 @@ const Appearance = () => (
         <Title className={styles.blockText} level={4}>
           General
         </Title>
-        {AppearanceGeneralItems.map((general, index) => {
+        {AppearanceGeneralItems.map((general) => {
           return (
-            <div key={index}>
-              <Checkbox key={index} defaultChecked={general.value}>
+            <div key={general.key}>
+              <Checkbox key={general.key} defaultChecked={general.value}>
                 <span className={styles.appointmentText}>{general.type}</span>
               </Checkbox>
               <HelpTooltip helpText={general.help} />

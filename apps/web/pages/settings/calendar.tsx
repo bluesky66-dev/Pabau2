@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { SettingsMenu, Button } from '@pabau/ui'
+import { SettingsMenu, Button, Notification } from '@pabau/ui'
 import { Card } from 'antd'
 import CommonHeader from '../setup/CommonHeader'
 import { Layout } from '@pabau/ui'
@@ -34,6 +34,10 @@ export function Calendar(props: CalendarProps) {
     },
   ]
 
+  const onSaveChange = () => {
+    Notification.openNotification('success', 'Saved Successfully', 2)
+  }
+
   return (
     <div>
       <CommonHeader />
@@ -50,7 +54,9 @@ export function Calendar(props: CalendarProps) {
               <h1>Calendar settings</h1>
             </div>
             <div className={styles.saveBtn}>
-              <Button type="primary">Save Changes</Button>
+              <Button type="primary" onClick={onSaveChange}>
+                Save Changes
+              </Button>
             </div>
           </div>
           <SettingsMenu items={generalSettingsMenu1} />
