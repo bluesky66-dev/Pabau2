@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import FormType from './Formtype'
+import FormType from './FormType'
 
 const setting = {
   medicalHistory: false,
