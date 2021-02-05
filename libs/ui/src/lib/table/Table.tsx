@@ -8,10 +8,12 @@ import {
 import { LockOutlined, MenuOutlined } from '@ant-design/icons'
 import styles from './Table.module.less'
 import { TableProps } from 'antd/es/table'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as Icons from '@fortawesome/free-solid-svg-icons'
 export interface DragProps {
   draggable?: boolean
   isCustomColorExist?: boolean
+  isCustomIconExist?: boolean
   updateDataSource?: ({ newData, oldIndex, newIndex }) => void
 }
 
@@ -48,6 +50,7 @@ export const Table: FC<TableType> = ({
   dataSource = [],
   padlocked,
   isCustomColorExist = false,
+  isCustomIconExist = false,
   updateDataSource,
   onRowClick,
   ...props
@@ -96,30 +99,32 @@ export const Table: FC<TableType> = ({
     )
   }
 
-  const checkPadLockField = (val, rowData) => {
-    return padlocked && padlocked.includes(val) ? (
+  const renderTableSource = (val, rowData) => {
+    return (
       <div className={styles.alignItems}>
-        {renderCustomColor(val, rowData)}
-        <div style={{ marginLeft: '6px' }}>
-          <LockOutlined />
-        </div>
+        {isCustomColorExist && renderCustomColor(val, rowData)}
+        {val}
+        {padlocked?.includes(val) && (
+          <div style={{ marginLeft: '6px' }}>
+            <LockOutlined />
+          </div>
+        )}
+        {isCustomIconExist && (
+          <FontAwesomeIcon
+            icon={Icons[rowData.icon]}
+            className={styles.tableIcon}
+          />
+        )}
       </div>
-    ) : (
-      renderCustomColor(val, rowData)
     )
   }
 
   const renderCustomColor = (val, rowData) => {
-    return isCustomColorExist ? (
-      <div className={styles.alignItems}>
-        <div
-          style={{ background: rowData.color }}
-          className={styles.customColor}
-        ></div>
-        {val}
-      </div>
-    ) : (
-      val
+    return (
+      <div
+        style={{ background: rowData.color }}
+        className={styles.customColor}
+      ></div>
     )
   }
 
@@ -141,7 +146,7 @@ export const Table: FC<TableType> = ({
         if (col && col.dataIndex === 'is_active') {
           col.render = renderActiveButton
         } else {
-          col.render = checkPadLockField
+          col.render = renderTableSource
         }
         return col
       })
