@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #
-# Deploys to vercel
+# Deploys to vercel pro
 #
 
 # Stop on error
