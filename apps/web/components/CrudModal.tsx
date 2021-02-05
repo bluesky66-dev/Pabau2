@@ -1,6 +1,6 @@
 import Form from './Form'
 import React, { FC, useEffect, useState } from 'react'
-import { BasicModal as Modal } from '@pabau/ui'
+import { BasicModal as Modal, Notification, NotificationType } from '@pabau/ui'
 import { DocumentNode, useMutation } from '@apollo/client'
 import { useFormikContext } from 'formik'
 
@@ -22,7 +22,17 @@ const CrudModal: FC<P> = ({
   editingRow,
 }) => {
   const [openDeleteModal, setDeleteModal] = useState(false)
-  const [deleteMutation] = useMutation(deleteQuery)
+  const [deleteMutation] = useMutation(deleteQuery, {
+    onCompleted(data) {
+      Notification(
+        NotificationType.success,
+        'Success! Marketing source deleted.'
+      )
+    },
+    onError(err) {
+      Notification(NotificationType.error, 'Error! Marketing source delete.')
+    },
+  })
   const formik = useFormikContext<unknown>()
   //let formRef: { submitForm: () => void } | null = null
   // const formRef = useEnsuredForwardedRef<{ submitForm: () => void }>(null)

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { gql } from '@apollo/client'
 import { NextPage } from 'next'
 import React from 'react'
@@ -12,6 +13,16 @@ const LIST_QUERY = gql`
     }
   }
 `
+const LIST_AGGREGATE_QUERY = gql`
+  query marketing_campaign_aggregate {
+    marketing_campaign_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+`
+
 const DELETE_MUTATION = gql`
   mutation delete_marketing_campaign($id: uuid!) {
     delete_marketing_campaign_by_pk(id: $id) {
@@ -66,7 +77,7 @@ export const Index: NextPage = () => {
       deleteQuery={DELETE_MUTATION}
       listQuery={LIST_QUERY}
       editQuery={EDIT_MUTATION}
-      searchQuery={LIST_QUERY} // Temparary added
+      aggregateQuery={LIST_AGGREGATE_QUERY}
     />
   )
 }

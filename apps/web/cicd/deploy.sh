@@ -66,6 +66,7 @@ ${LAST_LINE}
 
 ${LAST_COMMIT_LOG}
 HEREDOC
+  echo "${message_body}" >> /tmp/bot_message.txt
 
   cat tools/cicd/slack_notification.json > /dev/null || (echo "ERROR: JSON not found"; exit 1)
   jq '.' tools/cicd/slack_notification.json > /dev/null || (echo "ERROR: Invalid JSON"; exit 1)
@@ -77,7 +78,7 @@ HEREDOC
 
 else
   echo "===== Processing type PR ====="
-  OUTPUT=$(cd "dist/apps/${APP_NAME}/exported" && vercel -c -C --token "${VERCEL_TOKEN}" -A ./vercel.json)
+  OUTPUT=$(cd "dist/apps/${APP_NAME}/exported" && vercel -c -C --token "${VERCEL_TOKEN}" -T pabau2 -A ./vercel.json)
   echo "errorlevel: $?"
   echo "Output from vercel:"
   echo "${OUTPUT}"

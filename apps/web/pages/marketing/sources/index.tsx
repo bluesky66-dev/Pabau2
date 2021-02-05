@@ -1,13 +1,21 @@
+/* eslint-disable */
 import { gql } from '@apollo/client'
 import { NextPage } from 'next'
 import React from 'react'
 import CrudLayout from '../../../components/CrudLayout/CrudLayout'
 
 const LIST_QUERY = gql`
-  query marketing_sources($isActive: Boolean = true) {
+  query marketing_sources(
+    $isActive: Boolean = true
+    $searchTerm: String = ""
+    $offset: Int
+    $limit: Int
+  ) {
     marketing_source(
+      offset: $offset
+      limit: $limit
       order_by: { created_at: desc }
-      where: { is_active: { _eq: $isActive } }
+      where: { is_active: { _eq: $isActive }, _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }] }
     ) {
       __typename
       id
@@ -16,23 +24,20 @@ const LIST_QUERY = gql`
     }
   }
 `
-
-const SEARCH_QUERY = gql`
-  query marketing_sources($isActive: Boolean = true, $searchTerm: String) {
-    marketing_source(
-      where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
+const LIST_AGGREGATE_QUERY = gql`
+  query marketing_source_aggregate(
+    $isActive: Boolean = true
+    $searchTerm: String = ""
+  ) {
+    marketing_source_aggregate(
+      where: { is_active: { _eq: $isActive }, _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }] }
+    ) {
+      aggregate {
+        count
       }
-    ) {
-      __typename
-      id
-      name
-      is_active
     }
   }
 `
-
 const DELETE_MUTATION = gql`
   mutation delete_marketing_source($id: uuid!) {
     delete_marketing_source_by_pk(id: $id) {
@@ -101,7 +106,7 @@ export const Index: NextPage = () => {
       deleteQuery={DELETE_MUTATION}
       listQuery={LIST_QUERY}
       editQuery={EDIT_MUTATION}
-      searchQuery={SEARCH_QUERY}
+      aggregateQuery={LIST_AGGREGATE_QUERY}
     />
   )
 }

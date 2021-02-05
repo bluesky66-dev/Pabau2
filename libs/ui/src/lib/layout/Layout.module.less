@@ -8,12 +8,18 @@
 }
 .header-margin {
   margin-top: 80px;
+  @media screen and (max-width: 767px) {
+    margin-top: 64px;
+  }
 }
 .sidebar-margin {
   margin-left: 200px;
 }
 .collapsed-sidebar-margin {
   margin-left: 80px;
+  @media (max-width: 767px) {
+    margin-left: 0;
+  }
 }
 
 @media (min-width: 200px) and (max-width: 767px) {

@@ -1,6 +1,6 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable */
 import React from 'react'
-import * as Notification from './Notification'
+import { Notification, NotificationType } from './Notification'
 import { Button } from 'antd'
 
 export default {
@@ -12,7 +12,7 @@ export default {
       control: {
         type: 'select',
         selected: 'success',
-        options: ['success', 'edit', 'delete'],
+        options: ['success', 'info', 'error'],
       },
     },
     text: { control: { type: 'text' } },
@@ -20,19 +20,20 @@ export default {
   },
 }
 
-const Notification2Types = ['success', 'edit', 'delete']
+const Notification2Types = ['success', 'info', 'error']
 
 export const Notification1 = () => (
-  <Button onClick={() => Notification.openNotification('connect', '', 15)}>
+  <Button onClick={() => Notification(NotificationType.connect, '', 15)}>
     Click
   </Button>
 )
+
 export const Notification2 = () => (
   <div>
     {Notification2Types.map((type) => (
       <Button
         key={type}
-        onClick={() => Notification.openNotification(type, 'Message', 10)}
+        onClick={() => Notification(NotificationType[type], 'Message' )}
       >
         Click
       </Button>

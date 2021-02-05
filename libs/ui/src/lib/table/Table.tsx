@@ -5,12 +5,15 @@ import {
   SortableElement,
   SortableHandle,
 } from 'react-sortable-hoc'
-import { MenuOutlined } from '@ant-design/icons'
+import { LockOutlined, MenuOutlined } from '@ant-design/icons'
 import styles from './Table.module.less'
 import { TableProps } from 'antd/es/table'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as Icons from '@fortawesome/free-solid-svg-icons'
 export interface DragProps {
   draggable?: boolean
+  isCustomColorExist?: boolean
+  isCustomIconExist?: boolean
   updateDataSource?: ({ newData, oldIndex, newIndex }) => void
 }
 
@@ -37,13 +40,17 @@ function array_move(arr, old_index, new_index) {
   })
 }
 
-type P = {
+export type TableType = {
   onRowClick?: (e) => void
+  padlocked?: string[]
 } & TableProps<never> &
   DragProps
 
-export const Table: FC<P> = ({
+export const Table: FC<TableType> = ({
   dataSource = [],
+  padlocked,
+  isCustomColorExist = false,
+  isCustomIconExist = false,
   updateDataSource,
   onRowClick,
   ...props
@@ -92,16 +99,59 @@ export const Table: FC<P> = ({
     )
   }
 
+  const renderTableSource = (val, rowData) => {
+    return (
+      <div className={styles.alignItems}>
+        {isCustomColorExist && renderCustomColor(val, rowData)}
+        {val}
+        {padlocked?.includes(val) && (
+          <div style={{ marginLeft: '6px' }}>
+            <LockOutlined />
+          </div>
+        )}
+        {isCustomIconExist && (
+          <FontAwesomeIcon
+            icon={Icons[rowData.icon]}
+            className={styles.tableIcon}
+          />
+        )}
+      </div>
+    )
+  }
+
+  const renderCustomColor = (val, rowData) => {
+    return (
+      <div
+        style={{ background: rowData.color }}
+        className={styles.customColor}
+      ></div>
+    )
+  }
+
+  const checkPadLocks = (record) => {
+    let alloWClicked = true
+    Object.keys(record).map((key) => {
+      if (padlocked && padlocked.includes(record[key])) {
+        alloWClicked = false
+      }
+      return key
+    })
+    return alloWClicked
+  }
+
   const renderSortHandler = () => {
     if (props && props.columns) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       props.columns?.map((col: any) => {
         if (col && col.dataIndex === 'is_active') {
           col.render = renderActiveButton
+        } else {
+          col.render = renderTableSource
         }
         return col
       })
     }
+
     return props.draggable
       ? [{ ...dragColumn }, ...(props.columns || [])]
       : props.columns
@@ -113,8 +163,10 @@ export const Table: FC<P> = ({
       onRow={(record, rowIndex) => {
         return {
           onClick: (event) => {
-            console.log(event, record)
-            onRowClick?.(record)
+            if (checkPadLocks(record)) {
+              onRowClick?.(record)
+              console.log(event, record)
+            }
           }, // click row
           //   onDoubleClick: (event) => {}, // double click row
           //   onContextMenu: (event) => {}, // right button click row

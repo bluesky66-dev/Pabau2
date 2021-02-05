@@ -1,0 +1,64 @@
+.phone-number-input-container {
+  width: 100%;
+}
+
+.phone-number-input {
+  :global {
+    .react-tel-input {
+      position: relative;
+      .form-control {
+        width: 100%;
+        border-radius: 2px;
+        border: 1px solid #ecedf0;
+        height: 32px;
+        color: #595959;
+        font-family: 'Circular-Std-Book';
+        font-size: 16px;
+      }
+      .flag-dropdown {
+        position: absolute;
+        top: 1px;
+        left: 1px;
+        height: 30px;
+        background-color: white;
+        border: 1px solid transparent;
+        border-right: 1px solid #ecedf0;
+        color: #595959;
+        font-family: 'Circular-Std-Book';
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.red-border {
+  :global {
+    .react-tel-input {
+      .form-control {
+        border: 1px solid #ff5b64;
+      }
+    }
+  } 
+}
+
+.phone-number-label {
+  margin: 0;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 22px;
+  color: #9292a3;
+}
+
+.phone-number-valid-msg {
+  margin: 0;
+  margin-top: 2px;
+  color: #ff5b64;
+  font-family: 'Circular-Std-Book';
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.menu-container {
+  max-height: 300px;
+  overflow-y: auto;
+}
