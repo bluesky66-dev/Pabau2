@@ -1,52 +1,54 @@
-import { Button, ButtonTypes } from '@pabau/ui'
-import { Input } from 'antd'
+import {
+  MedicalFormBody,
+  MedicalFormBottom,
+  MedicalFormHeader,
+  MedicalFormTitle,
+} from '@pabau/ui'
 import React, { FC, useState } from 'react'
 import dropdownIcon from '../../assets/images/medicalform_dropdown.svg'
-import LinkedField from './LinkedField'
-import styles from './MedicalForm.module.less'
-import MedicalFormBottom from './MedicalFormBottom'
-import MedicalFormTitle from './MedicalFormTitle'
+import BasicElement from './BasicElement'
+import ElementAdvanced from './ElementAdvanced'
+import ElementQuestion from './ElementQuestion'
+import MedicalFormError from './MedicalFormError'
 import Options from './Options'
 
-const Dropdown: FC = () => {
-  const [advanced, setAdvanced] = useState(false)
+interface P {
+  hideSideBar?: () => void
+}
+
+const Dropdown: FC<P> = ({ hideSideBar }) => {
+  const [addedItems, setAddedItems] = useState(0)
+  const [errMsg, setErrMsg] = useState('')
+  const eventhandler = (count) => {
+    setAddedItems(count)
+    setErrMsg('')
+  }
+
+  const saveFunc = () => {
+    if (hideSideBar && addedItems > 0) {
+      setErrMsg('')
+      hideSideBar()
+    } else {
+      setErrMsg('Please add an option')
+    }
+  }
   return (
-    <div className={styles.mainBody}>
-      <div className={styles.formItem}>
-        <div className={`${styles.formCaption} ${styles.formCommon}`}>
-          <span>component settings</span>
-        </div>
-      </div>
-      <div className={styles.formItem}>
-        <MedicalFormTitle
-          iconUrl={dropdownIcon}
-          bgcolor="#65CD98"
-          title="Dropdown"
-          desc="A list of options that can be ticked"
-        />
-      </div>
-      <div className={styles.formItem}>
-        <div className={`${styles.formQuestion} ${styles.formCommon}`}>
-          <p style={{ marginTop: '5px' }}>Question</p>
-          <Input placeholder="Enter your question" />
-          <Options />
-          {advanced && <LinkedField linkedLabel="Linked field" />}
-          <br />
-          <Button
-            type={ButtonTypes.default}
-            style={{ marginTop: '15px' }}
-            onClick={(e) => setAdvanced((advanced) => !advanced)}
-            size="small"
-          >
-            {!advanced && `Show advanced settings`}
-            {advanced && `Hide advanced settings`}
-          </Button>
-        </div>
-      </div>
-      <div className={styles.formItem} style={{ borderBottom: 'none' }}>
-        <MedicalFormBottom needLeft={true} />
-      </div>
-    </div>
+    <BasicElement>
+      <MedicalFormHeader title="component settings" />
+      <MedicalFormTitle
+        iconUrl={dropdownIcon}
+        bgcolor="#65CD98"
+        title="Dropdown"
+        desc="A list of options that can be ticked"
+      />
+      <MedicalFormBody>
+        <ElementQuestion desc="Enter your question" title="Question" />
+        <Options onChange={eventhandler} />
+        {errMsg !== '' && <MedicalFormError errMsg={errMsg} />}
+        <ElementAdvanced />
+      </MedicalFormBody>
+      <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
+    </BasicElement>
   )
 }
 

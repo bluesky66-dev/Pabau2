@@ -1,6 +1,5 @@
 import React from 'react'
-
-import { SettingsMenu, Button, Notification } from '@pabau/ui'
+import { SettingsMenu, Button, Notification, NotificationType } from '@pabau/ui'
 import { Card } from 'antd'
 import CommonHeader from '../setup/CommonHeader'
 import { Layout } from '@pabau/ui'
@@ -35,7 +34,7 @@ export function Calendar(props: CalendarProps) {
   ]
 
   const onSaveChange = () => {
-    Notification.openNotification('success', 'Saved Successfully', 2)
+    Notification(NotificationType['success'], 'Saved Successfully')
   }
 
   return (

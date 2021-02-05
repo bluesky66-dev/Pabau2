@@ -1,11 +1,13 @@
-import React, { FC, useEffect, useState } from 'react'
-import { ClientNotification } from '@pabau/ui'
-// eslint-disable-next-line
-import Standard from '../../../../libs/ui/src/lib/standard/Standard'
-// eslint-disable-next-line
-import Appointment from '../../../../libs/ui/src/lib/appointment/Appointment'
+import React, { FC, useState } from 'react'
+import { ClientNotification, Standard, Appointment, Smstext } from '@pabau/ui'
 
-const Index: FC = () => {
+interface P {
+  onSeletedTab: (number) => void
+}
+
+const Index: FC<P> = ({ onSeletedTab }) => {
+  const [enableReminder, setEnableReminder] = useState(false)
+  const [smartDelivery, setSmartDelivery] = useState(false)
   const [requestConfirmation, setRequestConfirmation] = useState(true)
   const [allowRescheduling, setAllowRescheduling] = useState(true)
   const [allowCancellation, setAllowCancellation] = useState(true)
@@ -15,32 +17,56 @@ const Index: FC = () => {
   const [addMedicalHisButton, setAddMedicalHisButton] = useState(true)
   const [backGroundColor, setBackGroundColor] = useState('')
   const [buttonColor, setButtonColor] = useState('')
-  const [selectLanguage, setSelectLanguage] = useState('en')
+  const [selectLanguage, setSelectLanguage] = useState('fr')
   const [medicalMessage, setMedicalMessage] = useState('')
   const [informationMessage, setInformationMessage] = useState('')
 
-  useEffect(() => {
-    console.log('object')
-  })
+  function handleSelectedTab(value) {
+    onSeletedTab(value)
+  }
   return (
     <ClientNotification
+      onSmsTabChanged={(value) => {
+        if (value === 2) {
+          handleSelectedTab(value)
+          setEnableReminder(true)
+          setSmartDelivery(true)
+        } else {
+          handleSelectedTab(value)
+          setEnableReminder(false)
+          setSmartDelivery(false)
+        }
+      }}
       tabComponent={
         <Standard
-          requestConfirmHook={[requestConfirmation, setRequestConfirmation]}
-          allowReschedulingHook={[allowRescheduling, setAllowRescheduling]}
-          allowCancellationHook={[allowCancellation, setAllowCancellation]}
-          displayPolicyHook={[displayPolicy, setDisplayPolicy]}
-          showServiceHook={[showService, setShowService]}
-          showEmployeeNameHook={[showEmployeeName, setShowEmployeeName]}
-          addMedicalHisButtonHook={[
-            addMedicalHisButton,
-            setAddMedicalHisButton,
-          ]}
-          selectLanguageHook={[selectLanguage, setSelectLanguage]}
-          backGroundColorHook={[backGroundColor, setBackGroundColor]}
-          buttonColorHook={[buttonColor, setButtonColor]}
-          informationMessageHook={[informationMessage, setInformationMessage]}
-          medicalMessageHook={[medicalMessage, setMedicalMessage]}
+          enableReminder={enableReminder}
+          onEnableReminder={(value) => setEnableReminder(value)}
+          smartDelivery={smartDelivery}
+          onSmartDelivery={(value) => setSmartDelivery(value)}
+          requestConfirmation={requestConfirmation}
+          onRequestConfirmation={(value) => setRequestConfirmation(value)}
+          allowRescheduling={allowRescheduling}
+          onAllowRescheduling={(value) => setAllowRescheduling(value)}
+          allowCancellation={allowCancellation}
+          onAllowCancellation={(value) => setAllowCancellation(value)}
+          displayPolicy={displayPolicy}
+          onDisplayPolicy={(value) => setDisplayPolicy(value)}
+          showService={showService}
+          onShowService={(value) => setShowService(value)}
+          showEmployeeName={showEmployeeName}
+          onShowEmployeeName={(value) => setShowEmployeeName(value)}
+          addMedicalHisButton={addMedicalHisButton}
+          onAddMedicalHisButton={(value) => setAddMedicalHisButton(value)}
+          backGroundColor={backGroundColor}
+          onBackGroundColor={(value) => setBackGroundColor(value)}
+          buttonColor={buttonColor}
+          onButtonColor={(value) => setButtonColor(value)}
+          selectLanguage={selectLanguage}
+          onSelectLanguage={(value) => setSelectLanguage(value)}
+          medicalMessage={medicalMessage}
+          onMedicalMessage={(value) => setMedicalMessage(value)}
+          informationMessage={informationMessage}
+          onInformationMessage={(value) => setInformationMessage(value)}
         />
       }
       previewComponent={
@@ -59,7 +85,12 @@ const Index: FC = () => {
           medicalMessage={medicalMessage}
         />
       }
-      smsComponent={<div>this is sms component</div>}
+      smsComponent={
+        <Smstext
+        // enableReminder={enableReminder}
+        // smartDelivery={smartDelivery}
+        />
+      }
     />
   )
 }

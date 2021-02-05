@@ -12,6 +12,7 @@ interface P {
   newButtonText?: string
   title?: string
   modalWidth?: number
+  footer?: boolean
 
   /**
    * Creates a special tickbox next to the OK button
@@ -44,6 +45,8 @@ export function BasicModal({
   onSpecialBooleanClick,
   newButtonText = 'OK',
   dangerButtonText,
+  footer = true,
+  wrapClassName,
   ...props
 }: PropsWithChildren<P & ModalProps>): JSX.Element {
   return (
@@ -57,32 +60,34 @@ export function BasicModal({
       width={modalWidth}
       // destroyOnClose={true}
       // modalRender={(E) => E}
-      wrapClassName={styles.modal}
+      wrapClassName={styles.modal + ' ' + wrapClassName}
       {...props}
     >
-      <div className={styles.modalBody}>{children}</div>
-      <div className={styles.modalFooter}>
-        {specialBooleanLabel && onSpecialBooleanClick && (
-          <Checkbox
-            defaultChecked={specialBooleanValue}
-            onClick={onSpecialBooleanClick}
-          >
-            {specialBooleanLabel}
-          </Checkbox>
-        )}
-        {dangerButtonText && (
-          <Button
-            type="default"
-            className={styles.deleteBtnStyle}
-            onClick={() => onDelete?.()}
-          >
-            {dangerButtonText}
+      <div>{children}</div>
+      {footer && (
+        <div className={styles.modalFooter}>
+          {specialBooleanLabel && onSpecialBooleanClick && (
+            <Checkbox
+              defaultChecked={specialBooleanValue}
+              onClick={onSpecialBooleanClick}
+            >
+              {specialBooleanLabel}
+            </Checkbox>
+          )}
+          {dangerButtonText && (
+            <Button
+              type="default"
+              className={styles.deleteBtnStyle}
+              onClick={() => onDelete?.()}
+            >
+              {dangerButtonText}
+            </Button>
+          )}
+          <Button type="primary" onClick={() => onOk?.()}>
+            {newButtonText}
           </Button>
-        )}
-        <Button type="primary" onClick={() => onOk?.()}>
-          {newButtonText}
-        </Button>
-      </div>
+        </div>
+      )}
     </Modal>
   )
 }
