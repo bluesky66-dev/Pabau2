@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { FC } from 'react'
 import Sentmail from '../../assets/images/sent-mail.svg'
 import styles from './NewsletterDelivery.module.less'

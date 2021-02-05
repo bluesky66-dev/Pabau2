@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { FC } from 'react'
 import NewsletterSent, { NewsletterSentProps } from './NewsletterSent'
 
