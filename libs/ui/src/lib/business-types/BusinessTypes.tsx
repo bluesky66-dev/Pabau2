@@ -16,7 +16,7 @@ export const BusinessTypes: FC<BusinessTypesProps> = ({
   const [selected, setSelected] = useState('')
   const handleClickItem = (val) => {
     setSelected(val)
-    onSelected && onSelected(val)
+    onSelected?.(val)
   }
 
   useEffect(() => {

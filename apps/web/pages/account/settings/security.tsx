@@ -4,8 +4,8 @@ import {
   LaptopOutlined,
   MobileOutlined,
 } from '@ant-design/icons'
-import { Passcode, PasswordWithHelper } from '@pabau/ui'
-import { Button, Descriptions, Divider, Form, Input } from 'antd'
+import { Passcode, PasswordWithHelper, Button } from '@pabau/ui'
+import { Descriptions, Divider, Form, Input } from 'antd'
 import React, { FC } from 'react'
 
 // const Passcode = dynamic(() => import('../../../components/Passcode'), {

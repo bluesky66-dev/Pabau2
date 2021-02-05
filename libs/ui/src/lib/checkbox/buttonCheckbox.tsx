@@ -19,7 +19,7 @@ export function ButtonCheckbox({
     <div className={styles.buttonCheckbox}>
       <Button
         shape="round"
-        onClick={() => setActivate(!activate)}
+        onClick={() => setActivate((activate) => !activate)}
         icon={activate === true ? <CheckOutlined /> : ''}
         className={activate === true ? styles.chkActive : styles.chkInActive}
         disabled={disabled}

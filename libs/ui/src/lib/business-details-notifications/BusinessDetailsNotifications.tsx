@@ -126,7 +126,7 @@ export const BusinessDetailsNotifications: FC<BusinessDetailsNotificationsProps>
   const [configs, setConfigs] = useState<NotificationConfig[]>([])
   const handleSaveChanges = () => {
     Notification(NotificationType.success, 'Successfully saved changes')
-    onSave && onSave(configs)
+    onSave?.(configs)
   }
 
   useEffect(() => {

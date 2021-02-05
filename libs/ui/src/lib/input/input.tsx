@@ -35,7 +35,7 @@ export function Input({
   const [form] = Form.useForm()
   const [rules, setRules] = useState<Rule[]>([])
   const handleInputChange = (e) => {
-    onChange && onChange(e.target.value)
+    onChange?.(e.target.value)
   }
 
   useEffect(() => {

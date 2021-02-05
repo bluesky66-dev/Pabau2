@@ -17,84 +17,68 @@ import RUSSVG from './russian.svg'
 export const languageMenu = [
   {
     label: 'English (UK)',
-    shortLabel: 'EN-UK',
     logo: ENSVG,
     selected: true,
   },
   {
     label: 'English (US)',
-    shortLabel: 'EN-US',
     logo: USSVG,
     selected: true,
   },
   {
     label: 'French',
-    shortLabel: 'FR',
     logo: FRSVG,
   },
   {
     label: 'Spanish',
-    shortLabel: 'SP',
     logo: SPSVG,
   },
   {
     label: 'Arabic',
-    shortLabel: 'AR',
     logo: ARSVG,
   },
   {
     label: 'Bulgarian',
-    shortLabel: 'BG',
     logo: BRSVG,
   },
   {
     label: 'Czech',
-    shortLabel: 'CS',
     logo: CZSVG,
   },
   {
     label: 'Danish',
-    shortLabel: 'DA',
     logo: FRSVG,
   },
   {
     label: 'Hungarian',
-    shortLabel: 'HU',
     logo: HGSVG,
   },
   {
     label: 'Latvian',
-    shortLabel: 'LV',
     logo: LTSVG,
   },
   {
     label: 'Norwegian',
-    shortLabel: 'NO',
     logo: NWSVG,
   },
   {
     label: 'Polish',
-    shortLabel: 'PL',
     logo: POSVG,
   },
   {
     label: 'Spannish',
-    shortLabel: 'SH',
     logo: SHSVG,
   },
   {
     label: 'Swedish',
-    shortLabel: 'SW',
     logo: SWSVG,
   },
   {
     label: 'Romanian',
-    shortLabel: 'RO',
     logo: ROMSVG,
   },
   {
     label: 'Russian',
-    shortLabel: 'RU',
     logo: RUSSVG,
   },
 ]

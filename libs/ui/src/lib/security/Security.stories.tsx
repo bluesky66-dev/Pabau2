@@ -21,7 +21,7 @@ export default {
 }
 
 const SecurityStory = ({ ...args }) => {
-  return <Security {...args} percent={args.percent} data={args.data}></Security>
+  return <Security {...args}></Security>
 }
 
 const securityToolsData = [
@@ -29,7 +29,7 @@ const securityToolsData = [
     id: '1',
     title: 'Force 2FA',
     name: 'Start a video call from your conversations',
-    imgPath: <VideoCameraOutlined />,
+    imgSrc: <VideoCameraOutlined />,
     isActive: true,
     modalType: 1,
     modalTitle: 'Force 2FA',
@@ -40,7 +40,7 @@ const securityToolsData = [
     id: '2',
     title: 'Autorized Devices',
     name: 'Create details and send conversations to Pipedrive',
-    imgPath: <TabletOutlined />,
+    imgSrc: <TabletOutlined />,
     isActive: true,
     modalType: 2,
   },
@@ -48,7 +48,7 @@ const securityToolsData = [
     id: '3',
     title: 'Password Expiration',
     name: 'Create details and send conversations to Pipedrive',
-    imgPath: <UnlockOutlined />,
+    imgSrc: <UnlockOutlined />,
     isActive: false,
     modalType: 2,
     modalTitle: 'Password Expiration',
@@ -74,7 +74,7 @@ const securityToolsData = [
     id: '4',
     title: 'Encrypted Emails',
     name: 'Create details and send conversations to Pipedrive',
-    imgPath: <MailOutlined />,
+    imgSrc: <MailOutlined />,
     isActive: true,
     modalType: 3,
     modalTitle: 'Encrypted Emails',
@@ -85,7 +85,7 @@ const securityToolsData = [
     id: '5',
     title: 'Encrypted Encryption',
     name: 'Create details and send conversations to Pipedrive',
-    imgPath: <KeyOutlined />,
+    imgSrc: <KeyOutlined />,
     isActive: false,
     modalType: 4,
   },

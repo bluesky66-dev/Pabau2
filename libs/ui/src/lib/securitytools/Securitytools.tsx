@@ -42,7 +42,7 @@ export interface SecurityToolsItemInfo {
   id: string
   title: string
   name: string
-  imgPath: ReactNode
+  imgSrc: ReactNode
   isActive: boolean
   modalType: number
 }
@@ -57,7 +57,7 @@ function Item(props: ItemProps) {
   return (
     <div onClick={(event) => handleClick()}>
       <div className={styles.container}>
-        <div className={styles.colStatusLabel}>{item.imgPath}</div>
+        <div className={styles.colStatusLabel}>{item.imgSrc}</div>
         <div className={styles.containercol}>
           <span className={styles.p1}>{item.title}</span>
           <span className={styles.p2}>{item.name}</span>

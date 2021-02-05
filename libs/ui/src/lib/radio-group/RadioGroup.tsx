@@ -20,20 +20,18 @@ export const RadioGroup: FC<RadioGroupProps> = ({
   ...props
 }) => {
   const [form] = Form.useForm()
-  const [_value, setValue] = useState(0)
+  const [radioChecked, setRadioChecked] = useState(0)
   const onRadioChecked = (e) => {
-    setValue(e.target.value)
-    if (onChange) {
-      onChange(radioItems[e.target.value])
-    }
+    setRadioChecked(e.target.value)
+    onChange?.(radioItems[e.target.value])
   }
 
   useEffect(() => {
     const elIndex = radioItems.findIndex((el) => el === value)
     if (elIndex < 0) {
-      setValue(0)
+      setRadioChecked(0)
     } else {
-      setValue(elIndex)
+      setRadioChecked(elIndex)
     }
   }, [value, radioItems])
 
@@ -41,14 +39,12 @@ export const RadioGroup: FC<RadioGroupProps> = ({
     <div className={styles.radioGroupContainer}>
       <Form form={form} layout="vertical" {...props}>
         <Form.Item label={label} tooltip={tooltip ? tooltip : ''}>
-          <Radio.Group onChange={(e) => onRadioChecked(e)} value={_value}>
-            {Array.isArray(radioItems) &&
-              radioItems.length > 0 &&
-              radioItems.map((item, index) => (
-                <Radio key={item} value={index}>
-                  {item}
-                </Radio>
-              ))}
+          <Radio.Group onChange={(e) => onRadioChecked(e)} value={radioChecked}>
+            {radioItems?.map((item, index) => (
+              <Radio key={item} value={index}>
+                {item}
+              </Radio>
+            ))}
           </Radio.Group>
         </Form.Item>
       </Form>

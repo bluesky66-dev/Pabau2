@@ -26,7 +26,7 @@ export const LanguageDropdown: FC<LanguageDropdownProps> = ({
   const handleClickSelect = (e) => {
     const text = e.target.innerText
     setSelected(text.substring(1, text.length))
-    onSelected && onSelected(text.substring(1, text.length))
+    onSelected?.(text.substring(1, text.length))
   }
   useEffect(() => {
     if (value) {

@@ -133,30 +133,29 @@ export const Terminology: FC<TerminologyProps> = ({
   optIns,
   onSave,
 }) => {
-  const [_config, setConfig] = useState(defaultConfig)
-  const [_optIns, setOptIns] = useState(defaultOptIns)
+  const [configs, setConfigs] = useState(defaultConfig)
+  const [optInsItems, setOptInsItems] = useState(defaultOptIns)
   const handleConfigItemChange = ({ index, itemIndex, val }) => {
-    const configItems = [..._config]
+    const configItems = [...configs]
     configItems[index].items[itemIndex].value = val
-    setConfig(configItems)
+    setConfigs(configItems)
   }
   const handleOptInsItemChange = ({ index, itemIndex, val }) => {
-    const OptInsItems = [..._optIns]
+    const OptInsItems = [...optInsItems]
     OptInsItems[index].items[itemIndex].value = val
-    setOptIns(OptInsItems)
+    setOptInsItems(OptInsItems)
   }
   const handleSaveChanges = () => {
     Notification(NotificationType.success, 'Successfully saved changes')
-    onSave &&
-      onSave({
-        config: _config,
-        optIns: _optIns,
-      })
+    onSave?.({
+      config: configs,
+      optIns: optInsItems,
+    })
   }
 
   useEffect(() => {
-    setConfig(config ? config : defaultConfig)
-    setOptIns(optIns ? optIns : defaultOptIns)
+    setConfigs(config || defaultConfig)
+    setOptInsItems(optIns || defaultOptIns)
   }, [config, optIns])
 
   return (
@@ -176,53 +175,49 @@ export const Terminology: FC<TerminologyProps> = ({
         </div>
       </div>
       <Divider />
-      {Array.isArray(_config) &&
-        _config.length > 0 &&
-        _config.map((configItem, index) => (
-          <div className={styles.configItem} key={configItem.title}>
-            <div className={styles.terminologySubContainer}>
-              <p className={styles.configSubTitle}>{configItem.title}</p>
-              <Row gutter={[32, 28]}>
-                {configItem.items.map((item, itemIndex) => (
-                  <Col className="gutter-row" xs={24} sm={12} key={item.key}>
-                    <Input
-                      text={item.value}
-                      label={item.key}
-                      onChange={(val) =>
-                        handleConfigItemChange({ index, itemIndex, val })
-                      }
-                    />
-                  </Col>
-                ))}
-              </Row>
-            </div>
-            <Divider />
+      {configs?.map((configItem, index) => (
+        <div className={styles.configItem} key={configItem.title}>
+          <div className={styles.terminologySubContainer}>
+            <p className={styles.configSubTitle}>{configItem.title}</p>
+            <Row gutter={[32, 28]}>
+              {configItem.items.map((item, itemIndex) => (
+                <Col className="gutter-row" xs={24} sm={12} key={item.key}>
+                  <Input
+                    text={item.value}
+                    label={item.key}
+                    onChange={(val) =>
+                      handleConfigItemChange({ index, itemIndex, val })
+                    }
+                  />
+                </Col>
+              ))}
+            </Row>
           </div>
-        ))}
+          <Divider />
+        </div>
+      ))}
       <p className={styles.configTitle}>Opt Ins</p>
-      {Array.isArray(_optIns) &&
-        _optIns.length > 0 &&
-        _optIns.map((optInsItem, index) => (
-          <div className={styles.configItem} key={optInsItem.title}>
-            <div className={styles.terminologySubContainer}>
-              <p className={styles.configSubTitle}>{optInsItem.title}</p>
-              <Row gutter={[32, 28]}>
-                {optInsItem.items.map((item, itemIndex) => (
-                  <Col className="gutter-row" xs={24} sm={12} key={item.key}>
-                    <Input
-                      text={item.value}
-                      label={item.key}
-                      onChange={(val) =>
-                        handleOptInsItemChange({ index, itemIndex, val })
-                      }
-                    />
-                  </Col>
-                ))}
-              </Row>
-            </div>
-            <Divider />
+      {optInsItems?.map((optInsItem, index) => (
+        <div className={styles.configItem} key={optInsItem.title}>
+          <div className={styles.terminologySubContainer}>
+            <p className={styles.configSubTitle}>{optInsItem.title}</p>
+            <Row gutter={[32, 28]}>
+              {optInsItem.items.map((item, itemIndex) => (
+                <Col className="gutter-row" xs={24} sm={12} key={item.key}>
+                  <Input
+                    text={item.value}
+                    label={item.key}
+                    onChange={(val) =>
+                      handleOptInsItemChange({ index, itemIndex, val })
+                    }
+                  />
+                </Col>
+              ))}
+            </Row>
           </div>
-        ))}
+          <Divider />
+        </div>
+      ))}
     </div>
   )
 }

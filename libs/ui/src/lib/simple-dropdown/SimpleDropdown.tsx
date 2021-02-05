@@ -44,13 +44,11 @@ export const SimpleDropdown: FC<SimpleDropdownProps> = ({
             onChange={(value) => handleClickSelect(value)}
             size={size}
           >
-            {Array.isArray(dropdownItems) &&
-              dropdownItems.length > 0 &&
-              dropdownItems.map((item) => (
-                <Select.Option key={item} value={item}>
-                  {item}
-                </Select.Option>
-              ))}
+            {dropdownItems?.map((item) => (
+              <Select.Option key={item} value={item}>
+                {item}
+              </Select.Option>
+            ))}
           </Select>
         </Form.Item>
       </Form>

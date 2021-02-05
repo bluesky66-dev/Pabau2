@@ -33,19 +33,19 @@ const defaultConfig: MedicalConfig = {
 }
 
 export const System: FC<SystemProps> = ({ config, onSave }) => {
-  const [_config, setConfig] = useState<MedicalConfig>(defaultConfig)
+  const [configs, setConfigs] = useState<MedicalConfig>(defaultConfig)
   const handleSaveChanges = () => {
     Notification(NotificationType.success, 'Successfully saved changes')
-    onSave && onSave(_config)
+    onSave?.(configs)
   }
   const handleItemChange = (change) => {
-    const configChange: MedicalConfig = { ..._config }
+    const configChange: MedicalConfig = { ...configs }
     configChange[change.key] = change.value
-    setConfig(configChange)
+    setConfigs(configChange)
   }
 
   useEffect(() => {
-    setConfig(config || defaultConfig)
+    setConfigs(config || defaultConfig)
   }, [config])
 
   return (
@@ -70,7 +70,7 @@ export const System: FC<SystemProps> = ({ config, onSave }) => {
             <SimpleDropdown
               label="Tretment Cycles"
               tooltip="Tretment Cycles"
-              value={_config.tretmentCycles}
+              value={configs.tretmentCycles}
               dropdownItems={['Always display']}
               onSelected={(val) =>
                 handleItemChange({ key: 'tretmentCycles', value: val })
@@ -81,7 +81,7 @@ export const System: FC<SystemProps> = ({ config, onSave }) => {
             <RadioGroup
               label="Secure Medical Forms"
               tooltip="Secure Medical Forms"
-              value={_config.secureMedicalForms === true ? 'Yes' : 'No'}
+              value={configs.secureMedicalForms === true ? 'Yes' : 'No'}
               radioItems={['Yes', 'No']}
               onChange={(val) =>
                 handleItemChange({
@@ -95,7 +95,7 @@ export const System: FC<SystemProps> = ({ config, onSave }) => {
             <RadioGroup
               label="Disable Prescriptions"
               tooltip="Disable Prescriptions"
-              value={_config.disablePrescriptions === true ? 'Yes' : 'No'}
+              value={configs.disablePrescriptions === true ? 'Yes' : 'No'}
               radioItems={['Yes', 'No']}
               onChange={(val) =>
                 handleItemChange({
@@ -109,7 +109,7 @@ export const System: FC<SystemProps> = ({ config, onSave }) => {
             <RadioGroup
               label="Perform Surgical"
               tooltip="Perform Surgical"
-              value={_config.performSurgical === true ? 'Yes' : 'No'}
+              value={configs.performSurgical === true ? 'Yes' : 'No'}
               radioItems={['Yes', 'No']}
               onChange={(val) =>
                 handleItemChange({
@@ -123,7 +123,7 @@ export const System: FC<SystemProps> = ({ config, onSave }) => {
             <RadioGroup
               label="Medical Approvals"
               tooltip="Medical Approvals"
-              value={_config.medicalApprovals === true ? 'Yes' : 'No'}
+              value={configs.medicalApprovals === true ? 'Yes' : 'No'}
               radioItems={['Yes', 'No']}
               onChange={(val) =>
                 handleItemChange({
@@ -137,7 +137,7 @@ export const System: FC<SystemProps> = ({ config, onSave }) => {
             <RadioGroup
               label="History Data"
               tooltip="History Data"
-              value={_config.historyData === true ? 'Yes' : 'No'}
+              value={configs.historyData === true ? 'Yes' : 'No'}
               radioItems={['Yes', 'No']}
               onChange={(val) =>
                 handleItemChange({ key: 'historyData', value: val === 'Yes' })
