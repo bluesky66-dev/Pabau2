@@ -1,13 +1,14 @@
-/* eslint-disable */
 import React from 'react'
-import FormtypePanel, { FormtypeProps } from './Formtype'
+import FormType, { FormTypeProps } from './Formtype'
 
 export default {
-  component: FormtypePanel,
+  component: FormType,
   title: 'UI/Form Type',
 }
 
-const FormtypeStory = ({ ...args }:FormtypeProps) => <FormtypePanel {...args}></FormtypePanel>
+const FormtypeStory = ({ ...args }: FormTypeProps) => (
+  <FormType {...args}></FormType>
+)
 
 export const Formtype = FormtypeStory.bind({})
 Formtype.args = {
@@ -19,6 +20,5 @@ Formtype.args = {
     presciption: false,
     labForm: false,
   },
-  onChangeSetting: (setting) => console.log(setting)
+  onChangeSetting: (setting) => console.log(setting),
 }
-

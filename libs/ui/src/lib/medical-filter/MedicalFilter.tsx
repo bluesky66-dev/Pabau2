@@ -1,5 +1,5 @@
-import React, { FC, useState, useEffect } from 'react'
-import { Button, Formtype, LanguageDropdown } from '@pabau/ui'
+import React, { FC, useState } from 'react'
+import { Button, FormType, LanguageDropdown } from '@pabau/ui'
 import { Popover } from 'antd'
 import { FilterOutlined } from '@ant-design/icons'
 import styles from './MedicalFilter.module.less'
@@ -82,7 +82,7 @@ export const MedicalFilter: FC<MedicalFilterProps> = ({ filter, onApply }) => {
         </Button>
       </div>
       <p className={styles.filterViewerSubTitle}>Form type</p>
-      <Formtype
+      <FormType
         setting={filters.formtype}
         onChangeSetting={(val) => handleChangeSetting(val)}
       />
@@ -96,9 +96,6 @@ export const MedicalFilter: FC<MedicalFilterProps> = ({ filter, onApply }) => {
       </Button>
     </div>
   )
-  useEffect(() => {
-    setFilters(filter || defaultFilter)
-  }, [filter])
   return (
     <div>
       <Popover

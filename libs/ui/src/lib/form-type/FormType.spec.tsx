@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import Formtype from './Formtype'
+import FormType from './Formtype'
 
 const setting = {
   medicalHistory: false,
@@ -12,10 +12,10 @@ const setting = {
   labForm: false,
 }
 
-describe('Formtype', () => {
+describe('FormType', () => {
   it('should render successfully', () => {
     const { baseElement } = render(
-      <Formtype setting={setting} onChangeSetting={(val) => val} />
+      <FormType setting={setting} onChangeSetting={(val) => val} />
     )
     expect(baseElement).toBeTruthy()
   })

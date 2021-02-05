@@ -23,9 +23,9 @@ interface Setting {
   presciption: boolean
   labForm: boolean
 }
-export interface FormtypeProps {
+export interface FormTypeProps {
   setting: Setting
-  onChangeSetting(val): void
+  onChangeSetting: (val: Setting) => void
 }
 
 interface FormTypeInfo {
@@ -85,7 +85,7 @@ const defaultTypeInfos: FormTypeInfo = {
   },
 }
 
-export const Formtype: FC<FormtypeProps> = ({ setting, onChangeSetting }) => {
+export const FormType: FC<FormTypeProps> = ({ setting, onChangeSetting }) => {
   const aligns = [
     styles.formTypeStart,
     styles.formTypeCenter,
@@ -150,4 +150,4 @@ export const Formtype: FC<FormtypeProps> = ({ setting, onChangeSetting }) => {
   )
 }
 
-export default Formtype
+export default FormType
