@@ -78,7 +78,7 @@ HEREDOC
 
 else
   echo "===== Processing type PR ====="
-  OUTPUT=$(cd "dist/apps/${APP_NAME}/exported" && vercel -c -C --token "${VERCEL_TOKEN}" -A ./vercel.json)
+  OUTPUT=$(cd "dist/apps/${APP_NAME}/exported" && vercel -c -C --token "${VERCEL_TOKEN}" -T pabau2 -A ./vercel.json)
   echo "errorlevel: $?"
   echo "Output from vercel:"
   echo "${OUTPUT}"
