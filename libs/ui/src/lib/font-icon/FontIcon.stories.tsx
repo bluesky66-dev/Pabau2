@@ -2,7 +2,7 @@ import React from 'react'
 import FontIconBox from './FontIcon'
 
 export default {
-  title: 'Font Icon',
+  title: 'Basics/Font Icon',
 }
 
 const FonticonStory = ({ ...args }) => <FontIconBox {...args}></FontIconBox>

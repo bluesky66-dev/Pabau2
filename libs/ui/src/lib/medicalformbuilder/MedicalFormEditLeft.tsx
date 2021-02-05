@@ -17,11 +17,15 @@ const MedicalFormEditLeft: FC = () => {
         <Panel
           header="GENERAL"
           key="1"
-          className={styles.medicalFormEditLeftPanelCollapsePanel}
+          className={styles.medicalFormEditLeftPanelCollapseGeneral}
         >
           <MedicalFormGeneralPanel />
         </Panel>
-        <Panel header="COMPONENTS" key="2">
+        <Panel
+          header="COMPONENTS"
+          key="2"
+          className={styles.medicalFormEditLeftPanelCollapseComponent}
+        >
           <MedicalFormComponentPanel />
         </Panel>
       </Collapse>

@@ -5,7 +5,7 @@ interface P {
   title?: string
 }
 
-const MedicalFormHeader: FC<P> = ({ title }) => {
+export const MedicalFormHeader: FC<P> = ({ title }) => {
   return (
     <div className={styles.formItem}>
       <div className={`${styles.formCaption} ${styles.formCommon}`}>
