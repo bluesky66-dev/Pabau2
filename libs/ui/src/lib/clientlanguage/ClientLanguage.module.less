@@ -123,7 +123,84 @@
       }
     }
   }
+
+  .preferredLanguageMouseIn {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 75px;
+    padding: 3px 6px;
+    border-radius: 3px;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    position: relative;
+    .language-name {
+      margin-left: 8px;
+    }
+    .popover {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 60px;
+    }
+    .close-badge {
+      position: absolute;
+      right: 3px;
+      top: 3px;
+      opacity: 0;
+      font-size: 8px;
+      color: #54b2d3;
+    }
+    
+      border: 1px solid #54b2d3;
+      cursor: pointer;
+      .close-badge {
+        opacity: 1;
+      }
+    
+  }
 }
+
+.preferredLanguageMouseOut {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 75px;
+  padding: 3px 6px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  position: relative;
+  .language-name {
+    margin-left: 8px;
+  }
+  .popover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 60px;
+  }
+  .close-badge {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    opacity: 0;
+    font-size: 8px;
+    color: #54b2d3;
+  }
+  
+    border: 1px solid #54b2d3;
+    cursor: pointer;
+    .close-badge {
+      opacity: 1;
+    }
+  
+}
+
 .pop-button {
   width: 26px;
   color: #54b2d3;

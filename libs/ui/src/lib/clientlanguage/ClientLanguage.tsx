@@ -244,6 +244,7 @@ export const ClientLanguage: FC<ClientLanguageProps> = ({
 
   function checkEvent1(value) {
     if (isHover) {
+      setFlagStatus(true)
       setSelectLanguage(value)
     }
   }
@@ -266,6 +267,10 @@ export const ClientLanguage: FC<ClientLanguageProps> = ({
                   flagStatus && item.shortLabel === selectLanguage
                     ? styles.preferredLanguage
                     : styles.preferredLanguageOut
+                } ${
+                  isHover && item.shortLabel === selectLanguage
+                    ? styles.preferredLanguageMouseIn
+                    : styles.preferredLanguageMouseOut
                 }`}
                 onMouseEnter={() => checkEvent1(item.shortLabel)}
                 onClick={() => checkEvent2(item.shortLabel)}
