@@ -7,10 +7,10 @@ export interface OrderDiscrepancyProps {
   number: number
 }
 
-export const OrderDiscrepancy:FC<OrderDiscrepancyProps> = ({ 
-  word, 
-  number, 
-  ...rest 
+export const OrderDiscrepancy: FC<OrderDiscrepancyProps> = ({
+  word,
+  number,
+  ...rest
 }) => {
   return (
     <div className={styles.orderDiscrepancy}>
@@ -18,7 +18,7 @@ export const OrderDiscrepancy:FC<OrderDiscrepancyProps> = ({
         <div className={styles.positive}>{`+${number}`}</div>
       ) : word === 0 ? (
         <div className={styles.negative}>{`-${number}`}</div>
-      ): ('')}
+      ) : ('')}
     </div>
   )
 }
