@@ -28,7 +28,6 @@ export const ClientNotification: FC<P> = ({
   const [previewStatus, setPreviewStatus] = React.useState(1)
 
   function handleSmsTabChanged(value) {
-    console.log(value)
     setPreviewStatus(value)
     if (onSmsTabChanged) {
       onSmsTabChanged(value)

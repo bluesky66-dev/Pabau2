@@ -55,6 +55,7 @@ interface P {
   smsMessage: string
   onSmsMessage: (string) => void
   onActiveSocialIcon: (value: string[]) => void
+  disableCustomTab: boolean
 }
 
 const { TabPane } = Tabs
@@ -96,6 +97,7 @@ export const Standard: FC<P> = ({
   smsMessage,
   onSmsMessage,
   onActiveSocialIcon,
+  disableCustomTab,
 }) => {
   function callback(key) {
     onStandardTabChanged(key)
@@ -427,63 +429,71 @@ export const Standard: FC<P> = ({
                   <ClientLanguage
                     selectLanguageHook={[selectLanguage, onSelectLanguage]}
                     defaultLanguage="EN"
+                    isClickable={false}
+                    isHover={true}
                   />
                 </Row>
               </Panel>
             </Collapse>
           </div>
         </TabPane>
-        <TabPane tab="Custom" key="2">
-          <div style={{ padding: '10px 9px' }}>
-            <Row style={{ padding: '0 15px' }}>
-              <span>
-                Design or upload your own custom email from your
-                <span className={styles.anchor}>
-                  <Button type="link">message templates</Button>
+        {!disableCustomTab && (
+          <TabPane tab="Custom" key="2">
+            <div style={{ padding: '10px 9px' }}>
+              <Row style={{ padding: '0 15px' }}>
+                <span>
+                  Design or upload your own custom email from your
+                  <span className={styles.anchor}>
+                    <Button type="link">message templates</Button>
+                  </span>
                 </span>
-              </span>
-            </Row>
-            <Row style={{ padding: '0 15px' }}>
-              <Col>Reminder advance notice</Col>
-            </Row>
+              </Row>
+              <Row style={{ padding: '0 15px' }}>
+                <Col>Reminder advance notice</Col>
+              </Row>
 
-            <Row style={{ padding: '0 15px' }}>
-              <Select defaultValue="24" style={{ width: '100%' }}>
-                <Option value="24">24 hours</Option>
-                <Option value="12">12 hours</Option>
-                <Option value="6">6 hours</Option>
-              </Select>
-            </Row>
+              <Row style={{ padding: '0 15px' }}>
+                <Select defaultValue="24" style={{ width: '100%' }}>
+                  <Option value="24">24 hours</Option>
+                  <Option value="12">12 hours</Option>
+                  <Option value="6">6 hours</Option>
+                </Select>
+              </Row>
 
-            <div className={styles.papauPlusContainer}>
-              <PabauPlus label="Plus" />
-            </div>
+              <div className={styles.papauPlusContainer}>
+                <PabauPlus label="Plus" />
+              </div>
 
-            <Collapse
-              className={styles.collapseAlignFirst}
-              bordered={false}
-              defaultActiveKey={['1']}
-              expandIconPosition="right"
-              style={{ backgroundColor: 'white' }}
-            >
-              <Panel
-                className={styles.panelAlign}
-                header="Client languages"
-                key="1"
+              <Collapse
+                className={styles.collapseAlignFirst}
+                bordered={false}
+                defaultActiveKey={['1']}
+                expandIconPosition="right"
+                style={{ backgroundColor: 'white' }}
               >
-                <Row>
-                  <Col>Setup templates in your clients preferred language</Col>
-                </Row>
-                <Row>
-                  <ClientLanguage
-                    selectLanguageHook={[selectLanguage, onSelectLanguage]}
-                    defaultLanguage="EN"
-                  />
-                </Row>
-              </Panel>
-            </Collapse>
-          </div>
-        </TabPane>
+                <Panel
+                  className={styles.panelAlign}
+                  header="Client languages"
+                  key="1"
+                >
+                  <Row>
+                    <Col>
+                      Setup templates in your clients preferred language
+                    </Col>
+                  </Row>
+                  <Row>
+                    <ClientLanguage
+                      selectLanguageHook={[selectLanguage, onSelectLanguage]}
+                      defaultLanguage="EN"
+                      isClickable={true}
+                      isHover={false}
+                    />
+                  </Row>
+                </Panel>
+              </Collapse>
+            </div>
+          </TabPane>
+        )}
       </Tabs>
     </Row>
   )

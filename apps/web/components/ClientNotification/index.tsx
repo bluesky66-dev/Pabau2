@@ -25,9 +25,7 @@ const Index: FC<P> = ({ onSeletedTab }) => {
   const [smsMessage, setSmsMessage] = useState('Hi, Kristy')
 
   const [activeSocialIcons, setActiveSocialIcons] = React.useState([])
-  React.useEffect(() => {
-    console.log(activeSocialIcons)
-  }, [activeSocialIcons])
+  const [disableCustomTab, setDisableCustomTab] = useState(false)
 
   function handleSelectedTab(value) {
     onSeletedTab(value)
@@ -36,19 +34,24 @@ const Index: FC<P> = ({ onSeletedTab }) => {
     <ClientNotification
       onSmsTabChanged={(value) => {
         if (value === 2) {
+          console.log('this is smstext tab')
+          setDisableCustomTab(true)
           handleSelectedTab(value)
           setEnableReminder(true)
           setSmartDelivery(true)
           setHideAppearanceTabPane(false)
         } else {
+          console.log('this is email tatb')
           handleSelectedTab(value)
           setEnableReminder(false)
           setSmartDelivery(false)
           setHideAppearanceTabPane(true)
+          setDisableCustomTab(false)
         }
       }}
       tabComponent={
         <Standard
+          disableCustomTab={disableCustomTab}
           onStandardTabChanged={(value) => setStandardTap(value)}
           enableReminder={enableReminder}
           onEnableReminder={(value) => setEnableReminder(value)}

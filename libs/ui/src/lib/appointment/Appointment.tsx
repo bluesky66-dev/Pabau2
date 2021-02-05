@@ -11,6 +11,21 @@ import styles from './Appointment.module.less'
 import { ReactComponent as NormalClinicLogo } from '../../assets/images/normal-clinic-logo.svg'
 import { ReactComponent as Calendar } from '../../assets/images/calendar.svg'
 
+import ENSVG from '../../assets/images/lang-logos/en.svg'
+import FRSVG from '../../assets/images/lang-logos/french.svg'
+import SPSVG from '../../assets/images/lang-logos/spanish.svg'
+import ARSVG from '../../assets/images/lang-logos/arabic.svg'
+import BGSVG from '../../assets/images/lang-logos/bulgarian.svg'
+import CSSVG from '../../assets/images/lang-logos/czech.svg'
+import HUSVG from '../../assets/images/lang-logos/hungarian.svg'
+import LVSVG from '../../assets/images/lang-logos/latvian.svg'
+import NOSVG from '../../assets/images/lang-logos/norwegian.svg'
+import PLSVG from '../../assets/images/lang-logos/polish.svg'
+import SWSVG from '../../assets/images/lang-logos/swedish.svg'
+import ROSVG from '../../assets/images/lang-logos/romanian.svg'
+import RUSVG from '../../assets/images/lang-logos/russian.svg'
+import DASVG from '../../assets/images/lang-logos/dutch.svg'
+
 interface LangData {
   [key: string]: Email
 }
@@ -92,6 +107,159 @@ const langData: LangData = {
     cancelPolicy: 'Политика отмены',
     complete: 'Полная медицинская история',
   },
+  ar: {
+    greeting: 'مرحبًا كريستي ، أراك قريبًا!',
+    detail: 'تفاصيل الموعد:',
+    date: 'الاثنين 16 نوفمبر الساعة 11:00',
+    reschedule: 'إعادة الجدولة',
+    service: 'استشارة (30 دقيقة)',
+    employee: ' مع جون سميث',
+    title: 'M-A لتصفيف الشعر وسبا',
+    address: '574 طريق بيفرلي ، H3454 ، إنجلترا ، GB',
+    cancelButton: 'إلغاء التعيين',
+    confirmButton: 'تأكيد الموعد',
+    policy: '* من فضلك ، تجنب الإلغاء خلال 48 ساعة من الإشعار',
+    cancelPolicy: 'سياسة الإلغاء',
+    complete: 'التاريخ الطبي الكامل',
+  },
+  bg: {
+    greeting: 'Здравей, Кристи, до скоро!',
+    detail: 'Подробности за назначаването:',
+    date: 'Понеделник, 16 ноември от 11:00',
+    reschedule: 'Разсрочване',
+    service: 'Консултация (30 минути)',
+    employee: ' с Джон Смит',
+    title: 'M-A Фризьорство и Спа',
+    address: '574 Beferly Road, H3454, Англия, Великобритания',
+    cancelButton: 'Отмяна на среща',
+    confirmButton: 'Потвърдете срещата',
+    policy: '* Моля, избягвайте анулиране в рамките на 48 часа предизвестие',
+    cancelPolicy: 'Политика за анулиране',
+    complete: 'Пълна медицинска история',
+  },
+
+  cs: {
+    greeting: 'Ahoj Kristy, uvidíme se brzy!',
+    detail: 'Podrobnosti o schůzce:',
+    date: 'Pondělí 16. listopadu v 11:00',
+    reschedule: 'Přeplánovat',
+    service: 'Konzultace (30 minut)',
+    employee: ' s Johnem Smithem',
+    title: 'M-A Hair Dressing & Spa',
+    address: '574 Beferly Road, H3454, England, GB',
+    cancelButton: 'Zrušit schůzku',
+    confirmButton: 'Potvrďte schůzku',
+    policy: '* Prosím, vyhněte se zrušení do 48 hodin od oznámení',
+    cancelPolicy: 'Storno podmínky',
+    complete: 'Kompletní anamnéza',
+  },
+
+  da: {
+    greeting: 'Hej Kristy, vi ses snart!',
+    detail: 'Udnævnelsesoplysninger:',
+    date: 'Mandag 16. november kl. 11:00',
+    reschedule: 'Planlæg om',
+    service: 'Konsultation (30 minutter)',
+    employee: ' med John Smith',
+    title: 'M-A Hair Dressing & Spa',
+    address: '574 Beferly Road, H3454, England, GB',
+    cancelButton: 'Annuller aftale',
+    confirmButton: 'Bekræft aftale',
+    policy: '* Undgå at annullere inden for 48 timers varsel',
+    cancelPolicy: 'Afbestillingspolitik',
+    complete: 'Komplet medicinsk historie',
+  },
+  hu: {
+    greeting: 'Szia Kristy, hamarosan találkozunk!',
+    detail: 'Kinevezés részletei:',
+    date: 'November 16., hétfő, 11:00',
+    reschedule: 'Átütemezés',
+    service: 'Konzultáció (30 perc)',
+    employee: ' John Smith-szel',
+    title: 'M-A hajviselet és fürdő',
+    address: '574 Beferly Road, H3454, Anglia, GB',
+    cancelButton: 'A találkozó lemondása',
+    confirmButton: 'Erősítse meg a kinevezést',
+    policy: '* Kérjük, kerülje a lemondást 48 órán belül',
+    cancelPolicy: 'Lemondási feltételek',
+    complete: 'Teljes kórtörténet',
+  },
+  lv: {
+    greeting: 'Sveika Kristij, tiekamies drīz!',
+    detail: 'Informācija par iecelšanu amatā:',
+    date: 'Pirmdien, 16. novembrī, pulksten 11:00',
+    reschedule: 'Pārplānojiet',
+    service: 'Konsultācijas (30 min)',
+    employee: ' ar Džonu Smitu',
+    title: 'M-A matu apstrāde un spa',
+    address: '574 Beferly Road, H3454, Anglija, GB',
+    cancelButton: 'Atcelt tikšanos',
+    confirmButton: 'Apstipriniet iecelšanu',
+    policy: '* Lūdzu, izvairieties no atcelšanas 48 stundu iepriekš',
+    cancelPolicy: 'Anulēšanas politika',
+    complete: 'Pilnīga medicīniskā vēsture',
+  },
+  no: {
+    greeting: 'Hei Kristy, vi sees snart!',
+    detail: 'Avtaledetaljer:',
+    date: 'Mandag 16. november kl 11:00',
+    reschedule: 'Planlegge på nytt',
+    service: 'Konsultasjon (30 minutter)',
+    employee: ' med John Smith',
+    title: 'M-A Hair Dressing & Spa',
+    address: '574 Beferly Road, H3454, England, GB',
+    cancelButton: 'Avbryt avtalen',
+    confirmButton: 'Bekreft avtale',
+    policy: '* Vennligst unngå kansellering innen 48 timers varsel',
+    cancelPolicy: 'Avbestillingsregler',
+    complete: 'Komplett medisinsk historie',
+  },
+  pl: {
+    greeting: 'Cześć Kristy, do zobaczenia wkrótce!',
+    detail: 'Szczegóły wizyty:',
+    date: 'Poniedziałek, 16 listopada o godzinie 11:00',
+    reschedule: 'Przełóż',
+    service: 'Konsultacja (30 min)',
+    employee: ' z Johnem Smithem',
+    title: 'M-A Hair Dressing & Spa',
+    address: '574 Beferly Road, H3454, Anglia, Wielka Brytania',
+    cancelButton: 'Odwołać spotkanie',
+    confirmButton: 'Potwierdź spotkanie',
+    policy:
+      '* Prosimy o unikanie anulowania w ciągu 48 godzin od powiadomienia',
+    cancelPolicy: 'Zasady anulowania',
+    complete: 'Pełna historia medyczna',
+  },
+  sw: {
+    greeting: 'Hej Kristy, vi ses snart!',
+    detail: 'Tidsinformation:',
+    date: 'Måndag 16 november kl 11:00',
+    reschedule: 'Boka om',
+    service: 'Konsultation (30 minuter)',
+    employee: ' med John Smith',
+    title: 'M-A Hair Dressing & Spa',
+    address: '574 Beferly Road, H3454, England, GB',
+    cancelButton: 'Avbryt mötet',
+    confirmButton: 'Bekräfta mötet',
+    policy: '* Undvik att avbryta inom 48 timmar',
+    cancelPolicy: 'Avbokningsregler',
+    complete: 'Komplett medicinsk historia',
+  },
+  ro: {
+    greeting: 'Bună Kristy, ne vedem în curând!',
+    detail: 'Detalii despre programare:',
+    date: 'Luni, 16 noiembrie la 11:00',
+    reschedule: 'Reprogramează',
+    service: 'Consultare (30 de minute)',
+    employee: ' cu John Smith',
+    title: 'M-A Hair Dressing & Spa',
+    address: '574 Beferly Road, H3454, Anglia, GB',
+    cancelButton: 'Anulați programarea',
+    confirmButton: 'Confirmați programarea',
+    policy: '* Vă rugăm să evitați anularea în termen de 48 de ore',
+    cancelPolicy: 'Politica de anulare',
+    complete: 'Istoric medical complet',
+  },
 }
 
 interface P {
@@ -156,6 +324,39 @@ export const Appointment: FC<P> = ({
       return <InstagramOutlined style={{ padding: '5px' }} />
     } else if (value.includes('twitter')) {
       return <TwitterOutlined style={{ padding: '5px' }} />
+    }
+  }
+
+  function getFlag(country) {
+    switch (country) {
+      case 'EN':
+        return ENSVG
+      case 'FR':
+        return FRSVG
+      case 'SP':
+        return SPSVG
+      case 'AR':
+        return ARSVG
+      case 'BG':
+        return BGSVG
+      case 'CS':
+        return CSSVG
+      case 'DA':
+        return DASVG
+      case 'HU':
+        return HUSVG
+      case 'LV':
+        return LVSVG
+      case 'NO':
+        return NOSVG
+      case 'PL':
+        return PLSVG
+      case 'SW':
+        return SWSVG
+      case 'RO':
+        return ROSVG
+      case 'RU':
+        return RUSVG
     }
   }
 
@@ -286,7 +487,8 @@ export const Appointment: FC<P> = ({
           style={{ backgroundColor: backGroundColor }}
         >
           <Button type="default" className={styles.addTemplateTxt}>
-            +Add {selectLanguage} Template
+            <img src={getFlag(selectLanguage)} alt="" />
+            &nbsp;+ Add Template
           </Button>
         </div>
       )}

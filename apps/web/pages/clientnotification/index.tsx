@@ -131,25 +131,24 @@ const Index: FC = () => {
             </div>
           </div>
         </Modal>
-        {setIndexTab === 1 && (
-          <Button
-            className={styles.notificationSaveButton}
-            style={{
-              margin: '1em 8px',
-              height: '40px',
-              fontSize: '14px',
-            }}
-            type="primary"
-            onClick={() =>
-              Notification(
-                NotificationType.success,
-                'Success! Notification Source Updated'
-              )
-            }
-          >
-            Save
-          </Button>
-        )}
+
+        <Button
+          className={styles.notificationSaveButton}
+          style={{
+            margin: '1em 8px',
+            height: '40px',
+            fontSize: '14px',
+          }}
+          type="primary"
+          onClick={() =>
+            Notification(
+              NotificationType.success,
+              'Success! Notification Source Updated'
+            )
+          }
+        >
+          Save
+        </Button>
       </div>
       <ClientNotification onSeletedTab={(value) => setSelectedTab(value)} />
     </Layout>
