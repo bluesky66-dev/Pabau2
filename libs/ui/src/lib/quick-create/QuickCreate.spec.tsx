@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import Standard from './Standard'
+import QuickCreate from './QuickCreate'
 
-describe('Standard', () => {
+describe('QuickCreate', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Standard />)
+    const { baseElement } = render(<QuickCreate />)
     expect(baseElement).toBeTruthy()
   })
 })

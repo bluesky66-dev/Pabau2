@@ -1,5 +1,26 @@
 - table:
     schema: public
+    name: colors
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - color
+      - created_at
+      - id
+      - updated_at
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - color
+      - id
+      - updated_at
+      filter: {}
+- table:
+    schema: public
     name: contacts
   select_permissions:
   - role: public
@@ -35,6 +56,7 @@
       - updated_at
       - id
       filter: {}
+      allow_aggregations: true
   update_permissions:
   - role: public
     permission:

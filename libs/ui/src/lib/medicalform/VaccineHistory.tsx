@@ -1,29 +1,31 @@
 import React, { FC } from 'react'
 import vaccineHistoryIcon from '../../assets/images/medicalform_vaccinehistory.svg'
-import styles from './MedicalForm.module.less'
+import BasicElement from './BasicElement'
 import MedicalFormBottom from './MedicalFormBottom'
+import MedicalFormHeader from './MedicalFormHeader'
 import MedicalFormTitle from './MedicalFormTitle'
 
-const VaccineHistory: FC = () => {
+interface P {
+  hideSideBar?: () => void
+}
+
+const VaccineHistory: FC<P> = ({ hideSideBar }) => {
+  const saveFunc = () => {
+    if (hideSideBar) {
+      hideSideBar()
+    }
+  }
   return (
-    <div className={styles.mainBody}>
-      <div className={styles.formItem}>
-        <div className={`${styles.formCaption} ${styles.formCommon}`}>
-          <span>component settings</span>
-        </div>
-      </div>
-      <div className={styles.formItem}>
-        <MedicalFormTitle
-          iconUrl={vaccineHistoryIcon}
-          bgcolor="#FAAD14"
-          title="Vaccine history"
-          desc="Description"
-        />
-      </div>
-      <div className={styles.formItem} style={{ borderBottom: 'none' }}>
-        <MedicalFormBottom needLeft={true} />
-      </div>
-    </div>
+    <BasicElement>
+      <MedicalFormHeader title="component settings" />
+      <MedicalFormTitle
+        iconUrl={vaccineHistoryIcon}
+        bgcolor="#FAAD14"
+        title="Vaccine history"
+        desc="Description"
+      />
+      <MedicalFormBottom saveFunc={saveFunc} needLeft={false} />
+    </BasicElement>
   )
 }
 
