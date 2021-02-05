@@ -14,6 +14,7 @@ export interface LayoutProps {
   onCancelClicked?: true | (() => void)
   card?: true
   searchRender?: (innerComponent: JSX.Element) => JSX.Element
+  active?: string
 }
 
 export const Layout: FC<LayoutProps> = ({
@@ -24,9 +25,10 @@ export const Layout: FC<LayoutProps> = ({
   onCancelClicked,
   card,
   children,
+  active,
   ...rest
 }) => {
-  const [collapsed, setCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState(true)
 
   const onSideBarCollapsed = (collapsed) => setCollapsed(collapsed)
 
@@ -36,7 +38,7 @@ export const Layout: FC<LayoutProps> = ({
         {/* {(isTablet || !isMobile) && <Header searchRender={searchRender} />} */}
         <Header searchRender={searchRender} />
         <AntLayout className={styles.headerMargin}>
-          <Menu onSideBarCollapsed={onSideBarCollapsed} />
+          <Menu onSideBarCollapsed={onSideBarCollapsed} active={active} />
           <Content
             className={classNames(
               styles.layoutContent,

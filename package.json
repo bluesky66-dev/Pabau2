@@ -1,6 +1,6 @@
 {
   "name": "pabau",
-  "version": "2.0.99",
+  "version": "2.0.103",
   "license": "Copyright Hambrand Technologies Ltd",
   "scripts": {
     "nx": "nx",
@@ -10,7 +10,7 @@
     "start": "nx serve",
     "dev": "yarn start",
     "hasura:export": "hasura --project hasura metadata export && graphql-codegen",
-    "start:production": "nx affected --uncommitted=true --target=export && npx serve dist/apps/web/exported",
+    "production:start": "nx affected --uncommitted=true --target=export && npx serve dist/apps/web/exported",
     "build": "pwd && ls -al && rm -rf public/ && nx build backend --no-cache && cp -rf dist/apps/backend/ public/ && cp apps/backend/vercel.json public/ && cp package.json public/",
     "test": "nx test",
     "lint": "nx workspace-lint && nx lint",
