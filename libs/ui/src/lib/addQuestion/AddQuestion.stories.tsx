@@ -11,7 +11,7 @@ import {
 
 export default {
   component: AddQuestion,
-  title: 'Basics/AddQuestion',
+  title: 'UI/AddQuestion',
   args: {
     description,
     questions,
