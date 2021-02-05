@@ -188,6 +188,33 @@ const CrudTable: FC<P> = ({
     setModalShowing(false)
   }
 
+  const formikFields = () => {
+    let initialValues = { name: '' }
+    Object.keys(fields).map((field) => {
+      initialValues[field] = checkFieldType(
+        fields[field]['type'],
+        fields[field]['default']
+      )
+    })
+    return initialValues
+  }
+
+  const checkFieldType = (type: string, defaultVal) => {
+    switch (type) {
+      case 'string':
+      case 'color-picker':
+      case 'radio-group':
+        return defaultVal || ''
+      case 'boolean':
+      case 'checkbox':
+        return defaultVal || true
+      case 'number':
+        return defaultVal || 0
+      default:
+        return ''
+    }
+  }
+
   return (
     <Formik
       enableReinitialize={true}
@@ -217,7 +244,7 @@ const CrudTable: FC<P> = ({
         // eslint-disable-next-line
         typeof modalShowing === 'object' && (modalShowing as any)?.id
           ? modalShowing
-          : { name: '', is_active: true } //TODO: remove this, it should come from schema.fields[].*
+          : formikFields() //TODO: remove this, it should come from schema.fields[].*
       }
     >
       <>

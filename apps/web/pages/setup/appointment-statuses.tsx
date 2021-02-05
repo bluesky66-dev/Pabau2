@@ -5,13 +5,13 @@ import React from 'react'
 import CrudLayout from '../../components/CrudLayout/CrudLayout'
 
 const LIST_QUERY = gql`
-  query marketing_sources(
+  query appointment_status(
     $isActive: Boolean = true
     $searchTerm: String = ""
     $offset: Int
     $limit: Int
   ) {
-    marketing_source(
+    appointment_status(
       offset: $offset
       limit: $limit
       order_by: { created_at: desc }
@@ -53,8 +53,8 @@ const DELETE_MUTATION = gql`
   }
 `
 const ADD_MUTATION = gql`
-  mutation add_marketing_source($name: String!, $is_active: Boolean) {
-    insert_marketing_source_one(
+  mutation insert_appointment_status_one($name: String!, $is_active: Boolean,) {
+    insert_appointment_status_one(
       object: { name: $name, is_active: $is_active }
     ) {
       __typename
@@ -84,17 +84,49 @@ const schema: Schema = {
   fullLower: 'appointment status',
   short: 'Appointment Status',
   shortLower: 'appointment statuses',
+  shemaType: 'Appointment Status',
   fields: {
+    appointment_type: {
+      radio: [
+        {
+          label: 'Line',
+          value: 'Line',
+        },
+        {
+          label: 'Icon',
+          value: 'Icon',
+        },
+      ],
+      type: 'radio-group',
+      visible: false,
+      default: 'Line',
+    },
+    icon: {
+      type: 'icon',
+      visible: false,
+    },
     name: {
       full: 'Friendly Name',
       fullLower: 'friendly name',
       short: 'Name',
       shortLower: 'name',
       min: 2,
-      example: 'Facebook',
-      description: 'A friendly name',
+      example: 'Running Late',
+      // description: 'A friendly name',
       // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
+      type: 'string',
+    },
+    color: {
+      full: 'Color',
+      type: 'color-picker',
+      visible: false,
+    },
+    track_time: {
+      full: 'Track time',
+      type: 'checkbox',
+      default: true,
+      visible: false,
     },
     is_active: {
       full: 'Active',

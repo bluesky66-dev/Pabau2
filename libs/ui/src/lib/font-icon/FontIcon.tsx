@@ -6,8 +6,9 @@ import React, { FC, useState } from 'react'
 import styles from './FontIcon.module.less'
 export interface FontIconProps {
   max?: number
+  onIconSelected(val): void
 }
-const FontIcon: FC<FontIconProps> = ({ max }) => {
+export const FontIcon: FC<FontIconProps> = ({ max, onIconSelected }) => {
   const iconList = Object.keys(Icons)
     .filter((key) => key !== 'fas' && key !== 'prefix')
     .slice(0, max)
@@ -27,7 +28,10 @@ const FontIcon: FC<FontIconProps> = ({ max }) => {
                   ? styles.iconItemActive
                   : styles.iconItem
               }
-              onClick={() => setActivate(icon.iconName)}
+              onClick={() => {
+                setActivate(icon.iconName)
+                onIconSelected(icon.iconName)
+              }}
             >
               {activate === icon.iconName && <CheckCircleFilled />}
               <FontAwesomeIcon size="2x" icon={icon.iconName} />

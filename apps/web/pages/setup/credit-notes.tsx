@@ -120,6 +120,7 @@ const schema: Schema = {
       // description: 'A friendly name',
       // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
+      type: 'string',
     },
     code: {
       full: 'Code',
@@ -143,6 +144,7 @@ const schema: Schema = {
       description: 'A invoice prefix',
       cssWidth: 'max',
       visible: false,
+      type: 'string',
     },
     is_active: {
       full: 'Status',

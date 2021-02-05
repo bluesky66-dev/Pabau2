@@ -11,6 +11,7 @@ interface Schema {
   deleteBtnLabel?: string
   messages?: messages
   fields: Record<string, SchemaItem>
+  shemaType?: string
 }
 interface SchemaItem {
   full?: string
@@ -22,7 +23,13 @@ interface SchemaItem {
   description?: string
   extra?: JSX.Element
   cssWidth?: string
-  type?: 'string' | 'boolean' | 'number'
+  type?: 'string' | 'boolean' | 'number' | 'radio-group' | 'color-picker' | 'checkbox' | 'icon'
   default?: string | number | boolean
   visible?: boolean
+  radio?: RadioItems[]
+}
+
+interface RadioItems {
+  label: string
+  value: string
 }

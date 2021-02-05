@@ -8,9 +8,8 @@ interface P {
   values: FormikValues
 }
 
-const Form: FC<P> = ({ schema, values }) => {
+const AppointmentStatusForm: FC<P> = ({ schema, values }) => {
   const { fields } = schema
-
   return (
     <AntForm layout="vertical" requiredMark={false}>
       {Object.entries(fields).map(
@@ -43,7 +42,7 @@ const Form: FC<P> = ({ schema, values }) => {
                 </Radio.Group>
               </AntForm.Item>
             ) : null}
-            {type === 'icon' && (
+            {type === 'icon' && values.appointment_type === 'Icon' && (
               <AntForm.Item key={name} name={name}>
                 <FontIcon
                   onIconSelected={(icon) => {
@@ -73,7 +72,7 @@ const Form: FC<P> = ({ schema, values }) => {
                 </Checkbox>
               </AntForm.Item>
             )}
-            {(type === 'string' || type === 'number') && (
+            {type === 'string' && values.appointment_type === 'Line' && (
               <AntForm.Item
                 key={name}
                 label={short}
@@ -102,4 +101,4 @@ const Form: FC<P> = ({ schema, values }) => {
   )
 }
 
-export default Form
+export default AppointmentStatusForm

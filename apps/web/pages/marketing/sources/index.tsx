@@ -110,6 +110,7 @@ const schema: Schema = {
       description: 'A friendly name',
       // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
+      type: 'string',
     },
     is_active: {
       full: 'Active',
