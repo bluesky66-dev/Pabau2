@@ -18,7 +18,9 @@ export const OrderDiscrepancy: FC<OrderDiscrepancyProps> = ({
         <div className={styles.positive}>{`+${number}`}</div>
       ) : word === 0 ? (
         <div className={styles.negative}>{`-${number}`}</div>
-      ) : ('')}
+      ) : (
+        ''
+      )}
     </div>
   )
 }
