@@ -8,8 +8,6 @@ interface User {
   avatarUrl: string
   name: string
 }
-
-/* eslint-disable-next-line */
 export interface AvatarListProps {
   users?: User[]
   isLoading?: boolean
