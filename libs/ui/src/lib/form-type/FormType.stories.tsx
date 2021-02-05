@@ -1,5 +1,5 @@
 import React from 'react'
-import FormType, { FormTypeProps } from './Formtype'
+import FormType, { FormTypeProps } from './FormType'
 
 export default {
   component: FormType,

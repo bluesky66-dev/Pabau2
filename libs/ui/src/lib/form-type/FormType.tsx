@@ -13,7 +13,7 @@ import { ReactComponent as Presciption } from '../../assets/images/form-type/pre
 import { ReactComponent as PresciptionSelected } from '../../assets/images/form-type/presciption-selected.svg'
 import { ReactComponent as LabForm } from '../../assets/images/form-type/lab-form.svg'
 import { ReactComponent as LabFormSelected } from '../../assets/images/form-type/lab-form-selected.svg'
-import styles from './Formtype.module.less'
+import styles from './FormType.module.less'
 
 interface Setting {
   medicalHistory: boolean
