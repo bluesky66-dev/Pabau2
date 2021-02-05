@@ -25,23 +25,8 @@ export const QuestionBankModalStory = (args: P): JSX.Element => {
     setQuestions(args.data)
   }, [args.data])
 
-  const handleChange = (e, key: number) => {
-    const data = menuOptions.filter(({ key }) => key === e.key)
-    setQuestions(
-      questions.map((i) =>
-        i.key === key ? { ...i, selectedValue: data[0].value } : i
-      )
-    )
-  }
-
-  const handleChecked = (key: number) => {
-    setQuestions(
-      questions.map((i) => (i.key === key ? { ...i, checked: !i.checked } : i))
-    )
-  }
-
-  const handleClick = (key: number) => {
-    console.log('Question ' + key + ' is clicked')
+  const handleAdd = (questions: Array<IQuestionOptions> | undefined): void => {
+    console.log('Question added', questions)
   }
 
   return (
@@ -50,9 +35,7 @@ export const QuestionBankModalStory = (args: P): JSX.Element => {
       title={'Question Bank'}
       questions={questions}
       options={menuOptions}
-      onSelect={handleChange}
-      onChecked={handleChecked}
-      onClick={handleClick}
+      onAdd={handleAdd}
     />
   )
 }

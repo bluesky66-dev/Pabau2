@@ -9,7 +9,7 @@ export interface IQuestionOptions {
   question: string
   showDropdown: boolean
   selectedValue?: string
-  checked?: boolean
+  checked: boolean
 }
 
 interface IMenuOptions {
@@ -45,7 +45,9 @@ export const QuestionBank: FC<QuestionBankProps> = (props) => {
           ({ key, question, showDropdown, selectedValue, checked }) => (
             <Row
               key={`question-${key}`}
-              className={styles.questionRow}
+              className={
+                styles.questionRow + ' ' + (checked && styles.activeRow)
+              }
               justify={'space-between'}
               onClick={() => onClick(key)}
             >

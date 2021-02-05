@@ -6,14 +6,23 @@ interface P {
   tabComponent?: React.ReactNode
   previewComponent?: React.ReactNode
   smsComponent?: React.ReactNode
+  onSmsTabChanged?: (index) => void
 }
 
 export const ClientNotification: FC<P> = ({
   tabComponent,
   previewComponent,
   smsComponent,
+  onSmsTabChanged,
 }) => {
   const [previewStatus, setPreviewStatus] = React.useState(1)
+
+  function handleSmsTabChanged(value) {
+    setPreviewStatus(value)
+    if (onSmsTabChanged) {
+      onSmsTabChanged(value)
+    }
+  }
   return (
     <Row wrap={false} className={styles.notificationPage}>
       <Col flex={'400px'} className={styles.builderColumn}>
@@ -31,14 +40,14 @@ export const ClientNotification: FC<P> = ({
             <Radio.Button
               className={styles.radioLeftButton}
               value="a"
-              onClick={() => setPreviewStatus(1)}
+              onClick={() => handleSmsTabChanged(1)}
             >
               Email
             </Radio.Button>
             <Radio.Button
               className={styles.radioRightButton}
               value="b"
-              onClick={() => setPreviewStatus(2)}
+              onClick={() => handleSmsTabChanged(2)}
             >
               SMS Text
             </Radio.Button>

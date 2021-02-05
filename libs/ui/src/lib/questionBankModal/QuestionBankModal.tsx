@@ -1,54 +1,68 @@
-import React, { FC, useEffect, useState } from 'react'
-import { Modal, Tabs, Row, Col } from 'antd'
+import React, { FC, useState } from 'react'
+import { useMedia } from 'react-use'
+import { Tabs, Row, Col } from 'antd'
 import { LeftOutlined } from '@ant-design/icons'
 
-import { ModalProps } from 'antd/lib/modal'
-import {
-  QuestionBankProps,
-  IQuestionOptions,
-} from '../questionBank/QuestionBank'
+import { IQuestionOptions } from '../questionBank/QuestionBank'
 
 import { menuOptions } from '../questionBank/mock'
 
 import QuestionBank from '../questionBank/QuestionBank'
 import Button from '../button/button'
+import BasicModal from '../modal/basicmodal'
 
 import customStyles from './QuestionBankModal.module.less'
-import styles from '../modal/basicmodal.module.less'
 
-interface P extends ModalProps {
-  title: string
+interface IMenuOption {
+  key: string
+  value: string
 }
 
-const QuestionBankModal: FC<P & QuestionBankProps> = ({
+interface P {
+  title: string
+  questions: Array<IQuestionOptions>
+  options: Array<IMenuOption>
+  onAdd: (questions: Array<IQuestionOptions> | undefined) => void
+}
+
+const QuestionBankModal: FC<P> = ({
   title,
   questions,
   options,
-  onSelect,
-  onChecked,
-  onClick,
+  onAdd,
   ...props
 }) => {
   const { TabPane } = Tabs
 
-  const [width, setWidth] = useState<number>(window.innerWidth)
   const [checkedQuestions, setCheckedQuestions] = useState<
     Array<IQuestionOptions> | undefined
   >(undefined)
+  const [questionList, setQuestionList] = useState<Array<IQuestionOptions>>(
+    questions
+  )
 
-  const updateDimensions = () => {
-    setWidth(window.innerWidth)
+  const isMobile = useMedia('(max-width: 768px)', false)
+
+  const handleChange = (e, key: number) => {
+    const data = menuOptions.filter(({ key }) => key === e.key)
+    setQuestionList(
+      questionList?.map((i) =>
+        i.key === key ? { ...i, selectedValue: data[0].value } : i
+      )
+    )
   }
 
-  useEffect(() => {
-    window.addEventListener('resize', updateDimensions)
-    return () => window.removeEventListener('resize', updateDimensions)
-  }, [])
+  const handleChecked = (key: number) => {
+    const data = questionList?.map((i) =>
+      i.key === key ? { ...i, checked: !i.checked } : i
+    )
+    setQuestionList(data)
+    setCheckedQuestions(data.filter(({ checked }) => checked))
+  }
 
-  useEffect(() => {
-    const data = questions?.filter(({ checked }) => checked)
-    setCheckedQuestions(data)
-  }, [onChecked, questions])
+  const handleClick = (key: number) => {
+    console.log('Question ' + key + ' is clicked')
+  }
 
   const preparePreviewContent = () => {
     return (
@@ -76,6 +90,7 @@ const QuestionBankModal: FC<P & QuestionBankProps> = ({
               }
               disabled={checkedQuestions?.length === 0}
               type={'primary'}
+              onClick={() => onAdd(checkedQuestions)}
             >
               + Add ({checkedQuestions?.length}) Questions
             </Button>
@@ -90,11 +105,11 @@ const QuestionBankModal: FC<P & QuestionBankProps> = ({
       <Tabs defaultActiveKey="1" className={customStyles.tabContainer}>
         <TabPane tab="Questions" key="1">
           <QuestionBank
-            questions={questions}
+            questions={questionList}
             options={menuOptions}
-            onSelect={onSelect}
-            onChecked={onChecked}
-            onClick={onClick}
+            onSelect={handleChange}
+            onChecked={handleChecked}
+            onClick={handleClick}
           />
         </TabPane>
         <TabPane tab="Preview" key="2">
@@ -106,7 +121,7 @@ const QuestionBankModal: FC<P & QuestionBankProps> = ({
 
   return (
     <div className={customStyles.wrapperQuestion}>
-      {width < 768 ? (
+      {isMobile ? (
         <div className={customStyles.mobDevice}>
           <div className={customStyles.queBank}>
             <LeftOutlined />
@@ -115,16 +130,17 @@ const QuestionBankModal: FC<P & QuestionBankProps> = ({
           {renderContent()}
         </div>
       ) : (
-        <Modal
-          title={title}
+        <BasicModal
           {...props}
-          footer={null}
-          wrapClassName={styles.modal + ' ' + customStyles.questionBankModal}
+          title={title}
+          modalWidth={682}
+          footer={false}
+          wrapClassName={customStyles.questionBankModal}
         >
           <div className={customStyles.questionBankModalBody}>
             {renderContent()}
           </div>
-        </Modal>
+        </BasicModal>
       )}
     </div>
   )
