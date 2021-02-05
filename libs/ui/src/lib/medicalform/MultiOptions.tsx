@@ -15,28 +15,28 @@ type itemProps = {
   editing?: boolean
 }
 
-const MultiOptions: FC = () => {
-  const [items, setItems] = useState<itemProps[]>([])
-  const [itemName, setItemName] = useState('')
+interface P {
+  onChange?: (count) => void
+}
 
-  const checkboxStyle = {
-    display: 'inline-block',
-    height: '30px',
-    lineHeight: '30px',
-    color: '#9292a3',
-  }
+const MultiOptions: FC<P> = ({ onChange }) => {
+  const [items, setItems] = useState<itemProps[]>([])
+  const [addedItems, setaddedItems] = useState<itemProps[]>([])
+  const [itemName, setItemName] = useState('')
 
   const addItem = (event) => {
     event.preventDefault()
-    setItems([
-      ...items,
-      {
-        id: items.length,
-        name: itemName,
-        editing: true,
-      },
-    ])
-    setItemName('')
+    if (items.length === addedItems.length) {
+      setItems([
+        ...items,
+        {
+          id: items.length,
+          name: itemName,
+          editing: true,
+        },
+      ])
+      setItemName('')
+    }
   }
 
   const handleOptions = (index, value) => {
@@ -50,12 +50,20 @@ const MultiOptions: FC = () => {
     }
     tempItems.splice(index, 1, itemValue)
     setItems(tempItems)
+    setaddedItems(tempItems)
+    if (onChange) {
+      onChange(addedItems.length)
+    }
   }
 
   const handleDelete = (index) => {
     const tempItems = [...items]
     tempItems.splice(index, 1)
     setItems(tempItems)
+    setaddedItems(tempItems)
+    if (onChange) {
+      onChange(addedItems.length)
+    }
   }
 
   const onKeyUp = (event, index, item) => {
@@ -74,7 +82,7 @@ const MultiOptions: FC = () => {
         <>
           {items.map((item, index) => (
             <div key={index} className={styles.multiOption}>
-              <Checkbox key={index} value={item.id} style={checkboxStyle}>
+              <Checkbox value={item.id} className={styles.checkbox}>
                 {item.editing && (
                   <Input
                     autoFocus
