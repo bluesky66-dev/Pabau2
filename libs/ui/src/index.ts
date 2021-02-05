@@ -1,3 +1,4 @@
+export * from './lib/daily/Daily'
 export * from './lib/business-details-notifications/BusinessDetailsNotifications'
 export * from './lib/business-location/BusinessLocation'
 export * from './lib/business-types/BusinessTypes'
