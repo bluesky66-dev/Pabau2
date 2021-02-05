@@ -21,12 +21,10 @@ export default {
   },
 }
 
-const OrderDiscrepancyStory = ({ ...args }) => (
-  <OrderDiscrepancy {...args} />
-)
+const OrderDiscrepancyStory = ({ ...args }) => <OrderDiscrepancy {...args} />
 
 export const BasicOrderDiscrepancy = OrderDiscrepancyStory.bind({})
 BasicOrderDiscrepancy.args = {
   word: 1,
-  number: 12
+  number: 12,
 }
