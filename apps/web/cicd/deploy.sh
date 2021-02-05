@@ -71,10 +71,10 @@ HEREDOC
   cat tools/cicd/slack_notification.json > /dev/null || (echo "ERROR: JSON not found"; exit 1)
   jq '.' tools/cicd/slack_notification.json > /dev/null || (echo "ERROR: Invalid JSON"; exit 1)
 
-  jq --arg var "${message_body}" '.blocks[0].text.text = $var' tools/cicd/slack_notification.json | curl -0 "${SLACK_HOOK_URL}" \
-    -H "Expect:" \
-    -H 'Content-Type: application/json; charset=utf-8' \
-    --data-binary @-
+#  jq --arg var "${message_body}" '.blocks[0].text.text = $var' tools/cicd/slack_notification.json | curl -0 "${SLACK_HOOK_URL}" \
+#    -H "Expect:" \
+#    -H 'Content-Type: application/json; charset=utf-8' \
+#    --data-binary @-
 
 else
   echo "===== Processing type PR ====="
