@@ -1,20 +1,24 @@
-import React, {FC} from 'react'
+import React, { FC } from 'react'
 import styles from './OrderDiscrepancy.module.less'
 
 /* eslint-disable-next-line */
 export interface OrderDiscrepancyProps {
-  word: Number,
-  number: Number
+  word: number
+  number: number
 }
 
-export const OrderDiscrepancy:FC<OrderDiscrepancyProps> = ({ word, number, ...rest }) => {
+export const OrderDiscrepancy:FC<OrderDiscrepancyProps> = ({ 
+  word, 
+  number, 
+  ...rest 
+}) => {
   return (
     <div className={styles.orderDiscrepancy}>
-      {word == 1 ? (
+      {word === 1 ? (
         <div className={styles.positive}>{`+${number}`}</div>
-      ) : word == 0 ? (
+      ) : word === 0 ? (
         <div className={styles.negative}>{`-${number}`}</div>
-      ): ''}
+      ): ('')}
     </div>
   )
 }
