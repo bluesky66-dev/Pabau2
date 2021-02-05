@@ -7,6 +7,7 @@ export default {
   args: {
     title: 'FTT Skin Clinics update',
     visible: false,
+    isVisibleMoreOption: true,
   },
   argTypes: { onBackClick: { action: 'clicked' } },
 }

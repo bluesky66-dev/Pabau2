@@ -1,86 +1,19 @@
 import React, { useState } from 'react'
-import { Webinar, Button, WebinarModal, WebinarModalProps } from '@pabau/ui'
+import {
+  Webinar,
+  Button,
+  WebinarModal,
+  WebinarModalProps,
+  ViewScheduleModal,
+} from '@pabau/ui'
 import styles from '../Setup.module.less'
 
-import backgroundImage from '../../../assets/images/user.png'
-
-const data = [
-  {
-    id: '1',
-    title: 'Stock Management',
-    name: 'Alexander Turner',
-    time: 'Tuesday, 15 10:00 AM',
-    timeLeft: '18:28',
-    backgroundImage,
-    isJoin: true,
-    description:
-      'This training session is to kick start your Pabau jorney, suitable for anyone starting off with the system, fron desh, practioers and anyone who nneds to know how to book. It covers all the core features you will need on a daily basisss, to ensure you are able to work at ease with the system.',
-  },
-  {
-    id: '2',
-    title: 'Advanced Financials',
-    name: 'Alexander Turner',
-    time: 'Tuesday, 15 10:00 AM',
-    timeLeft: '18:28',
-    backgroundImage,
-    description:
-      'This training session is to kick start your Pabau jorney, suitable for anyone starting off with the system, fron desh, practioers and anyone who nneds to know how to book. It covers all the core features you will need on a daily basisss, to ensure you are able to work at ease with the system.',
-  },
-  {
-    id: '3',
-    title: 'Basic Start-Up Training',
-    name: 'Alexander Turner',
-    time: 'Tuesday, 15 10:00 AM',
-    timeLeft: '18:28',
-    backgroundImage,
-    description:
-      'This training session is to kick start your Pabau jorney, suitable for anyone starting off with the system, fron desh, practioers and anyone who nneds to know how to book. It covers all the core features you will need on a daily basisss, to ensure you are able to work at ease with the system.',
-  },
-  {
-    id: '4',
-    title: 'Advanced Financials',
-    name: 'Alexander Turner',
-    time: 'Tuesday, 15 10:00 AM',
-    timeLeft: '18:28',
-    backgroundImage,
-    description:
-      'This training session is to kick start your Pabau jorney, suitable for anyone starting off with the system, fron desh, practioers and anyone who nneds to know how to book. It covers all the core features you will need on a daily basisss, to ensure you are able to work at ease with the system.',
-  },
-  {
-    id: '5',
-    title: 'Basic Start-Up Training',
-    name: 'Alexander Turner',
-    time: 'Tuesday, 15 10:00 AM',
-    timeLeft: '18:28',
-    backgroundImage,
-    description:
-      'This training session is to kick start your Pabau jorney, suitable for anyone starting off with the system, fron desh, practioers and anyone who nneds to know how to book. It covers all the core features you will need on a daily basisss, to ensure you are able to work at ease with the system.',
-  },
-  {
-    id: '6',
-    title: 'Advanced Financials',
-    name: 'Alexander Turner',
-    time: 'Tuesday, 15 10:00 AM',
-    timeLeft: '18:28',
-    backgroundImage,
-    description:
-      'This training session is to kick start your Pabau jorney, suitable for anyone starting off with the system, fron desh, practioers and anyone who nneds to know how to book. It covers all the core features you will need on a daily basisss, to ensure you are able to work at ease with the system.',
-  },
-  {
-    id: '7',
-    title: 'Basic Start-Up Training',
-    name: 'Alexander Turner',
-    time: 'Tuesday, 15 10:00 AM',
-    timeLeft: '18:28',
-    backgroundImage,
-    description:
-      'This training session is to kick start your Pabau jorney, suitable for anyone starting off with the system, fron desh, practioers and anyone who nneds to know how to book. It covers all the core features you will need on a daily basisss, to ensure you are able to work at ease with the system.',
-  },
-]
+import { data, viewScheduleData } from '../../../assets/webinarMock'
 
 const WebinarCard = () => {
   const [isOpenModal, setIsOpen] = useState<boolean>(false)
   const [modalData, setModalData] = useState({})
+  const [isOpenViewSchedule, setIsOpenViewSchedule] = useState<boolean>(false)
 
   const handleOpenModal = (buttonType: string, id?: string) => {
     const filterData = data.filter((thread) => thread.id === id)[0]
@@ -96,6 +29,14 @@ const WebinarCard = () => {
     setIsOpen(false)
   }
 
+  const handleOpenViewSchedule = () => {
+    setIsOpenViewSchedule(true)
+  }
+
+  const handleCloseViewSchedule = () => {
+    setIsOpenViewSchedule(false)
+  }
+
   return (
     <>
       <div className={styles.rightSide}>
@@ -106,12 +47,19 @@ const WebinarCard = () => {
               <Webinar key={index} {...value} onClick={handleOpenModal} />
             ))}
         </div>
-        <Button className={styles.btnView}>View Full Schedule</Button>
+        <Button className={styles.btnView} onClick={handleOpenViewSchedule}>
+          View Full Schedule
+        </Button>
       </div>
       <WebinarModal
         visible={isOpenModal}
         {...modalData}
         onCancel={handleCloseModal}
+      />
+      <ViewScheduleModal
+        {...viewScheduleData}
+        visible={isOpenViewSchedule}
+        onBackClick={handleCloseViewSchedule}
       />
     </>
   )

@@ -1,9 +1,13 @@
 import React, { FC } from 'react'
 import styles from './SetupChip.module.less'
 import { Button } from '@pabau/ui'
-import { PlayCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import {
+  PlayCircleOutlined,
+  PlusOutlined,
+  CheckOutlined,
+} from '@ant-design/icons'
 
-interface WebinarProps {
+export interface WebinarProps {
   id?: string
   title?: string
   name?: string
@@ -12,6 +16,7 @@ interface WebinarProps {
   backgroundImage?: string
   isJoin?: boolean
   onClick?: (type: string, id?: string) => void
+  isYourSchedule?: boolean
 }
 
 export const Webinar: FC<WebinarProps> = ({
@@ -23,6 +28,7 @@ export const Webinar: FC<WebinarProps> = ({
   backgroundImage,
   isJoin,
   onClick,
+  isYourSchedule,
 }) => {
   return (
     <div className={styles.webinarBannerEnd}>
@@ -49,6 +55,15 @@ export const Webinar: FC<WebinarProps> = ({
                   onClick={() => onClick?.('join', id)}
                 >
                   Join class
+                </Button>
+              </div>
+            </div>
+          ) : isYourSchedule ? (
+            <div>
+              <h4 className={styles.time}> {timeLeft} elapsed </h4>
+              <div className={styles.joinBtnTopSpace}>
+                <Button className={styles.joinBtn} icon={<CheckOutlined />}>
+                  Registered
                 </Button>
               </div>
             </div>

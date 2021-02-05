@@ -1,0 +1,82 @@
+.view-schedule-wrapper {
+  max-width: 890px;
+  margin: 28px auto 0;
+  @media screen and (max-width: 991px) {
+    max-width: unset;
+    width: 100%;
+  }
+  .schedule-content {
+    background: #fff;
+    border-right: 4px;
+    h2 {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      padding: 10px 24px;
+      color: #3D3D46;
+      border-bottom: 1px solid #E4E6EB;
+    }
+    .upcoming-wrap {
+      height: 140px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 22px;
+      color: #3D3D46
+    }
+    .filter-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #E4E6EB;
+      line-height: 42px;
+      padding-right: 24px;
+
+      h2 {
+        margin-bottom: 0;
+        border-bottom: none;
+      }
+      .filter-btn {
+        background: #FFFFFF;
+        border: 1px solid #ECEDF0;
+        border-radius: 4px;
+        padding: 1px 9px;
+        color: #9292A3;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 22px;
+        cursor: pointer;
+        span {
+          margin-right: 5px;
+          svg {
+            color: #9292a3;
+          }
+        }
+      }
+    }
+    .discover-wrap {
+      margin: 4px 24px 24px;
+     &.discover-border {
+       border-top: 1px solid #E4E6EB;
+     }
+      h4 {
+        margin-top: 10px;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .webinar-wrapper-modal {
+    display: flex;
+    @media screen and (max-width: 991px) {
+      overflow-x: auto;
+    }
+      .web-box {
+        margin-right: 16px;
+
+    }
+  }
+}

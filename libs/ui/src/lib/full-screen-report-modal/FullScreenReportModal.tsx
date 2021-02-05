@@ -9,6 +9,7 @@ export interface FullScreenReportModalProps {
   visible?: boolean
   onBackClick?: () => void
   content?: () => JSX.Element
+  isVisibleMoreOption?: boolean
 }
 
 export const FullScreenReportModal: FC<FullScreenReportModalProps> = ({
@@ -16,6 +17,7 @@ export const FullScreenReportModal: FC<FullScreenReportModalProps> = ({
   visible,
   onBackClick,
   content,
+  isVisibleMoreOption,
 }) => {
   return (
     <Modal
@@ -31,9 +33,11 @@ export const FullScreenReportModal: FC<FullScreenReportModalProps> = ({
             <LeftOutlined onClick={() => onBackClick?.()} />
             <span className={styles.headerTitle}>{title}</span>
           </div>
-          <button className={styles.headerMore}>
-            <MoreOutlined />
-          </button>
+          {isVisibleMoreOption && (
+            <button className={styles.headerMore}>
+              <MoreOutlined />
+            </button>
+          )}
         </div>
         {content?.()}
       </>
