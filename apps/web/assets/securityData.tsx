@@ -1,30 +1,36 @@
-import iconHome from '../../assets/images/share.svg'
+import {
+  VideoCameraOutlined,
+  TabletOutlined,
+  UnlockOutlined,
+  MailOutlined,
+  KeyOutlined,
+} from '@ant-design/icons'
 
-export const data = [
+const securityToolsData = [
   {
     id: '1',
     title: 'Force 2FA',
     name: 'Start a video call from your conversations',
-    imgPath: iconHome,
+    imgSrc: <VideoCameraOutlined />,
     isActive: true,
     modalType: 1,
     modalTitle: 'Force 2FA',
     modalContent:
-      '<p>Two-factor authentication adds an extra layer of security to your Pabau account. By asking you to enter a verification code after entering the correct email address and password, it will protect you from potential attackers who also might have gained access to your email address. It will ensure that the secure data you share with your clients stays secure, as they will need to enter a verification code as well.</p><p>*SMS credits are mandatory, in order for the two-factor authentication to work.</p>',
+      'Two-factor authentication adds an extra layer of security to your Pabau account. By asking you to enter a verification code after entering the correct email address and password, it will protect you from potential attackers who also might have gained access to your email address. It will ensure that the secure data you share with your clients stays secure, as they will need to enter a verification code as well. /n*SMS credits are mandatory, in order for the two-factor authentication to work.',
   },
-  // {
-  //     id: "2",
-  //     title: "Autorized Devices",
-  //     name: "Create details and send conversations to Pipedrive",
-  //     imgPath: icon_force2fa,
-  //     isActive: true,
-  //     modalType: 2,
-  // },
   {
     id: '2',
+    title: 'Autorized Devices',
+    name: 'Create details and send conversations to Pipedrive',
+    imgSrc: <TabletOutlined />,
+    isActive: true,
+    modalType: 2,
+  },
+  {
+    id: '3',
     title: 'Password Expiration',
     name: 'Create details and send conversations to Pipedrive',
-    imgPath: iconHome,
+    imgSrc: <UnlockOutlined />,
     isActive: false,
     modalType: 2,
     modalTitle: 'Password Expiration',
@@ -47,10 +53,10 @@ export const data = [
     okbtn: 'Save',
   },
   {
-    id: '3',
+    id: '4',
     title: 'Encrypted Emails',
     name: 'Create details and send conversations to Pipedrive',
-    imgPath: iconHome,
+    imgSrc: <MailOutlined />,
     isActive: true,
     modalType: 3,
     modalTitle: 'Encrypted Emails',
@@ -58,11 +64,15 @@ export const data = [
     okbtn: 'Encrypt emails',
   },
   {
-    id: '4',
+    id: '5',
     title: 'Encrypted Encryption',
     name: 'Create details and send conversations to Pipedrive',
-    imgPath: iconHome,
+    imgSrc: <KeyOutlined />,
     isActive: false,
     modalType: 4,
   },
 ]
+
+const percent = 76
+
+export { securityToolsData, percent }

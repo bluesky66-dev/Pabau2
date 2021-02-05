@@ -26,7 +26,7 @@ export const Menu: FC<P> = ({ onSideBarCollapsed, active }) => {
 
   const handleSidebarCollapse = () => {
     setCollapsed((e) => {
-      onSideBarCollapsed && onSideBarCollapsed(!e)
+      onSideBarCollapsed?.(!e)
       return !e
     })
   }
