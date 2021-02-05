@@ -3,11 +3,11 @@ import NotificationDrawer from './NotificationDrawer'
 import AppointmentSVG from '../../assets/images/notification.svg'
 import ReportSVG from '../../assets/images/notification-report.svg'
 import LeadSVG from '../../assets/images/notification-lead.svg'
-import ReviewSVG from "../../assets/images/review.svg";
-import CampaignSVG from "../../assets/images/campaign.svg";
-import NewsletterSVG from "../../assets/images/newsletter.svg";
-import RequestSVG from "../../assets/images/request.svg";
-import ReferSVG from "../../assets/images/refer.svg";
+import ReviewSVG from '../../assets/images/review.svg'
+import CampaignSVG from '../../assets/images/campaign.svg'
+import NewsletterSVG from '../../assets/images/newsletter.svg'
+import RequestSVG from '../../assets/images/request.svg'
+import ReferSVG from '../../assets/images/refer.svg'
 
 export default {
   component: NotificationDrawer,
@@ -16,7 +16,7 @@ export default {
   argTypes: {},
 }
 const NotificationDrawerStory = ({ ...args }) => (
-  <NotificationDrawer {...args}></NotificationDrawer>
+  <NotificationDrawer {...args} />
 )
 
 export const NotificationDrawers = NotificationDrawerStory.bind({})
