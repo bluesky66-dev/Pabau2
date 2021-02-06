@@ -1,0 +1,54 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 16px;
+
+  a:hover,
+  a:focus {
+    .card {
+      border-color: #54b2d3;
+      background-color: #dcf0f9;
+      pointer-events: none;
+    }
+  }
+
+  .card {
+    height: 72px;
+    width: 254px;
+    border: 1.5px solid #ecedf0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 20px;
+
+    h2 {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      left: 19px;
+      top: -21.6%;
+      bottom: 41.67%;
+
+      font-style: normal;
+      font-weight: normal;
+      font-size: 20px;
+      line-height: 32px;
+    }
+
+    p {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      left: -30px;
+      top: 50%;
+      bottom: 41.67%;
+
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 15px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #9292a3;
+    }
+  }
+}
