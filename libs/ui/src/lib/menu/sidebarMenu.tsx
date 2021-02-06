@@ -14,6 +14,7 @@ import {
 export interface SidebarMenuItem {
   menuName: string
   icon?: JSX.Element
+  path?: string
   children?: SidebarMenuItem[]
 }
 
@@ -21,10 +22,12 @@ export const sidebarMenu: SidebarMenuItem[] = [
   {
     menuName: 'Dashboard',
     icon: <DashboardOutlined />,
+    path: '/',
   },
   {
     menuName: 'Calendar',
     icon: <CalendarOutlined />,
+    path: '/',
   },
   {
     menuName: 'Team',
@@ -32,36 +35,27 @@ export const sidebarMenu: SidebarMenuItem[] = [
     children: [
       {
         menuName: 'Staff Manager',
+        path: '/',
       },
       {
         menuName: 'Staff Targets',
+        path: '/',
       },
       {
         menuName: 'Schedule',
+        path: '/',
       },
     ],
   },
   {
     menuName: 'Leads',
     icon: <RiseOutlined />,
-    children: [
-      {
-        menuName: 'Leads',
-      },
-      {
-        menuName: 'Lead groups',
-      },
-      {
-        menuName: 'Lead views',
-      },
-      {
-        menuName: 'New leads',
-      },
-    ],
+    path: '/leads',
   },
   {
     menuName: 'Reports',
     icon: <FundOutlined />,
+    path: '/',
   },
   {
     menuName: 'Stock',
@@ -69,15 +63,19 @@ export const sidebarMenu: SidebarMenuItem[] = [
     children: [
       {
         menuName: 'Products',
+        path: '/',
       },
       {
         menuName: 'Inventory count',
+        path: '/',
       },
       {
         menuName: 'Purchase order',
+        path: '/',
       },
       {
         menuName: 'Suppliers',
+        path: '/',
       },
     ],
   },
@@ -86,25 +84,24 @@ export const sidebarMenu: SidebarMenuItem[] = [
     icon: <NotificationOutlined />,
     children: [
       {
-        menuName: 'SMS campaign',
+        menuName: 'Campaigns',
+        path: '/',
       },
       {
-        menuName: 'Birthday mailer',
-      },
-      {
-        menuName: 'Newsletter',
-      },
-      {
-        menuName: 'Feedback Survey',
+        menuName: 'Reviews',
+        path: '/',
       },
       {
         menuName: 'Gift Vouchers',
+        path: '/',
       },
       {
         menuName: 'Referral tracker',
+        path: '/',
       },
       {
         menuName: 'Loyalty',
+        path: '/',
       },
     ],
   },
@@ -114,9 +111,11 @@ export const sidebarMenu: SidebarMenuItem[] = [
     children: [
       {
         menuName: 'Accounts',
+        path: '/',
       },
       {
         menuName: 'Cashup',
+        path: '/',
       },
     ],
   },
@@ -126,9 +125,11 @@ export const sidebarMenu: SidebarMenuItem[] = [
     children: [
       {
         menuName: 'Clients',
+        path: '/',
       },
       {
         menuName: 'Case manager',
+        path: '/',
       },
     ],
   },
