@@ -4,6 +4,7 @@ import { Button, Breadcrumb, PhoneNumberInput, Notification } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import ClientNotification from '../../../components/ClientNotification/index'
 import styles from './index.module.less'
+import CommonHeader from '../../setup/CommonHeader'
 
 const { Title } = Typography
 
@@ -48,110 +49,113 @@ const Index: FC = () => {
   }
 
   return (
-    <Layout>
-      <div style={{ backgroundColor: '#FFF' }}>
-        <Breadcrumb
-          breadcrumbItems={[
-            'Setup',
-            'Notification Messages',
-            'Upcoming appointment reminder',
-          ]}
-        />
-        <Title>Upcoming appointment reminder</Title>
-      </div>
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          margin: '1em 8px',
-          height: '40px',
-          minWidth: '124px',
-          fontSize: '14px',
-        }}
-      >
-        <Button
-          className={styles.notificationSendButton}
-          style={{ margin: '1em 8px', height: '40px', fontSize: '14px' }}
-          type="default"
-          onClick={() => handleSendEmailBtn(!sendEmail)}
-        >
-          {setIndexTab === 1 ? 'Send Test Email' : 'Send Test SMS'}
-        </Button>
-        <Modal
-          title={setIndexTab === 1 ? 'Send Test Email' : 'Send Test Message'}
-          visible={sendEmail}
-          onCancel={() => setSendEmail(false)}
-          centered={true}
-          wrapClassName={styles.modal}
-          footer={null}
-        >
-          <div>
-            {setIndexTab === 1 ? (
-              <div>
-                <p style={{ color: '#9292A3' }}>Email</p>
-                <Input
-                  placeholder="client@email.com"
-                  onChange={(event) => isEmail(event.target.value)}
-                />
-              </div>
-            ) : (
-              <div>
-                <PhoneNumberInput
-                  countryCode={'GB'}
-                  onChange={(val) => {
-                    console.log(val)
-                  }}
-                />
-              </div>
-            )}
-
-            <div className={styles.footerBtnGroup}>
-              <Button
-                type="default"
-                style={{ marginRight: '10px' }}
-                onClick={() => setSendEmail(false)}
-              >
-                Cancel
-              </Button>
-              {setIndexTab === 1 && (
-                <Button
-                  type="primary"
-                  disabled={valideEmail ? false : true}
-                  onClick={() => showNotification()}
-                >
-                  Send
-                </Button>
-              )}
-              {setIndexTab === 2 && (
-                <Button type="primary" onClick={() => showNotification()}>
-                  Send
-                </Button>
-              )}
-            </div>
-          </div>
-        </Modal>
-
-        <Button
-          className={styles.notificationSaveButton}
+    <>
+      <CommonHeader />
+      <Layout>
+        <div style={{ backgroundColor: '#FFF' }}>
+          <Breadcrumb
+            breadcrumbItems={[
+              'Setup',
+              'Notification Messages',
+              'Upcoming appointment reminder',
+            ]}
+          />
+          <Title>Upcoming appointment reminder</Title>
+        </div>
+        <div
           style={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
             margin: '1em 8px',
             height: '40px',
+            minWidth: '124px',
             fontSize: '14px',
           }}
-          type="primary"
-          onClick={() =>
-            Notification(
-              NotificationType.success,
-              'Success! Notification Source Updated'
-            )
-          }
         >
-          Save
-        </Button>
-      </div>
-      <ClientNotification onSeletedTab={(value) => setSelectedTab(value)} />
-    </Layout>
+          <Button
+            className={styles.notificationSendButton}
+            style={{ margin: '1em 8px', height: '40px', fontSize: '14px' }}
+            type="default"
+            onClick={() => handleSendEmailBtn(!sendEmail)}
+          >
+            {setIndexTab === 1 ? 'Send Test Email' : 'Send Test SMS'}
+          </Button>
+          <Modal
+            title={setIndexTab === 1 ? 'Send Test Email' : 'Send Test Message'}
+            visible={sendEmail}
+            onCancel={() => setSendEmail(false)}
+            centered={true}
+            wrapClassName={styles.modal}
+            footer={null}
+          >
+            <div>
+              {setIndexTab === 1 ? (
+                <div>
+                  <p style={{ color: '#9292A3' }}>Email</p>
+                  <Input
+                    placeholder="client@email.com"
+                    onChange={(event) => isEmail(event.target.value)}
+                  />
+                </div>
+              ) : (
+                <div>
+                  <PhoneNumberInput
+                    countryCode={'GB'}
+                    onChange={(val) => {
+                      console.log(val)
+                    }}
+                  />
+                </div>
+              )}
+
+              <div className={styles.footerBtnGroup}>
+                <Button
+                  type="default"
+                  style={{ marginRight: '10px' }}
+                  onClick={() => setSendEmail(false)}
+                >
+                  Cancel
+                </Button>
+                {setIndexTab === 1 && (
+                  <Button
+                    type="primary"
+                    disabled={valideEmail ? false : true}
+                    onClick={() => showNotification()}
+                  >
+                    Send
+                  </Button>
+                )}
+                {setIndexTab === 2 && (
+                  <Button type="primary" onClick={() => showNotification()}>
+                    Send
+                  </Button>
+                )}
+              </div>
+            </div>
+          </Modal>
+
+          <Button
+            className={styles.notificationSaveButton}
+            style={{
+              margin: '1em 8px',
+              height: '40px',
+              fontSize: '14px',
+            }}
+            type="primary"
+            onClick={() =>
+              Notification(
+                NotificationType.success,
+                'Success! Notification Source Updated'
+              )
+            }
+          >
+            Save
+          </Button>
+        </div>
+        <ClientNotification onSeletedTab={(value) => setSelectedTab(value)} />
+      </Layout>
+    </>
   )
 }
 
