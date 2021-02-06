@@ -96,15 +96,15 @@ const Index: FC = () => {
                 />
               </div>
             ) : (
-                <div>
-                  <PhoneNumberInput
-                    countryCode={'GB'}
-                    onChange={(val) => {
-                      console.log(val)
-                    }}
-                  />
-                </div>
-              )}
+              <div>
+                <PhoneNumberInput
+                  countryCode={'GB'}
+                  onChange={(val) => {
+                    console.log(val)
+                  }}
+                />
+              </div>
+            )}
 
             <div className={styles.footerBtnGroup}>
               <Button
