@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Progress as AntProgress, Popover } from 'antd'
+import { Progress as AntProgress, Tooltip } from 'antd'
 import { ProgressProps } from 'antd/lib/progress'
 
 import styles from './NewsLetterTile.module.less'
@@ -11,15 +11,13 @@ interface P extends ProgressProps {
 }
 
 const NewsLetterTile: FC<P> = ({ totalSent, opened, clicked, ...props }) => {
-  const calculateValue = (value: number): number => {
-    const content = (value * 100) / totalSent
-    return Number(content.toFixed(2))
-  }
+  const openedPercentage = calculatePercentage(opened, totalSent)
+  const clickedPercentage = calculatePercentage(clicked, totalSent)
 
   const preparePopoverContent = (value: number, type: string): JSX.Element => {
     return (
-      <div className={styles.popOver}>
-        {type}:{calculateValue(value)}% ({opened} out of {totalSent} contacts)
+      <div className={styles.tooltipText}>
+        {type}:{value}% ({opened} out of {totalSent} contacts)
       </div>
     )
   }
@@ -27,32 +25,32 @@ const NewsLetterTile: FC<P> = ({ totalSent, opened, clicked, ...props }) => {
     <div className={styles.popOverModal}>
       <div className={styles.customTooltip}>
         <p>O:</p>
-        <Popover
+        <Tooltip
+          title={preparePopoverContent(openedPercentage, 'Opened')}
           placement={'bottom'}
-          content={preparePopoverContent(opened, 'Opened')}
         >
-          <AntProgress
-            showInfo={false}
-            percent={calculateValue(opened)}
-            {...props}
-          />
-        </Popover>
+          <AntProgress showInfo={false} percent={openedPercentage} {...props} />
+        </Tooltip>
       </div>
       <div className={styles.customTooltip}>
         <p>C:</p>
-        <Popover
+        <Tooltip
           placement={'bottom'}
-          content={preparePopoverContent(clicked, 'Clicked')}
+          title={preparePopoverContent(clickedPercentage, 'Clicked')}
         >
           <AntProgress
             showInfo={false}
-            percent={calculateValue(clicked)}
+            percent={clickedPercentage}
             {...props}
           />
-        </Popover>
+        </Tooltip>
       </div>
     </div>
   )
+}
+
+function calculatePercentage(value: number, total: number): number {
+  return Number(Number((value * 100) / total).toFixed(2))
 }
 
 export default NewsLetterTile
