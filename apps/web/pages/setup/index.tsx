@@ -107,7 +107,6 @@ const Index: FC = () => {
         { title: 'Payment Types', data: [] },
         { title: 'Contract Pricing', data: [] },
         { title: 'Cancellation Policy', data: [] },
-        { title: 'Petty Cash Types', data: [] },
       ],
       image: financialImage,
     },
@@ -192,7 +191,7 @@ const Index: FC = () => {
   return (
     <div>
       <CommonHeader handleSearch={handleSearch} />
-      <Layout>
+      <Layout active={'setup'}>
         <div className={styles.cardWrapper}>
           <div className={styles.titleWrapper}>
             <span className={styles.title}>{title}</span>

@@ -1,8 +1,9 @@
-/* eslint-disable */
-
 import React from 'react'
 import { HelpTooltip } from './helptooltip'
 import { Input } from './input'
+import { notification } from 'antd'
+import { Passcode as PasscodeBox } from './Passcode'
+import { PasswordWithHelper as PasswordWithHelperBox } from './PasswordWithHelper'
 
 export default {
   component: Input,
@@ -35,7 +36,11 @@ export default {
 }
 
 const InputStory = ({ ...args }) => <Input {...args} />
-export const InputWithFormControl = InputStory.bind({})
+export const InputWithFormControl = InputStory.bind({
+  onChange: (val) => {
+    notification.open({ message: val })
+  },
+})
 
 const HelpTooltipStory = ({ ...args }) => <HelpTooltip {...args} />
 export const HelpTooltipControl = HelpTooltipStory.bind({})
@@ -51,4 +56,16 @@ InputEmailAddress.args = {
   type: 'email',
   placeHolderText: 'Enter email',
   reqiredMsg: 'Email is required!',
-};
+}
+
+const PasscodeStory = ({ ...args }) => <PasscodeBox {...args}></PasscodeBox>
+export const Passcode = PasscodeStory.bind({})
+
+const PasswordWithHelperStory = ({ ...args }) => (
+  <PasswordWithHelperBox {...args}></PasswordWithHelperBox>
+)
+export const PasswordWithHelper = PasswordWithHelperStory.bind({})
+PasswordWithHelper.args = {
+  stength: 3,
+  width: '50%',
+}

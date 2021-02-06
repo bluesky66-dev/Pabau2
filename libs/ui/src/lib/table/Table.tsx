@@ -8,9 +8,12 @@ import {
 import { LockOutlined, MenuOutlined } from '@ant-design/icons'
 import styles from './Table.module.less'
 import { TableProps } from 'antd/es/table'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as Icons from '@fortawesome/free-solid-svg-icons'
 export interface DragProps {
   draggable?: boolean
+  isCustomColorExist?: boolean
+  isCustomIconExist?: boolean
   updateDataSource?: ({ newData, oldIndex, newIndex }) => void
 }
 
@@ -37,15 +40,17 @@ function array_move(arr, old_index, new_index) {
   })
 }
 
-type P = {
+export type TableType = {
   onRowClick?: (e) => void
   padlocked?: string[]
 } & TableProps<never> &
   DragProps
 
-export const Table: FC<P> = ({
+export const Table: FC<TableType> = ({
   dataSource = [],
   padlocked,
+  isCustomColorExist = false,
+  isCustomIconExist = false,
   updateDataSource,
   onRowClick,
   ...props
@@ -94,13 +99,32 @@ export const Table: FC<P> = ({
     )
   }
 
-  const checkPadLockField = (val) => {
-    return padlocked && padlocked.includes(val) ? (
-      <>
-        {val} <LockOutlined />
-      </>
-    ) : (
-      val
+  const renderTableSource = (val, rowData) => {
+    return (
+      <div className={styles.alignItems}>
+        {isCustomColorExist && renderCustomColor(val, rowData)}
+        {val}
+        {padlocked?.includes(val) && (
+          <div style={{ marginLeft: '6px' }}>
+            <LockOutlined />
+          </div>
+        )}
+        {isCustomIconExist && (
+          <FontAwesomeIcon
+            icon={Icons[rowData.icon]}
+            className={styles.tableIcon}
+          />
+        )}
+      </div>
+    )
+  }
+
+  const renderCustomColor = (val, rowData) => {
+    return (
+      <div
+        style={{ background: rowData.color }}
+        className={styles.customColor}
+      ></div>
     )
   }
 
@@ -122,11 +146,12 @@ export const Table: FC<P> = ({
         if (col && col.dataIndex === 'is_active') {
           col.render = renderActiveButton
         } else {
-          if (checkPadLocks(col)) col.render = checkPadLockField
+          col.render = renderTableSource
         }
         return col
       })
     }
+
     return props.draggable
       ? [{ ...dragColumn }, ...(props.columns || [])]
       : props.columns
