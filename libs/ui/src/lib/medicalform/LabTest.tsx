@@ -1,13 +1,24 @@
+import {
+  MedicalFormBody,
+  MedicalFormBottom,
+  MedicalFormHeader,
+  MedicalFormTitle,
+} from '@pabau/ui'
 import React, { FC } from 'react'
 import labTestIcon from '../../assets/images/medicalform_labtest.svg'
 import BasicElement from './BasicElement'
-import MedicalFormBody from './MedicalFormBody'
-import MedicalFormBottom from './MedicalFormBottom'
-import MedicalFormHeader from './MedicalFormHeader'
-import MedicalFormTitle from './MedicalFormTitle'
 import MultiSelect from './MultiSelect'
 
-const LabTest: FC = () => {
+interface P {
+  hideSideBar?: () => void
+}
+
+const LabTest: FC<P> = ({ hideSideBar }) => {
+  const saveFunc = () => {
+    if (hideSideBar) {
+      hideSideBar()
+    }
+  }
   const optionLabels = [
     { id: 1, label: 'Accent Prime' },
     { id: 2, label: 'All-inclusive' },
@@ -30,7 +41,7 @@ const LabTest: FC = () => {
       <MedicalFormBody>
         <MultiSelect title="Question" options={optionLabels} />
       </MedicalFormBody>
-      <MedicalFormBottom needLeft={true} />
+      <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
     </BasicElement>
   )
 }

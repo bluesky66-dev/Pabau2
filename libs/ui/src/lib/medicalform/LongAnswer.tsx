@@ -1,14 +1,25 @@
+import {
+  MedicalFormBody,
+  MedicalFormBottom,
+  MedicalFormHeader,
+  MedicalFormTitle,
+} from '@pabau/ui'
 import React, { FC } from 'react'
 import longAnswerIcon from '../../assets/images/medicalform_longanswer.svg'
 import BasicElement from './BasicElement'
 import ElementAdvanced from './ElementAdvanced'
 import ElementQuestion from './ElementQuestion'
-import MedicalFormBody from './MedicalFormBody'
-import MedicalFormBottom from './MedicalFormBottom'
-import MedicalFormHeader from './MedicalFormHeader'
-import MedicalFormTitle from './MedicalFormTitle'
 
-const LongAnswer: FC = () => {
+interface P {
+  hideSideBar?: () => void
+}
+
+const LongAnswer: FC<P> = ({ hideSideBar }) => {
+  const saveFunc = () => {
+    if (hideSideBar) {
+      hideSideBar()
+    }
+  }
   return (
     <BasicElement>
       <MedicalFormHeader title="component settings" />
@@ -22,7 +33,7 @@ const LongAnswer: FC = () => {
         <ElementQuestion desc="Enter your question" title="Question" />
         <ElementAdvanced />
       </MedicalFormBody>
-      <MedicalFormBottom needLeft={true} />
+      <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
     </BasicElement>
   )
 }

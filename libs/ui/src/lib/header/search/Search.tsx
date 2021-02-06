@@ -36,7 +36,7 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
     const timer = setTimeout(() => {
       if (searchTerm) {
         setSearchPopUp(true)
-        onChange && onChange(searchTerm)
+        onChange?.(searchTerm)
       } else setSearchPopUp(false)
     }, WAIT_INTERVAL)
 

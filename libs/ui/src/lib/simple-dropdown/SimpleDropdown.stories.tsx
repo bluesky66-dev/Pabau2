@@ -5,7 +5,7 @@ import SimpleDropdown, { SimpleDropdownProps } from './SimpleDropdown'
 export default {
   component: SimpleDropdown,
   title: 'Basics/SimpleDropdown',
-  args: { label: '', menuItems: ['a', 'b'] },
+  args: { label: '', dropdownItems: ['a', 'b'] },
   argTypes: {
     label: { control: { type: 'text' } },
   },
@@ -18,7 +18,9 @@ const SimpleDropdownStory = ({ ...args }: SimpleDropdownProps) => (
 export const Basic = SimpleDropdownStory.bind({})
 Basic.args = {
   label: 'Reverse Family Relation',
-  menuItems: ['a', 'b'],
+  value: 'a',
+  dropdownItems: ['a', 'b'],
+  tooltip: 'Reverse Family Relation',
   onSelected: (val) => {
     notification.open({ message: `Select ${val}` })
   },
@@ -26,7 +28,8 @@ Basic.args = {
 
 export const NoLabel = SimpleDropdownStory.bind({})
 NoLabel.args = {
-  menuItems: ['a', 'b'],
+  value: 'a',
+  dropdownItems: ['a', 'b'],
   onSelected: (val) => {
     notification.open({ message: `Select ${val}` })
   },

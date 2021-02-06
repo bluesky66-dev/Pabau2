@@ -1,5 +1,12 @@
 import React from 'react'
 import NewsLetterTile from './NewsLetterTile'
+import { ProgressProps } from 'antd/lib/progress'
+
+interface P extends ProgressProps {
+  totalSent: number
+  opened: number
+  clicked: number
+}
 
 export default {
   component: NewsLetterTile,
@@ -13,6 +20,6 @@ export default {
   },
 }
 
-export const NewsLetterTitleStory = (args) => {
+export const NewsLetterTitleStory = (args: P): JSX.Element => {
   return <NewsLetterTile {...args} />
 }

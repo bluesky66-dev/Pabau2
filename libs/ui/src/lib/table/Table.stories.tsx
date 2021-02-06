@@ -103,3 +103,21 @@ const TableWithCustomColorStory: FC = ({ ...args }) => {
   )
 }
 export const TableWithCustomColor = TableWithCustomColorStory.bind({})
+
+const TableWithCustomIconStory: FC = ({ ...args }) => {
+  const [dataSource, setDataSource]: any = useState(data)
+  const updateDataSource = ({ newData, oldIndex, newIndex }) => {
+    setDataSource(newData)
+  }
+
+  return (
+    <Table
+      {...args}
+      padlocked={[]}
+      dataSource={dataSource}
+      isCustomIconExist={true}
+      updateDataSource={updateDataSource}
+    />
+  )
+}
+export const TableWithCustomIcon = TableWithCustomIconStory.bind({})
