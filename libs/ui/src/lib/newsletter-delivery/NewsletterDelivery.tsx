@@ -17,14 +17,20 @@ export interface NewsletterDeliveryProps {
 export const NewsletterDelivery: FC<NewsletterDeliveryProps> = ({ data }) => {
   return (
     <div className={styles.wrapper}>
-      {data?.map((dat) => (
-        <a href={url} key={dat.key}>
-          <div className={styles.card}>
+      {data?.map((dat, index) => (
+        <div className={styles.tile}>
+          <input
+            type="checkbox"
+            name={dat.title}
+            id={dat.title}
+            {...(index + 1)}
+          />
+          <label htmlFor={dat.title}>
+            <p>{dat.title}</p>
             <img src={dat.img} alt="" />
             <h2>{dat.value.toLocaleString('en')}</h2>
-            <p>{dat.title}</p>
-          </div>
-        </a>
+          </label>
+        </div>
       ))}
     </div>
   )
