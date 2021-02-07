@@ -6,7 +6,7 @@ import styles from './MedicalFilter.module.less'
 
 export interface MedicalFilterType {
   language: string
-  status: boolean
+  status: 'active' | 'inactive' | 'require_setup'
   formtype: {
     medicalHistory: boolean
     consent: boolean
@@ -24,7 +24,7 @@ export interface MedicalFilterProps {
 
 const defaultFilter: MedicalFilterType = {
   language: 'English (UK)',
-  status: false,
+  status: 'active',
   formtype: {
     medicalHistory: false,
     consent: false,
@@ -69,14 +69,20 @@ export const MedicalFilter: FC<MedicalFilterProps> = ({ filter, onApply }) => {
       <p className={styles.filterViewerSubTitle}>Status</p>
       <div className={styles.filterViewerStatusContainer}>
         <Button
-          type={filters.status ? 'primary' : 'default'}
-          onClick={() => handleChangeStatus(true)}
+          type={filters.status === 'active' ? 'primary' : 'default'}
+          onClick={() => handleChangeStatus('active')}
         >
           Active
         </Button>
         <Button
-          type={!filters.status ? 'primary' : 'default'}
-          onClick={() => handleChangeStatus(false)}
+          type={filters.status === 'inactive' ? 'primary' : 'default'}
+          onClick={() => handleChangeStatus('inactive')}
+        >
+          Inactive
+        </Button>
+        <Button
+          type={filters.status === 'require_setup' ? 'primary' : 'default'}
+          onClick={() => handleChangeStatus('require_setup')}
         >
           Inactive
         </Button>
