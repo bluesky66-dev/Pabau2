@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import { Button } from '@pabau/ui'
-import VersionHistory from './VersionHistory'
+import VersionHistory, { VersionItem } from './VersionHistory'
 
 export default {
   component: VersionHistory,
@@ -9,32 +9,45 @@ export default {
   argTypes: {},
 }
 
-const VerstionHistoryStory: FC = () => {
+const defaultHistory = {
+  last_week: [
+    {
+      version: '3',
+      updatedBy: 'William Brandham',
+      date: 'January 22, 2:27 PM',
+    },
+    {
+      version: '2',
+      updatedBy: 'Meri Redjepi',
+      date: 'January 22, 1:26 PM',
+    },
+    {
+      version: '1',
+      updatedBy: 'Meri Redjepi',
+      date: 'January 22, 2:27 PM',
+    },
+  ],
+}
+
+interface VerstionHistoryStoryProps {
+  history: {
+    [key: string]: VersionItem[]
+  }
+  currentVersion: string
+}
+
+const VerstionHistoryStory: FC<VerstionHistoryStoryProps> = ({
+  history,
+  currentVersion,
+}) => {
   const [viewHistory, setViewHistory] = useState(false)
 
   return (
     <>
       <Button onClick={() => setViewHistory(true)}>Version History</Button>
       <VersionHistory
-        history={{
-          last_week: [
-            {
-              version: 'Current verison',
-              updatedBy: 'William Brandham',
-              date: 'January 22, 2:27 PM',
-            },
-            {
-              version: 'Version 2',
-              updatedBy: 'Meri Redjepi',
-              date: 'January 22, 1:26 PM',
-            },
-            {
-              version: 'Version 1',
-              updatedBy: 'Meri Redjepi',
-              date: 'January 22, 2:27 PM',
-            },
-          ],
-        }}
+        history={history}
+        currentVersion={currentVersion}
         visible={viewHistory}
         onVisibleChange={(val) => setViewHistory(val)}
       />
@@ -43,3 +56,7 @@ const VerstionHistoryStory: FC = () => {
 }
 
 export const Basic = VerstionHistoryStory.bind({})
+Basic.args = {
+  history: defaultHistory,
+  currentVersion: '3',
+}

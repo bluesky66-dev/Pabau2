@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Button, FormType, LanguageDropdown } from '@pabau/ui'
 import { Popover } from 'antd'
 import { FilterOutlined } from '@ant-design/icons'
@@ -57,6 +57,9 @@ export const MedicalFilter: FC<MedicalFilterProps> = ({ filter, onApply }) => {
     setVisible(false)
     onApply(filters)
   }
+  useEffect(() => {
+    setFilters(filter)
+  }, [filter])
   const FilterViewer = () => (
     <div className={styles.filterViewerContainer}>
       <p
@@ -84,7 +87,7 @@ export const MedicalFilter: FC<MedicalFilterProps> = ({ filter, onApply }) => {
           type={filters.status === 'require_setup' ? 'primary' : 'default'}
           onClick={() => handleChangeStatus('require_setup')}
         >
-          Inactive
+          Require Setup
         </Button>
       </div>
       <p className={styles.filterViewerSubTitle}>Form type</p>

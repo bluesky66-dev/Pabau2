@@ -13,6 +13,7 @@ export interface VersionItem {
 }
 
 export interface VersionHistoryProps {
+  currentVersion: string
   history: {
     [key: string]: VersionItem[]
   }
@@ -21,23 +22,21 @@ export interface VersionHistoryProps {
 }
 
 export const VersionHistory: FC<VersionHistoryProps> = ({
+  currentVersion,
   history,
   visible,
   onVisibleChange,
 }) => {
   const handleRestoreVersion = (e) => {
-    console.log(e)
-    if (e.key === 'restore-version') {
-      Notification(
-        NotificationType.success,
-        'You successfully restored this version as Aesthetics Form v2 (Restored)'
-      )
-      onVisibleChange(false)
-    }
+    Notification(
+      NotificationType.success,
+      `You successfully restored this version as Aesthetics Form v${e.key} (Restored)`
+    )
+    onVisibleChange(false)
   }
-  const restoreVersion = () => (
+  const restoreVersion = (item) => (
     <Menu onClick={(e) => handleRestoreVersion(e)}>
-      <Menu.Item key="restore-version">Restore Version</Menu.Item>
+      <Menu.Item key={item.version}>Restore Version</Menu.Item>
     </Menu>
   )
   return (
@@ -64,14 +63,16 @@ export const VersionHistory: FC<VersionHistoryProps> = ({
                   <div>
                     <p className={styles.historyUpdatedDate}>{item.date}</p>
                     <p className={styles.historyUpdatedVersion}>
-                      {item.version}
+                      {item.version === currentVersion
+                        ? 'Current Version'
+                        : `Version ${item.version}`}
                     </p>
                     <p
                       className={styles.historyUpdatedBy}
                     >{`by ${item.updatedBy}`}</p>
                   </div>
                   <div>
-                    <Dropdown overlay={restoreVersion}>
+                    <Dropdown overlay={restoreVersion(item)} trigger="click">
                       <p className={styles.historyMore}>
                         <MoreOutlined />
                       </p>
