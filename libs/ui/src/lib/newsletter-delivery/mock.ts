@@ -1,38 +1,38 @@
-import SentMail from '../../assets/images/sent-mail.svg'
-import Mail from '../../assets/images/email.svg'
-import Open from '../../assets/images/opened-email.svg'
-import Click from '../../assets/images/click.svg'
-import Bounced from '../../assets/images/bounced.svg'
+import SentMail from '../../assets/images/sent-mail.png'
+import Mail from '../../assets/images/email.png'
+import Open from '../../assets/images/opened-email.png'
+import Click from '../../assets/images/click.png'
+import Bounced from '../../assets/images/bounced.png'
 
 export const data = [
   {
-    title: 'SENT',
+    title: 'Sent',
     value: 3244,
     key: 1,
-    img: `${SentMail}`,
+    img: SentMail,
   },
   {
-    title: 'DELIVERED',
+    title: 'Delivered',
     value: 2844,
     key: 2,
-    img: `${Mail}`,
+    img: Mail,
   },
   {
-    title: 'OPENED',
+    title: 'Opened',
     value: 3224,
     key: 3,
-    img: `${Open}`,
+    img: Open,
   },
   {
-    title: 'CLICKS',
+    title: 'Clicks',
     value: 882,
     key: 4,
-    img: `${Click}`,
+    img: Click,
   },
   {
-    title: 'BOUNCED',
+    title: 'Bounced',
     value: 50,
     key: 5,
-    img: `${Bounced}`,
+    img: Bounced,
   },
 ]
