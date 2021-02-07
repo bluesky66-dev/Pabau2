@@ -3,6 +3,7 @@ import { gql } from '@apollo/client'
 import { NextPage } from 'next'
 import React from 'react'
 import CrudLayout from '../../../components/CrudLayout/CrudLayout'
+import { useTranslation } from 'react-i18next'
 
 const LIST_QUERY = gql`
   query marketing_sources(
@@ -99,6 +100,31 @@ const schema: Schema = {
 }
 
 export const Index: NextPage = () => {
+  const { t, i18n } = useTranslation('common')
+  const schema: Schema = {
+    full: t('marketingsource-title.translation'),
+    fullLower: t('marketingsource-title.translation'),
+    short: 'Source',
+    shortLower: 'source',
+    fields: {
+      name: {
+        full: 'Friendly Name',
+        fullLower: 'friendly name',
+        short: t('marketingsource-name-textfield.translation'),
+        shortLower: 'name',
+        min: 2,
+        example: t('marketingsource-name-placeholder.translation'),
+        description: 'A friendly name',
+        // extra: <i>Please note: blah blah blahh</i>,
+        cssWidth: 'max',
+      },
+      is_active: {
+        full: t('marketingsource-tableColumn-active.translation'),
+        type: 'boolean',
+        default: true,
+      },
+    },
+  }
   return (
     <CrudLayout
       schema={schema}

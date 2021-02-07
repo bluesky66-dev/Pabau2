@@ -25,7 +25,7 @@ const Form: FC<P> = ({ schema }) => {
             <Input
               //disabled={isSubmitting}
               name={name}
-              placeholder={example && `eg ${example}`}
+              placeholder={example && `${example}`}
               autoFocus={i === 0}
             />
           </AntForm.Item>

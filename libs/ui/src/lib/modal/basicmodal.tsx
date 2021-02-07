@@ -63,7 +63,7 @@ export function BasicModal({
       wrapClassName={styles.modal + ' ' + wrapClassName}
       {...props}
     >
-      <div>{children}</div>
+      <div className={styles.modalBody}>{children}</div>
       {footer && (
         <div className={styles.modalFooter}>
           {specialBooleanLabel && onSpecialBooleanClick && (

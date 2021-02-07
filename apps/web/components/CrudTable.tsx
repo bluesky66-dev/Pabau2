@@ -5,6 +5,7 @@ import {
   MobileHeader,
   Notification,
   NotificationType,
+  SimpleDropdown,
 } from '@pabau/ui'
 import React, { FC, useEffect, useState } from 'react'
 import { DocumentNode, useMutation } from '@apollo/client'
@@ -20,6 +21,7 @@ import Layout from './Layout/Layout'
 import { LeftOutlined } from '@ant-design/icons'
 import classNames from 'classnames'
 import Link from 'next/link'
+import { useTranslationI18 } from '../hooks/useTranslationI18'
 
 const { Title } = Typography
 
@@ -32,6 +34,73 @@ interface P {
   aggregateQuery?: DocumentNode
 }
 
+const languages = [
+  {
+    key: 'en',
+    value: 'English(UK)',
+  },
+  {
+    key: 'en-us',
+    value: 'English(US)',
+  },
+  {
+    key: 'de',
+    value: 'German',
+  },
+  {
+    key: 'fr',
+    value: 'French',
+  },
+  {
+    key: 'es',
+    value: 'Spanish',
+  },
+  {
+    key: 'ar',
+    value: 'Arabic',
+  },
+  {
+    key: 'bg',
+    value: 'Bulgarian',
+  },
+  {
+    key: 'cs',
+    value: 'Czech',
+  },
+  {
+    key: 'da',
+    value: 'Danish',
+  },
+  {
+    key: 'hu',
+    value: 'Hungarian',
+  },
+  {
+    key: 'lv',
+    value: 'Latvian',
+  },
+  {
+    key: 'no',
+    value: 'Norwegian',
+  },
+  {
+    key: 'pl',
+    value: 'Polish',
+  },
+  {
+    key: 'sv',
+    value: 'Swedish',
+  },
+  {
+    key: 'ro',
+    value: 'Romanian',
+  },
+  {
+    key: 'ru',
+    value: 'Russian',
+  },
+]
+
 const CrudTable: FC<P> = ({
   schema,
   addQuery,
@@ -42,6 +111,13 @@ const CrudTable: FC<P> = ({
 }) => {
   const [isActive, setIsActive] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
+  const [currentLanguage, setCurrentLanguage] = useState<string>('English(UK)')
+  const { t, i18n } = useTranslationI18()
+
+  useEffect(() => {
+    const data = languages.filter(({ value }) => value === currentLanguage)
+    i18n.changeLanguage(data[0].key)
+  }, [currentLanguage, i18n])
   // eslint-disable-next-line graphql/template-strings
   const [editMutation] = useMutation(editQuery, {
     onCompleted(data) {
@@ -179,6 +255,10 @@ const CrudTable: FC<P> = ({
     setModalShowing(false)
   }
 
+  const handleLanguageChange = (language: string): void => {
+    setCurrentLanguage(language)
+  }
+
   return (
     <Formik
       enableReinitialize={true}
@@ -224,7 +304,7 @@ const CrudTable: FC<P> = ({
                 <Link href="/">
                   <LeftOutlined />
                 </Link>
-                <p> Marketing sources </p>
+                <p> {t('marketingsource-title.translation')} </p>
               </div>
               {addQuery && (
                 <AddButton
@@ -263,7 +343,17 @@ const CrudTable: FC<P> = ({
                   pluralize(schema.full || schema.short),
                 ]}
               />
-              <Title>{pluralize(schema.full || schema.short)}</Title>
+              <div style={{ display: 'flex' }}>
+                <Title>{pluralize(schema.full || schema.short)}</Title>
+              </div>
+            </div>
+            <div className={styles.btn}>
+              <SimpleDropdown
+                label={'Change Language'}
+                dropdownItems={prepareLanguages(languages)}
+                value={currentLanguage}
+                onSelected={handleLanguageChange}
+              />
             </div>
             {addQuery && (
               <AddButton
@@ -341,6 +431,13 @@ const CrudTable: FC<P> = ({
       </>
     </Formik>
   )
+}
+
+function prepareLanguages(languages): Array<string> {
+  const array = languages?.map(({ value }) => {
+    return value
+  })
+  return array
 }
 
 export default CrudTable

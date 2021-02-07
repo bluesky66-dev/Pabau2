@@ -10,6 +10,7 @@ import styles from './Table.module.less'
 import { TableProps } from 'antd/es/table'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from '@fortawesome/free-solid-svg-icons'
+import { useTranslation } from 'react-i18next'
 export interface DragProps {
   draggable?: boolean
   isCustomColorExist?: boolean
@@ -69,6 +70,7 @@ export const Table: FC<TableType> = ({
     )
     return <SortItem index={index} {...restProps} />
   }
+  const { t } = useTranslation('common')
 
   const DraggableContainer = (props) => (
     <SortContainer
@@ -94,7 +96,9 @@ export const Table: FC<TableType> = ({
         className={isActive ? styles.activeBtn : styles.disableSourceBtn}
         disabled={!isActive}
       >
-        {isActive ? 'Active' : 'Inactive'}
+        {isActive
+          ? t('marketingsource-tableRow-active-btn.translation')
+          : t('marketingsource-tableRow-inActive-btn.translation')}
       </Button>
     )
   }

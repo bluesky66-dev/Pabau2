@@ -8,6 +8,7 @@ import {
 } from '@ant-design/icons'
 import { Drawer, Input, Popover, Radio } from 'antd'
 import classNames from 'classnames'
+import { useTranslationI18 } from '../hooks/useTranslationI18'
 // import { isMobile, isTablet } from 'react-device-detect'
 // import { useKeyPressEvent } from 'react-use'
 
@@ -30,6 +31,7 @@ const AddButton: FC<P> = ({
   const [isActive, setIsActive] = useState(true)
   const [mobFilterDrawer, setMobFilterDrawer] = useState(false)
   const [marketingSourceSearch, setMarketingSourceSearch] = useState('')
+  const { t } = useTranslationI18()
 
   // useKeyPressEvent('n', () => {
   //   onClick?.()
@@ -120,7 +122,7 @@ const AddButton: FC<P> = ({
       >
         <Input
           className={styles.searchMarketingStyle}
-          placeholder="Search"
+          placeholder={t('search-placeholder.translation')}
           value={marketingSourceSearch}
           onChange={(e) => setMarketingSourceSearch(e.target.value)}
           suffix={<SearchOutlined style={{ color: '#8C8C8C' }} />}
@@ -133,7 +135,7 @@ const AddButton: FC<P> = ({
           overlayClassName={styles.filterPopover}
         >
           <Button className={styles.filterBtn}>
-            <FilterOutlined /> Filter
+            <FilterOutlined /> {t('marketingsource-button-filter.translation')}
           </Button>
         </Popover>
         <Button
@@ -141,7 +143,7 @@ const AddButton: FC<P> = ({
           type="primary"
           onClick={() => onClick?.()}
         >
-          {'Create ' + schema.short}
+          {t('marketingsource-header-create.translation')}
         </Button>
       </div>
     </>
