@@ -72,7 +72,10 @@ export const VersionHistory: FC<VersionHistoryProps> = ({
                     >{`by ${item.updatedBy}`}</p>
                   </div>
                   <div>
-                    <Dropdown overlay={restoreVersion(item)} trigger="click">
+                    <Dropdown
+                      overlay={restoreVersion(item)}
+                      trigger={['click']}
+                    >
                       <p className={styles.historyMore}>
                         <MoreOutlined />
                       </p>
