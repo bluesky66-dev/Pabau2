@@ -1,8 +1,6 @@
 import React, { FC } from 'react'
 import styles from './NewsletterDelivery.module.less'
 
-const url = '/?path=/story/basics-newsletterdelivery--news-letter-delivery'
-
 export interface cardData {
   title: string
   value: number
@@ -18,7 +16,7 @@ export const NewsletterDelivery: FC<NewsletterDeliveryProps> = ({ data }) => {
   return (
     <div className={styles.wrapper}>
       {data?.map((dat, index) => (
-        <div className={styles.tile}>
+        <div className={styles.tile} key={dat.key}>
           <input
             type="checkbox"
             name={dat.title}
