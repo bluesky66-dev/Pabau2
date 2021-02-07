@@ -21,7 +21,7 @@ export const ReviewWrite: FC<P> = ({ questions }) => {
       </div>
 
       <div className={styles.rateStarBox}>
-        {questions.map(({ question, key, rating }) => (
+        {questions?.map(({ question, key, rating }) => (
           <div key={`review-write-question-${key}`}>
             <div className={styles.question}>{question}</div>
             <div className={styles.rating}>
