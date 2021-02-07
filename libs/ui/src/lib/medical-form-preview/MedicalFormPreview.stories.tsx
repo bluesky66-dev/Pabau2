@@ -15,8 +15,8 @@ const MedicalFormPreviewStory: FC<MedicalFormPreviewProps> = ({ ...props }) => (
 
 export const Basic = MedicalFormPreviewStory.bind({})
 Basic.args = {
-  desktopTemp: 'http://fresha.com/',
-  appTemp: 'http://fresha.com/',
+  desktopTemp: 'https://fresha.com/',
+  appTemp: 'https://fresha.com/',
   step: 2,
   stepData: data,
   user: {

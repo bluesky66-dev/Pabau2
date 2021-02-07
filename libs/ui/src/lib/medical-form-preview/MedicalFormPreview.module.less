@@ -1,3 +1,18 @@
+.temp-preview-container {
+  :global {
+    .ant-modal {
+      min-width: 680px;
+      height: 80vh;
+      @media (max-width: 767px) {
+        min-width: 100%;
+      }
+    }
+    .ant-tabs {
+      min-height: 60vh !important;
+    }
+  }
+}
+
 .temp-preview-tab-menu-container {
   > div {
     border: none;
@@ -28,7 +43,7 @@
   > iframe {
     border: none;
     width: 100%;
-    height: 100vh;
+    height: calc(60vh - 90px);
   }
 }
 

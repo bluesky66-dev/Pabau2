@@ -41,10 +41,11 @@ export const MedicalFormPreview: FC<MedicalFormPreviewProps> = ({
       </Button>
       {visible && (
         <BasicModal
+          wrapClassName={styles.tempPreviewContainer}
           title="Template Preview"
           visible={visible}
           newButtonText="Test As Client"
-          width="100%"
+          width="50%"
           onCancel={() => setVisible(false)}
         >
           <div className={styles.tempPreviewTabMenuContainer}>
