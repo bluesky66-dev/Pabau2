@@ -1,7 +1,7 @@
 import * as NexusSchema from 'nexus'
 import { nexusPrisma } from 'nexus-plugin-prisma'
 import * as path from 'path'
-import * as types from './types'
+import * as types from '../types'
 
 export default NexusSchema.makeSchema({
   types,

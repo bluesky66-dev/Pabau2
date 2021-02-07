@@ -2,21 +2,7 @@
 ### Do not make changes to this file directly
 
 
-type admin {
-  creation_date: DateTime!
-  digit8: Int!
-  id: Int!
-  image: String!
-  slug: String
-  user: String!
-}
-
-input adminWhereUniqueInput {
-  id: Int
-  slug: String
-}
-
-scalar DateTime
+type Admin
 
 type marketing_sources {
   custom_id: Int!
@@ -25,6 +11,4 @@ type marketing_sources {
   source_name: String!
 }
 
-type Query {
-  admin(where: adminWhereUniqueInput!): admin
-}
+type Query
