@@ -55,6 +55,12 @@ Now add `import { } from '@pabau/ui'` at top of the new page file and fill in th
 ### Bridge
 
 To view the GraphQA endpoint which will expose the legacy database run `yarn nx serve bridge-api`
+Our ORM of choice is prisma, the schema fail is located at apps/bridge-api/prisma/schema.prisma and is following a strict naming convention
+- Model names must adhere to the following regular expression: [A-Za-z][A-Za-z0-9_]*
+- Model names must start with a letter and are typically spelled in PascalCase
+- Model names should use the singular form (for example, User instead of user, users or Users)
+
+Successful modification  of the schema.prisma file must be followed by `yarn prisma:generate`
 
 
 ## Backend
