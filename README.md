@@ -59,7 +59,7 @@ To view the GraphQA endpoint which will expose the legacy database run `yarn nx 
 Our ORM of choice is prisma, the schema file is located at `apps/bridge-api/prisma/schema.prisma` and is following a strict naming convention
 - Model names must adhere to the following regular expression: [A-Za-z][A-Za-z0-9_]*
 - Model names must start with a letter and are typically spelled in PascalCase
-- Model names must use the singular form (for example, User instead of user, users or Users)
+- Model names must use the singular form (for example, User instead of users or Users)
 
 U should never manually edit:
 - nexus.ts located at `apps/bridge-api/src/generated/nexus.ts`
