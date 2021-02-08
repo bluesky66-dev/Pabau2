@@ -1,8 +1,9 @@
 import React from 'react'
-
+import Stepper from '../stepper/Stepper'
 import styels from './Wizard.module.less'
 import { Button, Breadcrumb } from '@pabau/ui'
 import { Typography } from 'antd'
+import { data } from './mock'
 
 const { Title } = Typography
 
@@ -40,21 +41,22 @@ export const Wizard: React.FC<WizardProps> = ({
       </div>
 
       <hr className={styels.line} />
-      {children}
+      <Stepper datasource={data} step={active} />
       <hr className={styels.bottomline} />
+      {children}
 
       <div className={styels.footer}>
-        <Button onClick={(event) => prevClick()} disabled={active <= 1}>
+        <Button onClick={(event) => prevClick()} disabled={active < 1}>
           Previous Step
         </Button>
         <span className={styels.breadcrumbgraytxt}>
-          Step {active}/{allSteps}
+          Step {active + 1}/{allSteps}
         </span>
 
         <Button
           type="primary"
           onClick={(event) => nextClick()}
-          disabled={active >= allSteps}
+          disabled={allSteps - 1 <= active}
         >
           Next Step
         </Button>

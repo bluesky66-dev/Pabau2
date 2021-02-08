@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './Stepper.module.less'
-
+import { StepperInterface } from '../wstepper/mock'
 interface StepperProps {
-  datasource: []
+  datasource: StepperInterface[]
   step: number
 }
 
@@ -37,7 +37,7 @@ function StepperList(props) {
                   : styles.icondisablecircle
               }
             >
-              <img src={element.imgPath} alt="" />
+              {element.imgPath}
             </div>
             <span
               className={

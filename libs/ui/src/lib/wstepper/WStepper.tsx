@@ -1,25 +1,28 @@
 /* eslint-disable */
-import React, { useState } from 'react'
+import React, { Children, useEffect, useState } from 'react'
 
 import styels from './WStepper.module.less'
-import Stepper from '../stepper/Stepper'
 import Wizard from '../wizard/Wizard'
-import { data } from './mock'
-
+import { data } from '../wizard/mock'
 interface WStepperProps {
   active: number
   breadcrumbTxt: string
   headerTxt: string
+  onActiveStepChange?: (index) => void
 }
 
 export const WStepper: React.FC<WStepperProps> = ({
   active,
   breadcrumbTxt,
   headerTxt,
+  children,
+  onActiveStepChange
 }) => {
   const [index, setIndex] = React.useState(active)
-  // const datasource = data
-  const [dataSource, setDataSource]: any = useState(data)
+
+  useEffect(() => {
+    onActiveStepChange?.(index)
+  }, [index])
 
   return (
     <div className={styels.container}>
@@ -29,9 +32,9 @@ export const WStepper: React.FC<WStepperProps> = ({
         breadcrumb={breadcrumbTxt}
         header={headerTxt}
         active={index}
-        allSteps={5}
+        allSteps={data.length}
       >
-        <Stepper datasource={dataSource} step={index} />
+        {children}
       </Wizard>
     </div>
   )
