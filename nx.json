@@ -6,6 +6,7 @@
   "implicitDependencies": {
     "workspace.json": "*",
     "package.json": {
+      "bump-rebuild-all": "*",
       "dependencies": "*",
       "devDependencies": "*"
     },
