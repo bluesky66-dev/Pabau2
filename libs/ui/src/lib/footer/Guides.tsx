@@ -3,6 +3,7 @@ import styles from './Footer.module.less'
 import classNames from 'classnames'
 import { ReactComponent as BookSvg } from '../../assets/images/book.svg'
 import { PlaySquareOutlined } from '@ant-design/icons'
+import ReactGA from 'react-ga'
 
 export const Guides: FC = () => {
   const guides = [
@@ -28,11 +29,23 @@ export const Guides: FC = () => {
     },
   ]
 
+  const onFooterGuideClick = (guideName) => {
+    ReactGA.event({
+      category: 'Footer',
+      action: 'Footer Guides Click',
+      label: guideName,
+    })
+  }
+
   return (
     <div className={styles.relatedGuides}>
       {guides.map((guide, index) => {
         return (
-          <div key={index} className={styles.boxDirection}>
+          <div
+            key={index}
+            className={styles.boxDirection}
+            onClick={() => onFooterGuideClick(guide.guideName)}
+          >
             <div className={classNames(styles.footerBox, styles.rightSpace)}>
               <div className={styles.iconTextAlign}>
                 <div>{guide.icon}</div>

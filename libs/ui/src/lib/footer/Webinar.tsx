@@ -2,8 +2,15 @@ import React, { FC } from 'react'
 import styles from './Footer.module.less'
 import { Button } from '@pabau/ui'
 import { PlayCircleOutlined } from '@ant-design/icons'
+import ReactGA from 'react-ga'
 
 export const Webinar: FC = () => {
+  const onFooterWebinarClick = () => {
+    ReactGA.event({
+      category: 'Footer',
+      action: 'Footer Webinar Click',
+    })
+  }
   return (
     <div className={styles.webinarBannerEnd}>
       <div>
@@ -20,7 +27,11 @@ export const Webinar: FC = () => {
             <h5>Tuesday, 15 10:00 AM</h5>
             <h4> 18:28 elapsed </h4>
             <div className={styles.joinBtnTopSpace}>
-              <Button className={styles.joinBtn} icon={<PlayCircleOutlined />}>
+              <Button
+                className={styles.joinBtn}
+                icon={<PlayCircleOutlined />}
+                onClick={onFooterWebinarClick}
+              >
                 Join class
               </Button>
             </div>

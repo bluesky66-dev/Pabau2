@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Menu, Badge, Avatar, Popover, Image, Drawer } from 'antd'
 import {
   RightOutlined,
@@ -23,7 +23,7 @@ import { languageMenu } from '../../assets/images/lang-logos'
 import styles from './dropdown.module.less'
 import classNames from 'classnames'
 import QueueAnim from 'rc-queue-anim'
-// import { isMobile, isTablet } from 'react-device-detect'
+import ReactGA from 'react-ga'
 export interface DropDownInterface {
   isOpen?: boolean
   onCloseDrawer?: () => void
@@ -38,6 +38,14 @@ export const Dropdown: FC<DropDownInterface> = ({
   // used for mobile device
   const [openProfileDrawer, setProfileDrawer] = useState(isOpen)
   const [activeMenuTitle, setActiveMenuTitle] = useState('Profile')
+
+  useEffect(() => {
+    ReactGA.event({
+      category: 'Header Avatar Menu',
+      action: 'Header Avatar Menu Clicked',
+      label: activeMenu,
+    })
+  }, [activeMenu])
 
   const menu = (
     <Menu className={styles.avatarMenu}>

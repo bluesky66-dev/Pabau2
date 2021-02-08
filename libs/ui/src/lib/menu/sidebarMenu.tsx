@@ -46,7 +46,7 @@ export const sidebarMenu: SidebarMenuItem[] = [
     icon: <RiseOutlined />,
     children: [
       {
-        menuName: 'Leads',
+        menuName: 'Leads Manager',
       },
       {
         menuName: 'Lead groups',

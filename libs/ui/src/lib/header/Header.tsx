@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Col, Layout, Row } from 'antd'
 import { BellOutlined, MailOutlined } from '@ant-design/icons'
 
@@ -9,6 +9,7 @@ import { Search } from './search/Search'
 import PabauNotification from './notification/Notification'
 import PabauMessages from './messages/Messages'
 import classNames from 'classnames'
+import ReactGA from 'react-ga'
 const AntHeader = Layout.Header
 
 interface P {
@@ -20,6 +21,29 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
     false
   )
   const [openMessageDrawer, setMessageDrawer] = useState<boolean>(false)
+
+  useEffect(() => {
+    ReactGA.event({
+      category: 'Header',
+      action: 'Header Load',
+    })
+  }, [])
+
+  useEffect(() => {
+    if (openNotificationDrawer) {
+      ReactGA.event({
+        category: 'Header Notification',
+        action: 'Header Notification Clicked',
+      })
+    }
+    if (openMessageDrawer) {
+      ReactGA.event({
+        category: 'Header Chat',
+        action: 'Header Chat Clicked',
+      })
+    }
+  }, [openNotificationDrawer, openMessageDrawer])
+
   return (
     <>
       <AntHeader

@@ -11,7 +11,10 @@ import {
 import { WebSocketLink } from '@apollo/client/link/ws'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { OperationDefinitionNode } from 'graphql'
+import ReactGA from 'react-ga'
+import { useRouter } from 'next/router'
 
+ReactGA.initialize('261368252')
 require('../styles/global.less')
 require('../../../libs/ui/src/styles/antd.less')
 
@@ -135,6 +138,9 @@ export default function CustomApp({
   Component,
   pageProps,
 }: AppProps): JSX.Element {
+  const router = useRouter()
+  ReactGA.pageview(router.pathname)
+
   return (
     <ApolloProvider client={client}>
       <style jsx global>{`

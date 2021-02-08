@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons'
 import User from '../../../assets/images/user.png'
 import classNames from 'classnames'
-// import { isMobile, isTablet } from 'react-device-detect'
+import ReactGA from 'react-ga'
 
 const WAIT_INTERVAL = 400
 interface P {
@@ -37,6 +37,11 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
       if (searchTerm) {
         setSearchPopUp(true)
         onChange && onChange(searchTerm)
+        ReactGA.event({
+          category: 'Header Search',
+          action: 'Header Search',
+          label: searchTerm,
+        })
       } else setSearchPopUp(false)
     }, WAIT_INTERVAL)
 

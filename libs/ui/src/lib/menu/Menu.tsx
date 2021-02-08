@@ -10,6 +10,7 @@ import styles from './Menu.module.less'
 import classNames from 'classnames'
 import Link from 'next/link'
 import { sidebarMenu } from './sidebarMenu'
+import ReactGA from 'react-ga'
 const { SubMenu } = AntMenu
 const { Sider } = Layout
 
@@ -43,6 +44,11 @@ export const Menu: FC<P> = ({ onSideBarCollapsed }) => {
   }
 
   const onClickMenu = (e) => {
+    ReactGA.event({
+      category: 'Sidebar',
+      action: 'Menu Clicked',
+      label: e.key,
+    })
     setSelectedKeys([e.key])
   }
 
@@ -69,26 +75,21 @@ export const Menu: FC<P> = ({ onSideBarCollapsed }) => {
       >
         {sidebarMenu.map((menuData, index) => {
           return !menuData.children ? (
-            renderMenu(
-              menuData.menuName + index,
-              menuData.menuName,
-              menuData.icon
-            )
+            renderMenu(menuData.menuName, menuData.menuName, menuData.icon)
           ) : (
             <SubMenu
-              key={menuData.menuName + index}
+              key={menuData.menuName}
               icon={menuData.icon}
               title={menuData.menuName}
               onTitleClick={onClickMenu}
               className={classNames(
                 styles.sidebarMenu,
-                selectedKeys.includes(menuData.menuName + index) &&
-                  styles.subMenuActive
+                selectedKeys.includes(menuData.menuName) && styles.subMenuActive
               )}
             >
               {menuData.children.map((subMenu, subIndex) => {
                 return renderMenu(
-                  subMenu.menuName + subIndex,
+                  subMenu.menuName,
                   subMenu.menuName,
                   subMenu?.icon
                 )
