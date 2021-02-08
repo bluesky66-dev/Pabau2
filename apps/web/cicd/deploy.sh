@@ -50,7 +50,7 @@ cp "${APP_TYPE}/${APP_NAME}/vercel.json" "${build_output_path}/"
 
 if [ -z "${BITBUCKET_PR_ID}" ]; then
   echo "===== Processing type COMMIT ====="
-  OUTPUT=$(cd "${build_output_path}/" && vercel -c -C --token "${VERCEL_TOKEN}" -A ./vercel.json --prod)
+  OUTPUT=$(cd "${build_output_path}/" && vercel switch Pabau2 && vercel -c -C --token "${VERCEL_TOKEN}" -A ./vercel.json --prod)
   echo "errorlevel: $?"
   echo "Output from vercel:"
   echo "${OUTPUT}"
