@@ -5,6 +5,7 @@ import styles from './Table.module.less'
 import React, { FC, useState } from 'react'
 import { Table } from './Table'
 import { data } from './mock'
+import { ContactsOutlined } from '@ant-design/icons'
 
 const padlocked = ['Book Now Link', 'Instagram', 'Facebook']
 
@@ -36,6 +37,8 @@ export default {
     dataSource: data,
     columns,
     padlocked,
+    noDataText: 'rota templates',
+    noDataBtnText: 'Rota Templete',
   },
   argTypes: {
     draggable: { control: { type: 'boolean' } },
@@ -48,7 +51,12 @@ const DragFeatureStory: FC = ({ ...args }) => {
     setDataSource(newData)
   }
   return (
-    <Table {...args} padlocked={[]} dataSource={dataSource} updateDataSource={updateDataSource} />
+    <Table
+      {...args}
+      padlocked={[]}
+      dataSource={dataSource}
+      updateDataSource={updateDataSource}
+    />
   )
 }
 export const TableWithDragFeature = DragFeatureStory.bind({})
@@ -121,3 +129,24 @@ const TableWithCustomIconStory: FC = ({ ...args }) => {
   )
 }
 export const TableWithCustomIcon = TableWithCustomIconStory.bind({})
+
+const TableWithNoDataStory: FC = ({ ...args }) => {
+  const [dataSource, setDataSource]: any = useState([])
+  const updateDataSource = ({ newData, oldIndex, newIndex }) => {
+    setDataSource(newData)
+  }
+
+  return (
+    <div style={{ border: '1px solid var(--light-grey-color)' }}>
+      <Table
+        {...args}
+        padlocked={[]}
+        dataSource={dataSource}
+        isCustomColorExist={true}
+        updateDataSource={updateDataSource}
+        noDataIcon={<ContactsOutlined />}
+      />
+    </div>
+  )
+}
+export const TableWithNoData = TableWithNoDataStory.bind({})

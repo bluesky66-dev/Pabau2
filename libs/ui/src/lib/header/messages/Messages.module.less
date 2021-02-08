@@ -16,8 +16,11 @@
     background-color: white;
     position: sticky;
     top: 0;
-    padding-top: 27px;
     z-index: 9;
+  }
+  .chat-panel {
+    height: calc(100vh - 56px);
+    overflow: auto;
   }
   .chat-icon-style {
     font-size: 16px;
@@ -30,12 +33,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
+    line-height: 56px;
     font-family: Circular-Std-Bold;
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
-    line-height: 20px;
     color: var(--grey-text-color);
     h1 {
       font-size: 16px;
@@ -128,12 +130,6 @@
   .gray-text-color {
     color: var(--light-grey-color);
   }
-  .chat-panel {
-    padding-top: 16px;
-    padding-left: 24px;
-    padding-right: 20px;
-    padding-bottom: 5px;
-  }
   .d-flex {
     display: flex;
     align-items: center;
@@ -217,7 +213,7 @@
   display: flex;
   flex-direction: column;
   align-content: space-between;
-  width: 522px;
+  width: calc(100% - 392px);
   height: 100vh;
   .chat-header-container {
     display: flex;
@@ -426,8 +422,18 @@
     }
   }
 }
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .messages-drawer {
+    :global {
+      .ant-drawer-content-wrapper {
+        width: 768px !important;
+      }
+    }
+  }
+}
 
 @media (min-width: 200px) and (max-width: 767px) {
+
   .messages-drawer {
     :global {
       .ant-drawer-content-wrapper {
@@ -442,3 +448,61 @@
     }
   }
 }
+.create-channel-modal {
+  :global {
+    .ant-modal-content {
+      .ant-modal-body {
+        padding: 0 40px !important;
+         div {
+           &:last-child {
+             padding-left: 0 !important;
+             padding-right: 0 !important;
+             :global .ant-btn[disabled] {
+               background: #F2F5F7 !important;
+               border: 1px solid #E8E8E8;
+               border-radius: 4px;
+               font-weight: 500;
+               font-size: 14px;
+               line-height: 18px;
+               height: 40px;
+               text-transform: capitalize;
+               color: #CFCFD7;
+             }
+           }
+        }
+      }
+    }
+  }
+
+}
+.content {
+  margin: 0 150px 28px 0;
+  color: #9292A3;
+}
+
+.textControl {
+  margin-bottom: 24px;
+}
+.nameInput {
+  :global {
+    .ant-input-suffix {
+      color: #9292A3;
+    }
+  }
+}
+
+.switchContent {
+  display: flex;
+}
+
+.switchText {
+  color: #9292A3;
+  flex: 55%;
+}
+
+.switch {
+  flex: 45%;
+  justify-content: flex-end;
+  text-align: right;
+}
+
