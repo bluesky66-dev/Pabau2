@@ -3,50 +3,49 @@ import {
   objectType,
 } from 'nexus'
 import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema'
+import { PrismaClient } from '@prisma/client'
 
-  const MarketingSource = objectType({
-    name: 'marketing_source',
-    definition(t) {
-      t.model.id()
-      t.model.source_name()
-      t.model.occupier()
-      t.model.custom_id()
-    }
-  })
+const prisma = new PrismaClient()
 
-  const Query = objectType({
-    name: 'Query',
-    definition(t) {
-      t.crud.marketingSource();
-      t.crud.marketingSources({
-        pagination: true,
-        filtering: true,
-        ordering: true
-      });
-    }
-  })
+const MarketingSource = objectType({
+  name: 'marketing_source',
+  definition(t) {
+    t.model.id()
+    t.model.source_name()
+    t.model.occupier()
+    t.model.custom_id()
+  }
+})
 
-  const Mutation = objectType({
-    name: 'Mutation',
-    definition(t) {
-      t.crud.createOnemarketing_source();
-      t.crud.deleteOnemarketing_source();
-      t.crud.updateOnemarketing_source();
-    }
-  })
+const Query = objectType({
+  name: 'Query',
+  definition(t) {
+    t.crud.marketingSource();
+    t.crud.marketingSources({
+      pagination: true,
+      filtering: true,
+      ordering: true
+    });
+  }
+})
 
-  export const schema = makeSchema({
-  types: [Query,Mutation,
+const Mutation = objectType({
+  name: 'Mutation',
+  definition(t) {
+    t.crud.createOnemarketing_source();
+    t.crud.deleteOnemarketing_source();
+    t.crud.updateOnemarketing_source();
+  }
+})
+
+export const schema = makeSchema({
+  types: [Query, Mutation,
     MarketingSource
   ],
-  plugins: [nexusSchemaPrisma({ experimentalCRUD: true })],
+  plugins: [nexusSchemaPrisma({ experimentalCRUD: true, prismaClient: ctx => ctx.prisma = prisma })],
   outputs: {
     schema: __dirname + '/../schema.graphql',
     typegen: __dirname + '/generated/nexus.ts',
-  },
-  contextType: {
-    module: require.resolve('./context'),
-    export: 'Context',
   },
   sourceTypes: {
     modules: [
