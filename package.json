@@ -176,7 +176,7 @@
   "husky": {
     "skipCI": true,
     "hooks": {
-      "pre-push": "yarn run affected:lint --base=origin/master && yarn run affected:test --base=origin/master"
+      "pre-push": "yarn run affected:lint --base=origin/master --parallel && yarn run affected:test --base=origin/master --parallel"
     }
   }
 }
