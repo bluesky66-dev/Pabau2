@@ -104,4 +104,11 @@ pipelines:
             - yarn affected --base=HEAD~2 --head=HEAD~1 --target=export --prod
             - yarn affected --base=HEAD~2 --head=HEAD~1 --target=build-storybook --prod
             - yarn affected --base=HEAD~2 --head=HEAD~1 --target=deploy --prod
-            - cat /tmp/bot_message.txt
+
+            # Post to Slack
+            - |
+              jq --arg var "$(cat /tmp/bot_message.txt)" '.blocks[0].text.text = $var' tools/cicd/slack_notification.json | curl -0 "${SLACK_HOOK_URL}" \
+              -H "Expect:" \
+              -H 'Content-Type: application/json; charset=utf-8' \
+              --data-binary @-
+

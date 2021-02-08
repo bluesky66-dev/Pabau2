@@ -30,6 +30,7 @@ interface P {
   specialBooleanValue?: boolean
 
   dangerButtonText?: string
+  newButtonDisable?: boolean
 }
 
 export function BasicModal({
@@ -43,7 +44,8 @@ export function BasicModal({
   specialBooleanLabel,
   specialBooleanValue,
   onSpecialBooleanClick,
-  newButtonText = 'OK',
+  newButtonText,
+  newButtonDisable = false,
   dangerButtonText,
   footer = true,
   wrapClassName,
@@ -83,9 +85,15 @@ export function BasicModal({
               {dangerButtonText}
             </Button>
           )}
-          <Button type="primary" onClick={() => onOk?.()}>
-            {newButtonText}
-          </Button>
+          {newButtonText && (
+            <Button
+              type="primary"
+              disabled={newButtonDisable}
+              onClick={() => onOk?.()}
+            >
+              {newButtonText}
+            </Button>
+          )}
         </div>
       )}
     </Modal>
