@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "license": "Copyright Hambrand Technologies Ltd",
   "private": true,
+  "scripts": {
+    "prisma:generate": "prisma generate --schema prisma/schema.prisma"
+  },
   "dependencies": {
     "tslib": "^2.0.3",
     "ts-node": "^7.0.0",
