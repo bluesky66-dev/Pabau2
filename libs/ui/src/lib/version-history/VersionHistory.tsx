@@ -4,8 +4,6 @@ import { Drawer, Divider, Menu, Dropdown } from 'antd'
 import { MoreOutlined } from '@ant-design/icons'
 import styles from './VersionHistory.module.less'
 
-console.log(styles.versionHistoryContainer)
-
 export interface VersionItem {
   version: string
   updatedBy: string
@@ -58,7 +56,7 @@ export const VersionHistory: FC<VersionHistoryProps> = ({
             </p>
             <Divider style={{ margin: 0 }} />
             {history[key]?.map((item) => (
-              <>
+              <React.Fragment key={item.version}>
                 <div className={styles.historyItem}>
                   <div>
                     <p className={styles.historyUpdatedDate}>{item.date}</p>
@@ -83,7 +81,7 @@ export const VersionHistory: FC<VersionHistoryProps> = ({
                   </div>
                 </div>
                 <Divider style={{ margin: 0 }} />
-              </>
+              </React.Fragment>
             ))}
           </div>
         ))}

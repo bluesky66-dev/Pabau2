@@ -1,5 +1,5 @@
 import {
-  makeSchema, mutationType,
+  makeSchema,
   objectType,
 } from 'nexus'
 import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema'

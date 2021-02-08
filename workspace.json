@@ -529,7 +529,8 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/bridge-api/**/*.ts"]
+            "lintFilePatterns": ["apps/bridge-api/**/*.ts"],
+            "maxWarnings": 0
           }
         },
         "test": {
