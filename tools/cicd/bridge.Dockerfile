@@ -16,8 +16,6 @@ RUN yarn
 COPY . .
 
 # Build app
-#RUN yarn run nx build
-#RUN yarn run web:export
 RUN yarn nx build bridge-api && yarn install --production
 
 # Host the static build directory
