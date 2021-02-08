@@ -78,7 +78,7 @@ HEREDOC
 
 else
   echo "===== Processing type PR ====="
-  OUTPUT=$(cd "${build_output_path}/" && vercel -c -C --token "${VERCEL_TOKEN}" --scope Pabau2 -A ./vercel.json)
+  OUTPUT=$(cd "${build_output_path}/" && vercel -c -C --token "${VERCEL_TOKEN}" --scope pabau2 -A ./vercel.json)
   echo "errorlevel: $?"
   echo "Output from vercel:"
   echo "${OUTPUT}"
