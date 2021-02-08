@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, MouseEvent } from 'react'
 import { Col, Layout, Row } from 'antd'
 import { BellOutlined, MailOutlined } from '@ant-design/icons'
 
@@ -31,6 +31,7 @@ const notifications = [
         notificationTypeIcon: AppointmentSVG,
         title: 'Cancelled appointment',
         desc: 'Your appointment at 17:00 PM with John Smith was cancelled',
+        read: false,
       },
       {
         notificationTime: '1:20 PM',
@@ -38,6 +39,7 @@ const notifications = [
         notificationTypeIcon: AppointmentSVG,
         title: 'Cancelled appointment',
         desc: 'Your appointment at 17:00 PM with John Smith was cancelled',
+        read: true,
       },
     ],
   },
@@ -49,6 +51,7 @@ const notifications = [
         notificationTypeIcon: ReportSVG,
         title: 'New financial report',
         desc: 'Your appointment at 17:00 PM with John Smith was cancelled',
+        read: false,
       },
       {
         notificationTime: '1:20 PM',
@@ -56,6 +59,7 @@ const notifications = [
         notificationTypeIcon: LeadSVG,
         title: 'New lead',
         desc: 'John Smith has enquired about Botox',
+        read: true,
       },
       {
         notificationTime: '1:21 PM',
@@ -63,6 +67,7 @@ const notifications = [
         notificationTypeIcon: ReviewSVG,
         title: 'New review delivered',
         desc: 'Olivia Sanders has left a new review',
+        read: true,
       },
       {
         notificationTime: '1:13 PM',
@@ -70,6 +75,7 @@ const notifications = [
         notificationTypeIcon: CampaignSVG,
         title: 'New SMS campaign delivered',
         desc: 'Check out new SMS campaign',
+        read: false,
       },
       {
         notificationTime: '12:48 PM',
@@ -77,6 +83,7 @@ const notifications = [
         notificationTypeIcon: NewsletterSVG,
         title: 'New Newsletter campaign delivered',
         desc: 'Check out new newsletter campaign',
+        read: true,
       },
       {
         notificationTime: '12:12 PM',
@@ -84,6 +91,7 @@ const notifications = [
         notificationTypeIcon: RequestSVG,
         title: 'Joe Hickey requests a holiday',
         desc: 'Deny or confirm it',
+        read: false,
       },
       {
         notificationTime: '10:42 AM',
@@ -91,6 +99,7 @@ const notifications = [
         notificationTypeIcon: ReferSVG,
         title: 'Someone refers into the business',
         desc: 'Click to learn more',
+        read: true,
       },
     ],
   },
@@ -98,9 +107,20 @@ const notifications = [
 
 interface P {
   searchRender?: (innerComponent: JSX.Element) => JSX.Element
+  onCreateChannel?: (
+    name: string,
+    description: string,
+    isPrivate: boolean
+  ) => void
+  onMessageType?: (e: MouseEvent<HTMLElement>) => void
 }
 
-export const Header: FC<P> = ({ searchRender, ...props }) => {
+export const Header: FC<P> = ({
+  searchRender,
+  onCreateChannel,
+  onMessageType,
+  ...props
+}) => {
   const [openNotificationDrawer, setNotificationDrawer] = useState<boolean>(
     false
   )
@@ -160,6 +180,8 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
         <PabauMessages
           openDrawer={openMessageDrawer}
           closeDrawer={() => setMessageDrawer((e) => !e)}
+          onCreateChannel={onCreateChannel}
+          onMessageType={onMessageType}
         />
       )}
     </>

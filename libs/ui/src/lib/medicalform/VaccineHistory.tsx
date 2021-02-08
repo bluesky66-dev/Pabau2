@@ -5,7 +5,16 @@ import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormHeader from './MedicalFormHeader'
 import MedicalFormTitle from './MedicalFormTitle'
 
-const VaccineHistory: FC = () => {
+interface P {
+  hideSideBar?: () => void
+}
+
+const VaccineHistory: FC<P> = ({ hideSideBar }) => {
+  const saveFunc = () => {
+    if (hideSideBar) {
+      hideSideBar()
+    }
+  }
   return (
     <BasicElement>
       <MedicalFormHeader title="component settings" />
@@ -15,7 +24,7 @@ const VaccineHistory: FC = () => {
         title="Vaccine history"
         desc="Description"
       />
-      <MedicalFormBottom needLeft={false} />
+      <MedicalFormBottom saveFunc={saveFunc} needLeft={false} />
     </BasicElement>
   )
 }

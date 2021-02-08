@@ -34,14 +34,12 @@ export const DropDownButton: FC<P> = ({
   }
   const menu = (
     <Menu onClick={(e) => handleMenuClick(e)}>
-      {Array.isArray(menuItems) &&
-        menuItems.length > 0 &&
-        menuItems.map((item) => (
-          <Menu.Item key={item.title}>
-            {item.icon}
-            {item.title}
-          </Menu.Item>
-        ))}
+      {menuItems?.map((item) => (
+        <Menu.Item key={item.title}>
+          {item.icon}
+          {item.title}
+        </Menu.Item>
+      ))}
     </Menu>
   )
   return (

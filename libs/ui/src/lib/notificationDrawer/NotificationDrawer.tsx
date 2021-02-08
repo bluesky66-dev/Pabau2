@@ -13,6 +13,7 @@ interface Notification {
   notificationTypeIcon: string
   title: string
   desc: string
+  read: boolean
 }
 
 interface NotificationData {
@@ -161,9 +162,14 @@ export const NotificationDrawer: FC<P> = ({
                             </p>
                           </div>
                         </div>
-                        <div className={styles.notifyTitleDesc}>
-                          <h1>{dayNotify.title}</h1>
-                          <p>{dayNotify.desc}</p>
+                        <div className={styles.descAlign}>
+                          <div className={styles.notifyTitleDesc}>
+                            <h1>{dayNotify.title}</h1>
+                            <p>{dayNotify.desc}</p>
+                          </div>
+                          <div className={styles.readStatus}>
+                            {!dayNotify.read && <span></span>}
+                          </div>
                         </div>
                       </div>
                       <div className={styles.cardBorder} />

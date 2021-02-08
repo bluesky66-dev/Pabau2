@@ -1,14 +1,26 @@
+import {
+  MedicalFormBody,
+  MedicalFormBottom,
+  MedicalFormHeader,
+  MedicalFormTitle,
+} from '@pabau/ui'
 import React, { FC } from 'react'
 import drawingIcon from '../../assets/images/medicalform_drawing.svg'
 import BasicElement from './BasicElement'
 import ElementQuestion from './ElementQuestion'
 import FileUpload from './FileUpload'
-import MedicalFormBody from './MedicalFormBody'
-import MedicalFormBottom from './MedicalFormBottom'
-import MedicalFormHeader from './MedicalFormHeader'
-import MedicalFormTitle from './MedicalFormTitle'
 
-const Drawing: FC = () => {
+interface P {
+  hideSideBar?: () => void
+}
+
+const Drawing: FC<P> = ({ hideSideBar }) => {
+  const saveFunc = () => {
+    if (hideSideBar) {
+      hideSideBar()
+    }
+  }
+
   return (
     <BasicElement>
       <MedicalFormHeader title="component settings" />
@@ -25,7 +37,7 @@ const Drawing: FC = () => {
           desc="Click or drag file to this area to upload"
         />
       </MedicalFormBody>
-      <MedicalFormBottom needLeft={true} />
+      <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
     </BasicElement>
   )
 }
