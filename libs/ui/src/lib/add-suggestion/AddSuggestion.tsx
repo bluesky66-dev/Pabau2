@@ -6,8 +6,8 @@ const { Option } = Select
 /* eslint-disable-next-line */
 export interface AddSuggestionProps {
   label: string
-  defaultSelected: Array<any>
-  options: Array<any>
+  defaultSelected: Array<string | number>
+  options: Array<string | number>
   onChange
 }
 
@@ -15,13 +15,13 @@ export const AddSuggestion: FC<AddSuggestionProps> = ({
   label,
   defaultSelected,
   options,
-  onChange
+  onChange,
 }) => {
   const [selected, setSelected] = useState(defaultSelected)
 
   const handleChange = (value) => {
-    console.log(value)
-    onChange(value);
+    setSelected(value)
+    onChange(value)
   }
 
   return (

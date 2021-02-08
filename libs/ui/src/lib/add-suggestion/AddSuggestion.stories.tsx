@@ -8,9 +8,6 @@ export default {
     label: 'Select Suggestion',
     defaultSelected: [],
     options: ['Tag1', 'Tag2'],
-    onChange: (data) => {
-      console.log('SELECTED: ', data)
-    },
   },
   argTypes: {
     label: {
@@ -42,4 +39,7 @@ BasicAddSuggestion.args = {
   options: ['Category', 'All inclusive'],
   defaultSelected: ['Category', 'All inclusive'],
   label: 'Select Suggestions',
+  onChange: (data: Array<string | number>) => {
+    console.log('SELECTED: ', data)
+  },
 }
