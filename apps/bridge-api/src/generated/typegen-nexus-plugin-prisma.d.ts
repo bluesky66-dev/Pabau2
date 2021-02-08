@@ -4,7 +4,7 @@
  */
 
 
-import { Context } from "./../context"
+
 
 
 declare global {
@@ -141,10 +141,10 @@ export interface NexusGenInputs {
   }
   MarketingSourceOrderByInput: { // input type
     company?: NexusGenInputs['CompanyOrderByInput'] | null; // CompanyOrderByInput
+    company_id?: NexusGenEnums['SortOrder'] | null; // SortOrder
     custom_id?: NexusGenEnums['SortOrder'] | null; // SortOrder
     id?: NexusGenEnums['SortOrder'] | null; // SortOrder
     imported?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    occupier?: NexusGenEnums['SortOrder'] | null; // SortOrder
     public?: NexusGenEnums['SortOrder'] | null; // SortOrder
     source_name?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
@@ -160,10 +160,10 @@ export interface NexusGenInputs {
     NOT?: NexusGenInputs['MarketingSourceWhereInput'][] | null; // [MarketingSourceWhereInput!]
     OR?: NexusGenInputs['MarketingSourceWhereInput'][] | null; // [MarketingSourceWhereInput!]
     company?: NexusGenInputs['CompanyWhereInput'] | null; // CompanyWhereInput
+    company_id?: NexusGenInputs['IntFilter'] | null; // IntFilter
     custom_id?: NexusGenInputs['IntFilter'] | null; // IntFilter
     id?: NexusGenInputs['IntFilter'] | null; // IntFilter
     imported?: NexusGenInputs['IntFilter'] | null; // IntFilter
-    occupier?: NexusGenInputs['IntFilter'] | null; // IntFilter
     public?: NexusGenInputs['IntFilter'] | null; // IntFilter
     source_name?: NexusGenInputs['StringFilter'] | null; // StringFilter
   }
@@ -284,9 +284,9 @@ export interface NexusGenObjects {
     user: string; // String!
   }
   MarketingSource: { // root type
+    company_id: number; // Int!
     custom_id: number; // Int!
     id: number; // Int!
-    occupier: number; // Int!
     source_name: string; // String!
   }
   Mutation: {};
@@ -318,9 +318,9 @@ export interface NexusGenFieldTypes {
   }
   MarketingSource: { // field return type
     company: NexusGenRootTypes['Company']; // Company!
+    company_id: number; // Int!
     custom_id: number; // Int!
     id: number; // Int!
-    occupier: number; // Int!
     source_name: string; // String!
   }
   Mutation: { // field return type
@@ -329,6 +329,8 @@ export interface NexusGenFieldTypes {
     updateOneMarketingSource: NexusGenRootTypes['MarketingSource'] | null; // MarketingSource
   }
   Query: { // field return type
+    companies: NexusGenRootTypes['Company'][]; // [Company!]!
+    company: NexusGenRootTypes['Company'] | null; // Company
     marketingSource: NexusGenRootTypes['MarketingSource'] | null; // MarketingSource
     marketingSources: NexusGenRootTypes['MarketingSource'][]; // [MarketingSource!]!
   }
@@ -349,9 +351,9 @@ export interface NexusGenFieldTypeNames {
   }
   MarketingSource: { // field return type name
     company: 'Company'
+    company_id: 'Int'
     custom_id: 'Int'
     id: 'Int'
-    occupier: 'Int'
     source_name: 'String'
   }
   Mutation: { // field return type name
@@ -360,6 +362,8 @@ export interface NexusGenFieldTypeNames {
     updateOneMarketingSource: 'MarketingSource'
   }
   Query: { // field return type name
+    companies: 'Company'
+    company: 'Company'
     marketingSource: 'MarketingSource'
     marketingSources: 'MarketingSource'
   }
@@ -379,6 +383,17 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    companies: { // args
+      after?: NexusGenInputs['CompanyWhereUniqueInput'] | null; // CompanyWhereUniqueInput
+      before?: NexusGenInputs['CompanyWhereUniqueInput'] | null; // CompanyWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs['CompanyOrderByInput'][] | null; // [CompanyOrderByInput!]
+      where?: NexusGenInputs['CompanyWhereInput'] | null; // CompanyWhereInput
+    }
+    company: { // args
+      where: NexusGenInputs['CompanyWhereUniqueInput']; // CompanyWhereUniqueInput!
+    }
     marketingSource: { // args
       where: NexusGenInputs['MarketingSourceWhereUniqueInput']; // MarketingSourceWhereUniqueInput!
     }
@@ -424,7 +439,7 @@ export type NexusGenFeaturesConfig = {
 }
 
 export interface NexusGenTypes {
-  context: Context;
+  context: any;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;

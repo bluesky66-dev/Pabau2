@@ -141,9 +141,9 @@ input IntFilter {
 
 type MarketingSource {
   company: Company!
+  company_id: Int!
   custom_id: Int!
   id: Int!
-  occupier: Int!
   source_name: String!
 }
 
@@ -163,10 +163,10 @@ input MarketingSourceListRelationFilter {
 
 input MarketingSourceOrderByInput {
   company: CompanyOrderByInput
+  company_id: SortOrder
   custom_id: SortOrder
   id: SortOrder
   imported: SortOrder
-  occupier: SortOrder
   public: SortOrder
   source_name: SortOrder
 }
@@ -184,10 +184,10 @@ input MarketingSourceWhereInput {
   NOT: [MarketingSourceWhereInput!]
   OR: [MarketingSourceWhereInput!]
   company: CompanyWhereInput
+  company_id: IntFilter
   custom_id: IntFilter
   id: IntFilter
   imported: IntFilter
-  occupier: IntFilter
   public: IntFilter
   source_name: StringFilter
 }
@@ -266,6 +266,8 @@ input NullableStringFieldUpdateOperationsInput {
 }
 
 type Query {
+  companies(after: CompanyWhereUniqueInput, before: CompanyWhereUniqueInput, first: Int, last: Int, orderBy: [CompanyOrderByInput!], where: CompanyWhereInput): [Company!]!
+  company(where: CompanyWhereUniqueInput!): Company
   marketingSource(where: MarketingSourceWhereUniqueInput!): MarketingSource
   marketingSources(after: MarketingSourceWhereUniqueInput, before: MarketingSourceWhereUniqueInput, first: Int, last: Int, orderBy: [MarketingSourceOrderByInput!], where: MarketingSourceWhereInput): [MarketingSource!]!
 }

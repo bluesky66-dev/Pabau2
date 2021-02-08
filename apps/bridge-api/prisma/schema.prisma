@@ -162,6 +162,8 @@ model Company {
   remote_url     String?
   remote_connect String?
   cron_enabled   Boolean?
+
+  @@map("admin")
 }
 
 model advert_campaign {
@@ -7258,14 +7260,14 @@ model manage_items {
 model MarketingSource {
   id          Int    @id @default(autoincrement())
   source_name String
-  occupier    Int
+  company_id    Int @map("occupier")
   custom_id   Int
   public      Int
   imported    Int
-  company Company @relation(fields: [occupier], references: [id])
+  company Company @relation(fields: [company_id], references: [id])
 
   @@map("marketing_sources")
-  @@index([occupier], name: "occupier")
+  @@index([company_id], name: "occupier")
   @@index([public], name: "public")
   @@index([source_name], name: "source_name")
 
