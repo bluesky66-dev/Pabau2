@@ -25,7 +25,7 @@ pipelines:
           script:
 
             # Get an oauth access token using the client credentials, parsing out the token with jq.
-            - apt-get update && apt-get install -y curl jq
+            - apt-get update && apt-get install -y curl jq time
             - >
               export access_token=$(curl -s -X POST -u "${BITBUCKET_CLIENT_ID}:${BITBUCKET_CLIENT_SECRET}" \
                 https://bitbucket.org/site/oauth2/access_token \
@@ -81,6 +81,8 @@ pipelines:
             - nodemodules
           script:
             - touch /tmp/bot_message.txt
+            - apt-get update -y && apt-get install -y curl jq time
+
             - /usr/bin/time -v yarn install --frozen-lockfile --prefer-offline
 
             - /usr/bin/time -v yarn affected:lint --base=HEAD~1 --with-deps --parallel
