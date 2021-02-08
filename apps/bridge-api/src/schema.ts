@@ -1,12 +1,8 @@
 import {
-    intArg,
     makeSchema,
-    nonNull,
-    nullable,
     objectType,
-    stringArg,
   } from 'nexus'
-  import { nexusPrisma } from 'nexus-plugin-prisma'
+import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema'
 
   const Admin = objectType({
     name: 'admin',
@@ -21,7 +17,7 @@ import {
   })
 
   const MarketingSource = objectType({
-    name: 'marketing_sources',
+    name: 'marketing_source',
     definition(t) {
       t.model.id()
       t.model.source_name()
@@ -30,13 +26,21 @@ import {
     }
   })
 
-
   const Query = objectType({
     name: 'Query',
     definition(t) {
       t.crud.admin();
-      t.crud.admins({pagination: true});
-      t.crud.marketingSources();
+      t.crud.admins({
+        pagination: true,
+        filtering: true,
+        ordering: true
+      });
+      t.crud.marketingSource();
+      t.crud.marketingSources({
+        pagination: true,
+        filtering: true,
+        ordering: true
+      });
     }
   })
 
@@ -44,7 +48,7 @@ import {
   types: [Query,
     Admin, MarketingSource
   ],
-  plugins: [nexusPrisma({ experimentalCRUD: true })],
+  plugins: [nexusSchemaPrisma({ experimentalCRUD: true })],
   outputs: {
     schema: __dirname + '/../schema.graphql',
     typegen: __dirname + '/generated/nexus.ts',

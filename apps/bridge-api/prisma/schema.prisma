@@ -7255,7 +7255,7 @@ model manage_items {
   staff_purchase Int?   @default(0)
 }
 
-model marketing_sources {
+model marketing_source {
   id          Int    @id @default(autoincrement())
   source_name String
   occupier    String
@@ -7263,9 +7263,11 @@ model marketing_sources {
   public      Int
   imported    Int
 
+  @@map("marketing_sources")
   @@index([occupier], name: "occupier")
   @@index([public], name: "public")
   @@index([source_name], name: "source_name")
+
 }
 
 model media_library_attachments {
