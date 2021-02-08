@@ -191,7 +191,7 @@ const Index: FC = () => {
   return (
     <div>
       <CommonHeader handleSearch={handleSearch} />
-      <Layout>
+      <Layout active={'setup'}>
         <div className={styles.cardWrapper}>
           <div className={styles.titleWrapper}>
             <span className={styles.title}>{title}</span>

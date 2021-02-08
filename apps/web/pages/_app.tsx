@@ -1,5 +1,7 @@
 import React from 'react'
 import { AppProps } from 'next/app'
+import { useRouter } from 'next/router'
+import ReactGA from 'react-ga'
 import {
   ApolloClient,
   ApolloLink,
@@ -11,8 +13,8 @@ import {
 import { WebSocketLink } from '@apollo/client/link/ws'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { OperationDefinitionNode } from 'graphql'
-import ReactGA from 'react-ga'
-import { useRouter } from 'next/router'
+import 'react-phone-input-2/lib/style.css'
+import 'react-google-places-autocomplete/dist/index.min.css'
 
 ReactGA.initialize('261368252')
 require('../styles/global.less')

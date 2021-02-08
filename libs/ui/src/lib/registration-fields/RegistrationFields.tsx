@@ -10,8 +10,6 @@ export interface FieldType {
   disabled: boolean
   key: number
 }
-
-/* eslint-disable-next-line */
 export interface RegistrationFieldsProps {
   title?: string
   description?: string

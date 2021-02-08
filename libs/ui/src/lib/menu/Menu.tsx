@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { Layout, Menu as AntMenu } from 'antd'
+import { Layout, Menu as AntMenu, Tooltip } from 'antd'
 import {
   SettingOutlined,
   MenuFoldOutlined,
@@ -16,16 +16,18 @@ const { Sider } = Layout
 
 interface P {
   onSideBarCollapsed?: (collapsed: boolean) => void
+  active?: string
 }
 
-export const Menu: FC<P> = ({ onSideBarCollapsed }) => {
-  const [collapsed, setCollapsed] = useState(false)
+export const Menu: FC<P> = ({ onSideBarCollapsed, active }) => {
+  const [collapsed, setCollapsed] = useState(true)
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([])
+  const [activeMenu, setActive] = useState<string>(active ? active : '')
 
   const handleSidebarCollapse = () => {
     setCollapsed((e) => {
-      onSideBarCollapsed && onSideBarCollapsed(!e)
+      onSideBarCollapsed?.(!e)
       return !e
     })
   }
@@ -35,10 +37,18 @@ export const Menu: FC<P> = ({ onSideBarCollapsed }) => {
     setOpenKeys(latestOpenKey ? [latestOpenKey] : [])
   }
 
-  const renderMenu = (index, menuName, icon) => {
+  const renderMenu = (index, menuName, icon, path) => {
     return (
-      <AntMenu.Item key={index} icon={icon} className={styles.sidebarMenu}>
-        {menuName}
+      <AntMenu.Item
+        key={index}
+        icon={icon}
+        className={classNames(
+          styles.sidebarMenu,
+          activeMenu && styles.removeSelected
+        )}
+        onClick={() => setActive('')}
+      >
+        <Link href={path}>{menuName}</Link>
       </AntMenu.Item>
     )
   }
@@ -58,12 +68,26 @@ export const Menu: FC<P> = ({ onSideBarCollapsed }) => {
       className={classNames(styles.pabauSidebar, styles.mobileViewNone)}
       collapsed={collapsed}
       style={{
-        overflow: 'auto',
-        height: '100vh',
+        overflowY: 'auto',
+        height: 'calc(100vh - 80px)',
         position: 'fixed',
         left: 0,
+        overflowX: 'hidden',
       }}
     >
+      <div>
+        {React.createElement(
+          collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
+          {
+            className: classNames(
+              styles.sidebarCollapseIcon,
+              styles.sidebarMenu,
+              collapsed && styles.sidebarCollapsed
+            ),
+            onClick: handleSidebarCollapse,
+          }
+        )}
+      </div>
       <AntMenu
         mode="inline"
         className={styles.sidebar}
@@ -75,7 +99,12 @@ export const Menu: FC<P> = ({ onSideBarCollapsed }) => {
       >
         {sidebarMenu.map((menuData, index) => {
           return !menuData.children ? (
-            renderMenu(menuData.menuName, menuData.menuName, menuData.icon)
+            renderMenu(
+              menuData.menuName,
+              menuData.menuName,
+              menuData.icon,
+              menuData?.path
+            )
           ) : (
             <SubMenu
               key={menuData.menuName}
@@ -84,49 +113,57 @@ export const Menu: FC<P> = ({ onSideBarCollapsed }) => {
               onTitleClick={onClickMenu}
               className={classNames(
                 styles.sidebarMenu,
-                selectedKeys.includes(menuData.menuName) && styles.subMenuActive
+                selectedKeys.includes(menuData.menuName) &&
+                  !activeMenu &&
+                  styles.subMenuActive
               )}
             >
               {menuData.children.map((subMenu, subIndex) => {
                 return renderMenu(
                   subMenu.menuName,
                   subMenu.menuName,
-                  subMenu?.icon
+                  subMenu?.icon,
+                  subMenu?.path
                 )
               })}
             </SubMenu>
           )
         })}
-        <div className={styles.sidebarBtnAlign}>
-          {collapsed ? (
-            <SettingOutlined className={styles.sidebarMenu} />
-          ) : (
-            <Link href="/setup">
-              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-              <a>
-                <Button
-                  icon={<SettingOutlined className={styles.sidebarMenu} />}
-                  className={styles.setupBtn}
-                >
-                  Setup
-                </Button>
-              </a>
-            </Link>
-          )}
-        </div>
-        <div>
-          {React.createElement(
-            collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-            {
-              className: classNames(
-                styles.sidebarCollapseIcon,
-                styles.sidebarMenu,
-                collapsed && styles.sidebarCollapsed
-              ),
-              onClick: handleSidebarCollapse,
-            }
-          )}
-        </div>
+        <span>
+          <Tooltip title={collapsed ? 'Setup' : ''} placement="left">
+            <div
+              className={styles.sidebarBtnAlign}
+              onClick={() => setActive('setup')}
+            >
+              <Link href="/setup">
+                {collapsed ? (
+                  <SettingOutlined
+                    className={`${
+                      activeMenu === 'setup'
+                        ? styles.activeSidebarMenu
+                        : styles.sidebarMenu
+                    }`}
+                  />
+                ) : (
+                  <Button
+                    icon={
+                      <SettingOutlined
+                        className={`${
+                          activeMenu === 'setup'
+                            ? styles.activeSidebarMenu
+                            : styles.sidebarMenu
+                        }`}
+                      />
+                    }
+                    className={styles.setupBtn}
+                  >
+                    Setup
+                  </Button>
+                )}
+              </Link>
+            </div>
+          </Tooltip>
+        </span>
       </AntMenu>
     </Sider>
   )

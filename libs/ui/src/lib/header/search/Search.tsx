@@ -36,7 +36,7 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
     const timer = setTimeout(() => {
       if (searchTerm) {
         setSearchPopUp(true)
-        onChange && onChange(searchTerm)
+        onChange?.(searchTerm)
         ReactGA.event({
           category: 'Header Search',
           action: 'Header Search',
