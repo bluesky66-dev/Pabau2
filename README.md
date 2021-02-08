@@ -55,12 +55,33 @@ Now add `import { } from '@pabau/ui'` at top of the new page file and fill in th
 ### Bridge
 
 To view the GraphQA endpoint which will expose the legacy database run `yarn nx serve bridge-api`
-Our ORM of choice is prisma, the schema fail is located at apps/bridge-api/prisma/schema.prisma and is following a strict naming convention
+
+Our ORM of choice is prisma, the schema file is located at `apps/bridge-api/prisma/schema.prisma` and is following a strict naming convention
 - Model names must adhere to the following regular expression: [A-Za-z][A-Za-z0-9_]*
 - Model names must start with a letter and are typically spelled in PascalCase
-- Model names should use the singular form (for example, User instead of user, users or Users)
+- Model names must use the singular form (for example, User instead of user, users or Users)
 
-Successful modification  of the schema.prisma file must be followed by `yarn prisma:generate`
+U should never manually edit:
+- nexus.ts located at `apps/bridge-api/src/generated/nexus.ts`
+-it will be rebuilded after doing changes to schema.ts `apps/bridge-api/src/schema.ts`
+  
+  Successful modification  of the schema.prisma file must be followed by `yarn prisma:generate`
+
+Notes:
+- To map the singular name of a Model to a plural database table use  @@map("table_name")
+
+`  model marketing_source{
+    ...[multiple filed names]
+    @@map("marketing_sources")
+  }`
+
+- To map a database table name which doesn't follow the naming convention [A-Za-z][A-Za-z0-9_]*
+`  model third_party_access{
+    ...[multiple filed names]
+    @@map("3rd_party_access")
+}`
+
+
 
 
 ## Backend

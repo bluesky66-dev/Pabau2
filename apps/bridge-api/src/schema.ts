@@ -1,20 +1,8 @@
 import {
-    makeSchema,
-    objectType,
-  } from 'nexus'
+  makeSchema, mutationType,
+  objectType,
+} from 'nexus'
 import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema'
-
-  const Admin = objectType({
-    name: 'admin',
-    definition(t) {
-      t.model.id()
-      t.model.user()
-      t.model.digit8()
-      t.model.creation_date()
-      t.model.image()
-      t.model.slug()
-    },
-  })
 
   const MarketingSource = objectType({
     name: 'marketing_source',
@@ -29,12 +17,6 @@ import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema'
   const Query = objectType({
     name: 'Query',
     definition(t) {
-      t.crud.admin();
-      t.crud.admins({
-        pagination: true,
-        filtering: true,
-        ordering: true
-      });
       t.crud.marketingSource();
       t.crud.marketingSources({
         pagination: true,
@@ -44,9 +26,18 @@ import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema'
     }
   })
 
+  const Mutation = objectType({
+    name: 'Mutation',
+    definition(t) {
+      t.crud.createOnemarketing_source();
+      t.crud.deleteOnemarketing_source();
+      t.crud.updateOnemarketing_source();
+    }
+  })
+
   export const schema = makeSchema({
-  types: [Query,
-    Admin, MarketingSource
+  types: [Query,Mutation,
+    MarketingSource
   ],
   plugins: [nexusSchemaPrisma({ experimentalCRUD: true })],
   outputs: {
