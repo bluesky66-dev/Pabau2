@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { FilterOutlined } from '@ant-design/icons'
 import {
   FullScreenReportModal,
@@ -28,6 +28,24 @@ export const ViewScheduleModal: FC<ViewScheduleProps> = ({
   schedule,
   discoverAndLearn,
 }) => {
+  const [scheduleData, setSchedule] = useState(schedule)
+
+  const onCancelSchedule = (type: string, id?: string) => {
+    if (type === 'cancel') {
+      let scheduleArray = scheduleData
+      scheduleArray.map((thread) => {
+        if (thread.webinar.length > 0) {
+          thread.webinar = thread.webinar.filter((webinar) => webinar.id !== id)
+        }
+        return scheduleArray
+      })
+      scheduleArray = scheduleArray.filter(
+        (thread) => thread.webinar.length > 0
+      )
+      setSchedule(scheduleArray)
+    }
+  }
+
   const webinarContent = (webinar: discoverAndLearnProps[]) => {
     return (
       <div>
@@ -46,7 +64,7 @@ export const ViewScheduleModal: FC<ViewScheduleProps> = ({
                   thread.webinar.map((data) => {
                     return (
                       <div className={styles.webBox} key={data.id}>
-                        <Webinar {...data} />
+                        <Webinar {...data} onClick={onCancelSchedule} />
                       </div>
                     )
                   })}
@@ -62,12 +80,12 @@ export const ViewScheduleModal: FC<ViewScheduleProps> = ({
       <div className={styles.viewScheduleWrapper}>
         <div className={styles.scheduleContent}>
           <h2>Your schedule</h2>
-          {schedule?.length === 0 ? (
+          {scheduleData?.length === 0 ? (
             <div className={styles.upcomingWrap}>
               You don’t have any upcoming webinars
             </div>
           ) : (
-            webinarContent(schedule)
+            webinarContent(scheduleData)
           )}
         </div>
         <div className={styles.scheduleContent}>

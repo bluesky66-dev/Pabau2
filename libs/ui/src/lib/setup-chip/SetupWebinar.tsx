@@ -1,10 +1,11 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import styles from './SetupChip.module.less'
 import { Button } from '@pabau/ui'
 import {
   PlayCircleOutlined,
   PlusOutlined,
   CheckOutlined,
+  CloseOutlined,
 } from '@ant-design/icons'
 
 export interface WebinarProps {
@@ -30,6 +31,8 @@ export const Webinar: FC<WebinarProps> = ({
   onClick,
   isYourSchedule,
 }) => {
+  const [hover, setHover] = useState<boolean>(false)
+
   return (
     <div className={styles.webinarBannerEnd}>
       <div className={styles.webinarBox} style={{ marginTop: '12px' }}>
@@ -61,9 +64,17 @@ export const Webinar: FC<WebinarProps> = ({
           ) : isYourSchedule ? (
             <div>
               <h4 className={styles.time}> {timeLeft} elapsed </h4>
-              <div className={styles.joinBtnTopSpace}>
-                <Button className={styles.joinBtn} icon={<CheckOutlined />}>
-                  Registered
+              <div
+                className={styles.joinBtnTopSpace}
+                onMouseOver={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}
+              >
+                <Button
+                  className={styles.joinBtn}
+                  onClick={() => onClick?.('cancel', id)}
+                  icon={hover ? <CloseOutlined /> : <CheckOutlined />}
+                >
+                  {hover ? 'Cancel' : 'Registered'}
                 </Button>
               </div>
             </div>
