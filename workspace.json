@@ -539,6 +539,16 @@
             "jestConfig": "apps/bridge-api/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "deploy": {
+          "builder": "@nrwl/workspace:run-commands",
+          "outputs": [],
+          "options": {
+            "command": "sh apps/bridge-api/cicd/deploy.sh"
+          },
+          "configurations": {
+            "production": {}
+          }
         }
       }
     }
