@@ -151,7 +151,7 @@ model ac_log_urls {
   @@index([url], name: "url")
 }
 
-model admin {
+model Company {
   id             Int      @id @default(autoincrement())
   user           String
   digit8         Int
@@ -7255,13 +7255,14 @@ model manage_items {
   staff_purchase Int?   @default(0)
 }
 
-model marketing_source {
+model MarketingSource {
   id          Int    @id @default(autoincrement())
   source_name String
-  occupier    String
+  occupier    Int
   custom_id   Int
   public      Int
   imported    Int
+  company Company @relation(fields: [occupier], references: [id])
 
   @@map("marketing_sources")
   @@index([occupier], name: "occupier")
