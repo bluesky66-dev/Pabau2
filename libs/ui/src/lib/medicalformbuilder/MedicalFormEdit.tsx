@@ -4,6 +4,24 @@ import { DragDropContext } from 'react-beautiful-dnd'
 import MedicalFormEditLeft from './MedicalFormEditLeft'
 import MedicalFormEditMain from './MedicalFormEditMain'
 
+const formNames = [
+  { id: 0, formName: 'Heading' },
+  { id: 1, formName: 'ShortAnswer' },
+  { id: 2, formName: 'LongAnswer' },
+  { id: 3, formName: 'TextBlock' },
+  { id: 4, formName: 'SingleChoice' },
+  { id: 5, formName: 'CheckBox' },
+  { id: 6, formName: 'DropDown' },
+  { id: 7, formName: 'Drawing' },
+  { id: 8, formName: 'Signature' },
+  { id: 9, formName: 'MedicalConditions' },
+  { id: 10, formName: 'Drugs' },
+  { id: 11, formName: 'TravelDestination' },
+  { id: 12, formName: 'VaccineScheduler' },
+  { id: 13, formName: 'VaccineHistory' },
+  { id: 14, formName: 'LabTest' },
+]
+
 const reorder = (list, startIndex, endIndex) => {
   const [removed] = list.splice(startIndex, 1)
   list.splice(endIndex, 0, removed)
@@ -23,23 +41,6 @@ const copy = (source, destination, droppableSource, droppableDestination) => {
 
 const MedicalFormEdit: FC = () => {
   const [draggedFromNames, setDraggedFromNames] = useState([])
-  const formNames = [
-    { id: 0, formName: 'Heading' },
-    { id: 1, formName: 'ShortAnswer' },
-    { id: 2, formName: 'LongAnswer' },
-    { id: 3, formName: 'TextBlock' },
-    { id: 4, formName: 'SingleChoice' },
-    { id: 5, formName: 'CheckBox' },
-    { id: 6, formName: 'DropDown' },
-    { id: 7, formName: 'Drawing' },
-    { id: 8, formName: 'Signature' },
-    { id: 9, formName: 'MedicalConditions' },
-    { id: 10, formName: 'Drugs' },
-    { id: 11, formName: 'TravelDestination' },
-    { id: 12, formName: 'VaccineScheduler' },
-    { id: 13, formName: 'VaccineHistory' },
-    { id: 14, formName: 'LabTest' },
-  ]
 
   const onDragEnd = React.useCallback(
     (result) => {
