@@ -5,7 +5,9 @@ import WStepper from './WStepper'
 
 describe('WStepper', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<WStepper />)
+    const { baseElement } = render(
+      <WStepper active={0} breadcrumbTxt={''} headerTxt={''} />
+    )
     expect(baseElement).toBeTruthy()
   })
 })

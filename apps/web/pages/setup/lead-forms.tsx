@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
 import { Layout, WStepper } from '@pabau/ui'
 import styles from './lead-forms.module.less'
-import { LeadSettings, LeadIntegration } from './lead-capture/index'
+import {
+  LeadSettings,
+  LeadIntegration,
+  LeadTesting,
+  LeadResult,
+} from './lead-capture/index'
 
 export function LeadForms() {
   const allSteps = ['Basic', 'Configure(API)', 'Testing(API)', 'Result']
@@ -17,6 +22,8 @@ export function LeadForms() {
         >
           {allSteps[activeStep] === 'Basic' && <LeadSettings />}
           {allSteps[activeStep] === 'Configure(API)' && <LeadIntegration />}
+          {allSteps[activeStep] === 'Testing(API)' && <LeadTesting />}
+          {allSteps[activeStep] === 'Result' && <LeadResult />}
         </WStepper>
       </div>
     </Layout>
