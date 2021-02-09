@@ -148,7 +148,7 @@ export const BusinessDetailsNotifications: FC<BusinessDetailsNotificationsProps>
         </div>
       </div>
       {configs.map((config) => (
-        <>
+        <React.Fragment key={config.title}>
           <Divider />
           <div className={styles.sectionContainer}>
             <Form layout="vertical">
@@ -163,7 +163,7 @@ export const BusinessDetailsNotifications: FC<BusinessDetailsNotificationsProps>
               </Form.Item>
             </Form>
           </div>
-        </>
+        </React.Fragment>
       ))}
     </div>
   )
