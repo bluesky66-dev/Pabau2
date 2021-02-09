@@ -82,6 +82,7 @@ pipelines:
             - nodemodules
           script:
             - touch /tmp/bot_message.txt
+
             - apt-get update -y && apt-get install -y curl jq time
 
             - /usr/bin/time -v yarn install --frozen-lockfile --prefer-offline

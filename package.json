@@ -1,8 +1,8 @@
 {
   "name": "pabau",
-  "version": "2.0.110",
+  "version": "2.0.117",
   "license": "Copyright Hambrand Technologies Ltd",
-  "bump-rebuild-all": 3,
+  "bump-rebuild-all": 4,
   "scripts": {
     "nx": "nx",
     "vercel": "vercel",
@@ -39,6 +39,8 @@
   "dependencies": {
     "@ant-design/icons": "^4.4.0",
     "@apollo/client": "^3.3.7",
+    "@babel/plugin-transform-object-assign": "^7.12.13",
+    "@babel/plugin-transform-react-jsx-source": "^7.12.13",
     "@babel/runtime": "^7.12.5",
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
