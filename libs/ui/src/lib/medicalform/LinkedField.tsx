@@ -104,7 +104,7 @@ const LinkedField: FC<linkedFieldProps> = ({ linkedLabel }) => {
       {addLinkedField && (
         <>
           <Select
-            size="small"
+            size="large"
             style={{ width: '100%', marginTop: '10px' }}
             onChange={(e) => handleChange(e)}
           >

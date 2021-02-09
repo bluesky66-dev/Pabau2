@@ -1,0 +1,102 @@
+.documentsMain {
+    box-sizing: border-box;
+
+    .seperator {
+        border: 1px solid #ECEDF0;
+        display: flex;
+    }
+
+    .header {
+        padding: 1rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .heading {
+            display: flex;
+            align-items: center;
+
+            :global {
+                h3 {
+                    margin: 0;
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 20px;
+                    line-height: 25px;
+                    color: #3D3D46;
+                }
+            }
+        }
+
+        .control {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+                        
+            .sortBy {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                margin: 5px 15px 5px 0px;
+
+                :global {
+                    .label {
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 14px;
+                        line-height: 22px;
+                        color: #9292A3;
+                        margin-right: 10px;
+                    }
+                    .label + div {
+                        min-width: 15rem;
+
+                        .ant-select-selector {
+                            border-color: #ECEDF0;
+                            border-radius: 5px;
+                        }
+                    }
+                }
+            }
+            .addFolder {
+                border: 1px solid #ECEDF0;
+                padding: 14px;
+                border-radius: 5px;
+                margin: 5px 15px 5px 0px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                user-select: none;
+            }
+            
+            .upload {
+                border: 1px solid #ECEDF0;
+                padding: 9px 14px;
+                border-radius: 5px;
+                margin: 5px 0px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                user-select: none;
+                
+                :global {
+                    img {
+                        margin-right: 10px;
+                        margin-bottom: 2px;
+                    }
+                }
+            }
+        }
+    }
+
+    .content {
+        :global {
+            .anticon {
+                display: none !important;
+            }
+        }
+    }
+}
