@@ -18,8 +18,8 @@ export interface MedicalFilterType {
 }
 
 export interface MedicalFilterProps {
-  filter: MedicalFilterType
-  onApply(val: MedicalFilterType): void
+  filter?: MedicalFilterType
+  onApply?: (val: MedicalFilterType) => void
 }
 
 const defaultFilter: MedicalFilterType = {
@@ -55,10 +55,10 @@ export const MedicalFilter: FC<MedicalFilterProps> = ({ filter, onApply }) => {
   }
   const handleApply = () => {
     setVisible(false)
-    onApply(filters)
+    onApply?.(filters)
   }
   useEffect(() => {
-    setFilters(filter)
+    setFilters(filter || defaultFilter)
   }, [filter])
   const FilterViewer = () => (
     <div className={styles.filterViewerContainer}>
@@ -110,7 +110,7 @@ export const MedicalFilter: FC<MedicalFilterProps> = ({ filter, onApply }) => {
       <Popover
         placement="bottomRight"
         content={FilterViewer}
-        trigger="click"
+        trigger="hover"
         visible={visible}
         onVisibleChange={(val) => {
           setVisible(val)

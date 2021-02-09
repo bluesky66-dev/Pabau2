@@ -4,8 +4,6 @@ import { Drawer, Divider, Menu, Dropdown } from 'antd'
 import { MoreOutlined } from '@ant-design/icons'
 import styles from './VersionHistory.module.less'
 
-console.log(styles.versionHistoryContainer)
-
 export interface VersionItem {
   version: string
   updatedBy: string

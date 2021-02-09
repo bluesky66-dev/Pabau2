@@ -1,0 +1,65 @@
+.libraryContainer {
+  display: grid;
+  grid-template-columns: 335px 1fr;
+  height: 100%;
+  > div {
+    &:first-child {
+      border-right: 1px solid var(--border-color-base);
+      .form-type-container, .tags-container {
+        padding: 18px 24px 0;
+        :global {
+          .ant-form-item {
+            margin: 0;
+          }
+        }
+      }
+      .tags-container {
+        :global {
+          .ant-tag {
+            display: inline-block;
+            margin-right: 0;
+            margin-bottom: 8px;
+            border-radius: 2px;
+            cursor: pointer;
+          }
+        }
+        .tag-checked {
+          :global {
+            .ant-tag {
+              color: var(--primary-color);
+              background: #eef7fb;
+              border-color: #b0dbeb;
+            }
+          }
+        }
+        .tag-unchecked {
+          :global {
+            .ant-tag {
+              color: var(--light-grey-color);
+              background: white;
+              border-color: var(--border-color-base);
+            }
+          }
+        }
+      }
+    }
+    &:last-child {
+      position: relative;
+      padding: 24px 24px 40px;
+    }
+  }
+}
+
+.mobileSetting {
+  display: none;
+  width: 100%;
+  margin: 0 0 1rem;
+  > button {
+    border-radius: 50% !important;
+    padding: 0;
+  }
+}
+
+.mobile-setting-container {
+  max-width: 320px;
+}

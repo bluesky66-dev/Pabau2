@@ -15,7 +15,7 @@ import { ReactComponent as LabForm } from '../../assets/images/form-type/lab-for
 import { ReactComponent as LabFormSelected } from '../../assets/images/form-type/lab-form-selected.svg'
 import styles from './FormType.module.less'
 
-interface Setting {
+export interface FormTypeSetting {
   medicalHistory: boolean
   consent: boolean
   treatmentForm: boolean
@@ -24,8 +24,8 @@ interface Setting {
   labForm: boolean
 }
 export interface FormTypeProps {
-  setting: Setting
-  onChangeSetting: (val: Setting) => void
+  setting: FormTypeSetting
+  onChangeSetting: (val: FormTypeSetting) => void
 }
 
 interface FormTypeInfo {
