@@ -34,7 +34,7 @@ const ColorItem: FC<P> = (props: P) => {
 
 interface PickerProps {
   heading: string
-  selectedColor: string
+  selectedColor?: string
   onSelected(val): void
   onHover?(val): void
   onLeave?(val): void
