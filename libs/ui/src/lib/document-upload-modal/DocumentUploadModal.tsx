@@ -13,6 +13,7 @@ import {
 } from '@ant-design/icons'
 import { Button, Checkbox } from '@pabau/ui'
 import Download from '../../assets/images/download.svg'
+import { UploadProps } from 'antd/es/upload'
 
 export interface DraggableProps {
   multiple?: boolean
@@ -48,7 +49,7 @@ const DocumentUploadModal: FC<DocumentUploadModalProps> = ({
   checkboxTooltip,
   ...props
 }) => {
-  const [fileList, setFileList] = useState([])
+  const [fileList, setFileList] = useState<UploadProps[]>([])
   const { Dragger } = Upload
 
   const handleFileOnChange = (info) => {
