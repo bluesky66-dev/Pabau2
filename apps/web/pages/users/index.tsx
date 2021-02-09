@@ -22,6 +22,7 @@ const dummyUsers = [
     vacationPending: true,
     available: true,
     active: true,
+    owner: true,
   },
   {
     id: 2,
@@ -184,6 +185,7 @@ const Index: FunctionComponent = () => {
                     active={user.active}
                     available={user.available}
                     img={user.img}
+                    owner={user.owner}
                   />
                 )
               })}

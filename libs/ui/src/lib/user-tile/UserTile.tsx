@@ -3,6 +3,7 @@ import { UserOutlined } from '@ant-design/icons'
 import { Button, Avatar } from '@pabau/ui'
 import styles from './UserTile.module.less'
 import Airplane from '../../assets/images/airplane.svg'
+import { KeyOutlined } from '@ant-design/icons'
 
 enum Status {
   default = 'default',
@@ -18,6 +19,8 @@ export interface UserProps {
   vacation?: boolean
   active?: boolean
   available?: boolean
+  owner?: boolean
+  admin?: boolean
 }
 
 interface AirplaneIconProps {
@@ -48,6 +51,8 @@ export const UserTile: FunctionComponent<UserProps> = ({
   active = false,
   available,
   img,
+  owner = false,
+  admin = true,
 }: UserProps): JSX.Element => {
   const online: Status = active ? Status.active : Status.default
   return (
@@ -60,11 +65,19 @@ export const UserTile: FunctionComponent<UserProps> = ({
           src={img}
           active={online}
         />
+        {owner && (
+          <Button className={styles.btnOwner} backgroundColor={'#EEF7FB'}>
+            Owner
+          </Button>
+        )}
         <div>
           <p className={styles.name}>
             {name} {surname}
           </p>
-          <p className={styles.title}>{title}</p>
+          <div className={styles.titleWrapper}>
+            {admin && <KeyOutlined className={styles.admin} />}
+            <p className={styles.title}>{title}</p>
+          </div>
         </div>
         <div className={styles.vacationWrapper}>
           {vacation && available && (

@@ -1,12 +1,10 @@
 import React from 'react'
-
 import { UserTile, UserProps } from './UserTile'
-
-import austin from '../../assets/images/users/austin.png'
+import { mockUsers } from './mock'
 
 export default {
   component: UserTile,
-  title: 'Misc/UserTile',
+  title: 'UI/UserTile',
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 
@@ -15,21 +13,22 @@ const UserTileStory = (user: UserProps) => (
     name={user.name}
     surname={user.surname}
     title={user.title}
+    img={user.img}
+    active={user.active}
     vacation={user.vacation}
     available={user.available}
-    active={user.active}
-    img={user.img}
+    owner={user.owner}
   />
 )
 
-export const User = UserTileStory.bind({})
-User.args = {
-  name: 'Joseph',
-  surname: 'Howard',
-  title: 'Managing Director',
-  user: austin,
-  active: true,
-  vacation: false,
-  img: austin,
-  available: true,
+export const userTile = UserTileStory.bind({})
+userTile.args = {
+  name: mockUsers.name,
+  surname: mockUsers.surname,
+  title: mockUsers.title,
+  img: mockUsers.img,
+  active: mockUsers.active,
+  vacation: mockUsers.vacation,
+  available: mockUsers.available,
+  owner: mockUsers.owner,
 }

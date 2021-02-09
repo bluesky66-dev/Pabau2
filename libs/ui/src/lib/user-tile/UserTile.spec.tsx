@@ -1,30 +1,18 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { UserTile } from '@pabau/ui'
-
-import austin from '../../assets/images/users/austin.png'
-const dummyUsers = [
-  {
-    name: 'Joseph',
-    surname: 'Howard',
-    title: 'Managing Director',
-    img: austin,
-    vacation: true,
-    available: true,
-    active: true,
-  },
-]
+import { mockUsers } from './mock'
 
 describe('UserTile', () => {
   it('should render successfully', () => {
     const { baseElement } = render(
       <UserTile
-        name={dummyUsers[0].name}
-        surname={dummyUsers[0].surname}
-        title={dummyUsers[0].title}
-        vacation={dummyUsers[0].vacation}
-        available={dummyUsers[0].available}
-        active={dummyUsers[0].active}
+        name={mockUsers.name}
+        surname={mockUsers.surname}
+        title={mockUsers.title}
+        vacation={mockUsers.vacation}
+        available={mockUsers.available}
+        active={mockUsers.active}
       />
     )
     expect(baseElement).toBeTruthy()
