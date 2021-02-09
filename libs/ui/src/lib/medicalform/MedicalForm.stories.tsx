@@ -33,6 +33,7 @@ import InnerShortAnswer from './InnerShortAnswer'
 import InnerSignature from './InnerSignature'
 import InnerSingleChoice from './InnerSingleChoice'
 import InnerTextBlock from './InnerTextBlock'
+import InnerTravelDestination from './InnerTravelDestination'
 import InnerVaccineHistory from './InnerVaccineHistory'
 import InnerVaccineScheduler from './InnerVaccineScheduler'
 import LabTest from './LabTest'
@@ -107,6 +108,9 @@ export const InnerVaccineHistoryForm = () => (
 export const InnerLabTestForm = () => <InnerLabTest required={true} />
 export const InnerConditionsForm = () => <InnerConditions required={false} />
 export const InnerDrugsForm = () => <InnerDrugs required={false} />
+export const InnerTravelDestinationForm = () => (
+  <InnerTravelDestination required={false} />
+)
 export const InnerSingleChoiceForm = () => (
   <InnerSingleChoice required={false} />
 )
