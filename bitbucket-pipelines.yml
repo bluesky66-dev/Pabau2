@@ -25,7 +25,7 @@ pipelines:
           script:
 
             # Get an oauth access token using the client credentials, parsing out the token with jq.
-            - apt-get update && apt-get install -y curl jq
+            - apt-get update && apt-get install -y curl jq time
             - >
               export access_token=$(curl -s -X POST -u "${BITBUCKET_CLIENT_ID}:${BITBUCKET_CLIENT_SECRET}" \
                 https://bitbucket.org/site/oauth2/access_token \
@@ -77,14 +77,18 @@ pipelines:
       - step:
           name: test (lint+unit), build, deploy
           deployment: Production
+          size: 2x
           caches:
             - nodemodules
           script:
             - touch /tmp/bot_message.txt
-            - yarn install --frozen-lockfile --prefer-offline
 
-            - yarn affected:lint --base=HEAD~1 --with-deps --parallel
-            - yarn affected:test --base=HEAD~1 --parallel
+            - apt-get update -y && apt-get install -y curl jq time
+
+            - /usr/bin/time -v yarn install --frozen-lockfile --prefer-offline
+
+            - /usr/bin/time -v yarn affected:lint --base=HEAD~1 --with-deps --parallel
+            - /usr/bin/time -v yarn affected:test --base=HEAD~1 --parallel
 
             # get the commit message for this merge
             - export LAST_COMMIT_LOG=$(git log HEAD -1 | tail -n +4 | perl -p -e 's/[\r\n]//' | awk '{$1=$1;print}')
@@ -101,9 +105,9 @@ pipelines:
             - git push && git push --tags
             - export PACKAGE_JSON_VERSION=$(jq -r .version < package.json)
 
-            - yarn affected --base=HEAD~2 --head=HEAD~1 --target=export --prod
-            - yarn affected --base=HEAD~2 --head=HEAD~1 --target=build-storybook --prod
-            - yarn affected --base=HEAD~2 --head=HEAD~1 --target=deploy --prod
+            - /usr/bin/time -v yarn affected --base=HEAD~2 --head=HEAD~1 --target=export --prod
+            - /usr/bin/time -v yarn affected --base=HEAD~2 --head=HEAD~1 --target=build-storybook --prod
+            - /usr/bin/time -v yarn affected --base=HEAD~2 --head=HEAD~1 --target=deploy --prod
 
             # Post to Slack
             - |

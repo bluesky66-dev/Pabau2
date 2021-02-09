@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import BusinessLocation from './BusinessLocation'
+import ChatInput from './ChatInput'
 
-describe('BusinessLocation', () => {
+describe('ChatInput', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<BusinessLocation />)
+    const { baseElement } = render(<ChatInput />)
     expect(baseElement).toBeTruthy()
   })
 })

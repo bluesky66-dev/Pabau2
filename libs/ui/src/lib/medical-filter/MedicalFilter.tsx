@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Button, FormType, LanguageDropdown } from '@pabau/ui'
 import { Popover } from 'antd'
 import { FilterOutlined } from '@ant-design/icons'
@@ -6,7 +6,7 @@ import styles from './MedicalFilter.module.less'
 
 export interface MedicalFilterType {
   language: string
-  status: boolean
+  status: 'active' | 'inactive' | 'require_setup'
   formtype: {
     medicalHistory: boolean
     consent: boolean
@@ -24,7 +24,7 @@ export interface MedicalFilterProps {
 
 const defaultFilter: MedicalFilterType = {
   language: 'English (UK)',
-  status: false,
+  status: 'active',
   formtype: {
     medicalHistory: false,
     consent: false,
@@ -57,6 +57,9 @@ export const MedicalFilter: FC<MedicalFilterProps> = ({ filter, onApply }) => {
     setVisible(false)
     onApply(filters)
   }
+  useEffect(() => {
+    setFilters(filter)
+  }, [filter])
   const FilterViewer = () => (
     <div className={styles.filterViewerContainer}>
       <p
@@ -69,16 +72,22 @@ export const MedicalFilter: FC<MedicalFilterProps> = ({ filter, onApply }) => {
       <p className={styles.filterViewerSubTitle}>Status</p>
       <div className={styles.filterViewerStatusContainer}>
         <Button
-          type={filters.status ? 'primary' : 'default'}
-          onClick={() => handleChangeStatus(true)}
+          type={filters.status === 'active' ? 'primary' : 'default'}
+          onClick={() => handleChangeStatus('active')}
         >
           Active
         </Button>
         <Button
-          type={!filters.status ? 'primary' : 'default'}
-          onClick={() => handleChangeStatus(false)}
+          type={filters.status === 'inactive' ? 'primary' : 'default'}
+          onClick={() => handleChangeStatus('inactive')}
         >
           Inactive
+        </Button>
+        <Button
+          type={filters.status === 'require_setup' ? 'primary' : 'default'}
+          onClick={() => handleChangeStatus('require_setup')}
+        >
+          Require Setup
         </Button>
       </div>
       <p className={styles.filterViewerSubTitle}>Form type</p>

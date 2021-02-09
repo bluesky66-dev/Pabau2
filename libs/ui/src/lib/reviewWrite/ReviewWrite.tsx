@@ -8,14 +8,19 @@ export interface Question {
   rating: number
 }
 
-export interface P {
+export interface QuestionProps {
   title: string
   subtitle: string
   reviews: Array<Question>
   onChange?: (reviews: Array<Question>) => void
 }
 
-export const ReviewWrite: FC<P> = ({ title, subtitle, reviews, onChange }) => {
+export const ReviewWrite: FC<QuestionProps> = ({
+  title,
+  subtitle,
+  reviews,
+  onChange,
+}) => {
   const [review, setReviews] = useState<Array<Question>>(reviews)
 
   const handleRateChange = (value: number, key: number) => {
