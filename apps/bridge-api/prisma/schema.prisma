@@ -7260,14 +7260,14 @@ model manage_items {
 model MarketingSource {
   id          Int    @id @default(autoincrement())
   source_name String
-  company_id    Int @map("occupier")
+  occupier    Int
   custom_id   Int
   public      Int
   imported    Int
-  company Company @relation(fields: [company_id], references: [id])
+  company Company @relation(fields: [occupier], references: [id])
 
   @@map("marketing_sources")
-  @@index([company_id], name: "occupier")
+  @@index([occupier], name: "occupier")
   @@index([public], name: "public")
   @@index([source_name], name: "source_name")
 

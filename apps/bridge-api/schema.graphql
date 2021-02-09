@@ -141,7 +141,6 @@ input IntFilter {
 
 type MarketingSource {
   company: Company!
-  company_id: Int!
   custom_id: Int!
   id: Int!
   source_name: String!
@@ -163,10 +162,10 @@ input MarketingSourceListRelationFilter {
 
 input MarketingSourceOrderByInput {
   company: CompanyOrderByInput
-  company_id: SortOrder
   custom_id: SortOrder
   id: SortOrder
   imported: SortOrder
+  occupier: SortOrder
   public: SortOrder
   source_name: SortOrder
 }
@@ -184,10 +183,10 @@ input MarketingSourceWhereInput {
   NOT: [MarketingSourceWhereInput!]
   OR: [MarketingSourceWhereInput!]
   company: CompanyWhereInput
-  company_id: IntFilter
   custom_id: IntFilter
   id: IntFilter
   imported: IntFilter
+  occupier: IntFilter
   public: IntFilter
   source_name: StringFilter
 }
