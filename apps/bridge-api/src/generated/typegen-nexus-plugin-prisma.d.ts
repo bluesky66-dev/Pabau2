@@ -317,6 +317,7 @@ export interface NexusGenFieldTypes {
   }
   MarketingSource: { // field return type
     company: NexusGenRootTypes['Company']; // Company!
+    company_id: number; // Int!
     custom_id: number; // Int!
     id: number; // Int!
     source_name: string; // String!
@@ -349,6 +350,7 @@ export interface NexusGenFieldTypeNames {
   }
   MarketingSource: { // field return type name
     company: 'Company'
+    company_id: 'Int'
     custom_id: 'Int'
     id: 'Int'
     source_name: 'String'

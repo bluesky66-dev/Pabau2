@@ -141,6 +141,7 @@ input IntFilter {
 
 type MarketingSource {
   company: Company!
+  company_id: Int!
   custom_id: Int!
   id: Int!
   source_name: String!
