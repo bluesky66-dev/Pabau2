@@ -56,7 +56,7 @@ export const VersionHistory: FC<VersionHistoryProps> = ({
             </p>
             <Divider style={{ margin: 0 }} />
             {history[key]?.map((item) => (
-              <>
+              <React.Fragment key={item.version}>
                 <div className={styles.historyItem}>
                   <div>
                     <p className={styles.historyUpdatedDate}>{item.date}</p>
@@ -81,7 +81,7 @@ export const VersionHistory: FC<VersionHistoryProps> = ({
                   </div>
                 </div>
                 <Divider style={{ margin: 0 }} />
-              </>
+              </React.Fragment>
             ))}
           </div>
         ))}
