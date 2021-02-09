@@ -330,6 +330,9 @@ const CrudTable: FC<P> = ({
             draggable={true}
             isCustomColorExist={checkCustomColorIconExsist('color')}
             isCustomIconExist={checkCustomColorIconExsist('icon')}
+            noDataBtnText={schema.full}
+            noDataText={schema.fullLower}
+            onAddTemplate={() => setModalShowing({ isCreate: true })}
             columns={[
               ...Object.entries(schema.fields).map(([k, v]) => ({
                 dataIndex: k,

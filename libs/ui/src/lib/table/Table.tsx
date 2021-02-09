@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
-import { Button, Table as AntTable } from 'antd'
+import { Button, Table as AntTable, Avatar } from 'antd'
 import {
   SortableContainer,
   SortableElement,
   SortableHandle,
 } from 'react-sortable-hoc'
-import { LockOutlined, MenuOutlined } from '@ant-design/icons'
+import { ContactsOutlined, LockOutlined, MenuOutlined } from '@ant-design/icons'
 import styles from './Table.module.less'
 import { TableProps } from 'antd/es/table'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -48,6 +48,10 @@ function array_move(arr, old_index, new_index) {
 export type TableType = {
   onRowClick?: (e) => void
   padlocked?: string[]
+  noDataText?: string
+  noDataBtnText?: string
+  noDataIcon?: JSX.Element
+  onAddTemplate?: () => void
 } & TableProps<never> &
   DragProps
 
@@ -58,6 +62,10 @@ export const Table: FC<TableType> = ({
   isCustomIconExist = false,
   updateDataSource,
   onRowClick,
+  noDataText,
+  noDataBtnText,
+  noDataIcon = <ContactsOutlined />,
+  onAddTemplate,
   ...props
 }) => {
   const onSortEnd = ({ oldIndex, newIndex }) => {
@@ -162,7 +170,7 @@ export const Table: FC<TableType> = ({
       : props.columns
   }
 
-  return (
+  return dataSource?.length ? (
     <AntTable
       {...props}
       onRow={(record, rowIndex) => {
@@ -194,5 +202,20 @@ export const Table: FC<TableType> = ({
         },
       }}
     />
+  ) : (
+    <div className={styles.noDataTableBox}>
+      <div className={styles.noDataTextStyle}>
+        <Avatar icon={noDataIcon} size="large" className={styles.roundDesign} />
+        <p>{`Add ${noDataText} to create more shifts faster`}</p>
+        <div className={styles.spaceBetweenText}></div>
+        <Button
+          className={styles.createTemaplateBtn}
+          type="primary"
+          onClick={() => onAddTemplate?.()}
+        >
+          {`Add ${noDataBtnText}`}
+        </Button>
+      </div>
+    </div>
   )
 }

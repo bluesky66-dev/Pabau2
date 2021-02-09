@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #
-# Deploys to vercel
+# Deploys to vercel pro
 #
 
 # Stop on error
@@ -50,7 +50,7 @@ cp "${APP_TYPE}/${APP_NAME}/vercel.json" "${build_output_path}/"
 
 if [ -z "${BITBUCKET_PR_ID}" ]; then
   echo "===== Processing type COMMIT ====="
-  OUTPUT=$(cd "${build_output_path}/" && vercel -c -C --token "${VERCEL_TOKEN}" -A ./vercel.json --prod)
+  OUTPUT=$(cd "${build_output_path}/" && vercel -c -C --token "${VERCEL_TOKEN}" --scope pabau2 -A ./vercel.json --prod)
   echo "errorlevel: $?"
   echo "Output from vercel:"
   echo "${OUTPUT}"
@@ -71,10 +71,10 @@ HEREDOC
   cat tools/cicd/slack_notification.json > /dev/null || (echo "ERROR: JSON not found"; exit 1)
   jq '.' tools/cicd/slack_notification.json > /dev/null || (echo "ERROR: Invalid JSON"; exit 1)
 
-  jq --arg var "${message_body}" '.blocks[0].text.text = $var' tools/cicd/slack_notification.json | curl -0 "${SLACK_HOOK_URL}" \
-    -H "Expect:" \
-    -H 'Content-Type: application/json; charset=utf-8' \
-    --data-binary @-
+#  jq --arg var "${message_body}" '.blocks[0].text.text = $var' tools/cicd/slack_notification.json | curl -0 "${SLACK_HOOK_URL}" \
+#    -H "Expect:" \
+#    -H 'Content-Type: application/json; charset=utf-8' \
+#    --data-binary @-
 
 else
   echo "===== Processing type PR ====="
