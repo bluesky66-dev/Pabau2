@@ -17,6 +17,7 @@ export default {
   },
 }
 
-export const CopyEmbeddCodeModalStory = ({ ...args }) => (
+const CopyEmbeddCodeModalStory = ({ ...args }) => (
   <CopyEmbeddCodeModal {...args} />
 )
+export const BasicEmbeddCodeModal = CopyEmbeddCodeModalStory.bind({})

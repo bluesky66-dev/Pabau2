@@ -36,6 +36,10 @@ export const CopyEmbeddCodeModal: FC<CopyEmbeddCodeModalProps> = ({
     }, 3000)
   }
 
+  const openEmailModal = () => {
+    setDevModalState(true)
+  }
+
   return (
     <>
       <Modal
@@ -58,17 +62,11 @@ export const CopyEmbeddCodeModal: FC<CopyEmbeddCodeModalProps> = ({
             </div>
           </div>
           <div className={styles.footer}>
-            <Button
-              onClick={() => {}}
-              type="default"
-              className={styles.buttons}
-            >
+            <Button type="default" className={styles.buttons}>
               Download Images
             </Button>
             <Button
-              onClick={() => {
-                setDevModalState(true)
-              }}
+              onClick={openEmailModal}
               type="default"
               className={styles.buttons}
             >
@@ -92,14 +90,12 @@ export const CopyEmbeddCodeModal: FC<CopyEmbeddCodeModalProps> = ({
           setDevModalState(false)
         }}
       >
-        <>
-          <Input
-            label="Developer email"
-            type="email"
-            placeHolderText="Enter Developer Email"
-            onChange={onEmailInput}
-          />
-        </>
+        <Input
+          label="Developer email"
+          type="email"
+          placeHolderText="Enter Developer Email"
+          onChange={onEmailInput}
+        />
       </Modal>
     </>
   )
