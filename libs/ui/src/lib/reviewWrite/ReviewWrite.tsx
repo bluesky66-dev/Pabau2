@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Rate } from 'antd'
 import styles from './ReviewWrite.module.less'
 
@@ -9,23 +9,43 @@ export interface Question {
 }
 
 export interface P {
-  questions: Array<Question>
+  title: string
+  subtitle: string
+  reviews: Array<Question>
+  onChange?: (reviews: Array<Question>) => void
 }
 
-export const ReviewWrite: FC<P> = ({ questions }) => {
+export const ReviewWrite: FC<P> = ({ title, subtitle, reviews, onChange }) => {
+  const [review, setReviews] = useState<Array<Question>>(reviews)
+
+  const handleRateChange = (value: number, key: number) => {
+    const reviewData = review
+    reviewData.map((review) => {
+      if (review.key === key) review.rating = value
+      return review
+    })
+    setReviews([...reviewData])
+    onChange?.(reviewData)
+  }
+
   return (
     <div className={styles.ratingBox}>
       <div className={styles.rateHeading}>
-        <h3>Consultation survey</h3>
-        <small>Please, rate your consultation to provide better service</small>
+        <h3>{title}</h3>
+        <small>{subtitle}</small>
       </div>
 
       <div className={styles.rateStarBox}>
-        {questions?.map(({ question, key, rating }) => (
+        {review?.map(({ question, key, rating }) => (
           <div key={`review-write-question-${key}`}>
             <div className={styles.question}>{question}</div>
             <div className={styles.rating}>
-              <Rate style={{ color: '#54B2D3' }} allowHalf value={rating} />
+              <Rate
+                style={{ color: '#54B2D3' }}
+                allowHalf
+                value={rating}
+                onChange={(value) => handleRateChange(value, key)}
+              />
             </div>
           </div>
         ))}

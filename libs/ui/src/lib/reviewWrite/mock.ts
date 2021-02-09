@@ -1,3 +1,6 @@
+export const title = 'Consultation survey'
+export const subtitle =
+  'Please, rate your consultation to provide better service'
 export const data = [
   {
     key: 1,
