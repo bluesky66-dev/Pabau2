@@ -38,7 +38,7 @@ export default Badge
 export interface PlusProps {
   label?: string
   disabled?: boolean
-  modalType: string
+  modalType?: string
 }
 
 export const PabauPlus: FC<PlusProps> = ({ label, disabled, modalType }) => {
@@ -90,6 +90,6 @@ export const PabauPlus: FC<PlusProps> = ({ label, disabled, modalType }) => {
   )
 }
 
-function getModalKey(type: string, data): string {
+function getModalKey(type: string | undefined, data): string {
   return data.filter(({ value }) => value === type)[0].key
 }
