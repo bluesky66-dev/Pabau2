@@ -266,10 +266,10 @@ input NullableStringFieldUpdateOperationsInput {
 }
 
 type Query {
+  MarketingSource(id: Int!): MarketingSource
+  MarketingSources(after: MarketingSourceWhereUniqueInput, before: MarketingSourceWhereUniqueInput, first: Int, last: Int, orderBy: [MarketingSourceOrderByInput!], where: MarketingSourceWhereInput): [MarketingSource!]!
   companies(after: CompanyWhereUniqueInput, before: CompanyWhereUniqueInput, first: Int, last: Int, orderBy: [CompanyOrderByInput!], where: CompanyWhereInput): [Company!]!
-  company(id: ID): Company
-  marketingSource(where: MarketingSourceWhereUniqueInput!): MarketingSource
-  marketingSources(after: MarketingSourceWhereUniqueInput, before: MarketingSourceWhereUniqueInput, first: Int, last: Int, orderBy: [MarketingSourceOrderByInput!], where: MarketingSourceWhereInput): [MarketingSource!]!
+  company(where: CompanyWhereUniqueInput!): Company
 }
 
 enum SortOrder {

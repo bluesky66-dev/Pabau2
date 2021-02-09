@@ -1,7 +1,5 @@
-import { objectType, extendType, idArg, } from "nexus";
+import { objectType, extendType, nonNull, intArg, } from "nexus";
 import { Context } from "../../context";
-
-const  companyId = 8901
 
 export const MarketingSource = objectType({
   name: 'MarketingSource',
@@ -22,17 +20,23 @@ export const MarketingSourceQuery = extendType({
     t.field("MarketingSource", {
       type: MarketingSource,
       args: {
-        id: idArg()
+        id: nonNull(intArg())
       },
-      resolve(_root,args, ctx:Context){
+      async resolve(_root, args, ctx:Context){
         return ctx.prisma.marketingSource.findFirst({
           where: {
-            occupier: companyId
+            id: Number(args.id) ?? undefined
           }
+        }).then((result) => {
+          if(result === null){
+            throw new Error(`No such marketing source with id of ${args.id}`)
+          }
+          return result
         })
       }
     })
     t.crud.marketingSources({
+      alias: 'MarketingSources',
       pagination: true,
       filtering: true,
       ordering: true

@@ -328,10 +328,10 @@ export interface NexusGenFieldTypes {
     updateOneMarketingSource: NexusGenRootTypes['MarketingSource'] | null; // MarketingSource
   }
   Query: { // field return type
+    MarketingSource: NexusGenRootTypes['MarketingSource'] | null; // MarketingSource
+    MarketingSources: NexusGenRootTypes['MarketingSource'][]; // [MarketingSource!]!
     companies: NexusGenRootTypes['Company'][]; // [Company!]!
     company: NexusGenRootTypes['Company'] | null; // Company
-    marketingSource: NexusGenRootTypes['MarketingSource'] | null; // MarketingSource
-    marketingSources: NexusGenRootTypes['MarketingSource'][]; // [MarketingSource!]!
   }
 }
 
@@ -361,10 +361,10 @@ export interface NexusGenFieldTypeNames {
     updateOneMarketingSource: 'MarketingSource'
   }
   Query: { // field return type name
+    MarketingSource: 'MarketingSource'
+    MarketingSources: 'MarketingSource'
     companies: 'Company'
     company: 'Company'
-    marketingSource: 'MarketingSource'
-    marketingSources: 'MarketingSource'
   }
 }
 
@@ -382,6 +382,17 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    MarketingSource: { // args
+      id: number; // Int!
+    }
+    MarketingSources: { // args
+      after?: NexusGenInputs['MarketingSourceWhereUniqueInput'] | null; // MarketingSourceWhereUniqueInput
+      before?: NexusGenInputs['MarketingSourceWhereUniqueInput'] | null; // MarketingSourceWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs['MarketingSourceOrderByInput'][] | null; // [MarketingSourceOrderByInput!]
+      where?: NexusGenInputs['MarketingSourceWhereInput'] | null; // MarketingSourceWhereInput
+    }
     companies: { // args
       after?: NexusGenInputs['CompanyWhereUniqueInput'] | null; // CompanyWhereUniqueInput
       before?: NexusGenInputs['CompanyWhereUniqueInput'] | null; // CompanyWhereUniqueInput
@@ -391,18 +402,7 @@ export interface NexusGenArgTypes {
       where?: NexusGenInputs['CompanyWhereInput'] | null; // CompanyWhereInput
     }
     company: { // args
-      id?: string | null; // ID
-    }
-    marketingSource: { // args
-      where: NexusGenInputs['MarketingSourceWhereUniqueInput']; // MarketingSourceWhereUniqueInput!
-    }
-    marketingSources: { // args
-      after?: NexusGenInputs['MarketingSourceWhereUniqueInput'] | null; // MarketingSourceWhereUniqueInput
-      before?: NexusGenInputs['MarketingSourceWhereUniqueInput'] | null; // MarketingSourceWhereUniqueInput
-      first?: number | null; // Int
-      last?: number | null; // Int
-      orderBy?: NexusGenInputs['MarketingSourceOrderByInput'][] | null; // [MarketingSourceOrderByInput!]
-      where?: NexusGenInputs['MarketingSourceWhereInput'] | null; // MarketingSourceWhereInput
+      where: NexusGenInputs['CompanyWhereUniqueInput']; // CompanyWhereUniqueInput!
     }
   }
 }
