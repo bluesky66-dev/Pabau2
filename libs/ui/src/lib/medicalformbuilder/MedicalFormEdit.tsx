@@ -35,7 +35,6 @@ const copy = (source, destination, droppableSource, droppableDestination) => {
     ...item,
     id: destination.length,
   })
-  console.log('destination = ', destination)
   return destination
 }
 
@@ -44,7 +43,6 @@ const MedicalFormEdit: FC = () => {
 
   const onDragEnd = React.useCallback(
     (result) => {
-      console.log(result)
       const { source, destination } = result
       if (!destination) {
         return
