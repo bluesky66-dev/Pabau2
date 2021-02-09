@@ -23,7 +23,14 @@ interface SchemaItem {
   description?: string
   extra?: JSX.Element
   cssWidth?: string
-  type?: 'string' | 'boolean' | 'number' | 'radio-group' | 'color-picker' | 'checkbox' | 'icon'
+  type?:
+    | 'string'
+    | 'boolean'
+    | 'number'
+    | 'radio-group'
+    | 'color-picker'
+    | 'checkbox'
+    | 'icon'
   defaultvalue?: string | number | boolean
   visible?: boolean
   radio?: RadioItems[]

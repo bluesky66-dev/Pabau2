@@ -189,12 +189,13 @@ const CrudTable: FC<P> = ({
   }
 
   const formikFields = () => {
-    let initialValues = { name: '' }
+    const initialValues = { name: '' }
     Object.keys(fields).map((field) => {
       initialValues[field] = checkFieldType(
         fields[field]['type'],
         fields[field]['defaultvalue']
       )
+      return field
     })
     return initialValues
   }
@@ -221,6 +222,7 @@ const CrudTable: FC<P> = ({
       if (data[type]) {
         isExist = true
       }
+      return data
     })
     return isExist
   }
@@ -327,7 +329,7 @@ const CrudTable: FC<P> = ({
             scroll={{ x: 'max-content' }}
             draggable={true}
             isCustomColorExist={checkCustomColorIconExsist('color')}
-            isCustomIconExist={(checkCustomColorIconExsist('icon'))}
+            isCustomIconExist={checkCustomColorIconExsist('icon')}
             columns={[
               ...Object.entries(schema.fields).map(([k, v]) => ({
                 dataIndex: k,

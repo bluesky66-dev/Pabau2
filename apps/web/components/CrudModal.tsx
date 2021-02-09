@@ -62,18 +62,18 @@ const CrudModal: FC<P> = ({
         true
     )
   }, [editingRow, specialFormElement])
-  
+
   console.log('editingRow', editingRow)
   console.log(
     'initial value of specialBoolean set to',
     (editingRow && editingRow.id && editingRow.is_active) ??
-    (typeof specialFormElement?.defaultvalue === 'boolean' &&
-    specialFormElement.defaultvalue) ??
+      (typeof specialFormElement?.defaultvalue === 'boolean' &&
+        specialFormElement.defaultvalue) ??
       true
   )
   console.log('formik', formik)
   console.log('schemaForm', schemaForm)
-  
+
   return (
     <>
       <Modal

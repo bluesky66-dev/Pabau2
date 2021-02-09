@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Form as AntForm, Input, Radio, Checkbox } from 'formik-antd'
 // import { Radio } from 'antd'
 import { ColorPicker, FontIcon } from '@pabau/ui'
-import { FormikValues, useFormikContext } from 'formik'
+import { FormikValues } from 'formik'
 interface P {
   schema: Schema
   values: FormikValues
