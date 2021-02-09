@@ -1,14 +1,15 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, VoidFunctionComponent } from 'react'
 import { UserOutlined } from '@ant-design/icons'
-import { Button, Avatar } from '@pabau/ui'
+import { Button, Avatar, Status as AvatarStatusProps } from '@pabau/ui'
 import styles from './UserTile.module.less'
 import Airplane from '../../assets/images/airplane.svg'
 import { KeyOutlined } from '@ant-design/icons'
+import { Tooltip } from 'antd'
 
-enum Status {
-  default = 'default',
-  active = 'active',
-  inactive = 'inactive',
+interface Vacation {
+  scheduled: boolean
+  startDate?: string
+  endDate?: string
 }
 
 export interface UserProps {
@@ -16,30 +17,45 @@ export interface UserProps {
   surname: string
   title: string
   img?: string | undefined
-  vacation?: boolean
   active?: boolean
   available?: boolean
   owner?: boolean
   admin?: boolean
+  vacation?: Vacation
 }
 
-interface AirplaneIconProps {
+interface UnavailableProps {
   size?: number
+  vacation?: Vacation
 }
 
-const AirplaneIcon: FunctionComponent<AirplaneIconProps> = ({
+const UnavailableStatus: FunctionComponent<UnavailableProps> = ({
   size = 24,
-}: AirplaneIconProps): JSX.Element => {
+  vacation,
+}: UnavailableProps): JSX.Element => {
   return (
-    <div
-      className={styles.inner}
-      style={{
-        backgroundImage: `url(${Airplane})`,
-        backgroundRepeat: 'no-repeat',
-        width: size,
-        height: size,
-      }}
-    />
+    <Tooltip
+      title={'On Vacation:' + vacation?.startDate + '-' + vacation?.endDate}
+      placement="bottom"
+    >
+      <div
+        className={styles.inner}
+        style={{
+          backgroundImage: `url(${Airplane})`,
+          backgroundRepeat: 'no-repeat',
+          width: size,
+          height: size,
+        }}
+      />
+    </Tooltip>
+  )
+}
+
+const UserIsAdmin: VoidFunctionComponent = (): JSX.Element => {
+  return (
+    <Tooltip title={'Administrator'} placement="bottom">
+      <KeyOutlined className={styles.admin} />
+    </Tooltip>
   )
 }
 
@@ -54,7 +70,10 @@ export const UserTile: FunctionComponent<UserProps> = ({
   owner = false,
   admin = true,
 }: UserProps): JSX.Element => {
-  const online: Status = active ? Status.active : Status.default
+  const online: AvatarStatusProps = active
+    ? AvatarStatusProps.active
+    : AvatarStatusProps.default
+  const userStatus: string = active ? 'Online' : ''
   return (
     <div className={styles.tile}>
       <div className={styles.wrapper}>
@@ -64,6 +83,7 @@ export const UserTile: FunctionComponent<UserProps> = ({
           icon={<UserOutlined />}
           src={img}
           active={online}
+          name={userStatus}
         />
         {owner && (
           <Button className={styles.btnOwner} backgroundColor={'#EEF7FB'}>
@@ -75,12 +95,12 @@ export const UserTile: FunctionComponent<UserProps> = ({
             {name} {surname}
           </p>
           <div className={styles.titleWrapper}>
-            {admin && <KeyOutlined className={styles.admin} />}
+            {admin && <UserIsAdmin />}
             <p className={styles.title}>{title}</p>
           </div>
         </div>
         <div className={styles.vacationWrapper}>
-          {vacation && available && (
+          {vacation?.scheduled && available && (
             <Button
               style={{ padding: 2 }}
               className={styles.btnVacationPending}
@@ -92,7 +112,7 @@ export const UserTile: FunctionComponent<UserProps> = ({
               </span>
             </Button>
           )}
-          {!available && <AirplaneIcon size={24} />}
+          {!available && <UnavailableStatus vacation={vacation} size={24} />}
         </div>
       </div>
     </div>

@@ -30,7 +30,9 @@ const dummyUsers = [
     surname: 'Davis',
     title: 'Aesthetician',
     img: alex,
-    vacationPending: false,
+    vacation: {
+      scheduled: false,
+    },
     available: true,
     active: true,
   },
@@ -41,7 +43,9 @@ const dummyUsers = [
     title: 'Manager',
     img: arya,
     active: false,
-    vacationPending: false,
+    vacation: {
+      scheduled: false,
+    },
     available: true,
   },
   {
@@ -49,7 +53,9 @@ const dummyUsers = [
     name: 'Joseph',
     surname: 'Howard',
     title: 'Managing Director',
-    vacationPending: false,
+    vacation: {
+      scheduled: false,
+    },
     available: true,
     active: true,
     img: james,
@@ -69,7 +75,9 @@ const dummyUsers = [
     title: 'Manager',
     img: arya,
     active: false,
-    vacationPending: false,
+    vacation: {
+      scheduled: false,
+    },
     available: true,
   },
   {
@@ -77,7 +85,9 @@ const dummyUsers = [
     name: 'Joseph',
     surname: 'Howard',
     title: 'Managing Director',
-    vacationPending: false,
+    vacation: {
+      scheduled: false,
+    },
     available: true,
     active: false,
     img: austin,
@@ -99,13 +109,20 @@ const dummyUsers = [
     active: false,
     vacationPending: true,
     available: false,
+    vacation: {
+      scheduled: false,
+      start: '2020-02-02',
+      end: '2020-02-15',
+    },
   },
   {
     id: 10,
     name: 'Joseph',
     surname: 'Howard',
     title: 'Managing Director',
-    vacationPending: false,
+    vacation: {
+      scheduled: false,
+    },
     available: true,
     active: true,
     img: austin,
@@ -125,7 +142,9 @@ const dummyUsers = [
     title: 'Manager',
     img: linda,
     active: false,
-    vacationPending: false,
+    vacation: {
+      scheduled: false,
+    },
     available: true,
   },
   {
@@ -144,6 +163,11 @@ const dummyUsers = [
     img: arya,
     active: false,
     vacationPending: true,
+    vacation: {
+      scheduled: false,
+      start: '2020-02-02',
+      end: '2020-02-15',
+    },
     available: false,
   },
   {
@@ -162,6 +186,11 @@ const dummyUsers = [
     img: alex,
     active: false,
     vacationPending: true,
+    vacation: {
+      scheduled: false,
+      start: '2020-02-02',
+      end: '2020-02-15',
+    },
     available: false,
   },
 ]
@@ -181,7 +210,7 @@ const Index: FunctionComponent = () => {
                     name={user.name}
                     surname={user.surname}
                     title={user.title}
-                    vacation={user.vacationPending}
+                    vacation={user.vacation}
                     active={user.active}
                     available={user.available}
                     img={user.img}

@@ -6,7 +6,7 @@ import { AvatarProps as NativeAvatarProps } from 'antd/lib/avatar/avatar'
 import { UserOutlined } from '@ant-design/icons'
 import styles from './Avatar.module.less'
 
-enum Status {
+export enum Status {
   default = 'default',
   active = 'active',
   inactive = 'inactive',
