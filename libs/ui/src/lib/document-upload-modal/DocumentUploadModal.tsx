@@ -32,7 +32,6 @@ export interface DocumentUploadModalProps {
   position: string
   checkboxTooltip?: string
   onCancel?: () => void
-  onDelete?: (file, index) => void
   onFolderChange?: (value) => void
   draggerProps?: DraggableProps
   folderOptions: FolderOptions[]
@@ -79,13 +78,9 @@ const DocumentUploadModal: FC<DocumentUploadModalProps> = ({
   }
 
   const onDelete = (file, index) => {
-    if (props?.onDelete) {
-      props.onDelete(file, index)
-    } else {
-      const newFileList = [...fileList]
-      newFileList.splice(index, 1)
-      setFileList(newFileList)
-    }
+    const newFileList = [...fileList]
+    newFileList.splice(index, 1)
+    setFileList(newFileList)
   }
 
   const renderContent = () => {
@@ -112,12 +107,7 @@ const DocumentUploadModal: FC<DocumentUploadModalProps> = ({
                     <p className={styles.text}>Drop Files here to upload</p>
                   </div>
                   <div className={styles.orBox}>or</div>
-                  <Button
-                    label="Choose Files"
-                    size="medium"
-                    type="primary"
-                    className={styles.chooseFileButton}
-                  >
+                  <Button type="primary" className={styles.chooseFileButton}>
                     Choose Files
                   </Button>
                 </Dragger>
@@ -183,7 +173,6 @@ const DocumentUploadModal: FC<DocumentUploadModalProps> = ({
             </Button>
             <Button
               disabled={fileList.length === 0}
-              label="Upload"
               size="large"
               type="primary"
             >
@@ -198,7 +187,6 @@ const DocumentUploadModal: FC<DocumentUploadModalProps> = ({
   return (
     <div className={''}>
       <BasicModal
-        {...props}
         title={title}
         modalWidth={682}
         footer={false}
