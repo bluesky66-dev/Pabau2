@@ -10,6 +10,11 @@ import User5 from '../../assets/images/user5.png'
 export default {
   component: Header,
   title: 'Layout/Header',
+  argTypes: {
+    onCreateChannel: { action: 'onCreateChannel' },
+    onMessageType: { action: 'onMessageType' },
+  },
+  actions: { argTypesRegex: '^on[A-Z].*' },
 }
 
 const searchResults = [
