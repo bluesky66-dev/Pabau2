@@ -1,0 +1,20 @@
+{
+  "name": "bridge-api",
+  "version": "1.0.0",
+  "license": "Copyright Hambrand Technologies Ltd",
+  "private": true,
+  "scripts": {
+    "prisma:generate": "prisma generate --schema prisma/schema.prisma"
+  },
+  "dependencies": {
+    "tslib": "^2.0.3",
+    "ts-node": "^7.0.0",
+    "typescript": "^4.0.3",
+    "@prisma/client": "*",
+    "graphql": "^15",
+    "nexus": "*",
+    "nexus-plugin-prisma": "*",
+    "prisma": "*",
+    "apollo-server": "*"
+  }
+}

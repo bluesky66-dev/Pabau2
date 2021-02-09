@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import BusinessLocation from './BusinessLocation'
+import AddSuggestion from './AddSuggestion'
 
-describe('BusinessLocation', () => {
+describe('AddSuggestion', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<BusinessLocation />)
+    const { baseElement } = render(<AddSuggestion />)
     expect(baseElement).toBeTruthy()
   })
 })
