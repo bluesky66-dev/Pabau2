@@ -4,6 +4,7 @@ import Button from '../button/button'
 import { Checkbox } from '@pabau/ui'
 import styles from './basicmodal.module.less'
 import { ModalProps } from 'antd/lib/modal'
+import classNames from 'classnames'
 interface P {
   onOk?: () => void
   onCancel?: () => void
@@ -64,7 +65,7 @@ export function BasicModal({
       width={modalWidth}
       // destroyOnClose={true}
       // modalRender={(E) => E}
-      wrapClassName={styles.modal + ' ' + wrapClassName}
+      wrapClassName={classNames(styles.modal, wrapClassName)}
       {...props}
     >
       <div>{children}</div>
