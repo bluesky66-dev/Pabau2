@@ -19,6 +19,7 @@ pipelines:
     '**':
       - step:
           name: PR pipeline
+          size: 2x
           caches:
             - nodemodules
             - yarncustom
