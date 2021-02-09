@@ -12,9 +12,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 const iconList = Object.keys(Icons)
-    .filter((key) => key !== 'fas' && key !== 'prefix')
-    .map((icon) => Icons[icon])
-  library.add(...iconList)
+  .filter((key) => key !== 'fas' && key !== 'prefix')
+  .map((icon) => Icons[icon])
+library.add(...iconList)
 export interface DragProps {
   draggable?: boolean
   isCustomColorExist?: boolean
@@ -115,10 +115,7 @@ export const Table: FC<TableType> = ({
           </div>
         )}
         {isCustomIconExist && (
-          <FontAwesomeIcon
-            icon={rowData.icon}
-            className={styles.tableIcon}
-          />
+          <FontAwesomeIcon icon={rowData.icon} className={styles.tableIcon} />
         )}
       </div>
     )
@@ -150,7 +147,7 @@ export const Table: FC<TableType> = ({
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ?.filter((col: any) => col.visible === true)
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          .map((col: any) => {
+        .map((col: any) => {
           if (col && col.dataIndex === 'is_active') {
             col.render = renderActiveButton
           } else {

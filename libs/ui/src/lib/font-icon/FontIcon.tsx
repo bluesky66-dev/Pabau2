@@ -9,7 +9,11 @@ export interface FontIconProps {
   selectedIcon?: string
   onIconSelected(val): void
 }
-export const FontIcon: FC<FontIconProps> = ({ max, selectedIcon = '', onIconSelected }) => {
+export const FontIcon: FC<FontIconProps> = ({
+  max,
+  selectedIcon = '',
+  onIconSelected,
+}) => {
   const iconList = Object.keys(Icons)
     .filter((key) => key !== 'fas' && key !== 'prefix')
     .slice(0, max)

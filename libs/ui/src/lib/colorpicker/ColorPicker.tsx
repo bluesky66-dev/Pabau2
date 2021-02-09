@@ -66,7 +66,7 @@ export const ColorPicker: FC<PickerProps> = ({
     '#9a3ac9',
   ]
 
-  const [ selColor, setSelColor ] = useState(selectedColor)
+  const [selColor, setSelColor] = useState(selectedColor)
 
   useEffect(() => {
     setSelColor(selectedColor)
@@ -86,7 +86,7 @@ export const ColorPicker: FC<PickerProps> = ({
             key={`${heading}${color}`}
             color={color}
             selected={color === selColor}
-            onClick={() => onClickColorItem( color)}
+            onClick={() => onClickColorItem(color)}
             onHover={() => onHover?.(color)}
             onLeave={() => onLeave?.(color)}
           />
