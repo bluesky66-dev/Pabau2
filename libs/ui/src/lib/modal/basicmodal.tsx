@@ -12,6 +12,7 @@ interface P {
   newButtonText?: string
   title?: string
   modalWidth?: number
+  footer?: boolean
 
   /**
    * Creates a special tickbox next to the OK button
@@ -29,6 +30,7 @@ interface P {
   specialBooleanValue?: boolean
 
   dangerButtonText?: string
+  newButtonDisable?: boolean
 }
 
 export function BasicModal({
@@ -42,8 +44,11 @@ export function BasicModal({
   specialBooleanLabel,
   specialBooleanValue,
   onSpecialBooleanClick,
-  newButtonText = 'OK',
+  newButtonText,
+  newButtonDisable = false,
   dangerButtonText,
+  footer = true,
+  wrapClassName,
   ...props
 }: PropsWithChildren<P & ModalProps>): JSX.Element {
   return (
@@ -57,32 +62,40 @@ export function BasicModal({
       width={modalWidth}
       // destroyOnClose={true}
       // modalRender={(E) => E}
-      wrapClassName={styles.modal}
+      wrapClassName={styles.modal + ' ' + wrapClassName}
       {...props}
     >
-      <div className={styles.modalBody}>{children}</div>
-      <div className={styles.modalFooter}>
-        {specialBooleanLabel && onSpecialBooleanClick && (
-          <Checkbox
-            defaultChecked={specialBooleanValue}
-            onClick={onSpecialBooleanClick}
-          >
-            {specialBooleanLabel}
-          </Checkbox>
-        )}
-        {dangerButtonText && (
-          <Button
-            type="default"
-            className={styles.deleteBtnStyle}
-            onClick={() => onDelete?.()}
-          >
-            {dangerButtonText}
-          </Button>
-        )}
-        <Button type="primary" onClick={() => onOk?.()}>
-          {newButtonText}
-        </Button>
-      </div>
+      <div>{children}</div>
+      {footer && (
+        <div className={styles.modalFooter}>
+          {specialBooleanLabel && onSpecialBooleanClick && (
+            <Checkbox
+              defaultChecked={specialBooleanValue}
+              onClick={onSpecialBooleanClick}
+            >
+              {specialBooleanLabel}
+            </Checkbox>
+          )}
+          {dangerButtonText && (
+            <Button
+              type="default"
+              className={styles.deleteBtnStyle}
+              onClick={() => onDelete?.()}
+            >
+              {dangerButtonText}
+            </Button>
+          )}
+          {newButtonText && (
+            <Button
+              type="primary"
+              disabled={newButtonDisable}
+              onClick={() => onOk?.()}
+            >
+              {newButtonText}
+            </Button>
+          )}
+        </div>
+      )}
     </Modal>
   )
 }

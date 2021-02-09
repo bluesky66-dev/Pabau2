@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, MouseEvent } from 'react'
 import { Col, Layout, Row } from 'antd'
 import { BellOutlined, MailOutlined } from '@ant-design/icons'
 
@@ -13,9 +13,20 @@ const AntHeader = Layout.Header
 
 interface P {
   searchRender?: (innerComponent: JSX.Element) => JSX.Element
+  onCreateChannel?: (
+    name: string,
+    description: string,
+    isPrivate: boolean
+  ) => void
+  onMessageType?: (e: MouseEvent<HTMLElement>) => void
 }
 
-export const Header: FC<P> = ({ searchRender, ...props }) => {
+export const Header: FC<P> = ({
+  searchRender,
+  onCreateChannel,
+  onMessageType,
+  ...props
+}) => {
   const [openNotificationDrawer, setNotificationDrawer] = useState<boolean>(
     false
   )
@@ -72,6 +83,8 @@ export const Header: FC<P> = ({ searchRender, ...props }) => {
         <PabauMessages
           openDrawer={openMessageDrawer}
           closeDrawer={() => setMessageDrawer((e) => !e)}
+          onCreateChannel={onCreateChannel}
+          onMessageType={onMessageType}
         />
       )}
     </>

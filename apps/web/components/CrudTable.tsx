@@ -281,6 +281,9 @@ const CrudTable: FC<P> = ({
             pagination={sourceData?.length > 10 ? {} : false}
             scroll={{ x: 'max-content' }}
             draggable={true}
+            noDataBtnText={schema.full}
+            noDataText={schema.fullLower}
+            onAddTemplate={() => setModalShowing({ isCreate: true })}
             columns={[
               ...Object.entries(schema.fields).map(([k, v]) => ({
                 dataIndex: k,

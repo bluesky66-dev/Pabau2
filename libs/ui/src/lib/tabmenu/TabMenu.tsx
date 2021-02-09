@@ -19,7 +19,7 @@ export const TabMenu: FC<P> = ({
     <div className={styles.calendarSettings}>
       <Tabs tabPosition={tabPosition} style={{ minHeight }}>
         {Array.isArray(children) &&
-          children.map((tab, i) => (
+          children?.map((tab, i) => (
             <TabPane tab={menuItems[i]} key={i}>
               {tab}
             </TabPane>

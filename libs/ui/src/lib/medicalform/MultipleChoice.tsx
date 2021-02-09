@@ -1,15 +1,37 @@
-import React, { FC } from 'react'
+import {
+  MedicalFormBody,
+  MedicalFormBottom,
+  MedicalFormHeader,
+  MedicalFormTitle,
+} from '@pabau/ui'
+import React, { FC, useState } from 'react'
 import multipleChoiceIcon from '../../assets/images/medicalform_multiplechoice.svg'
 import BasicElement from './BasicElement'
 import ElementAdvanced from './ElementAdvanced'
 import ElementQuestion from './ElementQuestion'
-import MedicalFormBody from './MedicalFormBody'
-import MedicalFormBottom from './MedicalFormBottom'
-import MedicalFormHeader from './MedicalFormHeader'
-import MedicalFormTitle from './MedicalFormTitle'
+import MedicalFormError from './MedicalFormError'
 import MultiOptions from './MultiOptions'
 
-const MultipleChoice: FC = () => {
+interface P {
+  hideSideBar?: () => void
+}
+
+const MultipleChoice: FC<P> = ({ hideSideBar }) => {
+  const [addedItems, setAddedItems] = useState(0)
+  const [errMsg, setErrMsg] = useState('')
+  const eventhandler = (count) => {
+    setAddedItems(count)
+    setErrMsg('')
+  }
+
+  const saveFunc = () => {
+    if (hideSideBar && addedItems > 0) {
+      setErrMsg('')
+      hideSideBar()
+    } else {
+      setErrMsg('Please add an option')
+    }
+  }
   return (
     <BasicElement>
       <MedicalFormHeader title="component settings" />
@@ -21,10 +43,11 @@ const MultipleChoice: FC = () => {
       />
       <MedicalFormBody>
         <ElementQuestion desc="Enter your question" title="Question" />
-        <MultiOptions />
+        <MultiOptions onChange={eventhandler} />
+        {errMsg !== '' && <MedicalFormError errMsg={errMsg} />}
         <ElementAdvanced />
       </MedicalFormBody>
-      <MedicalFormBottom needLeft={true} />
+      <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
     </BasicElement>
   )
 }

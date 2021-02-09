@@ -1,17 +1,19 @@
 import React, { FC } from 'react'
-import { Button, Table as AntTable } from 'antd'
+import { Button, Table as AntTable, Avatar } from 'antd'
 import {
   SortableContainer,
   SortableElement,
   SortableHandle,
 } from 'react-sortable-hoc'
-import { LockOutlined, MenuOutlined } from '@ant-design/icons'
+import { ContactsOutlined, LockOutlined, MenuOutlined } from '@ant-design/icons'
 import styles from './Table.module.less'
 import { TableProps } from 'antd/es/table'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as Icons from '@fortawesome/free-solid-svg-icons'
 export interface DragProps {
   draggable?: boolean
   isCustomColorExist?: boolean
+  isCustomIconExist?: boolean
   updateDataSource?: ({ newData, oldIndex, newIndex }) => void
 }
 
@@ -41,6 +43,10 @@ function array_move(arr, old_index, new_index) {
 export type TableType = {
   onRowClick?: (e) => void
   padlocked?: string[]
+  noDataText?: string
+  noDataBtnText?: string
+  noDataIcon?: JSX.Element
+  onAddTemplate?: () => void
 } & TableProps<never> &
   DragProps
 
@@ -48,8 +54,13 @@ export const Table: FC<TableType> = ({
   dataSource = [],
   padlocked,
   isCustomColorExist = false,
+  isCustomIconExist = false,
   updateDataSource,
   onRowClick,
+  noDataText,
+  noDataBtnText,
+  noDataIcon = <ContactsOutlined />,
+  onAddTemplate,
   ...props
 }) => {
   const onSortEnd = ({ oldIndex, newIndex }) => {
@@ -96,30 +107,32 @@ export const Table: FC<TableType> = ({
     )
   }
 
-  const checkPadLockField = (val, rowData) => {
-    return padlocked && padlocked.includes(val) ? (
+  const renderTableSource = (val, rowData) => {
+    return (
       <div className={styles.alignItems}>
-        {renderCustomColor(val, rowData)}
-        <div style={{ marginLeft: '6px' }}>
-          <LockOutlined />
-        </div>
+        {isCustomColorExist && renderCustomColor(val, rowData)}
+        {val}
+        {padlocked?.includes(val) && (
+          <div style={{ marginLeft: '6px' }}>
+            <LockOutlined />
+          </div>
+        )}
+        {isCustomIconExist && (
+          <FontAwesomeIcon
+            icon={Icons[rowData.icon]}
+            className={styles.tableIcon}
+          />
+        )}
       </div>
-    ) : (
-      renderCustomColor(val, rowData)
     )
   }
 
   const renderCustomColor = (val, rowData) => {
-    return isCustomColorExist ? (
-      <div className={styles.alignItems}>
-        <div
-          style={{ background: rowData.color }}
-          className={styles.customColor}
-        ></div>
-        {val}
-      </div>
-    ) : (
-      val
+    return (
+      <div
+        style={{ background: rowData.color }}
+        className={styles.customColor}
+      ></div>
     )
   }
 
@@ -141,7 +154,7 @@ export const Table: FC<TableType> = ({
         if (col && col.dataIndex === 'is_active') {
           col.render = renderActiveButton
         } else {
-          col.render = checkPadLockField
+          col.render = renderTableSource
         }
         return col
       })
@@ -152,7 +165,7 @@ export const Table: FC<TableType> = ({
       : props.columns
   }
 
-  return (
+  return dataSource?.length ? (
     <AntTable
       {...props}
       onRow={(record, rowIndex) => {
@@ -184,5 +197,20 @@ export const Table: FC<TableType> = ({
         },
       }}
     />
+  ) : (
+    <div className={styles.noDataTableBox}>
+      <div className={styles.noDataTextStyle}>
+        <Avatar icon={noDataIcon} size="large" className={styles.roundDesign} />
+        <p>{`Add ${noDataText} to create more shifts faster`}</p>
+        <div className={styles.spaceBetweenText}></div>
+        <Button
+          className={styles.createTemaplateBtn}
+          type="primary"
+          onClick={() => onAddTemplate?.()}
+        >
+          {`Add ${noDataBtnText}`}
+        </Button>
+      </div>
+    </div>
   )
 }
