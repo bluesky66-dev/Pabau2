@@ -9,16 +9,22 @@ export interface CopyEmbeddCodeModalProps {
   modalWidth: number
   visible: boolean
   onClose: () => void
-  onCopy: () => void
   onDownloadImg: () => void
-  onSendToDevs: () => void
+  onEmailInput: () => void
   code: string
   title: string
   subTitle: string
 }
 
 export const CopyEmbeddCodeModal: FC<CopyEmbeddCodeModalProps> = ({
-  ...rest
+  visible,
+  title,
+  modalWidth,
+  code,
+  subTitle,
+  onClose,
+  onDownloadImg,
+  onEmailInput,
 }) => {
   const [hightLight, setHightLight] = useState(false)
   const [devModalState, setDevModalState] = useState(false)
@@ -33,24 +39,22 @@ export const CopyEmbeddCodeModal: FC<CopyEmbeddCodeModalProps> = ({
   return (
     <>
       <Modal
-        title={rest.title}
-        visible={!devModalState && rest.visible}
+        title={title}
+        visible={!devModalState && visible}
         footer={null}
-        width={rest.modalWidth}
+        width={modalWidth}
         centered={true}
         className={styles.embeddModal}
-        onCancel={() => {
-          rest.onClose
-        }}
+        onCancel={onClose}
       >
         <>
-          <div className={styles.subTitle}>{rest.subTitle}</div>
+          <div className={styles.subTitle}>{subTitle}</div>
           <div className={styles.codeBox}>
             <span className={styles.codeHeading}>Code</span>
             <div className={styles.codeDiv}>
               <span
                 className={`${hightLight && 'highLighted'}`}
-              >{`${rest.code}`}</span>
+              >{`${code}`}</span>
             </div>
           </div>
           <div className={styles.footer}>
@@ -70,7 +74,7 @@ export const CopyEmbeddCodeModal: FC<CopyEmbeddCodeModalProps> = ({
             >
               Send To Developers
             </Button>
-            <CopyToClipboard text={rest.code} onCopy={copyCode}>
+            <CopyToClipboard text={code} onCopy={copyCode}>
               <Button type="primary" className={styles.buttons}>
                 Copy
               </Button>
@@ -81,7 +85,7 @@ export const CopyEmbeddCodeModal: FC<CopyEmbeddCodeModalProps> = ({
       <Modal
         visible={devModalState}
         footer={null}
-        width={rest.modalWidth}
+        width={modalWidth}
         centered={true}
         className={styles.embeddModal}
         onCancel={() => {
@@ -93,9 +97,7 @@ export const CopyEmbeddCodeModal: FC<CopyEmbeddCodeModalProps> = ({
             label="Developer email"
             type="email"
             placeHolderText="Enter Developer Email"
-            onChange={() => {
-              console.log('HELLO')
-            }}
+            onChange={onEmailInput}
           />
         </>
       </Modal>
