@@ -149,7 +149,7 @@ const schema: Schema = {
     is_active: {
       full: 'Status',
       type: 'boolean',
-      default: true,
+      defaultvalue: true,
     },
   },
 }

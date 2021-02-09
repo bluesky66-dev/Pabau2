@@ -99,7 +99,7 @@ const schema: Schema = {
     is_active: {
       full: 'Active',
       type: 'boolean',
-      default: true,
+      defaultvalue: true,
     },
   },
 }
