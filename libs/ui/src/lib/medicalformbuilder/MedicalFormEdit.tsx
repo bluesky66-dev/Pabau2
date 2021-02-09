@@ -1,6 +1,7 @@
 import { Col, Row } from 'antd'
 import React, { FC, useState } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
+import uuid from 'react-uuid'
 import MedicalFormEditLeft from './MedicalFormEditLeft'
 import MedicalFormEditMain from './MedicalFormEditMain'
 
@@ -25,7 +26,6 @@ const formNames = [
 const reorder = (list, startIndex, endIndex) => {
   const [removed] = list.splice(startIndex, 1)
   list.splice(endIndex, 0, removed)
-  console.log('list = ', list)
   return list
 }
 
@@ -33,7 +33,7 @@ const copy = (source, destination, droppableSource, droppableDestination) => {
   const item = source[droppableSource.index]
   destination.splice(droppableDestination.index, 0, {
     ...item,
-    id: destination.length,
+    id: uuid(),
   })
   return destination
 }

@@ -9,10 +9,27 @@ import InnerMedicalFormTitle from './InnerMedicalFormTitle'
 
 interface P {
   required?: boolean
+  activate?: boolean
+  handleId?: number
+  handlingSelectComponent?: (
+    isActive?: boolean,
+    handleId?: number,
+    componentName?: string
+  ) => void
 }
-const InnerDrawing: FC<P> = ({ required }) => {
+const InnerDrawing: FC<P> = ({
+  required,
+  activate,
+  handleId,
+  handlingSelectComponent,
+}) => {
   return (
-    <InnerElement>
+    <InnerElement
+      handleId={handleId}
+      activate={activate}
+      componentName="Drawing"
+      handlingSelectComponent={handlingSelectComponent}
+    >
       {required && <InnerMedicalFormRequired />}
       <InnerMedicalFormEditIcon />
       <InnerMedicalFormTitle

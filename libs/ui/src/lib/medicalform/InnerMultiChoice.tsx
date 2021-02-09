@@ -9,8 +9,20 @@ import InnerMedicalFormTitle from './InnerMedicalFormTitle'
 
 interface P {
   required?: boolean
+  activate?: boolean
+  handleId?: number
+  handlingSelectComponent?: (
+    isActive?: boolean,
+    handleId?: number,
+    componentName?: string
+  ) => void
 }
-const InnerMultiChoice: FC<P> = ({ required }) => {
+const InnerMultiChoice: FC<P> = ({
+  required,
+  activate,
+  handleId,
+  handlingSelectComponent,
+}) => {
   const multiChoiceOptions = [
     { id: 1, label: 'Option 1' },
     { id: 2, label: 'Option 2' },
@@ -18,7 +30,12 @@ const InnerMultiChoice: FC<P> = ({ required }) => {
     { id: 4, label: 'Option 4' },
   ]
   return (
-    <InnerElement>
+    <InnerElement
+      handleId={handleId}
+      activate={activate}
+      componentName="CheckBox"
+      handlingSelectComponent={handlingSelectComponent}
+    >
       {required && <InnerMedicalFormRequired />}
       <InnerMedicalFormEditIcon />
       <InnerMedicalFormTitle

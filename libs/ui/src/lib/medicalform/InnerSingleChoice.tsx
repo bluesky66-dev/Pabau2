@@ -9,8 +9,20 @@ import InnerRadio from './InnerRadio'
 
 interface P {
   required?: boolean
+  activate?: boolean
+  handleId?: number
+  handlingSelectComponent?: (
+    isActive?: boolean,
+    handleId?: number,
+    componentName?: string
+  ) => void
 }
-const InnerSingleChoice: FC<P> = ({ required }) => {
+const InnerSingleChoice: FC<P> = ({
+  required,
+  activate,
+  handleId,
+  handlingSelectComponent,
+}) => {
   const singleChoiceOptions = [
     { id: 1, label: 'Dry' },
     { id: 2, label: 'Normal' },
@@ -18,7 +30,12 @@ const InnerSingleChoice: FC<P> = ({ required }) => {
     { id: 4, label: 'Combination' },
   ]
   return (
-    <InnerElement>
+    <InnerElement
+      handleId={handleId}
+      activate={activate}
+      componentName="SingleChoice"
+      handlingSelectComponent={handlingSelectComponent}
+    >
       {required && <InnerMedicalFormRequired />}
       <InnerMedicalFormEditIcon />
       <InnerMedicalFormTitle
