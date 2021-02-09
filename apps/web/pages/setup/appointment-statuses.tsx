@@ -23,16 +23,20 @@ const LIST_QUERY = gql`
       __typename
       id
       name
+      appointment_type
+      color
+      icon
       is_active
+      track_time
     }
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query marketing_source_aggregate(
+  query appointment_status_aggregate(
     $isActive: Boolean = true
     $searchTerm: String = ""
   ) {
-    marketing_source_aggregate(
+    appointment_status_aggregate(
       where: {
         is_active: { _eq: $isActive }
         _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
@@ -45,36 +49,72 @@ const LIST_AGGREGATE_QUERY = gql`
   }
 `
 const DELETE_MUTATION = gql`
-  mutation delete_marketing_source($id: uuid!) {
-    delete_marketing_source_by_pk(id: $id) {
+  mutation delete_appointment_status($id: uuid!) {
+    delete_appointment_status_by_pk(id: $id) {
       __typename
       id
     }
   }
 `
 const ADD_MUTATION = gql`
-  mutation insert_appointment_status_one($name: String!, $is_active: Boolean,) {
+  mutation insert_appointment_status_one(
+    $name: String!
+    $appointment_type: String!
+    $color: String
+    $icon: String
+    $track_time: Boolean
+    $is_active: Boolean
+  ) {
     insert_appointment_status_one(
-      object: { name: $name, is_active: $is_active }
+      object: {
+        name: $name
+        appointment_type: $appointment_type
+        color: $color
+        icon: $icon
+        track_time: $track_time
+        is_active: $is_active
+      }
     ) {
       __typename
       id
+      name
+      appointment_type
+      color
+      icon
+      is_active
+      track_time
     }
   }
 `
 const EDIT_MUTATION = gql`
-  mutation update_marketing_source_by_pk(
+  mutation update_appointment_status_by_pk(
     $id: uuid!
     $name: String!
+    $appointment_type: String!
+    $color: String
+    $icon: String
+    $track_time: Boolean
     $is_active: Boolean
   ) {
-    update_marketing_source_by_pk(
+    update_appointment_status_by_pk(
       pk_columns: { id: $id }
-      _set: { name: $name, is_active: $is_active }
+      _set: {
+        name: $name
+        appointment_type: $appointment_type
+        color: $color
+        icon: $icon
+        track_time: $track_time
+        is_active: $is_active
+      }
     ) {
       __typename
       id
+      name
+      appointment_type
+      color
+      icon
       is_active
+      track_time
     }
   }
 `
@@ -85,6 +125,20 @@ const schema: Schema = {
   short: 'Appointment Status',
   shortLower: 'appointment statuses',
   shemaType: 'Appointment Status',
+  messages: {
+    create: {
+      success: 'You have successfully created a appointment status',
+      error: 'While creating a appointment status',
+    },
+    update: {
+      success: 'You have successfully updated a appointment status',
+      error: 'While updating a appointment status',
+    },
+    delete: {
+      success: 'You have successfully deleted a appointment status',
+      error: 'While deleting a appointment status',
+    },
+  },
   fields: {
     appointment_type: {
       radio: [
@@ -99,7 +153,7 @@ const schema: Schema = {
       ],
       type: 'radio-group',
       visible: false,
-      default: 'Line',
+      defaultvalue: 'Line',
     },
     icon: {
       type: 'icon',
@@ -112,8 +166,6 @@ const schema: Schema = {
       shortLower: 'name',
       min: 2,
       example: 'Running Late',
-      // description: 'A friendly name',
-      // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
       type: 'string',
     },
@@ -125,13 +177,13 @@ const schema: Schema = {
     track_time: {
       full: 'Track time',
       type: 'checkbox',
-      default: true,
+      defaultvalue: true,
       visible: false,
     },
     is_active: {
       full: 'Active',
       type: 'boolean',
-      default: true,
+      defaultvalue: true,
     },
   },
 }

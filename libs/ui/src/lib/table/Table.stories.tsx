@@ -13,6 +13,7 @@ const columns = [
     title: 'Name',
     dataIndex: 'name',
     className: 'drag-visible',
+    visible: true,
     render: function renderSourceName(val, rowData) {
       if (rowData.isLocked) {
         return <>{val}</>
@@ -25,6 +26,7 @@ const columns = [
     title: 'STATUS',
     dataIndex: 'is_active',
     className: 'drag-visible',
+    visible: true,
   },
 ]
 
@@ -48,7 +50,12 @@ const DragFeatureStory: FC = ({ ...args }) => {
     setDataSource(newData)
   }
   return (
-    <Table {...args} padlocked={[]} dataSource={dataSource} updateDataSource={updateDataSource} />
+    <Table
+      {...args}
+      padlocked={[]}
+      dataSource={dataSource}
+      updateDataSource={updateDataSource}
+    />
   )
 }
 export const TableWithDragFeature = DragFeatureStory.bind({})

@@ -49,31 +49,31 @@ const CrudModal: FC<P> = ({
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     (editingRow && editingRow.id && editingRow.is_active) ??
-      (typeof specialFormElement?.default === 'boolean' &&
-        specialFormElement.default) ??
+      (typeof specialFormElement?.defaultvalue === 'boolean' &&
+        specialFormElement.defaultvalue) ??
       true
   )
 
   useEffect(() => {
     setSpecialBoolean(
       (editingRow && editingRow.id && (editingRow.is_active as boolean)) ??
-        (typeof specialFormElement?.default === 'boolean' &&
-          (specialFormElement.default as boolean)) ??
+        (typeof specialFormElement?.defaultvalue === 'boolean' &&
+          (specialFormElement.defaultvalue as boolean)) ??
         true
     )
   }, [editingRow, specialFormElement])
-
+  
   console.log('editingRow', editingRow)
   console.log(
     'initial value of specialBoolean set to',
     (editingRow && editingRow.id && editingRow.is_active) ??
-      (typeof specialFormElement?.default === 'boolean' &&
-        specialFormElement.default) ??
+    (typeof specialFormElement?.defaultvalue === 'boolean' &&
+    specialFormElement.defaultvalue) ??
       true
   )
-  console.log('currently is', specialBoolean)
-  console.log('currently is formik', formik)
-
+  console.log('formik', formik)
+  console.log('schemaForm', schemaForm)
+  
   return (
     <>
       <Modal
@@ -161,9 +161,7 @@ const CrudModal: FC<P> = ({
           }
         }}
         isValidate={
-          formik.values['appointment_type'] === 'Icon'
-            ? true
-            : editingRow && editingRow.isCreate
+          editingRow && editingRow.isCreate
             ? formik.dirty && formik.isValid
             : formik.isValid
         }

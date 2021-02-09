@@ -6,15 +6,16 @@ import React, { FC, useState } from 'react'
 import styles from './FontIcon.module.less'
 export interface FontIconProps {
   max?: number
+  selectedIcon?: string
   onIconSelected(val): void
 }
-export const FontIcon: FC<FontIconProps> = ({ max, onIconSelected }) => {
+export const FontIcon: FC<FontIconProps> = ({ max, selectedIcon = '', onIconSelected }) => {
   const iconList = Object.keys(Icons)
     .filter((key) => key !== 'fas' && key !== 'prefix')
     .slice(0, max)
     .map((icon) => Icons[icon])
   library.add(...iconList)
-  const [activate, setActivate] = useState('')
+  const [activate, setActivate] = useState(selectedIcon)
   return (
     <div className={styles.iconPanel}>
       {iconList

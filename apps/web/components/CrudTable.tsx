@@ -193,7 +193,7 @@ const CrudTable: FC<P> = ({
     Object.keys(fields).map((field) => {
       initialValues[field] = checkFieldType(
         fields[field]['type'],
-        fields[field]['default']
+        fields[field]['defaultvalue']
       )
     })
     return initialValues
@@ -211,8 +211,18 @@ const CrudTable: FC<P> = ({
       case 'number':
         return defaultVal || 0
       default:
-        return ''
+        return defaultVal || ''
     }
+  }
+
+  const checkCustomColorIconExsist = (type) => {
+    let isExist = false
+    sourceData?.map((data) => {
+      if (data[type]) {
+        isExist = true
+      }
+    })
+    return isExist
   }
 
   return (
@@ -260,7 +270,7 @@ const CrudTable: FC<P> = ({
                 <Link href="/">
                   <LeftOutlined />
                 </Link>
-                <p> Marketing sources </p>
+                <p> {schema.full || schema.short} </p>
               </div>
               {addQuery && (
                 <AddButton
@@ -316,6 +326,8 @@ const CrudTable: FC<P> = ({
             pagination={sourceData?.length > 10 ? {} : false}
             scroll={{ x: 'max-content' }}
             draggable={true}
+            isCustomColorExist={checkCustomColorIconExsist('color')}
+            isCustomIconExist={(checkCustomColorIconExsist('icon'))}
             columns={[
               ...Object.entries(schema.fields).map(([k, v]) => ({
                 dataIndex: k,
@@ -325,31 +337,6 @@ const CrudTable: FC<P> = ({
                   ? v.visible
                   : true,
               })),
-              // {
-              //   title: 'Actions',
-              //   width: '10em',
-              //   // eslint-disable-next-line react/display-name
-              //   render: ({ id }) => {
-              //     return (
-              //       // eslint-disable-next-line react/jsx-no-useless-fragment
-              //       <>
-              //         {deleteQuery && (
-              //           <DeleteButton
-              //             id={id}
-              //             listQuery={listQuery}
-              //             deleteQuery={deleteQuery}
-              //
-              //             // onClick={() =>
-              //
-              //             // }
-              //           >
-              //             Delete
-              //           </DeleteButton>
-              //         )}
-              //       </>
-              //     )
-              //   },
-              // },
             ]}
             // eslint-disable-next-line
             dataSource={sourceData?.map((e: { id: any }) => ({

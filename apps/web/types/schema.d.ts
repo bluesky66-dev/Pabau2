@@ -24,7 +24,7 @@ interface SchemaItem {
   extra?: JSX.Element
   cssWidth?: string
   type?: 'string' | 'boolean' | 'number' | 'radio-group' | 'color-picker' | 'checkbox' | 'icon'
-  default?: string | number | boolean
+  defaultvalue?: string | number | boolean
   visible?: boolean
   radio?: RadioItems[]
 }

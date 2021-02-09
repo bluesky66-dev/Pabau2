@@ -26,6 +26,7 @@ const AppointmentStatusForm: FC<P> = ({ schema, values }) => {
               type,
               radio,
               full,
+              defaultvalue
             },
           ],
           i
@@ -45,6 +46,7 @@ const AppointmentStatusForm: FC<P> = ({ schema, values }) => {
             {type === 'icon' && values.appointment_type === 'Icon' && (
               <AntForm.Item key={name} name={name}>
                 <FontIcon
+                  selectedIcon={values.icon}
                   onIconSelected={(icon) => {
                     values.icon = icon
                   }}
@@ -56,8 +58,8 @@ const AppointmentStatusForm: FC<P> = ({ schema, values }) => {
               <AntForm.Item key={name} name={name}>
                 <div style={{ width: '344px' }}>
                   <ColorPicker
+                    selectedColor={values.color}
                     onSelected={(val) => {
-                      // formik.setFieldValue(name, val)
                       values.color = val
                     }}
                     heading={values.appointment_type + ' ' + full}
@@ -67,7 +69,7 @@ const AppointmentStatusForm: FC<P> = ({ schema, values }) => {
             )}
             {type === 'checkbox' && (
               <AntForm.Item key={name} name={name}>
-                <Checkbox name={name} defaultChecked={true}>
+                <Checkbox name={name} defaultChecked={values[name] || true}>
                   {full}
                 </Checkbox>
               </AntForm.Item>

@@ -10,6 +10,11 @@ import styles from './Table.module.less'
 import { TableProps } from 'antd/es/table'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
+const iconList = Object.keys(Icons)
+    .filter((key) => key !== 'fas' && key !== 'prefix')
+    .map((icon) => Icons[icon])
+  library.add(...iconList)
 export interface DragProps {
   draggable?: boolean
   isCustomColorExist?: boolean
@@ -111,7 +116,7 @@ export const Table: FC<TableType> = ({
         )}
         {isCustomIconExist && (
           <FontAwesomeIcon
-            icon={Icons[rowData.icon]}
+            icon={rowData.icon}
             className={styles.tableIcon}
           />
         )}
