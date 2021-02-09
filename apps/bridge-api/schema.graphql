@@ -267,7 +267,7 @@ input NullableStringFieldUpdateOperationsInput {
 
 type Query {
   companies(after: CompanyWhereUniqueInput, before: CompanyWhereUniqueInput, first: Int, last: Int, orderBy: [CompanyOrderByInput!], where: CompanyWhereInput): [Company!]!
-  company(where: CompanyWhereUniqueInput!): Company
+  company(id: ID): Company
   marketingSource(where: MarketingSourceWhereUniqueInput!): MarketingSource
   marketingSources(after: MarketingSourceWhereUniqueInput, before: MarketingSourceWhereUniqueInput, first: Int, last: Int, orderBy: [MarketingSourceOrderByInput!], where: MarketingSourceWhereInput): [MarketingSource!]!
 }

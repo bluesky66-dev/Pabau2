@@ -391,7 +391,7 @@ export interface NexusGenArgTypes {
       where?: NexusGenInputs['CompanyWhereInput'] | null; // CompanyWhereInput
     }
     company: { // args
-      where: NexusGenInputs['CompanyWhereUniqueInput']; // CompanyWhereUniqueInput!
+      id?: string | null; // ID
     }
     marketingSource: { // args
       where: NexusGenInputs['MarketingSourceWhereUniqueInput']; // MarketingSourceWhereUniqueInput!

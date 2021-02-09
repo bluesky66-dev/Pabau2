@@ -3,10 +3,12 @@ import { nexusPrisma } from 'nexus-plugin-prisma'
 import { PrismaClient } from '@prisma/client'
 import { join } from 'path'
 import * as types from './schema/types'
+import { GraphQLSchema } from "graphql";
+import { NexusSchemaExtension } from "nexus/dist/extensions";
 
 const prisma = new PrismaClient()
 
-export const schema = makeSchema({
+export const schema: Omit<GraphQLSchema, "extensions"> & { extensions: { nexus: NexusSchemaExtension } } = makeSchema({
   types,
   plugins: [nexusPrisma({
     experimentalCRUD: true, prismaClient: ctx => ctx.prisma = prisma })],

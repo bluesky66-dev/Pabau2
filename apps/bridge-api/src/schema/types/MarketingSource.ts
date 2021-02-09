@@ -1,4 +1,7 @@
-import { objectType, extendType, } from "nexus";
+import { objectType, extendType, idArg, } from "nexus";
+import { Context } from "../../context";
+
+const  companyId = 8901
 
 export const MarketingSource = objectType({
   name: 'MarketingSource',
@@ -16,7 +19,19 @@ export const MarketingSource = objectType({
 export const MarketingSourceQuery = extendType({
   type: 'Query',
   definition(t ) {
-    t.crud.marketingSource();
+    t.field("MarketingSource", {
+      type: MarketingSource,
+      args: {
+        id: idArg()
+      },
+      resolve(_root,args, ctx:Context){
+        return ctx.prisma.marketingSource.findFirst({
+          where: {
+            occupier: companyId
+          }
+        })
+      }
+    })
     t.crud.marketingSources({
       pagination: true,
       filtering: true,
