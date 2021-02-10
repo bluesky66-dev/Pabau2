@@ -9,6 +9,7 @@ interface P {
   listQuery: DocumentNode
   editQuery: DocumentNode
   aggregateQuery?: DocumentNode
+  updateOrderQuery?: DocumentNode
 }
 
 const CrudLayout: FC<P> = ({ ...props }) => <CrudTable {...props} />
