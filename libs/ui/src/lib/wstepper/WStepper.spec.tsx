@@ -6,7 +6,7 @@ import WStepper from './WStepper'
 describe('WStepper', () => {
   it('should render successfully', () => {
     const { baseElement } = render(
-      <WStepper active={0} breadcrumbTxt={''} headerTxt={''} data={[]}/>
+      <WStepper active={0} breadcrumbTxt={''} headerTxt={''} data={[]} />
     )
     expect(baseElement).toBeTruthy()
   })
