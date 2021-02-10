@@ -7,6 +7,7 @@ import * as child_process from 'child_process'
 
 function removeIndexTsx(input: string): string {
   if (input.endsWith('/index.tsx')) return input.substr(0, input.length - '/index.tsx'.length)
+  if (input.endsWith('.tsx')) return input.substr(0, input.length - '.tsx'.length)
   return input
 }
 
@@ -75,6 +76,6 @@ output.forEach(e=>{
 })
 
 if (deDuped.length) {
-  console.log("I have detected the following pages have changed:")
+  console.log("*I have detected the following pages have changed:*")
   console.log(deDuped.join("\n"))
 }
