@@ -4,7 +4,7 @@ import { SetupSearchInput } from '@pabau/ui'
 import {
   MobileHeader,
   MobileSidebar,
-  PabauNotification,
+  NotificationDrawer,
   PabauMessages,
 } from '@pabau/ui'
 import { MenuOutlined } from '@ant-design/icons'
@@ -61,7 +61,7 @@ const CommonHeader: FC<P> = (props) => {
         />
       )}
       {openNotificationDrawer && (
-        <PabauNotification
+        <NotificationDrawer
           openDrawer={openNotificationDrawer}
           closeDrawer={() => setNotificationDrawer((e) => !e)}
         />

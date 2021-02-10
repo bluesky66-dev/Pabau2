@@ -4,6 +4,7 @@ import Button from '../button/button'
 import { Checkbox } from '@pabau/ui'
 import styles from './basicmodal.module.less'
 import { ModalProps } from 'antd/lib/modal'
+import classNames from 'classnames'
 interface P {
   onOk?: () => void
   onCancel?: () => void
@@ -65,7 +66,7 @@ export function BasicModal({
       wrapClassName={styles.modal + ' ' + wrapClassName}
       {...props}
     >
-      <div>{children}</div>
+      <div className={styles.modalContent}>{children}</div>
       {footer && (
         <div className={styles.modalFooter}>
           {specialBooleanLabel && onSpecialBooleanClick && (
@@ -79,7 +80,7 @@ export function BasicModal({
           {dangerButtonText && (
             <Button
               type="default"
-              className={styles.deleteBtnStyle}
+              className={classNames(styles.deleteBtnStyle, styles.btnStyle)}
               onClick={() => onDelete?.()}
             >
               {dangerButtonText}
@@ -88,6 +89,7 @@ export function BasicModal({
           {newButtonText && (
             <Button
               type="primary"
+              className={styles.btnStyle}
               disabled={newButtonDisable}
               onClick={() => onOk?.()}
             >
