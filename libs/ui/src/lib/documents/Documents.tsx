@@ -31,13 +31,13 @@ export const Documents: FC<DocumentsProps> = ({
   folders,
   ...rest
 }) => {
-  const fileInputRef = useRef()
+  const fileInputRef = useRef(null)
 
   const chooseFile = () => {
     if (fileInputRef && fileInputRef.current) {
       const target = fileInputRef.current
       if (target) {
-        console.log("CLICKED TO UPLOAD")
+        console.log('CLICKED TO UPLOAD')
       }
     }
   }
