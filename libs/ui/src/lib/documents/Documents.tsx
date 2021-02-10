@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react'
+import React, { FC, useRef, RefObject } from 'react'
 import styles from './Documents.module.less'
 import { Button, Checkbox, Accordion, DotButton } from '@pabau/ui'
 import FolderIcon from './Folder.svg'
@@ -30,7 +30,7 @@ export const Documents: FC<DocumentsProps> = ({
   folders,
   ...rest
 }) => {
-  const fileInputRef = useRef<HTMLDivElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const chooseFile = () => {
     if (fileInputRef?.current) {
