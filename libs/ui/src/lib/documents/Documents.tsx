@@ -1,4 +1,4 @@
-import React, { FC, useRef, RefObject } from 'react'
+import React, { FC, useRef } from 'react'
 import styles from './Documents.module.less'
 import { Button, Checkbox, Accordion, DotButton } from '@pabau/ui'
 import FolderIcon from './Folder.svg'
