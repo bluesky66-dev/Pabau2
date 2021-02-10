@@ -24,10 +24,7 @@ interface formParams {
 
 interface P {
   draggedFromNames?: formParams[]
-  handlingComponentSetting?: (
-    componentName?: string,
-    componentID?: string
-  ) => void
+  handlingComponentSetting?: (componentName?: string) => void
 }
 
 const MedicalFormEditMain: FC<P> = ({ ...props }) => {
@@ -48,17 +45,9 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
     }
   }
 
-  const handlingSelectComponent1 = (
-    activatedComponent,
-    activatedComponentID
-  ) => {
-    if (handlingComponentSetting)
-      handlingComponentSetting(activatedComponent, activatedComponentID)
-  }
-
   useEffect(() => {
-    handlingSelectComponent1(activatedComponent, activatedComponentID)
-  }, [activatedComponent, activatedComponentID])
+    if (handlingComponentSetting) handlingComponentSetting(activatedComponent)
+  }, [activatedComponent])
 
   return (
     <Droppable droppableId="MainSide">

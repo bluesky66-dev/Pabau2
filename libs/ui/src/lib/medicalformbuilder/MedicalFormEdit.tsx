@@ -44,11 +44,11 @@ const MedicalFormEdit: FC = () => {
   const [selectComponent, setSelectComponent] = useState('')
   const [selectComponentId, setSelectComponentId] = useState('')
   const [displaySettingBar, setDisplaySettingBar] = useState(false)
-  const handlingComponentSetting = (componentName, componentID) => {
+  const handlingComponentSetting = (componentName) => {
     setDisplaySettingBar(componentName === '' ? false : true)
-    if (componentName !== '' && componentID !== '') {
+    if (componentName !== '') {
       setSelectComponent(componentName)
-      setSelectComponentId(componentID)
+      // setSelectComponentId(componentID)
     }
   }
   console.log('selectComponentId = ', selectComponentId)
