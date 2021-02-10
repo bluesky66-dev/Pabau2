@@ -31,6 +31,7 @@ interface P {
   editQuery: DocumentNode
   aggregateQuery?: DocumentNode
   tableSearch?: boolean
+  updateOrderQuery?: DocumentNode
 }
 
 const CrudTable: FC<P> = ({
@@ -41,6 +42,7 @@ const CrudTable: FC<P> = ({
   editQuery,
   aggregateQuery,
   tableSearch = true,
+  updateOrderQuery,
 }) => {
   const [isActive, setIsActive] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
@@ -57,6 +59,11 @@ const CrudTable: FC<P> = ({
         NotificationType.error,
         `Error! ${schema.messages.update.error}`
       )
+    },
+  })
+  const [updateOrderMutation] = useMutation(updateOrderQuery, {
+    onError(err) {
+      Notification(NotificationType.error, 'Error! Marketing source update.')
     },
   })
   const [addMutation] = useMutation(addQuery, {
@@ -227,6 +234,34 @@ const CrudTable: FC<P> = ({
     return isExist
   }
 
+  const updateOrder = async (values) => {
+    if (values.id)
+      await updateOrderMutation({
+        variables: values,
+        optimisticResponse: {},
+        update: (proxy) => {
+          if (listQuery) {
+            const existing = proxy.readQuery({
+              query: listQuery,
+            })
+            if (existing) {
+              const key = Object.keys(existing)[0]
+              proxy.writeQuery({
+                query: listQuery,
+                data: {
+                  [key]: [...existing[key], values],
+                },
+              })
+            }
+          }
+        },
+      })
+  }
+
+  const createNew = () => {
+    setModalShowing({ name: '', isCreate: true })
+  }
+
   return (
     <Formik
       enableReinitialize={true}
@@ -276,7 +311,7 @@ const CrudTable: FC<P> = ({
               </div>
               {addQuery && (
                 <AddButton
-                  onClick={() => setModalShowing({ name: '' })}
+                  onClick={createNew}
                   onFilterSource={onFilterMarketingSource}
                   onSearch={onSearch}
                   schema={schema}
@@ -313,7 +348,7 @@ const CrudTable: FC<P> = ({
             </div>
             {addQuery && (
               <AddButton
-                onClick={() => setModalShowing({ name: '', isCreate: true })}
+                onClick={createNew}
                 onFilterSource={onFilterMarketingSource}
                 onSearch={onSearch}
                 schema={schema}
@@ -349,6 +384,19 @@ const CrudTable: FC<P> = ({
               ...e,
             }))}
             updateDataSource={({ newData, oldIndex, newIndex }) => {
+              newData = newData.map((data, i) => {
+                data.order = sourceData[i].order
+                return data
+              })
+              if (oldIndex > newIndex) {
+                for (let i = newIndex; i <= oldIndex; i++) {
+                  updateOrder(newData[i])
+                }
+              } else {
+                for (let i = oldIndex; i <= newIndex; i++) {
+                  updateOrder(newData[i])
+                }
+              }
               setSourceData(newData)
               console.log('newData, oldIndex, newIndex ', {
                 newData,

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { gql } from '@apollo/client'
 import { NextPage } from 'next'
 import React from 'react'
@@ -14,7 +13,7 @@ const LIST_QUERY = gql`
     marketing_source(
       offset: $offset
       limit: $limit
-      order_by: { created_at: desc }
+      order_by: { order: desc }
       where: {
         is_active: { _eq: $isActive }
         _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
@@ -24,6 +23,7 @@ const LIST_QUERY = gql`
       id
       name
       is_active
+      order
     }
   }
 `
@@ -67,18 +67,29 @@ const EDIT_MUTATION = gql`
     $id: uuid!
     $name: String!
     $is_active: Boolean
+    $order: Int
   ) {
     update_marketing_source_by_pk(
       pk_columns: { id: $id }
-      _set: { name: $name, is_active: $is_active }
+      _set: { name: $name, is_active: $is_active, order: $order }
     ) {
       __typename
       id
       is_active
+      order
     }
   }
 `
-
+const UPDATE_ORDER_MUTATION = gql`
+  mutation update_marketing_source_order($id: uuid!, $order: Int) {
+    update_marketing_source(
+      where: { id: { _eq: $id } }
+      _set: { order: $order }
+    ) {
+      affected_rows
+    }
+  }
+`
 const schema: Schema = {
   full: 'Family Relationship',
   fullLower: 'family relationship',
@@ -114,6 +125,7 @@ export const FamilyRelationships: NextPage = () => {
       listQuery={LIST_QUERY}
       editQuery={EDIT_MUTATION}
       aggregateQuery={LIST_AGGREGATE_QUERY}
+      updateOrderQuery={UPDATE_ORDER_MUTATION}
     />
   )
 }

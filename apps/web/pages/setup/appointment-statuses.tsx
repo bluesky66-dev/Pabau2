@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { gql } from '@apollo/client'
 import { NextPage } from 'next'
 import React from 'react'
@@ -14,7 +13,7 @@ const LIST_QUERY = gql`
     appointment_status(
       offset: $offset
       limit: $limit
-      order_by: { created_at: desc }
+      order_by: { order: desc }
       where: {
         is_active: { _eq: $isActive }
         _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
@@ -28,6 +27,7 @@ const LIST_QUERY = gql`
       icon
       is_active
       track_time
+      order
     }
   }
 `
@@ -95,6 +95,7 @@ const EDIT_MUTATION = gql`
     $icon: String
     $track_time: Boolean
     $is_active: Boolean
+    $order: Int
   ) {
     update_appointment_status_by_pk(
       pk_columns: { id: $id }
@@ -105,6 +106,7 @@ const EDIT_MUTATION = gql`
         icon: $icon
         track_time: $track_time
         is_active: $is_active
+        order: $order
       }
     ) {
       __typename
@@ -115,6 +117,18 @@ const EDIT_MUTATION = gql`
       icon
       is_active
       track_time
+      order
+    }
+  }
+`
+
+const UPDATE_ORDER_MUTATION = gql`
+  mutation update_appointment_status_order($id: uuid!, $order: Int) {
+    update_appointment_status(
+      where: { id: { _eq: $id } }
+      _set: { order: $order }
+    ) {
+      affected_rows
     }
   }
 `
@@ -198,6 +212,7 @@ export const AppointmentStatuses: NextPage = () => {
       listQuery={LIST_QUERY}
       editQuery={EDIT_MUTATION}
       aggregateQuery={LIST_AGGREGATE_QUERY}
+      updateOrderQuery={UPDATE_ORDER_MUTATION}
     />
   )
 }

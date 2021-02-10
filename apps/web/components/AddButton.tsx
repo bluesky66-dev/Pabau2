@@ -77,7 +77,9 @@ const AddButton: FC<P> = ({
     <>
       {/* Mobile header */}
       <div className={classNames(styles.marketingIcon, styles.desktopViewNone)}>
-        <SearchOutlined className={styles.marketingIconStyle} />
+        {tableSearch && (
+          <SearchOutlined className={styles.marketingIconStyle} />
+        )}
         <FilterOutlined
           className={styles.marketingIconStyle}
           onClick={() => setMobFilterDrawer((e) => !e)}

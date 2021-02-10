@@ -1,10 +1,6 @@
 .modal {
   font-family: Circular-Std-Book;
   :global {
-    .ant-modal-body {
-      padding-left: 40px;
-      padding-right: 40px;
-    }
     .ant-modal-content {
       background: #ffffff;
       box-shadow: 4px 4px 23px rgba(0, 34, 65, 0.15);
@@ -32,9 +28,9 @@
     .ant-checkbox {
       border: 1px solid #cfcfd7;
     }
-    // .ant-modal-body {
-    //   padding: 0 !important;
-    // }
+    .ant-modal-body {
+      padding: 0 !important;
+    }
 
     .ant-form-item {
       .ant-form-item-label {
@@ -95,6 +91,11 @@
     display: flex;
     align-items: center;
     color: #3d3d46;
+  }
+
+  .modal-content {
+    padding-left: 40px;
+    padding-right: 40px;
   }
 
   .modal-footer {
@@ -170,6 +171,36 @@
       padding-left: 10px;
       color: var(--light-grey-color);
       font-size: 14px;
+    }
+  }
+
+  .btn-style {
+    min-width: 76px;
+    min-height: 40px;
+  }
+}
+
+@media (min-width: 225px) and (max-width: 575px) {
+  .modal {
+    :global {
+      .ant-modal-header {
+        padding: 16px;
+      }
+      .ant-modal-close-x {
+        padding-top: 0;
+      }
+    }
+
+    .modal-content {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .modal-footer {
+      padding-top: 8px;
+      padding-left: 16px;
+      padding-right: 16px;
+      padding-bottom: 16px;
     }
   }
 }

@@ -11,21 +11,23 @@
       - icon
       - is_active
       - name
+      - order
       - track_time
       backend_only: false
   select_permissions:
   - role: public
     permission:
       columns:
+      - is_active
+      - track_time
+      - order
       - appointment_type
       - color
-      - created_at
       - icon
-      - id
-      - is_active
       - name
-      - track_time
+      - created_at
       - updated_at
+      - id
       filter: {}
       allow_aggregations: true
   update_permissions:
@@ -37,6 +39,7 @@
       - icon
       - is_active
       - name
+      - order
       - track_time
       filter: {}
       check: null
@@ -92,6 +95,7 @@
       - invoice_prefix
       - is_active
       - name
+      - order
       backend_only: false
   select_permissions:
   - role: public
@@ -103,6 +107,7 @@
       - invoice_prefix
       - is_active
       - name
+      - order
       - updated_at
       filter: {}
       allow_aggregations: true
@@ -114,6 +119,7 @@
       - invoice_prefix
       - is_active
       - name
+      - order
       - updated_at
       filter: {}
       check: null
@@ -131,6 +137,7 @@
       columns:
       - is_active
       - name
+      - order
       backend_only: false
   select_permissions:
   - role: public
@@ -140,6 +147,7 @@
       - id
       - is_active
       - name
+      - order
       - updated_at
       filter: {}
       allow_aggregations: true
@@ -149,6 +157,7 @@
       columns:
       - is_active
       - name
+      - order
       - updated_at
       filter: {}
       check: null
@@ -166,6 +175,7 @@
       columns:
       - is_active
       - name
+      - order
       backend_only: false
   select_permissions:
   - role: public
@@ -175,6 +185,7 @@
       - id
       - is_active
       - name
+      - order
       - updated_at
       filter: {}
       allow_aggregations: true
@@ -184,6 +195,7 @@
       columns:
       - is_active
       - name
+      - order
       - updated_at
       filter: {}
       check: null
@@ -199,19 +211,18 @@
     permission:
       check: {}
       columns:
-      - created_at
-      - id
       - name
-      - updated_at
+      - order
       backend_only: false
   select_permissions:
   - role: public
     permission:
       columns:
-      - name
       - created_at
-      - updated_at
       - id
+      - name
+      - order
+      - updated_at
       filter: {}
       allow_aggregations: true
   update_permissions:
@@ -219,6 +230,7 @@
     permission:
       columns:
       - name
+      - order
       filter: {}
       check: null
   delete_permissions:
@@ -271,6 +283,7 @@
       columns:
       - is_active
       - name
+      - order
       backend_only: false
   select_permissions:
   - role: public
@@ -280,6 +293,7 @@
       - id
       - is_active
       - name
+      - order
       - updated_at
       filter: {}
       allow_aggregations: true
@@ -289,6 +303,7 @@
       columns:
       - is_active
       - name
+      - order
       filter: {}
       check: null
   delete_permissions:
