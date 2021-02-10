@@ -37,7 +37,7 @@ export const Documents: FC<DocumentsProps> = ({
     if (fileInputRef && fileInputRef.current) {
       const target = fileInputRef.current
       if (target) {
-        target.click()
+        console.log("CLICKED TO UPLOAD")
       }
     }
   }
