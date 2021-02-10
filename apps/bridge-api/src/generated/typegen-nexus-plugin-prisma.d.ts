@@ -286,7 +286,6 @@ export interface NexusGenObjects {
   MarketingSource: { // root type
     custom_id: number; // Int!
     id: number; // Int!
-    source_name: string; // String!
   }
   Mutation: {};
   Query: {};
@@ -320,7 +319,7 @@ export interface NexusGenFieldTypes {
     company_id: number; // Int!
     custom_id: number; // Int!
     id: number; // Int!
-    source_name: string; // String!
+    name: string; // String!
   }
   Mutation: { // field return type
     createOneMarketingSource: NexusGenRootTypes['MarketingSource']; // MarketingSource!
@@ -328,10 +327,10 @@ export interface NexusGenFieldTypes {
     updateOneMarketingSource: NexusGenRootTypes['MarketingSource'] | null; // MarketingSource
   }
   Query: { // field return type
-    MarketingSource: NexusGenRootTypes['MarketingSource'] | null; // MarketingSource
-    MarketingSources: NexusGenRootTypes['MarketingSource'][]; // [MarketingSource!]!
     companies: NexusGenRootTypes['Company'][]; // [Company!]!
     company: NexusGenRootTypes['Company'] | null; // Company
+    listMarketingSources: NexusGenRootTypes['MarketingSource'][]; // [MarketingSource!]!
+    retrieveMarketingSource: NexusGenRootTypes['MarketingSource'] | null; // MarketingSource
   }
 }
 
@@ -353,7 +352,7 @@ export interface NexusGenFieldTypeNames {
     company_id: 'Int'
     custom_id: 'Int'
     id: 'Int'
-    source_name: 'String'
+    name: 'String'
   }
   Mutation: { // field return type name
     createOneMarketingSource: 'MarketingSource'
@@ -361,10 +360,10 @@ export interface NexusGenFieldTypeNames {
     updateOneMarketingSource: 'MarketingSource'
   }
   Query: { // field return type name
-    MarketingSource: 'MarketingSource'
-    MarketingSources: 'MarketingSource'
     companies: 'Company'
     company: 'Company'
+    listMarketingSources: 'MarketingSource'
+    retrieveMarketingSource: 'MarketingSource'
   }
 }
 
@@ -382,17 +381,6 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
-    MarketingSource: { // args
-      id: number; // Int!
-    }
-    MarketingSources: { // args
-      after?: NexusGenInputs['MarketingSourceWhereUniqueInput'] | null; // MarketingSourceWhereUniqueInput
-      before?: NexusGenInputs['MarketingSourceWhereUniqueInput'] | null; // MarketingSourceWhereUniqueInput
-      first?: number | null; // Int
-      last?: number | null; // Int
-      orderBy?: NexusGenInputs['MarketingSourceOrderByInput'][] | null; // [MarketingSourceOrderByInput!]
-      where?: NexusGenInputs['MarketingSourceWhereInput'] | null; // MarketingSourceWhereInput
-    }
     companies: { // args
       after?: NexusGenInputs['CompanyWhereUniqueInput'] | null; // CompanyWhereUniqueInput
       before?: NexusGenInputs['CompanyWhereUniqueInput'] | null; // CompanyWhereUniqueInput
@@ -403,6 +391,17 @@ export interface NexusGenArgTypes {
     }
     company: { // args
       where: NexusGenInputs['CompanyWhereUniqueInput']; // CompanyWhereUniqueInput!
+    }
+    listMarketingSources: { // args
+      after?: NexusGenInputs['MarketingSourceWhereUniqueInput'] | null; // MarketingSourceWhereUniqueInput
+      before?: NexusGenInputs['MarketingSourceWhereUniqueInput'] | null; // MarketingSourceWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs['MarketingSourceOrderByInput'][] | null; // [MarketingSourceOrderByInput!]
+      where?: NexusGenInputs['MarketingSourceWhereInput'] | null; // MarketingSourceWhereInput
+    }
+    retrieveMarketingSource: { // args
+      id: number; // Int!
     }
   }
 }

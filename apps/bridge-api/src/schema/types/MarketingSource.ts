@@ -5,7 +5,9 @@ export const MarketingSource = objectType({
   name: 'MarketingSource',
   definition(t) {
     t.model.id()
-    t.model.source_name()
+    t.model.source_name({
+      alias: 'name'
+    })
     t.model.occupier({
       alias: 'company_id'
     })
@@ -17,7 +19,7 @@ export const MarketingSource = objectType({
 export const MarketingSourceQuery = extendType({
   type: 'Query',
   definition(t ) {
-    t.field("MarketingSource", {
+    t.field("retrieveMarketingSource", {
       type: MarketingSource,
       args: {
         id: nonNull(intArg())
@@ -36,7 +38,7 @@ export const MarketingSourceQuery = extendType({
       }
     })
     t.crud.marketingSources({
-      alias: 'MarketingSources',
+      alias: 'listMarketingSources',
       pagination: true,
       filtering: true,
       ordering: true

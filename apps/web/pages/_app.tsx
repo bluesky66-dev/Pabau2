@@ -55,7 +55,7 @@ const GRAPHQL_ENDPOINT = 'wss://api.new.pabau.com/v1/graphql'
 // })
 
 const httpLink = new HttpLink({
-  uri: 'https://api.new.pabau.com/v1/graphql',
+  uri: 'http://host.docker.internal:8080/v1/graphql',
 })
 
 const wsLink = process.browser

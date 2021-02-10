@@ -144,7 +144,7 @@ type MarketingSource {
   company_id: Int!
   custom_id: Int!
   id: Int!
-  source_name: String!
+  name: String!
 }
 
 input MarketingSourceCreateInput {
@@ -266,10 +266,10 @@ input NullableStringFieldUpdateOperationsInput {
 }
 
 type Query {
-  MarketingSource(id: Int!): MarketingSource
-  MarketingSources(after: MarketingSourceWhereUniqueInput, before: MarketingSourceWhereUniqueInput, first: Int, last: Int, orderBy: [MarketingSourceOrderByInput!], where: MarketingSourceWhereInput): [MarketingSource!]!
   companies(after: CompanyWhereUniqueInput, before: CompanyWhereUniqueInput, first: Int, last: Int, orderBy: [CompanyOrderByInput!], where: CompanyWhereInput): [Company!]!
   company(where: CompanyWhereUniqueInput!): Company
+  listMarketingSources(after: MarketingSourceWhereUniqueInput, before: MarketingSourceWhereUniqueInput, first: Int, last: Int, orderBy: [MarketingSourceOrderByInput!], where: MarketingSourceWhereInput): [MarketingSource!]!
+  retrieveMarketingSource(id: Int!): MarketingSource
 }
 
 enum SortOrder {
