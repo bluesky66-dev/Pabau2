@@ -50,7 +50,10 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
 
   useEffect(() => {
     if (handlingComponentSetting)
-      handlingComponentSetting(activatedComponent, activatedComponentID)
+      handlingComponentSetting(
+        activatedComponent ? activatedComponent : '',
+        activatedComponentID ? activatedComponentID : ''
+      )
   }, [activatedComponentID])
 
   return (
