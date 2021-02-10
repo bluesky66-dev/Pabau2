@@ -7,7 +7,7 @@
     }
 
     .header {
-        padding: 1rem 1.5rem;
+        padding: 0.5rem 1.25rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -60,27 +60,21 @@
                 }
             }
             .addFolder {
-                border: 1px solid #ECEDF0;
                 padding: 14px;
                 border-radius: 5px;
                 margin: 5px 15px 5px 0px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                cursor: pointer;
-                user-select: none;
             }
             
             .upload {
-                border: 1px solid #ECEDF0;
                 padding: 9px 14px;
                 border-radius: 5px;
                 margin: 5px 0px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                cursor: pointer;
-                user-select: none;
                 
                 :global {
                     img {
@@ -96,6 +90,92 @@
         :global {
             .anticon {
                 display: none !important;
+            }
+        }
+
+        .folderPanel {
+            padding: 0px 5px;
+
+            .subFolderDiv {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                border-bottom: 1px solid #eee;
+                padding: 15px 25px;
+
+                :global {
+                    .detailsWithControls {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        flex-wrap: wrap;
+
+                        .checkBoxDiv {
+                            padding-right: 30px;
+                        }
+                        .details {
+                            display: flex;
+                            justify-content: flex-start;
+                            align-items: center;
+                            flex-wrap: wrap;
+
+                            .fileIcon {
+                                margin-right: 15px;
+                            }
+                            .fileDetails {
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: space-between;
+                                align-items: flex-start;
+                                flex-wrap: wrap;
+
+                                div.nameStatus, div.dateSize {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    flex-wrap: wrap;
+
+                                    .seperator {
+                                        border-right: 1px solid #CFCFD7;
+                                        border-width: 1.5px !important;
+                                        min-height: 15px;
+                                        height: auto;
+                                        margin: 0px 10px;
+                                    }
+                                }
+
+                                div.nameStatus {
+                                    span {
+                                        line-height: 10px;
+                                        font-style: normal;
+                                        font-weight: normal;
+                                        font-size: 14px;
+                                        line-height: 25px;
+                                    }
+                                    .name {
+                                        color: #54B2D3;
+                                    }
+                                    .status {
+                                        color: #9292A3;
+                                    }
+                                }
+                                div.dateSize {
+                                    span {
+                                        font-style: normal;
+                                        font-weight: normal;
+                                        font-size: 12px;
+                                        line-height: 15px;
+                                        color: #9292A3;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .subFolderDiv:last-child {
+                border: none !important;
             }
         }
     }
