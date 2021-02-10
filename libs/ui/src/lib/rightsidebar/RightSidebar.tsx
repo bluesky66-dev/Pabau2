@@ -20,11 +20,18 @@ import styles from './RightSidebar.module.less'
 interface P {
   componentName?: string
   display?: boolean
+  handlingComponentSetting?: (
+    componentName?: string,
+    componentID?: string
+  ) => void
 }
 
-const RightSidebar: FC<P> = ({ componentName, display }) => {
+const RightSidebar: FC<P> = ({
+  componentName,
+  display,
+  handlingComponentSetting,
+}) => {
   const [isVisible, setIsVisible] = useState(display)
-
   useEffect(() => {
     setIsVisible(display)
   }, [display])
@@ -37,6 +44,7 @@ const RightSidebar: FC<P> = ({ componentName, display }) => {
   }
   const hideSideBar = () => {
     setIsVisible(false)
+    if (handlingComponentSetting) handlingComponentSetting('', '')
   }
 
   return (
@@ -45,7 +53,7 @@ const RightSidebar: FC<P> = ({ componentName, display }) => {
         className={styles.componentDiv}
         style={isVisible ? showStyle : hideStyle}
       >
-        {componentName === 'Conditions' && (
+        {componentName === 'MedicalConditions' && (
           <Conditions hideSideBar={hideSideBar} />
         )}
         {componentName === 'Dob' && <Dob hideSideBar={hideSideBar} />}

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 import InnerConditions from '../medicalform/InnerConditions'
 import InnerDrawing from '../medicalform/InnerDrawing'
@@ -24,22 +24,35 @@ interface formParams {
 
 interface P {
   draggedFromNames?: formParams[]
+  handlingComponentSetting?: (
+    componentName?: string,
+    componentID?: string
+  ) => void
 }
 
 const MedicalFormEditMain: FC<P> = ({ ...props }) => {
-  const { draggedFromNames } = props
+  const { draggedFromNames, handlingComponentSetting } = props
   const [activatedComponentID, setActivatedComponentID] = useState('')
   const [activatedComponent, setActivatedComponent] = useState('')
+  const clearActivatedComponent = () => {
+    setActivatedComponentID('')
+    setActivatedComponent('')
+  }
+
   const handlingSelectComponent = (isActive, handleId, componentName) => {
     if (isActive) {
       setActivatedComponentID(handleId)
       setActivatedComponent(componentName)
     } else {
-      setActivatedComponentID('')
-      setActivatedComponent('')
+      clearActivatedComponent()
     }
   }
-  console.log('activatedComponent = ', activatedComponent)
+
+  useEffect(() => {
+    if (handlingComponentSetting)
+      handlingComponentSetting(activatedComponent, activatedComponentID)
+  }, [activatedComponentID])
+
   return (
     <Droppable droppableId="MainSide">
       {(provided, snapshot) => (
@@ -112,7 +125,7 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
                         handlingSelectComponent={handlingSelectComponent}
                       />
                     )}
-                    {form.formName === 'CheckBox' && (
+                    {form.formName === 'MultipleChoice' && (
                       <InnerMultiChoice
                         required={false}
                         activate={

@@ -9,7 +9,7 @@ const LeftSidebarBasicCheckBox: FC = () => {
       <LeftSidebarMedicalFormTitle
         iconUrl={multipleChoiceIcon}
         bgcolor="#65CD98"
-        title="Checkboxes"
+        title="Multiple Choice"
         desc="Ask for a several choices"
       />
     </LeftSidebarElement>

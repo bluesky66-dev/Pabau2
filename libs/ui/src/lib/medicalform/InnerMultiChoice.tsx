@@ -33,7 +33,7 @@ const InnerMultiChoice: FC<P> = ({
     <InnerElement
       handleId={handleId}
       activate={activate}
-      componentName="CheckBox"
+      componentName="MultipleChoice"
       handlingSelectComponent={handlingSelectComponent}
     >
       {required && <InnerMedicalFormRequired />}

@@ -162,7 +162,7 @@ const MedicalFormLeftSidebarBasicPanels: FC<P> = ({ ...props }) => {
               ?.filter(
                 (form) =>
                   form.formName === 'SingleChoice' ||
-                  form.formName === 'CheckBox' ||
+                  form.formName === 'MultipleChoice' ||
                   form.formName === 'DropDown'
               )
               .map((form) => {
@@ -172,7 +172,7 @@ const MedicalFormLeftSidebarBasicPanels: FC<P> = ({ ...props }) => {
                     {form.formName === 'SingleChoice' && (
                       <LeftSidebarBasicSingleChoice />
                     )}
-                    {form.formName === 'CheckBox' && (
+                    {form.formName === 'MultipleChoice' && (
                       <LeftSidebarBasicCheckBox />
                     )}
                     {form.formName === 'DropDown' && (
@@ -198,7 +198,7 @@ const MedicalFormLeftSidebarBasicPanels: FC<P> = ({ ...props }) => {
                         {form.formName === 'SingleChoice' && (
                           <LeftSidebarBasicSingleChoice />
                         )}
-                        {form.formName === 'CheckBox' && (
+                        {form.formName === 'MultipleChoice' && (
                           <LeftSidebarBasicCheckBox />
                         )}
                         {form.formName === 'DropDown' && (

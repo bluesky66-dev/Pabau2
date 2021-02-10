@@ -2,6 +2,7 @@ import { Col, Row } from 'antd'
 import React, { FC, useState } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { v4 as uuidv4 } from 'uuid'
+import RightSidebar from '../rightsidebar/RightSidebar'
 import MedicalFormEditLeft from './MedicalFormEditLeft'
 import MedicalFormEditMain from './MedicalFormEditMain'
 
@@ -11,7 +12,7 @@ const formNames = [
   { id: 2, formName: 'LongAnswer' },
   { id: 3, formName: 'TextBlock' },
   { id: 4, formName: 'SingleChoice' },
-  { id: 5, formName: 'CheckBox' },
+  { id: 5, formName: 'MultipleChoice' },
   { id: 6, formName: 'DropDown' },
   { id: 7, formName: 'Drawing' },
   { id: 8, formName: 'Signature' },
@@ -40,6 +41,19 @@ const copy = (source, destination, droppableSource, droppableDestination) => {
 
 const MedicalFormEdit: FC = () => {
   const [draggedFromNames, setDraggedFromNames] = useState([])
+  const [selectComponent, setSelectComponent] = useState('')
+  const [selectComponentId, setSelectComponentId] = useState('')
+  const [displaySettingBar, setDisplaySettingBar] = useState(false)
+  const handlingComponentSetting = (componentName, componentID) => {
+    setDisplaySettingBar(componentName === '' ? false : true)
+    if (componentName !== '' && componentID !== '') {
+      setSelectComponent(componentName)
+      setSelectComponentId(componentID)
+    }
+  }
+  console.log('selectComponentId = ', selectComponentId)
+  // console.log('selectComponent = ', selectComponent)
+
   const onDragEnd = React.useCallback(
     (result) => {
       const { source, destination } = result
@@ -70,7 +84,17 @@ const MedicalFormEdit: FC = () => {
           <MedicalFormEditLeft formNames={formNames} />
         </Col>
         <Col span={12}>
-          <MedicalFormEditMain draggedFromNames={draggedFromNames} />
+          <MedicalFormEditMain
+            draggedFromNames={draggedFromNames}
+            handlingComponentSetting={handlingComponentSetting}
+          />
+        </Col>
+        <Col span={6}>
+          <RightSidebar
+            componentName={selectComponent}
+            display={displaySettingBar}
+            handlingComponentSetting={handlingComponentSetting}
+          />
         </Col>
       </DragDropContext>
     </Row>

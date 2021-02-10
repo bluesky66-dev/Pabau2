@@ -11,7 +11,7 @@ export default {
       control: {
         type: 'select',
         selected: 'heading',
-        options: ['Conditions','Dob','Drawing','Dropdown','Drugs','LabTest','LongAnswer','Heading','MultipleChoice','ShortAnswer','Signature','SingleChoice','TravelDestination','VaccineHistory','VaccineScheduler'],
+        options: ['MedicalConditions','Dob','Drawing','Dropdown','Drugs','LabTest','LongAnswer','Heading','MultipleChoice','ShortAnswer','Signature','SingleChoice','TravelDestination','VaccineHistory','VaccineScheduler'],
       },
     },
     display: {
