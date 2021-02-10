@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import BusinessLocation from './BusinessLocation'
+import UpgradeModal from './UpgradeModal'
 
-describe('BusinessLocation', () => {
+describe('UpgradeModal', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<BusinessLocation />)
+    const { baseElement } = render(<UpgradeModal />)
     expect(baseElement).toBeTruthy()
   })
 })

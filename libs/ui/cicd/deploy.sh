@@ -50,21 +50,18 @@ cp "${APP_TYPE}/${APP_NAME}/vercel.json" "${build_output_path}/"
 
 if [ -z "${BITBUCKET_PR_ID}" ]; then
   echo "===== Processing type COMMIT ====="
-  OUTPUT=$(cd "${build_output_path}/" && vercel -c -C --token "${VERCEL_TOKEN}" -A ./vercel.json --prod)
+  OUTPUT=$(cd "${build_output_path}/" && vercel -c -C --token "${VERCEL_TOKEN}" --scope pabau2 -A ./vercel.json --prod)
   echo "errorlevel: $?"
   echo "Output from vercel:"
   echo "${OUTPUT}"
   echo "--"
   LAST_LINE=$(echo "${OUTPUT}" | tail -n1)
   echo "last line: ${LAST_LINE}"
+  echo "${LAST_LINE}" > /tmp/bot_url_ui.txt
 
   message_body=''
   read_heredoc message_body <<HEREDOC
-*New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}
-
-${LAST_LINE}
-
-${LAST_COMMIT_LOG}
+${APP_NAME}: ${LAST_LINE}
 HEREDOC
   echo "${message_body}" >> /tmp/bot_message.txt
 
@@ -78,7 +75,7 @@ HEREDOC
 
 else
   echo "===== Processing type PR ====="
-  OUTPUT=$(cd "${build_output_path}/" && vercel -c -C --token "${VERCEL_TOKEN}" -T pabau2 -A ./vercel.json)
+  OUTPUT=$(cd "${build_output_path}/" && vercel -c -C --token "${VERCEL_TOKEN}" --scope pabau2 -A ./vercel.json)
   echo "errorlevel: $?"
   echo "Output from vercel:"
   echo "${OUTPUT}"
