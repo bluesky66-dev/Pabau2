@@ -1,9 +1,13 @@
 import React, { FC, useRef } from 'react'
 import styles from './Documents.module.less'
 import { Button, Checkbox, Accordion, DotButton } from '@pabau/ui'
-import FolderIcon from './Folder.svg'
-import UploadIcon from './Upload.svg'
 import FileIcon from './FileIcon.svg'
+import {
+  DeleteOutlined,
+  FileOutlined,
+  DownloadOutlined,
+  FolderAddOutlined,
+} from '@ant-design/icons'
 import { Select } from 'antd'
 const { Option } = Select
 
@@ -38,15 +42,10 @@ export const Documents: FC<DocumentsProps> = ({
     }
   }
 
-  const DotMenuIcon = (
-    <div>
-      <img src={FileIcon} alt="Icon" />
-    </div>
-  )
   const DotMenuOptions = [
     {
       key: 1,
-      icon: DotMenuIcon,
+      icon: <FileOutlined />,
       label: 'Rename',
       onClick: () => {
         console.log('RENAME CLICKED')
@@ -54,7 +53,7 @@ export const Documents: FC<DocumentsProps> = ({
     },
     {
       key: 2,
-      icon: DotMenuIcon,
+      icon: <DeleteOutlined />,
       label: 'Delete',
       onClick: () => {
         console.log('DELETE CLICKED')
@@ -82,14 +81,22 @@ export const Documents: FC<DocumentsProps> = ({
             </div>
           </div>
           <div>
-            <Button type="default" size="large" className={styles.addFolder}>
-              <img src={FolderIcon} alt="Folder" width="100%" />
-            </Button>
+            <Button
+              type="default"
+              size="large"
+              className={styles.addFolder}
+              icon={<FolderAddOutlined />}
+            ></Button>
           </div>
           <div onClick={chooseFile}>
             <input type="file" style={{ display: 'none' }} ref={fileInputRef} />
-            <Button type="default" size="large" className={styles.upload}>
-              <img src={UploadIcon} alt="Upload" width="100%" />
+            <Button
+              type="default"
+              size="large"
+              className={styles.upload}
+              icon={<DownloadOutlined />}
+            >
+              {/* <img src={UploadIcon} alt="Upload" width="100%" /> */}
               <div>Upload</div>
             </Button>
           </div>
@@ -140,7 +147,9 @@ export const Documents: FC<DocumentsProps> = ({
                           </div>
                         </div>
                         <div className="dottedMenu">
-                          <DotButton menuList={DotMenuOptions} />
+                          <div>
+                            <DotButton menuList={DotMenuOptions} />
+                          </div>
                         </div>
                       </div>
                     ))}
