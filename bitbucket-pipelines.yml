@@ -111,10 +111,12 @@ pipelines:
             - /usr/bin/time -v yarn affected --base=HEAD~2 --head=HEAD~1 --target=deploy --prod
 
             - npm i -g ts-node && ts-node tools/cicd/PrintChangedUrls.ts "HEAD~2" "$(cat /tmp/bot_url_web.txt)" "$(cat /tmp/bot_url_ui.txt)" >> /tmp/bot_message.txt
+            - echo "New Version Staged for Production v${PACKAGE_JSON_VERSION}\n${LAST_COMMIT_LOG}\n" > /tmp/bot_message2.txt
+            - cat /tmp/bot_message.txt >> /tmp/bot_message2.txt
 
             # Post to Slack
             - |
-              jq --arg var "$(cat /tmp/bot_message.txt)" '.blocks[0].text.text = $var' tools/cicd/slack_notification.json | curl -0 "${SLACK_HOOK_URL}" \
+              jq --arg var "$(cat /tmp/bot_message2.txt)" '.blocks[0].text.text = $var' tools/cicd/slack_notification.json | curl -0 "${SLACK_HOOK_URL}" \
               -H "Expect:" \
               -H 'Content-Type: application/json; charset=utf-8' \
               --data-binary @-

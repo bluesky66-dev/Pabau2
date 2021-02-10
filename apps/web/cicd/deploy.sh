@@ -62,10 +62,6 @@ if [ -z "${BITBUCKET_PR_ID}" ]; then
   message_body=''
   read_heredoc message_body <<HEREDOC
 ${APP_NAME}: ${LAST_LINE}
-
-(*New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION})
-
-(commit log: ${LAST_COMMIT_LOG})
 HEREDOC
   echo "${message_body}" >> /tmp/bot_message.txt
 
