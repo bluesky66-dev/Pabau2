@@ -8,10 +8,29 @@ import { Select } from 'antd'
 
 const { Option } = Select
 
-/* eslint-disable-next-line */
-export interface DocumentsProps {}
+interface files {
+  key: string
+  status: string
+  name: string
+  addedByDate: string
+  size: string
+}
+interface folders {
+  name: string
+  files: files[]
+}
 
-export const Documents: FC<DocumentsProps> = ({ ...props }) => {
+/* eslint-disable-next-line */
+export interface DocumentsProps {
+  headingLabel: string
+  folders: folders[]
+}
+
+export const Documents: FC<DocumentsProps> = ({
+  headingLabel,
+  folders,
+  ...rest
+}) => {
   const fileInputRef = useRef(null)
 
   const DotMenuIcon = (
@@ -42,7 +61,7 @@ export const Documents: FC<DocumentsProps> = ({ ...props }) => {
     <div className={styles.documentsMain}>
       <div className={styles.header}>
         <div className={styles.heading}>
-          <h3>Documents</h3>
+          <h3>{headingLabel}</h3>
         </div>
         <div className={styles.control}>
           <div className={styles.sortBy}>
@@ -78,44 +97,55 @@ export const Documents: FC<DocumentsProps> = ({ ...props }) => {
       <div className={styles.seperator}></div>
       <div className={styles.content}>
         <div className={styles.folderPanel}>
-          <div>
-            <Accordion headerLabel="Resumes and Applications (0)">
-              <div className={styles.subFolderDiv}>
-                <div className="detailsWithControls">
-                  <div className="checkBoxDiv">
-                    <Checkbox
-                      className="checkBox"
-                      onChange={(res) => {
-                        console.log('RES: ', res)
-                      }}
-                    />
-                  </div>
-                  <div className="details">
-                    <div className="fileIcon">
-                      <img src={FileIcon} alt="FileIcon" width="100%" />
-                    </div>
-                    <div className="fileDetails">
-                      <div className="nameStatus">
-                        <span className="name">Company Handbook.pdf</span>
-                        <div className="seperator"></div>
-                        <span className="status">Shared</span>
+          {folders &&
+            folders.length &&
+            folders.map((folder, index) => (
+              <div key={`folder${index}`}>
+                <Accordion headerLabel={folder.name}>
+                  {folder.files &&
+                    folder.files.length &&
+                    folder.files.map((file, ind) => (
+                      <div
+                        className={styles.subFolderDiv}
+                        key={`file${ind * index}`}
+                      >
+                        <div className="detailsWithControls">
+                          <div className="checkBoxDiv">
+                            <Checkbox
+                              className="checkBox"
+                              onChange={(res) => {
+                                console.log('RES: ', res)
+                              }}
+                            />
+                          </div>
+                          <div className="details">
+                            <div className="fileIcon">
+                              <img src={FileIcon} alt="FileIcon" width="100%" />
+                            </div>
+                            <div className="fileDetails">
+                              <div className="nameStatus">
+                                <span className="name">{file.name}</span>
+                                <div className="seperator"></div>
+                                <span className="status">{file.status}</span>
+                              </div>
+                              <div className="dateSize">
+                                <span className="date">{file.addedByDate}</span>
+                                <div className="seperator"></div>
+                                <span className="size">
+                                  {file.size && `(${file.size})`}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="dottedMenu">
+                          <DotButton menuList={DotMenuOptions} />
+                        </div>
                       </div>
-                      <div className="dateSize">
-                        <span className="date">
-                          Added 07/09/2020 by Charlotte Abbott
-                        </span>
-                        <div className="seperator"></div>
-                        <span className="size">(25.5 MB)</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="dottedMenu">
-                  <DotButton menuList={DotMenuOptions} />
-                </div>
+                    ))}
+                </Accordion>
               </div>
-            </Accordion>
-          </div>
+            ))}
         </div>
       </div>
     </div>
