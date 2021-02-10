@@ -31,15 +31,13 @@ export const Accordion: FC<AccordionProps> = ({ headerLabel, ...rest }) => {
     )
   }
 
-  const callback = () => {
-    setAccordionState(!accordionState)
-  }
-
   return (
     <div className={styles.mainCollapseDiv}>
       <Collapse
         defaultActiveKey={[]}
-        onChange={callback}
+        onChange={() => {
+          setAccordionState((accordionState) => !accordionState)
+        }}
         expandIcon={customArrow}
         ghost={true}
       >
@@ -55,7 +53,7 @@ export const Accordion: FC<AccordionProps> = ({ headerLabel, ...rest }) => {
               <div className={styles.headerText}>{headerLabel}</div>
             </div>
           }
-          key="1"
+          key="true"
         >
           <div className={styles.panel}>{rest.children}</div>
         </Panel>

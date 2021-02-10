@@ -5,25 +5,24 @@ import FolderIcon from './Folder.svg'
 import UploadIcon from './Upload.svg'
 import FileIcon from './FileIcon.svg'
 import { Select } from 'antd'
-
 const { Option } = Select
 
-interface files {
+interface Files {
   key: string
   status: string
   name: string
   addedByDate: string
   size: string
 }
-interface folders {
+interface Folders {
   name: string
-  files: files[]
+  files: Files[]
 }
 
 /* eslint-disable-next-line */
 export interface DocumentsProps {
   headingLabel: string
-  folders: folders[]
+  folders: Folders[]
 }
 
 export const Documents: FC<DocumentsProps> = ({
@@ -31,14 +30,11 @@ export const Documents: FC<DocumentsProps> = ({
   folders,
   ...rest
 }) => {
-  const fileInputRef = useRef(null)
+  const fileInputRef = useRef<HTMLDivElement>(null)
 
   const chooseFile = () => {
-    if (fileInputRef && fileInputRef.current) {
-      const target = fileInputRef.current
-      if (target) {
-        console.log('CLICKED TO UPLOAD')
-      }
+    if (fileInputRef?.current) {
+      fileInputRef.current.click()
     }
   }
 
