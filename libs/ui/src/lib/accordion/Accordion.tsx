@@ -20,7 +20,12 @@ export const Accordion: FC<AccordionProps> = ({ headerLabel, ...rest }) => {
   const customArrow = () => {
     return (
       <div>
-        <Button type="default" size="large" shape="circle" className={styles.arrowIcon}>
+        <Button
+          type="default"
+          size="large"
+          shape="circle"
+          className={styles.arrowIcon}
+        >
           <img
             src={accordionState ? UpArrowIcon : DownArrowIcon}
             alt="CaretDown"
