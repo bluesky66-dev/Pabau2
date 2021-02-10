@@ -1,7 +1,7 @@
 import { Col, Row } from 'antd'
 import React, { FC, useState } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
-import uuid from 'react-uuid'
+import { v4 as uuidv4 } from 'uuid'
 import MedicalFormEditLeft from './MedicalFormEditLeft'
 import MedicalFormEditMain from './MedicalFormEditMain'
 
@@ -33,14 +33,13 @@ const copy = (source, destination, droppableSource, droppableDestination) => {
   const item = source[droppableSource.index]
   destination.splice(droppableDestination.index, 0, {
     ...item,
-    id: uuid(),
+    id: uuidv4(),
   })
   return destination
 }
 
 const MedicalFormEdit: FC = () => {
   const [draggedFromNames, setDraggedFromNames] = useState([])
-
   const onDragEnd = React.useCallback(
     (result) => {
       const { source, destination } = result

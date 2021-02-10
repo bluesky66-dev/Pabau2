@@ -31,8 +31,6 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
   const [activatedComponentID, setActivatedComponentID] = useState('')
   const [activatedComponent, setActivatedComponent] = useState('')
   const handlingSelectComponent = (isActive, handleId, componentName) => {
-    console.log('handleId = ', handleId)
-    console.log('componentName = ', componentName)
     if (isActive) {
       setActivatedComponentID(handleId)
       setActivatedComponent(componentName)
@@ -41,7 +39,7 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
       setActivatedComponent('')
     }
   }
-
+  console.log('activatedComponent = ', activatedComponent)
   return (
     <Droppable droppableId="MainSide">
       {(provided, snapshot) => (
