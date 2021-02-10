@@ -54,7 +54,7 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
         activatedComponent ? activatedComponent : '',
         activatedComponentID ? activatedComponentID : ''
       )
-  }, [activatedComponentID])
+  }, [activatedComponent, activatedComponentID])
 
   return (
     <Droppable droppableId="MainSide">
