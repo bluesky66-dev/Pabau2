@@ -31,7 +31,16 @@ export const Documents: FC<DocumentsProps> = ({
   folders,
   ...rest
 }) => {
-  const fileInputRef = useRef(null)
+  const fileInputRef = useRef()
+
+  const chooseFile = () => {
+    if (fileInputRef && fileInputRef.current) {
+      const target = fileInputRef.current
+      if (target) {
+        target.click()
+      }
+    }
+  }
 
   const DotMenuIcon = (
     <div>
@@ -81,11 +90,7 @@ export const Documents: FC<DocumentsProps> = ({
               <img src={FolderIcon} alt="Folder" width="100%" />
             </Button>
           </div>
-          <div
-            onClick={() => {
-              fileInputRef.current.click()
-            }}
-          >
+          <div onClick={chooseFile}>
             <input type="file" style={{ display: 'none' }} ref={fileInputRef} />
             <Button type="default" size="large" className={styles.upload}>
               <img src={UploadIcon} alt="Upload" width="100%" />
