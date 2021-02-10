@@ -31,6 +31,7 @@ export const NotificationDrawer: FC<P> = ({
   closeDrawer,
   notifications = [],
 }) => {
+  console.log('notifications', notifications)
   const [notificationDrawer, setNotificationDrawer] = useState(openDrawer)
   const [notifyTab, setNotifyTab] = useState('Activity')
   const [notificationData, setNotificationData] = useState<NotificationData[]>(
@@ -65,10 +66,10 @@ export const NotificationDrawer: FC<P> = ({
     closeDrawer?.()
   }
 
-  const removeNotification = (index, objectKey) => {
+  const removeSingleNotification = (index, dayIndex, objectKey) => {
     const selectedObject = notificationData[index]
-    delete selectedObject[objectKey]
-    if (Object.keys(selectedObject).length === 0) {
+    selectedObject[objectKey].splice(dayIndex, 1)
+    if (selectedObject[objectKey].length === 0) {
       notificationData.splice(index, 1)
       setNotificationData([...notificationData])
     } else {
@@ -81,6 +82,12 @@ export const NotificationDrawer: FC<P> = ({
       setNotificationData([...newNotificationData])
     }
   }
+
+  let lengths = 0
+  notificationData.forEach((item) => {
+    const length = Object.values(item)[0] ? Object.values(item)[0].length : 0
+    lengths = lengths + length
+  })
 
   return (
     <Drawer
@@ -134,11 +141,7 @@ export const NotificationDrawer: FC<P> = ({
                     styles.todayTextTopSpace
                   )}
                 >
-                  <h2>{notification}</h2>
-                  <CloseOutlined
-                    className={styles.searchIconSize}
-                    onClick={(e) => removeNotification(index, notification)}
-                  />
+                  <h2>{notify[notification].length > 0 && notification}</h2>
                 </div>
                 {notify[notification].map((dayNotify, dayIndex) => {
                   return (
@@ -159,6 +162,16 @@ export const NotificationDrawer: FC<P> = ({
                               )}
                             >
                               {dayNotify.notificationTime}
+                              <CloseOutlined
+                                className={styles.notificationClearIcon}
+                                onClick={() =>
+                                  removeSingleNotification(
+                                    index,
+                                    dayIndex,
+                                    notification
+                                  )
+                                }
+                              />
                             </p>
                           </div>
                         </div>
@@ -182,7 +195,7 @@ export const NotificationDrawer: FC<P> = ({
         })}
 
       {Array.isArray(notificationData) &&
-        notificationData.length === 0 &&
+        (notificationData.length === 0 || lengths === 0) &&
         notifyTab === 'Activity' && (
           <div className={styles.notificationEmpty}>
             <EmptySVG />
