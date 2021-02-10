@@ -16,7 +16,7 @@ export const Documents: FC<DocumentsProps> = ({ ...props }) => {
 
   const DotMenuIcon = (
     <div>
-      <img src={FileIcon} />
+      <img src={FileIcon} alt="Icon" />
     </div>
   )
   const DotMenuOptions = [
@@ -24,13 +24,17 @@ export const Documents: FC<DocumentsProps> = ({ ...props }) => {
       key: 1,
       icon: DotMenuIcon,
       label: 'Rename',
-      onClick: () => {},
+      onClick: () => {
+        console.log('RENAME CLICKED')
+      },
     },
     {
       key: 2,
       icon: DotMenuIcon,
       label: 'Delete',
-      onClick: () => {},
+      onClick: () => {
+        console.log('DELETE CLICKED')
+      },
     },
   ]
 
