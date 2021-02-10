@@ -48,12 +48,16 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
     }
   }
 
-  useEffect(() => {
+  const handlingSelectComponent1 = (
+    activatedComponent,
+    activatedComponentID
+  ) => {
     if (handlingComponentSetting)
-      handlingComponentSetting(
-        activatedComponent ? activatedComponent : '',
-        activatedComponentID ? activatedComponentID : ''
-      )
+      handlingComponentSetting(activatedComponent, activatedComponentID)
+  }
+
+  useEffect(() => {
+    handlingSelectComponent1(activatedComponent, activatedComponentID)
   }, [activatedComponent, activatedComponentID])
 
   return (
