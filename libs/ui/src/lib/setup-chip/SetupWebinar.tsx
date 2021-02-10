@@ -8,6 +8,12 @@ import {
   CloseOutlined,
 } from '@ant-design/icons'
 
+enum Difficulty {
+  easy = 'Easy',
+  medium = 'Medium',
+  hard = 'Hard',
+}
+
 export interface WebinarProps {
   id?: string
   title?: string
@@ -18,6 +24,9 @@ export interface WebinarProps {
   isJoin?: boolean
   onClick?: (type: string, id?: string) => void
   isYourSchedule?: boolean
+  category?: string
+  length?: number
+  difficulty?: Difficulty
 }
 
 export const Webinar: FC<WebinarProps> = ({

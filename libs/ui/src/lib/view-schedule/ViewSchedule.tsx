@@ -1,11 +1,12 @@
 import React, { FC, useState } from 'react'
-import { FilterOutlined } from '@ant-design/icons'
 import {
   FullScreenReportModal,
   FullScreenReportModalProps,
   WebinarProps,
   Webinar,
 } from '@pabau/ui'
+
+import { Filter } from './Filter'
 
 import styles from './ViewSchedule.module.less'
 import classNames from 'classnames'
@@ -29,6 +30,17 @@ export const ViewScheduleModal: FC<ViewScheduleProps> = ({
   discoverAndLearn,
 }) => {
   const [scheduleData, setSchedule] = useState(schedule)
+  const [filteredWebinars, setFilteredWebinars] = useState<
+    discoverAndLearnProps[] | undefined
+  >(discoverAndLearn)
+
+  const handleClear = (): void => {
+    setFilteredWebinars(discoverAndLearn)
+  }
+
+  const onFilter = (webinar: discoverAndLearnProps[] | undefined): void => {
+    setFilteredWebinars(webinar)
+  }
 
   const onCancelSchedule = (type: string, id?: string) => {
     if (type === 'cancel') {
@@ -46,7 +58,7 @@ export const ViewScheduleModal: FC<ViewScheduleProps> = ({
     }
   }
 
-  const webinarContent = (webinar: discoverAndLearnProps[]) => {
+  const webinarContent = (webinar: discoverAndLearnProps[] | undefined) => {
     return (
       <div>
         {webinar?.map((thread, index) => {
@@ -64,6 +76,7 @@ export const ViewScheduleModal: FC<ViewScheduleProps> = ({
                   thread.webinar.map((data) => {
                     return (
                       <div className={styles.webBox} key={data.id}>
+                        <p>{data.length}</p>
                         <Webinar {...data} onClick={onCancelSchedule} />
                       </div>
                     )
@@ -75,7 +88,9 @@ export const ViewScheduleModal: FC<ViewScheduleProps> = ({
       </div>
     )
   }
+
   const viewScheduleContent = () => {
+    console.log('Filtered data', filteredWebinars)
     return (
       <div className={styles.viewScheduleWrapper}>
         <div className={styles.scheduleContent}>
@@ -91,11 +106,15 @@ export const ViewScheduleModal: FC<ViewScheduleProps> = ({
         <div className={styles.scheduleContent}>
           <div className={styles.filterWrap}>
             <h2>Discover & Learn</h2>
-            <span className={styles.filterBtn}>
-              <FilterOutlined /> Filter
-            </span>
+            <Filter
+              webinarList={discoverAndLearn}
+              handleShowResult={onFilter}
+              onClear={handleClear}
+            />
           </div>
-          {discoverAndLearn?.length > 0 && webinarContent(discoverAndLearn)}
+          {filteredWebinars &&
+            filteredWebinars?.length > 0 &&
+            webinarContent(filteredWebinars)}
         </div>
       </div>
     )
