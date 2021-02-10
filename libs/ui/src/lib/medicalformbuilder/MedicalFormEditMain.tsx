@@ -24,11 +24,11 @@ interface formParams {
 
 interface P {
   draggedFromNames?: formParams[]
-  handlingComponentSetting?: (componentName?: string) => void
+  handlingComponentSetting1?: (componentName?: string) => void
 }
 
 const MedicalFormEditMain: FC<P> = ({ ...props }) => {
-  const { draggedFromNames, handlingComponentSetting } = props
+  const { draggedFromNames, handlingComponentSetting1 } = props
   const [activatedComponentID, setActivatedComponentID] = useState('')
   const [activatedComponent, setActivatedComponent] = useState('')
   const clearActivatedComponent = () => {
@@ -46,7 +46,7 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
   }
 
   useEffect(() => {
-    if (handlingComponentSetting) handlingComponentSetting(activatedComponent)
+    if (handlingComponentSetting1) handlingComponentSetting1(activatedComponent)
   }, [activatedComponent])
 
   return (
