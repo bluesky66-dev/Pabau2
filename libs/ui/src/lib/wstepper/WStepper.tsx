@@ -41,6 +41,7 @@ export const WStepper: React.FC<WStepperProps> = ({
         header={headerTxt}
         active={index}
         allSteps={data.length}
+        stepperData={data}
       >
         {children}
       </Wizard>

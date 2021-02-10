@@ -1,5 +1,11 @@
 import React, { useState } from 'react'
-import { Layout, WStepper, StepperInterface } from '@pabau/ui'
+import {
+  Layout,
+  WStepper,
+  StepperInterface,
+  BasicModal as Modal,
+  ButtonTypes,
+} from '@pabau/ui'
 import styles from './lead-forms.module.less'
 import {
   LeadSettings,
@@ -7,15 +13,19 @@ import {
   LeadTesting,
   LeadResult,
 } from './lead-capture/index'
+import LeadCustomizeForm from './lead-capture/lead-forms/LeadCustomizeForm'
 import { FlagOutlined, HomeOutlined, ToolOutlined } from '@ant-design/icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from '@fortawesome/free-solid-svg-icons'
 
 export function LeadForms() {
-  const allSteps = ['Basic', 'Configure(API)', 'Testing(API)', 'Result']
+  const allAPISteps = ['Basic', 'Configure(API)', 'Testing(API)', 'Result']
+  const allFormSteps = ['Basic', 'Customize Form', 'Test Form', 'Result']
+  const [activeStepper, setActiveStepper] = useState('API')
   const [activeStep, setActiveStep] = useState(0)
+  const [openPabauLeadModal, setPabauLeadModal] = useState(false)
 
-  const data: StepperInterface[] = [
+  const apiStepper: StepperInterface[] = [
     {
       step: 1,
       name: 'Basic',
@@ -50,21 +60,97 @@ export function LeadForms() {
       index: 3,
     },
   ]
+
+  const formStepper: StepperInterface[] = [
+    {
+      step: 1,
+      name: 'Basic',
+      imgPath: <HomeOutlined />,
+      isActive: true,
+      index: 0,
+    },
+    {
+      step: 2,
+      name: 'Customize Form',
+      imgPath: (
+        <FontAwesomeIcon
+          icon={Icons.faPencilAlt}
+          style={{ fontSize: '12px' }}
+        />
+      ),
+      isActive: false,
+      index: 1,
+    },
+    {
+      step: 3,
+      name: 'Test Form',
+      imgPath: <ToolOutlined />,
+      isActive: false,
+      index: 2,
+    },
+    {
+      step: 4,
+      name: 'Result',
+      imgPath: <FlagOutlined />,
+      isActive: false,
+      index: 3,
+    },
+  ]
+
+  const setActiveStepperForLead = (type) => {
+    setActiveStepper(type)
+  }
   return (
     <Layout active={'setup'}>
       <div className={styles.cardWrapper}>
         <WStepper
-          data={data}
+          data={activeStepper === 'API' ? apiStepper : formStepper}
           active={activeStep}
           breadcrumbTxt="Setup"
           headerTxt="Lead Capture"
-          onActiveStepChange={(step) => setActiveStep(step)}
+          onActiveStepChange={(step) => {
+            if (step === 1 && activeStepper === 'API')
+              setPabauLeadModal((e) => !e)
+            else setActiveStep(step)
+          }}
         >
-          {allSteps[activeStep] === 'Basic' && <LeadSettings />}
-          {allSteps[activeStep] === 'Configure(API)' && <LeadIntegration />}
-          {allSteps[activeStep] === 'Testing(API)' && <LeadTesting />}
-          {allSteps[activeStep] === 'Result' && <LeadResult />}
+          {allAPISteps[activeStep] === 'Basic' && (
+            <LeadSettings captureLeadStepChange={setActiveStepperForLead} />
+          )}
+          {activeStepper === 'API' ? (
+            <>
+              {allAPISteps[activeStep] === 'Configure(API)' && (
+                <LeadIntegration />
+              )}
+              {allAPISteps[activeStep] === 'Testing(API)' && <LeadTesting />}
+              {allAPISteps[activeStep] === 'Result' && <LeadResult />}
+            </>
+          ) : (
+            allFormSteps[activeStep] === 'Customize Form' && (
+              <LeadCustomizeForm />
+            )
+          )}
         </WStepper>
+        <Modal
+          modalWidth={682}
+          centered={true}
+          onOk={() => {
+            setActiveStep(1)
+            setPabauLeadModal((e) => !e)
+          }}
+          closable={true}
+          onCancel={() => setPabauLeadModal((e) => !e)}
+          visible={openPabauLeadModal}
+          title={'Pabau Leads'}
+          newButtonText={'Main page'}
+          btnType={ButtonTypes.default}
+        >
+          <p>
+            This process is for advanced users and should be handed over to a
+            web developer. Please reach out to your web team in order for them
+            to follow this guide on how to implement Pabau Leads.
+          </p>
+        </Modal>
       </div>
     </Layout>
   )

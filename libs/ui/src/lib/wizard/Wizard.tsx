@@ -3,7 +3,7 @@ import Stepper from '../stepper/Stepper'
 import styels from './Wizard.module.less'
 import { Button, Breadcrumb } from '@pabau/ui'
 import { Typography } from 'antd'
-import { data } from './mock'
+import { StepperInterface } from './mock'
 
 const { Title } = Typography
 
@@ -14,6 +14,7 @@ interface WizardProps {
   allSteps: number
   breadcrumb: string
   header: string
+  stepperData: StepperInterface[]
 }
 
 export const Wizard: React.FC<WizardProps> = ({
@@ -23,6 +24,7 @@ export const Wizard: React.FC<WizardProps> = ({
   allSteps,
   breadcrumb,
   header,
+  stepperData,
   children,
 }) => {
   function prevClick() {
@@ -41,7 +43,7 @@ export const Wizard: React.FC<WizardProps> = ({
       </div>
 
       <hr className={styels.line} />
-      <Stepper datasource={data} step={active} />
+      <Stepper datasource={stepperData} step={active} />
       <hr className={styels.bottomline} />
       {children}
 

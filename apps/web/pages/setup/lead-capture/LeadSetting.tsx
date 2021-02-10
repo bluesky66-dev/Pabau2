@@ -3,12 +3,22 @@ import styles from './lead-setting.module.less'
 import classNames from 'classnames'
 import {
   ApiOutlined,
-  CheckCircleOutlined,
+  CheckCircleFilled,
   ProfileOutlined,
 } from '@ant-design/icons'
+interface LeadSettingsInterface {
+  captureLeadStepChange: (step: string) => void
+}
 
-export function LeadSettings() {
+export const LeadSettings: React.FC<LeadSettingsInterface> = ({
+  captureLeadStepChange,
+}) => {
   const [captureLeadStep, setCaptureLeadStep] = useState('API')
+
+  const updateCaptureLeadStep = (type) => {
+    setCaptureLeadStep(type)
+    captureLeadStepChange(type)
+  }
   return (
     <div className={styles.leadSettingContent}>
       <div className={styles.headingStyle}>
@@ -27,14 +37,14 @@ export function LeadSettings() {
               styles.leadBasisForm,
               captureLeadStep === 'API' && styles.leadCaptureSelected
             )}
-            onClick={() => setCaptureLeadStep('API')}
+            onClick={() => updateCaptureLeadStep('API')}
           >
             <div className={styles.iconAlignBox}>
               <div>
                 <ApiOutlined className={styles.leadIconStyle} />
               </div>
               <div className={styles.iconNone}>
-                <CheckCircleOutlined className={styles.checkIconStyle} />
+                <CheckCircleFilled className={styles.checkIconStyle} />
               </div>
             </div>
             <div className={styles.leadTextChild}>
@@ -48,14 +58,14 @@ export function LeadSettings() {
               styles.rightBox,
               captureLeadStep === 'Form' && styles.leadCaptureSelected
             )}
-            onClick={() => setCaptureLeadStep('Form')}
+            onClick={() => updateCaptureLeadStep('Form')}
           >
             <div className={styles.iconAlignBox}>
               <div>
                 <ProfileOutlined className={styles.leadIconStyle} />
               </div>
               <div className={styles.iconNone}>
-                <CheckCircleOutlined className={styles.checkIconStyle} />
+                <CheckCircleFilled className={styles.checkIconStyle} />
               </div>
             </div>
             <div className={styles.leadTextChild}>
