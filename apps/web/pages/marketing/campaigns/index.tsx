@@ -6,7 +6,7 @@ import CrudLayout from '../../../components/CrudLayout/CrudLayout'
 
 const LIST_QUERY = gql`
   query marketing_campaigns {
-    listMarketingSources {
+    marketingSources {
       __typename
       id
       name
@@ -15,7 +15,7 @@ const LIST_QUERY = gql`
 `
 const LIST_AGGREGATE_QUERY = gql`
   query marketing_campaign_aggregate {
-    listMarketingSources {
+    marketingSources {
       aggregate {
         count
       }

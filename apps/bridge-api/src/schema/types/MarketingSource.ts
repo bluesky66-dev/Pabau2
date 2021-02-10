@@ -19,7 +19,7 @@ export const MarketingSource = objectType({
 export const MarketingSourceQuery = extendType({
   type: 'Query',
   definition(t ) {
-    t.field("retrieveMarketingSource", {
+    t.field("marketingSource", {
       type: MarketingSource,
       args: {
         id: nonNull(intArg())
@@ -38,10 +38,11 @@ export const MarketingSourceQuery = extendType({
       }
     })
     t.crud.marketingSources({
-      alias: 'listMarketingSources',
+      alias: 'marketingSources',
       pagination: true,
       filtering: true,
-      ordering: true
+      ordering: true,
+      aggregate: true
     });
   }
 })

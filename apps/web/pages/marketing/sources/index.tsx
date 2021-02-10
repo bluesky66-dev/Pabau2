@@ -14,13 +14,12 @@ const LIST_QUERY = gql`
     marketing_source(
       offset: $offset
       limit: $limit
-      order_by: { created_at: desc }
-      where: { is_active: { _eq: $isActive }, _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }] }
+      where: { public: { _eq: $isActive }, _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }] }
     ) {
       __typename
       id
       name
-      is_active
+      public
     }
   }
 `
