@@ -1,17 +1,16 @@
 import React, { FC, useRef } from 'react'
-import { Select } from 'antd'
-const { Option } = Select
-
 import styles from './Documents.module.less'
 import FolderIcon from './Folder.svg'
 import UploadIcon from './Upload.svg'
+import { Select } from 'antd'
+
+const { Option } = Select
 
 /* eslint-disable-next-line */
 export interface DocumentsProps {}
 
 export const Documents: FC<DocumentsProps> = ({ ...props }) => {
   const fileInputRef = useRef(null)
-
 
   return (
     <div className={styles.documentsMain}>
@@ -49,9 +48,7 @@ export const Documents: FC<DocumentsProps> = ({ ...props }) => {
       </div>
       <div className={styles.seperator}></div>
       <div className={styles.content}>
-        <div className={styles.folderPanel}>
-
-        </div>
+        <div className={styles.folderPanel}></div>
       </div>
     </div>
   )
