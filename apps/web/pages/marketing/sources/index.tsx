@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { gql } from '@apollo/client'
 import { NextPage } from 'next'
 import React from 'react'
@@ -6,19 +5,21 @@ import CrudLayout from '../../../components/CrudLayout/CrudLayout'
 
 const LIST_QUERY = gql`
   query marketing_sources(
-    $isActive: Boolean = true
-    $searchTerm: String = ""
+    $isActive: Int
+    $searchTerm: String
     $offset: Int
     $limit: Int
   ) {
-    marketing_source(
-      offset: $offset
-      limit: $limit
-      where: { public: { _eq: $isActive }, _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }] }
+    marketingSources(
+      first: $offset
+      last: $limit
+      where: {
+        public: { equals: $isActive }
+        OR: [{ AND: [{ source_name: { contains: $searchTerm } }] }]
+      }
     ) {
-      __typename
       id
-      name
+      source_name
       public
     }
   }
@@ -29,7 +30,10 @@ const LIST_AGGREGATE_QUERY = gql`
     $searchTerm: String = ""
   ) {
     marketing_source_aggregate(
-      where: { is_active: { _eq: $isActive }, _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }] }
+      where: {
+        public: { _eq: $isActive }
+        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
+      }
     ) {
       aggregate {
         count
@@ -38,8 +42,8 @@ const LIST_AGGREGATE_QUERY = gql`
   }
 `
 const DELETE_MUTATION = gql`
-  mutation delete_marketing_source($id: uuid!) {
-    delete_marketing_source_by_pk(id: $id) {
+  mutation delete_marketing_source($id: Int) {
+    deleteOneMarketingSource(where: { id: $id }) {
       __typename
       id
     }
@@ -47,9 +51,7 @@ const DELETE_MUTATION = gql`
 `
 const ADD_MUTATION = gql`
   mutation add_marketing_source($name: String!, $is_active: Boolean) {
-    insert_marketing_source_one(
-      object: { name: $name, is_active: $is_active }
-    ) {
+    insert_marketing_source_one(object: { name: $name, public: $is_active }) {
       __typename
       id
     }
@@ -57,17 +59,15 @@ const ADD_MUTATION = gql`
 `
 const EDIT_MUTATION = gql`
   mutation update_marketing_source_by_pk(
-    $id: uuid!
-    $name: String!
-    $is_active: Boolean
+    $id: Int!
+    $source_name: String
+    $public: Int = 1
   ) {
-    update_marketing_source_by_pk(
-      pk_columns: { id: $id }
-      _set: { name: $name, is_active: $is_active }
+    updateOneMarketingSource(
+      data: { source_name: { set: $source_name }, public: { set: $public } }
+      where: { id: $id }
     ) {
-      __typename
       id
-      is_active
     }
   }
 `
@@ -78,7 +78,7 @@ const schema: Schema = {
   short: 'Source',
   shortLower: 'source',
   fields: {
-    name: {
+    source_name: {
       full: 'Friendly Name',
       fullLower: 'friendly name',
       short: 'Name',
@@ -89,10 +89,10 @@ const schema: Schema = {
       // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
     },
-    is_active: {
+    public: {
       full: 'Active',
       type: 'boolean',
-      default: true,
+      default: 1,
     },
   },
 }

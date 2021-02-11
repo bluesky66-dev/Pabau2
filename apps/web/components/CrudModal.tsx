@@ -120,7 +120,7 @@ const CrudModal: FC<P> = ({
           }}
         >
           {editingRow && editingRow?.name} will be deleted. This action is
-          irreversable
+          irreversible
         </span>
       </Modal>
       <Modal

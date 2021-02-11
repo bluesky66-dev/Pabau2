@@ -2,8 +2,9 @@ module.exports = {
   client: {
     service: {
       name: 'hasura',
-      url: 'https://api.new.pabau.com/v1/graphql',
-      // optional headers
+      url: 'http://host.docker.internal:8080/v1/graphql',
+
+// optional headers
       headers: {
         //authorization: 'Bearer lkjfalkfjadkfjeopknavadf'
       },
@@ -11,4 +12,4 @@ module.exports = {
       //skipSSLValidation: true
     },
   },
-}
+};

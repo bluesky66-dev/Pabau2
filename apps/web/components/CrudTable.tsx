@@ -40,7 +40,7 @@ const CrudTable: FC<P> = ({
   editQuery,
   aggregateQuery,
 }) => {
-  const [isActive, setIsActive] = useState(true)
+  const [isActive, setIsActive] = useState(1)
   const [searchTerm, setSearchTerm] = useState('')
   // eslint-disable-next-line graphql/template-strings
   const [editMutation] = useMutation(editQuery, {
@@ -58,7 +58,7 @@ const CrudTable: FC<P> = ({
     onCompleted(data) {
       Notification(
         NotificationType.success,
-        'Success! New marketings source created.'
+        'Success! New marketing source created.'
       )
     },
     onError(err) {
@@ -103,7 +103,7 @@ const CrudTable: FC<P> = ({
 
   const onFilterMarketingSource = () => {
     resetPagination()
-    setIsActive((e) => !e)
+    setIsActive((e) => 0)
   }
 
   const onSearch = async (val) => {

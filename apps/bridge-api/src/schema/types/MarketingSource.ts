@@ -5,14 +5,14 @@ export const MarketingSource = objectType({
   name: 'MarketingSource',
   definition(t) {
     t.model.id()
-    t.model.source_name({
-      alias: 'name'
-    })
+    t.model.source_name()
     t.model.occupier({
       alias: 'company_id'
     })
     t.model.custom_id()
     t.model.company()
+    t.model.public()
+    t.model.imported()
   }
 })
 
@@ -42,7 +42,6 @@ export const MarketingSourceQuery = extendType({
       pagination: true,
       filtering: true,
       ordering: true,
-      aggregate: true
     });
   }
 })

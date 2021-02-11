@@ -27,7 +27,7 @@ const AddButton: FC<P> = ({
   onFilterSource,
   onSearch,
 }) => {
-  const [isActive, setIsActive] = useState(true)
+  const [isActive, setIsActive] = useState(1)
   const [mobFilterDrawer, setMobFilterDrawer] = useState(false)
   const [marketingSourceSearch, setMarketingSourceSearch] = useState('')
 
@@ -41,8 +41,7 @@ const AddButton: FC<P> = ({
     }, WAIT_INTERVAL)
 
     return () => clearTimeout(timer)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [marketingSourceSearch])
+  }, [marketingSourceSearch, onSearch])
 
   const filterContent = (isMobile = false) => (
     <div className={styles.filterContent}>
@@ -55,7 +54,7 @@ const AddButton: FC<P> = ({
       <div className={styles.radioTextStyle}>
         <Radio.Group
           onChange={(e) => {
-            setIsActive(e.target.value)
+            setIsActive(Number(e.target.value))
             !isMobile && onFilterSource()
           }}
           value={isActive}
