@@ -44,12 +44,20 @@ export default {
         type: 'boolean',
       },
     },
+    voucherType: {
+      control: {
+        type: 'select',
+        options: ['valentine', 'birthday', 'flowers'],
+      },
+    },
   },
 }
 
 const VoucherCardStory = ({ ...args }) => <VoucherCard {...args} />
 export const BasicVoucherCard = VoucherCardStory.bind({})
-export const ImageVoucherCard = VoucherCardStory.bind({})
+export const ValentineVoucherCard = VoucherCardStory.bind({})
+export const BirthdayVoucherCard = VoucherCardStory.bind({})
+export const FlowersVoucherCard = VoucherCardStory.bind({})
 export const BookingVoucherCard = VoucherCardStory.bind({})
 
 BasicVoucherCard.args = {
@@ -60,10 +68,10 @@ BasicVoucherCard.args = {
   borderColor: '#000',
   bookNowButton: false,
   buttonLabel: 'Book Now',
-  backgroundImg: '',
+  voucherType: '',
 }
 
-ImageVoucherCard.args = {
+ValentineVoucherCard.args = {
   cardWidth: 500,
   backgroundColor1: '#9013FE',
   backgroundColor2: '#BD10E0',
@@ -71,8 +79,29 @@ ImageVoucherCard.args = {
   borderColor: '#000',
   bookNowButton: false,
   buttonLabel: 'Book Now',
-  backgroundImg:
-    'https://wonderfulengineering.com/wp-content/uploads/2014/10/wallpaper-photos-31.jpg',
+  voucherType: 'valentine',
+}
+
+BirthdayVoucherCard.args = {
+  cardWidth: 500,
+  backgroundColor1: '#9013FE',
+  backgroundColor2: '#BD10E0',
+  gradientType: 'linear-gradient',
+  borderColor: '#000',
+  bookNowButton: false,
+  buttonLabel: 'Book Now',
+  voucherType: 'birthday',
+}
+
+FlowersVoucherCard.args = {
+  cardWidth: 500,
+  backgroundColor1: '#9013FE',
+  backgroundColor2: '#BD10E0',
+  gradientType: 'linear-gradient',
+  borderColor: '#000',
+  bookNowButton: false,
+  buttonLabel: 'Book Now',
+  voucherType: 'flowers',
 }
 
 BookingVoucherCard.args = {
@@ -81,6 +110,6 @@ BookingVoucherCard.args = {
   backgroundColor2: '#BD10E0',
   gradientType: 'linear-gradient',
   borderColor: '#000',
-  bookNowButton: false,
-  backgroundImg: '',
+  bookNowButton: true,
+  voucherType: 'Book Now',
 }

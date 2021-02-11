@@ -8,22 +8,20 @@ export interface VoucherCardProps {
   cardWidth: number
   backgroundColor1: string
   backgroundColor2: string
-  borderColor: string
   gradientType: string
   bookNowButton?: boolean
   buttonLabel: string
-  backgroundImg: string
+  voucherType: string
 }
 
 export const VoucherCard: FC<VoucherCardProps> = ({
   cardWidth,
-  borderColor,
   backgroundColor1,
   backgroundColor2,
   gradientType,
   bookNowButton,
   buttonLabel,
-  backgroundImg,
+  voucherType,
   ...rest
 }) => {
   const cardRef = useRef<HTMLDivElement>(null)
@@ -44,14 +42,9 @@ export const VoucherCard: FC<VoucherCardProps> = ({
     }, ${backgroundColor1} 3.53%, ${backgroundColor2} 95.41%)`,
   }
 
-  const cardFaceBgImage = {
-    backgroundImage: `url('${backgroundImg}')`,
-  }
-
   const dotsStyles = {
     width: `${cardWidth / 25 / 2}px`,
     height: `${cardWidth / 25}px`,
-    borderColor: borderColor,
   }
 
   const flipCard = (e) => {
@@ -72,11 +65,13 @@ export const VoucherCard: FC<VoucherCardProps> = ({
       >
         <div className="card" ref={cardRef} onClick={flipCard}>
           <div
-            className="card__face card__face--front"
+            className={`card__face card__face--front ${voucherType}`}
             style={
-              backgroundImg
-                ? { ...cardFaceBgImage, borderColor }
-                : { ...cardFaceBgColor, borderColor }
+              !voucherType
+                ? {
+                    ...cardFaceBgColor,
+                  }
+                : {}
             }
           >
             <div className={styles.dots}>
@@ -122,7 +117,7 @@ export const VoucherCard: FC<VoucherCardProps> = ({
             </div>
           </div>
 
-          <div className="card__face card__face--back" style={{ borderColor }}>
+          <div className="card__face card__face--back">
             <div className={styles.dots}>
               <div className="dotsInner">
                 <div className="dot1" style={{ ...dotsStyles }}></div>

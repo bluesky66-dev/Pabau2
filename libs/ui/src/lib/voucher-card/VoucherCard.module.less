@@ -14,7 +14,7 @@
             cursor: pointer;
             transform-style: preserve-3d;
             transition: transform 0.6s;
-            border-radius: 5px;
+            border-radius: 7.5px;
         }
           
         .card.is-flipped {
@@ -26,7 +26,7 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 5px;
+            border-radius: 7.5px;
             border-width: 2px;
             border-style: solid;
         }
@@ -35,6 +35,33 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            border-color: transparent !important;
+            border-radius: 10px;
+
+            .dot1, .dot2 {
+                border-color: transparent !important;
+            }
+        }
+        .card__face--front.valentine {
+            background-image: url('./valentine.png');
+            background-blend-mode: lighten;
+
+            h1, h2, p, span, button {
+                color: #D12C28 !important;
+            }
+            button:first-child {
+                border-color: #D12C28 !important;
+            }
+        }
+
+        .card__face--front.birthday {
+            background-image: url('./birthday.png');
+            background-blend-mode: lighten;
+        }
+
+        .card__face--front.flowers {
+            background-image: url('./flowers.png');
+            background-blend-mode: lighten;
         }
           
         .card__face--back {
@@ -231,7 +258,6 @@
     .backFaceContent {
         height: 100%;
         width: 100%;
-        background-color: #ffffff;
 
         :global {
             div {
