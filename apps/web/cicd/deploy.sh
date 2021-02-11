@@ -57,14 +57,11 @@ if [ -z "${BITBUCKET_PR_ID}" ]; then
   echo "--"
   LAST_LINE=$(echo "${OUTPUT}" | tail -n1)
   echo "last line: ${LAST_LINE}"
+  echo "${LAST_LINE}" > /tmp/bot_url_web.txt
 
   message_body=''
   read_heredoc message_body <<HEREDOC
-*New Version Staged for Production* - ${APP_NAME} v${PACKAGE_JSON_VERSION}
-
-${LAST_LINE}
-
-${LAST_COMMIT_LOG}
+${APP_NAME}: ${LAST_LINE}
 HEREDOC
   echo "${message_body}" >> /tmp/bot_message.txt
 
