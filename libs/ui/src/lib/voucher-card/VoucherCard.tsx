@@ -67,7 +67,10 @@ export const VoucherCard: FC<VoucherCardProps> = ({
           <div
             className={`card__face card__face--front ${voucherType}`}
             style={
-              !voucherType
+              !voucherType &&
+              voucherType != 'flowers' &&
+              voucherType != 'valentine' &&
+              voucherType != 'birthday'
                 ? {
                     ...cardFaceBgColor,
                   }

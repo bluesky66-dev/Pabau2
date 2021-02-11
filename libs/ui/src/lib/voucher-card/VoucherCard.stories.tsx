@@ -111,5 +111,6 @@ BookingVoucherCard.args = {
   gradientType: 'linear-gradient',
   borderColor: '#000',
   bookNowButton: true,
-  voucherType: 'Book Now',
+  voucherType: '',
+  buttonLabel: 'Book Now'
 }
