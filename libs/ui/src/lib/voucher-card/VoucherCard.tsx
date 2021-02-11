@@ -1,8 +1,7 @@
-import React, { FC, ReactNode, useRef } from 'react'
+import React, { FC, useRef } from 'react'
 import { Button, DotButton } from '@pabau/ui'
 import { DeleteOutlined } from '@ant-design/icons'
 import styles from './VoucherCard.module.less'
-import ThreeDotIcon from './DotMenu.svg'
 
 /* eslint-disable-next-line */
 export interface VoucherCardProps {
@@ -41,7 +40,7 @@ export const VoucherCard: FC<VoucherCardProps> = ({
   ]
   const cardFaceBgColor = {
     background: `${gradientType}(${
-      gradientType == 'radial-gradient' ? 'circle at center' : '47.23deg'
+      gradientType === 'radial-gradient' ? 'circle at center' : '47.23deg'
     }, ${backgroundColor1} 3.53%, ${backgroundColor2} 95.41%)`,
   }
 
