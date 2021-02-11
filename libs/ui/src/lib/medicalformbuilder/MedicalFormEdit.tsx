@@ -86,7 +86,7 @@ const MedicalFormEdit: FC = () => {
         <Col span={12}>
           <MedicalFormEditMain
             draggedFromNames={draggedFromNames}
-            handlingComponentSetting1={handlingComponentSetting}
+            handlingComponentSetting={handlingComponentSetting}
           />
         </Col>
         <Col span={6}>
