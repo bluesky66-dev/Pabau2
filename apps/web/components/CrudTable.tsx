@@ -44,6 +44,7 @@ const CrudTable: FC<P> = ({
   tableSearch = true,
   updateOrderQuery,
 }) => {
+  const [isLoading, setIsLoading] = useState(true)
   const [isActive, setIsActive] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   // eslint-disable-next-line graphql/template-strings
@@ -115,6 +116,7 @@ const CrudTable: FC<P> = ({
         total: aggregateData?.aggregate.count,
         showingRecords: data?.length,
       })
+    if (!loading && data) setIsLoading(false)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, aggregateData])
@@ -360,7 +362,7 @@ const CrudTable: FC<P> = ({
             )}
           </div>
           <Table
-            loading={loading}
+            loading={isLoading}
             style={{ height: '100%' }}
             sticky={{ offsetScroll: 80, offsetHeader: 80 }}
             pagination={sourceData?.length > 10 ? {} : false}

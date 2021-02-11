@@ -170,6 +170,7 @@ export const Table: FC<TableType> = ({
       : props.columns
   }
 
+  console.log('dataSource?.length ', dataSource?.length, props.loading)
   return !dataSource?.length && !props.loading ? (
     <div className={styles.noDataTableBox}>
       <div className={styles.noDataTextStyle}>
