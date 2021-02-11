@@ -1,3 +1,4 @@
+export * from './lib/voucher-card/VoucherCard'
 export * from './lib/add-suggestion/AddSuggestion'
 export * from './lib/daily/Daily'
 export * from './lib/business-details-notifications/BusinessDetailsNotifications'
