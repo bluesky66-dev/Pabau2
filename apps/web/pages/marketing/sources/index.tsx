@@ -96,6 +96,19 @@ const schema: Schema = {
     },
   },
 }
+const UPDATE_ORDER_MUTATION = gql`
+  mutation update_marketing_source_order(
+    $id: uuid!
+    $order: Int
+  ) {
+    update_marketing_source(
+      where: { id: { _eq: $id } }
+      _set: { order: $order }
+    ) {
+      affected_rows
+    }
+  }
+`
 
 export const Index: NextPage = () => {
   return (
@@ -106,6 +119,7 @@ export const Index: NextPage = () => {
       listQuery={LIST_QUERY}
       editQuery={EDIT_MUTATION}
       aggregateQuery={LIST_AGGREGATE_QUERY}
+      updateOrderQuery={UPDATE_ORDER_MUTATION}
     />
   )
 }

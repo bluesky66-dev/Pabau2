@@ -102,7 +102,7 @@ export const Table: FC<TableType> = ({
         className={isActive ? styles.activeBtn : styles.disableSourceBtn}
         disabled={!isActive}
       >
-        {isActive ? 'Active' : 'Inactive'}
+        {isActive === 1 ? 'Active' : 'Inactive'}
       </Button>
     )
   }
@@ -151,7 +151,7 @@ export const Table: FC<TableType> = ({
     if (props && props.columns) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       props.columns?.map((col: any) => {
-        if (col && col.dataIndex === 'is_active') {
+        if (col && col.dataIndex === 'public') {
           col.render = renderActiveButton
         } else {
           col.render = renderTableSource
