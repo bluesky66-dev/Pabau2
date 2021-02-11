@@ -1,3 +1,7 @@
+/**
+ * This is a Pabau Appointment
+ */
+
 import React, { FC } from 'react'
 import { Row, Col, Divider } from 'antd'
 import { Button } from '@pabau/ui'
