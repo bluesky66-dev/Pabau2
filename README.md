@@ -4,7 +4,7 @@
 
 This monorepo contains all of our code (with the exception of `/.env`). The monorepo was created by [nx](https://nx.dev). For more information type `yarn run nx`.
 
-### Paths
+## Paths
 
 - `/` -
 - `/.run/` - scripts for all devs (and Jetbrains IDE's)
@@ -22,13 +22,27 @@ This monorepo contains all of our code (with the exception of `/.env`). The mono
 
 ## Setup
 
+### Windows 
 1. Install Node 14 LTS (Opt in for the extra build tools)
 1. Install yarn: `npm i -g yarn` (`yarn --version` \>=1.22.10 && <2 is fine)
 1. Ensure your terminal is BASH (cmd and PS not supported. Vscode: `"terminal.integrated.shell.windows": "c:/program files/git/bin/bash.exe",`)
 1. Ensure your IDE has eslint plugin setup and configured to auto-fix on save.
 1. Ensure your Git config user.name is your full name, and user.email is the same email you registered as with Bitbucket.org.
 
-### Storybook
+### Linux
+
+```bash
+curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt install -y nodejs gcc g++ make curl build-essential
+mkdir ~/.npm-global
+npm config set prefix "${HOME}/.npm-global"
+echo 'NPM_STORE="${HOME}/.npm-global"' >> ~/.bashrc
+echo 'export PATH="$PATH:$NPM_STORE/bin"' >> ~/.bashrc
+echo 'export MANPATH="${MANPATH-$(manpath)}:$NPM_STORE/share/man"' >> ~/.bashrc
+npm i -g yarn
+```
+
+## Storybook
 
 Any component that is likely to be needed on other pages, such as a table, button, heading, avatar, etc, should live in `/libs/ui/`. Each component in here should be exposed as a Storybook item, and is visible on [https://storybook.new.pabau.com](https://storybook.new.pabau.com) or run `yarn run nx run ui:storybook` to develop on it locally with live reloading.
 
@@ -38,7 +52,7 @@ To create a new component, such as "Button", do the following:
 yarn run nx g @nrwl/react:component --project=ui --style=less --export --pascalCaseFiles --name=Button
 ```
 
-### Frontend
+## Frontend
 
 To view the Frontend, you can either visit [https://prelive-crm.new.pabau.com](https://prelive-crm.new.pabau.com) or run `yarn start` to develop on it locally with live reloading (HMR).
 
@@ -52,7 +66,7 @@ yarn run nx g @nrwl/next:page --project=web --style=less --directory marketing s
 
 Now add `import { } from '@pabau/ui'` at top of the new page file and fill in the {} with components you need.
 
-### Bridge
+## Bridge
 
 To view the GraphQA endpoint which will expose the legacy database run `yarn nx serve bridge-api`
 
