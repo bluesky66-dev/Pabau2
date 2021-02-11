@@ -3,8 +3,6 @@ import React, { FC, useEffect, useState } from 'react'
 import { BasicModal as Modal, Notification, NotificationType } from '@pabau/ui'
 import { DocumentNode, useMutation } from '@apollo/client'
 import { useFormikContext } from 'formik'
-import AppointmentStatusForm from './AppointmentStatusForm'
-
 interface P {
   schema: Schema
   addQuery?: DocumentNode
@@ -166,43 +164,39 @@ const CrudModal: FC<P> = ({
             : formik.isValid
         }
       >
-        {schemaForm.shemaType === 'Appointment Status' ? (
-          <AppointmentStatusForm values={formik.values} schema={schemaForm} />
-        ) : (
-          <Form
-            // ref={formRef} typeof editingRow === 'object' ? editingRow : undefined}
-            values={formik.values}
-            schema={schemaForm}
-            // initialValues={typeof editingRow === 'object' ? editingRow : { name: 'erm' }}
-            // onSubmit={async (form: Record<string, unknown>) => {
-            //   console.log('ONsUBMIT', form)
-            //   return
-            //   if (specialFormElement) form['is_active'] = specialBoolean
-            //   debugger
-            //   await addMutation({
-            //     variables: form,
-            //     optimisticResponse: {},
-            //     update: (proxy) => {
-            //       if (listQuery) {
-            //         const existing = proxy.readQuery({
-            //           query: listQuery,
-            //         })
-            //         if (existing) {
-            //           const key = Object.keys(existing)[0]
-            //           proxy.writeQuery({
-            //             query: listQuery,
-            //             data: {
-            //               [key]: [...existing[key], form],
-            //             },
-            //           })
-            //         }
-            //       }
-            //     },
-            //   })
-            //   onClose?.()
-            // }}
-          />
-        )}
+        <Form
+          // ref={formRef} typeof editingRow === 'object' ? editingRow : undefined}
+          values={formik.values}
+          schema={schemaForm}
+          // initialValues={typeof editingRow === 'object' ? editingRow : { name: 'erm' }}
+          // onSubmit={async (form: Record<string, unknown>) => {
+          //   console.log('ONsUBMIT', form)
+          //   return
+          //   if (specialFormElement) form['is_active'] = specialBoolean
+          //   debugger
+          //   await addMutation({
+          //     variables: form,
+          //     optimisticResponse: {},
+          //     update: (proxy) => {
+          //       if (listQuery) {
+          //         const existing = proxy.readQuery({
+          //           query: listQuery,
+          //         })
+          //         if (existing) {
+          //           const key = Object.keys(existing)[0]
+          //           proxy.writeQuery({
+          //             query: listQuery,
+          //             data: {
+          //               [key]: [...existing[key], form],
+          //             },
+          //           })
+          //         }
+          //       }
+          //     },
+          //   })
+          //   onClose?.()
+          // }}
+        />
       </Modal>
     </>
   )

@@ -1,16 +1,19 @@
+import React, { FC, useState } from 'react'
 import { CheckCircleFilled } from '@ant-design/icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import * as Icons from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { FC, useState } from 'react'
 import styles from './FontIcon.module.less'
 export interface FontIconProps {
   max?: number
+  height?: number
+  fontSize?: number
   selectedIcon?: string
   onIconSelected(val): void
 }
 export const FontIcon: FC<FontIconProps> = ({
-  max,
+  max = 100,
+  height = 300,
   selectedIcon = '',
   onIconSelected,
 }) => {
@@ -20,8 +23,9 @@ export const FontIcon: FC<FontIconProps> = ({
     .map((icon) => Icons[icon])
   library.add(...iconList)
   const [activate, setActivate] = useState(selectedIcon)
+
   return (
-    <div className={styles.iconPanel}>
+    <div className={styles.iconPanel} style={{ height: height + 'px' }}>
       {iconList
         .filter((icon, index) => icon.iconName !== 'font-awesome-logo-full')
         .map((icon, index) => {
@@ -34,8 +38,12 @@ export const FontIcon: FC<FontIconProps> = ({
                   : styles.iconItem
               }
               onClick={() => {
-                setActivate(icon.iconName)
-                onIconSelected(icon.iconName)
+                let selectedIcon = icon.iconName
+                if (activate === icon.iconName) {
+                  selectedIcon = ''
+                }
+                setActivate(selectedIcon)
+                onIconSelected(selectedIcon)
               }}
             >
               {activate === icon.iconName && <CheckCircleFilled />}

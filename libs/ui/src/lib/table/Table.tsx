@@ -122,7 +122,7 @@ export const Table: FC<TableType> = ({
             <LockOutlined />
           </div>
         )}
-        {isCustomIconExist && (
+        {isCustomIconExist && rowData.icon && (
           <FontAwesomeIcon icon={rowData.icon} className={styles.tableIcon} />
         )}
       </div>
@@ -170,7 +170,22 @@ export const Table: FC<TableType> = ({
       : props.columns
   }
 
-  return dataSource?.length ? (
+  return !dataSource?.length && !props.loading ? (
+    <div className={styles.noDataTableBox}>
+      <div className={styles.noDataTextStyle}>
+        <Avatar icon={noDataIcon} size="large" className={styles.roundDesign} />
+        <p>{`Add ${noDataText} to create more shifts faster`}</p>
+        <div className={styles.spaceBetweenText}></div>
+        <Button
+          className={styles.createTemaplateBtn}
+          type="primary"
+          onClick={() => onAddTemplate?.()}
+        >
+          {`Add ${noDataBtnText}`}
+        </Button>
+      </div>
+    </div>
+  ) : (
     <AntTable
       {...props}
       onRow={(record, rowIndex) => {
@@ -202,20 +217,5 @@ export const Table: FC<TableType> = ({
         },
       }}
     />
-  ) : (
-    <div className={styles.noDataTableBox}>
-      <div className={styles.noDataTextStyle}>
-        <Avatar icon={noDataIcon} size="large" className={styles.roundDesign} />
-        <p>{`Add ${noDataText} to create more shifts faster`}</p>
-        <div className={styles.spaceBetweenText}></div>
-        <Button
-          className={styles.createTemaplateBtn}
-          type="primary"
-          onClick={() => onAddTemplate?.()}
-        >
-          {`Add ${noDataBtnText}`}
-        </Button>
-      </div>
-    </div>
   )
 }

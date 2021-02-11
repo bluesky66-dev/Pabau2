@@ -43,9 +43,12 @@ const Form: FC<P> = ({ schema, values }) => {
                 </Radio.Group>
               </AntForm.Item>
             ) : null}
-            {type === 'icon' && (
+            {type === 'icon' && values.appointment_type === 'Icon' && (
               <AntForm.Item key={name} name={name}>
                 <FontIcon
+                  max={60}
+                  height={172}
+                  selectedIcon={values.icon}
                   onIconSelected={(icon) => {
                     values.icon = icon
                   }}
@@ -57,8 +60,8 @@ const Form: FC<P> = ({ schema, values }) => {
               <AntForm.Item key={name} name={name}>
                 <div style={{ width: '344px' }}>
                   <ColorPicker
+                    selectedColor={values.color}
                     onSelected={(val) => {
-                      // formik.setFieldValue(name, val)
                       values.color = val
                     }}
                     heading={values.appointment_type + ' ' + full}

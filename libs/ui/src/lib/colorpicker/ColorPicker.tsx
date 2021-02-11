@@ -1,13 +1,14 @@
 import React, { FC, useEffect, useState } from 'react'
-import { ReactComponent as CheckBadge } from '../../assets/images/check-badge.svg'
+// import { ReactComponent as CheckBadge } from '../../assets/images/check-badge.svg'
 import styles from './ColorPicker.module.less'
 import classNames from 'classnames'
+import { CheckOutlined } from '@ant-design/icons'
 interface P {
   color: string
   selected: boolean
   onClick(): void
-  onHover(): void
-  onLeave(): void
+  onHover?(): void
+  onLeave?(): void
 }
 
 const ColorItem: FC<P> = (props: P) => {
@@ -24,10 +25,10 @@ const ColorItem: FC<P> = (props: P) => {
       onClick={() => {
         onClick()
       }}
-      onMouseEnter={() => onHover()}
-      onMouseLeave={() => onLeave()}
+      onMouseEnter={() => onHover?.()}
+      onMouseLeave={() => onLeave?.()}
     >
-      <CheckBadge className={styles.badge} />
+      <CheckOutlined className={styles.badge} />
     </div>
   )
 }
@@ -81,7 +82,7 @@ export const ColorPicker: FC<PickerProps> = ({
     <div style={{ marginTop: '16px' }}>
       <span className={styles.heading}>{heading}</span>
       <div className={styles.colorPickerWrap}>
-        {colorData.map((color, index) => (
+        {colorData.map((color) => (
           <ColorItem
             key={`${heading}${color}`}
             color={color}

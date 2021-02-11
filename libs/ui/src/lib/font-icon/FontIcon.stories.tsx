@@ -10,5 +10,5 @@ const FonticonStory = ({ ...args }) => (
 )
 export const FontIcon = FonticonStory.bind({})
 FontIcon.args = {
-  max: 50,
+  max: 100,
 }

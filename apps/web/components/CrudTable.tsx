@@ -99,6 +99,7 @@ const CrudTable: FC<P> = ({
       limit: paginateData.limit,
     },
   })
+
   const { data: aggregateData } = useLiveQuery(aggregateQuery, {
     variables: {
       isActive,
@@ -107,12 +108,14 @@ const CrudTable: FC<P> = ({
   })
 
   useEffect(() => {
-    setSourceData(data)
-    setPaginateData({
-      ...paginateData,
-      total: aggregateData?.aggregate.count,
-      showingRecords: data?.length,
-    })
+    if (data) setSourceData(data)
+    if (aggregateData)
+      setPaginateData({
+        ...paginateData,
+        total: aggregateData?.aggregate.count,
+        showingRecords: data?.length,
+      })
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, aggregateData])
 
