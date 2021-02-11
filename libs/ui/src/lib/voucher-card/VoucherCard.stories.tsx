@@ -5,7 +5,7 @@ export default {
   title: 'UI/VoucherCard',
   component: VoucherCard,
   args: {
-    gradientType: 'linear-gradient'
+    gradientType: 'linear-gradient',
   },
   argTypes: {
     cardWidth: {
@@ -39,16 +39,48 @@ export default {
         type: 'text',
       },
     },
+    bookNowButton: {
+      control: {
+        type: 'boolean',
+      },
+    },
   },
 }
 
 const VoucherCardStory = ({ ...args }) => <VoucherCard {...args} />
 export const BasicVoucherCard = VoucherCardStory.bind({})
+export const ImageVoucherCard = VoucherCardStory.bind({})
+export const BookingVoucherCard = VoucherCardStory.bind({})
+
 BasicVoucherCard.args = {
-  cardWidth: 800,
-  backgroundColor1: '#fff',
-  backgroundColor2: '#fff',
+  cardWidth: 500,
+  backgroundColor1: '#9013FE',
+  backgroundColor2: '#BD10E0',
   gradientType: 'linear-gradient',
+  borderColor: '#000',
+  bookNowButton: false,
+  buttonLabel: 'Book Now',
   backgroundImg: '',
-  borderColor: 'red',
+}
+
+ImageVoucherCard.args = {
+  cardWidth: 500,
+  backgroundColor1: '#9013FE',
+  backgroundColor2: '#BD10E0',
+  gradientType: 'linear-gradient',
+  borderColor: '#000',
+  bookNowButton: false,
+  buttonLabel: 'Book Now',
+  backgroundImg:
+    'https://wonderfulengineering.com/wp-content/uploads/2014/10/wallpaper-photos-31.jpg',
+}
+
+BookingVoucherCard.args = {
+  cardWidth: 500,
+  backgroundColor1: '#9013FE',
+  backgroundColor2: '#BD10E0',
+  gradientType: 'linear-gradient',
+  borderColor: '#000',
+  bookNowButton: false,
+  backgroundImg: '',
 }
