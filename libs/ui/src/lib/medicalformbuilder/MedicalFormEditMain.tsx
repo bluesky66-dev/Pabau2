@@ -60,7 +60,12 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
   useEffect(() => {
     if (prevActiveComponentID !== activatedComponentID)
       handlingComponentSetting?.(activatedComponent, activatedComponentID)
-  }, [prevActiveComponentID, handlingComponentSetting, activatedComponent])
+  }, [
+    prevActiveComponentID,
+    handlingComponentSetting,
+    activatedComponent,
+    activatedComponentID,
+  ])
 
   return (
     <Droppable droppableId="MainSide">
