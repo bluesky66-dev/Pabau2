@@ -112,5 +112,5 @@ BookingVoucherCard.args = {
   borderColor: '#000',
   bookNowButton: true,
   voucherType: '',
-  buttonLabel: 'Book Now'
+  buttonLabel: 'Book Now',
 }
