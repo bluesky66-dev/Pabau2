@@ -4,6 +4,7 @@ import { Input } from './input'
 import { notification } from 'antd'
 import { Passcode as PasscodeBox } from './Passcode'
 import { PasswordWithHelper as PasswordWithHelperBox } from './PasswordWithHelper'
+import { InputNumber } from './inputNumber'
 
 export default {
   component: Input,
@@ -68,4 +69,13 @@ export const PasswordWithHelper = PasswordWithHelperStory.bind({})
 PasswordWithHelper.args = {
   stength: 3,
   width: '50%',
+}
+
+const InputNumberStory = ({ ...args }) => <InputNumber {...args} />
+export const InputNumberControl = InputNumberStory.bind({})
+InputNumberControl.args = {
+  placeHolderText: 'Enter Number',
+  value: 14.43,
+  reqiredMsg: 'Number is required!',
+  isFormatter: true,
 }
