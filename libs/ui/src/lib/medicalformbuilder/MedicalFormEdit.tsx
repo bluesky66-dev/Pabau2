@@ -45,12 +45,19 @@ const MedicalFormEdit: FC = () => {
   const [selectComponentId, setSelectComponentId] = useState('')
   const [displaySettingBar, setDisplaySettingBar] = useState(false)
   const handlingComponentSetting = (componentName, componentID) => {
-    setDisplaySettingBar(componentName === '' ? false : true)
-    if (componentName !== '') {
+    setDisplaySettingBar(componentID === '' ? false : true)
+    if (componentID !== '') {
       setSelectComponent(componentName)
       setSelectComponentId(componentID)
     }
   }
+  const handlingDeleteComponent = (componentID) => {
+    handlingComponentSetting('', '')
+    setDraggedFromNames(
+      draggedFromNames.filter((item) => item['id'] !== componentID)
+    )
+  }
+
   console.log('selectComponentId = ', selectComponentId)
   const onDragEnd = React.useCallback(
     (result) => {
@@ -90,8 +97,10 @@ const MedicalFormEdit: FC = () => {
         <Col span={6}>
           <RightSidebar
             componentName={selectComponent}
+            componentID={selectComponentId}
             display={displaySettingBar}
             handlingComponentSetting={handlingComponentSetting}
+            handlingDeleteComponent={handlingDeleteComponent}
           />
         </Col>
       </DragDropContext>

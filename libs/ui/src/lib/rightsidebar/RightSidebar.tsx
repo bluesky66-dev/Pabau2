@@ -20,17 +20,21 @@ import styles from './RightSidebar.module.less'
 
 interface P {
   componentName?: string
+  componentID?: string
   display?: boolean
   handlingComponentSetting?: (
     componentName?: string,
     componentID?: string
   ) => void
+  handlingDeleteComponent?: (componentID?: string) => void
 }
 
 const RightSidebar: FC<P> = ({
   componentName,
+  componentID,
   display,
   handlingComponentSetting,
+  handlingDeleteComponent,
 }) => {
   const [isVisible, setIsVisible] = useState(display)
   useEffect(() => {
@@ -49,6 +53,7 @@ const RightSidebar: FC<P> = ({
   }
   const handleDelete = () => {
     setIsVisible(false)
+    handlingDeleteComponent?.(componentID)
   }
 
   return (
