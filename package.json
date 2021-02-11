@@ -32,7 +32,8 @@
     "dep-graph": "nx dep-graph",
     "prisma": "prisma",
     "prisma:generate": "prisma generate --schema apps/bridge-api/prisma/schema.prisma",
-    "nexus:generate": "ts-node-dev --transpile-only apps/bridge-api/src/schema"
+    "nexus:generate": "ts-node-dev --transpile-only apps/bridge-api/src/schema",
+    "postinstall": "husky install"
   },
   "private": true,
   "dependencies": {
