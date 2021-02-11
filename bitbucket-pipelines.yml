@@ -19,13 +19,14 @@ pipelines:
     '**':
       - step:
           name: PR pipeline
+          size: 2x
           caches:
             - nodemodules
             - yarncustom
           script:
 
             # Get an oauth access token using the client credentials, parsing out the token with jq.
-            - apt-get update && apt-get install -y curl jq time
+            - apt-get update && apt-get install -y curl jq
             - >
               export access_token=$(curl -s -X POST -u "${BITBUCKET_CLIENT_ID}:${BITBUCKET_CLIENT_SECRET}" \
                 https://bitbucket.org/site/oauth2/access_token \
@@ -36,6 +37,10 @@ pipelines:
               curl -sS -H "Authorization: Bearer ${access_token}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}"
             - >
               export PR_AUTHOR=$(curl -sS -H "Authorization: Bearer ${access_token}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}" | jq -r '.author.display_name')
+
+            # get the commit message for this commit
+            - export LAST_COMMIT_LOG=$(git log HEAD~1 -1 | tail -n +4 | perl -p -e 's/[\r\n]//' | awk '{$1=$1;print}')
+            - echo "${LAST_COMMIT_LOG}"
 
             - touch /tmp/bot_message.txt
             - yarn install --frozen-lockfile --prefer-offline
@@ -59,6 +64,17 @@ pipelines:
             - yarn affected --base=origin/master --target=deploy
             - cat /tmp/bot_message.txt
 
+            - npm i -g ts-node && ts-node tools/cicd/PrintChangedUrls.ts "origin/master" "$(cat /tmp/bot_url_web.txt)" "$(cat /tmp/bot_url_ui.txt)" >> /tmp/bot_message.txt
+            - |
+              printf ":shallow_pan_of_food: *<https://bitbucket.org/pabau/monorepo/pull-requests/${BITBUCKET_PR_ID}|PR ${BITBUCKET_PR_ID}> published by ${PR_AUTHOR}*\n\n${LAST_COMMIT_LOG}\n\n" > /tmp/bot_message2.txt
+            - cat /tmp/bot_message.txt >> /tmp/bot_message2.txt
+
+            # Post to Slack
+            - |
+              jq --arg var "$(cat /tmp/bot_message2.txt)" '.blocks[0].text.text = $var' tools/cicd/slack_notification.json | curl -0 "${SLACK_HOOK_URL}" \
+              -H "Expect:" \
+              -H 'Content-Type: application/json; charset=utf-8' \
+              --data-binary @-
 
   branches:
     master:
@@ -80,13 +96,11 @@ pipelines:
           size: 2x
           caches:
             - nodemodules
+            - yarncustom
           script:
             - touch /tmp/bot_message.txt
-
             - apt-get update -y && apt-get install -y curl jq time
-
             - /usr/bin/time -v yarn install --frozen-lockfile --prefer-offline
-
             - /usr/bin/time -v yarn affected:lint --base=HEAD~1 --with-deps --parallel
             - /usr/bin/time -v yarn affected:test --base=HEAD~1 --parallel
 
@@ -109,9 +123,14 @@ pipelines:
             - /usr/bin/time -v yarn affected --base=HEAD~2 --head=HEAD~1 --target=build-storybook --prod
             - /usr/bin/time -v yarn affected --base=HEAD~2 --head=HEAD~1 --target=deploy --prod
 
+            - npm i -g ts-node && ts-node tools/cicd/PrintChangedUrls.ts "HEAD~2" "$(cat /tmp/bot_url_web.txt)" "$(cat /tmp/bot_url_ui.txt)" >> /tmp/bot_message.txt
+            - |
+              printf "*New Version Staged for Production*\n## v${PACKAGE_JSON_VERSION}\n${LAST_COMMIT_LOG}" > /tmp/bot_message2.txt
+            - cat /tmp/bot_message.txt >> /tmp/bot_message2.txt
+
             # Post to Slack
             - |
-              jq --arg var "$(cat /tmp/bot_message.txt)" '.blocks[0].text.text = $var' tools/cicd/slack_notification.json | curl -0 "${SLACK_HOOK_URL}" \
+              jq --arg var "$(cat /tmp/bot_message2.txt)" '.blocks[0].text.text = $var' tools/cicd/slack_notification.json | curl -0 "${SLACK_HOOK_URL}" \
               -H "Expect:" \
               -H 'Content-Type: application/json; charset=utf-8' \
               --data-binary @-
