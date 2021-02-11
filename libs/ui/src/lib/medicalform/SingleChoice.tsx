@@ -2,7 +2,7 @@ import {
   MedicalFormBody,
   MedicalFormBottom,
   MedicalFormHeader,
-  MedicalFormTitle
+  MedicalFormTitle,
 } from '@pabau/ui'
 import React, { FC, useState } from 'react'
 import singleChoiceIcon from '../../assets/images/medicalform_singlechoice.svg'
