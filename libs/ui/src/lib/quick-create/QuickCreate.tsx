@@ -65,6 +65,7 @@ export const QuickCreate: FC = () => {
         content={QuickCreateContent}
         trigger="click"
         visible={visible}
+        onVisibleChange={(e) => setVisible(e)}
       >
         <Button
           type="default"
