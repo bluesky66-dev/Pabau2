@@ -47,7 +47,7 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
 
   useEffect(() => {
     handlingComponentSetting?.(activatedComponent)
-  }, [activatedComponent])
+  }, [handlingComponentSetting, activatedComponent])
 
   return (
     <Droppable droppableId="MainSide">
