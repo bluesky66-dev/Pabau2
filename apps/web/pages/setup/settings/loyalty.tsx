@@ -1,9 +1,11 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { useMedia } from 'react-use'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 
-import { Button, Layout } from '@pabau/ui'
+import { Button, Layout, Breadcrumb } from '@pabau/ui'
 import { Row, Col, Card } from 'antd'
-import { RightOutlined, LeftOutlined } from '@ant-design/icons'
+import { LeftOutlined } from '@ant-design/icons'
 import { LoyaltySettingsObj } from '../../../mocks/LoyaltySettings'
 import General from '../../../components/Setup/Settings/LoyaltySettings/General'
 import styles from './loyalty.module.less'
@@ -13,15 +15,26 @@ interface P {
 }
 
 const LoyaltySettings: FC<P> = () => {
-  const [loyaltyObj, setLoyaltyObj] = useState<P>(LoyaltySettingsObj)
   const isMobile = useMedia('(max-width: 768px)', false)
 
-  const handleChange = (obj: GeneralLoyaltyConfig) => {
-    setLoyaltyObj({ ...loyaltyObj, general: obj })
-  }
+  const loyaltyFormik = useFormik({
+    initialValues: {
+      showOnReceipt: LoyaltySettingsObj.general.dropdownList.value,
+      inputPoint: LoyaltySettingsObj.general.inputPoint.value,
+    },
+    validationSchema: Yup.object({
+      showOnReceipt: Yup.string().required('Show on receipt Value is required'),
+      inputPoint: Yup.number()
+        .typeError('You must specify a currency amount')
+        .required('Points Value is required'),
+    }),
+    onSubmit: (value) => {
+      console.log(value)
+    },
+  })
 
   const handleSave = (): void => {
-    console.log('Save Object', loyaltyObj)
+    loyaltyFormik.handleSubmit()
   }
 
   return (
@@ -46,12 +59,7 @@ const LoyaltySettings: FC<P> = () => {
           ) : (
             <Row className={styles.loyaltyMainWrapper}>
               <Col span={20} className={styles.titleWrapper}>
-                <p className={styles.titleTagLine}>
-                  {'Setup'}
-                  <span>
-                    <RightOutlined /> {'Loyalty settings'}
-                  </span>
-                </p>
+                <Breadcrumb breadcrumbItems={['Setup', 'Loyalty settings']} />
                 <h4>{'Loyalty settings'}</h4>
                 <p className={styles.description}>
                   {
@@ -71,8 +79,10 @@ const LoyaltySettings: FC<P> = () => {
             </Row>
           )}
           <General
-            generalObj={loyaltyObj.general}
-            handleChange={handleChange}
+            generalObj={LoyaltySettingsObj.general}
+            values={loyaltyFormik.values}
+            setFieldValue={loyaltyFormik.setFieldValue}
+            errors={loyaltyFormik.errors}
           />
           {isMobile && (
             <div className={styles.mobSaveBtn} onClick={handleSave}>

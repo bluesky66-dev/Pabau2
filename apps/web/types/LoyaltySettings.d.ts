@@ -18,3 +18,8 @@ interface GeneralLoyaltyConfig {
   dropdownList: Dropdown
   inputPoint: inputPointValue
 }
+
+interface LoyaltyObjProp {
+  showOnReceipt: string
+  inputPoint: number
+}

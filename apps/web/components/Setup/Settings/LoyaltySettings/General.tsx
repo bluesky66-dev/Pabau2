@@ -1,29 +1,21 @@
 import React, { FC } from 'react'
 import { SimpleDropdown, InputNumber, HelpTooltip } from '@pabau/ui'
-
 import styles from './common.module.less'
+import { FormikErrors } from 'formik'
 
 interface P {
   generalObj: GeneralLoyaltyConfig
-  handleChange: (obj: GeneralLoyaltyConfig) => void
+  values: LoyaltyObjProp
+  setFieldValue: (field: string, value: string) => void
+  errors: FormikErrors<LoyaltyObjProp>
 }
 
 const General: FC<P> = ({
   generalObj: { dropdownList, inputPoint },
-  handleChange,
+  values,
+  setFieldValue,
+  errors,
 }) => {
-  const handleSelect = (value): void => {
-    const data = dropdownList
-    data['value'] = value
-    handleChange({ dropdownList: data, inputPoint })
-  }
-
-  const handleInputChange = (value: number) => {
-    const data = inputPoint
-    data.value = value
-    handleChange({ dropdownList, inputPoint: data })
-  }
-
   return (
     <div className={styles.loyaltyGeneralContainer}>
       <div className={styles.generalLabel}>
@@ -34,15 +26,20 @@ const General: FC<P> = ({
           </span>
           <span>{inputPoint.pointText}</span>
         </div>
-        <InputNumber value={inputPoint.value} onChange={handleInputChange} />
+        <InputNumber
+          value={values.inputPoint}
+          onChange={(val) => setFieldValue('inputPoint', val)}
+          isFormatter={true}
+          requiredMsg={errors.inputPoint}
+        />
       </div>
       <div className={styles.generalDropdownList}>
         <SimpleDropdown
           label={dropdownList.label}
           tooltip={dropdownList.helpText}
-          value={dropdownList.value}
+          value={values.showOnReceipt}
           dropdownItems={dropdownList.options}
-          onSelected={(val) => handleSelect(val)}
+          onSelected={(val) => setFieldValue('showOnReceipt', val)}
         />
       </div>
     </div>

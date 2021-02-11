@@ -1,6 +1,6 @@
-import React, { PropsWithChildren, useEffect, useState } from 'react'
+import React, { PropsWithChildren } from 'react'
 import { Form, InputNumber as AntInput } from 'antd'
-import { FormProps, Rule } from 'antd/lib/form'
+import { FormProps } from 'antd/lib/form'
 import styles from './input.module.less'
 
 enum ButtonSize {
@@ -15,7 +15,7 @@ export interface InputNumberProps extends FormProps {
   size?: ButtonSize
   disabled?: boolean
   placeHolderText?: string
-  reqiredMsg?: string
+  requiredMsg?: string
   type?: string
   isFormatter?: boolean
   onChange?(val): void
@@ -28,31 +28,17 @@ export function InputNumber({
   disabled,
   placeHolderText,
   requiredMark = false,
-  reqiredMsg,
+  requiredMsg,
   type,
   onChange,
   isFormatter,
   ...props
 }: PropsWithChildren<InputNumberProps>): JSX.Element {
   const [form] = Form.useForm()
-  const [rules, setRules] = useState<Rule[]>([])
+
   const handleInputChange = (value) => {
     onChange?.(value)
   }
-
-  useEffect(() => {
-    let items: Rule[] = []
-    if (requiredMark) {
-      items = [
-        ...items,
-        {
-          required: true,
-          message: reqiredMsg ? reqiredMsg : '',
-        },
-      ]
-    }
-    setRules(items)
-  }, [requiredMark, reqiredMsg, type])
 
   return (
     <div className={styles.inputContainer}>
@@ -62,7 +48,12 @@ export function InputNumber({
         requiredMark={requiredMark}
         layout="vertical"
       >
-        <Form.Item label={label ? label : ''} name="input-item" rules={rules}>
+        <Form.Item
+          label={label ? label : ''}
+          name="input-item"
+          help={requiredMsg}
+          validateStatus={requiredMsg ? 'error' : 'success'}
+        >
           <AntInput
             className={styles.inputNumber}
             placeholder={placeHolderText}
