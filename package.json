@@ -33,7 +33,8 @@
     "postinstall": "node ./node_modules/husky/lib/installer/bin install",
     "prisma": "prisma",
     "prisma:generate": "prisma generate",
-    "nexus:generate": "ts-node-dev --transpile-only apps/bridge-api/src/schema"
+    "nexus:generate": "ts-node-dev --transpile-only apps/bridge-api/src/schema",
+    "nexus:types:generate": "npx cnt --mq -f -o --schema apps/bridge-api/src/schema --output apps/bridge-api/src/schema/types"
   },
   "private": true,
   "dependencies": {

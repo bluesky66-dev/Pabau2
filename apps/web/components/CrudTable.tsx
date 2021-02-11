@@ -103,7 +103,7 @@ const CrudTable: FC<P> = ({
 
   const onFilterMarketingSource = () => {
     resetPagination()
-    setIsActive((e) => 0)
+    setIsActive((e) => Number(!e))
   }
 
   const onSearch = async (val) => {

@@ -41,7 +41,7 @@ const AddButton: FC<P> = ({
     }, WAIT_INTERVAL)
 
     return () => clearTimeout(timer)
-  }, [marketingSourceSearch, onSearch])
+  }, [marketingSourceSearch])
 
   const filterContent = (isMobile = false) => (
     <div className={styles.filterContent}>
@@ -59,10 +59,10 @@ const AddButton: FC<P> = ({
           }}
           value={isActive}
         >
-          <Radio value={true}>
+          <Radio value={1}>
             <span>Active</span>
           </Radio>
-          <Radio value={false}>
+          <Radio value={2}>
             <span>Inactive</span>
           </Radio>
         </Radio.Group>

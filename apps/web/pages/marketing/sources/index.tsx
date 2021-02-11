@@ -91,7 +91,7 @@ const schema: Schema = {
     },
     public: {
       full: 'Active',
-      type: 'boolean',
+      type: 'number',
       default: 1,
     },
   },
