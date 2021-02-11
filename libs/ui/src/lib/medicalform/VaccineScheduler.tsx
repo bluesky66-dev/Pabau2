@@ -6,14 +6,17 @@ import MedicalFormHeader from './MedicalFormHeader'
 import MedicalFormTitle from './MedicalFormTitle'
 
 interface P {
-  hideSideBar?: () => void
+  handleSave?: () => void
+  handleDelete?: () => void
 }
 
-const VaccineScheduler: FC<P> = ({ hideSideBar }) => {
+const VaccineScheduler: FC<P> = ({ handleSave, handleDelete }) => {
   const saveFunc = () => {
-    if (hideSideBar) {
-      hideSideBar()
-    }
+    handleSave?.()
+  }
+
+  const deleteFunc = () => {
+    handleDelete?.()
   }
   return (
     <BasicElement>
@@ -24,7 +27,11 @@ const VaccineScheduler: FC<P> = ({ hideSideBar }) => {
         title="Vaccine scheduler"
         desc="Description"
       />
-      <MedicalFormBottom saveFunc={saveFunc} needLeft={false} />
+      <MedicalFormBottom
+        saveFunc={saveFunc}
+        deleteFunc={deleteFunc}
+        needLeft={false}
+      />
     </BasicElement>
   )
 }

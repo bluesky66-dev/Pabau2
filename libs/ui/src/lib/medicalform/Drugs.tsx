@@ -10,15 +10,19 @@ import BasicElement from './BasicElement'
 import ElementQuestion from './ElementQuestion'
 
 interface P {
-  hideSideBar?: () => void
+  handleSave?: () => void
+  handleDelete?: () => void
 }
 
-const Drugs: FC<P> = ({ hideSideBar }) => {
+const Drugs: FC<P> = ({ handleSave, handleDelete }) => {
   const saveFunc = () => {
-    if (hideSideBar) {
-      hideSideBar()
-    }
+    handleSave?.()
   }
+
+  const deleteFunc = () => {
+    handleDelete?.()
+  }
+
   return (
     <BasicElement>
       <MedicalFormHeader title="component settings" />
@@ -31,7 +35,11 @@ const Drugs: FC<P> = ({ hideSideBar }) => {
       <MedicalFormBody>
         <ElementQuestion desc="Enter your question" title="Question" />
       </MedicalFormBody>
-      <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
+      <MedicalFormBottom
+        saveFunc={saveFunc}
+        deleteFunc={deleteFunc}
+        needLeft={true}
+      />
     </BasicElement>
   )
 }

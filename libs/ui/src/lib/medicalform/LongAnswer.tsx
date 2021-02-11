@@ -11,15 +11,19 @@ import ElementAdvanced from './ElementAdvanced'
 import ElementQuestion from './ElementQuestion'
 
 interface P {
-  hideSideBar?: () => void
+  handleSave?: () => void
+  handleDelete?: () => void
 }
 
-const LongAnswer: FC<P> = ({ hideSideBar }) => {
+const LongAnswer: FC<P> = ({ handleSave, handleDelete }) => {
   const saveFunc = () => {
-    if (hideSideBar) {
-      hideSideBar()
-    }
+    handleSave?.()
   }
+
+  const deleteFunc = () => {
+    handleDelete?.()
+  }
+
   return (
     <BasicElement>
       <MedicalFormHeader title="component settings" />
@@ -33,7 +37,11 @@ const LongAnswer: FC<P> = ({ hideSideBar }) => {
         <ElementQuestion desc="Enter your question" title="Question" />
         <ElementAdvanced />
       </MedicalFormBody>
-      <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
+      <MedicalFormBottom
+        saveFunc={saveFunc}
+        deleteFunc={deleteFunc}
+        needLeft={true}
+      />
     </BasicElement>
   )
 }

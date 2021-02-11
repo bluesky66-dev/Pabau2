@@ -11,14 +11,17 @@ import ElementQuestion from './ElementQuestion'
 import FileUpload from './FileUpload'
 
 interface P {
-  hideSideBar?: () => void
+  handleSave?: () => void
+  handleDelete?: () => void
 }
 
-const Drawing: FC<P> = ({ hideSideBar }) => {
+const Drawing: FC<P> = ({ handleSave, handleDelete }) => {
   const saveFunc = () => {
-    if (hideSideBar) {
-      hideSideBar()
-    }
+    handleSave?.()
+  }
+
+  const deleteFunc = () => {
+    handleDelete?.()
   }
 
   return (
@@ -37,7 +40,11 @@ const Drawing: FC<P> = ({ hideSideBar }) => {
           desc="Click or drag file to this area to upload"
         />
       </MedicalFormBody>
-      <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
+      <MedicalFormBottom
+        saveFunc={saveFunc}
+        deleteFunc={deleteFunc}
+        needLeft={true}
+      />
     </BasicElement>
   )
 }

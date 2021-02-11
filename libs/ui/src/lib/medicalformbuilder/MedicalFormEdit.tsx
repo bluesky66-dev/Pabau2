@@ -42,19 +42,16 @@ const copy = (source, destination, droppableSource, droppableDestination) => {
 const MedicalFormEdit: FC = () => {
   const [draggedFromNames, setDraggedFromNames] = useState([])
   const [selectComponent, setSelectComponent] = useState('')
-  // const [selectComponentId, setSelectComponentId] = useState('')
+  const [selectComponentId, setSelectComponentId] = useState('')
   const [displaySettingBar, setDisplaySettingBar] = useState(false)
-  const handlingComponentSetting = (componentName) => {
+  const handlingComponentSetting = (componentName, componentID) => {
     setDisplaySettingBar(componentName === '' ? false : true)
     if (componentName !== '') {
       setSelectComponent(componentName)
-      // setSelectComponentId(componentID)
+      setSelectComponentId(componentID)
     }
   }
-
-  // console.log('selectComponentId = ', selectComponentId)
-  // console.log('selectComponent = ', selectComponent)
-
+  console.log('selectComponentId = ', selectComponentId)
   const onDragEnd = React.useCallback(
     (result) => {
       const { source, destination } = result

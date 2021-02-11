@@ -13,10 +13,11 @@ import MedicalFormError from './MedicalFormError'
 import Options from './Options'
 
 interface P {
-  hideSideBar?: () => void
+  handleSave?: () => void
+  handleDelete?: () => void
 }
 
-const Dropdown: FC<P> = ({ hideSideBar }) => {
+const Dropdown: FC<P> = ({ handleSave, handleDelete }) => {
   const [addedItems, setAddedItems] = useState(0)
   const [errMsg, setErrMsg] = useState('')
   const eventhandler = (count) => {
@@ -25,13 +26,18 @@ const Dropdown: FC<P> = ({ hideSideBar }) => {
   }
 
   const saveFunc = () => {
-    if (hideSideBar && addedItems > 0) {
+    if (handleSave && addedItems > 0) {
       setErrMsg('')
-      hideSideBar()
+      handleSave()
     } else {
       setErrMsg('Please add an option')
     }
   }
+
+  const deleteFunc = () => {
+    handleDelete?.()
+  }
+
   return (
     <BasicElement>
       <MedicalFormHeader title="component settings" />
@@ -47,7 +53,11 @@ const Dropdown: FC<P> = ({ hideSideBar }) => {
         {errMsg !== '' && <MedicalFormError errMsg={errMsg} />}
         <ElementAdvanced />
       </MedicalFormBody>
-      <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
+      <MedicalFormBottom
+        saveFunc={saveFunc}
+        deleteFunc={deleteFunc}
+        needLeft={true}
+      />
     </BasicElement>
   )
 }

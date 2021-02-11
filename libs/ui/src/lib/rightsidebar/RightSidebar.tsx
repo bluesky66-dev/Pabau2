@@ -12,6 +12,7 @@ import MultipleChoice from '../medicalform/MultipleChoice'
 import ShortAnswer from '../medicalform/ShortAnswer'
 import Signature from '../medicalform/Signature'
 import SingleChoice from '../medicalform/SingleChoice'
+import TextBlock from '../medicalform/TextBlock'
 import TravelDestination from '../medicalform/TravelDestination'
 import VaccineHistory from '../medicalform/VaccineHistory'
 import VaccineScheduler from '../medicalform/VaccineScheduler'
@@ -20,7 +21,10 @@ import styles from './RightSidebar.module.less'
 interface P {
   componentName?: string
   display?: boolean
-  handlingComponentSetting?: (componentName?: string) => void
+  handlingComponentSetting?: (
+    componentName?: string,
+    componentID?: string
+  ) => void
 }
 
 const RightSidebar: FC<P> = ({
@@ -37,11 +41,14 @@ const RightSidebar: FC<P> = ({
     right: '0px',
   }
   const hideStyle = {
-    right: '-400px',
+    right: '-100%',
   }
-  const hideSideBar = () => {
+  const handleSave = () => {
     setIsVisible(false)
-    if (handlingComponentSetting) handlingComponentSetting('')
+    handlingComponentSetting?.('', '')
+  }
+  const handleDelete = () => {
+    setIsVisible(false)
   }
 
   return (
@@ -51,37 +58,58 @@ const RightSidebar: FC<P> = ({
         style={isVisible ? showStyle : hideStyle}
       >
         {componentName === 'MedicalConditions' && (
-          <Conditions hideSideBar={hideSideBar} />
+          <Conditions handleSave={handleSave} handleDelete={handleDelete} />
         )}
-        {componentName === 'Dob' && <Dob hideSideBar={hideSideBar} />}
-        {componentName === 'Drawing' && <Drawing hideSideBar={hideSideBar} />}
-        {componentName === 'Dropdown' && <Dropdown hideSideBar={hideSideBar} />}
-        {componentName === 'Drugs' && <Drugs hideSideBar={hideSideBar} />}
-        {componentName === 'LabTest' && <LabTest hideSideBar={hideSideBar} />}
+        {componentName === 'Dob' && (
+          <Dob handleSave={handleSave} handleDelete={handleDelete} />
+        )}
+        {componentName === 'Drawing' && (
+          <Drawing handleSave={handleSave} handleDelete={handleDelete} />
+        )}
+        {componentName === 'Dropdown' && (
+          <Dropdown handleSave={handleSave} handleDelete={handleDelete} />
+        )}
+        {componentName === 'Drugs' && (
+          <Drugs handleSave={handleSave} handleDelete={handleDelete} />
+        )}
+        {componentName === 'LabTest' && (
+          <LabTest handleSave={handleSave} handleDelete={handleDelete} />
+        )}
+        {componentName === 'TextBlock' && (
+          <TextBlock handleSave={handleSave} handleDelete={handleDelete} />
+        )}
         {componentName === 'LongAnswer' && (
-          <LongAnswer hideSideBar={hideSideBar} />
+          <LongAnswer handleSave={handleSave} handleDelete={handleDelete} />
         )}
-        {componentName === 'Heading' && <Heading hideSideBar={hideSideBar} />}
+        {componentName === 'Heading' && (
+          <Heading handleSave={handleSave} handleDelete={handleDelete} />
+        )}
         {componentName === 'MultipleChoice' && (
-          <MultipleChoice hideSideBar={hideSideBar} />
+          <MultipleChoice handleSave={handleSave} handleDelete={handleDelete} />
         )}
         {componentName === 'ShortAnswer' && (
-          <ShortAnswer hideSideBar={hideSideBar} />
+          <ShortAnswer handleSave={handleSave} handleDelete={handleDelete} />
         )}
         {componentName === 'Signature' && (
-          <Signature hideSideBar={hideSideBar} />
+          <Signature handleSave={handleSave} handleDelete={handleDelete} />
         )}
         {componentName === 'SingleChoice' && (
-          <SingleChoice hideSideBar={hideSideBar} />
+          <SingleChoice handleSave={handleSave} handleDelete={handleDelete} />
         )}
         {componentName === 'TravelDestination' && (
-          <TravelDestination hideSideBar={hideSideBar} />
+          <TravelDestination
+            handleSave={handleSave}
+            handleDelete={handleDelete}
+          />
         )}
         {componentName === 'VaccineHistory' && (
-          <VaccineHistory hideSideBar={hideSideBar} />
+          <VaccineHistory handleSave={handleSave} handleDelete={handleDelete} />
         )}
         {componentName === 'VaccineScheduler' && (
-          <VaccineScheduler hideSideBar={hideSideBar} />
+          <VaccineScheduler
+            handleSave={handleSave}
+            handleDelete={handleDelete}
+          />
         )}
       </div>
     </div>

@@ -6,10 +6,15 @@ import styles from './MedicalForm.module.less'
 
 interface P {
   needLeft?: boolean
+  deleteFunc?: () => void
   saveFunc?: () => void
 }
 
-export const MedicalFormBottom: FC<P> = ({ needLeft, saveFunc }) => {
+export const MedicalFormBottom: FC<P> = ({
+  needLeft,
+  deleteFunc,
+  saveFunc,
+}) => {
   return (
     <div className={styles.formItem} style={{ borderBottom: 'none' }}>
       <div className={`${styles.formBottom} ${styles.formCommon}`}>
@@ -23,6 +28,7 @@ export const MedicalFormBottom: FC<P> = ({ needLeft, saveFunc }) => {
           <Button
             type={ButtonTypes.default}
             icon={<DeleteOutlined />}
+            onClick={deleteFunc}
             size="small"
           >
             Delete

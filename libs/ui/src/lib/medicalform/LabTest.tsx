@@ -10,14 +10,17 @@ import BasicElement from './BasicElement'
 import MultiSelect from './MultiSelect'
 
 interface P {
-  hideSideBar?: () => void
+  handleSave?: () => void
+  handleDelete?: () => void
 }
 
-const LabTest: FC<P> = ({ hideSideBar }) => {
+const LabTest: FC<P> = ({ handleSave, handleDelete }) => {
   const saveFunc = () => {
-    if (hideSideBar) {
-      hideSideBar()
-    }
+    handleSave?.()
+  }
+
+  const deleteFunc = () => {
+    handleDelete?.()
   }
   const optionLabels = [
     { id: 1, label: 'Accent Prime' },
@@ -41,7 +44,11 @@ const LabTest: FC<P> = ({ hideSideBar }) => {
       <MedicalFormBody>
         <MultiSelect title="Question" options={optionLabels} />
       </MedicalFormBody>
-      <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
+      <MedicalFormBottom
+        saveFunc={saveFunc}
+        deleteFunc={deleteFunc}
+        needLeft={true}
+      />
     </BasicElement>
   )
 }

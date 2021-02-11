@@ -5,15 +5,19 @@ import MedicalFormBottom from './MedicalFormBottom'
 import MedicalFormTitle from './MedicalFormTitle'
 
 interface P {
-  hideSideBar?: () => void
+  handleSave?: () => void
+  handleDelete?: () => void
 }
 
-const Dob: FC<P> = ({ hideSideBar }) => {
+const Dob: FC<P> = ({ handleSave, handleDelete }) => {
   const saveFunc = () => {
-    if (hideSideBar) {
-      hideSideBar()
-    }
+    handleSave?.()
   }
+
+  const deleteFunc = () => {
+    handleDelete?.()
+  }
+
   return (
     <div className={styles.mainBody}>
       <div className={styles.formItem}>
@@ -30,7 +34,11 @@ const Dob: FC<P> = ({ hideSideBar }) => {
         />
       </div>
       <div className={styles.formItem} style={{ borderBottom: 'none' }}>
-        <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
+        <MedicalFormBottom
+          saveFunc={saveFunc}
+          deleteFunc={deleteFunc}
+          needLeft={true}
+        />
       </div>
     </div>
   )

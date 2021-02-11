@@ -2,7 +2,7 @@ import {
   MedicalFormBody,
   MedicalFormBottom,
   MedicalFormHeader,
-  MedicalFormTitle,
+  MedicalFormTitle
 } from '@pabau/ui'
 import React, { FC, useState } from 'react'
 import singleChoiceIcon from '../../assets/images/medicalform_singlechoice.svg'
@@ -13,10 +13,11 @@ import MedicalFormError from './MedicalFormError'
 import Options from './Options'
 
 interface P {
-  hideSideBar?: () => void
+  handleSave?: () => void
+  handleDelete?: () => void
 }
 
-const SingleChoice: FC<P> = ({ hideSideBar }) => {
+const SingleChoice: FC<P> = ({ handleSave, handleDelete }) => {
   const [addedItems, setAddedItems] = useState(0)
   const [errMsg, setErrMsg] = useState('')
   const eventhandler = (count) => {
@@ -25,12 +26,15 @@ const SingleChoice: FC<P> = ({ hideSideBar }) => {
   }
 
   const saveFunc = () => {
-    if (hideSideBar && addedItems > 0) {
+    if (handleSave && addedItems > 0) {
       setErrMsg('')
-      hideSideBar()
+      handleSave()
     } else {
       setErrMsg('Please add an option')
     }
+  }
+  const deleteFunc = () => {
+    handleDelete?.()
   }
   return (
     <BasicElement>
@@ -47,7 +51,11 @@ const SingleChoice: FC<P> = ({ hideSideBar }) => {
         {errMsg !== '' && <MedicalFormError errMsg={errMsg} />}
         <ElementAdvanced />
       </MedicalFormBody>
-      <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
+      <MedicalFormBottom
+        saveFunc={saveFunc}
+        deleteFunc={deleteFunc}
+        needLeft={true}
+      />
     </BasicElement>
   )
 }

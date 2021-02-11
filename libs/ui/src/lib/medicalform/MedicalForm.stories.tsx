@@ -71,6 +71,7 @@ import MultipleChoice from './MultipleChoice'
 import ShortAnswer from './ShortAnswer'
 import Signature from './Signature'
 import SingleChoice from './SingleChoice'
+import TextBlock from './TextBlock'
 import TravelDestination from './TravelDestination'
 import VaccineHistory from './VaccineHistory'
 import VaccineScheduler from './VaccineScheduler'
@@ -84,6 +85,7 @@ export const HeadingForm = () => <Heading />
 export const ShortAnswerForm = () => <ShortAnswer />
 export const LongAnswerForm = () => <LongAnswer />
 export const SingleChoiceForm = () => <SingleChoice />
+export const TextBlockForm = () => <TextBlock />
 export const MultipleChoicesForm = () => <MultipleChoice />
 export const DropdownForm = () => <Dropdown />
 export const SignatureForm = () => <Signature />

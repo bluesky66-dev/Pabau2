@@ -24,7 +24,10 @@ interface formParams {
 
 interface P {
   draggedFromNames?: formParams[]
-  handlingComponentSetting?: (componentName?: string) => void
+  handlingComponentSetting?: (
+    componentName?: string,
+    componentID?: string
+  ) => void
 }
 
 function usePrevious(value) {
@@ -39,7 +42,7 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
   const { draggedFromNames, handlingComponentSetting } = props
   const [activatedComponentID, setActivatedComponentID] = useState('')
   const [activatedComponent, setActivatedComponent] = useState('')
-  const prevActiveComponent = usePrevious(activatedComponent)
+  const prevActiveComponentID = usePrevious(activatedComponentID)
   const clearActivatedComponent = () => {
     setActivatedComponentID('')
     setActivatedComponent('')
@@ -55,12 +58,9 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
   }
 
   useEffect(() => {
-    // console.log(prevActiveComponent)
-    // console.log('new')
-    // console.log(activatedComponent)
-    if (prevActiveComponent !== activatedComponent)
-      handlingComponentSetting?.(activatedComponent)
-  }, [prevActiveComponent, handlingComponentSetting, activatedComponent])
+    if (prevActiveComponentID !== activatedComponentID)
+      handlingComponentSetting?.(activatedComponent, activatedComponentID)
+  }, [prevActiveComponentID, handlingComponentSetting, activatedComponent])
 
   return (
     <Droppable droppableId="MainSide">

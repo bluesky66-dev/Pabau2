@@ -5,18 +5,15 @@ import {
   MedicalFormTitle,
 } from '@pabau/ui'
 import React, { FC } from 'react'
-import shortAnswerIcon from '../../assets/images/medicalform_shortanswer.svg'
+import textBlockIcon from '../../assets/images/medicalform_textblock.svg'
 import BasicElement from './BasicElement'
-import ElementAdvanced from './ElementAdvanced'
-import ElementQuestion from './ElementQuestion'
-import ElementTypeOption from './ElementTypeOption'
+import ElementTextBox from './ElementTextBox'
 
 interface P {
   handleSave?: () => void
   handleDelete?: () => void
 }
-
-const ShortAnswer: FC<P> = ({ handleSave, handleDelete }) => {
+const TextBlock: FC<P> = ({ handleSave, handleDelete }) => {
   const saveFunc = () => {
     handleSave?.()
   }
@@ -24,28 +21,25 @@ const ShortAnswer: FC<P> = ({ handleSave, handleDelete }) => {
   const deleteFunc = () => {
     handleDelete?.()
   }
-
   return (
     <BasicElement>
       <MedicalFormHeader title="component settings" />
       <MedicalFormTitle
-        iconUrl={shortAnswerIcon}
+        iconUrl={textBlockIcon}
         bgcolor="#6383F1"
-        title="Short answer"
-        desc="Ask a question with a short answer"
+        title="Text Block"
+        desc="Create a text block for a section"
       />
       <MedicalFormBody>
-        <ElementQuestion desc="Enter your question" title="Question" />
-        <ElementTypeOption title="Input type" />
-        <ElementAdvanced />
+        <ElementTextBox desc="Enter your text" title="Text" />
       </MedicalFormBody>
       <MedicalFormBottom
         saveFunc={saveFunc}
         deleteFunc={deleteFunc}
-        needLeft={true}
+        needLeft={false}
       />
     </BasicElement>
   )
 }
 
-export default ShortAnswer
+export default TextBlock
