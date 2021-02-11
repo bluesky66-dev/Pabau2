@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 import InnerConditions from '../medicalform/InnerConditions'
 import InnerDrawing from '../medicalform/InnerDrawing'
@@ -27,10 +27,19 @@ interface P {
   handlingComponentSetting?: (componentName?: string) => void
 }
 
+function usePrevious(value) {
+  const ref = useRef()
+  useEffect(() => {
+    ref.current = value
+  })
+  return ref.current
+}
+
 const MedicalFormEditMain: FC<P> = ({ ...props }) => {
   const { draggedFromNames, handlingComponentSetting } = props
   const [activatedComponentID, setActivatedComponentID] = useState('')
   const [activatedComponent, setActivatedComponent] = useState('')
+  const prevActiveComponent = usePrevious(activatedComponent)
   const clearActivatedComponent = () => {
     setActivatedComponentID('')
     setActivatedComponent('')
@@ -46,8 +55,12 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
   }
 
   useEffect(() => {
-    handlingComponentSetting?.(activatedComponent)
-  }, [handlingComponentSetting, activatedComponent])
+    // console.log(prevActiveComponent)
+    // console.log('new')
+    // console.log(activatedComponent)
+    if (prevActiveComponent !== activatedComponent)
+      handlingComponentSetting?.(activatedComponent)
+  }, [prevActiveComponent, handlingComponentSetting, activatedComponent])
 
   return (
     <Droppable droppableId="MainSide">
