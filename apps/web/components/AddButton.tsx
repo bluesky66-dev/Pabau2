@@ -62,7 +62,7 @@ const AddButton: FC<P> = ({
           <Radio value={1}>
             <span>Active</span>
           </Radio>
-          <Radio value={2}>
+          <Radio value={0}>
             <span>Inactive</span>
           </Radio>
         </Radio.Group>
