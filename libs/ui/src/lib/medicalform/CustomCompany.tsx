@@ -8,7 +8,6 @@ import React, { FC } from 'react'
 import customCompanyIcon from '../../assets/images/medicalform_custom_company.svg'
 import CustomElement from './CustomElement'
 import ElementAdvanced from './ElementAdvanced'
-import ElementQuestion from './ElementQuestion'
 import ElementTypeOption from './ElementTypeOption'
 
 const CustomCompany: FC = () => {
@@ -22,7 +21,7 @@ const CustomCompany: FC = () => {
         desc="Confirm a clients company"
       />
       <MedicalFormBody>
-        <ElementQuestion desc="Enter your question" title="Question" />
+        {/* <ElementQuestion desc="Enter your question" title="Question" /> */}
         <ElementTypeOption title="Input type" />
         <ElementAdvanced />
       </MedicalFormBody>

@@ -8,7 +8,6 @@ import React, { FC } from 'react'
 import customPostalAddressIcon from '../../assets/images/medicalform_custom_postal_address.svg'
 import CustomElement from './CustomElement'
 import ElementAdvanced from './ElementAdvanced'
-import ElementQuestion from './ElementQuestion'
 import ElementTypeOption from './ElementTypeOption'
 
 const CustomPostalAddress: FC = () => {
@@ -22,7 +21,7 @@ const CustomPostalAddress: FC = () => {
         desc="Confirm a clients postal address"
       />
       <MedicalFormBody>
-        <ElementQuestion desc="Enter your question" title="Question" />
+        {/* <ElementQuestion desc="Enter your question" title="Question" /> */}
         <ElementTypeOption title="Input type" />
         <ElementAdvanced />
       </MedicalFormBody>

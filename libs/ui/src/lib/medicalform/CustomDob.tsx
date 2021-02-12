@@ -8,7 +8,6 @@ import React, { FC } from 'react'
 import customDobIcon from '../../assets/images/medicalform_custom_dob.svg'
 import CustomElement from './CustomElement'
 import ElementAdvanced from './ElementAdvanced'
-import ElementQuestion from './ElementQuestion'
 import ElementTypeOption from './ElementTypeOption'
 
 const CustomDob: FC = () => {
@@ -22,7 +21,7 @@ const CustomDob: FC = () => {
         desc="Confirm a clients birth date"
       />
       <MedicalFormBody>
-        <ElementQuestion desc="Enter your question" title="Question" />
+        {/* <ElementQuestion desc="Enter your question" title="Question" /> */}
         <ElementTypeOption title="Input type" />
         <ElementAdvanced />
       </MedicalFormBody>

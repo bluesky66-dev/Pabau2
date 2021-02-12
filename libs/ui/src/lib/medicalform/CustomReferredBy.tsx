@@ -8,7 +8,6 @@ import React, { FC } from 'react'
 import customReferIcon from '../../assets/images/medicalform_custom_refer.svg'
 import CustomElement from './CustomElement'
 import ElementAdvanced from './ElementAdvanced'
-import ElementQuestion from './ElementQuestion'
 import ElementTypeOption from './ElementTypeOption'
 
 const CustomReferredBy: FC = () => {
@@ -22,7 +21,7 @@ const CustomReferredBy: FC = () => {
         desc="Where did they hear of you"
       />
       <MedicalFormBody>
-        <ElementQuestion desc="Enter your question" title="Question" />
+        {/* <ElementQuestion desc="Enter your question" title="Question" /> */}
         <ElementTypeOption title="Input type" />
         <ElementAdvanced />
       </MedicalFormBody>

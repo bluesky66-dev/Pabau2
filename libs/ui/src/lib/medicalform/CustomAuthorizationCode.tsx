@@ -8,7 +8,6 @@ import React, { FC } from 'react'
 import dobIcon from '../../assets/images/medicalform_dob.svg'
 import CustomElement from './CustomElement'
 import ElementAdvanced from './ElementAdvanced'
-import ElementQuestion from './ElementQuestion'
 import ElementTypeOption from './ElementTypeOption'
 
 const CustomAuthorizationCode: FC = () => {
@@ -22,7 +21,7 @@ const CustomAuthorizationCode: FC = () => {
         desc="Cliens can opt in to marketing"
       />
       <MedicalFormBody>
-        <ElementQuestion desc="Enter your question" title="Question" />
+        {/* <ElementQuestion desc="Enter your question" title="Question" /> */}
         <ElementTypeOption title="Input type" />
         <ElementAdvanced />
       </MedicalFormBody>
