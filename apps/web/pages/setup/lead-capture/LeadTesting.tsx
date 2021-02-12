@@ -14,7 +14,7 @@ import { Image } from 'antd'
 import PabauLogo from '../../../assets/images/logo.svg'
 import LeadTestWaiting from './WaitingRequest'
 
-export function LeadTesting() {
+export const LeadTesting: React.FC = () => {
   const [testTrigger, setTestTrigger] = useState(false)
 
   return (

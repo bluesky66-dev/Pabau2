@@ -8,12 +8,10 @@ import {
   ButtonTypes,
 } from '@pabau/ui'
 import styles from './lead-forms.module.less'
-import {
-  LeadSettings,
-  LeadIntegration,
-  LeadTesting,
-  LeadResult,
-} from './lead-capture/index'
+import LeadSettings from './lead-capture/LeadSetting'
+import LeadIntegration from './lead-capture/LeadIntegration'
+import LeadTesting from './lead-capture/LeadTesting'
+import LeadResult from './lead-capture/LeadResult'
 import LeadCustomizeForm from './lead-capture/lead-forms/LeadCustomizeForm'
 import { FlagOutlined, HomeOutlined, ToolOutlined } from '@ant-design/icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

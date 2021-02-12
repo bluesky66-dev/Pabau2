@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons'
 import { Radio } from 'antd'
 
-export function LeadIntegration() {
+const LeadIntegration: React.FC = () => {
   const [captureLeadIntegrationStep, setCaptureLeadIntegrationStep] = useState(
     'Documentation'
   )

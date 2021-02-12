@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { CheckCircleFilled, FilePdfOutlined } from '@ant-design/icons'
 import { Input } from '@pabau/ui'
 
-export function LeadResult() {
+export const LeadResult: React.FC = () => {
   return (
     <div className={styles.successAllContentCenter}>
       <div className={styles.textAllCenter}>

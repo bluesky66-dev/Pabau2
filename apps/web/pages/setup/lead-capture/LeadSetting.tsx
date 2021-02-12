@@ -10,7 +10,7 @@ interface LeadSettingsInterface {
   captureLeadStepChange: (step: string) => void
 }
 
-export const LeadSettings: React.FC<LeadSettingsInterface> = ({
+const LeadSettings: React.FC<LeadSettingsInterface> = ({
   captureLeadStepChange,
 }) => {
   const [captureLeadStep, setCaptureLeadStep] = useState('API')
