@@ -2,14 +2,10 @@ import React, { FC, useEffect, useState } from 'react'
 import styles from './InnerMedicalForm.module.less'
 
 interface P {
-  handleId?: number
+  handleId?: string
   activate?: boolean
   componentName?: string
-  handlingSelectComponent?: (
-    isActive?: boolean,
-    handleId?: number,
-    componentName?: string
-  ) => void
+  handlingSelectForm?: (isActive?: boolean, handleId?: string) => void
 }
 
 const InnerElement: FC<P> = (props) => {
@@ -19,12 +15,8 @@ const InnerElement: FC<P> = (props) => {
   }, [props.activate])
 
   const activeComponent = () => {
-    if (props.handlingSelectComponent) {
-      props.handlingSelectComponent(
-        !clicked,
-        props.handleId,
-        props.componentName
-      )
+    if (props.handlingSelectForm) {
+      props.handlingSelectForm(!clicked, props.handleId)
     }
   }
   return (

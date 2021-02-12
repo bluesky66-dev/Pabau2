@@ -1,33 +1,31 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
-import InnerConditions from '../medicalform/InnerConditions'
-import InnerDrawing from '../medicalform/InnerDrawing'
-import InnerDropdown from '../medicalform/InnerDropdown'
-import InnerDrugs from '../medicalform/InnerDrugs'
+// import InnerDrawing from '../medicalform/InnerDrawing'
+// import InnerDropdown from '../medicalform/InnerDropdown'
+// import InnerDrugs from '../medicalform/InnerDrugs'
 import InnerHeading from '../medicalform/InnerHeading'
-import InnerLabTest from '../medicalform/InnerLabTest'
-import InnerLongAnswer from '../medicalform/InnerLongAnswer'
-import InnerMultiChoice from '../medicalform/InnerMultiChoice'
-import InnerShortAnswer from '../medicalform/InnerShortAnswer'
-import InnerSignature from '../medicalform/InnerSignature'
-import InnerSingleChoice from '../medicalform/InnerSingleChoice'
-import InnerTextBlock from '../medicalform/InnerTextBlock'
-import InnerTravelDestination from '../medicalform/InnerTravelDestination'
-import InnerVaccineHistory from '../medicalform/InnerVaccineHistory'
-import InnerVaccineScheduler from '../medicalform/InnerVaccineScheduler'
+// import InnerLabTest from '../medicalform/InnerLabTest'
+// import InnerLongAnswer from '../medicalform/InnerLongAnswer'
+// import InnerMultiChoice from '../medicalform/InnerMultiChoice'
+// import InnerShortAnswer from '../medicalform/InnerShortAnswer'
+// import InnerSignature from '../medicalform/InnerSignature'
+// import InnerSingleChoice from '../medicalform/InnerSingleChoice'
+// import InnerTextBlock from '../medicalform/InnerTextBlock'
+// import InnerTravelDestination from '../medicalform/InnerTravelDestination'
+// import InnerVaccineHistory from '../medicalform/InnerVaccineHistory'
+// import InnerVaccineScheduler from '../medicalform/InnerVaccineScheduler'
 import styles from './MedicalFormBuilder.module.less'
 
 interface formParams {
   id: number
   formName: string
+  txt1: ''
+  arr1: []
 }
 
 interface P {
-  draggedFromNames?: formParams[]
-  handlingComponentSetting?: (
-    componentName?: string,
-    componentID?: string
-  ) => void
+  draggedForms?: formParams[]
+  handlingFormSetting?: (formID?: string) => void
 }
 
 function usePrevious(value) {
@@ -39,33 +37,25 @@ function usePrevious(value) {
 }
 
 const MedicalFormEditMain: FC<P> = ({ ...props }) => {
-  const { draggedFromNames, handlingComponentSetting } = props
-  const [activatedComponentID, setActivatedComponentID] = useState('')
-  const [activatedComponent, setActivatedComponent] = useState('')
-  const prevActiveComponentID = usePrevious(activatedComponentID)
-  const clearActivatedComponent = () => {
-    setActivatedComponentID('')
-    setActivatedComponent('')
+  const { draggedForms, handlingFormSetting } = props
+  const [activatedFormID, setActivatedFormID] = useState('')
+  const prevActiveFormID = usePrevious(activatedFormID)
+  const clearActivatedForm = () => {
+    setActivatedFormID('')
   }
 
-  const handlingSelectComponent = (isActive, handleId, componentName) => {
+  const handlingSelectForm = (isActive, handleId) => {
     if (isActive) {
-      setActivatedComponentID(handleId)
-      setActivatedComponent(componentName)
+      setActivatedFormID(handleId)
     } else {
-      clearActivatedComponent()
+      clearActivatedForm()
     }
   }
 
   useEffect(() => {
-    if (prevActiveComponentID !== activatedComponentID)
-      handlingComponentSetting?.(activatedComponent, activatedComponentID)
-  }, [
-    prevActiveComponentID,
-    handlingComponentSetting,
-    activatedComponent,
-    activatedComponentID,
-  ])
+    if (prevActiveFormID !== activatedFormID)
+      handlingFormSetting?.(activatedFormID)
+  }, [prevActiveFormID, handlingFormSetting, activatedFormID])
 
   return (
     <Droppable droppableId="MainSide">
@@ -74,7 +64,7 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
           className={styles.medicalFormEditMainPanel}
           ref={provided.innerRef}
         >
-          {draggedFromNames?.map((form, index) => {
+          {draggedForms?.map((form, index) => {
             return (
               <Draggable key={form.id} draggableId={form.id} index={index}>
                 {(provided, snapshot) => (
@@ -93,19 +83,19 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
                       <InnerHeading
                         required={false}
                         activate={
-                          activatedComponentID === `${form.id}` ? true : false
+                          activatedFormID === `${form.id}` ? true : false
                         }
-                        handleId={form.id}
-                        handlingSelectComponent={handlingSelectComponent}
+                        handlingSelectForm={handlingSelectForm}
+                        formData={form}
                       />
                     )}
-                    {form.formName === 'ShortAnswer' && (
+                    {/* {form.formName === 'ShortAnswer' && (
                       <InnerShortAnswer
                         required={false}
                         activate={
                           activatedComponentID === `${form.id}` ? true : false
                         }
-                        handleId={form.id}
+                        componentData={form}
                         handlingSelectComponent={handlingSelectComponent}
                       />
                     )}
@@ -115,7 +105,7 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
                         activate={
                           activatedComponentID === `${form.id}` ? true : false
                         }
-                        handleId={form.id}
+                        componentData={form}
                         handlingSelectComponent={handlingSelectComponent}
                       />
                     )}
@@ -125,7 +115,7 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
                         activate={
                           activatedComponentID === `${form.id}` ? true : false
                         }
-                        handleId={form.id}
+                        componentData={form}
                         handlingSelectComponent={handlingSelectComponent}
                       />
                     )}
@@ -135,7 +125,7 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
                         activate={
                           activatedComponentID === `${form.id}` ? true : false
                         }
-                        handleId={form.id}
+                        componentData={form}
                         handlingSelectComponent={handlingSelectComponent}
                       />
                     )}
@@ -145,7 +135,7 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
                         activate={
                           activatedComponentID === `${form.id}` ? true : false
                         }
-                        handleId={form.id}
+                        componentData={form}
                         handlingSelectComponent={handlingSelectComponent}
                       />
                     )}
@@ -155,7 +145,7 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
                         activate={
                           activatedComponentID === `${form.id}` ? true : false
                         }
-                        handleId={form.id}
+                        componentData={form}
                         handlingSelectComponent={handlingSelectComponent}
                       />
                     )}
@@ -165,7 +155,7 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
                         activate={
                           activatedComponentID === `${form.id}` ? true : false
                         }
-                        handleId={form.id}
+                        componentData={form}
                         handlingSelectComponent={handlingSelectComponent}
                       />
                     )}
@@ -175,7 +165,7 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
                         activate={
                           activatedComponentID === `${form.id}` ? true : false
                         }
-                        handleId={form.id}
+                        componentData={form}
                         handlingSelectComponent={handlingSelectComponent}
                       />
                     )}
@@ -185,7 +175,7 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
                         activate={
                           activatedComponentID === `${form.id}` ? true : false
                         }
-                        handleId={form.id}
+                        componentData={form}
                         handlingSelectComponent={handlingSelectComponent}
                       />
                     )}
@@ -195,7 +185,7 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
                         activate={
                           activatedComponentID === `${form.id}` ? true : false
                         }
-                        handleId={form.id}
+                        componentData={form}
                         handlingSelectComponent={handlingSelectComponent}
                       />
                     )}
@@ -205,7 +195,7 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
                         activate={
                           activatedComponentID === `${form.id}` ? true : false
                         }
-                        handleId={form.id}
+                        componentData={form}
                         handlingSelectComponent={handlingSelectComponent}
                       />
                     )}
@@ -215,7 +205,7 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
                         activate={
                           activatedComponentID === `${form.id}` ? true : false
                         }
-                        handleId={form.id}
+                        componentData={form}
                         handlingSelectComponent={handlingSelectComponent}
                       />
                     )}
@@ -225,7 +215,7 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
                         activate={
                           activatedComponentID === `${form.id}` ? true : false
                         }
-                        handleId={form.id}
+                        componentData={form}
                         handlingSelectComponent={handlingSelectComponent}
                       />
                     )}
@@ -235,10 +225,10 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
                         activate={
                           activatedComponentID === `${form.id}` ? true : false
                         }
-                        handleId={form.id}
+                        componentData={form}
                         handlingSelectComponent={handlingSelectComponent}
                       />
-                    )}
+                    )} */}
                   </div>
                 )}
               </Draggable>

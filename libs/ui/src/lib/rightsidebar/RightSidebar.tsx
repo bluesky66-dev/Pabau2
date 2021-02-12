@@ -19,22 +19,17 @@ import VaccineScheduler from '../medicalform/VaccineScheduler'
 import styles from './RightSidebar.module.less'
 
 interface P {
-  componentName?: string
-  componentID?: string
+  selectedForm?: any
   display?: boolean
-  handlingComponentSetting?: (
-    componentName?: string,
-    componentID?: string
-  ) => void
-  handlingDeleteComponent?: (componentID?: string) => void
+  handlingFormSetting?: (componentID?: string) => void
+  handlingDeleteForm?: (componentID?: string) => void
 }
 
 const RightSidebar: FC<P> = ({
-  componentName,
-  componentID,
+  selectedForm,
   display,
-  handlingComponentSetting,
-  handlingDeleteComponent,
+  handlingFormSetting,
+  handlingDeleteForm,
 }) => {
   const [isVisible, setIsVisible] = useState(display)
   useEffect(() => {
@@ -49,11 +44,11 @@ const RightSidebar: FC<P> = ({
   }
   const handleSave = () => {
     setIsVisible(false)
-    handlingComponentSetting?.('', '')
+    handlingFormSetting?.('')
   }
   const handleDelete = () => {
     setIsVisible(false)
-    handlingDeleteComponent?.(componentID)
+    handlingDeleteForm?.(selectedForm.id)
   }
 
   return (
@@ -62,55 +57,59 @@ const RightSidebar: FC<P> = ({
         className={styles.componentDiv}
         style={isVisible ? showStyle : hideStyle}
       >
-        {componentName === 'MedicalConditions' && (
+        {selectedForm.formName === 'MedicalConditions' && (
           <Conditions handleSave={handleSave} handleDelete={handleDelete} />
         )}
-        {componentName === 'Dob' && (
+        {selectedForm.formName === 'Dob' && (
           <Dob handleSave={handleSave} handleDelete={handleDelete} />
         )}
-        {componentName === 'Drawing' && (
+        {selectedForm.formName === 'Drawing' && (
           <Drawing handleSave={handleSave} handleDelete={handleDelete} />
         )}
-        {componentName === 'Dropdown' && (
+        {selectedForm.formName === 'Dropdown' && (
           <Dropdown handleSave={handleSave} handleDelete={handleDelete} />
         )}
-        {componentName === 'Drugs' && (
+        {selectedForm.formName === 'Drugs' && (
           <Drugs handleSave={handleSave} handleDelete={handleDelete} />
         )}
-        {componentName === 'LabTest' && (
+        {selectedForm.formName === 'LabTest' && (
           <LabTest handleSave={handleSave} handleDelete={handleDelete} />
         )}
-        {componentName === 'TextBlock' && (
+        {selectedForm.formName === 'TextBlock' && (
           <TextBlock handleSave={handleSave} handleDelete={handleDelete} />
         )}
-        {componentName === 'LongAnswer' && (
+        {selectedForm.formName === 'LongAnswer' && (
           <LongAnswer handleSave={handleSave} handleDelete={handleDelete} />
         )}
-        {componentName === 'Heading' && (
-          <Heading handleSave={handleSave} handleDelete={handleDelete} />
+        {selectedForm.formName === 'Heading' && (
+          <Heading
+            handleSave={handleSave}
+            handleDelete={handleDelete}
+            selectedForm={selectedForm}
+          />
         )}
-        {componentName === 'MultipleChoice' && (
+        {selectedForm.formName === 'MultipleChoice' && (
           <MultipleChoice handleSave={handleSave} handleDelete={handleDelete} />
         )}
-        {componentName === 'ShortAnswer' && (
+        {selectedForm.formName === 'ShortAnswer' && (
           <ShortAnswer handleSave={handleSave} handleDelete={handleDelete} />
         )}
-        {componentName === 'Signature' && (
+        {selectedForm.formName === 'Signature' && (
           <Signature handleSave={handleSave} handleDelete={handleDelete} />
         )}
-        {componentName === 'SingleChoice' && (
+        {selectedForm.formName === 'SingleChoice' && (
           <SingleChoice handleSave={handleSave} handleDelete={handleDelete} />
         )}
-        {componentName === 'TravelDestination' && (
+        {selectedForm.formName === 'TravelDestination' && (
           <TravelDestination
             handleSave={handleSave}
             handleDelete={handleDelete}
           />
         )}
-        {componentName === 'VaccineHistory' && (
+        {selectedForm.formName === 'VaccineHistory' && (
           <VaccineHistory handleSave={handleSave} handleDelete={handleDelete} />
         )}
-        {componentName === 'VaccineScheduler' && (
+        {selectedForm.formName === 'VaccineScheduler' && (
           <VaccineScheduler
             handleSave={handleSave}
             handleDelete={handleDelete}

@@ -35,30 +35,31 @@ const copy = (source, destination, droppableSource, droppableDestination) => {
   destination.splice(droppableDestination.index, 0, {
     ...item,
     id: uuidv4(),
+    txt1: '',
+    arr1: [],
   })
   return destination
 }
 
 const MedicalFormEdit: FC = () => {
-  const [draggedFromNames, setDraggedFromNames] = useState([])
-  const [selectComponent, setSelectComponent] = useState('')
-  const [selectComponentId, setSelectComponentId] = useState('')
+  const [draggedForms, setDraggedForms] = useState([])
+  // const [selectComponent, setSelectComponent] = useState('')
+  // const [selectComponentId, setSelectComponentId] = useState('')
+  const [selectedForm, setSelectedForm] = useState({})
   const [displaySettingBar, setDisplaySettingBar] = useState(false)
-  const handlingComponentSetting = (componentName, componentID) => {
+  const handlingFormSetting = (componentID) => {
     setDisplaySettingBar(componentID === '' ? false : true)
     if (componentID !== '') {
-      setSelectComponent(componentName)
-      setSelectComponentId(componentID)
+      const sel_form = draggedForms.filter((item) => item['id'] === componentID)
+      setSelectedForm(sel_form ? sel_form[0] : {})
     }
   }
-  const handlingDeleteComponent = (componentID) => {
-    handlingComponentSetting('', '')
-    setDraggedFromNames(
-      draggedFromNames.filter((item) => item['id'] !== componentID)
-    )
+  const handlingDeleteForm = (componentID) => {
+    handlingFormSetting('')
+    setDraggedForms(draggedForms.filter((item) => item['id'] !== componentID))
   }
 
-  console.log('selectComponentId = ', selectComponentId)
+  console.log('selectedForm = ', selectedForm)
   const onDragEnd = React.useCallback(
     (result) => {
       const { source, destination } = result
@@ -67,12 +68,12 @@ const MedicalFormEdit: FC = () => {
       }
       switch (source.droppableId) {
         case destination.droppableId:
-          setDraggedFromNames((state) =>
+          setDraggedForms((state) =>
             reorder(state, source.index, destination.index)
           )
           break
         case 'LeftSide':
-          setDraggedFromNames((state) =>
+          setDraggedForms((state) =>
             copy(formNames, state, source, destination)
           )
           break
@@ -80,7 +81,7 @@ const MedicalFormEdit: FC = () => {
           break
       }
     },
-    [setDraggedFromNames]
+    [setDraggedForms]
   )
   return (
     <Row>
@@ -90,17 +91,16 @@ const MedicalFormEdit: FC = () => {
         </Col>
         <Col span={12}>
           <MedicalFormEditMain
-            draggedFromNames={draggedFromNames}
-            handlingComponentSetting={handlingComponentSetting}
+            draggedForms={draggedForms}
+            handlingFormSetting={handlingFormSetting}
           />
         </Col>
         <Col span={6}>
           <RightSidebar
-            componentName={selectComponent}
-            componentID={selectComponentId}
+            selectedForm={selectedForm}
             display={displaySettingBar}
-            handlingComponentSetting={handlingComponentSetting}
-            handlingDeleteComponent={handlingDeleteComponent}
+            handlingFormSetting={handlingFormSetting}
+            handlingDeleteForm={handlingDeleteForm}
           />
         </Col>
       </DragDropContext>
