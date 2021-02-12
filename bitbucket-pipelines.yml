@@ -24,6 +24,7 @@ pipelines:
             - nodemodules
             - yarncustom
           script:
+            - /bin/bash -c 'yarn audit --no-progress --non-interactive; [[ $? -gt 2 ]] && exit 1 || exit 0'
 
             # Get an oauth access token using the client credentials, parsing out the token with jq.
             - apt-get update && apt-get install -y curl jq
@@ -98,9 +99,24 @@ pipelines:
             - nodemodules
             - yarncustom
           script:
+            - /bin/bash -c 'yarn audit --no-progress --non-interactive; [[ $? -gt 2 ]] && exit 1 || exit 0'
             - touch /tmp/bot_message.txt
             - apt-get update -y && apt-get install -y curl jq time
             - /usr/bin/time -v yarn install --frozen-lockfile --prefer-offline
+
+            # TODO: move these to eslint so that `yarn lint` picks up these errors instead
+            - npm i -g typescript
+            - tsc --noEmit -p apps/backend/
+            - tsc --noEmit -p apps/connect/
+            - tsc --noEmit -p apps/connect-e2e/
+            - tsc --noEmit -p apps/mgmt/
+            - tsc --noEmit -p apps/mgmt-e2e/
+            - tsc --noEmit -p apps/ui-e2e/
+            - tsc --noEmit -p apps/web/
+            - tsc --noEmit -p apps/web-e2e/
+            - tsc --noEmit -p libs/ui/tsconfig.lib.json
+            - tsc --noEmit -p libs/yup/tsconfig.lib.json
+
             - /usr/bin/time -v yarn affected:lint --base=HEAD~1 --with-deps --parallel
             - /usr/bin/time -v yarn affected:test --base=HEAD~1 --parallel
 
