@@ -23,10 +23,9 @@ export const SecurityTools: React.FC<P> = ({
   return (
     <div className={styles.scoreBody}>
       <p className={styles.phead}>{title}</p>
-      {datasource &&
-        datasource.map((el, i) => (
-          <Item key={i} item={el} onClick={() => handleItemClick(i)} />
-        ))}
+      {datasource?.map((el, i) => (
+        <Item key={i} item={el} onClick={() => handleItemClick(i)} />
+      ))}
     </div>
   )
 }

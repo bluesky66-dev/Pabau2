@@ -46,7 +46,7 @@ const CrudModal: FC<P> = ({
   const [specialBoolean, setSpecialBoolean] = useState<boolean>(
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    (editingRow && editingRow.id && editingRow.is_active) ??
+    (editingRow?.id && editingRow?.is_active) ??
       (typeof specialFormElement?.defaultvalue === 'boolean' &&
         specialFormElement.defaultvalue) ??
       true
@@ -54,21 +54,18 @@ const CrudModal: FC<P> = ({
 
   useEffect(() => {
     setSpecialBoolean(
-      (editingRow && editingRow.id && (editingRow.is_active as boolean)) ??
+      (editingRow &&
+        Object.prototype.hasOwnProperty.call(editingRow, 'id') &&
+        (Object.prototype.hasOwnProperty.call(
+          editingRow,
+          'is_active'
+        ) as boolean)) ??
         (typeof specialFormElement?.defaultvalue === 'boolean' &&
           (specialFormElement.defaultvalue as boolean)) ??
         true
     )
   }, [editingRow, specialFormElement])
 
-  console.log('editingRow', editingRow)
-  console.log(
-    'initial value of specialBoolean set to',
-    (editingRow && editingRow.id && editingRow.is_active) ??
-      (typeof specialFormElement?.defaultvalue === 'boolean' &&
-        specialFormElement.defaultvalue) ??
-      true
-  )
   console.log('formik', formik)
   console.log('schemaForm', schemaForm)
 
@@ -124,7 +121,7 @@ const CrudModal: FC<P> = ({
             color: '#9292A3',
           }}
         >
-          {editingRow && editingRow?.name} will be deleted. This action is
+          {editingRow ? editingRow.name : null} will be deleted. This action is
           irreversable
         </span>
       </Modal>
@@ -159,8 +156,10 @@ const CrudModal: FC<P> = ({
           }
         }}
         isValidate={
-          editingRow && editingRow.isCreate
-            ? formik.dirty && formik.isValid
+          editingRow
+            ? editingRow?.isCreate
+              ? formik.dirty && formik.isValid
+              : formik.isValid
             : formik.isValid
         }
       >

@@ -254,8 +254,8 @@ export const BusinessLocation: FC<BusinessLocationProps> = ({
                 <Input
                   label="Address"
                   text={detailForModal.address}
-                  onChange={(val) =>
-                    setDetailForModal({ ...detailForModal, address: val })
+                  onChange={(value_) =>
+                    setDetailForModal({ ...detailForModal, address: value_ })
                   }
                 />
               </Col>
@@ -263,8 +263,8 @@ export const BusinessLocation: FC<BusinessLocationProps> = ({
                 <Input
                   label="Apt./Suite etc."
                   text={detailForModal.apt}
-                  onChange={(val) =>
-                    setDetailForModal({ ...detailForModal, apt: val })
+                  onChange={(value_) =>
+                    setDetailForModal({ ...detailForModal, apt: value_ })
                   }
                 />
               </Col>
@@ -272,8 +272,8 @@ export const BusinessLocation: FC<BusinessLocationProps> = ({
                 <Input
                   label="Postcode"
                   text={detailForModal.postcode}
-                  onChange={(val) =>
-                    setDetailForModal({ ...detailForModal, postcode: val })
+                  onChange={(value_) =>
+                    setDetailForModal({ ...detailForModal, postcode: value_ })
                   }
                 />
               </Col>
@@ -281,8 +281,8 @@ export const BusinessLocation: FC<BusinessLocationProps> = ({
                 <Input
                   label="City"
                   text={detailForModal.city}
-                  onChange={(val) =>
-                    setDetailForModal({ ...detailForModal, city: val })
+                  onChange={(value_) =>
+                    setDetailForModal({ ...detailForModal, city: value_ })
                   }
                 />
               </Col>
@@ -290,8 +290,8 @@ export const BusinessLocation: FC<BusinessLocationProps> = ({
                 <Input
                   label="Region"
                   text={detailForModal.region}
-                  onChange={(val) =>
-                    setDetailForModal({ ...detailForModal, region: val })
+                  onChange={(value_) =>
+                    setDetailForModal({ ...detailForModal, region: value_ })
                   }
                 />
               </Col>
@@ -299,8 +299,8 @@ export const BusinessLocation: FC<BusinessLocationProps> = ({
                 <Input
                   label="Country"
                   text={detailForModal.country}
-                  onChange={(val) =>
-                    setDetailForModal({ ...detailForModal, country: val })
+                  onChange={(value_) =>
+                    setDetailForModal({ ...detailForModal, country: value_ })
                   }
                 />
               </Col>

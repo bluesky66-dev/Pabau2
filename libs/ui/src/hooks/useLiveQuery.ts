@@ -51,8 +51,8 @@ export function useLiveQuery<T>(
   useEffect(() => {
     console.log('creating sub!')
     const cancelFunc = subscribeToMore({
-      document: (options && options.subscription) || convert(query),
-      variables: options && options.variables ? options.variables : undefined,
+      document: options?.subscription || convert(query),
+      variables: options?.variables ? options.variables : undefined,
       updateQuery: (prev, { subscriptionData }) => {
         console.log('GOT SUBSCRIPTION DATA', prev, subscriptionData)
 
