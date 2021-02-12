@@ -15,7 +15,7 @@ declare global {
 }
 
 declare global {
-  interface NexusGen extends NexusGenTypes {}
+  type NexusGen = NexusGenTypes
 }
 
 export interface NexusGenInputs {
@@ -391,13 +391,17 @@ export interface NexusGenObjects {
     public: number; // Int!
     source_name: string; // String!
   }
+  // eslint-disable-next-line @typescript-eslint/ban-types
   Mutation: {};
+  // eslint-disable-next-line @typescript-eslint/ban-types
   Query: {};
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface NexusGenInterfaces {
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface NexusGenUnions {
 }
 
@@ -554,9 +558,11 @@ export interface NexusGenArgTypes {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface NexusGenAbstractTypeMembers {
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface NexusGenTypeInterfaces {
 }
 
@@ -612,14 +618,19 @@ export interface NexusGenTypes {
 
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/no-empty-interface
   interface NexusGenPluginTypeConfig<TypeName extends string> {
   }
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface NexusGenPluginFieldConfig<TypeName extends string, FieldName extends string> {
   }
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface NexusGenPluginInputFieldConfig<TypeName extends string, FieldName extends string> {
   }
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface NexusGenPluginSchemaConfig {
   }
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface NexusGenPluginArgConfig {
   }
 }

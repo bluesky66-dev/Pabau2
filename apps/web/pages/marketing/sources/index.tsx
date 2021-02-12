@@ -2,6 +2,7 @@ import { gql } from '@apollo/client'
 import { NextPage } from 'next'
 import React from 'react'
 import CrudLayout from '../../../components/CrudLayout/CrudLayout'
+/* eslint-disable graphql/template-strings */
 
 const LIST_QUERY = gql`
   query marketing_sources(
@@ -85,6 +86,9 @@ const EDIT_MUTATION = gql`
     }
   }
 `
+/**
+ * TODO refactor UPDATE_ORDER_MUTATION with legacy db
+ */
 const UPDATE_ORDER_MUTATION = gql`
   mutation update_marketing_source_order($id: uuid!, $order: Int) {
     update_marketing_source(

@@ -38,20 +38,22 @@ const CrudModal: FC<P> = ({
   // const formRef = useEnsuredForwardedRef<{ submitForm: () => void }>(null)
 
   const schemaForm = { ...schema, fields: { ...schema.fields } }
-  const specialFormElement = schemaForm.fields['is_active']
-  delete schemaForm.fields['is_active']
+  const specialFormElement = schemaForm.fields['public']
+  delete schemaForm.fields['public']
   const [specialBoolean, setSpecialBoolean] = useState<boolean>(
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    (editingRow && editingRow.id && editingRow.is_active) ??
+    (editingRow && editingRow.id && editingRow.public) ??
       (typeof specialFormElement?.default === 'boolean' &&
         specialFormElement.default) ??
       true
   )
-
+  useEffect(() => {
+    console.log(specialFormElement)
+  })
   useEffect(() => {
     setSpecialBoolean(
-      (editingRow && editingRow.id && (editingRow.is_active as boolean)) ??
+      (editingRow && editingRow.id && (editingRow.public as boolean)) ??
         (typeof specialFormElement?.default === 'boolean' &&
           (specialFormElement.default as boolean)) ??
         true
@@ -61,7 +63,7 @@ const CrudModal: FC<P> = ({
   console.log('editingRow', editingRow)
   console.log(
     'initial value of specialBoolean set to',
-    (editingRow && editingRow.id && editingRow.is_active) ??
+    (editingRow && editingRow.id && editingRow.public) ??
       (typeof specialFormElement?.default === 'boolean' &&
         specialFormElement.default) ??
       true
@@ -147,7 +149,7 @@ const CrudModal: FC<P> = ({
         onSpecialBooleanClick={() => {
           setSpecialBoolean((e) => !e)
           if (editingRow) {
-            editingRow.is_active = !specialBoolean
+            editingRow.public = !specialBoolean
           }
         }}
       >
@@ -158,7 +160,7 @@ const CrudModal: FC<P> = ({
           // onSubmit={async (form: Record<string, unknown>) => {
           //   console.log('ONsUBMIT', form)
           //   return
-          //   if (specialFormElement) form['is_active'] = specialBoolean
+          //   if (specialFormElement) form['public'] = specialBoolean
           //   debugger
           //   await addMutation({
           //     variables: form,
