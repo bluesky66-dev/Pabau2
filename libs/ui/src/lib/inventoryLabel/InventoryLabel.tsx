@@ -1,28 +1,19 @@
 import React, { FC } from 'react'
 import styles from './InventoryLabel.module.less'
-import classNames from 'classnames'
+
+export enum LabelType {
+  empty = 'empty',
+  low = 'low',
+  good = 'good',
+}
 interface P {
-  labelType?: string
+  labelType?: LabelType
 }
 
-export const InventoryLabel: FC<P> = ({ labelType, ...props }) => {
+export const InventoryLabel: FC<P> = ({ labelType = LabelType.empty }) => {
   return (
     <div className={styles.labelWrapper}>
-      <label
-        className={classNames(
-          labelType?.toLowerCase() === 'empty'
-            ? styles.empty
-            : labelType?.toLowerCase() === 'low'
-            ? styles.low
-            : styles.good
-        )}
-      >
-        {labelType?.toLowerCase() === 'empty'
-          ? 'Empty'
-          : labelType?.toLowerCase() === 'low'
-          ? 'Low'
-          : 'Good'}
-      </label>
+      <label className={styles[labelType]}>{labelType}</label>
     </div>
   )
 }
