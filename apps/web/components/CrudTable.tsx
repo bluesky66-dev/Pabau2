@@ -89,9 +89,11 @@ const CrudTable: FC<P> = ({
     currentPage: 1,
     showingRecords: 0,
   })
-  const [modalShowing, setModalShowing] = useState<
-    Record<string, string | boolean | number> | false
-  >(false)
+  const [modalShowing, setModalShowing] = useState(false)
+  const [editingRow, setEditingRow] = useState<
+    Record<string, string | boolean | number>
+  >({})
+
   const { data, error, loading } = useLiveQuery(listQuery, {
     variables: {
       isActive,
@@ -263,7 +265,8 @@ const CrudTable: FC<P> = ({
   }
 
   const createNew = () => {
-    setModalShowing({ name: '', isCreate: true })
+    setModalShowing((e) => !e)
+    setEditingRow({ name: '', isCreate: true })
   }
 
   return (
@@ -292,10 +295,7 @@ const CrudTable: FC<P> = ({
       }}
       //initialValues={typeof modalShowing === 'object' ? modalShowing : undefined}
       initialValues={
-        // eslint-disable-next-line
-        typeof modalShowing === 'object' && (modalShowing as any)?.id
-          ? modalShowing
-          : formikFields() //TODO: remove this, it should come from schema.fields[].*
+        editingRow?.id ? editingRow : formikFields() //TODO: remove this, it should come from schema.fields[].*
       }
     >
       <>
@@ -329,7 +329,7 @@ const CrudTable: FC<P> = ({
         {modalShowing && (
           <CrudModal
             schema={schema}
-            editingRow={modalShowing}
+            editingRow={editingRow}
             addQuery={addQuery}
             listQuery={listQuery}
             deleteQuery={deleteQuery}
@@ -374,7 +374,7 @@ const CrudTable: FC<P> = ({
             isCustomIconExist={checkCustomColorIconExsist('icon')}
             noDataBtnText={schema.full}
             noDataText={schema.fullLower}
-            onAddTemplate={() => setModalShowing({ isCreate: true })}
+            onAddTemplate={() => createNew()}
             searchTerm={searchTerm}
             columns={[
               ...Object.entries(schema.fields).map(([k, v]) => ({
@@ -412,7 +412,10 @@ const CrudTable: FC<P> = ({
                 newIndex,
               })
             }}
-            onRowClick={(e) => setModalShowing(e)}
+            onRowClick={(e) => {
+              setEditingRow(e)
+              setModalShowing((e) => !e)
+            }}
           />
           <Pagination
             total={paginateData.total}
