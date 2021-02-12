@@ -4,7 +4,7 @@ interface Input {
   label?: string
   value?: number
   helpText?: string
-  isFormatter?: boolean
+  showCurrency?: boolean
 }
 
 export interface GeneralReferralConfig {

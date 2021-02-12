@@ -5,7 +5,7 @@ const generalInputOption = [
     label: 'Reward Value',
     value: 25,
     helpText: 'Help tooltip',
-    isFormatter: true,
+    showCurrency: true,
   },
   {
     key: 2,
@@ -13,7 +13,7 @@ const generalInputOption = [
     label: 'Referree Reward Value',
     value: 25,
     helpText: 'Help tooltip',
-    isFormatter: true,
+    showCurrency: true,
   },
   {
     key: 3,

@@ -28,7 +28,7 @@ const General: FC<P> = ({
         <p>Referral configuration</p>
         <span>Configure key information about your referral system.</span>
       </div>
-      {inputList?.map(({ key, name, label, helpText, isFormatter }) => (
+      {inputList?.map(({ key, name, label, helpText, showCurrency }) => (
         <div
           key={`general-input-list-${key}`}
           className={styles.generalInputList}
@@ -39,7 +39,7 @@ const General: FC<P> = ({
           </div>
           <InputNumber
             value={values[name]}
-            isFormatter={isFormatter}
+            showCurrency={showCurrency}
             onChange={(val) => setFieldValue(name, val)}
             requiredMsg={errors[name]}
           />

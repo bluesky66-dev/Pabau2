@@ -17,7 +17,7 @@ export interface InputNumberProps extends FormProps {
   placeHolderText?: string
   requiredMsg?: string
   type?: string
-  isFormatter?: boolean
+  showCurrency?: boolean
   onChange?(val): void
 }
 
@@ -31,7 +31,7 @@ export function InputNumber({
   requiredMsg,
   type,
   onChange,
-  isFormatter,
+  showCurrency,
   ...props
 }: PropsWithChildren<InputNumberProps>): JSX.Element {
   const [form] = Form.useForm()
@@ -60,7 +60,7 @@ export function InputNumber({
           <AntInput
             className={styles.inputNumber}
             placeholder={placeHolderText}
-            formatter={(value) => (isFormatter ? `£ ${value}` : `${value}`)}
+            formatter={(value) => (showCurrency ? `£ ${value}` : `${value}`)}
             size={size}
             disabled={disabled}
             onChange={(value) => handleInputChange(value)}
