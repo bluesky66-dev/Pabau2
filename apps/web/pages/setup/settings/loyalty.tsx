@@ -59,7 +59,12 @@ const LoyaltySettings: FC<P> = () => {
           ) : (
             <Row className={styles.loyaltyMainWrapper}>
               <Col span={20} className={styles.titleWrapper}>
-                <Breadcrumb breadcrumbItems={['Setup', 'Loyalty settings']} />
+                <Breadcrumb
+                  breadcrumbItems={[
+                    { breadcrumbName: 'Setup', path: 'setup' },
+                    { breadcrumbName: 'Loyalty settings', path: '' },
+                  ]}
+                />
                 <h4>{'Loyalty settings'}</h4>
                 <p className={styles.description}>
                   {
