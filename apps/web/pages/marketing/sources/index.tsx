@@ -49,10 +49,24 @@ const DELETE_MUTATION = gql`
     }
   }
 `
+
 const ADD_MUTATION = gql`
-  mutation add_marketing_source($name: String!, $is_active: Boolean) {
-    insert_marketing_source_one(object: { name: $name, public: $is_active }) {
-      __typename
+  mutation add_marketing_source(
+    $imported: Int = 0
+    $is_active: Int = 1
+    $name: String!
+    $custom_id: Int = 0
+    $company_id: Int = 8901 #TODO refactor with actual company_id
+  ) {
+    createOneMarketingSource(
+      data: {
+        company: { connect: { id: $company_id } }
+        imported: $imported
+        source_name: $name
+        public: $is_active
+        custom_id: $custom_id
+      }
+    ) {
       id
     }
   }
@@ -71,7 +85,16 @@ const EDIT_MUTATION = gql`
     }
   }
 `
-
+const UPDATE_ORDER_MUTATION = gql`
+  mutation update_marketing_source_order($id: uuid!, $order: Int) {
+    update_marketing_source(
+      where: { id: { _eq: $id } }
+      _set: { order: $order }
+    ) {
+      affected_rows
+    }
+  }
+`
 const schema: Schema = {
   full: 'Marketing Source',
   fullLower: 'marketing source',
@@ -96,20 +119,6 @@ const schema: Schema = {
     },
   },
 }
-const UPDATE_ORDER_MUTATION = gql`
-  mutation update_marketing_source_order(
-    $id: uuid!
-    $order: Int
-  ) {
-    update_marketing_source(
-      where: { id: { _eq: $id } }
-      _set: { order: $order }
-    ) {
-      affected_rows
-    }
-  }
-`
-
 export const Index: NextPage = () => {
   return (
     <CrudLayout

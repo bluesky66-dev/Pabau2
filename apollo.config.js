@@ -2,7 +2,7 @@ module.exports = {
   client: {
     service: {
       name: 'hasura',
-      url: 'http://host.docker.internal:8080/v1/graphql',
+      url: 'https://api.new.pabau.com/v1/graphql',
 
 // optional headers
       headers: {
