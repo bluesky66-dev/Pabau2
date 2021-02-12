@@ -13,6 +13,7 @@ export const schedule = [
         timeLeft: '18:28',
         backgroundImage,
         isYourSchedule: true,
+        length: 55,
       },
     ],
   },
@@ -171,7 +172,7 @@ export const filterOptions = [
     id: 'name',
     label: 'Trainer',
     options: [
-      'Select...',
+      'Select',
       'Alexander Tuner',
       'Hitesh Chaudhary',
       'William Brandham',
