@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import {
   Layout,
+  Breadcrumb,
   WStepper,
-  StepperInterface,
+  StepperItem,
   BasicModal as Modal,
   ButtonTypes,
 } from '@pabau/ui'
@@ -17,6 +18,9 @@ import LeadCustomizeForm from './lead-capture/lead-forms/LeadCustomizeForm'
 import { FlagOutlined, HomeOutlined, ToolOutlined } from '@ant-design/icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from '@fortawesome/free-solid-svg-icons'
+import { Typography } from 'antd'
+
+const { Title } = Typography
 
 export function LeadForms() {
   const allAPISteps = ['Basic', 'Configure(API)', 'Testing(API)', 'Result']
@@ -25,7 +29,7 @@ export function LeadForms() {
   const [activeStep, setActiveStep] = useState(0)
   const [openPabauLeadModal, setPabauLeadModal] = useState(false)
 
-  const apiStepper: StepperInterface[] = [
+  const apiStepper: StepperItem[] = [
     {
       step: 1,
       name: 'Basic',
@@ -61,7 +65,7 @@ export function LeadForms() {
     },
   ]
 
-  const formStepper: StepperInterface[] = [
+  const formStepper: StepperItem[] = [
     {
       step: 1,
       name: 'Basic',
@@ -103,11 +107,18 @@ export function LeadForms() {
   return (
     <Layout active={'setup'}>
       <div className={styles.cardWrapper}>
+        <div style={{ background: '#FFF' }}>
+          <Breadcrumb
+            breadcrumbItems={[
+              { breadcrumbName: 'Setup', path: 'setup' },
+              { breadcrumbName: 'Lead Capture', path: '' },
+            ]}
+          />
+          <Title>Lead Capture</Title>
+        </div>
         <WStepper
           data={activeStepper === 'API' ? apiStepper : formStepper}
           active={activeStep}
-          breadcrumbTxt="Setup"
-          headerTxt="Lead Capture"
           onActiveStepChange={(step) => {
             if (step === 1 && activeStepper === 'API')
               setPabauLeadModal((e) => !e)

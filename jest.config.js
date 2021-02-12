@@ -8,5 +8,6 @@ module.exports = {
     '<rootDir>/apps/connect',
     '<rootDir>/apps/mobile',
     '<rootDir>/apps/bridge-api',
+    '<rootDir>/libs/i18n',
   ],
 }

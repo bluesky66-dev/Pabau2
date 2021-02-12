@@ -1,27 +1,16 @@
 /* eslint-disable */
-import React, { Children, useEffect, useState } from 'react'
-
-import styels from './WStepper.module.less'
+import React, { useEffect } from 'react'
+import styles from './WStepper.module.less'
 import Wizard from '../wizard/Wizard'
-export interface StepperInterface {
-  step: number
-  name: string
-  imgPath: JSX.Element
-  isActive: boolean
-  index: number
-}
+import { StepperItem } from '@pabau/ui'
 interface WStepperProps {
   active: number
-  breadcrumbTxt: string
-  headerTxt: string
-  data: StepperInterface[]
+  data: StepperItem[]
   onActiveStepChange?: (index) => void
 }
 
 export const WStepper: React.FC<WStepperProps> = ({
   active,
-  breadcrumbTxt,
-  headerTxt,
   children,
   data,
   onActiveStepChange
@@ -33,12 +22,10 @@ export const WStepper: React.FC<WStepperProps> = ({
   }, [index])
 
   return (
-    <div className={styels.container}>
+    <div className={styles.container}>
       <Wizard
         onPrev={() => setIndex(index - 1)}
         onNext={() => setIndex(index + 1)}
-        breadcrumb={breadcrumbTxt}
-        header={headerTxt}
         active={index}
         allSteps={data.length}
         stepperData={data}

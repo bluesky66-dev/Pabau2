@@ -8,7 +8,7 @@ interface P {
   addQuery?: DocumentNode
   deleteQuery?: DocumentNode
   listQuery: DocumentNode
-  editingRow?: Record<string, string | boolean | number> | false
+  editingRow?: Record<string, string | boolean | number>
   onClose?: () => void
 }
 
@@ -46,7 +46,7 @@ const CrudModal: FC<P> = ({
   const [specialBoolean, setSpecialBoolean] = useState<boolean>(
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    (editingRow && editingRow.id && editingRow.is_active) ??
+    (editingRow?.id && editingRow?.is_active) ??
       (typeof specialFormElement?.defaultvalue === 'boolean' &&
         specialFormElement.defaultvalue) ??
       true
@@ -54,21 +54,13 @@ const CrudModal: FC<P> = ({
 
   useEffect(() => {
     setSpecialBoolean(
-      (editingRow && editingRow.id && (editingRow.is_active as boolean)) ??
+      (editingRow?.id && (editingRow?.is_active as boolean)) ??
         (typeof specialFormElement?.defaultvalue === 'boolean' &&
           (specialFormElement.defaultvalue as boolean)) ??
         true
     )
   }, [editingRow, specialFormElement])
 
-  console.log('editingRow', editingRow)
-  console.log(
-    'initial value of specialBoolean set to',
-    (editingRow && editingRow.id && editingRow.is_active) ??
-      (typeof specialFormElement?.defaultvalue === 'boolean' &&
-        specialFormElement.defaultvalue) ??
-      true
-  )
   console.log('formik', formik)
   console.log('schemaForm', schemaForm)
 
@@ -124,8 +116,7 @@ const CrudModal: FC<P> = ({
             color: '#9292A3',
           }}
         >
-          {editingRow && editingRow?.name} will be deleted. This action is
-          irreversable
+          {editingRow?.name} will be deleted. This action is irreversable
         </span>
       </Modal>
       <Modal
@@ -137,7 +128,7 @@ const CrudModal: FC<P> = ({
         }}
         onDelete={() => setDeleteModal(true)}
         onOk={() => formik.submitForm()}
-        visible={editingRow !== false && !openDeleteModal}
+        visible={!openDeleteModal}
         title={
           typeof editingRow === 'object' && editingRow.isCreate
             ? `Create ${schema.full}`
@@ -149,7 +140,7 @@ const CrudModal: FC<P> = ({
             : 'Save'
         }
         // eslint-disable-next-line
-        dangerButtonText={(editingRow as any)?.id && `Delete`}
+        dangerButtonText={editingRow?.id && `Delete`}
         specialBooleanLabel={!!specialFormElement && 'Active'}
         specialBooleanValue={specialBoolean}
         onSpecialBooleanClick={() => {
@@ -159,9 +150,7 @@ const CrudModal: FC<P> = ({
           }
         }}
         isValidate={
-          editingRow && editingRow.isCreate
-            ? formik.dirty && formik.isValid
-            : formik.isValid
+          editingRow?.isCreate ? formik.dirty && formik.isValid : formik.isValid
         }
       >
         <Form

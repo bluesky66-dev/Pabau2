@@ -1,13 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import Wizard from './Wizard'
+import I18n from './i18n'
 
-describe('Wizard', () => {
+describe('I18n', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(
-      <Wizard active={0} allSteps={2} stepperData={[]} />
-    )
+    const { baseElement } = render(<I18n />)
     expect(baseElement).toBeTruthy()
   })
 })

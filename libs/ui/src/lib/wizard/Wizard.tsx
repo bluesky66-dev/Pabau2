@@ -1,19 +1,13 @@
 import React from 'react'
 import Stepper from '../stepper/Stepper'
 import styels from './Wizard.module.less'
-import { Button, Breadcrumb } from '@pabau/ui'
-import { Typography } from 'antd'
+import { Button } from '@pabau/ui'
 import { StepperInterface } from './mock'
-
-const { Title } = Typography
-
 interface WizardProps {
-  onPrev: () => void
-  onNext: () => void
+  onPrev?: () => void
+  onNext?: () => void
   active: number
   allSteps: number
-  breadcrumb: string
-  header: string
   stepperData: StepperInterface[]
 }
 
@@ -22,33 +16,18 @@ export const Wizard: React.FC<WizardProps> = ({
   onNext,
   active,
   allSteps,
-  breadcrumb,
-  header,
   stepperData,
   children,
 }) => {
-  function prevClick() {
-    onPrev()
-  }
-
-  function nextClick() {
-    onNext()
-  }
-
   return (
     <div className={styels.container}>
-      <div style={{ backgroundColor: '#FFF' }}>
-        <Breadcrumb breadcrumbItems={[breadcrumb, header]} />
-        <Title>{header}</Title>
-      </div>
-
       <hr className={styels.line} />
       <Stepper datasource={stepperData} step={active} />
       <hr className={styels.bottomline} />
       {children}
 
       <div className={styels.footer}>
-        <Button onClick={(event) => prevClick()} disabled={active < 1}>
+        <Button onClick={(event) => onPrev?.()} disabled={active < 1}>
           Previous Step
         </Button>
         <span className={styels.breadcrumbgraytxt}>
@@ -57,7 +36,7 @@ export const Wizard: React.FC<WizardProps> = ({
 
         <Button
           type="primary"
-          onClick={(event) => nextClick()}
+          onClick={(event) => onNext?.()}
           disabled={allSteps - 1 <= active}
         >
           Next Step

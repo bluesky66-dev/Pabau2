@@ -1,0 +1,36 @@
+en:
+  marketingsource-header-create: 'Create Marketing Source'
+  marketingsource-title: 'Marketing Sources'
+  marketingsource-name-textfield: Name
+  marketingsource-name-placeholder: 'eg. Facebook'
+  marketingsource-header-edit: 'Edit Marketing Source'
+  KEY: Text
+  search.placeholder: 'Search clients or leads'
+  avatar.balance: Balance
+  avatar.account.settings: 'Account Settings'
+  avatar.tasks: Tasks
+  avatar.give.feedback: 'Give feedback'
+  avatar.help.support: 'Help & Support'
+  avatar.help.support.header: 'Help & Support'
+  avatar.help.support.centre: 'Help Centre'
+  avatar.help.video.guides: 'Video Guides'
+  avatar.help.contact.support: 'Contact Support'
+  avatar.select.language: 'Select language'
+  avatar.change.company: 'Select company'
+  avatar.logout: 'Log out'
+  search.client.label: Clients
+  search.lead.label: Leads
+  search.result.one: 'Top Result'
+  search.result.two: 'All Results'
+  search.new.client: 'Add new client'
+  search.advanced.search: 'Advanced search'
+  notifications.header: Notifications
+  notifications.tab.activity: Activity
+  notifications.tab.news: News
+  notifications.today: Today
+  notifications.yesterday: Yesterday
+  notifications.report: Report
+  notifications.appointment: "Appointment\n"
+  notifications.lead: Leads
+  news.learn: 'Learn more'
+  marketingsource-input-search: Search
