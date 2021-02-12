@@ -79,22 +79,6 @@ export const ReviewSlider: FC<ReviewSliderProps> = ({
   return (
     <div className={styles.reviewSlider}>
       <h1 className={styles.title}>{title}</h1>
-      {/* <div className={styles.contentWrapper}>
-      <div className={styles.contentWrap}>
-          <h5>{execellentData.name}</h5>
-          <Rate allowHalf value={execellentData.value} />
-      </div>
-      <div className={styles.avgWrapper}>
-        <div className={styles.avgData}>
-           <div><b>{averageData.value}</b></div>
-           <div>{averageData.name}</div></div>
-        <div className={styles.avgData}>
-          <div><b>{reviewData.value}</b></div>
-          <div>{reviewData.name}</div></div>
-        </div>
-        <Logo />
-      </div> */}
-
       <Popover content={content} visible={true} placement="top">
         <div className={styles.sliderWrapper}>
           <Slider
