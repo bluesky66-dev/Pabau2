@@ -15,7 +15,8 @@ import 'react-phone-input-2/lib/style.css'
 import 'react-google-places-autocomplete/dist/index.min.css'
 import * as Icons from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
-
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 require('../styles/global.less')
 require('../../../libs/ui/src/styles/antd.less')
 
