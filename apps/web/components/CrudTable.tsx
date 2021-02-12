@@ -11,7 +11,7 @@ import { DocumentNode, useMutation } from '@apollo/client'
 import AddButton from './AddButton'
 import { Breadcrumb } from '@pabau/ui'
 import { Typography } from 'antd'
-import pluralize from 'pluralize'
+// import pluralize from 'pluralize'
 import styles from './CrudTable.module.less'
 // import DeleteButton from './DeleteButton'
 import CrudModal from './CrudModal'
@@ -30,6 +30,7 @@ interface P {
   listQuery: DocumentNode
   editQuery: DocumentNode
   aggregateQuery?: DocumentNode
+  tableSearch?: boolean
   updateOrderQuery?: DocumentNode
 }
 
@@ -40,20 +41,25 @@ const CrudTable: FC<P> = ({
   listQuery,
   editQuery,
   aggregateQuery,
+  tableSearch = true,
   updateOrderQuery,
 }) => {
-  const [isActive, setIsActive] = useState(1)
+  const [isLoading, setIsLoading] = useState(true)
+  const [isActive, setIsActive] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   // eslint-disable-next-line graphql/template-strings
   const [editMutation] = useMutation(editQuery, {
     onCompleted(data) {
       Notification(
         NotificationType.success,
-        'Success! Marketing source updated.'
+        `Success! ${schema.messages.update.success}`
       )
     },
     onError(err) {
-      Notification(NotificationType.error, 'Error! Marketing source update.')
+      Notification(
+        NotificationType.error,
+        `Error! ${schema.messages.update.error}`
+      )
     },
   })
   const [updateOrderMutation] = useMutation(updateOrderQuery, {
@@ -65,11 +71,14 @@ const CrudTable: FC<P> = ({
     onCompleted(data) {
       Notification(
         NotificationType.success,
-        'Success! New marketing source created.'
+        `Success! ${schema.messages.create.success}`
       )
     },
     onError(err) {
-      Notification(NotificationType.error, 'Error! Marketing source create.')
+      Notification(
+        NotificationType.error,
+        `Error! ${schema.messages.create.error}`
+      )
     },
   })
   const [sourceData, setSourceData] = useState(null)
@@ -91,6 +100,7 @@ const CrudTable: FC<P> = ({
       limit: paginateData.limit,
     },
   })
+
   const { data: aggregateData } = useLiveQuery(aggregateQuery, {
     variables: {
       isActive,
@@ -99,18 +109,20 @@ const CrudTable: FC<P> = ({
   })
 
   useEffect(() => {
-    setSourceData(data)
-    setPaginateData({
-      ...paginateData,
-      total: aggregateData?.aggregate.count,
-      showingRecords: data?.length,
-    })
+    if (data) setSourceData(data)
+    if (aggregateData)
+      setPaginateData({
+        ...paginateData,
+        total: aggregateData?.aggregate.count,
+        showingRecords: data?.length,
+      })
+    if (!loading && data) setIsLoading(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, aggregateData])
+  }, [data, aggregateData, loading])
 
   const onFilterMarketingSource = () => {
     resetPagination()
-    setIsActive((e) => Number(!e))
+    setIsActive((e) => !e)
   }
 
   const onSearch = async (val) => {
@@ -139,7 +151,7 @@ const CrudTable: FC<P> = ({
 
   const { fields } = schema
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values, { resetForm }) => {
     console.log('got submittal!', values)
     if (values.id)
       await editMutation({
@@ -183,7 +195,47 @@ const CrudTable: FC<P> = ({
           }
         },
       })
+    resetForm()
     setModalShowing(false)
+  }
+
+  const formikFields = () => {
+    const initialValues = { name: '' }
+    Object.keys(fields).map((field) => {
+      initialValues[field] = checkFieldType(
+        fields[field]['type'],
+        fields[field]['defaultvalue']
+      )
+      return field
+    })
+    return initialValues
+  }
+
+  const checkFieldType = (type: string, defaultVal) => {
+    switch (type) {
+      case 'string':
+      case 'color-picker':
+      case 'radio-group':
+        return defaultVal || ''
+      case 'boolean':
+      case 'checkbox':
+        return defaultVal || true
+      case 'number':
+        return defaultVal || 0
+      default:
+        return defaultVal || ''
+    }
+  }
+
+  const checkCustomColorIconExsist = (type) => {
+    let isExist = false
+    sourceData?.map((data) => {
+      if (data[type]) {
+        isExist = true
+      }
+      return data
+    })
+    return isExist
   }
 
   const updateOrder = async (values) => {
@@ -234,16 +286,16 @@ const CrudTable: FC<P> = ({
           // eslint-disable-next-line
         }, {} as FormikErrors<any>)
       }
-      onSubmit={(values) => {
+      onSubmit={(values, { resetForm }) => {
         console.log('formik onsubmit', values)
-        onSubmit(values)
+        onSubmit(values, { resetForm })
       }}
       //initialValues={typeof modalShowing === 'object' ? modalShowing : undefined}
       initialValues={
         // eslint-disable-next-line
         typeof modalShowing === 'object' && (modalShowing as any)?.id
           ? modalShowing
-          : { name: 'test', is_active: 1 } //TODO: remove this, it should come from schema.fields[].*
+          : formikFields() //TODO: remove this, it should come from schema.fields[].*
       }
     >
       <>
@@ -259,7 +311,7 @@ const CrudTable: FC<P> = ({
                 <Link href="/">
                   <LeftOutlined />
                 </Link>
-                <p> Marketing sources </p>
+                <p> {schema.full || schema.short} </p>
               </div>
               {addQuery && (
                 <AddButton
@@ -267,6 +319,7 @@ const CrudTable: FC<P> = ({
                   onFilterSource={onFilterMarketingSource}
                   onSearch={onSearch}
                   schema={schema}
+                  tableSearch={tableSearch}
                 />
               )}
             </div>
@@ -293,12 +346,9 @@ const CrudTable: FC<P> = ({
           >
             <div style={{ background: '#FFF' }}>
               <Breadcrumb
-                breadcrumbItems={[
-                  'Setup',
-                  pluralize(schema.full || schema.short),
-                ]}
+                breadcrumbItems={['Setup', schema.full || schema.short]}
               />
-              <Title>{pluralize(schema.full || schema.short)}</Title>
+              <Title>{schema.full || schema.short}</Title>
             </div>
             {addQuery && (
               <AddButton
@@ -306,50 +356,32 @@ const CrudTable: FC<P> = ({
                 onFilterSource={onFilterMarketingSource}
                 onSearch={onSearch}
                 schema={schema}
+                tableSearch={tableSearch}
               />
             )}
           </div>
           <Table
-            loading={loading}
+            loading={isLoading}
             style={{ height: '100%' }}
             sticky={{ offsetScroll: 80, offsetHeader: 80 }}
             pagination={sourceData?.length > 10 ? {} : false}
             scroll={{ x: 'max-content' }}
             draggable={true}
+            isCustomColorExist={checkCustomColorIconExsist('color')}
+            isCustomIconExist={checkCustomColorIconExsist('icon')}
             noDataBtnText={schema.full}
             noDataText={schema.fullLower}
             onAddTemplate={() => setModalShowing({ isCreate: true })}
+            searchTerm={searchTerm}
             columns={[
               ...Object.entries(schema.fields).map(([k, v]) => ({
                 dataIndex: k,
                 width: v.cssWidth,
                 title: v.short || v.full,
+                visible: Object.prototype.hasOwnProperty.call(v, 'visible')
+                  ? v.visible
+                  : true,
               })),
-              // {
-              //   title: 'Actions',
-              //   width: '10em',
-              //   // eslint-disable-next-line react/display-name
-              //   render: ({ id }) => {
-              //     return (
-              //       // eslint-disable-next-line react/jsx-no-useless-fragment
-              //       <>
-              //         {deleteQuery && (
-              //           <DeleteButton
-              //             id={id}
-              //             listQuery={listQuery}
-              //             deleteQuery={deleteQuery}
-              //
-              //             // onClick={() =>
-              //
-              //             // }
-              //           >
-              //             Delete
-              //           </DeleteButton>
-              //         )}
-              //       </>
-              //     )
-              //   },
-              // },
             ]}
             // eslint-disable-next-line
             dataSource={sourceData?.map((e: { id: any }) => ({

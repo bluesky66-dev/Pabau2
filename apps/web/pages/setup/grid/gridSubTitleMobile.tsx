@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, FC } from 'react'
 import { LeftOutlined } from '@ant-design/icons'
-
 import { SetupGridSubMenuMobile, SetupGridProps } from '@pabau/ui'
 import styles from '../Setup.module.less'
 
-interface p {
+interface P {
   data: SetupGridProps[]
   handleBack: () => void
 }
-const GridSubMenuMobile = (props: p) => {
-  const { data } = props
+
+const GridSubMenuMobile: FC<P> = ({ handleBack, data }) => {
   const [subTitle, setSubTitle] = useState([])
 
   useEffect(() => {
@@ -21,7 +20,7 @@ const GridSubMenuMobile = (props: p) => {
   return (
     <div className={styles.gridMobileWrapper}>
       <div className={styles.listIcon}>
-        <LeftOutlined onClick={props.handleBack} />
+        <LeftOutlined onClick={handleBack} />
         <div className={styles.textContent}>
           {data && data.length > 0 ? data[0].title : ''}
         </div>

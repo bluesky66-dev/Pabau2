@@ -13,6 +13,8 @@ import { getMainDefinition } from '@apollo/client/utilities'
 import { OperationDefinitionNode } from 'graphql'
 import 'react-phone-input-2/lib/style.css'
 import 'react-google-places-autocomplete/dist/index.min.css'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 require('../styles/global.less')
 require('../../../libs/ui/src/styles/antd.less')
 
