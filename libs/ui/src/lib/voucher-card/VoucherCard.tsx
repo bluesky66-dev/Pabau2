@@ -67,18 +67,6 @@ export const VoucherCard: FC<VoucherCardProps> = ({
     height: `${cardWidth / 25}px`,
   }
 
-  const flipCard = (e) => {
-    if (cardRef?.current) {
-      if (cardRef.current.classList.contains('is-flipped')) {
-        cardRef.current.classList.remove('is-flipped')
-      } else {
-        cardRef.current.classList.add('is-flipped')
-      }
-    }
-  }
-
-  console.log('REST: ', rest)
-
   return (
     <div className={styles.voucherCardMain}>
       <div
