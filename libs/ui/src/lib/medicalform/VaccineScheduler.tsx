@@ -9,6 +9,7 @@ import vaccineSchedulerIcon from '../../assets/images/medicalform_vaccineschedul
 import BasicElement from './BasicElement'
 import ElementQuestion from './ElementQuestion'
 
+// eslint-disable-next-line no-use-before-define
 interface P {
   selectedForm?: any
   handleSave?: () => void

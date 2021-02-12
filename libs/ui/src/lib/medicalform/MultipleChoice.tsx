@@ -12,6 +12,7 @@ import ElementQuestion from './ElementQuestion'
 import MedicalFormError from './MedicalFormError'
 import MultiOptions from './MultiOptions'
 
+// eslint-disable-next-line no-use-before-define
 interface P {
   selectedForm?: any
   handleSave?: () => void

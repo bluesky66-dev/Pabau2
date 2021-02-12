@@ -11,6 +11,7 @@ import ElementAdvanced from './ElementAdvanced'
 import ElementQuestion from './ElementQuestion'
 import ElementTypeOption from './ElementTypeOption'
 
+// eslint-disable-next-line no-use-before-define
 interface P {
   selectedForm?: any
   handleSave?: () => void

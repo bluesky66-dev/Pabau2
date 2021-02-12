@@ -9,6 +9,7 @@ import labTestIcon from '../../assets/images/medicalform_labtest.svg'
 import BasicElement from './BasicElement'
 import MultiSelect from './MultiSelect'
 
+// eslint-disable-next-line no-use-before-define
 interface P {
   selectedForm?: any
   handleSave?: () => void

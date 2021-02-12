@@ -9,6 +9,7 @@ import conditionsIcon from '../../assets/images/medicalform_conditions.svg'
 import BasicElement from './BasicElement'
 import ElementQuestion from './ElementQuestion'
 
+// eslint-disable-next-line no-use-before-define
 interface P {
   selectedForm?: any
   handleSave?: () => void

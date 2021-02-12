@@ -9,6 +9,7 @@ import drugsIcon from '../../assets/images/medicalform_drugs.svg'
 import BasicElement from './BasicElement'
 import ElementQuestion from './ElementQuestion'
 
+// eslint-disable-next-line no-use-before-define
 interface P {
   selectedForm?: any
   handleSave?: () => void

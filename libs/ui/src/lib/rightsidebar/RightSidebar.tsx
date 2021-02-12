@@ -18,6 +18,7 @@ import VaccineHistory from '../medicalform/VaccineHistory'
 import VaccineScheduler from '../medicalform/VaccineScheduler'
 import styles from './RightSidebar.module.less'
 
+// eslint-disable-next-line no-use-before-define
 interface P {
   selectedForm?: any
   display?: boolean

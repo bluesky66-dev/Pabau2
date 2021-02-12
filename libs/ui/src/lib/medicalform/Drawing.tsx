@@ -9,7 +9,7 @@ import drawingIcon from '../../assets/images/medicalform_drawing.svg'
 import BasicElement from './BasicElement'
 import ElementQuestion from './ElementQuestion'
 import FileUpload from './FileUpload'
-
+// eslint-disable-next-line no-use-before-define
 interface P {
   selectedForm?: any
   handleSave?: () => void

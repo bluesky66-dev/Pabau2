@@ -9,6 +9,7 @@ import textBlockIcon from '../../assets/images/medicalform_textblock.svg'
 import BasicElement from './BasicElement'
 import ElementTextBox from './ElementTextBox'
 
+// eslint-disable-next-line no-use-before-define
 interface P {
   selectedForm?: any
   handleSave?: () => void
