@@ -33,7 +33,7 @@ export const Notification2 = () => (
     {Notification2Types.map((type) => (
       <Button
         key={type}
-        onClick={() => Notification(NotificationType[type], 'Message' )}
+        onClick={() => Notification(NotificationType[type], 'Message')}
       >
         Click
       </Button>

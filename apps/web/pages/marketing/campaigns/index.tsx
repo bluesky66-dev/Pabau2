@@ -52,10 +52,7 @@ const EDIT_MUTATION = gql`
 `
 
 const UPDATE_ORDER_MUTATION = gql`
-  mutation update_marketing_campaign_order(
-    $id: uuid!
-    $order: Int
-  ) {
+  mutation update_marketing_campaign_order($id: uuid!, $order: Int) {
     update_marketing_campaign(
       where: { id: { _eq: $id } }
       _set: { order: $order }
