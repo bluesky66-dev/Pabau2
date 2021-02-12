@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 import { NextPage } from 'next'
 import React from 'react'
-import CrudLayout from '../../../components/CrudLayout/CrudLayout'
+import CrudLayout from '../../components/CrudLayout/CrudLayout'
 
 const LIST_QUERY = gql`
   query marketing_sources(
@@ -92,25 +92,10 @@ const UPDATE_ORDER_MUTATION = gql`
 `
 
 const schema: Schema = {
-  full: 'Marketing Source',
-  fullLower: 'marketing source',
-  short: 'Source',
-  shortLower: 'source',
-  messages: {
-    create: {
-      success: 'New marketings source created.',
-      error: 'While creating marketing source.',
-    },
-    update: {
-      success: 'Marketings source updated.',
-      error: 'While updating marketings source.',
-    },
-    delete: {
-      success: 'Marketings source deleted.',
-      error: 'While deleting marketing sources.',
-    },
-  },
-  deleteBtnLabel: 'Yes, Delete Source',
+  full: 'Payment Type',
+  fullLower: 'payment type',
+  short: 'Payment Type',
+  shortLower: 'payment type',
   fields: {
     name: {
       full: 'Friendly Name',
@@ -122,7 +107,6 @@ const schema: Schema = {
       description: 'A friendly name',
       // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
-      type: 'string',
     },
     is_active: {
       full: 'Active',
@@ -132,10 +116,11 @@ const schema: Schema = {
   },
 }
 
-export const Index: NextPage = () => {
+export const PaymentTypes: NextPage = () => {
   return (
     <CrudLayout
       schema={schema}
+      tableSearch={false}
       addQuery={ADD_MUTATION}
       deleteQuery={DELETE_MUTATION}
       listQuery={LIST_QUERY}
@@ -146,4 +131,4 @@ export const Index: NextPage = () => {
   )
 }
 
-export default Index
+export default PaymentTypes

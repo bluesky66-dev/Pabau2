@@ -18,6 +18,7 @@ interface P {
   onClick?: () => void
   onFilterSource: () => void
   onSearch: (term: string) => void
+  tableSearch?: boolean
 }
 
 const AddButton: FC<P> = ({
@@ -26,6 +27,7 @@ const AddButton: FC<P> = ({
   children,
   onFilterSource,
   onSearch,
+  tableSearch = true,
 }) => {
   const [isActive, setIsActive] = useState(true)
   const [mobFilterDrawer, setMobFilterDrawer] = useState(false)
@@ -75,7 +77,9 @@ const AddButton: FC<P> = ({
     <>
       {/* Mobile header */}
       <div className={classNames(styles.marketingIcon, styles.desktopViewNone)}>
-        <SearchOutlined className={styles.marketingIconStyle} />
+        {tableSearch && (
+          <SearchOutlined className={styles.marketingIconStyle} />
+        )}
         <FilterOutlined
           className={styles.marketingIconStyle}
           onClick={() => setMobFilterDrawer((e) => !e)}
@@ -118,14 +122,16 @@ const AddButton: FC<P> = ({
       <div
         className={classNames(styles.marketingSource, styles.mobileViewNone)}
       >
-        <Input
-          className={styles.searchMarketingStyle}
-          placeholder="Search"
-          value={marketingSourceSearch}
-          onChange={(e) => setMarketingSourceSearch(e.target.value)}
-          suffix={<SearchOutlined style={{ color: '#8C8C8C' }} />}
-          autoFocus
-        />
+        {tableSearch && (
+          <Input
+            className={styles.searchMarketingStyle}
+            placeholder="Search"
+            value={marketingSourceSearch}
+            onChange={(e) => setMarketingSourceSearch(e.target.value)}
+            suffix={<SearchOutlined style={{ color: '#8C8C8C' }} />}
+            autoFocus
+          />
+        )}
         <Popover
           trigger="click"
           content={filterContent}

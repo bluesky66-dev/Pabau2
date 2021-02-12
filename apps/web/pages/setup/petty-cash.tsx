@@ -1,16 +1,16 @@
 import { gql } from '@apollo/client'
 import { NextPage } from 'next'
 import React from 'react'
-import CrudLayout from '../../../components/CrudLayout/CrudLayout'
+import CrudLayout from '../../components/CrudLayout/CrudLayout'
 
 const LIST_QUERY = gql`
-  query marketing_sources(
+  query petty_cash_types(
     $isActive: Boolean = true
     $searchTerm: String = ""
     $offset: Int
     $limit: Int
   ) {
-    marketing_source(
+    petty_cash_types(
       offset: $offset
       limit: $limit
       order_by: { order: desc }
@@ -28,11 +28,11 @@ const LIST_QUERY = gql`
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query marketing_source_aggregate(
+  query petty_cash_types_aggregate(
     $isActive: Boolean = true
     $searchTerm: String = ""
   ) {
-    marketing_source_aggregate(
+    petty_cash_types_aggregate(
       where: {
         is_active: { _eq: $isActive }
         _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
@@ -45,16 +45,16 @@ const LIST_AGGREGATE_QUERY = gql`
   }
 `
 const DELETE_MUTATION = gql`
-  mutation delete_marketing_source($id: uuid!) {
-    delete_marketing_source_by_pk(id: $id) {
+  mutation delete_petty_cash_types_by_pk($id: uuid!) {
+    delete_petty_cash_types_by_pk(id: $id) {
       __typename
       id
     }
   }
 `
 const ADD_MUTATION = gql`
-  mutation add_marketing_source($name: String!, $is_active: Boolean) {
-    insert_marketing_source_one(
+  mutation insert_petty_cash_types_one($name: String!, $is_active: Boolean) {
+    insert_petty_cash_types_one(
       object: { name: $name, is_active: $is_active }
     ) {
       __typename
@@ -63,13 +63,13 @@ const ADD_MUTATION = gql`
   }
 `
 const EDIT_MUTATION = gql`
-  mutation update_marketing_source_by_pk(
+  mutation update_petty_cash_types_by_pk(
     $id: uuid!
     $name: String!
     $is_active: Boolean
     $order: Int
   ) {
-    update_marketing_source_by_pk(
+    update_petty_cash_types_by_pk(
       pk_columns: { id: $id }
       _set: { name: $name, is_active: $is_active, order: $order }
     ) {
@@ -80,9 +80,10 @@ const EDIT_MUTATION = gql`
     }
   }
 `
+
 const UPDATE_ORDER_MUTATION = gql`
-  mutation update_marketing_source_order($id: uuid!, $order: Int) {
-    update_marketing_source(
+  mutation update_petty_cash_types_order($id: uuid!, $order: Int) {
+    update_petty_cash_types(
       where: { id: { _eq: $id } }
       _set: { order: $order }
     ) {
@@ -92,25 +93,24 @@ const UPDATE_ORDER_MUTATION = gql`
 `
 
 const schema: Schema = {
-  full: 'Marketing Source',
-  fullLower: 'marketing source',
-  short: 'Source',
-  shortLower: 'source',
+  full: 'Petty Cash Types',
+  fullLower: 'petty cash types',
+  short: 'Petty Cash',
+  shortLower: 'petty cash types',
   messages: {
     create: {
-      success: 'New marketings source created.',
-      error: 'While creating marketing source.',
+      success: 'You have successfully created a petty cash',
+      error: 'While creating a petty cash',
     },
     update: {
-      success: 'Marketings source updated.',
-      error: 'While updating marketings source.',
+      success: 'You have successfully updated a petty cash',
+      error: 'While updating a petty cash',
     },
     delete: {
-      success: 'Marketings source deleted.',
-      error: 'While deleting marketing sources.',
+      success: 'You have successfully deleted a petty cash',
+      error: 'While deleting a petty cash',
     },
   },
-  deleteBtnLabel: 'Yes, Delete Source',
   fields: {
     name: {
       full: 'Friendly Name',
@@ -118,24 +118,25 @@ const schema: Schema = {
       short: 'Name',
       shortLower: 'name',
       min: 2,
-      example: 'Facebook',
-      description: 'A friendly name',
+      example: 'Milk',
+      // description: 'A friendly name',
       // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
       type: 'string',
     },
     is_active: {
-      full: 'Active',
+      full: 'Status',
       type: 'boolean',
       defaultvalue: true,
     },
   },
 }
 
-export const Index: NextPage = () => {
+export const PettyCash: NextPage = () => {
   return (
     <CrudLayout
       schema={schema}
+      tableSearch={false}
       addQuery={ADD_MUTATION}
       deleteQuery={DELETE_MUTATION}
       listQuery={LIST_QUERY}
@@ -146,4 +147,4 @@ export const Index: NextPage = () => {
   )
 }
 
-export default Index
+export default PettyCash

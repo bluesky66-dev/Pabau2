@@ -13,6 +13,7 @@ interface P {
   newButtonText?: string
   title?: string
   modalWidth?: number
+  isValidate?: boolean
   footer?: boolean
 
   /**
@@ -48,6 +49,7 @@ export function BasicModal({
   newButtonText,
   newButtonDisable = false,
   dangerButtonText,
+  isValidate,
   footer = true,
   wrapClassName,
   ...props
@@ -63,7 +65,7 @@ export function BasicModal({
       width={modalWidth}
       // destroyOnClose={true}
       // modalRender={(E) => E}
-      wrapClassName={styles.modal + ' ' + wrapClassName}
+      wrapClassName={classNames(styles.modal, wrapClassName)}
       {...props}
     >
       <div className={styles.modalContent}>{children}</div>

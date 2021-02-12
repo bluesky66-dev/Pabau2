@@ -24,7 +24,7 @@ pipelines:
             - nodemodules
             - yarncustom
           script:
-            - /bin/bash -c 'yarn audit --no-progress --non-interactive; [[ $? -ge 2 ]] && exit 1 || exit 0'
+            - /bin/bash -c 'yarn audit --no-progress --non-interactive; [[ $? -gt 2 ]] && exit 1 || exit 0'
 
             # Get an oauth access token using the client credentials, parsing out the token with jq.
             - apt-get update && apt-get install -y curl jq
@@ -99,7 +99,7 @@ pipelines:
             - nodemodules
             - yarncustom
           script:
-            - /bin/bash -c 'yarn audit --no-progress --non-interactive; [[ $? -ge 2 ]] && exit 1 || exit 0'
+            - /bin/bash -c 'yarn audit --no-progress --non-interactive; [[ $? -gt 2 ]] && exit 1 || exit 0'
             - touch /tmp/bot_message.txt
             - apt-get update -y && apt-get install -y curl jq time
             - /usr/bin/time -v yarn install --frozen-lockfile --prefer-offline
