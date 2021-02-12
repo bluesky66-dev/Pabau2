@@ -5,16 +5,17 @@ import styels from './WStepper.module.less'
 import Stepper from '../stepper/Stepper'
 import Wizard from '../wizard/Wizard'
 import { data } from './mock'
+import { BreadcrumbItemInterface } from '../breadcrumb/Breadcrumb'
 
 interface WStepperProps {
   active: number
-  breadcrumbTxt: string
+  breadcrumbItems: BreadcrumbItemInterface[]
   headerTxt: string
 }
 
 export const WStepper: React.FC<WStepperProps> = ({
   active,
-  breadcrumbTxt,
+  breadcrumbItems,
   headerTxt,
 }) => {
   const [index, setIndex] = React.useState(active)
@@ -26,7 +27,7 @@ export const WStepper: React.FC<WStepperProps> = ({
       <Wizard
         onPrev={() => setIndex(index - 1)}
         onNext={() => setIndex(index + 1)}
-        breadcrumb={breadcrumbTxt}
+        breadcrumbItems={breadcrumbItems}
         header={headerTxt}
         active={index}
         allSteps={5}

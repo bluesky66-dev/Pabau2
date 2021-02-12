@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { gql } from '@apollo/client'
 import { NextPage } from 'next'
 import React from 'react'
@@ -82,10 +81,7 @@ const EDIT_MUTATION = gql`
   }
 `
 const UPDATE_ORDER_MUTATION = gql`
-  mutation update_marketing_source_order(
-    $id: uuid!
-    $order: Int
-  ) {
+  mutation update_marketing_source_order($id: uuid!, $order: Int) {
     update_marketing_source(
       where: { id: { _eq: $id } }
       _set: { order: $order }
@@ -100,6 +96,21 @@ const schema: Schema = {
   fullLower: 'marketing source',
   short: 'Source',
   shortLower: 'source',
+  messages: {
+    create: {
+      success: 'New marketings source created.',
+      error: 'While creating marketing source.',
+    },
+    update: {
+      success: 'Marketings source updated.',
+      error: 'While updating marketings source.',
+    },
+    delete: {
+      success: 'Marketings source deleted.',
+      error: 'While deleting marketing sources.',
+    },
+  },
+  deleteBtnLabel: 'Yes, Delete Source',
   fields: {
     name: {
       full: 'Friendly Name',
@@ -111,11 +122,12 @@ const schema: Schema = {
       description: 'A friendly name',
       // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
+      type: 'string',
     },
     is_active: {
       full: 'Active',
       type: 'boolean',
-      default: true,
+      defaultvalue: true,
     },
   },
 }
