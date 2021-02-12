@@ -39,7 +39,7 @@ const AddButton: FC<P> = ({
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      onSearch && onSearch(marketingSourceSearch)
+      onSearch?.(marketingSourceSearch)
     }, WAIT_INTERVAL)
 
     return () => clearTimeout(timer)

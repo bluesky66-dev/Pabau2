@@ -1,11 +1,12 @@
 import React, { FC } from 'react'
 import styles from './InventoryLabel.module.less'
 import classNames from 'classnames'
+
 interface P {
   labelType?: string
 }
 
-export const InventoryLabel: FC<P> = ({ labelType, ...props }) => {
+export const InventoryLabel: FC<P> = ({ labelType }) => {
   return (
     <div className={styles.labelWrapper}>
       <label
