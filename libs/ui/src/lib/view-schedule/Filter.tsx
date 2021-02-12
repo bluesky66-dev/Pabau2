@@ -129,7 +129,7 @@ function filterEachWebinar(
 ): WebinarProps[] {
   let filteredData: WebinarProps[] = [...webinars]
   if (filters) {
-    filters.map((item) => {
+    filters.forEach((item) => {
       filteredData = filterCategory(filteredData, filterOptions, item)
     })
   }
