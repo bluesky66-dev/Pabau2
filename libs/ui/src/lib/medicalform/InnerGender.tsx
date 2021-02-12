@@ -12,8 +12,8 @@ interface P {
 }
 const InnerGender: FC<P> = ({ required }) => {
   const genderOptions = [
-    { id: 1, label: 'Male' },
-    { id: 2, label: 'Female' },
+    { id: 1, name: 'Male' },
+    { id: 2, name: 'Female' },
   ]
   return (
     <InnerElement>
