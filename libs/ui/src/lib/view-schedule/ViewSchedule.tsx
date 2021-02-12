@@ -1,9 +1,9 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import {
   FullScreenReportModal,
   FullScreenReportModalProps,
-  WebinarProps,
   Webinar,
+  WebinarProps,
 } from '@pabau/ui'
 
 import { Filter } from './Filter'
@@ -32,7 +32,11 @@ export const ViewScheduleModal: FC<ViewScheduleProps> = ({
   const [scheduleData, setSchedule] = useState(schedule)
   const [filteredWebinars, setFilteredWebinars] = useState<
     discoverAndLearnProps[] | undefined
-  >(discoverAndLearn)
+  >([])
+
+  useEffect(() => {
+    setFilteredWebinars(discoverAndLearn)
+  }, [discoverAndLearn])
 
   const handleClear = (): void => {
     setFilteredWebinars(discoverAndLearn)
@@ -76,7 +80,6 @@ export const ViewScheduleModal: FC<ViewScheduleProps> = ({
                   thread.webinar.map((data) => {
                     return (
                       <div className={styles.webBox} key={data.id}>
-                        <p>{data.length}</p>
                         <Webinar {...data} onClick={onCancelSchedule} />
                       </div>
                     )
@@ -90,7 +93,6 @@ export const ViewScheduleModal: FC<ViewScheduleProps> = ({
   }
 
   const viewScheduleContent = () => {
-    console.log('Filtered data', filteredWebinars)
     return (
       <div className={styles.viewScheduleWrapper}>
         <div className={styles.scheduleContent}>

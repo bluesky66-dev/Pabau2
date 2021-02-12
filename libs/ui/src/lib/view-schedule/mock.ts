@@ -152,9 +152,8 @@ export const filterOptions = [
     key: 1,
     id: 'length',
     label: 'Length',
-    value: 'Select...',
     options: [
-      'Select...',
+      'Select',
       'Below 20 minutes',
       '20 to 40 minutes',
       '40 to 60 minutes',
@@ -165,14 +164,12 @@ export const filterOptions = [
     key: 2,
     id: 'category',
     label: 'Category',
-    value: 'Select...',
-    options: ['Select...', 'Stock', 'Financial', 'Startup'],
+    options: ['Select', 'Stock', 'Financial', 'Startup'],
   },
   {
     key: 3,
     id: 'name',
     label: 'Trainer',
-    value: 'Select...',
     options: [
       'Select...',
       'Alexander Tuner',
@@ -184,8 +181,7 @@ export const filterOptions = [
     key: 4,
     id: 'difficulty',
     label: 'Difficulty',
-    value: 'Select...',
-    options: ['Select...', 'Easy', 'Medium', 'Hard'],
+    options: ['Select', 'Easy', 'Medium', 'Hard'],
   },
 ]
 

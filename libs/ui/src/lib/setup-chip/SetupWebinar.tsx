@@ -8,7 +8,7 @@ import {
   CloseOutlined,
 } from '@ant-design/icons'
 
-enum Difficulty {
+export enum Difficulty {
   easy = 'Easy',
   medium = 'Medium',
   hard = 'Hard',
@@ -25,7 +25,7 @@ export interface WebinarProps {
   onClick?: (type: string, id?: string) => void
   isYourSchedule?: boolean
   category?: string
-  length?: number
+  length: number
   difficulty?: Difficulty
 }
 

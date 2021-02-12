@@ -49,6 +49,13 @@
         font-size: 14px;
         line-height: 22px;
         cursor: pointer;
+        &:focus, &:hover {
+          border: 1px solid #40A0C1;
+          color: #40A0C1;
+          svg {
+            color: #40A0C1;
+          }
+        }
         span {
           margin-right: 5px;
           svg {
@@ -71,9 +78,10 @@
 
   .webinar-wrapper-modal {
     display: flex;
-    @media screen and (max-width: 991px) {
-      overflow-x: auto;
-    }
+    overflow-x: auto;
+    //@media screen and (max-width: 991px) {
+    //  overflow-x: auto;
+    //}
       .web-box {
         margin-right: 16px;
 
@@ -84,4 +92,33 @@
 .filter-container {
   width: 340px;
   padding: 24px;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+
+    button {
+      span {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        color: #9292A3;
+      }
+    }
+  }
+
+  .dropdown-list {
+    .dropdown {
+      margin-bottom: 20px;
+    }
+  }
+
+  .show-result-btn {
+    button {
+      width: 100%;
+    }
+  }
 }

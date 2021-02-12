@@ -1,11 +1,13 @@
 import React, { FC, useState } from 'react'
 import { Popover } from 'antd'
 import { FilterOutlined } from '@ant-design/icons'
+import _ from 'lodash'
 
-import { discoverAndLearnProps } from './ViewSchedule'
+import { discoverAndLearnProps } from '@pabau/ui'
 import { WebinarProps } from '@pabau/ui'
 
 import { filterOptions, lengthOptions } from './mock'
+
 import { Button } from '../button/button'
 import { SimpleDropdown } from '../simple-dropdown/SimpleDropdown'
 
@@ -25,49 +27,66 @@ interface P {
 }
 
 const initialFilters: IFilterOptions = {
-  name: 'Select...',
-  category: 'Select...',
-  length: 'Select...',
-  difficulty: 'Select...',
+  name: 'Select',
+  category: 'Select',
+  length: 'Select',
+  difficulty: 'Select',
 }
 
 export const Filter: FC<P> = ({ webinarList, onClear, handleShowResult }) => {
-  const [filters, setFilters] = useState<IFilterOptions>(initialFilters)
+  const [filterObj, setFilterObj] = useState<IFilterOptions>(initialFilters)
+  const [filters, setFilters] = useState<string[] | undefined>([])
+
   const handleSelect = (key: string, val): void => {
-    setFilters({ ...filters, [key]: val })
+    setFilterObj({ ...filterObj, [key]: val })
+    if (filters?.includes(key) && val === 'Select') {
+      const data = filters?.splice(filters?.indexOf(key), 1)
+      setFilters(data)
+    } else if (!filters?.includes(key)) {
+      filters?.push(key)
+      setFilters(filters)
+    }
   }
 
   const handleClear = (): void => {
-    setFilters(initialFilters)
+    setFilterObj(initialFilters)
+    setFilters([])
     onClear()
   }
 
   const handleFilter = (): void => {
-    const data = filterWebinar(webinarList, filters)
+    const data = filterWebinar(webinarList, filterObj, filters)
     handleShowResult(data)
   }
+
   const filterPopoverContent = (): JSX.Element => {
     return (
       <div className={styles.filterContainer}>
-        <div>
-          <p>Filter By</p>
+        <div className={styles.header}>
+          <strong>Filter By</strong>
           <Button type={'text'} onClick={handleClear}>
             Clear All
           </Button>
         </div>
-        <div>
-          {filterOptions?.map(({ key, id, label, value, options }) => (
-            <SimpleDropdown
-              key={key}
-              label={label}
-              value={filters[id]}
-              dropdownItems={options}
-              onSelected={(val) => handleSelect(id, val)}
-            />
+        <div className={styles.dropdownList}>
+          {filterOptions?.map(({ key, id, label, options }) => (
+            <div className={styles.dropdown} key={`filter-${id}`}>
+              <SimpleDropdown
+                key={key}
+                label={label}
+                value={filterObj[id]}
+                dropdownItems={options}
+                onSelected={(val) => handleSelect(id, val)}
+              />
+            </div>
           ))}
         </div>
-        <div>
-          <Button type={'primary'} onClick={handleFilter}>
+        <div className={styles.showResultBtn}>
+          <Button
+            type={'primary'}
+            disabled={filters?.length === 0}
+            onClick={() => handleFilter()}
+          >
             Show Results
           </Button>
         </div>
@@ -75,7 +94,6 @@ export const Filter: FC<P> = ({ webinarList, onClear, handleShowResult }) => {
     )
   }
 
-  console.log('filter', webinarList)
   return (
     <Popover
       placement={'bottomRight'}
@@ -91,41 +109,56 @@ export const Filter: FC<P> = ({ webinarList, onClear, handleShowResult }) => {
 
 function filterWebinar(
   discoverAndLearn: discoverAndLearnProps[] | undefined,
-  filterOptions: IFilterOptions
+  filterOptions: IFilterOptions,
+  filters: string[] | undefined
 ): discoverAndLearnProps[] | undefined {
-  if (discoverAndLearn) {
+  const duplicateData = _.cloneDeep(discoverAndLearn)
+  if (discoverAndLearn && duplicateData) {
     discoverAndLearn.forEach(({ webinar }, index) => {
-      const data = filterEachWebinar(webinar, filterOptions)
-      discoverAndLearn[index].webinar = data
+      const data = filterEachWebinar(webinar, filterOptions, filters)
+      duplicateData[index].webinar = data
     })
   }
-  return discoverAndLearn
+  return duplicateData
 }
 
 function filterEachWebinar(
   webinars: WebinarProps[],
-  filterOptions: IFilterOptions
+  filterOptions: IFilterOptions,
+  filters: string[] | undefined
 ): WebinarProps[] {
-  const filteredData = webinars.filter(
-    ({ category, length, name, difficulty }) =>
-      category === filterOptions?.category ||
-      (length && checkWebinarLength(length, filterOptions.length)) ||
-      name === filterOptions?.name ||
-      difficulty === filterOptions?.difficulty
-  )
+  let filteredData: WebinarProps[] = [...webinars]
+  if (filters) {
+    filters.map((item) => {
+      filteredData = filterCategory(filteredData, filterOptions, item)
+    })
+  }
   return filteredData
 }
 
+function filterCategory(
+  webinars: WebinarProps[],
+  filterOptions: IFilterOptions,
+  key: string
+): WebinarProps[] {
+  return webinars.filter((i) =>
+    key === 'length'
+      ? checkWebinarLength(i.length, filterOptions[key])
+      : i[key] === filterOptions[key]
+  )
+}
+
 function checkWebinarLength(length: number, option: string): boolean {
-  if (lengthOptions[option] === 0) {
-    return length < 20
-  } else if (lengthOptions[option] > 0 && lengthOptions[option] < 3) {
-    return (
-      length >= lengthOptions[option] * 20 &&
-      length < (lengthOptions[option] + 1) * 20
-    )
-  } else if (lengthOptions[option] === 3) {
-    return length > 60
+  switch (lengthOptions[option]) {
+    case 0:
+      return length < 20
+    case 1:
+      return length >= 20 && length < 40
+    case 2:
+      return length >= 40 && length < 60
+    case 3:
+      return length > 60
+    default:
+      return false
   }
-  return false
 }
