@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Document, Page, pdfjs } from 'react-pdf'
+import dynamic from 'next/dynamic'
 import { RightOutlined, LeftOutlined } from '@ant-design/icons'
 import styles from './EPaper.module.less'
 
@@ -13,7 +13,9 @@ export interface EPaperProps {
   onDocumentLoadSuccess?: ({ numPages: number }) => void
 }
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
+const MyEPaper = dynamic(() => import('./MyEPaper'), {
+  ssr: false,
+})
 
 export const EPaper: FC<EPaperProps> = ({
   title,
@@ -58,16 +60,11 @@ export const EPaper: FC<EPaperProps> = ({
           </div>
           <div className={styles.ePaperContent}>
             {pdfURL ? (
-              <Document
-                file={{ url: pdfURL }}
-                onLoadSuccess={onDocumentLoadSuccess}
-              >
-                <Page
-                  pageNumber={pageNumber}
-                  scale={1.3}
-                  renderAnnotationLayer={false}
-                />
-              </Document>
+              <MyEPaper
+                pdfURL={pdfURL}
+                pageNumber={pageNumber}
+                onDocumentLoadSuccess={onDocumentLoadSuccess}
+              />
             ) : (
               images &&
               images.length > 0 && (
