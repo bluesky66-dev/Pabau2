@@ -117,9 +117,8 @@ const CrudTable: FC<P> = ({
         showingRecords: data?.length,
       })
     if (!loading && data) setIsLoading(false)
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, aggregateData])
+  }, [data, aggregateData, loading])
 
   const onFilterMarketingSource = () => {
     resetPagination()
@@ -373,6 +372,7 @@ const CrudTable: FC<P> = ({
             noDataBtnText={schema.full}
             noDataText={schema.fullLower}
             onAddTemplate={() => setModalShowing({ isCreate: true })}
+            searchTerm={searchTerm}
             columns={[
               ...Object.entries(schema.fields).map(([k, v]) => ({
                 dataIndex: k,

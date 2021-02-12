@@ -52,6 +52,7 @@ export type TableType = {
   noDataBtnText?: string
   noDataIcon?: JSX.Element
   onAddTemplate?: () => void
+  searchTerm?: string
 } & TableProps<never> &
   DragProps
 
@@ -66,6 +67,7 @@ export const Table: FC<TableType> = ({
   noDataBtnText,
   noDataIcon = <ContactsOutlined />,
   onAddTemplate,
+  searchTerm = '',
   ...props
 }) => {
   const onSortEnd = ({ oldIndex, newIndex }) => {
@@ -209,7 +211,7 @@ export const Table: FC<TableType> = ({
       rowKey="key"
       className={styles.dragTable}
       locale={{
-        emptyText: 'No results found',
+        emptyText: !props.loading && searchTerm && 'No results found',
       }}
       components={{
         body: {
