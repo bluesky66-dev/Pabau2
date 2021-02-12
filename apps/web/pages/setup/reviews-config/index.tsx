@@ -1,6 +1,13 @@
 import React, { FC, useState, useEffect } from 'react'
 import { Typography, Badge, Form, Row, Col, Radio } from 'antd'
-import { LeftOutlined, RightOutlined } from '@ant-design/icons'
+import {
+  LeftOutlined,
+  RightOutlined,
+  ToolOutlined,
+  QuestionOutlined,
+  ShareAltOutlined,
+  LinkOutlined,
+} from '@ant-design/icons'
 import {
   TabMenu,
   Breadcrumb,
@@ -17,8 +24,38 @@ import CommonHeader from '../CommonHeader'
 import reviewsConfigBanner from '../../../assets/images/reviews-config-banner.png'
 import { ReactComponent as ExternalLink } from '../../../assets/images/external-link.svg'
 import { ReactComponent as ExternalLinkGrey } from '../../../assets/images/external-link-grey.svg'
-import { stepData } from './mock'
 import styles from './index.module.less'
+
+const stepData = [
+  {
+    step: 0,
+    name: 'Builder',
+    img: <ToolOutlined />,
+    isActive: true,
+    index: 0,
+  },
+  {
+    step: 1,
+    name: 'Questions',
+    img: <QuestionOutlined />,
+    isActive: false,
+    index: 1,
+  },
+  {
+    step: 2,
+    name: 'Integrations',
+    img: <LinkOutlined />,
+    isActive: false,
+    index: 2,
+  },
+  {
+    step: 3,
+    name: 'Share',
+    img: <ShareAltOutlined />,
+    isActive: false,
+    index: 3,
+  },
+]
 
 interface FeedbackSurveyBuilder {
   color: string
