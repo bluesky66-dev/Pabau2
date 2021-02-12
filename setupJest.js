@@ -1,5 +1,7 @@
 // https://github.com/akiran/react-slick/issues/742#issuecomment-557793922
-window.matchMedia =
+
+if (typeof window !== "undefined") {
+  window.matchMedia =
   window.matchMedia ||
   function() {
     return {
@@ -8,3 +10,4 @@ window.matchMedia =
       removeListener: function() {}
     };
   };
+}
