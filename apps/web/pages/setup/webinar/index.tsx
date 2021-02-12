@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import {
   Webinar,
   Button,
@@ -10,7 +10,7 @@ import styles from '../Setup.module.less'
 
 import { data, viewScheduleData } from '../../../assets/webinarMock'
 
-const WebinarCard = () => {
+const WebinarCard: FC = () => {
   const [isOpenModal, setIsOpen] = useState<boolean>(false)
   const [modalData, setModalData] = useState({})
   const [isOpenViewSchedule, setIsOpenViewSchedule] = useState<boolean>(false)
@@ -42,10 +42,9 @@ const WebinarCard = () => {
       <div className={styles.rightSide}>
         <div className={styles.textTitle}>Live & Upcoming Webinars</div>
         <div className={styles.webinarWrapper}>
-          {data &&
-            data.map((value, index) => (
-              <Webinar key={index} {...value} onClick={handleOpenModal} />
-            ))}
+          {data?.map((value, index) => (
+            <Webinar key={index} {...value} onClick={handleOpenModal} />
+          ))}
         </div>
         <Button className={styles.btnView} onClick={handleOpenViewSchedule}>
           View Full Schedule

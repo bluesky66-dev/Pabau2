@@ -1,7 +1,7 @@
 import React from 'react'
 
 import styels from './Wizard.module.less'
-import { Button, Breadcrumb } from '@pabau/ui'
+import { Button, Breadcrumb, BreadcrumbItemInterface } from '@pabau/ui'
 import { Typography } from 'antd'
 
 const { Title } = Typography
@@ -11,7 +11,7 @@ interface WizardProps {
   onNext: () => void
   active: number
   allSteps: number
-  breadcrumb: string
+  breadcrumbItems: BreadcrumbItemInterface[]
   header: string
 }
 
@@ -20,7 +20,7 @@ export const Wizard: React.FC<WizardProps> = ({
   onNext,
   active,
   allSteps,
-  breadcrumb,
+  breadcrumbItems,
   header,
   children,
 }) => {
@@ -35,7 +35,7 @@ export const Wizard: React.FC<WizardProps> = ({
   return (
     <div className={styels.container}>
       <div style={{ backgroundColor: '#FFF' }}>
-        <Breadcrumb breadcrumbItems={[breadcrumb, header]} />
+        <Breadcrumb breadcrumbItems={breadcrumbItems} />
         <Title>{header}</Title>
       </div>
 

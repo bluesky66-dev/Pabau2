@@ -14,6 +14,7 @@ const columns = [
     title: 'Name',
     dataIndex: 'name',
     className: 'drag-visible',
+    visible: true,
     render: function renderSourceName(val, rowData) {
       if (rowData.isLocked) {
         return <>{val}</>
@@ -26,6 +27,7 @@ const columns = [
     title: 'STATUS',
     dataIndex: 'is_active',
     className: 'drag-visible',
+    visible: true,
   },
 ]
 
