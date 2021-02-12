@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Card } from 'antd'
 import Highlighter from 'react-highlight-words'
 
@@ -9,12 +9,12 @@ interface searchProps {
   subTitle: string
   title: string
 }
-interface p {
+interface P {
   data: searchProps[]
   searchTerm: string
 }
 
-const SearchResults = (props: p) => {
+const SearchResults: FC<P> = (props) => {
   const { data, searchTerm } = props
 
   return (

@@ -14,11 +14,6 @@ interface P {
 }
 
 const LabTest: FC<P> = ({ hideSideBar }) => {
-  const saveFunc = () => {
-    if (hideSideBar) {
-      hideSideBar()
-    }
-  }
   const optionLabels = [
     { id: 1, label: 'Accent Prime' },
     { id: 2, label: 'All-inclusive' },
@@ -41,7 +36,7 @@ const LabTest: FC<P> = ({ hideSideBar }) => {
       <MedicalFormBody>
         <MultiSelect title="Question" options={optionLabels} />
       </MedicalFormBody>
-      <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
+      <MedicalFormBottom saveFunc={() => hideSideBar?.()} needLeft={true} />
     </BasicElement>
   )
 }

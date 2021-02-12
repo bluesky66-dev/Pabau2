@@ -73,7 +73,7 @@ export const Table: FC<TableType> = ({
   const onSortEnd = ({ oldIndex, newIndex }) => {
     if (oldIndex !== newIndex) {
       const newData = array_move(dataSource, oldIndex, newIndex)
-      updateDataSource && updateDataSource({ newData, oldIndex, newIndex })
+      updateDataSource?.({ newData, oldIndex, newIndex })
     }
   }
 
@@ -143,7 +143,7 @@ export const Table: FC<TableType> = ({
   const checkPadLocks = (record) => {
     let alloWClicked = true
     Object.keys(record).map((key) => {
-      if (padlocked && padlocked.includes(record[key])) {
+      if (padlocked?.includes(record[key])) {
         alloWClicked = false
       }
       return key
@@ -152,7 +152,7 @@ export const Table: FC<TableType> = ({
   }
 
   const renderSortHandler = () => {
-    if (props && props.columns) {
+    if (props?.columns) {
       props.columns = props.columns
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ?.filter((col: any) => col.visible === true)
