@@ -1,10 +1,10 @@
 import React from 'react'
-import { HelpTooltip } from './helptooltip'
+import { HelpTooltip } from './HelpTooltip'
 import { Input } from './input'
 import { notification } from 'antd'
 import { Passcode as PasscodeBox } from './Passcode'
 import { PasswordWithHelper as PasswordWithHelperBox } from './PasswordWithHelper'
-import { InputNumber } from './inputNumber'
+import { InputNumber } from './InputNumber'
 
 export default {
   component: Input,

@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, useEffect, useState } from 'react'
 import { Form, Input as AntInput } from 'antd'
 import { FormProps, Rule } from 'antd/lib/form'
-import styles from './input.module.less'
+import styles from './Input.module.less'
 
 enum ButtonSize {
   small = 'small',
