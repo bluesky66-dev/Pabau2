@@ -260,10 +260,12 @@ export const Standard: FC<P> = ({
                   </>
                 )}
                 <ColorPicker
+                  selectedColor=""
                   heading="Background color"
                   onSelected={(val) => onBackGroundColor(val)}
                 />
                 <ColorPicker
+                  selectedColor=""
                   heading="Buttons color"
                   onSelected={(val) => onButtonColor(val)}
                 />
