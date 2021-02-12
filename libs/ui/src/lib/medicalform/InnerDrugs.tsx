@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import drugsIcon from '../../assets/images/medicalform_drugs.svg'
 import InnerElement from './InnerElement'
+import InnerMedicalFormBody from './InnerMedicalFormBody'
 import InnerMedicalFormEditIcon from './InnerMedicalFormEditIcon'
 import InnerMedicalFormRequired from './InnerMedicalFormRequired'
 import InnerMedicalFormTitle from './InnerMedicalFormTitle'
@@ -8,25 +9,20 @@ import InnerMedicalFormTitle from './InnerMedicalFormTitle'
 interface P {
   required?: boolean
   activate?: boolean
-  handleId?: number
-  handlingSelectComponent?: (
-    isActive?: boolean,
-    handleId?: number,
-    componentName?: string
-  ) => void
+  handlingSelectForm?: (isActive?: boolean, handleId?: string) => void
+  formData?: any
 }
 const InnerDrugs: FC<P> = ({
   required,
   activate,
-  handleId,
-  handlingSelectComponent,
+  handlingSelectForm,
+  formData,
 }) => {
   return (
     <InnerElement
-      handleId={handleId}
+      handleId={formData.id}
       activate={activate}
-      componentName="Drugs"
-      handlingSelectComponent={handlingSelectComponent}
+      handlingSelectForm={handlingSelectForm}
     >
       {required && <InnerMedicalFormRequired />}
       <InnerMedicalFormEditIcon />
@@ -35,6 +31,11 @@ const InnerDrugs: FC<P> = ({
         bgcolor="#FAAD14"
         title="Drugs"
       />
+      {formData.txt1 !== '' && (
+        <InnerMedicalFormBody>
+          <p>{formData.txt1}</p>
+        </InnerMedicalFormBody>
+      )}
     </InnerElement>
   )
 }

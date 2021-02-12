@@ -1,19 +1,20 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
-// import InnerDrawing from '../medicalform/InnerDrawing'
-// import InnerDropdown from '../medicalform/InnerDropdown'
-// import InnerDrugs from '../medicalform/InnerDrugs'
+import InnerConditions from '../medicalform/InnerConditions'
+import InnerDrawing from '../medicalform/InnerDrawing'
+import InnerDropdown from '../medicalform/InnerDropdown'
+import InnerDrugs from '../medicalform/InnerDrugs'
 import InnerHeading from '../medicalform/InnerHeading'
-// import InnerLabTest from '../medicalform/InnerLabTest'
-// import InnerLongAnswer from '../medicalform/InnerLongAnswer'
-// import InnerMultiChoice from '../medicalform/InnerMultiChoice'
-// import InnerShortAnswer from '../medicalform/InnerShortAnswer'
-// import InnerSignature from '../medicalform/InnerSignature'
-// import InnerSingleChoice from '../medicalform/InnerSingleChoice'
-// import InnerTextBlock from '../medicalform/InnerTextBlock'
-// import InnerTravelDestination from '../medicalform/InnerTravelDestination'
-// import InnerVaccineHistory from '../medicalform/InnerVaccineHistory'
-// import InnerVaccineScheduler from '../medicalform/InnerVaccineScheduler'
+import InnerLabTest from '../medicalform/InnerLabTest'
+import InnerLongAnswer from '../medicalform/InnerLongAnswer'
+import InnerMultiChoice from '../medicalform/InnerMultiChoice'
+import InnerShortAnswer from '../medicalform/InnerShortAnswer'
+import InnerSignature from '../medicalform/InnerSignature'
+import InnerSingleChoice from '../medicalform/InnerSingleChoice'
+import InnerTextBlock from '../medicalform/InnerTextBlock'
+import InnerTravelDestination from '../medicalform/InnerTravelDestination'
+import InnerVaccineHistory from '../medicalform/InnerVaccineHistory'
+import InnerVaccineScheduler from '../medicalform/InnerVaccineScheduler'
 import styles from './MedicalFormBuilder.module.less'
 
 interface formParams {
@@ -89,146 +90,146 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
                         formData={form}
                       />
                     )}
-                    {/* {form.formName === 'ShortAnswer' && (
+                    {form.formName === 'ShortAnswer' && (
                       <InnerShortAnswer
                         required={false}
                         activate={
-                          activatedComponentID === `${form.id}` ? true : false
+                          activatedFormID === `${form.id}` ? true : false
                         }
-                        componentData={form}
-                        handlingSelectComponent={handlingSelectComponent}
+                        handlingSelectForm={handlingSelectForm}
+                        formData={form}
                       />
                     )}
                     {form.formName === 'LongAnswer' && (
                       <InnerLongAnswer
                         required={false}
                         activate={
-                          activatedComponentID === `${form.id}` ? true : false
+                          activatedFormID === `${form.id}` ? true : false
                         }
-                        componentData={form}
-                        handlingSelectComponent={handlingSelectComponent}
+                        handlingSelectForm={handlingSelectForm}
+                        formData={form}
                       />
                     )}
                     {form.formName === 'TextBlock' && (
                       <InnerTextBlock
                         required={false}
                         activate={
-                          activatedComponentID === `${form.id}` ? true : false
+                          activatedFormID === `${form.id}` ? true : false
                         }
-                        componentData={form}
-                        handlingSelectComponent={handlingSelectComponent}
+                        handlingSelectForm={handlingSelectForm}
+                        formData={form}
                       />
                     )}
                     {form.formName === 'SingleChoice' && (
                       <InnerSingleChoice
                         required={false}
                         activate={
-                          activatedComponentID === `${form.id}` ? true : false
+                          activatedFormID === `${form.id}` ? true : false
                         }
-                        componentData={form}
-                        handlingSelectComponent={handlingSelectComponent}
+                        handlingSelectForm={handlingSelectForm}
+                        formData={form}
                       />
                     )}
                     {form.formName === 'MultipleChoice' && (
                       <InnerMultiChoice
                         required={false}
                         activate={
-                          activatedComponentID === `${form.id}` ? true : false
+                          activatedFormID === `${form.id}` ? true : false
                         }
-                        componentData={form}
-                        handlingSelectComponent={handlingSelectComponent}
+                        handlingSelectForm={handlingSelectForm}
+                        formData={form}
                       />
                     )}
                     {form.formName === 'DropDown' && (
                       <InnerDropdown
                         required={false}
                         activate={
-                          activatedComponentID === `${form.id}` ? true : false
+                          activatedFormID === `${form.id}` ? true : false
                         }
-                        componentData={form}
-                        handlingSelectComponent={handlingSelectComponent}
+                        handlingSelectForm={handlingSelectForm}
+                        formData={form}
                       />
                     )}
                     {form.formName === 'Drawing' && (
                       <InnerDrawing
                         required={false}
                         activate={
-                          activatedComponentID === `${form.id}` ? true : false
+                          activatedFormID === `${form.id}` ? true : false
                         }
-                        componentData={form}
-                        handlingSelectComponent={handlingSelectComponent}
+                        handlingSelectForm={handlingSelectForm}
+                        formData={form}
                       />
                     )}
                     {form.formName === 'Signature' && (
                       <InnerSignature
                         required={false}
                         activate={
-                          activatedComponentID === `${form.id}` ? true : false
+                          activatedFormID === `${form.id}` ? true : false
                         }
-                        componentData={form}
-                        handlingSelectComponent={handlingSelectComponent}
+                        handlingSelectForm={handlingSelectForm}
+                        formData={form}
                       />
                     )}
                     {form.formName === 'MedicalConditions' && (
                       <InnerConditions
                         required={false}
                         activate={
-                          activatedComponentID === `${form.id}` ? true : false
+                          activatedFormID === `${form.id}` ? true : false
                         }
-                        componentData={form}
-                        handlingSelectComponent={handlingSelectComponent}
+                        handlingSelectForm={handlingSelectForm}
+                        formData={form}
                       />
                     )}
                     {form.formName === 'Drugs' && (
                       <InnerDrugs
                         required={false}
                         activate={
-                          activatedComponentID === `${form.id}` ? true : false
+                          activatedFormID === `${form.id}` ? true : false
                         }
-                        componentData={form}
-                        handlingSelectComponent={handlingSelectComponent}
+                        handlingSelectForm={handlingSelectForm}
+                        formData={form}
                       />
                     )}
                     {form.formName === 'TravelDestination' && (
                       <InnerTravelDestination
                         required={false}
                         activate={
-                          activatedComponentID === `${form.id}` ? true : false
+                          activatedFormID === `${form.id}` ? true : false
                         }
-                        componentData={form}
-                        handlingSelectComponent={handlingSelectComponent}
+                        handlingSelectForm={handlingSelectForm}
+                        formData={form}
                       />
                     )}
                     {form.formName === 'VaccineScheduler' && (
                       <InnerVaccineScheduler
                         required={false}
                         activate={
-                          activatedComponentID === `${form.id}` ? true : false
+                          activatedFormID === `${form.id}` ? true : false
                         }
-                        componentData={form}
-                        handlingSelectComponent={handlingSelectComponent}
+                        handlingSelectForm={handlingSelectForm}
+                        formData={form}
                       />
                     )}
                     {form.formName === 'VaccineHistory' && (
                       <InnerVaccineHistory
                         required={false}
                         activate={
-                          activatedComponentID === `${form.id}` ? true : false
+                          activatedFormID === `${form.id}` ? true : false
                         }
-                        componentData={form}
-                        handlingSelectComponent={handlingSelectComponent}
+                        handlingSelectForm={handlingSelectForm}
+                        formData={form}
                       />
                     )}
                     {form.formName === 'LabTest' && (
                       <InnerLabTest
                         required={false}
                         activate={
-                          activatedComponentID === `${form.id}` ? true : false
+                          activatedFormID === `${form.id}` ? true : false
                         }
-                        componentData={form}
-                        handlingSelectComponent={handlingSelectComponent}
+                        handlingSelectForm={handlingSelectForm}
+                        formData={form}
                       />
-                    )} */}
+                    )}
                   </div>
                 )}
               </Draggable>

@@ -9,25 +9,20 @@ import InnerMedicalFormTitle from './InnerMedicalFormTitle'
 interface P {
   required?: boolean
   activate?: boolean
-  handleId?: number
-  handlingSelectComponent?: (
-    isActive?: boolean,
-    handleId?: number,
-    componentName?: string
-  ) => void
+  handlingSelectForm?: (isActive?: boolean, handleId?: string) => void
+  formData?: any
 }
 const InnerTextBlock: FC<P> = ({
   required,
   activate,
-  handleId,
-  handlingSelectComponent,
+  handlingSelectForm,
+  formData,
 }) => {
   return (
     <InnerElement
-      handleId={handleId}
+      handleId={formData.id}
       activate={activate}
-      componentName="TextBlock"
-      handlingSelectComponent={handlingSelectComponent}
+      handlingSelectForm={handlingSelectForm}
     >
       {required && <InnerMedicalFormRequired />}
       <InnerMedicalFormEditIcon />
@@ -36,13 +31,20 @@ const InnerTextBlock: FC<P> = ({
         bgcolor="#6383F1"
         title="Text block"
       />
-      <InnerMedicalFormBody>
-        <p>
-          At Day Space Wellington we believe you deserve to make the most of
-          your me-time. To say no to stress and push pause on life. To relax,
-          unwind, recharge and simply, live better.
-        </p>
-      </InnerMedicalFormBody>
+      {formData.txt1 !== '' && (
+        <InnerMedicalFormBody>
+          <p>
+            {formData.txt1.split('\n').map(function (item, idx) {
+              return (
+                <span key={idx}>
+                  {item}
+                  <br />
+                </span>
+              )
+            })}
+          </p>
+        </InnerMedicalFormBody>
+      )}
     </InnerElement>
   )
 }

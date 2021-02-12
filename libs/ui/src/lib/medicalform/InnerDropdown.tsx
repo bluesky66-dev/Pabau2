@@ -10,31 +10,26 @@ import InnerRadio from './InnerRadio'
 interface P {
   required?: boolean
   activate?: boolean
-  handleId?: number
-  handlingSelectComponent?: (
-    isActive?: boolean,
-    handleId?: number,
-    componentName?: string
-  ) => void
+  handlingSelectForm?: (isActive?: boolean, handleId?: string) => void
+  formData?: any
 }
 const InnerDropdown: FC<P> = ({
   required,
   activate,
-  handleId,
-  handlingSelectComponent,
+  handlingSelectForm,
+  formData,
 }) => {
-  const dropdownOptions = [
-    { id: 1, label: 'Option 1' },
-    { id: 2, label: 'Option 2' },
-    { id: 3, label: 'Option 3' },
-    { id: 4, label: 'Option 4' },
-  ]
+  // const dropdownOptions = [
+  //   { id: 1, label: 'Option 1' },
+  //   { id: 2, label: 'Option 2' },
+  //   { id: 3, label: 'Option 3' },
+  //   { id: 4, label: 'Option 4' },
+  // ]
   return (
     <InnerElement
-      handleId={handleId}
+      handleId={formData.id}
       activate={activate}
-      componentName="Dropdown"
-      handlingSelectComponent={handlingSelectComponent}
+      handlingSelectForm={handlingSelectForm}
     >
       {required && <InnerMedicalFormRequired />}
       <InnerMedicalFormEditIcon />
@@ -43,9 +38,11 @@ const InnerDropdown: FC<P> = ({
         bgcolor="#65CD98"
         title="Dropdown"
       />
-      <InnerMedicalFormBody>
-        <InnerRadio title="Some question" options={dropdownOptions} />
-      </InnerMedicalFormBody>
+      {formData.arr1.length > 0 && (
+        <InnerMedicalFormBody>
+          <InnerRadio title={formData.txt1} options={formData.arr1} />
+        </InnerMedicalFormBody>
+      )}
     </InnerElement>
   )
 }

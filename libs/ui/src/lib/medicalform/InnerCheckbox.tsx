@@ -4,7 +4,7 @@ import styles from './InnerMedicalForm.module.less'
 
 interface OPTION_TYPE {
   id: number
-  label: string
+  name: string
 }
 
 interface P {
@@ -16,9 +16,9 @@ const InnerCheckbox: FC<P> = ({ title, options }) => {
   return (
     <>
       <h3>{title}</h3>
-      {options?.map(({ id, label }) => (
+      {options?.map(({ id, name }) => (
         <Checkbox key={id} value={id} className={styles.checkbox}>
-          {label}
+          {name}
         </Checkbox>
       ))}
     </>

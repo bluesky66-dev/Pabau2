@@ -10,31 +10,26 @@ import InnerRadio from './InnerRadio'
 interface P {
   required?: boolean
   activate?: boolean
-  handleId?: number
-  handlingSelectComponent?: (
-    isActive?: boolean,
-    handleId?: number,
-    componentName?: string
-  ) => void
+  handlingSelectForm?: (isActive?: boolean, handleId?: string) => void
+  formData?: any
 }
 const InnerSingleChoice: FC<P> = ({
   required,
   activate,
-  handleId,
-  handlingSelectComponent,
+  handlingSelectForm,
+  formData,
 }) => {
-  const singleChoiceOptions = [
-    { id: 1, label: 'Dry' },
-    { id: 2, label: 'Normal' },
-    { id: 3, label: 'Oily' },
-    { id: 4, label: 'Combination' },
-  ]
+  // const singleChoiceOptions = [
+  //   { id: 1, label: 'Dry' },
+  //   { id: 2, label: 'Normal' },
+  //   { id: 3, label: 'Oily' },
+  //   { id: 4, label: 'Combination' },
+  // ]
   return (
     <InnerElement
-      handleId={handleId}
+      handleId={formData.id}
       activate={activate}
-      componentName="SingleChoice"
-      handlingSelectComponent={handlingSelectComponent}
+      handlingSelectForm={handlingSelectForm}
     >
       {required && <InnerMedicalFormRequired />}
       <InnerMedicalFormEditIcon />
@@ -43,12 +38,11 @@ const InnerSingleChoice: FC<P> = ({
         bgcolor="#65CD98"
         title="Single choice"
       />
-      <InnerMedicalFormBody>
-        <InnerRadio
-          title="Do you have concerns about any of following?"
-          options={singleChoiceOptions}
-        />
-      </InnerMedicalFormBody>
+      {formData.arr1.length > 0 && (
+        <InnerMedicalFormBody>
+          <InnerRadio title={formData.txt1} options={formData.arr1} />
+        </InnerMedicalFormBody>
+      )}
     </InnerElement>
   )
 }

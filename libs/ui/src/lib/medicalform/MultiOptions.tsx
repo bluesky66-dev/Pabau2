@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons'
 import { Button, ButtonTypes } from '@pabau/ui'
 import { Checkbox, Input } from 'antd'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import styles from './MedicalForm.module.less'
 
 type itemProps = {
@@ -16,13 +16,19 @@ type itemProps = {
 }
 
 interface P {
-  onChange?: (count) => void
+  onChange?: (addedItems) => void
+  paramItems?: any
 }
 
-const MultiOptions: FC<P> = ({ onChange }) => {
+const MultiOptions: FC<P> = ({ onChange, paramItems }) => {
   const [items, setItems] = useState<itemProps[]>([])
   const [addedItems, setaddedItems] = useState<itemProps[]>([])
   const [itemName, setItemName] = useState('')
+
+  useEffect(() => {
+    setItems(paramItems)
+    setaddedItems(paramItems)
+  }, [paramItems])
 
   const addItem = (event) => {
     event.preventDefault()
@@ -52,7 +58,7 @@ const MultiOptions: FC<P> = ({ onChange }) => {
     setItems(tempItems)
     setaddedItems(tempItems)
     if (onChange) {
-      onChange(addedItems.length)
+      onChange(tempItems)
     }
   }
 
@@ -62,7 +68,7 @@ const MultiOptions: FC<P> = ({ onChange }) => {
     setItems(tempItems)
     setaddedItems(tempItems)
     if (onChange) {
-      onChange(addedItems.length)
+      onChange(tempItems)
     }
   }
 

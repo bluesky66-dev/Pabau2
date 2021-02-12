@@ -9,25 +9,21 @@ import InnerMedicalFormTitle from './InnerMedicalFormTitle'
 interface P {
   required?: boolean
   activate?: boolean
-  handleId?: number
-  handlingSelectComponent?: (
-    isActive?: boolean,
-    handleId?: number,
-    componentName?: string
-  ) => void
+  handlingSelectForm?: (isActive?: boolean, handleId?: string) => void
+  formData?: any
 }
 const InnerLongAnswer: FC<P> = ({
   required,
   activate,
-  handleId,
-  handlingSelectComponent,
+  handlingSelectForm,
+  formData,
 }) => {
   return (
     <InnerElement
-      handleId={handleId}
+      handleId={formData.id}
       activate={activate}
       componentName="LongAnswer"
-      handlingSelectComponent={handlingSelectComponent}
+      handlingSelectForm={handlingSelectForm}
     >
       {required && <InnerMedicalFormRequired />}
       <InnerMedicalFormEditIcon />
@@ -36,9 +32,11 @@ const InnerLongAnswer: FC<P> = ({
         bgcolor="#6383F1"
         title="Long answer"
       />
-      <InnerMedicalFormBody>
-        <p>Welcome to Day Spa Wellington</p>
-      </InnerMedicalFormBody>
+      {formData.txt1 !== '' && (
+        <InnerMedicalFormBody>
+          <p>{formData.txt1}</p>
+        </InnerMedicalFormBody>
+      )}
     </InnerElement>
   )
 }

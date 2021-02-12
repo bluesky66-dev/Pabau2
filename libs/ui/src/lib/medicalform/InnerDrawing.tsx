@@ -10,25 +10,20 @@ import InnerMedicalFormTitle from './InnerMedicalFormTitle'
 interface P {
   required?: boolean
   activate?: boolean
-  handleId?: number
-  handlingSelectComponent?: (
-    isActive?: boolean,
-    handleId?: number,
-    componentName?: string
-  ) => void
+  handlingSelectForm?: (isActive?: boolean, handleId?: string) => void
+  formData?: any
 }
 const InnerDrawing: FC<P> = ({
   required,
   activate,
-  handleId,
-  handlingSelectComponent,
+  handlingSelectForm,
+  formData,
 }) => {
   return (
     <InnerElement
-      handleId={handleId}
+      handleId={formData.id}
       activate={activate}
-      componentName="Drawing"
-      handlingSelectComponent={handlingSelectComponent}
+      handlingSelectForm={handlingSelectForm}
     >
       {required && <InnerMedicalFormRequired />}
       <InnerMedicalFormEditIcon />
@@ -48,9 +43,9 @@ const InnerDrawing: FC<P> = ({
           src={innerDrawingIcon}
           alt=""
         />
-        <p style={{ textAlign: 'left' }}>
-          Please drawer where we will be insering botox
-        </p>
+        {formData.txt1 !== '' && (
+          <p style={{ textAlign: 'left' }}>{formData.txt1}</p>
+        )}
       </InnerMedicalFormBody>
     </InnerElement>
   )

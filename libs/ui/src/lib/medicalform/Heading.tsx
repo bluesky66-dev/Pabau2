@@ -23,7 +23,6 @@ const Heading: FC<P> = ({ selectedForm, handleSave, handleDelete }) => {
   }, [selectedForm])
 
   const saveFunc = () => {
-    console.log(form)
     selectedForm.txt1 = form.txt1
     handleSave?.()
   }

@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
-import LeftSidebarBasicCheckBox from '../medicalform/LeftSidebarBasicCheckBox'
 import LeftSidebarBasicDrawing from '../medicalform/LeftSidebarBasicDrawing'
 import LeftSidebarBasicDropDown from '../medicalform/LeftSidebarBasicDropDown'
 import LeftSidebarBasicDrugs from '../medicalform/LeftSidebarBasicDrugs'
@@ -8,6 +7,7 @@ import LeftSidebarBasicHeading from '../medicalform/LeftSidebarBasicHeading'
 import LeftSidebarBasicLabTest from '../medicalform/LeftSidebarBasicLabTest'
 import LeftSidebarBasicLongAnswer from '../medicalform/LeftSidebarBasicLongAnswer'
 import LeftSidebarBasicMedicalConditions from '../medicalform/LeftSidebarBasicMedicalConditions'
+import LeftSidebarBasicMultipleChoice from '../medicalform/LeftSidebarBasicMultipleChoice'
 import LeftSidebarBasicShortAnswer from '../medicalform/LeftSidebarBasicShortAnswer'
 import LeftSidebarBasicSignature from '../medicalform/LeftSidebarBasicSignature'
 import LeftSidebarBasicSingleChoice from '../medicalform/LeftSidebarBasicSingleChoice'
@@ -52,8 +52,8 @@ const getRenderItem = () => {
         {rubric.draggableId === 'LeftSidebarBasicSingleChoice' && (
           <LeftSidebarBasicSingleChoice />
         )}
-        {rubric.draggableId === 'LeftSidebarBasicCheckBox' && (
-          <LeftSidebarBasicCheckBox />
+        {rubric.draggableId === 'LeftSidebarBasicMultipleChoice' && (
+          <LeftSidebarBasicMultipleChoice />
         )}
         {rubric.draggableId === 'LeftSidebarBasicDropDown' && (
           <LeftSidebarBasicDropDown />
@@ -173,7 +173,7 @@ const MedicalFormLeftSidebarBasicPanels: FC<P> = ({ ...props }) => {
                       <LeftSidebarBasicSingleChoice />
                     )}
                     {form.formName === 'MultipleChoice' && (
-                      <LeftSidebarBasicCheckBox />
+                      <LeftSidebarBasicMultipleChoice />
                     )}
                     {form.formName === 'DropDown' && (
                       <LeftSidebarBasicDropDown />
@@ -199,7 +199,7 @@ const MedicalFormLeftSidebarBasicPanels: FC<P> = ({ ...props }) => {
                           <LeftSidebarBasicSingleChoice />
                         )}
                         {form.formName === 'MultipleChoice' && (
-                          <LeftSidebarBasicCheckBox />
+                          <LeftSidebarBasicMultipleChoice />
                         )}
                         {form.formName === 'DropDown' && (
                           <LeftSidebarBasicDropDown />

@@ -4,7 +4,7 @@ import styles from './InnerMedicalForm.module.less'
 
 interface OPTION_TYPE {
   id: number
-  label: string
+  name: string
 }
 
 interface P {
@@ -22,9 +22,9 @@ const InnerRadio: FC<P> = ({ title, options }) => {
         value={optionVal}
         onChange={(e) => setOptionVal(e.target.value)}
       >
-        {options?.map(({ id, label }) => (
+        {options?.map(({ id, name }) => (
           <Radio key={id} value={id} className={styles.radio}>
-            {label}
+            {name}
           </Radio>
         ))}
       </Radio.Group>

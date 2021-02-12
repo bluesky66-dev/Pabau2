@@ -59,7 +59,7 @@ const MedicalFormEdit: FC = () => {
     setDraggedForms(draggedForms.filter((item) => item['id'] !== componentID))
   }
 
-  console.log('selectedForm = ', selectedForm)
+  // console.log('selectedForm = ', selectedForm)
   const onDragEnd = React.useCallback(
     (result) => {
       const { source, destination } = result

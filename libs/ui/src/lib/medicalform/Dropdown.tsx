@@ -4,7 +4,7 @@ import {
   MedicalFormHeader,
   MedicalFormTitle,
 } from '@pabau/ui'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import dropdownIcon from '../../assets/images/medicalform_dropdown.svg'
 import BasicElement from './BasicElement'
 import ElementAdvanced from './ElementAdvanced'
@@ -13,21 +13,31 @@ import MedicalFormError from './MedicalFormError'
 import Options from './Options'
 
 interface P {
+  selectedForm?: any
   handleSave?: () => void
   handleDelete?: () => void
 }
 
-const Dropdown: FC<P> = ({ handleSave, handleDelete }) => {
+const Dropdown: FC<P> = ({ selectedForm, handleSave, handleDelete }) => {
   const [addedItems, setAddedItems] = useState(0)
   const [errMsg, setErrMsg] = useState('')
-  const eventhandler = (count) => {
-    setAddedItems(count)
+  const [form, setForm] = useState(JSON.parse(JSON.stringify(selectedForm)))
+  const eventhandler = (addedItems) => {
+    setAddedItems(addedItems.length)
+    const tempForm = { ...form, arr1: addedItems }
+    setForm(tempForm)
     setErrMsg('')
   }
+
+  useEffect(() => {
+    setForm(JSON.parse(JSON.stringify(selectedForm)))
+  }, [selectedForm])
 
   const saveFunc = () => {
     if (handleSave && addedItems > 0) {
       setErrMsg('')
+      selectedForm.txt1 = form.txt1
+      selectedForm.arr1 = form.arr1
       handleSave()
     } else {
       setErrMsg('Please add an option')
@@ -36,6 +46,11 @@ const Dropdown: FC<P> = ({ handleSave, handleDelete }) => {
 
   const deleteFunc = () => {
     handleDelete?.()
+  }
+
+  const onChange = (value) => {
+    const tempForm = { ...form, txt1: value }
+    setForm(tempForm)
   }
 
   return (
@@ -48,8 +63,13 @@ const Dropdown: FC<P> = ({ handleSave, handleDelete }) => {
         desc="A list of options that can be ticked"
       />
       <MedicalFormBody>
-        <ElementQuestion desc="Enter your question" title="Question" />
-        <Options onChange={eventhandler} />
+        <ElementQuestion
+          desc="Enter your question"
+          title="Question"
+          value={form.txt1}
+          onChange={onChange}
+        />
+        <Options onChange={eventhandler} paramItems={selectedForm.arr1} />
         {errMsg !== '' && <MedicalFormError errMsg={errMsg} />}
         <ElementAdvanced />
       </MedicalFormBody>

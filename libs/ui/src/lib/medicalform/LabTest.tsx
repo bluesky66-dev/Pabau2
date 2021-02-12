@@ -4,24 +4,33 @@ import {
   MedicalFormHeader,
   MedicalFormTitle,
 } from '@pabau/ui'
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import labTestIcon from '../../assets/images/medicalform_labtest.svg'
 import BasicElement from './BasicElement'
 import MultiSelect from './MultiSelect'
 
 interface P {
+  selectedForm?: any
   handleSave?: () => void
   handleDelete?: () => void
 }
 
-const LabTest: FC<P> = ({ handleSave, handleDelete }) => {
+const LabTest: FC<P> = ({ selectedForm, handleSave, handleDelete }) => {
+  const [form, setForm] = useState(JSON.parse(JSON.stringify(selectedForm)))
+
+  useEffect(() => {
+    setForm(JSON.parse(JSON.stringify(selectedForm)))
+  }, [selectedForm])
+
   const saveFunc = () => {
+    selectedForm.txt1 = form.txt1
     handleSave?.()
   }
 
   const deleteFunc = () => {
     handleDelete?.()
   }
+
   const optionLabels = [
     { id: 1, label: 'Accent Prime' },
     { id: 2, label: 'All-inclusive' },

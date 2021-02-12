@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons'
 import { Button, ButtonTypes } from '@pabau/ui'
 import { Input, Radio } from 'antd'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import styles from './MedicalForm.module.less'
 
 type itemProps = {
@@ -16,15 +16,20 @@ type itemProps = {
 }
 
 interface P {
-  onChange?: (count) => void
+  onChange?: (addedItems) => void
+  paramItems?: any
 }
 
-const Options: FC<P> = ({ onChange }) => {
+const Options: FC<P> = ({ onChange, paramItems }) => {
   const [items, setItems] = useState<itemProps[]>([])
   const [addedItems, setaddedItems] = useState<itemProps[]>([])
   const [itemName, setItemName] = useState('')
-
   const [optionVal, setOptionVal] = useState(0)
+
+  useEffect(() => {
+    setItems(paramItems)
+    setaddedItems(paramItems)
+  }, [paramItems])
 
   const addItem = (event) => {
     event.preventDefault()
@@ -54,7 +59,7 @@ const Options: FC<P> = ({ onChange }) => {
     setItems(tempItems)
     setaddedItems(tempItems)
     if (onChange) {
-      onChange(addedItems.length)
+      onChange(tempItems)
     }
   }
 
@@ -64,7 +69,7 @@ const Options: FC<P> = ({ onChange }) => {
     setItems(tempItems)
     setaddedItems(tempItems)
     if (onChange) {
-      onChange(addedItems.length)
+      onChange(tempItems)
     }
   }
 

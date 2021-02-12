@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import signatureIcon from '../../assets/images/medicalform_signature.svg'
 import InnerElement from './InnerElement'
+import InnerMedicalFormBody from './InnerMedicalFormBody'
 import InnerMedicalFormEditIcon from './InnerMedicalFormEditIcon'
 import InnerMedicalFormRequired from './InnerMedicalFormRequired'
 import InnerMedicalFormTitle from './InnerMedicalFormTitle'
@@ -8,25 +9,20 @@ import InnerMedicalFormTitle from './InnerMedicalFormTitle'
 interface P {
   required?: boolean
   activate?: boolean
-  handleId?: number
-  handlingSelectComponent?: (
-    isActive?: boolean,
-    handleId?: number,
-    componentName?: string
-  ) => void
+  handlingSelectForm?: (isActive?: boolean, handleId?: string) => void
+  formData?: any
 }
 const InnerSignature: FC<P> = ({
   required,
   activate,
-  handleId,
-  handlingSelectComponent,
+  handlingSelectForm,
+  formData,
 }) => {
   return (
     <InnerElement
-      handleId={handleId}
+      handleId={formData.id}
       activate={activate}
-      componentName="Signature"
-      handlingSelectComponent={handlingSelectComponent}
+      handlingSelectForm={handlingSelectForm}
     >
       {required && <InnerMedicalFormRequired />}
       <InnerMedicalFormEditIcon />
@@ -35,6 +31,11 @@ const InnerSignature: FC<P> = ({
         bgcolor="#F78561"
         title="Signature"
       />
+      {formData.txt1 !== '' && (
+        <InnerMedicalFormBody>
+          <p>{formData.txt1}</p>
+        </InnerMedicalFormBody>
+      )}
     </InnerElement>
   )
 }

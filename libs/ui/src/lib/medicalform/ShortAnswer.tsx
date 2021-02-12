@@ -4,7 +4,7 @@ import {
   MedicalFormHeader,
   MedicalFormTitle,
 } from '@pabau/ui'
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import shortAnswerIcon from '../../assets/images/medicalform_shortanswer.svg'
 import BasicElement from './BasicElement'
 import ElementAdvanced from './ElementAdvanced'
@@ -12,17 +12,30 @@ import ElementQuestion from './ElementQuestion'
 import ElementTypeOption from './ElementTypeOption'
 
 interface P {
+  selectedForm?: any
   handleSave?: () => void
   handleDelete?: () => void
 }
 
-const ShortAnswer: FC<P> = ({ handleSave, handleDelete }) => {
+const ShortAnswer: FC<P> = ({ selectedForm, handleSave, handleDelete }) => {
+  const [form, setForm] = useState(JSON.parse(JSON.stringify(selectedForm)))
+
+  useEffect(() => {
+    setForm(JSON.parse(JSON.stringify(selectedForm)))
+  }, [selectedForm])
+
   const saveFunc = () => {
+    selectedForm.txt1 = form.txt1
     handleSave?.()
   }
 
   const deleteFunc = () => {
     handleDelete?.()
+  }
+
+  const onChange = (value) => {
+    const tempForm = { ...form, txt1: value }
+    setForm(tempForm)
   }
 
   return (
@@ -35,7 +48,12 @@ const ShortAnswer: FC<P> = ({ handleSave, handleDelete }) => {
         desc="Ask a question with a short answer"
       />
       <MedicalFormBody>
-        <ElementQuestion desc="Enter your question" title="Question" />
+        <ElementQuestion
+          desc="Enter your question"
+          title="Question"
+          value={form.txt1}
+          onChange={onChange}
+        />
         <ElementTypeOption title="Input type" />
         <ElementAdvanced />
       </MedicalFormBody>

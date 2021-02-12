@@ -58,28 +58,56 @@ const RightSidebar: FC<P> = ({
         style={isVisible ? showStyle : hideStyle}
       >
         {selectedForm.formName === 'MedicalConditions' && (
-          <Conditions handleSave={handleSave} handleDelete={handleDelete} />
+          <Conditions
+            handleSave={handleSave}
+            handleDelete={handleDelete}
+            selectedForm={selectedForm}
+          />
         )}
         {selectedForm.formName === 'Dob' && (
           <Dob handleSave={handleSave} handleDelete={handleDelete} />
         )}
         {selectedForm.formName === 'Drawing' && (
-          <Drawing handleSave={handleSave} handleDelete={handleDelete} />
+          <Drawing
+            handleSave={handleSave}
+            handleDelete={handleDelete}
+            selectedForm={selectedForm}
+          />
         )}
-        {selectedForm.formName === 'Dropdown' && (
-          <Dropdown handleSave={handleSave} handleDelete={handleDelete} />
+        {selectedForm.formName === 'DropDown' && (
+          <Dropdown
+            handleSave={handleSave}
+            handleDelete={handleDelete}
+            selectedForm={selectedForm}
+          />
         )}
         {selectedForm.formName === 'Drugs' && (
-          <Drugs handleSave={handleSave} handleDelete={handleDelete} />
+          <Drugs
+            handleSave={handleSave}
+            handleDelete={handleDelete}
+            selectedForm={selectedForm}
+          />
         )}
         {selectedForm.formName === 'LabTest' && (
-          <LabTest handleSave={handleSave} handleDelete={handleDelete} />
+          <LabTest
+            handleSave={handleSave}
+            handleDelete={handleDelete}
+            selectedForm={selectedForm}
+          />
         )}
         {selectedForm.formName === 'TextBlock' && (
-          <TextBlock handleSave={handleSave} handleDelete={handleDelete} />
+          <TextBlock
+            handleSave={handleSave}
+            handleDelete={handleDelete}
+            selectedForm={selectedForm}
+          />
         )}
         {selectedForm.formName === 'LongAnswer' && (
-          <LongAnswer handleSave={handleSave} handleDelete={handleDelete} />
+          <LongAnswer
+            handleSave={handleSave}
+            handleDelete={handleDelete}
+            selectedForm={selectedForm}
+          />
         )}
         {selectedForm.formName === 'Heading' && (
           <Heading
@@ -89,30 +117,52 @@ const RightSidebar: FC<P> = ({
           />
         )}
         {selectedForm.formName === 'MultipleChoice' && (
-          <MultipleChoice handleSave={handleSave} handleDelete={handleDelete} />
+          <MultipleChoice
+            handleSave={handleSave}
+            handleDelete={handleDelete}
+            selectedForm={selectedForm}
+          />
         )}
         {selectedForm.formName === 'ShortAnswer' && (
-          <ShortAnswer handleSave={handleSave} handleDelete={handleDelete} />
+          <ShortAnswer
+            handleSave={handleSave}
+            handleDelete={handleDelete}
+            selectedForm={selectedForm}
+          />
         )}
         {selectedForm.formName === 'Signature' && (
-          <Signature handleSave={handleSave} handleDelete={handleDelete} />
+          <Signature
+            handleSave={handleSave}
+            handleDelete={handleDelete}
+            selectedForm={selectedForm}
+          />
         )}
         {selectedForm.formName === 'SingleChoice' && (
-          <SingleChoice handleSave={handleSave} handleDelete={handleDelete} />
+          <SingleChoice
+            handleSave={handleSave}
+            handleDelete={handleDelete}
+            selectedForm={selectedForm}
+          />
         )}
         {selectedForm.formName === 'TravelDestination' && (
           <TravelDestination
             handleSave={handleSave}
             handleDelete={handleDelete}
+            selectedForm={selectedForm}
           />
         )}
         {selectedForm.formName === 'VaccineHistory' && (
-          <VaccineHistory handleSave={handleSave} handleDelete={handleDelete} />
+          <VaccineHistory
+            handleSave={handleSave}
+            handleDelete={handleDelete}
+            selectedForm={selectedForm}
+          />
         )}
         {selectedForm.formName === 'VaccineScheduler' && (
           <VaccineScheduler
             handleSave={handleSave}
             handleDelete={handleDelete}
+            selectedForm={selectedForm}
           />
         )}
       </div>

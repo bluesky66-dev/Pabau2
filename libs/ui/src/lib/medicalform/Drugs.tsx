@@ -4,23 +4,36 @@ import {
   MedicalFormHeader,
   MedicalFormTitle,
 } from '@pabau/ui'
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import drugsIcon from '../../assets/images/medicalform_drugs.svg'
 import BasicElement from './BasicElement'
 import ElementQuestion from './ElementQuestion'
 
 interface P {
+  selectedForm?: any
   handleSave?: () => void
   handleDelete?: () => void
 }
 
-const Drugs: FC<P> = ({ handleSave, handleDelete }) => {
+const Drugs: FC<P> = ({ selectedForm, handleSave, handleDelete }) => {
+  const [form, setForm] = useState(JSON.parse(JSON.stringify(selectedForm)))
+
+  useEffect(() => {
+    setForm(JSON.parse(JSON.stringify(selectedForm)))
+  }, [selectedForm])
+
   const saveFunc = () => {
+    selectedForm.txt1 = form.txt1
     handleSave?.()
   }
 
   const deleteFunc = () => {
     handleDelete?.()
+  }
+
+  const onChange = (value) => {
+    const tempForm = { ...form, txt1: value }
+    setForm(tempForm)
   }
 
   return (
@@ -33,7 +46,12 @@ const Drugs: FC<P> = ({ handleSave, handleDelete }) => {
         desc="Description"
       />
       <MedicalFormBody>
-        <ElementQuestion desc="Enter your question" title="Question" />
+        <ElementQuestion
+          desc="Enter your question"
+          title="Question"
+          value={form.txt1}
+          onChange={onChange}
+        />
       </MedicalFormBody>
       <MedicalFormBottom
         saveFunc={saveFunc}

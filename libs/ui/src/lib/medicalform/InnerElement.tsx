@@ -4,7 +4,6 @@ import styles from './InnerMedicalForm.module.less'
 interface P {
   handleId?: string
   activate?: boolean
-  componentName?: string
   handlingSelectForm?: (isActive?: boolean, handleId?: string) => void
 }
 
