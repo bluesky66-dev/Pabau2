@@ -5,7 +5,24 @@ export default {
   title: 'UI/VoucherCard',
   component: VoucherCard,
   args: {
+    cardWidth: 500,
+    backgroundColor1: '#9013FE',
+    backgroundColor2: '#BD10E0',
     gradientType: 'linear-gradient',
+    borderColor: '#000',
+    bookNowButton: false,
+    buttonLabel: 'Book Now',
+    dotMenuShow: false,
+
+    voucherType: '',
+    voucherNum: 100001,
+    voucherPrice: 100,
+    voucherPriceLabel: 'Voucher Value',
+    voucherSoldPrice: 100,
+    voucherSoldPriceLabel: 'Sold 5',
+    voucherRelation: 'Family',
+    voucherRelationLabel: 'Redeem on all services',
+    currencyType: '£',
   },
   argTypes: {
     cardWidth: {
@@ -40,6 +57,11 @@ export default {
       },
     },
     bookNowButton: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    dotMenuShow: {
       control: {
         type: 'boolean',
       },

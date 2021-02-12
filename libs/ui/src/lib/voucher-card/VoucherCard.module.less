@@ -1,6 +1,59 @@
 .voucherCardMain {
 
     :global {
+        .flip-card {
+            background-color: transparent;
+            min-width: 300px;
+            min-height: 150px;
+            perspective: 1000px;
+            border-radius: 7.5px;
+        }
+          
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            border-radius: 7.5px;
+        }
+          
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+          
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 7.5px;
+        }
+          
+        .flip-card-front {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-color: transparent !important;
+            border-radius: 10px;
+
+            .dot1, .dot2 {
+                border-color: transparent !important;
+            }
+        }
+          
+        .flip-card-back {
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            background: #ffffff !important;
+            border-style: solid;
+            border-width: 2px;
+            transform: rotateY(180deg);
+        }
+        
         .scene {
             min-width: 250px;
             min-height: 125px;
@@ -11,13 +64,12 @@
             position: relative;
             width: 100%;
             height: 100%;
-            cursor: pointer;
             transform-style: preserve-3d;
             transition: transform 0.6s;
             border-radius: 7.5px;
         }
           
-        .card.is-flipped {
+        .card:hover.is-flipped {
             transform: rotateY(180deg);
         }
           
@@ -42,8 +94,8 @@
                 border-color: transparent !important;
             }
         }
-        .card__face--front.valentine {
-            background-image: url('./valentine.png');
+        .flip-card-front.valentine {
+            background-image: url('./assets/valentine.png');
             background-blend-mode: lighten;
 
             h1, h2, p, span, button {
@@ -54,13 +106,13 @@
             }
         }
 
-        .card__face--front.birthday {
-            background-image: url('./birthday.png');
+        .flip-card-front.birthday {
+            background-image: url('./assets/birthday.png');
             background-blend-mode: lighten;
         }
 
-        .card__face--front.flowers {
-            background-image: url('./flowers.png');
+        .flip-card-front.flowers {
+            background-image: url('./assets/flowers.png');
             background-blend-mode: lighten;
         }
           
@@ -127,6 +179,7 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            min-height: 32px;
 
             :global {
                 div:first-child {

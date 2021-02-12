@@ -11,7 +11,17 @@ export interface VoucherCardProps {
   gradientType: string
   bookNowButton?: boolean
   buttonLabel: string
+  dotMenuShow?: boolean
+  borderColor: string
   voucherType: string
+  voucherNum: number
+  voucherPrice: number
+  voucherPriceLabel: string
+  voucherSoldPrice: number
+  voucherSoldPriceLabel: string
+  voucherRelation: string
+  voucherRelationLabel: string
+  currencyType: string
 }
 
 export const VoucherCard: FC<VoucherCardProps> = ({
@@ -21,7 +31,17 @@ export const VoucherCard: FC<VoucherCardProps> = ({
   gradientType,
   bookNowButton,
   buttonLabel,
+  dotMenuShow,
+  borderColor,
   voucherType,
+  voucherNum,
+  voucherPrice,
+  voucherPriceLabel,
+  voucherSoldPrice,
+  voucherSoldPriceLabel,
+  voucherRelation,
+  voucherRelationLabel,
+  currencyType,
   ...rest
 }) => {
   const cardRef = useRef<HTMLDivElement>(null)
@@ -57,23 +77,23 @@ export const VoucherCard: FC<VoucherCardProps> = ({
     }
   }
 
+  console.log('REST: ', rest)
+
   return (
     <div className={styles.voucherCardMain}>
       <div
-        className="scene scene--card"
+        className="flip-card"
         style={{ width: `${cardWidth}px`, height: `${cardWidth / 2}px` }}
       >
-        <div className="card" ref={cardRef} onClick={flipCard}>
+        <div className="flip-card-inner" ref={cardRef}>
           <div
-            className={`card__face card__face--front ${voucherType}`}
+            className={`flip-card-front ${voucherType}`}
             style={
               !voucherType &&
               voucherType !== 'flowers' &&
               voucherType !== 'valentine' &&
               voucherType !== 'birthday'
-                ? {
-                    ...cardFaceBgColor,
-                  }
+                ? { ...cardFaceBgColor }
                 : {}
             }
           >
@@ -93,38 +113,43 @@ export const VoucherCard: FC<VoucherCardProps> = ({
                     )}
                   </div>
                   <div>
-                    <DotButton menuList={DotMenuOptions} />
-                    {/* <img src={ThreeDotIcon} alt="Dotted Icon" width="100%" /> */}
+                    {dotMenuShow && <DotButton menuList={DotMenuOptions} />}
                   </div>
                 </div>
 
                 <div className={styles.middleRow}>
                   <div>
-                    <h1>£100</h1>
-                    <p>Voucher value</p>
+                    <h1>{currencyType + voucherPrice}</h1>
+                    <p>{voucherPriceLabel}</p>
                   </div>
                 </div>
 
                 <div className={styles.lastRow}>
                   <div className={styles.generalDetails}>
-                    <h1>Family</h1>
-                    <p>Redeem on all services</p>
+                    <h1>{voucherRelation}</h1>
+                    <p>{voucherRelationLabel}</p>
                   </div>
                   <div className={styles.soldDetails}>
-                    <h1>£100</h1>
-                    <p>Sold 5</p>
-                    <h1>#100001</h1>
+                    <h1>{currencyType + voucherSoldPrice}</h1>
+                    <p>{voucherSoldPriceLabel}</p>
+                    <h1>#{voucherNum}</h1>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="card__face card__face--back">
+          <div className="flip-card-back" style={{ borderColor }}>
             <div className={styles.dots}>
               <div className="dotsInner">
-                <div className="dot1" style={{ ...dotsStyles }}></div>
-                <div className="dot2" style={{ ...dotsStyles }}></div>
+                <div
+                  className="dot1"
+                  style={{ ...dotsStyles, borderColor }}
+                ></div>
+                <div
+                  className="dot2"
+                  style={{ ...dotsStyles, borderColor }}
+                ></div>
               </div>
             </div>
             <div className={styles.backFaceContent}>
