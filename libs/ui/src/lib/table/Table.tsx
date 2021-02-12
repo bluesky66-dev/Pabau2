@@ -10,6 +10,11 @@ import styles from './Table.module.less'
 import { TableProps } from 'antd/es/table'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
+const iconList = Object.keys(Icons)
+  .filter((key) => key !== 'fas' && key !== 'prefix')
+  .map((icon) => Icons[icon])
+library.add(...iconList)
 export interface DragProps {
   draggable?: boolean
   isCustomColorExist?: boolean
@@ -47,6 +52,7 @@ export type TableType = {
   noDataBtnText?: string
   noDataIcon?: JSX.Element
   onAddTemplate?: () => void
+  searchTerm?: string
 } & TableProps<never> &
   DragProps
 
@@ -61,12 +67,13 @@ export const Table: FC<TableType> = ({
   noDataBtnText,
   noDataIcon = <ContactsOutlined />,
   onAddTemplate,
+  searchTerm = '',
   ...props
 }) => {
   const onSortEnd = ({ oldIndex, newIndex }) => {
     if (oldIndex !== newIndex) {
       const newData = array_move(dataSource, oldIndex, newIndex)
-      updateDataSource && updateDataSource({ newData, oldIndex, newIndex })
+      updateDataSource?.({ newData, oldIndex, newIndex })
     }
   }
 
@@ -117,11 +124,8 @@ export const Table: FC<TableType> = ({
             <LockOutlined />
           </div>
         )}
-        {isCustomIconExist && (
-          <FontAwesomeIcon
-            icon={Icons[rowData.icon]}
-            className={styles.tableIcon}
-          />
+        {isCustomIconExist && rowData.icon && (
+          <FontAwesomeIcon icon={rowData.icon} className={styles.tableIcon} />
         )}
       </div>
     )
@@ -139,7 +143,7 @@ export const Table: FC<TableType> = ({
   const checkPadLocks = (record) => {
     let alloWClicked = true
     Object.keys(record).map((key) => {
-      if (padlocked && padlocked.includes(record[key])) {
+      if (padlocked?.includes(record[key])) {
         alloWClicked = false
       }
       return key
@@ -148,16 +152,19 @@ export const Table: FC<TableType> = ({
   }
 
   const renderSortHandler = () => {
-    if (props && props.columns) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      props.columns?.map((col: any) => {
-        if (col && col.dataIndex === 'is_active') {
-          col.render = renderActiveButton
-        } else {
-          col.render = renderTableSource
-        }
-        return col
-      })
+    if (props?.columns) {
+      props.columns = props.columns
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ?.filter((col: any) => col.visible === true)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        .map((col: any) => {
+          if (col && col.dataIndex === 'is_active') {
+            col.render = renderActiveButton
+          } else {
+            col.render = renderTableSource
+          }
+          return col
+        })
     }
 
     return props.draggable
@@ -165,7 +172,23 @@ export const Table: FC<TableType> = ({
       : props.columns
   }
 
-  return dataSource?.length ? (
+  console.log('dataSource?.length ', dataSource?.length, props.loading)
+  return !dataSource?.length && !props.loading ? (
+    <div className={styles.noDataTableBox}>
+      <div className={styles.noDataTextStyle}>
+        <Avatar icon={noDataIcon} size="large" className={styles.roundDesign} />
+        <p>{`Add ${noDataText} to create more shifts faster`}</p>
+        <div className={styles.spaceBetweenText}></div>
+        <Button
+          className={styles.createTemaplateBtn}
+          type="primary"
+          onClick={() => onAddTemplate?.()}
+        >
+          {`Add ${noDataBtnText}`}
+        </Button>
+      </div>
+    </div>
+  ) : (
     <AntTable
       {...props}
       onRow={(record, rowIndex) => {
@@ -188,7 +211,7 @@ export const Table: FC<TableType> = ({
       rowKey="key"
       className={styles.dragTable}
       locale={{
-        emptyText: 'No results found',
+        emptyText: !props.loading && searchTerm && 'No results found',
       }}
       components={{
         body: {
@@ -197,20 +220,5 @@ export const Table: FC<TableType> = ({
         },
       }}
     />
-  ) : (
-    <div className={styles.noDataTableBox}>
-      <div className={styles.noDataTextStyle}>
-        <Avatar icon={noDataIcon} size="large" className={styles.roundDesign} />
-        <p>{`Add ${noDataText} to create more shifts faster`}</p>
-        <div className={styles.spaceBetweenText}></div>
-        <Button
-          className={styles.createTemaplateBtn}
-          type="primary"
-          onClick={() => onAddTemplate?.()}
-        >
-          {`Add ${noDataBtnText}`}
-        </Button>
-      </div>
-    </div>
   )
 }

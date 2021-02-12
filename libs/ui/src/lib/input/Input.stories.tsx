@@ -4,6 +4,7 @@ import { Input } from './input'
 import { notification } from 'antd'
 import { Passcode as PasscodeBox } from './Passcode'
 import { PasswordWithHelper as PasswordWithHelperBox } from './PasswordWithHelper'
+import { InputNumber } from './inputNumber'
 
 export default {
   component: Input,
@@ -35,14 +36,14 @@ export default {
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 
-const InputStory = ({ ...args }) => <Input {...args} />
+const InputStory = ({ ...rest }) => <Input {...rest} />
 export const InputWithFormControl = InputStory.bind({
-  onChange: (val) => {
-    notification.open({ message: val })
+  onChange: (value) => {
+    notification.open({ message: value })
   },
 })
 
-const HelpTooltipStory = ({ ...args }) => <HelpTooltip {...args} />
+const HelpTooltipStory = ({ ...rest }) => <HelpTooltip {...rest} />
 export const HelpTooltipControl = HelpTooltipStory.bind({})
 HelpTooltipControl.args = {
   helpText: 'Hello!!! Nice to meet you',
@@ -55,17 +56,26 @@ InputEmailAddress.args = {
   label: 'Email',
   type: 'email',
   placeHolderText: 'Enter email',
-  reqiredMsg: 'Email is required!',
+  requiredMsg: 'Email is required!',
 }
 
-const PasscodeStory = ({ ...args }) => <PasscodeBox {...args}></PasscodeBox>
+const PasscodeStory = ({ ...rest }) => <PasscodeBox {...rest} />
 export const Passcode = PasscodeStory.bind({})
 
-const PasswordWithHelperStory = ({ ...args }) => (
-  <PasswordWithHelperBox {...args}></PasswordWithHelperBox>
+const PasswordWithHelperStory = ({ ...rest }) => (
+  <PasswordWithHelperBox {...rest} />
 )
 export const PasswordWithHelper = PasswordWithHelperStory.bind({})
 PasswordWithHelper.args = {
-  stength: 3,
+  strength: 3,
   width: '50%',
+}
+
+const InputNumberStory = ({ ...rest }) => <InputNumber {...rest} />
+export const InputNumberControl = InputNumberStory.bind({})
+InputNumberControl.args = {
+  placeHolderText: 'Enter Number',
+  value: 14.43,
+  requiredMsg: 'Number is required!',
+  isFormatter: true,
 }

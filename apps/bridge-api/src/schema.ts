@@ -1,7 +1,4 @@
-import {
-  makeSchema,
-  objectType,
-} from 'nexus'
+import { makeSchema, objectType } from 'nexus'
 import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema'
 import { PrismaClient } from '@prisma/client'
 
@@ -14,35 +11,38 @@ const MarketingSource = objectType({
     t.model.source_name()
     t.model.occupier()
     t.model.custom_id()
-  }
+  },
 })
 
 const Query = objectType({
   name: 'Query',
   definition(t) {
-    t.crud.marketingSource();
+    t.crud.marketingSource()
     t.crud.marketingSources({
       pagination: true,
       filtering: true,
-      ordering: true
-    });
-  }
+      ordering: true,
+    })
+  },
 })
 
 const Mutation = objectType({
   name: 'Mutation',
   definition(t) {
-    t.crud.createOnemarketing_source();
-    t.crud.deleteOnemarketing_source();
-    t.crud.updateOnemarketing_source();
-  }
+    t.crud.createOnemarketing_source()
+    t.crud.deleteOnemarketing_source()
+    t.crud.updateOnemarketing_source()
+  },
 })
 
 export const schema = makeSchema({
-  types: [Query, Mutation,
-    MarketingSource
+  types: [Query, Mutation, MarketingSource],
+  plugins: [
+    nexusSchemaPrisma({
+      experimentalCRUD: true,
+      prismaClient: (ctx) => (ctx.prisma = prisma),
+    }),
   ],
-  plugins: [nexusSchemaPrisma({ experimentalCRUD: true, prismaClient: ctx => ctx.prisma = prisma })],
   outputs: {
     schema: __dirname + '/../schema.graphql',
     typegen: __dirname + '/generated/nexus.ts',

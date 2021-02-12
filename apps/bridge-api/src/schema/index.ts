@@ -13,7 +13,7 @@ export default NexusSchema.makeSchema({
   outputs: {
     typegen: path.join(
       __dirname,
-      '../../node_modules/@types/nexus-typegen/index.d.ts',
+      '../../node_modules/@types/nexus-typegen/index.d.ts'
     ),
   },
   contextType: {

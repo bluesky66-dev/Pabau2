@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import { Webinar, Button, WebinarModal, WebinarModalProps } from '@pabau/ui'
 import styles from '../Setup.module.less'
 
@@ -78,7 +78,7 @@ const data = [
   },
 ]
 
-const WebinarCard = () => {
+const WebinarCard: FC = () => {
   const [isOpenModal, setIsOpen] = useState<boolean>(false)
   const [modalData, setModalData] = useState({})
 
@@ -101,10 +101,9 @@ const WebinarCard = () => {
       <div className={styles.rightSide}>
         <div className={styles.textTitle}>Live & Upcoming Webinars</div>
         <div className={styles.webinarWrapper}>
-          {data &&
-            data.map((value, index) => (
-              <Webinar key={index} {...value} onClick={handleOpenModal} />
-            ))}
+          {data?.map((value, index) => (
+            <Webinar key={index} {...value} onClick={handleOpenModal} />
+          ))}
         </div>
         <Button className={styles.btnView}>View Full Schedule</Button>
       </div>

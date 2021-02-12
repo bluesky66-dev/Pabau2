@@ -25,16 +25,14 @@ export interface P {
   onAddMembers?: (value: string[]) => void
 }
 
-export const AddPeopleModal: FC<P> = ({ ...props }) => {
-  const {
-    selectedGroup,
-    isAddModalVisible,
-    onOk,
-    onCancel,
-    members,
-    onAddMembers,
-  } = props
-
+export const AddPeopleModal: FC<P> = ({
+  selectedGroup,
+  isAddModalVisible,
+  onOk,
+  onCancel,
+  members,
+  onAddMembers,
+}) => {
   const [searchAddMember, setSearchAddMember] = useState<string[]>([])
   const [isCancelWarning, setIsCancelWarning] = useState<boolean>(false)
 
@@ -76,25 +74,24 @@ export const AddPeopleModal: FC<P> = ({ ...props }) => {
             placeholder=" Type the name of a channel or people"
             onChange={handleAddMemberChange}
           >
-            {members &&
-              members.map((member) => (
-                <Option
-                  key={member.userName}
-                  value={member.userName}
-                  label={member.userName}
-                >
-                  <div>
-                    <span role="img">
-                      <Avatar
-                        className={styles.memberAvatar}
-                        size={32}
-                        src={member.profileURL}
-                      />
-                    </span>
-                    {` ${member.userName}`}
-                  </div>
-                </Option>
-              ))}
+            {members?.map((member) => (
+              <Option
+                key={member.userName}
+                value={member.userName}
+                label={member.userName}
+              >
+                <div>
+                  <span role="img">
+                    <Avatar
+                      className={styles.memberAvatar}
+                      size={32}
+                      src={member.profileURL}
+                    />
+                  </span>
+                  {` ${member.userName}`}
+                </div>
+              </Option>
+            ))}
           </Select>
         </div>
         <div className={styles.modalBtn}>

@@ -1,0 +1,26 @@
+.label-wrapper {
+  display: flex;
+  flex-direction: column;
+  label {
+    max-width: 94px;
+    line-height: 24px;
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+    &.good {
+      border: 1px solid #65cd98;
+      color: #65cd98;
+      background: rgba(101, 205, 152, 0.05);
+    }
+    &.low {
+      border: 1px solid #ffa827;
+      color: #ffa827;
+      background: rgba(255, 168, 39, 0.05);
+    }
+    &.empty {
+      border: 1px solid #ff5b64;
+      color: #ff5b64;
+      background: rgba(255, 91, 100, 0.05);
+    }
+  }
+}
