@@ -22,7 +22,6 @@ const InnerShortAnswer: FC<P> = ({
     <InnerElement
       handleId={formData.id}
       activate={activate}
-      componentName="ShortAnswer"
       handlingSelectForm={handlingSelectForm}
     >
       {required && <InnerMedicalFormRequired />}

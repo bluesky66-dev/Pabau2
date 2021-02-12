@@ -22,7 +22,6 @@ const InnerHeading: FC<P> = ({
     <InnerElement
       handleId={formData.id}
       activate={activate}
-      componentName="Heading"
       handlingSelectForm={handlingSelectForm}
     >
       {required && <InnerMedicalFormRequired />}

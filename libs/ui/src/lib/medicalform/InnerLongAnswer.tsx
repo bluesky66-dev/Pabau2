@@ -22,7 +22,6 @@ const InnerLongAnswer: FC<P> = ({
     <InnerElement
       handleId={formData.id}
       activate={activate}
-      componentName="LongAnswer"
       handlingSelectForm={handlingSelectForm}
     >
       {required && <InnerMedicalFormRequired />}

@@ -23,7 +23,6 @@ const InnerLabTest: FC<P> = ({
     <InnerElement
       handleId={formData.id}
       activate={activate}
-      componentName="LabTest"
       handlingSelectForm={handlingSelectForm}
     >
       {required && <InnerMedicalFormRequired />}
