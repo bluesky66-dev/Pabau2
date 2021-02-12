@@ -34,8 +34,7 @@ export const AddSuggestion: FC<AddSuggestionProps> = ({
         defaultValue={selected}
         onChange={handleChange}
       >
-        {options &&
-          options.length &&
+        {options?.length &&
           options.map((el, index) => (
             <Option key={`multiCheckBoxOption${index}`} value={el}>
               {el || ''}

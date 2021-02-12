@@ -13,14 +13,14 @@ interface P {
 }
 
 const InnerRadio: FC<P> = ({ title, options }) => {
-  const [optionVal, setOptionVal] = useState(1)
+  const [optionValue, setOptionValue] = useState(1)
   return (
     <>
       <h3>{title}</h3>
       <Radio.Group
         size="small"
-        value={optionVal}
-        onChange={(e) => setOptionVal(e.target.value)}
+        value={optionValue}
+        onChange={(e) => setOptionValue(e.target.value)}
       >
         {options?.map(({ id, label }) => (
           <Radio key={id} value={id} className={styles.radio}>

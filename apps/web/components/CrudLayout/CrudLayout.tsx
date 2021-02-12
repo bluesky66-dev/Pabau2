@@ -9,6 +9,7 @@ interface P {
   listQuery: DocumentNode
   editQuery: DocumentNode
   aggregateQuery?: DocumentNode
+  tableSearch?: boolean
   updateOrderQuery?: DocumentNode
 }
 

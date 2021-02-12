@@ -10,13 +10,13 @@ export default {
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 
-const LanguageDropdownStory = ({ ...args }) => <LanguageDropdown {...args} />
+const LanguageDropdownStory = ({ ...rest }) => <LanguageDropdown {...rest} />
 export const Basic = LanguageDropdownStory.bind({})
 Basic.args = {
   label: 'Default language for your staff',
   value: 'French',
   tooltip: '',
-  onSelected: (val) => {
-    notification.open({ message: `Select ${val}` })
+  onSelected: (value) => {
+    notification.open({ message: `Select ${value}` })
   },
 }

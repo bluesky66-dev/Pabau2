@@ -189,7 +189,15 @@ export const Index: FC<ReviewsConfigProps> = ({
         <div className={styles.reviewsConfigContainer}>
           <div className={styles.reviewsConfigHeader}>
             <div className={styles.reviewsConfigBreadcrumb}>
-              <Breadcrumb breadcrumbItems={['Setup', 'Feedback Survey']} />
+              <Breadcrumb
+                breadcrumbItems={[
+                  { breadcrumbName: 'Setup', path: '/setup' },
+                  {
+                    breadcrumbName: 'Feedback Survey',
+                    path: '/setup/reviews-config',
+                  },
+                ]}
+              />
               <Typography.Title>Feedback Survey</Typography.Title>
             </div>
             <div className={styles.reviewsConfigBreadcrumbMobile}>
