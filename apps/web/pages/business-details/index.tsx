@@ -30,7 +30,7 @@ export const Index: FC = () => {
         <div className={styles.businessDetailsContainer}>
           <Breadcrumb
             breadcrumbItems={[
-              { breadcrumbName: 'Setup', path: '/setup' },
+              { breadcrumbName: 'Setup', path: 'setup' },
               { breadcrumbName: 'Business Details', path: '' },
             ]}
           />

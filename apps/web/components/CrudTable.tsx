@@ -347,7 +347,7 @@ const CrudTable: FC<P> = ({
             <div style={{ background: '#FFF' }}>
               <Breadcrumb
                 breadcrumbItems={[
-                  { breadcrumbName: 'Setup', path: '/setup' },
+                  { breadcrumbName: 'Setup', path: 'setup' },
                   { breadcrumbName: schema.full || schema.short, path: '' },
                 ]}
               />

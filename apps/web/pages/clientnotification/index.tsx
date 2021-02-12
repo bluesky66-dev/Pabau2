@@ -18,7 +18,7 @@ const Index: FC = () => {
       <div style={{ backgroundColor: '#FFF' }}>
         <Breadcrumb
           breadcrumbItems={[
-            { breadcrumbName: 'Setup', path: '/setup' },
+            { breadcrumbName: 'Setup', path: 'setup' },
             { breadcrumbName: 'Notification Messages', path: '' },
             { breadcrumbName: 'Upcoming appointment reminder', path: '' },
           ]}

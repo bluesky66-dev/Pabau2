@@ -64,7 +64,7 @@ const Index: FC = () => {
             <div>
               <Breadcrumb
                 breadcrumbItems={[
-                  { breadcrumbName: 'Setup', path: '/setup' },
+                  { breadcrumbName: 'Setup', path: 'setup' },
                   { breadcrumbName: 'Notification Messages', path: '' },
                 ]}
               />

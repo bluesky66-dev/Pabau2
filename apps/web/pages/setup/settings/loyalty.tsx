@@ -61,7 +61,7 @@ const LoyaltySettings: FC<P> = () => {
               <Col span={20} className={styles.titleWrapper}>
                 <Breadcrumb
                   breadcrumbItems={[
-                    { breadcrumbName: 'Setup', path: '/setup' },
+                    { breadcrumbName: 'Setup', path: 'setup' },
                     { breadcrumbName: 'Loyalty settings', path: '' },
                   ]}
                 />
