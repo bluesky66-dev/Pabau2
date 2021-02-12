@@ -47,6 +47,9 @@ export function InputNumber({
         form={form}
         requiredMark={requiredMark}
         layout="vertical"
+        initialValues={{
+          'input-item': value,
+        }}
       >
         <Form.Item
           label={label ? label : ''}
@@ -58,7 +61,6 @@ export function InputNumber({
             className={styles.inputNumber}
             placeholder={placeHolderText}
             formatter={(value) => (isFormatter ? `£ ${value}` : `${value}`)}
-            defaultValue={value}
             size={size}
             disabled={disabled}
             onChange={(value) => handleInputChange(value)}

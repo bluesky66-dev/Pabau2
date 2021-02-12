@@ -76,6 +76,5 @@ export const InputNumberControl = InputNumberStory.bind({})
 InputNumberControl.args = {
   placeHolderText: 'Enter Number',
   value: 14.43,
-  requiredMsg: 'Number is required!',
   isFormatter: true,
 }
