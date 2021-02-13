@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Popover, Button } from 'antd'
 import styles from './SMSLabel.module.less'
 
@@ -9,6 +9,7 @@ export interface SMSLabelProps {
 }
 
 export const SMSLabel: FC<SMSLabelProps> = ({ status, block, ...props }) => {
+  
   const StatusData = {
     '?': {
       label: 'Debounced',
@@ -41,6 +42,7 @@ export const SMSLabel: FC<SMSLabelProps> = ({ status, block, ...props }) => {
         'The message expired at the operator after the default 48 hour validity period. Either the phone is off, or roaming abroad.',
     },
   }
+
   return (
     <div className={styles.smsLabelMain}>
       <Popover
@@ -55,7 +57,7 @@ export const SMSLabel: FC<SMSLabelProps> = ({ status, block, ...props }) => {
           }`}
         >
           <span>
-            {StatusData[status]?.label ? StatusData[status]?.label : 'Labelled'}
+            {StatusData[status]?.label ? StatusData[status].label : 'Labelled'}
           </span>
         </Button>
       </Popover>
