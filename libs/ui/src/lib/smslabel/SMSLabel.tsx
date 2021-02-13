@@ -43,31 +43,22 @@ export const SMSLabel: FC<SMSLabelProps> = ({ status, block, ...props }) => {
   }
   return (
     <div className={styles.smsLabelMain}>
-      {StatusData[status] && StatusData[status].content ? (
-        <Popover
-          {...props}
-          content={StatusData[status] && StatusData[status].content}
-          placement="top"
-        >
-          <Button
-            {...props}
-            className={`${block && 'block'} ${
-              StatusData[status] && StatusData[status].class
-            }`}
-          >
-            <span>{StatusData[status]?.label || 'Labelled'}</span>
-          </Button>
-        </Popover>
-      ) : (
+      <Popover
+        {...props}
+        content={StatusData[status] ? StatusData[status].content : ''}
+        placement="top"
+      >
         <Button
           {...props}
           className={`${block && 'block'} ${
-            StatusData[status] && StatusData[status].class
+            StatusData[status] ? StatusData[status].class : ''
           }`}
         >
-          <span>{StatusData[status]?.label || 'Labelled'}</span>
+          <span>
+            {StatusData[status]?.label ? StatusData[status]?.label : 'Labelled'}
+          </span>
         </Button>
-      )}
+      </Popover>
     </div>
   )
 }
