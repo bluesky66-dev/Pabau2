@@ -1,14 +1,12 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { Popover, Button } from 'antd'
 import styles from './SMSLabel.module.less'
-
 export interface SMSLabelProps {
   status: string
   block?: boolean
 }
 
 export const SMSLabel: FC<SMSLabelProps> = ({ status, block, ...props }) => {
-
   const StatusData = {
     '?': {
       label: 'Debounced',
