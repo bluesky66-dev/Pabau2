@@ -120,6 +120,19 @@
     font-weight: 400;
     margin: 0;
     margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    .plusTagItem {
+      padding: 3px 12px;
+      font-family: var(--font-family);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 14px;
+      color: var(--primary-color);
+      background-color: #eef7fb;
+      border-radius: 6px;
+      margin-left: 8px;
+    }
   }
   > h4 {
     font-family: var(--font-family);
@@ -216,4 +229,64 @@
   border-radius: 4px;
   min-height: 40vh;
   margin: 24px 15px 100px;
+  > div {
+    box-shadow: none !important;
+  }
+}
+
+.smsTextContainer {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.smsTextItem {
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.smsTextContent {
+  position: relative;
+  padding: 20px;
+  max-width: 80%;
+  min-width: 60%;
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--grey-text-color);
+  border-radius: 10px;
+}
+
+.smsTextArrow {
+  display: block;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  bottom: 10px;
+  transform: rotate(45deg);
+}
+
+.directionFrom {
+  justify-content: flex-start;
+  .smsTextContent {
+    background-color: #e8e8ee;
+    .smsTextArrow {
+      right: calc(100% - 6px);
+      background-color: #e8e8ee;
+    }
+  }
+}
+
+.directionTo {
+  justify-content: flex-end;
+  .smsTextContent {
+    background-color: #eef7fb;
+    .smsTextArrow {
+      left: calc(100% - 6px);
+      background-color: #eef7fb;
+    }
+  }
 }

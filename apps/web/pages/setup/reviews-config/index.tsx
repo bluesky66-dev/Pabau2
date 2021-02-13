@@ -1,4 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
+import classNames from 'classnames'
 import { Typography, Badge, Form, Row, Col, Radio } from 'antd'
 import {
   LeftOutlined,
@@ -18,12 +19,16 @@ import {
   Stepper,
   Button,
   ColorPicker,
+  Appointment,
 } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import CommonHeader from '../CommonHeader'
 import reviewsConfigBanner from '../../../assets/images/reviews-config-banner.png'
 import { ReactComponent as ExternalLink } from '../../../assets/images/external-link.svg'
 import { ReactComponent as ExternalLinkGrey } from '../../../assets/images/external-link-grey.svg'
+import { ReactComponent as Palette } from '../../../assets/images/palette.svg'
+import { ReactComponent as Voucher } from '../../../assets/images/voucher.svg'
+import { ReactComponent as Bell } from '../../../assets/images/bell.svg'
 import styles from './index.module.less'
 
 const stepData = [
@@ -105,7 +110,10 @@ export const Index: FC<ReviewsConfigProps> = ({
   const BuilderPanel = () => (
     <>
       <div className={styles.section}>
-        <h3>Apperance</h3>
+        <h3>
+          <Palette style={{ marginRight: '.5rem' }} />
+          <span>Apperance</span>
+        </h3>
         <h4>
           Customize the look and feel of your survey page, as well as
           customizing features such as displaying the clients full name or
@@ -141,7 +149,10 @@ export const Index: FC<ReviewsConfigProps> = ({
         </div>
       </div>
       <div className={styles.section}>
-        <h3>Notifications</h3>
+        <h3>
+          <Bell style={{ marginRight: '.5rem' }} />
+          <span>Notifications</span>
+        </h3>
         <h4>
           The way in which you request feedback from clients who visit you.
           Changes in client notifications.
@@ -178,7 +189,11 @@ export const Index: FC<ReviewsConfigProps> = ({
         </div>
       </div>
       <div className={styles.section}>
-        <h3>Incentive</h3>
+        <h3>
+          <Voucher style={{ marginRight: '.5rem' }} />
+          <span>Incentive</span>
+          <span className={styles.plusTagItem}>Plus</span>
+        </h3>
         <h4>Reward clients for writing a review</h4>
         <div className={styles.sectionItem}>
           <SimpleDropdown
@@ -192,20 +207,72 @@ export const Index: FC<ReviewsConfigProps> = ({
     </>
   )
 
-  const PreviewPanel = () => (
-    <div className={styles.previewPanel}>
-      <Radio.Group buttonStyle="solid" defaultValue="a">
-        <Radio.Button value="a">Listing</Radio.Button>
-        <Radio.Button value="b">Read</Radio.Button>
-      </Radio.Group>
-      <div className={styles.templatePanel} />
-      <Radio.Group buttonStyle="solid" defaultValue="a">
-        <Radio.Button value="a">Email</Radio.Button>
-        <Radio.Button value="b">SMS Text</Radio.Button>
-      </Radio.Group>
-      <div className={styles.templatePanel} />
-    </div>
-  )
+  const SMSText = () => {
+    const messages = [
+      {
+        content: 'Hi, Kristy',
+        direction: 'from',
+      },
+      {
+        content: 'Heya',
+        direction: 'to',
+      },
+    ]
+    return (
+      <div className={styles.smsTextContainer}>
+        {messages.map((message) => (
+          <div
+            key={message.content}
+            className={
+              message.direction === 'from'
+                ? classNames(styles.smsTextItem, styles.directionFrom)
+                : classNames(styles.smsTextItem, styles.directionTo)
+            }
+          >
+            <div className={styles.smsTextContent}>
+              {message.content}
+              <div className={styles.smsTextArrow} />
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  const PreviewPanel = () => {
+    const [isListing, setIsListing] = useState(true)
+    const [isEmail, setIsEmail] = useState(true)
+    return (
+      <div className={styles.previewPanel}>
+        <Radio.Group
+          buttonStyle="solid"
+          defaultValue={isListing}
+          value={isListing}
+          onChange={(e) => setIsListing(e.target.value)}
+        >
+          <Radio.Button value={true}>Listing</Radio.Button>
+          <Radio.Button value={false}>Read</Radio.Button>
+        </Radio.Group>
+        <div className={styles.templatePanel}>
+          {isListing && <div>Listing</div>}
+          {!isListing && <div>Read</div>}
+        </div>
+        <Radio.Group
+          buttonStyle="solid"
+          defaultValue={isEmail}
+          value={isEmail}
+          onChange={(e) => setIsEmail(e.target.value)}
+        >
+          <Radio.Button value={true}>Email</Radio.Button>
+          <Radio.Button value={false}>SMS Text</Radio.Button>
+        </Radio.Group>
+        <div className={styles.templatePanel}>
+          {isEmail && <Appointment selectLanguage="en" />}
+          {!isEmail && <SMSText />}
+        </div>
+      </div>
+    )
+  }
 
   useEffect(() => {
     setSetting(builderSetting)
@@ -256,29 +323,31 @@ export const Index: FC<ReviewsConfigProps> = ({
               <Stepper datasource={stepData} step={step} />
             </div>
           </div>
-          <div className={styles.reviewsConfigBody}>
-            <div className={styles.reviewsConfigBodyDesktop}>
-              <div>
-                <h2>Builder</h2>
-                <BuilderPanel />
-              </div>
-              <div>
-                <PreviewPanel />
-              </div>
-            </div>
-            <div className={styles.reviewsConfigBodyMobile}>
-              <TabMenu
-                menuItems={['BUILDER', 'PREVIEW']}
-                tabPosition="top"
-                minHeight="1px"
-              >
-                <div className={styles.tabContainer}>
+          {step === 0 && (
+            <div className={styles.reviewsConfigBody}>
+              <div className={styles.reviewsConfigBodyDesktop}>
+                <div>
+                  <h2>Builder</h2>
                   <BuilderPanel />
                 </div>
-                <PreviewPanel />
-              </TabMenu>
+                <div>
+                  <PreviewPanel />
+                </div>
+              </div>
+              <div className={styles.reviewsConfigBodyMobile}>
+                <TabMenu
+                  menuItems={['BUILDER', 'PREVIEW']}
+                  tabPosition="top"
+                  minHeight="1px"
+                >
+                  <div className={styles.tabContainer}>
+                    <BuilderPanel />
+                  </div>
+                  <PreviewPanel />
+                </TabMenu>
+              </div>
             </div>
-          </div>
+          )}
           <div className={styles.reviewsConfigFooter}>
             <Button
               type="primary"
