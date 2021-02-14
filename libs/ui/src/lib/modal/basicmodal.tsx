@@ -5,7 +5,7 @@ import { Checkbox } from '@pabau/ui'
 import styles from './basicmodal.module.less'
 import { ModalProps } from 'antd/lib/modal'
 import classNames from 'classnames'
-interface P {
+export interface BasicModalProps {
   onOk?: () => void
   onCancel?: () => void
   onDelete?: () => void
@@ -53,7 +53,7 @@ export function BasicModal({
   footer = true,
   wrapClassName,
   ...props
-}: PropsWithChildren<P & ModalProps>): JSX.Element {
+}: PropsWithChildren<BasicModalProps & ModalProps>): JSX.Element {
   return (
     <Modal
       title={title}
