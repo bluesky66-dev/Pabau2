@@ -7,7 +7,7 @@ export default {
   args: {},
 }
 
-const story = ({ ...args }) => <ClientNotification {...args} />
+const story = ({ ...props }) => <ClientNotification {...props} />
 
 export const DefaultClientNotification = story.bind({})
 
