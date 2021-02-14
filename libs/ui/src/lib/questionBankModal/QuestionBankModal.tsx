@@ -25,7 +25,7 @@ interface P {
   onAdd: (questions: Array<IQuestionOptions> | undefined) => void
 }
 
-const QuestionBankModal: FC<P> = ({
+export const QuestionBankModal: FC<P> = ({
   title,
   questions,
   options,

@@ -21,6 +21,7 @@ export interface AddQuestionProps {
   onChange?: (value: string, index: number) => void
   onAddQuestion?: () => void
   onDeleteButton?: (index: number) => void
+  onGoTo?: () => void
 }
 
 export const AddQuestion: FC<AddQuestionProps> = ({
@@ -34,6 +35,7 @@ export const AddQuestion: FC<AddQuestionProps> = ({
   onChange,
   onAddQuestion,
   onDeleteButton,
+  onGoTo,
 }) => {
   return (
     <div className={styles.questionWrapper}>
@@ -65,7 +67,11 @@ export const AddQuestion: FC<AddQuestionProps> = ({
           <PlusOutlined /> {addQuestionLabel}
         </div>
       </div>
-      <Button type="primary" className={styles.btnBank}>
+      <Button
+        type="primary"
+        className={styles.btnBank}
+        onClick={() => onGoTo?.()}
+      >
         {goToButtonLabel}
       </Button>
     </div>

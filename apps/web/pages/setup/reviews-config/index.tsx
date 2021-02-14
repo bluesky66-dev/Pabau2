@@ -22,6 +22,9 @@ import {
   Appointment,
   ReadReview,
   Permission,
+  ReviewWrite,
+  AddQuestion,
+  QuestionBankModal,
 } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import CommonHeader from '../CommonHeader'
@@ -33,6 +36,11 @@ import { ReactComponent as ExternalLinkGrey } from '../../../assets/images/exter
 import { ReactComponent as Palette } from '../../../assets/images/palette.svg'
 import { ReactComponent as Voucher } from '../../../assets/images/voucher.svg'
 import { ReactComponent as Bell } from '../../../assets/images/bell.svg'
+import {
+  addQuestionData,
+  questionBankData,
+  questionBankMenuOptions,
+} from '../../../assets/feedbackSurveyData'
 import styles from './index.module.less'
 
 const stepData = [
@@ -111,105 +119,145 @@ export const Index: FC<ReviewsConfigProps> = ({
     setSetting({ ...builder })
   }
 
-  const BuilderPanel = () => (
-    <>
-      <div className={styles.section}>
-        <h3>
-          <Palette style={{ marginRight: '.5rem' }} />
-          <span>Apperance</span>
-        </h3>
-        <h4>
-          Customize the look and feel of your survey page, as well as
-          customizing features such as displaying the clients full name or
-          aninymously
-        </h4>
-        <ColorPicker
-          heading="Colour sheme"
-          onSelected={(val) => handleChangeSetting('color', val)}
-        />
-        <div className={styles.sectionItem}>
-          <SimpleDropdown
-            label="Logo Position"
-            value={setting.logotypePosition}
-            dropdownItems={['Left', 'Middle', 'Right']}
-            onSelected={(val) => handleChangeSetting('logotypePosition', val)}
-          />
-        </div>
-        <div className={styles.sectionItem}>
-          <Slider
-            title="Logo size"
-            value={setting.logotypeSize}
-            onChange={(val) => handleChangeSetting('logotypeSize', val)}
-            calculatedValue={`${setting.logotypeSize}px`}
-          />
-        </div>
-        <div className={styles.sectionItem}>
-          <SimpleDropdown
-            label="Display client name"
-            value={setting.clientName}
-            dropdownItems={['Full Name', 'First Name', 'Initials']}
-            onSelected={(val) => handleChangeSetting('clientName', val)}
-          />
-        </div>
-      </div>
-      <div className={styles.section}>
-        <h3>
-          <Bell style={{ marginRight: '.5rem' }} />
-          <span>Notifications</span>
-        </h3>
-        <h4>
-          The way in which you request feedback from clients who visit you.
-          Changes in client notifications.
-        </h4>
-        <div className={styles.sectionItem}>
-          <Row>
-            <Col span={12}>
-              <Form form={form} layout="vertical">
-                <Form.Item label="Email">
-                  <Badge
-                    status={setting.notifications.email ? 'success' : 'default'}
-                    text={setting.notifications.email ? 'Enabled' : 'Disabled'}
-                  />
-                </Form.Item>
-              </Form>
-            </Col>
-            <Col span={12}>
-              <Form form={form} layout="vertical">
-                <Form.Item label="SMS">
-                  <Badge
-                    status={setting.notifications.sms ? 'success' : 'default'}
-                    text={setting.notifications.sms ? 'Enabled' : 'Disabled'}
-                  />
-                </Form.Item>
-              </Form>
-            </Col>
-          </Row>
-        </div>
-        <div className={styles.sectionItem}>
-          <div className={styles.changeInClientNotifications}>
-            Change in client notifications{' '}
-            <ExternalLinkGrey style={{ marginLeft: '0.5rem' }} />
+  const BuilderPanel = () => {
+    const [visible, setVisible] = useState(false)
+    if (step === 0) {
+      return (
+        <div>
+          <div className={styles.section}>
+            <h3>
+              <Palette style={{ marginRight: '.5rem' }} />
+              <span>Apperance</span>
+            </h3>
+            <h4>
+              Customize the look and feel of your survey page, as well as
+              customizing features such as displaying the clients full name or
+              aninymously
+            </h4>
+            <ColorPicker
+              heading="Colour sheme"
+              onSelected={(val) => handleChangeSetting('color', val)}
+            />
+            <div className={styles.sectionItem}>
+              <SimpleDropdown
+                label="Logo Position"
+                value={setting.logotypePosition}
+                dropdownItems={['Left', 'Middle', 'Right']}
+                onSelected={(val) =>
+                  handleChangeSetting('logotypePosition', val)
+                }
+              />
+            </div>
+            <div className={styles.sectionItem}>
+              <Slider
+                title="Logo size"
+                value={setting.logotypeSize}
+                onChange={(val) => handleChangeSetting('logotypeSize', val)}
+                calculatedValue={`${setting.logotypeSize}px`}
+              />
+            </div>
+            <div className={styles.sectionItem}>
+              <SimpleDropdown
+                label="Display client name"
+                value={setting.clientName}
+                dropdownItems={['Full Name', 'First Name', 'Initials']}
+                onSelected={(val) => handleChangeSetting('clientName', val)}
+              />
+            </div>
+          </div>
+          <div className={styles.section}>
+            <h3>
+              <Bell style={{ marginRight: '.5rem' }} />
+              <span>Notifications</span>
+            </h3>
+            <h4>
+              The way in which you request feedback from clients who visit you.
+              Changes in client notifications.
+            </h4>
+            <div className={styles.sectionItem}>
+              <Row>
+                <Col span={12}>
+                  <Form form={form} layout="vertical">
+                    <Form.Item label="Email">
+                      <Badge
+                        status={
+                          setting.notifications.email ? 'success' : 'default'
+                        }
+                        text={
+                          setting.notifications.email ? 'Enabled' : 'Disabled'
+                        }
+                      />
+                    </Form.Item>
+                  </Form>
+                </Col>
+                <Col span={12}>
+                  <Form form={form} layout="vertical">
+                    <Form.Item label="SMS">
+                      <Badge
+                        status={
+                          setting.notifications.sms ? 'success' : 'default'
+                        }
+                        text={
+                          setting.notifications.sms ? 'Enabled' : 'Disabled'
+                        }
+                      />
+                    </Form.Item>
+                  </Form>
+                </Col>
+              </Row>
+            </div>
+            <div className={styles.sectionItem}>
+              <div className={styles.changeInClientNotifications}>
+                Change in client notifications{' '}
+                <ExternalLinkGrey style={{ marginLeft: '0.5rem' }} />
+              </div>
+            </div>
+          </div>
+          <div className={styles.section}>
+            <h3>
+              <Voucher style={{ marginRight: '.5rem' }} />
+              <span>Incentive</span>
+              <span className={styles.plusTagItem}>Plus</span>
+            </h3>
+            <h4>Reward clients for writing a review</h4>
+            <div className={styles.sectionItem}>
+              <SimpleDropdown
+                label="Voucher reward"
+                value={setting.voucherReward}
+                dropdownItems={['£5.00 Review Voucher Scheme']}
+                onSelected={(val) => handleChangeSetting('voucherReward', val)}
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <div className={styles.section}>
-        <h3>
-          <Voucher style={{ marginRight: '.5rem' }} />
-          <span>Incentive</span>
-          <span className={styles.plusTagItem}>Plus</span>
-        </h3>
-        <h4>Reward clients for writing a review</h4>
-        <div className={styles.sectionItem}>
-          <SimpleDropdown
-            label="Voucher reward"
-            value={setting.voucherReward}
-            dropdownItems={['£5.00 Review Voucher Scheme']}
-            onSelected={(val) => handleChangeSetting('voucherReward', val)}
+      )
+    }
+    if (step === 1) {
+      return (
+        <div>
+          <div className={styles.section}></div>
+          <AddQuestion
+            description={addQuestionData.description}
+            questions={addQuestionData.questions}
+            title={addQuestionData.title}
+            addQuestionLabel={addQuestionData.addQuestionLabel}
+            goToButtonLabel={addQuestionData.goToButtonLabel}
+            questionLabel={addQuestionData.questionLabel}
+            onGoTo={() => setVisible(true)}
+          />
+          <QuestionBankModal
+            visible={visible}
+            title="Question Bank"
+            questions={questionBankData}
+            options={questionBankMenuOptions}
+            onAdd={(question) => setVisible(false)}
+            onOk={() => setVisible(false)}
+            onCancel={() => setVisible(false)}
           />
         </div>
-      </div>
-    </>
-  )
+      )
+    }
+  }
 
   const SMSText = () => {
     const messages = [
@@ -248,52 +296,79 @@ export const Index: FC<ReviewsConfigProps> = ({
     const [isEmail, setIsEmail] = useState(true)
     return (
       <div className={styles.previewPanel}>
-        <Radio.Group
-          buttonStyle="solid"
-          defaultValue={isListing}
-          value={isListing}
-          onChange={(e) => setIsListing(e.target.value)}
-        >
-          <Radio.Button value={true}>Listing</Radio.Button>
-          <Radio.Button value={false}>Read</Radio.Button>
-        </Radio.Group>
-        <div className={styles.templatePanel}>
-          {isListing && (
-            <Permission
-              image={<NormalClinicLogo />}
-              review={4.67}
-              description="Things people are saying about us"
-              totalReview={5}
-              totalReviewUser={43}
-              weScoreLabel="We score"
-              fromLabel="from"
-              reviewLabel="reviews"
-            />
-          )}
-          {!isListing && (
-            <ReadReview
-              title="Highly Recommended"
-              bodyContent="Was extremely nervous about seeing Doctor Hazim Sadideen but had a very friendly and warm welcoming at the reception and immediately felt at ease. Doctor Hazim himself made me feel very comfortable and reassured, initially I was very nervous to begin with. Reassured me that everything was going to be OK and that he'll do the best he can with the surgery. His secretary is also very nice, very approachable and easy to talk to if there are any complications or concerns. Highly recommended."
-              updatedAt="1 year ago"
-              name="Jamal Potter"
-              defaultRating={2.5}
-              avatarSrc={userAvatar}
-            />
-          )}
-        </div>
-        <Radio.Group
-          buttonStyle="solid"
-          defaultValue={isEmail}
-          value={isEmail}
-          onChange={(e) => setIsEmail(e.target.value)}
-        >
-          <Radio.Button value={true}>Email</Radio.Button>
-          <Radio.Button value={false}>SMS Text</Radio.Button>
-        </Radio.Group>
-        <div className={styles.templatePanel}>
-          {isEmail && <Appointment selectLanguage="en" />}
-          {!isEmail && <SMSText />}
-        </div>
+        {step === 0 && (
+          <>
+            <Radio.Group
+              buttonStyle="solid"
+              defaultValue={isListing}
+              value={isListing}
+              onChange={(e) => setIsListing(e.target.value)}
+            >
+              <Radio.Button value={true}>Listing</Radio.Button>
+              <Radio.Button value={false}>Read</Radio.Button>
+            </Radio.Group>
+            <div className={styles.templatePanel}>
+              {isListing && (
+                <Permission
+                  image={<NormalClinicLogo />}
+                  review={4.67}
+                  description="Things people are saying about us"
+                  totalReview={5}
+                  totalReviewUser={43}
+                  weScoreLabel="We score"
+                  fromLabel="from"
+                  reviewLabel="reviews"
+                />
+              )}
+              {!isListing && (
+                <ReadReview
+                  title="Highly Recommended"
+                  bodyContent="Was extremely nervous about seeing Doctor Hazim Sadideen but had a very friendly and warm welcoming at the reception and immediately felt at ease. Doctor Hazim himself made me feel very comfortable and reassured, initially I was very nervous to begin with. Reassured me that everything was going to be OK and that he'll do the best he can with the surgery. His secretary is also very nice, very approachable and easy to talk to if there are any complications or concerns. Highly recommended."
+                  updatedAt="1 year ago"
+                  name="Jamal Potter"
+                  defaultRating={2.5}
+                  avatarSrc={userAvatar}
+                />
+              )}
+            </div>
+            <Radio.Group
+              buttonStyle="solid"
+              defaultValue={isEmail}
+              value={isEmail}
+              onChange={(e) => setIsEmail(e.target.value)}
+            >
+              <Radio.Button value={true}>Email</Radio.Button>
+              <Radio.Button value={false}>SMS Text</Radio.Button>
+            </Radio.Group>
+            <div className={styles.templatePanel}>
+              {isEmail && <Appointment selectLanguage="en" />}
+              {!isEmail && <SMSText />}
+            </div>
+          </>
+        )}
+        {step === 1 && (
+          <ReviewWrite
+            title="Consultation survey"
+            subtitle="Please, rate your consultation to provide better service"
+            reviews={[
+              {
+                key: 1,
+                question: 'How did you rate your consultation?',
+                rating: 3.5,
+              },
+              {
+                key: 2,
+                question: 'How likely will you recommend us to a friend?',
+                rating: 2.5,
+              },
+              {
+                key: 3,
+                question: 'How was your overall experience?',
+                rating: 4,
+              },
+            ]}
+          />
+        )}
       </div>
     )
   }
@@ -347,7 +422,7 @@ export const Index: FC<ReviewsConfigProps> = ({
               <Stepper datasource={stepData} step={step} />
             </div>
           </div>
-          {step === 0 && (
+          {(step === 0 || step === 1) && (
             <div className={styles.reviewsConfigBody}>
               <div className={styles.reviewsConfigBodyDesktop}>
                 <div>
@@ -355,6 +430,7 @@ export const Index: FC<ReviewsConfigProps> = ({
                   <BuilderPanel />
                 </div>
                 <div>
+                  <h2>Preview</h2>
                   <PreviewPanel />
                 </div>
               </div>
@@ -364,9 +440,7 @@ export const Index: FC<ReviewsConfigProps> = ({
                   tabPosition="top"
                   minHeight="1px"
                 >
-                  <div className={styles.tabContainer}>
-                    <BuilderPanel />
-                  </div>
+                  <BuilderPanel />
                   <PreviewPanel />
                 </TabMenu>
               </div>
