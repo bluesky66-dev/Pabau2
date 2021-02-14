@@ -4,6 +4,7 @@ import Button from '../button/button'
 import { Checkbox } from '@pabau/ui'
 import styles from './basicmodal.module.less'
 import { ModalProps } from 'antd/lib/modal'
+import classNames from 'classnames'
 interface P {
   onOk?: () => void
   onCancel?: () => void
@@ -12,6 +13,7 @@ interface P {
   newButtonText?: string
   title?: string
   modalWidth?: number
+  isValidate?: boolean
   footer?: boolean
 
   /**
@@ -30,6 +32,7 @@ interface P {
   specialBooleanValue?: boolean
 
   dangerButtonText?: string
+  newButtonDisable?: boolean
 }
 
 export function BasicModal({
@@ -43,8 +46,10 @@ export function BasicModal({
   specialBooleanLabel,
   specialBooleanValue,
   onSpecialBooleanClick,
-  newButtonText = 'OK',
+  newButtonText,
+  newButtonDisable = false,
   dangerButtonText,
+  isValidate,
   footer = true,
   wrapClassName,
   ...props
@@ -60,10 +65,10 @@ export function BasicModal({
       width={modalWidth}
       // destroyOnClose={true}
       // modalRender={(E) => E}
-      wrapClassName={styles.modal + ' ' + wrapClassName}
+      wrapClassName={classNames(styles.modal, wrapClassName)}
       {...props}
     >
-      <div>{children}</div>
+      <div className={styles.modalContent}>{children}</div>
       {footer && (
         <div className={styles.modalFooter}>
           {specialBooleanLabel && onSpecialBooleanClick && (
@@ -77,15 +82,22 @@ export function BasicModal({
           {dangerButtonText && (
             <Button
               type="default"
-              className={styles.deleteBtnStyle}
+              className={classNames(styles.deleteBtnStyle, styles.btnStyle)}
               onClick={() => onDelete?.()}
             >
               {dangerButtonText}
             </Button>
           )}
-          <Button type="primary" onClick={() => onOk?.()}>
-            {newButtonText}
-          </Button>
+          {newButtonText && (
+            <Button
+              type="primary"
+              className={styles.btnStyle}
+              disabled={newButtonDisable}
+              onClick={() => onOk?.()}
+            >
+              {newButtonText}
+            </Button>
+          )}
         </div>
       )}
     </Modal>

@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { gql } from '@apollo/client'
 import { NextPage } from 'next'
 import React from 'react'
@@ -14,13 +13,17 @@ const LIST_QUERY = gql`
     marketing_source(
       offset: $offset
       limit: $limit
-      order_by: { created_at: desc }
-      where: { is_active: { _eq: $isActive }, _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }] }
+      order_by: { order: desc }
+      where: {
+        is_active: { _eq: $isActive }
+        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
+      }
     ) {
       __typename
       id
       name
       is_active
+      order
     }
   }
 `
@@ -30,7 +33,10 @@ const LIST_AGGREGATE_QUERY = gql`
     $searchTerm: String = ""
   ) {
     marketing_source_aggregate(
-      where: { is_active: { _eq: $isActive }, _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }] }
+      where: {
+        is_active: { _eq: $isActive }
+        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
+      }
     ) {
       aggregate {
         count
@@ -61,14 +67,26 @@ const EDIT_MUTATION = gql`
     $id: uuid!
     $name: String!
     $is_active: Boolean
+    $order: Int
   ) {
     update_marketing_source_by_pk(
       pk_columns: { id: $id }
-      _set: { name: $name, is_active: $is_active }
+      _set: { name: $name, is_active: $is_active, order: $order }
     ) {
       __typename
       id
       is_active
+      order
+    }
+  }
+`
+const UPDATE_ORDER_MUTATION = gql`
+  mutation update_marketing_source_order($id: uuid!, $order: Int) {
+    update_marketing_source(
+      where: { id: { _eq: $id } }
+      _set: { order: $order }
+    ) {
+      affected_rows
     }
   }
 `
@@ -78,6 +96,21 @@ const schema: Schema = {
   fullLower: 'marketing source',
   short: 'Source',
   shortLower: 'source',
+  messages: {
+    create: {
+      success: 'New marketings source created.',
+      error: 'While creating marketing source.',
+    },
+    update: {
+      success: 'Marketings source updated.',
+      error: 'While updating marketings source.',
+    },
+    delete: {
+      success: 'Marketings source deleted.',
+      error: 'While deleting marketing sources.',
+    },
+  },
+  deleteBtnLabel: 'Yes, Delete Source',
   fields: {
     name: {
       full: 'Friendly Name',
@@ -89,11 +122,12 @@ const schema: Schema = {
       description: 'A friendly name',
       // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
+      type: 'string',
     },
     is_active: {
       full: 'Active',
       type: 'boolean',
-      default: true,
+      defaultvalue: true,
     },
   },
 }
@@ -107,6 +141,7 @@ export const Index: NextPage = () => {
       listQuery={LIST_QUERY}
       editQuery={EDIT_MUTATION}
       aggregateQuery={LIST_AGGREGATE_QUERY}
+      updateOrderQuery={UPDATE_ORDER_MUTATION}
     />
   )
 }

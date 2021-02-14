@@ -1,17 +1,23 @@
-import React, { FC, PropsWithChildren, useEffect, useState } from 'react'
-import { Drawer, Badge, Avatar, Modal, Button, Input } from 'antd'
+import React, {
+  FC,
+  PropsWithChildren,
+  useEffect,
+  useState,
+  MouseEvent,
+} from 'react'
+import { Drawer, Input } from 'antd'
 import styles from './Messages.module.less'
+import { CloseOutlined, EditOutlined, SearchOutlined } from '@ant-design/icons'
 import {
-  CloseOutlined,
-  EditOutlined,
-  SearchOutlined,
-  PlusCircleFilled,
-  PlusOutlined,
-} from '@ant-design/icons'
-// import { ReactComponent as Chat } from '../../../assets/images/chat.svg'
-import { ReactComponent as ChatPopIcon } from '../../../assets/images/chat-pop-icon.svg'
-import { ReactComponent as EmojiIcon } from '../../../assets/images/emoji-icon.svg'
-import { ReactComponent as AddUserIcon } from '../../../assets/images/add-user-icon.svg'
+  BasicModal,
+  Switch,
+  GroupList,
+  ChatsList,
+  AddGroupModal,
+  AddPeopleModal,
+  MessageContainer,
+} from '@pabau/ui'
+
 import Stephen from '../../../assets/images/users/stephen.png'
 import Linda from '../../../assets/images/users/linda.png'
 import Alex from '../../../assets/images/users/alex.png'
@@ -22,9 +28,16 @@ import Walter from '../../../assets/images/users/walter.png'
 import Liza from '../../../assets/images/users/liza.png'
 
 import classNames from 'classnames'
+
 export interface MessagesProps {
   openDrawer: boolean
   closeDrawer: () => void
+  onCreateChannel?: (
+    name: string,
+    description: string,
+    isPrivate: boolean
+  ) => void
+  onMessageType?: (e: MouseEvent<HTMLElement>) => void
 }
 
 interface Contact {
@@ -33,9 +46,41 @@ interface Contact {
   unread?: number
   dateTime: string
   isOnline: boolean
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  profileURL: any
+  profileURL: string
 }
+
+const members = [
+  {
+    userName: 'Alex Johnson',
+    profileURL: Alex,
+    isOnline: true,
+  },
+  {
+    userName: 'Arya Davis',
+    profileURL: Arya,
+    isOnline: false,
+  },
+  {
+    userName: 'James Ocean',
+    profileURL: James,
+    isOnline: true,
+  },
+  {
+    userName: 'Austin Winter',
+    profileURL: Austin,
+    isOnline: false,
+  },
+  {
+    userName: 'Walter Brown',
+    profileURL: Walter,
+    isOnline: true,
+  },
+  {
+    userName: 'Liza Frank',
+    profileURL: Liza,
+    isOnline: true,
+  },
+]
 
 const groupData = {
   general: [
@@ -84,33 +129,35 @@ const groupData = {
   ],
 }
 
-interface Member {
-  userName: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  profileURL: any
-}
-
 export const PabauMessages: FC<MessagesProps> = ({
   openDrawer = false,
   closeDrawer,
+  onMessageType,
+  onCreateChannel,
 }: PropsWithChildren<MessagesProps>) => {
   const WidthEnum = {
     MessageBox: 392,
     ChatBox: 522,
   }
   const [messageDrawer, setMessageDrawer] = useState(openDrawer)
-  const [notifyTab, setNotifyTab] = useState('All')
   const [selectedContact, setSelectedContact] = useState<Contact>()
   const [drawerWidth, setDrawerWidth] = useState(WidthEnum.MessageBox)
   const [showChatBox, setShowChatBox] = useState(false)
   const [showGroupChatBox, setShowGroupChatBox] = useState(false)
-  const [selectedGroup, setSelectedGroup] = useState('')
+  const [selectedGroup, setSelectedGroup] = useState('general')
   const [isGroupModalVisible, setIsGroupModalVisible] = useState(false)
   const [isAddModalVisible, setIsAddModalVisible] = useState(false)
   const [memberModalTitle, setMemberModalTitle] = useState('')
-  const [searchAddMember, setSearchAddMember] = useState<Member[]>([])
-  const [searchMember, setSearchMember] = useState<Member[]>([])
-  const [searchMemberText, setSearchMemberText] = useState('')
+  const [typingContact, setTypingContact] = useState<Contact>()
+
+  //createChaneel
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [isPrivate, setIsPrivate] = useState(false)
+  const [isCreateChannel, setIsCreateChannel] = useState(false)
+
+  //new DM
+  const [isNewDm, setIsNewDm] = useState(false)
 
   const chatMessages = [
     {
@@ -173,18 +220,45 @@ export const PabauMessages: FC<MessagesProps> = ({
     },
   ]
 
-  const closeDrawerMenu = () => {
-    setMessageDrawer(false)
+  const handleNameChange = (e): void => {
+    if (e.target.value.length < 80) {
+      setName(e.target.value)
+    }
+  }
+
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value)
+  }
+
+  const onChangeToPrivate = (checked) => {
+    setIsPrivate(checked)
+  }
+
+  const onCreate = async () => {
+    onCreateChannel
+      ? await onCreateChannel(name, description, isPrivate)
+      : toggleCreateChannel()
+    toggleCreateChannel()
+  }
+  const toggleCreateChannel = () => {
+    setIsCreateChannel(!isCreateChannel)
+  }
+
+  const toggleNewDm = () => {
+    setShowChatBox(false)
+    setShowGroupChatBox(false)
+    setIsNewDm(true)
+    setDrawerWidth(WidthEnum.MessageBox + WidthEnum.ChatBox)
+  }
+
+  const closeNewDm = () => {
+    setIsNewDm(false)
     closeDrawer()
   }
 
-  const onClickContact = (index) => {
-    if (chatMessages) {
-      const data = chatMessages[index]
-      setSelectedContact({ ...data })
-    }
-    setShowChatBox(true)
-    setDrawerWidth(WidthEnum.MessageBox + WidthEnum.ChatBox)
+  const closeDrawerMenu = () => {
+    setMessageDrawer(false)
+    closeDrawer()
   }
 
   useEffect(() => {
@@ -198,32 +272,55 @@ export const PabauMessages: FC<MessagesProps> = ({
     }
   }, [selectedGroup])
 
-  const searchAddPeople = (value) => {
-    const results = Array<Member>()
-    for (const groupKey in groupData) {
-      for (const key in groupData[groupKey]) {
-        if (
-          value !== '' &&
-          groupData[groupKey][key].userName.indexOf(value) !== -1
-        ) {
-          results.push(groupData[groupKey][key])
-        }
-      }
-    }
-    setSearchAddMember([...results])
+  const handleGroupClick = (e, type) => {
+    setShowGroupChatBox(true)
+    setShowChatBox(false)
+    setIsNewDm(false)
+    setSelectedGroup(type)
+    setDrawerWidth(WidthEnum.ChatBox + WidthEnum.MessageBox)
   }
 
-  const searchGroupMember = (value) => {
-    const results = Array<Member>()
-    for (const key in groupData[selectedGroup]) {
-      if (
-        value !== '' &&
-        groupData[selectedGroup][key].userName.indexOf(value) !== -1
-      ) {
-        results.push(groupData[selectedGroup][key])
-      }
+  const handleClick = (e) => {
+    setSelectedContact(e)
+    setShowGroupChatBox(false)
+    setShowChatBox(true)
+    setIsNewDm(false)
+    setDrawerWidth(WidthEnum.MessageBox + WidthEnum.ChatBox)
+  }
+
+  const handleOk = () => {
+    setIsGroupModalVisible(false)
+  }
+
+  const handleAddOk = () => {
+    setIsAddModalVisible(false)
+  }
+
+  const onAddMembers = () => {
+    setIsAddModalVisible(false)
+  }
+
+  const handleCancel = () => {
+    setIsGroupModalVisible(false)
+  }
+
+  const handleAddCancel = () => {
+    setIsAddModalVisible(false)
+  }
+
+  const handleAddClick = () => {
+    setIsAddModalVisible(true)
+  }
+
+  const handleMessageType = (e) => {
+    if (isNewDm || showGroupChatBox) {
+      setTypingContact(undefined)
+    } else {
+      e.target.value !== ''
+        ? setTypingContact(selectedContact)
+        : setTypingContact(undefined)
     }
-    setSearchMember([...results])
+    onMessageType?.(e)
   }
 
   return (
@@ -243,6 +340,7 @@ export const PabauMessages: FC<MessagesProps> = ({
             </div>
             <div>
               <EditOutlined
+                onClick={toggleNewDm}
                 className={classNames(
                   styles.grayTextColor,
                   styles.pr5,
@@ -268,495 +366,121 @@ export const PabauMessages: FC<MessagesProps> = ({
               )}
             </div>
           </div>
-          <div
-            className={classNames(
-              styles.messagesTabs,
-              styles.topSpaceNotification
-            )}
-          >
-            <button
-              className={classNames(
-                styles.messagesTabDesign,
-                notifyTab === 'All' && styles.activeTabs
-              )}
-              onClick={() => {
-                setNotifyTab('All')
-                setShowChatBox(false)
-                setDrawerWidth(WidthEnum.MessageBox)
-              }}
-            >
-              All
-            </button>
-            <button
-              className={classNames(
-                styles.messagesTabDesign,
-                notifyTab === 'Contacts' && styles.activeTabs
-              )}
-              onClick={() => {
-                setNotifyTab('Contacts')
-                setShowGroupChatBox(false)
-                setDrawerWidth(WidthEnum.MessageBox)
-              }}
-            >
-              Contacts
-            </button>
-          </div>
         </div>
         <div className={styles.chatPanel}>
-          {notifyTab === 'All' && (
-            <>
-              <div
-                className={classNames(styles.channelsText, styles.dFlex)}
-                style={{ cursor: 'pointer', transition: 'all 0.5s' }}
-              >
-                <span
-                  className={classNames(styles.textSm, styles.grayTextColor)}
-                >
-                  channels
-                </span>
-
-                <PlusCircleFilled
-                  className={styles.addChannelIcon}
-                  style={{
-                    color: 'var(--primary-color)',
-                    fontSize: 'var(--font-size-base)',
-                  }}
-                />
-              </div>
-              <div
-                onClick={() => {
-                  setShowGroupChatBox(true)
-                  setSelectedGroup('general')
-                  setDrawerWidth(WidthEnum.ChatBox + WidthEnum.MessageBox)
-                }}
-              >
-                <div className={classNames(styles.dFlex, styles.channelText)}>
-                  <p
-                    className={classNames(
-                      styles.textBlack,
-                      styles.textMd,
-                      styles.fontMedium,
-                      styles.mb,
-                      styles.channelName
-                    )}
-                  >
-                    #general
-                  </p>
-                  <h6
-                    className={classNames(
-                      styles.grayTextColor,
-                      styles.textSm,
-                      styles.mb,
-                      styles.channelName
-                    )}
-                  >
-                    11: 20 AM
-                  </h6>
-                </div>
-                <div
-                  className={classNames(styles.dFlex, styles.channelMessage)}
-                >
-                  <p
-                    className={classNames(
-                      styles.grayTextColor,
-                      styles.textMd,
-                      styles.fontMedium,
-                      styles.mb
-                    )}
-                  >
-                    6 unread messages
-                  </p>
-                  <h6
-                    className={classNames(
-                      styles.grayTextColor,
-                      styles.textSm,
-                      styles.mb
-                    )}
-                  >
-                    <Badge count={6} style={{ backgroundColor: '#54B2D3' }} />
-                  </h6>
-                </div>
-              </div>
-              <div className={styles.chatBorder}></div>
-              <div
-                onClick={() => {
-                  setShowGroupChatBox(true)
-                  setSelectedGroup('design')
-                  setDrawerWidth(WidthEnum.ChatBox + WidthEnum.MessageBox)
-                }}
-              >
-                <div className={classNames(styles.dFlex, styles.channelText)}>
-                  <p
-                    className={classNames(
-                      styles.textBlack,
-                      styles.textMd,
-                      styles.fontMedium,
-                      styles.mb,
-                      styles.channelName
-                    )}
-                  >
-                    #design
-                  </p>
-                  <h6
-                    className={classNames(
-                      styles.grayTextColor,
-                      styles.textSm,
-                      styles.mb,
-                      styles.channelName
-                    )}
-                  >
-                    11: 20 AM
-                  </h6>
-                </div>
-                <div
-                  className={classNames(styles.dFlex, styles.channelMessage)}
-                >
-                  <p
-                    className={classNames(
-                      styles.grayTextColor,
-                      styles.textMd,
-                      styles.fontMedium,
-                      styles.mb
-                    )}
-                  >
-                    Oliver Addams: I have an idia on this issue...
-                  </p>
-                </div>
-              </div>
-              <div className={styles.chatBorder}></div>
-              <div
-                className={classNames(styles.channelsText, styles.chatTopSpace)}
-              >
-                <p className={classNames(styles.grayTextColor, styles.textSm)}>
-                  chats
-                </p>
-              </div>
-            </>
-          )}
-
-          {chatMessages.map((chat, index) => {
-            return (
-              <div
-                key={chat.userName}
-                onClick={() => {
-                  if (notifyTab === 'Contacts') onClickContact(index)
-                }}
-              >
-                <div
-                  className={classNames(styles.flex, styles.porfileChatSpace)}
-                >
-                  <div className={styles.chatProfile}>
-                    <Badge
-                      dot
-                      color={chat.isOnline ? '#65CD98' : '#FF9E44'}
-                      offset={[-2, 32]}
-                      size="default"
-                      style={{ height: '8px', width: '8px' }}
-                    >
-                      <Avatar size={40} src={chat.profileURL} />
-                    </Badge>
-                  </div>
-                  <div className={styles.chatText}>
-                    <div
-                      className={classNames(styles.dFlex, styles.userDetails)}
-                    >
-                      <p
-                        className={classNames(
-                          styles.textBlack,
-                          styles.mb,
-                          styles.fontMedium,
-                          styles.textMd
-                        )}
-                      >
-                        {chat.userName}
-                      </p>
-                      <p
-                        className={classNames(
-                          styles.grayTextColor,
-                          styles.mb,
-                          styles.textSm
-                        )}
-                      >
-                        {chat.dateTime}
-                      </p>
-                    </div>
-                    <div className={styles.dFlex}>
-                      <p
-                        className={classNames(
-                          styles.grayTextColor,
-                          styles.mb,
-                          styles.fontMedium,
-                          styles.textMd,
-                          styles.userMessage
-                        )}
-                      >
-                        {chat.message}
-                      </p>
-                      <h6
-                        className={classNames(
-                          styles.grayTextColor,
-                          styles.textSm,
-                          styles.mb
-                        )}
-                      >
-                        {chat.unread && (
-                          <Badge
-                            count={chat.unread}
-                            style={{ backgroundColor: '#54B2D3' }}
-                          />
-                        )}
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-                <div className={styles.chatBorder}></div>
-              </div>
-            )
-          })}
+          <GroupList
+            onClick={handleGroupClick}
+            showChatBox={showChatBox}
+            isNewDm={isNewDm}
+            onCreateModalClick={toggleCreateChannel}
+          />
+          <ChatsList
+            chatMessages={chatMessages}
+            typingContact={typingContact}
+            onClick={handleClick}
+            showGroupChatBox={showGroupChatBox}
+            showChatBox={showChatBox}
+            isNewDm={isNewDm}
+            selectedContact={selectedContact}
+          />
         </div>
+
+        <BasicModal
+          modalWidth={682}
+          centered={true}
+          title="create A Channel"
+          newButtonText={'Create'}
+          className={styles.createChannelModal}
+          newButtonDisable={name.length <= 0}
+          onOk={() => onCreate()}
+          dangerButtonText={`Cancel`}
+          onCancel={toggleCreateChannel}
+          onDelete={toggleCreateChannel}
+          visible={isCreateChannel}
+        >
+          <div className={styles.content}>
+            Channels are where your team communicates. They’re best when
+            organized around a topic – #marketing, for example.
+          </div>
+          <div className={styles.textControl}>
+            <div>Name</div>
+            <Input
+              className={styles.nameInput}
+              placeholder="# e.g. plan-budget"
+              onChange={handleNameChange}
+              value={name}
+              suffix={80 - name.length}
+            />
+          </div>
+          <div className={styles.textControl}>
+            <div>Description</div>
+            <Input
+              placeholder="What’s this channel about?"
+              onChange={handleDescriptionChange}
+            />
+          </div>
+          <div>
+            <div>Make private</div>
+            <div className={styles.switchContent}>
+              <div className={styles.switchText}>
+                When a channel is set to private, it can be only be viewed or
+                joined by invitation.
+              </div>
+              <div className={styles.switch}>
+                <Switch onChange={onChangeToPrivate} />
+              </div>
+            </div>
+          </div>
+        </BasicModal>
       </div>
       {showChatBox && (
-        <div className={styles.chatBoxContainer}>
-          <div className={styles.chatHeaderContainer}>
-            {selectedContact && (
-              <div className={styles.chatHeader}>
-                <Badge
-                  dot
-                  color={selectedContact.isOnline ? '#65CD98' : '#FF9E44'}
-                  offset={[-2, 32]}
-                  size="default"
-                  style={{ height: '8px', width: '8px' }}
-                >
-                  <Avatar size={40} src={selectedContact.profileURL} />
-                </Badge>
-                <p className={styles.chatHeaderName}>
-                  {selectedContact.userName}
-                </p>
-              </div>
-            )}
-            <div className={styles.chatHeader}>
-              <ChatPopIcon style={{ margin: '0 20px' }} />
-              <CloseOutlined
-                className={classNames(
-                  styles.grayTextColor,
-                  styles.chatIconStyle,
-                  styles.closeIcon
-                )}
-                onClick={closeDrawerMenu}
-              />
-            </div>
-          </div>
-          <div className={styles.messageContainer}>
-            <div className={styles.receivedAlign}>
-              <div className={styles.receivedMessage}>
-                <p className={styles.receivedMessageText}>
-                  I will search some reference for that
-                </p>
-                <p className={styles.receivedMessageTime}>11:24 AM</p>
-              </div>
-            </div>
-            <div className={styles.sendAlign}>
-              <div className={styles.sendMessage}>
-                <p className={styles.sendMessageText}>
-                  I will search some reference for that
-                </p>
-                <p className={styles.sendMessageTime}>11:24 AM</p>
-              </div>
-            </div>
-          </div>
-          <div className={styles.messageInputContainer}>
-            <input
-              className={styles.messageInput}
-              type="text"
-              placeholder={'Message'}
-            />
-            <EmojiIcon />
-          </div>
-        </div>
+        <MessageContainer
+          selectedContact={selectedContact}
+          onClick={closeDrawerMenu}
+          onMessageType={handleMessageType}
+        />
       )}
       {showGroupChatBox && (
         <div className={styles.chatBoxContainer}>
-          <div className={styles.chatHeaderContainer}>
-            <p className={styles.chatHeaderName}>#{selectedGroup}</p>
-            <div className={styles.chatHeader}>
-              <div
-                className={styles.userImageList}
-                onClick={() => setIsGroupModalVisible(true)}
-              >
-                {selectedGroup && (
-                  <>
-                    <Avatar
-                      size={25}
-                      src={groupData[selectedGroup][0].profileURL}
-                    />
-                    <Avatar
-                      className={styles.userImage}
-                      size={25}
-                      src={groupData[selectedGroup][1].profileURL}
-                    />
-                    <Avatar
-                      className={styles.userImage}
-                      size={25}
-                      src={groupData[selectedGroup][2].profileURL}
-                    />
-                    <p className={styles.groupCount}>
-                      {groupData[selectedGroup].length}
-                    </p>
-                  </>
-                )}
-                <Modal
-                  centered
-                  title={memberModalTitle}
-                  visible={isGroupModalVisible}
-                  onOk={(e) => {
-                    e.stopPropagation()
-                    setIsGroupModalVisible(false)
-                  }}
-                  onCancel={(e) => {
-                    e.stopPropagation()
-                    setIsGroupModalVisible(false)
-                  }}
-                  width={680}
-                  className={styles.memberModal}
-                  footer={null}
-                >
-                  <Button
-                    className={styles.modalAddButton}
-                    type="default"
-                    icon={<PlusOutlined />}
-                    size="middle"
-                    onClick={() => setIsAddModalVisible(true)}
-                  >
-                    Add People
-                  </Button>
-                  <Input
-                    className={styles.modalSearchInput}
-                    size="large"
-                    placeholder="Search members"
-                    prefix={<SearchOutlined />}
-                    onChange={(e) => {
-                      searchGroupMember(e.target.value)
-                      setSearchMemberText(e.target.value)
-                    }}
-                  />
-                  {searchMemberText === '' &&
-                    groupData[selectedGroup].map((member, index) => (
-                      <div key={member.userName} className={styles.modalMember}>
-                        <div className={styles.memberInfo}>
-                          <Avatar
-                            className={styles.memberAvatar}
-                            size={32}
-                            src={member.profileURL}
-                          />
-                          <span className={styles.memberName}>
-                            {member.userName}
-                          </span>
-                        </div>
-                        <Button type="default" size="middle">
-                          Remove
-                        </Button>
-                      </div>
-                    ))}
-                  {searchMemberText !== '' &&
-                    searchMember.map((member, index) => (
-                      <div key={member.userName} className={styles.modalMember}>
-                        <div className={styles.memberInfo}>
-                          <Avatar
-                            className={styles.memberAvatar}
-                            size={32}
-                            src={member.profileURL}
-                          />
-                          <span className={styles.memberName}>
-                            {member.userName}
-                          </span>
-                        </div>
-                        <Button type="default" size="middle">
-                          Remove
-                        </Button>
-                      </div>
-                    ))}
-                </Modal>
-                <Modal
-                  centered
-                  title="Add People"
-                  visible={isAddModalVisible}
-                  onOk={(e) => {
-                    e.stopPropagation()
-                    setIsAddModalVisible(false)
-                  }}
-                  onCancel={(e) => {
-                    e.stopPropagation()
-                    setIsAddModalVisible(false)
-                  }}
-                  width={680}
-                  className={styles.addMemberModal}
-                  footer={null}
-                >
-                  <span>#{selectedGroup}</span>
-                  <Input
-                    className={styles.addMemberSearchInput}
-                    size="large"
-                    placeholder="Enter a name email, or user group"
-                    onChange={(e) => searchAddPeople(e.target.value)}
-                  />
-                  {searchAddMember &&
-                    searchAddMember.map((member, index) => (
-                      <div key={member.userName} className={styles.modalMember}>
-                        <div className={styles.memberInfo}>
-                          <Avatar
-                            className={styles.memberAvatar}
-                            size={32}
-                            src={member.profileURL}
-                          />
-                          <span className={styles.memberName}>
-                            {member.userName}
-                          </span>
-                        </div>
-                        <Button type="default" size="middle">
-                          Add
-                        </Button>
-                      </div>
-                    ))}
-                </Modal>
-              </div>
-              <AddUserIcon style={{ margin: '0 20px' }} />
-              <CloseOutlined
-                className={classNames(
-                  styles.grayTextColor,
-                  styles.chatIconStyle,
-                  styles.closeIcon
-                )}
-                onClick={closeDrawerMenu}
-              />
-            </div>
-          </div>
-          <div className={styles.messageContainer}>
-            <div className={styles.receivedAlign}>
-              <div className={styles.receivedMessage}>
-                <p className={styles.receivedMessageText}>
-                  I will search some reference for that
-                </p>
-                <p className={styles.receivedMessageTime}>11:24 AM</p>
-              </div>
-            </div>
-            <div className={styles.sendAlign}>
-              <div className={styles.sendMessage}>
-                <p className={styles.sendMessageText}>
-                  I will search some reference for that
-                </p>
-                <p className={styles.sendMessageTime}>11:24 AM</p>
-              </div>
-            </div>
-          </div>
-          <div className={styles.messageInputContainer}>
-            <input
-              className={styles.messageInput}
-              type="text"
-              placeholder={'Message'}
-            />
-            <EmojiIcon />
-          </div>
+          <MessageContainer
+            onClick={closeDrawerMenu}
+            onMessageType={handleMessageType}
+            /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+            // @ts-ignore
+            groupData={groupData}
+            selectedGroup={selectedGroup}
+            onModalOpen={() => setIsGroupModalVisible(true)}
+          />
+          <AddGroupModal
+            memberModalTitle={memberModalTitle}
+            groupData={groupData}
+            selectedGroup={selectedGroup}
+            isGroupModalVisible={isGroupModalVisible}
+            onOk={handleOk}
+            onCancel={handleCancel}
+            onClick={handleAddClick}
+          />
+          <AddPeopleModal
+            /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+            // @ts-ignore
+            groupData={groupData}
+            isAddModalVisible={isAddModalVisible}
+            members={members}
+            selectedGroup={selectedGroup}
+            onOk={handleAddOk}
+            onAddMembers={onAddMembers}
+            onCancel={handleAddCancel}
+          />
         </div>
+      )}
+      {isNewDm && (
+        <MessageContainer
+          isNewDm={isNewDm}
+          members={members}
+          messages={[]}
+          onCloseNewDm={closeNewDm}
+          onMessageType={handleMessageType}
+        />
       )}
     </Drawer>
   )
