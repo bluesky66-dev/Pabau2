@@ -8,6 +8,8 @@ import {
   QuestionOutlined,
   ShareAltOutlined,
   LinkOutlined,
+  BellOutlined,
+  SmileOutlined,
 } from '@ant-design/icons'
 import {
   TabMenu,
@@ -35,7 +37,6 @@ import { ReactComponent as ExternalLink } from '../../../assets/images/external-
 import { ReactComponent as ExternalLinkGrey } from '../../../assets/images/external-link-grey.svg'
 import { ReactComponent as Palette } from '../../../assets/images/palette.svg'
 import { ReactComponent as Voucher } from '../../../assets/images/voucher.svg'
-import { ReactComponent as Bell } from '../../../assets/images/bell.svg'
 import {
   addQuestionData,
   questionBankData,
@@ -84,6 +85,9 @@ interface FeedbackSurveyBuilder {
     sms: boolean
   }
   voucherReward: string
+  surveyName: string
+  surveySubTitle: string
+  surveyFormat: boolean
 }
 
 export interface ReviewsConfigProps {
@@ -101,6 +105,9 @@ const defaultBuilderSetting: FeedbackSurveyBuilder = {
     sms: true,
   },
   voucherReward: '£5.00 Review Voucher Scheme',
+  surveyName: 'Client Feedback Survey',
+  surveySubTitle: 'Please, complete your responses below',
+  surveyFormat: false,
 }
 
 export const Index: FC<ReviewsConfigProps> = ({
@@ -167,7 +174,9 @@ export const Index: FC<ReviewsConfigProps> = ({
           </div>
           <div className={styles.section}>
             <h3>
-              <Bell style={{ marginRight: '.5rem' }} />
+              <BellOutlined
+                style={{ marginRight: '.5rem', color: '#54b2d3' }}
+              />
               <span>Notifications</span>
             </h3>
             <h4>
@@ -235,7 +244,58 @@ export const Index: FC<ReviewsConfigProps> = ({
     if (step === 1) {
       return (
         <div>
-          <div className={styles.section}></div>
+          <div className={styles.section}>
+            <h3>
+              <SmileOutlined
+                style={{ marginRight: '.5rem', color: '#54b2d3' }}
+              />
+              <span>Survey Settings</span>
+            </h3>
+            <h4>
+              In this section you can name your feedback survey, as well as
+              choose your survey format
+            </h4>
+            <div className={styles.sectionItem}>
+              <SimpleDropdown
+                label="Survey name"
+                value={setting.surveyName}
+                dropdownItems={['Client Feedback Survey']}
+                onSelected={(val) => handleChangeSetting('surveyName', val)}
+              />
+            </div>
+            <div className={styles.sectionItem}>
+              <SimpleDropdown
+                label="Survey subtitle"
+                value={setting.surveySubTitle}
+                dropdownItems={['Client Feedback Survey']}
+                onSelected={(val) => handleChangeSetting('surveySubTitle', val)}
+              />
+            </div>
+            <div className={styles.surveyFormat}>
+              <h4>Survey format</h4>
+              <Form form={form} layout="vertical">
+                <Form.Item
+                  hasFeedback
+                  help="Show all questions on a page at once"
+                >
+                  <Radio checked={setting.surveyFormat === false}>
+                    Classic
+                  </Radio>
+                </Form.Item>
+                <Form.Item
+                  hasFeedback
+                  help="Automatically scroll t o the next question"
+                >
+                  <Radio checked={setting.surveyFormat === true}>
+                    <span>
+                      Smart Survey{' '}
+                      <span className={styles.plusTagItem}>Plus</span>
+                    </span>
+                  </Radio>
+                </Form.Item>
+              </Form>
+            </div>
+          </div>
           <AddQuestion
             description={addQuestionData.description}
             questions={addQuestionData.questions}

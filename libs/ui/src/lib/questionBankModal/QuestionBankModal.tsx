@@ -1,4 +1,4 @@
-import React, { FC, useState, PropsWithChildren } from 'react'
+import React, { FC, useState } from 'react'
 import { useMedia } from 'react-use'
 import { Tabs, Row, Col } from 'antd'
 import { LeftOutlined } from '@ant-design/icons'
@@ -10,7 +10,6 @@ import { menuOptions } from '../questionBank/mock'
 import QuestionBank from '../questionBank/QuestionBank'
 import Button from '../button/button'
 import BasicModal, { BasicModalProps } from '../modal/basicmodal'
-import { ModalProps } from 'antd/lib/modal'
 
 import customStyles from './QuestionBankModal.module.less'
 
@@ -19,7 +18,7 @@ interface IMenuOption {
   value: string
 }
 
-interface P {
+interface P extends BasicModalProps {
   title: string
   questions: Array<IQuestionOptions>
   options: Array<IMenuOption>
@@ -32,7 +31,7 @@ export const QuestionBankModal: FC<P> = ({
   options,
   onAdd,
   ...props
-}: PropsWithChildren<P & ModalProps & BasicModalProps>) => {
+}) => {
   const { TabPane } = Tabs
 
   const [checkedQuestions, setCheckedQuestions] = useState<

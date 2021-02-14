@@ -1,7 +1,11 @@
 import React, { FC } from 'react'
 import { Input as AntInput } from 'antd'
-import { Button } from '@pabau/ui'
-import { CloseOutlined, PlusOutlined } from '@ant-design/icons'
+import { Button, Switch } from '@pabau/ui'
+import {
+  CloseOutlined,
+  PlusOutlined,
+  UnorderedListOutlined,
+} from '@ant-design/icons'
 
 import styles from './AddQuestion.module.less'
 
@@ -18,6 +22,7 @@ export interface AddQuestionProps {
   addQuestionLabel?: string
   goToButtonLabel?: string
   isDeleteDisable?: boolean
+  translate?: boolean
   onChange?: (value: string, index: number) => void
   onAddQuestion?: () => void
   onDeleteButton?: (index: number) => void
@@ -39,8 +44,20 @@ export const AddQuestion: FC<AddQuestionProps> = ({
 }) => {
   return (
     <div className={styles.questionWrapper}>
-      <h1>{title}</h1>
+      <h1>
+        <UnorderedListOutlined
+          style={{ marginRight: '.5rem', color: '#54b2d3' }}
+        />
+        {title}
+      </h1>
       <div className={styles.para}>{description}</div>
+      <div className={styles.translate}>
+        <span>
+          Translate questions to clients local language.{' '}
+          <span className={styles.plusTag}>Plus</span>
+        </span>
+        <Switch size="small" />
+      </div>
       <div className={styles.questionWrapperList}>
         {questions?.map((que, index) => (
           <div className={styles.queList} key={que.key}>
