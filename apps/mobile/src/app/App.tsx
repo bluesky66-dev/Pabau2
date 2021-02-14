@@ -18,8 +18,7 @@ import {
 // @ts-ignore
 import openURLInBrowser from 'react-native/Libraries/Core/Devtools/openURLInBrowser'
 
-const App = () => {
-  return (
+const App = () => (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
@@ -72,7 +71,6 @@ const App = () => {
       </SafeAreaView>
     </>
   )
-}
 
 const styles = StyleSheet.create({
   scrollView: {
