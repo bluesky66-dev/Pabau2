@@ -20,10 +20,14 @@ import {
   Button,
   ColorPicker,
   Appointment,
+  ReadReview,
+  Permission,
 } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import CommonHeader from '../CommonHeader'
 import reviewsConfigBanner from '../../../assets/images/reviews-config-banner.png'
+import userAvatar from '../../../assets/images/users/alex.png'
+import { ReactComponent as NormalClinicLogo } from '../../../assets/images/normal-clinic-logo.svg'
 import { ReactComponent as ExternalLink } from '../../../assets/images/external-link.svg'
 import { ReactComponent as ExternalLinkGrey } from '../../../assets/images/external-link-grey.svg'
 import { ReactComponent as Palette } from '../../../assets/images/palette.svg'
@@ -254,8 +258,28 @@ export const Index: FC<ReviewsConfigProps> = ({
           <Radio.Button value={false}>Read</Radio.Button>
         </Radio.Group>
         <div className={styles.templatePanel}>
-          {isListing && <div>Listing</div>}
-          {!isListing && <div>Read</div>}
+          {isListing && (
+            <Permission
+              image={<NormalClinicLogo />}
+              review={4.67}
+              description="Things people are saying about us"
+              totalReview={5}
+              totalReviewUser={43}
+              weScoreLabel="We score"
+              fromLabel="from"
+              reviewLabel="reviews"
+            />
+          )}
+          {!isListing && (
+            <ReadReview
+              title="Highly Recommended"
+              bodyContent="Was extremely nervous about seeing Doctor Hazim Sadideen but had a very friendly and warm welcoming at the reception and immediately felt at ease. Doctor Hazim himself made me feel very comfortable and reassured, initially I was very nervous to begin with. Reassured me that everything was going to be OK and that he'll do the best he can with the surgery. His secretary is also very nice, very approachable and easy to talk to if there are any complications or concerns. Highly recommended."
+              updatedAt="1 year ago"
+              name="Jamal Potter"
+              defaultRating={2.5}
+              avatarSrc={userAvatar}
+            />
+          )}
         </div>
         <Radio.Group
           buttonStyle="solid"
