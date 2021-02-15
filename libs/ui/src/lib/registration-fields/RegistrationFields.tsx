@@ -73,11 +73,13 @@ export const RegistrationFields: FC<RegistrationFieldsProps> = ({
           </div>
         ))}
       </div>
-      <div className={styles.customFieldTitleWrap}>
-        <div className={styles.headTitle}>{customFieldTitle}</div>
-        <div className={styles.headTitle}>{visibleTitle}</div>
-        <div className={styles.headTitle}>{requiredTitle}</div>
-      </div>
+      {customFields?.length && (
+        <div className={styles.customFieldTitleWrap}>
+          <div className={styles.headTitle}>{customFieldTitle}</div>
+          <div className={styles.headTitle}>{visibleTitle}</div>
+          <div className={styles.headTitle}>{requiredTitle}</div>
+        </div>
+      )}
       <div>
         {customFields?.map((field) => (
           <div key={field.key} className={styles.fieldItemWrap}>

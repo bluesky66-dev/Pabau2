@@ -124,6 +124,18 @@ const schema: Schema = {
       cssWidth: 'max',
       type: 'string',
     },
+    type: {
+      full: 'type Name',
+      fullLower: 'friendly name',
+      short: 'Type',
+      shortLower: 'type',
+      min: 2,
+      example: 'Facebook',
+      description: 'A friendly name',
+      // extra: <i>Please note: blah blah blahh</i>,
+      cssWidth: 'max',
+      type: 'string',
+    },
     is_active: {
       full: 'Active',
       type: 'boolean',
