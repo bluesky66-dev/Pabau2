@@ -35,11 +35,11 @@ const Tab: FC<TitleCard> = ({ title, subTitle, icon, className, ...rest }) => {
   )
 }
 
-export interface BreadcrumbItems {
+interface BreadcrumbItems {
   breadcrumbName: string
   path: string
 }
-export interface Columns {
+interface Columns {
   title: string | number
   dateIndex: string | number
 }
@@ -164,12 +164,7 @@ export const LabsDashboard: FC<LabsDashboardProps> = ({
               </div>
               <div className="inputs-div">
                 <div className="search-input">
-                  <Input
-                    size="large"
-                    type="text"
-                    name="search"
-                    placeHolderText="Search"
-                  />
+                  <Input type="text" name="search" placeHolderText="Search" />
                   <span className="search-icon">
                     <SearchOutlined />
                   </span>
