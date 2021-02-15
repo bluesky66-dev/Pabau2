@@ -14,9 +14,7 @@ interface P {
   searchTerm: string
 }
 
-const SearchResults: FC<P> = (props) => {
-  const { data, searchTerm } = props
-
+const SearchResults: FC<P> = ({ data, searchTerm }) => {
   return (
     <Card className={styles.searchResultsCard} bodyStyle={{ padding: '0' }}>
       {data && data.length > 0 && (

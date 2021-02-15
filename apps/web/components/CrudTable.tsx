@@ -89,9 +89,11 @@ const CrudTable: FC<P> = ({
     currentPage: 1,
     showingRecords: 0,
   })
-  const [modalShowing, setModalShowing] = useState<
-    Record<string, string | boolean | number> | false
-  >(false)
+  const [modalShowing, setModalShowing] = useState(false)
+  const [editingRow, setEditingRow] = useState<
+    Record<string, string | boolean | number>
+  >({})
+
   const { data, error, loading } = useLiveQuery(listQuery, {
     variables: {
       isActive,
@@ -153,48 +155,47 @@ const CrudTable: FC<P> = ({
 
   const onSubmit = async (values, { resetForm }) => {
     console.log('got submittal!', values)
-    if (values.id)
-      await editMutation({
-        variables: values,
-        optimisticResponse: {},
-        update: (proxy) => {
-          if (listQuery) {
-            const existing = proxy.readQuery({
-              query: listQuery,
-            })
-            if (existing) {
-              const key = Object.keys(existing)[0]
-              proxy.writeQuery({
+    await (values.id
+      ? editMutation({
+          variables: values,
+          optimisticResponse: {},
+          update: (proxy) => {
+            if (listQuery) {
+              const existing = proxy.readQuery({
                 query: listQuery,
-                data: {
-                  [key]: [...existing[key], values],
-                },
               })
+              if (existing) {
+                const key = Object.keys(existing)[0]
+                proxy.writeQuery({
+                  query: listQuery,
+                  data: {
+                    [key]: [...existing[key], values],
+                  },
+                })
+              }
             }
-          }
-        },
-      })
-    else
-      await addMutation({
-        variables: values,
-        optimisticResponse: {},
-        update: (proxy) => {
-          if (listQuery) {
-            const existing = proxy.readQuery({
-              query: listQuery,
-            })
-            if (existing) {
-              const key = Object.keys(existing)[0]
-              proxy.writeQuery({
+          },
+        })
+      : addMutation({
+          variables: values,
+          optimisticResponse: {},
+          update: (proxy) => {
+            if (listQuery) {
+              const existing = proxy.readQuery({
                 query: listQuery,
-                data: {
-                  [key]: [...existing[key], values],
-                },
               })
+              if (existing) {
+                const key = Object.keys(existing)[0]
+                proxy.writeQuery({
+                  query: listQuery,
+                  data: {
+                    [key]: [...existing[key], values],
+                  },
+                })
+              }
             }
-          }
-        },
-      })
+          },
+        }))
     resetForm()
     setModalShowing(false)
   }
@@ -263,7 +264,8 @@ const CrudTable: FC<P> = ({
   }
 
   const createNew = () => {
-    setModalShowing({ name: '', isCreate: true })
+    setModalShowing((e) => !e)
+    setEditingRow({ name: '', isCreate: true })
   }
 
   return (
@@ -271,16 +273,16 @@ const CrudTable: FC<P> = ({
       enableReinitialize={true}
       validate={(e) =>
         Object.entries(fields).reduce((a, c) => {
-          if (c[1].min) {
+          if (
+            c[1].min && // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            c[1].min > e[c[0]].length
+          ) {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            if (c[1].min > e[c[0]].length) {
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              a[
-                c[0]
-              ] = `The value for ${c[1].shortLower} must be more than ${c[1].min} characters.`
-            }
+            a[
+              c[0]
+            ] = `The value for ${c[1].shortLower} must be more than ${c[1].min} characters.`
           }
           return a
           // eslint-disable-next-line
@@ -292,10 +294,7 @@ const CrudTable: FC<P> = ({
       }}
       //initialValues={typeof modalShowing === 'object' ? modalShowing : undefined}
       initialValues={
-        // eslint-disable-next-line
-        typeof modalShowing === 'object' && (modalShowing as any)?.id
-          ? modalShowing
-          : formikFields() //TODO: remove this, it should come from schema.fields[].*
+        editingRow?.id ? editingRow : formikFields() //TODO: remove this, it should come from schema.fields[].*
       }
     >
       <>
@@ -329,7 +328,7 @@ const CrudTable: FC<P> = ({
         {modalShowing && (
           <CrudModal
             schema={schema}
-            editingRow={modalShowing}
+            editingRow={editingRow}
             addQuery={addQuery}
             listQuery={listQuery}
             deleteQuery={deleteQuery}
@@ -346,7 +345,10 @@ const CrudTable: FC<P> = ({
           >
             <div style={{ background: '#FFF' }}>
               <Breadcrumb
-                breadcrumbItems={['Setup', schema.full || schema.short]}
+                breadcrumbItems={[
+                  { breadcrumbName: 'Setup', path: 'setup' },
+                  { breadcrumbName: schema.full || schema.short, path: '' },
+                ]}
               />
               <Title>{schema.full || schema.short}</Title>
             </div>
@@ -371,7 +373,7 @@ const CrudTable: FC<P> = ({
             isCustomIconExist={checkCustomColorIconExsist('icon')}
             noDataBtnText={schema.full}
             noDataText={schema.fullLower}
-            onAddTemplate={() => setModalShowing({ isCreate: true })}
+            onAddTemplate={() => createNew()}
             searchTerm={searchTerm}
             columns={[
               ...Object.entries(schema.fields).map(([k, v]) => ({
@@ -403,13 +405,16 @@ const CrudTable: FC<P> = ({
                 }
               }
               setSourceData(newData)
-              console.log('newData, oldIndex, newIndex ', {
+              console.log('newData, oldIndex, newIndex', {
                 newData,
                 oldIndex,
                 newIndex,
               })
             }}
-            onRowClick={(e) => setModalShowing(e)}
+            onRowClick={(e) => {
+              setEditingRow(e)
+              setModalShowing((e) => !e)
+            }}
           />
           <Pagination
             total={paginateData.total}

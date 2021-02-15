@@ -63,7 +63,10 @@ const Index: FC = () => {
           <div className={styles.clientNotificationTop}>
             <div>
               <Breadcrumb
-                breadcrumbItems={['Setup', 'Notification Messages']}
+                breadcrumbItems={[
+                  { breadcrumbName: 'Setup', path: 'setup' },
+                  { breadcrumbName: 'Notification Messages', path: '' },
+                ]}
               />
               <Title>Notification Messages</Title>
               <p className={styles.clientNotificationsSubtitle}>
