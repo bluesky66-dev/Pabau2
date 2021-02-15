@@ -1,0 +1,47 @@
+.system-container {
+  width: 100%;
+}
+
+.system-sub-container {
+  margin: 0 24px;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #ecedf0;
+}
+
+.system-header-container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+
+  > button {
+    margin: 0.5rem 0.5rem 0 0;
+  }
+
+  @media (max-width: 575px) {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}
+
+.tab-title {
+  font-family: 'Circular-Std-Bold';
+  font-size: 20px;
+  line-height: 1.21;
+  color: #3d3d46;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.tab-sub-title {
+  font-family: 'Circular-Std-Book';
+  font-size: 14px;
+  line-height: 18px;
+  color: #9292a3;
+  margin: 0;
+}
+
+.tab-header {
+  padding: 20px 24px;
+}

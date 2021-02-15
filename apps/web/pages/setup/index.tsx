@@ -34,9 +34,10 @@ const Index: FC = () => {
         {
           title: 'General settings',
           data: [
-            ' Calendar Settings',
-            'Point of Sale Configuration',
+            'Calendar Settings',
             'Loyalty',
+            'Performance Settings',
+            'Point of Sale Configuration',
             'Referral Settings',
           ],
         },
@@ -191,7 +192,7 @@ const Index: FC = () => {
   return (
     <div>
       <CommonHeader handleSearch={handleSearch} />
-      <Layout>
+      <Layout active={'setup'}>
         <div className={styles.cardWrapper}>
           <div className={styles.titleWrapper}>
             <span className={styles.title}>{title}</span>

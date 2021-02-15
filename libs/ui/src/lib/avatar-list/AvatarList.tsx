@@ -8,8 +8,6 @@ interface User {
   avatarUrl: string
   name: string
 }
-
-/* eslint-disable-next-line */
 export interface AvatarListProps {
   users?: User[]
   isLoading?: boolean
@@ -25,7 +23,7 @@ export const AvatarList: FC<AvatarListProps> = ({
     <div className={styles.avatarListContainer}>
       {isLoading ? (
         <div className={styles.avatarList}>
-          {[...Array(3)].map((_, index) => {
+          {[...Array.from({ length: 3 })].map((_, index) => {
             return (
               <Avatar
                 key={index}

@@ -2,6 +2,22 @@
   "root": true,
   "ignorePatterns": ["**/*"],
   "plugins": ["@nrwl/nx"],
+  "extends": ["plugin:unicorn/recommended"],
+  "rules": {
+    "@typescript-eslint/prefer-optional-chain": ["error"],
+    "unicorn/no-abusive-eslint-disable": 0,
+    "unicorn/consistent-destructuring": 0,
+    "unicorn/consistent-function-scoping": 0,
+    "unicorn/prefer-includes": 0,
+    "unicorn/no-null": 0,
+    "unicorn/no-array-reduce": 0,
+    "unicorn/no-useless-undefined": 0,
+    "unicorn/no-nested-ternary": 0,
+    "unicorn/prefer-array-some": 0,
+    "unicorn/prefer-string-slice": 0,
+    "unicorn/prevent-abbreviations": 0,
+    "unicorn/filename-case": 0
+  },
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -12,7 +28,10 @@
             "enforceBuildableLibDependency": true,
             "allow": [],
             "depConstraints": [
-              { "sourceTag": "*", "onlyDependOnLibsWithTags": ["*"] }
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": ["*"]
+              }
             ]
           }
         ]
@@ -21,7 +40,9 @@
     {
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nrwl/nx/typescript"],
-      "parserOptions": { "project": "./tsconfig.*?.json" },
+      "parserOptions": {
+        "project": "./tsconfig.*?.json"
+      },
       "rules": {}
     },
     {

@@ -3,7 +3,7 @@ import { gql } from '@apollo/client'
 import { useLiveQuery, Search as PabauSearch } from '@pabau/ui'
 
 const QUERY = gql`
-  query($searchTerm1: String, $searchTerm2: String) {
+  query($searchTerm1: String = "", $searchTerm2: String = "") {
     contacts(
       where: {
         _or: [

@@ -1,29 +1,31 @@
 import React, { FC } from 'react'
 import vaccineSchedulerIcon from '../../assets/images/medicalform_vaccinescheduler.svg'
-import styles from './MedicalForm.module.less'
+import BasicElement from './BasicElement'
 import MedicalFormBottom from './MedicalFormBottom'
+import MedicalFormHeader from './MedicalFormHeader'
 import MedicalFormTitle from './MedicalFormTitle'
 
-const VaccineScheduler: FC = () => {
+interface P {
+  hideSideBar?: () => void
+}
+
+const VaccineScheduler: FC<P> = ({ hideSideBar }) => {
+  const saveFunc = () => {
+    if (hideSideBar) {
+      hideSideBar()
+    }
+  }
   return (
-    <div className={styles.mainBody}>
-      <div className={styles.formItem}>
-        <div className={`${styles.formCaption} ${styles.formCommon}`}>
-          <span>component settings</span>
-        </div>
-      </div>
-      <div className={styles.formItem}>
-        <MedicalFormTitle
-          iconUrl={vaccineSchedulerIcon}
-          bgcolor="#FAAD14"
-          title="Vaccine scheduler"
-          desc="Description"
-        />
-      </div>
-      <div className={styles.formItem} style={{ borderBottom: 'none' }}>
-        <MedicalFormBottom needLeft={false} />
-      </div>
-    </div>
+    <BasicElement>
+      <MedicalFormHeader title="component settings" />
+      <MedicalFormTitle
+        iconUrl={vaccineSchedulerIcon}
+        bgcolor="#FAAD14"
+        title="Vaccine scheduler"
+        desc="Description"
+      />
+      <MedicalFormBottom saveFunc={saveFunc} needLeft={false} />
+    </BasicElement>
   )
 }
 

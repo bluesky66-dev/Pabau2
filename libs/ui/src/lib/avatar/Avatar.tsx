@@ -11,8 +11,6 @@ enum Status {
   active = 'active',
   inactive = 'inactive',
 }
-
-/* eslint-disable-next-line */
 export interface AvatarProps extends NativeAvatarProps {
   isLoading?: boolean
   zIndex?: number
@@ -35,12 +33,12 @@ export const Avatar: FC<AvatarProps> = ({
   const [shortName, setShortName] = useState('')
   useEffect(() => {
     const img = new Image()
-    img.onload = () => {
+    img.addEventListener('load', () => {
       setLoad(true)
-    }
-    img.onerror = () => {
+    })
+    img.addEventListener('error', () => {
       setLoad(false)
-    }
+    })
     img.src = src
     setShortName(
       name

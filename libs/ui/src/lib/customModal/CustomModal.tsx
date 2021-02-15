@@ -2,13 +2,13 @@
 import React, { useEffect, useState } from 'react'
 
 import styles from './CustomModal.module.less'
-import SecurityTools from '../securitytools/Securitytools'
+import { SecurityTools, SecurityToolsItemInfo } from '@pabau/ui'
 import BasicModal from '../modal/basicmodal'
 import { Menu, Dropdown, Button, Modal } from 'antd'
 import { DownOutlined, UserOutlined } from '@ant-design/icons'
 
 interface P {
-  datasource: []
+  datasource: SecurityToolsItemInfo[]
 }
 
 export function CustomModal(props: P) {
@@ -37,7 +37,6 @@ export function CustomModal(props: P) {
         selectedData.modalType === 1 &&
         (width > 768 ? (
           <BasicModal
-            footer={null}
             title={selectedData ? selectedData.modalTitle : ''}
             visible={Boolean(selectedData)}
             onCancel={() => setSelectedData(null)}
@@ -52,24 +51,23 @@ export function CustomModal(props: P) {
             )}
           </BasicModal>
         ) : (
-            <BasicModal
-              footer={null}
-              title={selectedData ? selectedData.modalTitle : ''}
-              visible={Boolean(selectedData)}
-              onCancel={() => setSelectedData(null)}
-              newButtonText="null"
-              dangerButtonText="Cancel"
-              closable={false}
-              centered={true}
-            >
-              {selectedData && (
-                <div
-                  className={styles.modalGreyText}
-                  dangerouslySetInnerHTML={{ __html: selectedData.modalContent }}
-                />
-              )}
-            </BasicModal>
-          ))}
+          <BasicModal
+            title={selectedData ? selectedData.modalTitle : ''}
+            visible={Boolean(selectedData)}
+            onCancel={() => setSelectedData(null)}
+            newButtonText="null"
+            dangerButtonText="Cancel"
+            closable={false}
+            centered={true}
+          >
+            {selectedData && (
+              <div
+                className={styles.modalGreyText}
+                dangerouslySetInnerHTML={{ __html: selectedData.modalContent }}
+              />
+            )}
+          </BasicModal>
+        ))}
 
       {selectedData &&
         selectedData.modalType === 2 &&
@@ -89,23 +87,23 @@ export function CustomModal(props: P) {
             )}
           </BasicModal>
         ) : (
-            <BasicModal
-              title={selectedData ? selectedData.modalTitle : ''}
-              visible={Boolean(selectedData)}
-              onCancel={() => setSelectedData(null)}
-              newButtonText={selectedData.okbtn}
-              dangerButtonText="Cancel"
-              closable={false}
-              centered={true}
-            >
-              {selectedData && (
-                <ModalType2Container
-                  menu={selectedData.modalMenu}
-                  content={selectedData.modalContent}
-                />
-              )}
-            </BasicModal>
-          ))}
+          <BasicModal
+            title={selectedData ? selectedData.modalTitle : ''}
+            visible={Boolean(selectedData)}
+            onCancel={() => setSelectedData(null)}
+            newButtonText={selectedData.okbtn}
+            dangerButtonText="Cancel"
+            closable={false}
+            centered={true}
+          >
+            {selectedData && (
+              <ModalType2Container
+                menu={selectedData.modalMenu}
+                content={selectedData.modalContent}
+              />
+            )}
+          </BasicModal>
+        ))}
 
       {selectedData &&
         selectedData.modalType === 3 &&
@@ -124,22 +122,22 @@ export function CustomModal(props: P) {
             )}
           </BasicModal>
         ) : (
-            <BasicModal
-              title={selectedData ? selectedData.modalTitle : ''}
-              visible={Boolean(selectedData)}
-              onCancel={() => setSelectedData(null)}
-              newButtonText={selectedData.okbtn}
-              dangerButtonText="Cancel"
-              closable={false}
-              centered={true}
-            >
-              {selectedData && (
-                <div className={styles.modalGreyText}>
-                  {selectedData.modalContent}
-                </div>
-              )}
-            </BasicModal>
-          ))}
+          <BasicModal
+            title={selectedData ? selectedData.modalTitle : ''}
+            visible={Boolean(selectedData)}
+            onCancel={() => setSelectedData(null)}
+            newButtonText={selectedData.okbtn}
+            dangerButtonText="Cancel"
+            closable={false}
+            centered={true}
+          >
+            {selectedData && (
+              <div className={styles.modalGreyText}>
+                {selectedData.modalContent}
+              </div>
+            )}
+          </BasicModal>
+        ))}
 
       {selectedData && selectedData.modalType === 4 && (
         <BasicModal
@@ -148,7 +146,9 @@ export function CustomModal(props: P) {
           onCancel={() => setSelectedData(null)}
           centered={true}
         >
-          {selectedData ? selectedData.name : ''}
+          <div className={styles.modalGreyText}>
+            {selectedData ? selectedData.name : ''}
+          </div>
         </BasicModal>
       )}
     </div>
