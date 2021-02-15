@@ -1,4 +1,5 @@
 import React from 'react'
+import { ImageProps } from 'antd/lib/image'
 
 import ProductImage from './ProductImage'
 
@@ -11,7 +12,9 @@ export default {
   },
 }
 
-const ProductImageStory = ({ ...args }) => <ProductImage {...args} />
+const ProductImageStory = ({ ...args }: ImageProps): JSX.Element => (
+  <ProductImage {...args} />
+)
 
 export const ProductWithImage = ProductImageStory.bind({})
 ProductWithImage.args = {
