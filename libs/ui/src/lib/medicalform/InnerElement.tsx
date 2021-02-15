@@ -256,7 +256,7 @@ const InnerElement: FC<P> = ({
   )
 
   return (
-    <>
+    <div>
       {filteredComponent.length > 0 && (
         <InnerMedicalForm
           activate={activate}
@@ -331,7 +331,7 @@ const InnerElement: FC<P> = ({
             )}
         </InnerMedicalForm>
       )}
-    </>
+    </div>
   )
 }
 

@@ -80,8 +80,8 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
                       activate={activatedFormID === `${form.id}` ? true : false}
                       type={form.formType}
                       component={form.formName}
-                      formData={form}
                       handleId={form.id}
+                      formData={form}
                       handlingSelectForm={handlingSelectForm}
                     />
                   </div>

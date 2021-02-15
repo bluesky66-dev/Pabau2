@@ -341,7 +341,7 @@ const SettingElement: FC<P> = ({
   )
 
   return (
-    <>
+    <div>
       {filteredComponent.length > 0 && (
         <SettingMedicalForm>
           <SettingMedicalFormHeader title="component settings" />
@@ -445,7 +445,7 @@ const SettingElement: FC<P> = ({
           />
         </SettingMedicalForm>
       )}
-    </>
+    </div>
   )
 }
 

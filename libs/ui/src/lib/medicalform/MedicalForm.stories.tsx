@@ -182,87 +182,151 @@ export const InnerCustomTelephoneNumber = () => (
 )
 
 export const SettingBasicHeading = () => (
-  <SettingElement type="basic" component="basic_heading" />
+  <SettingElement type="basic" component="basic_heading" selectedForm={{}} />
 )
 export const SettingBasicShortAnswer = () => (
-  <SettingElement type="basic" component="basic_shortanswer" />
+  <SettingElement
+    type="basic"
+    component="basic_shortanswer"
+    selectedForm={{}}
+  />
 )
 export const SettingBasicLongAnswer = () => (
-  <SettingElement type="basic" component="basic_longanswer" />
+  <SettingElement type="basic" component="basic_longanswer" selectedForm={{}} />
 )
 export const SettingBasicTextBlock = () => (
-  <SettingElement type="basic" component="basic_textblock" />
+  <SettingElement type="basic" component="basic_textblock" selectedForm={{}} />
 )
 export const SettingBasicSingleChoice = () => (
-  <SettingElement type="basic" component="basic_singlechoice" />
+  <SettingElement
+    type="basic"
+    component="basic_singlechoice"
+    selectedForm={{}}
+  />
 )
 export const SettingBasicMultipleChoice = () => (
-  <SettingElement type="basic" component="basic_multiplechoice" />
+  <SettingElement
+    type="basic"
+    component="basic_multiplechoice"
+    selectedForm={{}}
+  />
 )
 export const SettingBasicDropDown = () => (
-  <SettingElement type="basic" component="basic_dropdown" />
+  <SettingElement type="basic" component="basic_dropdown" selectedForm={{}} />
 )
 export const SettingBasicDrawing = () => (
-  <SettingElement type="basic" component="basic_drawing" />
+  <SettingElement type="basic" component="basic_drawing" selectedForm={{}} />
 )
 export const SettingBasicSignature = () => (
-  <SettingElement type="basic" component="basic_signature" />
+  <SettingElement type="basic" component="basic_signature" selectedForm={{}} />
 )
 export const SettingBasicConditions = () => (
-  <SettingElement type="basic" component="basic_conditions" />
+  <SettingElement type="basic" component="basic_conditions" selectedForm={{}} />
 )
 export const SettingBasicDrugs = () => (
-  <SettingElement type="basic" component="basic_drugs" />
+  <SettingElement type="basic" component="basic_drugs" selectedForm={{}} />
 )
 export const SettingBasicTravelDestination = () => (
-  <SettingElement type="basic" component="basic_traveldestination" />
+  <SettingElement
+    type="basic"
+    component="basic_traveldestination"
+    selectedForm={{}}
+  />
 )
 export const SettingBasicVaccineScheduler = () => (
-  <SettingElement type="basic" component="basic_vaccinescheduler" />
+  <SettingElement
+    type="basic"
+    component="basic_vaccinescheduler"
+    selectedForm={{}}
+  />
 )
 export const SettingBasicVaccineHistory = () => (
-  <SettingElement type="basic" component="basic_vaccinehistory" />
+  <SettingElement
+    type="basic"
+    component="basic_vaccinehistory"
+    selectedForm={{}}
+  />
 )
 export const SettingBasicLabTests = () => (
-  <SettingElement type="basic" component="basic_labtests" />
+  <SettingElement type="basic" component="basic_labtests" selectedForm={{}} />
 )
 
 export const SettingCustomEmailMarketing = () => (
-  <SettingElement type="custom" component="custom_emailmarketing" />
+  <SettingElement
+    type="custom"
+    component="custom_emailmarketing"
+    selectedForm={{}}
+  />
 )
 export const SettingCustomSmsMarketing = () => (
-  <SettingElement type="custom" component="custom_smsmarketing" />
+  <SettingElement
+    type="custom"
+    component="custom_smsmarketing"
+    selectedForm={{}}
+  />
 )
 export const SettingCustomPhoneCall = () => (
-  <SettingElement type="custom" component="custom_phonecall" />
+  <SettingElement
+    type="custom"
+    component="custom_phonecall"
+    selectedForm={{}}
+  />
 )
 export const SettingCustomLettermarketing = () => (
-  <SettingElement type="custom" component="custom_lettermarketing" />
+  <SettingElement
+    type="custom"
+    component="custom_lettermarketing"
+    selectedForm={{}}
+  />
 )
 export const SettingCustomMembershipNumber = () => (
-  <SettingElement type="custom" component="custom_membershipnumber" />
+  <SettingElement
+    type="custom"
+    component="custom_membershipnumber"
+    selectedForm={{}}
+  />
 )
 export const SettingCustomAuthorizationCode = () => (
-  <SettingElement type="custom" component="custom_authorizationcode" />
+  <SettingElement
+    type="custom"
+    component="custom_authorizationcode"
+    selectedForm={{}}
+  />
 )
 export const SettingCustomCompany = () => (
-  <SettingElement type="custom" component="custom_company" />
+  <SettingElement type="custom" component="custom_company" selectedForm={{}} />
 )
 export const SettingCustomDob = () => (
-  <SettingElement type="custom" component="custom_dob" />
+  <SettingElement type="custom" component="custom_dob" selectedForm={{}} />
 )
 export const SettingCustomGender = () => (
-  <SettingElement type="custom" component="custom_gender" />
+  <SettingElement type="custom" component="custom_gender" selectedForm={{}} />
 )
 export const SettingCustomPhysicalAddress = () => (
-  <SettingElement type="custom" component="custom_physicaladdress" />
+  <SettingElement
+    type="custom"
+    component="custom_physicaladdress"
+    selectedForm={{}}
+  />
 )
 export const SettingCustomPostalAddress = () => (
-  <SettingElement type="custom" component="custom_postaladdress" />
+  <SettingElement
+    type="custom"
+    component="custom_postaladdress"
+    selectedForm={{}}
+  />
 )
 export const SettingCustomReferredBy = () => (
-  <SettingElement type="custom" component="custom_referredby" />
+  <SettingElement
+    type="custom"
+    component="custom_referredby"
+    selectedForm={{}}
+  />
 )
 export const SettingCustomTelephoneNumber = () => (
-  <SettingElement type="custom" component="custom_telephonenumber" />
+  <SettingElement
+    type="custom"
+    component="custom_telephonenumber"
+    selectedForm={{}}
+  />
 )
