@@ -1,10 +1,11 @@
 import { makeSchema  } from 'nexus'
 import { nexusPrisma } from 'nexus-plugin-prisma'
 import { PrismaClient } from '@prisma/client'
-import { join } from 'path'
+import path from 'path'
 import * as types from './schema/types'
 import { GraphQLSchema } from "graphql";
 import { NexusSchemaExtension } from "nexus/dist/extensions";
+const { join } = path
 
 const prisma = new PrismaClient()
 
