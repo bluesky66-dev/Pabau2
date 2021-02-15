@@ -13,7 +13,6 @@ export function CancelAClassBooking({
   consultationDetail,
   message,
   address,
-  footer,
   text,
 }: PropsWithChildren<
   CancelAClassBookingProps & EmailSMSPreviewProps
@@ -38,7 +37,7 @@ export function CancelAClassBooking({
           </Button>
         </Col>
       </Row>
-      {footer && (
+      {address !== '' && (
         <Row className={styles.consultancyNameAddr}>
           <Col>
             <span className={styles.consultancyName}>{consultancyName}</span>

@@ -12,7 +12,7 @@ export function ConnectRegistration({
   username,
   password,
   text,
-  footerIconGroup,
+  footerContact,
 }: PropsWithChildren<
   ConnectRegistrationProps & EmailSMSPreviewProps
 >): JSX.Element {
@@ -37,7 +37,7 @@ export function ConnectRegistration({
           </div>
         </Col>
       </Row>
-      {footerIconGroup && (
+      {footerContact && (
         <Row gutter={[0, 4]} className={styles.textBox}>
           <span
             className={styles.text}

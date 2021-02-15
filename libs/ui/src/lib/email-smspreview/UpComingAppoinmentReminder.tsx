@@ -3,7 +3,7 @@ import { EmailSMSPreviewProps, ReminderForClassProps } from './EmailSMSPreview'
 import { Col, Row } from 'antd'
 import styles from './EmailSMSPreview.module.less'
 
-export function ReminderForClass({
+export function UpComingAppointmentReminder({
   message,
   contactNumber,
 }: PropsWithChildren<
@@ -44,4 +44,4 @@ export function ReminderForClass({
   )
 }
 
-export default ReminderForClass
+export default UpComingAppointmentReminder

@@ -2,6 +2,12 @@ import React, { PropsWithChildren } from 'react'
 import { EmailSMSPreviewProps, GiftVoucherProps } from './EmailSMSPreview'
 import { Col, Divider, Row } from 'antd'
 import styles from './EmailSMSPreview.module.less'
+import {
+  FacebookOutlined,
+  WhatsAppOutlined,
+  InstagramOutlined,
+  TwitterOutlined,
+} from '@ant-design/icons'
 
 export function GiftVaoucher({
   value,
@@ -43,6 +49,16 @@ export function GiftVaoucher({
       <Row gutter={[0, 4]} className={styles.bookAppointment}>
         <Col>
           <span className={styles.contactInfo}>info@theclinic.com</span>
+        </Col>
+      </Row>
+      <Row className={`${styles.footerIcon} ${styles.icon}`}>
+        <Col>
+          <div className={styles.iconGroup}>
+            <FacebookOutlined className={styles.color} />
+            <WhatsAppOutlined className={styles.color} />
+            <InstagramOutlined className={styles.color} />
+            <TwitterOutlined className={styles.color} />
+          </div>
         </Col>
       </Row>
     </>

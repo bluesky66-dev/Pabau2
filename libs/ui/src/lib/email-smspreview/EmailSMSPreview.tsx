@@ -23,6 +23,7 @@ export interface EmailSMSPreviewProps {
   smsFooterText?: string
   footer?: boolean
   isGiftVoucher?: boolean
+  hideLogo?: boolean
 }
 
 export interface FooterProps {
@@ -177,6 +178,7 @@ export const EmailSMSPreview = (
     smsMessage,
     footer = true,
     isGiftVoucher = false,
+    hideLogo = false,
   } = props
   const [previewStatus, setPreviewStatus] = React.useState('email')
 
@@ -218,16 +220,20 @@ export const EmailSMSPreview = (
             </div>
           )}
           <div>
-            <Row justify="center" className={styles.logo}>
-              <Col>
-                <NormalClinicLogo />
-              </Col>
-            </Row>
-            <Row gutter={[0, 4]}>
-              <Col>
-                <span className={styles.greetingText}>{greeting}</span>
-              </Col>
-            </Row>
+            {!hideLogo && (
+              <>
+                <Row justify="center" className={styles.logo}>
+                  <Col>
+                    <NormalClinicLogo />
+                  </Col>
+                </Row>
+                <Row gutter={[0, 4]}>
+                  <Col>
+                    <span className={styles.greetingText}>{greeting}</span>
+                  </Col>
+                </Row>
+              </>
+            )}
             {subtitle !== '' && (
               <Row className={styles.subhead}>
                 <Col>

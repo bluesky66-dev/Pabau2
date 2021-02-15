@@ -25,6 +25,9 @@ import MissedAClassComponent from './MissedAClass'
 import ConnectRegistration from './ConnectRegistration'
 import MedicalForm from './MedicalForm'
 import ClassesSpotAvailable from './ClassesSpotAvailable'
+import RequestFeedBacks from './RequestFeedBack'
+import NewAppoinmentsIsBooked from './NewAppointmentIsBooked'
+import UpComingAppointmentReminder from './UpComingAppoinmentReminder'
 
 export default {
   component: EmailSMSPreview,
@@ -102,7 +105,7 @@ NoShowAppointment1.args = {
     "We hope everything is okay with you. We had you scheduled to see Dr. Christine today at 11:00 but unfortunately, you didn't show up.",
   contactNumber: '+44 000 987 507',
   footerContact: true,
-  footerIconGroup: false,
+  footerIconGroup: true,
   footerText:
     'Looking forward to hearing from you soon,<br/>Your friends at The Clinic',
   isFooterText: true,
@@ -178,7 +181,6 @@ const cancelledAClassBookingStory = ({
   consultancyName,
   address,
   message,
-  footer,
   smsGreeting,
   smsMessage,
   smsFooterText,
@@ -186,7 +188,6 @@ const cancelledAClassBookingStory = ({
   <EmailSMSPreview
     greeting={greeting}
     footerIconGroup={footerIconGroup}
-    footer={footer}
     smsGreeting={smsGreeting}
     smsMessage={smsMessage}
     smsFooterText={smsFooterText}
@@ -198,7 +199,6 @@ const cancelledAClassBookingStory = ({
       consultationDetail={consultationDetail}
       address={address}
       message={message}
-      footer={footer}
     />
   </EmailSMSPreview>
 )
@@ -228,10 +228,9 @@ cancelledAClassBooking1.args = {
   dateTime: 'Monday, 16 November at 11:00',
   consultationDetail: 'Consultation (30mins) with John Smith',
   consultancyName: 'M-A Hair Dressing & Spa',
-  address: '574 Beverly Road, H3454, England, GB',
+  address: '',
   message: 'We would love to see you again in the near future! ',
-  footerIconGroup: false,
-  footer: false,
+  footerIconGroup: true,
   smsGreeting: 'Hi Kristy!',
   smsMessage:
     'We have cancelled your appointment for Monday, 16 November at 11:00. We hope to see you again soon!',
@@ -296,7 +295,7 @@ missedAClass1.args = {
     "We hope everything is okay with you. We had you scheduled to see Dr. Christine today at 11:00 but unfortunately, you didn't show up.",
   contactNumber: '+44 000 987 507',
   footerContact: true,
-  footerIconGroup: false,
+  footerIconGroup: true,
   footerText:
     'Looking forward to hearing from you soon,<br/>Your friends at The Clinic',
   isFooterText: true,
@@ -354,7 +353,7 @@ ClassReschedule1.args = {
     'This is a confirmation to let you now we rescheduled your Consultation (30mins) appointment from Monday, 16 November at 11:00 to Friday, 20 November at 11:00.',
   footerText: 'Kind regards, Your friends at The Clinic',
   footerContact: true,
-  footerIconGroup: false,
+  footerIconGroup: true,
   smsGreeting: 'Hi Anna',
   smsMessage:
     'This is a confirmation to let you now we rescheduled your Consultation (30mins) appointment from Monday, 16 November at 11:00 to Friday, 20 November at 11:00.',
@@ -424,7 +423,7 @@ ClassWaitLists.args = {
   greeting: 'Dear Sophia,',
   message:
     'Good news! You recently were placed in our waitlist and a new class is now available. If you would still like to book your appointment, you must take action before the spot is taken.',
-  footerIconGroup: false,
+  footerIconGroup: true,
   footerContact: true,
   footerText:
     'Looking forward to hearing from you soon,<br/>Your friends at The Clinic',
@@ -466,7 +465,7 @@ ClassSpotAvailable.args = {
   greeting: 'Dear Sophia,',
   message:
     'Good news! You recently were placed in our waitlist and a new class is now available. If you would still like to book your appointment, you must take action before the spot is taken.',
-  footerIconGroup: false,
+  footerIconGroup: true,
   footerContact: true,
   footerText:
     'Looking forward to hearing from you soon,<br/>Your friends at The Clinic',
@@ -597,7 +596,7 @@ LeadResponse1.args = {
   greeting: 'Hi Anna,',
   message:
     'Thank you for your inquiry! We received your form and we will get back to you as soon as possible.',
-  footerIconGroup: false,
+  footerIconGroup: true,
   text: 'Kind regards,<br/> Your friends at The Clinic',
   footerText: 'Kind regards <br/> Your friends at The Clinic',
   footerContact: false,
@@ -671,7 +670,7 @@ const ConnectRegistrationStory = ({
       connectURL={connectURL}
       message={message}
       text={text}
-      footerIconGroup={footerIconGroup}
+      footerContact={footerContact}
     />
   </EmailSMSPreview>
 )
@@ -700,13 +699,13 @@ ConnectRegistrations1.args = {
   password: 'Sophia0193091',
   connectURL: 'URL://CONNECTURL',
   text: 'Kind regards,<br/> Your friends at The Clinic',
-  footerIconGroup: false,
+  footerIconGroup: true,
   footerContact: false,
   isFooterText: true,
   footerText: 'Kind regards,<br/> Your friends at The Clinic',
 }
 
-const UpcomingAppointmentReminderStory = ({
+const MedicalFormStory = ({
   greeting,
   footerIconGroup,
   footerText,
@@ -724,13 +723,97 @@ const UpcomingAppointmentReminderStory = ({
   </EmailSMSPreview>
 )
 
-export const MedicalForms = UpcomingAppointmentReminderStory.bind({})
+export const MedicalForms = MedicalFormStory.bind({})
 MedicalForms.args = {
   greeting: 'Dear Sophia,',
   message:
     'Please find attached your medical form in PDF format. If you have any questions do not hesitate to contact us at',
   contactNumber: '+44 000 987 507',
-  footerIconGroup: false,
+  footerIconGroup: true,
   footerText: 'Kind regards,<br/> Your friends at The Clinic',
   isFooterText: true,
+}
+
+const RequestFeedBackStory = ({
+  greeting,
+  message,
+  footerIconGroup,
+}: PropsWithChildren<EmailSMSPreviewProps & ClassRescheduledProps>) => (
+  <EmailSMSPreview greeting={greeting} footerIconGroup={footerIconGroup}>
+    <RequestFeedBacks message={message} />
+  </EmailSMSPreview>
+)
+
+export const RequestFeedBack = RequestFeedBackStory.bind({})
+RequestFeedBack.args = {
+  greeting: 'Hi Anna,',
+  message:
+    'Thank you for visiting The Clinic, we hope you were happy with our services!',
+  footerIconGroup: true,
+}
+
+const NewAppoinmentsIsBookedStory = ({
+  smsGreeting,
+  smsMessage,
+  smsFooterText,
+  footer,
+  hideLogo,
+}: PropsWithChildren<EmailSMSPreviewProps>) => (
+  <EmailSMSPreview
+    footer={footer}
+    smsGreeting={smsGreeting}
+    smsMessage={smsMessage}
+    smsFooterText={smsFooterText}
+    hideLogo={hideLogo}
+  >
+    <NewAppoinmentsIsBooked />
+  </EmailSMSPreview>
+)
+
+export const NewAppoinmentsBooked = NewAppoinmentsIsBookedStory.bind({})
+NewAppoinmentsBooked.args = {
+  footer: false,
+  smsFooterText: 'We look forward to seeing you!',
+  smsGreeting: 'Hi Sophia!',
+  smsMessage:
+    "This is a confirmation of your appointment at Meri's Skincare on Monday, 16 November at 11:00.",
+  hideLogo: true,
+}
+
+const UpcomingAppointmentReminderStory = ({
+  greeting,
+  message,
+  footerIconGroup,
+  contactNumber,
+  smsGreeting,
+  smsMessage,
+  smsFooterText,
+}: PropsWithChildren<EmailSMSPreviewProps & ReminderForClassProps>) => (
+  <EmailSMSPreview
+    greeting={greeting}
+    footerIconGroup={footerIconGroup}
+    smsGreeting={smsGreeting}
+    smsMessage={smsMessage}
+    smsFooterText={smsFooterText}
+  >
+    <UpComingAppointmentReminder
+      message={message}
+      contactNumber={contactNumber}
+    />
+  </EmailSMSPreview>
+)
+
+export const UpComingAppointmentReminders = UpcomingAppointmentReminderStory.bind(
+  {}
+)
+UpComingAppointmentReminders.args = {
+  greeting: 'Hi Anna,',
+  message:
+    'This is a friendly reminder that we have you scheduled for Botox 1 area on Monday, 16 November at 11:00.\n You can find us at 574 Beverly Road, H3454, England, GB.',
+  footerIconGroup: true,
+  contactNumber: '+44 000 987 507',
+  smsGreeting: 'Hi Sophia!',
+  smsMessage:
+    'This is a friendly reminder that we have you scheduled for Botox 1 area on Monday, 16 November at 11:00.',
+  smsFooterText: 'See you soon!',
 }
