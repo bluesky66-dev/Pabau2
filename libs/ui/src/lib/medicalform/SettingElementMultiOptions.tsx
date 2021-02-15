@@ -17,7 +17,7 @@ type itemProps = {
 
 interface P {
   onChange?: (addedItems) => void
-  paramItems?: any
+  paramItems: itemProps[]
 }
 
 const SettingElementMultiOptions: FC<P> = ({ onChange, paramItems }) => {

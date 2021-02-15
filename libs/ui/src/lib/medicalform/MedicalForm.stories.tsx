@@ -29,85 +29,273 @@ LeftSidebarBasicShortAnswer.args = {
   component: 'basic_shortanswer',
 }
 
-export const LeftSidebarBasicLongAnswer = () => (
-  <LeftSidebarElement type="basic" component="basic_longanswer" />
+const LeftSidebarBasicLongAnswerStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
 )
-export const LeftSidebarBasicTextBlock = () => (
-  <LeftSidebarElement type="basic" component="basic_textblock" />
+export const LeftSidebarBasicLongAnswer = LeftSidebarBasicLongAnswerStory.bind(
+  {}
 )
-export const LeftSidebarBasicSingleChoice = () => (
-  <LeftSidebarElement type="basic" component="basic_singlechoice" />
-)
-export const LeftSidebarBasicMultipleChoice = () => (
-  <LeftSidebarElement type="basic" component="basic_multiplechoice" />
-)
-export const LeftSidebarBasicDropDown = () => (
-  <LeftSidebarElement type="basic" component="basic_dropdown" />
-)
-export const LeftSidebarBasicDrawing = () => (
-  <LeftSidebarElement type="basic" component="basic_drawing" />
-)
-export const LeftSidebarBasicSignature = () => (
-  <LeftSidebarElement type="basic" component="basic_signature" />
-)
-export const LeftSidebarBasicConditions = () => (
-  <LeftSidebarElement type="basic" component="basic_conditions" />
-)
-export const LeftSidebarBasicDrugs = () => (
-  <LeftSidebarElement type="basic" component="basic_drugs" />
-)
-export const LeftSidebarBasicTravelDestination = () => (
-  <LeftSidebarElement type="basic" component="basic_traveldestination" />
-)
-export const LeftSidebarBasicVaccineScheduler = () => (
-  <LeftSidebarElement type="basic" component="basic_vaccinescheduler" />
-)
-export const LeftSidebarBasicVaccineHistory = () => (
-  <LeftSidebarElement type="basic" component="basic_vaccinehistory" />
-)
-export const LeftSidebarBasicLabTests = () => (
-  <LeftSidebarElement type="basic" component="basic_labtests" />
-)
+LeftSidebarBasicLongAnswer.args = {
+  type: 'basic',
+  component: 'basic_longanswer',
+}
 
-export const LeftSidebarCustomEmailMarketing = () => (
-  <LeftSidebarElement type="custom" component="custom_emailmarketing" />
+const LeftSidebarBasicTextBlockStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
 )
-export const LeftSidebarCustomSmsMarketing = () => (
-  <LeftSidebarElement type="custom" component="custom_smsmarketing" />
+export const LeftSidebarBasicTextBlock = LeftSidebarBasicTextBlockStory.bind({})
+LeftSidebarBasicTextBlock.args = {
+  type: 'basic',
+  component: 'basic_textblock',
+}
+
+const LeftSidebarBasicSingleChoiceStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
 )
-export const LeftSidebarCustomPhoneCall = () => (
-  <LeftSidebarElement type="custom" component="custom_phonecall" />
+export const LeftSidebarBasicSingleChoice = LeftSidebarBasicSingleChoiceStory.bind(
+  {}
 )
-export const LeftSidebarCustomLettermarketing = () => (
-  <LeftSidebarElement type="custom" component="custom_lettermarketing" />
+LeftSidebarBasicSingleChoice.args = {
+  type: 'basic',
+  component: 'basic_singlechoice',
+}
+
+const LeftSidebarBasicMultipleChoiceStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
 )
-export const LeftSidebarCustomMembershipNumber = () => (
-  <LeftSidebarElement type="custom" component="custom_membershipnumber" />
+export const LeftSidebarBasicMultipleChoice = LeftSidebarBasicMultipleChoiceStory.bind(
+  {}
 )
-export const LeftSidebarCustomAuthorizationCode = () => (
-  <LeftSidebarElement type="custom" component="custom_authorizationcode" />
+LeftSidebarBasicMultipleChoice.args = {
+  type: 'basic',
+  component: 'basic_multiplechoice',
+}
+
+const LeftSidebarBasicDropDownStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
 )
-export const LeftSidebarCustomCompany = () => (
-  <LeftSidebarElement type="custom" component="custom_company" />
+export const LeftSidebarBasicDropDown = LeftSidebarBasicDropDownStory.bind({})
+LeftSidebarBasicDropDown.args = {
+  type: 'basic',
+  component: 'basic_dropdown',
+}
+
+const LeftSidebarBasicDrawingStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
 )
-export const LeftSidebarCustomDob = () => (
-  <LeftSidebarElement type="custom" component="custom_dob" />
+export const LeftSidebarBasicDrawing = LeftSidebarBasicDrawingStory.bind({})
+LeftSidebarBasicDrawing.args = {
+  type: 'basic',
+  component: 'basic_drawing',
+}
+
+const LeftSidebarBasicSignatureStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
 )
-export const LeftSidebarCustomGender = () => (
-  <LeftSidebarElement type="custom" component="custom_gender" />
+export const LeftSidebarBasicSignature = LeftSidebarBasicSignatureStory.bind({})
+LeftSidebarBasicSignature.args = {
+  type: 'basic',
+  component: 'basic_signature',
+}
+
+const LeftSidebarBasicConditionsStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
 )
-export const LeftSidebarCustomPhysicalAddress = () => (
-  <LeftSidebarElement type="custom" component="custom_physicaladdress" />
+export const LeftSidebarBasicConditions = LeftSidebarBasicConditionsStory.bind(
+  {}
 )
-export const LeftSidebarCustomPostalAddress = () => (
-  <LeftSidebarElement type="custom" component="custom_postaladdress" />
+LeftSidebarBasicConditions.args = {
+  type: 'basic',
+  component: 'basic_conditions',
+}
+
+const LeftSidebarBasicDrugsStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
 )
-export const LeftSidebarCustomReferredBy = () => (
-  <LeftSidebarElement type="custom" component="custom_referredby" />
+export const LeftSidebarBasicDrugs = LeftSidebarBasicDrugsStory.bind({})
+LeftSidebarBasicDrugs.args = {
+  type: 'basic',
+  component: 'basic_drugs',
+}
+
+const LeftSidebarBasicTravelDestinationStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
 )
-export const LeftSidebarCustomTelephoneNumber = () => (
-  <LeftSidebarElement type="custom" component="custom_telephonenumber" />
+export const LeftSidebarBasicTravelDestination = LeftSidebarBasicTravelDestinationStory.bind(
+  {}
 )
+LeftSidebarBasicTravelDestination.args = {
+  type: 'basic',
+  component: 'basic_traveldestination',
+}
+
+const LeftSidebarBasicVaccineSchedulerStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
+)
+export const LeftSidebarBasicVaccineScheduler = LeftSidebarBasicVaccineSchedulerStory.bind(
+  {}
+)
+LeftSidebarBasicVaccineScheduler.args = {
+  type: 'basic',
+  component: 'basic_vaccinescheduler',
+}
+
+const LeftSidebarBasicVaccineHistoryStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
+)
+export const LeftSidebarBasicVaccineHistory = LeftSidebarBasicVaccineHistoryStory.bind(
+  {}
+)
+LeftSidebarBasicVaccineHistory.args = {
+  type: 'basic',
+  component: 'basic_vaccinehistory',
+}
+
+const LeftSidebarBasicLabTestsStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
+)
+export const LeftSidebarBasicLabTests = LeftSidebarBasicLabTestsStory.bind({})
+LeftSidebarBasicLabTests.args = {
+  type: 'basic',
+  component: 'basic_labtests',
+}
+
+const LeftSidebarCustomEmailMarketingStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
+)
+export const LeftSidebarCustomEmailMarketing = LeftSidebarCustomEmailMarketingStory.bind(
+  {}
+)
+LeftSidebarCustomEmailMarketing.args = {
+  type: 'custom',
+  component: 'custom_emailmarketing',
+}
+
+const LeftSidebarCustomSmsMarketingStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
+)
+export const LeftSidebarCustomSmsMarketing = LeftSidebarCustomSmsMarketingStory.bind(
+  {}
+)
+LeftSidebarCustomSmsMarketing.args = {
+  type: 'custom',
+  component: 'custom_smsmarketing',
+}
+
+const LeftSidebarCustomPhoneCallStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
+)
+export const LeftSidebarCustomPhoneCall = LeftSidebarCustomPhoneCallStory.bind(
+  {}
+)
+LeftSidebarCustomPhoneCall.args = {
+  type: 'custom',
+  component: 'custom_phonecall',
+}
+
+const LeftSidebarCustomLettermarketingStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
+)
+export const LeftSidebarCustomLettermarketing = LeftSidebarCustomLettermarketingStory.bind(
+  {}
+)
+LeftSidebarCustomLettermarketing.args = {
+  type: 'custom',
+  component: 'custom_lettermarketing',
+}
+
+const LeftSidebarCustomMembershipNumberStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
+)
+export const LeftSidebarCustomMembershipNumber = LeftSidebarCustomMembershipNumberStory.bind(
+  {}
+)
+LeftSidebarCustomMembershipNumber.args = {
+  type: 'custom',
+  component: 'custom_membershipnumber',
+}
+
+const LeftSidebarCustomAuthorizationCodeStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
+)
+export const LeftSidebarCustomAuthorizationCode = LeftSidebarCustomAuthorizationCodeStory.bind(
+  {}
+)
+LeftSidebarCustomAuthorizationCode.args = {
+  type: 'custom',
+  component: 'custom_authorizationcode',
+}
+
+const LeftSidebarCustomCompanyStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
+)
+export const LeftSidebarCustomCompany = LeftSidebarCustomCompanyStory.bind({})
+LeftSidebarCustomCompany.args = {
+  type: 'custom',
+  component: 'custom_company',
+}
+
+const LeftSidebarCustomDobStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
+)
+export const LeftSidebarCustomDob = LeftSidebarCustomDobStory.bind({})
+LeftSidebarCustomDob.args = {
+  type: 'custom',
+  component: 'custom_dob',
+}
+
+const LeftSidebarCustomGenderStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
+)
+export const LeftSidebarCustomGender = LeftSidebarCustomGenderStory.bind({})
+LeftSidebarCustomGender.args = {
+  type: 'custom',
+  component: 'custom_gender',
+}
+
+const LeftSidebarCustomPhysicalAddressStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
+)
+export const LeftSidebarCustomPhysicalAddress = LeftSidebarCustomPhysicalAddressStory.bind(
+  {}
+)
+LeftSidebarCustomPhysicalAddress.args = {
+  type: 'custom',
+  component: 'custom_physicaladdress',
+}
+
+const LeftSidebarCustomPostalAddressStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
+)
+export const LeftSidebarCustomPostalAddress = LeftSidebarCustomPostalAddressStory.bind(
+  {}
+)
+LeftSidebarCustomPostalAddress.args = {
+  type: 'custom',
+  component: 'custom_postaladdress',
+}
+
+const LeftSidebarCustomReferredByStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
+)
+export const LeftSidebarCustomReferredBy = LeftSidebarCustomReferredByStory.bind(
+  {}
+)
+LeftSidebarCustomReferredBy.args = {
+  type: 'custom',
+  component: 'custom_referredby',
+}
+
+const LeftSidebarCustomTelephoneNumberStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
+)
+export const LeftSidebarCustomTelephoneNumber = LeftSidebarCustomTelephoneNumberStory.bind(
+  {}
+)
+LeftSidebarCustomTelephoneNumber.args = {
+  type: 'custom',
+  component: 'custom_telephonenumber',
+}
 
 export const InnerBasicHeading = () => (
   <InnerElement type="basic" component="basic_heading" />
