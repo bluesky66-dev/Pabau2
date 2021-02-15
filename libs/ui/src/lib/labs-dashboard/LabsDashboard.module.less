@@ -87,6 +87,48 @@
           }
         }
       }
+
+      .content {
+        .contentHeader {
+          :global {
+            h1 {
+              font-style: normal;
+              font-weight: 500;
+              font-size: 16px;
+              line-height: 20px;
+              text-transform: capitalize;
+
+              /* Text Main */
+              color: #3d3d46;
+              margin: 0px;
+            }
+
+            .search-input {
+              position: relative;
+              transition: all ease 1s;
+
+              .search-icon {
+                position: absolute;
+                right: 7.5px;
+                top: 7.5px;
+                align-self: center;
+
+                svg {
+                  fill: #9292a3;
+                }
+              }
+
+              input {
+                padding-right: 30px;
+              }
+
+              &.clicked {
+                min-width: 350px;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

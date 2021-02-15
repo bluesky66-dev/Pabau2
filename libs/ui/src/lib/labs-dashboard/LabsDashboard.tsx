@@ -1,10 +1,16 @@
-import React, { FC, ReactNode, useState } from 'react'
-import { InboxOutlined } from '@ant-design/icons'
+import React, { FC, useState } from 'react'
 import Processing from './assets/processing.svg'
 import Requested from './assets/requested.svg'
 import Received from './assets/received.svg'
 import Sent from './assets/sent.svg'
-import { Breadcrumb, NotificationBanner, Button } from '@pabau/ui'
+import { InboxOutlined, SearchOutlined } from '@ant-design/icons'
+import {
+  Breadcrumb,
+  NotificationBanner,
+  Button,
+  Input,
+  Pagination,
+} from '@pabau/ui'
 import styles from './LabsDashboard.module.less'
 
 interface TitleCard {
@@ -91,6 +97,16 @@ export const LabsDashboard: FC<LabsDashboardProps> = ({ ...props }) => {
             <Tab title="12345" subTitle="REQUESTED" icon={Requested} />
             <Tab title="12345" subTitle="RECEIVED" icon={Received} />
             <Tab title="12345" subTitle="SENT" icon={Sent} />
+          </div>
+
+          <div className={styles.content}>
+            <div className={styles.contentHead}>
+              <div>
+                <h1>Tablesheet</h1>
+              </div>
+              <div></div>
+            </div>
+            <div className={styles.contentBody}></div>
           </div>
         </div>
       </div>
