@@ -1,0 +1,79 @@
+.labsDashboard {
+  .topBanner {
+    display: flex;
+    justify-content: space-between;
+    // align-items: center;
+    flex-wrap: wrap;
+
+    position: relative;
+    min-height: 144px;
+    background: #e9faff;
+    border: 1px solid #ecedf0;
+    box-sizing: border-box;
+    border-radius: 4px;
+
+    background-image: url('./assets/Ellipse.svg');
+    background-repeat: no-repeat;
+    background-position: 100%;
+
+    :global a {
+      position: absolute;
+      top: 7.5px;
+      right: 12.5px;
+      color: #9292a3;
+    }
+
+    .dataDiv {
+      width: 100%;
+      max-width: 60%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: flex-start;
+      padding: 20px 20px;
+
+      :global {
+        h3 {
+          font-style: normal;
+          font-weight: bold;
+          font-size: 14px;
+          line-height: 18px;
+          color: #3d3d46;
+        }
+        p {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 24px;
+          color: #3d3d46;
+          margin: 0px;
+        }
+      }
+    }
+
+    .paperIcon {
+      width: 100%;
+      max-width: 40%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+
+      :global {
+        .miniPaperDiv {
+          user-select: none;
+          background: #ffffff;
+          box-shadow: 3px -2px 13px rgba(0, 0, 0, 0.05);
+          margin-right: 5em;
+
+          min-height: 105px;
+          max-height: 105px;
+          max-width: 110px;
+          min-width: 110px;
+
+          border-top-right-radius: 15px;
+          border-top-left-radius: 15px;
+        }
+      }
+    }
+  }
+}
