@@ -3,7 +3,7 @@ import Layout from '../../../components/Layout/Layout'
 import CommonHeader from '../CommonHeader'
 import { Pagination, UserTile, TabMenu } from '@pabau/ui'
 import { Filter } from '../../../components/modules/setup/users'
-import { Breadcrumb } from '@pabau/ui'
+import { Breadcrumb, BreadcrumbItemInterface } from '@pabau/ui'
 import { Typography } from 'antd'
 import styles from './Users.module.less'
 import { mockUsers } from '../../../components/modules/setup/users/mock'
@@ -17,7 +17,18 @@ const Index: FunctionComponent = () => {
         <Layout>
           <div className={styles.header}>
             <div className={styles.headerTitle}>
-              <Breadcrumb breadcrumbItems={['Setup', 'Users']} />
+              <Breadcrumb
+                breadcrumbItems={[
+                  {
+                    path: '/setup',
+                    breadcrumbName: 'Setup',
+                  },
+                  {
+                    path: '/setup/users',
+                    breadcrumbName: 'Users',
+                  },
+                ]}
+              />
               <Title>Users</Title>
             </div>
             <div className={styles.headerFilter}>
@@ -37,21 +48,20 @@ const Index: FunctionComponent = () => {
               minHeight={'0'}
             >
               <div className={styles.container}>
-                {mockUsers &&
-                  mockUsers.map((user) => {
-                    return (
-                      <UserTile
-                        key={user.id}
-                        name={user.name}
-                        surname={user.surname}
-                        title={user.title}
-                        vacation={user.vacationPending}
-                        active={user.active}
-                        available={user.available}
-                        img={user.img}
-                      />
-                    )
-                  })}
+                {mockUsers?.map((user) => {
+                  return (
+                    <UserTile
+                      key={user.id}
+                      name={user.name}
+                      surname={user.surname}
+                      title={user.title}
+                      vacation={user.vacationPending}
+                      active={user.active}
+                      available={user.available}
+                      img={user.img}
+                    />
+                  )
+                })}
               </div>
               <div>
                 <div className={styles.container} />
