@@ -6,7 +6,7 @@ import CrudLayout from '../../../components/CrudLayout/CrudLayout'
 
 const LIST_QUERY = gql`
   query marketing_sources(
-    $isActive: Int
+    $public: Int
     $searchTerm: String
     $offset: Int
     $limit: Int
@@ -15,7 +15,7 @@ const LIST_QUERY = gql`
       first: $offset
       last: $limit
       where: {
-        public: { equals: $isActive }
+        public: { equals: $public }
         OR: [{ AND: [{ source_name: { contains: $searchTerm } }] }]
       }
     ) {
@@ -27,12 +27,12 @@ const LIST_QUERY = gql`
 `
 const LIST_AGGREGATE_QUERY = gql`
   query marketing_source_aggregate(
-    $isActive: Boolean = true
+    $public: Boolean = true
     $searchTerm: String = ""
   ) {
     marketing_source_aggregate(
       where: {
-        public: { _eq: $isActive }
+        public: { _eq: $public }
         _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
       }
     ) {
@@ -104,6 +104,21 @@ const schema: Schema = {
   fullLower: 'marketing source',
   short: 'Source',
   shortLower: 'source',
+  messages: {
+    create: {
+      success: 'New marketings source created.',
+      error: 'While creating marketing source.',
+    },
+    update: {
+      success: 'Marketings source updated.',
+      error: 'While updating marketings source.',
+    },
+    delete: {
+      success: 'Marketings source deleted.',
+      error: 'While deleting marketing sources.',
+    },
+  },
+  deleteBtnLabel: 'Yes, Delete Source',
   fields: {
     source_name: {
       full: 'Friendly Name',
@@ -115,11 +130,12 @@ const schema: Schema = {
       description: 'A friendly name',
       // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
+      type: 'string',
     },
     public: {
       full: 'Active',
       type: 'number',
-      default: 1,
+      defaultvalue: 1,
     },
   },
 }
