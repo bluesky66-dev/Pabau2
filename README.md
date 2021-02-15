@@ -41,6 +41,10 @@ echo 'NPM_STORE="${HOME}/.npm-global"' >> ~/.bashrc
 echo 'export PATH="$PATH:$NPM_STORE/bin"' >> ~/.bashrc
 echo 'export MANPATH="${MANPATH-$(manpath)}:$NPM_STORE/share/man"' >> ~/.bashrc
 npm i -g yarn
+
+snap --classic phpstorm vscode
+
+
 ```
 
 ## Storybook
@@ -206,3 +210,12 @@ then yarn hasura:export
 - Create a bridge to our old LAMP app
   1. generate jwt in php
   2. ...?
+
+
+
+* auth to prisma
+* storing jwt token for hasura in nextjs httponly cookie
+* graphql code generator and other tooling
+* nestjs needs a typed hasura service that we can call
+* prisma needs a hoc for company_id security
+* 
