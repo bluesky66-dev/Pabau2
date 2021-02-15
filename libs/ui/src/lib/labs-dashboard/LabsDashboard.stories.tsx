@@ -1,5 +1,4 @@
 import React from 'react'
-import { Button } from '@pabau/ui'
 import { LabsDashboard } from './LabsDashboard'
 
 const columns = [
