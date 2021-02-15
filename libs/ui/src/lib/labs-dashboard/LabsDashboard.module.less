@@ -33,6 +33,7 @@
 
     .cardBody {
       .tabs {
+        margin-bottom: 40px;
         padding: 25px;
         display: flex;
         justify-content: space-between;
@@ -89,41 +90,75 @@
       }
 
       .content {
-        .contentHeader {
+        .contentHead {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          padding: 25px;
+          border-bottom: 1px solid #ecedf0;
+
           :global {
             h1 {
               font-style: normal;
-              font-weight: 500;
-              font-size: 16px;
-              line-height: 20px;
-              text-transform: capitalize;
-
-              /* Text Main */
+              font-weight: bold;
+              font-size: 20px;
+              line-height: 25px;
               color: #3d3d46;
-              margin: 0px;
             }
 
-            .search-input {
+            div.inputs-div {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              flex-wrap: wrap;
               position: relative;
-              transition: all ease 1s;
 
-              .search-icon {
-                position: absolute;
-                right: 7.5px;
-                top: 7.5px;
-                align-self: center;
+              .search-input {
+                position: relative;
+                transition: all ease 1s;
+                margin-right: 15px;
 
-                svg {
-                  fill: #9292a3;
+                .search-icon {
+                  position: absolute;
+                  right: 10px;
+                  top: 10px;
+                  align-self: center;
+
+                  svg {
+                    fill: #9292a3;
+                  }
+                }
+
+                input {
+                  padding-right: 30px;
+                }
+
+                &.clicked {
+                  min-width: 350px;
                 }
               }
+            }
+          }
+        }
 
-              input {
-                padding-right: 30px;
-              }
-
-              &.clicked {
-                min-width: 350px;
+        .contentBody {
+          :global {
+            .ant-table-thead > tr > th {
+              min-width: 150px !important;
+              background-color: #ffffff;
+              border-top: 1px solid #f1f1f1;
+            }
+            .ant-table-tbody {
+              tr {
+                border-bottom: 1px solid #f1f1f1;
+                td {
+                  min-width: 150px !important;
+                  background-color: transparent;
+                }
+                &:hover {
+                  background: #eef7fb !important;
+                }
               }
             }
           }

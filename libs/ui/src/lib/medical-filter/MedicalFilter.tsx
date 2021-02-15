@@ -116,7 +116,9 @@ export const MedicalFilter: FC<MedicalFilterProps> = ({ filter, onApply }) => {
           setVisible(val)
         }}
       >
-        <Button icon={<FilterOutlined />}>Filter</Button>
+        <Button size="large" icon={<FilterOutlined />}>
+          Filter
+        </Button>
       </Popover>
     </div>
   )
