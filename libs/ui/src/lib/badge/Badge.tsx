@@ -91,5 +91,5 @@ export const PabauPlus: FC<PlusProps> = ({ label, disabled, modalType }) => {
 }
 
 function getModalKey(type: string | undefined, data): string {
-  return data.filter(({ value }) => value === type)[0]?.key
+  return data.find(({ value }) => value === type)?.key
 }

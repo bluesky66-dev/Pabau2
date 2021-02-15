@@ -16,14 +16,13 @@ const Grid = (props: p) => {
   const { data } = props
   return (
     <div className={styles.gridMobileWrapper}>
-      {data &&
-        data.map((value, index) => (
-          <SetupGridMobile
-            key={index}
-            {...value}
-            onClick={props.handleShowSubMenuMobile}
-          />
-        ))}
+      {data?.map((value, index) => (
+        <SetupGridMobile
+          key={index}
+          {...value}
+          onClick={props.handleShowSubMenuMobile}
+        />
+      ))}
     </div>
   )
 }

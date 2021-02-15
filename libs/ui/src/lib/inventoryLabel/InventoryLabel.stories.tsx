@@ -1,11 +1,11 @@
 import React from 'react'
-import InventoryLabel from './InventoryLabel'
+import { InventoryLabel, LabelType } from './InventoryLabel'
 
 export default {
   component: InventoryLabel,
   title: 'Basics/InventoryLabel',
   args: {
-    labelType: 'good',
+    labelType: LabelType.good,
   },
   argTypes: {},
 }
@@ -16,10 +16,10 @@ Good.args = {}
 
 export const Low = InventoryLabelStory.bind({})
 Low.args = {
-  labelType: 'low',
+  labelType: LabelType.low,
 }
 
 export const Empty = InventoryLabelStory.bind({})
 Empty.args = {
-  labelType: 'empty',
+  labelType: LabelType.empty,
 }

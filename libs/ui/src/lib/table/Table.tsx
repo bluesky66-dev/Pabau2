@@ -9,12 +9,7 @@ import { ContactsOutlined, LockOutlined, MenuOutlined } from '@ant-design/icons'
 import styles from './Table.module.less'
 import { TableProps } from 'antd/es/table'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import * as Icons from '@fortawesome/free-solid-svg-icons'
-import { library } from '@fortawesome/fontawesome-svg-core'
-const iconList = Object.keys(Icons)
-  .filter((key) => key !== 'fas' && key !== 'prefix')
-  .map((icon) => Icons[icon])
-library.add(...iconList)
+
 export interface DragProps {
   draggable?: boolean
   isCustomColorExist?: boolean
@@ -73,7 +68,7 @@ export const Table: FC<TableType> = ({
   const onSortEnd = ({ oldIndex, newIndex }) => {
     if (oldIndex !== newIndex) {
       const newData = array_move(dataSource, oldIndex, newIndex)
-      updateDataSource && updateDataSource({ newData, oldIndex, newIndex })
+      updateDataSource?.({ newData, oldIndex, newIndex })
     }
   }
 
@@ -143,7 +138,7 @@ export const Table: FC<TableType> = ({
   const checkPadLocks = (record) => {
     let alloWClicked = true
     Object.keys(record).map((key) => {
-      if (padlocked && padlocked.includes(record[key])) {
+      if (padlocked?.includes(record[key])) {
         alloWClicked = false
       }
       return key
@@ -152,13 +147,14 @@ export const Table: FC<TableType> = ({
   }
 
   const renderSortHandler = () => {
-    if (props && props.columns) {
+    if (props?.columns) {
       props.columns = props.columns
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ?.filter((col: any) => col.visible === true)
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .map((col: any) => {
-          if (col && col.dataIndex === 'is_active') {
+          if (col && col.dataIndex === 'public') {
+            console.log(col.dataIndex)
             col.render = renderActiveButton
           } else {
             col.render = renderTableSource
@@ -172,8 +168,7 @@ export const Table: FC<TableType> = ({
       : props.columns
   }
 
-  console.log('dataSource?.length ', dataSource?.length, props.loading)
-  return !dataSource?.length && !props.loading ? (
+  return !dataSource?.length && !props.loading && !searchTerm ? (
     <div className={styles.noDataTableBox}>
       <div className={styles.noDataTextStyle}>
         <Avatar icon={noDataIcon} size="large" className={styles.roundDesign} />

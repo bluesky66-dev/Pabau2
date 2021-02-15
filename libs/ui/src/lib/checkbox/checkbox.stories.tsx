@@ -38,9 +38,11 @@ CustomCheckBox.args = {
   disabled: false,
 }
 
-const ButtonCheckboxStory = ({ ...args }) => <ButtonCheckbox {...args}></ButtonCheckbox>
+const ButtonCheckboxStory = ({ ...args }) => (
+  <ButtonCheckbox {...args}></ButtonCheckbox>
+)
 export const ButtonCheck = ButtonCheckboxStory.bind({})
 ButtonCheck.args = {
   label: 'Checkbox',
-  disabled: false
+  disabled: false,
 }
