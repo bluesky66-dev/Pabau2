@@ -47,7 +47,7 @@ const QuestionBankModal: FC<P> = ({
     const data = menuOptions.find(({ key }) => key === e.key)
     setQuestionList(
       questionList?.map((i) =>
-        i.key === key ? { ...i, selectedValue: data.value } : i
+        i.key === key ? { ...i, selectedValue: data?.value } : i
       )
     )
   }
