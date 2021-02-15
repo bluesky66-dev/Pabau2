@@ -10,8 +10,8 @@ interface inputProps {
 }
 
 interface inputTypes {
-  companyName?: string,
-  phone?: string,
+  companyName?: string
+  phone?: string
   website?: string
 }
 
@@ -29,21 +29,21 @@ export const TileInputDiv: FC<TileInputDivProps> = ({
   phoneLabel,
   websiteData,
 }) => {
-  const [ focused, setFocused ] = useState(false);
+  const [focused, setFocused] = useState<boolean>(false)
   const validate = (values) => {
-    const errors: inputTypes = {};
+    const errors: inputTypes = {}
 
-    if(!values.companyName) {
-      errors.companyName = 'Company name is required';
+    if (!values.companyName) {
+      errors.companyName = 'Company name is required'
     }
 
-    if(!values.website) {
-      errors.website = 'Website is required';
-    } else if (!/^[A-Z0-9._%+-]+\.[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.website)) {
-      errors.website = 'Invalid website name';
+    if (!values.website) {
+      errors.website = 'Website is required'
+    } else if (!/^[\w%+.-]+\.[\d.a-z-]+\.[a-z]{2,4}$/i.test(values.website)) {
+      errors.website = 'Invalid website name'
     }
-    
-    return errors; 
+
+    return errors
   }
   const formik = useFormik({
     initialValues: {
@@ -53,7 +53,7 @@ export const TileInputDiv: FC<TileInputDivProps> = ({
     },
     validate,
     onSubmit: (values) => {
-      console.log("Form Vales:", values);
+      console.log('Form Vales:', values)
     },
   })
 
@@ -62,12 +62,15 @@ export const TileInputDiv: FC<TileInputDivProps> = ({
   }
 
   const handleFocusElement = (status) => {
-    setFocused(status);
+    setFocused(status)
   }
-  
+
   return (
     <div className={styles.mainWrapper}>
-      <div className={ focused ? styles.focusedContentWrapper : styles.contentWrapper}
+      <div
+        className={
+          focused ? styles.focusedContentWrapper : styles.contentWrapper
+        }
         onFocus={() => handleFocusElement(true)}
         onBlur={() => handleFocusElement(false)}
       >
@@ -80,7 +83,9 @@ export const TileInputDiv: FC<TileInputDivProps> = ({
               onChange={(e) => onchange(e, 'companyName')}
               text={formik.values.companyName}
             />
-            {formik.errors.companyName ? <div className={styles.error}>{formik.errors.companyName}</div> : null}
+            {formik.errors.companyName ? (
+              <div className={styles.error}>{formik.errors.companyName}</div>
+            ) : null}
           </div>
           <div className={styles.customForm}>
             <PhoneNumberInput
@@ -95,7 +100,9 @@ export const TileInputDiv: FC<TileInputDivProps> = ({
               onChange={(e) => onchange(e, 'website')}
               text={formik.values.website}
             />
-            {formik.errors.website ? <div className={styles.error}>{formik.errors.website}</div> : null}
+            {formik.errors.website ? (
+              <div className={styles.error}>{formik.errors.website}</div>
+            ) : null}
           </div>
         </Form>
       </div>
