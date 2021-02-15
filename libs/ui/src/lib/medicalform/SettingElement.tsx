@@ -415,13 +415,13 @@ const SettingElement: FC<P> = ({
               filteredComponent[0].component === 'basic_dropdown') && (
               <SettingElementOption
                 onChange={eventhandler}
-                paramItems={selectedForm.arrItems}
+                paramItems={selectedForm.arrItems ? selectedForm.arrItems : []}
               />
             )}
             {filteredComponent[0].component === 'basic_multiplechoice' && (
               <SettingElementMultiOptions
                 onChange={eventhandler}
-                paramItems={selectedForm.arrItems}
+                paramItems={selectedForm.arrItems ? selectedForm.arrItems : []}
               />
             )}
             {(filteredComponent[0].component === 'basic_singlechoice' ||

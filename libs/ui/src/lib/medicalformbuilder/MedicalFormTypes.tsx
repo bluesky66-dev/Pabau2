@@ -1,6 +1,7 @@
 export interface OPTION_TYPE {
   id: number
   name: string
+  editing?: boolean
 }
 
 export interface MEDICAL_FORM_TYPES {

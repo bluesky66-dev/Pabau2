@@ -4,25 +4,19 @@ import {
   PlusOutlined,
   SaveOutlined,
 } from '@ant-design/icons'
-import { Button, ButtonTypes } from '@pabau/ui'
+import { Button, ButtonTypes, OPTION_TYPE } from '@pabau/ui'
 import { Input, Radio } from 'antd'
 import React, { FC, useEffect, useState } from 'react'
 import styles from './Setting.module.less'
 
-type itemProps = {
-  id: number
-  name?: string
-  editing?: boolean
-}
-
 interface P {
   onChange?: (addedItems) => void
-  paramItems: itemProps[]
+  paramItems: OPTION_TYPE[]
 }
 
 const SettingElementOption: FC<P> = ({ onChange, paramItems }) => {
-  const [items, setItems] = useState<itemProps[]>([])
-  const [addedItems, setaddedItems] = useState<itemProps[]>([])
+  const [items, setItems] = useState<OPTION_TYPE[]>([])
+  const [addedItems, setaddedItems] = useState<OPTION_TYPE[]>([])
   const [itemName, setItemName] = useState('')
   const [optionVal, setOptionVal] = useState(0)
 

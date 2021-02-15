@@ -1,11 +1,7 @@
+import { OPTION_TYPE } from '@pabau/ui'
 import { Checkbox } from 'antd'
 import React, { FC } from 'react'
 import styles from './Inner.module.less'
-
-interface OPTION_TYPE {
-  id: number
-  name: string
-}
 
 interface P {
   title?: string
