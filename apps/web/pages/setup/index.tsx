@@ -34,9 +34,10 @@ const Index: FC = () => {
         {
           title: 'General settings',
           data: [
-            ' Calendar Settings',
-            'Point of Sale Configuration',
+            'Calendar Settings',
             'Loyalty',
+            'Performance Settings',
+            'Point of Sale Configuration',
             'Referral Settings',
           ],
         },
