@@ -3,7 +3,8 @@ module.exports = {
     service: {
       name: 'hasura',
       url: 'https://api.new.pabau.com/v1/graphql',
-      // optional headers
+
+// optional headers
       headers: {
         //authorization: 'Bearer lkjfalkfjadkfjeopknavadf'
       },
@@ -11,4 +12,4 @@ module.exports = {
       //skipSSLValidation: true
     },
   },
-}
+};

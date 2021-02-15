@@ -84,10 +84,10 @@ export const NotificationDrawer: FC<P> = ({
   }
 
   let lengths = 0
-  notificationData.forEach((item) => {
+  for (const item of notificationData) {
     const length = Object.values(item)[0] ? Object.values(item)[0].length : 0
     lengths = lengths + length
-  })
+  }
 
   return (
     <Drawer

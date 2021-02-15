@@ -17,10 +17,11 @@ export const LeadFormBuilder: React.FC = () => {
 
   const onMainFieldCheckboxChange = (e, key: number, checkboxField: string) => {
     const records = [...mainFields]
-    records.forEach((record) => {
+    records.map((record) => {
       if (record.key === key) {
         record[checkboxField] = e.target.checked
       }
+      return record
     })
     setMainFields([...records])
     onChange?.(mainFields, customField)
@@ -32,10 +33,11 @@ export const LeadFormBuilder: React.FC = () => {
     checkboxField: string
   ) => {
     const records = [...customField]
-    records.forEach((record) => {
+    records.map((record) => {
       if (record.key === key) {
         record[checkboxField] = e.target.checked
       }
+      return record
     })
     setCustomField([...records])
     onChange?.(mainFields, customField)

@@ -1,5 +1,69 @@
 - table:
     schema: public
+    name: Labs
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - city
+      - country
+      - email
+      - integration
+      - is_active
+      - name
+      - order
+      - phone
+      - postal_code
+      - provider_number
+      - street
+      - street2
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - city
+      - country
+      - created_at
+      - email
+      - id
+      - integration
+      - is_active
+      - name
+      - order
+      - phone
+      - postal_code
+      - provider_number
+      - street
+      - street2
+      - updated_at
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - city
+      - country
+      - email
+      - integration
+      - is_active
+      - name
+      - order
+      - phone
+      - postal_code
+      - provider_number
+      - street
+      - street2
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
     name: appointment_status
   insert_permissions:
   - role: public
