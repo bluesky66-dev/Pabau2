@@ -35,7 +35,7 @@ const Tab: FC<TitleCard> = ({ title, subTitle, icon, className, ...rest }) => {
   )
 }
 
-export interface Breadcrumb {
+export interface BreadcrumbItems {
   breadcrumbName: string
   path: string
 }
@@ -51,7 +51,7 @@ export interface LabsDashboardProps {
   notificationTitle?: string
   notificationImagePath?: string
   notificationDescription?: string
-  breadScrumbs: Breadcrumb[]
+  breadScrumbs: BreadcrumbItems[]
   pageTitle: string
   tableTitle: string
   columns: Columns[]

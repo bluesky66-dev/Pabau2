@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from '@pabau/ui'
 import { LabsDashboard } from './LabsDashboard'
 
 const columns = [
@@ -78,7 +79,7 @@ export default {
     Just have your lab provider send those results to
     labs+482@pabau.com, and then you can automatically match the results
     against the patient.`,
-    breadScrumbs: breadcrumbItems,
+    breadcrumbItems: breadcrumbItems,
     pageTitle: 'Labs',
     columns: columns,
     tableTitle: 'Tablesheet',
