@@ -4,7 +4,6 @@ set -e
 echo "DEBUG: pwd=$(pwd)"
 APP_NAME="$(basename "$(dirname "$(cd "$(dirname "${0}")"; pwd)")")"
 DOCKER_USERNAME="ops"
-DOCKER_PASSWORD="jfdjiwfdjwiojdsmcnvhsbakdujr"
 echo "DEBUG: app_name=${APP_NAME}"
 
 yarn run nx run "${APP_NAME}:build" --prod
