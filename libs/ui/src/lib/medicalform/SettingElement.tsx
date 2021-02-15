@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import conditionsIcon from '../../assets/images/medicalform_conditions.svg'
 import customCompanyIcon from '../../assets/images/medicalform_custom_company.svg'
 import customDobIcon from '../../assets/images/medicalform_custom_dob.svg'
@@ -22,15 +22,39 @@ import textBlockIcon from '../../assets/images/medicalform_textblock.svg'
 import travelDesctinationIcon from '../../assets/images/medicalform_traveldestination.svg'
 import vaccineHistoryIcon from '../../assets/images/medicalform_vaccinehistory.svg'
 import vaccineSchedulerIcon from '../../assets/images/medicalform_vaccinescheduler.svg'
-import styles from './LeftSidebar.module.less'
-import LeftSidebarMedicalFormTitle from './LeftSidebarMedicalFormTitle'
+import SettingElementAdvanced from './SettingElementAdvanced'
+import SettingElementFileUpload from './SettingElementFileUpload'
+import SettingElementMultiOptions from './SettingElementMultiOptions'
+import SettingElementOption from './SettingElementOption'
+import SettingElementQuestion from './SettingElementQuestion'
+import SettingElementTextBox from './SettingElementTextBox'
+import SettingElementTypeOption from './SettingElementTypeOption'
+import SettingMedicalForm from './SettingMedicalForm'
+import SettingMedicalFormBody from './SettingMedicalFormBody'
+import SettingMedicalFormBottom from './SettingMedicalFormBottom'
+import SettingMedicalFormError from './SettingMedicalFormError'
+import SettingMedicalFormHeader from './SettingMedicalFormHeader'
+import SettingMedicalFormTitle from './SettingMedicalFormTitle'
 
 interface P {
   type?: string
   component?: string
+  selectedForm?: any
+  handleSave?: () => void
+  handleDelete?: () => void
 }
 
-const LeftSidebarElement: FC<P> = ({ type, component }) => {
+const SettingElement: FC<P> = ({
+  type,
+  component,
+  selectedForm,
+  handleSave,
+  handleDelete,
+}) => {
+  const [form, setForm] = useState(JSON.parse(JSON.stringify(selectedForm)))
+  const [addedItems, setAddedItems] = useState(0)
+  const [errMsg, setErrMsg] = useState('')
+
   const componentInfos = [
     {
       component: 'basic_heading',
@@ -259,22 +283,169 @@ const LeftSidebarElement: FC<P> = ({ type, component }) => {
     },
   ]
 
+  useEffect(() => {
+    setForm(JSON.parse(JSON.stringify(selectedForm)))
+  }, [selectedForm])
+
+  const eventhandler = (addedItems) => {
+    setAddedItems(addedItems.length)
+    const tempForm = { ...form, arrItems: addedItems }
+    setForm(tempForm)
+    setErrMsg('')
+  }
+
+  const saveFunc = () => {
+    selectedForm.txtQuestion = form.txtQuestion
+    selectedForm.txtBlock = form.txtBlock
+    selectedForm.txtInputType = form.txtInputType
+    selectedForm.arrItems = form.arrItems
+    selectedForm.required = form.required
+    if (
+      component === 'basic_singlechoice' ||
+      component === 'basic_multiplechoice' ||
+      component === 'basic_dropdown'
+    ) {
+      if (addedItems > 0) {
+        setErrMsg('')
+        handleSave?.()
+      } else {
+        setErrMsg('Please add an option')
+      }
+    } else {
+      handleSave?.()
+    }
+  }
+
+  const deleteFunc = () => {
+    handleDelete?.()
+  }
+
+  const requireFunc = (checked) => {
+    console.log('checked = ', checked)
+    const tempForm = { ...form, required: checked }
+    setForm(tempForm)
+  }
+  const onChangeQuestion = (value) => {
+    const tempForm = { ...form, txtQuestion: value }
+    setForm(tempForm)
+  }
+
+  const onChangeText = (value) => {
+    const tempForm = { ...form, txtBlock: value }
+    setForm(tempForm)
+  }
+
   const filteredComponent = componentInfos.filter(
     (item) => item.component === component
   )
 
   return (
-    <div className={styles.mainBody}>
-      {filteredComponent && (
-        <LeftSidebarMedicalFormTitle
-          iconUrl={filteredComponent[0].iconUrl}
-          bgcolor={filteredComponent[0].bgcolor}
-          title={filteredComponent[0].title}
-          desc={filteredComponent[0].desc}
-        />
+    <>
+      {filteredComponent.length > 0 && (
+        <SettingMedicalForm>
+          <SettingMedicalFormHeader title="component settings" />
+          <SettingMedicalFormTitle
+            iconUrl={filteredComponent[0].iconUrl}
+            bgcolor={filteredComponent[0].bgcolor}
+            title={filteredComponent[0].title}
+            desc={filteredComponent[0].desc}
+          />
+          <SettingMedicalFormBody>
+            {(filteredComponent[0].component === 'basic_heading' ||
+              filteredComponent[0].component === 'basic_shortanswer' ||
+              filteredComponent[0].component === 'basic_longanswer' ||
+              filteredComponent[0].component === 'basic_singlechoice' ||
+              filteredComponent[0].component === 'basic_multiplechoice' ||
+              filteredComponent[0].component === 'basic_dropdown' ||
+              filteredComponent[0].component === 'basic_conditions' ||
+              filteredComponent[0].component === 'basic_drugs' ||
+              filteredComponent[0].component === 'basic_traveldestination' ||
+              filteredComponent[0].component === 'basic_vaccinescheduler' ||
+              filteredComponent[0].component === 'basic_vaccinehistory' ||
+              filteredComponent[0].component === 'basic_labtests' ||
+              filteredComponent[0].component === 'custom_emailmarketing' ||
+              filteredComponent[0].component === 'custom_smsmarketing' ||
+              filteredComponent[0].component === 'custom_phonecall' ||
+              filteredComponent[0].component === 'custom_lettermarketing' ||
+              filteredComponent[0].component === 'custom_membershipnumber' ||
+              filteredComponent[0].component === 'custom_authorizationcode' ||
+              filteredComponent[0].component === 'custom_company' ||
+              filteredComponent[0].component === 'custom_dob' ||
+              filteredComponent[0].component === 'custom_gender' ||
+              filteredComponent[0].component === 'custom_physicaladdress' ||
+              filteredComponent[0].component === 'custom_postaladdress' ||
+              filteredComponent[0].component === 'custom_referredby' ||
+              filteredComponent[0].component === 'custom_telephonenumber') && (
+              <SettingElementQuestion
+                desc="Enter your question"
+                title="Question"
+                value={form.txtQuestion}
+                onChangeQuestion={onChangeQuestion}
+              />
+            )}
+            {(filteredComponent[0].component === 'basic_signature' ||
+              filteredComponent[0].component === 'basic_drawing') && (
+              <SettingElementQuestion
+                desc="Enter your title"
+                title="Title"
+                value={form.txtQuestion}
+                onChangeQuestion={onChangeQuestion}
+              />
+            )}
+            {filteredComponent[0].component === 'basic_drawing' && (
+              <SettingElementFileUpload
+                title="Image"
+                desc="Click or drag file to this area to upload"
+              />
+            )}
+
+            {filteredComponent[0].component === 'basic_shortanswer' && (
+              <SettingElementTypeOption title="Input type" />
+            )}
+            {filteredComponent[0].component === 'basic_textblock' && (
+              <SettingElementTextBox
+                desc="Enter your text"
+                title="Text"
+                value={form.txtBlock}
+                onChangeText={onChangeText}
+              />
+            )}
+            {(filteredComponent[0].component === 'basic_singlechoice' ||
+              filteredComponent[0].component === 'basic_dropdown') && (
+              <SettingElementOption
+                onChange={eventhandler}
+                paramItems={selectedForm.arrItems}
+              />
+            )}
+            {filteredComponent[0].component === 'basic_multiplechoice' && (
+              <SettingElementMultiOptions
+                onChange={eventhandler}
+                paramItems={selectedForm.arrItems}
+              />
+            )}
+            {(filteredComponent[0].component === 'basic_singlechoice' ||
+              filteredComponent[0].component === 'basic_multiplechoice' ||
+              filteredComponent[0].component === 'basic_dropdown') &&
+              errMsg !== '' && <SettingMedicalFormError errMsg={errMsg} />}
+            {(filteredComponent[0].component === 'basic_shortanswer' ||
+              filteredComponent[0].component === 'basic_longanswer' ||
+              filteredComponent[0].component === 'basic_singlechoice' ||
+              filteredComponent[0].component === 'basic_multiplechoice' ||
+              filteredComponent[0].component === 'basic_dropdown') && (
+              <SettingElementAdvanced />
+            )}
+          </SettingMedicalFormBody>
+          <SettingMedicalFormBottom
+            saveFunc={saveFunc}
+            deleteFunc={deleteFunc}
+            requireFunc={requireFunc}
+            required={selectedForm.required}
+            needLeft={true}
+          />
+        </SettingMedicalForm>
       )}
-    </div>
+    </>
   )
 }
 
-export default LeftSidebarElement
+export default SettingElement

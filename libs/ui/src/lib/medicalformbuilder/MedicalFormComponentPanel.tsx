@@ -6,15 +6,37 @@ import MedicalFormLeftSidebarCustomPanels from './MedicalFormLeftSidebarCustomPa
 
 const { TabPane } = Tabs
 
-const MedicalFormComponentPanel: FC = () => {
+interface medicalForms {
+  id?: number
+  formType?: string
+  formName?: string
+}
+
+interface P {
+  medicalForms: medicalForms[]
+}
+
+const MedicalFormComponentPanel: FC<P> = ({ ...props }) => {
+  const { medicalForms } = props
+
+  const basicMedicalForms = medicalForms.filter(
+    (item) => item.formType === 'basic'
+  )
+
+  const customMedicalForms = medicalForms.filter(
+    (item) => item.formType === 'custom'
+  )
+
   return (
     <div className={styles.MedicalFormComponentPanel}>
       <Tabs defaultActiveKey="1" centered>
         <TabPane tab={<span className={styles.tabName}>Basic</span>} key="1">
-          <MedicalFormLeftSidebarBasicPanels />
+          <MedicalFormLeftSidebarBasicPanels medicalForms={basicMedicalForms} />
         </TabPane>
         <TabPane tab={<span className={styles.tabName}>Custom</span>} key="2">
-          <MedicalFormLeftSidebarCustomPanels />
+          <MedicalFormLeftSidebarCustomPanels
+            medicalForms={customMedicalForms}
+          />
         </TabPane>
       </Tabs>
     </div>

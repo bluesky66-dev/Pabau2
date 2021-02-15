@@ -1,19 +1,93 @@
-import React, { FC } from 'react'
-import backImg from '../../assets/images/medicalform_back.svg'
-import backgroundImg from '../../assets/images/medicalform_builder.svg'
+import React, { FC, useEffect, useRef, useState } from 'react'
+import { Draggable, Droppable } from 'react-beautiful-dnd'
+import InnerElement from '../medicalform/InnerElement'
 import styles from './MedicalFormBuilder.module.less'
 
-const MedicalFormEditMain: FC = () => {
+interface formParams {
+  id: string
+  formType: string
+  formName: string
+  txtQuestion: ''
+  txtBlock: ''
+  txtInputType: ''
+  arrItems: []
+  required: false
+}
+
+interface P {
+  draggedForms?: formParams[]
+  handlingFormSetting?: (formID?: string) => void
+}
+
+function usePrevious(value) {
+  const ref = useRef()
+  useEffect(() => {
+    ref.current = value
+  })
+  return ref.current
+}
+
+const MedicalFormEditMain: FC<P> = ({ ...props }) => {
+  const { draggedForms, handlingFormSetting } = props
+  const [activatedFormID, setActivatedFormID] = useState('')
+  const prevActiveFormID = usePrevious(activatedFormID)
+  const clearActivatedForm = () => {
+    setActivatedFormID('')
+  }
+
+  const handlingSelectForm = (isActive, handleId) => {
+    if (isActive) {
+      setActivatedFormID(handleId)
+    } else {
+      clearActivatedForm()
+    }
+  }
+
+  useEffect(() => {
+    if (prevActiveFormID !== activatedFormID)
+      handlingFormSetting?.(activatedFormID)
+  }, [prevActiveFormID, handlingFormSetting, activatedFormID])
+
   return (
-    <div className={styles.medicalFormEditMainPanel}>
-      <img src={backgroundImg} alt="" />
-      <h1>Start building your form with components</h1>
-      <span>Drag and drop components from the left menu here</span>
-      <div className={styles.medicalFormEditDesc}>
-        <img src={backImg} alt="" />
-        <span>Place your first component here</span>
-      </div>
-    </div>
+    <Droppable droppableId="MainSide">
+      {(provided, snapshot) => (
+        <div
+          className={styles.medicalFormEditMainPanel}
+          ref={provided.innerRef}
+        >
+          {draggedForms?.map((form, index) => {
+            return (
+              <Draggable key={form.id} draggableId={form.id} index={index}>
+                {(provided, snapshot) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    isDragging={snapshot.isDragging}
+                    className={
+                      snapshot.isDragging
+                        ? styles.dndMainDragging
+                        : styles.dndMainNoDragging
+                    }
+                  >
+                    <InnerElement
+                      required={form.required}
+                      activate={activatedFormID === `${form.id}` ? true : false}
+                      type={form.formType}
+                      component={form.formName}
+                      formData={form}
+                      handleId={form.id}
+                      handlingSelectForm={handlingSelectForm}
+                    />
+                  </div>
+                )}
+              </Draggable>
+            )
+          })}
+          {provided.placeholder}
+        </div>
+      )}
+    </Droppable>
   )
 }
 

@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import styles from './LeftSidebarMedicalForm.module.less'
+import styles from './LeftSidebar.module.less'
 
 interface P {
   iconUrl?: string

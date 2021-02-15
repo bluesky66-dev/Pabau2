@@ -6,7 +6,18 @@ import MedicalFormGeneralPanel from './MedicalFormGeneralPanel'
 
 const { Panel } = Collapse
 
-const MedicalFormEditLeft: FC = () => {
+interface formParams {
+  id?: number
+  formType?: string
+  formName?: string
+}
+
+interface P {
+  medicalForms: formParams[]
+}
+
+const MedicalFormEditLeft: FC<P> = ({ ...props }) => {
+  const { medicalForms } = props
   return (
     <div className={styles.medicalFormEditLeftPanel}>
       <Collapse
@@ -26,7 +37,7 @@ const MedicalFormEditLeft: FC = () => {
           key="2"
           className={styles.medicalFormEditLeftPanelCollapseComponent}
         >
-          <MedicalFormComponentPanel />
+          <MedicalFormComponentPanel medicalForms={medicalForms} />
         </Panel>
       </Collapse>
     </div>
