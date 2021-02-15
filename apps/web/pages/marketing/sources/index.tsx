@@ -2,39 +2,37 @@ import { gql } from '@apollo/client'
 import { NextPage } from 'next'
 import React from 'react'
 import CrudLayout from '../../../components/CrudLayout/CrudLayout'
+/* eslint-disable graphql/template-strings */
 
 const LIST_QUERY = gql`
   query marketing_sources(
-    $isActive: Boolean = true
-    $searchTerm: String = ""
+    $public: Int
+    $searchTerm: String
     $offset: Int
     $limit: Int
   ) {
-    marketing_source(
-      offset: $offset
-      limit: $limit
-      order_by: { order: desc }
+    marketingSources(
+      first: $offset
+      last: $limit
       where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
+        public: { equals: $public }
+        OR: [{ AND: [{ source_name: { contains: $searchTerm } }] }]
       }
     ) {
-      __typename
       id
-      name
-      is_active
-      order
+      source_name
+      public
     }
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
   query marketing_source_aggregate(
-    $isActive: Boolean = true
+    $public: Boolean = true
     $searchTerm: String = ""
   ) {
     marketing_source_aggregate(
       where: {
-        is_active: { _eq: $isActive }
+        public: { _eq: $public }
         _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
       }
     ) {
@@ -45,41 +43,52 @@ const LIST_AGGREGATE_QUERY = gql`
   }
 `
 const DELETE_MUTATION = gql`
-  mutation delete_marketing_source($id: uuid!) {
-    delete_marketing_source_by_pk(id: $id) {
+  mutation delete_marketing_source($id: Int) {
+    deleteOneMarketingSource(where: { id: $id }) {
       __typename
       id
     }
   }
 `
+
 const ADD_MUTATION = gql`
-  mutation add_marketing_source($name: String!, $is_active: Boolean) {
-    insert_marketing_source_one(
-      object: { name: $name, is_active: $is_active }
+  mutation add_marketing_source(
+    $imported: Int = 0
+    $is_active: Int = 1
+    $name: String!
+    $custom_id: Int = 0
+    $company_id: Int = 8901 #TODO refactor with actual company_id
+  ) {
+    createOneMarketingSource(
+      data: {
+        company: { connect: { id: $company_id } }
+        imported: $imported
+        source_name: $name
+        public: $is_active
+        custom_id: $custom_id
+      }
     ) {
-      __typename
       id
     }
   }
 `
 const EDIT_MUTATION = gql`
   mutation update_marketing_source_by_pk(
-    $id: uuid!
-    $name: String!
-    $is_active: Boolean
-    $order: Int
+    $id: Int!
+    $source_name: String
+    $public: Int = 1
   ) {
-    update_marketing_source_by_pk(
-      pk_columns: { id: $id }
-      _set: { name: $name, is_active: $is_active, order: $order }
+    updateOneMarketingSource(
+      data: { source_name: { set: $source_name }, public: { set: $public } }
+      where: { id: $id }
     ) {
-      __typename
       id
-      is_active
-      order
     }
   }
 `
+/**
+ * TODO refactor UPDATE_ORDER_MUTATION with legacy db
+ */
 const UPDATE_ORDER_MUTATION = gql`
   mutation update_marketing_source_order($id: uuid!, $order: Int) {
     update_marketing_source(
@@ -90,7 +99,6 @@ const UPDATE_ORDER_MUTATION = gql`
     }
   }
 `
-
 const schema: Schema = {
   full: 'Marketing Source',
   fullLower: 'marketing source',
@@ -112,7 +120,7 @@ const schema: Schema = {
   },
   deleteBtnLabel: 'Yes, Delete Source',
   fields: {
-    name: {
+    source_name: {
       full: 'Friendly Name',
       fullLower: 'friendly name',
       short: 'Name',
@@ -124,14 +132,13 @@ const schema: Schema = {
       cssWidth: 'max',
       type: 'string',
     },
-    is_active: {
+    public: {
       full: 'Active',
-      type: 'boolean',
-      defaultvalue: true,
+      type: 'number',
+      defaultvalue: 1,
     },
   },
 }
-
 export const Index: NextPage = () => {
   return (
     <CrudLayout
