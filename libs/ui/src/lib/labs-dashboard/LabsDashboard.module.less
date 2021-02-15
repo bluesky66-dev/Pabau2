@@ -9,7 +9,7 @@
   .labsDashboardCard {
     background: #ffffff;
     box-shadow: 3px -2px 13px rgba(0, 0, 0, 0.05);
-    border: 1px solid gray;
+    border: 1px solid #ffffff;
     border-radius: 4px;
     min-height: 100vh;
 
@@ -38,9 +38,10 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
 
         .tab {
-          cursor: pointer;
+          // cursor: pointer;
           border: 1px solid #ecedf0;
           box-sizing: border-box;
           border-radius: 4px;
@@ -80,11 +81,25 @@
             }
           }
 
-          &:active,
-          &.active {
-            border-color: #e9faff;
-            background-color: #e9faff;
-            box-shadow: 3px -2px 13px rgba(0, 0, 0, 0.05);
+          // &:active,
+          // &.active {
+          //   border-color: #e9faff;
+          //   background-color: #e9faff;
+          //   box-shadow: 3px -2px 13px rgba(0, 0, 0, 0.05);
+          // }
+
+          @media screen and (max-width: 834px) {
+            & {
+              min-width: 48%;
+              margin-bottom: 20px;
+            }
+          }
+
+          @media screen and (max-width: 320px) {
+            & {
+              min-width: 100%;
+              margin-bottom: 10px;
+            }
           }
         }
       }
@@ -144,22 +159,29 @@
 
         .contentBody {
           :global {
-            .ant-table-thead > tr > th {
-              min-width: 150px !important;
-              background-color: #ffffff;
-              border-top: 1px solid #f1f1f1;
-            }
-            .ant-table-tbody {
-              tr {
-                border-bottom: 1px solid #f1f1f1;
-                td {
-                  min-width: 150px !important;
-                  background-color: transparent;
-                }
-                &:hover {
-                  background: #eef7fb !important;
+            .tableDiv {
+              .ant-table-thead > tr > th {
+                min-width: 150px !important;
+                background-color: #ffffff;
+                border-top: 1px solid #f1f1f1;
+              }
+              .ant-table-tbody {
+                tr {
+                  border-bottom: 1px solid #f1f1f1;
+                  td {
+                    min-width: 150px !important;
+                    background-color: transparent;
+                  }
+                  &:hover {
+                    background: #eef7fb !important;
+                  }
                 }
               }
+            }
+
+            .paginationDiv {
+              padding-right: 20px;
+              padding-left: 20px;
             }
           }
         }

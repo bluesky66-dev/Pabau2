@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import Processing from './assets/processing.svg'
 import Requested from './assets/requested.svg'
 import Received from './assets/received.svg'
@@ -35,28 +35,52 @@ const Tab: FC<TitleCard> = ({ title, subTitle, icon, className, ...rest }) => {
   )
 }
 
-/* eslint-disable-next-line */
-export interface LabsDashboardProps {}
+export interface Breadcrumb {
+  breadcrumbName: string
+  path: string
+}
+export interface Columns {
+  title: string | number
+  dateIndex: string | number
+}
 
-export const LabsDashboard: FC<LabsDashboardProps> = ({ ...props }) => {
-  const [topBannerVisibility, setTopBannerVisibility] = useState(true)
+/* eslint-disable-next-line */
+export interface LabsDashboardProps {
+  apiUrl: string
+  notification?: boolean
+  notificationTitle?: string
+  notificationImagePath?: string
+  notificationDescription?: string
+  breadScrumbs: Breadcrumb[]
+  pageTitle: string
+  tableTitle: string
+  columns: Columns[]
+}
+
+export const LabsDashboard: FC<LabsDashboardProps> = ({
+  apiUrl,
+  notification,
+  notificationTitle,
+  notificationImagePath,
+  notificationDescription,
+  breadScrumbs,
+  pageTitle,
+  tableTitle,
+  columns,
+  ...props
+}) => {
+  const [topBannerVisibility, setTopBannerVisibility] = useState(notification)
   const [loader, setLoader] = useState(false)
   const [dataSource, setDataSource] = useState([])
+  const [selectedRows, setSelectedRows] = useState([])
   const [total, setTotal] = useState(0)
   const [dataStart, setDataStart] = useState(0)
+  const APIKEY = 'QvSIMgCvR9U-eNOm93rgwXA7eSENQz2jrXmb75tji3'
   const limit = 10
-  const columns = []
 
-  const breadcrumbItems = [
-    {
-      breadcrumbName: 'Clients',
-      path: '',
-    },
-    {
-      breadcrumbName: 'Labs',
-      path: '',
-    },
-  ]
+  useEffect(() => {
+    // fetchMessageHistory()
+  }, [])
 
   const fetchMessageHistory = async (page = 1) => {
     try {
@@ -79,18 +103,23 @@ export const LabsDashboard: FC<LabsDashboardProps> = ({ ...props }) => {
     fetchMessageHistory(page)
   }
 
+  const onSelectChange = (selectedRowKeys) => {
+    setSelectedRows(selectedRowKeys)
+  }
+
+  const rowSelection = {
+    selectedRowKeys: [],
+    onChange: onSelectChange,
+  }
+
   return (
     <div className={styles.labsDashboard}>
       {topBannerVisibility && (
         <div className={styles.topBanner}>
           <NotificationBanner
             allowClose
-            desc="We noticed that you are processing lab results, however have not
-          setup integration for “UD Labs”. To receive these automatically.
-          Just have your lab provider send those results to
-          labs+482@pabau.com, and then you can automatically match the results
-          against the patient."
-            imgPath="static/media/notification.8ad6bbd7.png"
+            desc={notificationDescription}
+            imgPath={notificationImagePath}
             setHide={[
               false,
               function noRefCheck() {
@@ -99,7 +128,7 @@ export const LabsDashboard: FC<LabsDashboardProps> = ({ ...props }) => {
                 )
               },
             ]}
-            title="Integrate your Lab"
+            title={notificationTitle}
           />
         </div>
       )}
@@ -107,10 +136,10 @@ export const LabsDashboard: FC<LabsDashboardProps> = ({ ...props }) => {
         <div className={styles.cardHeader}>
           <div>
             <div className={styles.breadScrumb}>
-              <Breadcrumb breadcrumbItems={breadcrumbItems} />
+              <Breadcrumb breadcrumbItems={breadScrumbs} />
             </div>
             <div className={styles.cardTitle}>
-              <h1>Labs</h1>
+              <h1>{pageTitle}</h1>
             </div>
           </div>
           <div>
@@ -131,7 +160,7 @@ export const LabsDashboard: FC<LabsDashboardProps> = ({ ...props }) => {
           <div className={styles.content}>
             <div className={styles.contentHead}>
               <div className="heading">
-                <h1>Tablesheet</h1>
+                <h1>{tableTitle}</h1>
               </div>
               <div className="inputs-div">
                 <div className="search-input">
@@ -175,6 +204,11 @@ export const LabsDashboard: FC<LabsDashboardProps> = ({ ...props }) => {
                   tableLayout="auto"
                   className={styles.dragTable}
                   loading={loader}
+                  scroll={{ x: true }}
+                  rowSelection={{
+                    selectedRowKeys: selectedRows,
+                    onChange: onSelectChange,
+                  }}
                 />
               </div>
               <div className="paginationDiv">
