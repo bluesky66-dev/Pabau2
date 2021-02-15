@@ -31,10 +31,6 @@ const SettingElementOption: FC<P> = ({ onChange, paramItems }) => {
     setaddedItems(paramItems)
   }, [paramItems])
 
-  useEffect(() => {
-    onChange?.(addedItems)
-  }, [addedItems])
-
   const addItem = (event) => {
     event.preventDefault()
     if (items.length === addedItems.length) {
@@ -63,6 +59,7 @@ const SettingElementOption: FC<P> = ({ onChange, paramItems }) => {
     setItems(tempItems)
     if (value.editing === false) {
       setaddedItems(tempItems)
+      onChange?.(tempItems)
     }
   }
 
@@ -71,9 +68,7 @@ const SettingElementOption: FC<P> = ({ onChange, paramItems }) => {
     tempItems.splice(index, 1)
     setItems(tempItems)
     setaddedItems(tempItems)
-    if (onChange) {
-      onChange(items)
-    }
+    onChange?.(tempItems)
   }
 
   const onKeyUp = (event, index, item) => {
