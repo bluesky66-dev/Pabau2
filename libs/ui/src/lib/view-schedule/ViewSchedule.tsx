@@ -76,17 +76,14 @@ export const ViewScheduleModal: FC<ViewScheduleProps> = ({
             >
               <h4>{thread.day}</h4>
               <div className={styles.webinarWrapperModal}>
-                {thread.webinar.length > 0 ? (
+                {thread.webinar.length > 0 &&
                   thread.webinar.map((data) => {
                     return (
                       <div className={styles.webBox} key={data.id}>
                         <Webinar {...data} onClick={onCancelSchedule} />
                       </div>
                     )
-                  })
-                ) : (
-                  <p>No matching data found.</p>
-                )}
+                  })}
               </div>
             </div>
           )
