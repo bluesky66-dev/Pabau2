@@ -20,7 +20,7 @@ import { Typography } from 'antd'
 
 const { Title } = Typography
 
-export function LeadForms() {
+export const LeadForms: React.FC = () => {
   const allAPISteps = ['Basic', 'Configure(API)', 'Testing(API)', 'Result']
   const allFormSteps = ['Basic', 'Customize Form', 'Test Form', 'Result']
   const [activeStepper, setActiveStepper] = useState('API')
