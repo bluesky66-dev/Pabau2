@@ -61,7 +61,7 @@ export const discoverAndLearn = [
       {
         id: '4',
         title: 'Stock Management',
-        name: 'Alexander Turner',
+        name: 'William Brandham',
         time: 'Tuesday, 15 10:00 AM',
         timeLeft: '18:28',
         backgroundImage,
@@ -107,7 +107,7 @@ export const discoverAndLearn = [
         backgroundImage,
         isJoin: true,
         category: 'Startup',
-        length: 25,
+        length: 15,
         difficulty: 'Easy',
       },
       {
@@ -136,7 +136,7 @@ export const discoverAndLearn = [
       {
         id: '10',
         title: 'Advanced Financials',
-        name: 'Hitesh Chaudhary',
+        name: 'Alexander Turner',
         time: 'Tuesday, 15 10:00 AM',
         timeLeft: '18:28',
         backgroundImage,
@@ -173,7 +173,7 @@ export const filterOptions = [
     label: 'Trainer',
     options: [
       'Select',
-      'Alexander Tuner',
+      'Alexander Turner',
       'Hitesh Chaudhary',
       'William Brandham',
     ],
