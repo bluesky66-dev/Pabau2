@@ -9,12 +9,26 @@ export default {
   title: 'UI/Medical Form',
 }
 
-export const LeftSidebarBasicHeading = () => (
-  <LeftSidebarElement type="basic" component="basic_heading" />
+const LeftSidebarBasicHeadingStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
 )
-export const LeftSidebarBasicShortAnswer = () => (
-  <LeftSidebarElement type="basic" component="basic_shortanswer" />
+export const LeftSidebarBasicHeading = LeftSidebarBasicHeadingStory.bind({})
+LeftSidebarBasicHeading.args = {
+  type: 'basic',
+  component: 'basic_heading',
+}
+
+const LeftSidebarBasicShortAnswerStory = ({ ...rest }) => (
+  <LeftSidebarElement {...rest} />
 )
+export const LeftSidebarBasicShortAnswer = LeftSidebarBasicShortAnswerStory.bind(
+  {}
+)
+LeftSidebarBasicShortAnswer.args = {
+  type: 'basic',
+  component: 'basic_shortanswer',
+}
+
 export const LeftSidebarBasicLongAnswer = () => (
   <LeftSidebarElement type="basic" component="basic_longanswer" />
 )
