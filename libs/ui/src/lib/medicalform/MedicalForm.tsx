@@ -4,7 +4,7 @@ import './MedicalForm.module.less'
 /* eslint-disable-next-line */
 interface MedicalFormProps {}
 
-export function MedicalForm(props: MedicalFormProps) {
+function MedicalForm(props: MedicalFormProps) {
   return (
     <div>
       <h1>Welcome to medicalform!</h1>
