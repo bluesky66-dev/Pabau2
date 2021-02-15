@@ -85,7 +85,7 @@ export const LabsDashboard: FC<LabsDashboardProps> = ({
   const fetchMessageHistory = async (page = 1) => {
     try {
       setLoader(true)
-      let url = `${apiUrl}?apikey=${APIKEY}&start=${
+      const url = `${apiUrl}?apikey=${APIKEY}&start=${
         (page - 1) * limit
       }&limit=${limit}`
       const response = await fetch(url)
@@ -94,7 +94,7 @@ export const LabsDashboard: FC<LabsDashboardProps> = ({
       await setTotal(json.total)
       await setLoader(false)
       await setDataStart(json.start + limit)
-    } catch (err) {
+    } catch (error) {
       setLoader(false)
     }
   }
@@ -183,7 +183,9 @@ export const LabsDashboard: FC<LabsDashboardProps> = ({
                       language: 'English (UK)',
                       status: 'require_setup',
                     }}
-                    onApply={() => {}}
+                    onApply={() => {
+                      console.log('APPLIED')
+                    }}
                   />
                 </div>
               </div>

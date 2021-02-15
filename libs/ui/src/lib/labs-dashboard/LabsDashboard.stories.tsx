@@ -37,15 +37,12 @@ const columns = [
     title: 'Requester',
     dataIndex: 'requester',
     visible: true,
-    render: (content) => {
-      return <span style={{ maxWidth: '200px' }}>{content}</span>
-    },
   },
   {
     title: 'Status',
     dataIndex: 'status',
     visible: true,
-    render: (status) => {
+    render: (status: string | number) => {
       return (
         <Button type="default" size="small">
           {status}
