@@ -1,3 +1,4 @@
+import { MEDICAL_FORM_TYPES } from '@pabau/ui'
 import React, { FC, useEffect, useState } from 'react'
 import conditionsIcon from '../../assets/images/medicalform_conditions.svg'
 import customCompanyIcon from '../../assets/images/medicalform_custom_company.svg'
@@ -39,7 +40,7 @@ import SettingMedicalFormTitle from './SettingMedicalFormTitle'
 interface P {
   type?: string
   component?: string
-  selectedForm?: any
+  selectedForm: MEDICAL_FORM_TYPES
   handleSave?: () => void
   handleDelete?: () => void
 }
@@ -321,7 +322,7 @@ const SettingElement: FC<P> = ({
   }
 
   const requireFunc = (checked) => {
-    console.log('checked = ', checked)
+    console.log('checked =', checked)
     const tempForm = { ...form, required: checked }
     setForm(tempForm)
   }

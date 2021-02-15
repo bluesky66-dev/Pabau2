@@ -1,3 +1,4 @@
+import { MEDICAL_FORM_TYPES } from '@pabau/ui'
 import React, { FC } from 'react'
 import conditionsIcon from '../../assets/images/medicalform_conditions.svg'
 import customCompanyIcon from '../../assets/images/medicalform_custom_company.svg'
@@ -37,7 +38,7 @@ interface P {
   type?: string
   component?: string
   handleId?: string
-  formData?: any
+  formData?: MEDICAL_FORM_TYPES
   handlingSelectForm?: (isActive?: boolean, handleId?: string) => void
 }
 
@@ -274,7 +275,7 @@ const InnerElement: FC<P> = ({
               formData.txtBlock !== '' ||
               formData.txtInputType !== '' ||
               formData.formName === 'basic_drawing' ||
-              formData.arrItems.length > 0) && (
+              (formData.arrItems && formData.arrItems.length > 0)) && (
               <InnerMedicalFormBody>
                 {formData.formName === 'basic_drawing' && (
                   <img
@@ -299,7 +300,7 @@ const InnerElement: FC<P> = ({
                   formData.formName !== 'basic_multiplechoice' &&
                   formData.formName !== 'basic_dropdown' && (
                     <p>
-                      {formData.txtBlock.split('\n').map(function (item) {
+                      {formData.txtBlock?.split('\n').map(function (item) {
                         return (
                           <>
                             {item}
@@ -309,7 +310,7 @@ const InnerElement: FC<P> = ({
                       })}
                     </p>
                   )}
-                {(formData.arrItems.length > 0 ||
+                {((formData.arrItems && formData.arrItems?.length > 0) ||
                   formData.txtQuestion !== '') &&
                   (formData.formName === 'basic_singlechoice' ||
                     formData.formName === 'basic_dropdown') && (
@@ -318,7 +319,7 @@ const InnerElement: FC<P> = ({
                       options={formData.arrItems}
                     />
                   )}
-                {(formData.arrItems.length > 0 ||
+                {((formData.arrItems && formData.arrItems.length > 0) ||
                   formData.txtQuestion !== '') &&
                   formData.formName === 'basic_multiplechoice' && (
                     <InnerMedicalFormCheckbox

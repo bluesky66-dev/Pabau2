@@ -1,9 +1,10 @@
+import { MEDICAL_FORM_TYPES } from '@pabau/ui'
 import React, { FC, useEffect, useState } from 'react'
 import SettingElement from '../medicalform/SettingElement'
 import styles from './RightSidebar.module.less'
 
 interface P {
-  selectedForm?: any
+  selectedForm?: MEDICAL_FORM_TYPES
   component?: string
   formType?: string
   display?: boolean
@@ -37,7 +38,7 @@ const RightSidebar: FC<P> = ({
   }
   const handleDelete = () => {
     setIsVisible(false)
-    handlingDeleteForm?.(selectedForm.id)
+    handlingDeleteForm?.(selectedForm?.id)
   }
 
   return (
@@ -49,7 +50,7 @@ const RightSidebar: FC<P> = ({
         <SettingElement
           type={formType}
           component={component}
-          selectedForm={selectedForm}
+          selectedForm={selectedForm ? selectedForm : {}}
           handleSave={handleSave}
           handleDelete={handleDelete}
         />
