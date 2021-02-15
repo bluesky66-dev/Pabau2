@@ -50,6 +50,7 @@
     "@nestjs/platform-express": "^7.6.12",
     "@prisma/client": "^2.16.1",
     "@storybook/addon-docs": "^6.1.15",
+    "@zeit/next-less": "1.0.1",
     "antd": "https://github.com/binary64/ant-design/releases/download/master/antd-4.10.3.tgz",
     "apollo": "^2.32.1",
     "apollo-server": "^2.20.0",
