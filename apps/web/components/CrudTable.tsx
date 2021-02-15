@@ -155,48 +155,47 @@ const CrudTable: FC<P> = ({
 
   const onSubmit = async (values, { resetForm }) => {
     console.log('got submittal!', values)
-    if (values.id)
-      await editMutation({
-        variables: values,
-        optimisticResponse: {},
-        update: (proxy) => {
-          if (listQuery) {
-            const existing = proxy.readQuery({
-              query: listQuery,
-            })
-            if (existing) {
-              const key = Object.keys(existing)[0]
-              proxy.writeQuery({
+    await (values.id
+      ? editMutation({
+          variables: values,
+          optimisticResponse: {},
+          update: (proxy) => {
+            if (listQuery) {
+              const existing = proxy.readQuery({
                 query: listQuery,
-                data: {
-                  [key]: [...existing[key], values],
-                },
               })
+              if (existing) {
+                const key = Object.keys(existing)[0]
+                proxy.writeQuery({
+                  query: listQuery,
+                  data: {
+                    [key]: [...existing[key], values],
+                  },
+                })
+              }
             }
-          }
-        },
-      })
-    else
-      await addMutation({
-        variables: values,
-        optimisticResponse: {},
-        update: (proxy) => {
-          if (listQuery) {
-            const existing = proxy.readQuery({
-              query: listQuery,
-            })
-            if (existing) {
-              const key = Object.keys(existing)[0]
-              proxy.writeQuery({
+          },
+        })
+      : addMutation({
+          variables: values,
+          optimisticResponse: {},
+          update: (proxy) => {
+            if (listQuery) {
+              const existing = proxy.readQuery({
                 query: listQuery,
-                data: {
-                  [key]: [...existing[key], values],
-                },
               })
+              if (existing) {
+                const key = Object.keys(existing)[0]
+                proxy.writeQuery({
+                  query: listQuery,
+                  data: {
+                    [key]: [...existing[key], values],
+                  },
+                })
+              }
             }
-          }
-        },
-      })
+          },
+        }))
     resetForm()
     setModalShowing(false)
   }
@@ -274,16 +273,16 @@ const CrudTable: FC<P> = ({
       enableReinitialize={true}
       validate={(e) =>
         Object.entries(fields).reduce((a, c) => {
-          if (c[1].min) {
+          if (
+            c[1].min && // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            c[1].min > e[c[0]].length
+          ) {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            if (c[1].min > e[c[0]].length) {
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              a[
-                c[0]
-              ] = `The value for ${c[1].shortLower} must be more than ${c[1].min} characters.`
-            }
+            a[
+              c[0]
+            ] = `The value for ${c[1].shortLower} must be more than ${c[1].min} characters.`
           }
           return a
           // eslint-disable-next-line
@@ -406,7 +405,7 @@ const CrudTable: FC<P> = ({
                 }
               }
               setSourceData(newData)
-              console.log('newData, oldIndex, newIndex ', {
+              console.log('newData, oldIndex, newIndex', {
                 newData,
                 oldIndex,
                 newIndex,

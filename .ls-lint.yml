@@ -1,0 +1,11 @@
+ls:
+  libs:
+
+  .js: point.case
+
+#  .js: regex:[a-z0-9]+ # the final regex pattern will be ^[a-z0-9]+$
+
+ignore:
+  - .git
+  - node_modules
+  - dist

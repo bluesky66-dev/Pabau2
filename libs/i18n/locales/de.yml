@@ -1,0 +1,39 @@
+de:
+    marketingsource-header-create: 'Erstellen Sie eine Marketingquelle'
+    marketingsource-title: ''
+    marketingsource-name-textfield: Name
+    marketingsource-name-placeholder: 'Z.B. Facebook'
+    marketingsource-header-edit: 'Marketingquelle bearbeiten'
+    KEY: ''
+    search.placeholder: ''
+    avatar.balance: ''
+    avatar.account.settings: ''
+    avatar.tasks: ''
+    avatar.give.feedback: ''
+    avatar.help.support: ''
+    avatar.help.support.header: ''
+    avatar.help.support.centre: ''
+    avatar.help.video.guides: ''
+    avatar.help.contact.support: ''
+    avatar.select.language: ''
+    avatar.change.company: ''
+    avatar.logout: ''
+    search.client.label: ''
+    search.lead.label: ''
+    search.result.one: ''
+    search.result.two: ''
+    search.new.client: ''
+    search.advanced.search: ''
+    notifications.header: ''
+    notifications.tab.activity: Aktivität
+    notifications.tab.news: Nachrichten
+    notifications.today: Heute
+    notifications.yesterday: Gestern
+    notifications.report: Bericht
+    notifications.appointment: 'Geplanter Termin'
+    notifications.lead: Führt
+    news.learn: 'Mehr erfahren'
+    marketingsource-input-search: Suche
+    james-testing-1: ''
+    james-testing-2: ''
+    james-test-3: ''
