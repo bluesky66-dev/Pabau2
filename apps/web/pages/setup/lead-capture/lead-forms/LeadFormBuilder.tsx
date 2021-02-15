@@ -1,12 +1,69 @@
 import React, { useState } from 'react'
 import { Row, Select } from 'antd'
 import { ColorPicker, RegistrationFields, FieldType } from '@pabau/ui'
-import { fields } from './mock'
 import styles from './Lead-forms.module.less'
 import classNames from 'classnames'
 
 const { Option } = Select
 
+const fields: FieldType[] = [
+  {
+    key: 1,
+    fieldName: 'First Name',
+    visible: true,
+    required: true,
+    disabled: true,
+  },
+  {
+    key: 2,
+    fieldName: 'Last Name',
+    visible: true,
+    required: true,
+    disabled: true,
+  },
+  {
+    fieldName: 'Date of Birth',
+    visible: false,
+    required: false,
+    disabled: false,
+    key: 3,
+  },
+  {
+    key: 4,
+    fieldName: 'Telephone',
+    visible: false,
+    required: false,
+    disabled: false,
+  },
+  {
+    key: 5,
+    fieldName: 'Email',
+    visible: false,
+    required: false,
+    disabled: false,
+  },
+  {
+    key: 6,
+    fieldName: 'City',
+    visible: false,
+    required: false,
+    disabled: false,
+  },
+  {
+    key: 7,
+    fieldName: 'I low did you hear about us',
+    visible: false,
+    required: false,
+    disabled: false,
+  },
+  {
+    key: 8,
+    fieldName: 'Message',
+    visible: false,
+    required: false,
+    disabled: false,
+  },
+]
 export const LeadFormBuilder: React.FC = () => {
   const [mainFields, setMainFields] = useState<FieldType[]>(fields)
   const [customField, setCustomField] = useState<FieldType[]>([])
