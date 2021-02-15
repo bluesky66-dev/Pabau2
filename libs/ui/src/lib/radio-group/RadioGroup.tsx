@@ -27,7 +27,7 @@ export const RadioGroup: FC<RadioGroupProps> = ({
   }
 
   useEffect(() => {
-    const elIndex = radioItems.indexOf(value)
+    const elIndex = radioItems.indexOf(value.toString())
     if (elIndex < 0) {
       setRadioChecked(0)
     } else {
