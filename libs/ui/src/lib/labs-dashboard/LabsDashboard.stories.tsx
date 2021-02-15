@@ -81,7 +81,6 @@ export default {
     columns: columns,
     tableTitle: 'Tablesheet',
   },
-  argTypes: {},
 }
 
 const LabsDashboardStory = ({ ...args }) => <LabsDashboard {...args} />
