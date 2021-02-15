@@ -1,15 +1,11 @@
-import React from 'react'
+import React, { FC } from 'react'
 import './MedicalForm.module.less'
 
-/* eslint-disable-next-line */
-interface MedicalFormProps {}
-
-function MedicalForm(props: MedicalFormProps) {
+const MedicalForm: FC = () => {
   return (
     <div>
       <h1>Welcome to medicalform!</h1>
     </div>
   )
 }
-
 export default MedicalForm
