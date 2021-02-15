@@ -17,7 +17,7 @@
   margin-bottom: 20px;
 }
 .avatar {
-  margin: 25px auto auto 52.4px;;
+  margin: 25px 0 8px 52.4px;
 }
 .name {
   left: 0;
@@ -37,8 +37,7 @@
   order: 0;
   -webkit-flex-grow: 0;
   flex-grow: 0;
-  margin: 10px 0 4px;
-  //margin-top: 16px;
+  margin: auto;
 
 }
 .btnVacationPending {
@@ -70,6 +69,10 @@
 }
 .wrapper {
   width: 100%;
+    .avatar-status img{
+      height: 10px;
+    }
+
 }
 .inner {
   border: 1px solid #9292A3;
@@ -107,5 +110,29 @@
   margin: 4px;
 }
 .vacationWrapper {
-  margin-top: 17px;
+}
+.btnOwner {
+  width: 48px;
+  font-size: 12px;
+  text-align: -webkit-center;
+  height: 22px;
+  color: #54B2D3;
+  padding: 0;
+  margin-top: 11px;
+  position: absolute;
+}
+.titleWrapper{
+  justify-content: center;
+  display: inline-flex;
+  margin: auto;
+  text-align: center;
+  width: 100%;
+}
+.admin{
+  padding-top: 5px;
+  svg {
+    transform: rotate(180deg);
+    size: 10px;
+    fill: #9292A3
+  }
 }
