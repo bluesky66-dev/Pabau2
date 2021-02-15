@@ -13,7 +13,8 @@ const Index: FC = () => {
       <div>
         <Link href="/marketing/sources">
           <a>Sources</a>
-        </Link>
+        </Link>{' '}
+        -
         <Link href="/marketing/campaigns">
           <a>Campaigns</a>
         </Link>

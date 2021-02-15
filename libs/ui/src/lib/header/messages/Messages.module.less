@@ -25,6 +25,7 @@
   .chat-icon-style {
     font-size: 16px;
     color: #9292a3;
+    cursor: pointer;
   }
   .close-icon {
     padding-right: 24px;
@@ -433,7 +434,6 @@
 }
 
 @media (min-width: 200px) and (max-width: 767px) {
-
   .messages-drawer {
     :global {
       .ant-drawer-content-wrapper {
@@ -453,31 +453,30 @@
     .ant-modal-content {
       .ant-modal-body {
         padding: 0 40px !important;
-         div {
-           &:last-child {
-             padding-left: 0 !important;
-             padding-right: 0 !important;
-             :global .ant-btn[disabled] {
-               background: #F2F5F7 !important;
-               border: 1px solid #E8E8E8;
-               border-radius: 4px;
-               font-weight: 500;
-               font-size: 14px;
-               line-height: 18px;
-               height: 40px;
-               text-transform: capitalize;
-               color: #CFCFD7;
-             }
-           }
+        div {
+          &:last-child {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            :global .ant-btn[disabled] {
+              background: #f2f5f7 !important;
+              border: 1px solid #e8e8e8;
+              border-radius: 4px;
+              font-weight: 500;
+              font-size: 14px;
+              line-height: 18px;
+              height: 40px;
+              text-transform: capitalize;
+              color: #cfcfd7;
+            }
+          }
         }
       }
     }
   }
-
 }
 .content {
   margin: 0 150px 28px 0;
-  color: #9292A3;
+  color: #9292a3;
 }
 
 .textControl {
@@ -486,7 +485,7 @@
 .nameInput {
   :global {
     .ant-input-suffix {
-      color: #9292A3;
+      color: #9292a3;
     }
   }
 }
@@ -496,7 +495,7 @@
 }
 
 .switchText {
-  color: #9292A3;
+  color: #9292a3;
   flex: 55%;
 }
 
@@ -505,4 +504,3 @@
   justify-content: flex-end;
   text-align: right;
 }
-

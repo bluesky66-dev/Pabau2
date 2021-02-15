@@ -118,25 +118,24 @@ export const MessageContainer: FC<P> = ({ ...props }) => {
                 placeholder=" Type the name of a channel or people"
                 onChange={handleSelectChange}
               >
-                {members &&
-                  members.map((member) => (
-                    <Option
-                      key={member.userName}
-                      value={member.userName}
-                      label={member.userName}
-                    >
-                      <div>
-                        <span role="img">
-                          <Avatar
-                            className={styles.memberAvatar}
-                            size={32}
-                            src={member.profileURL}
-                          />
-                        </span>
-                        {` ${member.userName}`}
-                      </div>
-                    </Option>
-                  ))}
+                {members?.map((member) => (
+                  <Option
+                    key={member.userName}
+                    value={member.userName}
+                    label={member.userName}
+                  >
+                    <div>
+                      <span role="img">
+                        <Avatar
+                          className={styles.memberAvatar}
+                          size={32}
+                          src={member.profileURL}
+                        />
+                      </span>
+                      {` ${member.userName}`}
+                    </div>
+                  </Option>
+                ))}
               </Select>
             </div>
           </div>

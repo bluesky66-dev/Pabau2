@@ -9,7 +9,9 @@ const Grid = (props: p) => {
   const { data } = props
   return (
     <div className={styles.gridWrapper}>
-      {data && data.map((value, index) => <SetupGrid key={index} {...value} />)}
+      {data?.map((value, index) => (
+        <SetupGrid key={index} {...value} />
+      ))}
     </div>
   )
 }

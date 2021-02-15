@@ -40,6 +40,7 @@
     "connect": { "tags": [], "implicitDependencies": ["backend"] },
     "connect-e2e": { "tags": [], "implicitDependencies": ["connect"] },
     "mobile": { "tags": [] },
-    "bridge-api": { "tags": [] }
+    "bridge-api": { "tags": [] },
+    "i18n": { "tags": [] }
   }
 }
