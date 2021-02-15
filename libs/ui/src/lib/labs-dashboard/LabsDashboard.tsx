@@ -34,11 +34,6 @@ const Tab: FC<TitleCard> = ({ title, subTitle, icon, className, ...rest }) => {
     </div>
   )
 }
-
-interface BreadcrumbItems {
-  breadcrumbName: string
-  path: string
-}
 interface Columns {
   title: string | number
   dateIndex: string | number
@@ -49,7 +44,6 @@ export interface LabsDashboardProps {
   notificationTitle?: string
   notificationImagePath?: string
   notificationDescription?: string
-  breadScrumbs: BreadcrumbItems[]
   pageTitle: string
   tableTitle: string
   columns: Columns[]
@@ -61,7 +55,6 @@ export const LabsDashboard: FC<LabsDashboardProps> = ({
   notificationTitle,
   notificationImagePath,
   notificationDescription,
-  breadScrumbs,
   pageTitle,
   tableTitle,
   columns,
@@ -81,20 +74,16 @@ export const LabsDashboard: FC<LabsDashboardProps> = ({
   }, [])
 
   const fetchMessageHistory = async (page = 1) => {
-    try {
-      setLoader(true)
-      const url = `${apiUrl}?apikey=${APIKEY}&start=${
-        (page - 1) * limit
-      }&limit=${limit}`
-      const response = await fetch(url)
-      const json = await response.json()
-      await setDataSource(json.messages)
-      await setTotal(json.total)
-      await setLoader(false)
-      await setDataStart(json.start + limit)
-    } catch (error) {
-      setLoader(false)
-    }
+    setLoader(true)
+    const url = `${apiUrl}?apikey=${APIKEY}&start=${
+      (page - 1) * limit
+    }&limit=${limit}`
+    const response = await fetch(url)
+    const json = await response.json()
+    await setDataSource(json.messages)
+    await setTotal(json.total)
+    await setLoader(false)
+    await setDataStart(json.start + limit)
   }
 
   const fetchMore = async (page) => {
@@ -103,11 +92,6 @@ export const LabsDashboard: FC<LabsDashboardProps> = ({
 
   const onSelectChange = (selectedRowKeys) => {
     setSelectedRows(selectedRowKeys)
-  }
-
-  const rowSelection = {
-    selectedRowKeys: [],
-    onChange: onSelectChange,
   }
 
   return (
@@ -134,7 +118,18 @@ export const LabsDashboard: FC<LabsDashboardProps> = ({
         <div className={styles.cardHeader}>
           <div>
             <div className={styles.breadScrumb}>
-              <Breadcrumb breadcrumbItems={breadScrumbs} />
+              <Breadcrumb
+                breadcrumbItems={[
+                  {
+                    breadcrumbName: 'Clients',
+                    path: '',
+                  },
+                  {
+                    breadcrumbName: 'Labs',
+                    path: '',
+                  },
+                ]}
+              />
             </div>
             <div className={styles.cardTitle}>
               <h1>{pageTitle}</h1>

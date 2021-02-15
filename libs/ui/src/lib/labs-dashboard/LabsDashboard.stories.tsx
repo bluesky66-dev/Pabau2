@@ -42,24 +42,6 @@ const columns = [
     title: 'Status',
     dataIndex: 'status',
     visible: true,
-    render: (status: string | number) => {
-      return (
-        <Button type="default" size="small">
-          {status}
-        </Button>
-      )
-    },
-  },
-]
-
-const breadcrumbItems = [
-  {
-    breadcrumbName: 'Clients',
-    path: '',
-  },
-  {
-    breadcrumbName: 'Labs',
-    path: '',
   },
 ]
 
@@ -76,7 +58,6 @@ export default {
     Just have your lab provider send those results to
     labs+482@pabau.com, and then you can automatically match the results
     against the patient.`,
-    breadcrumbItems: breadcrumbItems,
     pageTitle: 'Labs',
     columns: columns,
     tableTitle: 'Tablesheet',
