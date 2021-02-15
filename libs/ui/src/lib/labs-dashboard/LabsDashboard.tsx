@@ -43,8 +43,6 @@ interface Columns {
   title: string | number
   dateIndex: string | number
 }
-
-/* eslint-disable-next-line */
 export interface LabsDashboardProps {
   apiUrl: string
   notification?: boolean
