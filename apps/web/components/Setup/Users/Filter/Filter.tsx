@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
-import { Button, MobileHeader } from '@pabau/ui'
-import addButtonStyles from '../../../../AddButton.module.less'
+import { Button, MobileHeader, GridVsList } from '@pabau/ui'
+import addButtonStyles from '../../../AddButton.module.less'
 import styles from './Filter.module.less'
 import {
   FilterOutlined,
@@ -29,7 +29,7 @@ export const Filter: FunctionComponent<P> = ({
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      onSearch && onSearch(marketingSourceSearch)
+      onSearch?.(marketingSourceSearch)
     }, WAIT_INTERVAL)
 
     return () => clearTimeout(timer)

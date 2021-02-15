@@ -2,11 +2,11 @@ import React, { FunctionComponent } from 'react'
 import Layout from '../../../components/Layout/Layout'
 import CommonHeader from '../CommonHeader'
 import { Pagination, UserTile, TabMenu } from '@pabau/ui'
-import { Filter } from '../../../components/modules/setup/users'
-import { Breadcrumb, BreadcrumbItemInterface } from '@pabau/ui'
+import { Filter } from '../../../components/Setup/Users'
+import { Breadcrumb } from '@pabau/ui'
 import { Typography } from 'antd'
 import styles from './Users.module.less'
-import { mockUsers } from '../../../components/modules/setup/users/mock'
+import { mockUsers } from '../../../components/Setup/Users/mock'
 const { Title } = Typography
 
 const Index: FunctionComponent = () => {

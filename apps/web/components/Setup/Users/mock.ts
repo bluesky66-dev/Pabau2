@@ -1,8 +1,8 @@
-import austin from '../../../../../../libs/ui/src/assets/images/users/austin.png'
-import james from '../../../../../../libs/ui/src/assets/images/users/james.png'
-import linda from '../../../../../../libs/ui/src/assets/images/users/linda.png'
-import arya from '../../../../../../libs/ui/src/assets/images/users/arya.png'
-import alex from '../../../../../../libs/ui/src/assets/images/users/alex.png'
+import austin from '../../../../../libs/ui/src/assets/images/users/austin.png'
+import james from '../../../../../libs/ui/src/assets/images/users/james.png'
+import linda from '../../../../../libs/ui/src/assets/images/users/linda.png'
+import arya from '../../../../../libs/ui/src/assets/images/users/arya.png'
+import alex from '../../../../../libs/ui/src/assets/images/users/alex.png'
 
 export const mockUsers = [
   //TODO Remove once users endpoints are implemented
