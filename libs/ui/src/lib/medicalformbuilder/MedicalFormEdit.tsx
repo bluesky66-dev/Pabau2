@@ -3,6 +3,7 @@ import React, { FC, useState } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { v4 as uuidv4 } from 'uuid'
 import RightSidebar from '../rightsidebar/RightSidebar'
+import styles from './MedicalFormBuilder.module.less'
 import MedicalFormEditLeft from './MedicalFormEditLeft'
 import MedicalFormEditMain from './MedicalFormEditMain'
 
@@ -110,7 +111,7 @@ const MedicalFormEdit: FC = () => {
         <Col span={6}>
           <MedicalFormEditLeft medicalForms={medicalForms} />
         </Col>
-        <Col span={11}>
+        <Col span={11} className={styles.MedicalFormEditMain}>
           <MedicalFormEditMain
             draggedForms={draggedForms}
             handlingFormSetting={handlingFormSetting}
