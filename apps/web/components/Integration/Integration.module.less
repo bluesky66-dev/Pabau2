@@ -1,0 +1,115 @@
+.tab-menu-wrapper {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+
+  .collection-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+
+    .collection-box {
+      max-width: 290px;
+      min-width: 290px;
+      padding: 24px;
+      margin-right: 29px;
+      background: linear-gradient(254.53deg, #E86D22 0%, #FDB720 100%);
+      border-radius: 10px;
+      margin-bottom: 29px;
+
+      &:nth-of-type(2) {
+        background: linear-gradient(254.53deg, #077DFF 0%, #5AA8FF 100%);
+      }
+
+      &:nth-of-type(3) {
+        background: linear-gradient(254.53deg, #6E4BF6 0%, #B94AF4 100%);
+      }
+
+      h4 {
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 32px;
+        height: 64px;
+        color: #FFFFFF;
+        margin-bottom: 24px;
+      }
+
+      .btn-coll {
+        border-radius: 4px;
+        background: transparent;
+        border: 1px solid #fff;
+        font-size: 14px;
+        line-height: 20px;
+        color: #fff;
+      }
+    }
+  }
+}
+
+.item-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 24px;
+
+  .item-box {
+    padding: 16px;
+    max-width: 296px;
+    min-width: 296px;
+    background: #FFFFFF;
+    border: 1px solid #ECEDF0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin-right: 20px;
+    position: relative;
+    margin-bottom: 20px;
+
+    .img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 16px;
+    }
+
+    h5 {
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 18px;
+      color: #3D3D46;
+      padding-left: 0;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 18px;
+      color: #9292A3;
+      margin-bottom: 0;
+      height: 54px;
+      overflow: auto;
+    }
+
+    .check-wrap {
+      display: none;
+    }
+
+    &.active {
+      border: 1px solid #54B2D3;
+
+      .check-wrap {
+        width: 21px;
+        height: 21px;
+        border-radius: 50%;
+        background: #54B2D3;
+        position: absolute;
+        right: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        :global .anticon {
+          svg {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
