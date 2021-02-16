@@ -32,6 +32,9 @@ interface P {
   aggregateQuery?: DocumentNode
   tableSearch?: boolean
   updateOrderQuery?: DocumentNode
+  createPage?: boolean
+  createPageOnClick?: () => void
+  addFilter?: boolean
 }
 
 const CrudTable: FC<P> = ({
@@ -43,6 +46,9 @@ const CrudTable: FC<P> = ({
   aggregateQuery,
   tableSearch = true,
   updateOrderQuery,
+  createPage,
+  createPageOnClick,
+  addFilter,
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [isActive, setIsActive] = useState(true)
@@ -352,13 +358,22 @@ const CrudTable: FC<P> = ({
               />
               <Title>{schema.full || schema.short}</Title>
             </div>
-            {addQuery && (
+            {addQuery && !createPage ? (
               <AddButton
                 onClick={createNew}
                 onFilterSource={onFilterMarketingSource}
                 onSearch={onSearch}
                 schema={schema}
                 tableSearch={tableSearch}
+              />
+            ) : (
+              <AddButton
+                onClick={createPageOnClick}
+                onFilterSource={onFilterMarketingSource}
+                onSearch={onSearch}
+                schema={schema}
+                tableSearch={tableSearch}
+                addFilter={addFilter}
               />
             )}
           </div>

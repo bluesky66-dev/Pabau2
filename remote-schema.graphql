@@ -36,11 +36,11 @@ type Labs {
   created_at: timestamptz!
   email: String!
   id: uuid!
-  integration: Boolean!
+  integration: Boolean
   is_active: Boolean!
   name: String!
   order: Int!
-  phone: numeric!
+  phone: String!
   postal_code: numeric!
   provider_number: numeric!
   street: String!
@@ -73,7 +73,6 @@ type Labs_aggregate_fields {
 """aggregate avg on columns"""
 type Labs_avg_fields {
   order: Float
-  phone: Float
   postal_code: Float
   provider_number: Float
 }
@@ -91,7 +90,7 @@ input Labs_bool_exp {
   is_active: Boolean_comparison_exp
   name: String_comparison_exp
   order: Int_comparison_exp
-  phone: numeric_comparison_exp
+  phone: String_comparison_exp
   postal_code: numeric_comparison_exp
   provider_number: numeric_comparison_exp
   street: String_comparison_exp
@@ -112,7 +111,6 @@ input type for incrementing numeric columns in table "Labs"
 """
 input Labs_inc_input {
   order: Int
-  phone: numeric
   postal_code: numeric
   provider_number: numeric
 }
@@ -127,7 +125,7 @@ input Labs_insert_input {
   is_active: Boolean
   name: String
   order: Int
-  phone: numeric
+  phone: String
   postal_code: numeric
   provider_number: numeric
   street: String
@@ -142,7 +140,7 @@ type Labs_max_fields {
   id: uuid
   name: String
   order: Int
-  phone: numeric
+  phone: String
   postal_code: numeric
   provider_number: numeric
   street: String
@@ -158,7 +156,7 @@ type Labs_min_fields {
   id: uuid
   name: String
   order: Int
-  phone: numeric
+  phone: String
   postal_code: numeric
   provider_number: numeric
   street: String
@@ -250,7 +248,7 @@ input Labs_set_input {
   is_active: Boolean
   name: String
   order: Int
-  phone: numeric
+  phone: String
   postal_code: numeric
   provider_number: numeric
   street: String
@@ -259,28 +257,24 @@ input Labs_set_input {
 """aggregate stddev on columns"""
 type Labs_stddev_fields {
   order: Float
-  phone: Float
   postal_code: Float
   provider_number: Float
 }
 """aggregate stddev_pop on columns"""
 type Labs_stddev_pop_fields {
   order: Float
-  phone: Float
   postal_code: Float
   provider_number: Float
 }
 """aggregate stddev_samp on columns"""
 type Labs_stddev_samp_fields {
   order: Float
-  phone: Float
   postal_code: Float
   provider_number: Float
 }
 """aggregate sum on columns"""
 type Labs_sum_fields {
   order: Int
-  phone: numeric
   postal_code: numeric
   provider_number: numeric
 }
@@ -316,21 +310,18 @@ enum Labs_update_column {
 """aggregate var_pop on columns"""
 type Labs_var_pop_fields {
   order: Float
-  phone: Float
   postal_code: Float
   provider_number: Float
 }
 """aggregate var_samp on columns"""
 type Labs_var_samp_fields {
   order: Float
-  phone: Float
   postal_code: Float
   provider_number: Float
 }
 """aggregate variance on columns"""
 type Labs_variance_fields {
   order: Float
-  phone: Float
   postal_code: Float
   provider_number: Float
 }
@@ -593,6 +584,209 @@ input bigint_comparison_exp {
   _lte: bigint
   _neq: bigint
   _nin: [bigint!]
+}
+"""
+columns and relationships of "cancellation_reasons"
+"""
+type cancellation_reasons {
+  cancellation_policy: String!
+  created_at: timestamptz!
+  id: uuid!
+  is_active: Boolean!
+  name: String!
+  order: Int!
+  type: String!
+  updated_at: timestamptz!
+}
+"""
+aggregated selection of "cancellation_reasons"
+"""
+type cancellation_reasons_aggregate {
+  aggregate: cancellation_reasons_aggregate_fields
+  nodes: [cancellation_reasons!]!
+}
+"""
+aggregate fields of "cancellation_reasons"
+"""
+type cancellation_reasons_aggregate_fields {
+  avg: cancellation_reasons_avg_fields
+  count(columns: [cancellation_reasons_select_column!], distinct: Boolean): Int!
+  max: cancellation_reasons_max_fields
+  min: cancellation_reasons_min_fields
+  stddev: cancellation_reasons_stddev_fields
+  stddev_pop: cancellation_reasons_stddev_pop_fields
+  stddev_samp: cancellation_reasons_stddev_samp_fields
+  sum: cancellation_reasons_sum_fields
+  var_pop: cancellation_reasons_var_pop_fields
+  var_samp: cancellation_reasons_var_samp_fields
+  variance: cancellation_reasons_variance_fields
+}
+"""aggregate avg on columns"""
+type cancellation_reasons_avg_fields {
+  order: Float
+}
+"""Boolean expression to filter rows from the table "cancellation_reasons". All fields are combined with a logical 'AND'."""
+input cancellation_reasons_bool_exp {
+  _and: [cancellation_reasons_bool_exp!]
+  _not: cancellation_reasons_bool_exp
+  _or: [cancellation_reasons_bool_exp!]
+  cancellation_policy: String_comparison_exp
+  created_at: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  is_active: Boolean_comparison_exp
+  name: String_comparison_exp
+  order: Int_comparison_exp
+  type: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+"""
+unique or primary key constraints on table "cancellation_reasons"
+"""
+enum cancellation_reasons_constraint {
+  """unique or primary key constraint"""
+  cancellation_reasons_pkey
+}
+"""
+input type for incrementing numeric columns in table "cancellation_reasons"
+"""
+input cancellation_reasons_inc_input {
+  order: Int
+}
+"""
+input type for inserting data into table "cancellation_reasons"
+"""
+input cancellation_reasons_insert_input {
+  cancellation_policy: String
+  is_active: Boolean
+  name: String
+  order: Int
+  type: String
+}
+"""aggregate max on columns"""
+type cancellation_reasons_max_fields {
+  cancellation_policy: String
+  created_at: timestamptz
+  id: uuid
+  name: String
+  order: Int
+  type: String
+  updated_at: timestamptz
+}
+"""aggregate min on columns"""
+type cancellation_reasons_min_fields {
+  cancellation_policy: String
+  created_at: timestamptz
+  id: uuid
+  name: String
+  order: Int
+  type: String
+  updated_at: timestamptz
+}
+"""
+response of any mutation on the table "cancellation_reasons"
+"""
+type cancellation_reasons_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+  """data from the rows affected by the mutation"""
+  returning: [cancellation_reasons!]!
+}
+"""
+on conflict condition type for table "cancellation_reasons"
+"""
+input cancellation_reasons_on_conflict {
+  constraint: cancellation_reasons_constraint!
+  update_columns: [cancellation_reasons_update_column!]!
+  where: cancellation_reasons_bool_exp
+}
+"""Ordering options when selecting data from "cancellation_reasons"."""
+input cancellation_reasons_order_by {
+  cancellation_policy: order_by
+  created_at: order_by
+  id: order_by
+  is_active: order_by
+  name: order_by
+  order: order_by
+  type: order_by
+  updated_at: order_by
+}
+"""primary key columns input for table: cancellation_reasons"""
+input cancellation_reasons_pk_columns_input {
+  id: uuid!
+}
+"""
+select columns of table "cancellation_reasons"
+"""
+enum cancellation_reasons_select_column {
+  """column name"""
+  cancellation_policy
+  """column name"""
+  created_at
+  """column name"""
+  id
+  """column name"""
+  is_active
+  """column name"""
+  name
+  """column name"""
+  order
+  """column name"""
+  type
+  """column name"""
+  updated_at
+}
+"""
+input type for updating data in table "cancellation_reasons"
+"""
+input cancellation_reasons_set_input {
+  cancellation_policy: String
+  is_active: Boolean
+  name: String
+  order: Int
+  type: String
+}
+"""aggregate stddev on columns"""
+type cancellation_reasons_stddev_fields {
+  order: Float
+}
+"""aggregate stddev_pop on columns"""
+type cancellation_reasons_stddev_pop_fields {
+  order: Float
+}
+"""aggregate stddev_samp on columns"""
+type cancellation_reasons_stddev_samp_fields {
+  order: Float
+}
+"""aggregate sum on columns"""
+type cancellation_reasons_sum_fields {
+  order: Int
+}
+"""
+update columns of table "cancellation_reasons"
+"""
+enum cancellation_reasons_update_column {
+  """column name"""
+  cancellation_policy
+  """column name"""
+  is_active
+  """column name"""
+  name
+  """column name"""
+  order
+  """column name"""
+  type
+}
+"""aggregate var_pop on columns"""
+type cancellation_reasons_var_pop_fields {
+  order: Float
+}
+"""aggregate var_samp on columns"""
+type cancellation_reasons_var_samp_fields {
+  order: Float
+}
+"""aggregate variance on columns"""
+type cancellation_reasons_variance_fields {
+  order: Float
 }
 """
 columns and relationships of "colors"
@@ -1097,6 +1291,198 @@ type departments_var_samp_fields {
 }
 """aggregate variance on columns"""
 type departments_variance_fields {
+  order: Float
+}
+"""
+columns and relationships of "issuing_company"
+"""
+type issuing_company {
+  address: String!
+  created_at: timestamptz!
+  id: uuid!
+  is_active: Boolean!
+  name: String!
+  order: Int!
+  updated_at: timestamptz!
+}
+"""
+aggregated selection of "issuing_company"
+"""
+type issuing_company_aggregate {
+  aggregate: issuing_company_aggregate_fields
+  nodes: [issuing_company!]!
+}
+"""
+aggregate fields of "issuing_company"
+"""
+type issuing_company_aggregate_fields {
+  avg: issuing_company_avg_fields
+  count(columns: [issuing_company_select_column!], distinct: Boolean): Int!
+  max: issuing_company_max_fields
+  min: issuing_company_min_fields
+  stddev: issuing_company_stddev_fields
+  stddev_pop: issuing_company_stddev_pop_fields
+  stddev_samp: issuing_company_stddev_samp_fields
+  sum: issuing_company_sum_fields
+  var_pop: issuing_company_var_pop_fields
+  var_samp: issuing_company_var_samp_fields
+  variance: issuing_company_variance_fields
+}
+"""aggregate avg on columns"""
+type issuing_company_avg_fields {
+  order: Float
+}
+"""Boolean expression to filter rows from the table "issuing_company". All fields are combined with a logical 'AND'."""
+input issuing_company_bool_exp {
+  _and: [issuing_company_bool_exp!]
+  _not: issuing_company_bool_exp
+  _or: [issuing_company_bool_exp!]
+  address: String_comparison_exp
+  created_at: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  is_active: Boolean_comparison_exp
+  name: String_comparison_exp
+  order: Int_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+"""
+unique or primary key constraints on table "issuing_company"
+"""
+enum issuing_company_constraint {
+  """unique or primary key constraint"""
+  issuing_company_pkey
+}
+"""
+input type for incrementing numeric columns in table "issuing_company"
+"""
+input issuing_company_inc_input {
+  order: Int
+}
+"""
+input type for inserting data into table "issuing_company"
+"""
+input issuing_company_insert_input {
+  address: String
+  is_active: Boolean
+  name: String
+  order: Int
+}
+"""aggregate max on columns"""
+type issuing_company_max_fields {
+  address: String
+  created_at: timestamptz
+  id: uuid
+  name: String
+  order: Int
+  updated_at: timestamptz
+}
+"""aggregate min on columns"""
+type issuing_company_min_fields {
+  address: String
+  created_at: timestamptz
+  id: uuid
+  name: String
+  order: Int
+  updated_at: timestamptz
+}
+"""
+response of any mutation on the table "issuing_company"
+"""
+type issuing_company_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+  """data from the rows affected by the mutation"""
+  returning: [issuing_company!]!
+}
+"""
+on conflict condition type for table "issuing_company"
+"""
+input issuing_company_on_conflict {
+  constraint: issuing_company_constraint!
+  update_columns: [issuing_company_update_column!]!
+  where: issuing_company_bool_exp
+}
+"""Ordering options when selecting data from "issuing_company"."""
+input issuing_company_order_by {
+  address: order_by
+  created_at: order_by
+  id: order_by
+  is_active: order_by
+  name: order_by
+  order: order_by
+  updated_at: order_by
+}
+"""primary key columns input for table: issuing_company"""
+input issuing_company_pk_columns_input {
+  id: uuid!
+}
+"""
+select columns of table "issuing_company"
+"""
+enum issuing_company_select_column {
+  """column name"""
+  address
+  """column name"""
+  created_at
+  """column name"""
+  id
+  """column name"""
+  is_active
+  """column name"""
+  name
+  """column name"""
+  order
+  """column name"""
+  updated_at
+}
+"""
+input type for updating data in table "issuing_company"
+"""
+input issuing_company_set_input {
+  address: String
+  is_active: Boolean
+  name: String
+  order: Int
+}
+"""aggregate stddev on columns"""
+type issuing_company_stddev_fields {
+  order: Float
+}
+"""aggregate stddev_pop on columns"""
+type issuing_company_stddev_pop_fields {
+  order: Float
+}
+"""aggregate stddev_samp on columns"""
+type issuing_company_stddev_samp_fields {
+  order: Float
+}
+"""aggregate sum on columns"""
+type issuing_company_sum_fields {
+  order: Int
+}
+"""
+update columns of table "issuing_company"
+"""
+enum issuing_company_update_column {
+  """column name"""
+  address
+  """column name"""
+  is_active
+  """column name"""
+  name
+  """column name"""
+  order
+}
+"""aggregate var_pop on columns"""
+type issuing_company_var_pop_fields {
+  order: Float
+}
+"""aggregate var_samp on columns"""
+type issuing_company_var_samp_fields {
+  order: Float
+}
+"""aggregate variance on columns"""
+type issuing_company_variance_fields {
   order: Float
 }
 """
@@ -1660,6 +2046,17 @@ type mutation_root {
   """
   delete_appointment_status_by_pk(id: uuid!): appointment_status
   """
+  delete data from the table: "cancellation_reasons"
+  """
+  delete_cancellation_reasons(
+    """filter the rows which have to be deleted"""
+    where: cancellation_reasons_bool_exp!
+  ): cancellation_reasons_mutation_response
+  """
+  delete single row from the table: "cancellation_reasons"
+  """
+  delete_cancellation_reasons_by_pk(id: uuid!): cancellation_reasons
+  """
   delete data from the table: "credit_note_type"
   """
   delete_credit_note_type(
@@ -1681,6 +2078,17 @@ type mutation_root {
   delete single row from the table: "departments"
   """
   delete_departments_by_pk(id: uuid!): departments
+  """
+  delete data from the table: "issuing_company"
+  """
+  delete_issuing_company(
+    """filter the rows which have to be deleted"""
+    where: issuing_company_bool_exp!
+  ): issuing_company_mutation_response
+  """
+  delete single row from the table: "issuing_company"
+  """
+  delete_issuing_company_by_pk(id: uuid!): issuing_company
   """
   delete data from the table: "job_title"
   """
@@ -1762,6 +2170,24 @@ type mutation_root {
     on_conflict: appointment_status_on_conflict
   ): appointment_status
   """
+  insert data into the table: "cancellation_reasons"
+  """
+  insert_cancellation_reasons(
+    """the rows to be inserted"""
+    objects: [cancellation_reasons_insert_input!]!
+    """on conflict condition"""
+    on_conflict: cancellation_reasons_on_conflict
+  ): cancellation_reasons_mutation_response
+  """
+  insert a single row into the table: "cancellation_reasons"
+  """
+  insert_cancellation_reasons_one(
+    """the row to be inserted"""
+    object: cancellation_reasons_insert_input!
+    """on conflict condition"""
+    on_conflict: cancellation_reasons_on_conflict
+  ): cancellation_reasons
+  """
   insert data into the table: "colors"
   """
   insert_colors(
@@ -1811,6 +2237,24 @@ type mutation_root {
     """on conflict condition"""
     on_conflict: departments_on_conflict
   ): departments
+  """
+  insert data into the table: "issuing_company"
+  """
+  insert_issuing_company(
+    """the rows to be inserted"""
+    objects: [issuing_company_insert_input!]!
+    """on conflict condition"""
+    on_conflict: issuing_company_on_conflict
+  ): issuing_company_mutation_response
+  """
+  insert a single row into the table: "issuing_company"
+  """
+  insert_issuing_company_one(
+    """the row to be inserted"""
+    object: issuing_company_insert_input!
+    """on conflict condition"""
+    on_conflict: issuing_company_on_conflict
+  ): issuing_company
   """
   insert data into the table: "job_title"
   """
@@ -1926,6 +2370,27 @@ type mutation_root {
     pk_columns: appointment_status_pk_columns_input!
   ): appointment_status
   """
+  update data of the table: "cancellation_reasons"
+  """
+  update_cancellation_reasons(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: cancellation_reasons_inc_input
+    """sets the columns of the filtered rows to the given values"""
+    _set: cancellation_reasons_set_input
+    """filter the rows which have to be updated"""
+    where: cancellation_reasons_bool_exp!
+  ): cancellation_reasons_mutation_response
+  """
+  update single row of the table: "cancellation_reasons"
+  """
+  update_cancellation_reasons_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: cancellation_reasons_inc_input
+    """sets the columns of the filtered rows to the given values"""
+    _set: cancellation_reasons_set_input
+    pk_columns: cancellation_reasons_pk_columns_input!
+  ): cancellation_reasons
+  """
   update data of the table: "credit_note_type"
   """
   update_credit_note_type(
@@ -1967,6 +2432,27 @@ type mutation_root {
     _set: departments_set_input
     pk_columns: departments_pk_columns_input!
   ): departments
+  """
+  update data of the table: "issuing_company"
+  """
+  update_issuing_company(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: issuing_company_inc_input
+    """sets the columns of the filtered rows to the given values"""
+    _set: issuing_company_set_input
+    """filter the rows which have to be updated"""
+    where: issuing_company_bool_exp!
+  ): issuing_company_mutation_response
+  """
+  update single row of the table: "issuing_company"
+  """
+  update_issuing_company_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: issuing_company_inc_input
+    """sets the columns of the filtered rows to the given values"""
+    _set: issuing_company_set_input
+    pk_columns: issuing_company_pk_columns_input!
+  ): issuing_company
   """
   update data of the table: "job_title"
   """
@@ -2327,6 +2813,38 @@ type query_root {
   """fetch data from the table: "appointment_status" using primary key columns"""
   appointment_status_by_pk(id: uuid!): appointment_status
   """
+  fetch data from the table: "cancellation_reasons"
+  """
+  cancellation_reasons(
+    """distinct select on columns"""
+    distinct_on: [cancellation_reasons_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [cancellation_reasons_order_by!]
+    """filter the rows returned"""
+    where: cancellation_reasons_bool_exp
+  ): [cancellation_reasons!]!
+  """
+  fetch aggregated fields from the table: "cancellation_reasons"
+  """
+  cancellation_reasons_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cancellation_reasons_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [cancellation_reasons_order_by!]
+    """filter the rows returned"""
+    where: cancellation_reasons_bool_exp
+  ): cancellation_reasons_aggregate!
+  """fetch data from the table: "cancellation_reasons" using primary key columns"""
+  cancellation_reasons_by_pk(id: uuid!): cancellation_reasons
+  """
   fetch data from the table: "colors"
   """
   colors(
@@ -2424,6 +2942,38 @@ type query_root {
   ): departments_aggregate!
   """fetch data from the table: "departments" using primary key columns"""
   departments_by_pk(id: uuid!): departments
+  """
+  fetch data from the table: "issuing_company"
+  """
+  issuing_company(
+    """distinct select on columns"""
+    distinct_on: [issuing_company_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [issuing_company_order_by!]
+    """filter the rows returned"""
+    where: issuing_company_bool_exp
+  ): [issuing_company!]!
+  """
+  fetch aggregated fields from the table: "issuing_company"
+  """
+  issuing_company_aggregate(
+    """distinct select on columns"""
+    distinct_on: [issuing_company_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [issuing_company_order_by!]
+    """filter the rows returned"""
+    where: issuing_company_bool_exp
+  ): issuing_company_aggregate!
+  """fetch data from the table: "issuing_company" using primary key columns"""
+  issuing_company_by_pk(id: uuid!): issuing_company
   """
   fetch data from the table: "job_title"
   """
@@ -2619,6 +3169,38 @@ type subscription_root {
   """fetch data from the table: "appointment_status" using primary key columns"""
   appointment_status_by_pk(id: uuid!): appointment_status
   """
+  fetch data from the table: "cancellation_reasons"
+  """
+  cancellation_reasons(
+    """distinct select on columns"""
+    distinct_on: [cancellation_reasons_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [cancellation_reasons_order_by!]
+    """filter the rows returned"""
+    where: cancellation_reasons_bool_exp
+  ): [cancellation_reasons!]!
+  """
+  fetch aggregated fields from the table: "cancellation_reasons"
+  """
+  cancellation_reasons_aggregate(
+    """distinct select on columns"""
+    distinct_on: [cancellation_reasons_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [cancellation_reasons_order_by!]
+    """filter the rows returned"""
+    where: cancellation_reasons_bool_exp
+  ): cancellation_reasons_aggregate!
+  """fetch data from the table: "cancellation_reasons" using primary key columns"""
+  cancellation_reasons_by_pk(id: uuid!): cancellation_reasons
+  """
   fetch data from the table: "colors"
   """
   colors(
@@ -2716,6 +3298,38 @@ type subscription_root {
   ): departments_aggregate!
   """fetch data from the table: "departments" using primary key columns"""
   departments_by_pk(id: uuid!): departments
+  """
+  fetch data from the table: "issuing_company"
+  """
+  issuing_company(
+    """distinct select on columns"""
+    distinct_on: [issuing_company_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [issuing_company_order_by!]
+    """filter the rows returned"""
+    where: issuing_company_bool_exp
+  ): [issuing_company!]!
+  """
+  fetch aggregated fields from the table: "issuing_company"
+  """
+  issuing_company_aggregate(
+    """distinct select on columns"""
+    distinct_on: [issuing_company_select_column!]
+    """limit the number of rows returned"""
+    limit: Int
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+    """sort the rows by one or more columns"""
+    order_by: [issuing_company_order_by!]
+    """filter the rows returned"""
+    where: issuing_company_bool_exp
+  ): issuing_company_aggregate!
+  """fetch data from the table: "issuing_company" using primary key columns"""
+  issuing_company_by_pk(id: uuid!): issuing_company
   """
   fetch data from the table: "job_title"
   """

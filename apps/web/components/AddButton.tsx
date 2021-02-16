@@ -19,6 +19,7 @@ interface P {
   onFilterSource: () => void
   onSearch: (term: string) => void
   tableSearch?: boolean
+  addFilter?: boolean
 }
 
 const AddButton: FC<P> = ({
@@ -28,6 +29,7 @@ const AddButton: FC<P> = ({
   onFilterSource,
   onSearch,
   tableSearch = true,
+  addFilter = true,
 }) => {
   const [isActive, setIsActive] = useState(true)
   const [mobFilterDrawer, setMobFilterDrawer] = useState(false)
@@ -138,9 +140,11 @@ const AddButton: FC<P> = ({
           placement="bottomRight"
           overlayClassName={styles.filterPopover}
         >
-          <Button className={styles.filterBtn}>
-            <FilterOutlined /> Filter
-          </Button>
+          {addFilter && (
+            <Button className={styles.filterBtn}>
+              <FilterOutlined /> Filter
+            </Button>
+          )}
         </Popover>
         <Button
           className={styles.createSourceBtn}

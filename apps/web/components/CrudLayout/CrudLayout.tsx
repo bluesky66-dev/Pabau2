@@ -11,6 +11,9 @@ interface P {
   aggregateQuery?: DocumentNode
   tableSearch?: boolean
   updateOrderQuery?: DocumentNode
+  createPage?: boolean
+  createPageOnClick?: () => void
+  addFilter?: boolean
 }
 
 const CrudLayout: FC<P> = ({ ...props }) => <CrudTable {...props} />
