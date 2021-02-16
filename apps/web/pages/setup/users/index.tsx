@@ -1,13 +1,7 @@
 import React, { FunctionComponent, useState } from 'react'
 import Layout from '../../../components/Layout/Layout'
 import CommonHeader from '../CommonHeader'
-import {
-  Pagination,
-  UserTile,
-  TabMenu,
-  UserProps,
-  Breadcrumb
-} from '@pabau/ui'
+import { Pagination, UserTile, TabMenu, UserProps, Breadcrumb } from '@pabau/ui'
 import { Filter } from '../../../components/Setup/Users'
 import { Typography } from 'antd'
 import styles from './Users.module.less'
@@ -31,6 +25,7 @@ const mockUsers = [
     vacation: {
       scheduled: true,
     },
+    owner: true,
     available: true,
     active: true,
   },

@@ -145,21 +145,22 @@ export const Filter: FunctionComponent<P> = ({
             displayTypes={[
               {
                 title: 'Grid',
-                icon: (
-                  <AppstoreOutlined
-                    className={styles.GridIcons}
-                  />
-                ),
+                icon: <AppstoreOutlined className={styles.GridIcons} />,
               },
               {
                 title: 'List',
-                icon: <MenuOutlined className={styles.GridIcons} />,
+                icon: (
+                  <MenuOutlined
+                    style={{ paddingBottom: 300 }}
+                    className={styles.GridIcons}
+                  />
+                ),
               },
             ]}
           />
         </span>
         <Button
-          className={addButtonStyles.createSourceBtn}
+          className={styles.createSourceBtn}
           type="primary"
           onClick={() => onClick?.()}
         >

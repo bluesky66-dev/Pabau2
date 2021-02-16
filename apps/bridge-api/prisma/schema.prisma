@@ -15,6 +15,7 @@ model fa_history {
   request_date DateTime
   is_confirmed Int
 
+
   @@map("2fa_history")
 }
 

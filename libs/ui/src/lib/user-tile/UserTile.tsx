@@ -69,7 +69,7 @@ export const UserTile: FunctionComponent<UserProps> = ({
   available,
   img,
   owner = false,
-  admin = true,
+  admin = false,
 }: UserProps): JSX.Element => {
   const online: AvatarStatusProps = active
     ? AvatarStatusProps.active
