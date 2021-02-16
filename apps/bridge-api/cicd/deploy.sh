@@ -7,4 +7,4 @@ echo "DEBUG: app_name=${APP_NAME}"
 
 yarn run nx run "${APP_NAME}:build" --prod
 cp "apps/${APP_NAME}/package.json-prod" "dist/apps/${APP_NAME}/"
-cp "apps/${APP_NAME}/prisma" "dist/apps/${APP_NAME}/prisma"
+cp -r "apps/${APP_NAME}/prisma" "dist/apps/${APP_NAME}/prisma"
