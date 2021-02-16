@@ -6,7 +6,7 @@ const { Dragger } = Upload
 
 interface P {
   title: string
-  desc?: string
+  desc: string
 }
 
 const SettingElementFileUpload: FC<P> = ({ title, desc }) => {

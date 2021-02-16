@@ -2,7 +2,7 @@ import { Radio } from 'antd'
 import React, { FC, useState } from 'react'
 
 interface P {
-  title?: string
+  title: string
 }
 
 const typeOptions = [

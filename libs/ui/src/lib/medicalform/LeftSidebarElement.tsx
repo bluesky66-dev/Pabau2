@@ -26,8 +26,8 @@ import styles from './LeftSidebar.module.less'
 import LeftSidebarMedicalFormTitle from './LeftSidebarMedicalFormTitle'
 
 interface P {
-  type?: string
-  component?: string
+  type: string
+  component: string
 }
 
 const LeftSidebarElement: FC<P> = ({ type, component }) => {

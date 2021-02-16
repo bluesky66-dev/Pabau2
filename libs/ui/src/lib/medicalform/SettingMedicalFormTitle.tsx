@@ -2,10 +2,10 @@ import React, { FC } from 'react'
 import styles from './Setting.module.less'
 
 interface P {
-  iconUrl?: string
-  bgcolor?: string
-  title?: string
-  desc?: string
+  iconUrl: string
+  bgcolor: string
+  title: string
+  desc: string
 }
 
 export const SettingMedicalFormTitle: FC<P> = ({

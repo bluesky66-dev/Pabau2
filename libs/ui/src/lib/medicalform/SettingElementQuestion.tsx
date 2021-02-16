@@ -2,10 +2,10 @@ import { Input } from 'antd'
 import React, { FC } from 'react'
 
 interface P {
-  title?: string
-  desc?: string
-  value?: string
-  onChangeQuestion?: (value: string) => void
+  title: string
+  desc: string
+  value: string
+  onChangeQuestion: (value: string) => void
 }
 
 const SettingElementQuestion: FC<P> = ({

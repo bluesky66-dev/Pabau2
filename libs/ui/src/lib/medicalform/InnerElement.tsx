@@ -33,13 +33,13 @@ import InnerMedicalFormRequired from './InnerMedicalFormRequired'
 import InnerMedicalFormTitle from './InnerMedicalFormTitle'
 
 interface P {
-  required?: boolean
-  activate?: boolean
-  type?: string
-  component?: string
-  handleId?: string
-  formData?: MedicalFormTypes
-  handlingSelectForm?: (isActive?: boolean, handleId?: string) => void
+  required: boolean
+  activate: boolean
+  type: string
+  component: string
+  handleId: string
+  formData: MedicalFormTypes
+  handlingSelectForm: (isActive?: boolean, handleId?: string) => void
 }
 
 const InnerElement: FC<P> = ({
@@ -260,7 +260,7 @@ const InnerElement: FC<P> = ({
       {filteredComponent.length > 0 && (
         <InnerMedicalForm
           activate={activate}
-          handleId={handleId}
+          handleId={handleId!}
           handlingSelectForm={handlingSelectForm}
         >
           {required && <InnerMedicalFormRequired />}
@@ -315,16 +315,16 @@ const InnerElement: FC<P> = ({
                   (formData.formName === 'basic_singlechoice' ||
                     formData.formName === 'basic_dropdown') && (
                     <InnerMedicalFormRadio
-                      title={formData.txtQuestion}
-                      options={formData.arrItems}
+                      title={formData.txtQuestion!}
+                      options={formData.arrItems!}
                     />
                   )}
                 {((formData.arrItems && formData.arrItems.length > 0) ||
                   formData.txtQuestion !== '') &&
                   formData.formName === 'basic_multiplechoice' && (
                     <InnerMedicalFormCheckbox
-                      title={formData.txtQuestion}
-                      options={formData.arrItems}
+                      title={formData.txtQuestion!}
+                      options={formData.arrItems!}
                     />
                   )}
               </InnerMedicalFormBody>

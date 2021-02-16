@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import styles from './Setting.module.less'
 
 interface P {
-  errMsg?: string
+  errMsg: string
 }
 
 const SettingMedicalFormError: FC<P> = ({ errMsg }) => {

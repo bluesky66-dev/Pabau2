@@ -38,11 +38,11 @@ import SettingMedicalFormHeader from './SettingMedicalFormHeader'
 import SettingMedicalFormTitle from './SettingMedicalFormTitle'
 
 interface P {
-  type?: string
-  component?: string
+  type: string
+  component: string
   selectedForm: MedicalFormTypes
-  handleSave?: () => void
-  handleDelete?: () => void
+  handleSave: () => void
+  handleDelete: () => void
 }
 
 const SettingElement: FC<P> = ({
@@ -440,7 +440,7 @@ const SettingElement: FC<P> = ({
             saveFunc={saveFunc}
             deleteFunc={deleteFunc}
             requireFunc={requireFunc}
-            required={selectedForm.required}
+            required={selectedForm.required!}
             needLeft={true}
           />
         </SettingMedicalForm>

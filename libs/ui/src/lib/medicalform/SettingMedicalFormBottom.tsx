@@ -5,11 +5,11 @@ import React, { FC, useEffect, useState } from 'react'
 import styles from './Setting.module.less'
 
 interface P {
-  needLeft?: boolean
-  deleteFunc?: () => void
-  saveFunc?: () => void
-  requireFunc?: (checked) => void
-  required?: boolean
+  needLeft: boolean
+  deleteFunc: () => void
+  saveFunc: () => void
+  requireFunc: (checked) => void
+  required: boolean
 }
 
 export const SettingMedicalFormBottom: FC<P> = ({

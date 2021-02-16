@@ -10,7 +10,7 @@ import React, { FC, useEffect, useState } from 'react'
 import styles from './Setting.module.less'
 
 interface P {
-  onChange?: (addedItems) => void
+  onChange: (addedItems) => void
   paramItems: OptionType[]
 }
 

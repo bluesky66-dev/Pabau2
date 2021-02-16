@@ -2,9 +2,9 @@ import React, { FC, useEffect, useState } from 'react'
 import styles from './Inner.module.less'
 
 interface P {
-  handleId?: string
-  activate?: boolean
-  handlingSelectForm?: (isActive?: boolean, handleId?: string) => void
+  handleId: string
+  activate: boolean
+  handlingSelectForm: (isActive?: boolean, handleId?: string) => void
 }
 
 const InnerMedicalForm: FC<P> = (props) => {

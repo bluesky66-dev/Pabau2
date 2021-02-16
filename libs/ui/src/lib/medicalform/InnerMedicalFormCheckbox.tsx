@@ -4,8 +4,8 @@ import React, { FC } from 'react'
 import styles from './Inner.module.less'
 
 interface P {
-  title?: string
-  options?: OptionType[]
+  title: string
+  options: OptionType[]
 }
 
 const InnerMedicalFormCheckbox: FC<P> = ({ title, options }) => {

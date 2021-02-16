@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import styles from './Setting.module.less'
 
 interface P {
-  title?: string
+  title: string
 }
 
 export const SettingMedicalFormHeader: FC<P> = ({ title }) => {

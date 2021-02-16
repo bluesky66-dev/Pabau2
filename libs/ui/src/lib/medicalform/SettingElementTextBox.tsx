@@ -4,10 +4,10 @@ import React, { FC } from 'react'
 const { TextArea } = Input
 
 interface P {
-  title?: string
-  desc?: string
-  value?: string
-  onChangeText?: (value: string) => void
+  title: string
+  desc: string
+  value: string
+  onChangeText: (value: string) => void
 }
 
 const SettingElementTextBox: FC<P> = ({ title, desc, value, onChangeText }) => {
