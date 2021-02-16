@@ -1,6 +1,6 @@
 # Bitbucket Pipeline definition
 
-image: node:14-buster
+# image: node:14-buster
 
 options:
   max-time: 40 # max time in minutes for each step
