@@ -2,7 +2,7 @@ import { ApolloServer } from 'apollo-server'
 import { schema } from './schema'
 import { createContext } from './context'
 
-const port_number = 4000;
+const PORT_NUMBER = 4000;
 
 const server = new ApolloServer({
   schema,
@@ -11,11 +11,9 @@ const server = new ApolloServer({
 });
 
 server.listen(
-  { port: port_number },
-  () =>
-    console.log(
-      `http://localhost:4000`,
-    ),
+  {port:PORT_NUMBER},
 )
+  .then(()=> console.log(`Server running on port ${PORT_NUMBER}`))
+  .catch(error => console.error(error))
 
 
