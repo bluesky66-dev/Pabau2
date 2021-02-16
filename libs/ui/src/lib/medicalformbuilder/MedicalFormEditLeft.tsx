@@ -1,3 +1,4 @@
+import { MedicalForms } from '@pabau/ui'
 import { Collapse } from 'antd'
 import React, { FC } from 'react'
 import styles from './MedicalFormBuilder.module.less'
@@ -6,14 +7,8 @@ import MedicalFormGeneralPanel from './MedicalFormGeneralPanel'
 
 const { Panel } = Collapse
 
-interface formParams {
-  id?: number
-  formType?: string
-  formName?: string
-}
-
 interface P {
-  medicalForms: formParams[]
+  medicalForms: MedicalForms[]
 }
 
 const MedicalFormEditLeft: FC<P> = ({ ...props }) => {
