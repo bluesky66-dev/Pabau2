@@ -4,6 +4,7 @@ image: node:14-buster
 
 options:
   max-time: 45 # max time in minutes for each step
+  docker: true
 
 definitions:
   caches:
@@ -154,4 +155,3 @@ pipelines:
               -H "Expect:" \
               -H 'Content-Type: application/json; charset=utf-8' \
               --data-binary @-
-
