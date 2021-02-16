@@ -57,30 +57,48 @@ const DELETE_MUTATION = gql`
   }
 `
 const ADD_MUTATION = gql`
-  mutation insert_cancellation_reasons($name: String!, $is_active: Boolean) {
+  mutation insert_cancellation_reasons(
+    $cancellation_policy: String, 
+    $is_active: Boolean , 
+    $name : String , 
+    $type : String
+    ) {
     insert_cancellation_reasons_one(
-      object: { name: $name, is_active: $is_active }
+      object: { cancellation_policy: $cancellation_policy, is_active: $is_active, name: $name, type: $type }
     ) {
       __typename
+      cancellation_policy
+      created_at
       id
+      is_active
+      name
+      order
+      type
+      updated_at
     }
   }
 `
 const EDIT_MUTATION = gql`
   mutation update_cancellation_reasons_by_pk(
     $id: uuid!
-    $name: String!
-    $is_active: Boolean
-    $order: Int
+    $cancellation_policy: String, 
+    $is_active: Boolean , 
+    $name : String , 
+    $type : String
   ) {
     update_cancellation_reasons_by_pk(
       pk_columns: { id: $id }
-      _set: { name: $name, is_active: $is_active, order: $order }
+      _set: { cancellation_policy: $cancellation_policy, is_active: $is_active, name: $name, type: $type }
     ) {
       __typename
+      cancellation_policy
+      created_at
       id
       is_active
+      name
       order
+      type
+      updated_at
     }
   }
 `
@@ -122,26 +140,68 @@ const schema: Schema = {
       short: 'Name',
       shortLower: 'name',
       min: 2,
-      example: 'Facebook',
+      example: 'Name',
       description: 'A friendly name',
       // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
       type: 'string',
     },
+    type: {
+      full: 'Cancellation type',
+      fullLower: 'cancellation type',
+      short: 'Type',
+      shortLower: 'type',
+      min: 2,
+      description: 'type of the cancellation reason',
+      cssWidth: 'max',
+      defaultvalue : "Early cancellation / Late cancellation",
+      type: 'select',
+      selectOptions: [
+        {
+          label: 'Early Cancel',
+          value: 'early cancel',
+        },
+        {
+          label: 'Late Cancel',
+          value: 'late cancel',
+        },
+      ],
+    },
+    cancellation_policy: {
+      full: 'Apply the corresponding cancellation policy',
+      fullLower: 'apply the corresponding cancellation policy',
+      short: 'Application Cancellation Policy',
+      shortLower: 'application cancellation policy',
+      min: 2,
+      description: 'order of the cancellation reason',
+      cssWidth: 'max',
+      defaultvalue : "Yes / No",
+      type: 'select',
+      selectOptions: [
+        {
+          label: 'None',
+          value: 'none',
+        },
+        {
+          label: '5-hour cancellation policy',
+          value: '5-hour cancellation policy',
+        },
+      ],
+    },
     is_active: {
-      full: 'Active',
+      full: 'Status',
       type: 'boolean',
       defaultvalue: true,
     },
   },
 }
 
-
 export const CancellationReasons: NextPage = () => {
   return (
     <CrudLayout
       schema={schema}
       tableSearch={false}
+      filter={false}
       addQuery={ADD_MUTATION}
       deleteQuery={DELETE_MUTATION}
       listQuery={LIST_QUERY}

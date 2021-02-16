@@ -19,6 +19,7 @@ interface P {
   onFilterSource: () => void
   onSearch: (term: string) => void
   tableSearch?: boolean
+  filter?: boolean
 }
 
 const AddButton: FC<P> = ({
@@ -28,14 +29,13 @@ const AddButton: FC<P> = ({
   onFilterSource,
   onSearch,
   tableSearch = true,
+  filter = true
 }) => {
   const [isActive, setIsActive] = useState(true)
   const [mobFilterDrawer, setMobFilterDrawer] = useState(false)
   const [marketingSourceSearch, setMarketingSourceSearch] = useState('')
 
-  // useKeyPressEvent('n', () => {
-  //   onClick?.()
-  // })
+  console.log("filter" , filter);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -80,10 +80,12 @@ const AddButton: FC<P> = ({
         {tableSearch && (
           <SearchOutlined className={styles.marketingIconStyle} />
         )}
-        <FilterOutlined
-          className={styles.marketingIconStyle}
-          onClick={() => setMobFilterDrawer((e) => !e)}
-        />
+        {filter && (
+          <FilterOutlined
+            className={styles.marketingIconStyle}
+            onClick={() => setMobFilterDrawer((e) => !e)}
+          />
+        )}
         <PlusSquareFilled
           className={styles.plusIconStyle}
           onClick={() => onClick?.()}
@@ -138,9 +140,11 @@ const AddButton: FC<P> = ({
           placement="bottomRight"
           overlayClassName={styles.filterPopover}
         >
-          <Button className={styles.filterBtn}>
-            <FilterOutlined /> Filter
-          </Button>
+          {filter && (
+            <Button className={styles.filterBtn}>
+              <FilterOutlined /> Filter
+            </Button>
+          )}
         </Popover>
         <Button
           className={styles.createSourceBtn}

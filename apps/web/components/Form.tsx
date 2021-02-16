@@ -1,14 +1,20 @@
 import React, { FC } from 'react'
-import { Form as AntForm, Input, Radio, Checkbox } from 'formik-antd'
+import { Form as AntForm, Input, Radio, Checkbox, Select } from 'formik-antd'
 // import { Radio } from 'antd'
 import { ColorPicker, FontIcon } from '@pabau/ui'
 import { FormikValues } from 'formik'
 interface P {
   schema: Schema
   values: FormikValues
+  selectOptions?: TypeValues[]
 }
 
-const Form: FC<P> = ({ schema, values }) => {
+interface TypeValues {
+  label: string
+  value: string
+}
+
+const Form: FC<P> = ({ schema, values , selectOptions }) => {
   const { fields } = schema
 
   return (
@@ -27,6 +33,7 @@ const Form: FC<P> = ({ schema, values }) => {
               type,
               radio,
               full,
+              selectOptions
             },
           ],
           i
@@ -74,6 +81,23 @@ const Form: FC<P> = ({ schema, values }) => {
                 <Checkbox name={name} defaultChecked={true}>
                   {full}
                 </Checkbox>
+              </AntForm.Item>
+            )}
+            {type === 'select' && (
+              <AntForm.Item
+                label={full}
+                name={name}
+                required
+              >
+                <Select name={name} style={{ width: '100%' }}>
+                  {selectOptions?.map((option) => {
+                    return (
+                      <Select.Option value={option.value} key={option.label}>
+                        {option.label}
+                      </Select.Option>
+                    )
+                  })}
+                </Select>
               </AntForm.Item>
             )}
             {(type === 'string' || type === 'number') && (
