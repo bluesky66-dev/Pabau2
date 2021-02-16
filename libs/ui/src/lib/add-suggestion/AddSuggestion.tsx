@@ -3,7 +3,6 @@ import { Select } from 'antd'
 import styles from './AddSuggestion.module.less'
 const { Option } = Select
 
-/* eslint-disable-next-line */
 export interface AddSuggestionProps {
   label: string
   defaultSelected: Array<string | number>

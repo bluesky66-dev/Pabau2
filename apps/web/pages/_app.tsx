@@ -22,6 +22,9 @@ require('../../../libs/ui/src/styles/antd.less')
 
 const cache = new InMemoryCache()
 const GRAPHQL_ENDPOINT = 'wss://api.new.pabau.com/v1/graphql'
+const GRAPHQL_HTTP_ENDPOINT =
+  process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT ||
+  'https://api.new.pabau.com/v1/graphql'
 
 const iconList = Object.keys(Icons)
   .filter((key) => key !== 'fas' && key !== 'prefix')
@@ -63,7 +66,7 @@ library.add(...iconList)
 // })
 
 const httpLink = new HttpLink({
-  uri: 'https://api.new.pabau.com/v1/graphql',
+  uri: GRAPHQL_HTTP_ENDPOINT,
 })
 
 const wsLink = process.browser

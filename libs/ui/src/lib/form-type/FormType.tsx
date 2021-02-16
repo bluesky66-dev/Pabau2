@@ -109,9 +109,9 @@ export const FormType: FC<FormTypeProps> = ({ setting, onChangeSetting }) => {
   }
   useEffect(() => {
     const typeInfo = { ...defaultTypeInfos }
-    Object.keys(setting).forEach((key) => {
+    for (const key of Object.keys(setting)) {
       typeInfo[key].selected = setting[key]
-    })
+    }
     setFormTypesInfo({ ...typeInfo })
   }, [setting])
   return (

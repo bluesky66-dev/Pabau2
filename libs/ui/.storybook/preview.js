@@ -1,6 +1,5 @@
 import '../src/assets/fonts/fonts.css'
 import 'react-phone-input-2/lib/style.css'
-// import 'react-google-places-autocomplete/dist/index.min.css'
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 require('../src/styles/antd.less')
