@@ -62,13 +62,35 @@ const MedicalFormEdit: FC = () => {
   const [draggedForms, setDraggedForms] = useState([])
   // const [selectComponent, setSelectComponent] = useState('')
   // const [selectComponentId, setSelectComponentId] = useState('')
-  const [selectedForm, setSelectedForm] = useState({})
+  const [selectedForm, setSelectedForm] = useState({
+    id: '',
+    formType: '',
+    formName: '',
+    txtQuestion: '',
+    txtBlock: '',
+    txtInputType: '',
+    arrItems: [],
+    required: false,
+  })
   const [displaySettingBar, setDisplaySettingBar] = useState(false)
   const handlingFormSetting = (componentID) => {
     setDisplaySettingBar(componentID === '' ? false : true)
     if (componentID !== '') {
       const sel_form = draggedForms.filter((item) => item['id'] === componentID)
-      setSelectedForm(sel_form ? sel_form[0] : {})
+      setSelectedForm(
+        sel_form
+          ? sel_form[0]
+          : {
+              id: '',
+              formType: '',
+              formName: '',
+              txtQuestion: '',
+              txtBlock: '',
+              txtInputType: '',
+              arrItems: [],
+              required: false,
+            }
+      )
     }
   }
   const handlingDeleteForm = (componentID) => {
