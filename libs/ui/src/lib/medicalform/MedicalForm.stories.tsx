@@ -1035,7 +1035,6 @@ const SettingBasicHeadingStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1055,7 +1054,6 @@ const SettingBasicShortAnswerStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1075,7 +1073,6 @@ const SettingBasicLongAnswerStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1095,7 +1092,6 @@ const SettingBasicTextBlockStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1115,7 +1111,6 @@ const SettingBasicSingleChoiceStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1135,7 +1130,6 @@ const SettingBasicMultipleChoiceStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1157,7 +1151,6 @@ const SettingBasicDropDownStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1177,7 +1170,6 @@ const SettingBasicDrawingStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1197,7 +1189,6 @@ const SettingBasicSignatureStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1217,7 +1208,6 @@ const SettingBasicConditionsStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1232,7 +1222,6 @@ SettingBasicConditions.args = {
 
 const SettingBasicDrugsStory = ({ type, component, selectedForm, ...rest }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1252,7 +1241,6 @@ const SettingBasicLabTestsStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1272,7 +1260,6 @@ const SettingBasicTravelDestinationStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1294,7 +1281,6 @@ const SettingBasicVaccineSchedulerStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1316,7 +1302,6 @@ const SettingBasicVaccineHistoryStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1338,7 +1323,6 @@ const SettingCustomEmailMarketingStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1360,7 +1344,6 @@ const SettingCustomSmsMarketingStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1380,7 +1363,6 @@ const SettingCustomPhoneCallStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1400,7 +1382,6 @@ const SettingCustomLettermarketingStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1422,7 +1403,6 @@ const SettingCustomMembershipNumberStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1444,7 +1424,6 @@ const SettingCustomAuthorizationCodeStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1466,7 +1445,6 @@ const SettingCustomCompanyStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1481,7 +1459,6 @@ SettingCustomCompany.args = {
 
 const SettingCustomDobStory = ({ type, component, selectedForm, ...rest }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1501,7 +1478,6 @@ const SettingCustomGenderStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1521,7 +1497,6 @@ const SettingCustomPhysicalAddressStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1543,7 +1518,6 @@ const SettingCustomPostalAddressStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1565,7 +1539,6 @@ const SettingCustomReferredByStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
@@ -1585,7 +1558,6 @@ const SettingCustomTelephoneNumberStory = ({
   ...rest
 }) => (
   <SettingElement
-    {...rest}
     type={type}
     component={component}
     selectedForm={selectedForm}
