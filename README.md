@@ -22,7 +22,8 @@ This monorepo contains all of our code (with the exception of `/.env`). The mono
 
 ## Setup
 
-### Windows 
+### Windows
+
 1. Install Node 14 LTS (Opt in for the extra build tools)
 1. Install yarn: `npm i -g yarn` (`yarn --version` \>=1.22.10 && <2 is fine)
 1. Ensure your terminal is BASH (cmd and PS not supported. Vscode: `"terminal.integrated.shell.windows": "c:/program files/git/bin/bash.exe",`)
@@ -40,6 +41,10 @@ echo 'NPM_STORE="${HOME}/.npm-global"' >> ~/.bashrc
 echo 'export PATH="$PATH:$NPM_STORE/bin"' >> ~/.bashrc
 echo 'export MANPATH="${MANPATH-$(manpath)}:$NPM_STORE/share/man"' >> ~/.bashrc
 npm i -g yarn
+
+snap --classic phpstorm vscode
+
+
 ```
 
 ## Storybook
@@ -71,32 +76,25 @@ Now add `import { } from '@pabau/ui'` at top of the new page file and fill in th
 To view the GraphQA endpoint which will expose the legacy database run `yarn nx serve bridge-api`
 
 Our ORM of choice is prisma, the schema file is located at `apps/bridge-api/prisma/schema.prisma` and is following a strict naming convention
-- Model names must adhere to the following regular expression: [A-Za-z][A-Za-z0-9_]*
+
+- Model names must adhere to the following regular expression: [A-Za-z][a-za-z0-9_]\*
 - Model names must start with a letter and are typically spelled in PascalCase
 - Model names must use the singular form (for example, User instead of users or Users)
 
 U should never manually edit:
+
 - nexus.ts located at `apps/bridge-api/src/generated/nexus.ts`
--it will be rebuilded after doing changes to schema.ts `apps/bridge-api/src/schema.ts`
-  
-  Successful modification  of the schema.prisma file must be followed by `yarn prisma:generate`
+  -it will be rebuilded after doing changes to schema.ts `apps/bridge-api/src/schema.ts`
+  Successful modification of the schema.prisma file must be followed by `yarn prisma:generate`
 
 Notes:
-- To map the singular name of a Model to a plural database table use  @@map("table_name")
 
-`  model marketing_source{
-    ...[multiple filed names]
-    @@map("marketing_sources")
-  }`
+- To map the singular name of a Model to a plural database table use @@map("table_name")
 
-- To map a database table name which doesn't follow the naming convention [A-Za-z][A-Za-z0-9_]*
-`  model third_party_access{
-    ...[multiple filed names]
-    @@map("3rd_party_access")
-}`
+` model marketing_source{ ...[multiple filed names] @@map("marketing_sources") }`
 
-
-
+- To map a database table name which doesn't follow the naming convention [A-Za-z][a-za-z0-9_]\*
+  ` model third_party_access{ ...[multiple filed names] @@map("3rd_party_access") }`
 
 ## Backend
 
@@ -171,34 +169,34 @@ To view the Backend, you can either visit [https://backend.new.pabau.com](https:
 1. When you feel very much finished, do a final push and open up a PR for it (to master)
 1. Configure Bitbucket to receive email upon code comment, 'Changes requested', or merged
 1. Of course, start your next ticket immediately while you follow through the remaining steps
-1. After 10 mins or so, release-bot will post in the channel. Reply to the message with a link to a more specific page that highlights the work done. Also copy the vercel URL and paste it into the JIRA ticket as a comment. Finally, change the JIRA status to CODE REVIEW. This will let William browse all CODE REVIEW's and click the direct vercel link to see changes. 
+1. After 10 mins or so, release-bot will post in the channel. Reply to the message with a link to a more specific page that highlights the work done. Also copy the vercel URL and paste it into the JIRA ticket as a comment. Finally, change the JIRA status to CODE REVIEW. This will let William browse all CODE REVIEW's and click the direct vercel link to see changes.
 1. If you receive an email that require you to make more changes: code, push, wait for the slack bot to post another url, reply to that tagging in @James and @Dipak
 1. When you receive an email that your code is merged, you should also find your ticket is moved to 'QA' status.
 
-
 ## GraphQL workflow
 
-1. [optional] Please install Hasura locally. On Linux it's very easy. 
+### Setup
+
+1. [optional] Please install Hasura locally. On Linux it's very easy.
 1. Create a hasura/.env file:
+   ```dotenv
    HASURA_GRAPHQL_ADMIN_SECRET=madskills
    HASURA_GRAPHQL_ENDPOINT=https://api.new.pabau.com/
+   ```
 
-1. Edit the database:
-  1. Open the hasura console
-  1. Create a new table (in the singular tense ie 'user' not 'users')
-  1. Insert 3 'Frequently used columns' - the ID being GUID, and the created_at and updated_at
-  1. Add a very clear comment for the table. Customers will see this.
-  1. Change the table permissions so that 'public' role can do pretty much everything (for now).
-  1. Check your table's public role permission for SELECT has the Aggregation queries permissions enabled.
-  1. Oh hey there's a nice Clone Permissions feature
-  1. Now run `yarn hasura:export` in your IDE, commit the changes to your branch.
+### Per-ticket
 
-
-
-  
-   then yarn hasura:export
-
-
+1. Open the hasura console
+1. Create a new table (in the singular tense, using snake case)
+1. Insert 3 'Frequently used columns' - the ID being GUID, and the created_at and updated_at
+1. If your table is order sensitive (customers can drag to rearrange the order), then add a column called "order", type Integer
+1. If your table has is_active boolean, then add "is_active" as Boolean
+1. Add the rest of your columns too
+1. Add a very clear comment for the table (our customers will see this)
+1. Change the table permissions so that 'public' role can do pretty much everything (for now).
+1. Check your table's public role permission for SELECT has the Aggregation queries permissions enabled.
+1. Now run `yarn hasura:export` in your IDE, commit the changes to your branch.
+1. Now on your page's `schema.fields` array, add the relevant keys in -- they should match the hasura columns
 
 ## To do (big engineering items)
 
@@ -218,3 +216,12 @@ To view the Backend, you can either visit [https://backend.new.pabau.com](https:
 - Create a bridge to our old LAMP app
   1. generate jwt in php
   2. ...?
+
+
+
+* auth to prisma
+* storing jwt token for hasura in nextjs httponly cookie
+* graphql code generator and other tooling
+* nestjs needs a typed hasura service that we can call
+* prisma needs a hoc for company_id security
+* 

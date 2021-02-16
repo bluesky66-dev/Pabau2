@@ -20,7 +20,11 @@ export const Left = (args: any) => (
   </TabMenu>
 )
 export const Top = (args: any) => (
-  <TabMenu {...args} menuItems={['Tab 1', 'Tab 2', 'Tab 3', 'Tab 4']} tabPosition="top">
+  <TabMenu
+    {...args}
+    menuItems={['Tab 1', 'Tab 2', 'Tab 3', 'Tab 4']}
+    tabPosition="top"
+  >
     <div>1</div>
     <div>2</div>
     <div>3</div>

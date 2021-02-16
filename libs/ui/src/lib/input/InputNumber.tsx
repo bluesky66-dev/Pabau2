@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import { Form, InputNumber as AntInput } from 'antd'
 import { FormProps } from 'antd/lib/form'
-import styles from './input.module.less'
+import styles from './Input.module.less'
 
 enum ButtonSize {
   small = 'small',

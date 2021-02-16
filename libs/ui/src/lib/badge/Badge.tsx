@@ -39,9 +39,15 @@ export interface PlusProps {
   label?: string
   disabled?: boolean
   modalType?: string
+  openModal?: boolean
 }
 
-export const PabauPlus: FC<PlusProps> = ({ label, disabled, modalType }) => {
+export const PabauPlus: FC<PlusProps> = ({
+  label,
+  disabled,
+  modalType,
+  openModal = true,
+}) => {
   const [showModal, setShowModal] = useState<boolean>(false)
   const [modalBody, setModalBody] = useState<UpgradeModalProps>(
     modalContent[getModalKey(modalType, modalTypes)] || {}
@@ -72,24 +78,26 @@ export const PabauPlus: FC<PlusProps> = ({ label, disabled, modalType }) => {
       <div className={styles.pabauPlusBtn} onClick={handleClick}>
         {label}
       </div>
-      <UpgradeModal
-        title={title}
-        visible={showModal}
-        modalWidth={682}
-        plan={plan}
-        description={description}
-        btnText={btnText}
-        sectionTitle={sectionTitle}
-        sectionData={sectionData}
-        sectionUpgradeTitle={sectionUpgradeTitle}
-        sectionUpgradeData={sectionUpgradeData}
-        linkText={linkText}
-        onCancel={handleClick}
-      />
+      {openModal && (
+        <UpgradeModal
+          title={title}
+          visible={showModal}
+          modalWidth={682}
+          plan={plan}
+          description={description}
+          btnText={btnText}
+          sectionTitle={sectionTitle}
+          sectionData={sectionData}
+          sectionUpgradeTitle={sectionUpgradeTitle}
+          sectionUpgradeData={sectionUpgradeData}
+          linkText={linkText}
+          onCancel={handleClick}
+        />
+      )}
     </div>
   )
 }
 
 function getModalKey(type: string | undefined, data): string {
-  return data.filter(({ value }) => value === type)[0]?.key
+  return data.find(({ value }) => value === type)?.key
 }
