@@ -26,6 +26,7 @@ import {
   ReadReview,
   Permission,
   ReviewWrite,
+  ReviewWriteStepper,
   AddQuestion,
   QuestionBankModal,
   QuestionField,
@@ -728,15 +729,28 @@ export const Index: FC<ReviewsConfigProps> = ({
             <div>
               <h2>Preview</h2>
               <div className={styles.previewPanel}>
-                <ReviewWrite
-                  title={surveyName}
-                  subtitle={surveySubTitle}
-                  reviews={questions.map((question) => ({
-                    key: question.key,
-                    question: question.title,
-                    rating: 0,
-                  }))}
-                />
+                {!surveyFormat && (
+                  <ReviewWrite
+                    title={surveyName}
+                    subtitle={surveySubTitle}
+                    reviews={questions.map((question) => ({
+                      key: question.key,
+                      question: question.title,
+                      rating: 0,
+                    }))}
+                  />
+                )}
+                {surveyFormat && (
+                  <ReviewWriteStepper
+                    title={surveyName}
+                    subtitle={surveySubTitle}
+                    reviews={questions.map((question) => ({
+                      key: question.key,
+                      question: question.title,
+                      rating: 0,
+                    }))}
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -836,15 +850,28 @@ export const Index: FC<ReviewsConfigProps> = ({
                 )}
               </div>
               <div className={styles.previewPanel}>
-                <ReviewWrite
-                  title={surveyName}
-                  subtitle={surveySubTitle}
-                  reviews={questions.map((question) => ({
-                    key: question.key,
-                    question: question.title,
-                    rating: 0,
-                  }))}
-                />
+                {!surveyFormat && (
+                  <ReviewWrite
+                    title={surveyName}
+                    subtitle={surveySubTitle}
+                    reviews={questions.map((question) => ({
+                      key: question.key,
+                      question: question.title,
+                      rating: 0,
+                    }))}
+                  />
+                )}
+                {surveyFormat && (
+                  <ReviewWriteStepper
+                    title={surveyName}
+                    subtitle={surveySubTitle}
+                    reviews={questions.map((question) => ({
+                      key: question.key,
+                      question: question.title,
+                      rating: 0,
+                    }))}
+                  />
+                )}
               </div>
             </TabMenu>
           </div>
