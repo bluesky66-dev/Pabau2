@@ -9,17 +9,20 @@ export default {
   title: 'UI/Medical Form',
 }
 
-const LeftSidebarBasicHeadingStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarBasicHeadingStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
-export const LeftSidebarBasicHeading = LeftSidebarBasicHeadingStory.bind({})
+export const LeftSidebarBasicHeading = LeftSidebarBasicHeadingStory.bind({
+  type: '',
+  component: '',
+})
 LeftSidebarBasicHeading.args = {
   type: 'basic',
   component: 'basic_heading',
 }
 
-const LeftSidebarBasicShortAnswerStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarBasicShortAnswerStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
 export const LeftSidebarBasicShortAnswer = LeftSidebarBasicShortAnswerStory.bind(
   {}
@@ -29,8 +32,8 @@ LeftSidebarBasicShortAnswer.args = {
   component: 'basic_shortanswer',
 }
 
-const LeftSidebarBasicLongAnswerStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarBasicLongAnswerStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
 export const LeftSidebarBasicLongAnswer = LeftSidebarBasicLongAnswerStory.bind(
   {}
@@ -40,8 +43,8 @@ LeftSidebarBasicLongAnswer.args = {
   component: 'basic_longanswer',
 }
 
-const LeftSidebarBasicTextBlockStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarBasicTextBlockStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
 export const LeftSidebarBasicTextBlock = LeftSidebarBasicTextBlockStory.bind({})
 LeftSidebarBasicTextBlock.args = {
@@ -49,8 +52,8 @@ LeftSidebarBasicTextBlock.args = {
   component: 'basic_textblock',
 }
 
-const LeftSidebarBasicSingleChoiceStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarBasicSingleChoiceStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
 export const LeftSidebarBasicSingleChoice = LeftSidebarBasicSingleChoiceStory.bind(
   {}
@@ -60,8 +63,8 @@ LeftSidebarBasicSingleChoice.args = {
   component: 'basic_singlechoice',
 }
 
-const LeftSidebarBasicMultipleChoiceStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarBasicMultipleChoiceStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
 export const LeftSidebarBasicMultipleChoice = LeftSidebarBasicMultipleChoiceStory.bind(
   {}
@@ -71,8 +74,8 @@ LeftSidebarBasicMultipleChoice.args = {
   component: 'basic_multiplechoice',
 }
 
-const LeftSidebarBasicDropDownStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarBasicDropDownStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
 export const LeftSidebarBasicDropDown = LeftSidebarBasicDropDownStory.bind({})
 LeftSidebarBasicDropDown.args = {
@@ -80,8 +83,8 @@ LeftSidebarBasicDropDown.args = {
   component: 'basic_dropdown',
 }
 
-const LeftSidebarBasicDrawingStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarBasicDrawingStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
 export const LeftSidebarBasicDrawing = LeftSidebarBasicDrawingStory.bind({})
 LeftSidebarBasicDrawing.args = {
@@ -89,8 +92,8 @@ LeftSidebarBasicDrawing.args = {
   component: 'basic_drawing',
 }
 
-const LeftSidebarBasicSignatureStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarBasicSignatureStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
 export const LeftSidebarBasicSignature = LeftSidebarBasicSignatureStory.bind({})
 LeftSidebarBasicSignature.args = {
@@ -98,8 +101,8 @@ LeftSidebarBasicSignature.args = {
   component: 'basic_signature',
 }
 
-const LeftSidebarBasicConditionsStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarBasicConditionsStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
 export const LeftSidebarBasicConditions = LeftSidebarBasicConditionsStory.bind(
   {}
@@ -109,8 +112,8 @@ LeftSidebarBasicConditions.args = {
   component: 'basic_conditions',
 }
 
-const LeftSidebarBasicDrugsStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarBasicDrugsStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
 export const LeftSidebarBasicDrugs = LeftSidebarBasicDrugsStory.bind({})
 LeftSidebarBasicDrugs.args = {
@@ -118,9 +121,20 @@ LeftSidebarBasicDrugs.args = {
   component: 'basic_drugs',
 }
 
-const LeftSidebarBasicTravelDestinationStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarBasicLabTestsStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
+export const LeftSidebarBasicLabTests = LeftSidebarBasicLabTestsStory.bind({})
+LeftSidebarBasicLabTests.args = {
+  type: 'basic',
+  component: 'basic_labtests',
+}
+
+const LeftSidebarBasicTravelDestinationStory = ({
+  type,
+  component,
+  ...rest
+}) => <LeftSidebarElement type={type} component={component} {...rest} />
 export const LeftSidebarBasicTravelDestination = LeftSidebarBasicTravelDestinationStory.bind(
   {}
 )
@@ -129,9 +143,11 @@ LeftSidebarBasicTravelDestination.args = {
   component: 'basic_traveldestination',
 }
 
-const LeftSidebarBasicVaccineSchedulerStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
-)
+const LeftSidebarBasicVaccineSchedulerStory = ({
+  type,
+  component,
+  ...rest
+}) => <LeftSidebarElement type={type} component={component} {...rest} />
 export const LeftSidebarBasicVaccineScheduler = LeftSidebarBasicVaccineSchedulerStory.bind(
   {}
 )
@@ -140,8 +156,8 @@ LeftSidebarBasicVaccineScheduler.args = {
   component: 'basic_vaccinescheduler',
 }
 
-const LeftSidebarBasicVaccineHistoryStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarBasicVaccineHistoryStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
 export const LeftSidebarBasicVaccineHistory = LeftSidebarBasicVaccineHistoryStory.bind(
   {}
@@ -151,17 +167,8 @@ LeftSidebarBasicVaccineHistory.args = {
   component: 'basic_vaccinehistory',
 }
 
-const LeftSidebarBasicLabTestsStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
-)
-export const LeftSidebarBasicLabTests = LeftSidebarBasicLabTestsStory.bind({})
-LeftSidebarBasicLabTests.args = {
-  type: 'basic',
-  component: 'basic_labtests',
-}
-
-const LeftSidebarCustomEmailMarketingStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarCustomEmailMarketingStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
 export const LeftSidebarCustomEmailMarketing = LeftSidebarCustomEmailMarketingStory.bind(
   {}
@@ -171,8 +178,8 @@ LeftSidebarCustomEmailMarketing.args = {
   component: 'custom_emailmarketing',
 }
 
-const LeftSidebarCustomSmsMarketingStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarCustomSmsMarketingStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
 export const LeftSidebarCustomSmsMarketing = LeftSidebarCustomSmsMarketingStory.bind(
   {}
@@ -182,8 +189,8 @@ LeftSidebarCustomSmsMarketing.args = {
   component: 'custom_smsmarketing',
 }
 
-const LeftSidebarCustomPhoneCallStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarCustomPhoneCallStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
 export const LeftSidebarCustomPhoneCall = LeftSidebarCustomPhoneCallStory.bind(
   {}
@@ -193,9 +200,11 @@ LeftSidebarCustomPhoneCall.args = {
   component: 'custom_phonecall',
 }
 
-const LeftSidebarCustomLettermarketingStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
-)
+const LeftSidebarCustomLettermarketingStory = ({
+  type,
+  component,
+  ...rest
+}) => <LeftSidebarElement type={type} component={component} {...rest} />
 export const LeftSidebarCustomLettermarketing = LeftSidebarCustomLettermarketingStory.bind(
   {}
 )
@@ -204,9 +213,11 @@ LeftSidebarCustomLettermarketing.args = {
   component: 'custom_lettermarketing',
 }
 
-const LeftSidebarCustomMembershipNumberStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
-)
+const LeftSidebarCustomMembershipNumberStory = ({
+  type,
+  component,
+  ...rest
+}) => <LeftSidebarElement type={type} component={component} {...rest} />
 export const LeftSidebarCustomMembershipNumber = LeftSidebarCustomMembershipNumberStory.bind(
   {}
 )
@@ -215,9 +226,11 @@ LeftSidebarCustomMembershipNumber.args = {
   component: 'custom_membershipnumber',
 }
 
-const LeftSidebarCustomAuthorizationCodeStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
-)
+const LeftSidebarCustomAuthorizationCodeStory = ({
+  type,
+  component,
+  ...rest
+}) => <LeftSidebarElement type={type} component={component} {...rest} />
 export const LeftSidebarCustomAuthorizationCode = LeftSidebarCustomAuthorizationCodeStory.bind(
   {}
 )
@@ -226,8 +239,8 @@ LeftSidebarCustomAuthorizationCode.args = {
   component: 'custom_authorizationcode',
 }
 
-const LeftSidebarCustomCompanyStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarCustomCompanyStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
 export const LeftSidebarCustomCompany = LeftSidebarCustomCompanyStory.bind({})
 LeftSidebarCustomCompany.args = {
@@ -235,8 +248,8 @@ LeftSidebarCustomCompany.args = {
   component: 'custom_company',
 }
 
-const LeftSidebarCustomDobStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarCustomDobStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
 export const LeftSidebarCustomDob = LeftSidebarCustomDobStory.bind({})
 LeftSidebarCustomDob.args = {
@@ -244,8 +257,8 @@ LeftSidebarCustomDob.args = {
   component: 'custom_dob',
 }
 
-const LeftSidebarCustomGenderStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarCustomGenderStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
 export const LeftSidebarCustomGender = LeftSidebarCustomGenderStory.bind({})
 LeftSidebarCustomGender.args = {
@@ -253,9 +266,11 @@ LeftSidebarCustomGender.args = {
   component: 'custom_gender',
 }
 
-const LeftSidebarCustomPhysicalAddressStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
-)
+const LeftSidebarCustomPhysicalAddressStory = ({
+  type,
+  component,
+  ...rest
+}) => <LeftSidebarElement type={type} component={component} {...rest} />
 export const LeftSidebarCustomPhysicalAddress = LeftSidebarCustomPhysicalAddressStory.bind(
   {}
 )
@@ -264,8 +279,8 @@ LeftSidebarCustomPhysicalAddress.args = {
   component: 'custom_physicaladdress',
 }
 
-const LeftSidebarCustomPostalAddressStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarCustomPostalAddressStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
 export const LeftSidebarCustomPostalAddress = LeftSidebarCustomPostalAddressStory.bind(
   {}
@@ -275,8 +290,8 @@ LeftSidebarCustomPostalAddress.args = {
   component: 'custom_postaladdress',
 }
 
-const LeftSidebarCustomReferredByStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
+const LeftSidebarCustomReferredByStory = ({ type, component, ...rest }) => (
+  <LeftSidebarElement type={type} component={component} {...rest} />
 )
 export const LeftSidebarCustomReferredBy = LeftSidebarCustomReferredByStory.bind(
   {}
@@ -286,9 +301,11 @@ LeftSidebarCustomReferredBy.args = {
   component: 'custom_referredby',
 }
 
-const LeftSidebarCustomTelephoneNumberStory = ({ ...rest }) => (
-  <LeftSidebarElement {...rest} />
-)
+const LeftSidebarCustomTelephoneNumberStory = ({
+  type,
+  component,
+  ...rest
+}) => <LeftSidebarElement type={type} component={component} {...rest} />
 export const LeftSidebarCustomTelephoneNumber = LeftSidebarCustomTelephoneNumberStory.bind(
   {}
 )
@@ -297,43 +314,149 @@ LeftSidebarCustomTelephoneNumber.args = {
   component: 'custom_telephonenumber',
 }
 
-const InnerBasicHeadingStory = ({ ...rest }) => <InnerElement {...rest} />
+const InnerBasicHeadingStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
+)
 export const InnerBasicHeading = InnerBasicHeadingStory.bind({})
 InnerBasicHeading.args = {
   type: 'basic',
   component: 'basic_heading',
 }
 
-const InnerBasicShortAnswerStory = ({ ...rest }) => <InnerElement {...rest} />
+const InnerBasicShortAnswerStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
+)
 export const InnerBasicShortAnswer = InnerBasicShortAnswerStory.bind({})
 InnerBasicShortAnswer.args = {
   type: 'basic',
   component: 'basic_shortanswer',
 }
 
-const InnerBasicLongAnswerStory = ({ ...rest }) => <InnerElement {...rest} />
+const InnerBasicLongAnswerStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
+)
 export const InnerBasicLongAnswer = InnerBasicLongAnswerStory.bind({})
 InnerBasicLongAnswer.args = {
   type: 'basic',
   component: 'basic_longanswer',
 }
 
-const InnerBasicTextBlockStory = ({ ...rest }) => <InnerElement {...rest} />
+const InnerBasicTextBlockStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
+)
 export const InnerBasicTextBlock = InnerBasicTextBlockStory.bind({})
 InnerBasicTextBlock.args = {
   type: 'basic',
   component: 'basic_textblock',
 }
 
-const InnerBasicSingleChoiceStory = ({ ...rest }) => <InnerElement {...rest} />
+const InnerBasicSingleChoiceStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
+)
 export const InnerBasicSingleChoice = InnerBasicSingleChoiceStory.bind({})
 InnerBasicSingleChoice.args = {
   type: 'basic',
   component: 'basic_singlechoice',
 }
 
-const InnerBasicMultipleChoiceStory = ({ ...rest }) => (
-  <InnerElement {...rest} />
+const InnerBasicMultipleChoiceStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
 )
 export const InnerBasicMultipleChoice = InnerBasicMultipleChoiceStory.bind({})
 InnerBasicMultipleChoice.args = {
@@ -341,43 +464,174 @@ InnerBasicMultipleChoice.args = {
   component: 'basic_multiplechoice',
 }
 
-const InnerBasicDropDownStory = ({ ...rest }) => <InnerElement {...rest} />
+const InnerBasicDropDownStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
+)
 export const InnerBasicDropDown = InnerBasicDropDownStory.bind({})
 InnerBasicDropDown.args = {
   type: 'basic',
   component: 'basic_dropdown',
 }
 
-const InnerBasicDrawingStory = ({ ...rest }) => <InnerElement {...rest} />
+const InnerBasicDrawingStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
+)
 export const InnerBasicDrawing = InnerBasicDrawingStory.bind({})
 InnerBasicDrawing.args = {
   type: 'basic',
   component: 'basic_drawing',
 }
 
-const InnerBasicSignatureStory = ({ ...rest }) => <InnerElement {...rest} />
+const InnerBasicSignatureStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
+)
 export const InnerBasicSignature = InnerBasicSignatureStory.bind({})
 InnerBasicSignature.args = {
   type: 'basic',
   component: 'basic_signature',
 }
 
-const InnerBasicConditionsStory = ({ ...rest }) => <InnerElement {...rest} />
+const InnerBasicConditionsStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
+)
 export const InnerBasicConditions = InnerBasicConditionsStory.bind({})
 InnerBasicConditions.args = {
   type: 'basic',
   component: 'basic_conditions',
 }
 
-const InnerBasicDrugsStory = ({ ...rest }) => <InnerElement {...rest} />
+const InnerBasicDrugsStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
+)
 export const InnerBasicDrugs = InnerBasicDrugsStory.bind({})
 InnerBasicDrugs.args = {
   type: 'basic',
   component: 'basic_drugs',
 }
 
-const InnerBasicTravelDestinationStory = ({ ...rest }) => (
-  <InnerElement {...rest} />
+const InnerBasicLabTestsStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
+)
+export const InnerBasicLabTests = InnerBasicLabTestsStory.bind({})
+InnerBasicLabTests.args = {
+  type: 'basic',
+  component: 'basic_labtests',
+}
+
+const InnerBasicTravelDestinationStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
 )
 export const InnerBasicTravelDestination = InnerBasicTravelDestinationStory.bind(
   {}
@@ -387,8 +641,24 @@ InnerBasicTravelDestination.args = {
   component: 'basic_traveldestination',
 }
 
-const InnerBasicVaccineSchedulerStory = ({ ...rest }) => (
-  <InnerElement {...rest} />
+const InnerBasicVaccineSchedulerStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
 )
 export const InnerBasicVaccineScheduler = InnerBasicVaccineSchedulerStory.bind(
   {}
@@ -398,8 +668,24 @@ InnerBasicVaccineScheduler.args = {
   component: 'basic_vaccinescheduler',
 }
 
-const InnerBasicVaccineHistoryStory = ({ ...rest }) => (
-  <InnerElement {...rest} />
+const InnerBasicVaccineHistoryStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
 )
 export const InnerBasicVaccineHistory = InnerBasicVaccineHistoryStory.bind({})
 InnerBasicVaccineHistory.args = {
@@ -407,15 +693,24 @@ InnerBasicVaccineHistory.args = {
   component: 'basic_vaccinehistory',
 }
 
-const InnerBasicLabTestsStory = ({ ...rest }) => <InnerElement {...rest} />
-export const InnerBasicLabTests = InnerBasicLabTestsStory.bind({})
-InnerBasicLabTests.args = {
-  type: 'basic',
-  component: 'basic_labtests',
-}
-
-const InnerCustomEmailMarketingStory = ({ ...rest }) => (
-  <InnerElement {...rest} />
+const InnerCustomEmailMarketingStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
 )
 export const InnerCustomEmailMarketing = InnerCustomEmailMarketingStory.bind({})
 InnerCustomEmailMarketing.args = {
@@ -423,22 +718,74 @@ InnerCustomEmailMarketing.args = {
   component: 'custom_emailmarketing',
 }
 
-const InnerCustomSmsMarketingStory = ({ ...rest }) => <InnerElement {...rest} />
+const InnerCustomSmsMarketingStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
+)
 export const InnerCustomSmsMarketing = InnerCustomSmsMarketingStory.bind({})
 InnerCustomSmsMarketing.args = {
   type: 'custom',
   component: 'custom_smsmarketing',
 }
 
-const InnerCustomPhoneCallStory = ({ ...rest }) => <InnerElement {...rest} />
+const InnerCustomPhoneCallStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
+)
 export const InnerCustomPhoneCall = InnerCustomPhoneCallStory.bind({})
 InnerCustomPhoneCall.args = {
   type: 'custom',
   component: 'custom_phonecall',
 }
 
-const InnerCustomLettermarketingStory = ({ ...rest }) => (
-  <InnerElement {...rest} />
+const InnerCustomLettermarketingStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
 )
 export const InnerCustomLettermarketing = InnerCustomLettermarketingStory.bind(
   {}
@@ -448,8 +795,24 @@ InnerCustomLettermarketing.args = {
   component: 'custom_lettermarketing',
 }
 
-const InnerCustomMembershipNumberStory = ({ ...rest }) => (
-  <InnerElement {...rest} />
+const InnerCustomMembershipNumberStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
 )
 export const InnerCustomMembershipNumber = InnerCustomMembershipNumberStory.bind(
   {}
@@ -459,8 +822,24 @@ InnerCustomMembershipNumber.args = {
   component: 'custom_membershipnumber',
 }
 
-const InnerCustomAuthorizationCodeStory = ({ ...rest }) => (
-  <InnerElement {...rest} />
+const InnerCustomAuthorizationCodeStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
 )
 export const InnerCustomAuthorizationCode = InnerCustomAuthorizationCodeStory.bind(
   {}
@@ -470,29 +849,99 @@ InnerCustomAuthorizationCode.args = {
   component: 'custom_authorizationcode',
 }
 
-const InnerCustomCompanyStory = ({ ...rest }) => <InnerElement {...rest} />
+const InnerCustomCompanyStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
+)
 export const InnerCustomCompany = InnerCustomCompanyStory.bind({})
 InnerCustomCompany.args = {
   type: 'custom',
   component: 'custom_company',
 }
 
-const InnerCustomDobStory = ({ ...rest }) => <InnerElement {...rest} />
+const InnerCustomDobStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
+)
 export const InnerCustomDob = InnerCustomDobStory.bind({})
 InnerCustomDob.args = {
   type: 'custom',
   component: 'custom_dob',
 }
 
-const InnerCustomGenderStory = ({ ...rest }) => <InnerElement {...rest} />
+const InnerCustomGenderStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
+)
 export const InnerCustomGender = InnerCustomGenderStory.bind({})
 InnerCustomGender.args = {
   type: 'custom',
   component: 'custom_gender',
 }
 
-const InnerCustomPhysicalAddressStory = ({ ...rest }) => (
-  <InnerElement {...rest} />
+const InnerCustomPhysicalAddressStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
 )
 export const InnerCustomPhysicalAddress = InnerCustomPhysicalAddressStory.bind(
   {}
@@ -502,8 +951,24 @@ InnerCustomPhysicalAddress.args = {
   component: 'custom_physicaladdress',
 }
 
-const InnerCustomPostalAddressStory = ({ ...rest }) => (
-  <InnerElement {...rest} />
+const InnerCustomPostalAddressStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
 )
 export const InnerCustomPostalAddress = InnerCustomPostalAddressStory.bind({})
 InnerCustomPostalAddress.args = {
@@ -511,15 +976,49 @@ InnerCustomPostalAddress.args = {
   component: 'custom_postaladdress',
 }
 
-const InnerCustomReferredByStory = ({ ...rest }) => <InnerElement {...rest} />
+const InnerCustomReferredByStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
+)
 export const InnerCustomReferredBy = InnerCustomReferredByStory.bind({})
 InnerCustomReferredBy.args = {
   type: 'custom',
   component: 'custom_referredby',
 }
 
-const InnerCustomTelephoneNumberStory = ({ ...rest }) => (
-  <InnerElement {...rest} />
+const InnerCustomTelephoneNumberStory = ({
+  required,
+  activate,
+  type,
+  component,
+  handleId,
+  formData,
+  ...rest
+}) => (
+  <InnerElement
+    required={required}
+    activate={activate}
+    type={type}
+    component={component}
+    handleId={handleId}
+    formData={formData}
+    {...rest}
+  />
 )
 export const InnerCustomTelephoneNumber = InnerCustomTelephoneNumberStory.bind(
   {}
@@ -529,8 +1028,19 @@ InnerCustomTelephoneNumber.args = {
   component: 'custom_telephonenumber',
 }
 
-const SettingBasicHeadingStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingBasicHeadingStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingBasicHeading = SettingBasicHeadingStory.bind({})
 SettingBasicHeading.args = {
@@ -538,8 +1048,19 @@ SettingBasicHeading.args = {
   component: 'basic_heading',
 }
 
-const SettingBasicShortAnswerStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingBasicShortAnswerStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingBasicShortAnswer = SettingBasicShortAnswerStory.bind({})
 SettingBasicShortAnswer.args = {
@@ -547,8 +1068,19 @@ SettingBasicShortAnswer.args = {
   component: 'basic_shortanswer',
 }
 
-const SettingBasicLongAnswerStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingBasicLongAnswerStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingBasicLongAnswer = SettingBasicLongAnswerStory.bind({})
 SettingBasicLongAnswer.args = {
@@ -556,8 +1088,19 @@ SettingBasicLongAnswer.args = {
   component: 'basic_longanswer',
 }
 
-const SettingBasicTextBlockStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingBasicTextBlockStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingBasicTextBlock = SettingBasicTextBlockStory.bind({})
 SettingBasicTextBlock.args = {
@@ -565,8 +1108,19 @@ SettingBasicTextBlock.args = {
   component: 'basic_textblock',
 }
 
-const SettingBasicSingleChoiceStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingBasicSingleChoiceStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingBasicSingleChoice = SettingBasicSingleChoiceStory.bind({})
 SettingBasicSingleChoice.args = {
@@ -574,8 +1128,19 @@ SettingBasicSingleChoice.args = {
   component: 'basic_singlechoice',
 }
 
-const SettingBasicMultipleChoiceStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingBasicMultipleChoiceStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingBasicMultipleChoice = SettingBasicMultipleChoiceStory.bind(
   {}
@@ -585,8 +1150,19 @@ SettingBasicMultipleChoice.args = {
   component: 'basic_multiplechoice',
 }
 
-const SettingBasicDropDownStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingBasicDropDownStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingBasicDropDown = SettingBasicDropDownStory.bind({})
 SettingBasicDropDown.args = {
@@ -594,8 +1170,19 @@ SettingBasicDropDown.args = {
   component: 'basic_dropdown',
 }
 
-const SettingBasicDrawingStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingBasicDrawingStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingBasicDrawing = SettingBasicDrawingStory.bind({})
 SettingBasicDrawing.args = {
@@ -603,8 +1190,19 @@ SettingBasicDrawing.args = {
   component: 'basic_drawing',
 }
 
-const SettingBasicSignatureStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingBasicSignatureStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingBasicSignature = SettingBasicSignatureStory.bind({})
 SettingBasicSignature.args = {
@@ -612,8 +1210,19 @@ SettingBasicSignature.args = {
   component: 'basic_signature',
 }
 
-const SettingBasicConditionsStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingBasicConditionsStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingBasicConditions = SettingBasicConditionsStory.bind({})
 SettingBasicConditions.args = {
@@ -621,8 +1230,14 @@ SettingBasicConditions.args = {
   component: 'basic_conditions',
 }
 
-const SettingBasicDrugsStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingBasicDrugsStory = ({ type, component, selectedForm, ...rest }) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingBasicDrugs = SettingBasicDrugsStory.bind({})
 SettingBasicDrugs.args = {
@@ -630,8 +1245,39 @@ SettingBasicDrugs.args = {
   component: 'basic_drugs',
 }
 
-const SettingBasicTravelDestinationStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingBasicLabTestsStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
+)
+export const SettingBasicLabTests = SettingBasicLabTestsStory.bind({})
+SettingBasicLabTests.args = {
+  type: 'basic',
+  component: 'basic_labtests',
+}
+
+const SettingBasicTravelDestinationStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingBasicTravelDestination = SettingBasicTravelDestinationStory.bind(
   {}
@@ -641,8 +1287,19 @@ SettingBasicTravelDestination.args = {
   component: 'basic_traveldestination',
 }
 
-const SettingBasicVaccineSchedulerStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingBasicVaccineSchedulerStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingBasicVaccineScheduler = SettingBasicVaccineSchedulerStory.bind(
   {}
@@ -652,8 +1309,19 @@ SettingBasicVaccineScheduler.args = {
   component: 'basic_vaccinescheduler',
 }
 
-const SettingBasicVaccineHistoryStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingBasicVaccineHistoryStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingBasicVaccineHistory = SettingBasicVaccineHistoryStory.bind(
   {}
@@ -663,17 +1331,19 @@ SettingBasicVaccineHistory.args = {
   component: 'basic_vaccinehistory',
 }
 
-const SettingBasicLabTestsStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
-)
-export const SettingBasicLabTests = SettingBasicLabTestsStory.bind({})
-SettingBasicLabTests.args = {
-  type: 'basic',
-  component: 'basic_labtests',
-}
-
-const SettingCustomEmailMarketingStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingCustomEmailMarketingStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingCustomEmailMarketing = SettingCustomEmailMarketingStory.bind(
   {}
@@ -683,8 +1353,19 @@ SettingCustomEmailMarketing.args = {
   component: 'custom_emailmarketing',
 }
 
-const SettingCustomSmsMarketingStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingCustomSmsMarketingStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingCustomSmsMarketing = SettingCustomSmsMarketingStory.bind({})
 SettingCustomSmsMarketing.args = {
@@ -692,8 +1373,19 @@ SettingCustomSmsMarketing.args = {
   component: 'custom_smsmarketing',
 }
 
-const SettingCustomPhoneCallStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingCustomPhoneCallStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingCustomPhoneCall = SettingCustomPhoneCallStory.bind({})
 SettingCustomPhoneCall.args = {
@@ -701,8 +1393,19 @@ SettingCustomPhoneCall.args = {
   component: 'custom_phonecall',
 }
 
-const SettingCustomLettermarketingStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingCustomLettermarketingStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingCustomLettermarketing = SettingCustomLettermarketingStory.bind(
   {}
@@ -712,8 +1415,19 @@ SettingCustomLettermarketing.args = {
   component: 'custom_lettermarketing',
 }
 
-const SettingCustomMembershipNumberStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingCustomMembershipNumberStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingCustomMembershipNumber = SettingCustomMembershipNumberStory.bind(
   {}
@@ -723,8 +1437,19 @@ SettingCustomMembershipNumber.args = {
   component: 'custom_membershipnumber',
 }
 
-const SettingCustomAuthorizationCodeStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingCustomAuthorizationCodeStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingCustomAuthorizationCode = SettingCustomAuthorizationCodeStory.bind(
   {}
@@ -734,8 +1459,19 @@ SettingCustomAuthorizationCode.args = {
   component: 'custom_authorizationcode',
 }
 
-const SettingCustomCompanyStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingCustomCompanyStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingCustomCompany = SettingCustomCompanyStory.bind({})
 SettingCustomCompany.args = {
@@ -743,8 +1479,14 @@ SettingCustomCompany.args = {
   component: 'custom_company',
 }
 
-const SettingCustomDobStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingCustomDobStory = ({ type, component, selectedForm, ...rest }) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingCustomDob = SettingCustomDobStory.bind({})
 SettingCustomDob.args = {
@@ -752,8 +1494,19 @@ SettingCustomDob.args = {
   component: 'custom_dob',
 }
 
-const SettingCustomGenderStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingCustomGenderStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingCustomGender = SettingCustomGenderStory.bind({})
 SettingCustomGender.args = {
@@ -761,8 +1514,19 @@ SettingCustomGender.args = {
   component: 'custom_gender',
 }
 
-const SettingCustomPhysicalAddressStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingCustomPhysicalAddressStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingCustomPhysicalAddress = SettingCustomPhysicalAddressStory.bind(
   {}
@@ -772,8 +1536,19 @@ SettingCustomPhysicalAddress.args = {
   component: 'custom_physicaladdress',
 }
 
-const SettingCustomPostalAddressStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingCustomPostalAddressStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingCustomPostalAddress = SettingCustomPostalAddressStory.bind(
   {}
@@ -783,8 +1558,19 @@ SettingCustomPostalAddress.args = {
   component: 'custom_postaladdress',
 }
 
-const SettingCustomReferredByStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingCustomReferredByStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingCustomReferredBy = SettingCustomReferredByStory.bind({})
 SettingCustomReferredBy.args = {
@@ -792,8 +1578,19 @@ SettingCustomReferredBy.args = {
   component: 'custom_referredby',
 }
 
-const SettingCustomTelephoneNumberStory = ({ ...rest }) => (
-  <SettingElement {...rest} selectedForm={{}} />
+const SettingCustomTelephoneNumberStory = ({
+  type,
+  component,
+  selectedForm,
+  ...rest
+}) => (
+  <SettingElement
+    {...rest}
+    type={type}
+    component={component}
+    selectedForm={selectedForm}
+    {...rest}
+  />
 )
 export const SettingCustomTelephoneNumber = SettingCustomTelephoneNumberStory.bind(
   {}

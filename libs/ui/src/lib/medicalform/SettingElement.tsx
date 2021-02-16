@@ -41,8 +41,8 @@ interface P {
   type: string
   component: string
   selectedForm: MedicalFormTypes
-  handleSave: () => void
-  handleDelete: () => void
+  handleSave?: () => void
+  handleDelete?: () => void
 }
 
 const SettingElement: FC<P> = ({
@@ -146,6 +146,14 @@ const SettingElement: FC<P> = ({
       desc: 'Description',
     },
     {
+      component: 'basic_labtests',
+      type: { type },
+      iconUrl: labTestIcon,
+      bgcolor: '#FAAD14',
+      title: 'Lab tests',
+      desc: 'Description',
+    },
+    {
       component: 'basic_traveldestination',
       type: { type },
       iconUrl: travelDesctinationIcon,
@@ -167,14 +175,6 @@ const SettingElement: FC<P> = ({
       iconUrl: vaccineHistoryIcon,
       bgcolor: '#FAAD14',
       title: 'Vaccine history',
-      desc: 'Description',
-    },
-    {
-      component: 'basic_labtests',
-      type: { type },
-      iconUrl: labTestIcon,
-      bgcolor: '#FAAD14',
-      title: 'Lab tests',
       desc: 'Description',
     },
 
@@ -360,10 +360,10 @@ const SettingElement: FC<P> = ({
               filteredComponent[0].component === 'basic_dropdown' ||
               filteredComponent[0].component === 'basic_conditions' ||
               filteredComponent[0].component === 'basic_drugs' ||
+              filteredComponent[0].component === 'basic_labtests' ||
               filteredComponent[0].component === 'basic_traveldestination' ||
               filteredComponent[0].component === 'basic_vaccinescheduler' ||
               filteredComponent[0].component === 'basic_vaccinehistory' ||
-              filteredComponent[0].component === 'basic_labtests' ||
               filteredComponent[0].component === 'custom_emailmarketing' ||
               filteredComponent[0].component === 'custom_smsmarketing' ||
               filteredComponent[0].component === 'custom_phonecall' ||

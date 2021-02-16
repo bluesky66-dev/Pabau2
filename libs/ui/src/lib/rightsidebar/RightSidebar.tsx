@@ -8,8 +8,8 @@ interface P {
   component: string
   formType: string
   display: boolean
-  handlingFormSetting?: (componentID?: string) => void
-  handlingDeleteForm?: (componentID?: string) => void
+  handlingFormSetting: (componentID?: string) => void
+  handlingDeleteForm: (componentID?: string) => void
 }
 
 const RightSidebar: FC<P> = ({

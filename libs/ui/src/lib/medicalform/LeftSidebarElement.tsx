@@ -121,6 +121,14 @@ const LeftSidebarElement: FC<P> = ({ type, component }) => {
       desc: 'Description',
     },
     {
+      component: 'basic_labtests',
+      type: { type },
+      iconUrl: labTestIcon,
+      bgcolor: '#FAAD14',
+      title: 'Lab tests',
+      desc: 'Description',
+    },
+    {
       component: 'basic_traveldestination',
       type: { type },
       iconUrl: travelDesctinationIcon,
@@ -142,14 +150,6 @@ const LeftSidebarElement: FC<P> = ({ type, component }) => {
       iconUrl: vaccineHistoryIcon,
       bgcolor: '#FAAD14',
       title: 'Vaccine history',
-      desc: 'Description',
-    },
-    {
-      component: 'basic_labtests',
-      type: { type },
-      iconUrl: labTestIcon,
-      bgcolor: '#FAAD14',
-      title: 'Lab tests',
       desc: 'Description',
     },
 

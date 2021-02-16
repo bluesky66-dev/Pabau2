@@ -39,7 +39,7 @@ interface P {
   component: string
   handleId: string
   formData: MedicalFormTypes
-  handlingSelectForm: (isActive?: boolean, handleId?: string) => void
+  handlingSelectForm?: (isActive?: boolean, handleId?: string) => void
 }
 
 const InnerElement: FC<P> = ({
@@ -130,6 +130,13 @@ const InnerElement: FC<P> = ({
       title: 'Drugs',
     },
     {
+      component: 'basic_labtests',
+      type: { type },
+      iconUrl: labTestIcon,
+      bgcolor: '#FAAD14',
+      title: 'Lab tests',
+    },
+    {
       component: 'basic_traveldestination',
       type: { type },
       iconUrl: travelDesctinationIcon,
@@ -149,13 +156,6 @@ const InnerElement: FC<P> = ({
       iconUrl: vaccineHistoryIcon,
       bgcolor: '#FAAD14',
       title: 'Vaccine history',
-    },
-    {
-      component: 'basic_labtests',
-      type: { type },
-      iconUrl: labTestIcon,
-      bgcolor: '#FAAD14',
-      title: 'Lab tests',
     },
 
     {
@@ -259,9 +259,9 @@ const InnerElement: FC<P> = ({
     <div>
       {filteredComponent.length > 0 && (
         <InnerMedicalForm
-          activate={activate}
+          activate={activate!}
           handleId={handleId!}
-          handlingSelectForm={handlingSelectForm}
+          handlingSelectForm={handlingSelectForm!}
         >
           {required && <InnerMedicalFormRequired />}
           <InnerMedicalFormEditIcon />
