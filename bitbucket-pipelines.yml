@@ -1,6 +1,6 @@
 # Bitbucket Pipeline definition
 
-# image: node:14-buster
+image: node:14-buster
 
 options:
   max-time: 40 # max time in minutes for each step
@@ -12,7 +12,7 @@ definitions:
     cypress: '/root/.cache/Cypress'
   services:
     docker:
-      memory: 4096
+      memory: 2048
 
 pipelines:
   pull-requests:
@@ -27,13 +27,6 @@ pipelines:
             - yarncustom
           script:
             # TODO: make this DRY
-
-            - docker version
-            - apt-get update && apt-get install -y curl jq apt-transport-https
-            - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-            - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-            - apt-get update && apt-get install -y nodejs yarn
-            - yarn --version
 
             - /bin/bash -c 'yarn audit --no-progress --non-interactive; [[ $? -gt 2 ]] && exit 1 || exit 0'
 
