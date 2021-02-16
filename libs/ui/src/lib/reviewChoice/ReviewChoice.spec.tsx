@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import I18n from './i18n'
+import ReviewChoice from './ReviewChoice'
 
-describe('I18n', () => {
+describe('ReviewChoice', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<I18n />)
+    const { baseElement } = render(<ReviewChoice />)
     expect(baseElement).toBeTruthy()
   })
 })
