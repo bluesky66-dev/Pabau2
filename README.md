@@ -41,6 +41,10 @@ echo 'NPM_STORE="${HOME}/.npm-global"' >> ~/.bashrc
 echo 'export PATH="$PATH:$NPM_STORE/bin"' >> ~/.bashrc
 echo 'export MANPATH="${MANPATH-$(manpath)}:$NPM_STORE/share/man"' >> ~/.bashrc
 npm i -g yarn
+
+snap --classic phpstorm vscode
+
+
 ```
 
 ## Storybook
@@ -171,22 +175,28 @@ To view the Backend, you can either visit [https://backend.new.pabau.com](https:
 
 ## GraphQL workflow
 
+### Setup
+
 1. [optional] Please install Hasura locally. On Linux it's very easy.
 1. Create a hasura/.env file:
+   ```dotenv
    HASURA_GRAPHQL_ADMIN_SECRET=madskills
    HASURA_GRAPHQL_ENDPOINT=https://api.new.pabau.com/
+   ```
 
-1. Edit the database:
+### Per-ticket
+
 1. Open the hasura console
-1. Create a new table (in the singular tense ie 'user' not 'users')
+1. Create a new table (in the singular tense, using snake case)
 1. Insert 3 'Frequently used columns' - the ID being GUID, and the created_at and updated_at
-1. Add a very clear comment for the table. Customers will see this.
+1. If your table is order sensitive (customers can drag to rearrange the order), then add a column called "order", type Integer
+1. If your table has is_active boolean, then add "is_active" as Boolean
+1. Add the rest of your columns too
+1. Add a very clear comment for the table (our customers will see this)
 1. Change the table permissions so that 'public' role can do pretty much everything (for now).
 1. Check your table's public role permission for SELECT has the Aggregation queries permissions enabled.
-1. Oh hey there's a nice Clone Permissions feature
 1. Now run `yarn hasura:export` in your IDE, commit the changes to your branch.
-
-then yarn hasura:export
+1. Now on your page's `schema.fields` array, add the relevant keys in -- they should match the hasura columns
 
 ## To do (big engineering items)
 
@@ -206,3 +216,12 @@ then yarn hasura:export
 - Create a bridge to our old LAMP app
   1. generate jwt in php
   2. ...?
+
+
+
+* auth to prisma
+* storing jwt token for hasura in nextjs httponly cookie
+* graphql code generator and other tooling
+* nestjs needs a typed hasura service that we can call
+* prisma needs a hoc for company_id security
+* 
