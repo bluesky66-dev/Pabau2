@@ -29,10 +29,14 @@ pipelines:
             # TODO: make this DRY
 
             - docker version
+            - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+            - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+            - apt-get update && apt-get install -y curl jq yarn
+            - yarn --version
+
             - /bin/bash -c 'yarn audit --no-progress --non-interactive; [[ $? -gt 2 ]] && exit 1 || exit 0'
 
             # Get an oauth access token using the client credentials, parsing out the token with jq.
-            - apt-get update && apt-get install -y curl jq
             - >
               export access_token=$(curl -s -X POST -u "${BITBUCKET_CLIENT_ID}:${BITBUCKET_CLIENT_SECRET}" \
                 https://bitbucket.org/site/oauth2/access_token \
