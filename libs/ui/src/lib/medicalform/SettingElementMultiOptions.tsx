@@ -4,7 +4,7 @@ import {
   PlusOutlined,
   SaveOutlined,
 } from '@ant-design/icons'
-import { Button, ButtonTypes } from '@pabau/ui'
+import { Button, ButtonTypes, OptionType } from '@pabau/ui'
 import { Checkbox, Input } from 'antd'
 import React, { FC, useEffect, useState } from 'react'
 import styles from './Setting.module.less'
