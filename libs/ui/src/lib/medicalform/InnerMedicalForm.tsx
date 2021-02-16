@@ -4,7 +4,7 @@ import styles from './Inner.module.less'
 interface P {
   handleId: string
   activate: boolean
-  handlingSelectForm: (isActive?: boolean, handleId?: string) => void
+  handlingSelectForm?: (isActive?: boolean, handleId?: string) => void
 }
 
 const InnerMedicalForm: FC<P> = (props) => {

@@ -39,7 +39,7 @@ interface P {
   component: string
   handleId: string
   formData: MedicalFormTypes
-  handlingSelectForm: (isActive?: boolean, handleId?: string) => void
+  handlingSelectForm?: (isActive?: boolean, handleId?: string) => void
 }
 
 const InnerElement: FC<P> = ({
