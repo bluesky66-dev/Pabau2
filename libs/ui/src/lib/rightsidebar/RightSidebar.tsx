@@ -1,10 +1,10 @@
-import { MEDICAL_FORM_TYPES } from '@pabau/ui'
+import { MedicalFormTypes } from '@pabau/ui'
 import React, { FC, useEffect, useState } from 'react'
 import SettingElement from '../medicalform/SettingElement'
 import styles from './RightSidebar.module.less'
 
 interface P {
-  selectedForm?: MEDICAL_FORM_TYPES
+  selectedForm?: MedicalFormTypes
   component?: string
   formType?: string
   display?: boolean

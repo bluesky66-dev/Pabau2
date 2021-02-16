@@ -1,4 +1,4 @@
-import { MEDICAL_FORM_TYPES } from '@pabau/ui'
+import { MedicalFormTypes } from '@pabau/ui'
 import React, { FC } from 'react'
 import conditionsIcon from '../../assets/images/medicalform_conditions.svg'
 import customCompanyIcon from '../../assets/images/medicalform_custom_company.svg'
@@ -38,7 +38,7 @@ interface P {
   type?: string
   component?: string
   handleId?: string
-  formData?: MEDICAL_FORM_TYPES
+  formData?: MedicalFormTypes
   handlingSelectForm?: (isActive?: boolean, handleId?: string) => void
 }
 

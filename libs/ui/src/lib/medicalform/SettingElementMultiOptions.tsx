@@ -4,19 +4,19 @@ import {
   PlusOutlined,
   SaveOutlined,
 } from '@ant-design/icons'
-import { Button, ButtonTypes, OPTION_TYPE } from '@pabau/ui'
+import { Button, ButtonTypes } from '@pabau/ui'
 import { Checkbox, Input } from 'antd'
 import React, { FC, useEffect, useState } from 'react'
 import styles from './Setting.module.less'
 
 interface P {
   onChange?: (addedItems) => void
-  paramItems: OPTION_TYPE[]
+  paramItems: OptionType[]
 }
 
 const SettingElementMultiOptions: FC<P> = ({ onChange, paramItems }) => {
-  const [items, setItems] = useState<OPTION_TYPE[]>([])
-  const [addedItems, setaddedItems] = useState<OPTION_TYPE[]>([])
+  const [items, setItems] = useState<OptionType[]>([])
+  const [addedItems, setaddedItems] = useState<OptionType[]>([])
   const [itemName, setItemName] = useState('')
 
   useEffect(() => {

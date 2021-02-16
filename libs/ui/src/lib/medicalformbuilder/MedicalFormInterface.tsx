@@ -1,16 +1,22 @@
-export interface OPTION_TYPE {
+export interface OptionType {
   id: number
   name: string
   editing?: boolean
 }
 
-export interface MEDICAL_FORM_TYPES {
+export interface MedicalFormTypes {
   id?: string
   formType?: string
   formName?: string
   txtQuestion?: string
   txtBlock?: string
   txtInputType?: string
-  arrItems?: OPTION_TYPE[]
+  arrItems?: OptionType[]
   required?: boolean
+}
+
+export interface MedicalForms {
+  id?: number
+  formType?: string
+  formName?: string
 }

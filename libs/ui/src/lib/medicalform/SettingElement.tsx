@@ -1,4 +1,4 @@
-import { MEDICAL_FORM_TYPES } from '@pabau/ui'
+import { MedicalFormTypes } from '@pabau/ui'
 import React, { FC, useEffect, useState } from 'react'
 import conditionsIcon from '../../assets/images/medicalform_conditions.svg'
 import customCompanyIcon from '../../assets/images/medicalform_custom_company.svg'
@@ -40,7 +40,7 @@ import SettingMedicalFormTitle from './SettingMedicalFormTitle'
 interface P {
   type?: string
   component?: string
-  selectedForm: MEDICAL_FORM_TYPES
+  selectedForm: MedicalFormTypes
   handleSave?: () => void
   handleDelete?: () => void
 }

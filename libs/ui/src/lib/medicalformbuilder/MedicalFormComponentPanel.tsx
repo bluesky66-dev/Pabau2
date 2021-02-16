@@ -1,3 +1,4 @@
+import { MedicalForms } from '@pabau/ui'
 import { Tabs } from 'antd'
 import React, { FC } from 'react'
 import styles from './MedicalFormBuilder.module.less'
@@ -6,14 +7,8 @@ import MedicalFormLeftSidebarCustomPanels from './MedicalFormLeftSidebarCustomPa
 
 const { TabPane } = Tabs
 
-interface medicalForms {
-  id?: number
-  formType?: string
-  formName?: string
-}
-
 interface P {
-  medicalForms: medicalForms[]
+  medicalForms: MedicalForms[]
 }
 
 const MedicalFormComponentPanel: FC<P> = ({ ...props }) => {

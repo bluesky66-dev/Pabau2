@@ -1,17 +1,12 @@
+import { MedicalForms } from '@pabau/ui'
 import React, { FC } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 import LeftSidebarElement from '../medicalform/LeftSidebarElement'
 import styles from './MedicalFormBuilder.module.less'
 import MedicalFormLeftSidebarDivider from './MedicalFormLeftSidebarDivider'
 
-interface medicalForms {
-  id?: number
-  formType?: string
-  formName?: string
-}
-
 interface P {
-  medicalForms: medicalForms[]
+  medicalForms: MedicalForms[]
 }
 
 const MedicalFormLeftSidebarBasicPanels: FC<P> = ({ ...props }) => {

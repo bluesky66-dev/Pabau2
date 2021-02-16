@@ -1,11 +1,11 @@
-import { OPTION_TYPE } from '@pabau/ui'
+import { OptionType } from '@pabau/ui'
 import { Checkbox } from 'antd'
 import React, { FC } from 'react'
 import styles from './Inner.module.less'
 
 interface P {
   title?: string
-  options?: OPTION_TYPE[]
+  options?: OptionType[]
 }
 
 const InnerMedicalFormCheckbox: FC<P> = ({ title, options }) => {

@@ -1,11 +1,11 @@
-import { OPTION_TYPE } from '@pabau/ui'
+import { OptionType } from '@pabau/ui'
 import { Radio } from 'antd'
 import React, { FC, useState } from 'react'
 import styles from './Inner.module.less'
 
 interface P {
   title?: string
-  options?: OPTION_TYPE[]
+  options?: OptionType[]
 }
 
 const InnerMedicalFormRadio: FC<P> = ({ title, options }) => {

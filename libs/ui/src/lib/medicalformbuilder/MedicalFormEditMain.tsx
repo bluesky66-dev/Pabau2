@@ -1,11 +1,11 @@
-import { MEDICAL_FORM_TYPES } from '@pabau/ui'
+import { MedicalFormTypes } from '@pabau/ui'
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
 import InnerElement from '../medicalform/InnerElement'
 import styles from './MedicalFormBuilder.module.less'
 
 interface P {
-  draggedForms?: MEDICAL_FORM_TYPES[]
+  draggedForms?: MedicalFormTypes[]
   handlingFormSetting?: (formID?: string) => void
 }
 
