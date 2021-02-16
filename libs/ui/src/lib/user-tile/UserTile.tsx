@@ -13,6 +13,7 @@ interface Vacation {
 }
 
 export interface UserProps {
+  id?: number
   name: string
   surname: string
   title: string

@@ -1,1 +1,1 @@
-export * from './Filter/Filter'
+export { Filter } from './Filter/Filter'

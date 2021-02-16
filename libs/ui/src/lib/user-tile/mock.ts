@@ -5,7 +5,9 @@ export const mockUsers = {
   surname: 'Howard',
   title: 'Managing Director',
   img: austin,
-  vacation: true,
+  vacation: {
+    scheduled: true,
+  },
   available: true,
   active: true,
   owner: true,

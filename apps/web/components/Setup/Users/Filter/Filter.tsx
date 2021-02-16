@@ -1,13 +1,16 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
-import { Button, MobileHeader, GridVsList } from '@pabau/ui'
+import { Button, MobileHeader } from '@pabau/ui'
 import addButtonStyles from '../../../AddButton.module.less'
 import styles from './Filter.module.less'
 import {
+  AppstoreOutlined,
   FilterOutlined,
+  MenuOutlined,
   PlusSquareFilled,
   SearchOutlined,
 } from '@ant-design/icons'
 import { Drawer, Input, Popover, Radio } from 'antd'
+import GridVsList from '../../../../../../libs/ui/src/lib/gridvslist/GridVsList'
 import classNames from 'classnames'
 
 const WAIT_INTERVAL = 400
@@ -111,7 +114,6 @@ export const Filter: FunctionComponent<P> = ({
         </Button>
         `
       </Drawer>
-
       {/* Desktop header */}
       <div
         className={classNames(
@@ -138,6 +140,15 @@ export const Filter: FunctionComponent<P> = ({
             <FilterOutlined /> Filter
           </Button>
         </Popover>
+        <span className={styles.GridVsList}>
+          <GridVsList
+            onChange={() => console.log('hi')}
+            displayTypes={[
+              { title: 'Grid', icon: <AppstoreOutlined /> },
+              { title: 'List', icon: <MenuOutlined /> },
+            ]}
+          />
+        </span>
         <Button
           className={addButtonStyles.createSourceBtn}
           type="primary"
