@@ -9,6 +9,7 @@ interface WizardProps {
   active: number
   allSteps: number
   stepperData: StepperInterface[]
+  disableNextStep?: boolean
 }
 
 export const Wizard: React.FC<WizardProps> = ({
@@ -17,6 +18,7 @@ export const Wizard: React.FC<WizardProps> = ({
   active,
   allSteps,
   stepperData,
+  disableNextStep = false,
   children,
 }) => {
   return (
@@ -27,7 +29,10 @@ export const Wizard: React.FC<WizardProps> = ({
       {children}
 
       <div className={styels.footer}>
-        <Button onClick={(event) => onPrev?.()} disabled={active < 1}>
+        <Button
+          onClick={(event) => onPrev?.()}
+          disabled={active < 1 || active === allSteps - 1}
+        >
           Previous Step
         </Button>
         <span className={styels.breadcrumbgraytxt}>
@@ -37,7 +42,7 @@ export const Wizard: React.FC<WizardProps> = ({
         <Button
           type="primary"
           onClick={(event) => onNext?.()}
-          disabled={allSteps - 1 <= active}
+          disabled={disableNextStep || allSteps - 1 <= active}
         >
           Next Step
         </Button>

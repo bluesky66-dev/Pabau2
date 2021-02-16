@@ -113,6 +113,49 @@
       filter: {}
 - table:
     schema: public
+    name: cancellation_reasons
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - cancellation_policy
+      - is_active
+      - name
+      - order
+      - type
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - order
+      - cancellation_policy
+      - name
+      - type
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - cancellation_policy
+      - is_active
+      - name
+      - order
+      - type
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
     name: colors
   insert_permissions:
   - role: public
@@ -223,6 +266,42 @@
       - name
       - order
       - updated_at
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: issuing_company
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - address
+      - is_active
+      - name
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - address
+      - name
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - address
+      - is_active
+      - name
       filter: {}
       check: null
   delete_permissions:

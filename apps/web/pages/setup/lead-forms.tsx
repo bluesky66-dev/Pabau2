@@ -1,12 +1,5 @@
 import React, { useState } from 'react'
-import {
-  Layout,
-  Breadcrumb,
-  WStepper,
-  StepperItem,
-  BasicModal as Modal,
-  ButtonTypes,
-} from '@pabau/ui'
+import { Layout, Breadcrumb, WStepper, StepperItem } from '@pabau/ui'
 import styles from './lead-forms.module.less'
 import LeadSettings from './lead-capture/LeadSetting'
 import LeadIntegration from './lead-capture/LeadIntegration'
@@ -22,10 +15,9 @@ const { Title } = Typography
 
 export const LeadForms: React.FC = () => {
   const allAPISteps = ['Basic', 'Configure(API)', 'Testing(API)', 'Result']
-  const allFormSteps = ['Basic', 'Customize Form', 'Test Form', 'Result']
+  const allFormSteps = ['Basic', 'Customize Form', 'Result']
   const [activeStepper, setActiveStepper] = useState('API')
   const [activeStep, setActiveStep] = useState(0)
-  const [openPabauLeadModal, setPabauLeadModal] = useState(false)
 
   const apiStepper: StepperItem[] = [
     {
@@ -85,23 +77,21 @@ export const LeadForms: React.FC = () => {
     },
     {
       step: 3,
-      name: 'Test Form',
-      imgPath: <ToolOutlined />,
-      isActive: false,
-      index: 2,
-    },
-    {
-      step: 4,
       name: 'Result',
       imgPath: <FlagOutlined />,
       isActive: false,
-      index: 3,
+      index: 2,
     },
   ]
 
   const setActiveStepperForLead = (type) => {
     setActiveStepper(type)
   }
+
+  const onAPIFlowComplete = () => {
+    setActiveStep(allAPISteps.length - 1)
+  }
+
   return (
     <Layout active={'setup'}>
       <div className={styles.cardWrapper}>
@@ -117,10 +107,12 @@ export const LeadForms: React.FC = () => {
         <WStepper
           data={activeStepper === 'API' ? apiStepper : formStepper}
           active={activeStep}
+          disableNextStep={
+            activeStepper === 'API' &&
+            allAPISteps[activeStep] === 'Testing(API)'
+          }
           onActiveStepChange={(step) => {
-            if (step === 1 && activeStepper === 'API')
-              setPabauLeadModal((e) => !e)
-            else setActiveStep(step)
+            setActiveStep(step)
           }}
         >
           {allAPISteps[activeStep] === 'Basic' && (
@@ -131,7 +123,9 @@ export const LeadForms: React.FC = () => {
               {allAPISteps[activeStep] === 'Configure(API)' && (
                 <LeadIntegration />
               )}
-              {allAPISteps[activeStep] === 'Testing(API)' && <LeadTesting />}
+              {allAPISteps[activeStep] === 'Testing(API)' && (
+                <LeadTesting onAPIFlowComplete={onAPIFlowComplete} />
+              )}
               {allAPISteps[activeStep] === 'Result' && <LeadResult />}
             </>
           ) : (
@@ -140,26 +134,6 @@ export const LeadForms: React.FC = () => {
             )
           )}
         </WStepper>
-        <Modal
-          modalWidth={682}
-          centered={true}
-          onOk={() => {
-            setActiveStep(1)
-            setPabauLeadModal((e) => !e)
-          }}
-          closable={true}
-          onCancel={() => setPabauLeadModal((e) => !e)}
-          visible={openPabauLeadModal}
-          title={'Pabau Leads'}
-          newButtonText={'Main page'}
-          btnType={ButtonTypes.default}
-        >
-          <p>
-            This process is for advanced users and should be handed over to a
-            web developer. Please reach out to your web team in order for them
-            to follow this guide on how to implement Pabau Leads.
-          </p>
-        </Modal>
       </div>
     </Layout>
   )

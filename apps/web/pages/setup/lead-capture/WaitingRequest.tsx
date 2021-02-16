@@ -5,11 +5,13 @@ import { Progress, Image } from 'antd'
 import ErrorImage from '../../../assets/images/error.png'
 
 interface LeadTestWaitingInterface {
+  progressStatus?: number
   triggerRequest: boolean
   triggerError: boolean
 }
 
 export const LeadTestWaiting: React.FC<LeadTestWaitingInterface> = ({
+  progressStatus = 75,
   triggerRequest,
   triggerError,
 }) => {
@@ -21,7 +23,7 @@ export const LeadTestWaiting: React.FC<LeadTestWaitingInterface> = ({
             <div className={styles.iconCenter}>
               <Progress
                 type="circle"
-                percent={75}
+                percent={progressStatus}
                 showInfo={false}
                 width={72}
               />

@@ -34,6 +34,7 @@ interface SchemaItem {
     | 'select'
   defaultvalue?: string | number | boolean
   visible?: boolean
+  required?: boolean
   radio?: TypeValues[]
   selectOptions?: TypeValues[]
 }

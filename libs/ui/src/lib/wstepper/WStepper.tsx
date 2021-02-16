@@ -6,6 +6,7 @@ import { StepperItem } from '@pabau/ui'
 interface WStepperProps {
   active: number
   data: StepperItem[]
+  disableNextStep?: boolean
   onActiveStepChange?: (index) => void
 }
 
@@ -13,9 +14,14 @@ export const WStepper: React.FC<WStepperProps> = ({
   active,
   children,
   data,
-  onActiveStepChange
+  disableNextStep = false,
+  onActiveStepChange,
 }) => {
-  const [index, setIndex] = React.useState(active)
+  const [index, setIndex] = React.useState(0)
+
+  useEffect(() => {
+    setIndex(active)
+  }, [active])
 
   useEffect(() => {
     onActiveStepChange?.(index)
@@ -29,6 +35,7 @@ export const WStepper: React.FC<WStepperProps> = ({
         active={index}
         allSteps={data.length}
         stepperData={data}
+        disableNextStep={disableNextStep}
       >
         {children}
       </Wizard>

@@ -7,12 +7,14 @@ import {
   ProfileOutlined,
 } from '@ant-design/icons'
 import { Radio } from 'antd'
+import { BasicModal as Modal, ButtonTypes } from '@pabau/ui'
 
 export const LeadIntegration: React.FC = () => {
   const [captureLeadIntegrationStep, setCaptureLeadIntegrationStep] = useState(
     'Documentation'
   )
 
+  const [openPabauLeadModal, setPabauLeadModal] = useState(false)
   const [typeOfIntegration, setTypeOfIntegration] = useState('Developer')
 
   return (
@@ -21,7 +23,12 @@ export const LeadIntegration: React.FC = () => {
         <Radio.Group
           className={styles.tabDesign}
           value={typeOfIntegration}
-          onChange={(e) => setTypeOfIntegration(e.target.value)}
+          onChange={(e) => {
+            setTypeOfIntegration(e.target.value)
+            if (e.target.value === 'User') {
+              setPabauLeadModal((e) => !e)
+            }
+          }}
         >
           <Radio.Button value="Developer">I’m a developer</Radio.Button>
           <Radio.Button value="User">I’m a user</Radio.Button>
@@ -105,6 +112,26 @@ export const LeadIntegration: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <Modal
+        modalWidth={682}
+        centered={true}
+        onOk={() => {
+          setPabauLeadModal((e) => !e)
+        }}
+        closable={true}
+        onCancel={() => setPabauLeadModal((e) => !e)}
+        visible={openPabauLeadModal}
+        title={'Pabau Leads'}
+        newButtonText={'Main page'}
+        btnType={ButtonTypes.default}
+      >
+        <p>
+          This process is for advanced users and should be handed over to a web
+          developer. Please reach out to your web team in order for them to
+          follow this guide on how to implement Pabau Leads.
+        </p>
+      </Modal>
     </>
   )
 }

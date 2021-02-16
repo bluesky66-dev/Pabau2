@@ -14,7 +14,12 @@ import { Image } from 'antd'
 import PabauLogo from '../../../assets/images/logo.svg'
 import LeadTestWaiting from './WaitingRequest'
 
-export const LeadTesting: React.FC = () => {
+interface LeadTestingInterface {
+  onAPIFlowComplete: () => void
+}
+export const LeadTesting: React.FC<LeadTestingInterface> = ({
+  onAPIFlowComplete,
+}) => {
   const [testTrigger, setTestTrigger] = useState(false)
 
   return (
@@ -36,7 +41,7 @@ export const LeadTesting: React.FC = () => {
               <div className={styles.triggerBox}>
                 <FontAwesomeIcon
                   icon={Icons.faGlobe}
-                  style={{ fontSize: '28px', color: '#3D3D46;' }}
+                  style={{ fontSize: '28px', color: '#3D3D46' }}
                 />
               </div>
               <div className={styles.triggerRightIcon}>
@@ -47,7 +52,16 @@ export const LeadTesting: React.FC = () => {
               </div>
             </div>
             <div className={styles.testTriggerButton}>
-              <Button type="primary" onClick={() => setTestTrigger((e) => !e)}>
+              <Button
+                type="primary"
+                onClick={() => {
+                  setTestTrigger((e) => !e)
+                  setTimeout(() => {
+                    setTestTrigger((e) => !e)
+                    onAPIFlowComplete()
+                  }, 3000)
+                }}
+              >
                 Test trigger
               </Button>
             </div>
