@@ -29,9 +29,10 @@ pipelines:
             # TODO: make this DRY
 
             - docker version
+            - apt-get update && apt-get install -y curl jq apt-transport-https
             - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
             - echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-            - apt-get update && apt-get install -y curl jq yarn
+            - apt-get update && apt-get install -y yarn
             - yarn --version
 
             - /bin/bash -c 'yarn audit --no-progress --non-interactive; [[ $? -gt 2 ]] && exit 1 || exit 0'
