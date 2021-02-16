@@ -190,7 +190,7 @@ const mockUsers = [
 ]
 
 const Index: FunctionComponent = () => {
-  const [users, setUsers] = useState<UserProps[]>(mockUsers)
+  const [users] = useState<UserProps[]>(mockUsers)
 
   return (
     <>
