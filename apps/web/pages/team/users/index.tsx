@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from 'react'
 import Layout from '../../../components/Layout/Layout'
-import CommonHeader from '../CommonHeader'
+import CommonHeader from '../../setup/CommonHeader'
 import { Pagination, UserTile, TabMenu, UserProps, Breadcrumb } from '@pabau/ui'
 import { Filter } from '../../../components/Setup/Users'
 import { Typography } from 'antd'
@@ -213,11 +213,11 @@ const Index: FunctionComponent = () => {
               <Breadcrumb
                 breadcrumbItems={[
                   {
-                    path: '/setup',
-                    breadcrumbName: 'Setup',
+                    path: '/team',
+                    breadcrumbName: 'Team',
                   },
                   {
-                    path: '/setup/users',
+                    path: '/team/users',
                     breadcrumbName: 'Users',
                   },
                 ]}
