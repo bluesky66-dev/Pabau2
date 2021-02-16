@@ -1,15 +1,16 @@
 import React, { FC } from 'react'
 
-import { Card, Typography, Table, Input } from 'antd'
-import { EyeOutlined } from '@ant-design/icons'
-import { Breadcrumb, TabMenu, Button } from '@pabau/ui'
+import { Card, Typography, Input } from 'antd'
+import { EyeOutlined, FilterOutlined, MailOutlined } from '@ant-design/icons'
+import { Breadcrumb, TabMenu, Button, Table } from '@pabau/ui'
 
 import { InvoiceData } from '../../mocks/Subscriptions'
 
 import Layout from '../../components/Layout/Layout'
+import Styles from './subscription.module.less'
 
 const Subscription: FC = () => {
-  const { Title } = Typography
+  const { Title, Text, Paragraph } = Typography
   const { Search } = Input
 
   const invoiceColumns = [
@@ -49,18 +50,22 @@ const Subscription: FC = () => {
       className: 'drag-visible',
       visible: true,
       // eslint-disable-next-line react/display-name
-      render: (text, record) =>
-        record.buttonGp && (
-          <div>
-            <Button>Email</Button>
-            <Button>
-              <EyeOutlined />
-              Preview
-            </Button>
-          </div>
-        ),
+      render: () => (
+        <div>
+          <Button className={Styles.emailBtn}>
+            <MailOutlined /> Email
+          </Button>
+          <Button>
+            <EyeOutlined /> Preview
+          </Button>
+        </div>
+      ),
     },
   ]
+
+  const handleSearch = (val) => {
+    console.log('val', val)
+  }
 
   const prepareInvoiceContent = () => {
     return (
@@ -68,8 +73,13 @@ const Subscription: FC = () => {
         <Table
           pagination={false}
           columns={invoiceColumns}
-          dataSource={InvoiceData}
+          dataSource={InvoiceData as never[]}
         />
+        <div style={{ marginTop: 24 }}>
+          <Paragraph type="secondary">
+            SHOWING <Text>2</Text> RESULTS FROM <Text>2</Text>
+          </Paragraph>
+        </div>
       </div>
     )
   }
@@ -77,7 +87,7 @@ const Subscription: FC = () => {
   return (
     <Layout>
       <Card>
-        <div style={{ width: '100%' }}>
+        <div className={Styles.headerContainer}>
           <div>
             <Breadcrumb
               breadcrumbItems={[
@@ -87,13 +97,17 @@ const Subscription: FC = () => {
             />
             <Title>Pabau Subscription</Title>
           </div>
-          <div>
+          <div className={Styles.searchBarContainer}>
             <Search
               placeholder={'Search in Custom'}
               allowClear
-              enterButton
-              onSearch={(val) => console.log('search', val)}
+              onSearch={handleSearch}
+              className={Styles.searchBar}
             />
+            <Button>
+              <FilterOutlined />
+              Filter
+            </Button>
           </div>
         </div>
         <TabMenu

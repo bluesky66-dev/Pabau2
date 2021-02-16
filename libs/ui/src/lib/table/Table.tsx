@@ -155,7 +155,7 @@ export const Table: FC<TableType> = ({
         .map((col: any) => {
           if (col && col.dataIndex === 'is_active') {
             col.render = renderActiveButton
-          } else {
+          } else if (!col.render) {
             col.render = renderTableSource
           }
           return col
