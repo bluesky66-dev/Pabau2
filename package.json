@@ -10,7 +10,7 @@
     "nest": "cd apps/backend && nest",
     "start": "nx serve",
     "dev": "yarn start",
-    "hasura:export": "npx -p hasura-cli hasura --project hasura metadata export && graphql-codegen",
+    "hasura:export": "npx -p hasura-cli hasura --project hasura metadata export && apollo client:download-schema remote-schema.graphql && apollo client:download-schema graphql.schema.json",
     "production:start": "nx affected --uncommitted=true --target=export && npx serve dist/apps/web/exported",
     "build": "pwd && ls -al && rm -rf public/ && nx build backend --no-cache && cp -rf dist/apps/backend/ public/ && cp apps/backend/vercel.json public/ && cp package.json public/",
     "pipeline-checks": "concurrently npm:ls-lint npm:test npm:lint npm:e2e",
