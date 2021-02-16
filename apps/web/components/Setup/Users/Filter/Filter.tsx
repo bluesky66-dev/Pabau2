@@ -139,15 +139,25 @@ export const Filter: FunctionComponent<P> = ({
             <FilterOutlined /> Filter
           </Button>
         </Popover>
-        <div className={styles.GridVsList}>
+        <span className={styles.GridVsList}>
           <GridVsList
             onChange={() => console.log('GridVsList not implemented')}
             displayTypes={[
-              { title: 'Grid', icon: <AppstoreOutlined /> },
-              { title: 'List', icon: <MenuOutlined /> },
+              {
+                title: 'Grid',
+                icon: (
+                  <AppstoreOutlined
+                    className={styles.GridIcons}
+                  />
+                ),
+              },
+              {
+                title: 'List',
+                icon: <MenuOutlined className={styles.GridIcons} />,
+              },
             ]}
           />
-        </div>
+        </span>
         <Button
           className={addButtonStyles.createSourceBtn}
           type="primary"
