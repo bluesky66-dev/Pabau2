@@ -28,6 +28,7 @@ const mockUsers = [
     owner: true,
     available: true,
     active: true,
+    admin: true,
   },
   {
     id: 2,
@@ -52,6 +53,7 @@ const mockUsers = [
       scheduled: true,
     },
     available: true,
+    admin: true,
   },
   {
     id: 4,
@@ -84,6 +86,7 @@ const mockUsers = [
       scheduled: true,
     },
     available: true,
+    admin: true,
   },
   {
     id: 7,
@@ -154,6 +157,7 @@ const mockUsers = [
     title: 'Aesthetician',
     img: austin,
     active: true,
+    admin: true,
   },
   {
     id: 24,
@@ -236,7 +240,9 @@ const Index: FunctionComponent = () => {
                       vacation={user.vacation}
                       active={user.active}
                       available={user.available}
+                      owner={user.owner}
                       img={user.img}
+                      admin={user.admin}
                     />
                   )
                 })}

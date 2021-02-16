@@ -160,7 +160,8 @@ export const Filter: FunctionComponent<P> = ({
           />
         </span>
         <Button
-          className={styles.createSourceBtn}
+          className={addButtonStyles.createSourceBtn}
+          style={{ marginLeft: 0 }}
           type="primary"
           onClick={() => onClick?.()}
         >
