@@ -20,13 +20,15 @@ export const LeadFormPreview: React.FC<LeadFormPreviewInterface> = ({
 
   const formikFields = () => {
     const initialValues = {}
-    Object.keys(schema.fields).map((field) => {
-      initialValues[field] = checkFieldType(
-        schema.fields[field]['type'],
-        schema.fields[field]['defaultvalue']
-      )
-      return field
-    })
+    if (schema) {
+      Object.keys(schema.fields).map((field) => {
+        initialValues[field] = checkFieldType(
+          schema.fields[field]['type'],
+          schema.fields[field]['defaultvalue']
+        )
+        return field
+      })
+    }
     return initialValues
   }
 
@@ -53,22 +55,24 @@ export const LeadFormPreview: React.FC<LeadFormPreviewInterface> = ({
       </Row>
       <Formik
         enableReinitialize={true}
-        validate={(e) =>
-          Object.entries(schema.fields).reduce((a, c) => {
-            if (
-              c[1].required &&
-              c[1].min && // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              c[1].min > e[c[0]].length
-            ) {
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              a[c[0]] = `Required ${c[1].full}.`
-            }
-            return a
-            // eslint-disable-next-line
-          }, {} as FormikErrors<any>)
-        }
+        validate={(e) => {
+          if (schema) {
+            Object.entries(schema.fields).reduce((a, c) => {
+              if (
+                c[1].required &&
+                c[1].min && // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                c[1].min > e[c[0]].length
+              ) {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                a[c[0]] = `Required ${c[1].full}.`
+              }
+              return a
+              // eslint-disable-next-line
+            }, {} as FormikErrors<any>)
+          }
+        }}
         onSubmit={(values, { resetForm }) => {
           setSendToDeveloperModal((e) => !e)
           console.log('formik onsubmit', values)
@@ -88,84 +92,88 @@ export const LeadFormPreview: React.FC<LeadFormPreviewInterface> = ({
               <Image src={NormalClinicLogo} />
             </div>
             <Row>
-              {Object.entries(schema.fields).map(
-                (
-                  [
-                    name,
-                    {
-                      short,
-                      shortLower,
-                      example,
-                      description,
-                      extra,
-                      min,
-                      type,
-                      radio,
-                      full,
-                      selectOptions,
-                      defaultvalue,
-                      visible,
-                      required,
-                    },
-                  ],
-                  i
-                ) =>
-                  visible && (
-                    <Col
-                      md={name === 'message' || name === 'about_us' ? 24 : 12}
-                      xs={name === 'dob' || name === 'telephone' ? 12 : 24}
-                      className={styles.colPaddingLeft}
-                      key={name}
-                    >
-                      {(type === 'string' || type === 'number') && (
-                        <AntForm.Item
-                          key={name}
-                          label={short}
-                          name={name}
-                          required={required}
-                          // extra={extra && <div>{extra}</div>}
-                          className={styles.clinicLabelStyle}
-                          rules={[
-                            {
-                              required: required,
-                              message: `* required ${full}`,
-                            },
-                          ]}
-                        >
-                          <Input
+              {schema &&
+                Object.entries(schema.fields).map(
+                  (
+                    [
+                      name,
+                      {
+                        short,
+                        shortLower,
+                        example,
+                        description,
+                        extra,
+                        min,
+                        type,
+                        radio,
+                        full,
+                        selectOptions,
+                        defaultvalue,
+                        visible,
+                        required,
+                      },
+                    ],
+                    i
+                  ) =>
+                    visible && (
+                      <Col
+                        md={name === 'message' || name === 'about_us' ? 24 : 12}
+                        xs={name === 'dob' || name === 'telephone' ? 12 : 24}
+                        className={styles.colPaddingLeft}
+                        key={name}
+                      >
+                        {(type === 'string' || type === 'number') && (
+                          <AntForm.Item
+                            key={name}
+                            label={short}
                             name={name}
-                            type={type}
-                            placeholder={description}
-                            autoFocus={i === 0}
-                          />
-                        </AntForm.Item>
-                      )}
-                      {type === 'select' && (
-                        <AntForm.Item
-                          label={full}
-                          name={name}
-                          required={required}
-                          // extra={extra && <div>{extra}</div>}
-                          className={styles.clinicLabelStyle}
-                        >
-                          <Select
-                            name={name}
-                            style={{ width: '100%' }}
-                            defaultValue={defaultvalue}
+                            required={required}
+                            // extra={extra && <div>{extra}</div>}
+                            className={styles.clinicLabelStyle}
+                            rules={[
+                              {
+                                required: required,
+                                message: `* required ${full}`,
+                              },
+                            ]}
                           >
-                            {selectOptions?.map((option) => {
-                              return (
-                                <Option value={option.value} key={option.label}>
-                                  {option.label}
-                                </Option>
-                              )
-                            })}
-                          </Select>
-                        </AntForm.Item>
-                      )}
-                    </Col>
-                  )
-              )}
+                            <Input
+                              name={name}
+                              type={type}
+                              placeholder={description}
+                              autoFocus={i === 0}
+                            />
+                          </AntForm.Item>
+                        )}
+                        {type === 'select' && (
+                          <AntForm.Item
+                            label={full}
+                            name={name}
+                            required={required}
+                            // extra={extra && <div>{extra}</div>}
+                            className={styles.clinicLabelStyle}
+                          >
+                            <Select
+                              name={name}
+                              style={{ width: '100%' }}
+                              defaultValue={defaultvalue}
+                            >
+                              {selectOptions?.map((option) => {
+                                return (
+                                  <Option
+                                    value={option.value}
+                                    key={option.label}
+                                  >
+                                    {option.label}
+                                  </Option>
+                                )
+                              })}
+                            </Select>
+                          </AntForm.Item>
+                        )}
+                      </Col>
+                    )
+                )}
 
               <Col md={24} xs={24} className={styles.colPaddingLeft}>
                 <div className={styles.formSendBtnCenter}>

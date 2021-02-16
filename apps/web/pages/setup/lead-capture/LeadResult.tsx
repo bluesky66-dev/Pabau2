@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './lead-setting.module.less'
 import classNames from 'classnames'
 import { CheckCircleFilled, FilePdfOutlined } from '@ant-design/icons'
@@ -10,12 +10,14 @@ export const LeadResult: React.FC = () => {
     return Math.random() * (max - min) + min
   }
 
-  confetti({
-    angle: randomInRange(55, 125),
-    spread: randomInRange(50, 70),
-    particleCount: randomInRange(50, 100),
-    origin: { y: 0.6 },
-  })
+  useEffect(() => {
+    confetti({
+      angle: randomInRange(55, 125),
+      spread: randomInRange(50, 70),
+      particleCount: randomInRange(50, 100),
+      origin: { y: 0.6 },
+    })
+  }, [])
 
   return (
     <div className={styles.successAllContentCenter}>
