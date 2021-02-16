@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Row, Select } from 'antd'
 import { ColorPicker, RegistrationFields, FieldType } from '@pabau/ui'
 import styles from './Lead-forms.module.less'

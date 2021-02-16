@@ -201,7 +201,13 @@ const schema: Schema = {
     },
   },
 }
-export const LeadCustomizeForm: React.FC = () => {
+
+interface LeadFormCustomizeForm {
+  onFormFlowComplete: () => void
+}
+export const LeadCustomizeForm: React.FC<LeadFormCustomizeForm> = ({
+  onFormFlowComplete,
+}) => {
   const [mainFields, setMainFields] = useState<FieldType[]>(fields)
   const [formPreviewSchema, setFormPreviewSchema] = useState(schema)
 
@@ -227,7 +233,10 @@ export const LeadCustomizeForm: React.FC = () => {
         flex="auto"
         className={classNames(styles.previewColumn, styles.mobileViewNone)}
       >
-        <LeadFormPreview schema={schema} formBuilderField={fields} />
+        <LeadFormPreview
+          schema={schema}
+          onLeadFormFlowComplete={onFormFlowComplete}
+        />
       </Col>
       <Col className={styles.desktopViewNone}>
         <Tabs className={styles.tabWidthFull}>
@@ -240,7 +249,7 @@ export const LeadCustomizeForm: React.FC = () => {
           <TabPane tab="Preview" key="2">
             <LeadFormPreview
               schema={formPreviewSchema}
-              formBuilderField={mainFields}
+              onLeadFormFlowComplete={onFormFlowComplete}
             />
           </TabPane>
         </Tabs>

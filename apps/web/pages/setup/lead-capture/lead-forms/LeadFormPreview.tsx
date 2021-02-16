@@ -1,21 +1,20 @@
 import React, { useState } from 'react'
-import { Row, Col, Button, Image } from 'antd'
-import { Formik } from 'formik'
-import { Form as AntForm, Input, Select } from 'formik-antd'
+import { Row, Col, Image } from 'antd'
+import { Formik, FormikErrors } from 'formik'
+import { Form as AntForm, Input, Select, SubmitButton } from 'formik-antd'
 import NormalClinicLogo from '../../../../assets/images/normal-clinic-logo.png'
 import classNames from 'classnames'
 import styles from './Lead-forms.module.less'
-import { FieldType, BasicModal as Modal, ButtonTypes } from '@pabau/ui'
+import { BasicModal as Modal, ButtonTypes } from '@pabau/ui'
 const { Option } = Select
-
 interface LeadFormPreviewInterface {
   schema: Schema
-  formBuilderField: FieldType[]
+  onLeadFormFlowComplete: () => void
 }
 
 export const LeadFormPreview: React.FC<LeadFormPreviewInterface> = ({
   schema,
-  formBuilderField,
+  onLeadFormFlowComplete,
 }) => {
   const [sendToDeveloperModal, setSendToDeveloperModal] = useState(false)
 
@@ -47,10 +46,6 @@ export const LeadFormPreview: React.FC<LeadFormPreviewInterface> = ({
     }
   }
 
-  const onSend = () => {
-    setSendToDeveloperModal(true)
-  }
-
   return (
     <>
       <Row className={classNames(styles.headerStyle, styles.mobileViewNone)}>
@@ -58,7 +53,24 @@ export const LeadFormPreview: React.FC<LeadFormPreviewInterface> = ({
       </Row>
       <Formik
         enableReinitialize={true}
+        validate={(e) =>
+          Object.entries(schema.fields).reduce((a, c) => {
+            if (
+              c[1].required &&
+              c[1].min && // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              c[1].min > e[c[0]].length
+            ) {
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              a[c[0]] = `Required ${c[1].full}.`
+            }
+            return a
+            // eslint-disable-next-line
+          }, {} as FormikErrors<any>)
+        }
         onSubmit={(values, { resetForm }) => {
+          setSendToDeveloperModal((e) => !e)
           console.log('formik onsubmit', values)
           // onSubmit(values, { resetForm })
         }}
@@ -68,7 +80,7 @@ export const LeadFormPreview: React.FC<LeadFormPreviewInterface> = ({
       >
         <AntForm
           layout={'vertical'}
-          requiredMark={false}
+          requiredMark={true}
           className={styles.clinicLeadCaptureForm}
         >
           <div className={styles.formBox}>
@@ -110,7 +122,7 @@ export const LeadFormPreview: React.FC<LeadFormPreviewInterface> = ({
                           key={name}
                           label={short}
                           name={name}
-                          required={!!min}
+                          required={required}
                           // extra={extra && <div>{extra}</div>}
                           className={styles.clinicLabelStyle}
                           rules={[
@@ -132,7 +144,7 @@ export const LeadFormPreview: React.FC<LeadFormPreviewInterface> = ({
                         <AntForm.Item
                           label={full}
                           name={name}
-                          required={!!min}
+                          required={required}
                           // extra={extra && <div>{extra}</div>}
                           className={styles.clinicLabelStyle}
                         >
@@ -157,13 +169,9 @@ export const LeadFormPreview: React.FC<LeadFormPreviewInterface> = ({
 
               <Col md={24} xs={24} className={styles.colPaddingLeft}>
                 <div className={styles.formSendBtnCenter}>
-                  <Button
-                    onClick={onSend}
-                    className={styles.sendBtn}
-                    type="default"
-                  >
+                  <SubmitButton className={styles.sendBtn} type="default">
                     Send
-                  </Button>
+                  </SubmitButton>
                 </div>
               </Col>
             </Row>
@@ -175,6 +183,7 @@ export const LeadFormPreview: React.FC<LeadFormPreviewInterface> = ({
         centered={true}
         onOk={() => {
           setSendToDeveloperModal((e) => !e)
+          onLeadFormFlowComplete()
         }}
         closable={true}
         onCancel={() => setSendToDeveloperModal((e) => !e)}
@@ -187,11 +196,8 @@ export const LeadFormPreview: React.FC<LeadFormPreviewInterface> = ({
           enableReinitialize={true}
           onSubmit={(values, { resetForm }) => {
             console.log('formik onsubmit', values)
-            // onSubmit(values, { resetForm })
           }}
-          //initialValues={typeof modalShowing === 'object' ? modalShowing : undefined}
           initialValues={{ email: '' }}
-          // requiredMark={required}
         >
           <AntForm
             layout={'vertical'}
@@ -201,7 +207,6 @@ export const LeadFormPreview: React.FC<LeadFormPreviewInterface> = ({
             <AntForm.Item
               label={'email'}
               name={'email'}
-              // extra={extra && <div>{extra}</div>}
               className={styles.clinicLabelStyle}
               rules={[
                 {
