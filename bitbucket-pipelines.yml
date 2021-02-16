@@ -24,7 +24,6 @@ pipelines:
           caches:
             - nodemodules
             - yarncustom
-            - composer
           script:
             - docker version
             - /bin/bash -c 'yarn audit --no-progress --non-interactive; [[ $? -gt 2 ]] && exit 1 || exit 0'
@@ -101,7 +100,6 @@ pipelines:
           caches:
             - nodemodules
             - yarncustom
-            - composer
           script:
             - /bin/bash -c 'yarn audit --no-progress --non-interactive; [[ $? -gt 2 ]] && exit 1 || exit 0'
             - touch /tmp/bot_message.txt
