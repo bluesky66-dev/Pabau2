@@ -1,6 +1,7 @@
 import React from 'react'
 import ReviewWrite from './ReviewWrite'
 import { Question } from './ReviewWrite'
+import ReviewWriteStepper from './ReviewWriteStepper'
 
 import { data, title, subtitle } from './mock'
 
@@ -34,6 +35,22 @@ export const ReviewWriteStory = ({
 }: P): JSX.Element => {
   return (
     <ReviewWrite
+      reviews={reviews}
+      title={title}
+      subtitle={subtitle}
+      onChange={onChange}
+    />
+  )
+}
+
+export const ReviewWriteStepperStory = ({
+  title,
+  subtitle,
+  reviews,
+  onChange,
+}: P): JSX.Element => {
+  return (
+    <ReviewWriteStepper
       reviews={reviews}
       title={title}
       subtitle={subtitle}
