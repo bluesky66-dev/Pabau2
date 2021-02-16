@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from 'react'
-import { Button, MobileHeader } from '@pabau/ui'
+import { Button, MobileHeader, GridVsList } from '@pabau/ui'
 import addButtonStyles from '../../../AddButton.module.less'
 import styles from './Filter.module.less'
 import {
@@ -10,7 +10,6 @@ import {
   SearchOutlined,
 } from '@ant-design/icons'
 import { Drawer, Input, Popover, Radio } from 'antd'
-import GridVsList from '../../../../../../libs/ui/src/lib/gridvslist/GridVsList'
 import classNames from 'classnames'
 
 const WAIT_INTERVAL = 400
@@ -67,7 +66,7 @@ export const Filter: FunctionComponent<P> = ({
   )
 
   return (
-    <>
+    <div className={styles.mainWrapper}>
       {/* Mobile header */}
       <div
         className={classNames(
@@ -140,15 +139,15 @@ export const Filter: FunctionComponent<P> = ({
             <FilterOutlined /> Filter
           </Button>
         </Popover>
-        <span className={styles.GridVsList}>
+        <div className={styles.GridVsList}>
           <GridVsList
-            onChange={() => console.log('hi')}
+            onChange={() => console.log('GridVsList not implemented')}
             displayTypes={[
               { title: 'Grid', icon: <AppstoreOutlined /> },
               { title: 'List', icon: <MenuOutlined /> },
             ]}
           />
-        </span>
+        </div>
         <Button
           className={addButtonStyles.createSourceBtn}
           type="primary"
@@ -157,6 +156,6 @@ export const Filter: FunctionComponent<P> = ({
           New Staff Member
         </Button>
       </div>
-    </>
+    </div>
   )
 }

@@ -11,7 +11,7 @@ interface P {
   onChange?: (type?: string) => void
 }
 
-const GridVsList: FC<P> = ({ displayTypes, onChange }) => {
+export const GridVsList: FC<P> = ({ displayTypes, onChange }, ...props) => {
   const selectedType = (e) => {
     onChange?.(e.target.value)
   }
