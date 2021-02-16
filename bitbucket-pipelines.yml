@@ -10,9 +10,9 @@ definitions:
     nodemodules: 'node_modules/'
     yarncustom: '/usr/local/share/.cache/yarn'
     cypress: '/root/.cache/Cypress'
-#  services:
-#    docker:
-#      memory: 2048
+  services:
+    docker:
+      memory: 2048
 
 pipelines:
   pull-requests:
@@ -23,7 +23,9 @@ pipelines:
           caches:
             - nodemodules
             - yarncustom
+            - composer
           script:
+            - docker version
             - /bin/bash -c 'yarn audit --no-progress --non-interactive; [[ $? -gt 2 ]] && exit 1 || exit 0'
 
             # Get an oauth access token using the client credentials, parsing out the token with jq.
@@ -98,11 +100,13 @@ pipelines:
           caches:
             - nodemodules
             - yarncustom
+            - composer
           script:
             - /bin/bash -c 'yarn audit --no-progress --non-interactive; [[ $? -gt 2 ]] && exit 1 || exit 0'
             - touch /tmp/bot_message.txt
             - apt-get update -y && apt-get install -y curl jq time
             - /usr/bin/time -v yarn install --frozen-lockfile --prefer-offline
+            - docker version
 
             # TODO: move these to eslint so that `yarn lint` picks up these errors instead
             - npm i -g typescript
