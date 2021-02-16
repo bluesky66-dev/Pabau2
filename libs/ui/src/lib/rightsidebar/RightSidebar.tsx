@@ -50,7 +50,7 @@ const RightSidebar: FC<P> = ({
         <SettingElement
           type={formType}
           component={component}
-          selectedForm={selectedForm!}
+          selectedForm={selectedForm}
           handleSave={handleSave}
           handleDelete={handleDelete}
         />

@@ -61,11 +61,11 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
                     }
                   >
                     <InnerElement
-                      required={form.required!}
+                      required={form.required}
                       activate={activatedFormID === `${form.id}` ? true : false}
-                      type={form.formType!}
-                      component={form.formName!}
-                      handleId={form.id!}
+                      type={form.formType}
+                      component={form.formName}
+                      handleId={form.id}
                       formData={form}
                       handlingSelectForm={handlingSelectForm}
                     />

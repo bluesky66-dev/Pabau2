@@ -440,7 +440,7 @@ const SettingElement: FC<P> = ({
             saveFunc={saveFunc}
             deleteFunc={deleteFunc}
             requireFunc={requireFunc}
-            required={selectedForm.required!}
+            required={selectedForm.required}
             needLeft={true}
           />
         </SettingMedicalForm>

@@ -39,7 +39,7 @@ interface P {
   component: string
   handleId: string
   formData: MedicalFormTypes
-  handlingSelectForm?: (isActive?: boolean, handleId?: string) => void
+  handlingSelectForm: (isActive?: boolean, handleId?: string) => void
 }
 
 const InnerElement: FC<P> = ({
@@ -259,9 +259,9 @@ const InnerElement: FC<P> = ({
     <div>
       {filteredComponent.length > 0 && (
         <InnerMedicalForm
-          activate={activate!}
-          handleId={handleId!}
-          handlingSelectForm={handlingSelectForm!}
+          activate={activate}
+          handleId={handleId}
+          handlingSelectForm={handlingSelectForm}
         >
           {required && <InnerMedicalFormRequired />}
           <InnerMedicalFormEditIcon />
@@ -315,16 +315,16 @@ const InnerElement: FC<P> = ({
                   (formData.formName === 'basic_singlechoice' ||
                     formData.formName === 'basic_dropdown') && (
                     <InnerMedicalFormRadio
-                      title={formData.txtQuestion!}
-                      options={formData.arrItems!}
+                      title={formData.txtQuestion}
+                      options={formData.arrItems}
                     />
                   )}
                 {((formData.arrItems && formData.arrItems.length > 0) ||
                   formData.txtQuestion !== '') &&
                   formData.formName === 'basic_multiplechoice' && (
                     <InnerMedicalFormCheckbox
-                      title={formData.txtQuestion!}
-                      options={formData.arrItems!}
+                      title={formData.txtQuestion}
+                      options={formData.arrItems}
                     />
                   )}
               </InnerMedicalFormBody>
