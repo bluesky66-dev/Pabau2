@@ -17,7 +17,7 @@ const ColorItem: FC<P> = (props: P) => {
     <div
       className={classNames(styles.colorItem, selected && styles.selectedColor)}
       style={{
-        backgroundColor: color,
+        backgroundColor: selected ? "#fff" : color,
         // border: hovering || selected ? '1px solid #54B2D3' : 'none',
         boxSizing: 'border-box',
         // opacity: hovering || selected ? '1' : '0.2',
