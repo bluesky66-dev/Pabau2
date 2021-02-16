@@ -157,6 +157,10 @@
   line-height: 18px;
   display: flex;
   align-items: center;
+  > a {
+    color: var(--light-grey-color);
+    text-decoration: none;
+  }
 }
 
 .reviewsConfigBodyMobile {
@@ -216,7 +220,6 @@
   background: white;
   box-shadow: 4px 4px 23px rgba(0, 34, 65, 0.15);
   border-radius: 4px;
-  min-height: 40vh;
   margin: 24px 15px 100px;
   > div {
     box-shadow: none !important;
@@ -310,4 +313,12 @@
   background-color: #eef7fb;
   border-radius: 6px;
   margin-left: 8px;
+}
+
+.reviewsConfigBanner {
+  :global {
+    button {
+       display:  none;
+    }
+  }
 }
