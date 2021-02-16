@@ -18,6 +18,7 @@ const UserTileStory = (user: UserProps) => (
     vacation={user.vacation}
     available={user.available}
     owner={user.owner}
+    admin={user.admin}
   />
 )
 
@@ -31,4 +32,5 @@ userTile.args = {
   vacation: mockUsers.vacation,
   available: mockUsers.available,
   owner: mockUsers.owner,
+  admin: mockUsers.admin,
 }

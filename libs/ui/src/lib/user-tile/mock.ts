@@ -7,8 +7,11 @@ export const mockUsers = {
   img: austin,
   vacation: {
     scheduled: true,
+    startDate: '19/02/2021',
+    endDate: '27/03/2021',
   },
   available: true,
   active: true,
   owner: true,
+  admin: true,
 }

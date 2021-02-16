@@ -51,6 +51,8 @@ const mockUsers = [
     active: false,
     vacation: {
       scheduled: true,
+      startDate: '19/02/2021',
+      endDate: '27/03/2021',
     },
     available: true,
     admin: true,
@@ -62,6 +64,8 @@ const mockUsers = [
     title: 'Managing Director',
     vacation: {
       scheduled: true,
+      startDate: '19/02/2021',
+      endDate: '27/03/2021',
     },
     available: true,
     active: true,
@@ -84,6 +88,8 @@ const mockUsers = [
     active: false,
     vacation: {
       scheduled: true,
+      startDate: '19/02/2021',
+      endDate: '27/03/2021',
     },
     available: true,
     admin: true,
@@ -95,6 +101,8 @@ const mockUsers = [
     title: 'Managing Director',
     vacation: {
       scheduled: true,
+      startDate: '19/02/2021',
+      endDate: '27/03/2021',
     },
     available: true,
     active: false,
@@ -125,6 +133,8 @@ const mockUsers = [
     title: 'Managing Director',
     vacation: {
       scheduled: true,
+      startDate: '19/02/2021',
+      endDate: '27/03/2021',
     },
     available: true,
     active: true,
@@ -147,6 +157,8 @@ const mockUsers = [
     active: false,
     vacation: {
       scheduled: true,
+      startDate: '19/02/2021',
+      endDate: '27/03/2021',
     },
     available: true,
   },
@@ -184,7 +196,6 @@ const mockUsers = [
     title: 'Manager',
     img: alex,
     active: false,
-    vacationPending: true,
     available: false,
   },
 ]
