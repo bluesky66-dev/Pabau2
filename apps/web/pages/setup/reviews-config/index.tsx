@@ -27,7 +27,7 @@ import {
   ColorPicker,
   Appointment,
   ReadReview,
-  Permission,
+  ReviewListing,
   ReviewWrite,
   ReviewWriteStepper,
   ReviewChoice,
@@ -364,7 +364,7 @@ export const Index: FC<ReviewsConfigProps> = ({
                 </Radio.Group>
                 <div className={styles.templatePanel}>
                   {isListing && (
-                    <Permission
+                    <ReviewListing
                       image={clinicLogo}
                       review={4.67}
                       description="Things people are saying about us"
@@ -554,7 +554,7 @@ export const Index: FC<ReviewsConfigProps> = ({
                 </Radio.Group>
                 <div className={styles.templatePanel}>
                   {isListing && (
-                    <Permission
+                    <ReviewListing
                       image={clinicLogo}
                       review={4.67}
                       description="Things people are saying about us"
@@ -1011,8 +1011,8 @@ export const Index: FC<ReviewsConfigProps> = ({
                         ]}
                       />
                     ) : (
-                      ''
-                    )}
+                          ''
+                        )}
                   </div>
                 </div>
               </div>
@@ -1075,8 +1075,8 @@ export const Index: FC<ReviewsConfigProps> = ({
                         ]}
                       />
                     ) : (
-                      ''
-                    )}
+                          ''
+                        )}
                   </div>
                 </div>
               </div>
