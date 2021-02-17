@@ -2,7 +2,7 @@ import { gql } from '@apollo/client'
 import { NextPage } from 'next'
 import React, { useState } from 'react'
 import CrudLayout from '../../../components/CrudLayout/CrudLayout'
-import { FullScreenReportModal } from '@pabau/ui'
+import { FullScreenReportModal, Switch, Button } from '@pabau/ui'
 import { Form, Select, Input } from 'antd'
 
 import styles from './issuing-company.module.less'
@@ -152,11 +152,42 @@ const schema: Schema = {
 
 export const IssuingCompany: NextPage = () => {
   const [showModal, setShowModal] = useState(false)
+  const [defaultChecked, setdefaultChecked] = useState(true)
 
   const createPageOnClick = () => {
     setShowModal(true)
   }
+  const onChecked = () => {
+    setdefaultChecked(!defaultChecked)
+  }
 
+  const headerContent = () => {
+    return (
+      <div className={styles.issuesCompanyHeader}>
+        <div>
+          <h4>Create Issuing Comapny</h4>
+        </div>
+        <div>
+          <small>VAT registered</small> <Switch onClick={onChecked} />
+        </div>
+        <div>
+          <Button type="default">Cancel</Button>
+        </div>
+        <div>
+          <Button type="default">Save as Draft</Button>
+        </div>
+        <div>
+          {defaultChecked ? (
+            <Button type="primary" disabled={true}>
+              Create
+            </Button>
+          ) : (
+            <Button type="primary">Create</Button>
+          )}
+        </div>
+      </div>
+    )
+  }
   const modalContents = () => {
     return (
       <div className={styles.mainWrapper}>
@@ -263,8 +294,9 @@ export const IssuingCompany: NextPage = () => {
         createPageOnClick={createPageOnClick}
       />
       <FullScreenReportModal
-        title="Create Issuing Company"
+        title={headerContent}
         visible={showModal}
+        header={true}
         onBackClick={() => setShowModal(false)}
         content={modalContents}
       />
