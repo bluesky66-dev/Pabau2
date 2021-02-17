@@ -7,7 +7,7 @@ import {
   NotificationBanner,
   NotificationType,
 } from '@pabau/ui'
-import React, { FC, useEffect, useState, ReactNode } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { DocumentNode, useMutation } from '@apollo/client'
 import AddButton from './AddButton'
 import { Breadcrumb } from '@pabau/ui'
@@ -33,7 +33,6 @@ interface P {
   aggregateQuery?: DocumentNode
   tableSearch?: boolean
   updateOrderQuery?: DocumentNode
-  beforeTable?: ReactNode
 }
 
 const CrudTable: FC<P> = ({

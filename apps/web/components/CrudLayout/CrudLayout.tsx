@@ -13,8 +13,6 @@ interface P {
   updateOrderQuery?: DocumentNode
 }
 
-const CrudLayout: FC<P> = ({ ...props }) => {
-  return <CrudTable {...props}></CrudTable>
-}
+const CrudLayout: FC<P> = ({ ...props }) => <CrudTable {...props} />
 
 export default CrudLayout

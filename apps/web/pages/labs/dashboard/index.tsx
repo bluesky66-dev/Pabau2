@@ -16,37 +16,22 @@ against the patient.`
 const notificationTitle = 'Integrate your Lab'
 
 const LIST_QUERY = gql`
-  query marketing_sources(
-    $public: Int
-    $searchTerm: String
-    $offset: Int
-    $limit: Int
-  ) {
-    marketingSources(
-      first: $offset
-      last: $limit
-      where: {
-        public: { equals: $public }
-        OR: [{ AND: [{ source_name: { contains: $searchTerm } }] }]
-      }
-    ) {
-      id
-      source_name
+  query labs_dashboard($limit: Int = 1) {
+    labs_dashboard(limit: $limit) {
+      lab
+      labNo
+      client
+      test
+      requested
+      requester
+      lastUpdate
       public
     }
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query marketing_source_aggregate(
-    $public: Boolean = true
-    $searchTerm: String = ""
-  ) {
-    marketing_source_aggregate(
-      where: {
-        public: { _eq: $public }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-      }
-    ) {
+  query labs_dashboard_aggregate {
+    labs_dashboard_aggregate {
       aggregate {
         count
       }
