@@ -95,8 +95,7 @@ interface FeedbackSurveyBuilder {
   logotypePosition: string
   logotypeSize: number
   clientName: string
-  firstName: string
-  lastName: string
+  name: string
   notifications: {
     email: boolean
     sms: boolean
@@ -118,8 +117,7 @@ const defaultBuilderSetting: FeedbackSurveyBuilder = {
   logotypePosition: 'Middle',
   logotypeSize: 137,
   clientName: 'First Name',
-  firstName: 'Jamal',
-  lastName: 'Potter',
+  name: 'Jamal Potter',
   notifications: {
     email: true,
     sms: true,
@@ -412,10 +410,13 @@ export const Index: FC<ReviewsConfigProps> = ({
                       updatedAt="1 year ago"
                       name={
                         setting.clientName === 'Full Name'
-                          ? `${setting.firstName} ${setting.lastName}`
+                          ? setting.name
                           : setting.clientName === 'First Name'
-                          ? setting.firstName
-                          : `${setting.firstName} ${setting.lastName}`
+                          ? setting.name.split(' ')[0]
+                          : setting.name
+                              .split(' ')
+                              .map((str) => str.charAt(0))
+                              .join('. ')
                       }
                       defaultRating={2.5}
                       avatarSrc={userAvatar}
