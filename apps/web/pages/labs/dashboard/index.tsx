@@ -37,7 +37,7 @@ const Tab: FC<TitleCard> = ({ title, subTitle, className, icon }) => {
 export const Index: FC = () => {
   const [filter, setIsActive] = useState(null)
   const [topBannerVisibility, setTopBannerVisibility] = useState(true)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading] = useState(false)
   const [dataSource, setDataSource] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
   const [paginateData, setPaginateData] = useState({
@@ -252,8 +252,6 @@ export const Index: FC = () => {
     setPaginateData({ ...paginateData, offset, currentPage: currentPage })
   }
 
-  const onFilterSource = () => {}
-
   const filterContent = (isMobile = false) => (
     <div className={styles.filterContent}>
       {!isMobile && (
@@ -265,7 +263,6 @@ export const Index: FC = () => {
         <Radio.Group
           onChange={(e) => {
             setIsActive(e.target.value)
-            !isMobile && onFilterSource()
           }}
           value={filter}
         >
@@ -395,7 +392,7 @@ export const Index: FC = () => {
                       pagination={dataSource?.length > 10 ? {} : false}
                       scroll={{ x: true }}
                       draggable={false}
-                      dataSource={dataSource?.map((e: { id: any }) => ({
+                      dataSource={dataSource?.map((e: { id }) => ({
                         key: e.id,
                         ...e,
                       }))}
