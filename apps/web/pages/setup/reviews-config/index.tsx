@@ -1,4 +1,5 @@
 import React, { FC, useState, useEffect, useRef } from 'react'
+import { useMedia } from 'react-use'
 import classNames from 'classnames'
 import { Typography, Badge, Form, Row, Col, Radio } from 'antd'
 import {
@@ -21,6 +22,8 @@ import {
   Switch,
   Stepper,
   Button,
+  BasicModal,
+  DotButton,
   ColorPicker,
   Appointment,
   ReadReview,
@@ -28,6 +31,8 @@ import {
   ReviewWrite,
   ReviewWriteStepper,
   ReviewChoice,
+  ReviewSlider,
+  ReviewSliderProps,
   AddQuestion,
   QuestionBankModal,
   IQuestionOptions,
@@ -38,6 +43,7 @@ import CommonHeader from '../CommonHeader'
 import reviewsConfigBanner from '../../../assets/images/reviews-config-banner.png'
 import userAvatar from '../../../assets/images/users/alex.png'
 import clinicLogo from '../../../assets/images/clinic-logo.png'
+import FeedbackSurveyFinal from '../../../assets/images/feedback-survey-final.png'
 import { ReactComponent as ExternalLink } from '../../../assets/images/external-link.svg'
 import { ReactComponent as ExternalLinkGrey } from '../../../assets/images/external-link-grey.svg'
 import { ReactComponent as Palette } from '../../../assets/images/palette.svg'
@@ -46,6 +52,9 @@ import {
   addQuestionData,
   integrations,
   questionBankData,
+  reviewBadges,
+  reviewWidgets,
+  defaultPreview,
 } from '../../../assets/feedbackSurveyData'
 import styles from './index.module.less'
 
@@ -906,6 +915,192 @@ export const Index: FC<ReviewsConfigProps> = ({
     )
   }
 
+  const Step4 = ({ reviewBadges = [], reviewWidgets = [] }) => {
+    const isMobile = useMedia('(max-width: 767px)', false)
+    const [openPreview, setOpenPreview] = useState(false)
+    const [currentReviews, setCurrentReviews] = useState<ReviewSliderProps>(
+      defaultPreview
+    )
+    return (
+      <>
+        <div className={styles.reviewsConfigBody}>
+          <div className={styles.reviewsShare}>
+            <div>
+              <img src={FeedbackSurveyFinal} alt="" width="100%" />
+            </div>
+            <div>
+              <p className={styles.reviewsShareTitle}>
+                Share your reviews with pride
+              </p>
+              <p className={styles.reviewsShareDescription}>
+                Reviews are an important component of a successful profiles,
+                considering that today’s tech savvy buyers often trust online
+                reviews as muuch as personal recommednations. We make it asy to
+                reuquest, track, and reply all within your portal..
+              </p>
+              <Button
+                type="primary"
+                onClick={() => {
+                  window.open(
+                    'https://www.pabau.com/reviews/cadogan-clinic',
+                    '_blank'
+                  )
+                }}
+              >
+                View Listing
+              </Button>
+            </div>
+          </div>
+          <div className={styles.reviewContent}>
+            <p className={styles.reviewContentTitle}>Review Badges</p>
+            <p className={styles.reviewContentSubTitle}>
+              Display your strong product ratings and attract new reviews with
+              your dynamic user review badge
+            </p>
+            {reviewBadges?.map((badge) => (
+              <div className={styles.reviewContentItem} key={badge.title}>
+                <div>
+                  <img src={badge.imgSrc} alt="" />
+                </div>
+                <div>
+                  <p>{badge.title}</p>
+                  <div>
+                    <Button type="primary">View Embed Code</Button>
+                    {!isMobile ? (
+                      <>
+                        {badge.wordpressPlugin && (
+                          <a
+                            href={badge.wordpressPlugin}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            <Button>View Wordpress Plugin</Button>
+                          </a>
+                        )}
+                        {badge.preview && (
+                          <Button
+                            onClick={() => {
+                              setCurrentReviews(badge.preview)
+                              setOpenPreview(true)
+                            }}
+                          >
+                            Preview
+                          </Button>
+                        )}
+                      </>
+                    ) : badge.wordpressPlugin || badge.preview ? (
+                      <DotButton
+                        menuList={[
+                          badge.wordpressPlugin && {
+                            key: 1,
+                            icon: <LinkOutlined />,
+                            label: 'Viewe Wordpress Plugin',
+                            onClick: () => {
+                              window.open(badge.wordpressPlugin, '_blank')
+                            },
+                          },
+                          badge.preview && {
+                            key: 2,
+                            label: 'Preview',
+                            icon: <LinkOutlined />,
+                            onClick: () => {
+                              setCurrentReviews(badge.preview)
+                              setOpenPreview(true)
+                            },
+                          },
+                        ]}
+                      />
+                    ) : (
+                          ''
+                        )}
+                  </div>
+                </div>
+              </div>
+            ))}
+            <p className={styles.reviewContentTitle}>Review widgets</p>
+            <p className={styles.reviewContentSubTitle}>
+              Embedd your reviews onto your website
+            </p>
+            {reviewWidgets?.map((widget) => (
+              <div className={styles.reviewContentItem} key={widget.title}>
+                <div>
+                  <img src={widget.imgSrc} alt="" />
+                </div>
+                <div>
+                  <p>{widget.title}</p>
+                  <div>
+                    <Button type="primary">View Embed Code</Button>
+                    {!isMobile ? (
+                      <>
+                        {widget.wordpressPlugin && (
+                          <a
+                            href={widget.wordpressPlugin}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            <Button>View Wordpress Plugin</Button>
+                          </a>
+                        )}
+                        {widget.preview && (
+                          <Button
+                            onClick={() => {
+                              setCurrentReviews(widget.preview)
+                              setOpenPreview(true)
+                            }}
+                          >
+                            Preview
+                          </Button>
+                        )}
+                      </>
+                    ) : widget.wordpressPlugin || widget.preview ? (
+                      <DotButton
+                        menuList={[
+                          widget.wordpressPlugin && {
+                            key: 1,
+                            icon: <LinkOutlined />,
+                            label: 'Viewe Wordpress Plugin',
+                            onClick: () => {
+                              window.open(widget.wordpressPlugin, '_blank')
+                            },
+                          },
+                          widget.preview && {
+                            key: 2,
+                            label: 'Preview',
+                            icon: <LinkOutlined />,
+                            onClick: () => {
+                              setCurrentReviews(widget.preview)
+                              setOpenPreview(true)
+                            },
+                          },
+                        ]}
+                      />
+                    ) : (
+                          ''
+                        )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <ReviewsConfigFooter
+          step={step}
+          onNext={() => setStep(step + 1)}
+          onPrev={() => setStep(step - 1)}
+        />
+        {openPreview && (
+          <BasicModal
+            visible={openPreview}
+            onOk={() => setOpenPreview(false)}
+            onCancel={() => setOpenPreview(false)}
+          >
+            <ReviewSlider {...currentReviews} />
+          </BasicModal>
+        )}
+      </>
+    )
+  }
+
   useEffect(() => {
     setSetting(builderSetting)
     setStep(currentStep)
@@ -969,6 +1164,9 @@ export const Index: FC<ReviewsConfigProps> = ({
             />
           )}
           {step === 2 && <Step3 />}
+          {step === 3 && (
+            <Step4 reviewBadges={reviewBadges} reviewWidgets={reviewWidgets} />
+          )}
         </div>
       </Layout>
     </div>
