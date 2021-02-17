@@ -17,37 +17,19 @@ export const MarketingSource = objectType({
 export const MarketingSourceQuery = extendType({
   type: 'Query',
   definition(t ) {
-    t.field("marketingSource", {
-      type: MarketingSource,
-      args: {
-        id: nonNull(intArg())
-      },
-      async resolve(_root, args, ctx:Context){
-        return ctx.prisma.marketingSource.findFirst({
-          where: {
-            occupier: Number(ctx.req) ?? undefined
-          }
-        }).then((result) => {
-          if(result === null){
-            throw new Error(`No such marketing source with id of ${args.id}`)
-          }
-          return result
-        })
-      }
-    })
+    t.crud.marketingSource();
     t.crud.marketingSources({
       async resolve(_root, args, ctx:Context) {
         const companyId = ctx.req.get('x-company_id')
-        return ctx.prisma.marketingSource.findMany({
+        const sources =  await ctx.prisma.marketingSource.findMany({
           where: {
             occupier: Number(companyId)
           }
-        }).then((result) => {
-          if(result === null || result.length === 0){
-            throw new Error(`No marketing sources avilable`)
-          }
-          return result
         })
+        if(sources.length === 0){
+          throw new Error(`No marketing sources available`)
+        }
+        return sources
       },
       alias: 'marketingSources',
       pagination: true,

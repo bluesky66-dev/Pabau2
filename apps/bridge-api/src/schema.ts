@@ -9,6 +9,23 @@ const { join } = path
 
 const prisma = new PrismaClient()
 
+prisma.$use(async (params, next) => {
+  if(params.action == 'delete'){
+    const modelName = params.model.charAt(0).toLowerCase() + params.model.substr(1)
+    const id = params.args.where.id
+    const record = await prisma[modelName].findFirst({
+      where:{
+        id: id
+      }
+    })
+    if(record.occupier !== 8254){
+      throw new Error('Insufficient permissions to remove record')
+    }
+    throw new Error(JSON.stringify(record))
+  }
+  return next(params)
+})
+
 export const schema: Omit<GraphQLSchema, "extensions"> & { extensions: { nexus: NexusSchemaExtension } } = makeSchema({
   types,
   plugins: [nexusPrisma({
