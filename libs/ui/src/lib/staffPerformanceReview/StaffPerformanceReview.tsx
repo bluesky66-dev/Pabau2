@@ -76,7 +76,7 @@ const StaffPerformanceReview: FC<P> = ({ reviewDate, reviewPeriod }) => {
     } else {
       console.log('aYear', aYear)
       const reviewMonth = new Date(new Date().setMonth(aYear.getMonth() - 1))
-      if (reviewMonth.getMonth() == aYear.getMonth()) reviewMonth.setDate(0)
+      if (reviewMonth.getMonth() === aYear.getMonth()) reviewMonth.setDate(0)
       reviewMonth.setDate(aYear.getDate())
       console.log('reviewMonth', reviewMonth)
       DateArray.push(
