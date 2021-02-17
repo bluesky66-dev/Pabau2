@@ -28,7 +28,7 @@ const CrudModal: FC<P> = ({
         `Success! ${schema.messages.delete.success}`
       )
     },
-    onError(err) {
+    onError() {
       Notification(
         NotificationType.error,
         `Error! ${schema.messages.delete.error}`
@@ -74,8 +74,7 @@ const CrudModal: FC<P> = ({
           onClose?.()
         }}
         onOk={async () => {
-          // eslint-disable-next-line
-          const { id } = editingRow as any
+          const { id } = editingRow as { id: string }
           await deleteMutation({
             variables: { id },
             optimisticResponse: {},
@@ -139,7 +138,6 @@ const CrudModal: FC<P> = ({
             ? `Create`
             : 'Save'
         }
-        // eslint-disable-next-line
         dangerButtonText={editingRow?.id && `Delete`}
         specialBooleanLabel={!!specialFormElement && 'Active'}
         specialBooleanValue={specialBoolean}

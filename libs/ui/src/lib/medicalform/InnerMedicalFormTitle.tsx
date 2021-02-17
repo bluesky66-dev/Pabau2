@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
-import styles from './InnerMedicalForm.module.less'
+import styles from './Inner.module.less'
 
 interface P {
-  iconUrl?: string
-  bgcolor?: string
-  title?: string
+  iconUrl: string
+  bgcolor: string
+  title: string
 }
 
 const InnerMedicalFormTitle: FC<P> = ({ iconUrl, bgcolor, title }) => {
