@@ -166,13 +166,13 @@ export const LeadForms: React.FC = () => {
                 {allAPISteps[activeStep] === 'Result' && <LeadResult />}
               </>
             ) : (
-                <>
-                  {allFormSteps[activeStep] === 'Customize Form' && (
-                    <LeadCustomizeForm />
-                  )}
-                  {allFormSteps[activeStep] === 'Result' && <LeadFormResult />}
-                </>
-              )}
+              <>
+                {allFormSteps[activeStep] === 'Customize Form' && (
+                  <LeadCustomizeForm />
+                )}
+                {allFormSteps[activeStep] === 'Result' && <LeadFormResult />}
+              </>
+            )}
           </WStepper>
         </div>
         <SendLeadDevloperModal

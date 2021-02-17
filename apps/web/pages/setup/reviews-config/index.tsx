@@ -38,6 +38,7 @@ import {
   IQuestionOptions,
   QuestionField,
 } from '@pabau/ui'
+import confetti from 'canvas-confetti'
 import Layout from '../../../components/Layout/Layout'
 import CommonHeader from '../CommonHeader'
 import reviewsConfigBanner from '../../../assets/images/reviews-config-banner.png'
@@ -137,6 +138,27 @@ export const Index: FC<ReviewsConfigProps> = ({
     defaultBuilderSetting
   )
   const [step, setStep] = useState(0)
+
+  const randomInRange = (min, max) => {
+    return Math.random() * (max - min) + min
+  }
+
+  useEffect(() => {
+    setSetting(builderSetting)
+    setStep(currentStep)
+  }, [currentStep, builderSetting])
+
+  useEffect(() => {
+    if (step === 3) {
+      confetti({
+        angle: randomInRange(55, 125),
+        spread: randomInRange(50, 70),
+        particleCount: randomInRange(50, 100),
+        origin: { y: 0.6 },
+      })
+    }
+  }, [step])
+
   const ReviewsConfigFooter = ({ step, onNext, onPrev }) => {
     const handleClickNext = () => {
       reviewsConfigRef.current.scrollIntoView()
@@ -1011,8 +1033,8 @@ export const Index: FC<ReviewsConfigProps> = ({
                         ]}
                       />
                     ) : (
-                          ''
-                        )}
+                      ''
+                    )}
                   </div>
                 </div>
               </div>
@@ -1075,8 +1097,8 @@ export const Index: FC<ReviewsConfigProps> = ({
                         ]}
                       />
                     ) : (
-                          ''
-                        )}
+                      ''
+                    )}
                   </div>
                 </div>
               </div>
@@ -1100,11 +1122,6 @@ export const Index: FC<ReviewsConfigProps> = ({
       </>
     )
   }
-
-  useEffect(() => {
-    setSetting(builderSetting)
-    setStep(currentStep)
-  }, [currentStep, builderSetting])
 
   return (
     <div ref={reviewsConfigRef}>
