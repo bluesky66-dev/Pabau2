@@ -18,11 +18,17 @@ const SettingElementMultiOptions: FC<P> = ({ onChange, paramItems }) => {
   const [items, setItems] = useState<OptionType[]>([])
   const [addedItems, setaddedItems] = useState<OptionType[]>([])
   const [itemName, setItemName] = useState('')
+  const [btnTitle, setBtnTitle] = useState('Add option')
 
   useEffect(() => {
     setItems(paramItems)
     setaddedItems(paramItems)
   }, [paramItems])
+
+  useEffect(() => {
+    if (addedItems.length > 0) setBtnTitle('Add another option')
+    else setBtnTitle('Add option')
+  }, [addedItems])
 
   const addItem = (event) => {
     event.preventDefault()
@@ -150,7 +156,7 @@ const SettingElementMultiOptions: FC<P> = ({ onChange, paramItems }) => {
         onClick={addItem}
         size="small"
       >
-        Add option
+        {btnTitle}
       </Button>
     </>
   )

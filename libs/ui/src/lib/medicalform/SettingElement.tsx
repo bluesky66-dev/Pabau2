@@ -441,7 +441,11 @@ const SettingElement: FC<P> = ({
             deleteFunc={deleteFunc}
             requireFunc={requireFunc}
             required={selectedForm.required}
-            needLeft={true}
+            needLeft={
+              filteredComponent[0].component === 'basic_textblock'
+                ? false
+                : true
+            }
           />
         </SettingMedicalForm>
       )}

@@ -60,8 +60,6 @@ const copy = (source, destination, droppableSource, droppableDestination) => {
 
 const MedicalFormEdit: FC = () => {
   const [draggedForms, setDraggedForms] = useState([])
-  // const [selectComponent, setSelectComponent] = useState('')
-  // const [selectComponentId, setSelectComponentId] = useState('')
   const [selectedForm, setSelectedForm] = useState({
     id: '',
     formType: '',
