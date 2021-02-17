@@ -342,13 +342,11 @@ export const Standard: FC<P> = ({
                   <ColorPicker
                     heading="Background color"
                     onSelected={(val) => onBackGroundColor(val)}
-                    defaultColor="#ffffff"
                     selectedColor=""
                   />
                   <ColorPicker
                     heading="Buttons color"
                     onSelected={(val) => onButtonColor(val)}
-                    defaultColor="#54b2d3"
                     selectedColor=""
                   />
                   <Row className={styles.informText}>
