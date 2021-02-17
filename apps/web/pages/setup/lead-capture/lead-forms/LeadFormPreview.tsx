@@ -18,7 +18,7 @@ interface LeadFormPreviewInterface {
 
 export const LeadFormPreview: React.FC<LeadFormPreviewInterface> = ({
   schema,
-  colours,
+  colours = { fontColor: '', buttonColor: '' },
 }) => {
   const formikFields = () => {
     const initialValues = {}

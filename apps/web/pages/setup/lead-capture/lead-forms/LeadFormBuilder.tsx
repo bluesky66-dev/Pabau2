@@ -19,7 +19,7 @@ interface LeadFormBuilderInterface {
 
 export const LeadFormBuilder: React.FC<LeadFormBuilderInterface> = ({
   fields,
-  colours,
+  colours = { fontColor: '', buttonColor: '' },
   onChange,
   onColorChange,
 }) => {
