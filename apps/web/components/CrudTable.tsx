@@ -64,7 +64,10 @@ const CrudTable: FC<P> = ({
   })
   const [updateOrderMutation] = useMutation(updateOrderQuery, {
     onError(err) {
-      Notification(NotificationType.error, 'Error! Marketing source update.')
+      Notification(
+        NotificationType.error,
+        `Error! ${schema.messages.update.error}`
+      )
     },
   })
   const [addMutation] = useMutation(addQuery, {
