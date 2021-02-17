@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, MouseEvent } from 'react'
 import { ReactComponent as IllustrationSvg } from './example.svg'
 import { Card, Layout as AntLayout } from 'antd'
 import { Footer, Header, Menu } from '@pabau/ui'
@@ -15,14 +15,22 @@ export interface LayoutProps {
   card?: true
   searchRender?: (innerComponent: JSX.Element) => JSX.Element
   active?: string
+  onCreateChannel?: (
+    name: string,
+    description: string,
+    isPrivate: boolean
+  ) => void
+  onMessageType?: (e: MouseEvent<HTMLElement>) => void
 }
 
 export const Layout: FC<LayoutProps> = ({
   searchRender,
+  onCreateChannel,
   pageTitle,
   newButtonText,
   onNewClicked,
   onCancelClicked,
+  onMessageType,
   card,
   children,
   active,
@@ -36,7 +44,11 @@ export const Layout: FC<LayoutProps> = ({
     <AntLayout {...rest} className={styles.main}>
       <AntLayout style={{ background: '#F7F7F9' }}>
         {/* {(isTablet || !isMobile) && <Header searchRender={searchRender} />} */}
-        <Header searchRender={searchRender} />
+        <Header
+          searchRender={searchRender}
+          onCreateChannel={onCreateChannel}
+          onMessageType={onMessageType}
+        />
         <AntLayout className={styles.headerMargin}>
           <Menu onSideBarCollapsed={onSideBarCollapsed} active={active} />
           <Content

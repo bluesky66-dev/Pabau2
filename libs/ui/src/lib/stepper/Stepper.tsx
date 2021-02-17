@@ -1,8 +1,14 @@
 import React from 'react'
 import styles from './Stepper.module.less'
-
+export interface StepperItem {
+  step: number
+  name: string
+  imgPath: JSX.Element
+  isActive: boolean
+  index: number
+}
 interface StepperProps {
-  datasource: []
+  datasource: StepperItem[]
   step: number
 }
 
@@ -28,7 +34,7 @@ function StepperList(props) {
   return (
     <div className={styles.horizonstepper}>
       {datasource.map((element, index) => (
-        <div key={index} className={styles.steplinediv}>
+        <div key={element.name} className={styles.steplinediv}>
           <div className={styles.imglabeldiv}>
             <div
               className={
@@ -37,7 +43,7 @@ function StepperList(props) {
                   : styles.icondisablecircle
               }
             >
-              <img src={element.imgPath} alt="" />
+              {element.imgPath}
             </div>
             <span
               className={

@@ -1,18 +1,15 @@
 import React from 'react'
-
+import Stepper from '../stepper/Stepper'
 import styels from './Wizard.module.less'
-import { Button, Breadcrumb } from '@pabau/ui'
-import { Typography } from 'antd'
-
-const { Title } = Typography
-
+import { Button } from '@pabau/ui'
+import { StepperInterface } from './mock'
 interface WizardProps {
-  onPrev: () => void
-  onNext: () => void
+  onPrev?: () => void
+  onNext?: () => void
   active: number
   allSteps: number
-  breadcrumb: string
-  header: string
+  stepperData: StepperInterface[]
+  disableNextStep?: boolean
 }
 
 export const Wizard: React.FC<WizardProps> = ({
@@ -20,41 +17,32 @@ export const Wizard: React.FC<WizardProps> = ({
   onNext,
   active,
   allSteps,
-  breadcrumb,
-  header,
+  stepperData,
+  disableNextStep = false,
   children,
 }) => {
-  function prevClick() {
-    onPrev()
-  }
-
-  function nextClick() {
-    onNext()
-  }
-
   return (
     <div className={styels.container}>
-      <div style={{ backgroundColor: '#FFF' }}>
-        <Breadcrumb breadcrumbItems={[breadcrumb, header]} />
-        <Title>{header}</Title>
-      </div>
-
       <hr className={styels.line} />
-      {children}
+      <Stepper datasource={stepperData} step={active} />
       <hr className={styels.bottomline} />
-
+      {children}
+      {/* <div style={{ marginTop: '20px' }}></div> */}
       <div className={styels.footer}>
-        <Button onClick={(event) => prevClick()} disabled={active <= 1}>
+        <Button
+          onClick={(event) => onPrev?.()}
+          disabled={active < 1 || active === allSteps - 1}
+        >
           Previous Step
         </Button>
         <span className={styels.breadcrumbgraytxt}>
-          Step {active}/{allSteps}
+          Step {active + 1}/{allSteps}
         </span>
 
         <Button
           type="primary"
-          onClick={(event) => nextClick()}
-          disabled={active >= allSteps}
+          onClick={(event) => onNext?.()}
+          disabled={disableNextStep || allSteps - 1 <= active}
         >
           Next Step
         </Button>

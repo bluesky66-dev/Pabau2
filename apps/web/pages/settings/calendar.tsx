@@ -1,5 +1,11 @@
 import React from 'react'
-import { SettingsMenu, Button, Notification, NotificationType } from '@pabau/ui'
+import {
+  SettingsMenu,
+  Button,
+  Notification,
+  NotificationType,
+  Breadcrumb,
+} from '@pabau/ui'
 import { Card } from 'antd'
 import CommonHeader from '../setup/CommonHeader'
 import { Layout } from '@pabau/ui'
@@ -8,7 +14,6 @@ import AppointmentSettings from '../../components/Settings/Calendar/AppointmentS
 import Appearance from '../../components/Settings/Calendar/Appearance'
 import Advanced from '../../components/Settings/Calendar/Advanced'
 import styles from './calendar.module.less'
-import { RightOutlined } from '@ant-design/icons'
 
 /* eslint-disable-next-line */
 export interface CalendarProps { }
@@ -44,12 +49,12 @@ export function Calendar(props: CalendarProps) {
         <Card className={styles.calendarCard}>
           <div className={styles.mainTabWrapper}>
             <div className={styles.titleWrapper}>
-              <p className={styles.tabWrap}>
-                {'Setup'}
-                <span>
-                  <RightOutlined /> Marketing Source
-                </span>
-              </p>
+              <Breadcrumb
+                breadcrumbItems={[
+                  { breadcrumbName: 'Setup', path: 'setup' },
+                  { breadcrumbName: 'Marketing Source', path: '' },
+                ]}
+              />
               <h1>Calendar settings</h1>
             </div>
             <div className={styles.saveBtn}>

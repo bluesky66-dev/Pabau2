@@ -1,5 +1,4 @@
-.settings-menu {
-  border: 1px solid var(--border-color-base);
+.calendar-settings {
   height: 100%;
   :global {
     .ant-tabs {
@@ -15,14 +14,13 @@
     .ant-tabs-left > .ant-tabs-nav .ant-tabs-tab,
     .ant-tabs-tab-active {
       padding-left: 24px;
-      padding-top: 9px;
-      padding-bottom: 9px;
+      padding-top: 11px;
+      padding-bottom: 11px;
       margin: 0;
     }
     .ant-tabs-top > .ant-tabs-nav .ant-tabs-tab,
     .ant-tabs-tab-active {
-      padding: 9px 24px;
-      padding-top: 9px;
+      padding: 11px 24px;
       margin: 0;
     }
     .ant-tabs-tab-active {
@@ -38,12 +36,16 @@
     .ant-tabs-tab {
       color: var(--light-grey-color);
     }
-    .ant-tabs-left > .ant-tabs-nav .ant-tabs-tab-active .ant-tabs-tab-btn {
-      font-family: 'Circular-Std-Book';
-      font-style: normal;
-      font-weight: 500;
+    .ant-tabs-left > .ant-tabs-nav .ant-tabs-tab .ant-tabs-tab-btn {
+      font-weight: normal;
       font-size: 14px;
       line-height: 18px;
+      color: #9292a3;
+    }
+    .ant-tabs-left > .ant-tabs-nav .ant-tabs-tab-active .ant-tabs-tab-btn {
+      font-family: 'Circular-Std-Book';
+      font-weight: 500;
+      color: #54b2d3;
     }
     .ant-tabs-left
       > .ant-tabs-content-holder
