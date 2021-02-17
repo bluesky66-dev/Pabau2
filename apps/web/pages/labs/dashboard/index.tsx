@@ -30,15 +30,9 @@ const LIST_QUERY = gql`
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query marketing_source_aggregate(
-    $public: Boolean = true
-    $searchTerm: String = ""
-  ) {
+  query marketing_source_aggregate($searchTerm: String = "") {
     marketing_source_aggregate(
-      where: {
-        public: { _eq: $public }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-      }
+      where: { _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }] }
     ) {
       aggregate {
         count
