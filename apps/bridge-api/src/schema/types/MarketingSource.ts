@@ -42,8 +42,46 @@ export const MarketingSourceQuery = extendType({
 export const MarketingSourceMutation = extendType({
   type: 'Mutation',
   definition(t) {
-    t.crud.createOneMarketingSource()
-    t.crud.deleteOneMarketingSource();
-    t.crud.updateOneMarketingSource();
+    t.crud.createOneMarketingSource({
+      async resolve(_root, args, ctx:Context) {
+        const companyId = Number(ctx.req.get('x-company_id'))
+        const id = Number(args.data.company.connect.id)
+        if(id !== companyId){
+          throw new Error("Auth error")
+        }
+        return await ctx.prisma.marketingSource.create(args)
+      },
+    });
+    t.crud.deleteOneMarketingSource({
+      async resolve(_root, args, ctx:Context) {
+        const companyId = Number(ctx.req.get('x-company_id'))
+        const id = args.where.id
+        const sources =  await ctx.prisma.marketingSource.findUnique({
+          where: {
+            id: Number(id)
+          }
+        })
+        if(sources.occupier !== companyId){
+          throw new Error("Auth error")
+        }
+        await ctx.prisma.marketingSource.delete(args)
+        return sources
+      },
+    });
+    t.crud.updateOneMarketingSource({
+      async resolve(_root, args, ctx:Context) {
+        const companyId = Number(ctx.req.get('x-company_id'))
+        const id = args.where.id
+        const sources = await ctx.prisma.marketingSource.findUnique({
+          where: {
+            id: Number(id)
+          }
+        })
+        if(sources?.occupier !== companyId){
+          throw new Error("Auth error")
+        }
+        return ctx.prisma.marketingSource.update(args);
+      },
+    });
   }
 })
