@@ -64,10 +64,6 @@
       }
     }
   }
-  .modal-body {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
 
   .input-field label {
     font-family: Circular-Std-Book;
@@ -95,6 +91,11 @@
     display: flex;
     align-items: center;
     color: #3d3d46;
+  }
+
+  .modal-content {
+    padding-left: 40px;
+    padding-right: 40px;
   }
 
   .modal-footer {
@@ -169,6 +170,36 @@
       padding-left: 10px;
       color: var(--light-grey-color);
       font-size: 14px;
+    }
+  }
+
+  .btn-style {
+    min-width: 76px;
+    min-height: 40px;
+  }
+}
+
+@media (min-width: 225px) and (max-width: 575px) {
+  .modal {
+    :global {
+      .ant-modal-header {
+        padding: 16px;
+      }
+      .ant-modal-close-x {
+        padding-top: 0;
+      }
+    }
+
+    .modal-content {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .modal-footer {
+      padding-top: 8px;
+      padding-left: 16px;
+      padding-right: 16px;
+      padding-bottom: 16px;
     }
   }
 }

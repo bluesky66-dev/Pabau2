@@ -9,7 +9,7 @@ export interface IQuestionOptions {
   question: string
   showDropdown: boolean
   selectedValue?: string
-  checked?: boolean
+  checked: boolean
 }
 
 interface IMenuOptions {
@@ -17,7 +17,7 @@ interface IMenuOptions {
   value: string
 }
 
-interface P {
+export interface QuestionBankProps {
   questions: IQuestionOptions[]
   options: IMenuOptions[]
   onSelect(e, key: number): void
@@ -25,7 +25,7 @@ interface P {
   onClick(key: number): void
 }
 
-export const QuestionBank: FC<P> = (props) => {
+export const QuestionBank: FC<QuestionBankProps> = (props) => {
   const { questions, options, onSelect, onChecked, onClick } = props
 
   const prepareOptions = (key: number) => {
@@ -45,7 +45,9 @@ export const QuestionBank: FC<P> = (props) => {
           ({ key, question, showDropdown, selectedValue, checked }) => (
             <Row
               key={`question-${key}`}
-              className={styles.questionRow}
+              className={
+                styles.questionRow + ' ' + (checked && styles.activeRow)
+              }
               justify={'space-between'}
               onClick={() => onClick(key)}
             >

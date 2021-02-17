@@ -354,11 +354,13 @@ export const Standard: FC<P> = ({
                     heading="Background color"
                     onSelected={(val) => onBackGroundColor(val)}
                     defaultColor="#ffffff"
+                    selectedColor=""
                   />
                   <ColorPicker
                     heading="Buttons color"
                     onSelected={(val) => onButtonColor(val)}
                     defaultColor="#54b2d3"
+                    selectedColor=""
                   />
                   <Row>
                     <span className={styles.textareaLabel}>Information</span>

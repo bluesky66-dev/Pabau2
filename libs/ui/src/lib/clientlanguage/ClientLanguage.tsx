@@ -258,42 +258,41 @@ export const ClientLanguage: FC<ClientLanguageProps> = ({
   return (
     <div className={styles.container}>
       <div className={styles.languageWrap}>
-        {preferredLang &&
-          preferredLang.map((item, index) => {
-            return (
-              <div
+        {preferredLang?.map((item, index) => {
+          return (
+            <div
+              key={item.label}
+              className={`${
+                flagStatus && item.shortLabel === selectLanguage
+                  ? styles.preferredLanguage
+                  : styles.preferredLanguageOut
+              } ${
+                isHover && item.shortLabel === selectLanguage
+                  ? styles.preferredLanguageMouseIn
+                  : styles.preferredLanguageMouseOut
+              }`}
+              onMouseEnter={() => checkEvent1(item.shortLabel)}
+              onClick={() => checkEvent2(item.shortLabel)}
+              onMouseOver={() => setFlagStatus(true)}
+              onMouseLeave={() => setFlagStatus(true)}
+            >
+              <Image
                 key={item.label}
-                className={`${
-                  flagStatus && item.shortLabel === selectLanguage
-                    ? styles.preferredLanguage
-                    : styles.preferredLanguageOut
-                } ${
-                  isHover && item.shortLabel === selectLanguage
-                    ? styles.preferredLanguageMouseIn
-                    : styles.preferredLanguageMouseOut
-                }`}
-                onMouseEnter={() => checkEvent1(item.shortLabel)}
-                onClick={() => checkEvent2(item.shortLabel)}
-                onMouseOver={() => setFlagStatus(true)}
-                onMouseLeave={() => setFlagStatus(true)}
-              >
-                <Image
-                  key={item.label}
-                  preview={false}
-                  width={26}
-                  src={item.logo}
-                  alt={item.label}
+                preview={false}
+                width={26}
+                src={item.logo}
+                alt={item.label}
+              />
+              <span className={styles.languageName}>{item.shortLabel}</span>
+              {!isDefault(item, defaultLanguage) && (
+                <CloseOutlined
+                  className={styles.closeBadge}
+                  onClick={() => deletePreferredLang(index)}
                 />
-                <span className={styles.languageName}>{item.shortLabel}</span>
-                {!isDefault(item, defaultLanguage) && (
-                  <CloseOutlined
-                    className={styles.closeBadge}
-                    onClick={() => deletePreferredLang(index)}
-                  />
-                )}
-              </div>
-            )
-          })}
+              )}
+            </div>
+          )
+        })}
       </div>
       <div className={styles.popover}>
         <Popover

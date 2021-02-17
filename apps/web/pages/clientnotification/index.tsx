@@ -26,11 +26,9 @@ const Index: FC = () => {
   }
 
   function showNotification() {
-    if (valideEmail) {
-      if (setIndexTab === 1) {
-        Notification(NotificationType.success, 'Test message sent')
-        setSendEmail(false)
-      }
+    if (valideEmail && setIndexTab === 1) {
+      Notification(NotificationType.success, 'Test message sent')
+      setSendEmail(false)
     }
     if (setIndexTab === 2) {
       Notification(NotificationType.success, 'Test SMS sent')
@@ -52,9 +50,9 @@ const Index: FC = () => {
       <div style={{ backgroundColor: '#FFF' }}>
         <Breadcrumb
           breadcrumbItems={[
-            'Setup',
-            'Notification Messages',
-            'Upcoming appointment reminder',
+            { breadcrumbName: 'Setup', path: 'setup' },
+            { breadcrumbName: 'Notification Messages', path: '' },
+            { breadcrumbName: 'Upcoming appointment reminder', path: '' },
           ]}
         />
         <Title>Upcoming appointment reminder</Title>

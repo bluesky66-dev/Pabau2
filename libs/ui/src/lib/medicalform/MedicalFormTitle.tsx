@@ -8,7 +8,7 @@ interface P {
   desc?: string
 }
 
-const MedicalFormTitle: FC<P> = ({ iconUrl, bgcolor, title, desc }) => {
+export const MedicalFormTitle: FC<P> = ({ iconUrl, bgcolor, title, desc }) => {
   return (
     <div className={styles.formItem}>
       <div className={`${styles.formTitle} ${styles.formCommon}`}>

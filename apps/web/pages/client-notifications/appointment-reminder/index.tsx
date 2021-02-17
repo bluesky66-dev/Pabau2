@@ -27,11 +27,9 @@ const Index: FC = () => {
   }
 
   function showNotification() {
-    if (valideEmail) {
-      if (setIndexTab === 1) {
-        Notification(NotificationType.success, 'Test message sent')
-        setSendEmail(false)
-      }
+    if (valideEmail && setIndexTab === 1) {
+      Notification(NotificationType.success, 'Test message sent')
+      setSendEmail(false)
     }
     if (setIndexTab === 2) {
       Notification(NotificationType.success, 'Test SMS sent')

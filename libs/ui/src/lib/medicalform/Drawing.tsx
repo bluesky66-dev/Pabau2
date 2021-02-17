@@ -1,51 +1,44 @@
-import { UploadOutlined } from '@ant-design/icons'
-import { Input, Upload } from 'antd'
+import {
+  MedicalFormBody,
+  MedicalFormBottom,
+  MedicalFormHeader,
+  MedicalFormTitle,
+} from '@pabau/ui'
 import React, { FC } from 'react'
 import drawingIcon from '../../assets/images/medicalform_drawing.svg'
-import styles from './MedicalForm.module.less'
-import MedicalFormBottom from './MedicalFormBottom'
-import MedicalFormTitle from './MedicalFormTitle'
+import BasicElement from './BasicElement'
+import ElementQuestion from './ElementQuestion'
+import FileUpload from './FileUpload'
 
-const { Dragger } = Upload
+interface P {
+  hideSideBar?: () => void
+}
 
-const Drawing: FC = () => {
-  const drawingStyle = {
-    height: '176px',
+const Drawing: FC<P> = ({ hideSideBar }) => {
+  const saveFunc = () => {
+    if (hideSideBar) {
+      hideSideBar()
+    }
   }
+
   return (
-    <div className={styles.mainBody}>
-      <div className={styles.formItem}>
-        <div className={`${styles.formCaption} ${styles.formCommon}`}>
-          <span>component settings</span>
-        </div>
-      </div>
-      <div className={styles.formItem}>
-        <MedicalFormTitle
-          iconUrl={drawingIcon}
-          bgcolor="#F78561"
-          title="Drawing"
-          desc="Draw on an image or a photo"
+    <BasicElement>
+      <MedicalFormHeader title="component settings" />
+      <MedicalFormTitle
+        iconUrl={drawingIcon}
+        bgcolor="#F78561"
+        title="Drawing"
+        desc="Draw on an image or a photo"
+      />
+      <MedicalFormBody>
+        <ElementQuestion desc="Enter your title" title="Title" />
+        <FileUpload
+          title="Image"
+          desc="Click or drag file to this area to upload"
         />
-      </div>
-      <div className={styles.formItem}>
-        <div className={`${styles.formQuestion} ${styles.formCommon}`}>
-          <p style={{ marginTop: '5px' }}>Title</p>
-          <Input placeholder="Enter your title" />
-          <p style={{ marginTop: '20px' }}>Image</p>
-          <Dragger style={drawingStyle}>
-            <p>
-              <UploadOutlined />
-            </p>
-            <p className="ant-upload-text" style={{ color: '#9292a3' }}>
-              Click or drag file to this area to upload
-            </p>
-          </Dragger>
-        </div>
-      </div>
-      <div className={styles.formItem} style={{ borderBottom: 'none' }}>
-        <MedicalFormBottom needLeft={true} />
-      </div>
-    </div>
+      </MedicalFormBody>
+      <MedicalFormBottom saveFunc={saveFunc} needLeft={true} />
+    </BasicElement>
   )
 }
 
