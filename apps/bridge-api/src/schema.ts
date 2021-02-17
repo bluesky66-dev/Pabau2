@@ -21,7 +21,6 @@ prisma.$use(async (params, next) => {
     if(record.occupier !== 8254){
       throw new Error('Insufficient permissions to remove record')
     }
-    throw new Error(JSON.stringify(record))
   }
   return next(params)
 })
