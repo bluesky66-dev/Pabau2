@@ -25,7 +25,6 @@ export const DefaultColorPicker: FC<P> = ({ heading }) => {
         onSelected={(val) => setSelectColor(val)}
         onHover={(val) => setHoverolor(val)}
         onLeave={(val) => setHoverolor('')}
-        defaultColor={'#ffffff'}
       />
       <div
         style={{

@@ -294,7 +294,7 @@ export const ClientLanguage: FC<ClientLanguageProps> = ({
           )
         })}
       </div>
-      <div className={styles.popover}>
+      <div className={styles.addpopover}>
         <Popover
           content={
             <LanguagePop childHook={[preferredLang, setPreferredLang]} />
@@ -302,7 +302,10 @@ export const ClientLanguage: FC<ClientLanguageProps> = ({
           placement="topLeft"
           trigger="click"
         >
-          <PlusOutlined className={styles.popButton} />
+          <div className={styles.addLanguageBtn}>
+            <PlusOutlined className={styles.popButton} />
+          </div>
+          <span className={styles.addLanguageText}>Add language</span>
         </Popover>
       </div>
     </div>

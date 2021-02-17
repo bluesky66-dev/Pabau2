@@ -1,10 +1,11 @@
 import React, { FC } from 'react'
-import { Typography, Input, Modal } from 'antd'
+import { Typography, Input, Modal, Menu, Dropdown, Checkbox, Row } from 'antd'
 import { Button, Breadcrumb, PhoneNumberInput, Notification } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import ClientNotification from '../../../components/ClientNotification/index'
 import styles from './index.module.less'
 import CommonHeader from '../../setup/CommonHeader'
+import { DownOutlined, LeftOutlined } from '@ant-design/icons'
 
 const { Title } = Typography
 
@@ -45,20 +46,49 @@ const Index: FC = () => {
     const serchfind = regexp.test(search)
     setValidEmail(serchfind)
   }
+  const menu = (
+    <Menu className={styles.menuListUl}>
+      <Menu.Item className={styles.menuListItem}>
+        <Row>
+          <Checkbox value="enable_reminder">
+            Enable reminders via email
+          </Checkbox>
+        </Row>
+      </Menu.Item>
+      <Menu.Item className={styles.menuListItem}>
+        <Row>
+          <Checkbox value="enable_reminder">Enable reminders via sms</Checkbox>
+        </Row>
+      </Menu.Item>
+    </Menu>
+  )
 
   return (
     <>
       <CommonHeader />
       <Layout>
-        <div style={{ backgroundColor: '#FFF' }}>
-          <Breadcrumb
-            breadcrumbItems={[
-              'Setup',
-              'Notification Messages',
-              'Upcoming appointment reminder',
-            ]}
-          />
-          <Title>Upcoming appointment reminder</Title>
+        <div className={styles.appointmentWrapper}>
+          <span className={styles.hideSection}>
+            <Breadcrumb
+              breadcrumbItems={[
+                { path: '', breadcrumbName: 'Setup' },
+                {
+                  path: '/client-notifications',
+                  breadcrumbName: 'Notification Messages',
+                },
+                {
+                  path: '/client-notifications/appointment-reminder',
+                  breadcrumbName: 'Upcoming appointment reminder',
+                },
+              ]}
+            />
+          </span>
+          <Title>
+            <span className={`${styles.backArrow} ${styles.hideSection}`}>
+              <LeftOutlined className={styles.leftIcon} />
+            </span>
+            Upcoming appointment reminder
+          </Title>
         </div>
         <div
           style={{
@@ -71,6 +101,13 @@ const Index: FC = () => {
             fontSize: '14px',
           }}
         >
+          <span className={styles.hideSection}>
+            <Dropdown overlay={menu} placement="bottomRight" arrow>
+              <Button size={'large'}>
+                Enable settings <DownOutlined />
+              </Button>
+            </Dropdown>
+          </span>
           <Button
             className={styles.notificationSendButton}
             style={{ margin: '1em 8px', height: '40px', fontSize: '14px' }}

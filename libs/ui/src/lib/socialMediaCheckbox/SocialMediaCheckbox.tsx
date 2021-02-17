@@ -32,7 +32,7 @@ export const SocialMediaCheckbox: FC<P> = (props) => {
   }
 
   return (
-    <div className="social-media-icons">
+    <div className={styles.socialMediaIcons}>
       {props?.mediaIcon?.map((socialIcon) => (
         <span
           key={socialIcon.label}
@@ -48,7 +48,10 @@ export const SocialMediaCheckbox: FC<P> = (props) => {
               {socialIcon.icon}
             </Popover>
           ) : (
-            socialIcon.icon
+            <div className={styles.socialbox}>
+              <span>{socialIcon.icon}</span>
+              <span className={styles.socialName}>{socialIcon.label}</span>
+            </div>
           )}
           <Checkbox checked={activeLabel.includes(socialIcon.label)} />
         </span>

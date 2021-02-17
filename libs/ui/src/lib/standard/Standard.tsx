@@ -141,18 +141,18 @@ export const Standard: FC<P> = ({
         <TabPane tab="Standard" key="1">
           <div style={{ padding: '10px 9px' }}>
             <Row style={{ padding: '0 15px' }}>
-              <span>
+              <span className={styles.line1}>
                 This notification automatically sends to clients the moment
                 their appointment is booked.
-                <span className={styles.anchor}>
+                {/* <span className={styles.anchor}>
                   <Button type="link">Learn more</Button>
-                </span>
+                </span> */}
               </span>
             </Row>
             <Collapse
               className={styles.collapseAlignFirst}
               bordered={false}
-              defaultActiveKey={['1', '2', '3']}
+              defaultActiveKey={['1', '2']}
               expandIconPosition="right"
               style={{ backgroundColor: 'white' }}
             >
@@ -161,26 +161,6 @@ export const Standard: FC<P> = ({
                 header="Reminder timeframe"
                 key="1"
               >
-                <Row>
-                  <Checkbox
-                    className={styles.checkboxStyle}
-                    value="enable_reminder"
-                    checked={enableReminder}
-                    onChange={() => onEnableReminder(!enableReminder)}
-                  >
-                    Enable reminders via email
-                  </Checkbox>
-                </Row>
-                <Row>
-                  <Checkbox
-                    className={styles.checkboxStyle}
-                    value="enable_reminder"
-                    checked={enableReminder}
-                    onChange={() => onEnableReminder(!enableReminder)}
-                  >
-                    Enable reminders via sms
-                  </Checkbox>
-                </Row>
                 <Row align="middle">
                   <Checkbox
                     className={styles.checkboxStyle}
@@ -200,14 +180,21 @@ export const Standard: FC<P> = ({
                 </Row>
                 <Row gutter={[0, 16]}>
                   <Col>
-                    Choose how far in advance your reminder notification
-                    messages are sent to clients
+                    <span className={styles.line1}>
+                      Choose how far in advance your reminder notification
+                      messages are sent to clients
+                    </span>
                   </Col>
                 </Row>
                 <Row>
-                  <Col>Reminder advance notice</Col>
+                  <Col>
+                    <span className={styles.reminder}>
+                      Reminder advance notice
+                    </span>
+                  </Col>
                 </Row>
-                <Select defaultValue="24" style={{ width: '100%' }}>
+                <Select defaultValue="48" style={{ width: '100%' }}>
+                  <Option value="48">48 hours</Option>
                   <Option value="24">24 hours</Option>
                   <Option value="12">12 hours</Option>
                   <Option value="6">6 hours</Option>
@@ -322,34 +309,36 @@ export const Standard: FC<P> = ({
                       Add Medical History button
                     </Checkbox>
                   </Row>
-                  {addMedicalHisButton && (
-                    <>
-                      <Row>
-                        <Checkbox
-                          className={styles.checkboxStyle}
-                          value="hide_his_completed"
-                        >
-                          Hide if history is already completed
-                        </Checkbox>
-                      </Row>
+                  <div className={styles.hidesection}>
+                    {addMedicalHisButton && (
+                      <>
+                        <Row>
+                          <Checkbox
+                            className={styles.checkboxStyle}
+                            value="hide_his_completed"
+                          >
+                            Hide if history is already completed
+                          </Checkbox>
+                        </Row>
 
-                      <Row>
-                        <span className={styles.textareaLabel}>
-                          Medical History message
-                        </span>
-                      </Row>
-                      <Row>
-                        <TextArea
-                          className={styles.textareaStyle}
-                          autoSize={{ minRows: 3, maxRows: 3 }}
-                          maxLength={size.width > 768 ? 500 : 160}
-                          onChange={(event) =>
-                            onMedicalMessage(event.target.value)
-                          }
-                        />
-                      </Row>
-                    </>
-                  )}
+                        <Row>
+                          <span className={styles.reminder}>
+                            Medical History message
+                          </span>
+                        </Row>
+                        <Row>
+                          <TextArea
+                            className={styles.textareaStyle}
+                            autoSize={{ minRows: 3, maxRows: 3 }}
+                            maxLength={size.width > 768 ? 500 : 160}
+                            onChange={(event) =>
+                              onMedicalMessage(event.target.value)
+                            }
+                          />
+                        </Row>
+                      </>
+                    )}
+                  </div>
                   <ColorPicker
                     heading="Background color"
                     onSelected={(val) => onBackGroundColor(val)}
@@ -362,8 +351,8 @@ export const Standard: FC<P> = ({
                     defaultColor="#54b2d3"
                     selectedColor=""
                   />
-                  <Row>
-                    <span className={styles.textareaLabel}>Information</span>
+                  <Row className={styles.informText}>
+                    <span className={styles.reminder}>Information</span>
                   </Row>
                   <Row>
                     <TextArea
@@ -416,18 +405,25 @@ export const Standard: FC<P> = ({
                   </Row>
                 </Panel>
               )}
-              <div className={styles.papauPlusContainer}>
-                <PabauPlus label="Plus" />
+              <div className={styles.clientLang}>
+                <div className={styles.papauPlusContainer}>
+                  <PabauPlus label="Plus" />
+                </div>
               </div>
+
               <Panel
                 className={styles.panelAlign}
                 header="Client languages"
                 key="4"
               >
                 <Row>
-                  <Col>Setup templates in your clients preferred language</Col>
+                  <Col>
+                    <span className={styles.reminder}>
+                      Setup templates in your clients preferred language
+                    </span>
+                  </Col>
                 </Row>
-                <Row>
+                <Row className={styles.clientLangLogo}>
                   <ClientLanguage
                     selectLanguageHook={[selectLanguage, onSelectLanguage]}
                     defaultLanguage="EN"
@@ -443,7 +439,7 @@ export const Standard: FC<P> = ({
           <TabPane tab="Custom" key="2">
             <div style={{ padding: '10px 9px' }}>
               <Row style={{ padding: '0 15px' }}>
-                <span>
+                <span className={styles.line1}>
                   Design or upload your own custom email from your
                   <span className={styles.anchor}>
                     <Button type="link">message templates</Button>
@@ -451,19 +447,26 @@ export const Standard: FC<P> = ({
                 </span>
               </Row>
               <Row style={{ padding: '0 15px' }}>
-                <Col>Reminder advance notice</Col>
+                <Col>
+                  <span className={styles.reminder}>
+                    Reminder advance notice
+                  </span>
+                </Col>
               </Row>
 
               <Row style={{ padding: '0 15px' }}>
-                <Select defaultValue="24" style={{ width: '100%' }}>
+                <Select defaultValue="48" style={{ width: '100%' }}>
+                  <Option value="48">48 hours</Option>
                   <Option value="24">24 hours</Option>
                   <Option value="12">12 hours</Option>
                   <Option value="6">6 hours</Option>
                 </Select>
               </Row>
 
-              <div className={styles.papauPlusContainer}>
-                <PabauPlus label="Plus" />
+              <div className={styles.clientLang}>
+                <div className={styles.papauPlusContainer}>
+                  <PabauPlus label="Plus" />
+                </div>
               </div>
 
               <Collapse
@@ -480,10 +483,12 @@ export const Standard: FC<P> = ({
                 >
                   <Row>
                     <Col>
-                      Setup templates in your clients preferred language
+                      <span className={styles.reminder}>
+                        Setup templates in your clients preferred language
+                      </span>
                     </Col>
                   </Row>
-                  <Row>
+                  <Row className={styles.clientLangLogo}>
                     <ClientLanguage
                       selectLanguageHook={[selectLanguage, onSelectLanguage]}
                       defaultLanguage="EN"
