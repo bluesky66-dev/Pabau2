@@ -3,8 +3,7 @@
 image: node:14-buster
 
 options:
-  max-time: 45 # max time in minutes for each step
-  docker: true
+  max-time: 40 # max time in minutes for each step
 
 definitions:
   caches:
@@ -13,7 +12,7 @@ definitions:
     cypress: '/root/.cache/Cypress'
   services:
     docker:
-      memory: 4096
+      memory: 2048
 
 pipelines:
   pull-requests:
@@ -21,15 +20,17 @@ pipelines:
       - step:
           name: PR pipeline
           size: 2x
+          services:
+            - docker
           caches:
             - nodemodules
             - yarncustom
           script:
-            - docker version
+            # TODO: make this DRY
+
             - /bin/bash -c 'yarn audit --no-progress --non-interactive; [[ $? -gt 2 ]] && exit 1 || exit 0'
 
             # Get an oauth access token using the client credentials, parsing out the token with jq.
-            - apt-get update && apt-get install -y curl jq
             - >
               export access_token=$(curl -s -X POST -u "${BITBUCKET_CLIENT_ID}:${BITBUCKET_CLIENT_SECRET}" \
                 https://bitbucket.org/site/oauth2/access_token \
@@ -101,12 +102,20 @@ pipelines:
             - nodemodules
             - yarncustom
           script:
-            - /bin/bash -c 'yarn audit --no-progress --non-interactive; [[ $? -gt 2 ]] && exit 1 || exit 0'
-            - touch /tmp/bot_message.txt
+            # Setup
             - apt-get update -y && apt-get install -y curl jq time
-            - /usr/bin/time -v yarn install --frozen-lockfile --prefer-offline
+            - touch /tmp/bot_message.txt
+
+            # Test to ensure docker is working
             - docker version
 
+            # Test for security vulnerabilities
+            - /bin/bash -c 'yarn audit --no-progress --non-interactive; [[ $? -gt 2 ]] && exit 1 || exit 0'
+
+            # Install npm
+            - /usr/bin/time -v yarn install --frozen-lockfile --prefer-offline
+
+            # Test the app completely
             # TODO: move these to eslint so that `yarn lint` picks up these errors instead
             - npm i -g typescript
             - tsc --noEmit -p apps/backend/
@@ -119,11 +128,10 @@ pipelines:
             - tsc --noEmit -p apps/web-e2e/
             - tsc --noEmit -p libs/ui/tsconfig.lib.json
             - tsc --noEmit -p libs/yup/tsconfig.lib.json
-
             - /usr/bin/time -v yarn affected:lint --base=HEAD~1 --with-deps --parallel
             - /usr/bin/time -v yarn affected:test --base=HEAD~1 --parallel
 
-            # get the commit message for this merge
+            # Get the commit message for this merge
             - export LAST_COMMIT_LOG=$(git log HEAD -1 | tail -n +4 | perl -p -e 's/[\r\n]//' | awk '{$1=$1;print}')
             - echo "${LAST_COMMIT_LOG}"
             - if [ "${LAST_COMMIT_LOG}" == "[skip ci] bumping version (patch)" ]; then (echo yes && export LAST_COMMIT_LOG=$(git log HEAD~1 -1 | tail -n +4)); fi
@@ -133,15 +141,17 @@ pipelines:
             - apt-get update && apt-get install -y curl jq && jq --version && curl --version
             - git remote set-url origin "${BITBUCKET_GIT_SSH_ORIGIN}"
 
-            # bump the package.json version by 0.0.1
+            # Bump the package.json version by 0.0.1
             - yarn version --message "[skip ci] bumping version (patch)" --patch --non-interactive --no-progress
             - git push && git push --tags
             - export PACKAGE_JSON_VERSION=$(jq -r .version < package.json)
 
+            # We build and export everything first, and then again inside the deploy target (which calls deploy.sh). The second time should be super-fast due to the NX cache.
             - /usr/bin/time -v yarn affected --base=HEAD~2 --head=HEAD~1 --target=export --prod
             - /usr/bin/time -v yarn affected --base=HEAD~2 --head=HEAD~1 --target=build-storybook --prod
             - /usr/bin/time -v yarn affected --base=HEAD~2 --head=HEAD~1 --target=deploy --prod
 
+            # Compile a message for Slack, including URLs of changed pages
             - npm i -g ts-node && ts-node tools/cicd/PrintChangedUrls.ts "HEAD~2" "$(cat /tmp/bot_url_web.txt)" "$(cat /tmp/bot_url_ui.txt)" >> /tmp/bot_message.txt
             - |
               printf "*New Version Staged for Production*\n## v${PACKAGE_JSON_VERSION}\n${LAST_COMMIT_LOG}\n\n" > /tmp/bot_message2.txt
