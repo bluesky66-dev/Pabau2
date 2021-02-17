@@ -20,3 +20,21 @@ export interface MedicalForms {
   formType: string
   formName: string
 }
+
+export interface SelectedForms {
+  medicalHistory: boolean
+  consent: boolean
+  treatmentForm: boolean
+  epaper: boolean
+  presciption: boolean
+  labForm: boolean
+}
+
+export const defaultSelectedFormInfos: SelectedForms = {
+  medicalHistory: false,
+  consent: false,
+  treatmentForm: false,
+  epaper: false,
+  presciption: false,
+  labForm: false,
+}

@@ -1,4 +1,4 @@
-import { MedicalForms } from '@pabau/ui'
+import { MedicalForms, SelectedForms } from '@pabau/ui'
 import { Tabs } from 'antd'
 import React, { FC } from 'react'
 import styles from './MedicalFormBuilder.module.less'
@@ -8,14 +8,63 @@ import MedicalFormLeftSidebarCustomPanels from './MedicalFormLeftSidebarCustomPa
 const { TabPane } = Tabs
 
 interface P {
+  selectedFormTypes: SelectedForms
   medicalForms: MedicalForms[]
 }
 
+interface HideForm {
+  [key: string]: string[]
+}
+
+const hideFormInfos: HideForm = {
+  medicalHistory: [
+    'basic_labtests',
+    'basic_vaccinehistory',
+    'basic_vaccinescheduler',
+    'basic_traveldestination',
+    'basic_drugs',
+  ],
+  consent: [
+    'basic_vaccinescheduler',
+    'basic_vaccinehistory',
+    'basic_traveldestination',
+    'basic_labtests',
+  ],
+  treatmentForm: [],
+  epaper: [],
+  presciption: [
+    'basic_labtests',
+    'basic_vaccinehistory',
+    'basic_vaccinescheduler',
+    'basic_traveldestination',
+    'basic_conditions',
+    'basic_drawing',
+  ],
+  labForm: [
+    'basic_drugs',
+    'basic_conditions',
+    'basic_vaccinehistory',
+    'basic_vaccinescheduler',
+    'basic_traveldestination',
+    'basic_drawing',
+  ],
+}
+
 const MedicalFormComponentPanel: FC<P> = ({ ...props }) => {
-  const { medicalForms } = props
+  const { selectedFormTypes, medicalForms } = props
+  const hideForms: string[] = []
+
+  const checkedFormTypes = Object.entries(selectedFormTypes)
+    .filter(([key, value]) => value === true)
+    .map((item) => hideFormInfos[item[0]])
+
+  checkedFormTypes.map((itemFormTypes) =>
+    itemFormTypes.map((itemFormType) => hideForms.push(itemFormType))
+  )
 
   const basicMedicalForms = medicalForms.filter(
-    (item) => item.formType === 'basic'
+    (item) =>
+      item.formType === 'basic' && hideForms.indexOf(item.formName) === -1
   )
 
   const customMedicalForms = medicalForms.filter(

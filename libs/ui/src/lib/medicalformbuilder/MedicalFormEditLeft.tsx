@@ -1,6 +1,10 @@
-import { MedicalForms } from '@pabau/ui'
+import {
+  defaultSelectedFormInfos,
+  MedicalForms,
+  SelectedForms,
+} from '@pabau/ui'
 import { Collapse } from 'antd'
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import styles from './MedicalFormBuilder.module.less'
 import MedicalFormComponentPanel from './MedicalFormComponentPanel'
 import MedicalFormGeneralPanel from './MedicalFormGeneralPanel'
@@ -13,6 +17,14 @@ interface P {
 
 const MedicalFormEditLeft: FC<P> = ({ ...props }) => {
   const { medicalForms } = props
+  const [selectedFormTypes, setSelectedFormTypes] = useState<SelectedForms>(
+    defaultSelectedFormInfos
+  )
+
+  const onSelectFormType = (setting) => {
+    setSelectedFormTypes(setting)
+  }
+
   return (
     <div className={styles.medicalFormEditLeftPanel}>
       <Collapse
@@ -25,14 +37,17 @@ const MedicalFormEditLeft: FC<P> = ({ ...props }) => {
           key="1"
           className={styles.medicalFormEditLeftPanelCollapseGeneral}
         >
-          <MedicalFormGeneralPanel />
+          <MedicalFormGeneralPanel onSelectFormType={onSelectFormType} />
         </Panel>
         <Panel
           header="COMPONENTS"
           key="2"
           className={styles.medicalFormEditLeftPanelCollapseComponent}
         >
-          <MedicalFormComponentPanel medicalForms={medicalForms} />
+          <MedicalFormComponentPanel
+            selectedFormTypes={selectedFormTypes}
+            medicalForms={medicalForms}
+          />
         </Panel>
       </Collapse>
     </div>
