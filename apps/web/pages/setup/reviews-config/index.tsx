@@ -27,6 +27,7 @@ import {
   Permission,
   ReviewWrite,
   ReviewWriteStepper,
+  ReviewChoice,
   AddQuestion,
   QuestionBankModal,
   QuestionField,
@@ -40,7 +41,10 @@ import { ReactComponent as ExternalLink } from '../../../assets/images/external-
 import { ReactComponent as ExternalLinkGrey } from '../../../assets/images/external-link-grey.svg'
 import { ReactComponent as Palette } from '../../../assets/images/palette.svg'
 import { ReactComponent as Voucher } from '../../../assets/images/voucher.svg'
-import { addQuestionData } from '../../../assets/feedbackSurveyData'
+import {
+  addQuestionData,
+  integrations,
+} from '../../../assets/feedbackSurveyData'
 import styles from './index.module.less'
 
 const stepData = [
@@ -885,6 +889,23 @@ export const Index: FC<ReviewsConfigProps> = ({
     )
   }
 
+  const Step3 = () => {
+    return (
+      <>
+        <div className={styles.reviewsConfigBody}>
+          <div className={styles.reviewChoiceContainer}>
+            <ReviewChoice {...integrations} />
+          </div>
+        </div>
+        <ReviewsConfigFooter
+          step={step}
+          onNext={() => setStep(step + 1)}
+          onPrev={() => setStep(step - 1)}
+        />
+      </>
+    )
+  }
+
   useEffect(() => {
     setSetting(builderSetting)
     setStep(currentStep)
@@ -947,6 +968,7 @@ export const Index: FC<ReviewsConfigProps> = ({
               settings={setting}
             />
           )}
+          {step === 2 && <Step3 />}
         </div>
       </Layout>
     </div>

@@ -9,6 +9,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   @media (max-width: 767px) {
     justify-content: flex-start;
     align-items: flex-start;
@@ -21,16 +22,19 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+
   .reviewLink {
     text-align: right;
   }
-  > a {
+
+  >a {
     font-family: var(--font-family);
     font-size: 14px;
     line-height: 18px;
     font-weight: 400;
     color: var(--primary-color);
   }
+
   @media (max-width: 767px) {
     align-items: flex-start;
     padding: 20px;
@@ -43,11 +47,13 @@
     .ant-typography {
       padding: 0;
     }
+
     .ant-breadcrumb {
       padding: 0;
       padding-bottom: 8px;
     }
   }
+
   @media (max-width: 767px) {
     display: none;
   }
@@ -56,11 +62,13 @@
 .reviewsConfigBreadcrumbMobile {
   display: none;
   padding: 20px;
+
   :global {
     .ant-typography {
       padding: 0;
     }
   }
+
   @media (max-width: 767px) {
     display: block;
   }
@@ -73,7 +81,8 @@
   justify-content: center;
   align-items: center;
   border-top: 1px solid var(--border-color-base);
-  > div {
+
+  >div {
     max-width: 400px;
     width: 100%;
   }
@@ -87,8 +96,9 @@
 .reviewsConfigBodyDesktop {
   display: grid;
   grid-template-columns: 392px 1fr;
-  > div {
-    > h2 {
+
+  >div {
+    >h2 {
       font-family: var(--font-family);
       font-size: 14px;
       line-height: 18px;
@@ -99,6 +109,7 @@
       border-bottom: 1px solid var(--border-color-base);
       text-transform: uppercase;
     }
+
     &:first-child {
       border-right: 1px solid var(--border-color-base);
     }
@@ -112,7 +123,8 @@
 .section {
   padding: 24px;
   border-bottom: 1px solid var(--border-color-base);
-  > h3 {
+
+  >h3 {
     color: var(--grey-text-color);
     font-family: 'Circular-Std-Bold';
     font-size: 16px;
@@ -123,7 +135,8 @@
     display: flex;
     align-items: center;
   }
-  > h4 {
+
+  >h4 {
     font-family: var(--font-family);
     font-size: 14px;
     line-height: 18px;
@@ -131,17 +144,20 @@
     color: var(--light-grey-color);
     margin: 0;
   }
-  .sectionItem { 
+
+  .sectionItem {
     width: 100%;
     margin-top: 20px;
-    
+
     :global {
       .ant-form-item-label {
         padding: 0;
       }
+
       .ant-form-item {
         margin: 0;
       }
+
       .ant-form-item-control-input {
         min-height: 18px;
       }
@@ -157,7 +173,8 @@
   line-height: 18px;
   display: flex;
   align-items: center;
-  > a {
+
+  >a {
     color: var(--light-grey-color);
     text-decoration: none;
   }
@@ -165,10 +182,12 @@
 
 .reviewsConfigBodyMobile {
   display: none;
+
   :global {
     .ant-tabs-nav-list {
       width: 100%;
     }
+
     .ant-tabs-tab {
       width: 50%;
       display: flex;
@@ -176,6 +195,7 @@
       justify-content: center;
     }
   }
+
   @media (max-width: 991px) {
     display: block;
   }
@@ -189,19 +209,22 @@
   align-items: center;
   justify-content: space-between;
   border-top: 1px solid var(--border-color-base);
-  > p {
+
+  >p {
     margin: 0;
     color: var(--light-grey-color);
     font-family: var(--font-family);
     font-size: 14px;
     line-height: 22px;
   }
+
   @media (max-width: 767px) {
     position: fixed;
     bottom: 0;
     left: 0;
     z-index: 99;
-    > p {
+
+    >p {
       display: none;
     }
   }
@@ -221,7 +244,8 @@
   box-shadow: 4px 4px 23px rgba(0, 34, 65, 0.15);
   border-radius: 4px;
   margin: 24px 15px 100px;
-  > div {
+
+  >div {
     box-shadow: none !important;
   }
 }
@@ -263,8 +287,10 @@
 
 .directionFrom {
   justify-content: flex-start;
+
   .smsTextContent {
     background-color: #e8e8ee;
+
     .smsTextArrow {
       right: calc(100% - 6px);
       background-color: #e8e8ee;
@@ -274,8 +300,10 @@
 
 .directionTo {
   justify-content: flex-end;
+
   .smsTextContent {
     background-color: #eef7fb;
+
     .smsTextArrow {
       left: calc(100% - 6px);
       background-color: #eef7fb;
@@ -284,7 +312,7 @@
 }
 
 .surveyFormat {
-  > h4 {
+  >h4 {
     color: var(--grey-text-color);
     font-family: var(--font-family);
     font-size: 14px;
@@ -293,10 +321,12 @@
     margin: 0;
     margin-top: 20px;
   }
+
   :global {
     .ant-form-item-control {
       margin-top: 12px;
     }
+
     .ant-form-item-explain {
       padding-left: 24px;
     }
@@ -318,7 +348,15 @@
 .reviewsConfigBanner {
   :global {
     button {
-       display:  none;
+      display: none;
     }
+  }
+}
+
+.reviewChoiceContainer {
+  padding: 3rem 1rem 2rem;
+
+  @media (max-width: 767px) {
+    padding: 1.25rem 1rem;
   }
 }

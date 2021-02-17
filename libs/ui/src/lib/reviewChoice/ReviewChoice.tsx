@@ -27,7 +27,7 @@ interface P {
   onSaveReview?: (reviewData?: ReviewDataWithText) => void
 }
 
-const ReviewChoice: FC<P> = ({ reviewData, reviewedData, onSaveReview }) => {
+export const ReviewChoice: FC<P> = ({ reviewData, reviewedData, onSaveReview }) => {
   const isMobile = useMedia('(max-width: 768px)', false)
   const [currentReview, setCurrentReview] = useState({
     header: '',
@@ -186,8 +186,8 @@ const ReviewChoice: FC<P> = ({ reviewData, reviewedData, onSaveReview }) => {
             </div>
           ))
         ) : (
-          <div />
-        )}
+            <div />
+          )}
       </div>
       <div>
         <div className={styles.descriptionMainWrapper}>
@@ -203,23 +203,23 @@ const ReviewChoice: FC<P> = ({ reviewData, reviewedData, onSaveReview }) => {
                       Show more ({yetToReview?.length}) <DownOutlined />
                     </Button>
                   ) : (
-                    <div>
-                      <div>{yetToReviewCard()}</div>
-                      <div className={styles.btnShowWrapper}>
-                        <Button
-                          className={styles.btnMore}
-                          onClick={() => setShowYetToReviewCards(false)}
-                        >
-                          Collapse
+                      <div>
+                        <div>{yetToReviewCard()}</div>
+                        <div className={styles.btnShowWrapper}>
+                          <Button
+                            className={styles.btnMore}
+                            onClick={() => setShowYetToReviewCards(false)}
+                          >
+                            Collapse
                           <UpOutlined />
-                        </Button>
+                          </Button>
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
                 </div>
               ) : (
-                <div>{yetToReviewCard()}</div>
-              )}
+                  <div>{yetToReviewCard()}</div>
+                )}
             </div>
           )}
         </div>
