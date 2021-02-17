@@ -95,6 +95,8 @@ interface FeedbackSurveyBuilder {
   logotypePosition: string
   logotypeSize: number
   clientName: string
+  firstName: string
+  lastName: string
   notifications: {
     email: boolean
     sms: boolean
@@ -116,6 +118,8 @@ const defaultBuilderSetting: FeedbackSurveyBuilder = {
   logotypePosition: 'Middle',
   logotypeSize: 137,
   clientName: 'First Name',
+  firstName: 'Jamal',
+  lastName: 'Potter',
   notifications: {
     email: true,
     sms: true,
@@ -283,9 +287,10 @@ export const Index: FC<ReviewsConfigProps> = ({
                       label="Display client name"
                       value={setting.clientName}
                       dropdownItems={['Full Name', 'First Name', 'Initials']}
-                      onSelected={(val) =>
+                      onSelected={(val) => {
                         handleChangeSetting('clientName', val)
-                      }
+                        setIsListing(false)
+                      }}
                     />
                   </div>
                 </div>
@@ -405,7 +410,13 @@ export const Index: FC<ReviewsConfigProps> = ({
                       title="Highly Recommended"
                       bodyContent="Was extremely nervous about seeing Doctor Hazim Sadideen but had a very friendly and warm welcoming at the reception and immediately felt at ease. Doctor Hazim himself made me feel very comfortable and reassured, initially I was very nervous to begin with. Reassured me that everything was going to be OK and that he'll do the best he can with the surgery. His secretary is also very nice, very approachable and easy to talk to if there are any complications or concerns. Highly recommended."
                       updatedAt="1 year ago"
-                      name="Jamal Potter"
+                      name={
+                        setting.clientName === 'Full Name'
+                          ? `${setting.firstName} ${setting.lastName}`
+                          : setting.clientName === 'First Name'
+                          ? setting.firstName
+                          : `${setting.firstName} ${setting.lastName}`
+                      }
                       defaultRating={2.5}
                       avatarSrc={userAvatar}
                       color={setting.color}
