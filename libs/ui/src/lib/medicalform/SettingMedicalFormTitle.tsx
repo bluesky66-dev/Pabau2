@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import styles from './LeftSidebar.module.less'
+import styles from './Setting.module.less'
 
 interface P {
   iconUrl: string
@@ -8,7 +8,7 @@ interface P {
   desc: string
 }
 
-const LeftSidebarMedicalFormTitle: FC<P> = ({
+export const SettingMedicalFormTitle: FC<P> = ({
   iconUrl,
   bgcolor,
   title,
@@ -29,4 +29,4 @@ const LeftSidebarMedicalFormTitle: FC<P> = ({
   )
 }
 
-export default LeftSidebarMedicalFormTitle
+export default SettingMedicalFormTitle
