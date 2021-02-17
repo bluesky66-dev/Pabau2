@@ -22,7 +22,6 @@ import classNames from 'classnames'
 import Link from 'next/link'
 
 const { Title } = Typography
-
 interface P {
   schema: Schema
   addQuery?: DocumentNode
@@ -378,6 +377,7 @@ const CrudTable: FC<P> = ({
             noDataText={schema.fullLower}
             onAddTemplate={() => createNew()}
             searchTerm={searchTerm}
+            padlocked={['Card', 'Cash', 'Loyalty']}
             columns={[
               ...Object.entries(schema.fields).map(([k, v]) => ({
                 dataIndex: k,

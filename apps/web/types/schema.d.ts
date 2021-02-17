@@ -12,6 +12,8 @@ interface Schema {
   messages?: messages
   fields: Record<string, SchemaItem>
   shemaType?: string
+  deleteDescField?: string
+  tooltip?: string
 }
 interface SchemaItem {
   full?: string
@@ -37,8 +39,8 @@ interface SchemaItem {
   required?: boolean
   radio?: TypeValues[]
   selectOptions?: TypeValues[]
+  collapsible?: boolean
 }
-
 interface TypeValues {
   label: string
   value: string
