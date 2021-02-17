@@ -198,6 +198,17 @@ To view the Backend, you can either visit [https://backend.new.pabau.com](https:
 1. Now run `yarn hasura:export` in your IDE, commit the changes to your branch.
 1. Now on your page's `schema.fields` array, add the relevant keys in -- they should match the hasura columns
 
+## Vscode Prettier setting
+
+2. install prettier extension
+3. Go to Preferences: Open Workspace Settings (ctrl + shift + p)
+4. Add follwing in JSON object :
+
+"editor.defaultFormatter": "esbenp.prettier-vscode",
+"[javascript]": {
+"editor.defaultFormatter": "esbenp.prettier-vscode"
+} 5. save 6. on your component right click and Format document.
+
 ## To do (big engineering items)
 
 - Apollo persisted queries (automatic, or build time)
@@ -217,11 +228,9 @@ To view the Backend, you can either visit [https://backend.new.pabau.com](https:
   1. generate jwt in php
   2. ...?
 
-
-
 * auth to prisma
 * storing jwt token for hasura in nextjs httponly cookie
 * graphql code generator and other tooling
 * nestjs needs a typed hasura service that we can call
 * prisma needs a hoc for company_id security
-* 
+*
