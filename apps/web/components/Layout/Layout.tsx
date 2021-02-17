@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import { Layout as PabauLayout, LayoutProps } from '@pabau/ui'
+import { Layout as PabauLayout, LayoutProps, Offline } from '@pabau/ui'
 import Search from '../Search'
-
+import { Offline as OfflineProvider } from 'react-detect-offline'
 const onMessageType = (e) => {
   //add mutation for send message textbox
 }
@@ -19,6 +19,14 @@ const Layout: FC<LayoutProps> = ({ children, ...props }) => {
       onMessageType={onMessageType}
       {...props}
     >
+      <OfflineProvider>
+        <Offline
+          time={15}
+          message="Connection lost. Reconnecting in"
+          iconColor="#008000"
+          buttonLabel="Reconnect"
+        />
+      </OfflineProvider>
       {children}
     </PabauLayout>
   )
