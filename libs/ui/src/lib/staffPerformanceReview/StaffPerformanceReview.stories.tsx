@@ -30,7 +30,9 @@ staffPerformanceReviewAnnualAndToday.args = {
   reviewPeriod: 'annual',
 }
 
-export const staffPerformanceReviewThreeMonths = StaffPerformanceReviewStory.bind({})
+export const staffPerformanceReviewThreeMonths = StaffPerformanceReviewStory.bind(
+  {}
+)
 staffPerformanceReviewThreeMonths.args = {
   reviewDate: new Date(new Date().setMonth(new Date().getMonth() + 4)),
   reviewPeriod: 'threeMonth',
