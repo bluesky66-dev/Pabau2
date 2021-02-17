@@ -318,13 +318,22 @@ const CrudTable: FC<P> = ({
                 </Link>
                 <p> {schema.full || schema.short} </p>
               </div>
-              {addQuery && (
+              {addQuery && !createPage ? (
                 <AddButton
                   onClick={createNew}
                   onFilterSource={onFilterMarketingSource}
                   onSearch={onSearch}
                   schema={schema}
                   tableSearch={tableSearch}
+                />
+              ) : (
+                <AddButton
+                  onClick={createPageOnClick}
+                  onFilterSource={onFilterMarketingSource}
+                  onSearch={onSearch}
+                  schema={schema}
+                  tableSearch={tableSearch}
+                  addFilter={addFilter}
                 />
               )}
             </div>
@@ -382,7 +391,6 @@ const CrudTable: FC<P> = ({
             style={{ height: '100%' }}
             sticky={{ offsetScroll: 80, offsetHeader: 80 }}
             pagination={sourceData?.length > 10 ? {} : false}
-            scroll={{ x: 'max-content' }}
             draggable={true}
             isCustomColorExist={checkCustomColorIconExsist('color')}
             isCustomIconExist={checkCustomColorIconExsist('icon')}
@@ -390,6 +398,7 @@ const CrudTable: FC<P> = ({
             noDataText={schema.fullLower}
             onAddTemplate={() => createNew()}
             searchTerm={searchTerm}
+            className={styles.tableCustom}
             columns={[
               ...Object.entries(schema.fields).map(([k, v]) => ({
                 dataIndex: k,

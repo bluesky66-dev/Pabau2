@@ -82,10 +82,12 @@ const AddButton: FC<P> = ({
         {tableSearch && (
           <SearchOutlined className={styles.marketingIconStyle} />
         )}
-        <FilterOutlined
-          className={styles.marketingIconStyle}
-          onClick={() => setMobFilterDrawer((e) => !e)}
-        />
+        {addFilter && (
+          <FilterOutlined
+            className={styles.marketingIconStyle}
+            onClick={() => setMobFilterDrawer((e) => !e)}
+          />
+        )}
         <PlusSquareFilled
           className={styles.plusIconStyle}
           onClick={() => onClick?.()}
