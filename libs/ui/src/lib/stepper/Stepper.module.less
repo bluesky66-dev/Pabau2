@@ -9,6 +9,7 @@
 
 .horizonstepper {
   padding: 10px;
+  padding-top: 0px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -29,6 +30,7 @@
   border: solid 1px #54b2d3;
   border-radius: 50%;
   background: #54b2d3;
+  color: #fff;
   width: 24px;
   height: 24px;
 }
@@ -42,6 +44,7 @@
   background: #fff;
   width: 24px;
   height: 24px;
+  color: var(--light-grey-color);
 }
 
 .enablespantxt {
@@ -53,6 +56,7 @@
   line-height: 18px;
   text-align: center;
   color: #3d3d46;
+  padding-top: 6px;
 }
 
 .disablespantxt {
@@ -64,6 +68,7 @@
   line-height: 18px;
   text-align: center;
   color: #9292a3;
+  padding-top: 6px;
 }
 
 .stepperlinedisable {
@@ -84,4 +89,9 @@
 
 .steplinediv {
   display: flex;
+}
+@media (min-width:225px) and (max-width:575px) {
+  .stepperlineenable, .stepperlinedisable {
+    width: 76px;
+  }
 }
