@@ -27,7 +27,7 @@ export const Wizard: React.FC<WizardProps> = ({
       <Stepper datasource={stepperData} step={active} />
       <hr className={styels.bottomline} />
       {children}
-
+      {/* <div style={{ marginTop: '20px' }}></div> */}
       <div className={styels.footer}>
         <Button
           onClick={(event) => onPrev?.()}

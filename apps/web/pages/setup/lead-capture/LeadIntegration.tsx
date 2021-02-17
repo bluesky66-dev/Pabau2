@@ -112,6 +112,20 @@ export const LeadIntegration: React.FC = () => {
           </div>
         </div>
       </div>
+      {(captureLeadIntegrationStep === 'Documentation' ||
+        captureLeadIntegrationStep === 'Zapier') && (
+        <div className={styles.apiContentCenter}>
+          <div className={styles.apiContentText}>
+            <h1>Your API key</h1>
+            <p>This should be passed with all API requests.</p>
+            <h6>Your API Key</h6>
+            <div className={styles.apiKeyBox}>
+              <p>028274219001jsi910030103</p>
+            </div>
+            <h5>Download Sample Code</h5>
+          </div>
+        </div>
+      )}
 
       <Modal
         modalWidth={682}

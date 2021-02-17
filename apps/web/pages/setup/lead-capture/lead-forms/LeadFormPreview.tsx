@@ -1,23 +1,25 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Row, Col, Image } from 'antd'
 import { Formik, FormikErrors } from 'formik'
-import { Form as AntForm, Input, Select, SubmitButton } from 'formik-antd'
+import { Form as AntForm, Input, Select } from 'formik-antd'
 import NormalClinicLogo from '../../../../assets/images/normal-clinic-logo.png'
 import classNames from 'classnames'
 import styles from './Lead-forms.module.less'
-import { BasicModal as Modal, ButtonTypes } from '@pabau/ui'
+import { Button } from '@pabau/ui'
 const { Option } = Select
+interface colors {
+  fontColor: string
+  buttonColor: string
+}
 interface LeadFormPreviewInterface {
   schema: Schema
-  onLeadFormFlowComplete: () => void
+  colours: colors
 }
 
 export const LeadFormPreview: React.FC<LeadFormPreviewInterface> = ({
   schema,
-  onLeadFormFlowComplete,
+  colours,
 }) => {
-  const [sendToDeveloperModal, setSendToDeveloperModal] = useState(false)
-
   const formikFields = () => {
     const initialValues = {}
     if (schema) {
@@ -74,7 +76,6 @@ export const LeadFormPreview: React.FC<LeadFormPreviewInterface> = ({
           }
         }}
         onSubmit={(values, { resetForm }) => {
-          setSendToDeveloperModal((e) => !e)
           console.log('formik onsubmit', values)
           // onSubmit(values, { resetForm })
         }}
@@ -125,7 +126,12 @@ export const LeadFormPreview: React.FC<LeadFormPreviewInterface> = ({
                         {(type === 'string' || type === 'number') && (
                           <AntForm.Item
                             key={name}
-                            label={short}
+                            // label={short}
+                            label={
+                              <span style={{ color: colours.fontColor }}>
+                                {short}
+                              </span>
+                            }
                             name={name}
                             required={required}
                             // extra={extra && <div>{extra}</div>}
@@ -177,61 +183,22 @@ export const LeadFormPreview: React.FC<LeadFormPreviewInterface> = ({
 
               <Col md={24} xs={24} className={styles.colPaddingLeft}>
                 <div className={styles.formSendBtnCenter}>
-                  <SubmitButton className={styles.sendBtn} type="default">
+                  <Button
+                    className={styles.sendBtn}
+                    style={{
+                      color: colours.fontColor,
+                    }}
+                    backgroundColor={colours?.buttonColor}
+                    type="default"
+                  >
                     Send
-                  </SubmitButton>
+                  </Button>
                 </div>
               </Col>
             </Row>
           </div>
         </AntForm>
       </Formik>
-      <Modal
-        modalWidth={682}
-        centered={true}
-        onOk={() => {
-          setSendToDeveloperModal((e) => !e)
-          onLeadFormFlowComplete()
-        }}
-        closable={true}
-        onCancel={() => setSendToDeveloperModal((e) => !e)}
-        visible={sendToDeveloperModal}
-        title={'Send To Developer'}
-        newButtonText={'Send'}
-        btnType={ButtonTypes.default}
-      >
-        <Formik
-          enableReinitialize={true}
-          onSubmit={(values, { resetForm }) => {
-            console.log('formik onsubmit', values)
-          }}
-          initialValues={{ email: '' }}
-        >
-          <AntForm
-            layout={'vertical'}
-            requiredMark={false}
-            className={styles.clinicLeadCaptureForm}
-          >
-            <AntForm.Item
-              label={'email'}
-              name={'email'}
-              className={styles.clinicLabelStyle}
-              rules={[
-                {
-                  required: true,
-                  message: `* required email`,
-                },
-              ]}
-            >
-              <Input
-                name={'email'}
-                placeholder={'client@email.com'}
-                autoFocus
-              />
-            </AntForm.Item>
-          </AntForm>
-        </Formik>
-      </Modal>
     </>
   )
 }

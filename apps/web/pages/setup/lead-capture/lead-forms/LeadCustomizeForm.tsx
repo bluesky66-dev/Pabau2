@@ -202,14 +202,10 @@ const schema: Schema = {
   },
 }
 
-interface LeadFormCustomizeForm {
-  onFormFlowComplete: () => void
-}
-export const LeadCustomizeForm: React.FC<LeadFormCustomizeForm> = ({
-  onFormFlowComplete,
-}) => {
+export const LeadCustomizeForm: React.FC = () => {
   const [mainFields, setMainFields] = useState<FieldType[]>(fields)
   const [formPreviewSchema, setFormPreviewSchema] = useState(schema)
+  const [colours, setColours] = useState({ fontColor: '', buttonColor: '' })
 
   const onUpdateFormBuilder = (updateFields) => {
     setMainFields(updateFields)
@@ -227,30 +223,35 @@ export const LeadCustomizeForm: React.FC<LeadFormCustomizeForm> = ({
         flex={'392px'}
         className={classNames(styles.builderColumn, styles.mobileViewNone)}
       >
-        <LeadFormBuilder fields={mainFields} onChange={onUpdateFormBuilder} />
+        <LeadFormBuilder
+          fields={mainFields}
+          colours={colours}
+          onChange={onUpdateFormBuilder}
+          onColorChange={(fColor, bColor) => {
+            setColours({ fontColor: fColor, buttonColor: bColor })
+          }}
+        />
       </Col>
       <Col
         flex="auto"
         className={classNames(styles.previewColumn, styles.mobileViewNone)}
       >
-        <LeadFormPreview
-          schema={schema}
-          onLeadFormFlowComplete={onFormFlowComplete}
-        />
+        <LeadFormPreview colours={colours} schema={schema} />
       </Col>
       <Col className={styles.desktopViewNone}>
         <Tabs className={styles.tabWidthFull}>
           <TabPane tab="Builder" key="1">
             <LeadFormBuilder
               fields={mainFields}
+              colours={colours}
+              onColorChange={(fColor, bColor) => {
+                setColours({ fontColor: fColor, buttonColor: bColor })
+              }}
               onChange={onUpdateFormBuilder}
             />
           </TabPane>
           <TabPane tab="Preview" key="2">
-            <LeadFormPreview
-              schema={formPreviewSchema}
-              onLeadFormFlowComplete={onFormFlowComplete}
-            />
+            <LeadFormPreview colours={colours} schema={formPreviewSchema} />
           </TabPane>
         </Tabs>
       </Col>

@@ -6,14 +6,22 @@ import classNames from 'classnames'
 
 const { Option } = Select
 
+interface colors {
+  fontColor: string
+  buttonColor: string
+}
 interface LeadFormBuilderInterface {
   fields: FieldType[]
+  colours: colors
   onChange?: (mainField: FieldType[]) => void
+  onColorChange: (fontColor: string, buttonColor: string) => void
 }
 
 export const LeadFormBuilder: React.FC<LeadFormBuilderInterface> = ({
   fields,
+  colours,
   onChange,
+  onColorChange,
 }) => {
   const onMainFieldCheckboxChange = (e, key: number, checkboxField: string) => {
     onChange?.(
@@ -46,8 +54,8 @@ export const LeadFormBuilder: React.FC<LeadFormBuilderInterface> = ({
           </div>
           <div className={styles.colorPickerDiv}>
             <ColorPicker
-              selectedColor={''}
-              onSelected={(val) => val}
+              selectedColor={colours.fontColor}
+              onSelected={(val) => onColorChange(val, colours.buttonColor)}
               heading={''}
             />
           </div>
@@ -56,8 +64,8 @@ export const LeadFormBuilder: React.FC<LeadFormBuilderInterface> = ({
           </div>
           <div className={styles.colorPickerDiv}>
             <ColorPicker
-              selectedColor={''}
-              onSelected={(val) => val}
+              selectedColor={colours.buttonColor}
+              onSelected={(val) => onColorChange(colours.fontColor, val)}
               heading={''}
             />
           </div>

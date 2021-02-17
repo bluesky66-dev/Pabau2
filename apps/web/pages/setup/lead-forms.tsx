@@ -13,6 +13,7 @@ import LeadTesting from './lead-capture/LeadTesting'
 import LeadResult from './lead-capture/LeadResult'
 import LeadFormResult from './lead-capture/lead-forms/LeadFormResult'
 import LeadCustomizeForm from './lead-capture/lead-forms/LeadCustomizeForm'
+import SendLeadDevloperModal from './lead-capture/lead-forms/SendLeadDevloperModal'
 import {
   FlagOutlined,
   HomeOutlined,
@@ -31,6 +32,8 @@ export const LeadForms: React.FC = () => {
   const allFormSteps = ['Basic', 'Customize Form', 'Result']
   const [activeStepper, setActiveStepper] = useState('API')
   const [activeStep, setActiveStep] = useState(0)
+
+  const [sendToDeveloperModal, setSendToDeveloperModal] = useState(false)
 
   const apiStepper: StepperItem[] = [
     {
@@ -105,10 +108,6 @@ export const LeadForms: React.FC = () => {
     setActiveStep(allAPISteps.length - 1)
   }
 
-  const onFormFlowComplete = () => {
-    setActiveStep(allFormSteps.length - 1)
-  }
-
   return (
     <>
       <div className={styles.desktopViewNone}>
@@ -139,16 +138,22 @@ export const LeadForms: React.FC = () => {
             data={activeStepper === 'API' ? apiStepper : formStepper}
             active={activeStep}
             disableNextStep={
-              activeStepper === 'API'
-                ? allAPISteps[activeStep] === 'Testing(API)'
-                : allFormSteps[activeStep] === 'Customize Form'
+              activeStepper === 'API' &&
+              allAPISteps[activeStep] === 'Testing(API)'
             }
             onActiveStepChange={(step) => {
+              if (activeStepper === 'Form' && allFormSteps[step] === 'Result') {
+                setSendToDeveloperModal((e) => !e)
+                return
+              }
               setActiveStep(step)
             }}
           >
             {allAPISteps[activeStep] === 'Basic' && (
-              <LeadSettings captureLeadStepChange={setActiveStepperForLead} />
+              <LeadSettings
+                activeStepper={activeStepper}
+                captureLeadStepChange={setActiveStepperForLead}
+              />
             )}
             {activeStepper === 'API' ? (
               <>
@@ -163,13 +168,21 @@ export const LeadForms: React.FC = () => {
             ) : (
               <>
                 {allFormSteps[activeStep] === 'Customize Form' && (
-                  <LeadCustomizeForm onFormFlowComplete={onFormFlowComplete} />
+                  <LeadCustomizeForm />
                 )}
                 {allFormSteps[activeStep] === 'Result' && <LeadFormResult />}
               </>
             )}
           </WStepper>
         </div>
+        <SendLeadDevloperModal
+          openModal={sendToDeveloperModal}
+          onSendToDeveloper={() => {
+            setSendToDeveloperModal((e) => !e)
+            setActiveStep(allFormSteps.length - 1)
+          }}
+          onClose={() => setSendToDeveloperModal((e) => !e)}
+        />
       </Layout>
     </>
   )

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './lead-setting.module.less'
 import classNames from 'classnames'
 import {
@@ -7,16 +7,18 @@ import {
   ProfileOutlined,
 } from '@ant-design/icons'
 interface LeadSettingsInterface {
+  activeStepper: string
   captureLeadStepChange: (step: string) => void
 }
 
 export const LeadSettings: React.FC<LeadSettingsInterface> = ({
+  activeStepper,
   captureLeadStepChange,
 }) => {
-  const [captureLeadStep, setCaptureLeadStep] = useState('API')
+  // const [captureLeadStep, setCaptureLeadStep] = useState('API')
 
   const updateCaptureLeadStep = (type) => {
-    setCaptureLeadStep(type)
+    // setCaptureLeadStep(type)
     captureLeadStepChange(type)
   }
   return (
@@ -35,7 +37,7 @@ export const LeadSettings: React.FC<LeadSettingsInterface> = ({
           <div
             className={classNames(
               styles.leadBasisForm,
-              captureLeadStep === 'API' && styles.leadCaptureSelected
+              activeStepper === 'API' && styles.leadCaptureSelected
             )}
             onClick={() => updateCaptureLeadStep('API')}
           >
@@ -56,7 +58,7 @@ export const LeadSettings: React.FC<LeadSettingsInterface> = ({
             className={classNames(
               styles.leadBasisForm,
               styles.rightBox,
-              captureLeadStep === 'Form' && styles.leadCaptureSelected
+              activeStepper === 'Form' && styles.leadCaptureSelected
             )}
             onClick={() => updateCaptureLeadStep('Form')}
           >
