@@ -14,7 +14,7 @@ const MedicalFormBuilder: FC = () => {
     <>
       <MedicalFormInfo formName="IPL Treatment Record (Clone)" />
       <MedicalFormSetting />
-      <Tabs defaultActiveKey="1" centered>
+      <Tabs defaultActiveKey="1" centered className={styles.medicalFormMain}>
         <TabPane
           tab={
             <span className={styles.tabName}>

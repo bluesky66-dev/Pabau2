@@ -12,7 +12,7 @@ export interface ReviewListingProps {
   fromLabel?: string
   reviewLabel?: string
 }
-export const Permission: FC<ReviewListingProps> = ({
+export const ReviewListing: FC<ReviewListingProps> = ({
   description,
   review,
   image,
@@ -44,4 +44,4 @@ export const Permission: FC<ReviewListingProps> = ({
   )
 }
 
-export default Permission
+export default ReviewListing

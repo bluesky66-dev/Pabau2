@@ -34,12 +34,15 @@ interface SchemaItem {
   | 'color-picker'
   | 'checkbox'
   | 'icon'
+  | 'select'
   defaultvalue?: string | number | boolean
   visible?: boolean
-  radio?: RadioItems[]
+  required?: boolean
+  radio?: TypeValues[]
+  selectOptions?: TypeValues[]
 }
 
-interface RadioItems {
+interface TypeValues {
   label: string
   value: string
 }
