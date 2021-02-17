@@ -561,7 +561,7 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/i18n/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": ["libs/i18n/**/*.ts"]
           }
         },
         "test": {
