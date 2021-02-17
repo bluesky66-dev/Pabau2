@@ -30,8 +30,16 @@ const LIST_QUERY = gql`
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query labs_dashboard_aggregate {
-    labs_dashboard_aggregate {
+  query marketing_source_aggregate(
+    $public: Boolean = true
+    $searchTerm: String = ""
+  ) {
+    marketing_source_aggregate(
+      where: {
+        public: { _eq: $public }
+        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
+      }
+    ) {
       aggregate {
         count
       }
@@ -187,65 +195,63 @@ const Tab: FC<TitleCard> = ({ title, subTitle, className, icon }) => {
 
 export const Index: FC = () => {
   return (
-    <>
-      <CrudLayout
-        schema={schema}
-        addQuery={ADD_MUTATION}
-        deleteQuery={DELETE_MUTATION}
-        listQuery={LIST_QUERY}
-        editQuery={EDIT_MUTATION}
-        aggregateQuery={LIST_AGGREGATE_QUERY}
-        updateOrderQuery={UPDATE_ORDER_MUTATION}
-      >
-        <div className={styles.labsDashboard}>
-          <div className={styles.labsDashboardCard}>
-            <div className={styles.cardHeader}>
-              <div>
-                <div className={styles.breadScrumb}>
-                  <Breadcrumb breadcrumbItems={schema.breadScrumbs} />
-                </div>
-                <div className={styles.cardTitle}>
-                  <h1>{schema.short}</h1>
-                </div>
+    <CrudLayout
+      schema={schema}
+      addQuery={ADD_MUTATION}
+      deleteQuery={DELETE_MUTATION}
+      listQuery={LIST_QUERY}
+      editQuery={EDIT_MUTATION}
+      aggregateQuery={LIST_AGGREGATE_QUERY}
+      updateOrderQuery={UPDATE_ORDER_MUTATION}
+    >
+      <div className={styles.labsDashboard}>
+        <div className={styles.labsDashboardCard}>
+          <div className={styles.cardHeader}>
+            <div>
+              <div className={styles.breadScrumb}>
+                <Breadcrumb breadcrumbItems={schema.breadScrumbs} />
               </div>
-              <div>
-                <Button type="primary" size="large" icon={<InboxOutlined />}>
-                  Inbox
-                </Button>
+              <div className={styles.cardTitle}>
+                <h1>{schema.short}</h1>
               </div>
             </div>
-            <div className={styles.cardBody}>
-              <div className={styles.tabs}>
-                <Tab
-                  title="12345"
-                  subTitle="PROCESSING"
-                  className="processing"
-                  icon={<ProcessingIcon />}
-                />
-                <Tab
-                  title="12345"
-                  subTitle="REQUESTED"
-                  className="requested"
-                  icon={<SendIcon />}
-                />
-                <Tab
-                  title="12345"
-                  subTitle="RECEIVED"
-                  className="received"
-                  icon={<SendIcon />}
-                />
-                <Tab
-                  title="12345"
-                  subTitle="SENT"
-                  className="sent"
-                  icon={<SendIcon />}
-                />
-              </div>
+            <div>
+              <Button type="primary" size="large" icon={<InboxOutlined />}>
+                Inbox
+              </Button>
+            </div>
+          </div>
+          <div className={styles.cardBody}>
+            <div className={styles.tabs}>
+              <Tab
+                title="12345"
+                subTitle="PROCESSING"
+                className="processing"
+                icon={<ProcessingIcon />}
+              />
+              <Tab
+                title="12345"
+                subTitle="REQUESTED"
+                className="requested"
+                icon={<SendIcon />}
+              />
+              <Tab
+                title="12345"
+                subTitle="RECEIVED"
+                className="received"
+                icon={<SendIcon />}
+              />
+              <Tab
+                title="12345"
+                subTitle="SENT"
+                className="sent"
+                icon={<SendIcon />}
+              />
             </div>
           </div>
         </div>
-      </CrudLayout>
-    </>
+      </div>
+    </CrudLayout>
   )
 }
 
