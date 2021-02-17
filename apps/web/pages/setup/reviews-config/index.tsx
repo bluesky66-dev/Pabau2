@@ -1011,8 +1011,8 @@ export const Index: FC<ReviewsConfigProps> = ({
                         ]}
                       />
                     ) : (
-                          ''
-                        )}
+                      ''
+                    )}
                   </div>
                 </div>
               </div>
@@ -1075,8 +1075,8 @@ export const Index: FC<ReviewsConfigProps> = ({
                         ]}
                       />
                     ) : (
-                          ''
-                        )}
+                      ''
+                    )}
                   </div>
                 </div>
               </div>

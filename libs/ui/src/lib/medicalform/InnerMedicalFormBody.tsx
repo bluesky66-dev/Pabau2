@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import styles from './InnerMedicalForm.module.less'
+import styles from './Inner.module.less'
 
 const InnerMedicalFormBody: FC = (props) => {
   return (
