@@ -25,7 +25,7 @@ const LIST_AGGREGATE_QUERY = gql`
 
 const DELETE_MUTATION = gql`
   mutation delete_marketing_campaign($id: uuid!) {
-    deleteOneMarketingSource(where: {id: $id}) {
+    deleteOneMarketingSource(where: { id: $id }) {
       __typename
       id
     }
@@ -41,10 +41,7 @@ const ADD_MUTATION = gql`
 `
 const EDIT_MUTATION = gql`
   mutation update_marketing_campaign_by_pk($id: uuid!, $name: String!) {
-    updateOneMarketingSource(
-      pk_columns: { id: $id }
-      _set: { name: $name }
-    ) {
+    updateOneMarketingSource(pk_columns: { id: $id }, _set: { name: $name }) {
       __typename
       id
     }

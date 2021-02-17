@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { Button } from '../button/button'
 import styles from './NotificationBanner.module.less'
 import { Row, Col } from 'antd'
 import iconClose from '../../assets/images/icon_close.svg'
@@ -17,7 +18,6 @@ export const NotificationBanner: FC<P> = ({
   imgPath,
   allowClose,
   setHide: [isHide, setHide],
-  ...rest
   // selectLanguageHook: [string, React.Dispatch<React.SetStateAction<string>>]
   // childHook: [isHide, React.Dispatch<React.SetStateAction<[]>>]
   // const [isHide, setHide] = useState(false)
@@ -31,7 +31,15 @@ export const NotificationBanner: FC<P> = ({
         <Col md={16} sm={12}>
           <p className={styles.title1}>{title}</p>
           <p className={styles.title2}>{desc}</p>
-          {rest.children}
+          <Button
+            className={styles.btnPayment}
+            // onClick={() => {}}
+
+            size="middle"
+            type="link"
+          >
+            Enable Payments
+          </Button>
         </Col>
         {allowClose && (
           <img

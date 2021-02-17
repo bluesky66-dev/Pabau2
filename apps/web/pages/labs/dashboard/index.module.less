@@ -1,3 +1,6 @@
+.filterPopover {
+  max-width: 150px !important;
+}
 .labsDashboard {
   display: flex;
   flex-direction: column;
@@ -55,7 +58,28 @@
 
           :global {
             div:first-child {
+              line-height: 0px;
               padding-right: 20px;
+              &.requested {
+                path {
+                  fill: #54b2d3;
+                }
+              }
+              &.processing {
+                path {
+                  fill: #faad14;
+                }
+              }
+              &.received {
+                path {
+                  fill: #65cd98;
+                }
+              }
+              &.sent {
+                path {
+                  fill: #7b61e2;
+                }
+              }
             }
             div:last-child {
               h3 {
@@ -81,13 +105,9 @@
               }
             }
           }
-
-          // &:active,
-          // &.active {
-          //   border-color: #e9faff;
-          //   background-color: #e9faff;
-          //   box-shadow: 3px -2px 13px rgba(0, 0, 0, 0.05);
-          // }
+          &:hover {
+            border-color: #54b2d3;
+          }
 
           @media screen and (max-width: 834px) {
             & {
@@ -115,9 +135,9 @@
           border-bottom: 1px solid #ecedf0;
 
           :global {
-            h1 {
+            h3 {
               font-style: normal;
-              font-weight: bold;
+              font-weight: normal;
               font-size: 20px;
               line-height: 25px;
               color: #3d3d46;
@@ -134,25 +154,6 @@
                 position: relative;
                 transition: all ease 1s;
                 margin-right: 15px;
-
-                .search-icon {
-                  position: absolute;
-                  right: 10px;
-                  top: 6.5px;
-                  align-self: center;
-
-                  svg {
-                    fill: #9292a3;
-                  }
-                }
-
-                input {
-                  padding-right: 30px;
-                }
-
-                &.clicked {
-                  min-width: 350px;
-                }
               }
             }
           }
@@ -160,25 +161,25 @@
 
         .contentBody {
           :global {
-            .tableDiv {
-              .ant-table-thead > tr > th {
-                min-width: 150px !important;
-                background-color: #ffffff;
-                border-top: 1px solid #f1f1f1;
-              }
-              .ant-table-tbody {
-                tr {
-                  border-bottom: 1px solid #f1f1f1;
-                  td {
-                    min-width: 150px !important;
-                    background-color: transparent;
-                  }
-                  &:hover {
-                    background: #eef7fb !important;
-                  }
-                }
-              }
-            }
+            // .tableDiv {
+            //   .ant-table-thead > tr > th {
+            //     min-width: 150px !important;
+            //     background-color: #ffffff;
+            //     border-top: 1px solid #f1f1f1;
+            //   }
+            //   .ant-table-tbody {
+            //     tr {
+            //       border-bottom: 1px solid #f1f1f1;
+            //       td {
+            //         min-width: 150px !important;
+            //         background-color: transparent;
+            //       }
+            //       &:hover {
+            //         background: #eef7fb !important;
+            //       }
+            //     }
+            //   }
+            // }
 
             .paginationDiv {
               padding-right: 20px;
