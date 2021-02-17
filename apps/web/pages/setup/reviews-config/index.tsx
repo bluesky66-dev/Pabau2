@@ -30,6 +30,7 @@ import {
   ReviewChoice,
   AddQuestion,
   QuestionBankModal,
+  IQuestionOptions,
   QuestionField,
 } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
@@ -44,6 +45,7 @@ import { ReactComponent as Voucher } from '../../../assets/images/voucher.svg'
 import {
   addQuestionData,
   integrations,
+  questionBankData,
 } from '../../../assets/feedbackSurveyData'
 import styles from './index.module.less'
 
@@ -91,6 +93,7 @@ interface FeedbackSurveyBuilder {
   surveyName: string
   surveySubTitle: string
   surveyFormat: boolean
+  questionsBank: IQuestionOptions[]
 }
 
 export interface ReviewsConfigProps {
@@ -111,6 +114,7 @@ const defaultBuilderSetting: FeedbackSurveyBuilder = {
   surveyName: 'Client Feedback Survey',
   surveySubTitle: 'Please, complete your responses below',
   surveyFormat: false,
+  questionsBank: questionBankData,
 }
 
 export const Index: FC<ReviewsConfigProps> = ({
@@ -610,10 +614,7 @@ export const Index: FC<ReviewsConfigProps> = ({
       setQuestions(temporaryQuestions)
     }
     const onAddQuestion = () => {
-      const data = [
-        ...questions,
-        { title: '', key: questions.length + Math.floor(Math.random() * 100) },
-      ]
+      const data = [...questions, { title: '', key: questions.length + 1 }]
       setQuestions(data)
     }
     const onDeleteButton = (key: number) => {
@@ -623,6 +624,15 @@ export const Index: FC<ReviewsConfigProps> = ({
     }
     const onGoTo = () => {
       setVisible(true)
+    }
+    const handleAddFromQuestionBank = (question) => {
+      const tmpQuestions = question.map((q, index) => ({
+        title: q.question,
+        key: questions.length + index + 1,
+      }))
+      const data = [...questions, ...tmpQuestions]
+      setQuestions(data)
+      setVisible(false)
     }
     useEffect(() => {
       if (questionData) setQuestions(questionData)
@@ -716,14 +726,9 @@ export const Index: FC<ReviewsConfigProps> = ({
                   <QuestionBankModal
                     visible={visible}
                     title="Question Bank"
-                    questions={questions.map((question) => ({
-                      key: question.key,
-                      question: question.title,
-                      showDropdown: false,
-                      checked: false,
-                    }))}
+                    questions={setting.questionsBank}
                     options={[]}
-                    onAdd={(question) => setVisible(false)}
+                    onAdd={(question) => handleAddFromQuestionBank(question)}
                     onOk={() => setVisible(false)}
                     onCancel={() => setVisible(false)}
                   />
@@ -840,14 +845,9 @@ export const Index: FC<ReviewsConfigProps> = ({
                   <QuestionBankModal
                     visible={visible}
                     title="Question Bank"
-                    questions={questions.map((question) => ({
-                      key: question.key,
-                      question: question.title,
-                      showDropdown: false,
-                      checked: false,
-                    }))}
+                    questions={setting.questionsBank}
                     options={[]}
-                    onAdd={(question) => setVisible(false)}
+                    onAdd={(question) => handleAddFromQuestionBank(question)}
                     onOk={() => setVisible(false)}
                     onCancel={() => setVisible(false)}
                   />
