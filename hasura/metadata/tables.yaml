@@ -274,6 +274,46 @@
       filter: {}
 - table:
     schema: public
+    name: issuing_company
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - address
+      - is_active
+      - name
+      - order
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - address
+      - created_at
+      - id
+      - is_active
+      - name
+      - order
+      - updated_at
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - address
+      - is_active
+      - name
+      - order
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
     name: job_title
   insert_permissions:
   - role: public
