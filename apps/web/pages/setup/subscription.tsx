@@ -1,6 +1,16 @@
 import React, { FC, useState } from 'react'
-import { Card, Typography, Input, Divider } from 'antd'
 import {
+  Card,
+  Typography,
+  Input,
+  Divider,
+  Row,
+  Col,
+  DatePicker,
+  Form,
+} from 'antd'
+import {
+  CloseOutlined,
   EyeOutlined,
   FilterOutlined,
   FileDoneOutlined,
@@ -17,6 +27,7 @@ import {
 import { InvoiceData } from '../../mocks/Subscriptions'
 import Layout from '../../components/Layout/Layout'
 import EmailSendButton from '../../components/Setup/Subscription/EmailSendButton'
+import paymentUpdateBanner from '../../assets/images/payment-update-banner.png'
 import Styles from './subscription.module.less'
 
 const invoiceColumns = [
@@ -77,8 +88,10 @@ const invoiceColumns = [
 
 const Subscription: FC = () => {
   const { Title, Text, Paragraph, Link } = Typography
-  const { Search } = Input
+  const { Search, Password } = Input
+  const [form] = Form.useForm()
   const [activeTab, setActiveTab] = useState('0')
+  const [editPayment, setEditPayment] = useState(false)
 
   const handleSearch = (val) => {
     console.log('val', val)
@@ -196,8 +209,41 @@ const Subscription: FC = () => {
               in case your balance becomes negative
             </Paragraph>
           </div>
-          <Button type="primary">Edit payment method</Button>
+          <Button type="primary" onClick={() => setEditPayment(!editPayment)}>
+            {editPayment ? 'save' : 'Edit payment method'}
+          </Button>
         </div>
+        {editPayment && (
+          <>
+            <Divider />
+            <div className={Styles.paymentMethodHeader}>
+              <div style={{ display: 'flex' }}>
+                <Button
+                  size="large"
+                  type="primary"
+                  shape="circle"
+                  backgroundColor="#EEF7FB"
+                  className={Styles.billingBtn}
+                  icon={<FileDoneOutlined size={28} />}
+                />
+                <div style={{ marginLeft: 24 }}>
+                  <Paragraph style={{ marginBottom: 8 }}>
+                    Bill estimate
+                  </Paragraph>
+                  <Paragraph className={Styles.blackText}>
+                    £551.25 (tax inclusive)
+                  </Paragraph>
+                  <Paragraph type="secondary" className={Styles.font12p}>
+                    *Next Charge: Feb 27, 2021
+                  </Paragraph>
+                </div>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'flex-end' }}>
+                <Link className={Styles.link}>View Full Estimate</Link>
+              </div>
+            </div>
+          </>
+        )}
         <Divider />
         <div style={{ padding: '0 24px' }}>
           <Paragraph className={Styles.subTitle}>Card details</Paragraph>
@@ -208,35 +254,129 @@ const Subscription: FC = () => {
           >
             Card owner
           </Paragraph>
-          <Paragraph className={Styles.blackText} style={{ marginTop: 2 }}>
-            William Brandham
-          </Paragraph>
-          <div style={{ display: 'flex' }}>
-            <div>
-              <Paragraph
-                type="secondary"
-                style={{ marginTop: 16 }}
-                className={Styles.font12p}
+          <Form layout="vertical" form={form} initialValues={{}}>
+            {editPayment ? (
+              <Form.Item
+                name="cardOwner"
+                rules={[
+                  { required: true, message: 'Please enter card owner name.' },
+                ]}
               >
-                Card number
-              </Paragraph>
+                <Input
+                  placeholder="Card owner"
+                  style={{ maxWidth: 450, marginTop: 2 }}
+                />
+              </Form.Item>
+            ) : (
               <Paragraph className={Styles.blackText} style={{ marginTop: 2 }}>
-                **** **** **** 2002
+                William Brandham
               </Paragraph>
-            </div>
-            <div style={{ marginLeft: 40 }}>
-              <Paragraph
-                type="secondary"
-                style={{ marginTop: 16 }}
-                className={Styles.font12p}
-              >
-                Valid thru
-              </Paragraph>
-              <Paragraph className={Styles.blackText} style={{ marginTop: 2 }}>
-                02/25
-              </Paragraph>
-            </div>
-          </div>
+            )}
+            {editPayment ? (
+              <>
+                <Paragraph
+                  type="secondary"
+                  style={{ marginTop: 16 }}
+                  className={Styles.font12p}
+                >
+                  Card number
+                </Paragraph>
+                <Form.Item
+                  name="cardNumber"
+                  rules={[
+                    { required: true, message: 'Please enter card number.' },
+                    { max: 16, message: 'Please enter valid card number.' },
+                  ]}
+                >
+                  <Password
+                    pattern="\d{4}-\d{4}-\d{4}-\d{4}"
+                    type="number"
+                    placeholder="**** **** **** ****"
+                    style={{ maxWidth: 450, marginTop: 2 }}
+                  />
+                </Form.Item>
+                <Row gutter={16} style={{ maxWidth: 460, flex: 1 }}>
+                  <Col span={12} style={{ flex: 1 }}>
+                    <Paragraph type="secondary" className={Styles.font12p}>
+                      CSC
+                    </Paragraph>
+                    <Form.Item
+                      name="csc"
+                      rules={[
+                        { required: true, message: 'Please enter CSC' },
+                        { max: 3, message: 'Enter valid CSC' },
+                      ]}
+                    >
+                      <Input
+                        enterKeyHint="next"
+                        placeholder="123"
+                        pattern="\d*"
+                        type="number"
+                        maxLength={3}
+                        min="1"
+                        max="999"
+                        style={{ marginTop: 2 }}
+                      />
+                    </Form.Item>
+                  </Col>
+                  <Col span={12} style={{ flex: 1 }}>
+                    <Paragraph type="secondary" className={Styles.font12p}>
+                      Expiration date
+                    </Paragraph>
+                    <Form.Item
+                      name="expireDate"
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please enter expiration date',
+                        },
+                      ]}
+                    >
+                      <DatePicker
+                        format="YYYY/MM"
+                        picker="month"
+                        placeholder="mm/yy"
+                        style={{ width: '100%', marginTop: 2 }}
+                      />
+                    </Form.Item>
+                  </Col>
+                </Row>
+              </>
+            ) : (
+              <div style={{ display: 'flex' }}>
+                <div>
+                  <Paragraph
+                    type="secondary"
+                    style={{ marginTop: 16 }}
+                    className={Styles.font12p}
+                  >
+                    Card number
+                  </Paragraph>
+                  <Paragraph
+                    className={Styles.blackText}
+                    style={{ marginTop: 2 }}
+                  >
+                    **** **** **** 2002
+                  </Paragraph>
+                </div>
+                <div style={{ marginLeft: 40 }}>
+                  <Paragraph
+                    type="secondary"
+                    style={{ marginTop: 16 }}
+                    className={Styles.font12p}
+                  >
+                    Valid thru
+                  </Paragraph>
+                  <Paragraph
+                    className={Styles.blackText}
+                    style={{ marginTop: 2 }}
+                  >
+                    02/25
+                  </Paragraph>
+                </div>
+              </div>
+            )}
+          </Form>
         </div>
       </div>
     )
@@ -254,8 +394,33 @@ const Subscription: FC = () => {
     )
   }
 
+  const renderAccountInfo = () => {
+    return (
+      <div style={{ padding: 20 }}>
+        <div>Information</div>
+      </div>
+    )
+  }
+
   return (
     <Layout>
+      <div className={Styles.headerBanner}>
+        <Paragraph className={Styles.subTitle} style={{ marginBottom: 12 }}>
+          Payment Method
+        </Paragraph>
+        <Paragraph style={{ color: '#3D3D46', width: '60%', marginBottom: 12 }}>
+          You currently do not have any active payment method on your account.
+          Please update your details in order to regain access.
+        </Paragraph>
+        <Link>Update details</Link>
+        <Button
+          size="small"
+          className={Styles.closeBtn}
+          type="ghost"
+          icon={<CloseOutlined size={16} />}
+        />
+        <img src={paymentUpdateBanner} alt="banner" className={Styles.img} />
+      </div>
       <Card bodyStyle={{ padding: 0 }}>
         <div className={Styles.headerContainer}>
           <div>
@@ -294,7 +459,7 @@ const Subscription: FC = () => {
         >
           {renderInvoiceActivity()}
           {renderBillingDetails()}
-          <div>Information</div>
+          {renderAccountInfo()}
         </TabMenu>
       </Card>
     </Layout>
