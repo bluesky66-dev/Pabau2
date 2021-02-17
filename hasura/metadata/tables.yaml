@@ -1,5 +1,69 @@
 - table:
     schema: public
+    name: Labs
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - city
+      - country
+      - email
+      - integration
+      - is_active
+      - name
+      - order
+      - phone
+      - postal_code
+      - provider_number
+      - street
+      - street2
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - city
+      - country
+      - created_at
+      - email
+      - id
+      - integration
+      - is_active
+      - name
+      - order
+      - phone
+      - postal_code
+      - provider_number
+      - street
+      - street2
+      - updated_at
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - city
+      - country
+      - email
+      - integration
+      - is_active
+      - name
+      - order
+      - phone
+      - postal_code
+      - provider_number
+      - street
+      - street2
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
     name: appointment_status
   insert_permissions:
   - role: public
@@ -41,6 +105,49 @@
       - name
       - order
       - track_time
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: cancellation_reasons
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - cancellation_policy
+      - is_active
+      - name
+      - order
+      - type
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - order
+      - cancellation_policy
+      - name
+      - type
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - cancellation_policy
+      - is_active
+      - name
+      - order
+      - type
       filter: {}
       check: null
   delete_permissions:
@@ -159,6 +266,46 @@
       - name
       - order
       - updated_at
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: issuing_company
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - address
+      - is_active
+      - name
+      - order
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - address
+      - created_at
+      - id
+      - is_active
+      - name
+      - order
+      - updated_at
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - address
+      - is_active
+      - name
+      - order
       filter: {}
       check: null
   delete_permissions:

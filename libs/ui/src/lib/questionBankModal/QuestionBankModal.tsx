@@ -44,10 +44,10 @@ const QuestionBankModal: FC<P> = ({
   const isMobile = useMedia('(max-width: 768px)', false)
 
   const handleChange = (e, key: number) => {
-    const data = menuOptions.filter(({ key }) => key === e.key)
+    const data = menuOptions.find(({ key }) => key === e.key)
     setQuestionList(
       questionList?.map((i) =>
-        i.key === key ? { ...i, selectedValue: data[0].value } : i
+        i.key === key ? { ...i, selectedValue: data?.value } : i
       )
     )
   }
