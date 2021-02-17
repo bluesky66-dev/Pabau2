@@ -6,9 +6,7 @@ export const MarketingSource = objectType({
   definition(t) {
     t.model.id()
     t.model.source_name()
-    t.model.occupier({
-      alias: 'company_id'
-    })
+    t.model.occupier()
     t.model.custom_id()
     t.model.company()
     t.model.public()
@@ -27,7 +25,7 @@ export const MarketingSourceQuery = extendType({
       async resolve(_root, args, ctx:Context){
         return ctx.prisma.marketingSource.findFirst({
           where: {
-            id: Number(args.id) ?? undefined
+            occupier: Number(ctx.req) ?? undefined
           }
         }).then((result) => {
           if(result === null){
@@ -38,6 +36,19 @@ export const MarketingSourceQuery = extendType({
       }
     })
     t.crud.marketingSources({
+      async resolve(_root, args, ctx:Context) {
+        const companyId = ctx.req.get('x-company_id')
+        return ctx.prisma.marketingSource.findMany({
+          where: {
+            occupier: Number(companyId)
+          }
+        }).then((result) => {
+          if(result === null || result.length === 0){
+            throw new Error(`No marketing sources avilable`)
+          }
+          return result
+        })
+      },
       alias: 'marketingSources',
       pagination: true,
       filtering: true,
