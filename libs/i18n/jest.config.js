@@ -1,12 +1,14 @@
 module.exports = {
-  displayName: 'i18n',
+  displayName: 'i18n2',
   preset: '../../jest.preset.js',
+  globals: {
+    'ts-jest': {
+      tsConfig: '<rootDir>/tsconfig.spec.json',
+    },
+  },
   transform: {
-    '^.+\\.[tj]sx?$': [
-      'babel-jest',
-      { cwd: __dirname, configFile: './babel-jest.config.json' },
-    ],
+    '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../coverage/libs/i18n',
+  coverageDirectory: '../../coverage/libs/i18n2',
 }
