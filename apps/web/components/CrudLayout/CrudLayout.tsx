@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import { DocumentNode } from '@apollo/client'
 import CrudTable from '../CrudTable'
 
@@ -11,8 +11,11 @@ interface P {
   aggregateQuery?: DocumentNode
   tableSearch?: boolean
   updateOrderQuery?: DocumentNode
+  beforeTable?: ReactNode
 }
 
-const CrudLayout: FC<P> = ({ ...props }) => <CrudTable {...props} />
+const CrudLayout: FC<P> = ({ ...props }) => {
+  return <CrudTable {...props}></CrudTable>
+}
 
 export default CrudLayout

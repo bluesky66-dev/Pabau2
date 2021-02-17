@@ -4,9 +4,10 @@ import {
   Pagination,
   MobileHeader,
   Notification,
+  NotificationBanner,
   NotificationType,
 } from '@pabau/ui'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useState, ReactNode } from 'react'
 import { DocumentNode, useMutation } from '@apollo/client'
 import AddButton from './AddButton'
 import { Breadcrumb } from '@pabau/ui'
@@ -32,6 +33,7 @@ interface P {
   aggregateQuery?: DocumentNode
   tableSearch?: boolean
   updateOrderQuery?: DocumentNode
+  beforeTable?: ReactNode
 }
 
 const CrudTable: FC<P> = ({
@@ -43,6 +45,7 @@ const CrudTable: FC<P> = ({
   aggregateQuery,
   tableSearch = true,
   updateOrderQuery,
+  ...rest
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [isActive, setIsActive] = useState(true)
@@ -93,6 +96,9 @@ const CrudTable: FC<P> = ({
   const [editingRow, setEditingRow] = useState<
     Record<string, string | boolean | number>
   >({})
+  const [notificationVisible, setNotificationVisible] = useState(
+    schema.notification || false
+  )
 
   const { data, error, loading } = useLiveQuery(listQuery, {
     variables: {
@@ -324,7 +330,6 @@ const CrudTable: FC<P> = ({
             </div>
           </MobileHeader>
         </div>
-
         {modalShowing && (
           <CrudModal
             schema={schema}
@@ -337,6 +342,27 @@ const CrudTable: FC<P> = ({
         )}
 
         <Layout>
+          {notificationVisible && (
+            <div className={styles.notificationBanner}>
+              <NotificationBanner
+                allowClose={schema.notification?.allowClose || true}
+                desc={schema.notification?.description}
+                imgPath={schema.notification?.imgPath}
+                setHide={[
+                  false,
+                  function noRefCheck() {
+                    setNotificationVisible(
+                      (notificationVisible) => !notificationVisible
+                    )
+                  },
+                ]}
+                title={schema.notification?.title}
+              />
+            </div>
+          )}
+
+          {rest.children}
+
           <div
             className={classNames(
               styles.tableMainHeading,
@@ -344,13 +370,19 @@ const CrudTable: FC<P> = ({
             )}
           >
             <div style={{ background: '#FFF' }}>
-              <Breadcrumb
-                breadcrumbItems={[
-                  { breadcrumbName: 'Setup', path: 'setup' },
-                  { breadcrumbName: schema.full || schema.short, path: '' },
-                ]}
-              />
-              <Title>{schema.full || schema.short}</Title>
+              {!schema.breadScrumbs?.length && (
+                <Breadcrumb
+                  breadcrumbItems={[
+                    { breadcrumbName: 'Setup', path: 'setup' },
+                    { breadcrumbName: schema.full || schema.short, path: '' },
+                  ]}
+                />
+              )}
+              <Title
+                style={{ paddingBottom: schema.breadScrumbs?.length && '0px' }}
+              >
+                {schema.full || schema.short}
+              </Title>
             </div>
             {addQuery && (
               <AddButton
@@ -368,7 +400,11 @@ const CrudTable: FC<P> = ({
             sticky={{ offsetScroll: 80, offsetHeader: 80 }}
             pagination={sourceData?.length > 10 ? {} : false}
             scroll={{ x: 'max-content' }}
-            draggable={true}
+            draggable={
+              Object.keys(schema).includes('draggable')
+                ? schema.draggable
+                : true
+            }
             isCustomColorExist={checkCustomColorIconExsist('color')}
             isCustomIconExist={checkCustomColorIconExsist('icon')}
             noDataBtnText={schema.full}
