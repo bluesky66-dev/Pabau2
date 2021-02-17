@@ -13,7 +13,7 @@ interface Schema {
   fields: Record<string, SchemaItem>
   shemaType?: string
   draggable?: boolean
-  notification?: Record<NotificationItems>,
+  notification?: Record<NotificationItems>
   breadScrumbs?: array<BreadScrumb>
 }
 interface SchemaItem {
@@ -48,13 +48,13 @@ interface TypeValues {
 }
 
 interface NotificationItems {
-  title: string,
-  description: string,
-  imgPath: string,
+  title: string
+  description: string
+  imgPath: string
   allowClose?: boolean
 }
 
 interface BreadScrumb {
-  breadcrumbName: string,
-  path: string,
+  breadcrumbName: string
+  path: string
 }
