@@ -58,13 +58,18 @@ const DELETE_MUTATION = gql`
 `
 const ADD_MUTATION = gql`
   mutation insert_cancellation_reasons(
-    $cancellation_policy: String, 
-    $is_active: Boolean , 
-    $name : String , 
-    $type : String
-    ) {
+    $cancellation_policy: String
+    $is_active: Boolean
+    $name: String
+    $type: String
+  ) {
     insert_cancellation_reasons_one(
-      object: { cancellation_policy: $cancellation_policy, is_active: $is_active, name: $name, type: $type }
+      object: {
+        cancellation_policy: $cancellation_policy
+        is_active: $is_active
+        name: $name
+        type: $type
+      }
     ) {
       __typename
       cancellation_policy
@@ -81,14 +86,19 @@ const ADD_MUTATION = gql`
 const EDIT_MUTATION = gql`
   mutation update_cancellation_reasons_by_pk(
     $id: uuid!
-    $cancellation_policy: String, 
-    $is_active: Boolean , 
-    $name : String , 
-    $type : String
+    $cancellation_policy: String
+    $is_active: Boolean
+    $name: String
+    $type: String
   ) {
     update_cancellation_reasons_by_pk(
       pk_columns: { id: $id }
-      _set: { cancellation_policy: $cancellation_policy, is_active: $is_active, name: $name, type: $type }
+      _set: {
+        cancellation_policy: $cancellation_policy
+        is_active: $is_active
+        name: $name
+        type: $type
+      }
     ) {
       __typename
       cancellation_policy
@@ -154,7 +164,7 @@ const schema: Schema = {
       min: 2,
       description: 'type of the cancellation reason',
       cssWidth: 'max',
-      defaultvalue : "Early cancellation / Late cancellation",
+      defaultvalue: 'Early cancellation / Late cancellation',
       type: 'select',
       selectOptions: [
         {
@@ -175,7 +185,7 @@ const schema: Schema = {
       min: 2,
       description: 'order of the cancellation reason',
       cssWidth: 'max',
-      defaultvalue : "Yes / No",
+      defaultvalue: 'Yes / No',
       type: 'select',
       selectOptions: [
         {

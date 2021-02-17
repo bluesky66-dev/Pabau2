@@ -14,7 +14,7 @@ interface TypeValues {
   value: string
 }
 
-const Form: FC<P> = ({ schema, values , selectOptions }) => {
+const Form: FC<P> = ({ schema, values, selectOptions }) => {
   const { fields } = schema
 
   return (
@@ -33,7 +33,7 @@ const Form: FC<P> = ({ schema, values , selectOptions }) => {
               type,
               radio,
               full,
-              selectOptions
+              selectOptions,
             },
           ],
           i
@@ -84,11 +84,7 @@ const Form: FC<P> = ({ schema, values , selectOptions }) => {
               </AntForm.Item>
             )}
             {type === 'select' && (
-              <AntForm.Item
-                label={full}
-                name={name}
-                required
-              >
+              <AntForm.Item label={full} name={name} required>
                 <Select name={name} style={{ width: '100%' }}>
                   {selectOptions?.map((option) => {
                     return (

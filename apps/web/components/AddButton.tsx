@@ -29,13 +29,13 @@ const AddButton: FC<P> = ({
   onFilterSource,
   onSearch,
   tableSearch = true,
-  filter = true
+  filter = true,
 }) => {
   const [isActive, setIsActive] = useState(true)
   const [mobFilterDrawer, setMobFilterDrawer] = useState(false)
   const [marketingSourceSearch, setMarketingSourceSearch] = useState('')
 
-  console.log("filter" , filter);
+  console.log('filter', filter)
 
   useEffect(() => {
     const timer = setTimeout(() => {
