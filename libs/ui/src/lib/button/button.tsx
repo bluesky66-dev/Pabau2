@@ -10,7 +10,8 @@ export enum ButtonTypes {
   link = 'link',
   text = 'text',
 }
-interface P extends NativeButtonProps {
+
+export interface ButtonProps extends NativeButtonProps {
   // type?: ButtonTypes
   disabled?: boolean
   color?: string
@@ -19,7 +20,7 @@ interface P extends NativeButtonProps {
   className?: string
 }
 
-export const Button: FC<P> = ({
+export const Button: FC<ButtonProps> = ({
   className,
   disabled,
   color,

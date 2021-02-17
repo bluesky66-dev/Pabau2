@@ -4,14 +4,81 @@
   justify-content: space-between;
   align-items: center;
 
+  @media (max-width: 991px) {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+
   .searchBarContainer {
     display: flex;
     align-items: center;
+    padding: 0 24px;
+
+    @media (max-width: 991px) {
+      justify-content: space-between;
+      flex: 1;
+    }
 
     .searchBar {
       margin-right: 1rem;
     }
   }
+}
+
+.paymentMethodTitle {
+  padding: 25px 24px 0 0;
+  display: flex;
+  justify-content: space-between;
+
+  .billingTitleParagraph {
+    padding-left: 24px;
+    margin-bottom: 0 !important;
+  }
+}
+
+.subTitle {
+  color: #3D3D46;
+  font-weight: 700;
+}
+
+.blackText {
+  color: #3D3D46;
+  font-weight: 500;
+  margin-bottom: 0 !important;
+}
+
+.font12p {
+  font-size: 12px;
+  margin-bottom: 0 !important;
+}
+
+.billingTitleParagraph {
+  padding-left: 24px;
+  margin-bottom: 0 !important;
+
+  .link {
+    color: #54b2d3;
+  }
+}
+
+.paymentFeeParagraph {
+  margin-top: 20px;
+  .link {
+    color: #54b2d3;
+  }
+}
+
+.billingBtn {
+  color: #54b2d3;
+  border-radius: 50%;
+  border-width: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px !important;
+  width: 44px !important;
 }
 
 .emailBtn {
