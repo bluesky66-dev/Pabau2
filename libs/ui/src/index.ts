@@ -1,3 +1,4 @@
+export * from './lib/circle-graph/CircleGraph'
 export * from './lib/read-review/ReadReview'
 export * from './lib/add-suggestion/AddSuggestion'
 export * from './lib/daily/Daily'
