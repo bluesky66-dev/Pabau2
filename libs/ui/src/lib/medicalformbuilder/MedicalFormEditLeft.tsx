@@ -35,7 +35,7 @@ const MedicalFormEditLeft: FC<P> = ({ ...props }) => {
   }
 
   useEffect(() => {
-    if (openPanel.length == 2)
+    if (openPanel.length === 2)
       setComponentClass(
         styles.medicalFormEditLeftPanelCollapseComponentCollapse
       )
