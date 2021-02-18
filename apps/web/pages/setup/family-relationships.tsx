@@ -27,7 +27,6 @@ const LIST_QUERY = gql`
     }
   }
 `
-
 const LIST_AGGREGATE_QUERY = gql`
   query marketing_source_aggregate_2(
     $isActive: Boolean = true
