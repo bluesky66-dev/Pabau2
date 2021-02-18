@@ -42,13 +42,13 @@ export function PasswordWithHelper({
   }
 
   const hasNumber = (value) => {
-    return /[0-9]/.test(value)
+    return /\d/.test(value)
   }
   const hasUpperLower = (value) => {
     return /(?=.*[a-z])(?=.*[A-Z])/.test(value)
   }
   const hasSpecial = (value) => {
-    return /[^A-Za-z0-9]/.test(value)
+    return /[^\dA-Za-z]/.test(value)
   }
 
   const content = (
