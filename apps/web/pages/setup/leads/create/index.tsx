@@ -22,7 +22,7 @@ import styles from './index.module.less'
 const { Title } = Typography
 
 const ADD_MUTATION = gql`
-  mutation insert_leads_one(
+  mutation insert_Labs_one(
     $city: String!
     $country: String!
     $email: String!
@@ -34,7 +34,7 @@ const ADD_MUTATION = gql`
     $street: String!
     $street2: String!
   ) {
-    insert_leads_one(
+    insert_Labs_one(
       object: {
         city: $city
         country: $country
