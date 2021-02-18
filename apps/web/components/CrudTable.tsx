@@ -32,8 +32,10 @@ interface P {
   aggregateQuery?: DocumentNode
   tableSearch?: boolean
   updateOrderQuery?: DocumentNode
+  showNotificationBanner?: boolean
   createPage?: boolean
-  createPageOnClick?: () => void
+  notificationBanner?: React.ReactNode
+  createPageOnClick?(): void
   addFilter?: boolean
 }
 
@@ -46,7 +48,9 @@ const CrudTable: FC<P> = ({
   aggregateQuery,
   tableSearch = true,
   updateOrderQuery,
-  createPage,
+  showNotificationBanner = false,
+  notificationBanner,
+  createPage = false,
   createPageOnClick,
   addFilter,
 }) => {
@@ -70,7 +74,10 @@ const CrudTable: FC<P> = ({
   })
   const [updateOrderMutation] = useMutation(updateOrderQuery, {
     onError(err) {
-      Notification(NotificationType.error, 'Error! Marketing source update.')
+      Notification(
+        NotificationType.error,
+        `Error! ${schema.messages.update.error}`
+      )
     },
   })
   const [addMutation] = useMutation(addQuery, {
@@ -352,6 +359,7 @@ const CrudTable: FC<P> = ({
         )}
 
         <Layout>
+          {showNotificationBanner && notificationBanner}
           <div
             className={classNames(
               styles.tableMainHeading,

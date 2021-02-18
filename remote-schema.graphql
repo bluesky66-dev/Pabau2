@@ -3,7 +3,53 @@ schema {
   mutation: mutation_root
   subscription: subscription_root
 }
-"""Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'."""
+
+"""
+Direct the client to resolve this field locally, either from the cache or local resolvers.
+"""
+directive @client(
+  """
+  When true, the client will never use the cache for this value. See
+  https://www.apollographql.com/docs/react/essentials/local-state/#forcing-resolvers-with-clientalways-true
+  """
+  always: Boolean
+) on FIELD | FRAGMENT_DEFINITION | INLINE_FRAGMENT
+
+"""
+Export this locally resolved field as a variable to be used in the remainder of this query. See
+https://www.apollographql.com/docs/react/essentials/local-state/#using-client-fields-as-variables
+"""
+directive @export(
+  """The variable name to export this field as."""
+  as: String!
+) on FIELD
+
+"""
+Specify a custom store key for this result. See
+https://www.apollographql.com/docs/react/advanced/caching/#the-connection-directive
+"""
+directive @connection(
+  """Specify the store key."""
+  key: String!
+
+  """
+  An array of query argument names to include in the generated custom store key.
+  """
+  filter: [String!]
+) on FIELD
+
+type AffectedRowsOutput {
+  count: Int
+}
+
+input BoolNullableFilter {
+  equals: Boolean
+  not: NestedBoolNullableFilter
+}
+
+"""
+Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'.
+"""
 input Boolean_comparison_exp {
   _eq: Boolean
   _gt: Boolean
@@ -15,7 +61,180 @@ input Boolean_comparison_exp {
   _neq: Boolean
   _nin: [Boolean!]
 }
-"""Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'."""
+
+type Company {
+  admin: Int
+  creation_date: DateTime
+  cron_enabled: Boolean
+  digit8: Int
+  id: Int
+  image: String
+  remote_connect: String
+  remote_url: String
+  slug: String
+  user: String
+}
+
+input CompanyCreateInput {
+  MarketingSource: MarketingSourceCreateNestedManyWithoutCompanyInput
+  admin: Int!
+  creation_date: DateTime!
+  cron_enabled: Boolean
+  digit8: Int!
+  image: String!
+  remote_connect: String
+  remote_url: String
+  slug: String
+  user: String!
+}
+
+input CompanyCreateNestedOneWithoutMarketingSourceInput {
+  connect: CompanyWhereUniqueInput
+  connectOrCreate: CompanyCreateOrConnectWithoutMarketingSourceInput
+  create: CompanyCreateWithoutMarketingSourceInput
+}
+
+input CompanyCreateOrConnectWithoutMarketingSourceInput {
+  create: CompanyCreateWithoutMarketingSourceInput!
+  where: CompanyWhereUniqueInput!
+}
+
+input CompanyCreateWithoutMarketingSourceInput {
+  admin: Int!
+  creation_date: DateTime!
+  cron_enabled: Boolean
+  digit8: Int!
+  image: String!
+  remote_connect: String
+  remote_url: String
+  slug: String
+  user: String!
+}
+
+input CompanyOrderByInput {
+  admin: SortOrder
+  creation_date: SortOrder
+  cron_enabled: SortOrder
+  digit8: SortOrder
+  id: SortOrder
+  image: SortOrder
+  remote_connect: SortOrder
+  remote_url: SortOrder
+  slug: SortOrder
+  user: SortOrder
+}
+
+input CompanyUpdateInput {
+  MarketingSource: MarketingSourceUpdateManyWithoutCompanyInput
+  admin: IntFieldUpdateOperationsInput
+  creation_date: DateTimeFieldUpdateOperationsInput
+  cron_enabled: NullableBoolFieldUpdateOperationsInput
+  digit8: IntFieldUpdateOperationsInput
+  image: StringFieldUpdateOperationsInput
+  remote_connect: NullableStringFieldUpdateOperationsInput
+  remote_url: NullableStringFieldUpdateOperationsInput
+  slug: NullableStringFieldUpdateOperationsInput
+  user: StringFieldUpdateOperationsInput
+}
+
+input CompanyUpdateManyMutationInput {
+  admin: IntFieldUpdateOperationsInput
+  creation_date: DateTimeFieldUpdateOperationsInput
+  cron_enabled: NullableBoolFieldUpdateOperationsInput
+  digit8: IntFieldUpdateOperationsInput
+  image: StringFieldUpdateOperationsInput
+  remote_connect: NullableStringFieldUpdateOperationsInput
+  remote_url: NullableStringFieldUpdateOperationsInput
+  slug: NullableStringFieldUpdateOperationsInput
+  user: StringFieldUpdateOperationsInput
+}
+
+input CompanyUpdateOneRequiredWithoutMarketingSourceInput {
+  connect: CompanyWhereUniqueInput
+  connectOrCreate: CompanyCreateOrConnectWithoutMarketingSourceInput
+  create: CompanyCreateWithoutMarketingSourceInput
+  update: CompanyUpdateWithoutMarketingSourceInput
+  upsert: CompanyUpsertWithoutMarketingSourceInput
+}
+
+input CompanyUpdateWithoutMarketingSourceInput {
+  admin: IntFieldUpdateOperationsInput
+  creation_date: DateTimeFieldUpdateOperationsInput
+  cron_enabled: NullableBoolFieldUpdateOperationsInput
+  digit8: IntFieldUpdateOperationsInput
+  image: StringFieldUpdateOperationsInput
+  remote_connect: NullableStringFieldUpdateOperationsInput
+  remote_url: NullableStringFieldUpdateOperationsInput
+  slug: NullableStringFieldUpdateOperationsInput
+  user: StringFieldUpdateOperationsInput
+}
+
+input CompanyUpsertWithoutMarketingSourceInput {
+  create: CompanyCreateWithoutMarketingSourceInput!
+  update: CompanyUpdateWithoutMarketingSourceInput!
+}
+
+input CompanyWhereInput {
+  AND: [CompanyWhereInput!]
+  MarketingSource: MarketingSourceListRelationFilter
+  NOT: [CompanyWhereInput!]
+  OR: [CompanyWhereInput!]
+  admin: IntFilter
+  creation_date: DateTimeFilter
+  cron_enabled: BoolNullableFilter
+  digit8: IntFilter
+  id: IntFilter
+  image: StringFilter
+  remote_connect: StringNullableFilter
+  remote_url: StringNullableFilter
+  slug: StringNullableFilter
+  user: StringFilter
+}
+
+input CompanyWhereUniqueInput {
+  id: Int
+  slug: String
+}
+
+scalar DateTime
+
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
+input IntFieldUpdateOperationsInput {
+  decrement: Int
+  divide: Int
+  increment: Int
+  multiply: Int
+  set: Int
+}
+
+input IntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntFilter
+  notIn: [Int!]
+}
+
+"""
+Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'.
+"""
 input Int_comparison_exp {
   _eq: Int
   _gt: Int
@@ -27,6 +246,7 @@ input Int_comparison_exp {
   _neq: Int
   _nin: [Int!]
 }
+
 """
 columns and relationships of "Labs"
 """
@@ -47,6 +267,7 @@ type Labs {
   street2: String
   updated_at: timestamptz!
 }
+
 """
 aggregated selection of "Labs"
 """
@@ -54,6 +275,7 @@ type Labs_aggregate {
   aggregate: Labs_aggregate_fields
   nodes: [Labs!]!
 }
+
 """
 aggregate fields of "Labs"
 """
@@ -70,13 +292,17 @@ type Labs_aggregate_fields {
   var_samp: Labs_var_samp_fields
   variance: Labs_variance_fields
 }
+
 """aggregate avg on columns"""
 type Labs_avg_fields {
   order: Float
   postal_code: Float
   provider_number: Float
 }
-"""Boolean expression to filter rows from the table "Labs". All fields are combined with a logical 'AND'."""
+
+"""
+Boolean expression to filter rows from the table "Labs". All fields are combined with a logical 'AND'.
+"""
 input Labs_bool_exp {
   _and: [Labs_bool_exp!]
   _not: Labs_bool_exp
@@ -97,15 +323,18 @@ input Labs_bool_exp {
   street2: String_comparison_exp
   updated_at: timestamptz_comparison_exp
 }
+
 """
 unique or primary key constraints on table "Labs"
 """
 enum Labs_constraint {
   """unique or primary key constraint"""
   Labs_email_key
+
   """unique or primary key constraint"""
   Labs_pkey
 }
+
 """
 input type for incrementing numeric columns in table "Labs"
 """
@@ -114,6 +343,7 @@ input Labs_inc_input {
   postal_code: numeric
   provider_number: numeric
 }
+
 """
 input type for inserting data into table "Labs"
 """
@@ -131,6 +361,7 @@ input Labs_insert_input {
   street: String
   street2: String
 }
+
 """aggregate max on columns"""
 type Labs_max_fields {
   city: String
@@ -147,6 +378,7 @@ type Labs_max_fields {
   street2: String
   updated_at: timestamptz
 }
+
 """aggregate min on columns"""
 type Labs_min_fields {
   city: String
@@ -163,15 +395,18 @@ type Labs_min_fields {
   street2: String
   updated_at: timestamptz
 }
+
 """
 response of any mutation on the table "Labs"
 """
 type Labs_mutation_response {
   """number of rows affected by the mutation"""
   affected_rows: Int!
+
   """data from the rows affected by the mutation"""
   returning: [Labs!]!
 }
+
 """
 on conflict condition type for table "Labs"
 """
@@ -180,6 +415,7 @@ input Labs_on_conflict {
   update_columns: [Labs_update_column!]!
   where: Labs_bool_exp
 }
+
 """Ordering options when selecting data from "Labs"."""
 input Labs_order_by {
   city: order_by
@@ -198,45 +434,62 @@ input Labs_order_by {
   street2: order_by
   updated_at: order_by
 }
+
 """primary key columns input for table: Labs"""
 input Labs_pk_columns_input {
   id: uuid!
 }
+
 """
 select columns of table "Labs"
 """
 enum Labs_select_column {
   """column name"""
   city
+
   """column name"""
   country
+
   """column name"""
   created_at
+
   """column name"""
   email
+
   """column name"""
   id
+
   """column name"""
   integration
+
   """column name"""
   is_active
+
   """column name"""
   name
+
   """column name"""
   order
+
   """column name"""
   phone
+
   """column name"""
   postal_code
+
   """column name"""
   provider_number
+
   """column name"""
   street
+
   """column name"""
   street2
+
   """column name"""
   updated_at
 }
+
 """
 input type for updating data in table "Labs"
 """
@@ -254,101 +507,362 @@ input Labs_set_input {
   street: String
   street2: String
 }
+
 """aggregate stddev on columns"""
 type Labs_stddev_fields {
   order: Float
   postal_code: Float
   provider_number: Float
 }
+
 """aggregate stddev_pop on columns"""
 type Labs_stddev_pop_fields {
   order: Float
   postal_code: Float
   provider_number: Float
 }
+
 """aggregate stddev_samp on columns"""
 type Labs_stddev_samp_fields {
   order: Float
   postal_code: Float
   provider_number: Float
 }
+
 """aggregate sum on columns"""
 type Labs_sum_fields {
   order: Int
   postal_code: numeric
   provider_number: numeric
 }
+
 """
 update columns of table "Labs"
 """
 enum Labs_update_column {
   """column name"""
   city
+
   """column name"""
   country
+
   """column name"""
   email
+
   """column name"""
   integration
+
   """column name"""
   is_active
+
   """column name"""
   name
+
   """column name"""
   order
+
   """column name"""
   phone
+
   """column name"""
   postal_code
+
   """column name"""
   provider_number
+
   """column name"""
   street
+
   """column name"""
   street2
 }
+
 """aggregate var_pop on columns"""
 type Labs_var_pop_fields {
   order: Float
   postal_code: Float
   provider_number: Float
 }
+
 """aggregate var_samp on columns"""
 type Labs_var_samp_fields {
   order: Float
   postal_code: Float
   provider_number: Float
 }
+
 """aggregate variance on columns"""
 type Labs_variance_fields {
   order: Float
   postal_code: Float
   provider_number: Float
 }
-"""Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'."""
+
+type MarketingSource {
+  company: Company
+  company_id: Int
+  custom_id: Int
+  id: Int
+  imported: Int
+  public: Int
+  source_name: String
+}
+
+input MarketingSourceCreateInput {
+  company: CompanyCreateNestedOneWithoutMarketingSourceInput!
+  custom_id: Int!
+  imported: Int!
+  public: Int!
+  source_name: String!
+}
+
+input MarketingSourceCreateNestedManyWithoutCompanyInput {
+  connect: [MarketingSourceWhereUniqueInput!]
+  connectOrCreate: [MarketingSourceCreateOrConnectWithoutcompanyInput!]
+  create: [MarketingSourceCreateWithoutCompanyInput!]
+}
+
+input MarketingSourceCreateOrConnectWithoutcompanyInput {
+  create: MarketingSourceCreateWithoutCompanyInput!
+  where: MarketingSourceWhereUniqueInput!
+}
+
+input MarketingSourceCreateWithoutCompanyInput {
+  custom_id: Int!
+  imported: Int!
+  public: Int!
+  source_name: String!
+}
+
+input MarketingSourceListRelationFilter {
+  every: MarketingSourceWhereInput
+  none: MarketingSourceWhereInput
+  some: MarketingSourceWhereInput
+}
+
+input MarketingSourceOrderByInput {
+  company: CompanyOrderByInput
+  custom_id: SortOrder
+  id: SortOrder
+  imported: SortOrder
+  occupier: SortOrder
+  public: SortOrder
+  source_name: SortOrder
+}
+
+input MarketingSourceScalarWhereInput {
+  AND: [MarketingSourceScalarWhereInput!]
+  NOT: [MarketingSourceScalarWhereInput!]
+  OR: [MarketingSourceScalarWhereInput!]
+  custom_id: IntFilter
+  id: IntFilter
+  imported: IntFilter
+  occupier: IntFilter
+  public: IntFilter
+  source_name: StringFilter
+}
+
+input MarketingSourceUpdateInput {
+  company: CompanyUpdateOneRequiredWithoutMarketingSourceInput
+  custom_id: IntFieldUpdateOperationsInput
+  imported: IntFieldUpdateOperationsInput
+  public: IntFieldUpdateOperationsInput
+  source_name: StringFieldUpdateOperationsInput
+}
+
+input MarketingSourceUpdateManyMutationInput {
+  custom_id: IntFieldUpdateOperationsInput
+  imported: IntFieldUpdateOperationsInput
+  public: IntFieldUpdateOperationsInput
+  source_name: StringFieldUpdateOperationsInput
+}
+
+input MarketingSourceUpdateManyWithWhereWithoutCompanyInput {
+  data: MarketingSourceUpdateManyMutationInput!
+  where: MarketingSourceScalarWhereInput!
+}
+
+input MarketingSourceUpdateManyWithoutCompanyInput {
+  connect: [MarketingSourceWhereUniqueInput!]
+  connectOrCreate: [MarketingSourceCreateOrConnectWithoutcompanyInput!]
+  create: [MarketingSourceCreateWithoutCompanyInput!]
+  delete: [MarketingSourceWhereUniqueInput!]
+  deleteMany: [MarketingSourceScalarWhereInput!]
+  disconnect: [MarketingSourceWhereUniqueInput!]
+  set: [MarketingSourceWhereUniqueInput!]
+  update: [MarketingSourceUpdateWithWhereUniqueWithoutCompanyInput!]
+  updateMany: [MarketingSourceUpdateManyWithWhereWithoutCompanyInput!]
+  upsert: [MarketingSourceUpsertWithWhereUniqueWithoutCompanyInput!]
+}
+
+input MarketingSourceUpdateWithWhereUniqueWithoutCompanyInput {
+  data: MarketingSourceUpdateWithoutCompanyInput!
+  where: MarketingSourceWhereUniqueInput!
+}
+
+input MarketingSourceUpdateWithoutCompanyInput {
+  custom_id: IntFieldUpdateOperationsInput
+  imported: IntFieldUpdateOperationsInput
+  public: IntFieldUpdateOperationsInput
+  source_name: StringFieldUpdateOperationsInput
+}
+
+input MarketingSourceUpsertWithWhereUniqueWithoutCompanyInput {
+  create: MarketingSourceCreateWithoutCompanyInput!
+  update: MarketingSourceUpdateWithoutCompanyInput!
+  where: MarketingSourceWhereUniqueInput!
+}
+
+input MarketingSourceWhereInput {
+  AND: [MarketingSourceWhereInput!]
+  NOT: [MarketingSourceWhereInput!]
+  OR: [MarketingSourceWhereInput!]
+  company: CompanyWhereInput
+  custom_id: IntFilter
+  id: IntFilter
+  imported: IntFilter
+  occupier: IntFilter
+  public: IntFilter
+  source_name: StringFilter
+}
+
+input MarketingSourceWhereUniqueInput {
+  id: Int
+}
+
+input NestedBoolNullableFilter {
+  equals: Boolean
+  not: NestedBoolNullableFilter
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
+input NestedIntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntFilter
+  notIn: [Int!]
+}
+
+input NestedStringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input NestedStringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input NullableBoolFieldUpdateOperationsInput {
+  set: Boolean
+}
+
+input NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input StringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+"""
+Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'.
+"""
 input String_comparison_exp {
   _eq: String
   _gt: String
   _gte: String
+
   """does the column match the given case-insensitive pattern"""
   _ilike: String
   _in: [String!]
   _is_null: Boolean
+
   """does the column match the given pattern"""
   _like: String
   _lt: String
   _lte: String
   _neq: String
+
   """does the column NOT match the given case-insensitive pattern"""
   _nilike: String
   _nin: [String!]
+
   """does the column NOT match the given pattern"""
   _nlike: String
+
   """does the column NOT match the given SQL regular expression"""
   _nsimilar: String
+
   """does the column match the given SQL regular expression"""
   _similar: String
 }
+
 """
 columns and relationships of "appointment_status"
 """
@@ -364,6 +878,7 @@ type appointment_status {
   track_time: Boolean!
   updated_at: timestamptz!
 }
+
 """
 aggregated selection of "appointment_status"
 """
@@ -371,6 +886,7 @@ type appointment_status_aggregate {
   aggregate: appointment_status_aggregate_fields
   nodes: [appointment_status!]!
 }
+
 """
 aggregate fields of "appointment_status"
 """
@@ -387,11 +903,15 @@ type appointment_status_aggregate_fields {
   var_samp: appointment_status_var_samp_fields
   variance: appointment_status_variance_fields
 }
+
 """aggregate avg on columns"""
 type appointment_status_avg_fields {
   order: Float
 }
-"""Boolean expression to filter rows from the table "appointment_status". All fields are combined with a logical 'AND'."""
+
+"""
+Boolean expression to filter rows from the table "appointment_status". All fields are combined with a logical 'AND'.
+"""
 input appointment_status_bool_exp {
   _and: [appointment_status_bool_exp!]
   _not: appointment_status_bool_exp
@@ -407,6 +927,7 @@ input appointment_status_bool_exp {
   track_time: Boolean_comparison_exp
   updated_at: timestamptz_comparison_exp
 }
+
 """
 unique or primary key constraints on table "appointment_status"
 """
@@ -414,12 +935,14 @@ enum appointment_status_constraint {
   """unique or primary key constraint"""
   appointment_status_pkey
 }
+
 """
 input type for incrementing numeric columns in table "appointment_status"
 """
 input appointment_status_inc_input {
   order: Int
 }
+
 """
 input type for inserting data into table "appointment_status"
 """
@@ -432,6 +955,7 @@ input appointment_status_insert_input {
   order: Int
   track_time: Boolean
 }
+
 """aggregate max on columns"""
 type appointment_status_max_fields {
   appointment_type: String
@@ -443,6 +967,7 @@ type appointment_status_max_fields {
   order: Int
   updated_at: timestamptz
 }
+
 """aggregate min on columns"""
 type appointment_status_min_fields {
   appointment_type: String
@@ -454,15 +979,18 @@ type appointment_status_min_fields {
   order: Int
   updated_at: timestamptz
 }
+
 """
 response of any mutation on the table "appointment_status"
 """
 type appointment_status_mutation_response {
   """number of rows affected by the mutation"""
   affected_rows: Int!
+
   """data from the rows affected by the mutation"""
   returning: [appointment_status!]!
 }
+
 """
 on conflict condition type for table "appointment_status"
 """
@@ -471,6 +999,7 @@ input appointment_status_on_conflict {
   update_columns: [appointment_status_update_column!]!
   where: appointment_status_bool_exp
 }
+
 """Ordering options when selecting data from "appointment_status"."""
 input appointment_status_order_by {
   appointment_type: order_by
@@ -484,35 +1013,47 @@ input appointment_status_order_by {
   track_time: order_by
   updated_at: order_by
 }
+
 """primary key columns input for table: appointment_status"""
 input appointment_status_pk_columns_input {
   id: uuid!
 }
+
 """
 select columns of table "appointment_status"
 """
 enum appointment_status_select_column {
   """column name"""
   appointment_type
+
   """column name"""
   color
+
   """column name"""
   created_at
+
   """column name"""
   icon
+
   """column name"""
   id
+
   """column name"""
   is_active
+
   """column name"""
   name
+
   """column name"""
   order
+
   """column name"""
   track_time
+
   """column name"""
   updated_at
 }
+
 """
 input type for updating data in table "appointment_status"
 """
@@ -525,55 +1066,73 @@ input appointment_status_set_input {
   order: Int
   track_time: Boolean
 }
+
 """aggregate stddev on columns"""
 type appointment_status_stddev_fields {
   order: Float
 }
+
 """aggregate stddev_pop on columns"""
 type appointment_status_stddev_pop_fields {
   order: Float
 }
+
 """aggregate stddev_samp on columns"""
 type appointment_status_stddev_samp_fields {
   order: Float
 }
+
 """aggregate sum on columns"""
 type appointment_status_sum_fields {
   order: Int
 }
+
 """
 update columns of table "appointment_status"
 """
 enum appointment_status_update_column {
   """column name"""
   appointment_type
+
   """column name"""
   color
+
   """column name"""
   icon
+
   """column name"""
   is_active
+
   """column name"""
   name
+
   """column name"""
   order
+
   """column name"""
   track_time
 }
+
 """aggregate var_pop on columns"""
 type appointment_status_var_pop_fields {
   order: Float
 }
+
 """aggregate var_samp on columns"""
 type appointment_status_var_samp_fields {
   order: Float
 }
+
 """aggregate variance on columns"""
 type appointment_status_variance_fields {
   order: Float
 }
+
 scalar bigint
-"""Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'."""
+
+"""
+Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'.
+"""
 input bigint_comparison_exp {
   _eq: bigint
   _gt: bigint
@@ -585,6 +1144,7 @@ input bigint_comparison_exp {
   _neq: bigint
   _nin: [bigint!]
 }
+
 """
 columns and relationships of "cancellation_reasons"
 """
@@ -598,6 +1158,7 @@ type cancellation_reasons {
   type: String!
   updated_at: timestamptz!
 }
+
 """
 aggregated selection of "cancellation_reasons"
 """
@@ -605,6 +1166,7 @@ type cancellation_reasons_aggregate {
   aggregate: cancellation_reasons_aggregate_fields
   nodes: [cancellation_reasons!]!
 }
+
 """
 aggregate fields of "cancellation_reasons"
 """
@@ -621,11 +1183,15 @@ type cancellation_reasons_aggregate_fields {
   var_samp: cancellation_reasons_var_samp_fields
   variance: cancellation_reasons_variance_fields
 }
+
 """aggregate avg on columns"""
 type cancellation_reasons_avg_fields {
   order: Float
 }
-"""Boolean expression to filter rows from the table "cancellation_reasons". All fields are combined with a logical 'AND'."""
+
+"""
+Boolean expression to filter rows from the table "cancellation_reasons". All fields are combined with a logical 'AND'.
+"""
 input cancellation_reasons_bool_exp {
   _and: [cancellation_reasons_bool_exp!]
   _not: cancellation_reasons_bool_exp
@@ -639,6 +1205,7 @@ input cancellation_reasons_bool_exp {
   type: String_comparison_exp
   updated_at: timestamptz_comparison_exp
 }
+
 """
 unique or primary key constraints on table "cancellation_reasons"
 """
@@ -646,12 +1213,14 @@ enum cancellation_reasons_constraint {
   """unique or primary key constraint"""
   cancellation_reasons_pkey
 }
+
 """
 input type for incrementing numeric columns in table "cancellation_reasons"
 """
 input cancellation_reasons_inc_input {
   order: Int
 }
+
 """
 input type for inserting data into table "cancellation_reasons"
 """
@@ -662,6 +1231,7 @@ input cancellation_reasons_insert_input {
   order: Int
   type: String
 }
+
 """aggregate max on columns"""
 type cancellation_reasons_max_fields {
   cancellation_policy: String
@@ -672,6 +1242,7 @@ type cancellation_reasons_max_fields {
   type: String
   updated_at: timestamptz
 }
+
 """aggregate min on columns"""
 type cancellation_reasons_min_fields {
   cancellation_policy: String
@@ -682,15 +1253,18 @@ type cancellation_reasons_min_fields {
   type: String
   updated_at: timestamptz
 }
+
 """
 response of any mutation on the table "cancellation_reasons"
 """
 type cancellation_reasons_mutation_response {
   """number of rows affected by the mutation"""
   affected_rows: Int!
+
   """data from the rows affected by the mutation"""
   returning: [cancellation_reasons!]!
 }
+
 """
 on conflict condition type for table "cancellation_reasons"
 """
@@ -699,6 +1273,7 @@ input cancellation_reasons_on_conflict {
   update_columns: [cancellation_reasons_update_column!]!
   where: cancellation_reasons_bool_exp
 }
+
 """Ordering options when selecting data from "cancellation_reasons"."""
 input cancellation_reasons_order_by {
   cancellation_policy: order_by
@@ -710,31 +1285,41 @@ input cancellation_reasons_order_by {
   type: order_by
   updated_at: order_by
 }
+
 """primary key columns input for table: cancellation_reasons"""
 input cancellation_reasons_pk_columns_input {
   id: uuid!
 }
+
 """
 select columns of table "cancellation_reasons"
 """
 enum cancellation_reasons_select_column {
   """column name"""
   cancellation_policy
+
   """column name"""
   created_at
+
   """column name"""
   id
+
   """column name"""
   is_active
+
   """column name"""
   name
+
   """column name"""
   order
+
   """column name"""
   type
+
   """column name"""
   updated_at
 }
+
 """
 input type for updating data in table "cancellation_reasons"
 """
@@ -745,49 +1330,62 @@ input cancellation_reasons_set_input {
   order: Int
   type: String
 }
+
 """aggregate stddev on columns"""
 type cancellation_reasons_stddev_fields {
   order: Float
 }
+
 """aggregate stddev_pop on columns"""
 type cancellation_reasons_stddev_pop_fields {
   order: Float
 }
+
 """aggregate stddev_samp on columns"""
 type cancellation_reasons_stddev_samp_fields {
   order: Float
 }
+
 """aggregate sum on columns"""
 type cancellation_reasons_sum_fields {
   order: Int
 }
+
 """
 update columns of table "cancellation_reasons"
 """
 enum cancellation_reasons_update_column {
   """column name"""
   cancellation_policy
+
   """column name"""
   is_active
+
   """column name"""
   name
+
   """column name"""
   order
+
   """column name"""
   type
 }
+
 """aggregate var_pop on columns"""
 type cancellation_reasons_var_pop_fields {
   order: Float
 }
+
 """aggregate var_samp on columns"""
 type cancellation_reasons_var_samp_fields {
   order: Float
 }
+
 """aggregate variance on columns"""
 type cancellation_reasons_variance_fields {
   order: Float
 }
+
 """
 columns and relationships of "colors"
 """
@@ -796,7 +1394,10 @@ type colors {
   id: uuid!
   updated_at: timestamptz!
 }
-"""Boolean expression to filter rows from the table "colors". All fields are combined with a logical 'AND'."""
+
+"""
+Boolean expression to filter rows from the table "colors". All fields are combined with a logical 'AND'.
+"""
 input colors_bool_exp {
   _and: [colors_bool_exp!]
   _not: colors_bool_exp
@@ -805,6 +1406,7 @@ input colors_bool_exp {
   id: uuid_comparison_exp
   updated_at: timestamptz_comparison_exp
 }
+
 """
 input type for inserting data into table "colors"
 """
@@ -814,32 +1416,39 @@ input colors_insert_input {
   id: uuid
   updated_at: timestamptz
 }
+
 """
 response of any mutation on the table "colors"
 """
 type colors_mutation_response {
   """number of rows affected by the mutation"""
   affected_rows: Int!
+
   """data from the rows affected by the mutation"""
   returning: [colors!]!
 }
+
 """Ordering options when selecting data from "colors"."""
 input colors_order_by {
   color: order_by
   id: order_by
   updated_at: order_by
 }
+
 """
 select columns of table "colors"
 """
 enum colors_select_column {
   """column name"""
   color
+
   """column name"""
   id
+
   """column name"""
   updated_at
 }
+
 """
 columns and relationships of "contacts"
 """
@@ -852,7 +1461,10 @@ type contacts {
   mobile_number: bigint!
   updated_at: timestamptz!
 }
-"""Boolean expression to filter rows from the table "contacts". All fields are combined with a logical 'AND'."""
+
+"""
+Boolean expression to filter rows from the table "contacts". All fields are combined with a logical 'AND'.
+"""
 input contacts_bool_exp {
   _and: [contacts_bool_exp!]
   _not: contacts_bool_exp
@@ -865,6 +1477,7 @@ input contacts_bool_exp {
   mobile_number: bigint_comparison_exp
   updated_at: timestamptz_comparison_exp
 }
+
 """Ordering options when selecting data from "contacts"."""
 input contacts_order_by {
   client_id: order_by
@@ -875,25 +1488,33 @@ input contacts_order_by {
   mobile_number: order_by
   updated_at: order_by
 }
+
 """
 select columns of table "contacts"
 """
 enum contacts_select_column {
   """column name"""
   client_id
+
   """column name"""
   created_at
+
   """column name"""
   first_name
+
   """column name"""
   id
+
   """column name"""
   last_name
+
   """column name"""
   mobile_number
+
   """column name"""
   updated_at
 }
+
 """
 columns and relationships of "credit_note_type"
 """
@@ -907,6 +1528,7 @@ type credit_note_type {
   order: Int!
   updated_at: timestamptz!
 }
+
 """
 aggregated selection of "credit_note_type"
 """
@@ -914,6 +1536,7 @@ type credit_note_type_aggregate {
   aggregate: credit_note_type_aggregate_fields
   nodes: [credit_note_type!]!
 }
+
 """
 aggregate fields of "credit_note_type"
 """
@@ -930,12 +1553,16 @@ type credit_note_type_aggregate_fields {
   var_samp: credit_note_type_var_samp_fields
   variance: credit_note_type_variance_fields
 }
+
 """aggregate avg on columns"""
 type credit_note_type_avg_fields {
   code: Float
   order: Float
 }
-"""Boolean expression to filter rows from the table "credit_note_type". All fields are combined with a logical 'AND'."""
+
+"""
+Boolean expression to filter rows from the table "credit_note_type". All fields are combined with a logical 'AND'.
+"""
 input credit_note_type_bool_exp {
   _and: [credit_note_type_bool_exp!]
   _not: credit_note_type_bool_exp
@@ -949,6 +1576,7 @@ input credit_note_type_bool_exp {
   order: Int_comparison_exp
   updated_at: timestamptz_comparison_exp
 }
+
 """
 unique or primary key constraints on table "credit_note_type"
 """
@@ -956,6 +1584,7 @@ enum credit_note_type_constraint {
   """unique or primary key constraint"""
   credit_note_type_pkey
 }
+
 """
 input type for incrementing numeric columns in table "credit_note_type"
 """
@@ -963,6 +1592,7 @@ input credit_note_type_inc_input {
   code: Int
   order: Int
 }
+
 """
 input type for inserting data into table "credit_note_type"
 """
@@ -973,6 +1603,7 @@ input credit_note_type_insert_input {
   name: String
   order: Int
 }
+
 """aggregate max on columns"""
 type credit_note_type_max_fields {
   code: Int
@@ -983,6 +1614,7 @@ type credit_note_type_max_fields {
   order: Int
   updated_at: timestamptz
 }
+
 """aggregate min on columns"""
 type credit_note_type_min_fields {
   code: Int
@@ -993,15 +1625,18 @@ type credit_note_type_min_fields {
   order: Int
   updated_at: timestamptz
 }
+
 """
 response of any mutation on the table "credit_note_type"
 """
 type credit_note_type_mutation_response {
   """number of rows affected by the mutation"""
   affected_rows: Int!
+
   """data from the rows affected by the mutation"""
   returning: [credit_note_type!]!
 }
+
 """
 on conflict condition type for table "credit_note_type"
 """
@@ -1010,6 +1645,7 @@ input credit_note_type_on_conflict {
   update_columns: [credit_note_type_update_column!]!
   where: credit_note_type_bool_exp
 }
+
 """Ordering options when selecting data from "credit_note_type"."""
 input credit_note_type_order_by {
   code: order_by
@@ -1021,31 +1657,41 @@ input credit_note_type_order_by {
   order: order_by
   updated_at: order_by
 }
+
 """primary key columns input for table: credit_note_type"""
 input credit_note_type_pk_columns_input {
   id: uuid!
 }
+
 """
 select columns of table "credit_note_type"
 """
 enum credit_note_type_select_column {
   """column name"""
   code
+
   """column name"""
   created_at
+
   """column name"""
   id
+
   """column name"""
   invoice_prefix
+
   """column name"""
   is_active
+
   """column name"""
   name
+
   """column name"""
   order
+
   """column name"""
   updated_at
 }
+
 """
 input type for updating data in table "credit_note_type"
 """
@@ -1057,58 +1703,72 @@ input credit_note_type_set_input {
   order: Int
   updated_at: timestamptz
 }
+
 """aggregate stddev on columns"""
 type credit_note_type_stddev_fields {
   code: Float
   order: Float
 }
+
 """aggregate stddev_pop on columns"""
 type credit_note_type_stddev_pop_fields {
   code: Float
   order: Float
 }
+
 """aggregate stddev_samp on columns"""
 type credit_note_type_stddev_samp_fields {
   code: Float
   order: Float
 }
+
 """aggregate sum on columns"""
 type credit_note_type_sum_fields {
   code: Int
   order: Int
 }
+
 """
 update columns of table "credit_note_type"
 """
 enum credit_note_type_update_column {
   """column name"""
   code
+
   """column name"""
   invoice_prefix
+
   """column name"""
   is_active
+
   """column name"""
   name
+
   """column name"""
   order
+
   """column name"""
   updated_at
 }
+
 """aggregate var_pop on columns"""
 type credit_note_type_var_pop_fields {
   code: Float
   order: Float
 }
+
 """aggregate var_samp on columns"""
 type credit_note_type_var_samp_fields {
   code: Float
   order: Float
 }
+
 """aggregate variance on columns"""
 type credit_note_type_variance_fields {
   code: Float
   order: Float
 }
+
 """
 columns and relationships of "departments"
 """
@@ -1120,6 +1780,7 @@ type departments {
   order: Int!
   updated_at: timestamptz!
 }
+
 """
 aggregated selection of "departments"
 """
@@ -1127,6 +1788,7 @@ type departments_aggregate {
   aggregate: departments_aggregate_fields
   nodes: [departments!]!
 }
+
 """
 aggregate fields of "departments"
 """
@@ -1143,11 +1805,15 @@ type departments_aggregate_fields {
   var_samp: departments_var_samp_fields
   variance: departments_variance_fields
 }
+
 """aggregate avg on columns"""
 type departments_avg_fields {
   order: Float
 }
-"""Boolean expression to filter rows from the table "departments". All fields are combined with a logical 'AND'."""
+
+"""
+Boolean expression to filter rows from the table "departments". All fields are combined with a logical 'AND'.
+"""
 input departments_bool_exp {
   _and: [departments_bool_exp!]
   _not: departments_bool_exp
@@ -1159,6 +1825,7 @@ input departments_bool_exp {
   order: Int_comparison_exp
   updated_at: timestamptz_comparison_exp
 }
+
 """
 unique or primary key constraints on table "departments"
 """
@@ -1166,12 +1833,14 @@ enum departments_constraint {
   """unique or primary key constraint"""
   departments_pkey
 }
+
 """
 input type for incrementing numeric columns in table "departments"
 """
 input departments_inc_input {
   order: Int
 }
+
 """
 input type for inserting data into table "departments"
 """
@@ -1180,6 +1849,7 @@ input departments_insert_input {
   name: String
   order: Int
 }
+
 """aggregate max on columns"""
 type departments_max_fields {
   created_at: timestamptz
@@ -1188,6 +1858,7 @@ type departments_max_fields {
   order: Int
   updated_at: timestamptz
 }
+
 """aggregate min on columns"""
 type departments_min_fields {
   created_at: timestamptz
@@ -1196,15 +1867,18 @@ type departments_min_fields {
   order: Int
   updated_at: timestamptz
 }
+
 """
 response of any mutation on the table "departments"
 """
 type departments_mutation_response {
   """number of rows affected by the mutation"""
   affected_rows: Int!
+
   """data from the rows affected by the mutation"""
   returning: [departments!]!
 }
+
 """
 on conflict condition type for table "departments"
 """
@@ -1213,6 +1887,7 @@ input departments_on_conflict {
   update_columns: [departments_update_column!]!
   where: departments_bool_exp
 }
+
 """Ordering options when selecting data from "departments"."""
 input departments_order_by {
   created_at: order_by
@@ -1222,27 +1897,35 @@ input departments_order_by {
   order: order_by
   updated_at: order_by
 }
+
 """primary key columns input for table: departments"""
 input departments_pk_columns_input {
   id: uuid!
 }
+
 """
 select columns of table "departments"
 """
 enum departments_select_column {
   """column name"""
   created_at
+
   """column name"""
   id
+
   """column name"""
   is_active
+
   """column name"""
   name
+
   """column name"""
   order
+
   """column name"""
   updated_at
 }
+
 """
 input type for updating data in table "departments"
 """
@@ -1252,47 +1935,59 @@ input departments_set_input {
   order: Int
   updated_at: timestamptz
 }
+
 """aggregate stddev on columns"""
 type departments_stddev_fields {
   order: Float
 }
+
 """aggregate stddev_pop on columns"""
 type departments_stddev_pop_fields {
   order: Float
 }
+
 """aggregate stddev_samp on columns"""
 type departments_stddev_samp_fields {
   order: Float
 }
+
 """aggregate sum on columns"""
 type departments_sum_fields {
   order: Int
 }
+
 """
 update columns of table "departments"
 """
 enum departments_update_column {
   """column name"""
   is_active
+
   """column name"""
   name
+
   """column name"""
   order
+
   """column name"""
   updated_at
 }
+
 """aggregate var_pop on columns"""
 type departments_var_pop_fields {
   order: Float
 }
+
 """aggregate var_samp on columns"""
 type departments_var_samp_fields {
   order: Float
 }
+
 """aggregate variance on columns"""
 type departments_variance_fields {
   order: Float
 }
+
 """
 columns and relationships of "issuing_company"
 """
@@ -1305,6 +2000,7 @@ type issuing_company {
   order: Int!
   updated_at: timestamptz!
 }
+
 """
 aggregated selection of "issuing_company"
 """
@@ -1312,6 +2008,7 @@ type issuing_company_aggregate {
   aggregate: issuing_company_aggregate_fields
   nodes: [issuing_company!]!
 }
+
 """
 aggregate fields of "issuing_company"
 """
@@ -1328,11 +2025,15 @@ type issuing_company_aggregate_fields {
   var_samp: issuing_company_var_samp_fields
   variance: issuing_company_variance_fields
 }
+
 """aggregate avg on columns"""
 type issuing_company_avg_fields {
   order: Float
 }
-"""Boolean expression to filter rows from the table "issuing_company". All fields are combined with a logical 'AND'."""
+
+"""
+Boolean expression to filter rows from the table "issuing_company". All fields are combined with a logical 'AND'.
+"""
 input issuing_company_bool_exp {
   _and: [issuing_company_bool_exp!]
   _not: issuing_company_bool_exp
@@ -1345,6 +2046,7 @@ input issuing_company_bool_exp {
   order: Int_comparison_exp
   updated_at: timestamptz_comparison_exp
 }
+
 """
 unique or primary key constraints on table "issuing_company"
 """
@@ -1352,12 +2054,14 @@ enum issuing_company_constraint {
   """unique or primary key constraint"""
   issuing_company_pkey
 }
+
 """
 input type for incrementing numeric columns in table "issuing_company"
 """
 input issuing_company_inc_input {
   order: Int
 }
+
 """
 input type for inserting data into table "issuing_company"
 """
@@ -1367,6 +2071,7 @@ input issuing_company_insert_input {
   name: String
   order: Int
 }
+
 """aggregate max on columns"""
 type issuing_company_max_fields {
   address: String
@@ -1376,6 +2081,7 @@ type issuing_company_max_fields {
   order: Int
   updated_at: timestamptz
 }
+
 """aggregate min on columns"""
 type issuing_company_min_fields {
   address: String
@@ -1385,15 +2091,18 @@ type issuing_company_min_fields {
   order: Int
   updated_at: timestamptz
 }
+
 """
 response of any mutation on the table "issuing_company"
 """
 type issuing_company_mutation_response {
   """number of rows affected by the mutation"""
   affected_rows: Int!
+
   """data from the rows affected by the mutation"""
   returning: [issuing_company!]!
 }
+
 """
 on conflict condition type for table "issuing_company"
 """
@@ -1402,6 +2111,7 @@ input issuing_company_on_conflict {
   update_columns: [issuing_company_update_column!]!
   where: issuing_company_bool_exp
 }
+
 """Ordering options when selecting data from "issuing_company"."""
 input issuing_company_order_by {
   address: order_by
@@ -1412,29 +2122,38 @@ input issuing_company_order_by {
   order: order_by
   updated_at: order_by
 }
+
 """primary key columns input for table: issuing_company"""
 input issuing_company_pk_columns_input {
   id: uuid!
 }
+
 """
 select columns of table "issuing_company"
 """
 enum issuing_company_select_column {
   """column name"""
   address
+
   """column name"""
   created_at
+
   """column name"""
   id
+
   """column name"""
   is_active
+
   """column name"""
   name
+
   """column name"""
   order
+
   """column name"""
   updated_at
 }
+
 """
 input type for updating data in table "issuing_company"
 """
@@ -1444,47 +2163,59 @@ input issuing_company_set_input {
   name: String
   order: Int
 }
+
 """aggregate stddev on columns"""
 type issuing_company_stddev_fields {
   order: Float
 }
+
 """aggregate stddev_pop on columns"""
 type issuing_company_stddev_pop_fields {
   order: Float
 }
+
 """aggregate stddev_samp on columns"""
 type issuing_company_stddev_samp_fields {
   order: Float
 }
+
 """aggregate sum on columns"""
 type issuing_company_sum_fields {
   order: Int
 }
+
 """
 update columns of table "issuing_company"
 """
 enum issuing_company_update_column {
   """column name"""
   address
+
   """column name"""
   is_active
+
   """column name"""
   name
+
   """column name"""
   order
 }
+
 """aggregate var_pop on columns"""
 type issuing_company_var_pop_fields {
   order: Float
 }
+
 """aggregate var_samp on columns"""
 type issuing_company_var_samp_fields {
   order: Float
 }
+
 """aggregate variance on columns"""
 type issuing_company_variance_fields {
   order: Float
 }
+
 """
 columns and relationships of "job_title"
 """
@@ -1496,6 +2227,7 @@ type job_title {
   order: Int!
   updated_at: timestamptz!
 }
+
 """
 aggregated selection of "job_title"
 """
@@ -1503,6 +2235,7 @@ type job_title_aggregate {
   aggregate: job_title_aggregate_fields
   nodes: [job_title!]!
 }
+
 """
 aggregate fields of "job_title"
 """
@@ -1519,11 +2252,15 @@ type job_title_aggregate_fields {
   var_samp: job_title_var_samp_fields
   variance: job_title_variance_fields
 }
+
 """aggregate avg on columns"""
 type job_title_avg_fields {
   order: Float
 }
-"""Boolean expression to filter rows from the table "job_title". All fields are combined with a logical 'AND'."""
+
+"""
+Boolean expression to filter rows from the table "job_title". All fields are combined with a logical 'AND'.
+"""
 input job_title_bool_exp {
   _and: [job_title_bool_exp!]
   _not: job_title_bool_exp
@@ -1535,6 +2272,7 @@ input job_title_bool_exp {
   order: Int_comparison_exp
   updated_at: timestamptz_comparison_exp
 }
+
 """
 unique or primary key constraints on table "job_title"
 """
@@ -1542,12 +2280,14 @@ enum job_title_constraint {
   """unique or primary key constraint"""
   job_title_pkey
 }
+
 """
 input type for incrementing numeric columns in table "job_title"
 """
 input job_title_inc_input {
   order: Int
 }
+
 """
 input type for inserting data into table "job_title"
 """
@@ -1556,6 +2296,7 @@ input job_title_insert_input {
   name: String
   order: Int
 }
+
 """aggregate max on columns"""
 type job_title_max_fields {
   created_at: timestamptz
@@ -1564,6 +2305,7 @@ type job_title_max_fields {
   order: Int
   updated_at: timestamptz
 }
+
 """aggregate min on columns"""
 type job_title_min_fields {
   created_at: timestamptz
@@ -1572,15 +2314,18 @@ type job_title_min_fields {
   order: Int
   updated_at: timestamptz
 }
+
 """
 response of any mutation on the table "job_title"
 """
 type job_title_mutation_response {
   """number of rows affected by the mutation"""
   affected_rows: Int!
+
   """data from the rows affected by the mutation"""
   returning: [job_title!]!
 }
+
 """
 on conflict condition type for table "job_title"
 """
@@ -1589,6 +2334,7 @@ input job_title_on_conflict {
   update_columns: [job_title_update_column!]!
   where: job_title_bool_exp
 }
+
 """Ordering options when selecting data from "job_title"."""
 input job_title_order_by {
   created_at: order_by
@@ -1598,27 +2344,35 @@ input job_title_order_by {
   order: order_by
   updated_at: order_by
 }
+
 """primary key columns input for table: job_title"""
 input job_title_pk_columns_input {
   id: uuid!
 }
+
 """
 select columns of table "job_title"
 """
 enum job_title_select_column {
   """column name"""
   created_at
+
   """column name"""
   id
+
   """column name"""
   is_active
+
   """column name"""
   name
+
   """column name"""
   order
+
   """column name"""
   updated_at
 }
+
 """
 input type for updating data in table "job_title"
 """
@@ -1628,47 +2382,59 @@ input job_title_set_input {
   order: Int
   updated_at: timestamptz
 }
+
 """aggregate stddev on columns"""
 type job_title_stddev_fields {
   order: Float
 }
+
 """aggregate stddev_pop on columns"""
 type job_title_stddev_pop_fields {
   order: Float
 }
+
 """aggregate stddev_samp on columns"""
 type job_title_stddev_samp_fields {
   order: Float
 }
+
 """aggregate sum on columns"""
 type job_title_sum_fields {
   order: Int
 }
+
 """
 update columns of table "job_title"
 """
 enum job_title_update_column {
   """column name"""
   is_active
+
   """column name"""
   name
+
   """column name"""
   order
+
   """column name"""
   updated_at
 }
+
 """aggregate var_pop on columns"""
 type job_title_var_pop_fields {
   order: Float
 }
+
 """aggregate var_samp on columns"""
 type job_title_var_samp_fields {
   order: Float
 }
+
 """aggregate variance on columns"""
 type job_title_variance_fields {
   order: Float
 }
+
 """
 columns and relationships of "marketing_campaign"
 """
@@ -1679,6 +2445,7 @@ type marketing_campaign {
   order: Int!
   updated_at: timestamptz!
 }
+
 """
 aggregated selection of "marketing_campaign"
 """
@@ -1686,6 +2453,7 @@ type marketing_campaign_aggregate {
   aggregate: marketing_campaign_aggregate_fields
   nodes: [marketing_campaign!]!
 }
+
 """
 aggregate fields of "marketing_campaign"
 """
@@ -1702,11 +2470,15 @@ type marketing_campaign_aggregate_fields {
   var_samp: marketing_campaign_var_samp_fields
   variance: marketing_campaign_variance_fields
 }
+
 """aggregate avg on columns"""
 type marketing_campaign_avg_fields {
   order: Float
 }
-"""Boolean expression to filter rows from the table "marketing_campaign". All fields are combined with a logical 'AND'."""
+
+"""
+Boolean expression to filter rows from the table "marketing_campaign". All fields are combined with a logical 'AND'.
+"""
 input marketing_campaign_bool_exp {
   _and: [marketing_campaign_bool_exp!]
   _not: marketing_campaign_bool_exp
@@ -1717,6 +2489,7 @@ input marketing_campaign_bool_exp {
   order: Int_comparison_exp
   updated_at: timestamptz_comparison_exp
 }
+
 """
 unique or primary key constraints on table "marketing_campaign"
 """
@@ -1724,12 +2497,14 @@ enum marketing_campaign_constraint {
   """unique or primary key constraint"""
   marketing_campaign_pkey
 }
+
 """
 input type for incrementing numeric columns in table "marketing_campaign"
 """
 input marketing_campaign_inc_input {
   order: Int
 }
+
 """
 input type for inserting data into table "marketing_campaign"
 """
@@ -1737,6 +2512,7 @@ input marketing_campaign_insert_input {
   name: String
   order: Int
 }
+
 """aggregate max on columns"""
 type marketing_campaign_max_fields {
   created_at: timestamptz
@@ -1745,6 +2521,7 @@ type marketing_campaign_max_fields {
   order: Int
   updated_at: timestamptz
 }
+
 """aggregate min on columns"""
 type marketing_campaign_min_fields {
   created_at: timestamptz
@@ -1753,15 +2530,18 @@ type marketing_campaign_min_fields {
   order: Int
   updated_at: timestamptz
 }
+
 """
 response of any mutation on the table "marketing_campaign"
 """
 type marketing_campaign_mutation_response {
   """number of rows affected by the mutation"""
   affected_rows: Int!
+
   """data from the rows affected by the mutation"""
   returning: [marketing_campaign!]!
 }
+
 """
 on conflict condition type for table "marketing_campaign"
 """
@@ -1770,6 +2550,7 @@ input marketing_campaign_on_conflict {
   update_columns: [marketing_campaign_update_column!]!
   where: marketing_campaign_bool_exp
 }
+
 """Ordering options when selecting data from "marketing_campaign"."""
 input marketing_campaign_order_by {
   created_at: order_by
@@ -1778,25 +2559,32 @@ input marketing_campaign_order_by {
   order: order_by
   updated_at: order_by
 }
+
 """primary key columns input for table: marketing_campaign"""
 input marketing_campaign_pk_columns_input {
   id: uuid!
 }
+
 """
 select columns of table "marketing_campaign"
 """
 enum marketing_campaign_select_column {
   """column name"""
   created_at
+
   """column name"""
   id
+
   """column name"""
   name
+
   """column name"""
   order
+
   """column name"""
   updated_at
 }
+
 """
 input type for updating data in table "marketing_campaign"
 """
@@ -1804,43 +2592,53 @@ input marketing_campaign_set_input {
   name: String
   order: Int
 }
+
 """aggregate stddev on columns"""
 type marketing_campaign_stddev_fields {
   order: Float
 }
+
 """aggregate stddev_pop on columns"""
 type marketing_campaign_stddev_pop_fields {
   order: Float
 }
+
 """aggregate stddev_samp on columns"""
 type marketing_campaign_stddev_samp_fields {
   order: Float
 }
+
 """aggregate sum on columns"""
 type marketing_campaign_sum_fields {
   order: Int
 }
+
 """
 update columns of table "marketing_campaign"
 """
 enum marketing_campaign_update_column {
   """column name"""
   name
+
   """column name"""
   order
 }
+
 """aggregate var_pop on columns"""
 type marketing_campaign_var_pop_fields {
   order: Float
 }
+
 """aggregate var_samp on columns"""
 type marketing_campaign_var_samp_fields {
   order: Float
 }
+
 """aggregate variance on columns"""
 type marketing_campaign_variance_fields {
   order: Float
 }
+
 """
 columns and relationships of "marketing_source"
 """
@@ -1852,6 +2650,7 @@ type marketing_source {
   order: Int!
   updated_at: timestamptz!
 }
+
 """
 aggregated selection of "marketing_source"
 """
@@ -1859,6 +2658,7 @@ type marketing_source_aggregate {
   aggregate: marketing_source_aggregate_fields
   nodes: [marketing_source!]!
 }
+
 """
 aggregate fields of "marketing_source"
 """
@@ -1875,11 +2675,15 @@ type marketing_source_aggregate_fields {
   var_samp: marketing_source_var_samp_fields
   variance: marketing_source_variance_fields
 }
+
 """aggregate avg on columns"""
 type marketing_source_avg_fields {
   order: Float
 }
-"""Boolean expression to filter rows from the table "marketing_source". All fields are combined with a logical 'AND'."""
+
+"""
+Boolean expression to filter rows from the table "marketing_source". All fields are combined with a logical 'AND'.
+"""
 input marketing_source_bool_exp {
   _and: [marketing_source_bool_exp!]
   _not: marketing_source_bool_exp
@@ -1891,6 +2695,7 @@ input marketing_source_bool_exp {
   order: Int_comparison_exp
   updated_at: timestamptz_comparison_exp
 }
+
 """
 unique or primary key constraints on table "marketing_source"
 """
@@ -1898,12 +2703,14 @@ enum marketing_source_constraint {
   """unique or primary key constraint"""
   marketing_source_pkey
 }
+
 """
 input type for incrementing numeric columns in table "marketing_source"
 """
 input marketing_source_inc_input {
   order: Int
 }
+
 """
 input type for inserting data into table "marketing_source"
 """
@@ -1911,6 +2718,7 @@ input marketing_source_insert_input {
   is_active: Boolean
   name: String
 }
+
 """aggregate max on columns"""
 type marketing_source_max_fields {
   created_at: timestamptz
@@ -1919,6 +2727,7 @@ type marketing_source_max_fields {
   order: Int
   updated_at: timestamptz
 }
+
 """aggregate min on columns"""
 type marketing_source_min_fields {
   created_at: timestamptz
@@ -1927,15 +2736,18 @@ type marketing_source_min_fields {
   order: Int
   updated_at: timestamptz
 }
+
 """
 response of any mutation on the table "marketing_source"
 """
 type marketing_source_mutation_response {
   """number of rows affected by the mutation"""
   affected_rows: Int!
+
   """data from the rows affected by the mutation"""
   returning: [marketing_source!]!
 }
+
 """
 on conflict condition type for table "marketing_source"
 """
@@ -1944,6 +2756,7 @@ input marketing_source_on_conflict {
   update_columns: [marketing_source_update_column!]!
   where: marketing_source_bool_exp
 }
+
 """Ordering options when selecting data from "marketing_source"."""
 input marketing_source_order_by {
   created_at: order_by
@@ -1953,27 +2766,35 @@ input marketing_source_order_by {
   order: order_by
   updated_at: order_by
 }
+
 """primary key columns input for table: marketing_source"""
 input marketing_source_pk_columns_input {
   id: uuid!
 }
+
 """
 select columns of table "marketing_source"
 """
 enum marketing_source_select_column {
   """column name"""
   created_at
+
   """column name"""
   id
+
   """column name"""
   is_active
+
   """column name"""
   name
+
   """column name"""
   order
+
   """column name"""
   updated_at
 }
+
 """
 input type for updating data in table "marketing_source"
 """
@@ -1982,47 +2803,64 @@ input marketing_source_set_input {
   name: String
   order: Int
 }
+
 """aggregate stddev on columns"""
 type marketing_source_stddev_fields {
   order: Float
 }
+
 """aggregate stddev_pop on columns"""
 type marketing_source_stddev_pop_fields {
   order: Float
 }
+
 """aggregate stddev_samp on columns"""
 type marketing_source_stddev_samp_fields {
   order: Float
 }
+
 """aggregate sum on columns"""
 type marketing_source_sum_fields {
   order: Int
 }
+
 """
 update columns of table "marketing_source"
 """
 enum marketing_source_update_column {
   """column name"""
   is_active
+
   """column name"""
   name
+
   """column name"""
   order
 }
+
 """aggregate var_pop on columns"""
 type marketing_source_var_pop_fields {
   order: Float
 }
+
 """aggregate var_samp on columns"""
 type marketing_source_var_samp_fields {
   order: Float
 }
+
 """aggregate variance on columns"""
 type marketing_source_variance_fields {
   order: Float
 }
+
 """mutation root"""
 type mutation_root {
+  createOneCompany(data: CompanyCreateInput!): Company
+  createOneMarketingSource(data: MarketingSourceCreateInput!): MarketingSource
+  deleteManyCompany(where: CompanyWhereInput): AffectedRowsOutput
+  deleteOneCompany(where: CompanyWhereUniqueInput!): Company
+  deleteOneMarketingSource(where: MarketingSourceWhereUniqueInput!): MarketingSource
+
   """
   delete data from the table: "Labs"
   """
@@ -2030,10 +2868,12 @@ type mutation_root {
     """filter the rows which have to be deleted"""
     where: Labs_bool_exp!
   ): Labs_mutation_response
+
   """
   delete single row from the table: "Labs"
   """
   delete_Labs_by_pk(id: uuid!): Labs
+
   """
   delete data from the table: "appointment_status"
   """
@@ -2041,10 +2881,12 @@ type mutation_root {
     """filter the rows which have to be deleted"""
     where: appointment_status_bool_exp!
   ): appointment_status_mutation_response
+
   """
   delete single row from the table: "appointment_status"
   """
   delete_appointment_status_by_pk(id: uuid!): appointment_status
+
   """
   delete data from the table: "cancellation_reasons"
   """
@@ -2052,10 +2894,12 @@ type mutation_root {
     """filter the rows which have to be deleted"""
     where: cancellation_reasons_bool_exp!
   ): cancellation_reasons_mutation_response
+
   """
   delete single row from the table: "cancellation_reasons"
   """
   delete_cancellation_reasons_by_pk(id: uuid!): cancellation_reasons
+
   """
   delete data from the table: "credit_note_type"
   """
@@ -2063,10 +2907,12 @@ type mutation_root {
     """filter the rows which have to be deleted"""
     where: credit_note_type_bool_exp!
   ): credit_note_type_mutation_response
+
   """
   delete single row from the table: "credit_note_type"
   """
   delete_credit_note_type_by_pk(id: uuid!): credit_note_type
+
   """
   delete data from the table: "departments"
   """
@@ -2074,10 +2920,12 @@ type mutation_root {
     """filter the rows which have to be deleted"""
     where: departments_bool_exp!
   ): departments_mutation_response
+
   """
   delete single row from the table: "departments"
   """
   delete_departments_by_pk(id: uuid!): departments
+
   """
   delete data from the table: "issuing_company"
   """
@@ -2085,10 +2933,12 @@ type mutation_root {
     """filter the rows which have to be deleted"""
     where: issuing_company_bool_exp!
   ): issuing_company_mutation_response
+
   """
   delete single row from the table: "issuing_company"
   """
   delete_issuing_company_by_pk(id: uuid!): issuing_company
+
   """
   delete data from the table: "job_title"
   """
@@ -2096,10 +2946,12 @@ type mutation_root {
     """filter the rows which have to be deleted"""
     where: job_title_bool_exp!
   ): job_title_mutation_response
+
   """
   delete single row from the table: "job_title"
   """
   delete_job_title_by_pk(id: uuid!): job_title
+
   """
   delete data from the table: "marketing_campaign"
   """
@@ -2107,10 +2959,12 @@ type mutation_root {
     """filter the rows which have to be deleted"""
     where: marketing_campaign_bool_exp!
   ): marketing_campaign_mutation_response
+
   """
   delete single row from the table: "marketing_campaign"
   """
   delete_marketing_campaign_by_pk(id: uuid!): marketing_campaign
+
   """
   delete data from the table: "marketing_source"
   """
@@ -2118,10 +2972,25 @@ type mutation_root {
     """filter the rows which have to be deleted"""
     where: marketing_source_bool_exp!
   ): marketing_source_mutation_response
+
   """
   delete single row from the table: "marketing_source"
   """
   delete_marketing_source_by_pk(id: uuid!): marketing_source
+
+  """
+  delete data from the table: "payment_types"
+  """
+  delete_payment_types(
+    """filter the rows which have to be deleted"""
+    where: payment_types_bool_exp!
+  ): payment_types_mutation_response
+
+  """
+  delete single row from the table: "payment_types"
+  """
+  delete_payment_types_by_pk(id: uuid!): payment_types
+
   """
   delete data from the table: "petty_cash_types"
   """
@@ -2129,64 +2998,78 @@ type mutation_root {
     """filter the rows which have to be deleted"""
     where: petty_cash_types_bool_exp!
   ): petty_cash_types_mutation_response
+
   """
   delete single row from the table: "petty_cash_types"
   """
   delete_petty_cash_types_by_pk(id: uuid!): petty_cash_types
+
   """
   insert data into the table: "Labs"
   """
   insert_Labs(
     """the rows to be inserted"""
     objects: [Labs_insert_input!]!
+
     """on conflict condition"""
     on_conflict: Labs_on_conflict
   ): Labs_mutation_response
+
   """
   insert a single row into the table: "Labs"
   """
   insert_Labs_one(
     """the row to be inserted"""
     object: Labs_insert_input!
+
     """on conflict condition"""
     on_conflict: Labs_on_conflict
   ): Labs
+
   """
   insert data into the table: "appointment_status"
   """
   insert_appointment_status(
     """the rows to be inserted"""
     objects: [appointment_status_insert_input!]!
+
     """on conflict condition"""
     on_conflict: appointment_status_on_conflict
   ): appointment_status_mutation_response
+
   """
   insert a single row into the table: "appointment_status"
   """
   insert_appointment_status_one(
     """the row to be inserted"""
     object: appointment_status_insert_input!
+
     """on conflict condition"""
     on_conflict: appointment_status_on_conflict
   ): appointment_status
+
   """
   insert data into the table: "cancellation_reasons"
   """
   insert_cancellation_reasons(
     """the rows to be inserted"""
     objects: [cancellation_reasons_insert_input!]!
+
     """on conflict condition"""
     on_conflict: cancellation_reasons_on_conflict
   ): cancellation_reasons_mutation_response
+
   """
   insert a single row into the table: "cancellation_reasons"
   """
   insert_cancellation_reasons_one(
     """the row to be inserted"""
     object: cancellation_reasons_insert_input!
+
     """on conflict condition"""
     on_conflict: cancellation_reasons_on_conflict
   ): cancellation_reasons
+
   """
   insert data into the table: "colors"
   """
@@ -2194,6 +3077,7 @@ type mutation_root {
     """the rows to be inserted"""
     objects: [colors_insert_input!]!
   ): colors_mutation_response
+
   """
   insert a single row into the table: "colors"
   """
@@ -2201,345 +3085,479 @@ type mutation_root {
     """the row to be inserted"""
     object: colors_insert_input!
   ): colors
+
   """
   insert data into the table: "credit_note_type"
   """
   insert_credit_note_type(
     """the rows to be inserted"""
     objects: [credit_note_type_insert_input!]!
+
     """on conflict condition"""
     on_conflict: credit_note_type_on_conflict
   ): credit_note_type_mutation_response
+
   """
   insert a single row into the table: "credit_note_type"
   """
   insert_credit_note_type_one(
     """the row to be inserted"""
     object: credit_note_type_insert_input!
+
     """on conflict condition"""
     on_conflict: credit_note_type_on_conflict
   ): credit_note_type
+
   """
   insert data into the table: "departments"
   """
   insert_departments(
     """the rows to be inserted"""
     objects: [departments_insert_input!]!
+
     """on conflict condition"""
     on_conflict: departments_on_conflict
   ): departments_mutation_response
+
   """
   insert a single row into the table: "departments"
   """
   insert_departments_one(
     """the row to be inserted"""
     object: departments_insert_input!
+
     """on conflict condition"""
     on_conflict: departments_on_conflict
   ): departments
+
   """
   insert data into the table: "issuing_company"
   """
   insert_issuing_company(
     """the rows to be inserted"""
     objects: [issuing_company_insert_input!]!
+
     """on conflict condition"""
     on_conflict: issuing_company_on_conflict
   ): issuing_company_mutation_response
+
   """
   insert a single row into the table: "issuing_company"
   """
   insert_issuing_company_one(
     """the row to be inserted"""
     object: issuing_company_insert_input!
+
     """on conflict condition"""
     on_conflict: issuing_company_on_conflict
   ): issuing_company
+
   """
   insert data into the table: "job_title"
   """
   insert_job_title(
     """the rows to be inserted"""
     objects: [job_title_insert_input!]!
+
     """on conflict condition"""
     on_conflict: job_title_on_conflict
   ): job_title_mutation_response
+
   """
   insert a single row into the table: "job_title"
   """
   insert_job_title_one(
     """the row to be inserted"""
     object: job_title_insert_input!
+
     """on conflict condition"""
     on_conflict: job_title_on_conflict
   ): job_title
+
   """
   insert data into the table: "marketing_campaign"
   """
   insert_marketing_campaign(
     """the rows to be inserted"""
     objects: [marketing_campaign_insert_input!]!
+
     """on conflict condition"""
     on_conflict: marketing_campaign_on_conflict
   ): marketing_campaign_mutation_response
+
   """
   insert a single row into the table: "marketing_campaign"
   """
   insert_marketing_campaign_one(
     """the row to be inserted"""
     object: marketing_campaign_insert_input!
+
     """on conflict condition"""
     on_conflict: marketing_campaign_on_conflict
   ): marketing_campaign
+
   """
   insert data into the table: "marketing_source"
   """
   insert_marketing_source(
     """the rows to be inserted"""
     objects: [marketing_source_insert_input!]!
+
     """on conflict condition"""
     on_conflict: marketing_source_on_conflict
   ): marketing_source_mutation_response
+
   """
   insert a single row into the table: "marketing_source"
   """
   insert_marketing_source_one(
     """the row to be inserted"""
     object: marketing_source_insert_input!
+
     """on conflict condition"""
     on_conflict: marketing_source_on_conflict
   ): marketing_source
+
+  """
+  insert data into the table: "payment_types"
+  """
+  insert_payment_types(
+    """the rows to be inserted"""
+    objects: [payment_types_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: payment_types_on_conflict
+  ): payment_types_mutation_response
+
+  """
+  insert a single row into the table: "payment_types"
+  """
+  insert_payment_types_one(
+    """the row to be inserted"""
+    object: payment_types_insert_input!
+
+    """on conflict condition"""
+    on_conflict: payment_types_on_conflict
+  ): payment_types
+
   """
   insert data into the table: "petty_cash_types"
   """
   insert_petty_cash_types(
     """the rows to be inserted"""
     objects: [petty_cash_types_insert_input!]!
+
     """on conflict condition"""
     on_conflict: petty_cash_types_on_conflict
   ): petty_cash_types_mutation_response
+
   """
   insert a single row into the table: "petty_cash_types"
   """
   insert_petty_cash_types_one(
     """the row to be inserted"""
     object: petty_cash_types_insert_input!
+
     """on conflict condition"""
     on_conflict: petty_cash_types_on_conflict
   ): petty_cash_types
+  updateManyCompany(data: CompanyUpdateManyMutationInput!, where: CompanyWhereInput): AffectedRowsOutput
+  updateOneCompany(data: CompanyUpdateInput!, where: CompanyWhereUniqueInput!): Company
+  updateOneMarketingSource(data: MarketingSourceUpdateInput!, where: MarketingSourceWhereUniqueInput!): MarketingSource
+
   """
   update data of the table: "Labs"
   """
   update_Labs(
     """increments the numeric columns with given value of the filtered values"""
     _inc: Labs_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: Labs_set_input
+
     """filter the rows which have to be updated"""
     where: Labs_bool_exp!
   ): Labs_mutation_response
+
   """
   update single row of the table: "Labs"
   """
   update_Labs_by_pk(
     """increments the numeric columns with given value of the filtered values"""
     _inc: Labs_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: Labs_set_input
     pk_columns: Labs_pk_columns_input!
   ): Labs
+
   """
   update data of the table: "appointment_status"
   """
   update_appointment_status(
     """increments the numeric columns with given value of the filtered values"""
     _inc: appointment_status_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: appointment_status_set_input
+
     """filter the rows which have to be updated"""
     where: appointment_status_bool_exp!
   ): appointment_status_mutation_response
+
   """
   update single row of the table: "appointment_status"
   """
   update_appointment_status_by_pk(
     """increments the numeric columns with given value of the filtered values"""
     _inc: appointment_status_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: appointment_status_set_input
     pk_columns: appointment_status_pk_columns_input!
   ): appointment_status
+
   """
   update data of the table: "cancellation_reasons"
   """
   update_cancellation_reasons(
     """increments the numeric columns with given value of the filtered values"""
     _inc: cancellation_reasons_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: cancellation_reasons_set_input
+
     """filter the rows which have to be updated"""
     where: cancellation_reasons_bool_exp!
   ): cancellation_reasons_mutation_response
+
   """
   update single row of the table: "cancellation_reasons"
   """
   update_cancellation_reasons_by_pk(
     """increments the numeric columns with given value of the filtered values"""
     _inc: cancellation_reasons_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: cancellation_reasons_set_input
     pk_columns: cancellation_reasons_pk_columns_input!
   ): cancellation_reasons
+
   """
   update data of the table: "credit_note_type"
   """
   update_credit_note_type(
     """increments the numeric columns with given value of the filtered values"""
     _inc: credit_note_type_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: credit_note_type_set_input
+
     """filter the rows which have to be updated"""
     where: credit_note_type_bool_exp!
   ): credit_note_type_mutation_response
+
   """
   update single row of the table: "credit_note_type"
   """
   update_credit_note_type_by_pk(
     """increments the numeric columns with given value of the filtered values"""
     _inc: credit_note_type_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: credit_note_type_set_input
     pk_columns: credit_note_type_pk_columns_input!
   ): credit_note_type
+
   """
   update data of the table: "departments"
   """
   update_departments(
     """increments the numeric columns with given value of the filtered values"""
     _inc: departments_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: departments_set_input
+
     """filter the rows which have to be updated"""
     where: departments_bool_exp!
   ): departments_mutation_response
+
   """
   update single row of the table: "departments"
   """
   update_departments_by_pk(
     """increments the numeric columns with given value of the filtered values"""
     _inc: departments_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: departments_set_input
     pk_columns: departments_pk_columns_input!
   ): departments
+
   """
   update data of the table: "issuing_company"
   """
   update_issuing_company(
     """increments the numeric columns with given value of the filtered values"""
     _inc: issuing_company_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: issuing_company_set_input
+
     """filter the rows which have to be updated"""
     where: issuing_company_bool_exp!
   ): issuing_company_mutation_response
+
   """
   update single row of the table: "issuing_company"
   """
   update_issuing_company_by_pk(
     """increments the numeric columns with given value of the filtered values"""
     _inc: issuing_company_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: issuing_company_set_input
     pk_columns: issuing_company_pk_columns_input!
   ): issuing_company
+
   """
   update data of the table: "job_title"
   """
   update_job_title(
     """increments the numeric columns with given value of the filtered values"""
     _inc: job_title_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: job_title_set_input
+
     """filter the rows which have to be updated"""
     where: job_title_bool_exp!
   ): job_title_mutation_response
+
   """
   update single row of the table: "job_title"
   """
   update_job_title_by_pk(
     """increments the numeric columns with given value of the filtered values"""
     _inc: job_title_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: job_title_set_input
     pk_columns: job_title_pk_columns_input!
   ): job_title
+
   """
   update data of the table: "marketing_campaign"
   """
   update_marketing_campaign(
     """increments the numeric columns with given value of the filtered values"""
     _inc: marketing_campaign_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: marketing_campaign_set_input
+
     """filter the rows which have to be updated"""
     where: marketing_campaign_bool_exp!
   ): marketing_campaign_mutation_response
+
   """
   update single row of the table: "marketing_campaign"
   """
   update_marketing_campaign_by_pk(
     """increments the numeric columns with given value of the filtered values"""
     _inc: marketing_campaign_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: marketing_campaign_set_input
     pk_columns: marketing_campaign_pk_columns_input!
   ): marketing_campaign
+
   """
   update data of the table: "marketing_source"
   """
   update_marketing_source(
     """increments the numeric columns with given value of the filtered values"""
     _inc: marketing_source_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: marketing_source_set_input
+
     """filter the rows which have to be updated"""
     where: marketing_source_bool_exp!
   ): marketing_source_mutation_response
+
   """
   update single row of the table: "marketing_source"
   """
   update_marketing_source_by_pk(
     """increments the numeric columns with given value of the filtered values"""
     _inc: marketing_source_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: marketing_source_set_input
     pk_columns: marketing_source_pk_columns_input!
   ): marketing_source
+
+  """
+  update data of the table: "payment_types"
+  """
+  update_payment_types(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: payment_types_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: payment_types_set_input
+
+    """filter the rows which have to be updated"""
+    where: payment_types_bool_exp!
+  ): payment_types_mutation_response
+
+  """
+  update single row of the table: "payment_types"
+  """
+  update_payment_types_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: payment_types_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: payment_types_set_input
+    pk_columns: payment_types_pk_columns_input!
+  ): payment_types
+
   """
   update data of the table: "petty_cash_types"
   """
   update_petty_cash_types(
     """increments the numeric columns with given value of the filtered values"""
     _inc: petty_cash_types_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: petty_cash_types_set_input
+
     """filter the rows which have to be updated"""
     where: petty_cash_types_bool_exp!
   ): petty_cash_types_mutation_response
+
   """
   update single row of the table: "petty_cash_types"
   """
   update_petty_cash_types_by_pk(
     """increments the numeric columns with given value of the filtered values"""
     _inc: petty_cash_types_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: petty_cash_types_set_input
     pk_columns: petty_cash_types_pk_columns_input!
   ): petty_cash_types
+  upsertOneCompany(create: CompanyCreateInput!, update: CompanyUpdateInput!, where: CompanyWhereUniqueInput!): Company
 }
+
 scalar numeric
-"""Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'."""
+
+"""
+Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'.
+"""
 input numeric_comparison_exp {
   _eq: numeric
   _gt: numeric
@@ -2551,21 +3569,282 @@ input numeric_comparison_exp {
   _neq: numeric
   _nin: [numeric!]
 }
+
 """column ordering options"""
 enum order_by {
   """in ascending order, nulls last"""
   asc
+
   """in ascending order, nulls first"""
   asc_nulls_first
+
   """in ascending order, nulls last"""
   asc_nulls_last
+
   """in descending order, nulls first"""
   desc
+
   """in descending order, nulls first"""
   desc_nulls_first
+
   """in descending order, nulls last"""
   desc_nulls_last
 }
+
+"""
+columns and relationships of "payment_types"
+"""
+type payment_types {
+  created_at: timestamptz!
+  description: String!
+  gl_code: String!
+  id: uuid!
+  is_active: Boolean!
+  name: String!
+  order: Int!
+  payment_type: String!
+  updated_at: timestamptz!
+}
+
+"""
+aggregated selection of "payment_types"
+"""
+type payment_types_aggregate {
+  aggregate: payment_types_aggregate_fields
+  nodes: [payment_types!]!
+}
+
+"""
+aggregate fields of "payment_types"
+"""
+type payment_types_aggregate_fields {
+  avg: payment_types_avg_fields
+  count(columns: [payment_types_select_column!], distinct: Boolean): Int!
+  max: payment_types_max_fields
+  min: payment_types_min_fields
+  stddev: payment_types_stddev_fields
+  stddev_pop: payment_types_stddev_pop_fields
+  stddev_samp: payment_types_stddev_samp_fields
+  sum: payment_types_sum_fields
+  var_pop: payment_types_var_pop_fields
+  var_samp: payment_types_var_samp_fields
+  variance: payment_types_variance_fields
+}
+
+"""aggregate avg on columns"""
+type payment_types_avg_fields {
+  order: Float
+}
+
+"""
+Boolean expression to filter rows from the table "payment_types". All fields are combined with a logical 'AND'.
+"""
+input payment_types_bool_exp {
+  _and: [payment_types_bool_exp!]
+  _not: payment_types_bool_exp
+  _or: [payment_types_bool_exp!]
+  created_at: timestamptz_comparison_exp
+  description: String_comparison_exp
+  gl_code: String_comparison_exp
+  id: uuid_comparison_exp
+  is_active: Boolean_comparison_exp
+  name: String_comparison_exp
+  order: Int_comparison_exp
+  payment_type: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "payment_types"
+"""
+enum payment_types_constraint {
+  """unique or primary key constraint"""
+  payment_types_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "payment_types"
+"""
+input payment_types_inc_input {
+  order: Int
+}
+
+"""
+input type for inserting data into table "payment_types"
+"""
+input payment_types_insert_input {
+  description: String
+  gl_code: String
+  is_active: Boolean
+  name: String
+  order: Int
+  payment_type: String
+}
+
+"""aggregate max on columns"""
+type payment_types_max_fields {
+  created_at: timestamptz
+  description: String
+  gl_code: String
+  id: uuid
+  name: String
+  order: Int
+  payment_type: String
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type payment_types_min_fields {
+  created_at: timestamptz
+  description: String
+  gl_code: String
+  id: uuid
+  name: String
+  order: Int
+  payment_type: String
+  updated_at: timestamptz
+}
+
+"""
+response of any mutation on the table "payment_types"
+"""
+type payment_types_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [payment_types!]!
+}
+
+"""
+on conflict condition type for table "payment_types"
+"""
+input payment_types_on_conflict {
+  constraint: payment_types_constraint!
+  update_columns: [payment_types_update_column!]!
+  where: payment_types_bool_exp
+}
+
+"""Ordering options when selecting data from "payment_types"."""
+input payment_types_order_by {
+  created_at: order_by
+  description: order_by
+  gl_code: order_by
+  id: order_by
+  is_active: order_by
+  name: order_by
+  order: order_by
+  payment_type: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: payment_types"""
+input payment_types_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "payment_types"
+"""
+enum payment_types_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  description
+
+  """column name"""
+  gl_code
+
+  """column name"""
+  id
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  order
+
+  """column name"""
+  payment_type
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "payment_types"
+"""
+input payment_types_set_input {
+  description: String
+  gl_code: String
+  is_active: Boolean
+  name: String
+  order: Int
+  payment_type: String
+}
+
+"""aggregate stddev on columns"""
+type payment_types_stddev_fields {
+  order: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type payment_types_stddev_pop_fields {
+  order: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type payment_types_stddev_samp_fields {
+  order: Float
+}
+
+"""aggregate sum on columns"""
+type payment_types_sum_fields {
+  order: Int
+}
+
+"""
+update columns of table "payment_types"
+"""
+enum payment_types_update_column {
+  """column name"""
+  description
+
+  """column name"""
+  gl_code
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  order
+
+  """column name"""
+  payment_type
+}
+
+"""aggregate var_pop on columns"""
+type payment_types_var_pop_fields {
+  order: Float
+}
+
+"""aggregate var_samp on columns"""
+type payment_types_var_samp_fields {
+  order: Float
+}
+
+"""aggregate variance on columns"""
+type payment_types_variance_fields {
+  order: Float
+}
+
 """
 columns and relationships of "petty_cash_types"
 """
@@ -2577,6 +3856,7 @@ type petty_cash_types {
   order: Int!
   updated_at: timestamptz!
 }
+
 """
 aggregated selection of "petty_cash_types"
 """
@@ -2584,6 +3864,7 @@ type petty_cash_types_aggregate {
   aggregate: petty_cash_types_aggregate_fields
   nodes: [petty_cash_types!]!
 }
+
 """
 aggregate fields of "petty_cash_types"
 """
@@ -2600,11 +3881,15 @@ type petty_cash_types_aggregate_fields {
   var_samp: petty_cash_types_var_samp_fields
   variance: petty_cash_types_variance_fields
 }
+
 """aggregate avg on columns"""
 type petty_cash_types_avg_fields {
   order: Float
 }
-"""Boolean expression to filter rows from the table "petty_cash_types". All fields are combined with a logical 'AND'."""
+
+"""
+Boolean expression to filter rows from the table "petty_cash_types". All fields are combined with a logical 'AND'.
+"""
 input petty_cash_types_bool_exp {
   _and: [petty_cash_types_bool_exp!]
   _not: petty_cash_types_bool_exp
@@ -2616,6 +3901,7 @@ input petty_cash_types_bool_exp {
   order: Int_comparison_exp
   updated_at: timestamptz_comparison_exp
 }
+
 """
 unique or primary key constraints on table "petty_cash_types"
 """
@@ -2623,12 +3909,14 @@ enum petty_cash_types_constraint {
   """unique or primary key constraint"""
   petty_cash_types_pkey
 }
+
 """
 input type for incrementing numeric columns in table "petty_cash_types"
 """
 input petty_cash_types_inc_input {
   order: Int
 }
+
 """
 input type for inserting data into table "petty_cash_types"
 """
@@ -2637,6 +3925,7 @@ input petty_cash_types_insert_input {
   name: String
   order: Int
 }
+
 """aggregate max on columns"""
 type petty_cash_types_max_fields {
   created_at: timestamptz
@@ -2645,6 +3934,7 @@ type petty_cash_types_max_fields {
   order: Int
   updated_at: timestamptz
 }
+
 """aggregate min on columns"""
 type petty_cash_types_min_fields {
   created_at: timestamptz
@@ -2653,15 +3943,18 @@ type petty_cash_types_min_fields {
   order: Int
   updated_at: timestamptz
 }
+
 """
 response of any mutation on the table "petty_cash_types"
 """
 type petty_cash_types_mutation_response {
   """number of rows affected by the mutation"""
   affected_rows: Int!
+
   """data from the rows affected by the mutation"""
   returning: [petty_cash_types!]!
 }
+
 """
 on conflict condition type for table "petty_cash_types"
 """
@@ -2670,6 +3963,7 @@ input petty_cash_types_on_conflict {
   update_columns: [petty_cash_types_update_column!]!
   where: petty_cash_types_bool_exp
 }
+
 """Ordering options when selecting data from "petty_cash_types"."""
 input petty_cash_types_order_by {
   created_at: order_by
@@ -2679,27 +3973,35 @@ input petty_cash_types_order_by {
   order: order_by
   updated_at: order_by
 }
+
 """primary key columns input for table: petty_cash_types"""
 input petty_cash_types_pk_columns_input {
   id: uuid!
 }
+
 """
 select columns of table "petty_cash_types"
 """
 enum petty_cash_types_select_column {
   """column name"""
   created_at
+
   """column name"""
   id
+
   """column name"""
   is_active
+
   """column name"""
   name
+
   """column name"""
   order
+
   """column name"""
   updated_at
 }
+
 """
 input type for updating data in table "petty_cash_types"
 """
@@ -2708,45 +4010,56 @@ input petty_cash_types_set_input {
   name: String
   order: Int
 }
+
 """aggregate stddev on columns"""
 type petty_cash_types_stddev_fields {
   order: Float
 }
+
 """aggregate stddev_pop on columns"""
 type petty_cash_types_stddev_pop_fields {
   order: Float
 }
+
 """aggregate stddev_samp on columns"""
 type petty_cash_types_stddev_samp_fields {
   order: Float
 }
+
 """aggregate sum on columns"""
 type petty_cash_types_sum_fields {
   order: Int
 }
+
 """
 update columns of table "petty_cash_types"
 """
 enum petty_cash_types_update_column {
   """column name"""
   is_active
+
   """column name"""
   name
+
   """column name"""
   order
 }
+
 """aggregate var_pop on columns"""
 type petty_cash_types_var_pop_fields {
   order: Float
 }
+
 """aggregate var_samp on columns"""
 type petty_cash_types_var_samp_fields {
   order: Float
 }
+
 """aggregate variance on columns"""
 type petty_cash_types_variance_fields {
   order: Float
 }
+
 type query_root {
   """
   fetch data from the table: "Labs"
@@ -2754,355 +4067,536 @@ type query_root {
   Labs(
     """distinct select on columns"""
     distinct_on: [Labs_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [Labs_order_by!]
+
     """filter the rows returned"""
     where: Labs_bool_exp
   ): [Labs!]!
+
   """
   fetch aggregated fields from the table: "Labs"
   """
   Labs_aggregate(
     """distinct select on columns"""
     distinct_on: [Labs_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [Labs_order_by!]
+
     """filter the rows returned"""
     where: Labs_bool_exp
   ): Labs_aggregate!
+
   """fetch data from the table: "Labs" using primary key columns"""
   Labs_by_pk(id: uuid!): Labs
+
   """
   fetch data from the table: "appointment_status"
   """
   appointment_status(
     """distinct select on columns"""
     distinct_on: [appointment_status_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [appointment_status_order_by!]
+
     """filter the rows returned"""
     where: appointment_status_bool_exp
   ): [appointment_status!]!
+
   """
   fetch aggregated fields from the table: "appointment_status"
   """
   appointment_status_aggregate(
     """distinct select on columns"""
     distinct_on: [appointment_status_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [appointment_status_order_by!]
+
     """filter the rows returned"""
     where: appointment_status_bool_exp
   ): appointment_status_aggregate!
-  """fetch data from the table: "appointment_status" using primary key columns"""
+
+  """
+  fetch data from the table: "appointment_status" using primary key columns
+  """
   appointment_status_by_pk(id: uuid!): appointment_status
+
   """
   fetch data from the table: "cancellation_reasons"
   """
   cancellation_reasons(
     """distinct select on columns"""
     distinct_on: [cancellation_reasons_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [cancellation_reasons_order_by!]
+
     """filter the rows returned"""
     where: cancellation_reasons_bool_exp
   ): [cancellation_reasons!]!
+
   """
   fetch aggregated fields from the table: "cancellation_reasons"
   """
   cancellation_reasons_aggregate(
     """distinct select on columns"""
     distinct_on: [cancellation_reasons_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [cancellation_reasons_order_by!]
+
     """filter the rows returned"""
     where: cancellation_reasons_bool_exp
   ): cancellation_reasons_aggregate!
-  """fetch data from the table: "cancellation_reasons" using primary key columns"""
+
+  """
+  fetch data from the table: "cancellation_reasons" using primary key columns
+  """
   cancellation_reasons_by_pk(id: uuid!): cancellation_reasons
+
   """
   fetch data from the table: "colors"
   """
   colors(
     """distinct select on columns"""
     distinct_on: [colors_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [colors_order_by!]
+
     """filter the rows returned"""
     where: colors_bool_exp
   ): [colors!]!
+
   """fetch data from the table: "colors" using primary key columns"""
   colors_by_pk(id: uuid!): colors
+  companies(after: CompanyWhereUniqueInput, before: CompanyWhereUniqueInput, first: Int, last: Int, orderBy: [CompanyOrderByInput!], where: CompanyWhereInput): [Company]!
+  company(where: CompanyWhereUniqueInput!): Company
+
   """
   fetch data from the table: "contacts"
   """
   contacts(
     """distinct select on columns"""
     distinct_on: [contacts_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [contacts_order_by!]
+
     """filter the rows returned"""
     where: contacts_bool_exp
   ): [contacts!]!
+
   """fetch data from the table: "contacts" using primary key columns"""
   contacts_by_pk(id: uuid!): contacts
+
   """
   fetch data from the table: "credit_note_type"
   """
   credit_note_type(
     """distinct select on columns"""
     distinct_on: [credit_note_type_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [credit_note_type_order_by!]
+
     """filter the rows returned"""
     where: credit_note_type_bool_exp
   ): [credit_note_type!]!
+
   """
   fetch aggregated fields from the table: "credit_note_type"
   """
   credit_note_type_aggregate(
     """distinct select on columns"""
     distinct_on: [credit_note_type_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [credit_note_type_order_by!]
+
     """filter the rows returned"""
     where: credit_note_type_bool_exp
   ): credit_note_type_aggregate!
-  """fetch data from the table: "credit_note_type" using primary key columns"""
+
+  """
+  fetch data from the table: "credit_note_type" using primary key columns
+  """
   credit_note_type_by_pk(id: uuid!): credit_note_type
+
   """
   fetch data from the table: "departments"
   """
   departments(
     """distinct select on columns"""
     distinct_on: [departments_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [departments_order_by!]
+
     """filter the rows returned"""
     where: departments_bool_exp
   ): [departments!]!
+
   """
   fetch aggregated fields from the table: "departments"
   """
   departments_aggregate(
     """distinct select on columns"""
     distinct_on: [departments_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [departments_order_by!]
+
     """filter the rows returned"""
     where: departments_bool_exp
   ): departments_aggregate!
+
   """fetch data from the table: "departments" using primary key columns"""
   departments_by_pk(id: uuid!): departments
+
   """
   fetch data from the table: "issuing_company"
   """
   issuing_company(
     """distinct select on columns"""
     distinct_on: [issuing_company_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [issuing_company_order_by!]
+
     """filter the rows returned"""
     where: issuing_company_bool_exp
   ): [issuing_company!]!
+
   """
   fetch aggregated fields from the table: "issuing_company"
   """
   issuing_company_aggregate(
     """distinct select on columns"""
     distinct_on: [issuing_company_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [issuing_company_order_by!]
+
     """filter the rows returned"""
     where: issuing_company_bool_exp
   ): issuing_company_aggregate!
+
   """fetch data from the table: "issuing_company" using primary key columns"""
   issuing_company_by_pk(id: uuid!): issuing_company
+
   """
   fetch data from the table: "job_title"
   """
   job_title(
     """distinct select on columns"""
     distinct_on: [job_title_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [job_title_order_by!]
+
     """filter the rows returned"""
     where: job_title_bool_exp
   ): [job_title!]!
+
   """
   fetch aggregated fields from the table: "job_title"
   """
   job_title_aggregate(
     """distinct select on columns"""
     distinct_on: [job_title_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [job_title_order_by!]
+
     """filter the rows returned"""
     where: job_title_bool_exp
   ): job_title_aggregate!
+
   """fetch data from the table: "job_title" using primary key columns"""
   job_title_by_pk(id: uuid!): job_title
+  marketingSource(id: Int!): MarketingSource
+  marketingSources(after: MarketingSourceWhereUniqueInput, before: MarketingSourceWhereUniqueInput, first: Int, last: Int, orderBy: [MarketingSourceOrderByInput!], where: MarketingSourceWhereInput): [MarketingSource]!
+
   """
   fetch data from the table: "marketing_campaign"
   """
   marketing_campaign(
     """distinct select on columns"""
     distinct_on: [marketing_campaign_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [marketing_campaign_order_by!]
+
     """filter the rows returned"""
     where: marketing_campaign_bool_exp
   ): [marketing_campaign!]!
+
   """
   fetch aggregated fields from the table: "marketing_campaign"
   """
   marketing_campaign_aggregate(
     """distinct select on columns"""
     distinct_on: [marketing_campaign_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [marketing_campaign_order_by!]
+
     """filter the rows returned"""
     where: marketing_campaign_bool_exp
   ): marketing_campaign_aggregate!
-  """fetch data from the table: "marketing_campaign" using primary key columns"""
+
+  """
+  fetch data from the table: "marketing_campaign" using primary key columns
+  """
   marketing_campaign_by_pk(id: uuid!): marketing_campaign
+
   """
   fetch data from the table: "marketing_source"
   """
   marketing_source(
     """distinct select on columns"""
     distinct_on: [marketing_source_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [marketing_source_order_by!]
+
     """filter the rows returned"""
     where: marketing_source_bool_exp
   ): [marketing_source!]!
+
   """
   fetch aggregated fields from the table: "marketing_source"
   """
   marketing_source_aggregate(
     """distinct select on columns"""
     distinct_on: [marketing_source_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [marketing_source_order_by!]
+
     """filter the rows returned"""
     where: marketing_source_bool_exp
   ): marketing_source_aggregate!
-  """fetch data from the table: "marketing_source" using primary key columns"""
+
+  """
+  fetch data from the table: "marketing_source" using primary key columns
+  """
   marketing_source_by_pk(id: uuid!): marketing_source
+
+  """
+  fetch data from the table: "payment_types"
+  """
+  payment_types(
+    """distinct select on columns"""
+    distinct_on: [payment_types_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [payment_types_order_by!]
+
+    """filter the rows returned"""
+    where: payment_types_bool_exp
+  ): [payment_types!]!
+
+  """
+  fetch aggregated fields from the table: "payment_types"
+  """
+  payment_types_aggregate(
+    """distinct select on columns"""
+    distinct_on: [payment_types_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [payment_types_order_by!]
+
+    """filter the rows returned"""
+    where: payment_types_bool_exp
+  ): payment_types_aggregate!
+
+  """fetch data from the table: "payment_types" using primary key columns"""
+  payment_types_by_pk(id: uuid!): payment_types
+
   """
   fetch data from the table: "petty_cash_types"
   """
   petty_cash_types(
     """distinct select on columns"""
     distinct_on: [petty_cash_types_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [petty_cash_types_order_by!]
+
     """filter the rows returned"""
     where: petty_cash_types_bool_exp
   ): [petty_cash_types!]!
+
   """
   fetch aggregated fields from the table: "petty_cash_types"
   """
   petty_cash_types_aggregate(
     """distinct select on columns"""
     distinct_on: [petty_cash_types_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [petty_cash_types_order_by!]
+
     """filter the rows returned"""
     where: petty_cash_types_bool_exp
   ): petty_cash_types_aggregate!
-  """fetch data from the table: "petty_cash_types" using primary key columns"""
+
+  """
+  fetch data from the table: "petty_cash_types" using primary key columns
+  """
   petty_cash_types_by_pk(id: uuid!): petty_cash_types
 }
+
 type subscription_root {
   """
   fetch data from the table: "Labs"
@@ -3110,357 +4604,537 @@ type subscription_root {
   Labs(
     """distinct select on columns"""
     distinct_on: [Labs_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [Labs_order_by!]
+
     """filter the rows returned"""
     where: Labs_bool_exp
   ): [Labs!]!
+
   """
   fetch aggregated fields from the table: "Labs"
   """
   Labs_aggregate(
     """distinct select on columns"""
     distinct_on: [Labs_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [Labs_order_by!]
+
     """filter the rows returned"""
     where: Labs_bool_exp
   ): Labs_aggregate!
+
   """fetch data from the table: "Labs" using primary key columns"""
   Labs_by_pk(id: uuid!): Labs
+
   """
   fetch data from the table: "appointment_status"
   """
   appointment_status(
     """distinct select on columns"""
     distinct_on: [appointment_status_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [appointment_status_order_by!]
+
     """filter the rows returned"""
     where: appointment_status_bool_exp
   ): [appointment_status!]!
+
   """
   fetch aggregated fields from the table: "appointment_status"
   """
   appointment_status_aggregate(
     """distinct select on columns"""
     distinct_on: [appointment_status_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [appointment_status_order_by!]
+
     """filter the rows returned"""
     where: appointment_status_bool_exp
   ): appointment_status_aggregate!
-  """fetch data from the table: "appointment_status" using primary key columns"""
+
+  """
+  fetch data from the table: "appointment_status" using primary key columns
+  """
   appointment_status_by_pk(id: uuid!): appointment_status
+
   """
   fetch data from the table: "cancellation_reasons"
   """
   cancellation_reasons(
     """distinct select on columns"""
     distinct_on: [cancellation_reasons_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [cancellation_reasons_order_by!]
+
     """filter the rows returned"""
     where: cancellation_reasons_bool_exp
   ): [cancellation_reasons!]!
+
   """
   fetch aggregated fields from the table: "cancellation_reasons"
   """
   cancellation_reasons_aggregate(
     """distinct select on columns"""
     distinct_on: [cancellation_reasons_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [cancellation_reasons_order_by!]
+
     """filter the rows returned"""
     where: cancellation_reasons_bool_exp
   ): cancellation_reasons_aggregate!
-  """fetch data from the table: "cancellation_reasons" using primary key columns"""
+
+  """
+  fetch data from the table: "cancellation_reasons" using primary key columns
+  """
   cancellation_reasons_by_pk(id: uuid!): cancellation_reasons
+
   """
   fetch data from the table: "colors"
   """
   colors(
     """distinct select on columns"""
     distinct_on: [colors_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [colors_order_by!]
+
     """filter the rows returned"""
     where: colors_bool_exp
   ): [colors!]!
+
   """fetch data from the table: "colors" using primary key columns"""
   colors_by_pk(id: uuid!): colors
+
   """
   fetch data from the table: "contacts"
   """
   contacts(
     """distinct select on columns"""
     distinct_on: [contacts_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [contacts_order_by!]
+
     """filter the rows returned"""
     where: contacts_bool_exp
   ): [contacts!]!
+
   """fetch data from the table: "contacts" using primary key columns"""
   contacts_by_pk(id: uuid!): contacts
+
   """
   fetch data from the table: "credit_note_type"
   """
   credit_note_type(
     """distinct select on columns"""
     distinct_on: [credit_note_type_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [credit_note_type_order_by!]
+
     """filter the rows returned"""
     where: credit_note_type_bool_exp
   ): [credit_note_type!]!
+
   """
   fetch aggregated fields from the table: "credit_note_type"
   """
   credit_note_type_aggregate(
     """distinct select on columns"""
     distinct_on: [credit_note_type_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [credit_note_type_order_by!]
+
     """filter the rows returned"""
     where: credit_note_type_bool_exp
   ): credit_note_type_aggregate!
-  """fetch data from the table: "credit_note_type" using primary key columns"""
+
+  """
+  fetch data from the table: "credit_note_type" using primary key columns
+  """
   credit_note_type_by_pk(id: uuid!): credit_note_type
+
   """
   fetch data from the table: "departments"
   """
   departments(
     """distinct select on columns"""
     distinct_on: [departments_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [departments_order_by!]
+
     """filter the rows returned"""
     where: departments_bool_exp
   ): [departments!]!
+
   """
   fetch aggregated fields from the table: "departments"
   """
   departments_aggregate(
     """distinct select on columns"""
     distinct_on: [departments_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [departments_order_by!]
+
     """filter the rows returned"""
     where: departments_bool_exp
   ): departments_aggregate!
+
   """fetch data from the table: "departments" using primary key columns"""
   departments_by_pk(id: uuid!): departments
+
   """
   fetch data from the table: "issuing_company"
   """
   issuing_company(
     """distinct select on columns"""
     distinct_on: [issuing_company_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [issuing_company_order_by!]
+
     """filter the rows returned"""
     where: issuing_company_bool_exp
   ): [issuing_company!]!
+
   """
   fetch aggregated fields from the table: "issuing_company"
   """
   issuing_company_aggregate(
     """distinct select on columns"""
     distinct_on: [issuing_company_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [issuing_company_order_by!]
+
     """filter the rows returned"""
     where: issuing_company_bool_exp
   ): issuing_company_aggregate!
+
   """fetch data from the table: "issuing_company" using primary key columns"""
   issuing_company_by_pk(id: uuid!): issuing_company
+
   """
   fetch data from the table: "job_title"
   """
   job_title(
     """distinct select on columns"""
     distinct_on: [job_title_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [job_title_order_by!]
+
     """filter the rows returned"""
     where: job_title_bool_exp
   ): [job_title!]!
+
   """
   fetch aggregated fields from the table: "job_title"
   """
   job_title_aggregate(
     """distinct select on columns"""
     distinct_on: [job_title_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [job_title_order_by!]
+
     """filter the rows returned"""
     where: job_title_bool_exp
   ): job_title_aggregate!
+
   """fetch data from the table: "job_title" using primary key columns"""
   job_title_by_pk(id: uuid!): job_title
+
   """
   fetch data from the table: "marketing_campaign"
   """
   marketing_campaign(
     """distinct select on columns"""
     distinct_on: [marketing_campaign_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [marketing_campaign_order_by!]
+
     """filter the rows returned"""
     where: marketing_campaign_bool_exp
   ): [marketing_campaign!]!
+
   """
   fetch aggregated fields from the table: "marketing_campaign"
   """
   marketing_campaign_aggregate(
     """distinct select on columns"""
     distinct_on: [marketing_campaign_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [marketing_campaign_order_by!]
+
     """filter the rows returned"""
     where: marketing_campaign_bool_exp
   ): marketing_campaign_aggregate!
-  """fetch data from the table: "marketing_campaign" using primary key columns"""
+
+  """
+  fetch data from the table: "marketing_campaign" using primary key columns
+  """
   marketing_campaign_by_pk(id: uuid!): marketing_campaign
+
   """
   fetch data from the table: "marketing_source"
   """
   marketing_source(
     """distinct select on columns"""
     distinct_on: [marketing_source_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [marketing_source_order_by!]
+
     """filter the rows returned"""
     where: marketing_source_bool_exp
   ): [marketing_source!]!
+
   """
   fetch aggregated fields from the table: "marketing_source"
   """
   marketing_source_aggregate(
     """distinct select on columns"""
     distinct_on: [marketing_source_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [marketing_source_order_by!]
+
     """filter the rows returned"""
     where: marketing_source_bool_exp
   ): marketing_source_aggregate!
-  """fetch data from the table: "marketing_source" using primary key columns"""
+
+  """
+  fetch data from the table: "marketing_source" using primary key columns
+  """
   marketing_source_by_pk(id: uuid!): marketing_source
+
+  """
+  fetch data from the table: "payment_types"
+  """
+  payment_types(
+    """distinct select on columns"""
+    distinct_on: [payment_types_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [payment_types_order_by!]
+
+    """filter the rows returned"""
+    where: payment_types_bool_exp
+  ): [payment_types!]!
+
+  """
+  fetch aggregated fields from the table: "payment_types"
+  """
+  payment_types_aggregate(
+    """distinct select on columns"""
+    distinct_on: [payment_types_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [payment_types_order_by!]
+
+    """filter the rows returned"""
+    where: payment_types_bool_exp
+  ): payment_types_aggregate!
+
+  """fetch data from the table: "payment_types" using primary key columns"""
+  payment_types_by_pk(id: uuid!): payment_types
+
   """
   fetch data from the table: "petty_cash_types"
   """
   petty_cash_types(
     """distinct select on columns"""
     distinct_on: [petty_cash_types_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [petty_cash_types_order_by!]
+
     """filter the rows returned"""
     where: petty_cash_types_bool_exp
   ): [petty_cash_types!]!
+
   """
   fetch aggregated fields from the table: "petty_cash_types"
   """
   petty_cash_types_aggregate(
     """distinct select on columns"""
     distinct_on: [petty_cash_types_select_column!]
+
     """limit the number of rows returned"""
     limit: Int
+
     """skip the first n rows. Use only with order_by"""
     offset: Int
+
     """sort the rows by one or more columns"""
     order_by: [petty_cash_types_order_by!]
+
     """filter the rows returned"""
     where: petty_cash_types_bool_exp
   ): petty_cash_types_aggregate!
-  """fetch data from the table: "petty_cash_types" using primary key columns"""
+
+  """
+  fetch data from the table: "petty_cash_types" using primary key columns
+  """
   petty_cash_types_by_pk(id: uuid!): petty_cash_types
 }
+
 scalar timestamptz
-"""Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'."""
+
+"""
+Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'.
+"""
 input timestamptz_comparison_exp {
   _eq: timestamptz
   _gt: timestamptz
@@ -3472,8 +5146,12 @@ input timestamptz_comparison_exp {
   _neq: timestamptz
   _nin: [timestamptz!]
 }
+
 scalar uuid
-"""Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'."""
+
+"""
+Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'.
+"""
 input uuid_comparison_exp {
   _eq: uuid
   _gt: uuid
