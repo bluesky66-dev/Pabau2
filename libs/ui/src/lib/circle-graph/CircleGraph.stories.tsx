@@ -12,52 +12,185 @@ export const KPIExlorer = CircleGraphStory.bind({})
 KPIExlorer.args = {
   chartData: [
     {
-      target: 'Services',
+      id: 1,
+      targetName: 'Shifts',
+      type: 'B',
       data: [
         {
-          name: 'Laser',
+          name: 'Days Worked',
+          revenue: 100,
+          target: 46,
         },
         {
-          name: 'Consultations',
-        },
-        {
-          name: 'Injectables',
-        },
-        {
-          name: 'surgical',
+          name: 'Days Off',
+          revenue: 100,
+          target: 46,
         },
       ],
     },
     {
-      target: 'Products',
+      id: 2,
+      targetName: 'kpis',
+      type: 'D',
       data: [
         {
-          name: 'Lipstick',
+          name: 'Services',
+          revenue: 12,
+          target: 46,
         },
         {
-          name: 'Whitening',
+          name: 'Products',
+          revenue: 100,
+          target: 46,
         },
         {
-          name: 'Skin Creams',
+          name: 'Vouchers',
+          revenue: 100,
+          target: 46,
+        },
+        {
+          name: 'Packages',
+          revenue: 100,
+          target: 46,
+        },
+        {
+          name: 'Client',
+          revenue: 100,
+          target: 146,
+        },
+        {
+          name: 'Rebook',
+          revenue: 100,
+          target: 146,
+        },
+        {
+          name: 'Utilisation',
+          revenue: 100,
+          target: 146,
+        },
+        {
+          name: 'Review Score',
+          revenue: 100,
+          target: 46,
+        },
+        {
+          name: 'Care Factor',
+          revenue: 100,
+          target: 46,
+        },
+      ],
+    },
+    {
+      id: 3,
+      targetName: 'Products',
+      type: 'C',
+      data: [
+        {
+          name: 'Face Creams',
+          revenue: 100,
+          target: 146,
         },
         {
           name: 'Obagi',
+          revenue: 100,
+          target: 46,
+        },
+        {
+          name: 'Skin Creams',
+          revenue: 100,
+          target: 46,
+        },
+        {
+          name: 'Whitening',
+          revenue: 100,
+          target: 46,
+        },
+        {
+          name: 'Lipstick',
+          revenue: 100,
+          target: 46,
         },
       ],
     },
     {
-      target: 'Packages',
+      id: 5,
+      targetName: 'Services',
+      type: 'C',
+      data: [
+        {
+          name: 'Physio',
+          revenue: 100,
+          target: 432,
+        },
+        {
+          name: 'Peels',
+          revenue: 100,
+          target: 46,
+        },
+        {
+          name: 'Facials',
+          revenue: 100,
+          target: 46,
+        },
+        {
+          name: 'Surgical',
+          revenue: 100,
+          target: 46,
+        },
+        {
+          name: 'Injectables',
+          revenue: 100,
+          target: 150,
+        },
+        {
+          name: 'Consultations',
+          revenue: 100,
+          target: 150,
+        },
+        {
+          name: 'Laser',
+          revenue: 100,
+          target: 150,
+        },
+      ],
     },
     {
-      target: 'Vouchers',
+      id: 6,
+      targetName: 'Gift vouchers',
+      type: 'C',
+      data: [
+        {
+          name: 'Vouchers',
+          revenue: 100,
+          target: 146,
+        },
+      ],
     },
     {
-      target: 'Shifts',
-      type: 'B',
-    },
-    {
-      target: 'kpis',
-      type: 'D',
+      id: 7,
+      targetName: 'Packages',
+      data: [
+        {
+          name: 'Peels',
+          revenue: 100,
+          target: 46,
+        },
+        {
+          name: 'Dentistry',
+          revenue: 100,
+          target: 46,
+        },
+        {
+          name: 'Fat Freezing',
+          revenue: 100,
+          target: 46,
+        },
+        {
+          name: 'Laser',
+          revenue: 100,
+          target: 46,
+        },
+      ],
     },
   ],
 }

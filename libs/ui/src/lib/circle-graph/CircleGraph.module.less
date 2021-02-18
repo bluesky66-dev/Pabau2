@@ -1,11 +1,20 @@
 .circleChart {
   display: flex;
+  position: relative;
+  justify-content: center;
+  padding: 100px;
+  transform: rotate(-105deg);
 }
 .circle {
-  border: 3px solid #f1f1f1;
+  border: 10px solid #f1f1f1;
   border-radius: 50%;
   position: relative;
   padding: 100px;
+  top: 18px;
+  right: 79px;
+  width: 540px;
+  height: 540px;
+  transform: rotate(105deg);
 }
 .progressCircle {
   padding: 45px;
@@ -63,3 +72,70 @@
     padding-bottom: 4px;
   }
 }
+ul {
+  position: relative;
+}
+
+ul > li {
+  width: 100px;
+  display: block;
+  transform-origin: -250px center;
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  z-index: 1;
+  .label {
+    padding-left: 8px;
+    white-space: nowrap;
+  }
+}
+.circleBox {
+  display: flex;
+  align-items: center;
+}
+
+ul li img {
+  transform: rotate(90deg);
+}
+
+// ul > :nth-child(1) {
+//   transform: rotate(72deg);
+//   display: flex;
+//   .label {
+//     background-color: green;
+//   }
+// }
+
+// ul > :nth-child(2) {
+//   display: flex;
+//   transform: rotate(144deg);
+//   .label {
+//     background-color: red;
+//   }
+// }
+// ul > :nth-child(2) > div {
+//   display: flex;
+//   transform: rotate(180deg);
+// }
+
+// ul > :nth-child(3) {
+//   display: flex;
+//   background-color: wheat;
+//   transform: rotate(216deg);
+// }
+// ul > :nth-child(3) > div {
+//   display: flex;
+//   transform: rotate(180deg);
+// }
+
+// ul > :nth-child(4) {
+//   display: flex;
+//   background-color: aqua;
+//   transform: rotate(288deg);
+// }
+
+// ul > :nth-child(5) {
+//   display: flex;
+//   background-color: blueviolet;
+//   transform: rotate(360deg);
+// }
