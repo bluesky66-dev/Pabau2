@@ -6,7 +6,7 @@ import * as Icons from '@fortawesome/free-solid-svg-icons'
 export interface StepperInterface {
   step: number
   name: string
-  imgPath: JSX.Element
+  img: JSX.Element | string
   isActive: boolean
   index: number
 }
@@ -14,14 +14,14 @@ export const data: StepperInterface[] = [
   {
     step: 1,
     name: 'Basic',
-    imgPath: <HomeOutlined />,
+    img: <HomeOutlined />,
     isActive: true,
     index: 0,
   },
   {
     step: 2,
     name: 'Configure(API)',
-    imgPath: (
+    img: (
       <FontAwesomeIcon icon={Icons.faPencilAlt} style={{ fontSize: '12px' }} />
     ),
     isActive: false,
@@ -30,14 +30,14 @@ export const data: StepperInterface[] = [
   {
     step: 3,
     name: 'Testing(API)',
-    imgPath: <ToolOutlined />,
+    img: <ToolOutlined />,
     isActive: false,
     index: 2,
   },
   {
     step: 4,
     name: 'Result',
-    imgPath: <FlagOutlined />,
+    img: <FlagOutlined />,
     isActive: false,
     index: 3,
   },
