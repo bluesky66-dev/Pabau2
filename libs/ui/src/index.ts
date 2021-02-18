@@ -1,3 +1,4 @@
+export * from './lib/reports-permission-table/ReportsPermissionTable'
 export * from './lib/read-review/ReadReview'
 export * from './lib/add-suggestion/AddSuggestion'
 export * from './lib/daily/Daily'
