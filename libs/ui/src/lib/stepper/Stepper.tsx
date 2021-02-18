@@ -32,44 +32,42 @@ function StepperList(props) {
   }
 
   return (
-    <>
-      <div className={styles.horizonstepper}>
-        {datasource.map((element, index) => (
-          <div key={element.name} className={styles.steplinediv}>
-            <div className={styles.imglabeldiv}>
-              <div
-                className={
-                  isActive(index)
-                    ? styles.iconenablecircle
-                    : styles.icondisablecircle
-                }
-              >
-                {React.isValidElement(element.img) ? (
-                  <div>{element.img}</div>
-                ) : (
-                  <img src={element.img} alt="" />
-                )}
-              </div>
-              <span
-                className={
-                  isActive(index) ? styles.enablespantxt : styles.disablespantxt
-                }
-              >
-                {element.name}
-              </span>
+    <div className={styles.horizonstepper}>
+      {datasource.map((element, index) => (
+        <div key={element.name} className={styles.steplinediv}>
+          <div className={styles.imglabeldiv}>
+            <div
+              className={
+                isActive(index)
+                  ? styles.iconenablecircle
+                  : styles.icondisablecircle
+              }
+            >
+              {React.isValidElement(element.img) ? (
+                <div>{element.img}</div>
+              ) : (
+                <img src={element.img} alt="" />
+              )}
             </div>
-            {index < datasource.length - 1 && (
-              <hr
-                className={
-                  isBarEnabled(index)
-                    ? styles.stepperlineenable
-                    : styles.stepperlinedisable
-                }
-              />
-            )}
+            <span
+              className={
+                isActive(index) ? styles.enablespantxt : styles.disablespantxt
+              }
+            >
+              {element.name}
+            </span>
           </div>
-        ))}
-      </div>
-    </>
+          {index < datasource.length - 1 && (
+            <hr
+              className={
+                isBarEnabled(index)
+                  ? styles.stepperlineenable
+                  : styles.stepperlinedisable
+              }
+            />
+          )}
+        </div>
+      ))}
+    </div>
   )
 }
