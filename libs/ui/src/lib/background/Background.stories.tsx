@@ -29,6 +29,6 @@ export default {
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 
-const BackgroundStory = ({ ...args }) => <Background {...args} />
+const BackgroundStory = ({ list }) => <Background list={list} />
 
 export const BackgroundColour = BackgroundStory.bind({})

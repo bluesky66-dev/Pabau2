@@ -22,6 +22,12 @@
     font-size: 8px;
   }
 }
+.toggle-opacity {
+  opacity: 0.2;
+  &:hover {
+    opacity: 1;
+  }
+}
 .color-item:hover .badge {
   opacity: 1;
 }
@@ -36,4 +42,13 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 18px;
+}
+
+@media (min-width: 200px) and (max-width: 767px) {
+  .color-item {
+    margin: 4px;
+  }
+  .color-picker-wrap {
+    justify-content: flex-start;
+  }
 }

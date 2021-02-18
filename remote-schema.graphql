@@ -2979,6 +2979,19 @@ type mutation_root {
   delete_marketing_source_by_pk(id: uuid!): marketing_source
 
   """
+  delete data from the table: "payment_types"
+  """
+  delete_payment_types(
+    """filter the rows which have to be deleted"""
+    where: payment_types_bool_exp!
+  ): payment_types_mutation_response
+
+  """
+  delete single row from the table: "payment_types"
+  """
+  delete_payment_types_by_pk(id: uuid!): payment_types
+
+  """
   delete data from the table: "petty_cash_types"
   """
   delete_petty_cash_types(
@@ -3204,6 +3217,28 @@ type mutation_root {
     """on conflict condition"""
     on_conflict: marketing_source_on_conflict
   ): marketing_source
+
+  """
+  insert data into the table: "payment_types"
+  """
+  insert_payment_types(
+    """the rows to be inserted"""
+    objects: [payment_types_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: payment_types_on_conflict
+  ): payment_types_mutation_response
+
+  """
+  insert a single row into the table: "payment_types"
+  """
+  insert_payment_types_one(
+    """the row to be inserted"""
+    object: payment_types_insert_input!
+
+    """on conflict condition"""
+    on_conflict: payment_types_on_conflict
+  ): payment_types
 
   """
   insert data into the table: "petty_cash_types"
@@ -3465,6 +3500,32 @@ type mutation_root {
   ): marketing_source
 
   """
+  update data of the table: "payment_types"
+  """
+  update_payment_types(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: payment_types_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: payment_types_set_input
+
+    """filter the rows which have to be updated"""
+    where: payment_types_bool_exp!
+  ): payment_types_mutation_response
+
+  """
+  update single row of the table: "payment_types"
+  """
+  update_payment_types_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: payment_types_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: payment_types_set_input
+    pk_columns: payment_types_pk_columns_input!
+  ): payment_types
+
+  """
   update data of the table: "petty_cash_types"
   """
   update_petty_cash_types(
@@ -3528,6 +3589,260 @@ enum order_by {
 
   """in descending order, nulls last"""
   desc_nulls_last
+}
+
+"""
+columns and relationships of "payment_types"
+"""
+type payment_types {
+  created_at: timestamptz!
+  description: String!
+  gl_code: String!
+  id: uuid!
+  is_active: Boolean!
+  name: String!
+  order: Int!
+  payment_type: String!
+  updated_at: timestamptz!
+}
+
+"""
+aggregated selection of "payment_types"
+"""
+type payment_types_aggregate {
+  aggregate: payment_types_aggregate_fields
+  nodes: [payment_types!]!
+}
+
+"""
+aggregate fields of "payment_types"
+"""
+type payment_types_aggregate_fields {
+  avg: payment_types_avg_fields
+  count(columns: [payment_types_select_column!], distinct: Boolean): Int!
+  max: payment_types_max_fields
+  min: payment_types_min_fields
+  stddev: payment_types_stddev_fields
+  stddev_pop: payment_types_stddev_pop_fields
+  stddev_samp: payment_types_stddev_samp_fields
+  sum: payment_types_sum_fields
+  var_pop: payment_types_var_pop_fields
+  var_samp: payment_types_var_samp_fields
+  variance: payment_types_variance_fields
+}
+
+"""aggregate avg on columns"""
+type payment_types_avg_fields {
+  order: Float
+}
+
+"""
+Boolean expression to filter rows from the table "payment_types". All fields are combined with a logical 'AND'.
+"""
+input payment_types_bool_exp {
+  _and: [payment_types_bool_exp!]
+  _not: payment_types_bool_exp
+  _or: [payment_types_bool_exp!]
+  created_at: timestamptz_comparison_exp
+  description: String_comparison_exp
+  gl_code: String_comparison_exp
+  id: uuid_comparison_exp
+  is_active: Boolean_comparison_exp
+  name: String_comparison_exp
+  order: Int_comparison_exp
+  payment_type: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "payment_types"
+"""
+enum payment_types_constraint {
+  """unique or primary key constraint"""
+  payment_types_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "payment_types"
+"""
+input payment_types_inc_input {
+  order: Int
+}
+
+"""
+input type for inserting data into table "payment_types"
+"""
+input payment_types_insert_input {
+  description: String
+  gl_code: String
+  is_active: Boolean
+  name: String
+  order: Int
+  payment_type: String
+}
+
+"""aggregate max on columns"""
+type payment_types_max_fields {
+  created_at: timestamptz
+  description: String
+  gl_code: String
+  id: uuid
+  name: String
+  order: Int
+  payment_type: String
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type payment_types_min_fields {
+  created_at: timestamptz
+  description: String
+  gl_code: String
+  id: uuid
+  name: String
+  order: Int
+  payment_type: String
+  updated_at: timestamptz
+}
+
+"""
+response of any mutation on the table "payment_types"
+"""
+type payment_types_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [payment_types!]!
+}
+
+"""
+on conflict condition type for table "payment_types"
+"""
+input payment_types_on_conflict {
+  constraint: payment_types_constraint!
+  update_columns: [payment_types_update_column!]!
+  where: payment_types_bool_exp
+}
+
+"""Ordering options when selecting data from "payment_types"."""
+input payment_types_order_by {
+  created_at: order_by
+  description: order_by
+  gl_code: order_by
+  id: order_by
+  is_active: order_by
+  name: order_by
+  order: order_by
+  payment_type: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: payment_types"""
+input payment_types_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "payment_types"
+"""
+enum payment_types_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  description
+
+  """column name"""
+  gl_code
+
+  """column name"""
+  id
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  order
+
+  """column name"""
+  payment_type
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "payment_types"
+"""
+input payment_types_set_input {
+  description: String
+  gl_code: String
+  is_active: Boolean
+  name: String
+  order: Int
+  payment_type: String
+}
+
+"""aggregate stddev on columns"""
+type payment_types_stddev_fields {
+  order: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type payment_types_stddev_pop_fields {
+  order: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type payment_types_stddev_samp_fields {
+  order: Float
+}
+
+"""aggregate sum on columns"""
+type payment_types_sum_fields {
+  order: Int
+}
+
+"""
+update columns of table "payment_types"
+"""
+enum payment_types_update_column {
+  """column name"""
+  description
+
+  """column name"""
+  gl_code
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  order
+
+  """column name"""
+  payment_type
+}
+
+"""aggregate var_pop on columns"""
+type payment_types_var_pop_fields {
+  order: Float
+}
+
+"""aggregate var_samp on columns"""
+type payment_types_var_samp_fields {
+  order: Float
+}
+
+"""aggregate variance on columns"""
+type payment_types_variance_fields {
+  order: Float
 }
 
 """
@@ -4194,6 +4509,49 @@ type query_root {
   marketing_source_by_pk(id: uuid!): marketing_source
 
   """
+  fetch data from the table: "payment_types"
+  """
+  payment_types(
+    """distinct select on columns"""
+    distinct_on: [payment_types_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [payment_types_order_by!]
+
+    """filter the rows returned"""
+    where: payment_types_bool_exp
+  ): [payment_types!]!
+
+  """
+  fetch aggregated fields from the table: "payment_types"
+  """
+  payment_types_aggregate(
+    """distinct select on columns"""
+    distinct_on: [payment_types_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [payment_types_order_by!]
+
+    """filter the rows returned"""
+    where: payment_types_bool_exp
+  ): payment_types_aggregate!
+
+  """fetch data from the table: "payment_types" using primary key columns"""
+  payment_types_by_pk(id: uuid!): payment_types
+
+  """
   fetch data from the table: "petty_cash_types"
   """
   petty_cash_types(
@@ -4682,6 +5040,49 @@ type subscription_root {
   fetch data from the table: "marketing_source" using primary key columns
   """
   marketing_source_by_pk(id: uuid!): marketing_source
+
+  """
+  fetch data from the table: "payment_types"
+  """
+  payment_types(
+    """distinct select on columns"""
+    distinct_on: [payment_types_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [payment_types_order_by!]
+
+    """filter the rows returned"""
+    where: payment_types_bool_exp
+  ): [payment_types!]!
+
+  """
+  fetch aggregated fields from the table: "payment_types"
+  """
+  payment_types_aggregate(
+    """distinct select on columns"""
+    distinct_on: [payment_types_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [payment_types_order_by!]
+
+    """filter the rows returned"""
+    where: payment_types_bool_exp
+  ): payment_types_aggregate!
+
+  """fetch data from the table: "payment_types" using primary key columns"""
+  payment_types_by_pk(id: uuid!): payment_types
 
   """
   fetch data from the table: "petty_cash_types"
