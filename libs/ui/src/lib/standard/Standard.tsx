@@ -24,22 +24,28 @@ import { PabauPlus } from '../badge/Badge'
 interface P {
   enableReminder: boolean
   onEnableReminder: (boolean) => void
+  standardMessage?: string
   smartDelivery: boolean
   onSmartDelivery: (boolean) => void
   requestConfirmation: boolean
   onRequestConfirmation: (boolean) => void
+  hideRequestConfirmationOption?: boolean
   allowRescheduling: boolean
   onAllowRescheduling: (boolean) => void
+  hideAllowReschedulingOption?: boolean
   allowCancellation: boolean
   onAllowCancellation: (boolean) => void
+  hideAllowCancellationOption?: boolean
   displayPolicy: boolean
   onDisplayPolicy: (boolean) => void
+  hideDisplayPolicyOption?: boolean
   showService: boolean
   onShowService: (boolean) => void
   showEmployeeName: boolean
   onShowEmployeeName: (boolean) => void
   addMedicalHisButton: boolean
   onAddMedicalHisButton: (boolean) => void
+  hideMedicalHistoryOption?: boolean
   backGroundColor: string
   onBackGroundColor: (string) => void
   buttonColor: string
@@ -66,22 +72,28 @@ const { TextArea } = Input
 export const Standard: FC<P> = ({
   enableReminder,
   onEnableReminder,
+  standardMessage,
   smartDelivery,
   onSmartDelivery,
   requestConfirmation,
   onRequestConfirmation,
+  hideRequestConfirmationOption = false,
   allowRescheduling,
   onAllowRescheduling,
+  hideAllowReschedulingOption = false,
   allowCancellation,
   onAllowCancellation,
+  hideAllowCancellationOption = false,
   displayPolicy,
   onDisplayPolicy,
+  hideDisplayPolicyOption = false,
   showService,
   onShowService,
   showEmployeeName,
   onShowEmployeeName,
   addMedicalHisButton,
   onAddMedicalHisButton,
+  hideMedicalHistoryOption = false,
   backGroundColor,
   onBackGroundColor,
   buttonColor,
@@ -142,8 +154,8 @@ export const Standard: FC<P> = ({
           <div style={{ padding: '10px 9px' }}>
             <Row style={{ padding: '0 15px' }}>
               <span className={styles.line1}>
-                This notification automatically sends to clients the moment
-                their appointment is booked.
+                {standardMessage ||
+                  'This notification automatically sends to clients the moment their appointment is booked.'}
                 {/* <span className={styles.anchor}>
                   <Button type="link">Learn more</Button>
                 </span> */}
@@ -223,55 +235,63 @@ export const Standard: FC<P> = ({
                   header="Appearance"
                   key="2"
                 >
-                  <Row align="middle">
-                    <Checkbox
-                      className={styles.checkboxStyle}
-                      value="request_confirmation"
-                      checked={requestConfirmation}
-                      onChange={() =>
-                        onRequestConfirmation(!requestConfirmation)
-                      }
-                    >
-                      Request confirmation
-                    </Checkbox>
-                    <Tooltip
-                      placement="topLeft"
-                      color="#595959"
-                      title={`"We will intelligently schedule additional confirmations to clients who have a history of forgetting"`}
-                    >
-                      <QuestionCircleOutlined />
-                    </Tooltip>
-                  </Row>
-                  <Row>
-                    <Checkbox
-                      className={styles.checkboxStyle}
-                      value="allow_reschedule"
-                      checked={allowRescheduling}
-                      onChange={() => onAllowRescheduling(!allowRescheduling)}
-                    >
-                      Allow rescheduling
-                    </Checkbox>
-                  </Row>
-                  <Row>
-                    <Checkbox
-                      className={styles.checkboxStyle}
-                      value="allow_cancellation"
-                      checked={allowCancellation}
-                      onChange={() => onAllowCancellation(!allowCancellation)}
-                    >
-                      Allow cancellation
-                    </Checkbox>
-                  </Row>
-                  <Row>
-                    <Checkbox
-                      className={styles.checkboxStyle}
-                      value="display_policy"
-                      checked={displayPolicy}
-                      onChange={() => onDisplayPolicy(!displayPolicy)}
-                    >
-                      Display policy
-                    </Checkbox>
-                  </Row>
+                  {!hideRequestConfirmationOption && (
+                    <Row align="middle">
+                      <Checkbox
+                        className={styles.checkboxStyle}
+                        value="request_confirmation"
+                        checked={requestConfirmation}
+                        onChange={() =>
+                          onRequestConfirmation(!requestConfirmation)
+                        }
+                      >
+                        Request confirmation
+                      </Checkbox>
+                      <Tooltip
+                        placement="topLeft"
+                        color="#595959"
+                        title={`"We will intelligently schedule additional confirmations to clients who have a history of forgetting"`}
+                      >
+                        <QuestionCircleOutlined />
+                      </Tooltip>
+                    </Row>
+                  )}
+                  {!hideAllowReschedulingOption && (
+                    <Row>
+                      <Checkbox
+                        className={styles.checkboxStyle}
+                        value="allow_reschedule"
+                        checked={allowRescheduling}
+                        onChange={() => onAllowRescheduling(!allowRescheduling)}
+                      >
+                        Allow rescheduling
+                      </Checkbox>
+                    </Row>
+                  )}
+                  {!hideAllowCancellationOption && (
+                    <Row>
+                      <Checkbox
+                        className={styles.checkboxStyle}
+                        value="allow_cancellation"
+                        checked={allowCancellation}
+                        onChange={() => onAllowCancellation(!allowCancellation)}
+                      >
+                        Allow cancellation
+                      </Checkbox>
+                    </Row>
+                  )}
+                  {!hideDisplayPolicyOption && (
+                    <Row>
+                      <Checkbox
+                        className={styles.checkboxStyle}
+                        value="display_policy"
+                        checked={displayPolicy}
+                        onChange={() => onDisplayPolicy(!displayPolicy)}
+                      >
+                        Display policy
+                      </Checkbox>
+                    </Row>
+                  )}
                   <Row>
                     <Checkbox
                       className={styles.checkboxStyle}
@@ -297,48 +317,51 @@ export const Standard: FC<P> = ({
                       Medical History settings
                     </span>
                   </Row>
-                  <Row>
-                    <Checkbox
-                      className={styles.checkboxStyle}
-                      value="add_his_button"
-                      checked={addMedicalHisButton}
-                      onChange={() =>
-                        onAddMedicalHisButton(!addMedicalHisButton)
-                      }
-                    >
-                      Add Medical History button
-                    </Checkbox>
-                  </Row>
-                  <div className={styles.hidesection}>
-                    {addMedicalHisButton && (
-                      <>
-                        <Row>
-                          <Checkbox
-                            className={styles.checkboxStyle}
-                            value="hide_his_completed"
-                          >
-                            Hide if history is already completed
-                          </Checkbox>
-                        </Row>
-
-                        <Row>
-                          <span className={styles.reminder}>
-                            Medical History message
-                          </span>
-                        </Row>
-                        <Row>
-                          <TextArea
-                            className={styles.textareaStyle}
-                            autoSize={{ minRows: 3, maxRows: 3 }}
-                            maxLength={size.width > 768 ? 500 : 160}
-                            onChange={(event) =>
-                              onMedicalMessage(event.target.value)
-                            }
-                          />
-                        </Row>
-                      </>
-                    )}
-                  </div>
+                  {!hideMedicalHistoryOption && (
+                    <>
+                      <Row>
+                        <Checkbox
+                          className={styles.checkboxStyle}
+                          value="add_his_button"
+                          checked={addMedicalHisButton}
+                          onChange={() =>
+                            onAddMedicalHisButton(!addMedicalHisButton)
+                          }
+                        >
+                          Add Medical History button
+                        </Checkbox>
+                      </Row>
+                      <div className={styles.hidesection}>
+                        {addMedicalHisButton && (
+                          <>
+                            <Row>
+                              <Checkbox
+                                className={styles.checkboxStyle}
+                                value="hide_his_completed"
+                              >
+                                Hide if history is already completed
+                              </Checkbox>
+                            </Row>
+                            <Row>
+                              <span className={styles.reminder}>
+                                Medical History message
+                              </span>
+                            </Row>
+                            <Row>
+                              <TextArea
+                                className={styles.textareaStyle}
+                                autoSize={{ minRows: 3, maxRows: 3 }}
+                                maxLength={size.width > 768 ? 500 : 160}
+                                onChange={(event) =>
+                                  onMedicalMessage(event.target.value)
+                                }
+                              />
+                            </Row>
+                          </>
+                        )}
+                      </div>
+                    </>
+                  )}
                   <ColorPicker
                     heading="Background color"
                     onSelected={(val) => onBackGroundColor(val)}

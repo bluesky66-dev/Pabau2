@@ -1,11 +1,28 @@
 import React, { FC, useState } from 'react'
 import { ClientNotification, Standard, Appointment, Smstext } from '@pabau/ui'
+import CancelAppointmentPreview from '../../pages/client-notifications/cancelled-appointment/CancelAppointmentPreview'
 
 interface P {
   onSeletedTab: (number) => void
+  standardMessage?: string
+  hideRequestConfirmationOption?: boolean
+  hideMedicalHistoryOption?: boolean
+  hideAllowReschedulingOption?: boolean
+  hideAllowCancellationOption?: boolean
+  hideDisplayPolicyOption?: boolean
+  type?: string
 }
 
-const Index: FC<P> = ({ onSeletedTab }) => {
+const Index: FC<P> = ({
+  onSeletedTab,
+  standardMessage,
+  hideRequestConfirmationOption = false,
+  hideMedicalHistoryOption = false,
+  hideAllowReschedulingOption = false,
+  hideAllowCancellationOption = false,
+  hideDisplayPolicyOption = false,
+  type = '',
+}) => {
   const [enableReminder, setEnableReminder] = useState(false)
   const [smartDelivery, setSmartDelivery] = useState(false)
   const [requestConfirmation, setRequestConfirmation] = useState(true)
@@ -87,25 +104,44 @@ const Index: FC<P> = ({ onSeletedTab }) => {
           onActiveSocialIcon={(value) => {
             setActiveSocialIcons(value.map((e) => e))
           }}
+          standardMessage={standardMessage}
+          hideRequestConfirmationOption={hideRequestConfirmationOption}
+          hideAllowReschedulingOption={hideAllowReschedulingOption}
+          hideAllowCancellationOption={hideAllowCancellationOption}
+          hideDisplayPolicyOption={hideDisplayPolicyOption}
+          hideMedicalHistoryOption={hideMedicalHistoryOption}
         />
       }
       previewComponent={
-        <Appointment
-          requestConfirm={requestConfirmation}
-          allowRescheduling={allowRescheduling}
-          allowCancellation={allowCancellation}
-          displayPolicy={displayPolicy}
-          showService={showService}
-          showEmployeeName={showEmployeeName}
-          addMedicalHisButton={addMedicalHisButton}
-          selectLanguage={selectLanguage}
-          backGroundColor={backGroundColor}
-          buttonColor={buttonColor}
-          informationMessage={informationMessage}
-          medicalMessage={medicalMessage}
-          standardTapIndex={standardTapIndex}
-          activeSocialIcons={activeSocialIcons}
-        />
+        type === 'cancel' ? (
+          <CancelAppointmentPreview
+            standardTapIndex={standardTapIndex}
+            backGroundColor={backGroundColor}
+            activeSocialIcons={activeSocialIcons}
+            selectLanguage={selectLanguage}
+            showService={showService}
+            showEmployeeName={showEmployeeName}
+            buttonColor={buttonColor}
+            informationMessage={informationMessage}
+          />
+        ) : (
+          <Appointment
+            requestConfirm={requestConfirmation}
+            allowRescheduling={allowRescheduling}
+            allowCancellation={allowCancellation}
+            displayPolicy={displayPolicy}
+            showService={showService}
+            showEmployeeName={showEmployeeName}
+            addMedicalHisButton={addMedicalHisButton}
+            selectLanguage={selectLanguage}
+            backGroundColor={backGroundColor}
+            buttonColor={buttonColor}
+            informationMessage={informationMessage}
+            medicalMessage={medicalMessage}
+            standardTapIndex={standardTapIndex}
+            activeSocialIcons={activeSocialIcons}
+          />
+        )
       }
       smsComponent={
         <Smstext

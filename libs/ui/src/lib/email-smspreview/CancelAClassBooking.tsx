@@ -14,6 +14,7 @@ export function CancelAClassBooking({
   message,
   address,
   text,
+  buttonColor,
 }: PropsWithChildren<
   CancelAClassBookingProps & EmailSMSPreviewProps
 >): JSX.Element {
@@ -52,7 +53,11 @@ export function CancelAClassBooking({
       </Row>
       <Row className={styles.rebookBtn}>
         <Col>
-          <Button size="middle" className={styles.btnRebook}>
+          <Button
+            size="middle"
+            className={styles.btnRebook}
+            backgroundColor={buttonColor}
+          >
             Rebook
           </Button>
         </Col>

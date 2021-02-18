@@ -1,4 +1,5 @@
 export * from './lib/email-smspreview/EmailSMSPreview'
+export * from './lib/email-smspreview/CancelAClassBooking'
 export * from './lib/read-review/ReadReview'
 export * from './lib/add-suggestion/AddSuggestion'
 export * from './lib/daily/Daily'

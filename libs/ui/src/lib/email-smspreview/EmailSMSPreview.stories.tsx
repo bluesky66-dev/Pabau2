@@ -184,6 +184,7 @@ const cancelledAClassBookingStory = ({
   smsGreeting,
   smsMessage,
   smsFooterText,
+  buttonColor = '',
 }: PropsWithChildren<EmailSMSPreviewProps & CancelAClassBookingProps>) => (
   <EmailSMSPreview
     greeting={greeting}
@@ -199,6 +200,7 @@ const cancelledAClassBookingStory = ({
       consultationDetail={consultationDetail}
       address={address}
       message={message}
+      buttonColor={buttonColor}
     />
   </EmailSMSPreview>
 )

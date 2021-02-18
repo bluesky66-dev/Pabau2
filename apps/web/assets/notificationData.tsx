@@ -38,7 +38,7 @@ const notificationData = {
       description: 'Automatically sends to clients ahead of their appointment',
       icon: <BellOutlined />,
       smartDelivery: true,
-      link: null,
+      link: '/client-notifications/appointment-reminder',
       disabled: true,
     },
     {
@@ -65,7 +65,7 @@ const notificationData = {
         'Automatically sends to clients when an appointment is cancelled',
       icon: <CloseCircleOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/cancelled-appointment',
       disabled: true,
     },
     {
