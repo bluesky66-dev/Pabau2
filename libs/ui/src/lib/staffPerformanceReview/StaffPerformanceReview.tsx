@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useState } from 'react'
-import { Steps, DatePicker, Dropdown, Menu, Button } from 'antd'
+import { Steps, DatePicker, Dropdown, Menu, Button, Tooltip } from 'antd'
 import {
   FileSearchOutlined,
   TeamOutlined,
@@ -9,6 +9,7 @@ import dateFormat from 'dateformat'
 import moment from 'moment'
 
 import styles from './StaffPerformanceReview.module.less'
+import { ClockCircleOutlined } from '@ant-design/icons/lib'
 const { Step } = Steps
 
 export enum periodType {
@@ -72,7 +73,11 @@ const StaffPerformanceReview: FC<P> = () => {
       const reviewMonth = new Date(review.setMonth(review.getMonth() - 1))
       DateArray.push({
         date: today,
-        icon: <FileSearchOutlined />,
+        icon: (
+          <Tooltip placement="topLeft" title="Today">
+            <ClockCircleOutlined />
+          </Tooltip>
+        ),
         status: 'wait',
       })
       if (diff_months(today, reviewDate) > 3) {
@@ -84,13 +89,25 @@ const StaffPerformanceReview: FC<P> = () => {
               new Date().setMonth(new Date().getMonth() + 3 * i - 1)
             ),
             status: 'process',
-            icon: <TeamOutlined />,
+            icon: (
+              <Tooltip placement="topLeft" title="Peer Feedback">
+                <TeamOutlined />
+              </Tooltip>
+            ),
           })
         }
       }
       new Date(reviewMonth) > new Date(today)
         ? DateArray.push(
-            { date: reviewMonth, icon: <MailOutlined />, status: 'finish' },
+            {
+              date: reviewMonth,
+              icon: (
+                <Tooltip placement="topLeft" title="Assessment Reminder Email">
+                  <MailOutlined />
+                </Tooltip>
+              ),
+              status: 'finish',
+            },
             {
               date: reviewDate,
               icon: <FileSearchOutlined />,
@@ -99,7 +116,11 @@ const StaffPerformanceReview: FC<P> = () => {
           )
         : DateArray.push({
             date: reviewDate,
-            icon: <FileSearchOutlined />,
+            icon: (
+              <Tooltip placement="topLeft" title="Self & Manager assessment">
+                <FileSearchOutlined />
+              </Tooltip>
+            ),
             status: 'process',
           })
       if (
@@ -109,7 +130,11 @@ const StaffPerformanceReview: FC<P> = () => {
         DateArray.push({
           date: new Date(new Date().setMonth(reviewDate.getMonth() + 1)),
           status: 'process',
-          icon: <TeamOutlined />,
+          icon: (
+            <Tooltip placement="topLeft" title="Peer Feedback">
+              <TeamOutlined />
+            </Tooltip>
+          ),
         })
       }
       if (numberOfReviews > 0) {
@@ -119,7 +144,11 @@ const StaffPerformanceReview: FC<P> = () => {
               new Date().setMonth(reviewDate.getMonth() + 3 * i + 1)
             ),
             status: 'process',
-            icon: <TeamOutlined />,
+            icon: (
+              <Tooltip placement="topLeft" title="Peer Feedback">
+                <TeamOutlined />
+              </Tooltip>
+            ),
           })
         }
       }
@@ -130,30 +159,58 @@ const StaffPerformanceReview: FC<P> = () => {
       DateArray.push(
         {
           date: today,
-          icon: <FileSearchOutlined />,
+          icon: (
+            <Tooltip placement="topLeft" title="Self & Manager assessment">
+              <FileSearchOutlined />
+            </Tooltip>
+          ),
           status: 'process',
         },
         {
           date: new Date(new Date().setMonth(new Date().getMonth() + 1)),
-          icon: <TeamOutlined />,
+          icon: (
+            <Tooltip placement="topLeft" title="Peer Feedback">
+              <TeamOutlined />
+            </Tooltip>
+          ),
           status: 'wait',
         },
         {
           date: new Date(new Date().setMonth(new Date().getMonth() + 4)),
-          icon: <TeamOutlined />,
+          icon: (
+            <Tooltip placement="topLeft" title="Peer Feedback">
+              <TeamOutlined />
+            </Tooltip>
+          ),
           status: 'wait',
         },
         {
           date: new Date(new Date().setMonth(new Date().getMonth() + 7)),
-          icon: <TeamOutlined />,
+          icon: (
+            <Tooltip placement="topLeft" title="Peer Feedback">
+              <TeamOutlined />
+            </Tooltip>
+          ),
           status: 'wait',
         },
         {
           date: new Date(new Date().setMonth(new Date().getMonth() + 10)),
-          icon: <TeamOutlined />,
+          icon: (
+            <Tooltip placement="topLeft" title="Peer Feedback">
+              <TeamOutlined />
+            </Tooltip>
+          ),
           status: 'wait',
         },
-        { date: reviewMonth, icon: <MailOutlined />, status: 'finish' },
+        {
+          date: reviewMonth,
+          icon: (
+            <Tooltip placement="topLeft" title="Assessment Reminder Email">
+              <MailOutlined />
+            </Tooltip>
+          ),
+          status: 'finish',
+        },
         { date: aYear, icon: <FileSearchOutlined />, status: 'process' }
       )
     }
@@ -166,7 +223,11 @@ const StaffPerformanceReview: FC<P> = () => {
     if (DateFormatter(today) !== DateFormatter(reviewDate)) {
       DateArray.push({
         date: today,
-        icon: <FileSearchOutlined />,
+        icon: (
+          <Tooltip placement="topLeft" title="Today">
+            <ClockCircleOutlined />
+          </Tooltip>
+        ),
         status: 'process',
       })
       if (diff_months(today, reviewDate) > 3) {
@@ -178,26 +239,42 @@ const StaffPerformanceReview: FC<P> = () => {
               new Date().setMonth(new Date().getMonth() + 3 * i - 1)
             ),
             status: 'process',
-            icon: <TeamOutlined />,
+            icon: (
+              <Tooltip placement="topLeft" title="Peer Feedback">
+                <TeamOutlined />
+              </Tooltip>
+            ),
           })
         }
       }
       if (new Date(new Date().setMonth(review.getMonth() - 1)) > new Date()) {
         DateArray.push({
           date: convertDate(-1),
-          icon: <MailOutlined />,
+          icon: (
+            <Tooltip placement="topLeft" title="Assessment Reminder Email">
+              <MailOutlined />
+            </Tooltip>
+          ),
           status: 'finish',
         })
       }
       DateArray.push(
         {
           date: review,
-          icon: <FileSearchOutlined />,
+          icon: (
+            <Tooltip placement="topLeft" title="Self & Manager assessment">
+              <FileSearchOutlined />
+            </Tooltip>
+          ),
           status: 'process',
         },
         {
           date: convertDate(1),
-          icon: <TeamOutlined />,
+          icon: (
+            <Tooltip placement="topLeft" title="Peer Feedback">
+              <TeamOutlined />
+            </Tooltip>
+          ),
           status: 'process',
         }
       )
@@ -208,24 +285,40 @@ const StaffPerformanceReview: FC<P> = () => {
           {
             date: convertDate(aMonth),
             status: 'finish',
-            icon: <MailOutlined />,
+            icon: (
+              <Tooltip placement="topLeft" title="Assessment Reminder Email">
+                <MailOutlined />
+              </Tooltip>
+            ),
           },
           {
             date: convertDate(month),
             status: 'process',
-            icon: <FileSearchOutlined />,
+            icon: (
+              <Tooltip placement="topLeft" title="Self & Manager assessment">
+                <FileSearchOutlined />
+              </Tooltip>
+            ),
           },
           {
             date: convertDate(month + 1),
             status: 'process',
-            icon: <TeamOutlined />,
+            icon: (
+              <Tooltip placement="topLeft" title="Peer Feedback">
+                <TeamOutlined />
+              </Tooltip>
+            ),
           }
         )
       }
     } else {
       DateArray.push({
         date: today,
-        icon: <FileSearchOutlined />,
+        icon: (
+          <Tooltip placement="topLeft" title="Self & Manager assessment">
+            <FileSearchOutlined />
+          </Tooltip>
+        ),
         status: 'process',
       })
       for (let i = 1; i < numberOfReviews + 1; i++) {
@@ -235,19 +328,31 @@ const StaffPerformanceReview: FC<P> = () => {
           {
             date: new Date(new Date().setMonth(new Date().getMonth() + aMonth)),
             status: 'finish',
-            icon: <MailOutlined />,
+            icon: (
+              <Tooltip placement="topLeft" title="Assessment Reminder Email">
+                <MailOutlined />
+              </Tooltip>
+            ),
           },
           {
             date: new Date(new Date().setMonth(new Date().getMonth() + month)),
             status: 'process',
-            icon: <FileSearchOutlined />,
+            icon: (
+              <Tooltip placement="topLeft" title="Self & Manager assessment">
+                <FileSearchOutlined />
+              </Tooltip>
+            ),
           },
           {
             date: new Date(
               new Date().setMonth(new Date().getMonth() + month + 1)
             ),
             status: 'process',
-            icon: <TeamOutlined />,
+            icon: (
+              <Tooltip placement="topLeft" title="Peer Feedback">
+                <TeamOutlined />
+              </Tooltip>
+            ),
           }
         )
       }
@@ -269,6 +374,9 @@ const StaffPerformanceReview: FC<P> = () => {
         <Dropdown overlay={menu} placement="bottomCenter" arrow>
           <Button>{reviewPeriod}</Button>
         </Dropdown>
+      </div>
+      <div className={styles.reviewDate}>
+        NEXT REVIEW IS ON {DateFormatter(reviewDate)}
       </div>
       <div>
         {reviewPeriod === 'annual' ? (
