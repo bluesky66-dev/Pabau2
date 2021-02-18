@@ -1,0 +1,364 @@
+.signInWrapper{
+  display: flex;
+  min-height: 100vh;
+  .sign-in-background {
+    background: #EEF7FB;
+    flex: 1 50%;
+    max-width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      max-width: 100%;
+    }
+  }
+  .form-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1 50%;
+    max-width: 50%;
+    padding: 40px 130px;
+    background: #FFFFFF;
+    .sign-in-form {
+      .form-head {
+        display: flex;
+        flex-direction: column;
+        h6 {
+          font-weight: 500;
+          font-size: 20px;
+          line-height: 25px;
+          color: #3D3D46;
+          margin-bottom: 40px;
+          margin-top: 90px;
+          text-align: center;
+        }
+
+        span {
+          font-size: 14px;
+          line-height: 20px;
+          color: #9292A3;
+          margin-bottom: 16px;
+          a {
+            font-size: 14px;
+            line-height: 20px;
+            color: #54B2D3
+          }
+          &.textContent {
+            color: #3D3D46;
+          }
+        }
+      }
+    }
+    .two-step-auth {
+      .input-wrap {
+        display: flex;
+        margin-bottom: 40px;
+        .custom-input-wrap {
+          display: flex;
+          :global .ant-form-item {
+            margin-bottom: 0;
+            .ant-form-item-control {
+              .ant-form-item-control-input {
+                .ant-form-item-control-input-content {
+                  input[type=number]  {
+                    width: 36px;
+                    height: 40px;
+                    text-align: center;
+                    -moz-appearance: textfield;
+                    &::-webkit-outer-spin-button,
+                    &::-webkit-inner-spin-button {
+                      -webkit-appearance: none;
+                      margin: 0;
+                    }
+                    &:focus {
+                      border: 1px solid #00a1e1;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          &:nth-of-type(2), &:nth-of-type(4) {
+            :global .ant-form-item {
+              margin-bottom: 0;
+              .ant-form-item-control {
+                .ant-form-item-control-input {
+                  .ant-form-item-control-input-content {
+                    input {
+                      width: 36px;
+                      height: 40px;
+                      border: 1px solid #ECEDF0;
+                      border-right: 0;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          &:first-child {
+            :global .ant-form-item {
+              margin-bottom: 0;
+              .ant-form-item-control {
+                .ant-form-item-control-input {
+                  .ant-form-item-control-input-content {
+                    input {
+                      width: 36px;
+                      height: 40px;
+                      border-radius: 4px 0 0 4px;
+                      border: 1px solid #ECEDF0;
+                      border-right: 0;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          &:last-child {
+            :global .ant-form-item {
+              margin-bottom: 0;
+              .ant-form-item-control {
+                .ant-form-item-control-input {
+                  .ant-form-item-control-input-content {
+                    input {
+                      width: 36px;
+                      height: 40px;
+                      border-radius: 0 4px 4px 0;
+                      border: 1px solid #ECEDF0;
+                      border-left: 0;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          .hyphen {
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            color: #ECEDF0;
+          }
+        }
+      }
+      .btn-auth-wrap {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        button {
+          margin-bottom: 16px;
+          height: 40px;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 20px;
+          &.btn-sign-auth {
+            color: #9292A3;
+          }
+        }
+      }
+    }
+    .form-login {
+      :global .ant-form {
+        .ant-form-item {
+          .ant-form-item-label {
+            label {
+              font-size: 14px;
+              line-height: 22px;
+              color: #9292A3;
+            }
+          }
+        }
+      }
+      .forgot-wrap {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: -14px;
+        .forgot-key {
+          font-size: 14px;
+          line-height: 20px;
+          color: #54B2D3;
+          cursor: pointer;
+        }
+      }
+      .check-box {
+        margin-bottom: 40px;
+        :global .ant-checkbox-wrapper {
+          span {
+            font-size: 14px;
+            line-height: 20px;
+            color: #9292A3;
+          }
+        }
+      }
+      .btn-submit {
+        button {
+          background: #54B2D3;
+          border-radius: 4px;
+          margin-bottom: 24px;
+          text-align: center;
+          height: 40px;
+          width: 100%;
+        }
+      }
+      .access-key {
+        font-size: 14px;
+        line-height: 18px;
+        color: #9292A3;
+        text-align: center;
+        margin-bottom: 24px;
+        .line {
+          position: relative;
+          width: 100%;
+          span {
+            background: #fff;
+            padding: 0 10px;
+            position: relative;
+            z-index: 999;
+          }
+          &:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            height: 1px;
+            background: #ECEDF0;
+            left: 0;
+          }
+          &:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            height: 1px;
+            background: #ECEDF0;
+            right: 0;
+          }
+        }
+      }
+      .social-wrapper {
+        .google {
+          button {
+            height: 40px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            span {
+              margin-left: 3px;
+              font-weight: 500;
+              font-size: 14px;
+              line-height: 20px;
+              color: #3D3D46;
+            }
+          }
+        }
+      }
+      .social-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 16px;
+        button {
+          border: 1px solid #ECEDF0;
+          box-sizing: border-box;
+          border-radius: 4px;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 20px;
+          height: 40px;
+          text-align: center;
+          align-items: center;
+          display: flex;
+          justify-content: center;
+          flex: 1;
+          .icon-txt-key {
+            svg {
+              width: 24px;
+              height: 24px;
+            }
+          }
+          &:first-child {
+            margin-right: 15px;
+          }
+          color: #3D3D46;
+          :global .anticon-linkedin {
+            svg {
+              fill: #4285F4;
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
+      }
+    }
+    .authLink {
+      display: flex;
+      flex-direction: column;
+      a {
+        font-size: 14px;
+        line-height: 20px;
+        margin-bottom: 8px;
+        color: #54B2D3;
+      }
+    }
+    .reset-password {
+      display: flex;
+      :global .ant-form {
+        width: 100%;
+        .ant-form-item {
+          .ant-form-item-label {
+            label {
+              font-size: 14px;
+              line-height: 22px;
+              color: #9292A3;
+            }
+          }
+        }
+      }
+      .reset-wrap {
+        .btn-reset {
+          display: flex;
+          flex-direction: column;
+          .btn-started {
+            background: #54B2D3;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 20px;
+            color: #FFFFFF;
+            height: 40px;
+          }
+          .btn-return {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 20px;
+            color: #9292A3;
+            height: 40px;
+            margin-top: 16px;
+          }
+        }
+        .link-reset {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          margin-top: 16px;
+          p {
+            margin-bottom: 0;
+            font-size: 14px;
+            line-height: 20px;
+            color: #9292A3;
+          }
+         span {
+           font-size: 14px;
+           cursor: pointer;
+           line-height: 20px;
+            color: #54B2D3;
+          }
+        }
+      }
+    }
+  }
+}
+

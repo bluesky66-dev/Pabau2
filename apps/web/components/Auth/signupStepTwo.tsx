@@ -84,7 +84,7 @@ export const SignupStepTwo: FC<SignupStepTwoProps> = ({
               name={'country'}
               className={styles.signupInput}
             >
-              <Select name={'country'}>
+              <Select name={'country'} showSearch>
                 {Object.keys(countriesName).map((key) => (
                   <Select.Option value={key} key={key}>
                     {countriesName[key]}
@@ -97,7 +97,7 @@ export const SignupStepTwo: FC<SignupStepTwoProps> = ({
               name={'timeZone'}
               className={styles.signupInput}
             >
-              <Select name={'timeZone'}>
+              <Select name={'timeZone'} showSearch>
                 {timezones.map((item) => (
                   <Select.Option key={item.text} value={item.text}>
                     {item.text}

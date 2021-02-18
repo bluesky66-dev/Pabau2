@@ -37,7 +37,7 @@ export const SignupStepOne: FC<SignupStepOneProps> = ({
           password: Yup.string()
             .required('Password is required')
             .matches(
-              /^(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
+              /^(?=.*\d)(?=.*[^\dA-Za-z])(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
               'Must Contain strong password'
             ),
         })}
