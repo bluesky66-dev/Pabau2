@@ -11,7 +11,7 @@ export interface P {
   reviewType: string
   reviewDescription: string
   questionNo?: number
-  onNext: (data: object) => void
+  onNext: (e: any) => void
   onClose: () => void
 }
 
@@ -35,7 +35,7 @@ export const ReviewQuestionScreen: FC<P> = ({
       setSpanError(true)
     } else {
       setTextAreaErr(false)
-      let data = {
+      const data = {
         answer,
         rating,
       }

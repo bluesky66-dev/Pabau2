@@ -81,9 +81,9 @@ export const Index: FC<IndexProps> = ({ ...props }) => {
   }
 
   const onNext = async (answerData) => {
-    let existingAnswers = { ...answers }
-    let currentAnswerData = existingAnswers[totalQs[current].id] || {}
-    let newAnswerData = { ...currentAnswerData, ...answerData }
+    const existingAnswers = { ...answers }
+    const currentAnswerData = existingAnswers[totalQs[current].id] || {}
+    const newAnswerData = { ...currentAnswerData, ...answerData }
     existingAnswers[totalQs[current].id] = newAnswerData
     await setAnswers(existingAnswers)
     setCurrent(current + 1)
