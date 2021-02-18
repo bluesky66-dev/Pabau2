@@ -4,13 +4,13 @@ import React from 'react'
 import CrudLayout from '../../components/CrudLayout/CrudLayout'
 
 const LIST_QUERY = gql`
-  query marketing_sources_TODO1(
+  query family_relationships_TODO1(
     $isActive: Boolean = true
     $searchTerm: String = ""
     $offset: Int
     $limit: Int
   ) {
-    marketing_source(
+    family_relationships(
       offset: $offset
       limit: $limit
       order_by: { order: desc }
