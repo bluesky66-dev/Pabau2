@@ -40,6 +40,10 @@ export const ClientMessageReport: FC<ClientMessageReportProps> = ({
   const APIKEY = 'QvSIMgCvR9U-eNOm93rgwXA7eSENQz2jrXmb75tji3'
   const [dataSource, setDataSource] = useState([])
 
+  useEffect(() => {
+    fetchMessageHistory()
+  }, [])
+
   const fetchMessageHistory = async (page = 1) => {
     try {
       setLoader(true)
@@ -67,12 +71,7 @@ export const ClientMessageReport: FC<ClientMessageReportProps> = ({
         <h1>{reportTitle}</h1>
       </div>
       <div className="search-input">
-        <Input
-          size="large"
-          type="text"
-          name="search"
-          placeHolderText="Search"
-        />
+        <Input type="text" name="search" placeHolderText="Search" />
         <span className="search-icon">
           <SearchOutlined />
         </span>
@@ -113,9 +112,6 @@ export const ClientMessageReport: FC<ClientMessageReportProps> = ({
 
   const menuClick = (key) => {
     if (key === 'See message log') {
-      if (!dataSource.length) {
-        fetchMessageHistory(1)
-      }
       setModalStatus((reportVisibility) => !reportVisibility)
     }
   }
