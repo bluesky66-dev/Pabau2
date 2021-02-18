@@ -83,11 +83,8 @@
     "r7insight_node": "^2.1.0",
     "rc-queue-anim": "^1.8.5",
     "react": "17.0.1",
-<<<<<<< HEAD
     "react-detect-offline": "^2.4.1",
-=======
     "react-beautiful-dnd": "^13.0.0",
->>>>>>> 0c36b84c1d7e4d7aa25eb4840e889501c223fe18
     "react-device-detect": "^1.15.0",
     "react-dom": "17.0.1",
     "react-google-places-autocomplete": "2.3.2",
