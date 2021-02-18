@@ -29,7 +29,7 @@ export const FullScreenReportModal: FC<FullScreenReportModalProps> = ({
     >
       <>
         <div className={styles.header}>
-          <div>
+          <div className={styles.headerContent}>
             <LeftOutlined onClick={() => onBackClick?.()} />
             {header ? (
               <span className={styles.headerTitle}>{title?.()}</span>

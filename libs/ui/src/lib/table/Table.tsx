@@ -172,7 +172,7 @@ export const Table: FC<TableType> = ({
       ? [{ ...dragColumn }, ...(props.columns || [])]
       : props.columns
   }
-
+  console.log('columns and datasource:', props.columns, dataSource)
   return !dataSource?.length && !props.loading && !searchTerm ? (
     <div className={styles.noDataTableBox}>
       <div className={styles.noDataTextStyle}>

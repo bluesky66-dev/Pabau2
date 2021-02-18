@@ -124,7 +124,20 @@ const CrudTable: FC<P> = ({
   })
 
   useEffect(() => {
-    if (data) setSourceData(data)
+    if (data) {
+      if (data[0].__typename === 'issuing_company') {
+        const newData = data.map((d) => {
+          const { country, city, street, post_code } = d
+          return {
+            ...d,
+            address: country + ', ' + city + ', ' + street + ', ' + post_code,
+          }
+        })
+        setSourceData(newData)
+      } else {
+        setSourceData(data)
+      }
+    }
     if (aggregateData)
       setPaginateData({
         ...paginateData,
@@ -406,7 +419,6 @@ const CrudTable: FC<P> = ({
             noDataText={schema.fullLower}
             onAddTemplate={() => createNew()}
             searchTerm={searchTerm}
-            className={styles.tableCustom}
             columns={[
               ...Object.entries(schema.fields).map(([k, v]) => ({
                 dataIndex: k,
