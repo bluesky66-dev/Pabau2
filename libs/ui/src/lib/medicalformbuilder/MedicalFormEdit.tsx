@@ -44,9 +44,9 @@ const reorder = (list, startIndex, endIndex) => {
   return list
 }
 
-const copy = (source, destination, droppableSource, droppableDestination) => {
+const copy = (source, destination, droppableSource, endIndex) => {
   const item = source[droppableSource.index]
-  destination.splice(droppableDestination.index, 0, {
+  destination.splice(endIndex, 0, {
     ...item,
     id: uuidv4(),
     txtQuestion: '',
@@ -110,12 +110,12 @@ const MedicalFormEdit: FC = () => {
           break
         case 'LeftSideBasic':
           setDraggedForms((state) =>
-            copy(medicalForms, state, source, destination)
+            copy(medicalForms, state, source, destination.index)
           )
           break
         case 'LeftSideCustom':
           setDraggedForms((state) =>
-            copy(medicalForms, state, source, destination)
+            copy(medicalForms, state, source, destination.index)
           )
           break
 
@@ -128,10 +128,10 @@ const MedicalFormEdit: FC = () => {
   return (
     <Row>
       <DragDropContext onDragEnd={onDragEnd}>
-        <Col span={5}>
+        <Col span={6}>
           <MedicalFormEditLeft medicalForms={medicalForms} />
         </Col>
-        <Col span={12} className={styles.MedicalFormEditMain}>
+        <Col span={11} className={styles.MedicalFormEditMain}>
           <MedicalFormEditMain
             draggedForms={draggedForms}
             handlingFormSetting={handlingFormSetting}

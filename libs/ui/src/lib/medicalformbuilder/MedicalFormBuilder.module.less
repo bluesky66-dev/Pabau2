@@ -46,7 +46,7 @@
       background-color: white;
     }
   }
-  .medicalFormEditLeftPanelCollapseComponent {
+  .medicalFormEditLeftPanelCollapseComponentCollapse {
     :global {
       .ant-collapse-content-box {
         padding: 0;
@@ -64,7 +64,30 @@
         margin: 0;
       }
       .ant-tabs-content-holder {
-        height: 350px;
+        height: 250px;
+        overflow-y: auto;
+      }
+    }
+  }
+  .medicalFormEditLeftPanelCollapseComponentExpend {
+    :global {
+      .ant-collapse-content-box {
+        padding: 0;
+      }
+      .ant-tabs > .ant-tabs-nav .ant-tabs-nav-list,
+      .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-list {
+        width: 100%;
+      }
+      .ant-tabs-tab {
+        flex: 1 1;
+        justify-content: center;
+        margin: 0;
+      }
+      .ant-tabs-nav {
+        margin: 0;
+      }
+      .ant-tabs-content-holder {
+        height: 690px;
         overflow-y: auto;
       }
     }
@@ -75,6 +98,9 @@
 }
 .MedicalFormEditMain {
   max-height: 780px;
+}
+.medicalFormEditMainEmptyPanel {
+  text-align: center;
 }
 .medicalFormEditMainPanel {
   display: block;
