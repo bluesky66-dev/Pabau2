@@ -6,13 +6,14 @@ import { FormikValues } from 'formik'
 interface P {
   schema: Schema
   values: FormikValues
+  layout?: 'horizontal' | 'inline' | 'vertical'
 }
 
-const Form: FC<P> = ({ schema, values }) => {
+const Form: FC<P> = ({ schema, values, layout = 'vertical' }) => {
   const { fields } = schema
 
   return (
-    <AntForm layout="vertical" requiredMark={false}>
+    <AntForm layout={layout} requiredMark={false}>
       {Object.entries(fields).map(
         (
           [
@@ -61,6 +62,7 @@ const Form: FC<P> = ({ schema, values }) => {
                 <div style={{ width: '344px' }}>
                   <ColorPicker
                     selectedColor={values.color}
+                    isDarkColor={true}
                     onSelected={(val) => {
                       values.color = val
                     }}
