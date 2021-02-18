@@ -1,0 +1,93 @@
+.clientAreaContainer {
+  width: 100%;
+  background-color: white;
+}
+
+.clientAreaHeader {
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 767px) {
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 0;
+  }
+}
+
+.clientAreaOps {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  .reviewLink {
+    text-align: right;
+  }
+
+  >a {
+    font-family: var(--font-family);
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    color: var(--primary-color);
+  }
+
+  @media (max-width: 767px) {
+    align-items: flex-start;
+    padding: 20px;
+    border-top: 1px solid var(--border-color-base);
+  }
+}
+
+.clientAreaBreadcrumb {
+  :global {
+    .ant-typography {
+      padding: 0;
+    }
+
+    .ant-breadcrumb {
+      padding: 0;
+      padding-bottom: 8px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+
+.clientAreaBreadcrumbMobile {
+  display: none;
+  padding: 20px;
+
+  :global {
+    .ant-typography {
+      padding: 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    display: block;
+  }
+}
+
+.clientAreaStep {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid var(--border-color-base);
+
+  >div {
+    max-width: 400px;
+    width: 100%;
+  }
+}
+
+.clientAreaBody {
+  width: 100%;
+  border-top: 1px solid var(--border-color-base);
+}
