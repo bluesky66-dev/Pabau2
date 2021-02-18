@@ -36,14 +36,14 @@ export const LeadForms: React.FC = () => {
     {
       step: 1,
       name: 'Basic',
-      imgPath: <HomeOutlined />,
+      img: <HomeOutlined />,
       isActive: true,
       index: 0,
     },
     {
       step: 2,
       name: 'Configure(API)',
-      imgPath: (
+      img: (
         <FontAwesomeIcon
           icon={Icons.faPencilAlt}
           style={{ fontSize: '12px' }}
@@ -55,14 +55,14 @@ export const LeadForms: React.FC = () => {
     {
       step: 3,
       name: 'Testing(API)',
-      imgPath: <ToolOutlined />,
+      img: <ToolOutlined />,
       isActive: false,
       index: 2,
     },
     {
       step: 4,
       name: 'Result',
-      imgPath: <FlagOutlined />,
+      img: <FlagOutlined />,
       isActive: false,
       index: 3,
     },
@@ -72,14 +72,14 @@ export const LeadForms: React.FC = () => {
     {
       step: 1,
       name: 'Basic',
-      imgPath: <HomeOutlined />,
+      img: <HomeOutlined />,
       isActive: true,
       index: 0,
     },
     {
       step: 2,
       name: 'Customize Form',
-      imgPath: (
+      img: (
         <FontAwesomeIcon
           icon={Icons.faPencilAlt}
           style={{ fontSize: '12px' }}
@@ -91,7 +91,7 @@ export const LeadForms: React.FC = () => {
     {
       step: 3,
       name: 'Result',
-      imgPath: <FlagOutlined />,
+      img: <FlagOutlined />,
       isActive: false,
       index: 2,
     },
