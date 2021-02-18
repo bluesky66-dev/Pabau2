@@ -40,13 +40,13 @@ export const AddQuestionStory: FC<AddQuestionProps> = ({
   const [isDeleteDisable, setDeleteDisable] = useState<boolean>(false)
 
   const onChange = (value: string, index: number) => {
-    const tempQuestions = [...question]
-    tempQuestions.forEach((question, key) => {
+    const temporaryQuestions = [...question]
+    for (const [key, question] of temporaryQuestions.entries()) {
       if (key === index) {
         question.title = value
       }
-    })
-    setQuestions(tempQuestions)
+    }
+    setQuestions(temporaryQuestions)
   }
 
   const onAddQuestion = useCallback(() => {
@@ -67,12 +67,14 @@ export const AddQuestionStory: FC<AddQuestionProps> = ({
     questions: Array<IQuestionOptions> | undefined
   ): void => {
     const data = [...question]
-    questions?.forEach((q) => {
-      data.push({
-        title: q.question,
-        key: question.length + Math.floor(Math.random() * 100),
-      })
-    })
+    if (questions) {
+      for (const a of questions) {
+        data.push({
+          title: a.question,
+          key: question.length + Math.floor(Math.random() * 100),
+        })
+      }
+    }
     setQuestions(data)
   }
 

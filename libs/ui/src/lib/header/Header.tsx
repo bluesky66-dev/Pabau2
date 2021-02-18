@@ -1,7 +1,6 @@
 import React, { FC, useState, MouseEvent } from 'react'
-import { Col, Layout, Row } from 'antd'
+import { Badge, Col, Layout, Row } from 'antd'
 import { BellOutlined, MailOutlined } from '@ant-design/icons'
-
 import styles from './Header.module.less'
 import {
   Dropdown as AvatarDropDown,
@@ -149,14 +148,18 @@ export const Header: FC<P> = ({
             </Col>
             <Col md={10} lg={8} className={styles.headerIconEnd}>
               <div className={styles.headerAlign}>
-                <BellOutlined
-                  className={styles.headerIcon}
-                  onClick={() => setNotificationDrawer((e) => !e)}
-                />
-                <MailOutlined
-                  className={styles.headerIcon}
-                  onClick={() => setMessageDrawer((e) => !e)}
-                />
+                <Badge count={3} className={styles.badgeCircle}>
+                  <BellOutlined
+                    className={styles.headerIcon}
+                    onClick={() => setNotificationDrawer((e) => !e)}
+                  />
+                </Badge>
+                <Badge count={3} className={styles.badgeCircle}>
+                  <MailOutlined
+                    className={styles.headerIcon}
+                    onClick={() => setMessageDrawer((e) => !e)}
+                  />
+                </Badge>
                 <div>
                   <QuickCreate />
                 </div>

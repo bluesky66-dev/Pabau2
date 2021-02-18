@@ -16,12 +16,13 @@ generates:
 #    plugins:
 #      - "typescript-graphql-files-modules"
 
-#  file.graphql:
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
+
+#  ./remote-schema.graphql:
 #    plugins:
 #      - schema-ast
 #    config:
 #      includeDirectives: true
-
-  ./graphql.schema.json:
-    plugins:
-      - "introspection"
+#

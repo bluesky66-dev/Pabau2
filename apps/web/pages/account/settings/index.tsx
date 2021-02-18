@@ -6,14 +6,14 @@ import {
 } from '@ant-design/icons'
 import { Layout } from '@pabau/ui'
 import { Button, Col, Row, Tabs } from 'antd'
-import React from 'react'
+import React, { FC } from 'react'
 import styles from './index.module.less'
 import Notification from './notifications'
 import Profile from './profile'
 import Security from './security'
 
 const { TabPane } = Tabs
-export function Index() {
+const Index: FC = () => {
   return (
     <Layout>
       <Row className={styles.container}>

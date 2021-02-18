@@ -1,7 +1,11 @@
 import React, { FC, useState } from 'react'
 import { Input as AntInput } from 'antd'
-import { Button, QuestionBankModal } from '@pabau/ui'
-import { CloseOutlined, PlusOutlined } from '@ant-design/icons'
+import { Button, Switch, QuestionBankModal } from '@pabau/ui'
+import {
+  CloseOutlined,
+  PlusOutlined,
+  UnorderedListOutlined,
+} from '@ant-design/icons'
 import { data, menuOptions } from '../questionBank/mock'
 import { IQuestionOptions } from '../questionBank/QuestionBank'
 
@@ -23,9 +27,11 @@ export interface AddQuestionProps {
   addQuestionLabel?: string
   goToButtonLabel?: string
   isDeleteDisable?: boolean
+  translate?: boolean
   onChange?: (value: string, index: number) => void
   onAddQuestion?: () => void
   onDeleteButton?: (index: number) => void
+  onGoTo?: () => void
 }
 
 export const AddQuestion: FC<AddQuestionProps> = ({
@@ -40,13 +46,29 @@ export const AddQuestion: FC<AddQuestionProps> = ({
   onAddQuestion,
   onDeleteButton,
   onQuestionBankAddButton,
+  onGoTo,
 }) => {
   const [isModalVisible, setModalVisible] = useState<boolean>(false)
-
+  const onClick = () => {
+    onGoTo?.()
+    setModalVisible(true)
+  }
   return (
     <div className={styles.questionWrapper}>
-      <h1>{title}</h1>
+      <h1>
+        <UnorderedListOutlined
+          style={{ marginRight: '.5rem', color: '#54b2d3' }}
+        />
+        {title}
+      </h1>
       <div className={styles.para}>{description}</div>
+      <div className={styles.translate}>
+        <span>
+          Translate questions to clients local language.{' '}
+          <span className={styles.plusTag}>Plus</span>
+        </span>
+        <Switch size="small" />
+      </div>
       <div className={styles.questionWrapperList}>
         {questions?.map((que, index) => (
           <div className={styles.queList} key={que.key}>
@@ -73,11 +95,7 @@ export const AddQuestion: FC<AddQuestionProps> = ({
           <PlusOutlined /> {addQuestionLabel}
         </div>
       </div>
-      <Button
-        type="primary"
-        className={styles.btnBank}
-        onClick={() => setModalVisible(true)}
-      >
+      <Button type="primary" className={styles.btnBank} onClick={onClick}>
         {goToButtonLabel}
       </Button>
       <QuestionBankModal

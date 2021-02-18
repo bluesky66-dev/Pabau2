@@ -33,7 +33,7 @@ export const QuestionBankModalStory = (args: P): JSX.Element => {
   return (
     <QuestionBankModal
       {...args}
-      title={'Question Bank'}
+      title="Question Bank"
       questions={questions}
       options={menuOptions}
       onAdd={handleAdd}
