@@ -464,6 +464,73 @@
 - table:
     schema: public
     name: leads
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - is_active
+      - status
+      - created_at
+      - updated_at
+      - lead_age
+      - order
+      - phone
+      - email
+      - interest
+      - lead_name
+      - lead_owner
+      - lead_source
+      - lead_status
+      - location
+      - id
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - status
+      - created_at
+      - updated_at
+      - lead_age
+      - order
+      - phone
+      - email
+      - interest
+      - lead_name
+      - lead_owner
+      - lead_source
+      - lead_status
+      - location
+      - id
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - status
+      - created_at
+      - updated_at
+      - lead_age
+      - order
+      - phone
+      - email
+      - interest
+      - lead_name
+      - lead_owner
+      - lead_source
+      - lead_status
+      - location
+      - id
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: marketing_campaign
