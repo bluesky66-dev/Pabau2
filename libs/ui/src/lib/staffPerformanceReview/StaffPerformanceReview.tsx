@@ -77,9 +77,7 @@ const StaffPerformanceReview: FC<P> = () => {
       })
       if (diff_months(today, reviewDate) > 3) {
         const diff = diff_months(today, reviewDate)
-        console.log('diff', diff)
         const beforePeers = Math.floor(Math.abs(diff - 1) / 3)
-        console.log('beforePeers', beforePeers)
         for (let i = 1; i < beforePeers + 1; i++) {
           DateArray.push({
             date: new Date(
@@ -281,7 +279,6 @@ const StaffPerformanceReview: FC<P> = () => {
                 if (i !== DateArray.length - 1) {
                   diff = diff_months(dates.date, DateArray[i + 1].date)
                 }
-                console.log('diff', diff)
                 return (
                   <Step
                     key={DateFormatter(dates.date)}
@@ -308,7 +305,6 @@ const StaffPerformanceReview: FC<P> = () => {
                 if (i !== DateArray.length - 1) {
                   diff = diff_months(dates.date, DateArray[i + 1].date)
                 }
-                console.log('diff', diff)
                 return (
                   <Step
                     key={DateFormatter(dates.date)}
