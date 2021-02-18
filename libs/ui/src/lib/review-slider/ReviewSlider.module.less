@@ -1,21 +1,27 @@
 .review-slider {
+  padding-top: 24px;
+
   .title {
     text-align: center;
     margin-bottom: 150px;
-    color: #3D3D46;
+    color: #3d3d46;
   }
+
   .slider-wrapper {
     font-size: 14px;
     line-height: 22px;
-    color: #3D3D46;
-    padding: 30px 50px;
+    color: #3d3d46;
+    padding: 30px;
+
     :global .slick-list {
       .slick-track {
         .slick-slide {
           ul {
             li {
               div {
-                .ant-rate-star-second, .ant-rate-star-first{
+
+                .ant-rate-star-second,
+                .ant-rate-star-first {
                   svg {
                     fill: #ff6f59;
                   }
@@ -26,6 +32,7 @@
         }
       }
     }
+
     :global .nextArrow {
       position: absolute;
       top: 0;
@@ -35,7 +42,7 @@
       font-weight: bold;
       cursor: pointer;
     }
-    
+
     :global .prevArrow {
       position: absolute;
       top: 0;
@@ -52,21 +59,24 @@
   display: flex;
   align-items: center;
   margin-bottom: 12px;
+
   div {
     color: #50524b;
   }
+
   ul {
     margin-left: 10px;
   }
 }
+
 .rate-wrap {
   font-size: 14px;
   line-height: 18px;
   height: 100px;
   color: #7e7e7e;
-  padding-right: 30px;
-  
-} 
+  padding-right: 20px;
+}
+
 .review-time {
   font-size: 14px;
   line-height: 22px;
@@ -76,44 +86,54 @@
 }
 
 .content-wrapper {
-  height: 50px;
+  width: 100%;
+  min-width: 692px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 0px;
   margin: 0 auto;
   position: relative;
-  
+
   .content-wrap {
     display: flex;
     align-items: center;
-    padding-right: 80px;
+
     h5 {
       margin: 0 8px 0 0;
       font-size: 18px;
       text-transform: uppercase;
     }
   }
+
   .avg-wrapper {
-    padding-right: 80px;
     display: flex;
     align-items: center;
+
     .avg-data {
       display: flex;
       margin-right: 15px;
       color: #bebebe;
       font-size: 16px;
+
       b {
-        color: #3D3D46;
+        color: #3d3d46;
         margin-right: 8px;
       }
     }
   }
-  
+
+  @media (max-width: 767px) {
+    flex-direction: column-reverse;
+    min-width: 1px;
+    min-height: 100px;
+    padding: 0;
+  }
+
   :global ul {
     li {
       div {
-        .ant-rate-star-second{
+        .ant-rate-star-second {
           svg {
             fill: #ff6f59;
           }

@@ -32,6 +32,10 @@ interface P {
   aggregateQuery?: DocumentNode
   tableSearch?: boolean
   updateOrderQuery?: DocumentNode
+  showNotificationBanner?: boolean
+  createPage?: boolean
+  notificationBanner?: React.ReactNode
+  createPageOnClick?(): void
 }
 
 const CrudTable: FC<P> = ({
@@ -43,6 +47,10 @@ const CrudTable: FC<P> = ({
   aggregateQuery,
   tableSearch = true,
   updateOrderQuery,
+  showNotificationBanner = false,
+  notificationBanner,
+  createPage = false,
+  createPageOnClick,
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [isActive, setIsActive] = useState(true)
@@ -64,7 +72,10 @@ const CrudTable: FC<P> = ({
   })
   const [updateOrderMutation] = useMutation(updateOrderQuery, {
     onError(err) {
-      Notification(NotificationType.error, 'Error! Marketing source update.')
+      Notification(
+        NotificationType.error,
+        `Error! ${schema.messages.update.error}`
+      )
     },
   })
   const [addMutation] = useMutation(addQuery, {
@@ -155,48 +166,47 @@ const CrudTable: FC<P> = ({
 
   const onSubmit = async (values, { resetForm }) => {
     console.log('got submittal!', values)
-    if (values.id)
-      await editMutation({
-        variables: values,
-        optimisticResponse: {},
-        update: (proxy) => {
-          if (listQuery) {
-            const existing = proxy.readQuery({
-              query: listQuery,
-            })
-            if (existing) {
-              const key = Object.keys(existing)[0]
-              proxy.writeQuery({
+    await (values.id
+      ? editMutation({
+          variables: values,
+          optimisticResponse: {},
+          update: (proxy) => {
+            if (listQuery) {
+              const existing = proxy.readQuery({
                 query: listQuery,
-                data: {
-                  [key]: [...existing[key], values],
-                },
               })
+              if (existing) {
+                const key = Object.keys(existing)[0]
+                proxy.writeQuery({
+                  query: listQuery,
+                  data: {
+                    [key]: [...existing[key], values],
+                  },
+                })
+              }
             }
-          }
-        },
-      })
-    else
-      await addMutation({
-        variables: values,
-        optimisticResponse: {},
-        update: (proxy) => {
-          if (listQuery) {
-            const existing = proxy.readQuery({
-              query: listQuery,
-            })
-            if (existing) {
-              const key = Object.keys(existing)[0]
-              proxy.writeQuery({
+          },
+        })
+      : addMutation({
+          variables: values,
+          optimisticResponse: {},
+          update: (proxy) => {
+            if (listQuery) {
+              const existing = proxy.readQuery({
                 query: listQuery,
-                data: {
-                  [key]: [...existing[key], values],
-                },
               })
+              if (existing) {
+                const key = Object.keys(existing)[0]
+                proxy.writeQuery({
+                  query: listQuery,
+                  data: {
+                    [key]: [...existing[key], values],
+                  },
+                })
+              }
             }
-          }
-        },
-      })
+          },
+        }))
     resetForm()
     setModalShowing(false)
   }
@@ -274,16 +284,16 @@ const CrudTable: FC<P> = ({
       enableReinitialize={true}
       validate={(e) =>
         Object.entries(fields).reduce((a, c) => {
-          if (c[1].min) {
+          if (
+            c[1].min && // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            c[1].min > e[c[0]].length
+          ) {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            if (c[1].min > e[c[0]].length) {
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              a[
-                c[0]
-              ] = `The value for ${c[1].shortLower} must be more than ${c[1].min} characters.`
-            }
+            a[
+              c[0]
+            ] = `The value for ${c[1].shortLower} must be more than ${c[1].min} characters.`
           }
           return a
           // eslint-disable-next-line
@@ -313,9 +323,17 @@ const CrudTable: FC<P> = ({
                 </Link>
                 <p> {schema.full || schema.short} </p>
               </div>
-              {addQuery && (
+              {addQuery && !createPage ? (
                 <AddButton
                   onClick={createNew}
+                  onFilterSource={onFilterMarketingSource}
+                  onSearch={onSearch}
+                  schema={schema}
+                  tableSearch={tableSearch}
+                />
+              ) : (
+                <AddButton
+                  onClick={createPageOnClick}
                   onFilterSource={onFilterMarketingSource}
                   onSearch={onSearch}
                   schema={schema}
@@ -338,6 +356,7 @@ const CrudTable: FC<P> = ({
         )}
 
         <Layout>
+          {showNotificationBanner && notificationBanner}
           <div
             className={classNames(
               styles.tableMainHeading,
@@ -353,9 +372,17 @@ const CrudTable: FC<P> = ({
               />
               <Title>{schema.full || schema.short}</Title>
             </div>
-            {addQuery && (
+            {addQuery && !createPage ? (
               <AddButton
                 onClick={createNew}
+                onFilterSource={onFilterMarketingSource}
+                onSearch={onSearch}
+                schema={schema}
+                tableSearch={tableSearch}
+              />
+            ) : (
+              <AddButton
+                onClick={createPageOnClick}
                 onFilterSource={onFilterMarketingSource}
                 onSearch={onSearch}
                 schema={schema}
@@ -406,7 +433,7 @@ const CrudTable: FC<P> = ({
                 }
               }
               setSourceData(newData)
-              console.log('newData, oldIndex, newIndex ', {
+              console.log('newData, oldIndex, newIndex', {
                 newData,
                 oldIndex,
                 newIndex,
