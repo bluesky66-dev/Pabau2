@@ -1,18 +1,18 @@
 import { CheckCircleFilled } from '@ant-design/icons'
 import { Button, Col, Row, Tooltip } from 'antd'
-import React, { FC, ReactNode, useState, useEffect } from 'react'
-import { ReactComponent as MedicalHistory } from '../../assets/images/form-type/medical-history.svg'
-import { ReactComponent as MedicalHistorySelected } from '../../assets/images/form-type/medical-history-selected.svg'
-import { ReactComponent as Consent } from '../../assets/images/form-type/consent.svg'
+import React, { FC, ReactNode, useEffect, useState } from 'react'
 import { ReactComponent as ConsentSelected } from '../../assets/images/form-type/consent-selected.svg'
-import { ReactComponent as Treatment } from '../../assets/images/form-type/treatment.svg'
-import { ReactComponent as TreatmentSelected } from '../../assets/images/form-type/treatment-selected.svg'
-import { ReactComponent as EPaper } from '../../assets/images/form-type/file-pdf.svg'
+import { ReactComponent as Consent } from '../../assets/images/form-type/consent.svg'
 import { ReactComponent as EPaperSelected } from '../../assets/images/form-type/file-pdf-selected.svg'
-import { ReactComponent as Presciption } from '../../assets/images/form-type/presciption.svg'
-import { ReactComponent as PresciptionSelected } from '../../assets/images/form-type/presciption-selected.svg'
-import { ReactComponent as LabForm } from '../../assets/images/form-type/lab-form.svg'
+import { ReactComponent as EPaper } from '../../assets/images/form-type/file-pdf.svg'
 import { ReactComponent as LabFormSelected } from '../../assets/images/form-type/lab-form-selected.svg'
+import { ReactComponent as LabForm } from '../../assets/images/form-type/lab-form.svg'
+import { ReactComponent as MedicalHistorySelected } from '../../assets/images/form-type/medical-history-selected.svg'
+import { ReactComponent as MedicalHistory } from '../../assets/images/form-type/medical-history.svg'
+import { ReactComponent as PresciptionSelected } from '../../assets/images/form-type/presciption-selected.svg'
+import { ReactComponent as Presciption } from '../../assets/images/form-type/presciption.svg'
+import { ReactComponent as TreatmentSelected } from '../../assets/images/form-type/treatment-selected.svg'
+import { ReactComponent as Treatment } from '../../assets/images/form-type/treatment.svg'
 import styles from './FormType.module.less'
 
 interface Setting {
@@ -87,9 +87,9 @@ const defaultTypeInfos: FormTypeInfo = {
 
 export const FormType: FC<FormTypeProps> = ({ setting, onChangeSetting }) => {
   const aligns = [
-    styles.formTypeStart,
     styles.formTypeCenter,
-    styles.formTypeEnd,
+    styles.formTypeCenter,
+    styles.formTypeCenter,
   ]
   const [formTypeInfo, setFormTypesInfo] = useState<FormTypeInfo>(
     defaultTypeInfos

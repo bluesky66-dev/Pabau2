@@ -7,11 +7,13 @@ import styles from './PhoneNumberInput.module.less'
 const phoneUtil = PhoneNumberUtil.getInstance()
 export interface PhoneNumberInputProps {
   countryCode?: string
+  label?: string
   onChange(val: string, valid?: boolean): void
 }
 
 export const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
   countryCode = 'GB',
+  label = 'Phone Number',
   onChange,
 }) => {
   const [phoneNumber, setPhoneNumber] = useState('')
@@ -35,7 +37,7 @@ export const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
 
   return (
     <div className={styles.phoneNumberInputContainer}>
-      <p className={styles.phoneNumberLabel}>Phone Number</p>
+      <p className={styles.phoneNumberLabel}>{label}</p>
       <div
         className={
           valid

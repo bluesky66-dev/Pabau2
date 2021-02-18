@@ -27,7 +27,11 @@ interface P {
   onSaveReview?: (reviewData?: ReviewDataWithText) => void
 }
 
-const ReviewChoice: FC<P> = ({ reviewData, reviewedData, onSaveReview }) => {
+export const ReviewChoice: FC<P> = ({
+  reviewData,
+  reviewedData,
+  onSaveReview,
+}) => {
   const isMobile = useMedia('(max-width: 768px)', false)
   const [currentReview, setCurrentReview] = useState({
     header: '',

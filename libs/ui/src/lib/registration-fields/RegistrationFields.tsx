@@ -5,6 +5,7 @@ import styles from './RegistrationFields.module.less'
 
 export interface FieldType {
   fieldName: string
+  label: string
   visible: boolean
   required: boolean
   disabled: boolean
@@ -55,7 +56,7 @@ export const RegistrationFields: FC<RegistrationFieldsProps> = ({
       <div>
         {fields?.map((field) => (
           <div key={field.key} className={styles.fieldItemWrap}>
-            <p>{field.fieldName}</p>
+            <p>{field.label}</p>
             <Checkbox
               checked={field.visible}
               disabled={field.disabled ?? false}
@@ -73,11 +74,13 @@ export const RegistrationFields: FC<RegistrationFieldsProps> = ({
           </div>
         ))}
       </div>
-      <div className={styles.customFieldTitleWrap}>
-        <div className={styles.headTitle}>{customFieldTitle}</div>
-        <div className={styles.headTitle}>{visibleTitle}</div>
-        <div className={styles.headTitle}>{requiredTitle}</div>
-      </div>
+      {customFields?.length && (
+        <div className={styles.customFieldTitleWrap}>
+          <div className={styles.headTitle}>{customFieldTitle}</div>
+          <div className={styles.headTitle}>{visibleTitle}</div>
+          <div className={styles.headTitle}>{requiredTitle}</div>
+        </div>
+      )}
       <div>
         {customFields?.map((field) => (
           <div key={field.key} className={styles.fieldItemWrap}>
