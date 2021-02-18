@@ -128,10 +128,10 @@ const MedicalFormEdit: FC = () => {
   return (
     <Row>
       <DragDropContext onDragEnd={onDragEnd}>
-        <Col span={6}>
+        <Col span={5}>
           <MedicalFormEditLeft medicalForms={medicalForms} />
         </Col>
-        <Col span={11} className={styles.MedicalFormEditMain}>
+        <Col span={12} className={styles.MedicalFormEditMain}>
           <MedicalFormEditMain
             draggedForms={draggedForms}
             handlingFormSetting={handlingFormSetting}

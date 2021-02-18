@@ -20,17 +20,23 @@ const MedicalFormEditLeft: FC<P> = ({ ...props }) => {
   const [selectedFormTypes, setSelectedFormTypes] = useState<SelectedForms>(
     defaultSelectedFormInfos
   )
+  const [openPanel, setOpenPanel] = useState<string[]>(['1', '2'])
 
   const onSelectFormType = (setting) => {
     setSelectedFormTypes(setting)
+    setOpenPanel(['2'])
   }
-
+  const callback = (key) => {
+    // console.log(key)
+    setOpenPanel(key)
+  }
   return (
     <div className={styles.medicalFormEditLeftPanel}>
       <Collapse
-        defaultActiveKey={['1', '2']}
         expandIconPosition="right"
         className={styles.medicalFormEditLeftPanelCollapse}
+        activeKey={openPanel}
+        onChange={callback}
       >
         <Panel
           header="GENERAL"

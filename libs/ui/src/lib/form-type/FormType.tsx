@@ -87,16 +87,20 @@ const defaultTypeInfos: FormTypeInfo = {
 
 export const FormType: FC<FormTypeProps> = ({ setting, onChangeSetting }) => {
   const aligns = [
+    styles.formTypeStart,
     styles.formTypeCenter,
-    styles.formTypeCenter,
-    styles.formTypeCenter,
+    styles.formTypeEnd,
   ]
   const [formTypeInfo, setFormTypesInfo] = useState<FormTypeInfo>(
     defaultTypeInfos
   )
   const handleClickItem = (name) => {
     const typeInfo = { ...formTypeInfo }
-    typeInfo[name].selected = !typeInfo[name].selected
+    const newValue = !typeInfo[name].selected
+    for (const key of Object.keys(setting)) {
+      typeInfo[key].selected = false
+    }
+    typeInfo[name].selected = newValue
     setFormTypesInfo({ ...typeInfo })
     onChangeSetting({
       medicalHistory: typeInfo.medicalHistory.selected,
@@ -116,6 +120,7 @@ export const FormType: FC<FormTypeProps> = ({ setting, onChangeSetting }) => {
   }, [setting])
   return (
     <div className={styles.formTypeContainer}>
+      <div className={styles.label}>Form Type</div>
       <Row>
         {Object.keys(formTypeInfo).map((key, index) => (
           <Col key={key} span={8} className={aligns[index % 3]}>
