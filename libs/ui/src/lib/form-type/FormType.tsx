@@ -87,9 +87,9 @@ const defaultTypeInfos: FormTypeInfo = {
 
 export const FormType: FC<FormTypeProps> = ({ setting, onChangeSetting }) => {
   const aligns = [
-    styles.formTypeStart,
     styles.formTypeCenter,
-    styles.formTypeEnd,
+    styles.formTypeCenter,
+    styles.formTypeCenter,
   ]
   const [formTypeInfo, setFormTypesInfo] = useState<FormTypeInfo>(
     defaultTypeInfos
