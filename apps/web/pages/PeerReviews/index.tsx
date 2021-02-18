@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, useRef } from 'react'
+import React, { FC, useState, useRef } from 'react'
 import StartScreen from './ReviewsScreens/StartScreen'
 import FinishScreen from './ReviewsScreens/FinishScreen'
 import ReviewQuestionScreen from './ReviewsScreens/ReviewQuestionScreen'
@@ -62,7 +62,7 @@ export interface IndexProps {}
 export const Index: FC<IndexProps> = ({ ...props }) => {
   const [isStarted, setIsStarted] = useState(false)
   const [isFinished, setIsFinished] = useState(false)
-  const [totalQs] = useState(reviewQuestions)
+  const [totalQs] = useState(reviewQuestions || [])
   const [current, setCurrent] = useState(0)
   const ref = useRef(null)
   const randomInRange = (min, max) => {
@@ -103,7 +103,7 @@ export const Index: FC<IndexProps> = ({ ...props }) => {
         <Logo />
       </div>
       <div className={styles.body}>
-        {!isStarted && !isFinished && (
+        {!isStarted && !isFinished && totalQs.length > 0 && (
           <StartScreen
             user={user}
             reviewSubTitle={reviewSubTitle}
@@ -111,7 +111,7 @@ export const Index: FC<IndexProps> = ({ ...props }) => {
             onStart={onStart}
           />
         )}
-        {isStarted && !isFinished && totalQs.length && (
+        {isStarted && !isFinished && (
           <PageSlider dots={false} ref={ref}>
             {totalQs.map((el, key) => (
               <div key={`sliderPageKey${key}`}>
