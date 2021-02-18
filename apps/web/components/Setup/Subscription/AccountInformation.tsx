@@ -61,7 +61,7 @@ const AccountInformation: FC = () => {
           </Col>
           <Col span={12}>
             <Paragraph className={styles.font12p}>Server name:</Paragraph>
-            <img src={location} height={13} />
+            <img src={location} height={13} alt="logo" />
             <Text className={styles.link} style={{ marginLeft: 8 }}>
               UK 1
             </Text>
@@ -85,7 +85,7 @@ const AccountInformation: FC = () => {
         <Row gutter={24} style={{ marginTop: 16 }}>
           <Col>
             <div className={styles.iconBtn}>
-              <img src={paymentTerminal} height={18} />
+              <img src={paymentTerminal} height={18} alt="logo" />
             </div>
           </Col>
           <Col span={20}>
