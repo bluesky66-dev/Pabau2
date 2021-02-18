@@ -32,6 +32,10 @@ interface P {
   aggregateQuery?: DocumentNode
   tableSearch?: boolean
   updateOrderQuery?: DocumentNode
+  showNotificationBanner?: boolean
+  createPage?: boolean
+  notificationBanner?: React.ReactNode
+  createPageOnClick?(): void
 }
 
 const CrudTable: FC<P> = ({
@@ -43,6 +47,10 @@ const CrudTable: FC<P> = ({
   aggregateQuery,
   tableSearch = true,
   updateOrderQuery,
+  showNotificationBanner = false,
+  notificationBanner,
+  createPage = false,
+  createPageOnClick,
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [isActive, setIsActive] = useState(true)
@@ -315,9 +323,17 @@ const CrudTable: FC<P> = ({
                 </Link>
                 <p> {schema.full || schema.short} </p>
               </div>
-              {addQuery && (
+              {addQuery && !createPage ? (
                 <AddButton
                   onClick={createNew}
+                  onFilterSource={onFilterMarketingSource}
+                  onSearch={onSearch}
+                  schema={schema}
+                  tableSearch={tableSearch}
+                />
+              ) : (
+                <AddButton
+                  onClick={createPageOnClick}
                   onFilterSource={onFilterMarketingSource}
                   onSearch={onSearch}
                   schema={schema}
@@ -340,6 +356,7 @@ const CrudTable: FC<P> = ({
         )}
 
         <Layout>
+          {showNotificationBanner && notificationBanner}
           <div
             className={classNames(
               styles.tableMainHeading,
@@ -355,9 +372,17 @@ const CrudTable: FC<P> = ({
               />
               <Title>{schema.full || schema.short}</Title>
             </div>
-            {addQuery && (
+            {addQuery && !createPage ? (
               <AddButton
                 onClick={createNew}
+                onFilterSource={onFilterMarketingSource}
+                onSearch={onSearch}
+                schema={schema}
+                tableSearch={tableSearch}
+              />
+            ) : (
+              <AddButton
+                onClick={createPageOnClick}
                 onFilterSource={onFilterMarketingSource}
                 onSearch={onSearch}
                 schema={schema}
