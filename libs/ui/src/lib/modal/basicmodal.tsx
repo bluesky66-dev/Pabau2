@@ -94,7 +94,7 @@ export function BasicModal({
             <Button
               type={btnType}
               className={styles.btnStyle}
-              disabled={newButtonDisable}
+              disabled={newButtonDisable || !isValidate}
               onClick={() => onOk?.()}
             >
               {newButtonText}

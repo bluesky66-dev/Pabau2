@@ -119,6 +119,7 @@ const schema: Schema = {
   fullLower: 'payment type',
   short: 'Payment Type',
   shortLower: 'payment type',
+  shemaType: 'PaymentTypes',
   messages: {
     create: {
       success: 'You have successfully created a payment type',
@@ -187,7 +188,6 @@ const schema: Schema = {
       short: 'GL code',
       shortLower: 'gl code',
       example: 'Lunchbreak',
-      min: 2,
       extra: <span>Advanced</span>,
       cssWidth: 'max',
       type: 'string',

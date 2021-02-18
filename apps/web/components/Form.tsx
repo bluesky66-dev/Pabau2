@@ -87,7 +87,7 @@ const Form: FC<P> = ({ schema, values, layout = 'vertical' }) => {
             {collapsible && (
               <Collapse
                 className={styles.advanceCollapsible}
-                defaultActiveKey={'1'}
+                defaultActiveKey={'0'}
                 ghost
                 expandIconPosition="right"
               >

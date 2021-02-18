@@ -5,6 +5,7 @@ import {
   MobileHeader,
   Notification,
   NotificationType,
+  NotificationBanner,
 } from '@pabau/ui'
 import React, { FC, useEffect, useState } from 'react'
 import { DocumentNode, useMutation } from '@apollo/client'
@@ -20,6 +21,7 @@ import Layout from './Layout/Layout'
 import { LeftOutlined } from '@ant-design/icons'
 import classNames from 'classnames'
 import Link from 'next/link'
+import PaymentNotificationImage from '../assets/images/payment-type-notify-image.png'
 
 const { Title } = Typography
 interface P {
@@ -46,6 +48,7 @@ const CrudTable: FC<P> = ({
   const [isLoading, setIsLoading] = useState(true)
   const [isActive, setIsActive] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
+  const [hideBanner, setHideBanner] = useState(false)
   // eslint-disable-next-line graphql/template-strings
   const [editMutation] = useMutation(editQuery, {
     onCompleted(data) {
@@ -339,6 +342,18 @@ const CrudTable: FC<P> = ({
         )}
 
         <Layout>
+          {schema?.shemaType === 'PaymentTypes' && (
+            <div style={{ marginBottom: 32 }}>
+              <NotificationBanner
+                title="Enable online payment"
+                desc="Activate payments with Fresha to benefit from tip collection during and after sale and get access to no show protection, payment terminals, safe online payments and many more."
+                imgPath={PaymentNotificationImage}
+                allowClose={true}
+                setHide={[hideBanner, setHideBanner]}
+              />
+            </div>
+          )}
+
           <div
             className={classNames(
               styles.tableMainHeading,

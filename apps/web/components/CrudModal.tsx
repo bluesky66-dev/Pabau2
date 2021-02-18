@@ -65,7 +65,6 @@ const CrudModal: FC<P> = ({
   }, [editingRow, specialFormElement])
 
   console.log('formik', formik)
-  console.log('schemaForm', schemaForm)
 
   return (
     <>
