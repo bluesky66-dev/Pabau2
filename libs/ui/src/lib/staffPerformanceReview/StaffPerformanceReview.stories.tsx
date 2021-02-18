@@ -16,32 +16,8 @@ const StaffPerformanceReviewStory = ({ ...args }) => (
     {...args}
   />
 )
-export const staffPerformanceReviewAnnual = StaffPerformanceReviewStory.bind({})
-staffPerformanceReviewAnnual.args = {
+export const staffPerformanceReview = StaffPerformanceReviewStory.bind({})
+staffPerformanceReview.args = {
   reviewDate: new Date(new Date().setMonth(new Date().getMonth() + 2)),
   reviewPeriod: 'annual',
-}
-
-export const staffPerformanceReviewAnnualAndToday = StaffPerformanceReviewStory.bind(
-  {}
-)
-staffPerformanceReviewAnnualAndToday.args = {
-  reviewDate: new Date(),
-  reviewPeriod: 'annual',
-}
-
-export const staffPerformanceReviewThreeMonths = StaffPerformanceReviewStory.bind(
-  {}
-)
-staffPerformanceReviewThreeMonths.args = {
-  reviewDate: new Date(new Date().setMonth(new Date().getMonth() + 4)),
-  reviewPeriod: 'threeMonth',
-}
-
-export const staffPerformanceReviewThreeMonthsAndToday = StaffPerformanceReviewStory.bind(
-  {}
-)
-staffPerformanceReviewThreeMonthsAndToday.args = {
-  reviewDate: new Date(),
-  reviewPeriod: 'threeMonth',
 }
