@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Button } from '@pabau/ui'
 import { Input, Rate } from 'antd'
 import styles from '../index.module.less'
@@ -11,7 +11,7 @@ export interface P {
   reviewType: string
   reviewDescription: string
   questionNo?: number
-  onNext: () => void
+  onNext: (data: object) => void
   onClose: () => void
 }
 
@@ -22,6 +22,27 @@ export const ReviewQuestionScreen: FC<P> = ({
   onNext,
   onClose,
 }) => {
+  const [textAreaErr, setTextAreaErr] = useState(false)
+  const [spanErr, setSpanError] = useState(false)
+  const [answer, setAnswer] = useState(null)
+  const [rating, setRating] = useState(0)
+
+  const beforeNextQuestion = () => {
+    if (!answer) {
+      setTextAreaErr(true)
+      setSpanError(true)
+    } else if (!rating) {
+      setSpanError(true)
+    } else {
+      setTextAreaErr(false)
+      let data = {
+        answer,
+        rating,
+      }
+      onNext(data)
+    }
+  }
+
   return (
     <div className={styles.section}>
       <div className={styles.centeralFlexBox}>
@@ -33,7 +54,13 @@ export const ReviewQuestionScreen: FC<P> = ({
         </div>
         <div className={styles.questionNum}>Question {questionNo}</div>
         <div className={classNames(styles.rating, styles.textCenter)}>
-          <Rate />
+          <Rate
+            value={rating}
+            onChange={(value: number) => {
+              setSpanError(false)
+              setRating(value)
+            }}
+          />
         </div>
         <div
           className={classNames(
@@ -45,9 +72,27 @@ export const ReviewQuestionScreen: FC<P> = ({
           Your comment
         </div>
         <div className={classNames(styles.commentInput, styles.w100)}>
-          <TextArea rows={4} placeholder="Paste your comment here" />
+          <TextArea
+            className={textAreaErr && 'redBordered'}
+            rows={4}
+            placeholder="Paste your comment here"
+            value={answer}
+            onChange={(e) => {
+              setTextAreaErr(false)
+              setSpanError(false)
+              setAnswer(e.target.value)
+            }}
+          />
+          {spanErr && (
+            <span className={styles.spanError}>
+              Please fill out every field to proceed.
+            </span>
+          )}
         </div>
-        <div className={classNames(styles.btn, styles.textRight, styles.w100)}>
+        <div
+          className={classNames(styles.btn, styles.textRight, styles.w100)}
+          style={{ marginTop: '10px' }}
+        >
           <Button
             type="default"
             size="large"
@@ -56,7 +101,7 @@ export const ReviewQuestionScreen: FC<P> = ({
           >
             Close
           </Button>
-          <Button type="primary" size="large" onClick={onNext}>
+          <Button type="primary" size="large" onClick={beforeNextQuestion}>
             Next
           </Button>
         </div>

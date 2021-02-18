@@ -11,6 +11,7 @@ import confetti from 'canvas-confetti'
 interface ReviewQuestions {
   reviewType: string
   reviewDescription: string
+  id: number
 }
 
 interface User {
@@ -27,26 +28,31 @@ const reviewQuestions: ReviewQuestions[] = [
     reviewType: 'Analytical thinking 1',
     reviewDescription:
       'Following a scientific approach to problem solving and understanding of complex issues.',
+    id: 1,
   },
   {
     reviewType: 'Analytical thinking 2',
     reviewDescription:
       'Following a scientific approach to problem solving and understanding of complex issues.',
+    id: 2,
   },
   {
     reviewType: 'Analytical thinking 3',
     reviewDescription:
       'Following a scientific approach to problem solving and understanding of complex issues.',
+    id: 3,
   },
   {
     reviewType: 'Analytical thinking 4',
     reviewDescription:
       'Following a scientific approach to problem solving and understanding of complex issues.',
+    id: 4,
   },
   {
     reviewType: 'Analytical thinking 5',
     reviewDescription:
       'Following a scientific approach to problem solving and understanding of complex issues.',
+    id: 5,
   },
 ]
 const reviewTitle = 'Quarterly Appraisal'
@@ -63,6 +69,7 @@ export const Index: FC<IndexProps> = ({ ...props }) => {
   const [isStarted, setIsStarted] = useState(false)
   const [isFinished, setIsFinished] = useState(false)
   const [totalQs] = useState(reviewQuestions || [])
+  const [answers, setAnswers] = useState({})
   const [current, setCurrent] = useState(0)
   const ref = useRef(null)
   const randomInRange = (min, max) => {
@@ -73,8 +80,13 @@ export const Index: FC<IndexProps> = ({ ...props }) => {
     await setIsStarted(true)
   }
 
-  const onNext = async () => {
-    await setCurrent(current + 1)
+  const onNext = async (answerData) => {
+    let existingAnswers = { ...answers }
+    let currentAnswerData = existingAnswers[totalQs[current].id] || {}
+    let newAnswerData = { ...currentAnswerData, ...answerData }
+    existingAnswers[totalQs[current].id] = newAnswerData
+    await setAnswers(existingAnswers)
+    setCurrent(current + 1)
     if (current < totalQs.length - 1) {
       ref.current.next()
     }
@@ -119,7 +131,9 @@ export const Index: FC<IndexProps> = ({ ...props }) => {
                   reviewType={el.reviewType}
                   reviewDescription={el.reviewDescription}
                   questionNo={key + 1}
-                  onNext={onNext}
+                  onNext={(data) => {
+                    onNext(data)
+                  }}
                   onClose={onClose}
                 />
               </div>

@@ -97,13 +97,25 @@
         color: #9292a3;
       }
       .commentInput {
-        :global textarea {
-          resize: auto;
-          background: #ffffff;
-          border: 1px solid #e8e8e8;
-          box-sizing: border-box;
-          border-radius: 4px;
-          margin-bottom: 10px;
+        :global {
+          textarea {
+            resize: auto;
+            background: #ffffff;
+            border: 1px solid #e8e8e8;
+            box-sizing: border-box;
+            border-radius: 4px;
+            margin-bottom: 5px;
+
+            &.redBordered {
+              border: 1px solid red;
+              box-shadow: 0 0 3px red;
+            }
+          }
+        }
+        .spanError {
+          color: red;
+          letter-spacing: 0.5px;
+          font-weight: 600;
         }
       }
       .label {
