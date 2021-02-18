@@ -1,0 +1,99 @@
+.header {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .inTrial {
+    background: #EEF7FB;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 3px 12px;
+    color: #54B2D3;
+    font-size: 12px;
+    line-height: 14px;
+    margin-top: 8px;
+  }
+
+  .logo {
+    background: #54B2D3;
+    height: 64px;
+    width: 64px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    border-radius: 50%;
+    margin-top: 20px;
+  }
+}
+
+.title {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  margin-bottom: 0;
+}
+
+.blackText {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: left;
+  margin-bottom: 4px;
+  color: #3D3D46;
+}
+
+.feature {
+  display: flex;
+  margin-bottom: 20px;
+
+  .iconBtn {
+    background: rgba(238, 247, 251, 0.5);
+    height: 32px;
+    width: 32px;
+    min-height: 32px;
+    min-width: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: #54b2d3 !important;
+    margin-right: 16px;
+
+    &.active {
+      background: #54b2d3;
+      color: #FFF !important;
+
+      & img {
+        filter: invert(27%) sepia(13%) saturate(1%) hue-rotate(58deg) brightness(1000%) contrast(116%)
+      }
+    }
+  }
+
+  .subTitle {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 18px;
+    color: #3D3D46;
+    margin-bottom: 2px;
+  }
+}
+
+.info {
+  color: #9292A3;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.link {
+  color: #54b2d3 !important;
+}
