@@ -1,19 +1,10 @@
-.container {
-  padding: 16px;
-  display: flex;
-  flex-direction: row;
-  // justify-content: center;
-  // align-items: center;
-  // justify-content: space-between;
-}
-
 .horizonstepper {
-  padding: 10px;
-  padding-top: 0px;
+  padding: 0 10px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .imglabeldiv {
@@ -21,6 +12,7 @@
   flex-direction: column;
   align-items: center;
   width: 22px;
+  z-index: 1;
 }
 
 .iconenablecircle {
@@ -71,27 +63,19 @@
   padding-top: 6px;
 }
 
-.stepperlinedisable {
-  border: 1px solid #ecedf0;
-  width: 96px;
-  margin: 11px 1px 0px 1px;
-
-  align-self: flex-start;
-}
-
-.stepperlineenable {
-  border: 1px solid #54b2d3;
-  width: 96px;
-  margin: 11px 1px 0px 1px;
-
-  align-self: flex-start;
-}
-
-.steplinediv {
+.stepperLine {
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: calc(100% - 20px);
+  height: 2px;
+  margin: 0 10px;
+  background-color: var(--border-color-base);
   display: flex;
-}
-@media (min-width:225px) and (max-width:575px) {
-  .stepperlineenable, .stepperlinedisable {
-    width: 76px;
+  justify-content: flex-start;
+
+  >div {
+    background-color: var(--primary-color);
+    height: 100%;
   }
 }

@@ -3,7 +3,7 @@ import styles from './Stepper.module.less'
 export interface StepperItem {
   step: number
   name: string
-  imgPath: JSX.Element
+  img: JSX.Element | string
   isActive: boolean
   index: number
 }
@@ -27,43 +27,39 @@ function StepperList(props) {
     return index <= step
   }
 
-  function isBarEnabled(index) {
-    return index < step
-  }
-
   return (
     <div className={styles.horizonstepper}>
       {datasource.map((element, index) => (
-        <div key={element.name} className={styles.steplinediv}>
-          <div className={styles.imglabeldiv}>
-            <div
-              className={
-                isActive(index)
-                  ? styles.iconenablecircle
-                  : styles.icondisablecircle
-              }
-            >
-              {element.imgPath}
-            </div>
-            <span
-              className={
-                isActive(index) ? styles.enablespantxt : styles.disablespantxt
-              }
-            >
-              {element.name}
-            </span>
+        <div key={element.name} className={styles.imglabeldiv}>
+          <div
+            className={
+              isActive(index)
+                ? styles.iconenablecircle
+                : styles.icondisablecircle
+            }
+          >
+            {React.isValidElement(element.img) ? (
+              <div>{element.img}</div>
+            ) : (
+              <img src={element.img} alt="" />
+            )}
           </div>
-          {index < datasource.length - 1 && (
-            <hr
-              className={
-                isBarEnabled(index)
-                  ? styles.stepperlineenable
-                  : styles.stepperlinedisable
-              }
-            />
-          )}
+          <span
+            className={
+              isActive(index) ? styles.enablespantxt : styles.disablespantxt
+            }
+          >
+            {element.name}
+          </span>
         </div>
       ))}
+      <div className={styles.stepperLine}>
+        <div
+          style={{
+            width: `${step <= 0 ? 0 : (step * 100) / (datasource.length - 1)}%`,
+          }}
+        />
+      </div>
     </div>
   )
 }

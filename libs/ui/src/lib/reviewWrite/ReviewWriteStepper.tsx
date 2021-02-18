@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { Rate } from 'antd'
 import { RightOutlined, LeftOutlined } from '@ant-design/icons'
 
@@ -37,6 +37,11 @@ export const ReviewWriteStepper: FC<ReviewWriteStepperProps> = ({
     onChange?.(reviewData)
   }
 
+  useEffect(() => {
+    setReviews(reviews)
+    setQuestionPage(0)
+  }, [reviews])
+
   return (
     <div className={styles.ratingBoxStepper}>
       <div className={styles.rateHeadingStepper}>
@@ -45,7 +50,7 @@ export const ReviewWriteStepper: FC<ReviewWriteStepperProps> = ({
       </div>
       <div className={styles.rateStarBoxStepper}>
         <div className={styles.reviewNumber}>
-          {questionPage + 1}/{reviews.length}
+          {questionPage + 1}/{review.length}
         </div>
         <div className={styles.question}>{review[questionPage].question}</div>
         <div className={styles.rating}>
@@ -72,10 +77,10 @@ export const ReviewWriteStepper: FC<ReviewWriteStepperProps> = ({
         <Button
           type={'default'}
           onClick={() => {
-            questionPage !== reviews.length - 1 &&
+            questionPage !== review.length - 1 &&
               setQuestionPage(questionPage + 1)
           }}
-          disabled={questionPage === reviews.length - 1}
+          disabled={questionPage === review.length - 1}
         >
           Next <RightOutlined />
         </Button>
