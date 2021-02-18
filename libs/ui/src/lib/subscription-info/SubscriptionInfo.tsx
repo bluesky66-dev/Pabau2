@@ -68,7 +68,7 @@ export const SubscriptionInfo: FC<SubscriptionInfoProps> = (props) => {
     trialDaysRemaining,
     marketingPlusStartDate,
   } = props
-  const { Text, Paragraph, Link } = Typography
+  const { Text, Paragraph } = Typography
 
   const renderLearnMore = (isActive = false) => {
     if (isActive) return
@@ -85,7 +85,7 @@ export const SubscriptionInfo: FC<SubscriptionInfoProps> = (props) => {
           </Button>
         )}
         <div className={styles.logo}>
-          <img src={logo} style={{ height: '100%' }} />
+          <img src={logo} style={{ height: '100%' }} alt="logo" />
         </div>
       </div>
       {inTrial && (
