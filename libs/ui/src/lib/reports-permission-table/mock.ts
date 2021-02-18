@@ -1,27 +1,28 @@
 export const title = 'Reports'
-export const subtitle = 'Setup which sections are accessible to each user permission level. All logged in staff can access the calendar, and owner accounts have full system access.'
+export const subtitle =
+  'Setup which sections are accessible to each user permission level. All logged in staff can access the calendar, and owner accounts have full system access.'
 
 export const columns = [
   {
     key: 'scheduler',
-    title: 'Scheduler'
+    title: 'Scheduler',
   },
   {
     key: 'therapist',
-    title: 'Therapist'
+    title: 'Therapist',
   },
   {
     key: 'manager',
-    title: 'Manager'
+    title: 'Manager',
   },
   {
     key: 'director',
-    title: 'Director'
+    title: 'Director',
   },
   {
     key: 'admin',
-    title: 'Admin'
-  }
+    title: 'Admin',
+  },
 ]
 
 export const data = [
@@ -37,10 +38,10 @@ export const data = [
           therapist: false,
           manager: false,
           director: true,
-          admin: true
+          admin: true,
         },
-      }
-    ]
+      },
+    ],
   },
   {
     key: '2',
@@ -54,7 +55,7 @@ export const data = [
           therapist: false,
           manager: false,
           director: true,
-          admin: true
+          admin: true,
         },
       },
       {
@@ -65,7 +66,7 @@ export const data = [
           therapist: false,
           manager: false,
           director: true,
-          admin: true
+          admin: true,
         },
       },
       {
@@ -76,9 +77,9 @@ export const data = [
           therapist: false,
           manager: false,
           director: true,
-          admin: true
+          admin: true,
         },
-      }
+      },
     ],
   },
   {
@@ -93,10 +94,10 @@ export const data = [
           therapist: false,
           manager: false,
           director: true,
-          admin: true
+          admin: true,
         },
-      }
-    ]
+      },
+    ],
   },
   {
     key: '4',
@@ -110,9 +111,9 @@ export const data = [
           therapist: false,
           manager: false,
           director: true,
-          admin: true
+          admin: true,
         },
-      }
-    ]
+      },
+    ],
   },
 ]
