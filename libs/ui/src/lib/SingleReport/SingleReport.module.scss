@@ -1,0 +1,44 @@
+.singleReport {
+  box-sizing: border-box;
+
+  height: 39px;
+  width: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  line-height: 22px;
+
+  border-top: 1px solid #ecedf0;
+
+  &__container {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__star {
+    margin-left: 17.38px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__code {
+    margin-left: 9.38px;
+  }
+
+  &__new {
+    margin-right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 50px;
+    height: 20px;
+    background: #eef7fb;
+    border-radius: 6px;
+
+    font-size: 12px;
+    line-height: 14px;
+    color: #54b2d3;
+  }
+}
