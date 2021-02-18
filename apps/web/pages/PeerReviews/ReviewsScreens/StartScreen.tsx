@@ -36,14 +36,14 @@ export const StartScreen: FC<P> = ({
       <div className={styles.avatar}>
         <UserAvatar
           isLoading={imgLoading}
-          name={user.userName}
+          name={user?.userName}
           shape="circle"
           size="large"
-          src={user.userImagePath}
+          src={user?.userImagePath}
         />
       </div>
       <div className={styles.label}>Review about</div>
-      <div className={styles.userName}>{user.userName}</div>
+      <div className={styles.userName}>{user?.userName}</div>
       <div className={styles.btn}>
         <Button type="primary" size="large" onClick={onStart}>
           Start

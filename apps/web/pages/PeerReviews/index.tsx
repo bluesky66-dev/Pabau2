@@ -126,7 +126,7 @@ export const Index: FC<IndexProps> = ({ ...props }) => {
         {isStarted && !isFinished && (
           <PageSlider dots={false} ref={ref}>
             {totalQs.map((el, key) => (
-              <div key={`sliderPageKey${key}`}>
+              <div key={`sliderPageKey${key * 12345}`}>
                 <ReviewQuestionScreen
                   reviewType={el.reviewType}
                   reviewDescription={el.reviewDescription}
