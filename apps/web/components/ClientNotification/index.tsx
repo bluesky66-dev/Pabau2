@@ -17,9 +17,15 @@ const Index: FC<P> = ({ onSeletedTab }) => {
   const [addMedicalHisButton, setAddMedicalHisButton] = useState(true)
   const [backGroundColor, setBackGroundColor] = useState('')
   const [buttonColor, setButtonColor] = useState('')
-  const [selectLanguage, setSelectLanguage] = useState('fr')
+  const [selectLanguage, setSelectLanguage] = useState('en')
   const [medicalMessage, setMedicalMessage] = useState('')
   const [informationMessage, setInformationMessage] = useState('')
+  const [standardTapIndex, setStandardTap] = useState('1')
+  const [hideAppearanceTabPane, setHideAppearanceTabPane] = useState(true)
+  const [smsMessage, setSmsMessage] = useState('Hi, Kristy')
+
+  const [activeSocialIcons, setActiveSocialIcons] = React.useState([])
+  const [disableCustomTab, setDisableCustomTab] = useState(false)
 
   function handleSelectedTab(value) {
     onSeletedTab(value)
@@ -28,17 +34,25 @@ const Index: FC<P> = ({ onSeletedTab }) => {
     <ClientNotification
       onSmsTabChanged={(value) => {
         if (value === 2) {
+          console.log('this is smstext tab')
+          setDisableCustomTab(true)
           handleSelectedTab(value)
           setEnableReminder(true)
           setSmartDelivery(true)
+          setHideAppearanceTabPane(false)
         } else {
+          console.log('this is email tab')
           handleSelectedTab(value)
           setEnableReminder(false)
           setSmartDelivery(false)
+          setHideAppearanceTabPane(true)
+          setDisableCustomTab(false)
         }
       }}
       tabComponent={
         <Standard
+          disableCustomTab={disableCustomTab}
+          onStandardTabChanged={(value) => setStandardTap(value)}
           enableReminder={enableReminder}
           onEnableReminder={(value) => setEnableReminder(value)}
           smartDelivery={smartDelivery}
@@ -67,6 +81,12 @@ const Index: FC<P> = ({ onSeletedTab }) => {
           onMedicalMessage={(value) => setMedicalMessage(value)}
           informationMessage={informationMessage}
           onInformationMessage={(value) => setInformationMessage(value)}
+          hideAppearanceTabPane={hideAppearanceTabPane}
+          smsMessage={smsMessage}
+          onSmsMessage={(value) => setSmsMessage(value)}
+          onActiveSocialIcon={(value) => {
+            setActiveSocialIcons(value.map((e) => e))
+          }}
         />
       }
       previewComponent={
@@ -83,12 +103,15 @@ const Index: FC<P> = ({ onSeletedTab }) => {
           buttonColor={buttonColor}
           informationMessage={informationMessage}
           medicalMessage={medicalMessage}
+          standardTapIndex={standardTapIndex}
+          activeSocialIcons={activeSocialIcons}
         />
       }
       smsComponent={
         <Smstext
-        // enableReminder={enableReminder}
-        // smartDelivery={smartDelivery}
+          smsMessage={smsMessage}
+          // enableReminder={enableReminder}
+          // smartDelivery={smartDelivery}
         />
       }
     />

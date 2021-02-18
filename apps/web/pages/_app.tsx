@@ -19,6 +19,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 require('../styles/global.less')
 require('../../../libs/ui/src/styles/antd.less')
+require('react-phone-input-2/lib/style.css')
 
 const cache = new InMemoryCache()
 const GRAPHQL_ENDPOINT = 'wss://api.new.pabau.com/v1/graphql'
