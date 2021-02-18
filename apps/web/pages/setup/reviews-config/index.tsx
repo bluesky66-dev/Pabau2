@@ -1125,6 +1125,8 @@ export const Index: FC<ReviewsConfigProps> = ({
         {openPreview && (
           <BasicModal
             visible={openPreview}
+            width="100%"
+            footer={null}
             onOk={() => setOpenPreview(false)}
             onCancel={() => setOpenPreview(false)}
           >
