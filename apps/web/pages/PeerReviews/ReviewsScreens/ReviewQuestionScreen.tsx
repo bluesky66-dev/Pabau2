@@ -6,12 +6,17 @@ import classNames from 'classnames'
 
 const { TextArea } = Input
 
+interface Answer {
+  answer: string
+  rating: number
+}
+
 /* eslint-disable-next-line */
 export interface P {
   reviewType: string
   reviewDescription: string
   questionNo?: number
-  onNext: (e: any) => void
+  onNext: (e: Answer) => void
   onClose: () => void
 }
 
