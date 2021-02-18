@@ -1989,12 +1989,14 @@ type departments_variance_fields {
 }
 
 """
-columns and relationships of "issuing_company"
+family_relationships
+
+
+columns and relationships of "family_relationships"
 """
-type issuing_company {
-  address: String!
+type family_relationships {
   created_at: timestamptz!
-  id: uuid!
+  id: Int!
   is_active: Boolean!
   name: String!
   order: Int!
@@ -2002,33 +2004,236 @@ type issuing_company {
 }
 
 """
-aggregated selection of "issuing_company"
+aggregated selection of "family_relationships"
 """
-type issuing_company_aggregate {
-  aggregate: issuing_company_aggregate_fields
-  nodes: [issuing_company!]!
+type family_relationships_aggregate {
+  aggregate: family_relationships_aggregate_fields
+  nodes: [family_relationships!]!
 }
 
 """
-aggregate fields of "issuing_company"
+aggregate fields of "family_relationships"
 """
-type issuing_company_aggregate_fields {
-  avg: issuing_company_avg_fields
-  count(columns: [issuing_company_select_column!], distinct: Boolean): Int!
-  max: issuing_company_max_fields
-  min: issuing_company_min_fields
-  stddev: issuing_company_stddev_fields
-  stddev_pop: issuing_company_stddev_pop_fields
-  stddev_samp: issuing_company_stddev_samp_fields
-  sum: issuing_company_sum_fields
-  var_pop: issuing_company_var_pop_fields
-  var_samp: issuing_company_var_samp_fields
-  variance: issuing_company_variance_fields
+type family_relationships_aggregate_fields {
+  avg: family_relationships_avg_fields
+  count(columns: [family_relationships_select_column!], distinct: Boolean): Int!
+  max: family_relationships_max_fields
+  min: family_relationships_min_fields
+  stddev: family_relationships_stddev_fields
+  stddev_pop: family_relationships_stddev_pop_fields
+  stddev_samp: family_relationships_stddev_samp_fields
+  sum: family_relationships_sum_fields
+  var_pop: family_relationships_var_pop_fields
+  var_samp: family_relationships_var_samp_fields
+  variance: family_relationships_variance_fields
 }
 
 """aggregate avg on columns"""
-type issuing_company_avg_fields {
+type family_relationships_avg_fields {
+  id: Float
   order: Float
+}
+
+"""
+Boolean expression to filter rows from the table "family_relationships". All fields are combined with a logical 'AND'.
+"""
+input family_relationships_bool_exp {
+  _and: [family_relationships_bool_exp!]
+  _not: family_relationships_bool_exp
+  _or: [family_relationships_bool_exp!]
+  created_at: timestamptz_comparison_exp
+  id: Int_comparison_exp
+  is_active: Boolean_comparison_exp
+  name: String_comparison_exp
+  order: Int_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "family_relationships"
+"""
+enum family_relationships_constraint {
+  """unique or primary key constraint"""
+  family_relationships_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "family_relationships"
+"""
+input family_relationships_inc_input {
+  order: Int
+}
+
+"""
+input type for inserting data into table "family_relationships"
+"""
+input family_relationships_insert_input {
+  is_active: Boolean
+  name: String
+  order: Int
+}
+
+"""aggregate max on columns"""
+type family_relationships_max_fields {
+  created_at: timestamptz
+  id: Int
+  name: String
+  order: Int
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type family_relationships_min_fields {
+  created_at: timestamptz
+  id: Int
+  name: String
+  order: Int
+  updated_at: timestamptz
+}
+
+"""
+response of any mutation on the table "family_relationships"
+"""
+type family_relationships_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [family_relationships!]!
+}
+
+"""
+on conflict condition type for table "family_relationships"
+"""
+input family_relationships_on_conflict {
+  constraint: family_relationships_constraint!
+  update_columns: [family_relationships_update_column!]!
+  where: family_relationships_bool_exp
+}
+
+"""Ordering options when selecting data from "family_relationships"."""
+input family_relationships_order_by {
+  created_at: order_by
+  id: order_by
+  is_active: order_by
+  name: order_by
+  order: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: family_relationships"""
+input family_relationships_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "family_relationships"
+"""
+enum family_relationships_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  order
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "family_relationships"
+"""
+input family_relationships_set_input {
+  is_active: Boolean
+  name: String
+  order: Int
+}
+
+"""aggregate stddev on columns"""
+type family_relationships_stddev_fields {
+  id: Float
+  order: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type family_relationships_stddev_pop_fields {
+  id: Float
+  order: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type family_relationships_stddev_samp_fields {
+  id: Float
+  order: Float
+}
+
+"""aggregate sum on columns"""
+type family_relationships_sum_fields {
+  id: Int
+  order: Int
+}
+
+"""
+update columns of table "family_relationships"
+"""
+enum family_relationships_update_column {
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  order
+}
+
+"""aggregate var_pop on columns"""
+type family_relationships_var_pop_fields {
+  id: Float
+  order: Float
+}
+
+"""aggregate var_samp on columns"""
+type family_relationships_var_samp_fields {
+  id: Float
+  order: Float
+}
+
+"""aggregate variance on columns"""
+type family_relationships_variance_fields {
+  id: Float
+  order: Float
+}
+
+"""
+columns and relationships of "issuing_company"
+"""
+type issuing_company {
+  city: String
+  country: String
+  created_at: timestamptz!
+  id: uuid!
+  invoice_prefix: String
+  invoice_starting_number: numeric
+  invoice_template: String
+  is_active: Boolean!
+  name: String!
+  order: Int!
+  phone: numeric
+  post_code: numeric
+  street: String
+  updated_at: timestamptz!
+  vat_registered: Boolean!
+  website: String
 }
 
 """
@@ -2038,13 +2243,22 @@ input issuing_company_bool_exp {
   _and: [issuing_company_bool_exp!]
   _not: issuing_company_bool_exp
   _or: [issuing_company_bool_exp!]
-  address: String_comparison_exp
+  city: String_comparison_exp
+  country: String_comparison_exp
   created_at: timestamptz_comparison_exp
   id: uuid_comparison_exp
+  invoice_prefix: String_comparison_exp
+  invoice_starting_number: numeric_comparison_exp
+  invoice_template: String_comparison_exp
   is_active: Boolean_comparison_exp
   name: String_comparison_exp
   order: Int_comparison_exp
+  phone: numeric_comparison_exp
+  post_code: numeric_comparison_exp
+  street: String_comparison_exp
   updated_at: timestamptz_comparison_exp
+  vat_registered: Boolean_comparison_exp
+  website: String_comparison_exp
 }
 
 """
@@ -2059,37 +2273,29 @@ enum issuing_company_constraint {
 input type for incrementing numeric columns in table "issuing_company"
 """
 input issuing_company_inc_input {
+  invoice_starting_number: numeric
   order: Int
+  phone: numeric
+  post_code: numeric
 }
 
 """
 input type for inserting data into table "issuing_company"
 """
 input issuing_company_insert_input {
-  address: String
+  city: String
+  country: String
+  invoice_prefix: String
+  invoice_starting_number: numeric
+  invoice_template: String
   is_active: Boolean
   name: String
   order: Int
-}
-
-"""aggregate max on columns"""
-type issuing_company_max_fields {
-  address: String
-  created_at: timestamptz
-  id: uuid
-  name: String
-  order: Int
-  updated_at: timestamptz
-}
-
-"""aggregate min on columns"""
-type issuing_company_min_fields {
-  address: String
-  created_at: timestamptz
-  id: uuid
-  name: String
-  order: Int
-  updated_at: timestamptz
+  phone: numeric
+  post_code: numeric
+  street: String
+  vat_registered: Boolean
+  website: String
 }
 
 """
@@ -2114,13 +2320,22 @@ input issuing_company_on_conflict {
 
 """Ordering options when selecting data from "issuing_company"."""
 input issuing_company_order_by {
-  address: order_by
+  city: order_by
+  country: order_by
   created_at: order_by
   id: order_by
+  invoice_prefix: order_by
+  invoice_starting_number: order_by
+  invoice_template: order_by
   is_active: order_by
   name: order_by
   order: order_by
+  phone: order_by
+  post_code: order_by
+  street: order_by
   updated_at: order_by
+  vat_registered: order_by
+  website: order_by
 }
 
 """primary key columns input for table: issuing_company"""
@@ -2133,7 +2348,10 @@ select columns of table "issuing_company"
 """
 enum issuing_company_select_column {
   """column name"""
-  address
+  city
+
+  """column name"""
+  country
 
   """column name"""
   created_at
@@ -2142,6 +2360,15 @@ enum issuing_company_select_column {
   id
 
   """column name"""
+  invoice_prefix
+
+  """column name"""
+  invoice_starting_number
+
+  """column name"""
+  invoice_template
+
+  """column name"""
   is_active
 
   """column name"""
@@ -2151,37 +2378,41 @@ enum issuing_company_select_column {
   order
 
   """column name"""
+  phone
+
+  """column name"""
+  post_code
+
+  """column name"""
+  street
+
+  """column name"""
   updated_at
+
+  """column name"""
+  vat_registered
+
+  """column name"""
+  website
 }
 
 """
 input type for updating data in table "issuing_company"
 """
 input issuing_company_set_input {
-  address: String
+  city: String
+  country: String
+  invoice_prefix: String
+  invoice_starting_number: numeric
+  invoice_template: String
   is_active: Boolean
   name: String
   order: Int
-}
-
-"""aggregate stddev on columns"""
-type issuing_company_stddev_fields {
-  order: Float
-}
-
-"""aggregate stddev_pop on columns"""
-type issuing_company_stddev_pop_fields {
-  order: Float
-}
-
-"""aggregate stddev_samp on columns"""
-type issuing_company_stddev_samp_fields {
-  order: Float
-}
-
-"""aggregate sum on columns"""
-type issuing_company_sum_fields {
-  order: Int
+  phone: numeric
+  post_code: numeric
+  street: String
+  vat_registered: Boolean
+  website: String
 }
 
 """
@@ -2189,7 +2420,19 @@ update columns of table "issuing_company"
 """
 enum issuing_company_update_column {
   """column name"""
-  address
+  city
+
+  """column name"""
+  country
+
+  """column name"""
+  invoice_prefix
+
+  """column name"""
+  invoice_starting_number
+
+  """column name"""
+  invoice_template
 
   """column name"""
   is_active
@@ -2199,21 +2442,21 @@ enum issuing_company_update_column {
 
   """column name"""
   order
-}
 
-"""aggregate var_pop on columns"""
-type issuing_company_var_pop_fields {
-  order: Float
-}
+  """column name"""
+  phone
 
-"""aggregate var_samp on columns"""
-type issuing_company_var_samp_fields {
-  order: Float
-}
+  """column name"""
+  post_code
 
-"""aggregate variance on columns"""
-type issuing_company_variance_fields {
-  order: Float
+  """column name"""
+  street
+
+  """column name"""
+  vat_registered
+
+  """column name"""
+  website
 }
 
 """
@@ -2433,6 +2676,175 @@ type job_title_var_samp_fields {
 """aggregate variance on columns"""
 type job_title_variance_fields {
   order: Float
+}
+
+"""
+columns and relationships of "labs_dashboard"
+"""
+type labs_dashboard {
+  client: String!
+  lab: String!
+  labNo: Int!
+  lastUpdate: String!
+  public: String!
+  requested: String!
+  requester: String!
+  test: String!
+}
+
+"""
+Boolean expression to filter rows from the table "labs_dashboard". All fields are combined with a logical 'AND'.
+"""
+input labs_dashboard_bool_exp {
+  _and: [labs_dashboard_bool_exp!]
+  _not: labs_dashboard_bool_exp
+  _or: [labs_dashboard_bool_exp!]
+  client: String_comparison_exp
+  lab: String_comparison_exp
+  labNo: Int_comparison_exp
+  lastUpdate: String_comparison_exp
+  public: String_comparison_exp
+  requested: String_comparison_exp
+  requester: String_comparison_exp
+  test: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "labs_dashboard"
+"""
+enum labs_dashboard_constraint {
+  """unique or primary key constraint"""
+  labs_dashboard_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "labs_dashboard"
+"""
+input labs_dashboard_inc_input {
+  labNo: Int
+}
+
+"""
+input type for inserting data into table "labs_dashboard"
+"""
+input labs_dashboard_insert_input {
+  client: String
+  lab: String
+  labNo: Int
+  lastUpdate: String
+  public: String
+  requested: String
+  requester: String
+  test: String
+}
+
+"""
+response of any mutation on the table "labs_dashboard"
+"""
+type labs_dashboard_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [labs_dashboard!]!
+}
+
+"""
+on conflict condition type for table "labs_dashboard"
+"""
+input labs_dashboard_on_conflict {
+  constraint: labs_dashboard_constraint!
+  update_columns: [labs_dashboard_update_column!]!
+  where: labs_dashboard_bool_exp
+}
+
+"""Ordering options when selecting data from "labs_dashboard"."""
+input labs_dashboard_order_by {
+  client: order_by
+  lab: order_by
+  labNo: order_by
+  lastUpdate: order_by
+  public: order_by
+  requested: order_by
+  requester: order_by
+  test: order_by
+}
+
+"""primary key columns input for table: labs_dashboard"""
+input labs_dashboard_pk_columns_input {
+  labNo: Int!
+}
+
+"""
+select columns of table "labs_dashboard"
+"""
+enum labs_dashboard_select_column {
+  """column name"""
+  client
+
+  """column name"""
+  lab
+
+  """column name"""
+  labNo
+
+  """column name"""
+  lastUpdate
+
+  """column name"""
+  public
+
+  """column name"""
+  requested
+
+  """column name"""
+  requester
+
+  """column name"""
+  test
+}
+
+"""
+input type for updating data in table "labs_dashboard"
+"""
+input labs_dashboard_set_input {
+  client: String
+  lab: String
+  labNo: Int
+  lastUpdate: String
+  public: String
+  requested: String
+  requester: String
+  test: String
+}
+
+"""
+update columns of table "labs_dashboard"
+"""
+enum labs_dashboard_update_column {
+  """column name"""
+  client
+
+  """column name"""
+  lab
+
+  """column name"""
+  labNo
+
+  """column name"""
+  lastUpdate
+
+  """column name"""
+  public
+
+  """column name"""
+  requested
+
+  """column name"""
+  requester
+
+  """column name"""
+  test
 }
 
 """
@@ -2927,6 +3339,19 @@ type mutation_root {
   delete_departments_by_pk(id: uuid!): departments
 
   """
+  delete data from the table: "family_relationships"
+  """
+  delete_family_relationships(
+    """filter the rows which have to be deleted"""
+    where: family_relationships_bool_exp!
+  ): family_relationships_mutation_response
+
+  """
+  delete single row from the table: "family_relationships"
+  """
+  delete_family_relationships_by_pk(id: Int!): family_relationships
+
+  """
   delete data from the table: "issuing_company"
   """
   delete_issuing_company(
@@ -2951,6 +3376,19 @@ type mutation_root {
   delete single row from the table: "job_title"
   """
   delete_job_title_by_pk(id: uuid!): job_title
+
+  """
+  delete data from the table: "labs_dashboard"
+  """
+  delete_labs_dashboard(
+    """filter the rows which have to be deleted"""
+    where: labs_dashboard_bool_exp!
+  ): labs_dashboard_mutation_response
+
+  """
+  delete single row from the table: "labs_dashboard"
+  """
+  delete_labs_dashboard_by_pk(labNo: Int!): labs_dashboard
 
   """
   delete data from the table: "marketing_campaign"
@@ -3131,6 +3569,28 @@ type mutation_root {
   ): departments
 
   """
+  insert data into the table: "family_relationships"
+  """
+  insert_family_relationships(
+    """the rows to be inserted"""
+    objects: [family_relationships_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: family_relationships_on_conflict
+  ): family_relationships_mutation_response
+
+  """
+  insert a single row into the table: "family_relationships"
+  """
+  insert_family_relationships_one(
+    """the row to be inserted"""
+    object: family_relationships_insert_input!
+
+    """on conflict condition"""
+    on_conflict: family_relationships_on_conflict
+  ): family_relationships
+
+  """
   insert data into the table: "issuing_company"
   """
   insert_issuing_company(
@@ -3173,6 +3633,28 @@ type mutation_root {
     """on conflict condition"""
     on_conflict: job_title_on_conflict
   ): job_title
+
+  """
+  insert data into the table: "labs_dashboard"
+  """
+  insert_labs_dashboard(
+    """the rows to be inserted"""
+    objects: [labs_dashboard_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: labs_dashboard_on_conflict
+  ): labs_dashboard_mutation_response
+
+  """
+  insert a single row into the table: "labs_dashboard"
+  """
+  insert_labs_dashboard_one(
+    """the row to be inserted"""
+    object: labs_dashboard_insert_input!
+
+    """on conflict condition"""
+    on_conflict: labs_dashboard_on_conflict
+  ): labs_dashboard
 
   """
   insert data into the table: "marketing_campaign"
@@ -3396,6 +3878,32 @@ type mutation_root {
   ): departments
 
   """
+  update data of the table: "family_relationships"
+  """
+  update_family_relationships(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: family_relationships_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: family_relationships_set_input
+
+    """filter the rows which have to be updated"""
+    where: family_relationships_bool_exp!
+  ): family_relationships_mutation_response
+
+  """
+  update single row of the table: "family_relationships"
+  """
+  update_family_relationships_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: family_relationships_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: family_relationships_set_input
+    pk_columns: family_relationships_pk_columns_input!
+  ): family_relationships
+
+  """
   update data of the table: "issuing_company"
   """
   update_issuing_company(
@@ -3446,6 +3954,32 @@ type mutation_root {
     _set: job_title_set_input
     pk_columns: job_title_pk_columns_input!
   ): job_title
+
+  """
+  update data of the table: "labs_dashboard"
+  """
+  update_labs_dashboard(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: labs_dashboard_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: labs_dashboard_set_input
+
+    """filter the rows which have to be updated"""
+    where: labs_dashboard_bool_exp!
+  ): labs_dashboard_mutation_response
+
+  """
+  update single row of the table: "labs_dashboard"
+  """
+  update_labs_dashboard_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: labs_dashboard_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: labs_dashboard_set_input
+    pk_columns: labs_dashboard_pk_columns_input!
+  ): labs_dashboard
 
   """
   update data of the table: "marketing_campaign"
@@ -4331,6 +4865,51 @@ type query_root {
   departments_by_pk(id: uuid!): departments
 
   """
+  fetch data from the table: "family_relationships"
+  """
+  family_relationships(
+    """distinct select on columns"""
+    distinct_on: [family_relationships_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [family_relationships_order_by!]
+
+    """filter the rows returned"""
+    where: family_relationships_bool_exp
+  ): [family_relationships!]!
+
+  """
+  fetch aggregated fields from the table: "family_relationships"
+  """
+  family_relationships_aggregate(
+    """distinct select on columns"""
+    distinct_on: [family_relationships_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [family_relationships_order_by!]
+
+    """filter the rows returned"""
+    where: family_relationships_bool_exp
+  ): family_relationships_aggregate!
+
+  """
+  fetch data from the table: "family_relationships" using primary key columns
+  """
+  family_relationships_by_pk(id: Int!): family_relationships
+
+  """
   fetch data from the table: "issuing_company"
   """
   issuing_company(
@@ -4349,26 +4928,6 @@ type query_root {
     """filter the rows returned"""
     where: issuing_company_bool_exp
   ): [issuing_company!]!
-
-  """
-  fetch aggregated fields from the table: "issuing_company"
-  """
-  issuing_company_aggregate(
-    """distinct select on columns"""
-    distinct_on: [issuing_company_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [issuing_company_order_by!]
-
-    """filter the rows returned"""
-    where: issuing_company_bool_exp
-  ): issuing_company_aggregate!
 
   """fetch data from the table: "issuing_company" using primary key columns"""
   issuing_company_by_pk(id: uuid!): issuing_company
@@ -4415,6 +4974,29 @@ type query_root {
 
   """fetch data from the table: "job_title" using primary key columns"""
   job_title_by_pk(id: uuid!): job_title
+
+  """
+  fetch data from the table: "labs_dashboard"
+  """
+  labs_dashboard(
+    """distinct select on columns"""
+    distinct_on: [labs_dashboard_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [labs_dashboard_order_by!]
+
+    """filter the rows returned"""
+    where: labs_dashboard_bool_exp
+  ): [labs_dashboard!]!
+
+  """fetch data from the table: "labs_dashboard" using primary key columns"""
+  labs_dashboard_by_pk(labNo: Int!): labs_dashboard
   marketingSource(id: Int!): MarketingSource
   marketingSources(after: MarketingSourceWhereUniqueInput, before: MarketingSourceWhereUniqueInput, first: Int, last: Int, orderBy: [MarketingSourceOrderByInput!], where: MarketingSourceWhereInput): [MarketingSource]!
 
@@ -4866,6 +5448,51 @@ type subscription_root {
   departments_by_pk(id: uuid!): departments
 
   """
+  fetch data from the table: "family_relationships"
+  """
+  family_relationships(
+    """distinct select on columns"""
+    distinct_on: [family_relationships_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [family_relationships_order_by!]
+
+    """filter the rows returned"""
+    where: family_relationships_bool_exp
+  ): [family_relationships!]!
+
+  """
+  fetch aggregated fields from the table: "family_relationships"
+  """
+  family_relationships_aggregate(
+    """distinct select on columns"""
+    distinct_on: [family_relationships_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [family_relationships_order_by!]
+
+    """filter the rows returned"""
+    where: family_relationships_bool_exp
+  ): family_relationships_aggregate!
+
+  """
+  fetch data from the table: "family_relationships" using primary key columns
+  """
+  family_relationships_by_pk(id: Int!): family_relationships
+
+  """
   fetch data from the table: "issuing_company"
   """
   issuing_company(
@@ -4884,26 +5511,6 @@ type subscription_root {
     """filter the rows returned"""
     where: issuing_company_bool_exp
   ): [issuing_company!]!
-
-  """
-  fetch aggregated fields from the table: "issuing_company"
-  """
-  issuing_company_aggregate(
-    """distinct select on columns"""
-    distinct_on: [issuing_company_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [issuing_company_order_by!]
-
-    """filter the rows returned"""
-    where: issuing_company_bool_exp
-  ): issuing_company_aggregate!
 
   """fetch data from the table: "issuing_company" using primary key columns"""
   issuing_company_by_pk(id: uuid!): issuing_company
@@ -4950,6 +5557,29 @@ type subscription_root {
 
   """fetch data from the table: "job_title" using primary key columns"""
   job_title_by_pk(id: uuid!): job_title
+
+  """
+  fetch data from the table: "labs_dashboard"
+  """
+  labs_dashboard(
+    """distinct select on columns"""
+    distinct_on: [labs_dashboard_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [labs_dashboard_order_by!]
+
+    """filter the rows returned"""
+    where: labs_dashboard_bool_exp
+  ): [labs_dashboard!]!
+
+  """fetch data from the table: "labs_dashboard" using primary key columns"""
+  labs_dashboard_by_pk(labNo: Int!): labs_dashboard
 
   """
   fetch data from the table: "marketing_campaign"
