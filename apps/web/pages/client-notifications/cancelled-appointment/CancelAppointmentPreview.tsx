@@ -248,6 +248,7 @@ const CancelAppointmentPreview: FC<P> = ({
           backGroundColor={backGroundColor}
           isFooterText={true}
           footerText={informationMessage}
+          footer={activeSocialIcons.length === 0 ? false : true}
         >
           <CancelAClassBooking
             dateTime={selectLangData.dateTime}
@@ -255,9 +256,9 @@ const CancelAppointmentPreview: FC<P> = ({
             consultancyName={selectLangData.title}
             consultationDetail={
               showService
-                ? `${selectLangData.consultationDetail}${
-                    showEmployeeName && `${selectLangData.employee}`
-                  }`
+                ? showEmployeeName
+                  ? `${selectLangData.consultationDetail}${selectLangData.employee}`
+                  : `${selectLangData.consultationDetail}`
                 : ''
             }
             address={selectLangData.address}

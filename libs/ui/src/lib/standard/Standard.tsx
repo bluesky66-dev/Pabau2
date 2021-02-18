@@ -312,13 +312,13 @@ export const Standard: FC<P> = ({
                       Show employee name
                     </Checkbox>
                   </Row>
-                  <Row>
-                    <span className={styles.separateText}>
-                      Medical History settings
-                    </span>
-                  </Row>
                   {!hideMedicalHistoryOption && (
                     <>
+                      <Row>
+                        <span className={styles.separateText}>
+                          Medical History settings
+                        </span>
+                      </Row>
                       <Row>
                         <Checkbox
                           className={styles.checkboxStyle}
