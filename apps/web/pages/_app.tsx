@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppProps } from 'next/app'
+import App, { AppProps } from 'next/app'
 import {
   ApolloClient,
   ApolloLink,
@@ -12,7 +12,7 @@ import { WebSocketLink } from '@apollo/client/link/ws'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { OperationDefinitionNode } from 'graphql'
 import 'react-phone-input-2/lib/style.css'
-// import 'react-google-places-autocomplete/dist/index.min.css'
+import i18n from '../i18n'
 import * as Icons from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import 'slick-carousel/slick/slick.css'
@@ -143,10 +143,7 @@ const client = new ApolloClient({
   cache,
 })
 
-export default function CustomApp({
-  Component,
-  pageProps,
-}: AppProps): JSX.Element {
+function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <ApolloProvider client={client}>
       <style jsx global>{`
@@ -170,3 +167,11 @@ export default function CustomApp({
     </ApolloProvider>
   )
 }
+
+MyApp.getInitialProps = async (appContext) => ({
+  ...(await App.getInitialProps(appContext)),
+})
+
+console.log('i18n', i18n)
+
+export default i18n.appWithTranslation(MyApp)

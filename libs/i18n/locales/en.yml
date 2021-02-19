@@ -1,4 +1,5 @@
 en:
+    index.title: 'Welcome'
     marketingsource-header-create: 'Create Marketing Source'
     marketingsource-title: 'Marketing Sources'
     marketingsource-name-textfield: Name

@@ -8,51 +8,21 @@ import { initReactI18next } from 'react-i18next'
 import Backend from 'i18next-xhr-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { addDecorator } from '@storybook/react'
+import { languages } from '@pabau/i18n'
+
 require('../src/styles/antd.less')
-
-const en = {
-  welcome: {
-    title: 'Welcome',
-    desc: 'How are you?',
-  },
-}
-
-const de = {
-  welcome: {
-    title: 'Willkommen',
-    desc: 'Wie geht es dir?',
-  },
-}
-
-const fr = {
-  welcome: {
-    title: 'Bienvenue',
-    desc: 'Comment vas-tu?',
-  },
-}
 
 i18n
   .use(Backend)
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    whitelist: ['en', 'de', 'fr'],
     lng: 'en',
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false,
     },
-    resources: {
-      en: {
-        common: en,
-      },
-      de: {
-        common: de,
-      },
-      fr: {
-        common: fr,
-      },
-    },
+    resources: languages,
   })
 
 addDecorator(
@@ -60,8 +30,8 @@ addDecorator(
     i18n,
     languages: {
       en: 'English',
-      de: 'German',
       fr: 'French',
+      de: 'German',
     },
   })
 )

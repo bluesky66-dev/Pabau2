@@ -6,9 +6,7 @@
   },
   "exclude": [
     "../**/*.spec.ts",
-    "../**/*.spec.js",
     "../**/*.spec.tsx",
-    "../**/*.spec.jsx"
   ],
-  "include": ["../src/**/*"]
+  "include": ["../src/**/*", "./preview.ts"]
 }

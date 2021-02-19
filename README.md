@@ -57,6 +57,8 @@ To create a new component, such as "Button", do the following:
 yarn run nx g @nrwl/react:component --project=ui --style=less --export --pascalCaseFiles --name=Button
 ```
 
+IMPORTANT: Now edit /libs/ui/src/index.ts and you will see new lines on line 1. Please change this insertion so that the file is alphabetical. change the insertion of this so that it’s alphabetical. Strange request, but it’s so other devs won't hit conflicts (line 1 is apparently difficult for Git).
+
 ## Frontend
 
 To view the Frontend, you can either visit [https://prelive-crm.new.pabau.com](https://prelive-crm.new.pabau.com) or run `yarn start` to develop on it locally with live reloading (HMR).
