@@ -4,7 +4,6 @@ import { Card, Table } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import styles from './ClientMessageReport.module.less'
 
-/* eslint-disable-next-line */
 export interface ClientMessageReportProps {
   reportVisibility?: boolean
   reportTitle?: string
