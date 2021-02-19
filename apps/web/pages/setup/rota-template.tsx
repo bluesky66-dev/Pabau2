@@ -4,26 +4,28 @@ import React from 'react'
 import CrudLayout from '../../components/CrudLayout/CrudLayout'
 
 const LIST_QUERY = gql`
-  query family_relationships_TODO1(
+  query marketing_sources_TODO1(
     $isActive: Boolean = true
     $searchTerm: String = ""
     $offset: Int
     $limit: Int
   ) {
-    family_relationships(
+    rota_templates(
       offset: $offset
       limit: $limit
       order_by: { order: desc }
       where: {
         is_active: { _eq: $isActive }
-        _or: [{ _and: [{ relation_name: { _ilike: $searchTerm } }] }]
+        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
       }
     ) {
       __typename
       id
-      relation_name
-      is_active
-      order
+      name
+      days
+      start_time
+      end_time
+      status
     }
   }
 `
@@ -35,7 +37,7 @@ const LIST_AGGREGATE_QUERY = gql`
     marketing_source_aggregate(
       where: {
         is_active: { _eq: $isActive }
-        _or: [{ _and: [{ relation_name: { _ilike: $searchTerm } }] }]
+        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
       }
     ) {
       aggregate {
@@ -55,7 +57,7 @@ const DELETE_MUTATION = gql`
 const ADD_MUTATION = gql`
   mutation add_marketing_source_2($name: String!, $is_active: Boolean) {
     insert_marketing_source_one(
-      object: { relation_name: $name, is_active: $is_active }
+      object: { name: $name, is_active: $is_active }
     ) {
       __typename
       id
@@ -71,12 +73,15 @@ const EDIT_MUTATION = gql`
   ) {
     update_marketing_source_by_pk(
       pk_columns: { id: $id }
-      _set: { relation_name: $name, is_active: $is_active, order: $order }
+      _set: { name: $name, is_active: $is_active, order: $order }
     ) {
       __typename
       id
-      is_active
-      order
+      name
+      days
+      start_time
+      end_time
+      status
     }
   }
 `
@@ -91,31 +96,37 @@ const UPDATE_ORDER_MUTATION = gql`
   }
 `
 const schema: Schema = {
-  full: 'Family Relationship',
-  fullLower: 'family relationship',
-  short: 'Family Relationship',
-  shortLower: 'family relationship',
+  full: 'Rota Template',
+  fullLower: 'rota template',
+  short: 'Rota Template',
+  shortLower: 'rota template',
   fields: {
-    relation_name: {
-      full: 'Friendly Name',
-      fullLower: 'friendly name',
+    name: {
+      full: 'Rota Template',
+      fullLower: 'rota template',
       short: 'Name',
       shortLower: 'name',
       min: 2,
       example: 'Facebook',
-      description: 'A friendly name',
+      description: 'A rota template',
       // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
     },
-    is_active: {
-      full: 'Active',
-      type: 'boolean',
-      defaultvalue: true,
+    days: {
+      full: 'Rota Template',
+      fullLower: 'rota template',
+      short: 'Name',
+      shortLower: 'name',
+      min: 2,
+      example: 'Facebook',
+      description: 'A rota template',
+      // extra: <i>Please note: blah blah blahh</i>,
+      cssWidth: 'max'
     },
   },
 }
 
-export const FamilyRelationships: NextPage = () => {
+export const RotaTemplate: NextPage = () => {
   return (
     <CrudLayout
       schema={schema}
@@ -130,4 +141,4 @@ export const FamilyRelationships: NextPage = () => {
   )
 }
 
-export default FamilyRelationships
+export default RotaTemplate
