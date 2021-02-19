@@ -23,13 +23,3 @@ export const companyQuery = extendType({
     t.crud.companies({ filtering: true, ordering: true });
   },
 });
-
-export const companyMutation = extendType({
-  type: 'Mutation',
-  definition(t) {
-    t.crud.createOneCompany();
-    t.crud.updateOneCompany();
-    t.crud.upsertOneCompany();
-    t.crud.deleteOneCompany();
-  },
-});

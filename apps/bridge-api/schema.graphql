@@ -2,10 +2,6 @@
 ### Do not make changes to this file directly
 
 
-type AffectedRowsOutput {
-  count: Int!
-}
-
 input BoolNullableFilter {
   equals: Boolean
   not: NestedBoolNullableFilter
@@ -17,19 +13,6 @@ type Company {
   cron_enabled: Boolean
   digit8: Int!
   id: Int!
-  image: String!
-  remote_connect: String
-  remote_url: String
-  slug: String
-  user: String!
-}
-
-input CompanyCreateInput {
-  MarketingSource: MarketingSourceCreateNestedManyWithoutCompanyInput
-  admin: Int!
-  creation_date: DateTime!
-  cron_enabled: Boolean
-  digit8: Int!
   image: String!
   remote_connect: String
   remote_url: String
@@ -71,31 +54,6 @@ input CompanyOrderByInput {
   remote_url: SortOrder
   slug: SortOrder
   user: SortOrder
-}
-
-input CompanyUpdateInput {
-  MarketingSource: MarketingSourceUpdateManyWithoutCompanyInput
-  admin: IntFieldUpdateOperationsInput
-  creation_date: DateTimeFieldUpdateOperationsInput
-  cron_enabled: NullableBoolFieldUpdateOperationsInput
-  digit8: IntFieldUpdateOperationsInput
-  image: StringFieldUpdateOperationsInput
-  remote_connect: NullableStringFieldUpdateOperationsInput
-  remote_url: NullableStringFieldUpdateOperationsInput
-  slug: NullableStringFieldUpdateOperationsInput
-  user: StringFieldUpdateOperationsInput
-}
-
-input CompanyUpdateManyMutationInput {
-  admin: IntFieldUpdateOperationsInput
-  creation_date: DateTimeFieldUpdateOperationsInput
-  cron_enabled: NullableBoolFieldUpdateOperationsInput
-  digit8: IntFieldUpdateOperationsInput
-  image: StringFieldUpdateOperationsInput
-  remote_connect: NullableStringFieldUpdateOperationsInput
-  remote_url: NullableStringFieldUpdateOperationsInput
-  slug: NullableStringFieldUpdateOperationsInput
-  user: StringFieldUpdateOperationsInput
 }
 
 input CompanyUpdateOneRequiredWithoutMarketingSourceInput {
@@ -182,7 +140,6 @@ input IntFilter {
 }
 
 type MarketingSource {
-  company: Company!
   company_id: Int!
   custom_id: Int!
   id: Int!
@@ -199,50 +156,10 @@ input MarketingSourceCreateInput {
   source_name: String!
 }
 
-input MarketingSourceCreateNestedManyWithoutCompanyInput {
-  connect: [MarketingSourceWhereUniqueInput!]
-  connectOrCreate: [MarketingSourceCreateOrConnectWithoutcompanyInput!]
-  create: [MarketingSourceCreateWithoutCompanyInput!]
-}
-
-input MarketingSourceCreateOrConnectWithoutcompanyInput {
-  create: MarketingSourceCreateWithoutCompanyInput!
-  where: MarketingSourceWhereUniqueInput!
-}
-
-input MarketingSourceCreateWithoutCompanyInput {
-  custom_id: Int!
-  imported: Int!
-  public: Int!
-  source_name: String!
-}
-
 input MarketingSourceListRelationFilter {
   every: MarketingSourceWhereInput
   none: MarketingSourceWhereInput
   some: MarketingSourceWhereInput
-}
-
-input MarketingSourceOrderByInput {
-  company: CompanyOrderByInput
-  custom_id: SortOrder
-  id: SortOrder
-  imported: SortOrder
-  occupier: SortOrder
-  public: SortOrder
-  source_name: SortOrder
-}
-
-input MarketingSourceScalarWhereInput {
-  AND: [MarketingSourceScalarWhereInput!]
-  NOT: [MarketingSourceScalarWhereInput!]
-  OR: [MarketingSourceScalarWhereInput!]
-  custom_id: IntFilter
-  id: IntFilter
-  imported: IntFilter
-  occupier: IntFilter
-  public: IntFilter
-  source_name: StringFilter
 }
 
 input MarketingSourceUpdateInput {
@@ -253,58 +170,15 @@ input MarketingSourceUpdateInput {
   source_name: StringFieldUpdateOperationsInput
 }
 
-input MarketingSourceUpdateManyMutationInput {
-  custom_id: IntFieldUpdateOperationsInput
-  imported: IntFieldUpdateOperationsInput
-  public: IntFieldUpdateOperationsInput
-  source_name: StringFieldUpdateOperationsInput
-}
-
-input MarketingSourceUpdateManyWithWhereWithoutCompanyInput {
-  data: MarketingSourceUpdateManyMutationInput!
-  where: MarketingSourceScalarWhereInput!
-}
-
-input MarketingSourceUpdateManyWithoutCompanyInput {
-  connect: [MarketingSourceWhereUniqueInput!]
-  connectOrCreate: [MarketingSourceCreateOrConnectWithoutcompanyInput!]
-  create: [MarketingSourceCreateWithoutCompanyInput!]
-  delete: [MarketingSourceWhereUniqueInput!]
-  deleteMany: [MarketingSourceScalarWhereInput!]
-  disconnect: [MarketingSourceWhereUniqueInput!]
-  set: [MarketingSourceWhereUniqueInput!]
-  update: [MarketingSourceUpdateWithWhereUniqueWithoutCompanyInput!]
-  updateMany: [MarketingSourceUpdateManyWithWhereWithoutCompanyInput!]
-  upsert: [MarketingSourceUpsertWithWhereUniqueWithoutCompanyInput!]
-}
-
-input MarketingSourceUpdateWithWhereUniqueWithoutCompanyInput {
-  data: MarketingSourceUpdateWithoutCompanyInput!
-  where: MarketingSourceWhereUniqueInput!
-}
-
-input MarketingSourceUpdateWithoutCompanyInput {
-  custom_id: IntFieldUpdateOperationsInput
-  imported: IntFieldUpdateOperationsInput
-  public: IntFieldUpdateOperationsInput
-  source_name: StringFieldUpdateOperationsInput
-}
-
-input MarketingSourceUpsertWithWhereUniqueWithoutCompanyInput {
-  create: MarketingSourceCreateWithoutCompanyInput!
-  update: MarketingSourceUpdateWithoutCompanyInput!
-  where: MarketingSourceWhereUniqueInput!
-}
-
 input MarketingSourceWhereInput {
   AND: [MarketingSourceWhereInput!]
   NOT: [MarketingSourceWhereInput!]
   OR: [MarketingSourceWhereInput!]
   company: CompanyWhereInput
+  company_id: IntFilter
   custom_id: IntFilter
   id: IntFilter
   imported: IntFilter
-  occupier: IntFilter
   public: IntFilter
   source_name: StringFilter
 }
@@ -314,15 +188,9 @@ input MarketingSourceWhereUniqueInput {
 }
 
 type Mutation {
-  createOneCompany(data: CompanyCreateInput!): Company!
   createOneMarketingSource(data: MarketingSourceCreateInput!): MarketingSource!
-  deleteManyCompany(where: CompanyWhereInput): AffectedRowsOutput!
-  deleteOneCompany(where: CompanyWhereUniqueInput!): Company
   deleteOneMarketingSource(where: MarketingSourceWhereUniqueInput!): MarketingSource
-  updateManyCompany(data: CompanyUpdateManyMutationInput!, where: CompanyWhereInput): AffectedRowsOutput!
-  updateOneCompany(data: CompanyUpdateInput!, where: CompanyWhereUniqueInput!): Company
   updateOneMarketingSource(data: MarketingSourceUpdateInput!, where: MarketingSourceWhereUniqueInput!): MarketingSource
-  upsertOneCompany(create: CompanyCreateInput!, update: CompanyUpdateInput!, where: CompanyWhereUniqueInput!): Company!
 }
 
 input NestedBoolNullableFilter {
@@ -391,8 +259,8 @@ input NullableStringFieldUpdateOperationsInput {
 type Query {
   companies(after: CompanyWhereUniqueInput, before: CompanyWhereUniqueInput, first: Int, last: Int, orderBy: [CompanyOrderByInput!], where: CompanyWhereInput): [Company!]!
   company(where: CompanyWhereUniqueInput!): Company
-  marketingSource(id: Int!): MarketingSource
-  marketingSources(after: MarketingSourceWhereUniqueInput, before: MarketingSourceWhereUniqueInput, first: Int, last: Int, orderBy: [MarketingSourceOrderByInput!], where: MarketingSourceWhereInput): [MarketingSource!]!
+  marketingSource(where: MarketingSourceWhereUniqueInput!): MarketingSource
+  marketingSources(after: MarketingSourceWhereUniqueInput, before: MarketingSourceWhereUniqueInput, first: Int, last: Int): [MarketingSource!]!
 }
 
 enum SortOrder {

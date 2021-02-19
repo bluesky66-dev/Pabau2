@@ -7,20 +7,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model fa_history {
+model TwoFactorHistory {
   id           Int      @id @default(autoincrement())
   company_id   Int
   passcode     String
   user_id      Int
   request_date DateTime
   is_confirmed Int
+  company Company @relation(fields: [company_id], references: [id])
 
   @@map("2fa_history")
 }
 
-model rd_party_access {
+model ThirdPartyAccess {
   id           Int    @id @default(autoincrement())
   occupier     Int
+  company_id    Int @map("occupier")
   company_name String
   email        String
   passcode     Int
@@ -28,6 +30,8 @@ model rd_party_access {
   last_name    String
   logo         String
   access_id    Int
+  company Company @relation(fields: [company_id], references: [id])
+
 
   @@map("3rd_party_access")
 }
@@ -37,20 +41,25 @@ model accept_email_token {
   company_id Int
   email      String
   token      Int
+  company Company @relation(fields: [company_id], references: [id])
+
+  @@map("accept_email_token")
 }
 
-model account_balance {
+model AccountBalance {
   id                   Int   @id @default(autoincrement())
   contact_id           Int?  @unique
   company_id           Int
   insurance_company_id Int
   balance              Float
   imported             Int
+  company Company @relation(fields: [company_id], references: [id])
 
+  @@map("account_balance")
   @@index([company_id], name: "company_id")
 }
 
-model account_balance_log {
+model AccountBalanceLog{
   id                   Int    @id @default(autoincrement())
   company_id           Int
   contact_id           Int
@@ -64,11 +73,13 @@ model account_balance_log {
   imported             Int
   ref_sale_id          Int
 
+  @@map("account_balance_log")
+
   @@index([company_id], name: "comnpany_id")
   @@index([company_id, date_time], name: "company_time")
 }
 
-model account_manager {
+model AccountManager {
   id                  Int       @id @default(autoincrement())
   organisation_name   String?
   organisation_status Int
@@ -98,9 +109,15 @@ model account_manager {
   con_num_2           String
   con_per_3           String
   con_num_3           String
+
+  @@map("account_manager")
+
 }
 
-model ac_logs {
+model AcLogs {
+
+  @@map("ac_logs")
+
   id         Int      @id @default(autoincrement())
   url_id     Int
   action_id  Int
@@ -124,7 +141,9 @@ model ac_logs {
   @@index([user_id], name: "user_id")
 }
 
-model ac_log_actions {
+model AcLogActions {
+  @@map("ac_log_actions")
+
   id            Int     @id @default(autoincrement())
   pabauid       String
   action_name   String
@@ -166,7 +185,8 @@ model Company {
   @@map("admin")
 }
 
-model advert_campaign {
+model AdverCampaign {
+
   id                Int    @id @default(autoincrement())
   advert_name       String
   advert_type       String
@@ -184,18 +204,25 @@ model advert_campaign {
   url               String
   attached_by       String
   attach_time       String
+
+  @@map("advert_campaign")
+
 }
 
-model api_debug {
+model ApiDebug {
+
   id            Int      @id @default(autoincrement())
   data_received String
   company_id    Int
   api_code      Int
   created_date  DateTime
   data_type     String
+
+  @@map("api_debug")
+
 }
 
-model api_key {
+model ApiKey {
   id            Int      @id @default(autoincrement())
   company_id    Int
   api_key       String
@@ -211,71 +238,89 @@ model api_key {
   leads         Int
   medical_forms Int
   reports       Int      @default(0)
+
+  @@map("api_key")
+
 }
 
-model app_before_after {
+model AppBeforeAfter {
   id         Int    @id @default(autoincrement())
   company_id Int
   contact_id Int
   before_img String
   after_img  String
   pass_key   String
+
+  @@map("app_before_after")
 }
 
-model app_permissions {
+model AppPermisions {
   id      Int    @id @default(autoincrement())
   company Int
   appid   String
 
+  @@map("app_permissions")
   @@index([appid, company], name: "app_company")
   @@index([company], name: "company")
 }
 
-model app_subscriptions {
+model AppSubscription {
   id          Int    @id @default(autoincrement())
   key_value   String
   name        String
   Description String
   price       Float
 
+  @@map("app_subscriptions")
   @@index([key_value], name: "key_value")
 }
 
-model app_subscriptions_company_prices {
+model AppSubscriptionsCompanyPrices {
   id            Int    @id @default(autoincrement())
   occupier      Int
   app_key_value String
   price         Float
 
+  @@map("app_subscriptions_company_prices")
   @@index([app_key_value], name: "app_key_value")
 }
 
-model attachment_helper_lite {
+model AttachmentHelperLite {
   id         Int    @id @default(autoincrement())
   contact_id Int
   f          String
   x          String
   type       Int
+  @@map("attachment_helper_lite")
 }
 
-model at_answers {
+model AtAnswers {
   id          Int    @id @default(autoincrement())
   question_id Int
   name        String
   image       String
+
+  @@map("at_answers")
+
 }
 
-model at_answers2 {
+model AtAnswers2 {
   id          Int    @id @default(autoincrement())
   question_id Int
   name        String
+
+  @@map("at_answers2")
+
 }
 
-model at_concerns {
+model AtConcerns {
   id     Int    @id @default(autoincrement())
   name   String
   image  String
   region String
+
+  @@map("at_concerns")
+
 }
 
 // The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -291,30 +336,35 @@ model at_concerns {
   // product_id Int
 // }
 
-model at_questions {
+model AtQuestions {
   id         Int    @id @default(autoincrement())
   company_id Int
   name       String
   order      Int
   region     String
+
+  @@map("at_questions")
 }
 
-model at_questions2 {
+model AtQuestions2 {
   id         Int    @id @default(autoincrement())
   company_id Int
   name       String
   type       String
+
+  @@map("at_questions")
 }
 
-model at_question_relations {
+model AtQuestionsRelations {
   company_id Int
   answer_id  Int
   product_id Int
 
+  @@map("at_question_relations")
   @@id([company_id, answer_id, product_id])
 }
 
-model at_quiz_takes {
+model AtQuizTakes {
   id         Int      @id @default(autoincrement())
   company_id Int
   name       String
@@ -324,25 +374,33 @@ model at_quiz_takes {
   concerns   String
   answers2   String
   products   String
+
+  @@map("at_quiz_takes")
+
 }
 
-model at_settings {
+model AtSettings {
   id          Int    @id @default(autoincrement())
   company_id  Int
   logo        String
   background  String
   font_family String
+
+  @@map("at_settings")
 }
 
-model at_treatments {
+model AtTreatments {
   id          Int    @id @default(autoincrement())
   company_id  Int
   name        String
   image       String
   description String
+
+  @@map("at_treatments")
+
 }
 
-model automation_actions {
+model AutomationActions {
   id          Int    @id @default(autoincrement())
   trigger_id  Int
   company     Int
@@ -350,10 +408,11 @@ model automation_actions {
   action_data String
   order       Int
 
+  @@map("automation_actions")
   @@index([company], name: "company")
 }
 
-model automation_delay {
+model AutomationDelay {
   id             Int      @id @default(autoincrement())
   action_rows    String
   data_array     String
@@ -363,25 +422,30 @@ model automation_delay {
   date_queued    DateTime
   appointment_id Int?
 
+  @@map("automation_delay")
   @@index([company], name: "company")
   @@index([date_queued], name: "date_queued")
   @@index([delay], name: "delay")
 }
 
-model automation_folders {
+model AutomationFolders {
   id          Int    @id @default(autoincrement())
   company_id  Int
   name        String
   description String
+
+  @@map("automation_folders")
 }
 
-model automation_log {
+model AutomationLog {
   id           Int      @id @default(autoincrement())
   company      Int
   date_created DateTime @default(now())
   message      String
   parent_id    Int?
   uid          Int?
+
+  @@map("automation_log")
 }
 
 model automation_rules {
@@ -396,6 +460,7 @@ model automation_rules {
   needs_config Int
   folder_id    Int       @default(1)
 
+  @@map("automation_log")
   @@index([active], name: "active")
   @@index([company], name: "company")
   @@index([date_end], name: "date_end")
@@ -7260,20 +7325,20 @@ model manage_items {
 model MarketingSource {
   id          Int    @id @default(autoincrement())
   source_name String
-  occupier    Int
+  company_id    Int @map("occupier")
   custom_id   Int
   public      Int
   imported    Int
-  company Company @relation(fields: [occupier], references: [id])
+  company Company @relation(fields: [company_id], references: [id])
 
   @@map("marketing_sources")
-  @@index([occupier], name: "occupier")
+  @@index([company_id], name: "company_id")
   @@index([public], name: "public")
   @@index([source_name], name: "source_name")
 
 }
 
-model media_library_attachments {
+model MediaLlibraryAttachments {
   id                      Int      @id @default(autoincrement())
   file_url                String
   company_id              Int
@@ -7284,6 +7349,8 @@ model media_library_attachments {
   sales_id                Int      @default(0)
   statement_id            Int      @default(0)
   creation_date           DateTime
+
+  @@map("media_library_attachments")
 
   @@index([communication_id], name: "communication_id")
   @@index([company_id], name: "company_id")
