@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import PhoneInput from 'react-phone-input-2'
 import { PhoneNumberUtil } from 'google-libphonenumber'
 import ClassNames from 'classnames'
@@ -8,16 +8,21 @@ const phoneUtil = PhoneNumberUtil.getInstance()
 export interface PhoneNumberInputProps {
   countryCode?: string
   label?: string
-  onChange(val): void
+  value?: string
+  onChange(val, valid): void
 }
 
 export const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
   countryCode = 'GB',
   label = 'Phone Number',
+  value = '',
   onChange,
 }) => {
-  const [phoneNumber, setPhoneNumber] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState(value)
   const [valid, setValid] = useState(true)
+  useEffect(() => {
+    setPhoneNumber(value)
+  }, [value])
   const handleChangeInput = (val, country) => {
     try {
       const isValid = phoneUtil.isValidNumberForRegion(
@@ -29,7 +34,7 @@ export const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
       setValid(false)
     }
     setPhoneNumber(val)
-    onChange(`${val}`)
+    onChange(`${val}`, valid)
   }
 
   return (

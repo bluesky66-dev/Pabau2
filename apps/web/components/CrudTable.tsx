@@ -478,7 +478,7 @@ const CrudTable: FC<P> = ({
                 setModalShowing((e) => !e)
               } else {
                 setEditPage(e)
-                createPageOnClick()
+                // createPageOnClick()
               }
             }}
           />

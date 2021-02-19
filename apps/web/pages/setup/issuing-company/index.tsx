@@ -9,6 +9,7 @@ import {
   Button,
   Notification,
   NotificationType,
+  BasicModal as Modal,
 } from '@pabau/ui'
 import { Form, Select, Input } from 'antd'
 import { useFormik } from 'formik'
@@ -90,6 +91,7 @@ const ADD_MUTATION = gql`
     $invoicePrefix: String!
     $invoiceStartingNumber: numeric!
     $vatRegistered: Boolean!
+    $isDraft: Boolean
   ) {
     insert_issuing_company_one(
       object: {
@@ -105,6 +107,7 @@ const ADD_MUTATION = gql`
         invoice_starting_number: $invoiceStartingNumber
         vat_registered: $vatRegistered
         is_active: true
+        is_draft: $isDraft
       }
     ) {
       __typename
@@ -115,12 +118,36 @@ const ADD_MUTATION = gql`
 const EDIT_MUTATION = gql`
   mutation update_issuing_company_by_pk(
     $id: uuid!
-    $name: String!
-    $is_active: Boolean
+    $companyName: String!
+    $phone: numeric!
+    $website: String!
+    $country: String!
+    $city: String!
+    $street: String!
+    $postCode: numeric!
+    $invoiceTemplate: String!
+    $invoicePrefix: String!
+    $invoiceStartingNumber: numeric!
+    $vatRegistered: Boolean!
+    $isDraft: Boolean
   ) {
     update_issuing_company_by_pk(
       pk_columns: { id: $id }
-      _set: { name: $name, is_active: $is_active }
+      _set: {
+        name: $companyName
+        phone: $phone
+        website: $website
+        country: $country
+        city: $city
+        street: $street
+        post_code: $postCode
+        invoice_template: $invoiceTemplate
+        invoice_prefix: $invoicePrefix
+        invoice_starting_number: $invoiceStartingNumber
+        vat_registered: $vatRegistered
+        is_active: true
+        is_draft: $isDraft
+      }
     ) {
       __typename
       id
@@ -201,6 +228,7 @@ interface inputTypes {
   invoicePrefix?: string
   invoiceStartingNumber?: string
   vatRegistered?: boolean
+  isDraft?: boolean
 }
 
 interface editFieldsTypes {
@@ -216,13 +244,21 @@ interface editFieldsTypes {
   invoice_prefix?: string
   invoice_starting_number?: string
   vat_registered?: boolean
+  is_active?: boolean
+  is_draft?: boolean
 }
+
+interface focusedTypes {
+  general?: boolean
+  address?: boolean
+  financial?: boolean
+}
+
 export const IssuingCompany: NextPage = () => {
-  const [showModal, setShowModal] = useState(false)
-  const [defaultChecked, setdefaultChecked] = useState(true)
+  const [showModal, setShowModal] = useState<boolean>(false)
   const { Option } = Select
-  const [countryCode, setCountryCode] = useState(null)
-  const [focused, setFocused] = useState({})
+  const [countryCode, setCountryCode] = useState<string>(null)
+  const [focused, setFocused] = useState<focusedTypes>({})
   const [addMutation] = useMutation(ADD_MUTATION, {
     onCompleted(data) {
       Notification(
@@ -238,12 +274,46 @@ export const IssuingCompany: NextPage = () => {
       )
     },
   })
+
+  const [editMutation] = useMutation(EDIT_MUTATION, {
+    onCompleted(data) {
+      Notification(
+        NotificationType.success,
+        `Success! You have successfully updated an issuing company`
+      )
+    },
+    onError(err) {
+      console.log('ERROR WHILE UPDATING:', err)
+      Notification(
+        NotificationType.error,
+        `Error! While updating an issuing company`
+      )
+    },
+  })
+
+  const [deleteMutation] = useMutation(DELETE_MUTATION, {
+    onCompleted(data) {
+      Notification(
+        NotificationType.success,
+        `Success! You have successfully deleted an issuing company`
+      )
+    },
+    onError(err) {
+      console.log('ERROR WHILE DELETING:', err)
+      Notification(
+        NotificationType.error,
+        `Error! While deleting an issuing company`
+      )
+    },
+  })
+
   const [editPage, setEditPage] = useState<editFieldsTypes>({})
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false)
 
   countries.registerLocale(english)
   const countriesName = countries.getNames('en')
 
-  const createOptions = (type) => {
+  const createOptions = (type: string) => {
     let options = []
     if (type === 'country') {
       options = Object.keys(countriesName).map((c) => (
@@ -262,11 +332,15 @@ export const IssuingCompany: NextPage = () => {
     return options
   }
 
-  const validate = (values) => {
+  const validate = (values: inputTypes) => {
     const errors: inputTypes = {}
 
     if (!values.companyName) {
       errors.companyName = 'Company name is required'
+    }
+
+    if (!values.phone) {
+      errors.phone = 'Phone number is required'
     }
 
     if (!values.website) {
@@ -321,6 +395,8 @@ export const IssuingCompany: NextPage = () => {
         invoicePrefix: editPage.invoice_prefix,
         invoiceStartingNumber: editPage.invoice_starting_number,
         vatRegistered: editPage.vat_registered,
+        isActive: editPage.is_active,
+        isDraft: editPage.is_draft,
       }
       // setFocused({ general: true, address: true, financial: true })
       return editObj
@@ -337,6 +413,7 @@ export const IssuingCompany: NextPage = () => {
         invoicePrefix: '',
         invoiceStartingNumber: undefined,
         vatRegistered: false,
+        isDraft: false,
       }
     }
   }
@@ -347,32 +424,71 @@ export const IssuingCompany: NextPage = () => {
     validate,
     onSubmit: async (values) => {
       console.log('submitted values values:', values)
-      await addMutation({
-        variables: values,
-        optimisticResponse: {},
-      })
+      await (!editPage.id
+        ? addMutation({
+            variables: values,
+            optimisticResponse: {},
+          })
+        : editMutation({
+            variables: values,
+            optimisticResponse: {},
+          }))
     },
   })
 
+  const handleSaveAsDraft = async () => {
+    await formik.setFieldValue('isDraft', true)
+    await formik.handleSubmit()
+  }
+
+  const showDeleteConfirmDialog = () => {
+    setShowDeleteModal(true)
+  }
+
   console.log('ERRORS:', formik.errors)
 
-  const onchange = (name, key) => {
-    const value = typeof name === 'object' ? name.target.value : name
-    formik.setFieldValue(key, value)
+  const onchange = (name: string | boolean | number, key: string) => {
+    formik.setFieldValue(key, name)
   }
 
   const createPageOnClick = () => {
+    setEditPage({})
+    setFocused({ general: false, address: false, financial: false })
     setShowModal(true)
   }
   const onChecked = () => {
-    setdefaultChecked(!defaultChecked)
-    onchange(defaultChecked, 'vatRegistered')
+    onchange(!formik.values.vatRegistered, 'vatRegistered')
+  }
+
+  const handleSelectCountry = (value: string) => {
+    const code = Object.keys(countriesName).find(
+      (c) => countriesName[c] === value
+    )
+    setCountryCode(code)
+    onchange(value, 'country')
+    onchange('', 'city')
+  }
+
+  const handleFocusElement = (name: string, status: boolean) => {
+    setFocused({ [name]: status })
+  }
+
+  const handleSetEditPage = (value: editFieldsTypes) => {
+    setFocused({ general: true, address: true, financial: true })
+    setEditPage(value)
+    setShowModal(true)
+  }
+
+  const handlePhoneInputValue = (): string => {
+    return formik.values.phone
+      ? formik.values.phone.toString()
+      : formik.values.phone
   }
 
   const headerContent = () => {
     return (
       <div className={styles.issuesCompanyHeader}>
-        <h4>Create Issuing Comapny</h4>
+        <h4>{!editPage.id ? 'Create' : 'Edit'} Issuing Comapny</h4>
         <div className={styles.issueRegister}>
           <div className={styles.vatReg}>
             <small>VAT registered</small>{' '}
@@ -384,12 +500,19 @@ export const IssuingCompany: NextPage = () => {
             </Button>
           </div>
           <div className={styles.btnDraft}>
-            <Button type="default">Save as draft</Button>
+            <Button
+              type="default"
+              onClick={
+                !editPage.id ? handleSaveAsDraft : showDeleteConfirmDialog
+              }
+            >
+              {!editPage.id ? 'Save as draft' : 'Delete'}
+            </Button>
           </div>
           <div>
-            {defaultChecked || !formik.values.vatRegistered ? (
+            {!formik.values.vatRegistered ? (
               <Button type="primary" disabled={true}>
-                Create
+                {!editPage.id ? 'Create' : 'Save'}
               </Button>
             ) : (
               <Button
@@ -397,7 +520,7 @@ export const IssuingCompany: NextPage = () => {
                 htmlType="submit"
                 onClick={() => formik.handleSubmit()}
               >
-                Create
+                {!editPage.id ? 'Create' : 'Save'}
               </Button>
             )}
           </div>
@@ -405,19 +528,6 @@ export const IssuingCompany: NextPage = () => {
       </div>
     )
   }
-  const handleSelectCountry = (value) => {
-    const code = Object.keys(countriesName).find(
-      (c) => countriesName[c] === value
-    )
-    setCountryCode(code)
-    onchange(value, 'country')
-    onchange('', 'city')
-  }
-
-  const handleFocusElement = (name, status) => {
-    setFocused({ [name]: status })
-  }
-  console.log('initial values:', formik.values)
 
   const modalContents = () => {
     return (
@@ -428,7 +538,7 @@ export const IssuingCompany: NextPage = () => {
         >
           <div
             className={
-              focused['general']
+              focused.general
                 ? styles.focusedContentWrapper
                 : styles.contentWrapper
             }
@@ -441,7 +551,6 @@ export const IssuingCompany: NextPage = () => {
                 <Input
                   name="companyName"
                   placeholder="Enter company name"
-                  // onChange={(e) => onchange(e, 'companyName')}
                   onChange={formik.handleChange}
                   value={formik.values.companyName}
                 />
@@ -454,18 +563,19 @@ export const IssuingCompany: NextPage = () => {
               <Form.Item>
                 <PhoneNumberInput
                   label="Phone"
-                  onChange={(e) => {
+                  value={handlePhoneInputValue()}
+                  onChange={(e: string, valid: boolean) => {
                     onchange(e, 'phone')
                   }}
                 />
+                {formik.errors.phone ? (
+                  <div className={styles.error}>{formik.errors.phone}</div>
+                ) : null}
               </Form.Item>
               <Form.Item label="Website">
                 <Input
                   name="website"
                   placeholder="Enter webisite"
-                  // onChange={(e) => {
-                  //   onchange(e, 'website')
-                  // }}
                   onChange={formik.handleChange}
                   value={formik.values.website}
                 />
@@ -477,7 +587,7 @@ export const IssuingCompany: NextPage = () => {
           </div>
           <div
             className={
-              focused['address']
+              focused.address
                 ? styles.focusedContentWrapper
                 : styles.contentWrapper
             }
@@ -551,12 +661,12 @@ export const IssuingCompany: NextPage = () => {
           </div>
           <div
             className={
-              focused['invoice']
+              focused.financial
                 ? styles.focusedContentWrapper
                 : styles.contentWrapper
             }
-            onFocus={() => handleFocusElement('invoice', true)}
-            onBlur={() => handleFocusElement('invoice', false)}
+            onFocus={() => handleFocusElement('financial', true)}
+            onBlur={() => handleFocusElement('financial', false)}
           >
             <h3>Finanacial Information</h3>
             <div className={styles.customForm}>
@@ -611,7 +721,6 @@ export const IssuingCompany: NextPage = () => {
   }
   return (
     <>
-      {/* {createcountryOptions()} */}
       <CrudLayout
         schema={schema}
         tableSearch={false}
@@ -624,7 +733,7 @@ export const IssuingCompany: NextPage = () => {
         addFilter={false}
         createPage={true}
         createPageOnClick={createPageOnClick}
-        setEditPage={setEditPage}
+        setEditPage={handleSetEditPage}
       />
       <FullScreenReportModal
         title={headerContent}
@@ -633,6 +742,38 @@ export const IssuingCompany: NextPage = () => {
         onBackClick={() => setShowModal(false)}
         content={modalContents}
       />
+      <Modal
+        modalWidth={682}
+        centered={true}
+        onCancel={() => {
+          setShowDeleteModal(false)
+        }}
+        onOk={async () => {
+          const { id } = editPage as { id: string }
+          await deleteMutation({
+            variables: { id },
+            optimisticResponse: {},
+          })
+          setShowDeleteModal(false)
+          setShowModal(false)
+        }}
+        visible={showDeleteModal}
+        title={`Delete ${schema.short}?`}
+        newButtonText={schema.deleteBtnLabel || 'Yes, Delete'}
+        isValidate={true}
+      >
+        <span
+          style={{
+            fontFamily: 'Circular-Std-Book',
+            fontWeight: 'normal',
+            fontSize: '16px',
+            lineHeight: '20px',
+            color: '#9292A3',
+          }}
+        >
+          {editPage?.name} will be deleted. This action is irreversable
+        </span>
+      </Modal>
     </>
   )
 }
