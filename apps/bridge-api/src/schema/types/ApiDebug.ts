@@ -16,7 +16,7 @@ export const apiDebugQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.apiDebug();
-    t.crud.apiDebugs({ filtering: true, ordering: true });
+    t.crud.apiDebugs({ filtering: true, ordering: true , pagination: true });
 
     t.field('apiDebugsCount', {
       type: 'Int',

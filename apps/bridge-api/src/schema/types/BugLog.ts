@@ -15,7 +15,7 @@ export const bugLogQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.bugLog();
-    t.crud.bugLogs({ filtering: true, ordering: true });
+    t.crud.bugLogs({ filtering: true, ordering: true , pagination: true });
 
     t.field('bugLogsCount', {
       type: 'Int',

@@ -16,7 +16,7 @@ export const bookmarkedPageQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.bookmarkedPage();
-    t.crud.bookmarkedPages({ filtering: true, ordering: true });
+    t.crud.bookmarkedPages({ filtering: true, ordering: true , pagination: true });
 
     t.field('bookmarkedPagesCount', {
       type: 'Int',

@@ -17,7 +17,7 @@ export const bookingStatusChangeQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.bookingStatusChange();
-    t.crud.bookingStatusChanges({ filtering: true, ordering: true });
+    t.crud.bookingStatusChanges({ filtering: true, ordering: true , pagination: true });
 
     t.field('bookingStatusChangesCount', {
       type: 'Int',

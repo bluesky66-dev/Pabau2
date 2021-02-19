@@ -17,7 +17,7 @@ export const bacsAccountQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.bacsAccount();
-    t.crud.bacsAccounts({ filtering: true, ordering: true });
+    t.crud.bacsAccounts({ filtering: true, ordering: true , pagination: true });
 
     t.field('bacsAccountsCount', {
       type: 'Int',

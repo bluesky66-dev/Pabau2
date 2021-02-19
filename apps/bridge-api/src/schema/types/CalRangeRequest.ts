@@ -15,7 +15,7 @@ export const calRangeRequestQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.calRangeRequest();
-    t.crud.calRangeRequests({ filtering: true, ordering: true });
+    t.crud.calRangeRequests({ filtering: true, ordering: true , pagination: true });
 
     t.field('calRangeRequestsCount', {
       type: 'Int',

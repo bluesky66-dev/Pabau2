@@ -23,7 +23,7 @@ export const acLogQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.acLog();
-    t.crud.acLogs({ filtering: true, ordering: true });
+    t.crud.acLogs({ filtering: true, ordering: true , pagination: true });
 
     t.field('acLogsCount', {
       type: 'Int',

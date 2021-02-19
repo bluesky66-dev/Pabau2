@@ -27,7 +27,7 @@ export const adverCampaignQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.adverCampaign();
-    t.crud.adverCampaigns({ filtering: true, ordering: true });
+    t.crud.adverCampaigns({ filtering: true, ordering: true , pagination: true });
 
     t.field('adverCampaignsCount', {
       type: 'Int',

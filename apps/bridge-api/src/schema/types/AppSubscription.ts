@@ -15,7 +15,7 @@ export const appSubscriptionQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.appSubscription();
-    t.crud.appSubscriptions({ filtering: true, ordering: true });
+    t.crud.appSubscriptions({ filtering: true, ordering: true , pagination: true });
 
     t.field('appSubscriptionsCount', {
       type: 'Int',

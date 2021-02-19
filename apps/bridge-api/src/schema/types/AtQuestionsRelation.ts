@@ -13,7 +13,7 @@ export const atQuestionsRelationQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.atQuestionsRelation();
-    t.crud.atQuestionsRelations({ filtering: true, ordering: true });
+    t.crud.atQuestionsRelations({ filtering: true, ordering: true , pagination: true });
 
     t.field('atQuestionsRelationsCount', {
       type: 'Int',

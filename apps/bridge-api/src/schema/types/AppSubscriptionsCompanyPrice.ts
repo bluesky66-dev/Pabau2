@@ -14,7 +14,7 @@ export const appSubscriptionsCompanyPriceQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.appSubscriptionsCompanyPrice();
-    t.crud.appSubscriptionsCompanyPrices({ filtering: true, ordering: true });
+    t.crud.appSubscriptionsCompanyPrices({ filtering: true, ordering: true , pagination: true });
 
     t.field('appSubscriptionsCompanyPricesCount', {
       type: 'Int',

@@ -24,7 +24,7 @@ export const bnfDrugQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.bnfDrug();
-    t.crud.bnfDrugs({ filtering: true, ordering: true });
+    t.crud.bnfDrugs({ filtering: true, ordering: true , pagination: true });
 
     t.field('bnfDrugsCount', {
       type: 'Int',

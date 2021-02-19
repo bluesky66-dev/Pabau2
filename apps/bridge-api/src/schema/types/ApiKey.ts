@@ -25,7 +25,7 @@ export const apiKeyQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.apiKey();
-    t.crud.apiKeys({ filtering: true, ordering: true });
+    t.crud.apiKeys({ filtering: true, ordering: true , pagination: true });
 
     t.field('apiKeysCount', {
       type: 'Int',

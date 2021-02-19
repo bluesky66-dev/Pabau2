@@ -13,7 +13,7 @@ export const appPermissionQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.appPermission();
-    t.crud.appPermissions({ filtering: true, ordering: true });
+    t.crud.appPermissions({ filtering: true, ordering: true , pagination: true });
 
     t.field('appPermissionsCount', {
       type: 'Int',

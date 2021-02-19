@@ -16,7 +16,7 @@ export const automationLogQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.automationLog();
-    t.crud.automationLogs({ filtering: true, ordering: true });
+    t.crud.automationLogs({ filtering: true, ordering: true , pagination: true });
 
     t.field('automationLogsCount', {
       type: 'Int',

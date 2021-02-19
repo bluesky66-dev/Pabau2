@@ -24,7 +24,7 @@ export const cancellationPolicyQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.cancellationPolicy();
-    t.crud.cancellationPolicies({ filtering: true, ordering: true });
+    t.crud.cancellationPolicies({ filtering: true, ordering: true , pagination: true });
 
     t.field('cancellationPoliciesCount', {
       type: 'Int',

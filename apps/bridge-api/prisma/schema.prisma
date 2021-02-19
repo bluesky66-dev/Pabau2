@@ -185,7 +185,7 @@ model Company {
   @@map("admin")
 }
 
-model AdverCampaign {
+model AdvertCampaign {
   id                Int    @id @default(autoincrement())
   advert_name       String
   advert_type       String
@@ -1114,7 +1114,7 @@ model CheckinQueue {
   @@index([uid], name: "uid")
 }
 
-model classtype_master {
+model ClasstypeMaster {
   ctype_id                Int     @id @default(autoincrement())
   ctype_name              String?
   ctype_compid            String
@@ -1123,9 +1123,11 @@ model classtype_master {
   ctype_description       String
   payment_option_disabled Int
   credit_option_disabled  Int
+
+  @@map("classtype_master")
 }
 
-model class_categories {
+model ClassCategories {
   id            Int       @id @default(autoincrement())
   code          String
   name          String
@@ -1133,9 +1135,11 @@ model class_categories {
   uid           Int?
   created_date  DateTime?
   modified_date DateTime?
+
+  @@map("class_categories")
 }
 
-model class_guests {
+model ClassGuests {
   id            Int    @id @default(autoincrement())
   guest_name    String
   signing_date  Int
@@ -1143,9 +1147,11 @@ model class_guests {
   company_id    Int
   cancel_status Int
   mobile        String
+
+  @@map("class_guests")
 }
 
-model class_master {
+model ClassMaster {
   c_id              Int                     @id @default(autoincrement())
   c_companyid       Int?
   c_type            Int?
@@ -1167,9 +1173,11 @@ model class_master {
   cancel_status     Int
   product_id        Int
   sign_in_type      String
+
+  @@map("class_master")
 }
 
-model class_notes {
+model ClassNotes {
   id        Int    @id @default(autoincrement())
   class_id  Int
   note      String
@@ -1177,6 +1185,8 @@ model class_notes {
   public    Int
   avatar    String
   post_date String
+
+  @@map("class_notes")
 }
 
 model class_products {

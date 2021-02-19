@@ -27,7 +27,7 @@ export const calendarViewQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.calendarView();
-    t.crud.calendarViews({ filtering: true, ordering: true });
+    t.crud.calendarViews({ filtering: true, ordering: true , pagination: true });
 
     t.field('calendarViewsCount', {
       type: 'Int',

@@ -14,7 +14,7 @@ export const atConcernQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.atConcern();
-    t.crud.atConcerns({ filtering: true, ordering: true });
+    t.crud.atConcerns({ filtering: true, ordering: true , pagination: true });
 
     t.field('atConcernsCount', {
       type: 'Int',

@@ -13,7 +13,7 @@ export const secondAtAnswerQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.secondAtAnswer();
-    t.crud.secondAtAnswers({ filtering: true, ordering: true });
+    t.crud.secondAtAnswers({ filtering: true, ordering: true , pagination: true });
 
     t.field('secondAtAnswersCount', {
       type: 'Int',

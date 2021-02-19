@@ -22,7 +22,7 @@ export const accountBalanceLogQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.accountBalanceLog();
-    t.crud.accountBalanceLogs({ filtering: true, ordering: true });
+    t.crud.accountBalanceLogs({ filtering: true, ordering: true , pagination: true });
 
     t.field('accountBalanceLogsCount', {
       type: 'Int',

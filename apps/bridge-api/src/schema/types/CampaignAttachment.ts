@@ -17,7 +17,7 @@ export const campaignAttachmentQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.campaignAttachment();
-    t.crud.campaignAttachments({ filtering: true, ordering: true });
+    t.crud.campaignAttachments({ filtering: true, ordering: true , pagination: true });
 
     t.field('campaignAttachmentsCount', {
       type: 'Int',

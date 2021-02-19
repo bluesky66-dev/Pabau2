@@ -19,7 +19,7 @@ export const atQuizTakeQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.atQuizTake();
-    t.crud.atQuizTakes({ filtering: true, ordering: true });
+    t.crud.atQuizTakes({ filtering: true, ordering: true , pagination: true });
 
     t.field('atQuizTakesCount', {
       type: 'Int',

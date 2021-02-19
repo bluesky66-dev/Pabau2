@@ -18,7 +18,7 @@ export const acLogActionQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.acLogAction();
-    t.crud.acLogActions({ filtering: true, ordering: true });
+    t.crud.acLogActions({ filtering: true, ordering: true , pagination: true });
 
     t.field('acLogActionsCount', {
       type: 'Int',

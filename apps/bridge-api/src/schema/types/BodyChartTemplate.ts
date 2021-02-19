@@ -19,7 +19,7 @@ export const bodyChartTemplateQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.bodyChartTemplate();
-    t.crud.bodyChartTemplates({ filtering: true, ordering: true });
+    t.crud.bodyChartTemplates({ filtering: true, ordering: true , pagination: true });
 
     t.field('bodyChartTemplatesCount', {
       type: 'Int',

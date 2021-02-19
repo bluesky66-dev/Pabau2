@@ -17,7 +17,7 @@ export const automationTriggerQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.automationTrigger();
-    t.crud.automationTriggers({ filtering: true, ordering: true });
+    t.crud.automationTriggers({ filtering: true, ordering: true , pagination: true });
 
     t.field('automationTriggersCount', {
       type: 'Int',

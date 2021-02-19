@@ -23,7 +23,7 @@ export const bookingMasterQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.bookingMaster();
-    t.crud.bookingMasters({ filtering: true, ordering: true });
+    t.crud.bookingMasters({ filtering: true, ordering: true , pagination: true });
 
     t.field('bookingMastersCount', {
       type: 'Int',

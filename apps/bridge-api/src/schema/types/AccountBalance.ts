@@ -17,7 +17,7 @@ export const accountBalanceQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.accountBalance();
-    t.crud.accountBalances({ filtering: true, ordering: true });
+    t.crud.accountBalances({ filtering: true, ordering: true , pagination: true });
 
     t.field('accountBalancesCount', {
       type: 'Int',

@@ -20,7 +20,7 @@ export const companyQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.company();
-    t.crud.companies({ filtering: true, ordering: true });
+    t.crud.companies({ filtering: true, ordering: true , pagination: true });
 
     t.field('companiesCount', {
       type: 'Int',

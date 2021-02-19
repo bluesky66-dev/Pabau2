@@ -14,7 +14,7 @@ export const atAnswerQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.atAnswer();
-    t.crud.atAnswers({ filtering: true, ordering: true });
+    t.crud.atAnswers({ filtering: true, ordering: true , pagination: true });
 
     t.field('atAnswersCount', {
       type: 'Int',
