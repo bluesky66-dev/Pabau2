@@ -17,7 +17,7 @@ export const modalContent = {
     plan: 'from $499.00/month',
     description:
       'We’ll ask you about your needs, help you understand ow pricing works, and get you started with new features.',
-    btnText: 'Chat with us',
+    btnText: 'Start Trial',
     sectionTitle: 'Scale with advanced workflows and security',
     sectionData: [
       {
@@ -87,7 +87,7 @@ export const modalContent = {
     plan: 'from $599.00/month',
     description:
       'We’ll ask you about your needs, help you understand ow pricing works, and get you started with new features.',
-    btnText: 'Chat with us',
+    btnText: 'Start Trial',
     sectionTitle: 'Scale with advanced workflows and security',
     sectionData: [
       {
@@ -157,7 +157,7 @@ export const modalContent = {
     plan: 'from $699.00/month',
     description:
       'We’ll ask you about your needs, help you understand ow pricing works, and get you started with new features.',
-    btnText: 'Chat with us',
+    btnText: 'Start Trial',
     sectionTitle: 'Scale with advanced workflows and security',
     sectionData: [
       {
@@ -227,7 +227,7 @@ export const modalContent = {
     plan: 'from $799.00/month',
     description:
       'We’ll ask you about your needs, help you understand ow pricing works, and get you started with new features.',
-    btnText: 'Chat with us',
+    btnText: 'Start Trial',
     sectionTitle: 'Scale with advanced workflows and security',
     sectionData: [
       {
@@ -298,7 +298,7 @@ export const title = 'Upgrade to Accelerate plan'
 export const plan = 'from $499.00/month'
 export const description =
   'We’ll ask you about your needs, help you understand ow pricing works, and get you started with new features.'
-export const btnText = 'Chat with us'
+export const btnText = 'Start Trial'
 export const sectionTitle = 'Scale with advanced workflows and security'
 export const sectionData = [
   {
