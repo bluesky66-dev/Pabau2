@@ -153,7 +153,12 @@ export const Table: FC<TableType> = ({
         ?.filter((col: any) => col.visible === true)
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .map((col: any) => {
-          if (col && col.dataIndex === 'public') {
+          if (
+            col &&
+            (col.dataIndex === 'public' ||
+              col.dataIndex === 'is_active' ||
+              col.dataIndex === 'integration')
+          ) {
             console.log(col.dataIndex)
             col.render = renderActiveButton
           } else {

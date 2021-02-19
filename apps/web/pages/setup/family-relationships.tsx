@@ -4,7 +4,7 @@ import React from 'react'
 import CrudLayout from '../../components/CrudLayout/CrudLayout'
 
 const LIST_QUERY = gql`
-  query marketing_sources(
+  query marketing_sources_TODO1(
     $isActive: Boolean = true
     $searchTerm: String = ""
     $offset: Int
@@ -28,7 +28,7 @@ const LIST_QUERY = gql`
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query marketing_source_aggregate(
+  query marketing_source_aggregate_2(
     $isActive: Boolean = true
     $searchTerm: String = ""
   ) {
@@ -45,7 +45,7 @@ const LIST_AGGREGATE_QUERY = gql`
   }
 `
 const DELETE_MUTATION = gql`
-  mutation delete_marketing_source($id: uuid!) {
+  mutation delete_marketing_source_2($id: uuid!) {
     delete_marketing_source_by_pk(id: $id) {
       __typename
       id
@@ -53,7 +53,7 @@ const DELETE_MUTATION = gql`
   }
 `
 const ADD_MUTATION = gql`
-  mutation add_marketing_source($name: String!, $is_active: Boolean) {
+  mutation add_marketing_source_2($name: String!, $is_active: Boolean) {
     insert_marketing_source_one(
       object: { name: $name, is_active: $is_active }
     ) {
@@ -63,7 +63,7 @@ const ADD_MUTATION = gql`
   }
 `
 const EDIT_MUTATION = gql`
-  mutation update_marketing_source_by_pk(
+  mutation update_marketing_source_by_pk_2(
     $id: uuid!
     $name: String!
     $is_active: Boolean
@@ -81,7 +81,7 @@ const EDIT_MUTATION = gql`
   }
 `
 const UPDATE_ORDER_MUTATION = gql`
-  mutation update_marketing_source_order($id: uuid!, $order: Int) {
+  mutation update_marketing_source_order_2($id: uuid!, $order: Int) {
     update_marketing_source(
       where: { id: { _eq: $id } }
       _set: { order: $order }

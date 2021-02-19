@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Wizard from './Wizard'
+import { data } from './mock'
 
 export default {
   component: Wizard,
@@ -27,8 +28,7 @@ const WizardStory = ({ ...args }) => {
       onPrev={() => setIndex(index - 1)}
       onNext={() => setIndex(index + 1)}
       allSteps={args.allSteps}
-      breadcrumb={args.breadcrumb}
-      header={args.header}
+      stepperData={data}
     ></Wizard>
   )
 }

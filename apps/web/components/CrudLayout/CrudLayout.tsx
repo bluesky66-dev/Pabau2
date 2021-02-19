@@ -11,6 +11,10 @@ interface P {
   aggregateQuery?: DocumentNode
   tableSearch?: boolean
   updateOrderQuery?: DocumentNode
+  showNotificationBanner?: boolean
+  createPage?: boolean
+  notificationBanner?: React.ReactNode
+  createPageOnClick?(): void
 }
 
 const CrudLayout: FC<P> = ({ ...props }) => <CrudTable {...props} />

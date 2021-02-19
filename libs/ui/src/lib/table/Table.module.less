@@ -25,6 +25,11 @@
       tr {
         border-bottom: 1px solid #f1f1f1;
       }
+      td {
+        @media screen and (max-width: 767px) {
+          width: 155px;  
+        }
+      }
     }
     tr:hover {
       background-color: #eef7fb;
@@ -142,5 +147,10 @@
       min-width: 155px;
       height: 40px;
     }
+  }
+}
+@media screen and (max-width: 767px) {
+:global .ant-table-sticky-scroll {
+  display: none;
   }
 }

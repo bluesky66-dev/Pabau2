@@ -21,8 +21,12 @@ export const DotButton: FC<P> = (props) => {
   const prepareContent = () => {
     return (
       <div className={styles.dotWrapper}>
-        {menuList?.map(({ key, icon, label }) => (
-          <div className={styles.dotList} key={`three-dot-menu-content-${key}`}>
+        {menuList?.map(({ key, icon, label, onClick }) => (
+          <div
+            className={styles.dotList}
+            key={`three-dot-menu-content-${key}`}
+            onClick={() => onClick?.()}
+          >
             {icon}
             <p>{label}</p>
           </div>
