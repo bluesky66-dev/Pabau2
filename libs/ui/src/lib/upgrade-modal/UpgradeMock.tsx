@@ -105,7 +105,7 @@ export const modalContent = {
       'Create private articles',
       'Reactions',
       'Audience targeting',
-      'Round robin assignment',
+      'Round robin assignment!!!',
       'Button triggers',
       'Salesforce integration',
       'Follow up actions',
