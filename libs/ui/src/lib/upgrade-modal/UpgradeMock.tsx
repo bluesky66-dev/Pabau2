@@ -82,12 +82,14 @@ export const modalContent = {
       {
         icon: <Shuffle />,
         title: 'Custom Pathways',
-        description: 'Custom pathways allow for building tailored journeys specific to a particular service or patient. A client coming in for a review for example, may have a different pathway to that of a treatment. By customizing the steps your patients take through your clinic, you can identify the most effective way to share information as well as monitor patient data and educate.',
+        description:
+          'Custom pathways allow for building tailored journeys specific to a particular service or patient. A client coming in for a review for example, may have a different pathway to that of a treatment. By customizing the steps your patients take through your clinic, you can identify the most effective way to share information as well as monitor patient data and educate.',
       },
       {
         icon: <TeamOutlined />,
         title: 'Smart Share',
-        description: 'With smart share you can create portrait photos with your before and after pictures and upload them directly to Facebook, Instagram or pretty much anywhere else in a click of a button.',
+        description:
+          'With smart share you can create portrait photos with your before and after pictures and upload them directly to Facebook, Instagram or pretty much anywhere else in a click of a button.',
       },
       {
         icon: <ApplicationSave />,
@@ -110,7 +112,6 @@ export const modalContent = {
       'Multilingual Journey',
       'Unique templates',
       'Video conferencing (iPad)',
-
     ],
     linkText: 'Compare all plans',
   },
@@ -125,17 +126,20 @@ export const modalContent = {
       {
         icon: <Shuffle />,
         title: 'Set team targets',
-        description: 'Gain useful insights into the performance of your Financial and Non-financial KPIs by setting targets.',
+        description:
+          'Gain useful insights into the performance of your Financial and Non-financial KPIs by setting targets.',
       },
       {
         icon: <ApplicationSave />,
         title: 'Performance Management',
-        description: 'Employees and managers can set and track there end of year appraisals, a long as they request feedback from peers.',
+        description:
+          'Employees and managers can set and track there end of year appraisals, a long as they request feedback from peers.',
       },
       {
         icon: <TeamOutlined />,
         title: 'Trends',
-        description: 'Track trends in employee performance and behaviour directly from the employee report.',
+        description:
+          'Track trends in employee performance and behaviour directly from the employee report.',
       },
       {
         icon: <ApplicationBook />,
