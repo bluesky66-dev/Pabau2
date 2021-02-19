@@ -3,16 +3,11 @@ import { PhoneNumberInput, Input } from '@pabau/ui'
 import { Form } from 'antd'
 import styles from './TileInputDiv.module.less'
 import { useFormik } from 'formik'
+import * as Yup from 'yup'
 
 interface inputProps {
   label?: string
   placeholderText?: string
-}
-
-interface inputTypes {
-  companyName?: string
-  phone?: string
-  website?: string
 }
 
 /* eslint-disable-next-line */
@@ -30,28 +25,17 @@ export const TileInputDiv: FC<TileInputDivProps> = ({
   websiteData,
 }) => {
   const [focused, setFocused] = useState<boolean>(false)
-  const validate = (values) => {
-    const errors: inputTypes = {}
-
-    if (!values.companyName) {
-      errors.companyName = 'Company name is required'
-    }
-
-    if (!values.website) {
-      errors.website = 'Website is required'
-    } else if (!/^[\w%+.-]+\.[\d.a-z-]+\.[a-z]{2,4}$/i.test(values.website)) {
-      errors.website = 'Invalid website name'
-    }
-
-    return errors
-  }
   const formik = useFormik({
     initialValues: {
       companyName: '',
       phone: '',
       website: '',
     },
-    validate,
+    validationSchema: Yup.object({
+      companyName: Yup.string().required('Company name is required'),
+      phone: Yup.string().required('Phone is required'),
+      website: Yup.string().url('Wesite name is invalid'),
+    }),
     onSubmit: (values) => {
       console.log('Form Vales:', values)
     },
