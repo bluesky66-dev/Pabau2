@@ -22,6 +22,7 @@ const Index: FC = () => {
   const [setIndexTab, setSelectedTab] = React.useState(1)
   const [sendEmail, setSendEmail] = React.useState(false)
   const [valideEmail, setValidEmail] = React.useState(false)
+  const [visible, setVisible] = React.useState(false)
 
   function handleSendEmailBtn(value) {
     setSendEmail(value)
@@ -63,6 +64,10 @@ const Index: FC = () => {
     </Menu>
   )
 
+  const handleVisibleChange = (flag) => {
+    setVisible(flag)
+  }
+
   return (
     <>
       <CommonHeader />
@@ -102,7 +107,13 @@ const Index: FC = () => {
           }}
         >
           <span className={styles.hideSection}>
-            <Dropdown overlay={menu} placement="bottomRight" arrow>
+            <Dropdown
+              overlay={menu}
+              placement="bottomRight"
+              onVisibleChange={handleVisibleChange}
+              visible={visible}
+              arrow
+            >
               <Button size={'large'}>
                 Enable settings <DownOutlined />
               </Button>
