@@ -1,26 +1,26 @@
-import React, { ReactText, useState } from "react";
-import { SingleReport } from "../SingleReport/SingleReport";
-import { ShowMore } from "../ShowMore/ShowMore";
+import React, { ReactText, useState } from 'react'
+import { SingleReport } from '../SingleReport/SingleReport'
+import { ShowMore } from '../ShowMore/ShowMore'
 
-import styles from "./ReportsCard.module.scss";
+import styles from './ReportsCard.module.less'
 
-const ReactHighcharts = require("react-highcharts");
+import ReactHighcharts from 'react-highcharts'
 
 interface report {
-  id: number;
-  reportCode: string;
-  reportName: string;
-  isNew: boolean;
-  favorite: boolean;
+  id: number
+  reportCode: string
+  reportName: string
+  isNew: boolean
+  favorite: boolean
 }
 
 interface ReportsCardProps {
-  catHeading?: string;
-  description?: string;
-  graphDescription?: string;
-  chartLabel?: string;
-  reports?: report[];
-  graphData?: ReactText[][];
+  catHeading?: string
+  description?: string
+  graphDescription?: string
+  chartLabel?: string
+  reports?: report[]
+  graphData?: ReactText[][]
 }
 
 export const ReportsCard: React.FC<ReportsCardProps> = ({
@@ -31,23 +31,23 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
   chartLabel,
   graphData,
 }) => {
-  const [showAll, setShowAll] = useState(false);
+  const [showAll, setShowAll] = useState(false)
 
   const config = {
     chart: {
-      type: "area",
-      backgroundColor: "rgba(236, 237, 240, 0.2)",
-      height: "36px",
+      type: 'area',
+      backgroundColor: 'rgba(236, 237, 240, 0.2)',
+      height: '36px',
       borderRadius: 3,
       marginBottom: 5,
     },
 
     title: {
-      text: "",
+      text: '',
     },
 
     subtitle: {
-      text: "",
+      text: '',
     },
 
     xAxis: {
@@ -68,8 +68,7 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
 
     tooltip: {
       formatter: function () {
-        var self: any = this;
-        return `${self.key} - ${chartLabel + self.y}`;
+        return `${this.key} - ${chartLabel + this.y}`
       },
     },
 
@@ -79,9 +78,9 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
         data: graphData,
       },
     ],
-  };
+  }
 
-  const showMoreHandler = () => setShowAll((showAll) => !showAll);
+  const showMoreHandler = () => setShowAll((showAll) => !showAll)
 
   return (
     <div className={styles.reportsCard}>
@@ -115,7 +114,7 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
                     showMoreHandler={showMoreHandler}
                   />
                 </>
-              );
+              )
             }
             return (
               <SingleReport
@@ -125,7 +124,7 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
                 isNew={report.isNew}
                 favorite={report.favorite}
               />
-            );
+            )
           })
         : reports.length > 10
         ? reports.map((report, i) =>
@@ -138,7 +137,7 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
                   showMoreHandler={showMoreHandler}
                 />
               ) : (
-                ""
+                ''
               )
             ) : (
               <SingleReport
@@ -152,7 +151,8 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
           )
         : [
             ...reports,
-            ...new Array(10 - reports.length).fill(""),
+            // eslint-disable-next-line unicorn/no-new-array
+            ...new Array(10 - reports.length).fill(''),
           ].map((report, i) =>
             report ? (
               <SingleReport
@@ -167,5 +167,5 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
             )
           )}
     </div>
-  );
-};
+  )
+}

@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react'
 
-import styles from "./SingleReport.module.scss";
+import styles from './SingleReport.module.less'
 
 export interface SingleReportProps {
-  reportCode?: string;
-  reportName?: string;
-  isNew?: boolean;
-  favorite?: boolean;
+  reportCode?: string
+  reportName?: string
+  isNew?: boolean
+  favorite?: boolean
 }
 
 export const SingleReport: React.FC<SingleReportProps> = ({
@@ -55,5 +55,5 @@ export const SingleReport: React.FC<SingleReportProps> = ({
       </div>
       {isNew && <div className={styles.singleReport__new}>New</div>}
     </div>
-  );
-};
+  )
+}

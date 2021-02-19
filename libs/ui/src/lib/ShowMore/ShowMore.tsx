@@ -1,12 +1,13 @@
-import ClassNames from "classnames";
+import React from 'react'
+import ClassNames from 'classnames'
 
-import styles from "./ShowMore.module.scss";
-console.log(styles);
+import styles from './ShowMore.module.less'
+console.log(styles)
 
 export interface ShowMoreProps {
-  length?: number;
-  showAll?: boolean;
-  showMoreHandler?: () => void;
+  length?: number
+  showAll?: boolean
+  showMoreHandler?: () => void
 }
 
 export const ShowMore: React.FC<ShowMoreProps> = ({
@@ -16,7 +17,12 @@ export const ShowMore: React.FC<ShowMoreProps> = ({
 }) => {
   return (
     <div className={styles.showMore} onClick={showMoreHandler}>
-      <div className={ClassNames(styles.showMore__arrow, showAll && styles.showMore__arrowRotated)}>
+      <div
+        className={ClassNames(
+          styles.showMore__arrow,
+          showAll && styles.showMore__arrowRotated
+        )}
+      >
         <svg
           width="12"
           height="8"
@@ -31,9 +37,9 @@ export const ShowMore: React.FC<ShowMoreProps> = ({
         </svg>
       </div>
       <span className={styles.showMore__text}>
-        {" "}
-        {showAll ? "Hide" : `Show more (${length - 9})`}
+        {' '}
+        {showAll ? 'Hide' : `Show more (${length - 9})`}
       </span>
     </div>
-  );
-};
+  )
+}

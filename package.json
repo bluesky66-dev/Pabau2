@@ -86,6 +86,7 @@
     "react-dom": "17.0.1",
     "react-google-places-autocomplete": "2.3.2",
     "react-grid-layout": "^1.2.0",
+    "react-highcharts": "^16.1.0",
     "react-highlight-words": "^0.17.0",
     "react-i18next": "^11.8.6",
     "react-native": "0.63.4",
