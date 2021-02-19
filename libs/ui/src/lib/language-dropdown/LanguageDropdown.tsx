@@ -24,7 +24,7 @@ export const LanguageDropdown: FC<LanguageDropdownProps> = ({
   const [form] = Form.useForm()
   const [selected, setSelected] = useState('English (UK)')
   const handleClickSelect = (e) => {
-    const text = e.target.innerText
+    const text = e.target.textContent
     setSelected(text.substring(1, text.length))
     onSelected?.(text.substring(1, text.length))
   }

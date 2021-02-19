@@ -40,7 +40,7 @@ export function SetupGrid(props: SetupGridProps): JSX.Element {
         <div className={styles.listItem}>{title}</div>
         {data.length > 0 &&
           data.map((subTitle, index) => {
-            return subTitle.data.length ? (
+            return subTitle.data.length > 0 ? (
               <Collapse accordion key={index}>
                 <Panel
                   header={
