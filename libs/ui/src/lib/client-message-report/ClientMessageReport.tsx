@@ -39,10 +39,8 @@ export const ClientMessageReport: FC<ClientMessageReportProps> = ({
   const [dataSource, setDataSource] = useState([])
 
   useEffect(() => {
-    if (modalStatus) {
-      fetchMessageHistory()
-    }
-  }, [modalStatus])
+    fetchMessageHistory()
+  })
 
   const fetchMessageHistory = async (page = 1) => {
     setLoader(true)
