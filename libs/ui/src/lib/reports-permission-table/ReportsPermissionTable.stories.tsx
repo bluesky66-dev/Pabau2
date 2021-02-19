@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import ReportsPermissionTable, {
   ReportsPermissionTableProps,
 } from './ReportsPermissionTable'
-import { title, subtitle, data, columns } from './mock'
+import { title, subtitle, data, columns } from './data'
 
 export default {
   component: ReportsPermissionTable,

@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 
 import ReportsPermissionTable from './ReportsPermissionTable'
-import { title, subtitle, data, columns } from './mock'
+import { title, subtitle, data, columns } from './data'
 
 describe('ReportsPermissionTable', () => {
   it('should render successfully', () => {
