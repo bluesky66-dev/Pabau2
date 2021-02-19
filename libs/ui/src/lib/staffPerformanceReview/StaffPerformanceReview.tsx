@@ -1,5 +1,7 @@
 import React, { FC, ReactNode, useState } from 'react'
-import { Steps, DatePicker, Dropdown, Menu, Button, Tooltip } from 'antd'
+import { Steps, DatePicker, Dropdown, Menu, Tooltip } from 'antd'
+import classNames from 'classnames'
+
 import {
   FileSearchOutlined,
   TeamOutlined,
@@ -7,7 +9,7 @@ import {
 } from '@ant-design/icons'
 import dateFormat from 'dateformat'
 import moment from 'moment'
-
+import { Button } from '@pabau/ui'
 import styles from './StaffPerformanceReview.module.less'
 import { ClockCircleOutlined } from '@ant-design/icons/lib'
 const { Step } = Steps
@@ -78,7 +80,7 @@ const StaffPerformanceReview: FC<P> = () => {
             <ClockCircleOutlined />
           </Tooltip>
         ),
-        status: 'wait',
+        status: 'process',
       })
       if (diff_months(today, reviewDate) > 3) {
         const diff = diff_months(today, reviewDate)
@@ -110,7 +112,11 @@ const StaffPerformanceReview: FC<P> = () => {
             },
             {
               date: reviewDate,
-              icon: <FileSearchOutlined />,
+              icon: (
+                <Tooltip placement="topLeft" title="Self & Manager assessment">
+                  <FileSearchOutlined />
+                </Tooltip>
+              ),
               status: 'process',
             }
           )
@@ -381,7 +387,11 @@ const StaffPerformanceReview: FC<P> = () => {
       <div>
         {reviewPeriod === 'annual' ? (
           <div>
-            <Steps className={styles.stepsDemo} labelPlacement="vertical">
+            <Steps
+              className={styles.stepsDemo}
+              responsive
+              labelPlacement="vertical"
+            >
               {DateArray.map((dates, i) => {
                 let diff = 0
                 if (i !== DateArray.length - 1) {
@@ -391,15 +401,17 @@ const StaffPerformanceReview: FC<P> = () => {
                   <Step
                     key={DateFormatter(dates.date)}
                     status={dates.status}
+                    title={i === 0 && 'Today'}
                     description={DateFormatter(dates.date)}
                     icon={dates.icon}
-                    className={
+                    className={classNames(
                       diff === 2
                         ? styles.stepVersionOne
                         : diff === 3
                         ? styles.stepVersionTwo
-                        : ''
-                    }
+                        : styles.stepVersionAnnual,
+                      i === 0 && styles.firstStep
+                    )}
                   />
                 )
               })}
@@ -407,7 +419,11 @@ const StaffPerformanceReview: FC<P> = () => {
           </div>
         ) : (
           <div>
-            <Steps className={styles.stepsDemo} labelPlacement="vertical">
+            <Steps
+              className={styles.stepsDemo}
+              responsive
+              labelPlacement="vertical"
+            >
               {DateArray.map((dates, i) => {
                 let diff = 0
                 if (i !== DateArray.length - 1) {
@@ -417,15 +433,17 @@ const StaffPerformanceReview: FC<P> = () => {
                   <Step
                     key={DateFormatter(dates.date)}
                     status={dates.status}
+                    title={i === 0 && 'Today'}
                     description={DateFormatter(dates.date)}
                     icon={dates.icon}
-                    className={
+                    className={classNames(
                       diff === 2
                         ? styles.stepVersionOne
                         : diff === 3
                         ? styles.stepVersionTwo
-                        : ''
-                    }
+                        : styles.stepVersion,
+                      i === 0 && styles.firstStep
+                    )}
                   />
                 )
               })}
