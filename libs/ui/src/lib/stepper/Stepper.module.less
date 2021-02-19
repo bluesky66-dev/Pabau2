@@ -6,22 +6,20 @@
   // align-items: center;
   // justify-content: space-between;
 }
-
 .horizonstepper {
   padding: 10px;
+  padding-top: 0px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-
 .imglabeldiv {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 22px;
 }
-
 .iconenablecircle {
   display: flex;
   justify-content: center;
@@ -29,10 +27,10 @@
   border: solid 1px #54b2d3;
   border-radius: 50%;
   background: #54b2d3;
+  color: #fff;
   width: 24px;
   height: 24px;
 }
-
 .icondisablecircle {
   display: flex;
   justify-content: center;
@@ -42,8 +40,8 @@
   background: #fff;
   width: 24px;
   height: 24px;
+  color: var(--light-grey-color);
 }
-
 .enablespantxt {
   white-space: nowrap;
   // font-family: Circular Std;
@@ -53,8 +51,8 @@
   line-height: 18px;
   text-align: center;
   color: #3d3d46;
+  padding-top: 6px;
 }
-
 .disablespantxt {
   white-space: nowrap;
   // font-family: Circular Std;
@@ -64,24 +62,26 @@
   line-height: 18px;
   text-align: center;
   color: #9292a3;
+  padding-top: 6px;
 }
-
 .stepperlinedisable {
   border: 1px solid #ecedf0;
   width: 96px;
   margin: 11px 1px 0px 1px;
-
   align-self: flex-start;
 }
-
 .stepperlineenable {
   border: 1px solid #54b2d3;
   width: 96px;
   margin: 11px 1px 0px 1px;
-
   align-self: flex-start;
 }
-
 .steplinediv {
   display: flex;
+}
+@media (min-width: 225px) and (max-width: 575px) {
+  .stepperlineenable,
+  .stepperlinedisable {
+    width: 76px;
+  }
 }
