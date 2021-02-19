@@ -19,7 +19,7 @@ model TwoFactorHistory {
   @@map("2fa_history")
 }
 
-model ThirdPartyAccess {
+model ThirdPartyAcces {
   id           Int    @id @default(autoincrement())
   occupier     Int
   company_id    Int @map("occupier")
@@ -36,7 +36,7 @@ model ThirdPartyAccess {
   @@map("3rd_party_access")
 }
 
-model accept_email_token {
+model AcceptEmailToken {
   id         Int    @id @default(autoincrement())
   company_id Int
   email      String
@@ -59,7 +59,7 @@ model AccountBalance {
   @@index([company_id], name: "company_id")
 }
 
-model AccountBalanceLog{
+model AccountBalanceLog {
   id                   Int    @id @default(autoincrement())
   company_id           Int
   contact_id           Int
@@ -114,9 +114,7 @@ model AccountManager {
 
 }
 
-model AcLogs {
-
-  @@map("ac_logs")
+model AcLog {
 
   id         Int      @id @default(autoincrement())
   url_id     Int
@@ -132,6 +130,8 @@ model AcLogs {
   row_id     Int
   row_data   String?
 
+
+  @@map("ac_logs")
   @@index([action_id], name: "action")
   @@index([humanize], name: "humanize")
   @@index([occupier], name: "occupier")
@@ -141,9 +141,7 @@ model AcLogs {
   @@index([user_id], name: "user_id")
 }
 
-model AcLogActions {
-  @@map("ac_log_actions")
-
+model AcLogAction {
   id            Int     @id @default(autoincrement())
   pabauid       String
   action_name   String
@@ -153,18 +151,20 @@ model AcLogActions {
   row_aff       Int
   row_id        Int
 
+  @@map("ac_log_actions")
   @@index([action_name], name: "action_name")
   @@index([action_status], name: "action_status")
   @@index([command], name: "command")
   @@index([table_aff], name: "table_aff")
 }
 
-model ac_log_urls {
+model AcLogUrl {
   id      Int    @id @default(autoincrement())
   url     String
   file    String
   referer String
 
+  @@map("ac_log_urls")
   @@index([file], name: "file")
   @@index([referer], name: "referer")
   @@index([url], name: "url")
@@ -186,7 +186,6 @@ model Company {
 }
 
 model AdverCampaign {
-
   id                Int    @id @default(autoincrement())
   advert_name       String
   advert_type       String
@@ -206,11 +205,9 @@ model AdverCampaign {
   attach_time       String
 
   @@map("advert_campaign")
-
 }
 
 model ApiDebug {
-
   id            Int      @id @default(autoincrement())
   data_received String
   company_id    Int
@@ -219,7 +216,6 @@ model ApiDebug {
   data_type     String
 
   @@map("api_debug")
-
 }
 
 model ApiKey {
@@ -240,7 +236,6 @@ model ApiKey {
   reports       Int      @default(0)
 
   @@map("api_key")
-
 }
 
 model AppBeforeAfter {
@@ -254,7 +249,7 @@ model AppBeforeAfter {
   @@map("app_before_after")
 }
 
-model AppPermisions {
+model AppPermission {
   id      Int    @id @default(autoincrement())
   company Int
   appid   String
@@ -275,7 +270,7 @@ model AppSubscription {
   @@index([key_value], name: "key_value")
 }
 
-model AppSubscriptionsCompanyPrices {
+model AppSubscriptionsCompanyPrice {
   id            Int    @id @default(autoincrement())
   occupier      Int
   app_key_value String
@@ -294,33 +289,30 @@ model AttachmentHelperLite {
   @@map("attachment_helper_lite")
 }
 
-model AtAnswers {
+model AtAnswer {
   id          Int    @id @default(autoincrement())
   question_id Int
   name        String
   image       String
 
   @@map("at_answers")
-
 }
 
-model AtAnswers2 {
+model SecondAtAnswer {
   id          Int    @id @default(autoincrement())
   question_id Int
   name        String
 
   @@map("at_answers2")
-
 }
 
-model AtConcerns {
+model AtConcern {
   id     Int    @id @default(autoincrement())
   name   String
   image  String
   region String
 
   @@map("at_concerns")
-
 }
 
 // The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
@@ -336,7 +328,7 @@ model AtConcerns {
   // product_id Int
 // }
 
-model AtQuestions {
+model AtQuestion {
   id         Int    @id @default(autoincrement())
   company_id Int
   name       String
@@ -346,16 +338,16 @@ model AtQuestions {
   @@map("at_questions")
 }
 
-model AtQuestions2 {
+model SecondAtQuestion {
   id         Int    @id @default(autoincrement())
   company_id Int
   name       String
   type       String
 
-  @@map("at_questions")
+  @@map("at_questions2")
 }
 
-model AtQuestionsRelations {
+model AtQuestionsRelation {
   company_id Int
   answer_id  Int
   product_id Int
@@ -364,7 +356,7 @@ model AtQuestionsRelations {
   @@id([company_id, answer_id, product_id])
 }
 
-model AtQuizTakes {
+model AtQuizTake {
   id         Int      @id @default(autoincrement())
   company_id Int
   name       String
@@ -379,7 +371,7 @@ model AtQuizTakes {
 
 }
 
-model AtSettings {
+model AtSetting {
   id          Int    @id @default(autoincrement())
   company_id  Int
   logo        String
@@ -389,7 +381,7 @@ model AtSettings {
   @@map("at_settings")
 }
 
-model AtTreatments {
+model AtTreatment {
   id          Int    @id @default(autoincrement())
   company_id  Int
   name        String
@@ -400,7 +392,7 @@ model AtTreatments {
 
 }
 
-model AutomationActions {
+model AutomationAction {
   id          Int    @id @default(autoincrement())
   trigger_id  Int
   company     Int
@@ -428,7 +420,7 @@ model AutomationDelay {
   @@index([delay], name: "delay")
 }
 
-model AutomationFolders {
+model AutomationFolder {
   id          Int    @id @default(autoincrement())
   company_id  Int
   name        String
@@ -448,7 +440,7 @@ model AutomationLog {
   @@map("automation_log")
 }
 
-model automation_rules {
+model AutomationRule {
   id           Int       @id @default(autoincrement())
   name         String
   company      Int
@@ -460,14 +452,14 @@ model automation_rules {
   needs_config Int
   folder_id    Int       @default(1)
 
-  @@map("automation_log")
+  @@map("automation_rules")
   @@index([active], name: "active")
   @@index([company], name: "company")
   @@index([date_end], name: "date_end")
   @@index([date_start], name: "date_start")
 }
 
-model automation_triggers {
+model AutomationTrigger {
   id           Int    @id @default(autoincrement())
   rule_id      Int
   name         String
@@ -476,21 +468,25 @@ model automation_triggers {
   trigger_data String
   order        Int
 
+
+  @@map("automation_triggers")
   @@index([code], name: "code")
   @@index([company], name: "company")
   @@index([rule_id], name: "rule_id")
 }
 
-model available_dates_log {
+model AvilableDatesLog {
   id       Int      @id @default(autoincrement())
   occupier String
   uid      Int
   date     DateTime
   start    DateTime
   end      DateTime
+
+  @@map("available_dates_log")
 }
 
-model bacs_account {
+model BacsAccount {
   id             Int    @id @default(autoincrement())
   bank_tag       String
   comp_id        Int
@@ -498,9 +494,11 @@ model bacs_account {
   account_holder String
   account_no     Int
   sort_code      String
+
+  @@map("bacs_account")
 }
 
-model batches {
+model Batch {
   id            Int       @id @default(autoincrement())
   company_id    Int
   order_id      Int       @default(0)
@@ -511,12 +509,13 @@ model batches {
   creation_date DateTime
   expiry_date   DateTime?
 
+  @@map("batches")
   @@index([batch_no], name: "batch_no")
   @@index([company_id], name: "company_id")
   @@index([order_id], name: "order_id")
 }
 
-model batch_items {
+model BatchItem {
   id             Int      @id @default(autoincrement())
   batch_id       Int
   company_id     Int
@@ -527,9 +526,11 @@ model batch_items {
   qty            Int      @default(0)
   appointment_id Int
   batch_flag     Int      @default(0)
+
+  @@map("batch_items")
 }
 
-model block_reason {
+model BlockReason {
   id           Int     @id @default(autoincrement())
   reason_name  String
   occupier     String
@@ -540,11 +541,12 @@ model block_reason {
   type         Int     @default(0)
   custom_id    Int
 
+  @@map("block_reason")
   @@index([is_active], name: "is_active")
   @@index([occupier], name: "occupier")
 }
 
-model bnf_drugs {
+model BnfDrug {
   id                 Int     @id @default(autoincrement())
   url                String
   page               String
@@ -559,9 +561,11 @@ model bnf_drugs {
   patient_advice     String?
   directions         String?
   specific_info      String?
+
+  @@map("bnf_drugs")
 }
 
-model body_chart_templates {
+model BodyChartTemplate {
   id            Int      @id @default(autoincrement())
   template_name String
   template_url  String
@@ -571,9 +575,12 @@ model body_chart_templates {
   creation_date DateTime @default(now())
   chart_order   Int      @default(0)
   template_type Int      @default(1)
+
+  @@map("body_chart_templates")
 }
 
-model bookings_settings {
+model BookingSetting {
+
   id                                Int      @id @default(autoincrement())
   occupier                          Int
   email_mode                        Int
@@ -677,12 +684,13 @@ model bookings_settings {
   modified_date                     DateTime
   conference_reminder_id            Int?
 
+  @@map("bookings_settings")
   @@index([email_id], name: "email_id")
   @@index([email_reminder_id], name: "email_reminder_id")
   @@index([occupier], name: "occupier")
 }
 
-model booking_master {
+model BookingMaster {
   id             Int                           @id @default(autoincrement())
   class_id       String
   user_id        String
@@ -697,11 +705,13 @@ model booking_master {
   payed_by       String
   waiting        Int
 
+  @@map("booking_master")
   @@index([class_id], name: "class_id")
   @@index([user_id], name: "user_id")
 }
 
-model booking_statuses {
+model BookingStatus {
+
   id          Int                         @id @default(autoincrement())
   name        String
   value       String
@@ -713,10 +723,11 @@ model booking_statuses {
   ord         Float
   track_time  Boolean                     @default(false)
 
+  @@map("booking_statuses")
   @@unique([value, company_id], name: "value")
 }
 
-model booking_status_changes {
+model BookingStatusChange {
   id         Int       @id @default(autoincrement())
   booking_id Int
   status     String
@@ -725,11 +736,13 @@ model booking_status_changes {
   company_id Int
   user_id    Int
 
+  @@map("booking_status_changes")
   @@index([booking_id], name: "booking_id")
   @@index([status], name: "status")
 }
 
-model bookitpro_general {
+model BookitProGeneral {
+
   id                         Int                                   @id @default(autoincrement())
   occupier                   String
   advance_time               String
@@ -796,35 +809,43 @@ model bookitpro_general {
   force_new_existing_patient Boolean                               @default(false)
   redirect_url               String
   connect_url                String?
+
+  @@map("bookitpro_general")
 }
 
-model bookitpro_slider {
+model BookitProSlider {
   id       Int    @id @default(autoincrement())
   slider1  String
   slider2  String
   slider3  String
   slider4  String
   occupier String
+
+  @@map("bookitpro_slider")
 }
 
-model bookmarked_pages {
+model BookmarkedPage {
   id        Int    @id @default(autoincrement())
   uid       Int
   link      String
   companyid Int
   title     String
   icon      String
+
+  @@map("bookmarked_pages")
 }
 
-model bug_log {
+model BugLog {
   id          Int    @id @default(autoincrement())
   bug_message String
   datetime    Int
   uid         Int
   related_id  Int
+
+  @@map("bug_log")
 }
 
-model calendar_views {
+model CalendarView {
   id                     Int    @id @default(autoincrement())
   occupier               Int
   user_id                Int
@@ -843,19 +864,22 @@ model calendar_views {
   favorite               Int    @default(0)
   favorite_id            Int    @default(-1)
 
+  @@map("calendar_views")
   @@index([occupier], name: "occupier")
   @@index([user_id], name: "user_id")
 }
 
-model cal_range_requests {
+model CalRangeRequest {
   id         Int      @id @default(autoincrement())
   minutes    Int
   company_id Int
   start_date DateTime
   end_date   DateTime
+
+  @@map("cal_range_requests")
 }
 
-model campaign_attachments {
+model CampaignAttachment {
   id               Int    @id @default(autoincrement())
   campaign_id      Int
   occupier         Int
@@ -863,9 +887,11 @@ model campaign_attachments {
   attach_user_name String
   attachment_type  String
   attach_id        Int
+
+  @@map("campaign_attachments")
 }
 
-model cancellation_policy {
+model CancellationPolicy {
   id                        Int       @id @default(autoincrement())
   is_active                 Int
   policy_type               Int       @default(0)
@@ -880,9 +906,50 @@ model cancellation_policy {
   occupier                  Int
   creation_date             DateTime?
   modified_date             DateTime?
+
+  @@map("cancellation_policy")
 }
 
-model cancel_reason {
+model MarketingSource {
+  id          Int    @id @default(autoincrement())
+  source_name String
+  company_id    Int @map("occupier")
+  custom_id   Int
+  public      Int
+  imported    Int
+  company Company @relation(fields: [company_id], references: [id])
+
+  @@map("marketing_sources")
+  @@index([company_id], name: "company_id")
+  @@index([public], name: "public")
+  @@index([source_name], name: "source_name")
+
+}
+
+model MediaLlibraryAttachments {
+  id                      Int      @id @default(autoincrement())
+  file_url                String
+  company_id              Int
+  contact_id              Int
+  communication_id        Int      @default(0)
+  medical_form_contact_id Int      @default(0)
+  contact_attachment_id   Int      @default(0)
+  sales_id                Int      @default(0)
+  statement_id            Int      @default(0)
+  creation_date           DateTime
+
+  @@map("media_library_attachments")
+
+  @@index([communication_id], name: "communication_id")
+  @@index([company_id], name: "company_id")
+  @@index([contact_attachment_id], name: "contact_attachment_id")
+  @@index([contact_id], name: "contact_id")
+  @@index([medical_form_contact_id], name: "medical_form_contact_id")
+  @@index([sales_id], name: "sales_id")
+}
+
+
+model CancelReason {
   id                        Int      @id @default(autoincrement())
   reason_name               String
   occupier                  String
@@ -890,6 +957,8 @@ model cancel_reason {
   apply_cancellation_policy Int
   created_at                DateTime
   modified_at               DateTime
+
+  @@map("cancel_reason")
 
   @@index([occupier], name: "occupier")
 }
@@ -911,7 +980,7 @@ model candidate {
   company_id       Int
 }
 
-model card_types {
+model CardTypes {
   id                       Int   @id @default(autoincrement())
   company_id               Int
   mastercard               Int
@@ -925,10 +994,11 @@ model card_types {
   mastercard_credit_charge Float
   enable_reference         Int
 
+   @@map("card_types")
   @@index([company_id], name: "company_id")
 }
 
-model cashup_report {
+model CashupReport {
   id                     Int      @id @default(autoincrement())
   company_id             Int
   staff_id               Int
@@ -951,10 +1021,11 @@ model cashup_report {
   cashup_date            DateTime
   finance_id             Int
 
+  @@map("cashup_report")
   @@index([cashup_date], name: "cashup_date")
 }
 
-model cashup_report_custom {
+model CashupReportCustom {
   id                Int      @id @default(autoincrement())
   company_id        String
   location_id       Int      @default(0)
@@ -964,34 +1035,42 @@ model cashup_report_custom {
   custom_actual     Float
   custom_difference Float
   card_type         String
+
+  @@map("cashup_report_custom")
+
 }
 
-model checkin_appts {
+model CheckinAppt {
   id          Int    @id @default(autoincrement())
   appt_id     Int
   spotify_uri String
+
+  @@map("checkin_appts")
 }
 
-model checkin_averages {
+model CheckinAverages {
   id               Int @id @default(autoincrement())
   uid              Int
   product_id       Int
   avg_time_seconds Int
 
+  @@map("checkin_averages")
   @@index([product_id], name: "product_id")
   @@index([uid], name: "uid")
   @@index([uid, product_id], name: "uid_product")
 }
 
-model checkin_averages_idle {
+model CheckinAveragesIdle {
   id                    Int    @id @default(autoincrement())
   username              String @unique
   uid                   Int
   avg                   Float?
   retailutilisation_avg Float?
+
+  @@map("checkin_averages_idle")
 }
 
-model checkin_products {
+model CheckinProduct {
   id             Int       @id @default(autoincrement())
   queue_id       Int
   product_id     Int
@@ -999,10 +1078,12 @@ model checkin_products {
   date_end       DateTime?
   inv_product_id Int       @default(0)
 
+
+  @@map("checkin_products")
   @@index([queue_id], name: "queue_id")
 }
 
-model checkin_queue {
+model CheckinQueue {
   id            Int       @id @default(autoincrement())
   uid           Int
   been_before   Boolean
@@ -1023,6 +1104,8 @@ model checkin_queue {
   spotify_uri   String?
   date_binned   DateTime?
 
+
+  @@map("checkin_queue")
   @@index([accepted], name: "accepted")
   @@index([date_accepted], name: "date_accepted")
   @@index([date_end], name: "date_end")
@@ -7320,44 +7403,6 @@ model manage_items {
   gross_total    Float
   val_tax        Float
   staff_purchase Int?   @default(0)
-}
-
-model MarketingSource {
-  id          Int    @id @default(autoincrement())
-  source_name String
-  company_id    Int @map("occupier")
-  custom_id   Int
-  public      Int
-  imported    Int
-  company Company @relation(fields: [company_id], references: [id])
-
-  @@map("marketing_sources")
-  @@index([company_id], name: "company_id")
-  @@index([public], name: "public")
-  @@index([source_name], name: "source_name")
-
-}
-
-model MediaLlibraryAttachments {
-  id                      Int      @id @default(autoincrement())
-  file_url                String
-  company_id              Int
-  contact_id              Int
-  communication_id        Int      @default(0)
-  medical_form_contact_id Int      @default(0)
-  contact_attachment_id   Int      @default(0)
-  sales_id                Int      @default(0)
-  statement_id            Int      @default(0)
-  creation_date           DateTime
-
-  @@map("media_library_attachments")
-
-  @@index([communication_id], name: "communication_id")
-  @@index([company_id], name: "company_id")
-  @@index([contact_attachment_id], name: "contact_attachment_id")
-  @@index([contact_id], name: "contact_id")
-  @@index([medical_form_contact_id], name: "medical_form_contact_id")
-  @@index([sales_id], name: "sales_id")
 }
 
 model medical_approval_notes {

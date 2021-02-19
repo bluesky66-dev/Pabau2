@@ -1,83 +1,45 @@
-import { objectType, extendType, nonNull, intArg, } from "nexus";
-import { Context } from "../../context";
+import { objectType, extendType } from 'nexus';
 
 export const MarketingSource = objectType({
   name: 'MarketingSource',
   definition(t) {
-    t.model.id()
-    t.model.source_name()
-    t.model.company_id()
-    t.model.custom_id()
-    t.model.company()
-    t.model.public()
-    t.model.imported()
-  }
-})
+    t.model.id();
+    t.model.source_name();
+    t.model.company_id();
+    t.model.custom_id();
+    t.model.public();
+    t.model.imported();
+    t.model.company();
+  },
+});
 
-export const MarketingSourceQuery = extendType({
+export const marketingSourceQuery = extendType({
   type: 'Query',
-  definition(t ) {
+  definition(t) {
     t.crud.marketingSource();
-    t.crud.marketingSources(
-      {
-        pagination:true,
-        filtering:true,
-        ordering:true,
-        groupBy : true,
-      },
-    );
-  }
-})
+    t.crud.marketingSources({ filtering: true, ordering: true });
 
-export const MarketingSourceMutation = extendType({
+    t.field('marketingSourcesCount', {
+      type: 'Int',
+      args: {
+        where: 'MarketingSourceWhereInput',
+      },
+      async resolve(_root, args, ctx) {
+        return ctx.prisma.marketingSource.count(args);
+      },
+    });
+  },
+});
+
+export const marketingSourceMutation = extendType({
   type: 'Mutation',
   definition(t) {
-    t.crud.createOneMarketingSource(
-    //   {
-    //   async resolve(_root, args, ctx:Context) {
-    //     const companyId = Number(ctx.req.get('x-company_id'))
-    //     const id = Number(args.data.company.connect.id)
-    //     if(id !== companyId){
-    //       throw new Error("Auth error")
-    //     }
-    //     return await ctx.prisma.marketingSource.create(args)
-    //   },
-    // }
-    );
-    t.crud.deleteOneMarketingSource(
-    //   {
-    //   async resolve(_root, args, ctx:Context) {
-    //     const companyId = Number(ctx.req.get('x-company_id'))
-    //     const id = args.where.id
-    //     const sources =  await ctx.prisma.marketingSource.findUnique({
-    //       where: {
-    //         id: Number(id)
-    //       }
-    //     })
-    //     if(sources.company_id !== companyId){
-    //       throw new Error("Auth error")
-    //     }
-    //     await ctx.prisma.marketingSource.delete(args)
-    //     return sources
-    //   },
-    // }
-    );
-    t.crud.updateOneMarketingSource(
-    //   {
-    //   async resolve(_root, args, ctx:Context) {
-    //     const companyId = Number(ctx.req.get('x-company_id'))
-    //     const id = args.where.id
-    //     const sources = await ctx.prisma.marketingSource.findUnique({
-    //       where: {
-    //         id: Number(id)
-    //       }
-    //     })
-    //     if(sources?.company_id !== companyId){
-    //       throw new Error("Auth error")
-    //     }
-    //     return ctx.prisma.marketingSource.update(args);
-    //   },
-    // }
-    );
-  }
-})
+    t.crud.createOneMarketingSource();
+    t.crud.updateOneMarketingSource();
+    t.crud.upsertOneMarketingSource();
+    t.crud.deleteOneMarketingSource();
+
+    t.crud.updateManyMarketingSource();
+    t.crud.deleteManyMarketingSource();
+  },
+});
