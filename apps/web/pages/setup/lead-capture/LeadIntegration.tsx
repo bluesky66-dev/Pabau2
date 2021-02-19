@@ -8,6 +8,7 @@ import {
 } from '@ant-design/icons'
 import { Radio } from 'antd'
 import { BasicModal as Modal, ButtonTypes } from '@pabau/ui'
+import SendLeadDevloperModal from './lead-forms/SendLeadDevloperModal'
 
 export const LeadIntegration: React.FC = () => {
   const [captureLeadIntegrationStep, setCaptureLeadIntegrationStep] = useState(
@@ -16,6 +17,7 @@ export const LeadIntegration: React.FC = () => {
 
   const [openPabauLeadModal, setPabauLeadModal] = useState(false)
   const [typeOfIntegration, setTypeOfIntegration] = useState('Developer')
+  const [sendToDeveloperModal, setSendToDeveloperModal] = useState(false)
 
   return (
     <>
@@ -122,7 +124,14 @@ export const LeadIntegration: React.FC = () => {
             <div className={styles.apiKeyBox}>
               <p>028274219001jsi910030103</p>
             </div>
-            <h5>Download Sample Code</h5>
+            {captureLeadIntegrationStep === 'Documentation' && (
+              <a href="/sample-code" download="LeadForm.html">
+                Download Sample Code
+              </a>
+            )}
+            {captureLeadIntegrationStep === 'Zapier' && (
+              <a>Follow Zapier installation guide</a>
+            )}
           </div>
         </div>
       )}
@@ -137,8 +146,10 @@ export const LeadIntegration: React.FC = () => {
         onCancel={() => setPabauLeadModal((e) => !e)}
         visible={openPabauLeadModal}
         title={'Pabau Leads'}
-        newButtonText={'Main page'}
+        newButtonText={'Close'}
         btnType={ButtonTypes.default}
+        dangerButtonText={'Send to Developer'}
+        onDelete={() => setSendToDeveloperModal((e) => !e)}
       >
         <p>
           This process is for advanced users and should be handed over to a web
@@ -146,6 +157,14 @@ export const LeadIntegration: React.FC = () => {
           follow this guide on how to implement Pabau Leads.
         </p>
       </Modal>
+
+      <SendLeadDevloperModal
+        openModal={sendToDeveloperModal}
+        onSendToDeveloper={() => {
+          setSendToDeveloperModal((e) => !e)
+        }}
+        onClose={() => setSendToDeveloperModal((e) => !e)}
+      />
     </>
   )
 }
