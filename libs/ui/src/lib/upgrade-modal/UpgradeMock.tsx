@@ -110,7 +110,7 @@ export const modalContent = {
       'Multilingual Journey',
       'Unique templates',
       'Video conferencing (iPad)',
-     
+
     ],
     linkText: 'Compare all plans',
   },
