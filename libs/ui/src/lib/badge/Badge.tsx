@@ -1,15 +1,11 @@
 import React, { FC, useEffect, useState } from 'react'
 import { Tooltip, Divider, Button, Typography } from 'antd'
 import { ArrowUpOutlined } from '@ant-design/icons'
+
 import btn_enable from '../../assets/images/security/btn_enable.svg'
 import btn_disabled from '../../assets/images/security/close.svg'
-
-import { UpgradeModalProps } from '../upgrade-modal/UpgradeModal'
-
+import UpgradeModal, { UpgradeModalProps } from '../upgrade-modal/UpgradeModal'
 import { modalContent, modalTypes } from '../upgrade-modal/UpgradeMock'
-
-import UpgradeModal from '../upgrade-modal/UpgradeModal'
-
 import styles from './Badge.module.less'
 
 interface P {
@@ -40,23 +36,6 @@ export interface PlusProps {
   label?: string
   disabled?: boolean
   modalType?: string
-  values: PlusValue[]
-}
-
-export interface PlusValue {
-  data: PlusData[]
-}
-
-export interface PlusData {
-  title?: string
-  description?: boolean
-  key: number
-  data: PlusDataType[]
-}
-
-export interface PlusDataType {
-  title?: string
-  key?: number
 }
 
 export const PabauPlus: FC<PlusProps> = ({ label, disabled, modalType }) => {
@@ -103,7 +82,12 @@ export const PabauPlus: FC<PlusProps> = ({ label, disabled, modalType }) => {
       </div>
       <Divider style={{ margin: 0 }} />
       <div style={{ padding: 12 }}>
-        <Button type="primary" style={{ width: '100%' }} onClick={handleClick}>
+        <Button
+          disabled={disabled}
+          type="primary"
+          style={{ width: '100%' }}
+          onClick={handleClick}
+        >
           Get Feature
         </Button>
       </div>
@@ -141,5 +125,5 @@ export const PabauPlus: FC<PlusProps> = ({ label, disabled, modalType }) => {
 }
 
 function getModalKey(type: string | undefined, data): string {
-  return data.filter(({ value }) => value === type)[0].key
+  return data.find(({ value }) => value === type).key
 }

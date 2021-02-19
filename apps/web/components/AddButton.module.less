@@ -24,11 +24,19 @@
     min-width: 86px;
     font-size: 14px;
     background: #ffffff;
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
+    // border: 1px solid var(--primary-color);
+    color: var(--light-grey-color);
     box-sizing: border-box;
     font-family: 'Circular-Std-Medium';
     font-weight: 500;
+    :hover {
+      color: var(--primary-color);
+      :global {
+        .anticon-filter {
+          color: var(--primary-color);
+        }
+      }
+    }
     :global {
       .anticon-filter {
         font-size: 12px;

@@ -12,13 +12,24 @@ import { WebSocketLink } from '@apollo/client/link/ws'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { OperationDefinitionNode } from 'graphql'
 import 'react-phone-input-2/lib/style.css'
-import 'react-google-places-autocomplete/dist/index.min.css'
+// import 'react-google-places-autocomplete/dist/index.min.css'
+import * as Icons from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 require('../styles/global.less')
 require('../../../libs/ui/src/styles/antd.less')
 
 const cache = new InMemoryCache()
 const GRAPHQL_ENDPOINT = 'wss://api.new.pabau.com/v1/graphql'
+const GRAPHQL_HTTP_ENDPOINT =
+  process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT ||
+  'https://api.new.pabau.com/v1/graphql'
 
+const iconList = Object.keys(Icons)
+  .filter((key) => key !== 'fas' && key !== 'prefix')
+  .map((icon) => Icons[icon])
+library.add(...iconList)
 // const request = async (operation) => {
 //   operation.setContext({
 //     http: {
@@ -55,7 +66,7 @@ const GRAPHQL_ENDPOINT = 'wss://api.new.pabau.com/v1/graphql'
 // })
 
 const httpLink = new HttpLink({
-  uri: 'https://api.new.pabau.com/v1/graphql',
+  uri: GRAPHQL_HTTP_ENDPOINT,
 })
 
 const wsLink = process.browser

@@ -3,7 +3,6 @@ import { Select } from 'antd'
 import styles from './AddSuggestion.module.less'
 const { Option } = Select
 
-/* eslint-disable-next-line */
 export interface AddSuggestionProps {
   label: string
   defaultSelected: Array<string | number>
@@ -34,8 +33,7 @@ export const AddSuggestion: FC<AddSuggestionProps> = ({
         defaultValue={selected}
         onChange={handleChange}
       >
-        {options &&
-          options.length &&
+        {options?.length &&
           options.map((el, index) => (
             <Option key={`multiCheckBoxOption${index}`} value={el}>
               {el || ''}

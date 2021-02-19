@@ -39,13 +39,13 @@ export const AddQuestionStory: FC<AddQuestionProps> = ({
   const [isDeleteDisable, setDeleteDisable] = useState<boolean>(false)
 
   const onChange = (value: string, index: number) => {
-    const tempQuestions = [...question]
-    tempQuestions.forEach((question, key) => {
+    const temporaryQuestions = [...question]
+    for (const [key, question] of temporaryQuestions.entries()) {
       if (key === index) {
         question.title = value
       }
-    })
-    setQuestions(tempQuestions)
+    }
+    setQuestions(temporaryQuestions)
   }
 
   const onAddQuestion = useCallback(() => {

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { Rate } from 'antd'
 import styles from './ReviewWrite.module.less'
 
@@ -21,7 +21,7 @@ export const ReviewWrite: FC<QuestionProps> = ({
   reviews,
   onChange,
 }) => {
-  const [review, setReviews] = useState<Array<Question>>(reviews)
+  const [review, setReviews] = useState<Array<Question>>([])
 
   const handleRateChange = (value: number, key: number) => {
     const reviewData = review
@@ -32,6 +32,10 @@ export const ReviewWrite: FC<QuestionProps> = ({
     setReviews([...reviewData])
     onChange?.(reviewData)
   }
+
+  useEffect(() => {
+    setReviews(reviews)
+  }, [reviews])
 
   return (
     <div className={styles.ratingBox}>
