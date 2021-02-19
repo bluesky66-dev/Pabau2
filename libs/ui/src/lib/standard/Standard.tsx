@@ -284,7 +284,7 @@ export const Standard: FC<P> = ({
                 </Row>
               </Panel>
               <div className={styles.papauPlusContainer}>
-                <PabauPlus label="Plus" />
+                <PabauPlus label="Plus" modalType="Care" />
               </div>
               <Panel
                 className={styles.panelAlign}
@@ -327,7 +327,7 @@ export const Standard: FC<P> = ({
             </Row>
 
             <div className={styles.papauPlusContainer}>
-              <PabauPlus label="Plus" />
+              <PabauPlus label="Plus" modalType="Marketing" />
             </div>
 
             <Collapse

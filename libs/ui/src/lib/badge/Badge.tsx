@@ -35,10 +35,14 @@ export default Badge
 export interface PlusProps {
   label?: string
   disabled?: boolean
-  modalType?: string
+  modalType: 'Marketing' | 'Care' | 'Staff' | 'Intelligence'
 }
 
-export const PabauPlus: FC<PlusProps> = ({ label, disabled, modalType }) => {
+export const PabauPlus: FC<PlusProps> = ({
+  label = 'Plus',
+  disabled,
+  modalType = 'Marketing',
+}) => {
   const [showModal, setShowModal] = useState<boolean>(false)
   const [modalBody, setModalBody] = useState<UpgradeModalProps>(
     modalContent[getModalKey(modalType, modalTypes)]
@@ -63,7 +67,7 @@ export const PabauPlus: FC<PlusProps> = ({ label, disabled, modalType }) => {
     sectionUpgradeData,
     sectionUpgradeTitle,
     linkText,
-  } = modalBody
+  } = modalBody || {}
 
   const text = (
     <div style={{ color: '#000' }}>
@@ -125,5 +129,5 @@ export const PabauPlus: FC<PlusProps> = ({ label, disabled, modalType }) => {
 }
 
 function getModalKey(type: string | undefined, data): string {
-  return data.find(({ value }) => value === type).key
+  return data.find(({ value }) => value === type)?.key
 }
