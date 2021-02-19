@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 import { Checkbox } from 'antd'
 import { CheckboxChangeEvent } from 'antd/lib/checkbox'
 import styles from './RegistrationFields.module.less'
@@ -8,10 +8,11 @@ export interface FieldType {
   label: string
   visible: boolean
   required: boolean
-  disabled: boolean
+  disabled?: boolean
   key: number
 }
 export interface RegistrationFieldsProps {
+  icon?: ReactNode
   title?: string
   description?: string
   fieldTitle?: string
@@ -33,6 +34,7 @@ export interface RegistrationFieldsProps {
 }
 
 export const RegistrationFields: FC<RegistrationFieldsProps> = ({
+  icon,
   title,
   description,
   fields,
@@ -46,7 +48,10 @@ export const RegistrationFields: FC<RegistrationFieldsProps> = ({
 }) => {
   return (
     <div className={styles.registrationWrap}>
-      <div className={styles.title}>{title}</div>
+      <div className={styles.title}>
+        <div>{icon && icon}</div>
+        <span>{title}</span>
+      </div>
       <div className={styles.desc}>{description}</div>
       <div className={styles.fieldTitleWrap}>
         <div className={styles.headTitle}>{fieldTitle}</div>

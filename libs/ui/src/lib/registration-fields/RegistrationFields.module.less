@@ -1,14 +1,25 @@
 .registrationWrap {
-  width: 392px;
-  // padding: 24px;
+  max-width: 392px;
+  width: 100%;
+
   .title {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 24px;
+    display: flex;
     align-items: center;
-    color: #3d3d46;
+
+    >span {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 24px;
+      color: #3d3d46;
+    }
+
+    >div {
+      display: flex;
+      align-items: center;
+    }
   }
+
   .desc {
     font-style: normal;
     font-weight: normal;
@@ -19,9 +30,11 @@
     margin-top: 8px;
     margin-bottom: 20px;
   }
+
   .fieldTitleWrap {
     display: flex;
     background-color: #F6F7FA;
+
     .headTitle {
       font-weight: normal;
       font-size: 14px;
@@ -32,6 +45,7 @@
       border-top: 1px solid #f1f1f1;
       border-bottom: 1px solid #f1f1f1;
       text-align: center;
+
       &:first-child {
         flex: 2;
         text-align: left;
@@ -39,8 +53,10 @@
       }
     }
   }
+
   .customFieldTitleWrap {
     display: flex;
+
     .headTitle {
       font-weight: normal;
       font-size: 14px;
@@ -50,6 +66,7 @@
       border-bottom: 1px solid #f1f1f1;
       flex: 0.8;
       text-align: center;
+
       &:first-child {
         flex: 2;
         text-align: left;
@@ -57,8 +74,10 @@
       }
     }
   }
+
   .fieldItemWrap {
     display: flex;
+
     p {
       font-weight: normal;
       font-size: 14px;
@@ -70,12 +89,14 @@
       white-space: nowrap;
       border-bottom: 1px solid #f1f1f1;
     }
+
     label {
       line-height: 36px;
       flex: 0.8;
       margin-left: 0;
       border-bottom: 1px solid #f1f1f1;
       text-align: center;
+
       :global .ant-checkbox {
         .ant-checkbox-inner {
           border: 1px solid #cfcfd7;
@@ -87,9 +108,8 @@
 
 
 
-  @media (min-width: 200px) and (max-width: 767px) {
-    .registrationWrap {
-      width: 100%;
-    }
+@media (min-width: 200px) and (max-width: 767px) {
+  .registrationWrap {
+    width: 100%;
   }
-  
+}
