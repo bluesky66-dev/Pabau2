@@ -202,5 +202,8 @@
   },
   "prisma": {
     "schema": "apps/bridge-api/prisma/schema.prisma"
+  },
+  "resolutions": {
+    "**/immer": "8.0.1"
   }
 }
