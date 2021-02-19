@@ -7,7 +7,7 @@ import styles from './ClientMessageReport.module.less'
 export interface ClientMessageReportProps {
   reportVisibility?: boolean
   reportTitle?: string
-  columns: Array<Object>
+  columns: []
   apiUrl: string
   start: number
   limit: number
@@ -33,24 +33,22 @@ export const ClientMessageReport: FC<ClientMessageReportProps> = ({
   const [dataSource, setDataSource] = useState([])
 
   useEffect(() => {
-    fetchMessageHistory()
-  }, [])
+    if (modalStatus) {
+      fetchMessageHistory()
+    }
+  }, [modalStatus])
 
   const fetchMessageHistory = async (page = 1) => {
-    try {
-      setLoader(true)
-      let url = `${apiUrl}?apikey=${APIKEY}&start=${
-        (page - 1) * limit
-      }&limit=${limit}`
-      const response = await fetch(url)
-      const json = await response.json()
-      await setDataSource(json.messages)
-      await setTotal(json.total)
-      await setLoader(false)
-      await setDataStart(json.start + limit)
-    } catch (err) {
-      setLoader(false)
-    }
+    setLoader(true)
+    const url = `${apiUrl}?apikey=${APIKEY}&start=${
+      (page - 1) * limit
+    }&limit=${limit}`
+    const response = await fetch(url)
+    const json = await response.json()
+    await setDataSource(json.messages)
+    await setTotal(json.total)
+    await setLoader(false)
+    await setDataStart(json.start + limit)
   }
 
   const fetchMore = async (page) => {

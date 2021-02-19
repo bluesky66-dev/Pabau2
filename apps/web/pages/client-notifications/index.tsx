@@ -8,7 +8,6 @@ import {
   NotificationMessages,
   DropDownButton,
   ClientMessageReport,
-  Button,
 } from '@pabau/ui'
 import Layout from '../../components/Layout/Layout'
 import CommonHeader from '../setup/CommonHeader'
@@ -54,21 +53,11 @@ const columns = [
     title: 'Content',
     dataIndex: 'content',
     visible: true,
-    render: (content) => {
-      return <span style={{ maxWidth: '200px' }}>{content}</span>
-    },
   },
   {
     title: '',
     dataIndex: 'status',
     visible: true,
-    render: (status) => {
-      return (
-        <Button type="default" size="small">
-          {status}
-        </Button>
-      )
-    },
   },
 ]
 

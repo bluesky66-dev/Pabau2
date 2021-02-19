@@ -1,6 +1,5 @@
 import React from 'react'
 import { ClientMessageReport } from './ClientMessageReport'
-import { Button } from '@pabau/ui'
 
 export default {
   title: 'UI/ClientMessageReport',
@@ -56,21 +55,11 @@ const columns = [
     title: 'Content',
     dataIndex: 'content',
     visible: true,
-    render: (content) => {
-      return <span style={{ maxWidth: '200px' }}>{content}</span>
-    },
   },
   {
     title: '',
     dataIndex: 'status',
     visible: true,
-    render: (status) => {
-      return (
-        <Button type="default" size="small">
-          {status}
-        </Button>
-      )
-    },
   },
 ]
 
@@ -85,5 +74,4 @@ BasicReport.args = {
   apiUrl: 'https://api.txtlocal.com/get_history_api/',
   start: 0,
   limit: 10,
-  onClick: () => {},
 }
