@@ -73,11 +73,11 @@ const Index: FC = () => {
               breadcrumbItems={[
                 { path: '', breadcrumbName: 'Setup' },
                 {
-                  path: '/client-notifications',
+                  path: 'client-notifications',
                   breadcrumbName: 'Notification Messages',
                 },
                 {
-                  path: '/client-notifications/appointment-reminder',
+                  path: 'client-notifications/appointment-reminder',
                   breadcrumbName: 'Upcoming appointment reminder',
                 },
               ]}

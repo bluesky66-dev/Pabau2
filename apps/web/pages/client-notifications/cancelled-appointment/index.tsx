@@ -78,11 +78,11 @@ const Index: FC = () => {
               breadcrumbItems={[
                 { path: '', breadcrumbName: 'Setup' },
                 {
-                  path: '/client-notifications',
+                  path: 'client-notifications',
                   breadcrumbName: 'Notification Messages',
                 },
                 {
-                  path: '/client-notifications/cancelled-appointment',
+                  path: 'client-notifications/cancelled-appointment',
                   breadcrumbName: 'Cancelled appointment',
                 },
               ]}
@@ -206,6 +206,7 @@ const Index: FC = () => {
           hideAllowCancellationOption={true}
           hideDisplayPolicyOption={true}
           hideMedicalHistoryOption={true}
+          hideReminderTimeFrameTabPane={true}
           standardMessage={
             'this notification automatically sends to clients the moment they cancel an appointment'
           }

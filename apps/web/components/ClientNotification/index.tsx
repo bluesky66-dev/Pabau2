@@ -5,6 +5,7 @@ import CancelAppointmentPreview from '../../pages/client-notifications/cancelled
 interface P {
   onSeletedTab: (number) => void
   standardMessage?: string
+  hideReminderTimeFrameTabPane?: boolean
   hideRequestConfirmationOption?: boolean
   hideMedicalHistoryOption?: boolean
   hideAllowReschedulingOption?: boolean
@@ -16,6 +17,7 @@ interface P {
 const Index: FC<P> = ({
   onSeletedTab,
   standardMessage,
+  hideReminderTimeFrameTabPane = false,
   hideRequestConfirmationOption = false,
   hideMedicalHistoryOption = false,
   hideAllowReschedulingOption = false,
@@ -110,6 +112,7 @@ const Index: FC<P> = ({
           hideAllowCancellationOption={hideAllowCancellationOption}
           hideDisplayPolicyOption={hideDisplayPolicyOption}
           hideMedicalHistoryOption={hideMedicalHistoryOption}
+          hideReminderTimeFrameTabPane={hideReminderTimeFrameTabPane}
         />
       }
       previewComponent={

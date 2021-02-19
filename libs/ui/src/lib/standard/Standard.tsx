@@ -25,6 +25,7 @@ interface P {
   enableReminder: boolean
   onEnableReminder: (boolean) => void
   standardMessage?: string
+  hideReminderTimeFrameTabPane?: boolean
   smartDelivery: boolean
   onSmartDelivery: (boolean) => void
   requestConfirmation: boolean
@@ -75,6 +76,7 @@ export const Standard: FC<P> = ({
   standardMessage,
   smartDelivery,
   onSmartDelivery,
+  hideReminderTimeFrameTabPane = false,
   requestConfirmation,
   onRequestConfirmation,
   hideRequestConfirmationOption = false,
@@ -168,67 +170,73 @@ export const Standard: FC<P> = ({
               expandIconPosition="right"
               style={{ backgroundColor: 'white' }}
             >
-              <Panel
-                className={styles.panelAlign}
-                header="Reminder timeframe"
-                key="1"
-              >
-                <Row align="middle">
-                  <Checkbox
-                    className={styles.checkboxStyle}
-                    value="smart_delivery"
-                    checked={smartDelivery}
-                    onChange={() => onSmartDelivery(!smartDelivery)}
-                  >
-                    Smart delivery
-                  </Checkbox>
-                  <Tooltip
-                    placement="topLeft"
-                    color="#595959"
-                    title={`"We will intelligently schedule additional confirmations to clients who have a history of forgetting"`}
-                  >
-                    <QuestionCircleOutlined />
-                  </Tooltip>
-                </Row>
-                <Row gutter={[0, 16]}>
-                  <Col>
-                    <span className={styles.line1}>
-                      Choose how far in advance your reminder notification
-                      messages are sent to clients
-                    </span>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <span className={styles.reminder}>
-                      Reminder advance notice
-                    </span>
-                  </Col>
-                </Row>
-                <Select defaultValue="48" style={{ width: '100%' }}>
-                  <Option value="48">48 hours</Option>
-                  <Option value="24">24 hours</Option>
-                  <Option value="12">12 hours</Option>
-                  <Option value="6">6 hours</Option>
-                </Select>
+              {(!hideReminderTimeFrameTabPane || !hideAppearanceTabPane) && (
+                <Panel
+                  className={styles.panelAlign}
+                  header="Reminder timeframe"
+                  key="1"
+                >
+                  {!hideReminderTimeFrameTabPane && (
+                    <>
+                      <Row align="middle">
+                        <Checkbox
+                          className={styles.checkboxStyle}
+                          value="smart_delivery"
+                          checked={smartDelivery}
+                          onChange={() => onSmartDelivery(!smartDelivery)}
+                        >
+                          Smart delivery
+                        </Checkbox>
+                        <Tooltip
+                          placement="topLeft"
+                          color="#595959"
+                          title={`"We will intelligently schedule additional confirmations to clients who have a history of forgetting"`}
+                        >
+                          <QuestionCircleOutlined />
+                        </Tooltip>
+                      </Row>
+                      <Row gutter={[0, 16]}>
+                        <Col>
+                          <span className={styles.line1}>
+                            Choose how far in advance your reminder notification
+                            messages are sent to clients
+                          </span>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col>
+                          <span className={styles.reminder}>
+                            Reminder advance notice
+                          </span>
+                        </Col>
+                      </Row>
+                      <Select defaultValue="48" style={{ width: '100%' }}>
+                        <Option value="48">48 hours</Option>
+                        <Option value="24">24 hours</Option>
+                        <Option value="12">12 hours</Option>
+                        <Option value="6">6 hours</Option>
+                      </Select>
+                    </>
+                  )}
 
-                {!hideAppearanceTabPane && (
-                  <>
-                    <Row>
-                      <span className={styles.textareaLabel}>Message</span>
-                    </Row>
-                    <Row>
-                      <TextArea
-                        className={styles.textareaStyle}
-                        autoSize={{ minRows: 3, maxRows: 3 }}
-                        onChange={(event) => onSmsMessage(event.target.value)}
-                        maxLength={size.width > 768 ? 500 : 160}
-                        value={smsMessage}
-                      />
-                    </Row>
-                  </>
-                )}
-              </Panel>
+                  {!hideAppearanceTabPane && (
+                    <>
+                      <Row>
+                        <span className={styles.textareaLabel}>Message</span>
+                      </Row>
+                      <Row>
+                        <TextArea
+                          className={styles.textareaStyle}
+                          autoSize={{ minRows: 3, maxRows: 3 }}
+                          onChange={(event) => onSmsMessage(event.target.value)}
+                          maxLength={size.width > 768 ? 500 : 160}
+                          value={smsMessage}
+                        />
+                      </Row>
+                    </>
+                  )}
+                </Panel>
+              )}
               {hideAppearanceTabPane && (
                 <Panel
                   className={styles.panelAlign}
@@ -467,23 +475,26 @@ export const Standard: FC<P> = ({
                   </span>
                 </span>
               </Row>
-              <Row style={{ padding: '0 15px' }}>
-                <Col>
-                  <span className={styles.reminder}>
-                    Reminder advance notice
-                  </span>
-                </Col>
-              </Row>
+              {!hideReminderTimeFrameTabPane && (
+                <>
+                  <Row style={{ padding: '0 15px' }}>
+                    <Col>
+                      <span className={styles.reminder}>
+                        Reminder advance notice
+                      </span>
+                    </Col>
+                  </Row>
 
-              <Row style={{ padding: '0 15px' }}>
-                <Select defaultValue="48" style={{ width: '100%' }}>
-                  <Option value="48">48 hours</Option>
-                  <Option value="24">24 hours</Option>
-                  <Option value="12">12 hours</Option>
-                  <Option value="6">6 hours</Option>
-                </Select>
-              </Row>
-
+                  <Row style={{ padding: '0 15px' }}>
+                    <Select defaultValue="48" style={{ width: '100%' }}>
+                      <Option value="48">48 hours</Option>
+                      <Option value="24">24 hours</Option>
+                      <Option value="12">12 hours</Option>
+                      <Option value="6">6 hours</Option>
+                    </Select>
+                  </Row>
+                </>
+              )}
               <div className={styles.clientLang}>
                 <div className={styles.papauPlusContainer}>
                   <PabauPlus label="Plus" />
