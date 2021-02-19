@@ -1,16 +1,7 @@
 import React, { FC, useState, useEffect } from 'react'
-import {
-  FullScreenReportModal,
-  DropDownButton,
-  Input,
-  Pagination,
-} from '@pabau/ui'
+import { FullScreenReportModal, Input, Pagination } from '@pabau/ui'
 import { Card, Table } from 'antd'
-import {
-  SearchOutlined,
-  PauseCircleOutlined,
-  MessageOutlined,
-} from '@ant-design/icons'
+import { SearchOutlined } from '@ant-design/icons'
 import styles from './ClientMessageReport.module.less'
 
 /* eslint-disable-next-line */
@@ -21,6 +12,7 @@ export interface ClientMessageReportProps {
   apiUrl: string
   start: number
   limit: number
+  onClose: () => void
 }
 
 export const ClientMessageReport: FC<ClientMessageReportProps> = ({
@@ -30,6 +22,7 @@ export const ClientMessageReport: FC<ClientMessageReportProps> = ({
   apiUrl,
   start,
   limit,
+  onClose,
   ...props
 }) => {
   const [modalStatus, setModalStatus] = useState(reportVisibility)
@@ -110,42 +103,18 @@ export const ClientMessageReport: FC<ClientMessageReportProps> = ({
     )
   }
 
-  const menuClick = (key) => {
-    if (key === 'See message log') {
-      setModalStatus((reportVisibility) => !reportVisibility)
-    }
+  const closeModal = () => {
+    onClose()
+    setModalStatus((modalStatus) => !modalStatus)
   }
 
   return (
     <div>
-      <DropDownButton
-        title="Manage Option"
-        menuItems={[
-          {
-            icon: <PauseCircleOutlined />,
-            title: 'Pause notifications',
-          },
-          {
-            icon: <MessageOutlined />,
-            title: 'See message log',
-          },
-        ]}
-        onClick={() => {}}
-        onMenuClick={(key) => {
-          menuClick(key)
-        }}
-        size="large"
-        type="default"
-      >
-        Manage Option
-      </DropDownButton>
       <FullScreenReportModal
         visible={modalStatus}
         title={reportTitle}
         content={ReportContent}
-        onBackClick={() => {
-          setModalStatus((modalStatus) => !modalStatus)
-        }}
+        onBackClick={closeModal}
       />
     </div>
   )

@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Typography, Modal } from 'antd'
 import { PauseCircleOutlined, MessageOutlined } from '@ant-design/icons'
 import {
@@ -7,6 +7,8 @@ import {
   NotificationBanner,
   NotificationMessages,
   DropDownButton,
+  ClientMessageReport,
+  Button,
 } from '@pabau/ui'
 import Layout from '../../components/Layout/Layout'
 import CommonHeader from '../setup/CommonHeader'
@@ -16,8 +18,65 @@ import styles from './style.module.less'
 
 const { Title } = Typography
 
+const APIURL = 'https://api.txtlocal.com/get_history_api/'
+const columns = [
+  {
+    title: 'Time sent',
+    dataIndex: 'datetime',
+    visible: true,
+  },
+  {
+    title: 'Client',
+    dataIndex: 'sender',
+    visible: true,
+  },
+  {
+    title: 'Ref',
+    dataIndex: 'customID',
+    visible: true,
+  },
+  {
+    title: 'Destination',
+    dataIndex: 'number',
+    visible: true,
+  },
+  {
+    title: 'Sender',
+    dataIndex: 'sender',
+    visible: true,
+  },
+  {
+    title: 'Type',
+    dataIndex: 'id',
+    visible: true,
+  },
+  {
+    title: 'Content',
+    dataIndex: 'content',
+    visible: true,
+    render: (content) => {
+      return <span style={{ maxWidth: '200px' }}>{content}</span>
+    },
+  },
+  {
+    title: '',
+    dataIndex: 'status',
+    visible: true,
+    render: (status) => {
+      return (
+        <Button type="default" size="small">
+          {status}
+        </Button>
+      )
+    },
+  },
+]
+
 const Index: FC = () => {
   const [hideBanner, setHideBanner] = React.useState(false)
+  const [clientMessageReportStatus, setClientMessageReportStatus] = useState(
+    false
+  )
   const menuItems = ['Appointments', 'Classes', 'Engagement', 'Other']
   const options = [
     {
@@ -30,7 +89,6 @@ const Index: FC = () => {
     },
   ]
   const handleOptionClick = (val) => {
-    console.log(val)
     switch (val) {
       case options[0].title:
         Modal.info({
@@ -43,6 +101,11 @@ const Index: FC = () => {
             return
           },
         })
+        break
+      case options[1].title:
+        setClientMessageReportStatus(
+          (clientMessageReportStatus) => !clientMessageReportStatus
+        )
         break
       default:
         break
@@ -81,6 +144,21 @@ const Index: FC = () => {
               >
                 Manage Options
               </DropDownButton>
+              {clientMessageReportStatus && (
+                <ClientMessageReport
+                  reportVisibility={clientMessageReportStatus}
+                  columns={columns}
+                  apiUrl={APIURL}
+                  reportTitle="Client Messages"
+                  start={0}
+                  limit={10}
+                  onClose={() => {
+                    setClientMessageReportStatus(
+                      (clientMessageReportStatus) => !clientMessageReportStatus
+                    )
+                  }}
+                />
+              )}
             </div>
           </div>
           <div className={styles.clientInnerNotifciationsDesktop}>

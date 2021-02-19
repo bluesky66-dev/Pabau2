@@ -81,8 +81,9 @@ const ClientMessageReportStory = ({ ...args }) => (
 export const BasicReport = ClientMessageReportStory.bind({})
 BasicReport.args = {
   columns,
-  reportVisibility: false,
+  reportVisibility: true,
   apiUrl: 'https://api.txtlocal.com/get_history_api/',
   start: 0,
   limit: 10,
+  onClick: () => {},
 }
