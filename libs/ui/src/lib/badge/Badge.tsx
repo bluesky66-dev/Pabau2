@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
-import { Tooltip } from 'antd'
+import { Tooltip, Divider, Button, Typography } from 'antd'
+import { ArrowUpOutlined } from '@ant-design/icons'
 import btn_enable from '../../assets/images/security/btn_enable.svg'
 import btn_disabled from '../../assets/images/security/close.svg'
 
@@ -85,10 +86,38 @@ export const PabauPlus: FC<PlusProps> = ({ label, disabled, modalType }) => {
     linkText,
   } = modalBody
 
-  const text = <span>prompt text</span>
+  const text = (
+    <div style={{ color: '#000' }}>
+      <div style={{ padding: 12, display: 'flex' }}>
+        <div className={styles.upArrow}>
+          <ArrowUpOutlined />
+        </div>
+        <div>
+          <Typography.Text className={styles.primaryText}>
+            Upgrade to {modalType} Plus
+          </Typography.Text>
+          <Typography.Paragraph className={styles.secondaryText}>
+            {sectionTitle}
+          </Typography.Paragraph>
+        </div>
+      </div>
+      <Divider style={{ margin: 0 }} />
+      <div style={{ padding: 12 }}>
+        <Button type="primary" style={{ width: '100%' }} onClick={handleClick}>
+          Get Feature
+        </Button>
+      </div>
+    </div>
+  )
+
   return (
     <div>
-      <Tooltip title={text}>
+      <Tooltip
+        arrowPointAtCenter
+        title={text}
+        color="#FFF"
+        overlayClassName={styles.tooltipCard}
+      >
         <div className={styles.pabauPlusBtn} onClick={handleClick}>
           {label}
         </div>
