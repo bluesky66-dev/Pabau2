@@ -51,9 +51,37 @@ const DELETE_MUTATION = gql`
   }
 `
 const ADD_MUTATION = gql`
-  mutation insert_leads($is_active: Boolean = true, $lead_name: String!) {
-    insert_leads(_set: { lead_name: $lead_name, is_active: $is_active }) {
+  mutation MyMutation {
+    insert_leads_one(
+      object: {
+        email: "nido_i@hotmail.com"
+        interest: "xyz"
+        is_active: true
+        lead_age: 30
+        lead_name: "aysha"
+        lead_owner: "rulaa"
+        lead_source: "xyz"
+        lead_status: "married"
+        location: "gilgit"
+        order: 2
+        phone: "45455545454"
+        status: true
+        id: "123e4567-e89b-12d3-a456-426614174011"
+      }
+    ) {
+      email
       id
+      is_active
+      order
+      lead_age
+      interest
+      lead_name
+      lead_owner
+      lead_source
+      lead_status
+      location
+      phone
+      status
     }
   }
 `
