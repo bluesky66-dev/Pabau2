@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-
+import { Tooltip } from 'antd'
 import btn_enable from '../../assets/images/security/btn_enable.svg'
 import btn_disabled from '../../assets/images/security/close.svg'
 
@@ -39,6 +39,23 @@ export interface PlusProps {
   label?: string
   disabled?: boolean
   modalType?: string
+  values: PlusValue[]
+}
+
+export interface PlusValue {
+  data: PlusData[]
+}
+
+export interface PlusData {
+  title?: string
+  description?: boolean
+  key: number
+  data: PlusDataType[]
+}
+
+export interface PlusDataType {
+  title?: string
+  key?: number
 }
 
 export const PabauPlus: FC<PlusProps> = ({ label, disabled, modalType }) => {
@@ -52,6 +69,7 @@ export const PabauPlus: FC<PlusProps> = ({ label, disabled, modalType }) => {
   }, [modalType])
 
   const handleClick = (): void => {
+    if (disabled) return
     setShowModal((e) => !e)
   }
 
@@ -67,11 +85,14 @@ export const PabauPlus: FC<PlusProps> = ({ label, disabled, modalType }) => {
     linkText,
   } = modalBody
 
+  const text = <span>prompt text</span>
   return (
     <div>
-      <div className={styles.pabauPlusBtn} onClick={handleClick}>
-        {label}
-      </div>
+      <Tooltip title={text}>
+        <div className={styles.pabauPlusBtn} onClick={handleClick}>
+          {label}
+        </div>
+      </Tooltip>
       <UpgradeModal
         title={title}
         visible={showModal}

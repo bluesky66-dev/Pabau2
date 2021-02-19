@@ -1,6 +1,7 @@
 import React from 'react'
 import { Badge, PabauPlus } from './Badge'
 import { PlusProps } from './Badge'
+import { values } from './mock'
 
 export default {
   component: Badge,
@@ -9,10 +10,12 @@ export default {
     label: 'Enabled',
     disabled: false,
     modalType: 'Marketing',
+    data: values,
   },
   argTypes: {
     label: { control: { type: 'text' } },
     disabled: { control: { type: 'boolean' } },
+    data: { control: { type: 'object' } },
     modalType: {
       control: {
         type: 'select',
@@ -37,4 +40,5 @@ export const pabauPlus = PabauPlusStory.bind({})
 pabauPlus.args = {
   label: 'Plus',
   modalType: 'Marketing',
+  data: values,
 }
