@@ -136,7 +136,7 @@ const AccountInformation: FC = () => {
                 Account Manager
               </Paragraph>
               <Paragraph type="secondary" style={{ maxWidth: '90%' }}>
-                Have an oncall dedicated account manager to bounce ideas off of, and dedicated help in setting up your account.{' '}
+                Have an oncall dedicated account manager to bounce ideas off of and dedicated help in setting up your account.{' '}
               </Paragraph>
               <Link className={styles.learnMoreLink}>Learn more</Link>
             </Card>
