@@ -1,4 +1,21 @@
-import { ShareAltOutlined, HomeOutlined, EditOutlined } from '@ant-design/icons'
+import {
+  ShareAltOutlined,
+  HomeOutlined,
+  EditOutlined,
+  LaptopOutlined,
+  ScheduleOutlined,
+  ShoppingOutlined,
+  GiftOutlined,
+  ExperimentOutlined,
+  FileTextOutlined,
+  MoneyCollectOutlined,
+  PayCircleOutlined,
+  TagsOutlined,
+  PhoneOutlined,
+  ClockCircleOutlined,
+  GlobalOutlined,
+  EnvironmentOutlined,
+} from '@ant-design/icons'
 export const defaultBuilderSetting = {
   appearance: {
     backgroundColor: 'strong',
@@ -117,6 +134,133 @@ export const defaultBuilderSetting = {
       key: 4,
     },
   ],
+}
+
+export const defaultWidgetsData = {
+  features: {
+    title: 'Core Features',
+    description:
+      'Choose whick core features you wish to enable to all of your clients',
+    widgets: [
+      {
+        icon: <LaptopOutlined />,
+        isPlus: false,
+        isEnable: true,
+        title: 'Online bookings',
+        description:
+          'Online bookings allowing customers to register and book appointments online',
+      },
+      {
+        icon: <ScheduleOutlined />,
+        isPlus: false,
+        isEnable: true,
+        title: 'Class sign up',
+        description: 'Allow clients to sign up to your classes',
+      },
+      {
+        icon: <ShoppingOutlined />,
+        isPlus: false,
+        isEnable: true,
+        title: 'Packages',
+        description: 'Clients can purchaise package online',
+      },
+      {
+        icon: <GiftOutlined />,
+        isPlus: false,
+        isEnable: true,
+        title: 'Gift vouchers',
+        description:
+          'Embed online bookings allowing customers to register and book appointments online',
+      },
+    ],
+  },
+  profile: {
+    title: 'Client Profile',
+    description:
+      'This section allows you to determine what logged in users have access to',
+    widgets: [
+      {
+        icon: <ExperimentOutlined />,
+        isPlus: true,
+        isEnable: false,
+        title: 'My labs',
+        description: 'Patients can view their labs online',
+      },
+      {
+        icon: <FileTextOutlined />,
+        isPlus: true,
+        isEnable: true,
+        title: 'My documents',
+        description:
+          'Publish photos/documents for clients to simplify view and share via your Pabau Connect',
+      },
+      {
+        icon: <MoneyCollectOutlined />,
+        isPlus: true,
+        isEnable: false,
+        title: 'Invoices',
+        description: 'Patients can view their labs online',
+      },
+      {
+        icon: <PayCircleOutlined />,
+        isPlus: false,
+        isEnable: false,
+        title: 'Make Payment',
+        description: 'Some description here',
+      },
+      {
+        icon: <ShoppingOutlined />,
+        isPlus: false,
+        isEnable: false,
+        title: 'My Packages',
+        description: 'Patients can view their labs online',
+      },
+      {
+        icon: <TagsOutlined />,
+        isPlus: false,
+        isEnable: true,
+        title: 'Loyalty',
+        description:
+          'Embed your card system into your connect account allowing your customers to check and redeem their points online',
+      },
+    ],
+  },
+  other: {
+    title: 'Other',
+    description:
+      'Allow your clients to see extra information about your business',
+    widgets: [
+      {
+        icon: <PhoneOutlined />,
+        isPlus: false,
+        isEnable: true,
+        title: 'Call us',
+        description:
+          'Allows users to initiate a phone call to your business through their mobiles or desktops',
+      },
+      {
+        icon: <ClockCircleOutlined />,
+        isPlus: false,
+        isEnable: true,
+        title: 'Openings',
+        description: 'Display your opening hours on your Pabau Connect website',
+      },
+      {
+        icon: <GlobalOutlined />,
+        isPlus: false,
+        isEnable: true,
+        title: 'Website',
+        description: 'Allows users to jump straight to your website',
+      },
+      {
+        icon: <EnvironmentOutlined />,
+        isPlus: false,
+        isEnable: true,
+        title: 'Location',
+        description: 'Displays a map of your location',
+      },
+    ],
+  },
 }
 
 export const defaultStepData = [

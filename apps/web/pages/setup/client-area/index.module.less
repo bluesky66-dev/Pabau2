@@ -148,6 +148,27 @@
   }
 }
 
+.clientAreaBodyMobile {
+  display: none;
+
+  :global {
+    .ant-tabs-nav-list {
+      width: 100%;
+    }
+
+    .ant-tabs-tab {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 991px) {
+    display: block;
+  }
+}
+
 .section {
   padding: 24px;
   border-bottom: 1px solid var(--border-color-base);
@@ -194,5 +215,192 @@
 
   &:last-child {
     border-bottom: none;
+  }
+}
+
+.previewPanel {
+  width: 100%;
+}
+
+.previewPanelHeader {
+  width: 100%;
+  border-bottom: 1px solid var(--border-color-base);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px 24px;
+}
+
+.previewPanelBody {
+  width: 100%;
+}
+
+.clientAreaWidgets {
+  width: 100%;
+}
+
+.clientAreaWidgetsHeader {
+  padding: 20px 24px;
+}
+
+.clientAreaWidgetsHeaderTitle {
+  font-family: 'Circular-Std-Bold';
+  font-size: 20px;
+  line-height: 25px;
+  color: var(--grey-text-color);
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.clientAreaWidgetsHeaderDesc {
+  font-family: 'Circular-Std-Medium';
+  font-size: 14px;
+  line-height: 18x;
+  color: var(--light-grey-color);
+  margin: 0;
+  max-width: 250px;
+}
+
+.clientAreaWidget {
+  position: relative;
+  width: 100%;
+  padding: 24px 20px;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  grid-column-gap: 16px;
+  border-top: 1px solid var(--border-color-base);
+
+  >div {
+    &:first-child {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #eef7fb;
+      color: var(--primary-color);
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.clientAreaWidgetTitle {
+  font-family: var(--font-family);
+  font-size: 14px;
+  line-height: 17px;
+  color: var(--grey-text-color);
+  margin: 0;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: flex-end;
+
+  >span {
+    display: inline-block;
+    background-color: #eef7fb;
+    color: var(--primary-color);
+    margin-left: 1rem;
+    padding: 3px 12px;
+    border-radius: 6px;
+  }
+}
+
+.clientAreaWidgetDesc {
+  color: var(--light-grey-color);
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  margin: 0;
+}
+
+.clientAreaWidgetStatus {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+}
+
+.widgetModal {
+  :global {
+    .ant-modal-body {
+      >div {
+        padding: 0;
+      }
+    }
+  }
+}
+
+.widgetModalContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  >div {
+    &:first-child {
+      padding: 40px 24px 40px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    &:last-child {
+      padding: 92px 48px 50px;
+      background-color: #f7f7f9;
+      border-radius: 0 4px 4px 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+
+    >div {
+      &:first-child {
+        order: 2;
+        padding: 24px 16px 16px;
+      }
+
+      &:last-child {
+        order: 1;
+        border-radius: 4px 4px 0 0;
+        padding: 86px 48px 42px;
+      }
+    }
+  }
+}
+
+.widgetModalOps {
+  display: flex;
+
+  @media (max-width: 767px) {
+    justify-content: flex-end;
+  }
+}
+
+.widgetModalTitle {
+  font-family: var(--font-family);
+  font-size: 22px;
+  line-height: 27px;
+  color: var(--grey-text-color);
+  margin: 0;
+  margin-bottom: 6px;
+
+  @media (max-width: 767px) {
+    font-size: 17px;
+    line-height: 21px;
+  }
+}
+
+.widgetModalDesc {
+  font-family: var(--font-family);
+  font-size: 17px;
+  line-height: 21px;
+  color: var(--light-grey-color);
+  margin: 0;
+  margin-bottom: 24px;
+
+  @media (max-width: 767px) {
+    font-size: 16px;
+    line-height: 24px;
   }
 }
