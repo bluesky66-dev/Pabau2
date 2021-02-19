@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react'
+import React, { FC, ReactElement, useEffect, useState } from 'react'
 import classNames from 'classnames'
 import { CheckOutlined } from '@ant-design/icons'
 import { Button } from '@pabau/ui'
@@ -13,8 +13,10 @@ interface itemsSchema {
 }
 
 interface P {
+  heading?: string
   category: string
   items: itemsSchema[]
+  limit?: number
 }
 
 const AllCollectionsHeaderCollections = [
@@ -57,56 +59,63 @@ const AllCollectionsHeader: FC = () => {
   )
 }
 
-export const AllCollectionsBody: FC<P> = ({ category = 'ALL', items = [] }) => {
+export const AllCollectionsBody: FC<P> = ({
+  heading,
+  category = 'ALL',
+  items,
+  limit,
+}) => {
   category = category.toUpperCase()
+  const [data, setData] = useState([])
+  const [tempLimit, setTempLimit] = useState(limit || 0)
+
+  useEffect(() => {
+    if (category !== 'ALL') {
+      const mapArray = []
+      for (const a of items) {
+        if (a.categories.indexOf(category) === 0) {
+          mapArray.push(a)
+        }
+      }
+      setData([...mapArray])
+      return
+    } else {
+      setData([...items])
+      return
+    }
+
+    if (tempLimit) {
+      setTempLimit(tempLimit)
+    } else {
+      setTempLimit(data.length)
+    }
+  }, [items, category, data.length, tempLimit])
+
   return (
-    <div className={styles.itemWrapper}>
-      {items.map((value, key) => (
-        <div key={key}>
-          {value.categories.indexOf(category) === 0 ? (
-            <div
-              className={
-                value.installed === 1
-                  ? classNames(styles.itemBox, styles.active)
-                  : classNames(styles.itemBox)
-              }
-            >
-              <span className={styles.checkWrap}>
-                <CheckOutlined />
-              </span>
-              <div className={styles.img}>
-                <img src={value.logoImage} alt={value.title} />
-              </div>
-              <h5>{value.title}</h5>
-              <p>{value.subTitle}</p>
+    <>
+      {heading && heading.length > 0 && <div>{heading}</div>}
+      <div className={styles.itemWrapper}>
+        {data.slice(0, limit).map((value, key) => (
+          <div
+            key={key}
+            className={
+              value.installed === 1
+                ? classNames(styles.itemBox, styles.active)
+                : classNames(styles.itemBox)
+            }
+          >
+            <span className={styles.checkWrap}>
+              <CheckOutlined />
+            </span>
+            <div className={styles.img}>
+              <img src={value.logoImage} alt={value.title} />
             </div>
-          ) : category === 'ALL' ? (
-            <div>
-              {
-                <div
-                  className={
-                    value.installed === 1
-                      ? classNames(styles.itemBox, styles.active)
-                      : classNames(styles.itemBox)
-                  }
-                >
-                  <span className={styles.checkWrap}>
-                    <CheckOutlined />
-                  </span>
-                  <div className={styles.img}>
-                    <img src={value.logoImage} alt={value.title} />
-                  </div>
-                  <h5>{value.title}</h5>
-                  <p>{value.subTitle}</p>
-                </div>
-              }
-            </div>
-          ) : (
-            <div></div>
-          )}
-        </div>
-      ))}
-    </div>
+            <h5>{value.title}</h5>
+            <p>{value.subTitle}</p>
+          </div>
+        ))}
+      </div>
+    </>
   )
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Layout, Breadcrumb, Input } from '@pabau/ui'
 import { Tabs, Typography } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
@@ -130,6 +130,12 @@ const IntegrationBodyCollections = [
 export interface IntegrationProps {}
 
 export function Integration(props: IntegrationProps) {
+  const [active, setActive] = useState('4')
+
+  function handleClick(key: string) {
+    setActive(key)
+  }
+
   return (
     <div>
       <Layout>
@@ -155,80 +161,116 @@ export function Integration(props: IntegrationProps) {
               </span>
             </div>
           </div>
-          <Tabs tabPosition="left" defaultActiveKey="4">
+          <Tabs
+            tabPosition="left"
+            defaultActiveKey={active}
+            activeKey={active}
+            onTabClick={handleClick}
+          >
             <TabPane
               tab="Manage"
-              key="1"
+              key="0"
               disabled={true}
               style={{ color: 'red', fontSize: '10px' }}
             />
-            <TabPane tab="Your installed apps" key="2">
-              Your installed apps
+            <TabPane tab="Your installed apps" key="1">
+              <div>Your installed apps</div>
             </TabPane>
-            <TabPane tab="Features" key="3" disabled={true} />
+            <TabPane tab="Features" key="2" disabled={true} />
             <TabPane tab="All Collections" key="4">
-              <AllCollectionsHeader />
-              <h5>All</h5>
-              <AllCollectionsBody
-                category="ALL"
-                items={IntegrationBodyCollections}
-              />
+              <div>
+                <AllCollectionsHeader />
+                <AllCollectionsBody
+                  heading="You recenly viewed"
+                  category="ALL"
+                  items={IntegrationBodyCollections}
+                  limit={6}
+                />
+                <div className={styles.popularWrapper}>
+                  <h5>Popular</h5>
+                  <div
+                    className={styles.seeAll}
+                    onClick={(event) => handleClick('5')}
+                  >
+                    see all &#x2794;
+                  </div>
+                </div>
+                <AllCollectionsBody
+                  category="Popular"
+                  items={IntegrationBodyCollections}
+                  limit={6}
+                />
+              </div>
             </TabPane>
             <TabPane tab="Popular" key="5">
-              <AllCollectionsHeader />
-              <h5>Popular</h5>
-              <AllCollectionsBody
-                category="Popular"
-                items={IntegrationBodyCollections}
-              />
+              <div>
+                <AllCollectionsHeader />
+                <AllCollectionsBody
+                  heading="Popular"
+                  category="Popular"
+                  items={IntegrationBodyCollections}
+                />
+              </div>
             </TabPane>
             <TabPane tab="Payment Processing" key="6">
-              <AllCollectionsHeader />
-              <h5>Payment Processing</h5>
-              <AllCollectionsBody
-                category="Payment"
-                items={IntegrationBodyCollections}
-              />
+              <div>
+                <AllCollectionsHeader />
+                <AllCollectionsBody
+                  heading="Payment Processing"
+                  category="Payment"
+                  items={IntegrationBodyCollections}
+                />
+              </div>
             </TabPane>
             <TabPane tab="Accountancy" key="7">
-              <AllCollectionsHeader />
-              <h5>Accountancy</h5>
-              <AllCollectionsBody
-                category="Accountancy"
-                items={IntegrationBodyCollections}
-              />
+              <div>
+                <AllCollectionsHeader />
+                <AllCollectionsBody
+                  heading="Accountancy"
+                  category="Accountancy"
+                  items={IntegrationBodyCollections}
+                />
+              </div>
             </TabPane>
             <TabPane tab="Labs" key="8">
-              <AllCollectionsHeader />
-              <h5>Labs</h5>
-              <AllCollectionsBody
-                category="Labs"
-                items={IntegrationBodyCollections}
-              />
+              <div>
+                <AllCollectionsHeader />
+                <AllCollectionsBody
+                  heading="Labs"
+                  category="Labs"
+                  items={IntegrationBodyCollections}
+                />
+              </div>
             </TabPane>
             <TabPane tab="Marketing" key="9">
-              <AllCollectionsHeader />
-              <h5>Marketing</h5>
-              <AllCollectionsBody
-                category="Marketing"
-                items={IntegrationBodyCollections}
-              />
+              <div>
+                <AllCollectionsHeader />
+                <AllCollectionsBody
+                  heading="Marketing"
+                  category="Marketing"
+                  items={IntegrationBodyCollections}
+                />
+              </div>
             </TabPane>
             <TabPane tab="Vaccination" key="10">
-              <AllCollectionsHeader />
-              <h5>Vaccination</h5>
-              <AllCollectionsBody
-                category="Vaccination"
-                items={IntegrationBodyCollections}
-              />
+              <div>
+                <AllCollectionsHeader />
+                <AllCollectionsBody
+                  heading="Vaccination"
+                  category="Vaccination"
+                  items={IntegrationBodyCollections}
+                />
+              </div>
             </TabPane>
             <TabPane tab="Bookings" key="11">
-              <AllCollectionsHeader />
-              <h5>Bookings</h5>
-              <AllCollectionsBody
-                category="Bookings"
-                items={IntegrationBodyCollections}
-              />
+              <div>
+                <AllCollectionsHeader />
+                <AllCollectionsBody
+                  heading="Bookings"
+                  category="Bookings"
+                  items={IntegrationBodyCollections}
+                />
+              </div>
             </TabPane>
           </Tabs>
         </div>
