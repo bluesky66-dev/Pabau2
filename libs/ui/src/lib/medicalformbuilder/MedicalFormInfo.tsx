@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import styles from './MedicalFormBuilder.module.less'
 
 interface P {
-  formName?: string
+  formName: string
 }
 
 const MedicalFormInfo: FC<P> = ({ formName }) => {

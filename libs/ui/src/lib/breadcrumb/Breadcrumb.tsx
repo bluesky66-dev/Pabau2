@@ -20,7 +20,7 @@ export const Breadcrumb: FC<P> = ({ breadcrumbItems }) => {
     return last ? (
       <span>{route.breadcrumbName}</span>
     ) : (
-      <Link href={'/' + paths}>{route.breadcrumbName}</Link>
+      <Link href={'/' + route.path ?? ''}>{route.breadcrumbName}</Link>
     )
   }
 
