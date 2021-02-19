@@ -1,132 +1,111 @@
-import React, { FC, useState } from 'react'
-import { ReactComponent as CheckBadge } from '../../assets/images/check-badge.svg'
+import React, { FC, useEffect, useState } from 'react'
+// import { ReactComponent as CheckBadge } from '../../assets/images/check-badge.svg'
 import styles from './ColorPicker.module.less'
+import classNames from 'classnames'
+import { CheckOutlined } from '@ant-design/icons'
 interface P {
   color: string
   selected: boolean
+  isDarkColor?: boolean
   onClick(): void
-  onHover(): void
+  onHover?(): void
+  onLeave?(): void
 }
 
-const ColorItem: FC<P> = (props: P) => {
-  const { color, selected, onClick, onHover } = props
+const ColorItem: FC<P> = ({
+  color,
+  selected,
+  isDarkColor = false,
+  onClick,
+  onHover,
+  onLeave,
+}) => {
   return (
     <div
-      className={styles.colorItem}
+      className={classNames(
+        styles.colorItem,
+        selected && styles.selectedColor,
+        !isDarkColor && styles.toggleOpacity
+      )}
       style={{
         backgroundColor: color,
-        border: selected === true ? '1px solid #54B2D3' : 'none',
+        // border: hovering || selected ? '1px solid #54B2D3' : 'none',
         boxSizing: 'border-box',
+        // opacity: hovering || selected ? '1' : '0.2',
       }}
       onClick={() => {
         onClick()
       }}
-      onMouseEnter={() => onHover()}
+      onMouseEnter={() => onHover?.()}
+      onMouseLeave={() => onLeave?.()}
     >
-      {selected && <CheckBadge className={styles.badge} />}
+      <CheckOutlined className={styles.badge} />
     </div>
   )
 }
 
 interface PickerProps {
   heading: string
+  selectedColor?: string
+  isDarkColor?: boolean
   onSelected(val): void
   onHover?(val): void
+  onLeave?(val): void
 }
 
 export const ColorPicker: FC<PickerProps> = ({
   heading = 'Background color',
+  selectedColor = '',
+  isDarkColor = false,
   onSelected,
   onHover,
+  onLeave,
 }) => {
-  const [colorData, setColorData] = useState([
-    {
-      color: '#F1F8FB',
-      selected: false,
-    },
-    {
-      color: '#FCF1F1',
-      selected: false,
-    },
-    {
-      color: '#F8F2FA',
-      selected: false,
-    },
-    {
-      color: '#F2F3F1',
-      selected: false,
-    },
-    {
-      color: '#F1F8FE',
-      selected: false,
-    },
-    {
-      color: '#F2F3FA',
-      selected: false,
-    },
-    {
-      color: '#f0fcfd',
-      selected: false,
-    },
-    {
-      color: '#EEF6F5',
-      selected: false,
-    },
-    {
-      color: '#f2f9e9',
-      selected: false,
-    },
-    {
-      color: '#FDF9E9',
-      selected: false,
-    },
-    {
-      color: '#F4F1F0',
-      selected: false,
-    },
-    {
-      color: '#F3F3F3',
-      selected: false,
-    },
-    {
-      color: '#feffd5',
-      selected: false,
-    },
-    {
-      color: '#F2F4F5',
-      selected: false,
-    },
-    {
-      color: '#EAEAEA',
-      selected: false,
-    },
-    {
-      color: '#f9e5f8',
-      selected: false,
-    },
-  ])
+  const colorData = [
+    '#03dbfc',
+    '#fca903',
+    '#8c03fc',
+    '#0ffc03',
+    '#03fcfc',
+    '#5e03fc',
+    '#03e7fc',
+    '#45fc03',
+    '#84fc03',
+    '#fcf403',
+    '#fcce03',
+    '#d2fc03',
+    '#f4fc03',
+    '#bf15c2',
+    '#486578',
+    '#9a3ac9',
+  ]
 
-  const onClickColorItem = (index, color) => {
-    const colors = [...colorData]
-    colors.forEach((item, idx) => {
-      item.selected = index === idx
-    })
-    setColorData([...colors])
+  const [selColor, setSelColor] = useState(selectedColor)
+
+  useEffect(() => {
+    setSelColor(selectedColor)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedColor])
+  const onClickColorItem = (color) => {
+    setSelColor(color)
     onSelected(color)
   }
+
   return (
-    <div style={{ marginTop: '16px' }}>
+    <div>
+      {' '}
+      {/*  style={{ marginTop: '16px' }} */}
       <span className={styles.heading}>{heading}</span>
       <div className={styles.colorPickerWrap}>
-        {colorData.map((item, index) => (
+        {colorData.map((color) => (
           <ColorItem
-            key={`${heading}${item.color}`}
-            color={item.color}
-            selected={item.selected}
-            onClick={() => onClickColorItem(index, item.color)}
-            onHover={() => {
-              if (onHover !== undefined) onHover(item.color)
-            }}
+            key={`${heading}${color}`}
+            color={color}
+            selected={color === selColor}
+            isDarkColor={isDarkColor}
+            onClick={() => onClickColorItem(color)}
+            onHover={() => onHover?.(color)}
+            onLeave={() => onLeave?.(color)}
           />
         ))}
       </div>

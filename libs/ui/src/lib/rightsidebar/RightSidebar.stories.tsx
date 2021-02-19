@@ -5,27 +5,60 @@ import RightSidebar from './RightSidebar'
 export default {
   component: RightSidebar,
   title: 'UI/Right Sidebar',
-  args: { componentName: 'heading', display: 'show' },
+  args: { component: 'basic_heading', display: true },
   argTypes: {
-    componentName: {
+    component: {
       control: {
         type: 'select',
-        selected: 'heading',
-        options: ['heading', 'signature', 'ghost', 'shortanswer', 'longanswer'],
+        selected: 'basic_heading',
+        options: [
+          'basic_heading',
+          'basic_shortanswer',
+          'basic_longanswer',
+          'basic_textblock',
+          'basic_singlechoice',
+          'basic_multiplechoice',
+          'basic_dropdown',
+          'basic_drawing',
+          'basic_signature',
+          'basic_conditions',
+          'basic_drugs',
+          'basic_labtests',
+          'basic_traveldestination',
+          'basic_vaccinescheduler',
+          'basic_labtests',
+          'custom_emailmarketing',
+          'custom_smsmarketing',
+          'custom_phonecall',
+          'custom_lettermarketing',
+          'custom_membershipnumber',
+          'custom_authorizationcode',
+          'custom_company',
+          'custom_dob',
+          'custom_gender',
+          'custom_physicaladdress',
+          'custom_postaladdress',
+          'custom_referredby',
+          'custom_telephonenumber',
+        ],
       },
     },
     display: {
       control: {
         type: 'radio',
-        selected: 'show',
-        options: ['show', 'hide'],
+        selected: true,
+        options: [true, false],
       },
-    }
-  }
+    },
+  },
 }
 
-const RightSidebarStory = ({ ...args }) => <RightSidebar {...args}></RightSidebar>
+const RightSidebarStory = ({ ...args }) => (
+  <RightSidebar {...args}></RightSidebar>
+)
 
 export const RightSidebarPanel = RightSidebarStory.bind({})
-RightSidebarPanel.args = {}
-
+RightSidebarPanel.args = {
+  component: 'basic_heading',
+  display: true,
+}

@@ -1,24 +1,29 @@
 import React, { FC } from 'react'
-import { Typography } from 'antd'
-import { Button } from '@pabau/ui'
-import { Breadcrumb } from '@pabau/ui'
+import { Typography, Input } from 'antd'
+import { Button, Breadcrumb, BasicModal } from '@pabau/ui'
 import Layout from '../../components/Layout/Layout'
 import ClientNotification from '../../components/ClientNotification/index'
 
 const { Title } = Typography
 
 const Index: FC = () => {
+  const [setIndexTab, setSelectedTab] = React.useState(1)
+  const [sendEmail, setSendEmail] = React.useState(false)
+  function handleSendEmailBtn(value) {
+    setSendEmail(value)
+  }
+
   return (
     <Layout>
       <div style={{ backgroundColor: '#FFF' }}>
         <Breadcrumb
           breadcrumbItems={[
-            'Setup',
-            'Notification Messages',
-            'New Appointment is booked',
+            { breadcrumbName: 'Setup', path: 'setup' },
+            { breadcrumbName: 'Notification Messages', path: '' },
+            { breadcrumbName: 'Upcoming appointment reminder', path: '' },
           ]}
         />
-        <Title>New Appointment is booked</Title>
+        <Title>Upcoming appointment reminder</Title>
       </div>
       <div
         style={{
@@ -34,23 +39,46 @@ const Index: FC = () => {
         <Button
           style={{ margin: '1em 8px', height: '40px', fontSize: '14px' }}
           type="default"
+          onClick={() => handleSendEmailBtn(!sendEmail)}
         >
-          Send Test Email
+          {setIndexTab === 1 ? 'Send Test Email' : 'Send Test SMS'}
         </Button>
-        <Button
-          style={{
-            margin: '1em 8px',
-            height: '40px',
-            fontSize: '14px',
-            color: 'white',
-          }}
-          type="default"
-          backgroundColor="#D4D4D4"
+        <BasicModal
+          title={
+            setIndexTab === 1 ? 'Send a Test Email' : 'Send a Test Message'
+          }
+          visible={sendEmail}
+          onCancel={() => setSendEmail(false)}
+          centered={true}
+          newButtonText={'Send'}
+          dangerButtonText={'Cancel'}
         >
-          Edit
-        </Button>
+          {setIndexTab === 1 ? (
+            <div>
+              <p style={{ color: '#9292A3' }}>Email:</p>
+              <Input placeholder="client@email.com" />
+            </div>
+          ) : (
+            <div>
+              <p style={{ color: '#9292A3' }}>Phone Number</p>
+              <Input placeholder="phone number" />
+            </div>
+          )}
+        </BasicModal>
+        {setIndexTab === 1 && (
+          <Button
+            style={{
+              margin: '1em 8px',
+              height: '40px',
+              fontSize: '14px',
+            }}
+            type="primary"
+          >
+            Save
+          </Button>
+        )}
       </div>
-      <ClientNotification />
+      <ClientNotification onSeletedTab={(value) => setSelectedTab(value)} />
     </Layout>
   )
 }

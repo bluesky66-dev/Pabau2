@@ -25,7 +25,7 @@ function convert(doc: DocumentNode): DocumentNode {
   const firstParen = body.indexOf('(')
   const i =
     firstParen === -1 || firstCurly < firstParen ? firstCurly : firstParen
-  const snipped = body.substr(i)
+  const snipped = body.slice(i)
   return gql(`subscription ${snipped}`)
 }
 
@@ -51,8 +51,8 @@ export function useLiveQuery<T>(
   useEffect(() => {
     console.log('creating sub!')
     const cancelFunc = subscribeToMore({
-      document: (options && options.subscription) || convert(query),
-      variables: options && options.variables ? options.variables : undefined,
+      document: options?.subscription || convert(query),
+      variables: options?.variables ? options.variables : undefined,
       updateQuery: (prev, { subscriptionData }) => {
         console.log('GOT SUBSCRIPTION DATA', prev, subscriptionData)
 
@@ -71,9 +71,11 @@ export function useLiveQuery<T>(
   }, [query, subscribeToMore, options])
 
   const data = rest.data
-    ? (rest.data as Record<string, unknown>)[
-        Object.keys(rest.data as Record<string, unknown>)[0]
-      ]
+    ? Object.keys(rest.data).length > 1
+      ? rest.data
+      : (rest.data as Record<string, unknown>)[
+          Object.keys(rest.data as Record<string, unknown>)[0]
+        ]
     : undefined
   return { ...rest, data }
 }

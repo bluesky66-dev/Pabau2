@@ -1,53 +1,22 @@
-import React, { FC, HTMLProps } from 'react'
+import React, { FC, HTMLProps, ReactNode } from 'react'
 import { Button as AntButton, Dropdown } from 'antd'
 import { NativeButtonProps } from 'antd/lib/button/button'
 import { Menu } from 'antd'
-import { PauseCircleOutlined, MessageOutlined } from '@ant-design/icons'
-import styles from './button.module.less'
 
-export enum ButtonTypes {
-  default = 'default',
-  primary = 'primary',
-  ghost = 'ghost',
-  dashed = 'dashed',
-  link = 'link',
-  text = 'text',
+interface MenuItem {
+  icon: ReactNode
+  title: string
 }
+
 interface P extends NativeButtonProps {
-  // type?: ButtonTypes
   disabled?: boolean
   color?: string
   backgroundColor?: string
   style?: HTMLProps<HTMLElement>['style']
   className?: string
+  menuItems?: MenuItem[]
+  onMenuClick?(val): void
 }
-
-const menu = (
-  <Menu>
-    <Menu.Item>
-      <a
-        className={styles.linkAction}
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.google.com/"
-      >
-        <PauseCircleOutlined />
-        Pause notifications
-      </a>
-    </Menu.Item>
-    <Menu.Item>
-      <a
-        className={styles.linkAction}
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.google.com/"
-      >
-        <MessageOutlined />
-        See message log
-      </a>
-    </Menu.Item>
-  </Menu>
-)
 
 export const DropDownButton: FC<P> = ({
   className,
@@ -56,8 +25,23 @@ export const DropDownButton: FC<P> = ({
   backgroundColor,
   children,
   style,
+  menuItems,
+  onMenuClick,
   ...props
 }) => {
+  const handleMenuClick = (e) => {
+    if (onMenuClick) onMenuClick(e.key)
+  }
+  const menu = (
+    <Menu onClick={(e) => handleMenuClick(e)}>
+      {menuItems?.map((item) => (
+        <Menu.Item key={item.title}>
+          {item.icon}
+          {item.title}
+        </Menu.Item>
+      ))}
+    </Menu>
+  )
   return (
     <Dropdown
       overlay={menu}
@@ -67,7 +51,6 @@ export const DropDownButton: FC<P> = ({
     >
       <AntButton
         style={{ ...style, ...{ backgroundColor: backgroundColor } }}
-        //size={ButtonSize.large}
         disabled={disabled}
         color={color}
         className={className}

@@ -1,9 +1,14 @@
-/* eslint-disable */
-import React from 'react'
+import React, { FC, useEffect, useState } from 'react'
 
-// import './Badge.module.less'
 import btn_enable from '../../assets/images/security/btn_enable.svg'
 import btn_disabled from '../../assets/images/security/close.svg'
+
+import { UpgradeModalProps } from '../upgrade-modal/UpgradeModal'
+
+import { modalContent, modalTypes } from '../upgrade-modal/UpgradeMock'
+
+import UpgradeModal from '../upgrade-modal/UpgradeModal'
+
 import styles from './Badge.module.less'
 
 interface P {
@@ -11,9 +16,7 @@ interface P {
   disabled?: boolean
 }
 
-export function Badge(props: P) {
-  const { label = 'Enabled', disabled = true } = props
-
+export const Badge: FC<P> = ({ label, disabled }) => {
   return (
     <div>
       <button
@@ -23,7 +26,7 @@ export function Badge(props: P) {
         <span
           className={disabled ? styles.imgtextspan : styles.imgtextspanDisable}
         >
-          {disabled ? 'Enabled' : 'Disabled'}
+          {label}
         </span>
       </button>
     </div>
@@ -31,3 +34,70 @@ export function Badge(props: P) {
 }
 
 export default Badge
+
+export interface PlusProps {
+  label?: string
+  disabled?: boolean
+  modalType?: string
+  openModal?: boolean
+}
+
+export const PabauPlus: FC<PlusProps> = ({
+  label,
+  disabled,
+  modalType,
+  openModal = true,
+}) => {
+  const [showModal, setShowModal] = useState<boolean>(false)
+  const [modalBody, setModalBody] = useState<UpgradeModalProps>(
+    modalContent[getModalKey(modalType, modalTypes)] || {}
+  )
+
+  useEffect(() => {
+    setModalBody(modalContent[getModalKey(modalType, modalTypes)] || {})
+  }, [modalType])
+
+  const handleClick = (): void => {
+    setShowModal((e) => !e)
+  }
+
+  const {
+    title,
+    plan,
+    description,
+    btnText,
+    sectionTitle,
+    sectionData,
+    sectionUpgradeData,
+    sectionUpgradeTitle,
+    linkText,
+  } = modalBody
+
+  return (
+    <div>
+      <div className={styles.pabauPlusBtn} onClick={handleClick}>
+        {label}
+      </div>
+      {openModal && (
+        <UpgradeModal
+          title={title}
+          visible={showModal}
+          modalWidth={682}
+          plan={plan}
+          description={description}
+          btnText={btnText}
+          sectionTitle={sectionTitle}
+          sectionData={sectionData}
+          sectionUpgradeTitle={sectionUpgradeTitle}
+          sectionUpgradeData={sectionUpgradeData}
+          linkText={linkText}
+          onCancel={handleClick}
+        />
+      )}
+    </div>
+  )
+}
+
+function getModalKey(type: string | undefined, data): string {
+  return data.find(({ value }) => value === type)?.key
+}

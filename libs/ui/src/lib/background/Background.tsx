@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, FC } from 'react'
 import { StopOutlined } from '@ant-design/icons'
 
 import styles from './Background.module.less'
@@ -9,19 +9,16 @@ export interface listType {
 }
 
 export interface BackgroundProps {
-  list?: listType[]
+  list: listType[]
   onChange?: (name: string) => void
 }
-/* eslint-disable-next-line */
 
-export function Background(props: BackgroundProps): JSX.Element {
+export const Background: FC<BackgroundProps> = ({ list, onChange }) => {
   const [selected, setSelected] = useState<string>()
-
-  const { list } = props
 
   const handleChange = (name: string) => {
     setSelected(name)
-    props.onChange?.(name)
+    onChange?.(name)
   }
 
   return (

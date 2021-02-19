@@ -1,0 +1,52 @@
+.client-notifications-content {
+  background-color: white;
+  width: 100%;
+  margin-top: 32px;
+}
+
+.client-notifications-subtitle {
+  background-color: white;
+  max-width: 440px;
+  font-size: 14px;
+  line-height: 18px;
+  color: #9292a3;
+  margin: 0;
+  padding: 0 0 24px;
+}
+
+.client-notification-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 24px;
+  :global {
+    .ant-typography,
+    .ant-breadcrumb {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  @media (max-width: 991px) {
+    flex-direction: column;
+  }
+}
+
+.client-notifications-ops {
+  padding: 24px 0 0;
+  @media (max-width: 991px) {
+    padding: 0 0 24px;
+  }
+}
+
+.client-inner-notifciations-desktop {
+  @media (max-width: 991px) {
+    display: none;
+  }
+}
+
+.client-inner-notifciations-mobile {
+  display: none;
+  @media (max-width: 991px) {
+    display: block;
+  }
+}

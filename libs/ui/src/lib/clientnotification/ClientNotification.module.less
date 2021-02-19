@@ -57,81 +57,39 @@
 }
 
 .notification-page {
-  font-family: Circular-Std-Medium;
   background-color: white;
   padding-bottom: 32px;
-  display: flex;
-
-  .header-style {
-    font-family: Circular-Std-Bold;
-    padding: 12px 0px;
-    border: 1px solid #ecedf0;
-    border-right: none;
-    border-left: none;
-    height: 40px;
-
-    .titleMargin {
-      margin-left: 24px;
-    }
-  }
-
   .builder-column {
     border-right: 1px solid #ecedf0;
-    width: 30%;
-
-    .clientLanguageContainer {
-      padding-right: 15px;
-    }
-
-    .preview-align {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 32px;
-      .radio-left-button {
-        width: 104px;
-        text-align: center;
-        border-top-left-radius: 4px;
-        border-bottom-left-radius: 4px;
-      }
-      .radio-right-button {
-        width: 104px;
-        text-align: center;
-        border-top-right-radius: 4px;
-        border-bottom-right-radius: 4px;
-      }
-    }
-
-    .bold16Black {
+    .header-style {
       font-family: Circular-Std-Bold;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 16px;
-      line-height: 24px;
-      display: flex;
-      align-items: center;
-      color: #3d3d46;
-    }
-
-    .medium14Gray1 {
-      font-family: Circular-Std-Medium;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 14px;
-      line-height: 18px;
-      color: #9292a3;
-    }
-
-    .clientLanguageSection {
-      margin-top: 24px;
+      padding: 12px 24px;
+      border: 1px solid #ecedf0;
+      border-right: none;
+      border-left: none;
+      height: 40px;
+      .preview-align {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 32px;
+        .radio-left-button {
+          width: 104px;
+          text-align: center;
+          border-top-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+        }
+        .radio-right-button {
+          width: 104px;
+          text-align: center;
+          border-top-right-radius: 4px;
+          border-bottom-right-radius: 4px;
+        }
+      }
     }
   }
 
   .preview-column {
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-
     .header-style {
       font-family: Circular-Std-Bold;
       padding: 12px 24px;
@@ -159,107 +117,4 @@
       height: auto;
     }
   }
-
-  .appointmentContent {
-    width: 440px;
-    height: 426px;
-    -moz-box-shadow: 0px 0px 10px 1px #ccc;
-    -webkit-box-shadow: 0px 0px 10px 1px #ccc;
-    box-shadow: 0px 0px 10px 1px #ccc;
-  }
-
-  .appointmentContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
-.ant-tabs .ant-tabs-top {
-  .ant-tabs-nav {
-    .ant-tabs-nav-wrap {
-      .ant-tabs-nav-list {
-        .ant-tabs-tab .ant-tabs-tab-active {
-          width: 100%;
-        }
-      }
-    }
-  }
-}
-
-.tabs {
-  .ant-tabs-tab {
-    width: 100%;
-  }
-  .ant-tabs-tab-active {
-    width: 100%;
-  }
-}
-
-// .customTab {
-// 	width: 100%;
-// 	background-color: chartreuse;
-
-// 	.ant-tabs-nav-list {
-// 		background-color: cyan;
-// 	}
-// 	.customTabPane{
-// 		width: 50%;
-// 		background-color: chocolate;
-// 	}
-// }
-
-.customTab {
-  :global {
-    .ant-tabs-nav {
-    }
-    .ant-tabs-nav-list {
-      width: 100%;
-    }
-    .ant-tabs-nav-wrap {
-    }
-    .ant-tabs-tab {
-      margin: 0px;
-      width: 50%;
-      display: flex;
-      justify-content: center;
-    }
-  }
-
-  .tabPane1Content {
-    height: 500px;
-    .ant-table-body {
-      overflow-y: hidden !important;
-    }
-
-    .ant-table-body:hover {
-      overflow-y: scroll !important;
-    }
-
-    overflow-y: scroll;
-  }
-
-  .tabPane2Content {
-    height: 500px;
-    .ant-table-body {
-      overflow-y: hidden !important;
-    }
-
-    .ant-table-body:hover {
-      overflow-y: scroll !important;
-    }
-
-    overflow-y: scroll;
-  }
-}
-
-.medium14Gray {
-  font-family: Circular-Std-Medium;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 18px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #9292a3;
 }
