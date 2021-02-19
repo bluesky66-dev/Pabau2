@@ -11,6 +11,8 @@ export default {
     desc:
       'Activate payments with Fresha to benefit from tip collection during and after sale and get access to no show protection, payment terminals, safe online payments and many more.',
     allowClose: true,
+    showPaymentButton: true,
+    showEmail: false,
   },
   argTypes: {
     title: { control: { type: 'text' } },
@@ -18,6 +20,7 @@ export default {
     imgPath: { control: { type: 'text' } },
     allowClose: { control: { type: 'boolean' } },
     onClick: { action: 'clicked' },
+    showPaymentButton: { control: { type: 'boolean' } },
   },
 }
 
@@ -42,4 +45,5 @@ Banner.args = {
     'Activate payments with Fresha to benefit from tip collection during and after sale and get access to no show protection, payment terminals, safe online payments and many more.',
   imgPath: icon,
   allowClose: true,
+  showEmail: false,
 }

@@ -60,7 +60,7 @@ const fields: FieldType[] = [
   {
     key: 7,
     fieldName: 'about_us',
-    label: 'I low did you hear about us',
+    label: 'How did you hear about us?',
     visible: true,
     required: false,
     disabled: false,
@@ -170,19 +170,19 @@ const schema: Schema = {
       type: 'select',
       selectOptions: [
         {
-          label: '24 hours',
-          value: '24',
+          label: 'Facebook',
+          value: 'facebook',
         },
         {
-          label: '12 hours',
-          value: '12',
+          label: 'Twitter',
+          value: 'twitter',
         },
         {
-          label: '6 hours',
-          value: '6',
+          label: 'Website',
+          value: 'website',
         },
       ],
-      defaultvalue: '24',
+      defaultvalue: 'facebook',
       visible: true,
       required: false,
     },
