@@ -4,10 +4,16 @@ import { Card, Table } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import styles from './ClientMessageReport.module.less'
 
+interface Column {
+  title: string | number
+  dataIndex: string | number
+  visible: boolean
+}
+
 export interface ClientMessageReportProps {
   reportVisibility?: boolean
   reportTitle?: string
-  columns: []
+  columns: Column[]
   apiUrl: string
   start: number
   limit: number
