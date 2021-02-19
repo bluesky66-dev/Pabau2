@@ -1,6 +1,7 @@
 .questionWrapper {
   padding: 24px;
-  width: 392px;
+  width: 100%;
+  min-width: 320px;
   h1 {
     font-weight: bold;
     font-size: 16px;
@@ -13,6 +14,33 @@
     line-height: 18px;
     color: #9292a3;
     margin-bottom: 20px;
+  }
+  .translate {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    
+    > span {
+      display: inline-block;
+      width: 80%;
+      color: var(--grey-text-color);
+      font-family: var(--font-family);
+      font-size: 14px;
+      line-height: 18px;
+      font-weight: 400;
+      .plusTag {
+        display: inline-block;
+        padding: 3px 12px;
+        border-radius:  6px;
+        color: var(--primary-color);
+        background-color: #eef7fb;
+        margin-left: 0.5rem;
+        font-family: var(--font-family);
+        font-size: 12px;
+        line-height: 14px;
+      }
+    }
   }
   .queList {
     font-size: 14px;
