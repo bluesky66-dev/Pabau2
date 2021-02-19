@@ -12,6 +12,10 @@
     margin-left: 18.06px;
     display: flex;
     align-items: center;
+
+    &Rotated {
+      transform: rotate(180deg);
+    }
   }
 
   &__text {

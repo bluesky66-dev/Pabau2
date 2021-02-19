@@ -11,6 +11,12 @@
 
   border-top: 1px solid #ecedf0;
 
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: #f9f9f9;
+  }
+
   &__container {
     display: inline-flex;
     align-items: center;

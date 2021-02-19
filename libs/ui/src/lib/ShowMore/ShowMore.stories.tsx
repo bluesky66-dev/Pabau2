@@ -6,11 +6,17 @@ export default {
   title: "ShowMore",
   args: {
     length: 15,
+    showAll: false,
   },
   argTypes: {
     length: {
       control: {
         type: "number",
+      },
+      showAll: {
+        control: {
+          type: "boolean",
+        },
       },
     },
   },
