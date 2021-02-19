@@ -43,7 +43,7 @@ const Subscription: FC = () => {
           <div>
             <Breadcrumb
               breadcrumbItems={[
-                { breadcrumbName: 'Setup', path: '/setup' },
+                { breadcrumbName: 'Setup', path: 'setup' },
                 { breadcrumbName: 'Subscription', path: '' },
               ]}
             />

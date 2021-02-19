@@ -45,7 +45,7 @@ const BillingInformation: FC = () => {
         </div>
         <Divider />
         <div style={{ padding: '0 24px' }}>
-          <Paragraph className={Styles.subTitle}>Payment Free</Paragraph>
+          <Paragraph className={Styles.subTitle}>Payment Fee</Paragraph>
           <Paragraph
             type="secondary"
             style={{ marginTop: 20 }}
