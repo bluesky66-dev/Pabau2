@@ -1,51 +1,21 @@
-import {
-  makeSchema,
-  objectType,
-} from 'nexus'
-import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema'
+import { makeSchema  } from 'nexus'
+import { nexusPrisma } from 'nexus-plugin-prisma'
 import { PrismaClient } from '@prisma/client'
+import path from 'path'
+import * as types from './schema/types'
+import { GraphQLSchema } from "graphql";
+import { NexusSchemaExtension } from "nexus/dist/extensions";
+const { join } = path
 
 const prisma = new PrismaClient()
 
-const MarketingSource = objectType({
-  name: 'marketing_source',
-  definition(t) {
-    t.model.id()
-    t.model.source_name()
-    t.model.occupier()
-    t.model.custom_id()
-  }
-})
-
-const Query = objectType({
-  name: 'Query',
-  definition(t) {
-    t.crud.marketingSource();
-    t.crud.marketingSources({
-      pagination: true,
-      filtering: true,
-      ordering: true
-    });
-  }
-})
-
-const Mutation = objectType({
-  name: 'Mutation',
-  definition(t) {
-    t.crud.createOnemarketing_source();
-    t.crud.deleteOnemarketing_source();
-    t.crud.updateOnemarketing_source();
-  }
-})
-
-export const schema = makeSchema({
-  types: [Query, Mutation,
-    MarketingSource
-  ],
-  plugins: [nexusSchemaPrisma({ experimentalCRUD: true, prismaClient: ctx => ctx.prisma = prisma })],
+export const schema: Omit<GraphQLSchema, "extensions"> & { extensions: { nexus: NexusSchemaExtension } } = makeSchema({
+  types,
+  plugins: [nexusPrisma({
+    experimentalCRUD: true, prismaClient: ctx => ctx.prisma = prisma })],
   outputs: {
     schema: __dirname + '/../schema.graphql',
-    typegen: __dirname + '/generated/nexus.ts',
+    typegen: join( __dirname, '/generated/', 'typegen-nexus-plugin-prisma.d.ts' )
   },
   sourceTypes: {
     modules: [
