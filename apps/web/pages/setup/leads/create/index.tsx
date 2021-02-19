@@ -22,33 +22,37 @@ import styles from './index.module.less'
 const { Title } = Typography
 
 const ADD_MUTATION = gql`
-  mutation insert_Labs_one(
-    $city: String!
-    $country: String!
-    $email: String!
-    $isActive: Boolean
-    $name: String!
-    $phone: String!
-    $postalCode: numeric
-    $providerNumber: numeric
-    $street: String!
-    $street2: String!
-  ) {
-    insert_Labs_one(
+  mutation MyMutation {
+    insert_leads_one(
       object: {
-        city: $city
-        country: $country
-        email: $email
-        is_active: $isActive
-        name: $name
-        phone: $phone
-        postal_code: $postalCode
-        provider_number: $providerNumber
-        street: $street
-        street2: $street2
+        email: "nido_i@hotmail.com"
+        interest: "xyz"
+        is_active: true
+        lead_age: 30
+        lead_name: "aysha"
+        lead_owner: "rulaa"
+        lead_source: "xyz"
+        lead_status: "married"
+        location: "gilgit"
+        order: 2
+        phone: "45455545454"
+        status: true
+        id: "123e4567-e89b-12d3-a456-426614174011"
       }
     ) {
+      email
       id
+      is_active
+      order
+      lead_age
+      interest
+      lead_name
+      lead_owner
+      lead_source
+      lead_status
+      location
+      phone
+      status
     }
   }
 `
