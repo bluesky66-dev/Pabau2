@@ -51,16 +51,8 @@ const DELETE_MUTATION = gql`
   }
 `
 const ADD_MUTATION = gql`
-  mutation insert_leads(
-    $imported: Int = 0
-    $is_active: Int = 1
-    $name: String!
-    $custom_id: Int = 0
-    $company_id: Int = 8901 #TODO refactor with actual company_id
-  ) {
-    insert_leads(
-      data: { source_name: $name, public: $is_active, custom_id: $custom_id }
-    ) {
+  mutation insert_leads($is_active: Boolean = true, $lead_name: String!) {
+    insert_leads(_set: { lead_name: $lead_name, is_active: $is_active }) {
       id
     }
   }
