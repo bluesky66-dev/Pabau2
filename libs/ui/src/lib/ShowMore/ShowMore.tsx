@@ -19,8 +19,8 @@ export const ShowMore: React.FC<ShowMoreProps> = ({
     <div className={styles.showMore} onClick={showMoreHandler}>
       <div
         className={ClassNames(
-          styles.showMore__arrow,
-          showAll && styles.showMore__arrowRotated
+          styles.showMoreArrow,
+          showAll && styles.showMoreArrowRotated
         )}
       >
         <svg
@@ -36,7 +36,7 @@ export const ShowMore: React.FC<ShowMoreProps> = ({
           />
         </svg>
       </div>
-      <span className={styles.showMore__text}>
+      <span className={styles.showMoreText}>
         {' '}
         {showAll ? 'Hide' : `Show more (${length - 9})`}
       </span>

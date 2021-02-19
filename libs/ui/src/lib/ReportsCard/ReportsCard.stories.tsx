@@ -39,7 +39,7 @@ export default {
   },
 }
 
-const ReportsCardStory = ({ ...args }) => <ReportsCard {...args} />
+const ReportsCardStory:any = ({ ...args }) => <ReportsCard {...args} />
 
 export const Basic = ReportsCardStory.bind({})
 Basic.args = {

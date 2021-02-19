@@ -17,8 +17,8 @@ export const SingleReport: React.FC<SingleReportProps> = ({
 }) => {
   return (
     <div className={styles.singleReport}>
-      <div className={styles.singleReport__container}>
-        <div className={styles.singleReport__star}>
+      <div className={styles.singleReportContainer}>
+        <div className={styles.singleReportStar}>
           {favorite ? (
             <svg
               width="14"
@@ -47,13 +47,13 @@ export const SingleReport: React.FC<SingleReportProps> = ({
             </svg>
           )}
         </div>
-        <span className={styles.singleReport__code}>{reportCode}</span>
+        <span className={styles.singleReportCode}>{reportCode}</span>
         &nbsp;
         <span>-</span>
         &nbsp;
-        <span className={styles.singleReport__name}>{reportName}</span>
+        <span className={styles.singleReportName}>{reportName}</span>
       </div>
-      {isNew && <div className={styles.singleReport__new}>New</div>}
+      {isNew && <div className={styles.singleReportNew}>New</div>}
     </div>
   )
 }

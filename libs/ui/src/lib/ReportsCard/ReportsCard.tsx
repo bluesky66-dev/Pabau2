@@ -32,6 +32,7 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
   graphData,
 }) => {
   const [showAll, setShowAll] = useState(false)
+  const id = reports[0] ? reports[reports.length - 1].id + 1 : 1
 
   const config = {
     chart: {
@@ -84,14 +85,14 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
 
   return (
     <div className={styles.reportsCard}>
-      <h3 className={styles.reportsCard__title}>{catHeading}</h3>
-      <p className={styles.reportsCard__description}>{description}</p>
-      <div className={styles.reportsCard__graphDescContainer}>
+      <h3 className={styles.reportsCardTitle}>{catHeading}</h3>
+      <p className={styles.reportsCardDescription}>{description}</p>
+      <div className={styles.reportsCardGraphDescContainer}>
         <span>{graphDescription}</span>
         <span>{chartLabel}</span>
       </div>
 
-      <div className={styles.reportsCard__graph}>
+      <div className={styles.reportsCardGraph}>
         <ReactHighcharts config={config} />
       </div>
 
@@ -108,7 +109,7 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
                     favorite={report.favorite}
                   />
                   <ShowMore
-                    key={i + 1}
+                    key={id}
                     length={reports.length}
                     showAll={showAll}
                     showMoreHandler={showMoreHandler}
@@ -131,7 +132,7 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
             i > 8 ? (
               i < 10 ? (
                 <ShowMore
-                  key={i + 1}
+                  key={id}
                   length={reports.length}
                   showAll={showAll}
                   showMoreHandler={showMoreHandler}
@@ -153,8 +154,8 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
             ...reports,
             // eslint-disable-next-line unicorn/no-new-array
             ...new Array(10 - reports.length).fill(''),
-          ].map((report, i) =>
-            report ? (
+          ].map((report) => {
+            return report ? (
               <SingleReport
                 key={report.id}
                 reportCode={report.reportCode}
@@ -163,9 +164,9 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
                 favorite={report.favorite}
               />
             ) : (
-              <div key={i + 1} className={styles.reportsCard__cell}></div>
+              <div key={id} className={styles.reportsCardCell}></div>
             )
-          )}
+          })}
     </div>
   )
 }
