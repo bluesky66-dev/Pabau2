@@ -16,7 +16,7 @@ interface P {
   handleSearch?: (searchTerm: string) => void
 }
 
-const CommonHeader: FC<P> = (props) => {
+const CommonHeader: FC<P> = ({ handleSearch }) => {
   const [openMenuDrawer, setMenuDrawer] = useState<boolean>(false)
   const [openNotificationDrawer, setNotificationDrawer] = useState<boolean>(
     false
@@ -46,7 +46,7 @@ const CommonHeader: FC<P> = (props) => {
               />
             ) : (
               <div className={styles.search}>
-                <SetupSearchInput onChange={props.handleSearch} />
+                <SetupSearchInput onChange={handleSearch} />
               </div>
             )}
           </div>

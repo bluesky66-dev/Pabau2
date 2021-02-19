@@ -1,0 +1,67 @@
+ .PermissiononWrap {
+    .title {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+        align-items: center;
+        color: #3D3D46;
+    }
+    .desc {
+        font-size: 14px;
+        line-height: 18px;
+        color: #9292A3;
+        margin-top: 8px;
+        margin-bottom: 20px;
+    }
+    .CheckBtn {
+        text-align: right;
+        margin-bottom: 14px;
+    }
+    .maintablbox {
+       display: flex;
+       align-items: start;
+       margin-bottom: 30px;
+       @media only screen and (max-width:767px) {
+           display: unset;
+       }
+       .fildename {
+            flex: 1 28%;
+            max-width: 28%;
+            @media only screen and (max-width:767px) {
+                flex: 1 ;
+                max-width: 100%;
+                margin-bottom: 10px;
+            }
+            p {
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 18px;
+                color: #3D3D46;
+                margin: 0;
+                padding-bottom: 7px;
+            }
+            div{color: #9292A3;}
+        }
+        .manegercon {
+            flex: 1 72%;
+            max-width: 72%;
+            padding-left: 25px;
+            @media only screen and (max-width:767px) {
+                flex: 1 ;
+                max-width: 100%;
+                padding: 0;
+            }
+        
+            .swichContact {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+        .dataname {
+            display: flex;
+            p { color: #3D3D46; }
+            span {padding: 4px 8px;}
+        }
+    }
+ } 

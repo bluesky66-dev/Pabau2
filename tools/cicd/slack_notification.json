@@ -7,19 +7,6 @@
         "type": "mrkdwn",
         "text": "(text goes here)"
       }
-    },
-    {
-      "type": "actions",
-      "elements": [
-        {
-          "type": "button",
-          "text": {
-            "type": "plain_text",
-            "text": "Deploy to crm.new.pabau.com",
-            "emoji": false
-          }
-        }
-      ]
     }
   ]
 }

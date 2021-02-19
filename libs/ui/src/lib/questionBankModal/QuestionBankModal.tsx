@@ -1,16 +1,10 @@
 import React, { FC, useState } from 'react'
-import { useMedia } from 'react-use'
 import { Tabs, Row, Col } from 'antd'
-import { LeftOutlined } from '@ant-design/icons'
-
 import { IQuestionOptions } from '../questionBank/QuestionBank'
-
 import { menuOptions } from '../questionBank/mock'
-
 import QuestionBank from '../questionBank/QuestionBank'
 import Button from '../button/button'
-import BasicModal from '../modal/basicmodal'
-
+import BasicModal, { BasicModalProps } from '../modal/basicmodal'
 import customStyles from './QuestionBankModal.module.less'
 
 interface IMenuOption {
@@ -18,14 +12,14 @@ interface IMenuOption {
   value: string
 }
 
-interface P {
+interface P extends BasicModalProps {
   title: string
   questions: Array<IQuestionOptions>
   options: Array<IMenuOption>
   onAdd: (questions: Array<IQuestionOptions> | undefined) => void
 }
 
-const QuestionBankModal: FC<P> = ({
+export const QuestionBankModal: FC<P> = ({
   title,
   questions,
   options,
@@ -41,13 +35,11 @@ const QuestionBankModal: FC<P> = ({
     questions
   )
 
-  const isMobile = useMedia('(max-width: 768px)', false)
-
   const handleChange = (e, key: number) => {
-    const data = menuOptions.filter(({ key }) => key === e.key)
+    const data = menuOptions.find(({ key }) => key === e.key)
     setQuestionList(
       questionList?.map((i) =>
-        i.key === key ? { ...i, selectedValue: data[0].value } : i
+        i.key === key ? { ...i, selectedValue: data?.value } : i
       )
     )
   }
@@ -80,22 +72,20 @@ const QuestionBankModal: FC<P> = ({
             </Row>
           ))}
         </div>
-        <Row>
-          <Col span={24} className={customStyles.btnWrap}>
-            <Button
-              className={
-                checkedQuestions?.length === 0
-                  ? customStyles.disabledBtn
-                  : customStyles.addButton
-              }
-              disabled={checkedQuestions?.length === 0}
-              type={'primary'}
-              onClick={() => onAdd(checkedQuestions)}
-            >
-              + Add ({checkedQuestions?.length}) Questions
-            </Button>
-          </Col>
-        </Row>
+        <div className={customStyles.btnWrap}>
+          <Button
+            className={
+              checkedQuestions?.length === 0
+                ? customStyles.disabledBtn
+                : customStyles.addButton
+            }
+            disabled={checkedQuestions?.length === 0}
+            type={'primary'}
+            onClick={() => onAdd(checkedQuestions)}
+          >
+            + Add ({checkedQuestions?.length}) Questions
+          </Button>
+        </div>
       </>
     )
   }
@@ -120,29 +110,17 @@ const QuestionBankModal: FC<P> = ({
   }
 
   return (
-    <div className={customStyles.wrapperQuestion}>
-      {isMobile ? (
-        <div className={customStyles.mobDevice}>
-          <div className={customStyles.queBank}>
-            <LeftOutlined />
-            Question Bank
-          </div>
-          {renderContent()}
-        </div>
-      ) : (
-        <BasicModal
-          {...props}
-          title={title}
-          modalWidth={682}
-          footer={false}
-          wrapClassName={customStyles.questionBankModal}
-        >
-          <div className={customStyles.questionBankModalBody}>
-            {renderContent()}
-          </div>
-        </BasicModal>
-      )}
-    </div>
+    <BasicModal
+      {...props}
+      title={title}
+      modalWidth={682}
+      footer={false}
+      wrapClassName={customStyles.questionBankModal}
+    >
+      <div className={customStyles.questionBankModalBody}>
+        {renderContent()}
+      </div>
+    </BasicModal>
   )
 }
 
