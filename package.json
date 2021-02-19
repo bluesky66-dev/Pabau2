@@ -1,6 +1,6 @@
 {
   "name": "pabau",
-  "version": "2.0.147",
+  "version": "2.0.150",
   "license": "Copyright Hambrand Technologies Ltd",
   "bump-rebuild-all": 5,
   "scripts": {
@@ -86,7 +86,7 @@
     "react-beautiful-dnd": "^13.0.0",
     "react-device-detect": "^1.15.0",
     "react-dom": "17.0.1",
-    "react-google-places-autocomplete": "2.3.2",
+    "react-google-places-autocomplete": "3.1.1",
     "react-grid-layout": "^1.2.0",
     "react-highlight-words": "^0.17.0",
     "react-i18next": "^11.8.6",

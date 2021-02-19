@@ -33,6 +33,10 @@ interface P {
   aggregateQuery?: DocumentNode
   tableSearch?: boolean
   updateOrderQuery?: DocumentNode
+  showNotificationBanner?: boolean
+  createPage?: boolean
+  notificationBanner?: React.ReactNode
+  createPageOnClick?(): void
 }
 
 const CrudTable: FC<P> = ({
@@ -44,6 +48,10 @@ const CrudTable: FC<P> = ({
   aggregateQuery,
   tableSearch = true,
   updateOrderQuery,
+  showNotificationBanner = false,
+  notificationBanner,
+  createPage = false,
+  createPageOnClick,
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [isActive, setIsActive] = useState(true)
@@ -317,9 +325,17 @@ const CrudTable: FC<P> = ({
                 </Link>
                 <p> {schema.full || schema.short} </p>
               </div>
-              {addQuery && (
+              {addQuery && !createPage ? (
                 <AddButton
                   onClick={createNew}
+                  onFilterSource={onFilterMarketingSource}
+                  onSearch={onSearch}
+                  schema={schema}
+                  tableSearch={tableSearch}
+                />
+              ) : (
+                <AddButton
+                  onClick={createPageOnClick}
                   onFilterSource={onFilterMarketingSource}
                   onSearch={onSearch}
                   schema={schema}
@@ -342,18 +358,7 @@ const CrudTable: FC<P> = ({
         )}
 
         <Layout>
-          {schema?.shemaType === 'PaymentTypes' && (
-            <div style={{ marginBottom: 32 }}>
-              <NotificationBanner
-                title="Enable online payment"
-                desc="Activate payments with Fresha to benefit from tip collection during and after sale and get access to no show protection, payment terminals, safe online payments and many more."
-                imgPath={PaymentNotificationImage}
-                allowClose={true}
-                setHide={[hideBanner, setHideBanner]}
-              />
-            </div>
-          )}
-
+          {showNotificationBanner && notificationBanner}
           <div
             className={classNames(
               styles.tableMainHeading,
@@ -369,9 +374,17 @@ const CrudTable: FC<P> = ({
               />
               <Title>{schema.full || schema.short}</Title>
             </div>
-            {addQuery && (
+            {addQuery && !createPage ? (
               <AddButton
                 onClick={createNew}
+                onFilterSource={onFilterMarketingSource}
+                onSearch={onSearch}
+                schema={schema}
+                tableSearch={tableSearch}
+              />
+            ) : (
+              <AddButton
+                onClick={createPageOnClick}
                 onFilterSource={onFilterMarketingSource}
                 onSearch={onSearch}
                 schema={schema}
