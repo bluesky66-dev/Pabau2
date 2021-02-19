@@ -1,343 +1,349 @@
 .voucherCardMain {
+  :global {
+    .flip-card {
+      background-color: transparent;
+      min-width: 300px;
+      min-height: 150px;
+      perspective: 1000px;
+      border-radius: 7.5px;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+      border-radius: 7.5px;
+    }
+
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 7.5px;
+    }
+
+    .flip-card-front {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-color: transparent !important;
+      border-radius: 10px;
+
+      .dot1,
+      .dot2 {
+        border-color: transparent !important;
+      }
+    }
+
+    .flip-card-back {
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      background: #ffffff !important;
+      border-style: solid;
+      border-width: 2px;
+      transform: rotateY(180deg);
+    }
+
+    .scene {
+      min-width: 250px;
+      min-height: 125px;
+      perspective: 1000px;
+    }
+
+    .card {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+      border-radius: 7.5px;
+    }
+
+    .card:hover.is-flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card__face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 7.5px;
+      border-width: 2px;
+      border-style: solid;
+    }
+
+    .card__face--front {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-color: transparent !important;
+      border-radius: 10px;
+
+      .dot1,
+      .dot2 {
+        border-color: transparent !important;
+      }
+    }
+    .flip-card-front.valentine {
+      background-image: url('./assets/valentine.png');
+      background-blend-mode: lighten;
+
+      h1,
+      h2,
+      p,
+      span,
+      button {
+        color: #d12c28 !important;
+      }
+      button:first-child {
+        border-color: #d12c28 !important;
+      }
+    }
+
+    .flip-card-front.birthday {
+      background-image: url('./assets/birthday.png');
+      background-blend-mode: lighten;
+    }
+
+    .flip-card-front.flowers {
+      background-image: url('./assets/flowers.png');
+      background-blend-mode: lighten;
+    }
+
+    .card__face--back {
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      background: #ffffff !important;
+      transform: rotateY(180deg);
+    }
+  }
+
+  .dots {
+    position: absolute;
+    height: 100%;
+    width: 100%;
 
     :global {
-        .flip-card {
-            background-color: transparent;
-            min-width: 300px;
-            min-height: 150px;
-            perspective: 1000px;
-            border-radius: 7.5px;
-        }
-          
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-            border-radius: 7.5px;
-        }
-          
-        .flip-card:hover .flip-card-inner {
-            transform: rotateY(180deg);
-        }
-          
-        .flip-card-front, .flip-card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: 7.5px;
-        }
-          
-        .flip-card-front {
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            border-color: transparent !important;
-            border-radius: 10px;
-
-            .dot1, .dot2 {
-                border-color: transparent !important;
-            }
-        }
-          
-        .flip-card-back {
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            background: #ffffff !important;
-            border-style: solid;
-            border-width: 2px;
-            transform: rotateY(180deg);
-        }
-        
-        .scene {
-            min-width: 250px;
-            min-height: 125px;
-            perspective: 1000px;
-        }
-          
-        .card {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            transition: transform 0.6s;
-            border-radius: 7.5px;
-        }
-          
-        .card:hover.is-flipped {
-            transform: rotateY(180deg);
-        }
-          
-        .card__face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 7.5px;
-            border-width: 2px;
-            border-style: solid;
-        }
-        
-        .card__face--front {
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            border-color: transparent !important;
-            border-radius: 10px;
-
-            .dot1, .dot2 {
-                border-color: transparent !important;
-            }
-        }
-        .flip-card-front.valentine {
-            background-image: url('./assets/valentine.png');
-            background-blend-mode: lighten;
-
-            h1, h2, p, span, button {
-                color: #D12C28 !important;
-            }
-            button:first-child {
-                border-color: #D12C28 !important;
-            }
-        }
-
-        .flip-card-front.birthday {
-            background-image: url('./assets/birthday.png');
-            background-blend-mode: lighten;
-        }
-
-        .flip-card-front.flowers {
-            background-image: url('./assets/flowers.png');
-            background-blend-mode: lighten;
-        }
-          
-        .card__face--back {
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            background: #ffffff !important;
-            transform: rotateY(180deg);
-        }        
-    }
-
-    .dots {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-
-        :global {
-            .dotsInner {
-                position: relative;
-                height: 100%;
-                width: 100%;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-    
-                .dot1, .dot2 {
-                    min-height: 10px;
-                    min-width: 5px;
-                    border-style: solid;
-                    border-width: 2px;
-                    background-color: #ffffff;
-                }
-    
-                .dot1 {
-                    border-top-right-radius: 100px;
-                    border-bottom-right-radius: 100px;
-                    margin-left: -1.75px;
-                    border-left: none;
-                }
-                .dot2 {
-                    border-top-left-radius: 100px;
-                    border-bottom-left-radius: 100px;
-                    margin-right: -1.5px;
-                    border-right: none;
-                }
-            }
-        }
-    }
-
-    .pRelative {
+      .dotsInner {
         position: relative;
-        width: 100%;
         height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .dot1,
+        .dot2 {
+          min-height: 10px;
+          min-width: 5px;
+          border-style: solid;
+          border-width: 2px;
+          background-color: #ffffff;
+        }
+
+        .dot1 {
+          border-top-right-radius: 100px;
+          border-bottom-right-radius: 100px;
+          margin-left: -1.75px;
+          border-left: none;
+        }
+        .dot2 {
+          border-top-left-radius: 100px;
+          border-bottom-left-radius: 100px;
+          margin-right: -1.5px;
+          border-right: none;
+        }
+      }
+    }
+  }
+
+  .pRelative {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .frontFaceContent {
+    height: 100%;
+    width: 100%;
+    padding: 15px 10px;
+    position: absolute;
+
+    .buttonsRow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      min-height: 32px;
+
+      :global {
+        div:first-child {
+          display: flex;
+          justify-content: flex-start;
+          padding-left: 20px;
+          button {
+            border: 2px solid #fff;
+            color: #fff;
+            background-color: transparent;
+            font-weight: normal;
+            font-size: 14px;
+            border-radius: 7.5px;
+            padding: 5px 15px;
+            line-height: 10px;
+          }
+          button:hover {
+            color: gray !important;
+            background-color: #fff;
+          }
+        }
+        div:last-child {
+          display: flex;
+          justify-content: flex-start;
+
+          button {
+            background-color: transparent;
+            border-color: transparent;
+            color: #ffffff;
+          }
+        }
+      }
     }
 
-    .frontFaceContent {
-        height: 100%;
-        width: 100%;
-        padding: 15px 10px;
-        position: absolute;
+    .middleRow {
+      display: flex;
+      justify-content: center;
 
-        .buttonsRow {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            min-height: 32px;
+      :global {
+        div {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
 
-            :global {
-                div:first-child {
-                    display: flex;
-                    justify-content: flex-start;
-                    padding-left: 20px;
-                    button {
-                        border: 2px solid #fff;
-                        color: #fff;
-                        background-color: transparent;
-                        font-weight: normal;
-                        font-size: 14px;
-                        border-radius: 7.5px;
-                        padding: 5px 15px;
-                        line-height: 10px;
-                    }
-                    button:hover {
-                        color: gray !important;
-                        background-color: #fff;
-                    }
-                }
-                div:last-child {
-                    display: flex;
-                    justify-content: flex-start;
+          h1 {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 22px;
+            color: #ffffff;
+            margin-bottom: 10px;
+          }
 
-                    button {
-                        background-color: transparent;
-                        border-color: transparent;
-                        color: #ffffff;
-                    }
-                }
-            }
+          p {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 16px;
+            color: #ffffff;
+            opacity: 0.7;
+          }
         }
-
-        .middleRow {
-            display: flex;
-            justify-content: center;
-
-            :global {
-                div {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-
-                    h1 {
-                        font-style: normal;
-                        font-weight: 600;
-                        font-size: 24px;
-                        line-height: 22px;
-                        color: #ffffff;
-                        margin-bottom: 10px;
-                    }
-
-                    p {
-                        font-style: normal;
-                        font-weight: 600;
-                        font-size: 14px;
-                        line-height: 16px;
-                        color: #FFFFFF;
-                        opacity: 0.7;
-                    }
-                }
-            }
-        }
-
-        .lastRow {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            padding: 20px 30px 0px 30px;
-
-            .generalDetails {
-                display: flex;
-                justify-content: space-evenly;
-                align-items: flex-start;
-                flex-direction: column;
-                :global {
-                    h1 {
-                        font-weight: 600;
-                        font-size: 22px;
-                        line-height: 24px;
-                        color: #FFFFFF;
-                        margin: 5px 0px 5px 0px;
-                    }
-                    p {
-                        font-weight: 600;
-                        font-size: 12px;
-                        line-height: 18px;
-                        color: #FFFFFF;
-                        opacity: 0.6;
-                        margin: 0px;
-                    }
-                }
-            }
-
-            .soldDetails {
-                display: flex;
-                justify-content: space-evenly;
-                align-items: flex-end;
-                flex-direction: column;
-                align-self: flex-end;
-
-                :global {
-                    h1 {
-                        font-style: normal;
-                        font-weight: 600;
-                        font-size: 22px;
-                        line-height: 24px;
-                        color: #FFFFFF;
-                        margin: 5px 0px;
-                    }
-                    p {
-                        font-weight: 600;
-                        font-size: 12px;
-                        line-height: 18px;
-                        color: #FFFFFF;
-                        opacity: 0.6;
-                        margin: 0px;
-                    }
-                }
-            }
-        }
+      }
     }
 
-    .backFaceContent {
-        height: 100%;
-        width: 100%;
+    .lastRow {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 20px 30px 0px 30px;
+
+      .generalDetails {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        flex-direction: column;
+        :global {
+          h1 {
+            font-weight: 600;
+            font-size: 22px;
+            line-height: 24px;
+            color: #ffffff;
+            margin: 5px 0px 5px 0px;
+          }
+          p {
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 18px;
+            color: #ffffff;
+            opacity: 0.6;
+            margin: 0px;
+          }
+        }
+      }
+
+      .soldDetails {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-end;
+        flex-direction: column;
+        align-self: flex-end;
 
         :global {
-            div {
-                display: flex;
-                justify-content: space-evenly;
-                align-items: center;
-                flex-direction: column;
-                height: 100%;
-                flex-wrap: wrap;
-                padding: 30px 40px;
-
-                h1 {
-                    font-style: normal;
-                    font-weight: 600;
-                    font-size: 22px;
-                    line-height: 24px;
-                    color: #3D3D46;
-                }
-                p {
-                    font-style: normal;
-                    font-weight: normal;
-                    font-size: 18px;
-                    line-height: 20px;
-                    text-align: center;
-                    color: #9292A3;
-                }
-            }
+          h1 {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 22px;
+            line-height: 24px;
+            color: #ffffff;
+            margin: 5px 0px;
+          }
+          p {
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 18px;
+            color: #ffffff;
+            opacity: 0.6;
+            margin: 0px;
+          }
         }
+      }
     }
+  }
+
+  .backFaceContent {
+    height: 100%;
+    width: 100%;
+
+    :global {
+      div {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+        height: 100%;
+        flex-wrap: wrap;
+        padding: 30px 40px;
+
+        h1 {
+          font-style: normal;
+          font-weight: 600;
+          font-size: 22px;
+          line-height: 24px;
+          color: #3d3d46;
+        }
+        p {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 18px;
+          line-height: 20px;
+          text-align: center;
+          color: #9292a3;
+        }
+      }
+    }
+  }
 }

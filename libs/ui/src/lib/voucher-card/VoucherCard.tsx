@@ -2,8 +2,6 @@ import React, { FC, useRef } from 'react'
 import { Button, DotButton } from '@pabau/ui'
 import { DeleteOutlined } from '@ant-design/icons'
 import styles from './VoucherCard.module.less'
-
-/* eslint-disable-next-line */
 export interface VoucherCardProps {
   cardWidth: number
   backgroundColor1: string
@@ -22,6 +20,7 @@ export interface VoucherCardProps {
   voucherRelation: string
   voucherRelationLabel: string
   currencyType: string
+  onMenuClick: () => void
 }
 
 export const VoucherCard: FC<VoucherCardProps> = ({
@@ -42,17 +41,17 @@ export const VoucherCard: FC<VoucherCardProps> = ({
   voucherRelation,
   voucherRelationLabel,
   currencyType,
-  ...rest
+  onMenuClick,
 }) => {
   const cardRef = useRef<HTMLDivElement>(null)
-
+  const voucherTypes = ['flowers', 'valentine', 'birthday']
   const DotMenuOptions = [
     {
       key: 2,
       icon: <DeleteOutlined />,
       label: 'Delete',
       onClick: () => {
-        console.log('DELETE CLICKED')
+        onMenuClick
       },
     },
   ]
@@ -77,10 +76,7 @@ export const VoucherCard: FC<VoucherCardProps> = ({
           <div
             className={`flip-card-front ${voucherType}`}
             style={
-              !voucherType &&
-              voucherType !== 'flowers' &&
-              voucherType !== 'valentine' &&
-              voucherType !== 'birthday'
+              !voucherType && !voucherTypes.includes(voucherType)
                 ? { ...cardFaceBgColor }
                 : {}
             }
