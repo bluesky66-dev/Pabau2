@@ -2013,10 +2013,11 @@ columns and relationships of "family_relationships"
 """
 type family_relationships {
   created_at: timestamptz!
-  id: Int!
+  id: uuid!
   is_active: Boolean!
-  name: String!
   order: Int!
+  relation_name: String!
+  reserve_relation: String
   updated_at: timestamptz!
 }
 
@@ -2047,7 +2048,6 @@ type family_relationships_aggregate_fields {
 
 """aggregate avg on columns"""
 type family_relationships_avg_fields {
-  id: Float
   order: Float
 }
 
@@ -2059,10 +2059,11 @@ input family_relationships_bool_exp {
   _not: family_relationships_bool_exp
   _or: [family_relationships_bool_exp!]
   created_at: timestamptz_comparison_exp
-  id: Int_comparison_exp
+  id: uuid_comparison_exp
   is_active: Boolean_comparison_exp
-  name: String_comparison_exp
   order: Int_comparison_exp
+  relation_name: String_comparison_exp
+  reserve_relation: String_comparison_exp
   updated_at: timestamptz_comparison_exp
 }
 
@@ -2086,25 +2087,28 @@ input type for inserting data into table "family_relationships"
 """
 input family_relationships_insert_input {
   is_active: Boolean
-  name: String
   order: Int
+  relation_name: String
+  reserve_relation: String
 }
 
 """aggregate max on columns"""
 type family_relationships_max_fields {
   created_at: timestamptz
-  id: Int
-  name: String
+  id: uuid
   order: Int
+  relation_name: String
+  reserve_relation: String
   updated_at: timestamptz
 }
 
 """aggregate min on columns"""
 type family_relationships_min_fields {
   created_at: timestamptz
-  id: Int
-  name: String
+  id: uuid
   order: Int
+  relation_name: String
+  reserve_relation: String
   updated_at: timestamptz
 }
 
@@ -2133,14 +2137,15 @@ input family_relationships_order_by {
   created_at: order_by
   id: order_by
   is_active: order_by
-  name: order_by
   order: order_by
+  relation_name: order_by
+  reserve_relation: order_by
   updated_at: order_by
 }
 
 """primary key columns input for table: family_relationships"""
 input family_relationships_pk_columns_input {
-  id: Int!
+  id: uuid!
 }
 
 """
@@ -2157,10 +2162,13 @@ enum family_relationships_select_column {
   is_active
 
   """column name"""
-  name
+  order
 
   """column name"""
-  order
+  relation_name
+
+  """column name"""
+  reserve_relation
 
   """column name"""
   updated_at
@@ -2171,31 +2179,28 @@ input type for updating data in table "family_relationships"
 """
 input family_relationships_set_input {
   is_active: Boolean
-  name: String
   order: Int
+  relation_name: String
+  reserve_relation: String
 }
 
 """aggregate stddev on columns"""
 type family_relationships_stddev_fields {
-  id: Float
   order: Float
 }
 
 """aggregate stddev_pop on columns"""
 type family_relationships_stddev_pop_fields {
-  id: Float
   order: Float
 }
 
 """aggregate stddev_samp on columns"""
 type family_relationships_stddev_samp_fields {
-  id: Float
   order: Float
 }
 
 """aggregate sum on columns"""
 type family_relationships_sum_fields {
-  id: Int
   order: Int
 }
 
@@ -2207,27 +2212,27 @@ enum family_relationships_update_column {
   is_active
 
   """column name"""
-  name
+  order
 
   """column name"""
-  order
+  relation_name
+
+  """column name"""
+  reserve_relation
 }
 
 """aggregate var_pop on columns"""
 type family_relationships_var_pop_fields {
-  id: Float
   order: Float
 }
 
 """aggregate var_samp on columns"""
 type family_relationships_var_samp_fields {
-  id: Float
   order: Float
 }
 
 """aggregate variance on columns"""
 type family_relationships_variance_fields {
-  id: Float
   order: Float
 }
 
@@ -2251,6 +2256,39 @@ type issuing_company {
   updated_at: timestamptz!
   vat_registered: Boolean!
   website: String
+}
+
+"""
+aggregated selection of "issuing_company"
+"""
+type issuing_company_aggregate {
+  aggregate: issuing_company_aggregate_fields
+  nodes: [issuing_company!]!
+}
+
+"""
+aggregate fields of "issuing_company"
+"""
+type issuing_company_aggregate_fields {
+  avg: issuing_company_avg_fields
+  count(columns: [issuing_company_select_column!], distinct: Boolean): Int!
+  max: issuing_company_max_fields
+  min: issuing_company_min_fields
+  stddev: issuing_company_stddev_fields
+  stddev_pop: issuing_company_stddev_pop_fields
+  stddev_samp: issuing_company_stddev_samp_fields
+  sum: issuing_company_sum_fields
+  var_pop: issuing_company_var_pop_fields
+  var_samp: issuing_company_var_samp_fields
+  variance: issuing_company_variance_fields
+}
+
+"""aggregate avg on columns"""
+type issuing_company_avg_fields {
+  invoice_starting_number: Float
+  order: Float
+  phone: Float
+  post_code: Float
 }
 
 """
@@ -2312,6 +2350,42 @@ input issuing_company_insert_input {
   post_code: numeric
   street: String
   vat_registered: Boolean
+  website: String
+}
+
+"""aggregate max on columns"""
+type issuing_company_max_fields {
+  city: String
+  country: String
+  created_at: timestamptz
+  id: uuid
+  invoice_prefix: String
+  invoice_starting_number: numeric
+  invoice_template: String
+  name: String
+  order: Int
+  phone: numeric
+  post_code: numeric
+  street: String
+  updated_at: timestamptz
+  website: String
+}
+
+"""aggregate min on columns"""
+type issuing_company_min_fields {
+  city: String
+  country: String
+  created_at: timestamptz
+  id: uuid
+  invoice_prefix: String
+  invoice_starting_number: numeric
+  invoice_template: String
+  name: String
+  order: Int
+  phone: numeric
+  post_code: numeric
+  street: String
+  updated_at: timestamptz
   website: String
 }
 
@@ -2432,6 +2506,38 @@ input issuing_company_set_input {
   website: String
 }
 
+"""aggregate stddev on columns"""
+type issuing_company_stddev_fields {
+  invoice_starting_number: Float
+  order: Float
+  phone: Float
+  post_code: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type issuing_company_stddev_pop_fields {
+  invoice_starting_number: Float
+  order: Float
+  phone: Float
+  post_code: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type issuing_company_stddev_samp_fields {
+  invoice_starting_number: Float
+  order: Float
+  phone: Float
+  post_code: Float
+}
+
+"""aggregate sum on columns"""
+type issuing_company_sum_fields {
+  invoice_starting_number: numeric
+  order: Int
+  phone: numeric
+  post_code: numeric
+}
+
 """
 update columns of table "issuing_company"
 """
@@ -2474,6 +2580,30 @@ enum issuing_company_update_column {
 
   """column name"""
   website
+}
+
+"""aggregate var_pop on columns"""
+type issuing_company_var_pop_fields {
+  invoice_starting_number: Float
+  order: Float
+  phone: Float
+  post_code: Float
+}
+
+"""aggregate var_samp on columns"""
+type issuing_company_var_samp_fields {
+  invoice_starting_number: Float
+  order: Float
+  phone: Float
+  post_code: Float
+}
+
+"""aggregate variance on columns"""
+type issuing_company_variance_fields {
+  invoice_starting_number: Float
+  order: Float
+  phone: Float
+  post_code: Float
 }
 
 """
@@ -3732,7 +3862,7 @@ type mutation_root {
   """
   delete single row from the table: "family_relationships"
   """
-  delete_family_relationships_by_pk(id: Int!): family_relationships
+  delete_family_relationships_by_pk(id: uuid!): family_relationships
 
   """
   delete data from the table: "issuing_company"
@@ -5351,7 +5481,7 @@ type query_root {
   """
   fetch data from the table: "family_relationships" using primary key columns
   """
-  family_relationships_by_pk(id: Int!): family_relationships
+  family_relationships_by_pk(id: uuid!): family_relationships
 
   """
   fetch data from the table: "issuing_company"
@@ -5372,6 +5502,26 @@ type query_root {
     """filter the rows returned"""
     where: issuing_company_bool_exp
   ): [issuing_company!]!
+
+  """
+  fetch aggregated fields from the table: "issuing_company"
+  """
+  issuing_company_aggregate(
+    """distinct select on columns"""
+    distinct_on: [issuing_company_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [issuing_company_order_by!]
+
+    """filter the rows returned"""
+    where: issuing_company_bool_exp
+  ): issuing_company_aggregate!
 
   """fetch data from the table: "issuing_company" using primary key columns"""
   issuing_company_by_pk(id: uuid!): issuing_company
@@ -5977,7 +6127,7 @@ type subscription_root {
   """
   fetch data from the table: "family_relationships" using primary key columns
   """
-  family_relationships_by_pk(id: Int!): family_relationships
+  family_relationships_by_pk(id: uuid!): family_relationships
 
   """
   fetch data from the table: "issuing_company"
@@ -5998,6 +6148,26 @@ type subscription_root {
     """filter the rows returned"""
     where: issuing_company_bool_exp
   ): [issuing_company!]!
+
+  """
+  fetch aggregated fields from the table: "issuing_company"
+  """
+  issuing_company_aggregate(
+    """distinct select on columns"""
+    distinct_on: [issuing_company_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [issuing_company_order_by!]
+
+    """filter the rows returned"""
+    where: issuing_company_bool_exp
+  ): issuing_company_aggregate!
 
   """fetch data from the table: "issuing_company" using primary key columns"""
   issuing_company_by_pk(id: uuid!): issuing_company

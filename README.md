@@ -32,7 +32,7 @@ This monorepo contains all of our code (with the exception of `/.env`). The mono
 
 ### Linux
 
-```bash
+```bashf
 curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 sudo apt install -y nodejs gcc g++ make curl build-essential
 mkdir ~/.npm-global

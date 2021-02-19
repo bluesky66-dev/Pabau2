@@ -10,6 +10,7 @@ interface P {
   editQuery: DocumentNode
   aggregateQuery?: DocumentNode
   tableSearch?: boolean
+  filter?: boolean
   updateOrderQuery?: DocumentNode
   showNotificationBanner?: boolean
   createPage?: boolean
