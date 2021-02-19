@@ -7,8 +7,21 @@ import { useRouter } from 'next/router'
 export interface LeadsProps {}
 
 const LIST_QUERY = gql`
-  query leads($isActive: Boolean = true, $offset: Int = 0, $limit: Int = 10) {
-    leads(offset: $offset, limit: $limit, order_by: { id: desc }) {
+  query leads(
+    $isActive: Boolean = true
+    $offset: Int
+    $limit: Int
+    $searchTerm: String = ""
+  ) {
+    leads(
+      offset: $offset
+      limit: $limit
+      order_by: { order: desc }
+      where: {
+        is_active: { _eq: $isActive }
+        _or: [{ _and: [{ lead_name: { _ilike: $searchTerm } }] }]
+      }
+    ) {
       id
       lead_name
       order
@@ -19,7 +32,7 @@ const LIST_QUERY = gql`
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query leads_aggregate($isActive: Boolean = true, $searchTerm: String = "") {
+  query leads_aggregate($searchTerm: String = "") {
     leads_aggregate(
       where: { _or: [{ _and: [{ lead_name: { _ilike: $searchTerm } }] }] }
     ) {
@@ -30,8 +43,9 @@ const LIST_AGGREGATE_QUERY = gql`
   }
 `
 const DELETE_MUTATION = gql`
-  mutation delete_leads($id: uuid!) {
-    delete_leads(where: { id: { _eq: $id } }) {
+  mutation delete_leads_by_pk($id: uuid!) {
+    delete_leads_by_pk(id: $id) {
+      __typename
       id
     }
   }
@@ -52,18 +66,19 @@ const ADD_MUTATION = gql`
   }
 `
 const EDIT_MUTATION = gql`
-  mutation update_leads(
+  mutation update_leads_by_pk(
     $id: uuid!
     $lead_name: String
     $is_active: Boolean = true
   ) {
-    update_leads(
-      where: { id: { _eq: $id } }
+    update_leads_by_pk(
+      pk_columns: { id: $id }
       _set: { lead_name: $lead_name, is_active: $is_active }
     ) {
-      returning {
-        id
-      }
+      __typename
+      id
+      is_active
+      order
     }
   }
 `
@@ -71,15 +86,13 @@ const EDIT_MUTATION = gql`
  * TODO refactor UPDATE_ORDER_MUTATION with legacy db
  */
 const UPDATE_ORDER_MUTATION = gql`
-  mutation update_marketing_source_order($id: uuid!, $order: Int) {
-    update_marketing_source(
-      where: { id: { _eq: $id } }
-      _set: { order: $order }
-    ) {
+  mutation update_leads_order($id: uuid!, $order: Int) {
+    update_leads(where: { id: { _eq: $id } }, _set: { order: $order }) {
       affected_rows
     }
   }
 `
+
 const schema: Schema = {
   full: 'Leads View',
   fullLower: 'leads view',

@@ -122,6 +122,7 @@ const CrudTable: FC<P> = ({
   })
 
   useEffect(() => {
+    console.log('dara', data)
     if (data) setSourceData(data)
     if (aggregateData)
       setPaginateData({
