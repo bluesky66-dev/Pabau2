@@ -1,7 +1,9 @@
 import { gql } from '@apollo/client'
 import { NextPage } from 'next'
-import React from 'react'
+import React, { useState } from 'react'
 import CrudLayout from '../../components/CrudLayout/CrudLayout'
+import { NotificationBanner } from '@pabau/ui'
+import PaymentNotificationImage from '../../assets/images/payment-type-notify-image.png'
 
 const LIST_QUERY = gql`
   query payment_types(
@@ -134,42 +136,42 @@ const schema: Schema = {
       error: 'While deleting a payment type',
     },
   },
-  deleteDescField: 'payment_type',
   tooltip: 'payment type',
   fields: {
     payment_type: {
+      full: '',
+      fullLower: '',
+      short: '',
+      shortLower: '',
+      radio: [
+        {
+          label: 'Money',
+          value: 'Money',
+        },
+        {
+          label: 'Non Money',
+          value: 'Non Money',
+        },
+        {
+          label: 'Account Credit',
+          value: 'Account Credit',
+        },
+      ],
+      type: 'radio-group',
+      defaultvalue: 'Money',
+      visible: false,
+    },
+    name: {
       full: 'Payment Type',
       fullLower: 'payment type',
       short: 'Payment Type',
       shortLower: 'payment type',
-      radio: [
-        {
-          label: 'Money',
-          value: 'Cash',
-        },
-        {
-          label: 'Non Money',
-          value: 'Card',
-        },
-        {
-          label: 'Account Credit',
-          value: 'Loyalty',
-        },
-      ],
-      type: 'radio-group',
-      defaultvalue: 'Cash',
-    },
-    name: {
-      full: 'Name',
-      fullLower: 'name',
-      short: 'Name',
-      shortLower: 'name',
       min: 2,
       example: 'Beauty Scheme',
       // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
       type: 'string',
-      visible: false,
+      visible: true,
     },
     description: {
       full: 'Description',
@@ -203,6 +205,7 @@ const schema: Schema = {
 }
 
 export const PaymentTypes: NextPage = () => {
+  const [showNotificationBanner, setShowNotificationBanner] = useState(false)
   return (
     <CrudLayout
       schema={schema}
@@ -213,6 +216,16 @@ export const PaymentTypes: NextPage = () => {
       editQuery={EDIT_MUTATION}
       aggregateQuery={LIST_AGGREGATE_QUERY}
       updateOrderQuery={UPDATE_ORDER_MUTATION}
+      showNotificationBanner={true}
+      notificationBanner={
+        <NotificationBanner
+          title="Enable online payment"
+          desc="Activate payments with Fresha to benefit from tip collection during and after sale and get access to no show protection, payment terminals, safe online payments and many more."
+          imgPath={PaymentNotificationImage}
+          allowClose={true}
+          setHide={[showNotificationBanner, setShowNotificationBanner]}
+        />
+      }
     />
   )
 }

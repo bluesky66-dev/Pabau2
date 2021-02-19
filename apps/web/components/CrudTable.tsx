@@ -5,7 +5,6 @@ import {
   MobileHeader,
   Notification,
   NotificationType,
-  NotificationBanner,
 } from '@pabau/ui'
 import React, { FC, useEffect, useState } from 'react'
 import { DocumentNode, useMutation } from '@apollo/client'
@@ -21,7 +20,6 @@ import Layout from './Layout/Layout'
 import { LeftOutlined } from '@ant-design/icons'
 import classNames from 'classnames'
 import Link from 'next/link'
-import PaymentNotificationImage from '../assets/images/payment-type-notify-image.png'
 
 const { Title } = Typography
 interface P {
@@ -56,7 +54,6 @@ const CrudTable: FC<P> = ({
   const [isLoading, setIsLoading] = useState(true)
   const [isActive, setIsActive] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
-  const [hideBanner, setHideBanner] = useState(false)
   // eslint-disable-next-line graphql/template-strings
   const [editMutation] = useMutation(editQuery, {
     onCompleted(data) {
