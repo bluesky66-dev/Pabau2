@@ -48,6 +48,7 @@ const LIST_QUERY = gql`
       invoice_template
       invoice_prefix
       invoice_starting_number
+      vat_registered
     }
   }
 `
@@ -199,6 +200,22 @@ interface inputTypes {
   invoiceTemplate?: string
   invoicePrefix?: string
   invoiceStartingNumber?: string
+  vatRegistered?: boolean
+}
+
+interface editFieldsTypes {
+  id?: string
+  name?: string
+  phone?: string
+  website?: string
+  country?: string
+  city?: string
+  street?: string
+  post_code?: string
+  invoice_template?: string
+  invoice_prefix?: string
+  invoice_starting_number?: string
+  vat_registered?: boolean
 }
 export const IssuingCompany: NextPage = () => {
   const [showModal, setShowModal] = useState(false)
@@ -221,6 +238,7 @@ export const IssuingCompany: NextPage = () => {
       )
     },
   })
+  const [editPage, setEditPage] = useState<editFieldsTypes>({})
 
   countries.registerLocale(english)
   const countriesName = countries.getNames('en')
@@ -288,20 +306,44 @@ export const IssuingCompany: NextPage = () => {
     return errors
   }
 
+  const setEditFields = () => {
+    if (editPage.id) {
+      const editObj = {
+        id: editPage.id,
+        companyName: editPage.name,
+        phone: editPage.phone,
+        website: editPage.website,
+        country: editPage.country,
+        city: editPage.city,
+        street: editPage.street,
+        postCode: editPage.post_code,
+        invoiceTemplate: editPage.invoice_template,
+        invoicePrefix: editPage.invoice_prefix,
+        invoiceStartingNumber: editPage.invoice_starting_number,
+        vatRegistered: editPage.vat_registered,
+      }
+      // setFocused({ general: true, address: true, financial: true })
+      return editObj
+    } else {
+      return {
+        companyName: '',
+        phone: undefined,
+        website: '',
+        country: '',
+        city: '',
+        street: '',
+        postCode: undefined,
+        invoiceTemplate: '',
+        invoicePrefix: '',
+        invoiceStartingNumber: undefined,
+        vatRegistered: false,
+      }
+    }
+  }
+
   const formik = useFormik({
-    initialValues: {
-      companyName: '',
-      phone: undefined,
-      website: '',
-      country: '',
-      city: '',
-      street: '',
-      postCode: undefined,
-      invoiceTemplate: '',
-      invoicePrefix: '',
-      invoiceStartingNumber: undefined,
-      vatRegistered: false,
-    },
+    enableReinitialize: true,
+    initialValues: setEditFields(),
     validate,
     onSubmit: async (values) => {
       console.log('submitted values values:', values)
@@ -345,19 +387,19 @@ export const IssuingCompany: NextPage = () => {
             <Button type="default">Save as draft</Button>
           </div>
           <div>
-            {defaultChecked ? (
+            {defaultChecked || !formik.values.vatRegistered ? (
               <Button type="primary" disabled={true}>
                 Create
               </Button>
             ) : (
-                <Button
-                  type="primary"
-                  htmlType="submit"
-                  onClick={() => formik.handleSubmit()}
-                >
-                  Create
-                </Button>
-              )}
+              <Button
+                type="primary"
+                htmlType="submit"
+                onClick={() => formik.handleSubmit()}
+              >
+                Create
+              </Button>
+            )}
           </div>
         </div>
       </div>
@@ -382,7 +424,7 @@ export const IssuingCompany: NextPage = () => {
       <div className={styles.mainWrapper}>
         <Form
           layout="vertical"
-        //  onSubmitCapture={formik.handleSubmit}
+          //  onSubmitCapture={formik.handleSubmit}
         >
           <div
             className={
@@ -452,6 +494,7 @@ export const IssuingCompany: NextPage = () => {
                       ? formik.values.country
                       : 'Select country'
                   }
+                  value={formik.values.country}
                   onChange={(e) => handleSelectCountry(e)}
                 >
                   {createOptions('country')}
@@ -521,7 +564,7 @@ export const IssuingCompany: NextPage = () => {
                 <Select
                   defaultValue="Select invoice template"
                   onChange={(e) => onchange(e, 'invoiceTemplate')}
-                // onChange={formik.handleChange}
+                  value={formik.values.invoiceTemplate}
                 >
                   <Option value="">Select invoice template</Option>
                   <Option value="test">test</Option>
@@ -581,6 +624,7 @@ export const IssuingCompany: NextPage = () => {
         addFilter={false}
         createPage={true}
         createPageOnClick={createPageOnClick}
+        setEditPage={setEditPage}
       />
       <FullScreenReportModal
         title={headerContent}

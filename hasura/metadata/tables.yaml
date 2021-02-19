@@ -281,19 +281,21 @@
       check: {}
       columns:
       - is_active
-      - name
       - order
+      - relation_name
+      - reserve_relation
       backend_only: false
   select_permissions:
   - role: public
     permission:
       columns:
       - is_active
-      - id
       - order
-      - name
+      - relation_name
+      - reserve_relation
       - created_at
       - updated_at
+      - id
       filter: {}
       allow_aggregations: true
   update_permissions:
@@ -301,8 +303,9 @@
     permission:
       columns:
       - is_active
-      - name
       - order
+      - relation_name
+      - reserve_relation
       filter: {}
       check: null
   delete_permissions:
@@ -352,6 +355,7 @@
       - vat_registered
       - website
       filter: {}
+      allow_aggregations: true
   update_permissions:
   - role: public
     permission:
@@ -455,6 +459,76 @@
       - lab
       - requester
       - public
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: leads
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - is_active
+      - status
+      - created_at
+      - updated_at
+      - lead_age
+      - order
+      - phone
+      - email
+      - interest
+      - lead_name
+      - lead_owner
+      - lead_source
+      - lead_status
+      - location
+      - id
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - status
+      - created_at
+      - updated_at
+      - lead_age
+      - order
+      - phone
+      - email
+      - interest
+      - lead_name
+      - lead_owner
+      - lead_source
+      - lead_status
+      - location
+      - id
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - status
+      - created_at
+      - updated_at
+      - lead_age
+      - order
+      - phone
+      - email
+      - interest
+      - lead_name
+      - lead_owner
+      - lead_source
+      - lead_status
+      - location
+      - id
       filter: {}
       check: {}
   delete_permissions:

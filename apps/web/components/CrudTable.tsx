@@ -23,6 +23,21 @@ import Link from 'next/link'
 
 const { Title } = Typography
 
+interface editFieldsTypes {
+  id?: string
+  name?: string
+  phone?: string
+  website?: string
+  country?: string
+  city?: string
+  street?: string
+  post_code?: string
+  invoice_template?: string
+  invoice_prefix?: string
+  invoice_starting_number?: string
+  vat_registered?: boolean
+}
+
 interface P {
   schema: Schema
   addQuery?: DocumentNode
@@ -37,6 +52,7 @@ interface P {
   notificationBanner?: React.ReactNode
   createPageOnClick?(): void
   addFilter?: boolean
+  setEditPage?(e: editFieldsTypes): void
 }
 
 const CrudTable: FC<P> = ({
@@ -53,6 +69,7 @@ const CrudTable: FC<P> = ({
   createPage = false,
   createPageOnClick,
   addFilter,
+  setEditPage,
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [isActive, setIsActive] = useState(true)
@@ -456,8 +473,13 @@ const CrudTable: FC<P> = ({
               })
             }}
             onRowClick={(e) => {
-              setEditingRow(e)
-              setModalShowing((e) => !e)
+              if (!createPage) {
+                setEditingRow(e)
+                setModalShowing((e) => !e)
+              } else {
+                setEditPage(e)
+                createPageOnClick()
+              }
             }}
           />
           <Pagination
