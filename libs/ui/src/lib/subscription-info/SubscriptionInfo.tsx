@@ -113,7 +113,7 @@ export const SubscriptionInfo: FC<SubscriptionInfoProps> = (props) => {
             <Text className={styles.info}>
               {props.marketingPlusActive
                 ? `Using it${getDateStr(marketingPlusStartDate)}.`
-                : 'Integrated payroll from BambooHR that makes paying your people surprisingly easy.'}{' '}
+                : 'Supercharge your marketing with our extended suite of tools.'}{' '}
             </Text>
             {renderLearnMore(props.marketingPlusActive)}
           </div>
@@ -123,11 +123,11 @@ export const SubscriptionInfo: FC<SubscriptionInfoProps> = (props) => {
             <img src={ve} height={16} alt="logo" />
           </div>
           <div>
-            <Paragraph className={styles.subTitle}>Go Plus</Paragraph>
+            <Paragraph className={styles.subTitle}>Care Plus</Paragraph>
             <Text className={styles.info}>
               {props.goPlusActive
                 ? `Using it${getDateStr(props.goPlusStartDate)}.`
-                : 'Integrated payroll from BambooHR that makes paying your people surprisingly easy.'}{' '}
+                : 'Create custom pathways and embrace automated care with Pabau care.'}{' '}
             </Text>
             {renderLearnMore(props.goPlusActive)}
           </div>
