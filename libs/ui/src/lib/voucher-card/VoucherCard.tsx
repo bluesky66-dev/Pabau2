@@ -51,7 +51,7 @@ export const VoucherCard: FC<VoucherCardProps> = ({
       icon: <DeleteOutlined />,
       label: 'Delete',
       onClick: () => {
-        onMenuClick
+        onMenuClick()
       },
     },
   ]
