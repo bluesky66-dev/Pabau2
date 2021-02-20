@@ -129,7 +129,7 @@ const Index: FC<P> = ({ ...props }) => {
                   noDataIcon={<ApartmentOutlined />}
                   noDataBtnText="Drug"
                   scroll={{ x: 'max-content' }}
-                  dataSource={dataSource?.map((e: { id }) => ({
+                  dataSource={dataSource?.map((e: { id: number | string }) => ({
                     key: e.id,
                     ...e,
                   }))}
