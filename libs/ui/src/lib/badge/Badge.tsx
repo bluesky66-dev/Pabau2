@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 
 import btn_enable from '../../assets/images/security/btn_enable.svg'
 import btn_disabled from '../../assets/images/security/close.svg'
+
 import styles from './Badge.module.less'
 
 interface P {
@@ -28,6 +29,17 @@ export const Badge: FC<P> = ({ label, disabled }) => {
 
 export default Badge
 
-export const PabauPlus: FC<P> = ({ label, disabled }) => {
-  return <div className={styles.pabauPlusBtn}>{label}</div>
+export interface PlusProps {
+  label?: string
+  onClick?: () => unknown
+}
+
+export const PabauPlus: FC<PlusProps> = ({ label, onClick }) => {
+  return (
+    <div>
+      <div className={styles.pabauPlusBtn} onClick={onClick}>
+        {label}
+      </div>
+    </div>
+  )
 }
