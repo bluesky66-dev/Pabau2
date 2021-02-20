@@ -28,7 +28,7 @@ import Link from 'next/link'
 const { Title } = Typography
 
 export const LeadForms: React.FC = () => {
-  const allAPISteps = ['Basic', 'Configure(API)', 'Testing(API)', 'Result']
+  const allAPISteps = ['Basic', 'Configure (API)', 'Testing (API)', 'Result']
   const allFormSteps = ['Basic', 'Customize Form', 'Result']
   const [activeStepper, setActiveStepper] = useState('API')
   const [activeStep, setActiveStep] = useState(0)
@@ -45,7 +45,7 @@ export const LeadForms: React.FC = () => {
     },
     {
       step: 2,
-      name: 'Configure(API)',
+      name: 'Configure (API)',
       imgPath: (
         <FontAwesomeIcon
           icon={Icons.faPencilAlt}
@@ -57,7 +57,7 @@ export const LeadForms: React.FC = () => {
     },
     {
       step: 3,
-      name: 'Testing(API)',
+      name: 'Testing (API)',
       imgPath: <ToolOutlined />,
       isActive: false,
       index: 2,
@@ -139,7 +139,7 @@ export const LeadForms: React.FC = () => {
             active={activeStep}
             disableNextStep={
               activeStepper === 'API' &&
-              allAPISteps[activeStep] === 'Testing(API)'
+              allAPISteps[activeStep] === 'Testing (API)'
             }
             onActiveStepChange={(step) => {
               if (activeStepper === 'Form' && allFormSteps[step] === 'Result') {
@@ -160,7 +160,7 @@ export const LeadForms: React.FC = () => {
                 {allAPISteps[activeStep] === 'Configure(API)' && (
                   <LeadIntegration />
                 )}
-                {allAPISteps[activeStep] === 'Testing(API)' && (
+                {allAPISteps[activeStep] === 'Testing (API)' && (
                   <LeadTesting onAPIFlowComplete={onAPIFlowComplete} />
                 )}
                 {allAPISteps[activeStep] === 'Result' && <LeadResult />}

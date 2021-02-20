@@ -44,9 +44,7 @@ export const LeadFormBuilder: React.FC<LeadFormBuilderInterface> = ({
           <div className={styles.builderHeadingText}>
             <h1> Apperance</h1>
             <p>
-              Your business name is displayed across many areas including on
-              your online booking profile, sales invoices and massages to
-              clients
+              Here we can customize the look and feel of your lead capture form
             </p>
           </div>
           <div className={styles.builderHeadingText}>
@@ -73,9 +71,9 @@ export const LeadFormBuilder: React.FC<LeadFormBuilderInterface> = ({
             <h1>Enable photo upload</h1>
           </div>
           <Select defaultValue="24" style={{ width: '100%' }}>
-            <Option value="24">24 hours</Option>
-            <Option value="12">12 hours</Option>
-            <Option value="6">6 hours</Option>
+            <Option value="1">1 Photo</Option>
+            <Option value="5">5 Photos</Option>
+            <Option value="10">10 Photos</Option>
           </Select>
         </div>
         <div className={styles.builderBorderBottom}></div>
@@ -87,7 +85,7 @@ export const LeadFormBuilder: React.FC<LeadFormBuilderInterface> = ({
           <RegistrationFields
             fields={fields}
             description={
-              'Your business name is displayed across many areas including on your online booking profile? sales invoices and messages to clients.'
+              'Include which fields you would like to be required or completed as part of your lead form.'
             }
             requiredTitle={'Required'}
             fieldTitle={'Field Name'}

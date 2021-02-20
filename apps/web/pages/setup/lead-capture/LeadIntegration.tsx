@@ -84,7 +84,7 @@ export const LeadIntegration: React.FC = () => {
               </div>
               <div className={styles.leadTextChild}>
                 <h1>Documentation</h1>{' '}
-                <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h5>
+                <h5>Follow our simple integration guide</h5>
               </div>
             </div>
             <div
@@ -105,8 +105,7 @@ export const LeadIntegration: React.FC = () => {
                 </div>
               </div>
               <div className={styles.leadTextChild}>
-                <h1>Zapier</h1>{' '}
-                <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h5>
+                <h1>Zapier</h1> <h5>Integrate via a Zapier hook.</h5>
               </div>
             </div>
           </div>
