@@ -115,7 +115,7 @@ const Index: FC<P> = ({ ...props }) => {
 
   useEffect(() => {
     setDataSource(data)
-  })
+  }, [])
 
   return (
     <Layout>
