@@ -69,7 +69,7 @@ export const Table: FC<TableType> = ({
   onDownload,
   ...props
 }) => {
-  const [showDownloadBtn, setShowDownloadBtn] = useState(false)
+  const [showDownloadBtn] = useState(false)
   const onSortEnd = ({ oldIndex, newIndex }) => {
     if (oldIndex !== newIndex) {
       const newData = array_move(dataSource, oldIndex, newIndex)
@@ -105,7 +105,7 @@ export const Table: FC<TableType> = ({
   }
   const renderActiveButton = (isActive) => {
     return (
-      <>
+      <div>
         {showDownloadBtn ? (
           <Button
             type="default"
@@ -121,7 +121,7 @@ export const Table: FC<TableType> = ({
             {isActive ? 'Active' : 'Inactive'}
           </Button>
         )}
-      </>
+      </div>
     )
   }
 
