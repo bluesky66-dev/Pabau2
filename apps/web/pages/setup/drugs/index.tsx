@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import Layout from '../../../components/Layout/Layout'
 import { TabbedTable, Button, Table, Breadcrumb, Pagination } from '@pabau/ui'
 import { Card, Input, Row, Col } from 'antd'
@@ -67,11 +67,15 @@ export interface P {
 const Index: FC<P> = ({ ...props }) => {
   const [paginationState, setPaginationState] = useState(true)
   const [searchTerm, setSearchTerm] = useState(null)
-  const [dataSource, setDataSource] = useState(data)
+  const [dataSource, setDataSource] = useState(null)
   const [libItems] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])
   const updateDataSource = ({ newData }) => {
     setDataSource(newData)
   }
+
+  useEffect(() => {
+    if (data) setDataSource(data)
+  }, [data])
 
   const tabItems = ['Tablesheet', 'Library']
 

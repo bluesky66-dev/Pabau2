@@ -1,5 +1,6 @@
 export const data = [
   {
+    id: 1,
     key: '1',
     name: 'Paracetamol (Acetominophen)',
     unit: 'Mg',
@@ -10,6 +11,7 @@ export const data = [
     index: 0,
   },
   {
+    id: 2,
     key: '2',
     name: 'From a friend',
     unit: 'Mg',
@@ -20,6 +22,7 @@ export const data = [
     index: 1,
   },
   {
+    id: 3,
     key: '3',
     name: 'Instagram',
     unit: 'Mg',
@@ -30,6 +33,7 @@ export const data = [
     index: 2,
   },
   {
+    id: 4,
     key: '4',
     name: 'Imported',
     unit: 'Mg',
@@ -40,6 +44,7 @@ export const data = [
     index: 3,
   },
   {
+    id: 5,
     key: '5',
     name: 'Walk-in',
     unit: 'Mg',
@@ -50,6 +55,7 @@ export const data = [
     index: 4,
   },
   {
+    id: 6,
     key: '6',
     name: 'Facebook',
     unit: 'Mg',
@@ -60,6 +66,7 @@ export const data = [
     index: 5,
   },
   {
+    id: 7,
     key: '7',
     name: 'Fresha',
     unit: 'Mg',
