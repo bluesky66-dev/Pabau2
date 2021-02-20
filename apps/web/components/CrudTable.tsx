@@ -5,6 +5,7 @@ import {
   MobileHeader,
   Notification,
   NotificationType,
+  SimpleDropdown,
 } from '@pabau/ui'
 import React, { FC, useEffect, useState } from 'react'
 import { DocumentNode, useMutation } from '@apollo/client'
@@ -20,6 +21,7 @@ import Layout from './Layout/Layout'
 import { LeftOutlined } from '@ant-design/icons'
 import classNames from 'classnames'
 import Link from 'next/link'
+import { useTranslationI18 } from '../hooks/useTranslationI18'
 
 const { Title } = Typography
 
@@ -36,7 +38,75 @@ interface P {
   createPage?: boolean
   notificationBanner?: React.ReactNode
   createPageOnClick?(): void
+  needTranslation?: boolean
 }
+
+const languages = [
+  {
+    key: 'en',
+    value: 'English(UK)',
+  },
+  {
+    key: 'en-us',
+    value: 'English(US)',
+  },
+  {
+    key: 'de',
+    value: 'German',
+  },
+  {
+    key: 'fr',
+    value: 'French',
+  },
+  {
+    key: 'es',
+    value: 'Spanish',
+  },
+  {
+    key: 'ar',
+    value: 'Arabic',
+  },
+  {
+    key: 'bg',
+    value: 'Bulgarian',
+  },
+  {
+    key: 'cs',
+    value: 'Czech',
+  },
+  {
+    key: 'da',
+    value: 'Danish',
+  },
+  {
+    key: 'hu',
+    value: 'Hungarian',
+  },
+  {
+    key: 'lv',
+    value: 'Latvian',
+  },
+  {
+    key: 'no',
+    value: 'Norwegian',
+  },
+  {
+    key: 'pl',
+    value: 'Polish',
+  },
+  {
+    key: 'sv',
+    value: 'Swedish',
+  },
+  {
+    key: 'ro',
+    value: 'Romanian',
+  },
+  {
+    key: 'ru',
+    value: 'Russian',
+  },
+]
 
 const CrudTable: FC<P> = ({
   schema,
@@ -51,10 +121,18 @@ const CrudTable: FC<P> = ({
   notificationBanner,
   createPage = false,
   createPageOnClick,
+  needTranslation = false,
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [isActive, setIsActive] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
+  const [currentLanguage, setCurrentLanguage] = useState<string>('English(UK)')
+  const { t, i18n } = useTranslationI18()
+
+  useEffect(() => {
+    const data = languages.find(({ value }) => value === currentLanguage)
+    i18n.changeLanguage(data.key)
+  }, [currentLanguage, i18n])
   // eslint-disable-next-line graphql/template-strings
   const [editMutation] = useMutation(editQuery, {
     onCompleted(data) {
@@ -279,6 +357,10 @@ const CrudTable: FC<P> = ({
     setEditingRow({ name: '', isCreate: true })
   }
 
+  const handleLanguageChange = (language: string): void => {
+    setCurrentLanguage(language)
+  }
+
   return (
     <Formik
       enableReinitialize={true}
@@ -321,7 +403,12 @@ const CrudTable: FC<P> = ({
                 <Link href="/">
                   <LeftOutlined />
                 </Link>
-                <p> {schema.full || schema.short} </p>
+                <p>
+                  {' '}
+                  {needTranslation
+                    ? t('marketingsource-title.translation')
+                    : schema.full || schema.short}{' '}
+                </p>
               </div>
               {addQuery && !createPage ? (
                 <AddButton
@@ -330,6 +417,7 @@ const CrudTable: FC<P> = ({
                   onSearch={onSearch}
                   schema={schema}
                   tableSearch={tableSearch}
+                  needTranslation={needTranslation}
                 />
               ) : (
                 <AddButton
@@ -338,6 +426,7 @@ const CrudTable: FC<P> = ({
                   onSearch={onSearch}
                   schema={schema}
                   tableSearch={tableSearch}
+                  needTranslation={needTranslation}
                 />
               )}
             </div>
@@ -372,6 +461,16 @@ const CrudTable: FC<P> = ({
               />
               <Title>{schema.full || schema.short}</Title>
             </div>
+            {needTranslation && (
+              <div className={styles.btn}>
+                <SimpleDropdown
+                  label={'Change Language'}
+                  dropdownItems={prepareLanguages(languages)}
+                  value={currentLanguage}
+                  onSelected={handleLanguageChange}
+                />
+              </div>
+            )}
             {addQuery && !createPage ? (
               <AddButton
                 onClick={createNew}
@@ -379,6 +478,7 @@ const CrudTable: FC<P> = ({
                 onSearch={onSearch}
                 schema={schema}
                 tableSearch={tableSearch}
+                needTranslation={needTranslation}
               />
             ) : (
               <AddButton
@@ -387,6 +487,7 @@ const CrudTable: FC<P> = ({
                 onSearch={onSearch}
                 schema={schema}
                 tableSearch={tableSearch}
+                needTranslation={needTranslation}
               />
             )}
           </div>
@@ -443,6 +544,7 @@ const CrudTable: FC<P> = ({
               setEditingRow(e)
               setModalShowing((e) => !e)
             }}
+            needTranslation={needTranslation}
           />
           <Pagination
             total={paginateData.total}
@@ -457,6 +559,13 @@ const CrudTable: FC<P> = ({
       </>
     </Formik>
   )
+}
+
+function prepareLanguages(languages): Array<string> {
+  const array = languages?.map(({ value }) => {
+    return value
+  })
+  return array
 }
 
 export default CrudTable
