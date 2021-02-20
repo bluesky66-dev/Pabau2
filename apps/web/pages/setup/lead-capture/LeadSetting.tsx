@@ -50,7 +50,7 @@ export const LeadSettings: React.FC<LeadSettingsInterface> = ({
               </div>
             </div>
             <div className={styles.leadTextChild}>
-              <h1>API(recommended)</h1>
+              <h1>API (recommended)</h1>
               <h5>Via Pabaus lead API (requires web developer)</h5>
             </div>
           </div>

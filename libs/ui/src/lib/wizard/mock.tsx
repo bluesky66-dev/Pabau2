@@ -20,7 +20,7 @@ export const data: StepperInterface[] = [
   },
   {
     step: 2,
-    name: 'Configure(API)',
+    name: 'Configure (API)',
     imgPath: (
       <FontAwesomeIcon icon={Icons.faPencilAlt} style={{ fontSize: '12px' }} />
     ),
@@ -29,7 +29,7 @@ export const data: StepperInterface[] = [
   },
   {
     step: 3,
-    name: 'Testing(API)',
+    name: 'Testing (API)',
     imgPath: <ToolOutlined />,
     isActive: false,
     index: 2,
