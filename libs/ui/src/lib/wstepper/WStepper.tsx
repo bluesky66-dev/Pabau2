@@ -1,37 +1,43 @@
 /* eslint-disable */
-import React, { useState } from 'react'
-
-import styels from './WStepper.module.less'
-import Stepper from '../stepper/Stepper'
+import React, { useEffect } from 'react'
+import styles from './WStepper.module.less'
 import Wizard from '../wizard/Wizard'
-import { data } from './mock'
-
+import { StepperItem } from '@pabau/ui'
 interface WStepperProps {
   active: number
-  breadcrumbTxt: string
-  headerTxt: string
+  data: StepperItem[]
+  disableNextStep?: boolean
+  onActiveStepChange?: (index) => void
 }
 
 export const WStepper: React.FC<WStepperProps> = ({
   active,
-  breadcrumbTxt,
-  headerTxt,
+  children,
+  data,
+  disableNextStep = false,
+  onActiveStepChange,
 }) => {
-  const [index, setIndex] = React.useState(active)
-  // const datasource = data
-  const [dataSource, setDataSource]: any = useState(data)
+  const [index, setIndex] = React.useState(0)
+
+  useEffect(() => {
+    setIndex(active)
+  }, [active])
+
+  useEffect(() => {
+    onActiveStepChange?.(index)
+  }, [index])
 
   return (
-    <div className={styels.container}>
+    <div className={styles.container}>
       <Wizard
         onPrev={() => setIndex(index - 1)}
         onNext={() => setIndex(index + 1)}
-        breadcrumb={breadcrumbTxt}
-        header={headerTxt}
         active={index}
-        allSteps={5}
+        allSteps={data.length}
+        stepperData={data}
+        disableNextStep={disableNextStep}
       >
-        <Stepper datasource={dataSource} step={index} />
+        {children}
       </Wizard>
     </div>
   )

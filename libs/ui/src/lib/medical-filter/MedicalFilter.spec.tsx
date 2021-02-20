@@ -4,7 +4,7 @@ import { render } from '@testing-library/react'
 import MedicalFilter from './MedicalFilter'
 const defaultFilter = {
   language: 'English (UK)',
-  status: false,
+  status: 'active',
   formtype: {
     medicalHistory: false,
     consent: false,

@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
-import styles from './LeftSidebarMedicalForm.module.less'
+import styles from './LeftSidebar.module.less'
 
 interface P {
-  iconUrl?: string
-  bgcolor?: string
-  title?: string
-  desc?: string
+  iconUrl: string
+  bgcolor: string
+  title: string
+  desc: string
 }
 
 const LeftSidebarMedicalFormTitle: FC<P> = ({

@@ -1,0 +1,63 @@
+.versionHistoryContainer {
+  width: 100%;
+}
+
+.historyItems {
+  width: 100%;
+}
+
+.historyItemTitle {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1px;
+  color: var(--light-grey-color);
+  padding: 8px 24px;
+  margin: 0;
+}
+
+.historyItem {
+  padding: 12px 24px;
+  cursor: pointer;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  &:hover {
+    background-color: #eef7fb;
+    .historyUpdatedDate,
+    .historyUpdatedVersion {
+      color: var(--primary-color);
+    }
+    .history-more {
+      display: block;
+    }
+  }
+}
+
+.historyUpdatedDate {
+  color: var(--grey-text-color);
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0;
+  margin-bottom: 2px;
+}
+
+.historyUpdatedVersion,
+.historyUpdatedBy {
+  color: var(--light-grey-color);
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0;
+  margin-bottom: 2px;
+}
+
+.history-more {
+  display: inline;
+  margin: 0;
+  display: none;
+}
