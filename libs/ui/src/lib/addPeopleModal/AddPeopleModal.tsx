@@ -9,17 +9,12 @@ interface Member {
   userName: string
   profileURL: string
 }
-interface groupData {
-  general: Member[]
-  design: Member[]
-}
 
 export interface P {
   searchAddMember?: Member[]
-  groupData?: groupData[]
-  members?: Member[]
+  members: Member[]
   selectedGroup?: string
-  isAddModalVisible?: boolean
+  isAddModalVisible: boolean
   onOk?: () => void
   onCancel?: () => void
   onAddMembers?: (value: string[]) => void
