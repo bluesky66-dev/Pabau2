@@ -102,12 +102,13 @@ const UPDATE_ORDER_MUTATION = gql`
 `
 
 export const Index: NextPage = () => {
-  const { t, i18n } = useTranslation('common')
+  const { t } = useTranslation('common')
   const schema: Schema = {
     full: t('marketingsource-title.translation'),
     fullLower: t('marketingsource-title.translation'),
     short: 'Source',
     shortLower: 'source',
+    createButtonLabel: 'Create Source',
     messages: {
       create: {
         success: 'New marketings source created.',
@@ -124,14 +125,13 @@ export const Index: NextPage = () => {
     },
     deleteBtnLabel: 'Yes, Delete Source',
     fields: {
-      name: {
+      source_name: {
         full: 'Friendly Name',
         fullLower: 'friendly name',
         short: t('marketingsource-name-textfield.translation'),
         shortLower: 'name',
         min: 2,
-        //@ts-ignore
-        example: t('marketingsource-name-placeholder.translation'),
+        example: t('marketingsource-name-textfield.translation'),
         description: 'A friendly name',
         // extra: <i>Please note: blah blah blahh</i>,
         cssWidth: 'max',
@@ -153,6 +153,7 @@ export const Index: NextPage = () => {
       editQuery={EDIT_MUTATION}
       aggregateQuery={LIST_AGGREGATE_QUERY}
       updateOrderQuery={UPDATE_ORDER_MUTATION}
+      needTranslation={true}
     />
   )
 }

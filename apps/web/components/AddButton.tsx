@@ -20,6 +20,7 @@ interface P {
   onFilterSource: () => void
   onSearch: (term: string) => void
   tableSearch?: boolean
+  needTranslation?: boolean
 }
 
 const AddButton: FC<P> = ({
@@ -29,6 +30,7 @@ const AddButton: FC<P> = ({
   onFilterSource,
   onSearch,
   tableSearch = true,
+  needTranslation,
 }) => {
   const [isActive, setIsActive] = useState(true)
   const [mobFilterDrawer, setMobFilterDrawer] = useState(false)
@@ -127,7 +129,9 @@ const AddButton: FC<P> = ({
         {tableSearch && (
           <Input
             className={styles.searchMarketingStyle}
-            placeholder={t('search-placeholder.translation')}
+            placeholder={
+              needTranslation ? t('search-placeholder.translation') : 'Search'
+            }
             value={marketingSourceSearch}
             onChange={(e) => setMarketingSourceSearch(e.target.value)}
             suffix={<SearchOutlined style={{ color: '#8C8C8C' }} />}
@@ -141,7 +145,10 @@ const AddButton: FC<P> = ({
           overlayClassName={styles.filterPopover}
         >
           <Button className={styles.filterBtn}>
-            <FilterOutlined /> {t('marketingsource-button-filter.translation')}
+            <FilterOutlined />{' '}
+            {needTranslation
+              ? t('marketingsource-button-filter.translation')
+              : 'Filter'}
           </Button>
         </Popover>
         <Button
@@ -149,7 +156,9 @@ const AddButton: FC<P> = ({
           type="primary"
           onClick={() => onClick?.()}
         >
-          {t('marketingsource-header-create.translation')}
+          {needTranslation
+            ? t('marketingsource-header-create.translation')
+            : schema.createButtonLabel}
         </Button>
       </div>
     </>

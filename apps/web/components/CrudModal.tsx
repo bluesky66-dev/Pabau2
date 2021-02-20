@@ -3,7 +3,6 @@ import React, { FC, useEffect, useState } from 'react'
 import { BasicModal as Modal, Notification, NotificationType } from '@pabau/ui'
 import { DocumentNode, useMutation } from '@apollo/client'
 import { useFormikContext } from 'formik'
-import { useTranslationI18 } from '../hooks/useTranslationI18'
 
 interface P {
   schema: Schema
@@ -53,7 +52,6 @@ const CrudModal: FC<P> = ({
         specialFormElement.defaultvalue) ??
       true
   )
-  const { t } = useTranslationI18()
 
   useEffect(() => {
     setSpecialBoolean(
@@ -133,8 +131,8 @@ const CrudModal: FC<P> = ({
         visible={!openDeleteModal}
         title={
           typeof editingRow === 'object' && editingRow.isCreate
-            ? `${t('marketingsource-header-create.translation')}`
-            : `${t('marketingsource-header-edit.translation')}`
+            ? `Create ${schema.full}`
+            : `Edit ${schema.full}`
         }
         newButtonText={
           typeof editingRow === 'object' && editingRow.isCreate

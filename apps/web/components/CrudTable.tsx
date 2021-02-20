@@ -38,6 +38,7 @@ interface P {
   createPage?: boolean
   notificationBanner?: React.ReactNode
   createPageOnClick?(): void
+  needTranslation?: boolean
 }
 
 const languages = [
@@ -120,6 +121,7 @@ const CrudTable: FC<P> = ({
   notificationBanner,
   createPage = false,
   createPageOnClick,
+  needTranslation = false,
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [isActive, setIsActive] = useState(true)
@@ -401,7 +403,12 @@ const CrudTable: FC<P> = ({
                 <Link href="/">
                   <LeftOutlined />
                 </Link>
-                <p> {t('marketingsource-title.translation')} </p>
+                <p>
+                  {' '}
+                  {needTranslation
+                    ? t('marketingsource-title.translation')
+                    : schema.full || schema.short}{' '}
+                </p>
               </div>
               {addQuery && !createPage ? (
                 <AddButton
@@ -410,6 +417,7 @@ const CrudTable: FC<P> = ({
                   onSearch={onSearch}
                   schema={schema}
                   tableSearch={tableSearch}
+                  needTranslation={needTranslation}
                 />
               ) : (
                 <AddButton
@@ -418,6 +426,7 @@ const CrudTable: FC<P> = ({
                   onSearch={onSearch}
                   schema={schema}
                   tableSearch={tableSearch}
+                  needTranslation={needTranslation}
                 />
               )}
             </div>
@@ -452,14 +461,16 @@ const CrudTable: FC<P> = ({
               />
               <Title>{schema.full || schema.short}</Title>
             </div>
-            <div className={styles.btn}>
-              <SimpleDropdown
-                label={'Change Language'}
-                dropdownItems={prepareLanguages(languages)}
-                value={currentLanguage}
-                onSelected={handleLanguageChange}
-              />
-            </div>
+            {needTranslation && (
+              <div className={styles.btn}>
+                <SimpleDropdown
+                  label={'Change Language'}
+                  dropdownItems={prepareLanguages(languages)}
+                  value={currentLanguage}
+                  onSelected={handleLanguageChange}
+                />
+              </div>
+            )}
             {addQuery && !createPage ? (
               <AddButton
                 onClick={createNew}
@@ -467,6 +478,7 @@ const CrudTable: FC<P> = ({
                 onSearch={onSearch}
                 schema={schema}
                 tableSearch={tableSearch}
+                needTranslation={needTranslation}
               />
             ) : (
               <AddButton
@@ -475,6 +487,7 @@ const CrudTable: FC<P> = ({
                 onSearch={onSearch}
                 schema={schema}
                 tableSearch={tableSearch}
+                needTranslation={needTranslation}
               />
             )}
           </div>
@@ -531,6 +544,7 @@ const CrudTable: FC<P> = ({
               setEditingRow(e)
               setModalShowing((e) => !e)
             }}
+            needTranslation={needTranslation}
           />
           <Pagination
             total={paginateData.total}

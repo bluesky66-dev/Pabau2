@@ -48,6 +48,7 @@ export type TableType = {
   noDataIcon?: JSX.Element
   onAddTemplate?: () => void
   searchTerm?: string
+  needTranslation?: boolean
 } & TableProps<never> &
   DragProps
 
@@ -63,6 +64,7 @@ export const Table: FC<TableType> = ({
   noDataIcon = <ContactsOutlined />,
   onAddTemplate,
   searchTerm = '',
+  needTranslation,
   ...props
 }) => {
   const onSortEnd = ({ oldIndex, newIndex }) => {
@@ -105,9 +107,13 @@ export const Table: FC<TableType> = ({
         className={isActive ? styles.activeBtn : styles.disableSourceBtn}
         disabled={!isActive}
       >
-        {isActive
-          ? t('marketingsource-tableRow-active-btn.translation')
-          : t('marketingsource-tableRow-inActive-btn.translation')}
+        {needTranslation
+          ? isActive
+            ? t('marketingsource-tableRow-active-btn.translation')
+            : t('marketingsource-tableRow-inActive-btn.translation')
+          : isActive
+          ? 'Active'
+          : 'Inactive'}
       </Button>
     )
   }
