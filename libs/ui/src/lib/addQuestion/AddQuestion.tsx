@@ -17,7 +17,7 @@ export interface QuestionField {
 }
 
 export interface AddQuestionProps {
-  onQuestionBankAddButton: (
+  onQuestionBankAddButton?: (
     questions: Array<IQuestionOptions> | undefined
   ) => void
   description?: string
