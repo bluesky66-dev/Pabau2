@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import Layout from '../../../components/Layout/Layout'
 import { TabbedTable, Button, Table, Breadcrumb, Pagination } from '@pabau/ui'
 import { Card, Input, Row, Col } from 'antd'
@@ -113,7 +113,9 @@ const Index: FC<P> = ({ ...props }) => {
     }
   }
 
-  setDataSource(data)
+  useEffect(() => {
+    setDataSource(data)
+  })
 
   return (
     <Layout>
