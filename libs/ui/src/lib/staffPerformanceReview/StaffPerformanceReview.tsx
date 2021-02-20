@@ -94,9 +94,7 @@ const StaffPerformanceReview: FC<P> = () => {
         const beforePeers = Math.floor(Math.abs(diff - 1) / 3)
         for (let i = 1; i < beforePeers + 1; i++) {
           DateArray.push({
-            date: new Date(
-              new Date().setMonth(new Date().getMonth() + 3 * i - 1)
-            ),
+            date: convertDateWithCurrentDate(3 * i - 1),
             status: 'process',
             icon: (
               <Tooltip placement="topLeft" title="Peer Feedback">
@@ -136,10 +134,7 @@ const StaffPerformanceReview: FC<P> = () => {
             ),
             status: 'process',
           })
-      if (
-        new Date(new Date().setMonth(reviewDate.getMonth() + 1)) <
-        new Date(aYear)
-      ) {
+      if (convertDate(1) < new Date(aYear)) {
         DateArray.push({
           date: convertDate(1),
           status: 'process',
