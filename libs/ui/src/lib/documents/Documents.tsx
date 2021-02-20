@@ -99,7 +99,8 @@ export const Documents: FC<DocumentsProps> = ({
       <div className={styles.seperator}></div>
       <div className={styles.content}>
         <div className={styles.folderPanel}>
-          {folders.length > 0 &&
+          {folders &&
+            folders.length > 0 &&
             folders.map((folder, index) => (
               <div key={`folder${index}`}>
                 <Accordion headerLabel={folder.name}>
