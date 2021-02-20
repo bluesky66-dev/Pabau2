@@ -100,13 +100,14 @@ export const modalContent = {
       },
       {
         icon: <ApplicationBook />,
-        title: 'Provide global support',
+        title: 'Multi Lingual',
         description: 'Support customers with a multilingual help center',
       },
     ],
     sectionUpgradeTitle: 'Everything you get with the upgrade',
     sectionUpgradeData: [
       'Multiple Questionnaires',
+      'Inbound email',
       'Video Aftercare',
       'Link aftercare products',
       'One touch purchases',
