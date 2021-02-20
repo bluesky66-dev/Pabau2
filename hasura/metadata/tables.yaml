@@ -281,19 +281,21 @@
       check: {}
       columns:
       - is_active
-      - name
       - order
+      - relation_name
+      - reserve_relation
       backend_only: false
   select_permissions:
   - role: public
     permission:
       columns:
       - is_active
-      - id
       - order
-      - name
+      - relation_name
+      - reserve_relation
       - created_at
       - updated_at
+      - id
       filter: {}
       allow_aggregations: true
   update_permissions:
@@ -301,8 +303,9 @@
     permission:
       columns:
       - is_active
-      - name
       - order
+      - relation_name
+      - reserve_relation
       filter: {}
       check: null
   delete_permissions:
@@ -322,6 +325,7 @@
       - invoice_prefix
       - invoice_starting_number
       - invoice_template
+      - is_draft
       - is_active
       - name
       - order
@@ -342,6 +346,7 @@
       - invoice_prefix
       - invoice_starting_number
       - invoice_template
+      - is_draft
       - is_active
       - name
       - order
@@ -352,6 +357,7 @@
       - vat_registered
       - website
       filter: {}
+      allow_aggregations: true
   update_permissions:
   - role: public
     permission:
@@ -361,6 +367,7 @@
       - invoice_prefix
       - invoice_starting_number
       - invoice_template
+      - is_draft
       - is_active
       - name
       - order
@@ -461,6 +468,97 @@
   - role: public
     permission:
       filter: {}
+- table:
+    schema: public
+    name: leads
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - is_active
+      - status
+      - created_at
+      - updated_at
+      - lead_age
+      - order
+      - phone
+      - email
+      - interest
+      - lead_name
+      - lead_owner
+      - lead_source
+      - lead_status
+      - location
+      - id
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - status
+      - created_at
+      - updated_at
+      - lead_age
+      - order
+      - phone
+      - email
+      - interest
+      - lead_name
+      - lead_owner
+      - lead_source
+      - lead_status
+      - location
+      - id
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - status
+      - created_at
+      - updated_at
+      - lead_age
+      - order
+      - phone
+      - email
+      - interest
+      - lead_name
+      - lead_owner
+      - lead_source
+      - lead_status
+      - location
+      - id
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: locations
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - address
+      - created_at
+      - id
+      - image
+      - is_active
+      - is_day
+      - is_night
+      - is_parking
+      - is_pharmacy
+      - is_time
+      - name
+      - order
+      filter: {}
+      allow_aggregations: true
 - table:
     schema: public
     name: marketing_campaign
@@ -617,3 +715,36 @@
 - table:
     schema: public
     name: rota_templates
+- table:
+    schema: public
+    name: salutation
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - is_active
+      - salutation
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - created_at
+      - id
+      - is_active
+      - salutation
+      - updated_at
+      filter: {}
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - salutation
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
