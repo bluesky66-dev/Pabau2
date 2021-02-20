@@ -69,9 +69,6 @@ const Index: FC<P> = ({ ...props }) => {
   const [searchTerm, setSearchTerm] = useState(null)
   const [dataSource, setDataSource] = useState(null)
   const [libItems] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])
-  const updateDataSource = ({ newData }) => {
-    setDataSource(newData)
-  }
 
   const tabItems = ['Tablesheet', 'Library']
 
@@ -131,11 +128,7 @@ const Index: FC<P> = ({ ...props }) => {
                   noDataIcon={<ApartmentOutlined />}
                   noDataBtnText="Drug"
                   scroll={{ x: 'max-content' }}
-                  dataSource={dataSource?.map((e: { id: number | string }) => ({
-                    key: e.id,
-                    ...e,
-                  }))}
-                  updateDataSource={updateDataSource}
+                  dataSource={dataSource}
                 />
               </div>
               <div className={styles.library}>
