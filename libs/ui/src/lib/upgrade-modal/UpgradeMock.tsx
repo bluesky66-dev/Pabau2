@@ -37,8 +37,8 @@ export const modalContent = {
       },
       {
         icon: <HeatMapOutlined />,
-        title: 'Zapier Integration',
-        description: 'Zapier is the easiest way to automate your workflow.',
+        title: 'Reputation Manager',
+        description: 'Integrate all your reviews into one place.',
       },
       {
         icon: <FormOutlined />,
@@ -66,8 +66,10 @@ export const modalContent = {
       'Google Tag Manager',
       'Facebook Pixel',
       'Custom voucher templates',
+      'Zapier Integration',
       'Recall insights',
       'Newsletter Insights',
+      'Google Reviews',
     ],
     linkText: 'Compare all plans',
   },
@@ -116,7 +118,7 @@ export const modalContent = {
     linkText: 'Compare all plans',
   },
   staff: {
-    title: 'Upgrade to Staff Plus',
+    title: 'Upgrade to Team Plus',
     plan: 'from $699.00/month',
     description:
       'We’ll ask you about your needs, help you understand how pricing works, and get you started with new features.',
@@ -137,7 +139,7 @@ export const modalContent = {
       },
       {
         icon: <TeamOutlined />,
-        title: 'Trends',
+        title: 'Commissions',
         description:
           'Track trends in employee performance and behaviour directly from the employee report.',
       },
@@ -181,8 +183,9 @@ export const modalContent = {
       },
       {
         icon: <PieChartOutlined />,
-        title: 'Schedule Reports',
-        description: 'Schedule the creation and issue of timely reports.',
+        title: 'Trends',
+        description:
+          'Trend historical data to view business performance over time.',
       },
       {
         icon: <BookOutlined />,
