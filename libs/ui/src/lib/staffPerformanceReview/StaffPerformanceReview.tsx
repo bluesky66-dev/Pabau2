@@ -43,22 +43,30 @@ const StaffPerformanceReview: FC<P> = () => {
     return dateFormat(date, 'mmm d, yyyy')
   }
 
-  const onDateChange = (date, dateString) => {
+  const onDateChange = (date) => {
     setReviewDate(new Date(date))
   }
 
   const diff_months = (dt2, dt1) => {
-    let diff = (dt2.getTime() - dt1.getTime()) / 1000
-    diff /= 60 * 60 * 24 * 7 * 4
-    return Math.abs(Math.round(diff))
+    const monthDifference = moment(new Date(dt2)).diff(
+      new Date(dt1),
+      'months',
+      true
+    )
+    return Math.abs(Math.round(monthDifference))
   }
 
   const today = new Date()
-  const aYear = new Date(new Date().setFullYear(new Date().getFullYear() + 1))
+  const aYear = new Date(moment().add(1, 'years').calendar())
   const review = new Date(reviewDate)
+
   const convertDate = (month) => {
     const months = new Date(new Date().setMonth(reviewDate.getMonth() + month))
     return new Date(months.setDate(reviewDate.getDate()))
+  }
+
+  const convertDateWithCurrentDate = (month) => {
+    return new Date(new Date().setMonth(new Date().getMonth() + month))
   }
   const DateArray: Array<{
     date: Date
@@ -67,11 +75,10 @@ const StaffPerformanceReview: FC<P> = () => {
   }> = []
   if (reviewPeriod === 'annual') {
     if (DateFormatter(today) !== DateFormatter(reviewDate)) {
-      const difference =
-        reviewDate.getFullYear() * 12 +
-        reviewDate.getMonth() -
-        (aYear.getFullYear() * 12 + aYear.getMonth())
-      const numberOfReviews = Math.floor(Math.abs(difference - 1) / 3)
+      const difference = Math.round(
+        moment(new Date(aYear)).diff(new Date(reviewDate), 'months', true)
+      )
+      const numberOfReviews = Math.floor(Math.abs(difference) / 3)
       const reviewMonth = new Date(review.setMonth(review.getMonth() - 1))
       DateArray.push({
         date: today,
@@ -134,7 +141,7 @@ const StaffPerformanceReview: FC<P> = () => {
         new Date(aYear)
       ) {
         DateArray.push({
-          date: new Date(new Date().setMonth(reviewDate.getMonth() + 1)),
+          date: convertDate(1),
           status: 'process',
           icon: (
             <Tooltip placement="topLeft" title="Peer Feedback">
@@ -146,9 +153,7 @@ const StaffPerformanceReview: FC<P> = () => {
       if (numberOfReviews > 0) {
         for (let i = 1; i < numberOfReviews; i++) {
           DateArray.push({
-            date: new Date(
-              new Date().setMonth(reviewDate.getMonth() + 3 * i + 1)
-            ),
+            date: convertDate(3 * i + 1),
             status: 'process',
             icon: (
               <Tooltip placement="topLeft" title="Peer Feedback">
@@ -173,7 +178,7 @@ const StaffPerformanceReview: FC<P> = () => {
           status: 'process',
         },
         {
-          date: new Date(new Date().setMonth(new Date().getMonth() + 1)),
+          date: convertDateWithCurrentDate(1),
           icon: (
             <Tooltip placement="topLeft" title="Peer Feedback">
               <TeamOutlined />
@@ -182,7 +187,7 @@ const StaffPerformanceReview: FC<P> = () => {
           status: 'wait',
         },
         {
-          date: new Date(new Date().setMonth(new Date().getMonth() + 4)),
+          date: convertDateWithCurrentDate(4),
           icon: (
             <Tooltip placement="topLeft" title="Peer Feedback">
               <TeamOutlined />
@@ -191,7 +196,7 @@ const StaffPerformanceReview: FC<P> = () => {
           status: 'wait',
         },
         {
-          date: new Date(new Date().setMonth(new Date().getMonth() + 7)),
+          date: convertDateWithCurrentDate(7),
           icon: (
             <Tooltip placement="topLeft" title="Peer Feedback">
               <TeamOutlined />
@@ -200,7 +205,7 @@ const StaffPerformanceReview: FC<P> = () => {
           status: 'wait',
         },
         {
-          date: new Date(new Date().setMonth(new Date().getMonth() + 10)),
+          date: convertDateWithCurrentDate(10),
           icon: (
             <Tooltip placement="topLeft" title="Peer Feedback">
               <TeamOutlined />
@@ -221,10 +226,9 @@ const StaffPerformanceReview: FC<P> = () => {
       )
     }
   } else {
-    const difference =
-      reviewDate.getFullYear() * 12 +
-      reviewDate.getMonth() -
-      (aYear.getFullYear() * 12 + aYear.getMonth())
+    const difference = Math.round(
+      moment(new Date(aYear)).diff(new Date(reviewDate), 'months', true)
+    )
     const numberOfReviews = Math.floor(Math.abs(difference) / 3)
     if (DateFormatter(today) !== DateFormatter(reviewDate)) {
       DateArray.push({
@@ -239,18 +243,18 @@ const StaffPerformanceReview: FC<P> = () => {
       if (diff_months(today, reviewDate) > 3) {
         const diff = diff_months(today, reviewDate)
         const beforePeers = Math.floor(Math.abs(diff - 1) / 3)
-        for (let i = 1; i < beforePeers + 1; i++) {
-          DateArray.push({
-            date: new Date(
-              new Date().setMonth(new Date().getMonth() + 3 * i - 1)
-            ),
-            status: 'process',
-            icon: (
-              <Tooltip placement="topLeft" title="Peer Feedback">
-                <TeamOutlined />
-              </Tooltip>
-            ),
-          })
+        for (let i = 1; i < beforePeers + 2; i++) {
+          if (convertDateWithCurrentDate(3 * i - 1) < convertDate(-1)) {
+            DateArray.push({
+              date: convertDateWithCurrentDate(3 * i - 1),
+              status: 'process',
+              icon: (
+                <Tooltip placement="topLeft" title="Peer Feedback">
+                  <TeamOutlined />
+                </Tooltip>
+              ),
+            })
+          }
         }
       }
       if (new Date(new Date().setMonth(review.getMonth() - 1)) > new Date()) {
@@ -332,7 +336,7 @@ const StaffPerformanceReview: FC<P> = () => {
         const month: number = 3 * i
         DateArray.push(
           {
-            date: new Date(new Date().setMonth(new Date().getMonth() + aMonth)),
+            date: convertDateWithCurrentDate(aMonth),
             status: 'finish',
             icon: (
               <Tooltip placement="topLeft" title="Assessment Reminder Email">
@@ -341,7 +345,7 @@ const StaffPerformanceReview: FC<P> = () => {
             ),
           },
           {
-            date: new Date(new Date().setMonth(new Date().getMonth() + month)),
+            date: convertDateWithCurrentDate(month),
             status: 'process',
             icon: (
               <Tooltip placement="topLeft" title="Self & Manager assessment">
@@ -350,9 +354,7 @@ const StaffPerformanceReview: FC<P> = () => {
             ),
           },
           {
-            date: new Date(
-              new Date().setMonth(new Date().getMonth() + month + 1)
-            ),
+            date: convertDateWithCurrentDate(month + 1),
             status: 'process',
             icon: (
               <Tooltip placement="topLeft" title="Peer Feedback">
