@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, ReactNode, useEffect, useState } from 'react'
 import { Checkbox } from '@pabau/ui'
 import styles from './Search.module.less'
 import { Input, Popover, Avatar, Image, Form, Button, Drawer } from 'antd'
@@ -23,9 +23,16 @@ interface P {
     avatarUrl?: string
   }[]
   onChange?: (newText: string) => void
+  children?: ReactNode
+  placeHolder?: string
 }
 
-export const Search: FC<P> = ({ onChange, searchResults }) => {
+export const Search: FC<P> = ({
+  onChange,
+  searchResults,
+  children,
+  placeHolder,
+}) => {
   const [searchDrawer, setSearchDrawer] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const [searchPopUp, setSearchPopUp] = useState(false)
@@ -269,38 +276,66 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
   return (
     <div style={{ width: '100%' }}>
       <div className={styles.mobileViewNone}>
-        <Popover
-          content={renderMenu}
-          visible={searchPopUp}
-          overlayClassName={classNames(
-            advanceSearch ? styles.advanceSearchModal : styles.searchInput,
-            styles.mobileViewNone
-          )}
-        >
-          <Input
-            className={styles.searchInputStyle}
-            placeholder="Search clients or leads"
-            value={searchTerm}
-            prefix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            suffix={
-              searchTerm && (
-                <CloseCircleFilled
-                  style={{ color: '#BFBFBF' }}
-                  onClick={() => {
-                    setSearchPopUp(false)
-                    setSearchTerm('')
-                  }}
-                />
-              )
-            }
-          />
-        </Popover>
+        {children ? (
+          <div>
+            <Input
+              className={styles.searchInputStyle}
+              placeholder={
+                placeHolder ? placeHolder : 'Search clients or leads'
+              }
+              value={searchTerm}
+              prefix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              suffix={
+                searchTerm && (
+                  <CloseCircleFilled
+                    style={{ color: '#BFBFBF' }}
+                    onClick={() => {
+                      setSearchPopUp(false)
+                      setSearchTerm('')
+                    }}
+                  />
+                )
+              }
+            />
+            <div>{children}</div>
+          </div>
+        ) : (
+          <Popover
+            content={children ? children : renderMenu}
+            visible={searchPopUp}
+            overlayClassName={classNames(
+              advanceSearch ? styles.advanceSearchModal : styles.searchInput,
+              styles.mobileViewNone
+            )}
+          >
+            <Input
+              className={styles.searchInputStyle}
+              placeholder={
+                placeHolder ? placeHolder : 'Search clients or leads'
+              }
+              value={searchTerm}
+              prefix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              suffix={
+                searchTerm && (
+                  <CloseCircleFilled
+                    style={{ color: '#BFBFBF' }}
+                    onClick={() => {
+                      setSearchPopUp(false)
+                      setSearchTerm('')
+                    }}
+                  />
+                )
+              }
+            />
+          </Popover>
+        )}
       </div>
       <div className={styles.desktopViewNone}>
         <Input
           className={classNames(styles.searchInputStyle)}
-          placeholder="Search clients or leads"
+          placeholder={placeHolder ? placeHolder : 'Search clients or leads'}
           value={searchTerm}
           prefix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -331,7 +366,9 @@ export const Search: FC<P> = ({ onChange, searchResults }) => {
                 styles.searchInputStyle,
                 styles.resSearchInputStyle
               )}
-              placeholder="Search clients or leads"
+              placeholder={
+                placeHolder ? placeHolder : 'Search clients or leads'
+              }
               value={searchTerm}
               prefix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
               onChange={(e) => setSearchTerm(e.target.value)}
