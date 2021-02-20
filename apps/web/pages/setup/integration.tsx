@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { Layout, Breadcrumb, Input } from '@pabau/ui'
-import { Tabs, Typography } from 'antd'
+import React, { FC, useState } from 'react'
+import { Layout, Breadcrumb, Input, SetupEmptySearch } from '@pabau/ui'
+import { Card, Tabs, Typography } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
-
+import Highlighter from 'react-highlight-words'
 import AllCollectionsHeader, {
   AllCollectionsBody,
 } from '../../components/Integration/Integration'
@@ -129,11 +129,66 @@ const IntegrationBodyCollections = [
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IntegrationProps {}
 
-export function Integration(props: IntegrationProps) {
+interface searchProps {
+  category: string[]
+  title: string
+}
+
+interface SearchProps {
+  data: searchProps[]
+  searchString: string
+}
+
+const Search: FC<SearchProps> = ({ data, searchString }) => {
+  console.log('searchString', searchString)
+  return (
+    <Card className={styles.searchResultsCard} bodyStyle={{ padding: '0' }}>
+      {data && data.length > 0 && (
+        <div className={styles.searchBody}>
+          {data.map((thread, index) => {
+            return (
+              <div key={index} className={styles.searchList}>
+                <span>
+                  <Highlighter
+                    highlightClassName={styles.highlight}
+                    searchWords={[searchString]}
+                    textToHighlight={thread.category}
+                  />
+                  <span className={styles.searchTitle}> - {thread.title}</span>
+                </span>
+              </div>
+            )
+          })}
+        </div>
+      )}
+      {data && data.length === 0 && <SetupEmptySearch />}
+    </Card>
+  )
+}
+
+export const Integration: FC<IntegrationProps> = (props) => {
   const [active, setActive] = useState('4')
+  const [searchString, setSearchString] = useState('')
+  const [searchItemsArray, setSearchItemsArray] = useState([])
 
   function handleClick(key: string) {
     setActive(key)
+  }
+
+  function search(e) {
+    e = e.trim()
+    setSearchString(e)
+    const tempSearchItemsArray = []
+    const tempIntegrationBodyCollections = IntegrationBodyCollections
+    if (searchString.length > 0) {
+      for (const a of tempIntegrationBodyCollections) {
+        // delete a.subTitle, a.installed, a.logoImage
+        tempSearchItemsArray.push({ title: a.title, categories: a.categories })
+        console.log('12346')
+      }
+      setSearchItemsArray(tempSearchItemsArray)
+      console.log('searchItemsArray', searchItemsArray.length)
+    }
   }
 
   return (
@@ -152,127 +207,136 @@ export function Integration(props: IntegrationProps) {
             </div>
             <div className={styles.searchWrapper}>
               <Input
-                name="search"
+                name="searchString"
                 type="text"
                 placeholder="Search by integration name"
+                onChange={search}
               />
               <span>
                 <SearchOutlined />
               </span>
             </div>
           </div>
-          <Tabs
-            tabPosition="left"
-            defaultActiveKey={active}
-            activeKey={active}
-            onTabClick={handleClick}
-          >
-            <TabPane
-              tab="Manage"
-              key="0"
-              disabled={true}
-              style={{ color: 'red', fontSize: '10px' }}
-            />
-            <TabPane tab="Your installed apps" key="1">
-              <div>Your installed apps</div>
-            </TabPane>
-            <TabPane tab="Features" key="2" disabled={true} />
-            <TabPane tab="All Collections" key="4">
-              <div>
-                <AllCollectionsHeader />
-                <AllCollectionsBody
-                  heading="You recenly viewed"
-                  category="ALL"
-                  items={IntegrationBodyCollections}
-                  limit={6}
+          {searchString.length === 0 ? (
+            <div>
+              <Tabs
+                tabPosition="left"
+                defaultActiveKey={active}
+                activeKey={active}
+                onTabClick={handleClick}
+              >
+                <TabPane
+                  tab="Manage"
+                  key="0"
+                  disabled={true}
+                  style={{ color: 'red', fontSize: '10px' }}
                 />
-                <div className={styles.popularWrapper}>
-                  <h5>Popular</h5>
-                  <div
-                    className={styles.seeAll}
-                    onClick={(event) => handleClick('5')}
-                  >
-                    see all &#x2794;
+                <TabPane tab="Your installed apps" key="1">
+                  <div>Your installed apps</div>
+                </TabPane>
+                <TabPane tab="Features" key="2" disabled={true} />
+                <TabPane tab="All Collections" key="4">
+                  <div>
+                    <AllCollectionsHeader />
+                    <AllCollectionsBody
+                      heading="You recenly viewed"
+                      category="ALL"
+                      items={IntegrationBodyCollections}
+                      limit={6}
+                    />
+                    <div className={styles.popularWrapper}>
+                      <h5>Popular</h5>
+                      <div
+                        className={styles.seeAll}
+                        onClick={(event) => handleClick('5')}
+                      >
+                        see all &#x2794;
+                      </div>
+                    </div>
+                    <AllCollectionsBody
+                      category="Popular"
+                      items={IntegrationBodyCollections}
+                      limit={6}
+                    />
                   </div>
-                </div>
-                <AllCollectionsBody
-                  category="Popular"
-                  items={IntegrationBodyCollections}
-                  limit={6}
-                />
-              </div>
-            </TabPane>
-            <TabPane tab="Popular" key="5">
-              <div>
-                <AllCollectionsHeader />
-                <AllCollectionsBody
-                  heading="Popular"
-                  category="Popular"
-                  items={IntegrationBodyCollections}
-                />
-              </div>
-            </TabPane>
-            <TabPane tab="Payment Processing" key="6">
-              <div>
-                <AllCollectionsHeader />
-                <AllCollectionsBody
-                  heading="Payment Processing"
-                  category="Payment"
-                  items={IntegrationBodyCollections}
-                />
-              </div>
-            </TabPane>
-            <TabPane tab="Accountancy" key="7">
-              <div>
-                <AllCollectionsHeader />
-                <AllCollectionsBody
-                  heading="Accountancy"
-                  category="Accountancy"
-                  items={IntegrationBodyCollections}
-                />
-              </div>
-            </TabPane>
-            <TabPane tab="Labs" key="8">
-              <div>
-                <AllCollectionsHeader />
-                <AllCollectionsBody
-                  heading="Labs"
-                  category="Labs"
-                  items={IntegrationBodyCollections}
-                />
-              </div>
-            </TabPane>
-            <TabPane tab="Marketing" key="9">
-              <div>
-                <AllCollectionsHeader />
-                <AllCollectionsBody
-                  heading="Marketing"
-                  category="Marketing"
-                  items={IntegrationBodyCollections}
-                />
-              </div>
-            </TabPane>
-            <TabPane tab="Vaccination" key="10">
-              <div>
-                <AllCollectionsHeader />
-                <AllCollectionsBody
-                  heading="Vaccination"
-                  category="Vaccination"
-                  items={IntegrationBodyCollections}
-                />
-              </div>
-            </TabPane>
-            <TabPane tab="Bookings" key="11">
-              <div>
-                <AllCollectionsHeader />
-                <AllCollectionsBody
-                  heading="Bookings"
-                  category="Bookings"
-                  items={IntegrationBodyCollections}
-                />
-              </div>
-            </TabPane>
-          </Tabs>
+                </TabPane>
+                <TabPane tab="Popular" key="5">
+                  <div>
+                    <AllCollectionsHeader />
+                    <AllCollectionsBody
+                      heading="Popular"
+                      category="Popular"
+                      items={IntegrationBodyCollections}
+                    />
+                  </div>
+                </TabPane>
+                <TabPane tab="Payment Processing" key="6">
+                  <div>
+                    <AllCollectionsHeader />
+                    <AllCollectionsBody
+                      heading="Payment Processing"
+                      category="Payment"
+                      items={IntegrationBodyCollections}
+                    />
+                  </div>
+                </TabPane>
+                <TabPane tab="Accountancy" key="7">
+                  <div>
+                    <AllCollectionsHeader />
+                    <AllCollectionsBody
+                      heading="Accountancy"
+                      category="Accountancy"
+                      items={IntegrationBodyCollections}
+                    />
+                  </div>
+                </TabPane>
+                <TabPane tab="Labs" key="8">
+                  <div>
+                    <AllCollectionsHeader />
+                    <AllCollectionsBody
+                      heading="Labs"
+                      category="Labs"
+                      items={IntegrationBodyCollections}
+                    />
+                  </div>
+                </TabPane>
+                <TabPane tab="Marketing" key="9">
+                  <div>
+                    <AllCollectionsHeader />
+                    <AllCollectionsBody
+                      heading="Marketing"
+                      category="Marketing"
+                      items={IntegrationBodyCollections}
+                    />
+                  </div>
+                </TabPane>
+                <TabPane tab="Vaccination" key="10">
+                  <div>
+                    <AllCollectionsHeader />
+                    <AllCollectionsBody
+                      heading="Vaccination"
+                      category="Vaccination"
+                      items={IntegrationBodyCollections}
+                    />
+                  </div>
+                </TabPane>
+                <TabPane tab="Bookings" key="11">
+                  <div>
+                    <AllCollectionsHeader />
+                    <AllCollectionsBody
+                      heading="Bookings"
+                      category="Bookings"
+                      items={IntegrationBodyCollections}
+                    />
+                  </div>
+                </TabPane>
+              </Tabs>
+            </div>
+          ) : (
+            <div className={styles.errorWrapper}>
+              <Search data={setSearchItemsArray} searchString={searchString} />
+            </div>
+          )}
         </div>
       </Layout>
     </div>

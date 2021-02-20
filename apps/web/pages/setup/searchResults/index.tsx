@@ -9,6 +9,7 @@ interface searchProps {
   subTitle: string
   title: string
 }
+
 interface P {
   data: searchProps[]
   searchTerm: string

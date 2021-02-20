@@ -14,7 +14,7 @@ interface itemsSchema {
 
 interface P {
   heading?: string
-  category: string
+  category?: string
   items: itemsSchema[]
   limit?: number
 }
