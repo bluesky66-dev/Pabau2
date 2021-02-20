@@ -29,7 +29,7 @@ const General: FC<P> = ({
         <InputNumber
           value={values.inputPoint}
           onChange={(val) => setFieldValue('inputPoint', val)}
-          isFormatter={true}
+          showCurrency={true}
           requiredMsg={errors.inputPoint}
         />
       </div>
