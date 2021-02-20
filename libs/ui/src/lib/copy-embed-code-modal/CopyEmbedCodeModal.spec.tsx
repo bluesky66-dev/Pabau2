@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import CopyEmbeddCodeModal from './CopyEmbeddCodeModal'
+import CopyEmbedCodeModal from './CopyEmbedCodeModal'
 
-describe('CopyEmbeddCodeModal', () => {
+describe('CopyEmbedCodeModal', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<CopyEmbeddCodeModal />)
+    const { baseElement } = render(<CopyEmbedCodeModal />)
     expect(baseElement).toBeTruthy()
   })
 })

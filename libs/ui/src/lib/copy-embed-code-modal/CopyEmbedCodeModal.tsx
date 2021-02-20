@@ -2,10 +2,10 @@ import React, { FC, useState } from 'react'
 import { Modal } from 'antd'
 import { Button, Input } from '@pabau/ui'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import styles from './CopyEmbeddCodeModal.module.less'
+import styles from './CopyEmbedCodeModal.module.less'
 
 /* eslint-disable-next-line */
-export interface CopyEmbeddCodeModalProps {
+export interface CopyEmbedCodeModalProps {
   modalWidth: number
   visible: boolean
   onClose: () => void
@@ -16,7 +16,7 @@ export interface CopyEmbeddCodeModalProps {
   subTitle: string
 }
 
-export const CopyEmbeddCodeModal: FC<CopyEmbeddCodeModalProps> = ({
+export const CopyEmbedCodeModal: FC<CopyEmbedCodeModalProps> = ({
   visible,
   title,
   modalWidth,
@@ -48,7 +48,7 @@ export const CopyEmbeddCodeModal: FC<CopyEmbeddCodeModalProps> = ({
         footer={null}
         width={modalWidth}
         centered={true}
-        className={styles.embeddModal}
+        className={styles.embedModal}
         onCancel={onClose}
       >
         <>
@@ -85,7 +85,7 @@ export const CopyEmbeddCodeModal: FC<CopyEmbeddCodeModalProps> = ({
         footer={null}
         width={modalWidth}
         centered={true}
-        className={styles.embeddModal}
+        className={styles.embedModal}
         onCancel={() => {
           setDevModalState(false)
         }}
@@ -101,4 +101,4 @@ export const CopyEmbeddCodeModal: FC<CopyEmbeddCodeModalProps> = ({
   )
 }
 
-export default CopyEmbeddCodeModal
+export default CopyEmbedCodeModal

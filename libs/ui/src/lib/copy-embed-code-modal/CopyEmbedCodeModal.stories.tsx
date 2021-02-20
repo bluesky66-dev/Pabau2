@@ -1,11 +1,11 @@
 import React from 'react'
-import { CopyEmbeddCodeModal } from './CopyEmbeddCodeModal'
+import { CopyEmbedCodeModal } from './CopyEmbedCodeModal'
 
 export default {
-  title: 'Modals/CopyEmbeddCodeModal',
-  component: CopyEmbeddCodeModal,
+  title: 'Modals/CopyEmbedCodeModal',
+  component: CopyEmbedCodeModal,
   args: {
-    title: 'Copy embedd code',
+    title: 'Copy embed code',
     subTitle: 'Paste this snippet into your webbsite’s source code',
     modalWidth: 600,
     visible: true,
@@ -17,7 +17,7 @@ export default {
   },
 }
 
-const CopyEmbeddCodeModalStory = ({ ...args }) => (
-  <CopyEmbeddCodeModal {...args} />
+const CopyEmbedCodeModalStory = ({ ...args }) => (
+  <CopyEmbedCodeModal {...args} />
 )
-export const BasicEmbeddCodeModal = CopyEmbeddCodeModalStory.bind({})
+export const BasicEmbedCodeModal = CopyEmbedCodeModalStory.bind({})
