@@ -73,10 +73,6 @@ const Index: FC<P> = ({ ...props }) => {
     setDataSource(newData)
   }
 
-  useEffect(() => {
-    if (data) setDataSource(data)
-  }, [data])
-
   const tabItems = ['Tablesheet', 'Library']
 
   const cardHeader = (
@@ -117,6 +113,8 @@ const Index: FC<P> = ({ ...props }) => {
     }
   }
 
+  setDataSource(data)
+
   return (
     <Layout>
       <div className={styles.drugsListingMain}>
@@ -131,7 +129,10 @@ const Index: FC<P> = ({ ...props }) => {
                   noDataIcon={<ApartmentOutlined />}
                   noDataBtnText="Drug"
                   scroll={{ x: 'max-content' }}
-                  dataSource={dataSource}
+                  dataSource={dataSource?.map((e: { id: any }) => ({
+                    key: e.id,
+                    ...e,
+                  }))}
                   updateDataSource={updateDataSource}
                   downloadBtn={true}
                 />
