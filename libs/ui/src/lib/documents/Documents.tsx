@@ -47,17 +47,11 @@ export const Documents: FC<DocumentsProps> = ({
       key: 1,
       icon: <FileOutlined />,
       label: 'Rename',
-      onClick: () => {
-        console.log('RENAME CLICKED')
-      },
     },
     {
       key: 2,
       icon: <DeleteOutlined />,
       label: 'Delete',
-      onClick: () => {
-        console.log('DELETE CLICKED')
-      },
     },
   ]
 
@@ -105,13 +99,11 @@ export const Documents: FC<DocumentsProps> = ({
       <div className={styles.seperator}></div>
       <div className={styles.content}>
         <div className={styles.folderPanel}>
-          {folders &&
-            folders.length &&
+          {folders.length > 0 &&
             folders.map((folder, index) => (
               <div key={`folder${index}`}>
                 <Accordion headerLabel={folder.name}>
-                  {folder.files &&
-                    folder.files.length &&
+                  {folder.files.length > 0 &&
                     folder.files.map((file, ind) => (
                       <div
                         className={styles.subFolderDiv}
@@ -119,12 +111,7 @@ export const Documents: FC<DocumentsProps> = ({
                       >
                         <div className="detailsWithControls">
                           <div className="checkBoxDiv">
-                            <Checkbox
-                              className="checkBox"
-                              onChange={(res) => {
-                                console.log('RES: ', res)
-                              }}
-                            />
+                            <Checkbox className="checkBox" />
                           </div>
                           <div className="details">
                             <div className="fileIcon">
