@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { Button, Table as AntTable, Avatar } from 'antd'
 import {
   SortableContainer,
@@ -67,7 +67,6 @@ export const Table: FC<TableType> = ({
   needTranslation,
   ...props
 }) => {
-  const [showDownloadBtn] = useState(false)
   const onSortEnd = ({ oldIndex, newIndex }) => {
     if (oldIndex !== newIndex) {
       const newData = array_move(dataSource, oldIndex, newIndex)
