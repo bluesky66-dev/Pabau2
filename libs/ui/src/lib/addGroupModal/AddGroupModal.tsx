@@ -14,9 +14,9 @@ interface groupData {
 }
 
 interface P {
-  groupData?: groupData
+  groupData: groupData
   searchMember?: Member[]
-  isGroupModalVisible?: boolean
+  isGroupModalVisible: boolean
   memberModalTitle?: string
   searchMemberText?: string
   selectedGroup?: string
