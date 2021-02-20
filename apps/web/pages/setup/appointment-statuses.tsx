@@ -139,6 +139,7 @@ const schema: Schema = {
   short: 'Appointment Status',
   shortLower: 'appointment statuses',
   shemaType: 'Appointment Status',
+  createButtonLabel: 'Create Appointment Status',
   messages: {
     create: {
       success: 'You have successfully created a appointment status',
