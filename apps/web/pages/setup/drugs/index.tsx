@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useState } from 'react'
 import Layout from '../../../components/Layout/Layout'
 import { TabbedTable, Button, Table, Breadcrumb, Pagination } from '@pabau/ui'
 import { Card, Input, Row, Col } from 'antd'
@@ -129,7 +129,7 @@ const Index: FC<P> = ({ ...props }) => {
                   noDataIcon={<ApartmentOutlined />}
                   noDataBtnText="Drug"
                   scroll={{ x: 'max-content' }}
-                  dataSource={dataSource?.map((e: { id: any }) => ({
+                  dataSource={dataSource?.map((e: { id }) => ({
                     key: e.id,
                     ...e,
                   }))}
