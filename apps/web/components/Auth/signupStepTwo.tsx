@@ -111,7 +111,11 @@ export const SignupStepTwo: FC<SignupStepTwoProps> = ({
               </Checkbox>
             </div>
             <div className={styles.signupButton}>
-              <SubmitButton className={styles.btnStarted} type={'primary'}>
+              <SubmitButton
+                className={styles.btnStarted}
+                type={'primary'}
+                disabled={!isValidPhone}
+              >
                 Create Account
               </SubmitButton>
             </div>

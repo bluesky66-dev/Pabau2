@@ -8,7 +8,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    img {
+    svg {
       max-width: 100%;
     }
   }
@@ -55,6 +55,28 @@
         margin-bottom: 40px;
         .custom-input-wrap {
           display: flex;
+          :global .ant-form-item-with-help {
+              .ant-form-item-control {
+                .ant-form-item-explain {
+                  div {
+                    li {
+                      display: none;
+                    }
+                  }
+                }
+                .ant-form-item-control-input {
+                  .ant-form-item-control-input-content {
+                    input[type="number"] {
+                      &:focus {
+                        border: 1px solid #f5222d !important;
+                      }
+                        border: 1px solid #f5222d !important;
+                    }
+                  }
+                }
+              }
+
+          }
           :global .ant-form-item {
             margin-bottom: 0;
             .ant-form-item-control {

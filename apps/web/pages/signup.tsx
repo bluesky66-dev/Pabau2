@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import { Logo } from '@pabau/ui'
-import LaunchingImage from '../assets/images/launching-pana.png'
+import { ReactComponent as LaunchingImage } from '../assets/images/launching-pana.svg'
 
 import {
   SignupStepOne,
@@ -27,7 +27,7 @@ const Signup: FC = () => {
   return (
     <div className={styles.signupWrapper}>
       <div className={styles.signupBackground}>
-        <img src={LaunchingImage} alt={LaunchingImage} />
+        <LaunchingImage />
       </div>
       <div className={styles.signupContent}>
         <div className={styles.signupLogo}>

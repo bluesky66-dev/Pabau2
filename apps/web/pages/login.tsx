@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import loginImage from '../assets/images/login.png'
+import { ReactComponent as LoginImage } from '../assets/images/login.svg'
 import styles from './login.module.less'
 import { Logo } from '@pabau/ui'
 import LoginMain from '../components/Auth/login'
@@ -15,7 +15,7 @@ const Login: FC = () => {
   return (
     <div className={styles.signInWrapper}>
       <div className={styles.signInBackground}>
-        <img src={loginImage} alt={loginImage} />
+        <LoginImage />
       </div>
       <div className={styles.formWrapper}>
         <div className={styles.signInContent}>
