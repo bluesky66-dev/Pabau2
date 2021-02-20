@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Progress as AntProgress, Tooltip } from 'antd'
 import { ProgressProps } from 'antd/lib/progress'
 
-import styles from './NewsLetterTile.module.less'
+import styles from './NewsletterTile.module.less'
 
 interface P extends ProgressProps {
   totalSent: number
@@ -10,11 +10,16 @@ interface P extends ProgressProps {
   clicked: number
 }
 
-const NewsLetterTile: FC<P> = ({ totalSent, opened, clicked, ...props }) => {
+interface popoverContent {
+  value: number
+  type: string
+}
+
+const NewsletterTile: FC<P> = ({ totalSent, opened, clicked, ...props }) => {
   const openedPercentage = calculatePercentage(opened, totalSent)
   const clickedPercentage = calculatePercentage(clicked, totalSent)
 
-  const preparePopoverContent = (value: number, type: string): JSX.Element => {
+  const PreparePopoverContent: FC<popoverContent> = ({ value, type }) => {
     return (
       <div className={styles.tooltipText}>
         {type}:{value}% ({opened} out of {totalSent} contacts)
@@ -26,7 +31,9 @@ const NewsLetterTile: FC<P> = ({ totalSent, opened, clicked, ...props }) => {
       <div className={styles.customTooltip}>
         <p>O:</p>
         <Tooltip
-          title={preparePopoverContent(openedPercentage, 'Opened')}
+          title={
+            <PreparePopoverContent value={openedPercentage} type={'Opened'} />
+          }
           placement={'bottom'}
         >
           <AntProgress showInfo={false} percent={openedPercentage} {...props} />
@@ -36,7 +43,9 @@ const NewsLetterTile: FC<P> = ({ totalSent, opened, clicked, ...props }) => {
         <p>C:</p>
         <Tooltip
           placement={'bottom'}
-          title={preparePopoverContent(clickedPercentage, 'Clicked')}
+          title={
+            <PreparePopoverContent value={clickedPercentage} type={'Clicked'} />
+          }
         >
           <AntProgress
             showInfo={false}
@@ -53,4 +62,4 @@ function calculatePercentage(value: number, total: number): number {
   return Number(Number((value * 100) / total).toFixed(2))
 }
 
-export default NewsLetterTile
+export default NewsletterTile

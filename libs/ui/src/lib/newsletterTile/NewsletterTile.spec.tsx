@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import NewsLetterTile from './NewsLetterTile'
+import NewsLetterTile from './NewsletterTile'
 
 describe('NewsLetterTile', () => {
   it('should render successfully', () => {

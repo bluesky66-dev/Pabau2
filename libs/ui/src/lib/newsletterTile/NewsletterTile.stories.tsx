@@ -1,5 +1,5 @@
 import React from 'react'
-import NewsLetterTile from './NewsLetterTile'
+import NewsletterTile from './NewsletterTile'
 import { ProgressProps } from 'antd/lib/progress'
 
 interface P extends ProgressProps {
@@ -9,8 +9,8 @@ interface P extends ProgressProps {
 }
 
 export default {
-  component: NewsLetterTile,
-  title: 'UI/NewsLetterTile',
+  component: NewsletterTile,
+  title: 'UI/NewsletterTile',
   args: { totalSent: '100', opened: '50', clicked: '10' },
   argsTypes: {
     value: { control: { type: 'number' } },
@@ -20,6 +20,6 @@ export default {
   },
 }
 
-export const NewsLetterTitleStory = (args: P): JSX.Element => {
-  return <NewsLetterTile {...args} />
+export const NewsletterTitleStory = (args: P): JSX.Element => {
+  return <NewsletterTile {...args} />
 }
