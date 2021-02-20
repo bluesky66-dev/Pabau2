@@ -92,6 +92,7 @@ const schema: Schema = {
   fullLower: 'department',
   short: 'Department',
   shortLower: 'department',
+  createButtonLabel: 'Create Department',
   messages: {
     create: {
       success: 'You have successfully created a department',

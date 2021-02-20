@@ -9,7 +9,7 @@ import { ContactsOutlined, LockOutlined, MenuOutlined } from '@ant-design/icons'
 import styles from './Table.module.less'
 import { TableProps } from 'antd/es/table'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import { useTranslation } from 'react-i18next'
 export interface DragProps {
   draggable?: boolean
   isCustomColorExist?: boolean
@@ -48,8 +48,7 @@ export type TableType = {
   noDataIcon?: JSX.Element
   onAddTemplate?: () => void
   searchTerm?: string
-  downloadBtn?: boolean
-  onDownload?: () => void
+  needTranslation?: boolean
 } & TableProps<never> &
   DragProps
 
@@ -65,8 +64,7 @@ export const Table: FC<TableType> = ({
   noDataIcon = <ContactsOutlined />,
   onAddTemplate,
   searchTerm = '',
-  downloadBtn,
-  onDownload,
+  needTranslation,
   ...props
 }) => {
   const [showDownloadBtn] = useState(false)
@@ -84,6 +82,7 @@ export const Table: FC<TableType> = ({
     )
     return <SortItem index={index} {...restProps} />
   }
+  const { t } = useTranslation('common')
 
   const DraggableContainer = (props) => (
     <SortContainer
@@ -105,23 +104,18 @@ export const Table: FC<TableType> = ({
   }
   const renderActiveButton = (isActive) => {
     return (
-      <div>
-        {showDownloadBtn ? (
-          <Button
-            type="default"
-            className={isActive ? styles.activeBtn : styles.disableSourceBtn}
-          >
-            Download
-          </Button>
-        ) : (
-          <Button
-            className={isActive ? styles.activeBtn : styles.disableSourceBtn}
-            disabled={!isActive}
-          >
-            {isActive ? 'Active' : 'Inactive'}
-          </Button>
-        )}
-      </div>
+      <Button
+        className={isActive ? styles.activeBtn : styles.disableSourceBtn}
+        disabled={!isActive}
+      >
+        {needTranslation
+          ? isActive
+            ? t('marketingsource-tableRow-active-btn.translation')
+            : t('marketingsource-tableRow-inActive-btn.translation')
+          : isActive
+          ? 'Active'
+          : 'Inactive'}
+      </Button>
     )
   }
 

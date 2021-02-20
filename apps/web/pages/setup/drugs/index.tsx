@@ -134,7 +134,6 @@ const Index: FC<P> = ({ ...props }) => {
                     ...e,
                   }))}
                   updateDataSource={updateDataSource}
-                  downloadBtn={true}
                 />
               </div>
               <div className={styles.library}>
