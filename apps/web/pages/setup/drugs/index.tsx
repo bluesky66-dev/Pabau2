@@ -60,12 +60,14 @@ const columns = [
   },
 ]
 
-export interface P {}
+export interface P {
+  tableName?: string
+}
 
-const Index: FC<P> = () => {
+const Index: FC<P> = ({ ...props }) => {
   const [paginationState, setPaginationState] = useState(true)
   const [searchTerm, setSearchTerm] = useState(null)
-  const [dataSource, setDataSource]: any = useState(data)
+  const [dataSource, setDataSource] = useState(data)
   const [libItems] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])
   const updateDataSource = ({ newData }) => {
     setDataSource(newData)
