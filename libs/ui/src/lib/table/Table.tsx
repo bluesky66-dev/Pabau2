@@ -50,7 +50,7 @@ export type TableType = {
   searchTerm?: string
   downloadBtn?: boolean
   onDownload?: () => void
-} & TableProps<never> &
+} & TableProps<any> &
   DragProps
 
 export const Table: FC<TableType> = ({
