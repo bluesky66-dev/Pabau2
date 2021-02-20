@@ -17,7 +17,7 @@ export interface QuestionField {
 }
 
 export interface AddQuestionProps {
-  onQuestionBankAddButton?: (
+  onQuestionBankAddButton: (
     questions: Array<IQuestionOptions> | undefined
   ) => void
   description?: string
@@ -31,7 +31,6 @@ export interface AddQuestionProps {
   onChange?: (value: string, index: number) => void
   onAddQuestion?: () => void
   onDeleteButton?: (index: number) => void
-  onGoTo?: () => void
 }
 
 export const AddQuestion: FC<AddQuestionProps> = ({
@@ -46,11 +45,9 @@ export const AddQuestion: FC<AddQuestionProps> = ({
   onAddQuestion,
   onDeleteButton,
   onQuestionBankAddButton,
-  onGoTo,
 }) => {
   const [isModalVisible, setModalVisible] = useState<boolean>(false)
   const onClick = () => {
-    onGoTo?.()
     setModalVisible(true)
   }
   return (
