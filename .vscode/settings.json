@@ -8,6 +8,18 @@
     "**/.next": true,
     "**/public/vendors": true
   },
-  "editor.formatOnSave": true,
-  "editor.formatOnPaste": false
+  "eslint.format.enable": true,
+  "eslint.codeActionsOnSave.mode": "all",
+  "eslint.codeAction.showDocumentation": {
+    "enable": true
+  },
+  "eslint.alwaysShowStatus": true,
+  "eslint.lintTask.enable": true,
+  "editor.suggestSelection": "first",
+  "explorer.confirmDelete": false,
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.formatOnSave": true
 }
