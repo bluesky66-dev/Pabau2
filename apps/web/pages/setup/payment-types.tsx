@@ -96,6 +96,7 @@ const schema: Schema = {
   fullLower: 'payment type',
   short: 'Payment Type',
   shortLower: 'payment type',
+  createButtonLabel: 'Create Payment Type',
   fields: {
     name: {
       full: 'Friendly Name',
