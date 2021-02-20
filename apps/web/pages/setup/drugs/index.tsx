@@ -63,12 +63,15 @@ const columns = [
 export interface P {}
 
 const Index: FC<P> = () => {
+  const [paginationState, setPaginationState] = useState(true)
   const [searchTerm, setSearchTerm] = useState(null)
   const [dataSource, setDataSource]: any = useState(data)
   const [libItems] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])
   const updateDataSource = ({ newData }) => {
     setDataSource(newData)
   }
+
+  const tabItems = ['Tablesheet', 'Library']
 
   const cardHeader = (
     <div className={styles.header}>
@@ -100,12 +103,20 @@ const Index: FC<P> = () => {
     </div>
   )
 
+  const onTabChange = (key: number | string) => {
+    if (Number(key) === 1) {
+      setPaginationState(false)
+    } else {
+      setPaginationState(true)
+    }
+  }
+
   return (
     <Layout>
       <div className={styles.drugsListingMain}>
         <Card title={cardHeader}>
           <div className={styles.body}>
-            <TabbedTable tabItems={['Tablesheet', 'Library']}>
+            <TabbedTable tabItems={tabItems} onTabChange={onTabChange}>
               <div className={styles.tableSheet}>
                 <Table
                   columns={columns}
@@ -115,13 +126,20 @@ const Index: FC<P> = () => {
                   noDataBtnText="Drug"
                   dataSource={dataSource}
                   updateDataSource={updateDataSource}
+                  downloadBtn={true}
                 />
               </div>
               <div className={styles.library}>
                 <Row>
                   {libItems.length > 0 &&
                     libItems.map((el, key) => (
-                      <Col lg={6} key={`col-key-${key * 123}`}>
+                      <Col
+                        lg={6}
+                        md={8}
+                        sm={16}
+                        xs={24}
+                        key={`col-key-${key * 123}`}
+                      >
                         <div className={styles.libraryCard}>
                           <div>
                             <FileProtectOutlined color="#9292A3;" />
@@ -136,14 +154,16 @@ const Index: FC<P> = () => {
             </TabbedTable>
           </div>
         </Card>
-        <div className={styles.paginationDiv}>
-          <Pagination
-            showingRecords={10}
-            defaultCurrent={1}
-            total={100}
-            pageSize={10}
-          />
-        </div>
+        {paginationState && (
+          <div className={styles.paginationDiv}>
+            <Pagination
+              showingRecords={7}
+              defaultCurrent={1}
+              total={7}
+              pageSize={10}
+            />
+          </div>
+        )}
       </div>
     </Layout>
   )

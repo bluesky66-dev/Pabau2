@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Button, Table as AntTable, Avatar } from 'antd'
 import {
   SortableContainer,
@@ -48,6 +48,8 @@ export type TableType = {
   noDataIcon?: JSX.Element
   onAddTemplate?: () => void
   searchTerm?: string
+  downloadBtn?: boolean
+  onDownload?: () => void
 } & TableProps<never> &
   DragProps
 
@@ -63,8 +65,11 @@ export const Table: FC<TableType> = ({
   noDataIcon = <ContactsOutlined />,
   onAddTemplate,
   searchTerm = '',
+  downloadBtn,
+  onDownload,
   ...props
 }) => {
+  const [showDownloadBtn, setShowDownloadBtn] = useState(false)
   const onSortEnd = ({ oldIndex, newIndex }) => {
     if (oldIndex !== newIndex) {
       const newData = array_move(dataSource, oldIndex, newIndex)
@@ -100,12 +105,23 @@ export const Table: FC<TableType> = ({
   }
   const renderActiveButton = (isActive) => {
     return (
-      <Button
-        className={isActive ? styles.activeBtn : styles.disableSourceBtn}
-        disabled={!isActive}
-      >
-        {isActive ? 'Active' : 'Inactive'}
-      </Button>
+      <>
+        {showDownloadBtn ? (
+          <Button
+            type="default"
+            className={isActive ? styles.activeBtn : styles.disableSourceBtn}
+          >
+            Download
+          </Button>
+        ) : (
+          <Button
+            className={isActive ? styles.activeBtn : styles.disableSourceBtn}
+            disabled={!isActive}
+          >
+            {isActive ? 'Active' : 'Inactive'}
+          </Button>
+        )}
+      </>
     )
   }
 
