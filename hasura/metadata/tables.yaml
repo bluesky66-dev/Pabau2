@@ -23,21 +23,21 @@
   - role: public
     permission:
       columns:
-      - city
-      - country
-      - created_at
-      - email
-      - id
       - integration
       - is_active
-      - name
       - order
-      - phone
       - postal_code
       - provider_number
+      - city
+      - country
+      - email
+      - name
+      - phone
       - street
       - street2
+      - created_at
       - updated_at
+      - id
       filter: {}
       allow_aggregations: true
   update_permissions:
@@ -325,6 +325,7 @@
       - invoice_prefix
       - invoice_starting_number
       - invoice_template
+      - is_draft
       - is_active
       - name
       - order
@@ -345,6 +346,7 @@
       - invoice_prefix
       - invoice_starting_number
       - invoice_template
+      - is_draft
       - is_active
       - name
       - order
@@ -365,6 +367,7 @@
       - invoice_prefix
       - invoice_starting_number
       - invoice_template
+      - is_draft
       - is_active
       - name
       - order
@@ -537,6 +540,27 @@
       filter: {}
 - table:
     schema: public
+    name: locations
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - address
+      - created_at
+      - id
+      - image
+      - is_active
+      - is_day
+      - is_night
+      - is_parking
+      - is_pharmacy
+      - is_time
+      - name
+      - order
+      filter: {}
+      allow_aggregations: true
+- table:
+    schema: public
     name: marketing_campaign
   insert_permissions:
   - role: public
@@ -691,3 +715,37 @@
 - table:
     schema: public
     name: rota_templates
+- table:
+    schema: public
+    name: salutation
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - is_active
+      - salutation
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - created_at
+      - id
+      - is_active
+      - salutation
+      - updated_at
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - salutation
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}

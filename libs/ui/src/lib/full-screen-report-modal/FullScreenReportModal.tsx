@@ -8,7 +8,7 @@ export interface FullScreenReportModalProps {
   title?: () => JSX.Element | string
   visible?: boolean
   header?: boolean
-  onBackClick?: () => void
+  onBackClick?: (e) => void
   content?: () => JSX.Element
 }
 
@@ -30,7 +30,7 @@ export const FullScreenReportModal: FC<FullScreenReportModalProps> = ({
       <>
         <div className={styles.header}>
           <div className={styles.headerContent}>
-            <LeftOutlined onClick={() => onBackClick?.()} />
+            <LeftOutlined onClick={(e) => onBackClick?.(e)} />
             {header ? (
               <span className={styles.headerTitle}>{title?.()}</span>
             ) : (

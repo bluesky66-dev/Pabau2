@@ -18,11 +18,15 @@ export const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
   value = '',
   onChange,
 }) => {
-  const [phoneNumber, setPhoneNumber] = useState(value)
+  const [phoneNumber, setPhoneNumber] = useState('')
   const [valid, setValid] = useState(true)
   useEffect(() => {
-    setPhoneNumber(value)
-  }, [value])
+    if (value !== '') {
+      setPhoneNumber(value)
+    } else {
+      setPhoneNumber('44')
+    }
+  }, [value, countryCode])
   const handleChangeInput = (val, country) => {
     try {
       const isValid = phoneUtil.isValidNumberForRegion(

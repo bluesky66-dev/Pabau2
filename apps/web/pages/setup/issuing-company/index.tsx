@@ -12,10 +12,13 @@ import {
   BasicModal as Modal,
 } from '@pabau/ui'
 import { Form, Select, Input } from 'antd'
+import { CloseOutlined, DeleteFilled } from '@ant-design/icons'
 import { useFormik } from 'formik'
+import * as Yup from 'yup'
 import countries from 'i18n-iso-countries'
 import english from 'i18n-iso-countries/langs/en.json'
 import csc from 'country-state-city'
+import { useMedia } from 'react-use'
 
 import styles from './issuing-company.module.less'
 
@@ -81,7 +84,7 @@ const DELETE_MUTATION = gql`
 const ADD_MUTATION = gql`
   mutation insert_issuing_company_one(
     $companyName: String!
-    $phone: numeric!
+    $phone: String!
     $website: String!
     $country: String!
     $city: String!
@@ -119,7 +122,7 @@ const EDIT_MUTATION = gql`
   mutation update_issuing_company_by_pk(
     $id: uuid!
     $companyName: String!
-    $phone: numeric!
+    $phone: String!
     $website: String!
     $country: String!
     $city: String!
@@ -255,6 +258,7 @@ interface focusedTypes {
 }
 
 export const IssuingCompany: NextPage = () => {
+  const isMobile = useMedia('(max-width: 768px)', false)
   const [showModal, setShowModal] = useState<boolean>(false)
   const { Option } = Select
   const [countryCode, setCountryCode] = useState<string>(null)
@@ -267,7 +271,6 @@ export const IssuingCompany: NextPage = () => {
       )
     },
     onError(err) {
-      console.log('ERROR WHILE CREATING:', err)
       Notification(
         NotificationType.error,
         `Error! While creating an issuing company`
@@ -283,7 +286,6 @@ export const IssuingCompany: NextPage = () => {
       )
     },
     onError(err) {
-      console.log('ERROR WHILE UPDATING:', err)
       Notification(
         NotificationType.error,
         `Error! While updating an issuing company`
@@ -299,7 +301,6 @@ export const IssuingCompany: NextPage = () => {
       )
     },
     onError(err) {
-      console.log('ERROR WHILE DELETING:', err)
       Notification(
         NotificationType.error,
         `Error! While deleting an issuing company`
@@ -332,107 +333,80 @@ export const IssuingCompany: NextPage = () => {
     return options
   }
 
-  const validate = (values: inputTypes) => {
-    const errors: inputTypes = {}
-
-    if (!values.companyName) {
-      errors.companyName = 'Company name is required'
-    }
-
-    if (!values.phone) {
-      errors.phone = 'Phone number is required'
-    }
-
-    if (!values.website) {
-      errors.website = 'Website is required'
-    } else if (!/^[\w%+.-]+\.[\d.a-z-]+\.[a-z]{2,4}$/i.test(values.website)) {
-      errors.website = 'Invalid website name'
-    }
-
-    if (!values.country) {
-      errors.country = 'Country is required'
-    }
-
-    if (!values.city) {
-      errors.city = 'City is required'
-    }
-
-    if (!values.street) {
-      errors.street = 'Street is required'
-    }
-
-    if (!values.postCode) {
-      errors.postCode = 'Post code is required'
-    }
-
-    if (!values.invoiceTemplate) {
-      errors.invoiceTemplate = 'Invoice template is required'
-    }
-
-    if (!values.invoicePrefix) {
-      errors.invoicePrefix = 'Invoice prefix is required'
-    }
-
-    if (!values.invoiceStartingNumber) {
-      errors.invoiceStartingNumber = 'Invoice starting number is required'
-    }
-
-    return errors
-  }
-
   const setEditFields = () => {
-    if (editPage.id) {
-      const editObj = {
-        id: editPage.id,
-        companyName: editPage.name,
-        phone: editPage.phone,
-        website: editPage.website,
-        country: editPage.country,
-        city: editPage.city,
-        street: editPage.street,
-        postCode: editPage.post_code,
-        invoiceTemplate: editPage.invoice_template,
-        invoicePrefix: editPage.invoice_prefix,
-        invoiceStartingNumber: editPage.invoice_starting_number,
-        vatRegistered: editPage.vat_registered,
-        isActive: editPage.is_active,
-        isDraft: editPage.is_draft,
-      }
-      // setFocused({ general: true, address: true, financial: true })
-      return editObj
-    } else {
-      return {
-        companyName: '',
-        phone: undefined,
-        website: '',
-        country: '',
-        city: '',
-        street: '',
-        postCode: undefined,
-        invoiceTemplate: '',
-        invoicePrefix: '',
-        invoiceStartingNumber: undefined,
-        vatRegistered: false,
-        isDraft: false,
-      }
+    const editObj = {
+      id: editPage.id,
+      companyName: editPage.name,
+      phone: editPage.phone,
+      website: editPage.website,
+      country: editPage.country,
+      city: editPage.city,
+      street: editPage.street,
+      postCode: editPage.post_code,
+      invoiceTemplate: editPage.invoice_template,
+      invoicePrefix: editPage.invoice_prefix,
+      invoiceStartingNumber: editPage.invoice_starting_number,
+      vatRegistered: editPage.vat_registered,
+      isActive: editPage.is_active,
+      isDraft: editPage.is_draft,
     }
+    return editObj
   }
+
+  const formikFields = () => {
+    const initialValues: inputTypes = {
+      companyName: '',
+      phone: '',
+      website: '',
+      country: '',
+      city: '',
+      street: '',
+      postCode: undefined,
+      invoiceTemplate: '',
+      invoicePrefix: '',
+      invoiceStartingNumber: undefined,
+      vatRegistered: false,
+      isDraft: false,
+    }
+    return initialValues
+  }
+
+  const issuingCompanySchema = Yup.object({
+    companyName: Yup.string().required('Company name is required'),
+    phone: Yup.string().required('Phone number is required'),
+    website:
+      Yup.string().required('website is required') ||
+      Yup.string().url('website is invalid'),
+    country: Yup.string().required('Country is required'),
+    city: Yup.string().required('City name is required'),
+    street: Yup.string().required('Street name is required'),
+    postCode:
+      Yup.string().required('Post code in required') ||
+      Yup.string().length(6, 'Post code must be 6 digit'),
+    invoiceTemplate: Yup.string().required('Invoice template is required'),
+    invoicePrefix: Yup.string().required('Invoice prefix is required'),
+    invoiceStartingNumber: Yup.string().required(
+      'Invoice starting number is required'
+    ),
+  })
 
   const formik = useFormik({
     enableReinitialize: true,
-    initialValues: setEditFields(),
-    validate,
-    onSubmit: async (values) => {
-      console.log('submitted values values:', values)
-      await (!editPage.id
-        ? addMutation({
-            variables: values,
-            optimisticResponse: {},
-          })
-        : editMutation({
-            variables: values,
-            optimisticResponse: {},
-          }))
+    initialValues: editPage?.id ? setEditFields() : formikFields(),
+    validationSchema: issuingCompanySchema,
+    validateOnChange: false,
+    onSubmit: (values) => {
+      formik.validateForm().then(async () => {
+        await (!editPage.id
+          ? addMutation({
+              variables: values,
+              optimisticResponse: {},
+            })
+          : editMutation({
+              variables: values,
+              optimisticResponse: {},
+            }))
+      })
     },
   })
 
@@ -444,8 +418,6 @@ export const IssuingCompany: NextPage = () => {
   const showDeleteConfirmDialog = () => {
     setShowDeleteModal(true)
   }
-
-  console.log('ERRORS:', formik.errors)
 
   const onchange = (name: string | boolean | number, key: string) => {
     formik.setFieldValue(key, name)
@@ -481,22 +453,36 @@ export const IssuingCompany: NextPage = () => {
 
   const handlePhoneInputValue = (): string => {
     return formik.values.phone
-      ? formik.values.phone.toString()
-      : formik.values.phone
+  }
+
+  const handleFullScreenModalBackClick = (e) => {
+    setShowModal(false)
+    formik.handleReset(e)
+  }
+
+  const showActionButtons = () => {
+    if (!isMobile) {
+      return !editPage.id ? 'Save as draft' : 'Delete'
+    } else {
+      return !editPage.id ? 'Draft' : <DeleteFilled />
+    }
   }
 
   const headerContent = () => {
     return (
       <div className={styles.issuesCompanyHeader}>
-        <h4>{!editPage.id ? 'Create' : 'Edit'} Issuing Comapny</h4>
+        <h4>{!editPage.id ? 'Create' : 'Edit'} Issuing Company</h4>
         <div className={styles.issueRegister}>
           <div className={styles.vatReg}>
             <small>VAT registered</small>{' '}
             <Switch checked={formik.values.vatRegistered} onClick={onChecked} />
           </div>
           <div className={styles.btnCancel}>
-            <Button type="default" onClick={() => setShowModal(false)}>
-              Cancel
+            <Button
+              type="default"
+              onClick={(e) => handleFullScreenModalBackClick(e)}
+            >
+              {!isMobile ? 'Cancel' : <CloseOutlined />}
             </Button>
           </div>
           <div className={styles.btnDraft}>
@@ -506,7 +492,7 @@ export const IssuingCompany: NextPage = () => {
                 !editPage.id ? handleSaveAsDraft : showDeleteConfirmDialog
               }
             >
-              {!editPage.id ? 'Save as draft' : 'Delete'}
+              {showActionButtons()}
             </Button>
           </div>
           <div>
@@ -515,11 +501,7 @@ export const IssuingCompany: NextPage = () => {
                 {!editPage.id ? 'Create' : 'Save'}
               </Button>
             ) : (
-              <Button
-                type="primary"
-                htmlType="submit"
-                onClick={() => formik.handleSubmit()}
-              >
+              <Button type="primary" onClick={() => formik.handleSubmit()}>
                 {!editPage.id ? 'Create' : 'Save'}
               </Button>
             )}
@@ -532,10 +514,7 @@ export const IssuingCompany: NextPage = () => {
   const modalContents = () => {
     return (
       <div className={styles.mainWrapper}>
-        <Form
-          layout="vertical"
-          //  onSubmitCapture={formik.handleSubmit}
-        >
+        <Form layout="vertical">
           <div
             className={
               focused.general
@@ -575,7 +554,7 @@ export const IssuingCompany: NextPage = () => {
               <Form.Item label="Website">
                 <Input
                   name="website"
-                  placeholder="Enter webisite"
+                  placeholder="https://www.company.com"
                   onChange={formik.handleChange}
                   value={formik.values.website}
                 />
@@ -609,7 +588,7 @@ export const IssuingCompany: NextPage = () => {
                 >
                   {createOptions('country')}
                 </Select>
-                {formik.errors.website ? (
+                {formik.errors.country ? (
                   <div className={styles.error}>{formik.errors.country}</div>
                 ) : null}
               </Form.Item>
@@ -627,7 +606,7 @@ export const IssuingCompany: NextPage = () => {
                 >
                   {createOptions('city')}
                 </Select>
-                {formik.errors.website ? (
+                {formik.errors.city ? (
                   <div className={styles.error}>{formik.errors.city}</div>
                 ) : null}
               </Form.Item>
@@ -640,7 +619,7 @@ export const IssuingCompany: NextPage = () => {
                   onChange={formik.handleChange}
                   value={formik.values.street}
                 />
-                {formik.errors.website ? (
+                {formik.errors.street ? (
                   <div className={styles.error}>{formik.errors.street}</div>
                 ) : null}
               </Form.Item>
@@ -649,11 +628,10 @@ export const IssuingCompany: NextPage = () => {
                   name="postCode"
                   placeholder="Enter post code"
                   className="input-style"
-                  // onChange={(e) => onchange(e, 'postCode')}
                   onChange={formik.handleChange}
                   value={formik.values.postCode}
                 />
-                {formik.errors.website ? (
+                {formik.errors.postCode ? (
                   <div className={styles.error}>{formik.errors.postCode}</div>
                 ) : null}
               </Form.Item>
@@ -689,11 +667,10 @@ export const IssuingCompany: NextPage = () => {
                 <Input
                   name="invoicePrefix"
                   placeholder="Enter invoice prefix"
-                  // onChange={(e) => onchange(e, 'invoicePrefix')}
                   onChange={formik.handleChange}
                   value={formik.values.invoicePrefix}
                 />
-                {formik.errors.website ? (
+                {formik.errors.invoicePrefix ? (
                   <div className={styles.error}>
                     {formik.errors.invoicePrefix}
                   </div>
@@ -703,11 +680,10 @@ export const IssuingCompany: NextPage = () => {
                 <Input
                   name="invoiceStartingNumber"
                   placeholder="Enter Invoice starting number"
-                  // onChange={(e) => onchange(e, 'invoiceStartingNumber')}
                   onChange={formik.handleChange}
                   value={formik.values.invoiceStartingNumber}
                 />
-                {formik.errors.website ? (
+                {formik.errors.invoiceStartingNumber ? (
                   <div className={styles.error}>
                     {formik.errors.invoiceStartingNumber}
                   </div>
@@ -739,7 +715,7 @@ export const IssuingCompany: NextPage = () => {
         title={headerContent}
         visible={showModal}
         header={true}
-        onBackClick={() => setShowModal(false)}
+        onBackClick={(e) => handleFullScreenModalBackClick(e)}
         content={modalContents}
       />
       <Modal
