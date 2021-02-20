@@ -130,6 +130,7 @@ const Index: FC<P> = ({ ...props }) => {
                   noDataText="Drug"
                   noDataIcon={<ApartmentOutlined />}
                   noDataBtnText="Drug"
+                  scroll={{ x: 'max-content' }}
                   dataSource={dataSource}
                   updateDataSource={updateDataSource}
                   downloadBtn={true}
