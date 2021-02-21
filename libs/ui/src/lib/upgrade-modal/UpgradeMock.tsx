@@ -85,7 +85,7 @@ export const modalContent = {
         icon: <Shuffle />,
         title: 'Custom Pathways',
         description:
-          'Custom pathways allow for building tailored journeys specific to a particular service or patient. A client coming in for a review for example, may have a different pathway to that of a treatment. By customizing the steps your patients take through your clinic, you can identify the most effective way to share information as well as monitor patient data and educate.',
+          'Custom pathways allow for building tailored journeys specific to a particular service or patient.',
       },
       {
         icon: <TeamOutlined />,
@@ -96,12 +96,12 @@ export const modalContent = {
       {
         icon: <ApplicationSave />,
         title: 'Pabau care',
-        description: 'Automate actions with customizable conversational bots',
+        description: 'Automate actions with customizable conversational bots.',
       },
       {
         icon: <ApplicationBook />,
         title: 'Multi Lingual',
-        description: 'Support customers with a multilingual help center',
+        description: 'Support customers with a multilingual help center.',
       },
     ],
     sectionUpgradeTitle: 'Everything you get with the upgrade',
@@ -192,7 +192,7 @@ export const modalContent = {
         icon: <BookOutlined />,
         title: 'Benchmarks',
         description:
-          'Receive industry metrics and see how you compare against the sector with Pabau’s benchmarking',
+          'Receive industry metrics and see how you compare against the sector with Pabau’s benchmarking.',
       },
     ],
     sectionUpgradeTitle: 'Everything you get with the upgrade',
