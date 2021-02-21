@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect, useRef, ReactNode } from 'react'
 import { useMedia } from 'react-use'
-import { Typography, Radio } from 'antd'
+import { Typography, Radio, Form, Input as AntInput } from 'antd'
 import {
   Button,
   Breadcrumb,
@@ -12,12 +12,17 @@ import {
   TabMenu,
   Badge,
   BasicModal,
+  SimpleDropdown,
 } from '@pabau/ui'
 import {
   LeftOutlined,
   RightOutlined,
+  DownOutlined,
   DesktopOutlined,
   MobileOutlined,
+  UsergroupAddOutlined,
+  EyeInvisibleOutlined,
+  EyeTwoTone,
 } from '@ant-design/icons'
 import confetti from 'canvas-confetti'
 import Layout from '../../../components/Layout/Layout'
@@ -26,12 +31,17 @@ import {
   defaultBuilderSetting,
   defaultStepData,
   defaultWidgetsData,
+  defaultShareData,
 } from '../../../assets/clientAreaData'
+import clinicLogo from '../../../assets/images/normal-clinic-logo.png'
 import widgetModalImg from '../../../assets/images/widget-modal.png'
+import setupMedicalFormNewEPaper from '../../../assets/images/setup-medicalforms-new-epaper.png'
 import { ReactComponent as Palette } from '../../../assets/images/palette.svg'
 import { ReactComponent as Profile } from '../../../assets/images/profile.svg'
 import { ReactComponent as ExternalLink } from '../../../assets/images/external-link.svg'
 import styles from './index.module.less'
+
+const { Title } = Typography
 
 export interface ClientAreaBuilderSetting {
   appearance: {
@@ -74,16 +84,26 @@ export interface ClientAreaWidgets {
   }
 }
 
+export interface ClientAreaShare {
+  clientPortalURL: string
+  addWordpressPlugin: string
+  sendCampaign: string
+  addConfirmationAndReminder: string
+  learnMore: string
+}
+
 export interface ClientAreaProps {
   currentStep: number
   builderSetting: ClientAreaBuilderSetting
   widgetsSetting: ClientAreaWidgets
+  shareSetting: ClientAreaShare
 }
 
 export const Index: FC<ClientAreaProps> = ({
   currentStep = 0,
   builderSetting = defaultBuilderSetting,
   widgetsSetting = defaultWidgetsData,
+  shareSetting = defaultShareData,
 }) => {
   const isMobile = useMedia('(max-width: 767px)', false)
   const isMdScreen = useMedia('(min-width: 992px)', false)
@@ -93,6 +113,7 @@ export const Index: FC<ClientAreaProps> = ({
     defaultBuilderSetting
   )
   const [widgets, setWidgets] = useState<ClientAreaWidgets>(defaultWidgetsData)
+  const [share, setShare] = useState<ClientAreaShare>(defaultShareData)
   const randomInRange = (min, max) => {
     return Math.random() * (max - min) + min
   }
@@ -100,7 +121,8 @@ export const Index: FC<ClientAreaProps> = ({
     setStep(currentStep)
     setSetting(builderSetting)
     setWidgets(widgetsSetting)
-  }, [currentStep, builderSetting, widgetsSetting])
+    setShare(shareSetting)
+  }, [currentStep, builderSetting, widgetsSetting, shareSetting])
 
   useEffect(() => {
     if (step === 2) {
@@ -132,13 +154,73 @@ export const Index: FC<ClientAreaProps> = ({
           <LeftOutlined /> Previous Step
         </Button>
         <p>{`Step ${step + 1}/3`}</p>
-        <Button
-          type="primary"
-          disabled={step >= 2}
-          onClick={() => handleClickNext()}
-        >
-          Next Step <RightOutlined />
-        </Button>
+        {step < 2 && (
+          <Button
+            type="primary"
+            disabled={step >= 2}
+            onClick={() => handleClickNext()}
+          >
+            Next Step <RightOutlined />
+          </Button>
+        )}
+        {step >= 2 && (
+          <Button type="primary">
+            Send Test <DownOutlined />
+          </Button>
+        )}
+      </div>
+    )
+  }
+
+  const LoginForm = () => {
+    const [form] = Form.useForm()
+    return (
+      <div className={styles.clientAreaLoginForm}>
+        <Form form={form} layout="vertical">
+          <div className={styles.loginFormCenter}>
+            <img src={clinicLogo} alt="" style={{ marginBottom: '2rem' }} />
+          </div>
+          <Form.Item label="Username">
+            <AntInput />
+          </Form.Item>
+          <Form.Item label="Password">
+            <AntInput.Password
+              iconRender={(visible) =>
+                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+              }
+            />
+          </Form.Item>
+          <div
+            className={styles.loginFormRight}
+            style={{
+              marginBottom: isMdScreen ? '2rem' : '20px',
+              color: 'var(--primary-color)',
+            }}
+          >
+            Forgot password?
+          </div>
+          <Button type="primary" block>
+            Login
+          </Button>
+          <div className={styles.loginFormCenter} style={{ margin: '8px 0' }}>
+            or
+          </div>
+          <Button block className={styles.loginViaFB}>
+            Login via Facebook
+          </Button>
+          <div className={styles.loginFormCenter} style={{ marginTop: '1rem' }}>
+            <span style={{ color: 'var(--grey-text-color)' }}>
+              Not a member yet?{' '}
+              <span style={{ color: 'var(--primary-color)' }}>Sign in</span>
+            </span>
+          </div>
+          <div
+            className={styles.loginFormCenter}
+            style={{ marginTop: '1rem', color: '#cccfd6' }}
+          >
+            Powered by Pabau
+          </div>
+        </Form>
       </div>
     )
   }
@@ -291,6 +373,9 @@ export const Index: FC<ClientAreaProps> = ({
                     </Radio.Button>
                   </Radio.Group>
                 </div>
+                <div className={styles.previewPanelBody}>
+                  <LoginForm />
+                </div>
               </div>
             </div>
           </div>
@@ -378,7 +463,19 @@ export const Index: FC<ClientAreaProps> = ({
                   />
                 </div>
               </div>
-              <div>Preview Panel</div>
+              <div className={styles.previewPanel}>
+                <div className={styles.previewPanelHeader}>
+                  <div style={{ width: '200px' }}>
+                    <SimpleDropdown
+                      dropdownItems={['Login', 'Dashboard']}
+                      onSelected={(val) => val}
+                    />
+                  </div>
+                </div>
+                <div className={styles.previewPanelBody}>
+                  <LoginForm />
+                </div>
+              </div>
             </TabMenu>
           </div>
         </div>
@@ -515,9 +612,126 @@ export const Index: FC<ClientAreaProps> = ({
   }
 
   const Step3 = ({ settings }) => {
+    const [form] = Form.useForm()
+    const [setting, setSetting] = useState<ClientAreaShare>(defaultShareData)
+    useEffect(() => {
+      setSetting(settings)
+    }, [settings])
     return (
       <>
-        <div className={styles.clientAreaBody}>Step 3</div>
+        <div className={styles.clientAreaBody}>
+          <div className={styles.clientAreaShare}>
+            <div>
+              <div className={styles.clientAreaShareItem}>
+                <img
+                  src={setupMedicalFormNewEPaper}
+                  width="100%"
+                  alt=""
+                  style={{ marginBottom: '14px' }}
+                />
+                <h3>Secured portal for your clients</h3>
+                <h4>
+                  Your clients can log in anytime to view and manage their past
+                  and upcoming appointments, payments, documents and more.
+                </h4>
+                <Form
+                  form={form}
+                  layout="vertical"
+                  style={{ marginTop: '14px' }}
+                >
+                  <Form.Item label="Client Portal URL">
+                    <AntInput.Group>
+                      <AntInput
+                        style={{ width: 'calc(100% - 67px)' }}
+                        defaultValue={setting.clientPortalURL}
+                        disabled={true}
+                      />
+                      <Button
+                        type="primary"
+                        style={{ width: '67px', marginLeft: '-3px' }}
+                      >
+                        Copy
+                      </Button>
+                    </AntInput.Group>
+                  </Form.Item>
+                </Form>
+              </div>
+            </div>
+            <div>
+              <div className={styles.clientAreaShareItem}>
+                <h3>
+                  <UsergroupAddOutlined
+                    style={{
+                      color: 'var(--primary-color)',
+                      marginRight: '8px',
+                    }}
+                  />{' '}
+                  Invite clients
+                </h3>
+                <h4>Some descriptional text</h4>
+                <div className={styles.clientAreaInviteClients}>
+                  <a
+                    href={setting.addWordpressPlugin}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <div className={styles.clientAreaInviteClientItem}>
+                      <span>Add Wordpress Plugin to your website</span>
+                      <RightOutlined />
+                    </div>
+                  </a>
+                  <a
+                    href={setting.sendCampaign}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <div className={styles.clientAreaInviteClientItem}>
+                      <span>Send A Campaign</span>
+                      <RightOutlined />
+                    </div>
+                  </a>
+                  <a
+                    href={setting.addConfirmationAndReminder}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <div className={styles.clientAreaInviteClientItem}>
+                      <span>Add To Confirmation & Reminders</span>
+                      <RightOutlined />
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div className={styles.clientAreaShareItem}>
+                <div className={styles.clientPortalOnTheGo}>
+                  <div>
+                    <h3>
+                      <UsergroupAddOutlined
+                        style={{
+                          color: 'var(--primary-color)',
+                          marginRight: '8px',
+                        }}
+                      />{' '}
+                      Client portal on-the-go
+                    </h3>
+                    <h4>
+                      Offer clients an easy, app-like experience of your portal
+                    </h4>
+                  </div>
+                  <div>
+                    <a
+                      href={setting.learnMore}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Learn more
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <ClientAreaFooter
           step={step}
           onNext={() => setStep(step + 1)}
@@ -543,12 +757,12 @@ export const Index: FC<ClientAreaProps> = ({
                   },
                 ]}
               />
-              <Typography.Title>Client Area</Typography.Title>
+              <Title>Client Area</Title>
             </div>
             <div className={styles.clientAreaBreadcrumbMobile}>
-              <Typography.Title>
+              <Title>
                 <LeftOutlined /> Client Area
-              </Typography.Title>
+              </Title>
             </div>
             <div className={styles.clientAreaOps}>
               <div className={styles.reviewLink}>
@@ -570,7 +784,7 @@ export const Index: FC<ClientAreaProps> = ({
           </div>
           {step === 0 && <Step1 settings={setting} />}
           {step === 1 && <Step2 settings={widgets} />}
-          {step === 2 && <Step3 settings={setting} />}
+          {step === 2 && <Step3 settings={share} />}
         </div>
       </Layout>
     </div>

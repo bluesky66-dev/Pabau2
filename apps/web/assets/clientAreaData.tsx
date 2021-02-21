@@ -286,3 +286,11 @@ export const defaultStepData = [
     index: 2,
   },
 ]
+
+export const defaultShareData = {
+  clientPortalURL: 'https://live.loremipsum.com',
+  addWordpressPlugin: '',
+  sendCampaign: '',
+  addConfirmationAndReminder: '',
+  learnMore: '',
+}
