@@ -1,12 +1,19 @@
 import React, { FC } from 'react'
-import { Button, Table as AntTable } from 'antd'
-import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc'
-import { MenuOutlined } from '@ant-design/icons'
+import { Button, Table as AntTable, Avatar } from 'antd'
+import {
+  SortableContainer,
+  SortableElement,
+  SortableHandle,
+} from 'react-sortable-hoc'
+import { ContactsOutlined, LockOutlined, MenuOutlined } from '@ant-design/icons'
 import styles from './Table.module.less'
 import { TableProps } from 'antd/es/table'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useTranslation } from 'react-i18next'
 export interface DragProps {
   draggable?: boolean
+  isCustomColorExist?: boolean
+  isCustomIconExist?: boolean
   updateDataSource?: ({ newData, oldIndex, newIndex }) => void
 }
 
@@ -14,7 +21,9 @@ const DragHandle = SortableHandle(() => (
   <MenuOutlined style={{ cursor: 'pointer', color: '#999' }} />
 ))
 
-const SortItem = SortableElement((props) => <tr {...props} className={styles.abc} />)
+const SortItem = SortableElement((props) => (
+  <tr {...props} className={styles.abc} />
+))
 const SortContainer = SortableContainer((props) => <tbody {...props} />)
 
 function array_move(arr, old_index, new_index) {
@@ -31,24 +40,48 @@ function array_move(arr, old_index, new_index) {
   })
 }
 
-type P = {
+export type TableType = {
   onRowClick?: (e) => void
+  padlocked?: string[]
+  noDataText?: string
+  noDataBtnText?: string
+  noDataIcon?: JSX.Element
+  onAddTemplate?: () => void
+  searchTerm?: string
+  needTranslation?: boolean
 } & TableProps<never> &
   DragProps
 
-export const Table: FC<P> = ({ dataSource = [], updateDataSource, onRowClick, ...props }) => {
+export const Table: FC<TableType> = ({
+  dataSource = [],
+  padlocked,
+  isCustomColorExist = false,
+  isCustomIconExist = false,
+  updateDataSource,
+  onRowClick,
+  noDataText,
+  noDataBtnText,
+  noDataIcon = <ContactsOutlined />,
+  onAddTemplate,
+  searchTerm = '',
+  needTranslation,
+  ...props
+}) => {
   const onSortEnd = ({ oldIndex, newIndex }) => {
     if (oldIndex !== newIndex) {
       const newData = array_move(dataSource, oldIndex, newIndex)
-      updateDataSource && updateDataSource({ newData, oldIndex, newIndex })
+      updateDataSource?.({ newData, oldIndex, newIndex })
     }
   }
 
   const DraggableBodyRow = ({ className, style, ...restProps }) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const index = dataSource.findIndex((x: any) => x.key === restProps['data-row-key'])
+    const index = dataSource.findIndex(
+      (x: { key: string }) => x.key === restProps['data-row-key']
+    )
     return <SortItem index={index} {...restProps} />
   }
+  const { t } = useTranslation('common')
 
   const DraggableContainer = (props) => (
     <SortContainer
@@ -74,32 +107,106 @@ export const Table: FC<P> = ({ dataSource = [], updateDataSource, onRowClick, ..
         className={isActive ? styles.activeBtn : styles.disableSourceBtn}
         disabled={!isActive}
       >
-        {isActive ? 'Active' : 'Inactive'}
+        {needTranslation
+          ? isActive
+            ? t('marketingsource-tableRow-active-btn.translation')
+            : t('marketingsource-tableRow-inActive-btn.translation')
+          : isActive
+          ? 'Active'
+          : 'Inactive'}
       </Button>
     )
   }
 
-  const renderSortHandler = () => {
-    if (props && props.columns) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      props.columns?.map((col: any) => {
-        if (col && col.dataIndex === 'is_active') {
-          col.render = renderActiveButton
-        }
-        return col
-      })
-    }
-    return props.draggable ? [{ ...dragColumn }, ...(props.columns || [])] : props.columns
+  const renderTableSource = (val, rowData) => {
+    return (
+      <div className={styles.alignItems}>
+        {isCustomColorExist && renderCustomColor(val, rowData)}
+        {val}
+        {padlocked?.includes(val) && (
+          <div style={{ marginLeft: '6px' }}>
+            <LockOutlined />
+          </div>
+        )}
+        {isCustomIconExist && rowData.icon && (
+          <FontAwesomeIcon icon={rowData.icon} className={styles.tableIcon} />
+        )}
+      </div>
+    )
   }
 
-  return (
+  const renderCustomColor = (val, rowData) => {
+    return (
+      <div
+        style={{ background: rowData.color }}
+        className={styles.customColor}
+      ></div>
+    )
+  }
+
+  const checkPadLocks = (record) => {
+    let alloWClicked = true
+    Object.keys(record).map((key) => {
+      if (padlocked?.includes(record[key])) {
+        alloWClicked = false
+      }
+      return key
+    })
+    return alloWClicked
+  }
+
+  const renderSortHandler = () => {
+    if (props?.columns) {
+      props.columns = props.columns
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ?.filter((col: any) => col.visible === true)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        .map((col: any) => {
+          if (
+            col &&
+            (col.dataIndex === 'public' ||
+              col.dataIndex === 'is_active' ||
+              col.dataIndex === 'integration')
+          ) {
+            console.log(col.dataIndex)
+            col.render = renderActiveButton
+          } else {
+            col.render = renderTableSource
+          }
+          return col
+        })
+    }
+
+    return props.draggable
+      ? [{ ...dragColumn }, ...(props.columns || [])]
+      : props.columns
+  }
+
+  return !dataSource?.length && !props.loading && !searchTerm ? (
+    <div className={styles.noDataTableBox}>
+      <div className={styles.noDataTextStyle}>
+        <Avatar icon={noDataIcon} size="large" className={styles.roundDesign} />
+        <p>{`Add ${noDataText} to create more shifts faster`}</p>
+        <div className={styles.spaceBetweenText}></div>
+        <Button
+          className={styles.createTemaplateBtn}
+          type="primary"
+          onClick={() => onAddTemplate?.()}
+        >
+          {`Add ${noDataBtnText}`}
+        </Button>
+      </div>
+    </div>
+  ) : (
     <AntTable
       {...props}
       onRow={(record, rowIndex) => {
         return {
           onClick: (event) => {
-            console.log(event, record)
-            onRowClick?.(record)
+            if (checkPadLocks(record)) {
+              onRowClick?.(record)
+              console.log(event, record)
+            }
           }, // click row
           //   onDoubleClick: (event) => {}, // double click row
           //   onContextMenu: (event) => {}, // right button click row
@@ -113,7 +220,7 @@ export const Table: FC<P> = ({ dataSource = [], updateDataSource, onRowClick, ..
       rowKey="key"
       className={styles.dragTable}
       locale={{
-        emptyText: 'No results found',
+        emptyText: !props.loading && searchTerm && 'No results found',
       }}
       components={{
         body: {

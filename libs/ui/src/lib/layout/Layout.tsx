@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, MouseEvent } from 'react'
 import { ReactComponent as IllustrationSvg } from './example.svg'
 import { Card, Layout as AntLayout } from 'antd'
 import { Footer, Header, Menu } from '@pabau/ui'
@@ -14,19 +14,29 @@ export interface LayoutProps {
   onCancelClicked?: true | (() => void)
   card?: true
   searchRender?: (innerComponent: JSX.Element) => JSX.Element
+  active?: string
+  onCreateChannel?: (
+    name: string,
+    description: string,
+    isPrivate: boolean
+  ) => void
+  onMessageType?: (e: MouseEvent<HTMLElement>) => void
 }
 
 export const Layout: FC<LayoutProps> = ({
   searchRender,
+  onCreateChannel,
   pageTitle,
   newButtonText,
   onNewClicked,
   onCancelClicked,
+  onMessageType,
   card,
   children,
+  active,
   ...rest
 }) => {
-  const [collapsed, setCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState(true)
 
   const onSideBarCollapsed = (collapsed) => setCollapsed(collapsed)
 
@@ -34,9 +44,13 @@ export const Layout: FC<LayoutProps> = ({
     <AntLayout {...rest} className={styles.main}>
       <AntLayout style={{ background: '#F7F7F9' }}>
         {/* {(isTablet || !isMobile) && <Header searchRender={searchRender} />} */}
-        <Header searchRender={searchRender} />
+        <Header
+          searchRender={searchRender}
+          onCreateChannel={onCreateChannel}
+          onMessageType={onMessageType}
+        />
         <AntLayout className={styles.headerMargin}>
-          <Menu onSideBarCollapsed={onSideBarCollapsed} />
+          <Menu onSideBarCollapsed={onSideBarCollapsed} active={active} />
           <Content
             className={classNames(
               styles.layoutContent,
@@ -53,7 +67,10 @@ export const Layout: FC<LayoutProps> = ({
               }}
             >
               {card ? (
-                <Card title={pageTitle} style={{ width: '50vmin', margin: '0 auto' }}>
+                <Card
+                  title={pageTitle}
+                  style={{ width: '50vmin', margin: '0 auto' }}
+                >
                   {children}
                 </Card>
               ) : (

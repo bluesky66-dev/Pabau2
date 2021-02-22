@@ -1,186 +1,57 @@
-.scoreTitle1{
-    
-    // font-family: Circular Std;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 18px;
-    letter-spacing: 0em;
-    text-align: left;
-}
-.btnScore {
-    // position: absolute;
-    // width: 203px;
-    // height: 22px;
-    padding: 0px;
-    
-    // font-family: Circular Std;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 22px;
-    /* identical to box height, or 157% */
-    
-    display: flex;
-    align-items: center;
-    
-    color: #54B2D3;
+.security-container {
+  width: 100%;
 }
 
-
-
-.iconSecuritytools {
-    max-width: 100%;
+.security-sub-container {
+  margin: 20px 24px 0;
 }
 
-.p1 {
-    // font-family: Circular Std;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 15px;
-    line-height: 18px;
-    color: #3D3D46;
-}
-
-.p2 {
-    // font-family: Circular Std;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 15px;
-    line-height: 18px;
-    color: #9292A3;
-    margin-top: 4px;
-}
-
-.phead{
-    // font-family: Circular Std;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 18px;
-    /* identical to box height */
-
-
-    /* Text Main */
-
-    color: #3D3D46;
-}
-
-.securityToolsline{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border: 1px solid #ECEDF0;
-}
-
-
-
-.colStatusLabel{
-    justify-content: center;
-}
-
-.container{
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    // justify-content: center;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.containercol{
-    display: flex;
+.security-header-container {
+  display: flex;
+  justify-content: space-between;
+  @media (max-width: 575px) {
     flex-direction: column;
-    justify-content: center;
-    // align-items: center;
-    margin-left: 16px;
-    justify-content: space-between;
-    flex: auto;
+    justify-content: flex-start;
+  }
 }
 
-.containerrow{
-    display: flex;
-    flex-direction: row;
-}
-
-.statelabel{
-    position: absolute;
-    top: 0px;
-    right: 24px;
-
-} 
-
-.scorePercent {
-    // font-family: Circular Std;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 38px;
-    display: flex;
-    align-items: center;
-    color: #3D3D46;
-
-
-    @media screen and (min-width: 769px) {
-        width: 25%;
-        font-size: 30px;
-    }    
-
-    @media screen and (max-width: 768px) {
-        width: 30%;
-        font-size: 20px;
-    }    
-}
-
-@media screen and (min-width: 0px) and (max-width: 768px) {
-    .statelabel { top: -5px; right: 0;}  /* show it on small screens */
-}
-
-.scoreBody {
-    position: relative;
-    display: flex;
+.security-ops-container {
+  display: flex;
+  > button {
+    margin: 0 0.5rem 0.5rem 0;
+  }
+  @media (max-width: 575px) {
     flex-direction: column;
+  }
 }
 
-.seconddivrow{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+.security-score-container {
+  padding: 20px;
+  border: 1px solid #ecedf0;
+  border-radius: 4px;
 }
 
-.scoreProgress{
-    @media screen and (min-width: 769px) {
-        width: 75%;
-    }    
-
-    @media screen and (max-width: 768px) {
-        width: 70%;
-    }   
+.security-tools-container {
+  margin-top: 28px;
 }
 
-.thirddivrow{
-    display: flex;
-    flex-direction: row;
-
-    align-items: center;
-
-    @media screen and (min-width: 769px) {
-        justify-content: space-between;
-        flex-direction: row;
-    }    
-
-    @media screen and (max-width: 768px) {
-        align-items: flex-start;
-        flex-direction: column;
-    }   
+.tab-title {
+  font-family: 'Circular-Std-Bold';
+  font-size: 20px;
+  line-height: 1.21;
+  color: #3d3d46;
+  margin: 0;
+  margin-bottom: 8px;
 }
 
-.scoreTitle{
+.tab-sub-title {
+  font-family: 'Circular-Std-Book';
+  font-size: 14px;
+  line-height: 18px;
+  color: #9292a3;
+  margin: 0;
+}
 
-
-// font-family: Circular Std;
-font-style: normal;
-font-weight: bold;
-font-size: 14px;
-line-height: 18px;
-color: #3D3D46;
+.tab-header {
+  padding: 20px 24px;
 }

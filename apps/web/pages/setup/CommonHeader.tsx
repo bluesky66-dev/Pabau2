@@ -1,14 +1,28 @@
 import React, { FC, useState } from 'react'
-import { MobileHeader, MobileSidebar, PabauNotification, PabauMessages } from '@pabau/ui'
+import { SearchOutlined } from '@ant-design/icons'
+import { SetupSearchInput } from '@pabau/ui'
+import {
+  MobileHeader,
+  MobileSidebar,
+  NotificationDrawer,
+  PabauMessages,
+} from '@pabau/ui'
 import { MenuOutlined } from '@ant-design/icons'
 import Search from '../../components/Search'
 import styles from './Setup.module.less'
 import classNames from 'classnames'
 
-const CommonHeader: FC = () => {
+interface P {
+  handleSearch?: (searchTerm: string) => void
+}
+
+const CommonHeader: FC<P> = ({ handleSearch }) => {
   const [openMenuDrawer, setMenuDrawer] = useState<boolean>(false)
-  const [openNotificationDrawer, setNotificationDrawer] = useState<boolean>(false)
+  const [openNotificationDrawer, setNotificationDrawer] = useState<boolean>(
+    false
+  )
   const [openMessageDrawer, setMessageDrawer] = useState<boolean>(false)
+  const [showSearch, setShowSearch] = useState(false)
 
   return (
     <div className={classNames(styles.setupPage, styles.desktopViewNone)}>
@@ -23,6 +37,19 @@ const CommonHeader: FC = () => {
             />
             <p>Setup</p>
           </div>
+          <div className={styles.searchInput}>
+            {!showSearch ? (
+              <SearchOutlined
+                onClick={() => {
+                  setShowSearch(true)
+                }}
+              />
+            ) : (
+              <div className={styles.search}>
+                <SetupSearchInput onChange={handleSearch} />
+              </div>
+            )}
+          </div>
         </div>
       </MobileHeader>
       {openMenuDrawer && (
@@ -34,7 +61,7 @@ const CommonHeader: FC = () => {
         />
       )}
       {openNotificationDrawer && (
-        <PabauNotification
+        <NotificationDrawer
           openDrawer={openNotificationDrawer}
           closeDrawer={() => setNotificationDrawer((e) => !e)}
         />

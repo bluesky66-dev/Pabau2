@@ -1,24 +1,41 @@
 import React, { FC, useEffect, useState } from 'react'
 import { Button, MobileHeader } from '@pabau/ui'
 import styles from './AddButton.module.less'
-import { FilterOutlined, PlusSquareFilled, SearchOutlined } from '@ant-design/icons'
-import { Input, Radio, Popover, Drawer } from 'antd'
+import {
+  FilterOutlined,
+  PlusSquareFilled,
+  SearchOutlined,
+} from '@ant-design/icons'
+import { Drawer, Input, Popover, Radio } from 'antd'
 import classNames from 'classnames'
+import { useTranslationI18 } from '../hooks/useTranslationI18'
 // import { isMobile, isTablet } from 'react-device-detect'
 // import { useKeyPressEvent } from 'react-use'
 
 const WAIT_INTERVAL = 400
+
 interface P {
   schema: Schema
   onClick?: () => void
-  onFilterSource: (filter: boolean) => void
+  onFilterSource: () => void
   onSearch: (term: string) => void
+  tableSearch?: boolean
+  needTranslation?: boolean
 }
 
-const AddButton: FC<P> = ({ schema, onClick, children, onFilterSource, onSearch }) => {
+const AddButton: FC<P> = ({
+  schema,
+  onClick,
+  children,
+  onFilterSource,
+  onSearch,
+  tableSearch = true,
+  needTranslation,
+}) => {
   const [isActive, setIsActive] = useState(true)
   const [mobFilterDrawer, setMobFilterDrawer] = useState(false)
   const [marketingSourceSearch, setMarketingSourceSearch] = useState('')
+  const { t } = useTranslationI18()
 
   // useKeyPressEvent('n', () => {
   //   onClick?.()
@@ -26,7 +43,7 @@ const AddButton: FC<P> = ({ schema, onClick, children, onFilterSource, onSearch 
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      onSearch && onSearch(marketingSourceSearch)
+      onSearch?.(marketingSourceSearch)
     }, WAIT_INTERVAL)
 
     return () => clearTimeout(timer)
@@ -45,7 +62,7 @@ const AddButton: FC<P> = ({ schema, onClick, children, onFilterSource, onSearch 
         <Radio.Group
           onChange={(e) => {
             setIsActive(e.target.value)
-            !isMobile && onFilterSource(e.target.value)
+            !isMobile && onFilterSource()
           }}
           value={isActive}
         >
@@ -64,14 +81,23 @@ const AddButton: FC<P> = ({ schema, onClick, children, onFilterSource, onSearch 
     <>
       {/* Mobile header */}
       <div className={classNames(styles.marketingIcon, styles.desktopViewNone)}>
-        <SearchOutlined className={styles.marketingIconStyle} />
+        {tableSearch && (
+          <SearchOutlined className={styles.marketingIconStyle} />
+        )}
         <FilterOutlined
           className={styles.marketingIconStyle}
           onClick={() => setMobFilterDrawer((e) => !e)}
         />
-        <PlusSquareFilled className={styles.plusIconStyle} onClick={() => onClick?.()} />
+        <PlusSquareFilled
+          className={styles.plusIconStyle}
+          onClick={() => onClick?.()}
+        />
       </div>
-      <Drawer visible={mobFilterDrawer} className={styles.mobFilterDrawer} closable={false}>
+      <Drawer
+        visible={mobFilterDrawer}
+        className={styles.mobFilterDrawer}
+        closable={false}
+      >
         <MobileHeader className={styles.marketingSourceFilterHeader}>
           <div className={styles.allContentAlignMobile}>
             <div className={styles.marketingTextStyle}>
@@ -81,12 +107,14 @@ const AddButton: FC<P> = ({ schema, onClick, children, onFilterSource, onSearch 
             </div>
           </div>
         </MobileHeader>
-        <div style={{ marginTop: '91px', paddingLeft: '24px' }}>{filterContent(true)}</div>
+        <div style={{ marginTop: '91px', paddingLeft: '24px' }}>
+          {filterContent(true)}
+        </div>
         <Button
           type="primary"
           className={styles.applyButton}
           onClick={() => {
-            onFilterSource(isActive)
+            onFilterSource()
             setMobFilterDrawer((e) => !e)
           }}
         >
@@ -95,15 +123,21 @@ const AddButton: FC<P> = ({ schema, onClick, children, onFilterSource, onSearch 
       </Drawer>
 
       {/* Desktop header */}
-      <div className={classNames(styles.marketingSource, styles.mobileViewNone)}>
-        <Input
-          className={styles.searchMarketingStyle}
-          placeholder="Search"
-          value={marketingSourceSearch}
-          onChange={(e) => setMarketingSourceSearch(e.target.value)}
-          suffix={<SearchOutlined style={{ color: '#8C8C8C' }} />}
-          autoFocus
-        />
+      <div
+        className={classNames(styles.marketingSource, styles.mobileViewNone)}
+      >
+        {tableSearch && (
+          <Input
+            className={styles.searchMarketingStyle}
+            placeholder={
+              needTranslation ? t('search-placeholder.translation') : 'Search'
+            }
+            value={marketingSourceSearch}
+            onChange={(e) => setMarketingSourceSearch(e.target.value)}
+            suffix={<SearchOutlined style={{ color: '#8C8C8C' }} />}
+            autoFocus
+          />
+        )}
         <Popover
           trigger="click"
           content={filterContent}
@@ -111,11 +145,20 @@ const AddButton: FC<P> = ({ schema, onClick, children, onFilterSource, onSearch 
           overlayClassName={styles.filterPopover}
         >
           <Button className={styles.filterBtn}>
-            <FilterOutlined /> Filter
+            <FilterOutlined />{' '}
+            {needTranslation
+              ? t('marketingsource-button-filter.translation')
+              : 'Filter'}
           </Button>
         </Popover>
-        <Button className={styles.createSourceBtn} type="primary" onClick={() => onClick?.()}>
-          {'Create ' + schema.short}
+        <Button
+          className={styles.createSourceBtn}
+          type="primary"
+          onClick={() => onClick?.()}
+        >
+          {needTranslation
+            ? t('marketingsource-header-create.translation')
+            : schema.createButtonLabel}
         </Button>
       </div>
     </>

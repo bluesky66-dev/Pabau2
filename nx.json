@@ -1,11 +1,10 @@
 {
   "npmScope": "pabau",
-  "affected": {
-    "defaultBase": "master"
-  },
+  "affected": { "defaultBase": "master" },
   "implicitDependencies": {
     "workspace.json": "*",
     "package.json": {
+      "bump-rebuild-all": "*",
       "dependencies": "*",
       "devDependencies": "*"
     },
@@ -18,50 +17,30 @@
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e", "build-storybook", "export"]
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e",
+          "build-storybook",
+          "export"
+        ]
       }
     }
   },
   "projects": {
-    "web": {
-      "tags": [],
-      "implicitDependencies": ["backend"]
-    },
-    "web-e2e": {
-      "tags": [],
-      "implicitDependencies": ["web"]
-    },
-    "ui": {
-      "tags": []
-    },
-    "ui-e2e": {
-      "tags": [],
-      "implicitDependencies": ["ui"]
-    },
-    "yup": {
-      "tags": []
-    },
-    "backend": {
-      "tags": []
-    },
-    "mgmt": {
-      "tags": [],
-      "implicitDependencies": ["backend"]
-    },
-    "mgmt-e2e": {
-      "tags": [],
-      "implicitDependencies": ["mgmt"]
-    },
-    "connect": {
-      "tags": [],
-      "implicitDependencies": ["backend"]
-    },
-    "connect-e2e": {
-      "tags": [],
-      "implicitDependencies": ["connect"]
-    },
-    "mobile": {
-      "tags": []
-    }
+    "web": { "tags": [], "implicitDependencies": ["backend"] },
+    "web-e2e": { "tags": [], "implicitDependencies": ["web"] },
+    "ui": { "tags": [] },
+    "ui-e2e": { "tags": [], "implicitDependencies": ["ui"] },
+    "yup": { "tags": [] },
+    "backend": { "tags": [] },
+    "mgmt": { "tags": [], "implicitDependencies": ["backend"] },
+    "mgmt-e2e": { "tags": [], "implicitDependencies": ["mgmt"] },
+    "connect": { "tags": [], "implicitDependencies": ["backend"] },
+    "connect-e2e": { "tags": [], "implicitDependencies": ["connect"] },
+    "mobile": { "tags": [] },
+    "bridge-api": { "tags": [] },
+    "i18n": { "tags": [] }
   }
 }

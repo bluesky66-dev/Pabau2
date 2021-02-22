@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import React from 'react'
+import ButtonCheckbox from './buttonCheckbox'
 import Checkbox from './checkbox'
 import CustomCheckbox from './customCheckbox'
 
@@ -22,13 +23,26 @@ export default {
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 
-const CheckboxStory = ({ ...args }) => <Checkbox {...args}>{args.label}</Checkbox>
+const CheckboxStory = ({ ...args }) => (
+  <Checkbox {...args}>{args.label}</Checkbox>
+)
 
 export const checkbox = CheckboxStory.bind({})
 
-const CustomCheckboxStory = ({ ...args }) => <CustomCheckbox {...args}></CustomCheckbox>
+const CustomCheckboxStory = ({ ...args }) => (
+  <CustomCheckbox {...args}></CustomCheckbox>
+)
 export const CustomCheckBox = CustomCheckboxStory.bind({})
 CustomCheckBox.args = {
   label: 'Activate',
-  disabled: false
+  disabled: false,
+}
+
+const ButtonCheckboxStory = ({ ...args }) => (
+  <ButtonCheckbox {...args}></ButtonCheckbox>
+)
+export const ButtonCheck = ButtonCheckboxStory.bind({})
+ButtonCheck.args = {
+  label: 'Checkbox',
+  disabled: false,
 }

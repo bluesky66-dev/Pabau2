@@ -1,10 +1,18 @@
-import { Table, useLiveQuery, Pagination, MobileHeader } from '@pabau/ui'
+import {
+  Table,
+  useLiveQuery,
+  Pagination,
+  MobileHeader,
+  Notification,
+  NotificationType,
+  SimpleDropdown,
+} from '@pabau/ui'
 import React, { FC, useEffect, useState } from 'react'
 import { DocumentNode, useMutation } from '@apollo/client'
 import AddButton from './AddButton'
 import { Breadcrumb } from '@pabau/ui'
 import { Typography } from 'antd'
-import pluralize from 'pluralize'
+// import pluralize from 'pluralize'
 import styles from './CrudTable.module.less'
 // import DeleteButton from './DeleteButton'
 import CrudModal from './CrudModal'
@@ -13,6 +21,7 @@ import Layout from './Layout/Layout'
 import { LeftOutlined } from '@ant-design/icons'
 import classNames from 'classnames'
 import Link from 'next/link'
+import { useTranslationI18 } from '../hooks/useTranslationI18'
 
 const { Title } = Typography
 
@@ -22,91 +31,334 @@ interface P {
   deleteQuery?: DocumentNode
   listQuery: DocumentNode
   editQuery: DocumentNode
-  searchQuery?: DocumentNode
+  aggregateQuery?: DocumentNode
+  tableSearch?: boolean
+  updateOrderQuery?: DocumentNode
+  showNotificationBanner?: boolean
+  createPage?: boolean
+  notificationBanner?: React.ReactNode
+  createPageOnClick?(): void
+  needTranslation?: boolean
 }
 
-const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, editQuery, searchQuery }) => {
+const languages = [
+  {
+    key: 'en',
+    value: 'English(UK)',
+  },
+  {
+    key: 'en-us',
+    value: 'English(US)',
+  },
+  {
+    key: 'de',
+    value: 'German',
+  },
+  {
+    key: 'fr',
+    value: 'French',
+  },
+  {
+    key: 'es',
+    value: 'Spanish',
+  },
+  {
+    key: 'ar',
+    value: 'Arabic',
+  },
+  {
+    key: 'bg',
+    value: 'Bulgarian',
+  },
+  {
+    key: 'cs',
+    value: 'Czech',
+  },
+  {
+    key: 'da',
+    value: 'Danish',
+  },
+  {
+    key: 'hu',
+    value: 'Hungarian',
+  },
+  {
+    key: 'lv',
+    value: 'Latvian',
+  },
+  {
+    key: 'no',
+    value: 'Norwegian',
+  },
+  {
+    key: 'pl',
+    value: 'Polish',
+  },
+  {
+    key: 'sv',
+    value: 'Swedish',
+  },
+  {
+    key: 'ro',
+    value: 'Romanian',
+  },
+  {
+    key: 'ru',
+    value: 'Russian',
+  },
+]
+
+const CrudTable: FC<P> = ({
+  schema,
+  addQuery,
+  deleteQuery,
+  listQuery,
+  editQuery,
+  aggregateQuery,
+  tableSearch = true,
+  updateOrderQuery,
+  showNotificationBanner = false,
+  notificationBanner,
+  createPage = false,
+  createPageOnClick,
+  needTranslation = false,
+}) => {
+  const [isLoading, setIsLoading] = useState(true)
   const [isActive, setIsActive] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
-  // eslint-disable-next-line graphql/template-strings
-  const [editMutation] = useMutation(editQuery)
-  const [addMutation] = useMutation(addQuery)
-  const [sourceData, setSourceData] = useState(null)
-  const [modalShowing, setModalShowing] = useState<
-    Record<string, string | boolean | number> | false
-  >(false)
+  const [currentLanguage, setCurrentLanguage] = useState<string>('English(UK)')
+  const { t, i18n } = useTranslationI18()
 
-  const { data, error, loading } = useLiveQuery(listQuery, { variables: { isActive } })
-  const { data: searchData } = useLiveQuery(searchQuery, {
-    variables: { isActive, searchTerm: '%' + searchTerm + '%' },
+  useEffect(() => {
+    const data = languages.find(({ value }) => value === currentLanguage)
+    i18n.changeLanguage(data.key)
+  }, [currentLanguage, i18n])
+  // eslint-disable-next-line graphql/template-strings
+  const [editMutation] = useMutation(editQuery, {
+    onCompleted(data) {
+      Notification(
+        NotificationType.success,
+        `Success! ${schema.messages.update.success}`
+      )
+    },
+    onError(err) {
+      Notification(
+        NotificationType.error,
+        `Error! ${schema.messages.update.error}`
+      )
+    },
+  })
+  const [updateOrderMutation] = useMutation(updateOrderQuery, {
+    onError(err) {
+      Notification(
+        NotificationType.error,
+        `Error! ${schema.messages.update.error}`
+      )
+    },
+  })
+  const [addMutation] = useMutation(addQuery, {
+    onCompleted(data) {
+      Notification(
+        NotificationType.success,
+        `Success! ${schema.messages.create.success}`
+      )
+    },
+    onError(err) {
+      Notification(
+        NotificationType.error,
+        `Error! ${schema.messages.create.error}`
+      )
+    },
+  })
+  const [sourceData, setSourceData] = useState(null)
+  const [paginateData, setPaginateData] = useState({
+    total: 0,
+    offset: 0,
+    limit: 10,
+    currentPage: 1,
+    showingRecords: 0,
+  })
+  const [modalShowing, setModalShowing] = useState(false)
+  const [editingRow, setEditingRow] = useState<
+    Record<string, string | boolean | number>
+  >({})
+
+  const { data, error, loading } = useLiveQuery(listQuery, {
+    variables: {
+      isActive,
+      searchTerm: '%' + searchTerm + '%',
+      offset: paginateData.offset,
+      limit: paginateData.limit,
+    },
+  })
+
+  const { data: aggregateData } = useLiveQuery(aggregateQuery, {
+    variables: {
+      isActive,
+      searchTerm: '%' + searchTerm + '%',
+    },
   })
 
   useEffect(() => {
-    if (searchTerm) {
-      setSourceData(searchData)
-    } else {
-      setSourceData(data)
-    }
+    if (data) setSourceData(data)
+    if (aggregateData)
+      setPaginateData({
+        ...paginateData,
+        total: aggregateData?.aggregate.count,
+        showingRecords: data?.length,
+      })
+    if (!loading && data) setIsLoading(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, searchData])
+  }, [data, aggregateData, loading])
 
-  const onFilterMarketingSource = (isActive) => {
-    setIsActive(isActive)
+  const onFilterMarketingSource = () => {
+    resetPagination()
+    setIsActive((e) => !e)
   }
 
   const onSearch = async (val) => {
-    setSearchTerm(val)
+    if (val !== searchTerm) {
+      resetPagination()
+      setSearchTerm(val)
+    }
+  }
+
+  const onPaginationChange = (currentPage) => {
+    const offset = paginateData.limit * (currentPage - 1)
+    setPaginateData({ ...paginateData, offset, currentPage: currentPage })
+  }
+
+  const resetPagination = () => {
+    setPaginateData({
+      total: 0,
+      offset: 0,
+      limit: 10,
+      currentPage: 1,
+      showingRecords: 0,
+    })
   }
 
   if (error) return <p>Error :( {error.message}</p>
 
   const { fields } = schema
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values, { resetForm }) => {
     console.log('got submittal!', values)
-    if (values.id)
-      await editMutation({
-        variables: values,
-        optimisticResponse: {},
-        update: (proxy) => {
-          if (listQuery) {
-            const existing = proxy.readQuery({
-              query: listQuery,
-            })
-            if (existing) {
-              const key = Object.keys(existing)[0]
-              proxy.writeQuery({
+    await (values.id
+      ? editMutation({
+          variables: values,
+          optimisticResponse: {},
+          update: (proxy) => {
+            if (listQuery) {
+              const existing = proxy.readQuery({
                 query: listQuery,
-                data: {
-                  [key]: [...existing[key], values],
-                },
               })
+              if (existing) {
+                const key = Object.keys(existing)[0]
+                proxy.writeQuery({
+                  query: listQuery,
+                  data: {
+                    [key]: [...existing[key], values],
+                  },
+                })
+              }
             }
-          }
-        },
-      })
-    else
-      await addMutation({
-        variables: values,
-        optimisticResponse: {},
-        update: (proxy) => {
-          if (listQuery) {
-            const existing = proxy.readQuery({
-              query: listQuery,
-            })
-            if (existing) {
-              const key = Object.keys(existing)[0]
-              proxy.writeQuery({
+          },
+        })
+      : addMutation({
+          variables: values,
+          optimisticResponse: {},
+          update: (proxy) => {
+            if (listQuery) {
+              const existing = proxy.readQuery({
                 query: listQuery,
-                data: {
-                  [key]: [...existing[key], values],
-                },
               })
+              if (existing) {
+                const key = Object.keys(existing)[0]
+                proxy.writeQuery({
+                  query: listQuery,
+                  data: {
+                    [key]: [...existing[key], values],
+                  },
+                })
+              }
             }
-          }
-        },
-      })
+          },
+        }))
+    resetForm()
     setModalShowing(false)
+  }
+
+  const formikFields = () => {
+    const initialValues = { name: '' }
+    Object.keys(fields).map((field) => {
+      initialValues[field] = checkFieldType(
+        fields[field]['type'],
+        fields[field]['defaultvalue']
+      )
+      return field
+    })
+    return initialValues
+  }
+
+  const checkFieldType = (type: string, defaultVal) => {
+    switch (type) {
+      case 'string':
+      case 'color-picker':
+      case 'radio-group':
+        return defaultVal || ''
+      case 'boolean':
+      case 'checkbox':
+        return defaultVal || true
+      case 'number':
+        return defaultVal || 0
+      default:
+        return defaultVal || ''
+    }
+  }
+
+  const checkCustomColorIconExsist = (type) => {
+    let isExist = false
+    sourceData?.map((data) => {
+      if (data[type]) {
+        isExist = true
+      }
+      return data
+    })
+    return isExist
+  }
+
+  const updateOrder = async (values) => {
+    if (values.id)
+      await updateOrderMutation({
+        variables: values,
+        optimisticResponse: {},
+        update: (proxy) => {
+          if (listQuery) {
+            const existing = proxy.readQuery({
+              query: listQuery,
+            })
+            if (existing) {
+              const key = Object.keys(existing)[0]
+              proxy.writeQuery({
+                query: listQuery,
+                data: {
+                  [key]: [...existing[key], values],
+                },
+              })
+            }
+          }
+        },
+      })
+  }
+
+  const createNew = () => {
+    setModalShowing((e) => !e)
+    setEditingRow({ name: '', isCreate: true })
+  }
+
+  const handleLanguageChange = (language: string): void => {
+    setCurrentLanguage(language)
   }
 
   return (
@@ -114,47 +366,67 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, editQuery,
       enableReinitialize={true}
       validate={(e) =>
         Object.entries(fields).reduce((a, c) => {
-          if (c[1].min) {
+          if (
+            c[1].min && // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            c[1].min > e[c[0]].length
+          ) {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            if (c[1].min > e[c[0]].length) {
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              a[c[0]] = `The value for ${c[1].shortLower} must be more than ${c[1].min} characters.`
-            }
+            a[
+              c[0]
+            ] = `The value for ${c[1].shortLower} must be more than ${c[1].min} characters.`
           }
           return a
           // eslint-disable-next-line
         }, {} as FormikErrors<any>)
       }
-      onSubmit={(values) => {
+      onSubmit={(values, { resetForm }) => {
         console.log('formik onsubmit', values)
-        onSubmit(values)
+        onSubmit(values, { resetForm })
       }}
       //initialValues={typeof modalShowing === 'object' ? modalShowing : undefined}
       initialValues={
-        // eslint-disable-next-line
-        typeof modalShowing === 'object' && (modalShowing as any)?.id
-          ? modalShowing
-          : { name: 'ee', is_active: true } //TODO: remove this, it should come from schema.fields[].*
+        editingRow?.id ? editingRow : formikFields() //TODO: remove this, it should come from schema.fields[].*
       }
     >
       <>
-        <div className={classNames(styles.marketingSourcePage, styles.desktopViewNone)}>
+        <div
+          className={classNames(
+            styles.marketingSourcePage,
+            styles.desktopViewNone
+          )}
+        >
           <MobileHeader className={styles.marketingSourceHeader}>
             <div className={styles.allContentAlignMobile}>
               <div className={styles.marketingTextStyle}>
                 <Link href="/">
                   <LeftOutlined />
                 </Link>
-                <p> Marketing sources </p>
+                <p>
+                  {' '}
+                  {needTranslation
+                    ? t('marketingsource-title.translation')
+                    : schema.full || schema.short}{' '}
+                </p>
               </div>
-              {addQuery && (
+              {addQuery && !createPage ? (
                 <AddButton
-                  onClick={() => setModalShowing({ name: '' })}
+                  onClick={createNew}
                   onFilterSource={onFilterMarketingSource}
                   onSearch={onSearch}
                   schema={schema}
+                  tableSearch={tableSearch}
+                  needTranslation={needTranslation}
+                />
+              ) : (
+                <AddButton
+                  onClick={createPageOnClick}
+                  onFilterSource={onFilterMarketingSource}
+                  onSearch={onSearch}
+                  schema={schema}
+                  tableSearch={tableSearch}
+                  needTranslation={needTranslation}
                 />
               )}
             </div>
@@ -164,7 +436,7 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, editQuery,
         {modalShowing && (
           <CrudModal
             schema={schema}
-            editingRow={modalShowing}
+            editingRow={editingRow}
             addQuery={addQuery}
             listQuery={listQuery}
             deleteQuery={deleteQuery}
@@ -173,72 +445,127 @@ const CrudTable: FC<P> = ({ schema, addQuery, deleteQuery, listQuery, editQuery,
         )}
 
         <Layout>
-          <div className={classNames(styles.tableMainHeading, styles.mobileViewNone)}>
+          {showNotificationBanner && notificationBanner}
+          <div
+            className={classNames(
+              styles.tableMainHeading,
+              styles.mobileViewNone
+            )}
+          >
             <div style={{ background: '#FFF' }}>
-              <Breadcrumb breadcrumbItems={['Setup', pluralize(schema.full || schema.short)]} />
-              <Title>{pluralize(schema.full || schema.short)}</Title>
+              <Breadcrumb
+                breadcrumbItems={[
+                  { breadcrumbName: 'Setup', path: 'setup' },
+                  { breadcrumbName: schema.full || schema.short, path: '' },
+                ]}
+              />
+              <Title>{schema.full || schema.short}</Title>
             </div>
-            {addQuery && (
+            {needTranslation && (
+              <div className={styles.btn}>
+                <SimpleDropdown
+                  label={'Change Language'}
+                  dropdownItems={prepareLanguages(languages)}
+                  value={currentLanguage}
+                  onSelected={handleLanguageChange}
+                />
+              </div>
+            )}
+            {addQuery && !createPage ? (
               <AddButton
-                onClick={() => setModalShowing({ name: '', isCreate: true })}
+                onClick={createNew}
                 onFilterSource={onFilterMarketingSource}
                 onSearch={onSearch}
                 schema={schema}
+                tableSearch={tableSearch}
+                needTranslation={needTranslation}
+              />
+            ) : (
+              <AddButton
+                onClick={createPageOnClick}
+                onFilterSource={onFilterMarketingSource}
+                onSearch={onSearch}
+                schema={schema}
+                tableSearch={tableSearch}
+                needTranslation={needTranslation}
               />
             )}
           </div>
           <Table
-            loading={loading}
+            loading={isLoading}
             style={{ height: '100%' }}
             sticky={{ offsetScroll: 80, offsetHeader: 80 }}
             pagination={sourceData?.length > 10 ? {} : false}
             scroll={{ x: 'max-content' }}
             draggable={true}
+            isCustomColorExist={checkCustomColorIconExsist('color')}
+            isCustomIconExist={checkCustomColorIconExsist('icon')}
+            noDataBtnText={schema.full}
+            noDataText={schema.fullLower}
+            onAddTemplate={() => createNew()}
+            searchTerm={searchTerm}
             columns={[
               ...Object.entries(schema.fields).map(([k, v]) => ({
                 dataIndex: k,
                 width: v.cssWidth,
                 title: v.short || v.full,
+                visible: Object.prototype.hasOwnProperty.call(v, 'visible')
+                  ? v.visible
+                  : true,
               })),
-              // {
-              //   title: 'Actions',
-              //   width: '10em',
-              //   // eslint-disable-next-line react/display-name
-              //   render: ({ id }) => {
-              //     return (
-              //       // eslint-disable-next-line react/jsx-no-useless-fragment
-              //       <>
-              //         {deleteQuery && (
-              //           <DeleteButton
-              //             id={id}
-              //             listQuery={listQuery}
-              //             deleteQuery={deleteQuery}
-              //
-              //             // onClick={() =>
-              //
-              //             // }
-              //           >
-              //             Delete
-              //           </DeleteButton>
-              //         )}
-              //       </>
-              //     )
-              //   },
-              // },
             ]}
             // eslint-disable-next-line
-            dataSource={sourceData?.map((e: { id: any }) => ({ key: e.id, ...e }))}
+            dataSource={sourceData?.map((e: { id: any }) => ({
+              key: e.id,
+              ...e,
+            }))}
             updateDataSource={({ newData, oldIndex, newIndex }) => {
+              newData = newData.map((data, i) => {
+                data.order = sourceData[i].order
+                return data
+              })
+              if (oldIndex > newIndex) {
+                for (let i = newIndex; i <= oldIndex; i++) {
+                  updateOrder(newData[i])
+                }
+              } else {
+                for (let i = oldIndex; i <= newIndex; i++) {
+                  updateOrder(newData[i])
+                }
+              }
               setSourceData(newData)
-              console.log('newData, oldIndex, newIndex ', { newData, oldIndex, newIndex })
+              console.log('newData, oldIndex, newIndex', {
+                newData,
+                oldIndex,
+                newIndex,
+              })
             }}
-            onRowClick={(e) => setModalShowing(e)}
+            onRowClick={(e) => {
+              setEditingRow(e)
+              setModalShowing((e) => !e)
+            }}
+            needTranslation={needTranslation}
           />
-          <Pagination total={50} defaultPageSize={10} defaultCurrent={1} />
+          <Pagination
+            total={paginateData.total}
+            defaultPageSize={10}
+            showSizeChanger={false}
+            onChange={onPaginationChange}
+            pageSize={paginateData.limit}
+            current={paginateData.currentPage}
+            showingRecords={paginateData.showingRecords}
+          />
         </Layout>
       </>
     </Formik>
   )
+}
+
+function prepareLanguages(languages): Array<string> {
+  const array = languages?.map(({ value }) => {
+    return value
+  })
+  return array
 }
 
 export default CrudTable

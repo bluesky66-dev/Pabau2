@@ -1,35 +1,40 @@
-import React, { FC, useState } from 'react'
-import { Menu, Badge, Avatar, Popover, Image, Drawer } from 'antd'
 import {
+  CaretDownOutlined,
+  CheckCircleFilled,
+  ExclamationOutlined,
+  ExportOutlined,
+  GlobalOutlined,
+  InfoCircleOutlined,
+  LeftOutlined,
+  NotificationOutlined,
+  PlaySquareOutlined,
+  QuestionCircleOutlined,
   RightOutlined,
   UserOutlined,
-  NotificationOutlined,
-  QuestionCircleOutlined,
-  GlobalOutlined,
-  ExportOutlined,
-  LeftOutlined,
-  CheckCircleFilled,
-  InfoCircleOutlined,
-  ExclamationOutlined,
-  PlaySquareOutlined,
-  CaretDownOutlined,
 } from '@ant-design/icons'
-import { ReactComponent as PABAULOGO } from '../../assets/images/pabaulogo.svg'
-import { ReactComponent as LaunchSVG } from '../../assets/images/launch.svg'
+import { Avatar, Badge, Drawer, Image, Menu, Popover } from 'antd'
+import classNames from 'classnames'
+import Link from 'next/link'
+import QueueAnim from 'rc-queue-anim'
+import React, { FC, useState } from 'react'
 import { ReactComponent as JASVG } from '../../assets/images/JA.svg'
+import { languageMenu } from '../../assets/images/lang-logos'
+import { ReactComponent as LaunchSVG } from '../../assets/images/launch.svg'
+import { ReactComponent as PABAULOGO } from '../../assets/images/pabaulogo.svg'
 import { ReactComponent as UPSVG } from '../../assets/images/UP.svg'
 import { ReactComponent as TaskSVG } from '../../assets/images/Vector.svg'
-import { languageMenu } from '../../assets/images/lang-logos'
 import styles from './dropdown.module.less'
-import classNames from 'classnames'
-import QueueAnim from 'rc-queue-anim'
+
 // import { isMobile, isTablet } from 'react-device-detect'
 export interface DropDownInterface {
   isOpen?: boolean
   onCloseDrawer?: () => void
 }
 
-export const Dropdown: FC<DropDownInterface> = ({ isOpen, onCloseDrawer }): JSX.Element => {
+export const Dropdown: FC<DropDownInterface> = ({
+  isOpen,
+  onCloseDrawer,
+}): JSX.Element => {
   const [activeMenu, setActiveMenu] = useState('Menu')
 
   // used for mobile device
@@ -55,17 +60,26 @@ export const Dropdown: FC<DropDownInterface> = ({ isOpen, onCloseDrawer }): JSX.
           <span>9445,00</span>
         </div>
       </Menu.Item>
-      <Menu.Item className={classNames(styles.dropdownMenu, styles.avatarSpaceTop)}>
+      <Menu.Item
+        className={classNames(styles.dropdownMenu, styles.avatarSpaceTop)}
+      >
         <div className={styles.dropdownHeader}>
           <UserOutlined style={{ color: '#9292A3' }} />
-          <span className={styles.headerText}>Account Settings</span>
+          <Link href="/account/settings">
+            <span className={styles.headerText}>Account Settings</span>
+          </Link>
         </div>
         <LaunchSVG className={styles.launchLogo} />
       </Menu.Item>
-      <Menu.Item className={styles.dropdownMenu} style={{ borderBottom: '1px solid #F1F1F1' }}>
+      <Menu.Item
+        className={styles.dropdownMenu}
+        style={{ borderBottom: '1px solid #F1F1F1' }}
+      >
         <div className={styles.dropdownHeader}>
           <TaskSVG />
-          <span className={classNames(styles.headerText, styles.taskText)}>Tasks</span>
+          <span className={classNames(styles.headerText, styles.taskText)}>
+            Tasks
+          </span>
         </div>
       </Menu.Item>
       <Menu.Item
@@ -78,14 +92,20 @@ export const Dropdown: FC<DropDownInterface> = ({ isOpen, onCloseDrawer }): JSX.
         </div>
         <RightOutlined className={styles.dropdownIcon} />
       </Menu.Item>
-      <Menu.Item className={styles.dropdownMenu} onClick={() => onClickAvatarMenu('HelpMenu')}>
+      <Menu.Item
+        className={styles.dropdownMenu}
+        onClick={() => onClickAvatarMenu('HelpMenu')}
+      >
         <div className={styles.dropdownHeader}>
           <QuestionCircleOutlined className={styles.dropdownIcon} />
           <span className={styles.headerText}>Help & Support</span>
         </div>
         <RightOutlined className={styles.dropdownIcon} />
       </Menu.Item>
-      <Menu.Item className={styles.dropdownMenu} onClick={() => onClickAvatarMenu('LangMenu')}>
+      <Menu.Item
+        className={styles.dropdownMenu}
+        onClick={() => onClickAvatarMenu('LangMenu')}
+      >
         <div className={styles.dropdownHeader}>
           <GlobalOutlined className={styles.dropdownIcon} />
           <span className={styles.headerText}>English</span>
@@ -128,7 +148,9 @@ export const Dropdown: FC<DropDownInterface> = ({ isOpen, onCloseDrawer }): JSX.
               Pabau Clinic Software
             </span>
           </div>
-          <CheckCircleFilled className={classNames(styles.checkIcon, styles.activeMenu)} />
+          <CheckCircleFilled
+            className={classNames(styles.checkIcon, styles.activeMenu)}
+          />
         </Menu.Item>
         <Menu.Item className={styles.subDropdownList}>
           <div className={styles.subDropdownListHeader}>
@@ -145,7 +167,8 @@ export const Dropdown: FC<DropDownInterface> = ({ isOpen, onCloseDrawer }): JSX.
           <div className={styles.subDropdownListHeader}>
             <UPSVG />
             <span className={classNames(styles.subDropdownListHeaderText)}>
-              University of Portsmouth Essenntial Student Guide – Info, Offers, Nightlife
+              University of Portsmouth Essenntial Student Guide – Info, Offers,
+              Nightlife
             </span>
           </div>
         </Menu.Item>
@@ -238,10 +261,14 @@ export const Dropdown: FC<DropDownInterface> = ({ isOpen, onCloseDrawer }): JSX.
             <Menu.Item key={index} className={styles.languageTextAlign}>
               <div className={styles.languageFlagCenter}>
                 <Image src={lang.logo} alt={lang.label} />
-                <span className={lang.selected ? styles.activeMenu : undefined}>{lang.label}</span>
+                <span className={lang.selected ? styles.activeMenu : undefined}>
+                  {lang.label}
+                </span>
               </div>
               {lang.selected && (
-                <CheckCircleFilled className={classNames(styles.checkIcon, styles.activeMenu)} />
+                <CheckCircleFilled
+                  className={classNames(styles.checkIcon, styles.activeMenu)}
+                />
               )}
             </Menu.Item>
           )
@@ -317,7 +344,9 @@ export const Dropdown: FC<DropDownInterface> = ({ isOpen, onCloseDrawer }): JSX.
               <Avatar size={40} icon={<UserOutlined />} />
             </Badge>
 
-            <CaretDownOutlined style={{ paddingLeft: '5px', color: '#9292A3' }} />
+            <CaretDownOutlined
+              style={{ paddingLeft: '5px', color: '#9292A3' }}
+            />
           </div>
         </Popover>
       </div>

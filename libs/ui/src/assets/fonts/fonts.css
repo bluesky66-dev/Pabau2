@@ -1,16 +1,16 @@
 @font-face {
   font-family: Circular-Std-Black;
-  src: url("./CircularStd-Black.otf") format("opentype");
+  src: url('./CircularStd-Black.otf') format('opentype');
 }
 @font-face {
   font-family: Circular-Std-Bold;
-  src: url("./CircularStd-Bold.otf") format("opentype");
+  src: url('./CircularStd-Bold.otf') format('opentype');
 }
 @font-face {
   font-family: Circular-Std-Book;
-  src: url("./CircularStd-Book.otf") format("opentype");
+  src: url('./CircularStd-Book.otf') format('opentype');
 }
 @font-face {
   font-family: Circular-Std-Medium;
-  src: url("./CircularStd-Medium.otf") format("opentype");
+  src: url('./CircularStd-Medium.otf') format('opentype');
 }

@@ -8,7 +8,14 @@ interface P {
   deleteQuery?: DocumentNode
   listQuery: DocumentNode
   editQuery: DocumentNode
-  searchQuery: DocumentNode
+  aggregateQuery?: DocumentNode
+  tableSearch?: boolean
+  updateOrderQuery?: DocumentNode
+  showNotificationBanner?: boolean
+  createPage?: boolean
+  notificationBanner?: React.ReactNode
+  createPageOnClick?(): void
+  needTranslation?: boolean
 }
 
 const CrudLayout: FC<P> = ({ ...props }) => <CrudTable {...props} />
