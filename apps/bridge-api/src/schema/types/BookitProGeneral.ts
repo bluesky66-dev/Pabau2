@@ -76,7 +76,7 @@ export const bookitProGeneralQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.bookitProGeneral();
-    t.crud.bookitProGenerals({ filtering: true, ordering: true , pagination: true });
+    t.crud.bookitProGenerals({ filtering: true, ordering: true });
 
     t.field('bookitProGeneralsCount', {
       type: 'Int',

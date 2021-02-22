@@ -16,7 +16,7 @@ export const bookitProSliderQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.bookitProSlider();
-    t.crud.bookitProSliders({ filtering: true, ordering: true , pagination: true });
+    t.crud.bookitProSliders({ filtering: true, ordering: true });
 
     t.field('bookitProSlidersCount', {
       type: 'Int',

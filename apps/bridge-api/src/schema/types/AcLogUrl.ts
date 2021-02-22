@@ -14,7 +14,7 @@ export const acLogUrlQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.acLogUrl();
-    t.crud.acLogUrls({ filtering: true, ordering: true , pagination: true });
+    t.crud.acLogUrls({ filtering: true, ordering: true });
 
     t.field('acLogUrlsCount', {
       type: 'Int',

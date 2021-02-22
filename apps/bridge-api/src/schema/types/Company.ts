@@ -13,6 +13,8 @@ export const Company = objectType({
     t.model.remote_url();
     t.model.remote_connect();
     t.model.cron_enabled();
+    t.model.details();
+    t.model.subscription();
   },
 });
 
@@ -20,7 +22,7 @@ export const companyQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.company();
-    t.crud.companies({ filtering: true, ordering: true , pagination: true });
+    t.crud.companies({ filtering: true, ordering: true });
 
     t.field('companiesCount', {
       type: 'Int',

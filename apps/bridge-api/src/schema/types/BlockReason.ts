@@ -19,7 +19,7 @@ export const blockReasonQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.blockReason();
-    t.crud.blockReasons({ filtering: true, ordering: true , pagination: true });
+    t.crud.blockReasons({ filtering: true, ordering: true });
 
     t.field('blockReasonsCount', {
       type: 'Int',

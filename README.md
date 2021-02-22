@@ -73,28 +73,20 @@ Now add `import { } from '@pabau/ui'` at top of the new page file and fill in th
 
 ## Bridge
 
-To view the GraphQA endpoint which will expose the legacy database run `yarn nx serve bridge-api`
+1. To view the GraphQA endpoint which will expose the legacy database run `yarn nx serve bridge-api`
+2. We are following the official GraphQL specification, all future changes must conform to all normative requirements published at `http://spec.graphql.org/June2018`
 
-Our ORM of choice is prisma, the schema file is located at `apps/bridge-api/prisma/schema.prisma` and is following a strict naming convention
+#Prisma
+- Our ORM of choice is prisma, the schema file is located at `apps/bridge-api/prisma/schema.prisma`
+- Any changes to schema.prisma must adhere to the official graphql convention outlined at the official graphql documentation
+- We strongly discourage following convention nomenclature marked as Pre-release/Working Draft 
+- Successful modifications of the `schema.prisma` must be followed by `yarn prisma:generate`
 
-- Model names must adhere to the following regular expression: [A-Za-z][a-za-z0-9_]\*
-- Model names must start with a letter and are typically spelled in PascalCase
-- Model names must use the singular form (for example, User instead of users or Users)
-
-U should never manually edit:
-
-- nexus.ts located at `apps/bridge-api/src/generated/nexus.ts`
-  -it will be rebuilded after doing changes to schema.ts `apps/bridge-api/src/schema.ts`
-  Successful modification of the schema.prisma file must be followed by `yarn prisma:generate`
-
-Notes:
-
-- To map the singular name of a Model to a plural database table use @@map("table_name")
-
-` model marketing_source{ ...[multiple filed names] @@map("marketing_sources") }`
-
-- To map a database table name which doesn't follow the naming convention [A-Za-z][a-za-z0-9_]\*
-  ` model third_party_access{ ...[multiple filed names] @@map("3rd_party_access") }`
+#Nexus
+- We are using Nexus to project fields from models defined in our Prisma schema into our GraphQL API
+- Nexus types are defined and stored at `apps/bridge-api/src/schema/types`
+- Nexus types should be exposed towards `schema.ts`  by exporting them via `apps/bridge-api/src/schema/types`
+- `yarn nexus:generate` exposes & generates the newly created types
 
 ## Backend
 

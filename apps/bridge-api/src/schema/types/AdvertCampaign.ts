@@ -1,7 +1,7 @@
 import { objectType, extendType } from 'nexus';
 
-export const AdverCampaign = objectType({
-  name: 'AdverCampaign',
+export const AdvertCampaign = objectType({
+  name: 'AdvertCampaign',
   definition(t) {
     t.model.id();
     t.model.advert_name();
@@ -23,33 +23,33 @@ export const AdverCampaign = objectType({
   },
 });
 
-export const adverCampaignQuery = extendType({
+export const advertCampaignQuery = extendType({
   type: 'Query',
   definition(t) {
-    t.crud.adverCampaign();
-    t.crud.adverCampaigns({ filtering: true, ordering: true , pagination: true });
+    t.crud.advertCampaign();
+    t.crud.advertCampaigns({ filtering: true, ordering: true });
 
-    t.field('adverCampaignsCount', {
+    t.field('advertCampaignsCount', {
       type: 'Int',
       args: {
-        where: 'AdverCampaignWhereInput',
+        where: 'AdvertCampaignWhereInput',
       },
       async resolve(_root, args, ctx) {
-        return ctx.prisma.adverCampaign.count(args);
+        return ctx.prisma.advertCampaign.count(args);
       },
     });
   },
 });
 
-export const adverCampaignMutation = extendType({
+export const advertCampaignMutation = extendType({
   type: 'Mutation',
   definition(t) {
-    t.crud.createOneAdverCampaign();
-    t.crud.updateOneAdverCampaign();
-    t.crud.upsertOneAdverCampaign();
-    t.crud.deleteOneAdverCampaign();
+    t.crud.createOneAdvertCampaign();
+    t.crud.updateOneAdvertCampaign();
+    t.crud.upsertOneAdvertCampaign();
+    t.crud.deleteOneAdvertCampaign();
 
-    t.crud.updateManyAdverCampaign();
-    t.crud.deleteManyAdverCampaign();
+    t.crud.updateManyAdvertCampaign();
+    t.crud.deleteManyAdvertCampaign();
   },
 });

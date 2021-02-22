@@ -18,7 +18,7 @@ export const automationDelayQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.automationDelay();
-    t.crud.automationDelays({ filtering: true, ordering: true , pagination: true });
+    t.crud.automationDelays({ filtering: true, ordering: true });
 
     t.field('automationDelaysCount', {
       type: 'Int',

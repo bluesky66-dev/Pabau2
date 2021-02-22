@@ -17,7 +17,7 @@ export const twoFactorHistoryQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.twoFactorHistory();
-    t.crud.twoFactorHistories({ filtering: true, ordering: true , pagination: true });
+    t.crud.twoFactorHistories({ filtering: true, ordering: true });
 
     t.field('twoFactorHistoriesCount', {
       type: 'Int',

@@ -15,7 +15,7 @@ export const atSettingQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.atSetting();
-    t.crud.atSettings({ filtering: true, ordering: true , pagination: true });
+    t.crud.atSettings({ filtering: true, ordering: true });
 
     t.field('atSettingsCount', {
       type: 'Int',

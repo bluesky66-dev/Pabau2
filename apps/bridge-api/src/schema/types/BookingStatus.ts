@@ -20,7 +20,7 @@ export const bookingStatusQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.bookingStatus();
-    t.crud.bookingStatuses({ filtering: true, ordering: true , pagination: true });
+    t.crud.bookingStatuses({ filtering: true, ordering: true });
 
     t.field('bookingStatusesCount', {
       type: 'Int',

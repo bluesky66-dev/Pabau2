@@ -15,7 +15,7 @@ export const atTreatmentQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.atTreatment();
-    t.crud.atTreatments({ filtering: true, ordering: true , pagination: true });
+    t.crud.atTreatments({ filtering: true, ordering: true });
 
     t.field('atTreatmentsCount', {
       type: 'Int',

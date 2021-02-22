@@ -16,7 +16,7 @@ export const automationActionQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.automationAction();
-    t.crud.automationActions({ filtering: true, ordering: true , pagination: true });
+    t.crud.automationActions({ filtering: true, ordering: true });
 
     t.field('automationActionsCount', {
       type: 'Int',

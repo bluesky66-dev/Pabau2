@@ -19,7 +19,7 @@ export const batchQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.batch();
-    t.crud.batches({ filtering: true, ordering: true , pagination: true });
+    t.crud.batches({ filtering: true, ordering: true });
 
     t.field('batchesCount', {
       type: 'Int',

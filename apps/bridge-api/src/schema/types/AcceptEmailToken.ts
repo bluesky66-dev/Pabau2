@@ -15,7 +15,7 @@ export const acceptEmailTokenQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.acceptEmailToken();
-    t.crud.acceptEmailTokens({ filtering: true, ordering: true , pagination: true });
+    t.crud.acceptEmailTokens({ filtering: true, ordering: true });
 
     t.field('acceptEmailTokensCount', {
       type: 'Int',

@@ -16,7 +16,7 @@ export const appBeforeAfterQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.appBeforeAfter();
-    t.crud.appBeforeAfters({ filtering: true, ordering: true , pagination: true });
+    t.crud.appBeforeAfters({ filtering: true, ordering: true });
 
     t.field('appBeforeAftersCount', {
       type: 'Int',

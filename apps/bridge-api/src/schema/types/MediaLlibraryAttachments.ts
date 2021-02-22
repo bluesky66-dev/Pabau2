@@ -20,7 +20,7 @@ export const mediaLlibraryAttachmentsQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.mediaLlibraryAttachments();
-    t.crud.mediaLlibraryAttachments({ filtering: true, ordering: true , pagination: true });
+    t.crud.mediaLlibraryAttachments({ filtering: true, ordering: true });
 
     t.field('mediaLlibraryAttachmentsCount', {
       type: 'Int',

@@ -15,7 +15,7 @@ export const attachmentHelperLiteQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.attachmentHelperLite();
-    t.crud.attachmentHelperLites({ filtering: true, ordering: true , pagination: true });
+    t.crud.attachmentHelperLites({ filtering: true, ordering: true });
 
     t.field('attachmentHelperLitesCount', {
       type: 'Int',

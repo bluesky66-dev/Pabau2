@@ -39,7 +39,7 @@ export const accountManagerQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.accountManager();
-    t.crud.accountManagers({ filtering: true, ordering: true , pagination: true });
+    t.crud.accountManagers({ filtering: true, ordering: true });
 
     t.field('accountManagersCount', {
       type: 'Int',

@@ -755,7 +755,7 @@ input AccountManagerWhereUniqueInput {
   id: Int
 }
 
-type AdverCampaign {
+type AdvertCampaign {
   Clicks: Int!
   advert_name: String!
   advert_reach: Int!
@@ -775,7 +775,7 @@ type AdverCampaign {
   url: String!
 }
 
-input AdverCampaignCreateInput {
+input AdvertCampaignCreateInput {
   Clicks: Int!
   advert_name: String!
   advert_reach: Int!
@@ -794,7 +794,7 @@ input AdverCampaignCreateInput {
   url: String!
 }
 
-input AdverCampaignOrderByInput {
+input AdvertCampaignOrderByInput {
   Clicks: SortOrder
   advert_name: SortOrder
   advert_reach: SortOrder
@@ -814,7 +814,7 @@ input AdverCampaignOrderByInput {
   url: SortOrder
 }
 
-input AdverCampaignUpdateInput {
+input AdvertCampaignUpdateInput {
   Clicks: IntFieldUpdateOperationsInput
   advert_name: StringFieldUpdateOperationsInput
   advert_reach: IntFieldUpdateOperationsInput
@@ -833,7 +833,7 @@ input AdverCampaignUpdateInput {
   url: StringFieldUpdateOperationsInput
 }
 
-input AdverCampaignUpdateManyMutationInput {
+input AdvertCampaignUpdateManyMutationInput {
   Clicks: IntFieldUpdateOperationsInput
   advert_name: StringFieldUpdateOperationsInput
   advert_reach: IntFieldUpdateOperationsInput
@@ -852,11 +852,11 @@ input AdverCampaignUpdateManyMutationInput {
   url: StringFieldUpdateOperationsInput
 }
 
-input AdverCampaignWhereInput {
-  AND: [AdverCampaignWhereInput!]
+input AdvertCampaignWhereInput {
+  AND: [AdvertCampaignWhereInput!]
   Clicks: IntFilter
-  NOT: [AdverCampaignWhereInput!]
-  OR: [AdverCampaignWhereInput!]
+  NOT: [AdvertCampaignWhereInput!]
+  OR: [AdvertCampaignWhereInput!]
   advert_name: StringFilter
   advert_reach: IntFilter
   advert_type: StringFilter
@@ -875,7 +875,7 @@ input AdverCampaignWhereInput {
   url: StringFilter
 }
 
-input AdverCampaignWhereUniqueInput {
+input AdvertCampaignWhereUniqueInput {
   id: Int
 }
 
@@ -4316,6 +4316,70 @@ input CampaignAttachmentWhereUniqueInput {
   id: Int
 }
 
+type CancelReason {
+  apply_cancellation_policy: Int!
+  created_at: DateTime!
+  id: Int!
+  late_cancel: Int!
+  modified_at: DateTime!
+  occupier: String!
+  reason_name: String!
+}
+
+input CancelReasonCreateInput {
+  apply_cancellation_policy: Int!
+  created_at: DateTime!
+  late_cancel: Int!
+  modified_at: DateTime!
+  occupier: String!
+  reason_name: String!
+}
+
+input CancelReasonOrderByInput {
+  apply_cancellation_policy: SortOrder
+  created_at: SortOrder
+  id: SortOrder
+  late_cancel: SortOrder
+  modified_at: SortOrder
+  occupier: SortOrder
+  reason_name: SortOrder
+}
+
+input CancelReasonUpdateInput {
+  apply_cancellation_policy: IntFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  late_cancel: IntFieldUpdateOperationsInput
+  modified_at: DateTimeFieldUpdateOperationsInput
+  occupier: StringFieldUpdateOperationsInput
+  reason_name: StringFieldUpdateOperationsInput
+}
+
+input CancelReasonUpdateManyMutationInput {
+  apply_cancellation_policy: IntFieldUpdateOperationsInput
+  created_at: DateTimeFieldUpdateOperationsInput
+  late_cancel: IntFieldUpdateOperationsInput
+  modified_at: DateTimeFieldUpdateOperationsInput
+  occupier: StringFieldUpdateOperationsInput
+  reason_name: StringFieldUpdateOperationsInput
+}
+
+input CancelReasonWhereInput {
+  AND: [CancelReasonWhereInput!]
+  NOT: [CancelReasonWhereInput!]
+  OR: [CancelReasonWhereInput!]
+  apply_cancellation_policy: IntFilter
+  created_at: DateTimeFilter
+  id: IntFilter
+  late_cancel: IntFilter
+  modified_at: DateTimeFilter
+  occupier: StringFilter
+  reason_name: StringFilter
+}
+
+input CancelReasonWhereUniqueInput {
+  id: Int
+}
+
 type CancellationPolicy {
   advanced_cancellation_fee: Int!
   creation_date: DateTime
@@ -4422,16 +4486,1079 @@ input CancellationPolicyWhereUniqueInput {
   id: Int
 }
 
+type CardTypes {
+  amex: Int!
+  amex_credit_charge: Float!
+  company_id: Int!
+  enable_reference: Int!
+  id: Int!
+  maestro: Int!
+  mastercard: Int!
+  mastercard_credit_charge: Float!
+  visa: Int!
+  visa_credit: Int!
+  visa_credit_charge: Float!
+  worldpay: Int!
+}
+
+input CardTypesCreateInput {
+  amex: Int!
+  amex_credit_charge: Float!
+  company_id: Int!
+  enable_reference: Int!
+  maestro: Int!
+  mastercard: Int!
+  mastercard_credit_charge: Float!
+  visa: Int!
+  visa_credit: Int!
+  visa_credit_charge: Float!
+  worldpay: Int!
+}
+
+input CardTypesOrderByInput {
+  amex: SortOrder
+  amex_credit_charge: SortOrder
+  company_id: SortOrder
+  enable_reference: SortOrder
+  id: SortOrder
+  maestro: SortOrder
+  mastercard: SortOrder
+  mastercard_credit_charge: SortOrder
+  visa: SortOrder
+  visa_credit: SortOrder
+  visa_credit_charge: SortOrder
+  worldpay: SortOrder
+}
+
+input CardTypesUpdateInput {
+  amex: IntFieldUpdateOperationsInput
+  amex_credit_charge: FloatFieldUpdateOperationsInput
+  company_id: IntFieldUpdateOperationsInput
+  enable_reference: IntFieldUpdateOperationsInput
+  maestro: IntFieldUpdateOperationsInput
+  mastercard: IntFieldUpdateOperationsInput
+  mastercard_credit_charge: FloatFieldUpdateOperationsInput
+  visa: IntFieldUpdateOperationsInput
+  visa_credit: IntFieldUpdateOperationsInput
+  visa_credit_charge: FloatFieldUpdateOperationsInput
+  worldpay: IntFieldUpdateOperationsInput
+}
+
+input CardTypesUpdateManyMutationInput {
+  amex: IntFieldUpdateOperationsInput
+  amex_credit_charge: FloatFieldUpdateOperationsInput
+  company_id: IntFieldUpdateOperationsInput
+  enable_reference: IntFieldUpdateOperationsInput
+  maestro: IntFieldUpdateOperationsInput
+  mastercard: IntFieldUpdateOperationsInput
+  mastercard_credit_charge: FloatFieldUpdateOperationsInput
+  visa: IntFieldUpdateOperationsInput
+  visa_credit: IntFieldUpdateOperationsInput
+  visa_credit_charge: FloatFieldUpdateOperationsInput
+  worldpay: IntFieldUpdateOperationsInput
+}
+
+input CardTypesWhereInput {
+  AND: [CardTypesWhereInput!]
+  NOT: [CardTypesWhereInput!]
+  OR: [CardTypesWhereInput!]
+  amex: IntFilter
+  amex_credit_charge: FloatFilter
+  company_id: IntFilter
+  enable_reference: IntFilter
+  id: IntFilter
+  maestro: IntFilter
+  mastercard: IntFilter
+  mastercard_credit_charge: FloatFilter
+  visa: IntFilter
+  visa_credit: IntFilter
+  visa_credit_charge: FloatFilter
+  worldpay: IntFilter
+}
+
+input CardTypesWhereUniqueInput {
+  id: Int
+}
+
+type CashupReport {
+  card_actual: Float!
+  card_amount: Float!
+  card_difference: Float!
+  cash_actual: Float!
+  cash_amount: Float!
+  cash_difference: Float!
+  cashup_date: DateTime!
+  cheque_actual: Float!
+  cheque_amount: Float!
+  cheque_difference: Float!
+  comments: String!
+  company_id: Int!
+  finance_id: Int!
+  float_amount: Float!
+  giftvoucher_actual: Float!
+  giftvoucher_amount: Float!
+  giftvoucher_difference: Float!
+  id: Int!
+  location_id: Int!
+  opening_balance: Float!
+  staff_id: Int!
+}
+
+input CashupReportCreateInput {
+  card_actual: Float!
+  card_amount: Float!
+  card_difference: Float!
+  cash_actual: Float!
+  cash_amount: Float!
+  cash_difference: Float!
+  cashup_date: DateTime!
+  cheque_actual: Float!
+  cheque_amount: Float!
+  cheque_difference: Float!
+  comments: String!
+  company_id: Int!
+  finance_id: Int!
+  float_amount: Float!
+  giftvoucher_actual: Float!
+  giftvoucher_amount: Float!
+  giftvoucher_difference: Float!
+  location_id: Int
+  opening_balance: Float!
+  staff_id: Int!
+}
+
+type CashupReportCustom {
+  card_type: String!
+  cashup_date: DateTime!
+  company_id: String!
+  custom_actual: Float!
+  custom_amount: Float!
+  custom_difference: Float!
+  custom_type: String!
+  id: Int!
+  location_id: Int!
+}
+
+input CashupReportCustomCreateInput {
+  card_type: String!
+  cashup_date: DateTime!
+  company_id: String!
+  custom_actual: Float!
+  custom_amount: Float!
+  custom_difference: Float!
+  custom_type: String!
+  location_id: Int
+}
+
+input CashupReportCustomOrderByInput {
+  card_type: SortOrder
+  cashup_date: SortOrder
+  company_id: SortOrder
+  custom_actual: SortOrder
+  custom_amount: SortOrder
+  custom_difference: SortOrder
+  custom_type: SortOrder
+  id: SortOrder
+  location_id: SortOrder
+}
+
+input CashupReportCustomUpdateInput {
+  card_type: StringFieldUpdateOperationsInput
+  cashup_date: DateTimeFieldUpdateOperationsInput
+  company_id: StringFieldUpdateOperationsInput
+  custom_actual: FloatFieldUpdateOperationsInput
+  custom_amount: FloatFieldUpdateOperationsInput
+  custom_difference: FloatFieldUpdateOperationsInput
+  custom_type: StringFieldUpdateOperationsInput
+  location_id: IntFieldUpdateOperationsInput
+}
+
+input CashupReportCustomUpdateManyMutationInput {
+  card_type: StringFieldUpdateOperationsInput
+  cashup_date: DateTimeFieldUpdateOperationsInput
+  company_id: StringFieldUpdateOperationsInput
+  custom_actual: FloatFieldUpdateOperationsInput
+  custom_amount: FloatFieldUpdateOperationsInput
+  custom_difference: FloatFieldUpdateOperationsInput
+  custom_type: StringFieldUpdateOperationsInput
+  location_id: IntFieldUpdateOperationsInput
+}
+
+input CashupReportCustomWhereInput {
+  AND: [CashupReportCustomWhereInput!]
+  NOT: [CashupReportCustomWhereInput!]
+  OR: [CashupReportCustomWhereInput!]
+  card_type: StringFilter
+  cashup_date: DateTimeFilter
+  company_id: StringFilter
+  custom_actual: FloatFilter
+  custom_amount: FloatFilter
+  custom_difference: FloatFilter
+  custom_type: StringFilter
+  id: IntFilter
+  location_id: IntFilter
+}
+
+input CashupReportCustomWhereUniqueInput {
+  id: Int
+}
+
+input CashupReportOrderByInput {
+  card_actual: SortOrder
+  card_amount: SortOrder
+  card_difference: SortOrder
+  cash_actual: SortOrder
+  cash_amount: SortOrder
+  cash_difference: SortOrder
+  cashup_date: SortOrder
+  cheque_actual: SortOrder
+  cheque_amount: SortOrder
+  cheque_difference: SortOrder
+  comments: SortOrder
+  company_id: SortOrder
+  finance_id: SortOrder
+  float_amount: SortOrder
+  giftvoucher_actual: SortOrder
+  giftvoucher_amount: SortOrder
+  giftvoucher_difference: SortOrder
+  id: SortOrder
+  location_id: SortOrder
+  opening_balance: SortOrder
+  staff_id: SortOrder
+}
+
+input CashupReportUpdateInput {
+  card_actual: FloatFieldUpdateOperationsInput
+  card_amount: FloatFieldUpdateOperationsInput
+  card_difference: FloatFieldUpdateOperationsInput
+  cash_actual: FloatFieldUpdateOperationsInput
+  cash_amount: FloatFieldUpdateOperationsInput
+  cash_difference: FloatFieldUpdateOperationsInput
+  cashup_date: DateTimeFieldUpdateOperationsInput
+  cheque_actual: FloatFieldUpdateOperationsInput
+  cheque_amount: FloatFieldUpdateOperationsInput
+  cheque_difference: FloatFieldUpdateOperationsInput
+  comments: StringFieldUpdateOperationsInput
+  company_id: IntFieldUpdateOperationsInput
+  finance_id: IntFieldUpdateOperationsInput
+  float_amount: FloatFieldUpdateOperationsInput
+  giftvoucher_actual: FloatFieldUpdateOperationsInput
+  giftvoucher_amount: FloatFieldUpdateOperationsInput
+  giftvoucher_difference: FloatFieldUpdateOperationsInput
+  location_id: IntFieldUpdateOperationsInput
+  opening_balance: FloatFieldUpdateOperationsInput
+  staff_id: IntFieldUpdateOperationsInput
+}
+
+input CashupReportUpdateManyMutationInput {
+  card_actual: FloatFieldUpdateOperationsInput
+  card_amount: FloatFieldUpdateOperationsInput
+  card_difference: FloatFieldUpdateOperationsInput
+  cash_actual: FloatFieldUpdateOperationsInput
+  cash_amount: FloatFieldUpdateOperationsInput
+  cash_difference: FloatFieldUpdateOperationsInput
+  cashup_date: DateTimeFieldUpdateOperationsInput
+  cheque_actual: FloatFieldUpdateOperationsInput
+  cheque_amount: FloatFieldUpdateOperationsInput
+  cheque_difference: FloatFieldUpdateOperationsInput
+  comments: StringFieldUpdateOperationsInput
+  company_id: IntFieldUpdateOperationsInput
+  finance_id: IntFieldUpdateOperationsInput
+  float_amount: FloatFieldUpdateOperationsInput
+  giftvoucher_actual: FloatFieldUpdateOperationsInput
+  giftvoucher_amount: FloatFieldUpdateOperationsInput
+  giftvoucher_difference: FloatFieldUpdateOperationsInput
+  location_id: IntFieldUpdateOperationsInput
+  opening_balance: FloatFieldUpdateOperationsInput
+  staff_id: IntFieldUpdateOperationsInput
+}
+
+input CashupReportWhereInput {
+  AND: [CashupReportWhereInput!]
+  NOT: [CashupReportWhereInput!]
+  OR: [CashupReportWhereInput!]
+  card_actual: FloatFilter
+  card_amount: FloatFilter
+  card_difference: FloatFilter
+  cash_actual: FloatFilter
+  cash_amount: FloatFilter
+  cash_difference: FloatFilter
+  cashup_date: DateTimeFilter
+  cheque_actual: FloatFilter
+  cheque_amount: FloatFilter
+  cheque_difference: FloatFilter
+  comments: StringFilter
+  company_id: IntFilter
+  finance_id: IntFilter
+  float_amount: FloatFilter
+  giftvoucher_actual: FloatFilter
+  giftvoucher_amount: FloatFilter
+  giftvoucher_difference: FloatFilter
+  id: IntFilter
+  location_id: IntFilter
+  opening_balance: FloatFilter
+  staff_id: IntFilter
+}
+
+input CashupReportWhereUniqueInput {
+  id: Int
+}
+
+type CheckinAppt {
+  appt_id: Int!
+  id: Int!
+  spotify_uri: String!
+}
+
+input CheckinApptCreateInput {
+  appt_id: Int!
+  spotify_uri: String!
+}
+
+input CheckinApptOrderByInput {
+  appt_id: SortOrder
+  id: SortOrder
+  spotify_uri: SortOrder
+}
+
+input CheckinApptUpdateInput {
+  appt_id: IntFieldUpdateOperationsInput
+  spotify_uri: StringFieldUpdateOperationsInput
+}
+
+input CheckinApptUpdateManyMutationInput {
+  appt_id: IntFieldUpdateOperationsInput
+  spotify_uri: StringFieldUpdateOperationsInput
+}
+
+input CheckinApptWhereInput {
+  AND: [CheckinApptWhereInput!]
+  NOT: [CheckinApptWhereInput!]
+  OR: [CheckinApptWhereInput!]
+  appt_id: IntFilter
+  id: IntFilter
+  spotify_uri: StringFilter
+}
+
+input CheckinApptWhereUniqueInput {
+  id: Int
+}
+
+type CheckinAverages {
+  avg_time_seconds: Int!
+  id: Int!
+  product_id: Int!
+  uid: Int!
+}
+
+input CheckinAveragesCreateInput {
+  avg_time_seconds: Int!
+  product_id: Int!
+  uid: Int!
+}
+
+type CheckinAveragesIdle {
+  avg: Float
+  id: Int!
+  retailutilisation_avg: Float
+  uid: Int!
+  username: String!
+}
+
+input CheckinAveragesIdleCreateInput {
+  avg: Float
+  retailutilisation_avg: Float
+  uid: Int!
+  username: String!
+}
+
+input CheckinAveragesIdleOrderByInput {
+  avg: SortOrder
+  id: SortOrder
+  retailutilisation_avg: SortOrder
+  uid: SortOrder
+  username: SortOrder
+}
+
+input CheckinAveragesIdleUpdateInput {
+  avg: NullableFloatFieldUpdateOperationsInput
+  retailutilisation_avg: NullableFloatFieldUpdateOperationsInput
+  uid: IntFieldUpdateOperationsInput
+  username: StringFieldUpdateOperationsInput
+}
+
+input CheckinAveragesIdleUpdateManyMutationInput {
+  avg: NullableFloatFieldUpdateOperationsInput
+  retailutilisation_avg: NullableFloatFieldUpdateOperationsInput
+  uid: IntFieldUpdateOperationsInput
+  username: StringFieldUpdateOperationsInput
+}
+
+input CheckinAveragesIdleWhereInput {
+  AND: [CheckinAveragesIdleWhereInput!]
+  NOT: [CheckinAveragesIdleWhereInput!]
+  OR: [CheckinAveragesIdleWhereInput!]
+  avg: FloatNullableFilter
+  id: IntFilter
+  retailutilisation_avg: FloatNullableFilter
+  uid: IntFilter
+  username: StringFilter
+}
+
+input CheckinAveragesIdleWhereUniqueInput {
+  id: Int
+  username: String
+}
+
+input CheckinAveragesOrderByInput {
+  avg_time_seconds: SortOrder
+  id: SortOrder
+  product_id: SortOrder
+  uid: SortOrder
+}
+
+input CheckinAveragesUpdateInput {
+  avg_time_seconds: IntFieldUpdateOperationsInput
+  product_id: IntFieldUpdateOperationsInput
+  uid: IntFieldUpdateOperationsInput
+}
+
+input CheckinAveragesUpdateManyMutationInput {
+  avg_time_seconds: IntFieldUpdateOperationsInput
+  product_id: IntFieldUpdateOperationsInput
+  uid: IntFieldUpdateOperationsInput
+}
+
+input CheckinAveragesWhereInput {
+  AND: [CheckinAveragesWhereInput!]
+  NOT: [CheckinAveragesWhereInput!]
+  OR: [CheckinAveragesWhereInput!]
+  avg_time_seconds: IntFilter
+  id: IntFilter
+  product_id: IntFilter
+  uid: IntFilter
+}
+
+input CheckinAveragesWhereUniqueInput {
+  id: Int
+}
+
+type CheckinProduct {
+  date_end: DateTime
+  date_start: DateTime
+  id: Int!
+  inv_product_id: Int!
+  product_id: Int!
+  queue_id: Int!
+}
+
+input CheckinProductCreateInput {
+  date_end: DateTime
+  date_start: DateTime
+  inv_product_id: Int
+  product_id: Int!
+  queue_id: Int!
+}
+
+input CheckinProductOrderByInput {
+  date_end: SortOrder
+  date_start: SortOrder
+  id: SortOrder
+  inv_product_id: SortOrder
+  product_id: SortOrder
+  queue_id: SortOrder
+}
+
+input CheckinProductUpdateInput {
+  date_end: NullableDateTimeFieldUpdateOperationsInput
+  date_start: NullableDateTimeFieldUpdateOperationsInput
+  inv_product_id: IntFieldUpdateOperationsInput
+  product_id: IntFieldUpdateOperationsInput
+  queue_id: IntFieldUpdateOperationsInput
+}
+
+input CheckinProductUpdateManyMutationInput {
+  date_end: NullableDateTimeFieldUpdateOperationsInput
+  date_start: NullableDateTimeFieldUpdateOperationsInput
+  inv_product_id: IntFieldUpdateOperationsInput
+  product_id: IntFieldUpdateOperationsInput
+  queue_id: IntFieldUpdateOperationsInput
+}
+
+input CheckinProductWhereInput {
+  AND: [CheckinProductWhereInput!]
+  NOT: [CheckinProductWhereInput!]
+  OR: [CheckinProductWhereInput!]
+  date_end: DateTimeNullableFilter
+  date_start: DateTimeNullableFilter
+  id: IntFilter
+  inv_product_id: IntFilter
+  product_id: IntFilter
+  queue_id: IntFilter
+}
+
+input CheckinProductWhereUniqueInput {
+  id: Int
+}
+
+type CheckinQueue {
+  accepted: Boolean!
+  been_before: Boolean!
+  connect_id: Int
+  date_accepted: DateTime
+  date_binned: DateTime
+  date_end: DateTime
+  date_start: DateTime!
+  finalise: Boolean
+  id: Int!
+  is_lunch: Boolean!
+  name: String!
+  order: Int!
+  skips: Int!
+  sms_number: String
+  sms_sent: DateTime
+  sms_wanted: Boolean
+  spotify_uri: String
+  uid: Int!
+  was_anyone: Boolean!
+}
+
+input CheckinQueueCreateInput {
+  accepted: Boolean
+  been_before: Boolean!
+  connect_id: Int
+  date_accepted: DateTime
+  date_binned: DateTime
+  date_end: DateTime
+  date_start: DateTime!
+  finalise: Boolean
+  is_lunch: Boolean
+  name: String!
+  order: Int!
+  skips: Int
+  sms_number: String
+  sms_sent: DateTime
+  sms_wanted: Boolean
+  spotify_uri: String
+  uid: Int!
+  was_anyone: Boolean!
+}
+
+input CheckinQueueOrderByInput {
+  accepted: SortOrder
+  been_before: SortOrder
+  connect_id: SortOrder
+  date_accepted: SortOrder
+  date_binned: SortOrder
+  date_end: SortOrder
+  date_start: SortOrder
+  finalise: SortOrder
+  id: SortOrder
+  is_lunch: SortOrder
+  name: SortOrder
+  order: SortOrder
+  skips: SortOrder
+  sms_number: SortOrder
+  sms_sent: SortOrder
+  sms_wanted: SortOrder
+  spotify_uri: SortOrder
+  uid: SortOrder
+  was_anyone: SortOrder
+}
+
+input CheckinQueueUpdateInput {
+  accepted: BoolFieldUpdateOperationsInput
+  been_before: BoolFieldUpdateOperationsInput
+  connect_id: NullableIntFieldUpdateOperationsInput
+  date_accepted: NullableDateTimeFieldUpdateOperationsInput
+  date_binned: NullableDateTimeFieldUpdateOperationsInput
+  date_end: NullableDateTimeFieldUpdateOperationsInput
+  date_start: DateTimeFieldUpdateOperationsInput
+  finalise: NullableBoolFieldUpdateOperationsInput
+  is_lunch: BoolFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  order: IntFieldUpdateOperationsInput
+  skips: IntFieldUpdateOperationsInput
+  sms_number: NullableStringFieldUpdateOperationsInput
+  sms_sent: NullableDateTimeFieldUpdateOperationsInput
+  sms_wanted: NullableBoolFieldUpdateOperationsInput
+  spotify_uri: NullableStringFieldUpdateOperationsInput
+  uid: IntFieldUpdateOperationsInput
+  was_anyone: BoolFieldUpdateOperationsInput
+}
+
+input CheckinQueueUpdateManyMutationInput {
+  accepted: BoolFieldUpdateOperationsInput
+  been_before: BoolFieldUpdateOperationsInput
+  connect_id: NullableIntFieldUpdateOperationsInput
+  date_accepted: NullableDateTimeFieldUpdateOperationsInput
+  date_binned: NullableDateTimeFieldUpdateOperationsInput
+  date_end: NullableDateTimeFieldUpdateOperationsInput
+  date_start: DateTimeFieldUpdateOperationsInput
+  finalise: NullableBoolFieldUpdateOperationsInput
+  is_lunch: BoolFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  order: IntFieldUpdateOperationsInput
+  skips: IntFieldUpdateOperationsInput
+  sms_number: NullableStringFieldUpdateOperationsInput
+  sms_sent: NullableDateTimeFieldUpdateOperationsInput
+  sms_wanted: NullableBoolFieldUpdateOperationsInput
+  spotify_uri: NullableStringFieldUpdateOperationsInput
+  uid: IntFieldUpdateOperationsInput
+  was_anyone: BoolFieldUpdateOperationsInput
+}
+
+input CheckinQueueWhereInput {
+  AND: [CheckinQueueWhereInput!]
+  NOT: [CheckinQueueWhereInput!]
+  OR: [CheckinQueueWhereInput!]
+  accepted: BoolFilter
+  been_before: BoolFilter
+  connect_id: IntNullableFilter
+  date_accepted: DateTimeNullableFilter
+  date_binned: DateTimeNullableFilter
+  date_end: DateTimeNullableFilter
+  date_start: DateTimeFilter
+  finalise: BoolNullableFilter
+  id: IntFilter
+  is_lunch: BoolFilter
+  name: StringFilter
+  order: IntFilter
+  skips: IntFilter
+  sms_number: StringNullableFilter
+  sms_sent: DateTimeNullableFilter
+  sms_wanted: BoolNullableFilter
+  spotify_uri: StringNullableFilter
+  uid: IntFilter
+  was_anyone: BoolFilter
+}
+
+input CheckinQueueWhereUniqueInput {
+  id: Int
+}
+
+type ClassCategories {
+  code: String!
+  created_date: DateTime
+  id: Int!
+  modified_date: DateTime
+  name: String!
+  occupier: Int
+  uid: Int
+}
+
+input ClassCategoriesCreateInput {
+  code: String!
+  created_date: DateTime
+  modified_date: DateTime
+  name: String!
+  occupier: Int
+  uid: Int
+}
+
+input ClassCategoriesOrderByInput {
+  code: SortOrder
+  created_date: SortOrder
+  id: SortOrder
+  modified_date: SortOrder
+  name: SortOrder
+  occupier: SortOrder
+  uid: SortOrder
+}
+
+input ClassCategoriesUpdateInput {
+  code: StringFieldUpdateOperationsInput
+  created_date: NullableDateTimeFieldUpdateOperationsInput
+  modified_date: NullableDateTimeFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  occupier: NullableIntFieldUpdateOperationsInput
+  uid: NullableIntFieldUpdateOperationsInput
+}
+
+input ClassCategoriesUpdateManyMutationInput {
+  code: StringFieldUpdateOperationsInput
+  created_date: NullableDateTimeFieldUpdateOperationsInput
+  modified_date: NullableDateTimeFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  occupier: NullableIntFieldUpdateOperationsInput
+  uid: NullableIntFieldUpdateOperationsInput
+}
+
+input ClassCategoriesWhereInput {
+  AND: [ClassCategoriesWhereInput!]
+  NOT: [ClassCategoriesWhereInput!]
+  OR: [ClassCategoriesWhereInput!]
+  code: StringFilter
+  created_date: DateTimeNullableFilter
+  id: IntFilter
+  modified_date: DateTimeNullableFilter
+  name: StringFilter
+  occupier: IntNullableFilter
+  uid: IntNullableFilter
+}
+
+input ClassCategoriesWhereUniqueInput {
+  id: Int
+}
+
+type ClassGuests {
+  cancel_status: Int!
+  class_id: Int!
+  company_id: Int!
+  guest_name: String!
+  id: Int!
+  mobile: String!
+  signing_date: Int!
+}
+
+input ClassGuestsCreateInput {
+  cancel_status: Int!
+  class_id: Int!
+  company_id: Int!
+  guest_name: String!
+  mobile: String!
+  signing_date: Int!
+}
+
+input ClassGuestsOrderByInput {
+  cancel_status: SortOrder
+  class_id: SortOrder
+  company_id: SortOrder
+  guest_name: SortOrder
+  id: SortOrder
+  mobile: SortOrder
+  signing_date: SortOrder
+}
+
+input ClassGuestsUpdateInput {
+  cancel_status: IntFieldUpdateOperationsInput
+  class_id: IntFieldUpdateOperationsInput
+  company_id: IntFieldUpdateOperationsInput
+  guest_name: StringFieldUpdateOperationsInput
+  mobile: StringFieldUpdateOperationsInput
+  signing_date: IntFieldUpdateOperationsInput
+}
+
+input ClassGuestsUpdateManyMutationInput {
+  cancel_status: IntFieldUpdateOperationsInput
+  class_id: IntFieldUpdateOperationsInput
+  company_id: IntFieldUpdateOperationsInput
+  guest_name: StringFieldUpdateOperationsInput
+  mobile: StringFieldUpdateOperationsInput
+  signing_date: IntFieldUpdateOperationsInput
+}
+
+input ClassGuestsWhereInput {
+  AND: [ClassGuestsWhereInput!]
+  NOT: [ClassGuestsWhereInput!]
+  OR: [ClassGuestsWhereInput!]
+  cancel_status: IntFilter
+  class_id: IntFilter
+  company_id: IntFilter
+  guest_name: StringFilter
+  id: IntFilter
+  mobile: StringFilter
+  signing_date: IntFilter
+}
+
+input ClassGuestsWhereUniqueInput {
+  id: Int
+}
+
+type ClassMaster {
+  c_book: String
+  c_companyid: Int
+  c_date: String
+  c_day: String
+  c_duration: String
+  c_empty: String
+  c_exptime: String
+  c_formattime: String
+  c_id: Int!
+  c_location: Int
+  c_price: Float
+  c_room: Int
+  c_slots: String
+  c_startformattime: String
+  c_teacher: Int
+  c_time: String
+  c_type: Int
+  cancel_status: Int!
+  class_pay: class_master_class_pay
+  product_id: Int!
+  sign_in_type: String!
+}
+
+input ClassMasterCreateInput {
+  c_book: String
+  c_companyid: Int
+  c_date: String
+  c_day: String
+  c_duration: String
+  c_empty: String
+  c_exptime: String
+  c_formattime: String
+  c_location: Int
+  c_price: Float
+  c_room: Int
+  c_slots: String
+  c_startformattime: String
+  c_teacher: Int
+  c_time: String
+  c_type: Int
+  cancel_status: Int!
+  class_pay: class_master_class_pay
+  product_id: Int!
+  sign_in_type: String!
+}
+
+input ClassMasterOrderByInput {
+  c_book: SortOrder
+  c_companyid: SortOrder
+  c_date: SortOrder
+  c_day: SortOrder
+  c_duration: SortOrder
+  c_empty: SortOrder
+  c_exptime: SortOrder
+  c_formattime: SortOrder
+  c_id: SortOrder
+  c_location: SortOrder
+  c_price: SortOrder
+  c_room: SortOrder
+  c_slots: SortOrder
+  c_startformattime: SortOrder
+  c_teacher: SortOrder
+  c_time: SortOrder
+  c_type: SortOrder
+  cancel_status: SortOrder
+  class_pay: SortOrder
+  product_id: SortOrder
+  sign_in_type: SortOrder
+}
+
+input ClassMasterUpdateInput {
+  c_book: NullableStringFieldUpdateOperationsInput
+  c_companyid: NullableIntFieldUpdateOperationsInput
+  c_date: NullableStringFieldUpdateOperationsInput
+  c_day: NullableStringFieldUpdateOperationsInput
+  c_duration: NullableStringFieldUpdateOperationsInput
+  c_empty: NullableStringFieldUpdateOperationsInput
+  c_exptime: NullableStringFieldUpdateOperationsInput
+  c_formattime: NullableStringFieldUpdateOperationsInput
+  c_location: NullableIntFieldUpdateOperationsInput
+  c_price: NullableFloatFieldUpdateOperationsInput
+  c_room: NullableIntFieldUpdateOperationsInput
+  c_slots: NullableStringFieldUpdateOperationsInput
+  c_startformattime: NullableStringFieldUpdateOperationsInput
+  c_teacher: NullableIntFieldUpdateOperationsInput
+  c_time: NullableStringFieldUpdateOperationsInput
+  c_type: NullableIntFieldUpdateOperationsInput
+  cancel_status: IntFieldUpdateOperationsInput
+  class_pay: NullableEnumclass_master_class_payFieldUpdateOperationsInput
+  product_id: IntFieldUpdateOperationsInput
+  sign_in_type: StringFieldUpdateOperationsInput
+}
+
+input ClassMasterUpdateManyMutationInput {
+  c_book: NullableStringFieldUpdateOperationsInput
+  c_companyid: NullableIntFieldUpdateOperationsInput
+  c_date: NullableStringFieldUpdateOperationsInput
+  c_day: NullableStringFieldUpdateOperationsInput
+  c_duration: NullableStringFieldUpdateOperationsInput
+  c_empty: NullableStringFieldUpdateOperationsInput
+  c_exptime: NullableStringFieldUpdateOperationsInput
+  c_formattime: NullableStringFieldUpdateOperationsInput
+  c_location: NullableIntFieldUpdateOperationsInput
+  c_price: NullableFloatFieldUpdateOperationsInput
+  c_room: NullableIntFieldUpdateOperationsInput
+  c_slots: NullableStringFieldUpdateOperationsInput
+  c_startformattime: NullableStringFieldUpdateOperationsInput
+  c_teacher: NullableIntFieldUpdateOperationsInput
+  c_time: NullableStringFieldUpdateOperationsInput
+  c_type: NullableIntFieldUpdateOperationsInput
+  cancel_status: IntFieldUpdateOperationsInput
+  class_pay: NullableEnumclass_master_class_payFieldUpdateOperationsInput
+  product_id: IntFieldUpdateOperationsInput
+  sign_in_type: StringFieldUpdateOperationsInput
+}
+
+input ClassMasterWhereInput {
+  AND: [ClassMasterWhereInput!]
+  NOT: [ClassMasterWhereInput!]
+  OR: [ClassMasterWhereInput!]
+  c_book: StringNullableFilter
+  c_companyid: IntNullableFilter
+  c_date: StringNullableFilter
+  c_day: StringNullableFilter
+  c_duration: StringNullableFilter
+  c_empty: StringNullableFilter
+  c_exptime: StringNullableFilter
+  c_formattime: StringNullableFilter
+  c_id: IntFilter
+  c_location: IntNullableFilter
+  c_price: FloatNullableFilter
+  c_room: IntNullableFilter
+  c_slots: StringNullableFilter
+  c_startformattime: StringNullableFilter
+  c_teacher: IntNullableFilter
+  c_time: StringNullableFilter
+  c_type: IntNullableFilter
+  cancel_status: IntFilter
+  class_pay: Enumclass_master_class_payNullableFilter
+  product_id: IntFilter
+  sign_in_type: StringFilter
+}
+
+input ClassMasterWhereUniqueInput {
+  c_id: Int
+}
+
+type ClassNotes {
+  author: String!
+  avatar: String!
+  class_id: Int!
+  id: Int!
+  note: String!
+  post_date: String!
+  public: Int!
+}
+
+input ClassNotesCreateInput {
+  author: String!
+  avatar: String!
+  class_id: Int!
+  note: String!
+  post_date: String!
+  public: Int!
+}
+
+input ClassNotesOrderByInput {
+  author: SortOrder
+  avatar: SortOrder
+  class_id: SortOrder
+  id: SortOrder
+  note: SortOrder
+  post_date: SortOrder
+  public: SortOrder
+}
+
+input ClassNotesUpdateInput {
+  author: StringFieldUpdateOperationsInput
+  avatar: StringFieldUpdateOperationsInput
+  class_id: IntFieldUpdateOperationsInput
+  note: StringFieldUpdateOperationsInput
+  post_date: StringFieldUpdateOperationsInput
+  public: IntFieldUpdateOperationsInput
+}
+
+input ClassNotesUpdateManyMutationInput {
+  author: StringFieldUpdateOperationsInput
+  avatar: StringFieldUpdateOperationsInput
+  class_id: IntFieldUpdateOperationsInput
+  note: StringFieldUpdateOperationsInput
+  post_date: StringFieldUpdateOperationsInput
+  public: IntFieldUpdateOperationsInput
+}
+
+input ClassNotesWhereInput {
+  AND: [ClassNotesWhereInput!]
+  NOT: [ClassNotesWhereInput!]
+  OR: [ClassNotesWhereInput!]
+  author: StringFilter
+  avatar: StringFilter
+  class_id: IntFilter
+  id: IntFilter
+  note: StringFilter
+  post_date: StringFilter
+  public: IntFilter
+}
+
+input ClassNotesWhereUniqueInput {
+  id: Int
+}
+
+type ClasstypeMaster {
+  credit_option_disabled: Int!
+  ctype_color: String!
+  ctype_compid: String!
+  ctype_date: String!
+  ctype_description: String!
+  ctype_id: Int!
+  ctype_name: String
+  payment_option_disabled: Int!
+}
+
+input ClasstypeMasterCreateInput {
+  credit_option_disabled: Int!
+  ctype_color: String!
+  ctype_compid: String!
+  ctype_date: String!
+  ctype_description: String!
+  ctype_name: String
+  payment_option_disabled: Int!
+}
+
+input ClasstypeMasterOrderByInput {
+  credit_option_disabled: SortOrder
+  ctype_color: SortOrder
+  ctype_compid: SortOrder
+  ctype_date: SortOrder
+  ctype_description: SortOrder
+  ctype_id: SortOrder
+  ctype_name: SortOrder
+  payment_option_disabled: SortOrder
+}
+
+input ClasstypeMasterUpdateInput {
+  credit_option_disabled: IntFieldUpdateOperationsInput
+  ctype_color: StringFieldUpdateOperationsInput
+  ctype_compid: StringFieldUpdateOperationsInput
+  ctype_date: StringFieldUpdateOperationsInput
+  ctype_description: StringFieldUpdateOperationsInput
+  ctype_name: NullableStringFieldUpdateOperationsInput
+  payment_option_disabled: IntFieldUpdateOperationsInput
+}
+
+input ClasstypeMasterUpdateManyMutationInput {
+  credit_option_disabled: IntFieldUpdateOperationsInput
+  ctype_color: StringFieldUpdateOperationsInput
+  ctype_compid: StringFieldUpdateOperationsInput
+  ctype_date: StringFieldUpdateOperationsInput
+  ctype_description: StringFieldUpdateOperationsInput
+  ctype_name: NullableStringFieldUpdateOperationsInput
+  payment_option_disabled: IntFieldUpdateOperationsInput
+}
+
+input ClasstypeMasterWhereInput {
+  AND: [ClasstypeMasterWhereInput!]
+  NOT: [ClasstypeMasterWhereInput!]
+  OR: [ClasstypeMasterWhereInput!]
+  credit_option_disabled: IntFilter
+  ctype_color: StringFilter
+  ctype_compid: StringFilter
+  ctype_date: StringFilter
+  ctype_description: StringFilter
+  ctype_id: IntFilter
+  ctype_name: StringNullableFilter
+  payment_option_disabled: IntFilter
+}
+
+input ClasstypeMasterWhereUniqueInput {
+  ctype_id: Int
+}
+
 type Company {
   admin: Int!
   creation_date: DateTime!
   cron_enabled: Boolean
+  details: CompanyDetails
   digit8: Int!
   id: Int!
   image: String!
   remote_connect: String
   remote_url: String
   slug: String
+  subscription: CompanySubscription
   user: String!
 }
 
@@ -4444,11 +5571,13 @@ input CompanyCreateInput {
   admin: Int!
   creation_date: DateTime!
   cron_enabled: Boolean
+  details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
   remote_connect: String
   remote_url: String
   slug: String
+  subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
 
@@ -4464,10 +5593,22 @@ input CompanyCreateNestedOneWithoutAccountBalanceInput {
   create: CompanyCreateWithoutAccountBalanceInput
 }
 
+input CompanyCreateNestedOneWithoutDetailsInput {
+  connect: CompanyWhereUniqueInput
+  connectOrCreate: CompanyCreateOrConnectWithoutdetailsInput
+  create: CompanyCreateWithoutDetailsInput
+}
+
 input CompanyCreateNestedOneWithoutMarketingSourceInput {
   connect: CompanyWhereUniqueInput
   connectOrCreate: CompanyCreateOrConnectWithoutMarketingSourceInput
   create: CompanyCreateWithoutMarketingSourceInput
+}
+
+input CompanyCreateNestedOneWithoutSubscriptionInput {
+  connect: CompanyWhereUniqueInput
+  connectOrCreate: CompanyCreateOrConnectWithoutsubscriptionInput
+  create: CompanyCreateWithoutSubscriptionInput
 }
 
 input CompanyCreateNestedOneWithoutThirdPartyAccesInput {
@@ -4507,6 +5648,16 @@ input CompanyCreateOrConnectWithoutTwoFactorHistoryInput {
   where: CompanyWhereUniqueInput!
 }
 
+input CompanyCreateOrConnectWithoutdetailsInput {
+  create: CompanyCreateWithoutDetailsInput!
+  where: CompanyWhereUniqueInput!
+}
+
+input CompanyCreateOrConnectWithoutsubscriptionInput {
+  create: CompanyCreateWithoutSubscriptionInput!
+  where: CompanyWhereUniqueInput!
+}
+
 input CompanyCreateWithoutAcceptEmailTokenInput {
   AccountBalance: AccountBalanceCreateNestedManyWithoutCompanyInput
   MarketingSource: MarketingSourceCreateNestedManyWithoutCompanyInput
@@ -4515,11 +5666,13 @@ input CompanyCreateWithoutAcceptEmailTokenInput {
   admin: Int!
   creation_date: DateTime!
   cron_enabled: Boolean
+  details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
   remote_connect: String
   remote_url: String
   slug: String
+  subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
 
@@ -4531,11 +5684,31 @@ input CompanyCreateWithoutAccountBalanceInput {
   admin: Int!
   creation_date: DateTime!
   cron_enabled: Boolean
+  details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
   remote_connect: String
   remote_url: String
   slug: String
+  subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
+  user: String!
+}
+
+input CompanyCreateWithoutDetailsInput {
+  AcceptEmailToken: AcceptEmailTokenCreateNestedManyWithoutCompanyInput
+  AccountBalance: AccountBalanceCreateNestedManyWithoutCompanyInput
+  MarketingSource: MarketingSourceCreateNestedManyWithoutCompanyInput
+  ThirdPartyAcces: ThirdPartyAccesCreateNestedManyWithoutCompanyInput
+  TwoFactorHistory: TwoFactorHistoryCreateNestedManyWithoutCompanyInput
+  admin: Int!
+  creation_date: DateTime!
+  cron_enabled: Boolean
+  digit8: Int!
+  image: String!
+  remote_connect: String
+  remote_url: String
+  slug: String
+  subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
 
@@ -4547,6 +5720,26 @@ input CompanyCreateWithoutMarketingSourceInput {
   admin: Int!
   creation_date: DateTime!
   cron_enabled: Boolean
+  details: CompanyDetailsCreateNestedOneWithoutCompanyInput
+  digit8: Int!
+  image: String!
+  remote_connect: String
+  remote_url: String
+  slug: String
+  subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
+  user: String!
+}
+
+input CompanyCreateWithoutSubscriptionInput {
+  AcceptEmailToken: AcceptEmailTokenCreateNestedManyWithoutCompanyInput
+  AccountBalance: AccountBalanceCreateNestedManyWithoutCompanyInput
+  MarketingSource: MarketingSourceCreateNestedManyWithoutCompanyInput
+  ThirdPartyAcces: ThirdPartyAccesCreateNestedManyWithoutCompanyInput
+  TwoFactorHistory: TwoFactorHistoryCreateNestedManyWithoutCompanyInput
+  admin: Int!
+  creation_date: DateTime!
+  cron_enabled: Boolean
+  details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
   remote_connect: String
@@ -4563,11 +5756,13 @@ input CompanyCreateWithoutThirdPartyAccesInput {
   admin: Int!
   creation_date: DateTime!
   cron_enabled: Boolean
+  details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
   remote_connect: String
   remote_url: String
   slug: String
+  subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
 
@@ -4579,25 +5774,1591 @@ input CompanyCreateWithoutTwoFactorHistoryInput {
   admin: Int!
   creation_date: DateTime!
   cron_enabled: Boolean
+  details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
   remote_connect: String
   remote_url: String
   slug: String
+  subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
+}
+
+type CompanyDetails {
+  accept_insurance: Int!
+  admin: Int!
+  append_client_pref: Int!
+  auto_sms: Int!
+  calendar_version: String!
+  capital_surname: Boolean!
+  city: String!
+  class_teacher_singular: String!
+  class_term_plural: String!
+  class_term_singular: String!
+  company: Company!
+  company_id: Int!
+  company_name: String!
+  company_notes: String!
+  completed_setup: Boolean!
+  contact_term_plural: String!
+  contact_term_singular: String!
+  converted_value: Float!
+  country: String!
+  county: String!
+  currency: String!
+  cycles_display: Int!
+  date_format: String!
+  db_lock: Int!
+  debrand_logo: Int!
+  default_inv_template_id: Int!
+  default_search: String!
+  demo_mode: Int!
+  details_id: Int!
+  diagnosis_codes_type: String!
+  disable_prescriptions: Int!
+  employee_clock_track: Boolean!
+  employee_term_plural: String!
+  employee_term_singular: String!
+  employees: String!
+  enable_2fa: Int!
+  enable_ad: Int!
+  enable_ad_code: String
+  enable_ip_filter: Int
+  enable_sens_data: Int!
+  facebook_page: String!
+  fax: String!
+  flag_enabled: Int!
+  footer_logo: String!
+  head_office: Int!
+  header_logo: String!
+  healthcode_live: Boolean
+  industry_sector: String!
+  info_email: String!
+  is_surgical: Int!
+  language: String!
+  legacy_consultations: Boolean!
+  linkedin_page: String!
+  lock_export: Int!
+  lock_prescription: Int!
+  logo: String!
+  medical_approvals: Int!
+  merge_bookings_tabs: Boolean!
+  new_reports: Int!
+  phone: String!
+  phone_prefix: Int!
+  post_code: String!
+  preferences_email: Int!
+  preferences_newsletters: Int!
+  preferences_post: Int!
+  preferences_sms: Int!
+  private_treatment_notes: Int!
+  rota_version: String!
+  secure_medical_forms: Int!
+  sensitive_data_question: Int!
+  show_report_logo: Boolean!
+  slug: String
+  sms_active: Int!
+  stock_manager: String!
+  street: String!
+  subscription: String!
+  tax_name: company_details_tax_name!
+  timezone: Timezone
+  timezone_id: Int
+  twitter_page: String!
+  use_google_auth: Boolean!
+  vat: String!
+  website: String!
+  week_start_day: String!
+  youtube_page: String!
+}
+
+input CompanyDetailsCreateInput {
+  accept_insurance: Int!
+  admin: Int!
+  append_client_pref: Int!
+  auto_sms: Int
+  calendar_version: String!
+  capital_surname: Boolean
+  city: String!
+  class_teacher_singular: String
+  class_term_plural: String
+  class_term_singular: String
+  company: CompanyCreateNestedOneWithoutDetailsInput!
+  company_name: String!
+  company_notes: String!
+  completed_setup: Boolean
+  contact_term_plural: String
+  contact_term_singular: String
+  converted_value: Float!
+  country: String
+  county: String!
+  currency: String
+  cycles_display: Int
+  date_format: String
+  db_lock: Int!
+  debrand_logo: Int!
+  default_inv_template_id: Int!
+  default_search: String
+  demo_mode: Int!
+  diagnosis_codes_type: String
+  disable_prescriptions: Int!
+  employee_clock_track: Boolean
+  employee_term_plural: String
+  employee_term_singular: String
+  employees: String!
+  enable_2fa: Int!
+  enable_ad: Int
+  enable_ad_code: String
+  enable_ip_filter: Int
+  enable_sens_data: Int!
+  facebook_page: String!
+  fax: String!
+  flag_enabled: Int
+  footer_logo: String!
+  head_office: Int!
+  header_logo: String!
+  healthcode_live: Boolean
+  industry_sector: String!
+  info_email: String!
+  is_surgical: Int!
+  language: String!
+  legacy_consultations: Boolean
+  linkedin_page: String!
+  lock_export: Int!
+  lock_prescription: Int!
+  logo: String!
+  medical_approvals: Int!
+  merge_bookings_tabs: Boolean
+  new_reports: Int!
+  phone: String!
+  phone_prefix: Int!
+  post_code: String!
+  preferences_email: Int
+  preferences_newsletters: Int
+  preferences_post: Int
+  preferences_sms: Int
+  private_treatment_notes: Int!
+  rota_version: String!
+  secure_medical_forms: Int
+  sensitive_data_question: Int
+  show_report_logo: Boolean
+  slug: String
+  sms_active: Int!
+  stock_manager: String!
+  street: String!
+  subscription: String!
+  tax_name: company_details_tax_name
+  timezone: TimezoneCreateNestedOneWithoutDetailsInput
+  timezone_id: Int
+  twitter_page: String!
+  use_google_auth: Boolean
+  vat: String!
+  website: String!
+  week_start_day: String
+  youtube_page: String!
+}
+
+input CompanyDetailsCreateNestedOneWithoutCompanyInput {
+  connect: CompanyDetailsWhereUniqueInput
+  connectOrCreate: CompanyDetailsCreateOrConnectWithoutcompanyInput
+  create: CompanyDetailsCreateWithoutCompanyInput
+}
+
+input CompanyDetailsCreateNestedOneWithoutTimezoneInput {
+  connect: CompanyDetailsWhereUniqueInput
+  connectOrCreate: CompanyDetailsCreateOrConnectWithouttimezoneInput
+  create: CompanyDetailsCreateWithoutTimezoneInput
+}
+
+input CompanyDetailsCreateOrConnectWithoutcompanyInput {
+  create: CompanyDetailsCreateWithoutCompanyInput!
+  where: CompanyDetailsWhereUniqueInput!
+}
+
+input CompanyDetailsCreateOrConnectWithouttimezoneInput {
+  create: CompanyDetailsCreateWithoutTimezoneInput!
+  where: CompanyDetailsWhereUniqueInput!
+}
+
+input CompanyDetailsCreateWithoutCompanyInput {
+  accept_insurance: Int!
+  admin: Int!
+  append_client_pref: Int!
+  auto_sms: Int
+  calendar_version: String!
+  capital_surname: Boolean
+  city: String!
+  class_teacher_singular: String
+  class_term_plural: String
+  class_term_singular: String
+  company_name: String!
+  company_notes: String!
+  completed_setup: Boolean
+  contact_term_plural: String
+  contact_term_singular: String
+  converted_value: Float!
+  country: String
+  county: String!
+  currency: String
+  cycles_display: Int
+  date_format: String
+  db_lock: Int!
+  debrand_logo: Int!
+  default_inv_template_id: Int!
+  default_search: String
+  demo_mode: Int!
+  diagnosis_codes_type: String
+  disable_prescriptions: Int!
+  employee_clock_track: Boolean
+  employee_term_plural: String
+  employee_term_singular: String
+  employees: String!
+  enable_2fa: Int!
+  enable_ad: Int
+  enable_ad_code: String
+  enable_ip_filter: Int
+  enable_sens_data: Int!
+  facebook_page: String!
+  fax: String!
+  flag_enabled: Int
+  footer_logo: String!
+  head_office: Int!
+  header_logo: String!
+  healthcode_live: Boolean
+  industry_sector: String!
+  info_email: String!
+  is_surgical: Int!
+  language: String!
+  legacy_consultations: Boolean
+  linkedin_page: String!
+  lock_export: Int!
+  lock_prescription: Int!
+  logo: String!
+  medical_approvals: Int!
+  merge_bookings_tabs: Boolean
+  new_reports: Int!
+  phone: String!
+  phone_prefix: Int!
+  post_code: String!
+  preferences_email: Int
+  preferences_newsletters: Int
+  preferences_post: Int
+  preferences_sms: Int
+  private_treatment_notes: Int!
+  rota_version: String!
+  secure_medical_forms: Int
+  sensitive_data_question: Int
+  show_report_logo: Boolean
+  slug: String
+  sms_active: Int!
+  stock_manager: String!
+  street: String!
+  subscription: String!
+  tax_name: company_details_tax_name
+  timezone: TimezoneCreateNestedOneWithoutDetailsInput
+  timezone_id: Int
+  twitter_page: String!
+  use_google_auth: Boolean
+  vat: String!
+  website: String!
+  week_start_day: String
+  youtube_page: String!
+}
+
+input CompanyDetailsCreateWithoutTimezoneInput {
+  accept_insurance: Int!
+  admin: Int!
+  append_client_pref: Int!
+  auto_sms: Int
+  calendar_version: String!
+  capital_surname: Boolean
+  city: String!
+  class_teacher_singular: String
+  class_term_plural: String
+  class_term_singular: String
+  company: CompanyCreateNestedOneWithoutDetailsInput!
+  company_name: String!
+  company_notes: String!
+  completed_setup: Boolean
+  contact_term_plural: String
+  contact_term_singular: String
+  converted_value: Float!
+  country: String
+  county: String!
+  currency: String
+  cycles_display: Int
+  date_format: String
+  db_lock: Int!
+  debrand_logo: Int!
+  default_inv_template_id: Int!
+  default_search: String
+  demo_mode: Int!
+  diagnosis_codes_type: String
+  disable_prescriptions: Int!
+  employee_clock_track: Boolean
+  employee_term_plural: String
+  employee_term_singular: String
+  employees: String!
+  enable_2fa: Int!
+  enable_ad: Int
+  enable_ad_code: String
+  enable_ip_filter: Int
+  enable_sens_data: Int!
+  facebook_page: String!
+  fax: String!
+  flag_enabled: Int
+  footer_logo: String!
+  head_office: Int!
+  header_logo: String!
+  healthcode_live: Boolean
+  industry_sector: String!
+  info_email: String!
+  is_surgical: Int!
+  language: String!
+  legacy_consultations: Boolean
+  linkedin_page: String!
+  lock_export: Int!
+  lock_prescription: Int!
+  logo: String!
+  medical_approvals: Int!
+  merge_bookings_tabs: Boolean
+  new_reports: Int!
+  phone: String!
+  phone_prefix: Int!
+  post_code: String!
+  preferences_email: Int
+  preferences_newsletters: Int
+  preferences_post: Int
+  preferences_sms: Int
+  private_treatment_notes: Int!
+  rota_version: String!
+  secure_medical_forms: Int
+  sensitive_data_question: Int
+  show_report_logo: Boolean
+  slug: String
+  sms_active: Int!
+  stock_manager: String!
+  street: String!
+  subscription: String!
+  tax_name: company_details_tax_name
+  timezone_id: Int
+  twitter_page: String!
+  use_google_auth: Boolean
+  vat: String!
+  website: String!
+  week_start_day: String
+  youtube_page: String!
+}
+
+input CompanyDetailsOrderByInput {
+  accept_insurance: SortOrder
+  admin: SortOrder
+  append_client_pref: SortOrder
+  auto_sms: SortOrder
+  calendar_version: SortOrder
+  capital_surname: SortOrder
+  city: SortOrder
+  class_teacher_singular: SortOrder
+  class_term_plural: SortOrder
+  class_term_singular: SortOrder
+  company_id: SortOrder
+  company_name: SortOrder
+  company_notes: SortOrder
+  completed_setup: SortOrder
+  contact_term_plural: SortOrder
+  contact_term_singular: SortOrder
+  converted_value: SortOrder
+  country: SortOrder
+  county: SortOrder
+  currency: SortOrder
+  cycles_display: SortOrder
+  date_format: SortOrder
+  db_lock: SortOrder
+  debrand_logo: SortOrder
+  default_inv_template_id: SortOrder
+  default_search: SortOrder
+  demo_mode: SortOrder
+  details_id: SortOrder
+  diagnosis_codes_type: SortOrder
+  disable_prescriptions: SortOrder
+  employee_clock_track: SortOrder
+  employee_term_plural: SortOrder
+  employee_term_singular: SortOrder
+  employees: SortOrder
+  enable_2fa: SortOrder
+  enable_ad: SortOrder
+  enable_ad_code: SortOrder
+  enable_ip_filter: SortOrder
+  enable_sens_data: SortOrder
+  facebook_page: SortOrder
+  fax: SortOrder
+  flag_enabled: SortOrder
+  footer_logo: SortOrder
+  head_office: SortOrder
+  header_logo: SortOrder
+  healthcode_live: SortOrder
+  industry_sector: SortOrder
+  info_email: SortOrder
+  is_surgical: SortOrder
+  language: SortOrder
+  legacy_consultations: SortOrder
+  linkedin_page: SortOrder
+  lock_export: SortOrder
+  lock_prescription: SortOrder
+  logo: SortOrder
+  medical_approvals: SortOrder
+  merge_bookings_tabs: SortOrder
+  new_reports: SortOrder
+  phone: SortOrder
+  phone_prefix: SortOrder
+  post_code: SortOrder
+  preferences_email: SortOrder
+  preferences_newsletters: SortOrder
+  preferences_post: SortOrder
+  preferences_sms: SortOrder
+  private_treatment_notes: SortOrder
+  rota_version: SortOrder
+  secure_medical_forms: SortOrder
+  sensitive_data_question: SortOrder
+  show_report_logo: SortOrder
+  slug: SortOrder
+  sms_active: SortOrder
+  stock_manager: SortOrder
+  street: SortOrder
+  subscription: SortOrder
+  tax_name: SortOrder
+  timezone: TimezoneOrderByInput
+  timezone_id: SortOrder
+  twitter_page: SortOrder
+  use_google_auth: SortOrder
+  vat: SortOrder
+  website: SortOrder
+  week_start_day: SortOrder
+  youtube_page: SortOrder
+}
+
+input CompanyDetailsUpdateInput {
+  accept_insurance: IntFieldUpdateOperationsInput
+  admin: IntFieldUpdateOperationsInput
+  append_client_pref: IntFieldUpdateOperationsInput
+  auto_sms: IntFieldUpdateOperationsInput
+  calendar_version: StringFieldUpdateOperationsInput
+  capital_surname: BoolFieldUpdateOperationsInput
+  city: StringFieldUpdateOperationsInput
+  class_teacher_singular: StringFieldUpdateOperationsInput
+  class_term_plural: StringFieldUpdateOperationsInput
+  class_term_singular: StringFieldUpdateOperationsInput
+  company: CompanyUpdateOneRequiredWithoutDetailsInput
+  company_name: StringFieldUpdateOperationsInput
+  company_notes: StringFieldUpdateOperationsInput
+  completed_setup: BoolFieldUpdateOperationsInput
+  contact_term_plural: StringFieldUpdateOperationsInput
+  contact_term_singular: StringFieldUpdateOperationsInput
+  converted_value: FloatFieldUpdateOperationsInput
+  country: StringFieldUpdateOperationsInput
+  county: StringFieldUpdateOperationsInput
+  currency: StringFieldUpdateOperationsInput
+  cycles_display: IntFieldUpdateOperationsInput
+  date_format: StringFieldUpdateOperationsInput
+  db_lock: IntFieldUpdateOperationsInput
+  debrand_logo: IntFieldUpdateOperationsInput
+  default_inv_template_id: IntFieldUpdateOperationsInput
+  default_search: StringFieldUpdateOperationsInput
+  demo_mode: IntFieldUpdateOperationsInput
+  diagnosis_codes_type: StringFieldUpdateOperationsInput
+  disable_prescriptions: IntFieldUpdateOperationsInput
+  employee_clock_track: BoolFieldUpdateOperationsInput
+  employee_term_plural: StringFieldUpdateOperationsInput
+  employee_term_singular: StringFieldUpdateOperationsInput
+  employees: StringFieldUpdateOperationsInput
+  enable_2fa: IntFieldUpdateOperationsInput
+  enable_ad: IntFieldUpdateOperationsInput
+  enable_ad_code: NullableStringFieldUpdateOperationsInput
+  enable_ip_filter: NullableIntFieldUpdateOperationsInput
+  enable_sens_data: IntFieldUpdateOperationsInput
+  facebook_page: StringFieldUpdateOperationsInput
+  fax: StringFieldUpdateOperationsInput
+  flag_enabled: IntFieldUpdateOperationsInput
+  footer_logo: StringFieldUpdateOperationsInput
+  head_office: IntFieldUpdateOperationsInput
+  header_logo: StringFieldUpdateOperationsInput
+  healthcode_live: NullableBoolFieldUpdateOperationsInput
+  industry_sector: StringFieldUpdateOperationsInput
+  info_email: StringFieldUpdateOperationsInput
+  is_surgical: IntFieldUpdateOperationsInput
+  language: StringFieldUpdateOperationsInput
+  legacy_consultations: BoolFieldUpdateOperationsInput
+  linkedin_page: StringFieldUpdateOperationsInput
+  lock_export: IntFieldUpdateOperationsInput
+  lock_prescription: IntFieldUpdateOperationsInput
+  logo: StringFieldUpdateOperationsInput
+  medical_approvals: IntFieldUpdateOperationsInput
+  merge_bookings_tabs: BoolFieldUpdateOperationsInput
+  new_reports: IntFieldUpdateOperationsInput
+  phone: StringFieldUpdateOperationsInput
+  phone_prefix: IntFieldUpdateOperationsInput
+  post_code: StringFieldUpdateOperationsInput
+  preferences_email: IntFieldUpdateOperationsInput
+  preferences_newsletters: IntFieldUpdateOperationsInput
+  preferences_post: IntFieldUpdateOperationsInput
+  preferences_sms: IntFieldUpdateOperationsInput
+  private_treatment_notes: IntFieldUpdateOperationsInput
+  rota_version: StringFieldUpdateOperationsInput
+  secure_medical_forms: IntFieldUpdateOperationsInput
+  sensitive_data_question: IntFieldUpdateOperationsInput
+  show_report_logo: BoolFieldUpdateOperationsInput
+  slug: NullableStringFieldUpdateOperationsInput
+  sms_active: IntFieldUpdateOperationsInput
+  stock_manager: StringFieldUpdateOperationsInput
+  street: StringFieldUpdateOperationsInput
+  subscription: StringFieldUpdateOperationsInput
+  tax_name: Enumcompany_details_tax_nameFieldUpdateOperationsInput
+  timezone: TimezoneUpdateOneWithoutDetailsInput
+  timezone_id: NullableIntFieldUpdateOperationsInput
+  twitter_page: StringFieldUpdateOperationsInput
+  use_google_auth: BoolFieldUpdateOperationsInput
+  vat: StringFieldUpdateOperationsInput
+  website: StringFieldUpdateOperationsInput
+  week_start_day: StringFieldUpdateOperationsInput
+  youtube_page: StringFieldUpdateOperationsInput
+}
+
+input CompanyDetailsUpdateManyMutationInput {
+  accept_insurance: IntFieldUpdateOperationsInput
+  admin: IntFieldUpdateOperationsInput
+  append_client_pref: IntFieldUpdateOperationsInput
+  auto_sms: IntFieldUpdateOperationsInput
+  calendar_version: StringFieldUpdateOperationsInput
+  capital_surname: BoolFieldUpdateOperationsInput
+  city: StringFieldUpdateOperationsInput
+  class_teacher_singular: StringFieldUpdateOperationsInput
+  class_term_plural: StringFieldUpdateOperationsInput
+  class_term_singular: StringFieldUpdateOperationsInput
+  company_name: StringFieldUpdateOperationsInput
+  company_notes: StringFieldUpdateOperationsInput
+  completed_setup: BoolFieldUpdateOperationsInput
+  contact_term_plural: StringFieldUpdateOperationsInput
+  contact_term_singular: StringFieldUpdateOperationsInput
+  converted_value: FloatFieldUpdateOperationsInput
+  country: StringFieldUpdateOperationsInput
+  county: StringFieldUpdateOperationsInput
+  currency: StringFieldUpdateOperationsInput
+  cycles_display: IntFieldUpdateOperationsInput
+  date_format: StringFieldUpdateOperationsInput
+  db_lock: IntFieldUpdateOperationsInput
+  debrand_logo: IntFieldUpdateOperationsInput
+  default_inv_template_id: IntFieldUpdateOperationsInput
+  default_search: StringFieldUpdateOperationsInput
+  demo_mode: IntFieldUpdateOperationsInput
+  diagnosis_codes_type: StringFieldUpdateOperationsInput
+  disable_prescriptions: IntFieldUpdateOperationsInput
+  employee_clock_track: BoolFieldUpdateOperationsInput
+  employee_term_plural: StringFieldUpdateOperationsInput
+  employee_term_singular: StringFieldUpdateOperationsInput
+  employees: StringFieldUpdateOperationsInput
+  enable_2fa: IntFieldUpdateOperationsInput
+  enable_ad: IntFieldUpdateOperationsInput
+  enable_ad_code: NullableStringFieldUpdateOperationsInput
+  enable_ip_filter: NullableIntFieldUpdateOperationsInput
+  enable_sens_data: IntFieldUpdateOperationsInput
+  facebook_page: StringFieldUpdateOperationsInput
+  fax: StringFieldUpdateOperationsInput
+  flag_enabled: IntFieldUpdateOperationsInput
+  footer_logo: StringFieldUpdateOperationsInput
+  head_office: IntFieldUpdateOperationsInput
+  header_logo: StringFieldUpdateOperationsInput
+  healthcode_live: NullableBoolFieldUpdateOperationsInput
+  industry_sector: StringFieldUpdateOperationsInput
+  info_email: StringFieldUpdateOperationsInput
+  is_surgical: IntFieldUpdateOperationsInput
+  language: StringFieldUpdateOperationsInput
+  legacy_consultations: BoolFieldUpdateOperationsInput
+  linkedin_page: StringFieldUpdateOperationsInput
+  lock_export: IntFieldUpdateOperationsInput
+  lock_prescription: IntFieldUpdateOperationsInput
+  logo: StringFieldUpdateOperationsInput
+  medical_approvals: IntFieldUpdateOperationsInput
+  merge_bookings_tabs: BoolFieldUpdateOperationsInput
+  new_reports: IntFieldUpdateOperationsInput
+  phone: StringFieldUpdateOperationsInput
+  phone_prefix: IntFieldUpdateOperationsInput
+  post_code: StringFieldUpdateOperationsInput
+  preferences_email: IntFieldUpdateOperationsInput
+  preferences_newsletters: IntFieldUpdateOperationsInput
+  preferences_post: IntFieldUpdateOperationsInput
+  preferences_sms: IntFieldUpdateOperationsInput
+  private_treatment_notes: IntFieldUpdateOperationsInput
+  rota_version: StringFieldUpdateOperationsInput
+  secure_medical_forms: IntFieldUpdateOperationsInput
+  sensitive_data_question: IntFieldUpdateOperationsInput
+  show_report_logo: BoolFieldUpdateOperationsInput
+  slug: NullableStringFieldUpdateOperationsInput
+  sms_active: IntFieldUpdateOperationsInput
+  stock_manager: StringFieldUpdateOperationsInput
+  street: StringFieldUpdateOperationsInput
+  subscription: StringFieldUpdateOperationsInput
+  tax_name: Enumcompany_details_tax_nameFieldUpdateOperationsInput
+  timezone_id: NullableIntFieldUpdateOperationsInput
+  twitter_page: StringFieldUpdateOperationsInput
+  use_google_auth: BoolFieldUpdateOperationsInput
+  vat: StringFieldUpdateOperationsInput
+  website: StringFieldUpdateOperationsInput
+  week_start_day: StringFieldUpdateOperationsInput
+  youtube_page: StringFieldUpdateOperationsInput
+}
+
+input CompanyDetailsUpdateOneWithoutCompanyInput {
+  connect: CompanyDetailsWhereUniqueInput
+  connectOrCreate: CompanyDetailsCreateOrConnectWithoutcompanyInput
+  create: CompanyDetailsCreateWithoutCompanyInput
+  delete: Boolean
+  disconnect: Boolean
+  update: CompanyDetailsUpdateWithoutCompanyInput
+  upsert: CompanyDetailsUpsertWithoutCompanyInput
+}
+
+input CompanyDetailsUpdateOneWithoutTimezoneInput {
+  connect: CompanyDetailsWhereUniqueInput
+  connectOrCreate: CompanyDetailsCreateOrConnectWithouttimezoneInput
+  create: CompanyDetailsCreateWithoutTimezoneInput
+  delete: Boolean
+  disconnect: Boolean
+  update: CompanyDetailsUpdateWithoutTimezoneInput
+  upsert: CompanyDetailsUpsertWithoutTimezoneInput
+}
+
+input CompanyDetailsUpdateWithoutCompanyInput {
+  accept_insurance: IntFieldUpdateOperationsInput
+  admin: IntFieldUpdateOperationsInput
+  append_client_pref: IntFieldUpdateOperationsInput
+  auto_sms: IntFieldUpdateOperationsInput
+  calendar_version: StringFieldUpdateOperationsInput
+  capital_surname: BoolFieldUpdateOperationsInput
+  city: StringFieldUpdateOperationsInput
+  class_teacher_singular: StringFieldUpdateOperationsInput
+  class_term_plural: StringFieldUpdateOperationsInput
+  class_term_singular: StringFieldUpdateOperationsInput
+  company_name: StringFieldUpdateOperationsInput
+  company_notes: StringFieldUpdateOperationsInput
+  completed_setup: BoolFieldUpdateOperationsInput
+  contact_term_plural: StringFieldUpdateOperationsInput
+  contact_term_singular: StringFieldUpdateOperationsInput
+  converted_value: FloatFieldUpdateOperationsInput
+  country: StringFieldUpdateOperationsInput
+  county: StringFieldUpdateOperationsInput
+  currency: StringFieldUpdateOperationsInput
+  cycles_display: IntFieldUpdateOperationsInput
+  date_format: StringFieldUpdateOperationsInput
+  db_lock: IntFieldUpdateOperationsInput
+  debrand_logo: IntFieldUpdateOperationsInput
+  default_inv_template_id: IntFieldUpdateOperationsInput
+  default_search: StringFieldUpdateOperationsInput
+  demo_mode: IntFieldUpdateOperationsInput
+  diagnosis_codes_type: StringFieldUpdateOperationsInput
+  disable_prescriptions: IntFieldUpdateOperationsInput
+  employee_clock_track: BoolFieldUpdateOperationsInput
+  employee_term_plural: StringFieldUpdateOperationsInput
+  employee_term_singular: StringFieldUpdateOperationsInput
+  employees: StringFieldUpdateOperationsInput
+  enable_2fa: IntFieldUpdateOperationsInput
+  enable_ad: IntFieldUpdateOperationsInput
+  enable_ad_code: NullableStringFieldUpdateOperationsInput
+  enable_ip_filter: NullableIntFieldUpdateOperationsInput
+  enable_sens_data: IntFieldUpdateOperationsInput
+  facebook_page: StringFieldUpdateOperationsInput
+  fax: StringFieldUpdateOperationsInput
+  flag_enabled: IntFieldUpdateOperationsInput
+  footer_logo: StringFieldUpdateOperationsInput
+  head_office: IntFieldUpdateOperationsInput
+  header_logo: StringFieldUpdateOperationsInput
+  healthcode_live: NullableBoolFieldUpdateOperationsInput
+  industry_sector: StringFieldUpdateOperationsInput
+  info_email: StringFieldUpdateOperationsInput
+  is_surgical: IntFieldUpdateOperationsInput
+  language: StringFieldUpdateOperationsInput
+  legacy_consultations: BoolFieldUpdateOperationsInput
+  linkedin_page: StringFieldUpdateOperationsInput
+  lock_export: IntFieldUpdateOperationsInput
+  lock_prescription: IntFieldUpdateOperationsInput
+  logo: StringFieldUpdateOperationsInput
+  medical_approvals: IntFieldUpdateOperationsInput
+  merge_bookings_tabs: BoolFieldUpdateOperationsInput
+  new_reports: IntFieldUpdateOperationsInput
+  phone: StringFieldUpdateOperationsInput
+  phone_prefix: IntFieldUpdateOperationsInput
+  post_code: StringFieldUpdateOperationsInput
+  preferences_email: IntFieldUpdateOperationsInput
+  preferences_newsletters: IntFieldUpdateOperationsInput
+  preferences_post: IntFieldUpdateOperationsInput
+  preferences_sms: IntFieldUpdateOperationsInput
+  private_treatment_notes: IntFieldUpdateOperationsInput
+  rota_version: StringFieldUpdateOperationsInput
+  secure_medical_forms: IntFieldUpdateOperationsInput
+  sensitive_data_question: IntFieldUpdateOperationsInput
+  show_report_logo: BoolFieldUpdateOperationsInput
+  slug: NullableStringFieldUpdateOperationsInput
+  sms_active: IntFieldUpdateOperationsInput
+  stock_manager: StringFieldUpdateOperationsInput
+  street: StringFieldUpdateOperationsInput
+  subscription: StringFieldUpdateOperationsInput
+  tax_name: Enumcompany_details_tax_nameFieldUpdateOperationsInput
+  timezone: TimezoneUpdateOneWithoutDetailsInput
+  timezone_id: NullableIntFieldUpdateOperationsInput
+  twitter_page: StringFieldUpdateOperationsInput
+  use_google_auth: BoolFieldUpdateOperationsInput
+  vat: StringFieldUpdateOperationsInput
+  website: StringFieldUpdateOperationsInput
+  week_start_day: StringFieldUpdateOperationsInput
+  youtube_page: StringFieldUpdateOperationsInput
+}
+
+input CompanyDetailsUpdateWithoutTimezoneInput {
+  accept_insurance: IntFieldUpdateOperationsInput
+  admin: IntFieldUpdateOperationsInput
+  append_client_pref: IntFieldUpdateOperationsInput
+  auto_sms: IntFieldUpdateOperationsInput
+  calendar_version: StringFieldUpdateOperationsInput
+  capital_surname: BoolFieldUpdateOperationsInput
+  city: StringFieldUpdateOperationsInput
+  class_teacher_singular: StringFieldUpdateOperationsInput
+  class_term_plural: StringFieldUpdateOperationsInput
+  class_term_singular: StringFieldUpdateOperationsInput
+  company: CompanyUpdateOneRequiredWithoutDetailsInput
+  company_name: StringFieldUpdateOperationsInput
+  company_notes: StringFieldUpdateOperationsInput
+  completed_setup: BoolFieldUpdateOperationsInput
+  contact_term_plural: StringFieldUpdateOperationsInput
+  contact_term_singular: StringFieldUpdateOperationsInput
+  converted_value: FloatFieldUpdateOperationsInput
+  country: StringFieldUpdateOperationsInput
+  county: StringFieldUpdateOperationsInput
+  currency: StringFieldUpdateOperationsInput
+  cycles_display: IntFieldUpdateOperationsInput
+  date_format: StringFieldUpdateOperationsInput
+  db_lock: IntFieldUpdateOperationsInput
+  debrand_logo: IntFieldUpdateOperationsInput
+  default_inv_template_id: IntFieldUpdateOperationsInput
+  default_search: StringFieldUpdateOperationsInput
+  demo_mode: IntFieldUpdateOperationsInput
+  diagnosis_codes_type: StringFieldUpdateOperationsInput
+  disable_prescriptions: IntFieldUpdateOperationsInput
+  employee_clock_track: BoolFieldUpdateOperationsInput
+  employee_term_plural: StringFieldUpdateOperationsInput
+  employee_term_singular: StringFieldUpdateOperationsInput
+  employees: StringFieldUpdateOperationsInput
+  enable_2fa: IntFieldUpdateOperationsInput
+  enable_ad: IntFieldUpdateOperationsInput
+  enable_ad_code: NullableStringFieldUpdateOperationsInput
+  enable_ip_filter: NullableIntFieldUpdateOperationsInput
+  enable_sens_data: IntFieldUpdateOperationsInput
+  facebook_page: StringFieldUpdateOperationsInput
+  fax: StringFieldUpdateOperationsInput
+  flag_enabled: IntFieldUpdateOperationsInput
+  footer_logo: StringFieldUpdateOperationsInput
+  head_office: IntFieldUpdateOperationsInput
+  header_logo: StringFieldUpdateOperationsInput
+  healthcode_live: NullableBoolFieldUpdateOperationsInput
+  industry_sector: StringFieldUpdateOperationsInput
+  info_email: StringFieldUpdateOperationsInput
+  is_surgical: IntFieldUpdateOperationsInput
+  language: StringFieldUpdateOperationsInput
+  legacy_consultations: BoolFieldUpdateOperationsInput
+  linkedin_page: StringFieldUpdateOperationsInput
+  lock_export: IntFieldUpdateOperationsInput
+  lock_prescription: IntFieldUpdateOperationsInput
+  logo: StringFieldUpdateOperationsInput
+  medical_approvals: IntFieldUpdateOperationsInput
+  merge_bookings_tabs: BoolFieldUpdateOperationsInput
+  new_reports: IntFieldUpdateOperationsInput
+  phone: StringFieldUpdateOperationsInput
+  phone_prefix: IntFieldUpdateOperationsInput
+  post_code: StringFieldUpdateOperationsInput
+  preferences_email: IntFieldUpdateOperationsInput
+  preferences_newsletters: IntFieldUpdateOperationsInput
+  preferences_post: IntFieldUpdateOperationsInput
+  preferences_sms: IntFieldUpdateOperationsInput
+  private_treatment_notes: IntFieldUpdateOperationsInput
+  rota_version: StringFieldUpdateOperationsInput
+  secure_medical_forms: IntFieldUpdateOperationsInput
+  sensitive_data_question: IntFieldUpdateOperationsInput
+  show_report_logo: BoolFieldUpdateOperationsInput
+  slug: NullableStringFieldUpdateOperationsInput
+  sms_active: IntFieldUpdateOperationsInput
+  stock_manager: StringFieldUpdateOperationsInput
+  street: StringFieldUpdateOperationsInput
+  subscription: StringFieldUpdateOperationsInput
+  tax_name: Enumcompany_details_tax_nameFieldUpdateOperationsInput
+  timezone_id: NullableIntFieldUpdateOperationsInput
+  twitter_page: StringFieldUpdateOperationsInput
+  use_google_auth: BoolFieldUpdateOperationsInput
+  vat: StringFieldUpdateOperationsInput
+  website: StringFieldUpdateOperationsInput
+  week_start_day: StringFieldUpdateOperationsInput
+  youtube_page: StringFieldUpdateOperationsInput
+}
+
+input CompanyDetailsUpsertWithoutCompanyInput {
+  create: CompanyDetailsCreateWithoutCompanyInput!
+  update: CompanyDetailsUpdateWithoutCompanyInput!
+}
+
+input CompanyDetailsUpsertWithoutTimezoneInput {
+  create: CompanyDetailsCreateWithoutTimezoneInput!
+  update: CompanyDetailsUpdateWithoutTimezoneInput!
+}
+
+input CompanyDetailsWhereInput {
+  AND: [CompanyDetailsWhereInput!]
+  NOT: [CompanyDetailsWhereInput!]
+  OR: [CompanyDetailsWhereInput!]
+  accept_insurance: IntFilter
+  admin: IntFilter
+  append_client_pref: IntFilter
+  auto_sms: IntFilter
+  calendar_version: StringFilter
+  capital_surname: BoolFilter
+  city: StringFilter
+  class_teacher_singular: StringFilter
+  class_term_plural: StringFilter
+  class_term_singular: StringFilter
+  company: CompanyWhereInput
+  company_id: IntFilter
+  company_name: StringFilter
+  company_notes: StringFilter
+  completed_setup: BoolFilter
+  contact_term_plural: StringFilter
+  contact_term_singular: StringFilter
+  converted_value: FloatFilter
+  country: StringFilter
+  county: StringFilter
+  currency: StringFilter
+  cycles_display: IntFilter
+  date_format: StringFilter
+  db_lock: IntFilter
+  debrand_logo: IntFilter
+  default_inv_template_id: IntFilter
+  default_search: StringFilter
+  demo_mode: IntFilter
+  details_id: IntFilter
+  diagnosis_codes_type: StringFilter
+  disable_prescriptions: IntFilter
+  employee_clock_track: BoolFilter
+  employee_term_plural: StringFilter
+  employee_term_singular: StringFilter
+  employees: StringFilter
+  enable_2fa: IntFilter
+  enable_ad: IntFilter
+  enable_ad_code: StringNullableFilter
+  enable_ip_filter: IntNullableFilter
+  enable_sens_data: IntFilter
+  facebook_page: StringFilter
+  fax: StringFilter
+  flag_enabled: IntFilter
+  footer_logo: StringFilter
+  head_office: IntFilter
+  header_logo: StringFilter
+  healthcode_live: BoolNullableFilter
+  industry_sector: StringFilter
+  info_email: StringFilter
+  is_surgical: IntFilter
+  language: StringFilter
+  legacy_consultations: BoolFilter
+  linkedin_page: StringFilter
+  lock_export: IntFilter
+  lock_prescription: IntFilter
+  logo: StringFilter
+  medical_approvals: IntFilter
+  merge_bookings_tabs: BoolFilter
+  new_reports: IntFilter
+  phone: StringFilter
+  phone_prefix: IntFilter
+  post_code: StringFilter
+  preferences_email: IntFilter
+  preferences_newsletters: IntFilter
+  preferences_post: IntFilter
+  preferences_sms: IntFilter
+  private_treatment_notes: IntFilter
+  rota_version: StringFilter
+  secure_medical_forms: IntFilter
+  sensitive_data_question: IntFilter
+  show_report_logo: BoolFilter
+  slug: StringNullableFilter
+  sms_active: IntFilter
+  stock_manager: StringFilter
+  street: StringFilter
+  subscription: StringFilter
+  tax_name: Enumcompany_details_tax_nameFilter
+  timezone: TimezoneWhereInput
+  timezone_id: IntNullableFilter
+  twitter_page: StringFilter
+  use_google_auth: BoolFilter
+  vat: StringFilter
+  website: StringFilter
+  week_start_day: StringFilter
+  youtube_page: StringFilter
+}
+
+input CompanyDetailsWhereUniqueInput {
+  details_id: Int
+  slug: String
 }
 
 input CompanyOrderByInput {
   admin: SortOrder
   creation_date: SortOrder
   cron_enabled: SortOrder
+  details: CompanyDetailsOrderByInput
   digit8: SortOrder
   id: SortOrder
   image: SortOrder
   remote_connect: SortOrder
   remote_url: SortOrder
   slug: SortOrder
+  subscription: CompanySubscriptionOrderByInput
   user: SortOrder
+}
+
+type CompanySubscription {
+  account_live: Int!
+  active: Int!
+  activity_logs: Int!
+  advanced_marketing_addon: Int!
+  am_group: String!
+  am_start_date: DateTime
+  bill_cycle: DateTime!
+  code: String!
+  commission_rate: Float!
+  company: Company!
+  company_id: Int!
+  complete_account: Int!
+  complete_notes: String!
+  demo_account: Int!
+  details_status: Int!
+  disable_sms: Int!
+  discount: Float!
+  enterprise_fee: Float!
+  enterprise_user_cost: Float!
+  exclude_reports: Int!
+  free_months: Int
+  free_users: Int!
+  gc_amount: Float!
+  gc_customer_id: String!
+  gc_email: String!
+  gc_enterprise_plan_id: String!
+  gc_plan_id: String!
+  gc_support_plan_id: String!
+  hide_in_comps: Boolean
+  is_referral: Int
+  leave_alert: Boolean!
+  license_expiry: DateTime!
+  license_id: Int!
+  license_type: Int!
+  live_server: String!
+  low_credit_amount: Int!
+  low_sms_action: Int!
+  max_user_count: Int!
+  multiple_locations: Int!
+  onboarder_id: Int
+  order_sheet: Int!
+  pabau_score: Int!
+  partner_id: String!
+  payment_bounces: Int!
+  payment_id: String!
+  phone_support: Int!
+  previous_system: String!
+  price_range: String!
+  renew_interval: String!
+  sandbox_server: String!
+  server_comp_id: Int!
+  setup_stage: String!
+  setup_status: Int!
+  slack_support: Int!
+  sms_rate: Float!
+  storage: Float!
+  stripe_customer_id: String!
+  stripe_fee: Float!
+  stripe_fee_type: String!
+  stripe_subscription_id: String!
+  sub_start_date: DateTime!
+  subscription_fee: Float!
+  subscription_name: String!
+  support_fee: Float!
+  support_plan: String!
+  suspend_sms: Int!
+  suspended_on: String!
+  suspension_reason: String!
+  trainer_id: Int
+  training_date: String!
+  training_status: Int!
+  trial: Boolean!
+  uid: Int!
+  warning_level: String!
+  whatsapp_support: Int!
+}
+
+input CompanySubscriptionCreateInput {
+  account_live: Int!
+  active: Int!
+  activity_logs: Int!
+  advanced_marketing_addon: Int!
+  am_group: String!
+  am_start_date: DateTime
+  bill_cycle: DateTime!
+  code: String!
+  commission_rate: Float!
+  company: CompanyCreateNestedOneWithoutSubscriptionInput!
+  complete_account: Int!
+  complete_notes: String!
+  demo_account: Int!
+  details_status: Int!
+  disable_sms: Int!
+  discount: Float!
+  enterprise_fee: Float!
+  enterprise_user_cost: Float
+  exclude_reports: Int!
+  free_months: Int
+  free_users: Int!
+  gc_amount: Float!
+  gc_customer_id: String!
+  gc_email: String!
+  gc_enterprise_plan_id: String!
+  gc_plan_id: String!
+  gc_support_plan_id: String!
+  hide_in_comps: Boolean
+  is_referral: Int
+  leave_alert: Boolean
+  license_expiry: DateTime!
+  license_type: Int!
+  live_server: String
+  low_credit_amount: Int
+  low_sms_action: Int
+  max_user_count: Int!
+  multiple_locations: Int!
+  onboarder_id: Int
+  order_sheet: Int!
+  pabau_score: Int!
+  partner_id: String!
+  payment_bounces: Int!
+  payment_id: String!
+  phone_support: Int
+  previous_system: String!
+  price_range: String
+  renew_interval: String
+  sandbox_server: String!
+  server_comp_id: Int!
+  setup_stage: String!
+  setup_status: Int!
+  slack_support: Int
+  sms_rate: Float
+  storage: Float
+  stripe_customer_id: String!
+  stripe_fee: Float
+  stripe_fee_type: String
+  stripe_subscription_id: String!
+  sub_start_date: DateTime!
+  subscription_fee: Float!
+  subscription_name: String!
+  support_fee: Float!
+  support_plan: String!
+  suspend_sms: Int!
+  suspended_on: String!
+  suspension_reason: String!
+  trainer_id: Int
+  training_date: String!
+  training_status: Int!
+  trial: Boolean
+  uid: Int!
+  warning_level: String!
+  whatsapp_support: Int
+}
+
+input CompanySubscriptionCreateNestedOneWithoutCompanyInput {
+  connect: CompanySubscriptionWhereUniqueInput
+  connectOrCreate: CompanySubscriptionCreateOrConnectWithoutcompanyInput
+  create: CompanySubscriptionCreateWithoutCompanyInput
+}
+
+input CompanySubscriptionCreateOrConnectWithoutcompanyInput {
+  create: CompanySubscriptionCreateWithoutCompanyInput!
+  where: CompanySubscriptionWhereUniqueInput!
+}
+
+input CompanySubscriptionCreateWithoutCompanyInput {
+  account_live: Int!
+  active: Int!
+  activity_logs: Int!
+  advanced_marketing_addon: Int!
+  am_group: String!
+  am_start_date: DateTime
+  bill_cycle: DateTime!
+  code: String!
+  commission_rate: Float!
+  complete_account: Int!
+  complete_notes: String!
+  demo_account: Int!
+  details_status: Int!
+  disable_sms: Int!
+  discount: Float!
+  enterprise_fee: Float!
+  enterprise_user_cost: Float
+  exclude_reports: Int!
+  free_months: Int
+  free_users: Int!
+  gc_amount: Float!
+  gc_customer_id: String!
+  gc_email: String!
+  gc_enterprise_plan_id: String!
+  gc_plan_id: String!
+  gc_support_plan_id: String!
+  hide_in_comps: Boolean
+  is_referral: Int
+  leave_alert: Boolean
+  license_expiry: DateTime!
+  license_type: Int!
+  live_server: String
+  low_credit_amount: Int
+  low_sms_action: Int
+  max_user_count: Int!
+  multiple_locations: Int!
+  onboarder_id: Int
+  order_sheet: Int!
+  pabau_score: Int!
+  partner_id: String!
+  payment_bounces: Int!
+  payment_id: String!
+  phone_support: Int
+  previous_system: String!
+  price_range: String
+  renew_interval: String
+  sandbox_server: String!
+  server_comp_id: Int!
+  setup_stage: String!
+  setup_status: Int!
+  slack_support: Int
+  sms_rate: Float
+  storage: Float
+  stripe_customer_id: String!
+  stripe_fee: Float
+  stripe_fee_type: String
+  stripe_subscription_id: String!
+  sub_start_date: DateTime!
+  subscription_fee: Float!
+  subscription_name: String!
+  support_fee: Float!
+  support_plan: String!
+  suspend_sms: Int!
+  suspended_on: String!
+  suspension_reason: String!
+  trainer_id: Int
+  training_date: String!
+  training_status: Int!
+  trial: Boolean
+  uid: Int!
+  warning_level: String!
+  whatsapp_support: Int
+}
+
+input CompanySubscriptionOrderByInput {
+  account_live: SortOrder
+  active: SortOrder
+  activity_logs: SortOrder
+  advanced_marketing_addon: SortOrder
+  am_group: SortOrder
+  am_start_date: SortOrder
+  bill_cycle: SortOrder
+  code: SortOrder
+  commission_rate: SortOrder
+  company_id: SortOrder
+  complete_account: SortOrder
+  complete_notes: SortOrder
+  demo_account: SortOrder
+  details_status: SortOrder
+  disable_sms: SortOrder
+  discount: SortOrder
+  enterprise_fee: SortOrder
+  enterprise_user_cost: SortOrder
+  exclude_reports: SortOrder
+  free_months: SortOrder
+  free_users: SortOrder
+  gc_amount: SortOrder
+  gc_customer_id: SortOrder
+  gc_email: SortOrder
+  gc_enterprise_plan_id: SortOrder
+  gc_plan_id: SortOrder
+  gc_support_plan_id: SortOrder
+  hide_in_comps: SortOrder
+  is_referral: SortOrder
+  leave_alert: SortOrder
+  license_expiry: SortOrder
+  license_id: SortOrder
+  license_type: SortOrder
+  live_server: SortOrder
+  low_credit_amount: SortOrder
+  low_sms_action: SortOrder
+  max_user_count: SortOrder
+  multiple_locations: SortOrder
+  onboarder_id: SortOrder
+  order_sheet: SortOrder
+  pabau_score: SortOrder
+  partner_id: SortOrder
+  payment_bounces: SortOrder
+  payment_id: SortOrder
+  phone_support: SortOrder
+  previous_system: SortOrder
+  price_range: SortOrder
+  renew_interval: SortOrder
+  sandbox_server: SortOrder
+  server_comp_id: SortOrder
+  setup_stage: SortOrder
+  setup_status: SortOrder
+  slack_support: SortOrder
+  sms_rate: SortOrder
+  storage: SortOrder
+  stripe_customer_id: SortOrder
+  stripe_fee: SortOrder
+  stripe_fee_type: SortOrder
+  stripe_subscription_id: SortOrder
+  sub_start_date: SortOrder
+  subscription_fee: SortOrder
+  subscription_name: SortOrder
+  support_fee: SortOrder
+  support_plan: SortOrder
+  suspend_sms: SortOrder
+  suspended_on: SortOrder
+  suspension_reason: SortOrder
+  trainer_id: SortOrder
+  training_date: SortOrder
+  training_status: SortOrder
+  trial: SortOrder
+  uid: SortOrder
+  warning_level: SortOrder
+  whatsapp_support: SortOrder
+}
+
+input CompanySubscriptionUpdateInput {
+  account_live: IntFieldUpdateOperationsInput
+  active: IntFieldUpdateOperationsInput
+  activity_logs: IntFieldUpdateOperationsInput
+  advanced_marketing_addon: IntFieldUpdateOperationsInput
+  am_group: StringFieldUpdateOperationsInput
+  am_start_date: NullableDateTimeFieldUpdateOperationsInput
+  bill_cycle: DateTimeFieldUpdateOperationsInput
+  code: StringFieldUpdateOperationsInput
+  commission_rate: FloatFieldUpdateOperationsInput
+  company: CompanyUpdateOneRequiredWithoutSubscriptionInput
+  complete_account: IntFieldUpdateOperationsInput
+  complete_notes: StringFieldUpdateOperationsInput
+  demo_account: IntFieldUpdateOperationsInput
+  details_status: IntFieldUpdateOperationsInput
+  disable_sms: IntFieldUpdateOperationsInput
+  discount: FloatFieldUpdateOperationsInput
+  enterprise_fee: FloatFieldUpdateOperationsInput
+  enterprise_user_cost: FloatFieldUpdateOperationsInput
+  exclude_reports: IntFieldUpdateOperationsInput
+  free_months: NullableIntFieldUpdateOperationsInput
+  free_users: IntFieldUpdateOperationsInput
+  gc_amount: FloatFieldUpdateOperationsInput
+  gc_customer_id: StringFieldUpdateOperationsInput
+  gc_email: StringFieldUpdateOperationsInput
+  gc_enterprise_plan_id: StringFieldUpdateOperationsInput
+  gc_plan_id: StringFieldUpdateOperationsInput
+  gc_support_plan_id: StringFieldUpdateOperationsInput
+  hide_in_comps: NullableBoolFieldUpdateOperationsInput
+  is_referral: NullableIntFieldUpdateOperationsInput
+  leave_alert: BoolFieldUpdateOperationsInput
+  license_expiry: DateTimeFieldUpdateOperationsInput
+  license_type: IntFieldUpdateOperationsInput
+  live_server: StringFieldUpdateOperationsInput
+  low_credit_amount: IntFieldUpdateOperationsInput
+  low_sms_action: IntFieldUpdateOperationsInput
+  max_user_count: IntFieldUpdateOperationsInput
+  multiple_locations: IntFieldUpdateOperationsInput
+  onboarder_id: NullableIntFieldUpdateOperationsInput
+  order_sheet: IntFieldUpdateOperationsInput
+  pabau_score: IntFieldUpdateOperationsInput
+  partner_id: StringFieldUpdateOperationsInput
+  payment_bounces: IntFieldUpdateOperationsInput
+  payment_id: StringFieldUpdateOperationsInput
+  phone_support: IntFieldUpdateOperationsInput
+  previous_system: StringFieldUpdateOperationsInput
+  price_range: StringFieldUpdateOperationsInput
+  renew_interval: StringFieldUpdateOperationsInput
+  sandbox_server: StringFieldUpdateOperationsInput
+  server_comp_id: IntFieldUpdateOperationsInput
+  setup_stage: StringFieldUpdateOperationsInput
+  setup_status: IntFieldUpdateOperationsInput
+  slack_support: IntFieldUpdateOperationsInput
+  sms_rate: FloatFieldUpdateOperationsInput
+  storage: FloatFieldUpdateOperationsInput
+  stripe_customer_id: StringFieldUpdateOperationsInput
+  stripe_fee: FloatFieldUpdateOperationsInput
+  stripe_fee_type: StringFieldUpdateOperationsInput
+  stripe_subscription_id: StringFieldUpdateOperationsInput
+  sub_start_date: DateTimeFieldUpdateOperationsInput
+  subscription_fee: FloatFieldUpdateOperationsInput
+  subscription_name: StringFieldUpdateOperationsInput
+  support_fee: FloatFieldUpdateOperationsInput
+  support_plan: StringFieldUpdateOperationsInput
+  suspend_sms: IntFieldUpdateOperationsInput
+  suspended_on: StringFieldUpdateOperationsInput
+  suspension_reason: StringFieldUpdateOperationsInput
+  trainer_id: NullableIntFieldUpdateOperationsInput
+  training_date: StringFieldUpdateOperationsInput
+  training_status: IntFieldUpdateOperationsInput
+  trial: BoolFieldUpdateOperationsInput
+  uid: IntFieldUpdateOperationsInput
+  warning_level: StringFieldUpdateOperationsInput
+  whatsapp_support: IntFieldUpdateOperationsInput
+}
+
+input CompanySubscriptionUpdateManyMutationInput {
+  account_live: IntFieldUpdateOperationsInput
+  active: IntFieldUpdateOperationsInput
+  activity_logs: IntFieldUpdateOperationsInput
+  advanced_marketing_addon: IntFieldUpdateOperationsInput
+  am_group: StringFieldUpdateOperationsInput
+  am_start_date: NullableDateTimeFieldUpdateOperationsInput
+  bill_cycle: DateTimeFieldUpdateOperationsInput
+  code: StringFieldUpdateOperationsInput
+  commission_rate: FloatFieldUpdateOperationsInput
+  complete_account: IntFieldUpdateOperationsInput
+  complete_notes: StringFieldUpdateOperationsInput
+  demo_account: IntFieldUpdateOperationsInput
+  details_status: IntFieldUpdateOperationsInput
+  disable_sms: IntFieldUpdateOperationsInput
+  discount: FloatFieldUpdateOperationsInput
+  enterprise_fee: FloatFieldUpdateOperationsInput
+  enterprise_user_cost: FloatFieldUpdateOperationsInput
+  exclude_reports: IntFieldUpdateOperationsInput
+  free_months: NullableIntFieldUpdateOperationsInput
+  free_users: IntFieldUpdateOperationsInput
+  gc_amount: FloatFieldUpdateOperationsInput
+  gc_customer_id: StringFieldUpdateOperationsInput
+  gc_email: StringFieldUpdateOperationsInput
+  gc_enterprise_plan_id: StringFieldUpdateOperationsInput
+  gc_plan_id: StringFieldUpdateOperationsInput
+  gc_support_plan_id: StringFieldUpdateOperationsInput
+  hide_in_comps: NullableBoolFieldUpdateOperationsInput
+  is_referral: NullableIntFieldUpdateOperationsInput
+  leave_alert: BoolFieldUpdateOperationsInput
+  license_expiry: DateTimeFieldUpdateOperationsInput
+  license_type: IntFieldUpdateOperationsInput
+  live_server: StringFieldUpdateOperationsInput
+  low_credit_amount: IntFieldUpdateOperationsInput
+  low_sms_action: IntFieldUpdateOperationsInput
+  max_user_count: IntFieldUpdateOperationsInput
+  multiple_locations: IntFieldUpdateOperationsInput
+  onboarder_id: NullableIntFieldUpdateOperationsInput
+  order_sheet: IntFieldUpdateOperationsInput
+  pabau_score: IntFieldUpdateOperationsInput
+  partner_id: StringFieldUpdateOperationsInput
+  payment_bounces: IntFieldUpdateOperationsInput
+  payment_id: StringFieldUpdateOperationsInput
+  phone_support: IntFieldUpdateOperationsInput
+  previous_system: StringFieldUpdateOperationsInput
+  price_range: StringFieldUpdateOperationsInput
+  renew_interval: StringFieldUpdateOperationsInput
+  sandbox_server: StringFieldUpdateOperationsInput
+  server_comp_id: IntFieldUpdateOperationsInput
+  setup_stage: StringFieldUpdateOperationsInput
+  setup_status: IntFieldUpdateOperationsInput
+  slack_support: IntFieldUpdateOperationsInput
+  sms_rate: FloatFieldUpdateOperationsInput
+  storage: FloatFieldUpdateOperationsInput
+  stripe_customer_id: StringFieldUpdateOperationsInput
+  stripe_fee: FloatFieldUpdateOperationsInput
+  stripe_fee_type: StringFieldUpdateOperationsInput
+  stripe_subscription_id: StringFieldUpdateOperationsInput
+  sub_start_date: DateTimeFieldUpdateOperationsInput
+  subscription_fee: FloatFieldUpdateOperationsInput
+  subscription_name: StringFieldUpdateOperationsInput
+  support_fee: FloatFieldUpdateOperationsInput
+  support_plan: StringFieldUpdateOperationsInput
+  suspend_sms: IntFieldUpdateOperationsInput
+  suspended_on: StringFieldUpdateOperationsInput
+  suspension_reason: StringFieldUpdateOperationsInput
+  trainer_id: NullableIntFieldUpdateOperationsInput
+  training_date: StringFieldUpdateOperationsInput
+  training_status: IntFieldUpdateOperationsInput
+  trial: BoolFieldUpdateOperationsInput
+  uid: IntFieldUpdateOperationsInput
+  warning_level: StringFieldUpdateOperationsInput
+  whatsapp_support: IntFieldUpdateOperationsInput
+}
+
+input CompanySubscriptionUpdateOneWithoutCompanyInput {
+  connect: CompanySubscriptionWhereUniqueInput
+  connectOrCreate: CompanySubscriptionCreateOrConnectWithoutcompanyInput
+  create: CompanySubscriptionCreateWithoutCompanyInput
+  delete: Boolean
+  disconnect: Boolean
+  update: CompanySubscriptionUpdateWithoutCompanyInput
+  upsert: CompanySubscriptionUpsertWithoutCompanyInput
+}
+
+input CompanySubscriptionUpdateWithoutCompanyInput {
+  account_live: IntFieldUpdateOperationsInput
+  active: IntFieldUpdateOperationsInput
+  activity_logs: IntFieldUpdateOperationsInput
+  advanced_marketing_addon: IntFieldUpdateOperationsInput
+  am_group: StringFieldUpdateOperationsInput
+  am_start_date: NullableDateTimeFieldUpdateOperationsInput
+  bill_cycle: DateTimeFieldUpdateOperationsInput
+  code: StringFieldUpdateOperationsInput
+  commission_rate: FloatFieldUpdateOperationsInput
+  complete_account: IntFieldUpdateOperationsInput
+  complete_notes: StringFieldUpdateOperationsInput
+  demo_account: IntFieldUpdateOperationsInput
+  details_status: IntFieldUpdateOperationsInput
+  disable_sms: IntFieldUpdateOperationsInput
+  discount: FloatFieldUpdateOperationsInput
+  enterprise_fee: FloatFieldUpdateOperationsInput
+  enterprise_user_cost: FloatFieldUpdateOperationsInput
+  exclude_reports: IntFieldUpdateOperationsInput
+  free_months: NullableIntFieldUpdateOperationsInput
+  free_users: IntFieldUpdateOperationsInput
+  gc_amount: FloatFieldUpdateOperationsInput
+  gc_customer_id: StringFieldUpdateOperationsInput
+  gc_email: StringFieldUpdateOperationsInput
+  gc_enterprise_plan_id: StringFieldUpdateOperationsInput
+  gc_plan_id: StringFieldUpdateOperationsInput
+  gc_support_plan_id: StringFieldUpdateOperationsInput
+  hide_in_comps: NullableBoolFieldUpdateOperationsInput
+  is_referral: NullableIntFieldUpdateOperationsInput
+  leave_alert: BoolFieldUpdateOperationsInput
+  license_expiry: DateTimeFieldUpdateOperationsInput
+  license_type: IntFieldUpdateOperationsInput
+  live_server: StringFieldUpdateOperationsInput
+  low_credit_amount: IntFieldUpdateOperationsInput
+  low_sms_action: IntFieldUpdateOperationsInput
+  max_user_count: IntFieldUpdateOperationsInput
+  multiple_locations: IntFieldUpdateOperationsInput
+  onboarder_id: NullableIntFieldUpdateOperationsInput
+  order_sheet: IntFieldUpdateOperationsInput
+  pabau_score: IntFieldUpdateOperationsInput
+  partner_id: StringFieldUpdateOperationsInput
+  payment_bounces: IntFieldUpdateOperationsInput
+  payment_id: StringFieldUpdateOperationsInput
+  phone_support: IntFieldUpdateOperationsInput
+  previous_system: StringFieldUpdateOperationsInput
+  price_range: StringFieldUpdateOperationsInput
+  renew_interval: StringFieldUpdateOperationsInput
+  sandbox_server: StringFieldUpdateOperationsInput
+  server_comp_id: IntFieldUpdateOperationsInput
+  setup_stage: StringFieldUpdateOperationsInput
+  setup_status: IntFieldUpdateOperationsInput
+  slack_support: IntFieldUpdateOperationsInput
+  sms_rate: FloatFieldUpdateOperationsInput
+  storage: FloatFieldUpdateOperationsInput
+  stripe_customer_id: StringFieldUpdateOperationsInput
+  stripe_fee: FloatFieldUpdateOperationsInput
+  stripe_fee_type: StringFieldUpdateOperationsInput
+  stripe_subscription_id: StringFieldUpdateOperationsInput
+  sub_start_date: DateTimeFieldUpdateOperationsInput
+  subscription_fee: FloatFieldUpdateOperationsInput
+  subscription_name: StringFieldUpdateOperationsInput
+  support_fee: FloatFieldUpdateOperationsInput
+  support_plan: StringFieldUpdateOperationsInput
+  suspend_sms: IntFieldUpdateOperationsInput
+  suspended_on: StringFieldUpdateOperationsInput
+  suspension_reason: StringFieldUpdateOperationsInput
+  trainer_id: NullableIntFieldUpdateOperationsInput
+  training_date: StringFieldUpdateOperationsInput
+  training_status: IntFieldUpdateOperationsInput
+  trial: BoolFieldUpdateOperationsInput
+  uid: IntFieldUpdateOperationsInput
+  warning_level: StringFieldUpdateOperationsInput
+  whatsapp_support: IntFieldUpdateOperationsInput
+}
+
+input CompanySubscriptionUpsertWithoutCompanyInput {
+  create: CompanySubscriptionCreateWithoutCompanyInput!
+  update: CompanySubscriptionUpdateWithoutCompanyInput!
+}
+
+input CompanySubscriptionWhereInput {
+  AND: [CompanySubscriptionWhereInput!]
+  NOT: [CompanySubscriptionWhereInput!]
+  OR: [CompanySubscriptionWhereInput!]
+  account_live: IntFilter
+  active: IntFilter
+  activity_logs: IntFilter
+  advanced_marketing_addon: IntFilter
+  am_group: StringFilter
+  am_start_date: DateTimeNullableFilter
+  bill_cycle: DateTimeFilter
+  code: StringFilter
+  commission_rate: FloatFilter
+  company: CompanyWhereInput
+  company_id: IntFilter
+  complete_account: IntFilter
+  complete_notes: StringFilter
+  demo_account: IntFilter
+  details_status: IntFilter
+  disable_sms: IntFilter
+  discount: FloatFilter
+  enterprise_fee: FloatFilter
+  enterprise_user_cost: FloatFilter
+  exclude_reports: IntFilter
+  free_months: IntNullableFilter
+  free_users: IntFilter
+  gc_amount: FloatFilter
+  gc_customer_id: StringFilter
+  gc_email: StringFilter
+  gc_enterprise_plan_id: StringFilter
+  gc_plan_id: StringFilter
+  gc_support_plan_id: StringFilter
+  hide_in_comps: BoolNullableFilter
+  is_referral: IntNullableFilter
+  leave_alert: BoolFilter
+  license_expiry: DateTimeFilter
+  license_id: IntFilter
+  license_type: IntFilter
+  live_server: StringFilter
+  low_credit_amount: IntFilter
+  low_sms_action: IntFilter
+  max_user_count: IntFilter
+  multiple_locations: IntFilter
+  onboarder_id: IntNullableFilter
+  order_sheet: IntFilter
+  pabau_score: IntFilter
+  partner_id: StringFilter
+  payment_bounces: IntFilter
+  payment_id: StringFilter
+  phone_support: IntFilter
+  previous_system: StringFilter
+  price_range: StringFilter
+  renew_interval: StringFilter
+  sandbox_server: StringFilter
+  server_comp_id: IntFilter
+  setup_stage: StringFilter
+  setup_status: IntFilter
+  slack_support: IntFilter
+  sms_rate: FloatFilter
+  storage: FloatFilter
+  stripe_customer_id: StringFilter
+  stripe_fee: FloatFilter
+  stripe_fee_type: StringFilter
+  stripe_subscription_id: StringFilter
+  sub_start_date: DateTimeFilter
+  subscription_fee: FloatFilter
+  subscription_name: StringFilter
+  support_fee: FloatFilter
+  support_plan: StringFilter
+  suspend_sms: IntFilter
+  suspended_on: StringFilter
+  suspension_reason: StringFilter
+  trainer_id: IntNullableFilter
+  training_date: StringFilter
+  training_status: IntFilter
+  trial: BoolFilter
+  uid: IntFilter
+  warning_level: StringFilter
+  whatsapp_support: IntFilter
+}
+
+input CompanySubscriptionWhereUniqueInput {
+  license_id: Int
 }
 
 input CompanyUpdateInput {
@@ -4609,11 +7370,13 @@ input CompanyUpdateInput {
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
   cron_enabled: NullableBoolFieldUpdateOperationsInput
+  details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
   remote_connect: NullableStringFieldUpdateOperationsInput
   remote_url: NullableStringFieldUpdateOperationsInput
   slug: NullableStringFieldUpdateOperationsInput
+  subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
 
@@ -4645,12 +7408,28 @@ input CompanyUpdateOneRequiredWithoutAccountBalanceInput {
   upsert: CompanyUpsertWithoutAccountBalanceInput
 }
 
+input CompanyUpdateOneRequiredWithoutDetailsInput {
+  connect: CompanyWhereUniqueInput
+  connectOrCreate: CompanyCreateOrConnectWithoutdetailsInput
+  create: CompanyCreateWithoutDetailsInput
+  update: CompanyUpdateWithoutDetailsInput
+  upsert: CompanyUpsertWithoutDetailsInput
+}
+
 input CompanyUpdateOneRequiredWithoutMarketingSourceInput {
   connect: CompanyWhereUniqueInput
   connectOrCreate: CompanyCreateOrConnectWithoutMarketingSourceInput
   create: CompanyCreateWithoutMarketingSourceInput
   update: CompanyUpdateWithoutMarketingSourceInput
   upsert: CompanyUpsertWithoutMarketingSourceInput
+}
+
+input CompanyUpdateOneRequiredWithoutSubscriptionInput {
+  connect: CompanyWhereUniqueInput
+  connectOrCreate: CompanyCreateOrConnectWithoutsubscriptionInput
+  create: CompanyCreateWithoutSubscriptionInput
+  update: CompanyUpdateWithoutSubscriptionInput
+  upsert: CompanyUpsertWithoutSubscriptionInput
 }
 
 input CompanyUpdateOneRequiredWithoutThirdPartyAccesInput {
@@ -4677,11 +7456,13 @@ input CompanyUpdateWithoutAcceptEmailTokenInput {
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
   cron_enabled: NullableBoolFieldUpdateOperationsInput
+  details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
   remote_connect: NullableStringFieldUpdateOperationsInput
   remote_url: NullableStringFieldUpdateOperationsInput
   slug: NullableStringFieldUpdateOperationsInput
+  subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
 
@@ -4693,11 +7474,31 @@ input CompanyUpdateWithoutAccountBalanceInput {
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
   cron_enabled: NullableBoolFieldUpdateOperationsInput
+  details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
   remote_connect: NullableStringFieldUpdateOperationsInput
   remote_url: NullableStringFieldUpdateOperationsInput
   slug: NullableStringFieldUpdateOperationsInput
+  subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
+  user: StringFieldUpdateOperationsInput
+}
+
+input CompanyUpdateWithoutDetailsInput {
+  AcceptEmailToken: AcceptEmailTokenUpdateManyWithoutCompanyInput
+  AccountBalance: AccountBalanceUpdateManyWithoutCompanyInput
+  MarketingSource: MarketingSourceUpdateManyWithoutCompanyInput
+  ThirdPartyAcces: ThirdPartyAccesUpdateManyWithoutCompanyInput
+  TwoFactorHistory: TwoFactorHistoryUpdateManyWithoutCompanyInput
+  admin: IntFieldUpdateOperationsInput
+  creation_date: DateTimeFieldUpdateOperationsInput
+  cron_enabled: NullableBoolFieldUpdateOperationsInput
+  digit8: IntFieldUpdateOperationsInput
+  image: StringFieldUpdateOperationsInput
+  remote_connect: NullableStringFieldUpdateOperationsInput
+  remote_url: NullableStringFieldUpdateOperationsInput
+  slug: NullableStringFieldUpdateOperationsInput
+  subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
 
@@ -4709,6 +7510,26 @@ input CompanyUpdateWithoutMarketingSourceInput {
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
   cron_enabled: NullableBoolFieldUpdateOperationsInput
+  details: CompanyDetailsUpdateOneWithoutCompanyInput
+  digit8: IntFieldUpdateOperationsInput
+  image: StringFieldUpdateOperationsInput
+  remote_connect: NullableStringFieldUpdateOperationsInput
+  remote_url: NullableStringFieldUpdateOperationsInput
+  slug: NullableStringFieldUpdateOperationsInput
+  subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
+  user: StringFieldUpdateOperationsInput
+}
+
+input CompanyUpdateWithoutSubscriptionInput {
+  AcceptEmailToken: AcceptEmailTokenUpdateManyWithoutCompanyInput
+  AccountBalance: AccountBalanceUpdateManyWithoutCompanyInput
+  MarketingSource: MarketingSourceUpdateManyWithoutCompanyInput
+  ThirdPartyAcces: ThirdPartyAccesUpdateManyWithoutCompanyInput
+  TwoFactorHistory: TwoFactorHistoryUpdateManyWithoutCompanyInput
+  admin: IntFieldUpdateOperationsInput
+  creation_date: DateTimeFieldUpdateOperationsInput
+  cron_enabled: NullableBoolFieldUpdateOperationsInput
+  details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
   remote_connect: NullableStringFieldUpdateOperationsInput
@@ -4725,11 +7546,13 @@ input CompanyUpdateWithoutThirdPartyAccesInput {
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
   cron_enabled: NullableBoolFieldUpdateOperationsInput
+  details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
   remote_connect: NullableStringFieldUpdateOperationsInput
   remote_url: NullableStringFieldUpdateOperationsInput
   slug: NullableStringFieldUpdateOperationsInput
+  subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
 
@@ -4741,11 +7564,13 @@ input CompanyUpdateWithoutTwoFactorHistoryInput {
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
   cron_enabled: NullableBoolFieldUpdateOperationsInput
+  details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
   remote_connect: NullableStringFieldUpdateOperationsInput
   remote_url: NullableStringFieldUpdateOperationsInput
   slug: NullableStringFieldUpdateOperationsInput
+  subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
 
@@ -4759,9 +7584,19 @@ input CompanyUpsertWithoutAccountBalanceInput {
   update: CompanyUpdateWithoutAccountBalanceInput!
 }
 
+input CompanyUpsertWithoutDetailsInput {
+  create: CompanyCreateWithoutDetailsInput!
+  update: CompanyUpdateWithoutDetailsInput!
+}
+
 input CompanyUpsertWithoutMarketingSourceInput {
   create: CompanyCreateWithoutMarketingSourceInput!
   update: CompanyUpdateWithoutMarketingSourceInput!
+}
+
+input CompanyUpsertWithoutSubscriptionInput {
+  create: CompanyCreateWithoutSubscriptionInput!
+  update: CompanyUpdateWithoutSubscriptionInput!
 }
 
 input CompanyUpsertWithoutThirdPartyAccesInput {
@@ -4786,12 +7621,14 @@ input CompanyWhereInput {
   admin: IntFilter
   creation_date: DateTimeFilter
   cron_enabled: BoolNullableFilter
+  details: CompanyDetailsWhereInput
   digit8: IntFilter
   id: IntFilter
   image: StringFilter
   remote_connect: StringNullableFilter
   remote_url: StringNullableFilter
   slug: StringNullableFilter
+  subscription: CompanySubscriptionWhereInput
   user: StringFilter
 }
 
@@ -4864,6 +7701,24 @@ input Enumbookitpro_general_integration_methodNullableFilter {
   notIn: [bookitpro_general_integration_method!]
 }
 
+input Enumclass_master_class_payNullableFilter {
+  equals: class_master_class_pay
+  in: [class_master_class_pay!]
+  not: NestedEnumclass_master_class_payNullableFilter
+  notIn: [class_master_class_pay!]
+}
+
+input Enumcompany_details_tax_nameFieldUpdateOperationsInput {
+  set: company_details_tax_name
+}
+
+input Enumcompany_details_tax_nameFilter {
+  equals: company_details_tax_name
+  in: [company_details_tax_name!]
+  not: NestedEnumcompany_details_tax_nameFilter
+  notIn: [company_details_tax_name!]
+}
+
 input FloatFieldUpdateOperationsInput {
   decrement: Float
   divide: Float
@@ -4880,6 +7735,17 @@ input FloatFilter {
   lt: Float
   lte: Float
   not: NestedFloatFilter
+  notIn: [Float!]
+}
+
+input FloatNullableFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatNullableFilter
   notIn: [Float!]
 }
 
@@ -5135,7 +8001,7 @@ type Mutation {
   createOneAccountBalance(data: AccountBalanceCreateInput!): AccountBalance!
   createOneAccountBalanceLog(data: AccountBalanceLogCreateInput!): AccountBalanceLog!
   createOneAccountManager(data: AccountManagerCreateInput!): AccountManager!
-  createOneAdverCampaign(data: AdverCampaignCreateInput!): AdverCampaign!
+  createOneAdvertCampaign(data: AdvertCampaignCreateInput!): AdvertCampaign!
   createOneApiDebug(data: ApiDebugCreateInput!): ApiDebug!
   createOneApiKey(data: ApiKeyCreateInput!): ApiKey!
   createOneAppBeforeAfter(data: AppBeforeAfterCreateInput!): AppBeforeAfter!
@@ -5174,14 +8040,32 @@ type Mutation {
   createOneCalRangeRequest(data: CalRangeRequestCreateInput!): CalRangeRequest!
   createOneCalendarView(data: CalendarViewCreateInput!): CalendarView!
   createOneCampaignAttachment(data: CampaignAttachmentCreateInput!): CampaignAttachment!
+  createOneCancelReason(data: CancelReasonCreateInput!): CancelReason!
   createOneCancellationPolicy(data: CancellationPolicyCreateInput!): CancellationPolicy!
+  createOneCardTypes(data: CardTypesCreateInput!): CardTypes!
+  createOneCashupReport(data: CashupReportCreateInput!): CashupReport!
+  createOneCashupReportCustom(data: CashupReportCustomCreateInput!): CashupReportCustom!
+  createOneCheckinAppt(data: CheckinApptCreateInput!): CheckinAppt!
+  createOneCheckinAverages(data: CheckinAveragesCreateInput!): CheckinAverages!
+  createOneCheckinAveragesIdle(data: CheckinAveragesIdleCreateInput!): CheckinAveragesIdle!
+  createOneCheckinProduct(data: CheckinProductCreateInput!): CheckinProduct!
+  createOneCheckinQueue(data: CheckinQueueCreateInput!): CheckinQueue!
+  createOneClassCategories(data: ClassCategoriesCreateInput!): ClassCategories!
+  createOneClassGuests(data: ClassGuestsCreateInput!): ClassGuests!
+  createOneClassMaster(data: ClassMasterCreateInput!): ClassMaster!
+  createOneClassNotes(data: ClassNotesCreateInput!): ClassNotes!
+  createOneClasstypeMaster(data: ClasstypeMasterCreateInput!): ClasstypeMaster!
   createOneCompany(data: CompanyCreateInput!): Company!
+  createOneCompanyDetails(data: CompanyDetailsCreateInput!): CompanyDetails!
+  createOneCompanySubscription(data: CompanySubscriptionCreateInput!): CompanySubscription!
   createOneMarketingSource(data: MarketingSourceCreateInput!): MarketingSource!
   createOneMediaLlibraryAttachments(data: MediaLlibraryAttachmentsCreateInput!): MediaLlibraryAttachments!
   createOneSecondAtAnswer(data: SecondAtAnswerCreateInput!): SecondAtAnswer!
   createOneSecondAtQuestion(data: SecondAtQuestionCreateInput!): SecondAtQuestion!
   createOneThirdPartyAcces(data: ThirdPartyAccesCreateInput!): ThirdPartyAcces!
+  createOneTimezone(data: TimezoneCreateInput!): Timezone!
   createOneTwoFactorHistory(data: TwoFactorHistoryCreateInput!): TwoFactorHistory!
+  createOnecandidate(data: candidateCreateInput!): candidate!
   deleteManyAcLog(where: AcLogWhereInput): AffectedRowsOutput!
   deleteManyAcLogAction(where: AcLogActionWhereInput): AffectedRowsOutput!
   deleteManyAcLogUrl(where: AcLogUrlWhereInput): AffectedRowsOutput!
@@ -5189,7 +8073,7 @@ type Mutation {
   deleteManyAccountBalance(where: AccountBalanceWhereInput): AffectedRowsOutput!
   deleteManyAccountBalanceLog(where: AccountBalanceLogWhereInput): AffectedRowsOutput!
   deleteManyAccountManager(where: AccountManagerWhereInput): AffectedRowsOutput!
-  deleteManyAdverCampaign(where: AdverCampaignWhereInput): AffectedRowsOutput!
+  deleteManyAdvertCampaign(where: AdvertCampaignWhereInput): AffectedRowsOutput!
   deleteManyApiDebug(where: ApiDebugWhereInput): AffectedRowsOutput!
   deleteManyApiKey(where: ApiKeyWhereInput): AffectedRowsOutput!
   deleteManyAppBeforeAfter(where: AppBeforeAfterWhereInput): AffectedRowsOutput!
@@ -5228,14 +8112,32 @@ type Mutation {
   deleteManyCalRangeRequest(where: CalRangeRequestWhereInput): AffectedRowsOutput!
   deleteManyCalendarView(where: CalendarViewWhereInput): AffectedRowsOutput!
   deleteManyCampaignAttachment(where: CampaignAttachmentWhereInput): AffectedRowsOutput!
+  deleteManyCancelReason(where: CancelReasonWhereInput): AffectedRowsOutput!
   deleteManyCancellationPolicy(where: CancellationPolicyWhereInput): AffectedRowsOutput!
+  deleteManyCardTypes(where: CardTypesWhereInput): AffectedRowsOutput!
+  deleteManyCashupReport(where: CashupReportWhereInput): AffectedRowsOutput!
+  deleteManyCashupReportCustom(where: CashupReportCustomWhereInput): AffectedRowsOutput!
+  deleteManyCheckinAppt(where: CheckinApptWhereInput): AffectedRowsOutput!
+  deleteManyCheckinAverages(where: CheckinAveragesWhereInput): AffectedRowsOutput!
+  deleteManyCheckinAveragesIdle(where: CheckinAveragesIdleWhereInput): AffectedRowsOutput!
+  deleteManyCheckinProduct(where: CheckinProductWhereInput): AffectedRowsOutput!
+  deleteManyCheckinQueue(where: CheckinQueueWhereInput): AffectedRowsOutput!
+  deleteManyClassCategories(where: ClassCategoriesWhereInput): AffectedRowsOutput!
+  deleteManyClassGuests(where: ClassGuestsWhereInput): AffectedRowsOutput!
+  deleteManyClassMaster(where: ClassMasterWhereInput): AffectedRowsOutput!
+  deleteManyClassNotes(where: ClassNotesWhereInput): AffectedRowsOutput!
+  deleteManyClasstypeMaster(where: ClasstypeMasterWhereInput): AffectedRowsOutput!
   deleteManyCompany(where: CompanyWhereInput): AffectedRowsOutput!
+  deleteManyCompanyDetails(where: CompanyDetailsWhereInput): AffectedRowsOutput!
+  deleteManyCompanySubscription(where: CompanySubscriptionWhereInput): AffectedRowsOutput!
   deleteManyMarketingSource(where: MarketingSourceWhereInput): AffectedRowsOutput!
   deleteManyMediaLlibraryAttachments(where: MediaLlibraryAttachmentsWhereInput): AffectedRowsOutput!
   deleteManySecondAtAnswer(where: SecondAtAnswerWhereInput): AffectedRowsOutput!
   deleteManySecondAtQuestion(where: SecondAtQuestionWhereInput): AffectedRowsOutput!
   deleteManyThirdPartyAcces(where: ThirdPartyAccesWhereInput): AffectedRowsOutput!
+  deleteManyTimezone(where: TimezoneWhereInput): AffectedRowsOutput!
   deleteManyTwoFactorHistory(where: TwoFactorHistoryWhereInput): AffectedRowsOutput!
+  deleteManycandidate(where: candidateWhereInput): AffectedRowsOutput!
   deleteOneAcLog(where: AcLogWhereUniqueInput!): AcLog
   deleteOneAcLogAction(where: AcLogActionWhereUniqueInput!): AcLogAction
   deleteOneAcLogUrl(where: AcLogUrlWhereUniqueInput!): AcLogUrl
@@ -5243,7 +8145,7 @@ type Mutation {
   deleteOneAccountBalance(where: AccountBalanceWhereUniqueInput!): AccountBalance
   deleteOneAccountBalanceLog(where: AccountBalanceLogWhereUniqueInput!): AccountBalanceLog
   deleteOneAccountManager(where: AccountManagerWhereUniqueInput!): AccountManager
-  deleteOneAdverCampaign(where: AdverCampaignWhereUniqueInput!): AdverCampaign
+  deleteOneAdvertCampaign(where: AdvertCampaignWhereUniqueInput!): AdvertCampaign
   deleteOneApiDebug(where: ApiDebugWhereUniqueInput!): ApiDebug
   deleteOneApiKey(where: ApiKeyWhereUniqueInput!): ApiKey
   deleteOneAppBeforeAfter(where: AppBeforeAfterWhereUniqueInput!): AppBeforeAfter
@@ -5282,14 +8184,32 @@ type Mutation {
   deleteOneCalRangeRequest(where: CalRangeRequestWhereUniqueInput!): CalRangeRequest
   deleteOneCalendarView(where: CalendarViewWhereUniqueInput!): CalendarView
   deleteOneCampaignAttachment(where: CampaignAttachmentWhereUniqueInput!): CampaignAttachment
+  deleteOneCancelReason(where: CancelReasonWhereUniqueInput!): CancelReason
   deleteOneCancellationPolicy(where: CancellationPolicyWhereUniqueInput!): CancellationPolicy
+  deleteOneCardTypes(where: CardTypesWhereUniqueInput!): CardTypes
+  deleteOneCashupReport(where: CashupReportWhereUniqueInput!): CashupReport
+  deleteOneCashupReportCustom(where: CashupReportCustomWhereUniqueInput!): CashupReportCustom
+  deleteOneCheckinAppt(where: CheckinApptWhereUniqueInput!): CheckinAppt
+  deleteOneCheckinAverages(where: CheckinAveragesWhereUniqueInput!): CheckinAverages
+  deleteOneCheckinAveragesIdle(where: CheckinAveragesIdleWhereUniqueInput!): CheckinAveragesIdle
+  deleteOneCheckinProduct(where: CheckinProductWhereUniqueInput!): CheckinProduct
+  deleteOneCheckinQueue(where: CheckinQueueWhereUniqueInput!): CheckinQueue
+  deleteOneClassCategories(where: ClassCategoriesWhereUniqueInput!): ClassCategories
+  deleteOneClassGuests(where: ClassGuestsWhereUniqueInput!): ClassGuests
+  deleteOneClassMaster(where: ClassMasterWhereUniqueInput!): ClassMaster
+  deleteOneClassNotes(where: ClassNotesWhereUniqueInput!): ClassNotes
+  deleteOneClasstypeMaster(where: ClasstypeMasterWhereUniqueInput!): ClasstypeMaster
   deleteOneCompany(where: CompanyWhereUniqueInput!): Company
+  deleteOneCompanyDetails(where: CompanyDetailsWhereUniqueInput!): CompanyDetails
+  deleteOneCompanySubscription(where: CompanySubscriptionWhereUniqueInput!): CompanySubscription
   deleteOneMarketingSource(where: MarketingSourceWhereUniqueInput!): MarketingSource
   deleteOneMediaLlibraryAttachments(where: MediaLlibraryAttachmentsWhereUniqueInput!): MediaLlibraryAttachments
   deleteOneSecondAtAnswer(where: SecondAtAnswerWhereUniqueInput!): SecondAtAnswer
   deleteOneSecondAtQuestion(where: SecondAtQuestionWhereUniqueInput!): SecondAtQuestion
   deleteOneThirdPartyAcces(where: ThirdPartyAccesWhereUniqueInput!): ThirdPartyAcces
+  deleteOneTimezone(where: TimezoneWhereUniqueInput!): Timezone
   deleteOneTwoFactorHistory(where: TwoFactorHistoryWhereUniqueInput!): TwoFactorHistory
+  deleteOnecandidate(where: candidateWhereUniqueInput!): candidate
   updateManyAcLog(data: AcLogUpdateManyMutationInput!, where: AcLogWhereInput): AffectedRowsOutput!
   updateManyAcLogAction(data: AcLogActionUpdateManyMutationInput!, where: AcLogActionWhereInput): AffectedRowsOutput!
   updateManyAcLogUrl(data: AcLogUrlUpdateManyMutationInput!, where: AcLogUrlWhereInput): AffectedRowsOutput!
@@ -5297,7 +8217,7 @@ type Mutation {
   updateManyAccountBalance(data: AccountBalanceUpdateManyMutationInput!, where: AccountBalanceWhereInput): AffectedRowsOutput!
   updateManyAccountBalanceLog(data: AccountBalanceLogUpdateManyMutationInput!, where: AccountBalanceLogWhereInput): AffectedRowsOutput!
   updateManyAccountManager(data: AccountManagerUpdateManyMutationInput!, where: AccountManagerWhereInput): AffectedRowsOutput!
-  updateManyAdverCampaign(data: AdverCampaignUpdateManyMutationInput!, where: AdverCampaignWhereInput): AffectedRowsOutput!
+  updateManyAdvertCampaign(data: AdvertCampaignUpdateManyMutationInput!, where: AdvertCampaignWhereInput): AffectedRowsOutput!
   updateManyApiDebug(data: ApiDebugUpdateManyMutationInput!, where: ApiDebugWhereInput): AffectedRowsOutput!
   updateManyApiKey(data: ApiKeyUpdateManyMutationInput!, where: ApiKeyWhereInput): AffectedRowsOutput!
   updateManyAppBeforeAfter(data: AppBeforeAfterUpdateManyMutationInput!, where: AppBeforeAfterWhereInput): AffectedRowsOutput!
@@ -5336,14 +8256,32 @@ type Mutation {
   updateManyCalRangeRequest(data: CalRangeRequestUpdateManyMutationInput!, where: CalRangeRequestWhereInput): AffectedRowsOutput!
   updateManyCalendarView(data: CalendarViewUpdateManyMutationInput!, where: CalendarViewWhereInput): AffectedRowsOutput!
   updateManyCampaignAttachment(data: CampaignAttachmentUpdateManyMutationInput!, where: CampaignAttachmentWhereInput): AffectedRowsOutput!
+  updateManyCancelReason(data: CancelReasonUpdateManyMutationInput!, where: CancelReasonWhereInput): AffectedRowsOutput!
   updateManyCancellationPolicy(data: CancellationPolicyUpdateManyMutationInput!, where: CancellationPolicyWhereInput): AffectedRowsOutput!
+  updateManyCardTypes(data: CardTypesUpdateManyMutationInput!, where: CardTypesWhereInput): AffectedRowsOutput!
+  updateManyCashupReport(data: CashupReportUpdateManyMutationInput!, where: CashupReportWhereInput): AffectedRowsOutput!
+  updateManyCashupReportCustom(data: CashupReportCustomUpdateManyMutationInput!, where: CashupReportCustomWhereInput): AffectedRowsOutput!
+  updateManyCheckinAppt(data: CheckinApptUpdateManyMutationInput!, where: CheckinApptWhereInput): AffectedRowsOutput!
+  updateManyCheckinAverages(data: CheckinAveragesUpdateManyMutationInput!, where: CheckinAveragesWhereInput): AffectedRowsOutput!
+  updateManyCheckinAveragesIdle(data: CheckinAveragesIdleUpdateManyMutationInput!, where: CheckinAveragesIdleWhereInput): AffectedRowsOutput!
+  updateManyCheckinProduct(data: CheckinProductUpdateManyMutationInput!, where: CheckinProductWhereInput): AffectedRowsOutput!
+  updateManyCheckinQueue(data: CheckinQueueUpdateManyMutationInput!, where: CheckinQueueWhereInput): AffectedRowsOutput!
+  updateManyClassCategories(data: ClassCategoriesUpdateManyMutationInput!, where: ClassCategoriesWhereInput): AffectedRowsOutput!
+  updateManyClassGuests(data: ClassGuestsUpdateManyMutationInput!, where: ClassGuestsWhereInput): AffectedRowsOutput!
+  updateManyClassMaster(data: ClassMasterUpdateManyMutationInput!, where: ClassMasterWhereInput): AffectedRowsOutput!
+  updateManyClassNotes(data: ClassNotesUpdateManyMutationInput!, where: ClassNotesWhereInput): AffectedRowsOutput!
+  updateManyClasstypeMaster(data: ClasstypeMasterUpdateManyMutationInput!, where: ClasstypeMasterWhereInput): AffectedRowsOutput!
   updateManyCompany(data: CompanyUpdateManyMutationInput!, where: CompanyWhereInput): AffectedRowsOutput!
+  updateManyCompanyDetails(data: CompanyDetailsUpdateManyMutationInput!, where: CompanyDetailsWhereInput): AffectedRowsOutput!
+  updateManyCompanySubscription(data: CompanySubscriptionUpdateManyMutationInput!, where: CompanySubscriptionWhereInput): AffectedRowsOutput!
   updateManyMarketingSource(data: MarketingSourceUpdateManyMutationInput!, where: MarketingSourceWhereInput): AffectedRowsOutput!
   updateManyMediaLlibraryAttachments(data: MediaLlibraryAttachmentsUpdateManyMutationInput!, where: MediaLlibraryAttachmentsWhereInput): AffectedRowsOutput!
   updateManySecondAtAnswer(data: SecondAtAnswerUpdateManyMutationInput!, where: SecondAtAnswerWhereInput): AffectedRowsOutput!
   updateManySecondAtQuestion(data: SecondAtQuestionUpdateManyMutationInput!, where: SecondAtQuestionWhereInput): AffectedRowsOutput!
   updateManyThirdPartyAcces(data: ThirdPartyAccesUpdateManyMutationInput!, where: ThirdPartyAccesWhereInput): AffectedRowsOutput!
+  updateManyTimezone(data: TimezoneUpdateManyMutationInput!, where: TimezoneWhereInput): AffectedRowsOutput!
   updateManyTwoFactorHistory(data: TwoFactorHistoryUpdateManyMutationInput!, where: TwoFactorHistoryWhereInput): AffectedRowsOutput!
+  updateManycandidate(data: candidateUpdateManyMutationInput!, where: candidateWhereInput): AffectedRowsOutput!
   updateOneAcLog(data: AcLogUpdateInput!, where: AcLogWhereUniqueInput!): AcLog
   updateOneAcLogAction(data: AcLogActionUpdateInput!, where: AcLogActionWhereUniqueInput!): AcLogAction
   updateOneAcLogUrl(data: AcLogUrlUpdateInput!, where: AcLogUrlWhereUniqueInput!): AcLogUrl
@@ -5351,7 +8289,7 @@ type Mutation {
   updateOneAccountBalance(data: AccountBalanceUpdateInput!, where: AccountBalanceWhereUniqueInput!): AccountBalance
   updateOneAccountBalanceLog(data: AccountBalanceLogUpdateInput!, where: AccountBalanceLogWhereUniqueInput!): AccountBalanceLog
   updateOneAccountManager(data: AccountManagerUpdateInput!, where: AccountManagerWhereUniqueInput!): AccountManager
-  updateOneAdverCampaign(data: AdverCampaignUpdateInput!, where: AdverCampaignWhereUniqueInput!): AdverCampaign
+  updateOneAdvertCampaign(data: AdvertCampaignUpdateInput!, where: AdvertCampaignWhereUniqueInput!): AdvertCampaign
   updateOneApiDebug(data: ApiDebugUpdateInput!, where: ApiDebugWhereUniqueInput!): ApiDebug
   updateOneApiKey(data: ApiKeyUpdateInput!, where: ApiKeyWhereUniqueInput!): ApiKey
   updateOneAppBeforeAfter(data: AppBeforeAfterUpdateInput!, where: AppBeforeAfterWhereUniqueInput!): AppBeforeAfter
@@ -5390,14 +8328,32 @@ type Mutation {
   updateOneCalRangeRequest(data: CalRangeRequestUpdateInput!, where: CalRangeRequestWhereUniqueInput!): CalRangeRequest
   updateOneCalendarView(data: CalendarViewUpdateInput!, where: CalendarViewWhereUniqueInput!): CalendarView
   updateOneCampaignAttachment(data: CampaignAttachmentUpdateInput!, where: CampaignAttachmentWhereUniqueInput!): CampaignAttachment
+  updateOneCancelReason(data: CancelReasonUpdateInput!, where: CancelReasonWhereUniqueInput!): CancelReason
   updateOneCancellationPolicy(data: CancellationPolicyUpdateInput!, where: CancellationPolicyWhereUniqueInput!): CancellationPolicy
+  updateOneCardTypes(data: CardTypesUpdateInput!, where: CardTypesWhereUniqueInput!): CardTypes
+  updateOneCashupReport(data: CashupReportUpdateInput!, where: CashupReportWhereUniqueInput!): CashupReport
+  updateOneCashupReportCustom(data: CashupReportCustomUpdateInput!, where: CashupReportCustomWhereUniqueInput!): CashupReportCustom
+  updateOneCheckinAppt(data: CheckinApptUpdateInput!, where: CheckinApptWhereUniqueInput!): CheckinAppt
+  updateOneCheckinAverages(data: CheckinAveragesUpdateInput!, where: CheckinAveragesWhereUniqueInput!): CheckinAverages
+  updateOneCheckinAveragesIdle(data: CheckinAveragesIdleUpdateInput!, where: CheckinAveragesIdleWhereUniqueInput!): CheckinAveragesIdle
+  updateOneCheckinProduct(data: CheckinProductUpdateInput!, where: CheckinProductWhereUniqueInput!): CheckinProduct
+  updateOneCheckinQueue(data: CheckinQueueUpdateInput!, where: CheckinQueueWhereUniqueInput!): CheckinQueue
+  updateOneClassCategories(data: ClassCategoriesUpdateInput!, where: ClassCategoriesWhereUniqueInput!): ClassCategories
+  updateOneClassGuests(data: ClassGuestsUpdateInput!, where: ClassGuestsWhereUniqueInput!): ClassGuests
+  updateOneClassMaster(data: ClassMasterUpdateInput!, where: ClassMasterWhereUniqueInput!): ClassMaster
+  updateOneClassNotes(data: ClassNotesUpdateInput!, where: ClassNotesWhereUniqueInput!): ClassNotes
+  updateOneClasstypeMaster(data: ClasstypeMasterUpdateInput!, where: ClasstypeMasterWhereUniqueInput!): ClasstypeMaster
   updateOneCompany(data: CompanyUpdateInput!, where: CompanyWhereUniqueInput!): Company
+  updateOneCompanyDetails(data: CompanyDetailsUpdateInput!, where: CompanyDetailsWhereUniqueInput!): CompanyDetails
+  updateOneCompanySubscription(data: CompanySubscriptionUpdateInput!, where: CompanySubscriptionWhereUniqueInput!): CompanySubscription
   updateOneMarketingSource(data: MarketingSourceUpdateInput!, where: MarketingSourceWhereUniqueInput!): MarketingSource
   updateOneMediaLlibraryAttachments(data: MediaLlibraryAttachmentsUpdateInput!, where: MediaLlibraryAttachmentsWhereUniqueInput!): MediaLlibraryAttachments
   updateOneSecondAtAnswer(data: SecondAtAnswerUpdateInput!, where: SecondAtAnswerWhereUniqueInput!): SecondAtAnswer
   updateOneSecondAtQuestion(data: SecondAtQuestionUpdateInput!, where: SecondAtQuestionWhereUniqueInput!): SecondAtQuestion
   updateOneThirdPartyAcces(data: ThirdPartyAccesUpdateInput!, where: ThirdPartyAccesWhereUniqueInput!): ThirdPartyAcces
+  updateOneTimezone(data: TimezoneUpdateInput!, where: TimezoneWhereUniqueInput!): Timezone
   updateOneTwoFactorHistory(data: TwoFactorHistoryUpdateInput!, where: TwoFactorHistoryWhereUniqueInput!): TwoFactorHistory
+  updateOnecandidate(data: candidateUpdateInput!, where: candidateWhereUniqueInput!): candidate
   upsertOneAcLog(create: AcLogCreateInput!, update: AcLogUpdateInput!, where: AcLogWhereUniqueInput!): AcLog!
   upsertOneAcLogAction(create: AcLogActionCreateInput!, update: AcLogActionUpdateInput!, where: AcLogActionWhereUniqueInput!): AcLogAction!
   upsertOneAcLogUrl(create: AcLogUrlCreateInput!, update: AcLogUrlUpdateInput!, where: AcLogUrlWhereUniqueInput!): AcLogUrl!
@@ -5405,7 +8361,7 @@ type Mutation {
   upsertOneAccountBalance(create: AccountBalanceCreateInput!, update: AccountBalanceUpdateInput!, where: AccountBalanceWhereUniqueInput!): AccountBalance!
   upsertOneAccountBalanceLog(create: AccountBalanceLogCreateInput!, update: AccountBalanceLogUpdateInput!, where: AccountBalanceLogWhereUniqueInput!): AccountBalanceLog!
   upsertOneAccountManager(create: AccountManagerCreateInput!, update: AccountManagerUpdateInput!, where: AccountManagerWhereUniqueInput!): AccountManager!
-  upsertOneAdverCampaign(create: AdverCampaignCreateInput!, update: AdverCampaignUpdateInput!, where: AdverCampaignWhereUniqueInput!): AdverCampaign!
+  upsertOneAdvertCampaign(create: AdvertCampaignCreateInput!, update: AdvertCampaignUpdateInput!, where: AdvertCampaignWhereUniqueInput!): AdvertCampaign!
   upsertOneApiDebug(create: ApiDebugCreateInput!, update: ApiDebugUpdateInput!, where: ApiDebugWhereUniqueInput!): ApiDebug!
   upsertOneApiKey(create: ApiKeyCreateInput!, update: ApiKeyUpdateInput!, where: ApiKeyWhereUniqueInput!): ApiKey!
   upsertOneAppBeforeAfter(create: AppBeforeAfterCreateInput!, update: AppBeforeAfterUpdateInput!, where: AppBeforeAfterWhereUniqueInput!): AppBeforeAfter!
@@ -5444,14 +8400,32 @@ type Mutation {
   upsertOneCalRangeRequest(create: CalRangeRequestCreateInput!, update: CalRangeRequestUpdateInput!, where: CalRangeRequestWhereUniqueInput!): CalRangeRequest!
   upsertOneCalendarView(create: CalendarViewCreateInput!, update: CalendarViewUpdateInput!, where: CalendarViewWhereUniqueInput!): CalendarView!
   upsertOneCampaignAttachment(create: CampaignAttachmentCreateInput!, update: CampaignAttachmentUpdateInput!, where: CampaignAttachmentWhereUniqueInput!): CampaignAttachment!
+  upsertOneCancelReason(create: CancelReasonCreateInput!, update: CancelReasonUpdateInput!, where: CancelReasonWhereUniqueInput!): CancelReason!
   upsertOneCancellationPolicy(create: CancellationPolicyCreateInput!, update: CancellationPolicyUpdateInput!, where: CancellationPolicyWhereUniqueInput!): CancellationPolicy!
+  upsertOneCardTypes(create: CardTypesCreateInput!, update: CardTypesUpdateInput!, where: CardTypesWhereUniqueInput!): CardTypes!
+  upsertOneCashupReport(create: CashupReportCreateInput!, update: CashupReportUpdateInput!, where: CashupReportWhereUniqueInput!): CashupReport!
+  upsertOneCashupReportCustom(create: CashupReportCustomCreateInput!, update: CashupReportCustomUpdateInput!, where: CashupReportCustomWhereUniqueInput!): CashupReportCustom!
+  upsertOneCheckinAppt(create: CheckinApptCreateInput!, update: CheckinApptUpdateInput!, where: CheckinApptWhereUniqueInput!): CheckinAppt!
+  upsertOneCheckinAverages(create: CheckinAveragesCreateInput!, update: CheckinAveragesUpdateInput!, where: CheckinAveragesWhereUniqueInput!): CheckinAverages!
+  upsertOneCheckinAveragesIdle(create: CheckinAveragesIdleCreateInput!, update: CheckinAveragesIdleUpdateInput!, where: CheckinAveragesIdleWhereUniqueInput!): CheckinAveragesIdle!
+  upsertOneCheckinProduct(create: CheckinProductCreateInput!, update: CheckinProductUpdateInput!, where: CheckinProductWhereUniqueInput!): CheckinProduct!
+  upsertOneCheckinQueue(create: CheckinQueueCreateInput!, update: CheckinQueueUpdateInput!, where: CheckinQueueWhereUniqueInput!): CheckinQueue!
+  upsertOneClassCategories(create: ClassCategoriesCreateInput!, update: ClassCategoriesUpdateInput!, where: ClassCategoriesWhereUniqueInput!): ClassCategories!
+  upsertOneClassGuests(create: ClassGuestsCreateInput!, update: ClassGuestsUpdateInput!, where: ClassGuestsWhereUniqueInput!): ClassGuests!
+  upsertOneClassMaster(create: ClassMasterCreateInput!, update: ClassMasterUpdateInput!, where: ClassMasterWhereUniqueInput!): ClassMaster!
+  upsertOneClassNotes(create: ClassNotesCreateInput!, update: ClassNotesUpdateInput!, where: ClassNotesWhereUniqueInput!): ClassNotes!
+  upsertOneClasstypeMaster(create: ClasstypeMasterCreateInput!, update: ClasstypeMasterUpdateInput!, where: ClasstypeMasterWhereUniqueInput!): ClasstypeMaster!
   upsertOneCompany(create: CompanyCreateInput!, update: CompanyUpdateInput!, where: CompanyWhereUniqueInput!): Company!
+  upsertOneCompanyDetails(create: CompanyDetailsCreateInput!, update: CompanyDetailsUpdateInput!, where: CompanyDetailsWhereUniqueInput!): CompanyDetails!
+  upsertOneCompanySubscription(create: CompanySubscriptionCreateInput!, update: CompanySubscriptionUpdateInput!, where: CompanySubscriptionWhereUniqueInput!): CompanySubscription!
   upsertOneMarketingSource(create: MarketingSourceCreateInput!, update: MarketingSourceUpdateInput!, where: MarketingSourceWhereUniqueInput!): MarketingSource!
   upsertOneMediaLlibraryAttachments(create: MediaLlibraryAttachmentsCreateInput!, update: MediaLlibraryAttachmentsUpdateInput!, where: MediaLlibraryAttachmentsWhereUniqueInput!): MediaLlibraryAttachments!
   upsertOneSecondAtAnswer(create: SecondAtAnswerCreateInput!, update: SecondAtAnswerUpdateInput!, where: SecondAtAnswerWhereUniqueInput!): SecondAtAnswer!
   upsertOneSecondAtQuestion(create: SecondAtQuestionCreateInput!, update: SecondAtQuestionUpdateInput!, where: SecondAtQuestionWhereUniqueInput!): SecondAtQuestion!
   upsertOneThirdPartyAcces(create: ThirdPartyAccesCreateInput!, update: ThirdPartyAccesUpdateInput!, where: ThirdPartyAccesWhereUniqueInput!): ThirdPartyAcces!
+  upsertOneTimezone(create: TimezoneCreateInput!, update: TimezoneUpdateInput!, where: TimezoneWhereUniqueInput!): Timezone!
   upsertOneTwoFactorHistory(create: TwoFactorHistoryCreateInput!, update: TwoFactorHistoryUpdateInput!, where: TwoFactorHistoryWhereUniqueInput!): TwoFactorHistory!
+  upsertOnecandidate(create: candidateCreateInput!, update: candidateUpdateInput!, where: candidateWhereUniqueInput!): candidate!
 }
 
 input NestedBoolFilter {
@@ -5514,6 +8488,20 @@ input NestedEnumbookitpro_general_integration_methodNullableFilter {
   notIn: [bookitpro_general_integration_method!]
 }
 
+input NestedEnumclass_master_class_payNullableFilter {
+  equals: class_master_class_pay
+  in: [class_master_class_pay!]
+  not: NestedEnumclass_master_class_payNullableFilter
+  notIn: [class_master_class_pay!]
+}
+
+input NestedEnumcompany_details_tax_nameFilter {
+  equals: company_details_tax_name
+  in: [company_details_tax_name!]
+  not: NestedEnumcompany_details_tax_nameFilter
+  notIn: [company_details_tax_name!]
+}
+
 input NestedFloatFilter {
   equals: Float
   gt: Float
@@ -5522,6 +8510,17 @@ input NestedFloatFilter {
   lt: Float
   lte: Float
   not: NestedFloatFilter
+  notIn: [Float!]
+}
+
+input NestedFloatNullableFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatNullableFilter
   notIn: [Float!]
 }
 
@@ -5591,6 +8590,18 @@ input NullableEnumbookitpro_general_integration_methodFieldUpdateOperationsInput
   set: bookitpro_general_integration_method
 }
 
+input NullableEnumclass_master_class_payFieldUpdateOperationsInput {
+  set: class_master_class_pay
+}
+
+input NullableFloatFieldUpdateOperationsInput {
+  decrement: Float
+  divide: Float
+  increment: Float
+  multiply: Float
+  set: Float
+}
+
 input NullableIntFieldUpdateOperationsInput {
   decrement: Int
   divide: Int
@@ -5625,9 +8636,9 @@ type Query {
   accountManager(where: AccountManagerWhereUniqueInput!): AccountManager
   accountManagers(after: AccountManagerWhereUniqueInput, before: AccountManagerWhereUniqueInput, first: Int, last: Int, orderBy: [AccountManagerOrderByInput!], where: AccountManagerWhereInput): [AccountManager!]!
   accountManagersCount(where: AccountManagerWhereInput): Int
-  adverCampaign(where: AdverCampaignWhereUniqueInput!): AdverCampaign
-  adverCampaigns(after: AdverCampaignWhereUniqueInput, before: AdverCampaignWhereUniqueInput, first: Int, last: Int, orderBy: [AdverCampaignOrderByInput!], where: AdverCampaignWhereInput): [AdverCampaign!]!
-  adverCampaignsCount(where: AdverCampaignWhereInput): Int
+  advertCampaign(where: AdvertCampaignWhereUniqueInput!): AdvertCampaign
+  advertCampaigns(after: AdvertCampaignWhereUniqueInput, before: AdvertCampaignWhereUniqueInput, first: Int, last: Int, orderBy: [AdvertCampaignOrderByInput!], where: AdvertCampaignWhereInput): [AdvertCampaign!]!
+  advertCampaignsCount(where: AdvertCampaignWhereInput): Int
   apiDebug(where: ApiDebugWhereUniqueInput!): ApiDebug
   apiDebugs(after: ApiDebugWhereUniqueInput, before: ApiDebugWhereUniqueInput, first: Int, last: Int, orderBy: [ApiDebugOrderByInput!], where: ApiDebugWhereInput): [ApiDebug!]!
   apiDebugsCount(where: ApiDebugWhereInput): Int
@@ -5742,12 +8753,57 @@ type Query {
   campaignAttachment(where: CampaignAttachmentWhereUniqueInput!): CampaignAttachment
   campaignAttachments(after: CampaignAttachmentWhereUniqueInput, before: CampaignAttachmentWhereUniqueInput, first: Int, last: Int, orderBy: [CampaignAttachmentOrderByInput!], where: CampaignAttachmentWhereInput): [CampaignAttachment!]!
   campaignAttachmentsCount(where: CampaignAttachmentWhereInput): Int
+  cancelReason(where: CancelReasonWhereUniqueInput!): CancelReason
+  cancelReasons(after: CancelReasonWhereUniqueInput, before: CancelReasonWhereUniqueInput, first: Int, last: Int, orderBy: [CancelReasonOrderByInput!], where: CancelReasonWhereInput): [CancelReason!]!
+  cancelReasonsCount(where: CancelReasonWhereInput): Int
   cancellationPolicies(after: CancellationPolicyWhereUniqueInput, before: CancellationPolicyWhereUniqueInput, first: Int, last: Int, orderBy: [CancellationPolicyOrderByInput!], where: CancellationPolicyWhereInput): [CancellationPolicy!]!
   cancellationPoliciesCount(where: CancellationPolicyWhereInput): Int
   cancellationPolicy(where: CancellationPolicyWhereUniqueInput!): CancellationPolicy
+  candidate(where: candidateWhereUniqueInput!): candidate
+  candidates(after: candidateWhereUniqueInput, before: candidateWhereUniqueInput, first: Int, last: Int, orderBy: [candidateOrderByInput!], where: candidateWhereInput): [candidate!]!
+  candidatesCount(where: candidateWhereInput): Int
+  cardTypes(after: CardTypesWhereUniqueInput, before: CardTypesWhereUniqueInput, first: Int, last: Int, orderBy: [CardTypesOrderByInput!], where: CardTypesWhereInput): [CardTypes!]!
+  cardTypesCount(where: CardTypesWhereInput): Int
+  cashupReport(where: CashupReportWhereUniqueInput!): CashupReport
+  cashupReportCustom(where: CashupReportCustomWhereUniqueInput!): CashupReportCustom
+  cashupReportCustoms(after: CashupReportCustomWhereUniqueInput, before: CashupReportCustomWhereUniqueInput, first: Int, last: Int, orderBy: [CashupReportCustomOrderByInput!], where: CashupReportCustomWhereInput): [CashupReportCustom!]!
+  cashupReportCustomsCount(where: CashupReportCustomWhereInput): Int
+  cashupReports(after: CashupReportWhereUniqueInput, before: CashupReportWhereUniqueInput, first: Int, last: Int, orderBy: [CashupReportOrderByInput!], where: CashupReportWhereInput): [CashupReport!]!
+  cashupReportsCount(where: CashupReportWhereInput): Int
+  checkinAppt(where: CheckinApptWhereUniqueInput!): CheckinAppt
+  checkinAppts(after: CheckinApptWhereUniqueInput, before: CheckinApptWhereUniqueInput, first: Int, last: Int, orderBy: [CheckinApptOrderByInput!], where: CheckinApptWhereInput): [CheckinAppt!]!
+  checkinApptsCount(where: CheckinApptWhereInput): Int
+  checkinAverages(after: CheckinAveragesWhereUniqueInput, before: CheckinAveragesWhereUniqueInput, first: Int, last: Int, orderBy: [CheckinAveragesOrderByInput!], where: CheckinAveragesWhereInput): [CheckinAverages!]!
+  checkinAveragesCount(where: CheckinAveragesWhereInput): Int
+  checkinAveragesIdle(where: CheckinAveragesIdleWhereUniqueInput!): CheckinAveragesIdle
+  checkinAveragesIdles(after: CheckinAveragesIdleWhereUniqueInput, before: CheckinAveragesIdleWhereUniqueInput, first: Int, last: Int, orderBy: [CheckinAveragesIdleOrderByInput!], where: CheckinAveragesIdleWhereInput): [CheckinAveragesIdle!]!
+  checkinAveragesIdlesCount(where: CheckinAveragesIdleWhereInput): Int
+  checkinProduct(where: CheckinProductWhereUniqueInput!): CheckinProduct
+  checkinProducts(after: CheckinProductWhereUniqueInput, before: CheckinProductWhereUniqueInput, first: Int, last: Int, orderBy: [CheckinProductOrderByInput!], where: CheckinProductWhereInput): [CheckinProduct!]!
+  checkinProductsCount(where: CheckinProductWhereInput): Int
+  checkinQueue(where: CheckinQueueWhereUniqueInput!): CheckinQueue
+  checkinQueues(after: CheckinQueueWhereUniqueInput, before: CheckinQueueWhereUniqueInput, first: Int, last: Int, orderBy: [CheckinQueueOrderByInput!], where: CheckinQueueWhereInput): [CheckinQueue!]!
+  checkinQueuesCount(where: CheckinQueueWhereInput): Int
+  classCategories(after: ClassCategoriesWhereUniqueInput, before: ClassCategoriesWhereUniqueInput, first: Int, last: Int, orderBy: [ClassCategoriesOrderByInput!], where: ClassCategoriesWhereInput): [ClassCategories!]!
+  classCategoriesCount(where: ClassCategoriesWhereInput): Int
+  classGuests(after: ClassGuestsWhereUniqueInput, before: ClassGuestsWhereUniqueInput, first: Int, last: Int, orderBy: [ClassGuestsOrderByInput!], where: ClassGuestsWhereInput): [ClassGuests!]!
+  classGuestsCount(where: ClassGuestsWhereInput): Int
+  classMaster(where: ClassMasterWhereUniqueInput!): ClassMaster
+  classMasters(after: ClassMasterWhereUniqueInput, before: ClassMasterWhereUniqueInput, first: Int, last: Int, orderBy: [ClassMasterOrderByInput!], where: ClassMasterWhereInput): [ClassMaster!]!
+  classMastersCount(where: ClassMasterWhereInput): Int
+  classNotes(after: ClassNotesWhereUniqueInput, before: ClassNotesWhereUniqueInput, first: Int, last: Int, orderBy: [ClassNotesOrderByInput!], where: ClassNotesWhereInput): [ClassNotes!]!
+  classNotesCount(where: ClassNotesWhereInput): Int
+  classtypeMaster(where: ClasstypeMasterWhereUniqueInput!): ClasstypeMaster
+  classtypeMasters(after: ClasstypeMasterWhereUniqueInput, before: ClasstypeMasterWhereUniqueInput, first: Int, last: Int, orderBy: [ClasstypeMasterOrderByInput!], where: ClasstypeMasterWhereInput): [ClasstypeMaster!]!
+  classtypeMastersCount(where: ClasstypeMasterWhereInput): Int
   companies(after: CompanyWhereUniqueInput, before: CompanyWhereUniqueInput, first: Int, last: Int, orderBy: [CompanyOrderByInput!], where: CompanyWhereInput): [Company!]!
   companiesCount(where: CompanyWhereInput): Int
   company(where: CompanyWhereUniqueInput!): Company
+  companyDetails(after: CompanyDetailsWhereUniqueInput, before: CompanyDetailsWhereUniqueInput, first: Int, last: Int, orderBy: [CompanyDetailsOrderByInput!], where: CompanyDetailsWhereInput): [CompanyDetails!]!
+  companyDetailsCount(where: CompanyDetailsWhereInput): Int
+  companySubscription(where: CompanySubscriptionWhereUniqueInput!): CompanySubscription
+  companySubscriptions(after: CompanySubscriptionWhereUniqueInput, before: CompanySubscriptionWhereUniqueInput, first: Int, last: Int, orderBy: [CompanySubscriptionOrderByInput!], where: CompanySubscriptionWhereInput): [CompanySubscription!]!
+  companySubscriptionsCount(where: CompanySubscriptionWhereInput): Int
   marketingSource(where: MarketingSourceWhereUniqueInput!): MarketingSource
   marketingSources(after: MarketingSourceWhereUniqueInput, before: MarketingSourceWhereUniqueInput, first: Int, last: Int, orderBy: [MarketingSourceOrderByInput!], where: MarketingSourceWhereInput): [MarketingSource!]!
   marketingSourcesCount(where: MarketingSourceWhereInput): Int
@@ -5761,6 +8817,9 @@ type Query {
   secondAtQuestionsCount(where: SecondAtQuestionWhereInput): Int
   thirdPartyAcces(after: ThirdPartyAccesWhereUniqueInput, before: ThirdPartyAccesWhereUniqueInput, first: Int, last: Int, orderBy: [ThirdPartyAccesOrderByInput!], where: ThirdPartyAccesWhereInput): [ThirdPartyAcces!]!
   thirdPartyAccesCount(where: ThirdPartyAccesWhereInput): Int
+  timezone(where: TimezoneWhereUniqueInput!): Timezone
+  timezones(after: TimezoneWhereUniqueInput, before: TimezoneWhereUniqueInput, first: Int, last: Int, orderBy: [TimezoneOrderByInput!], where: TimezoneWhereInput): [Timezone!]!
+  timezonesCount(where: TimezoneWhereInput): Int
   twoFactorHistories(after: TwoFactorHistoryWhereUniqueInput, before: TwoFactorHistoryWhereUniqueInput, first: Int, last: Int, orderBy: [TwoFactorHistoryOrderByInput!], where: TwoFactorHistoryWhereInput): [TwoFactorHistory!]!
   twoFactorHistoriesCount(where: TwoFactorHistoryWhereInput): Int
   twoFactorHistory(where: TwoFactorHistoryWhereUniqueInput!): TwoFactorHistory
@@ -6057,6 +9116,113 @@ input ThirdPartyAccesWhereUniqueInput {
   id: Int
 }
 
+type Timezone {
+  company_details: Int
+  db_format: String!
+  details: CompanyDetails
+  label: String!
+  offset_seconds: Int!
+  php_format: String!
+  supported: Boolean!
+  timezone_id: Int!
+}
+
+input TimezoneCreateInput {
+  db_format: String!
+  details: CompanyDetailsCreateNestedOneWithoutTimezoneInput
+  label: String!
+  offset_seconds: Int!
+  php_format: String!
+  supported: Boolean!
+}
+
+input TimezoneCreateNestedOneWithoutDetailsInput {
+  connect: TimezoneWhereUniqueInput
+  connectOrCreate: TimezoneCreateOrConnectWithoutdetailsInput
+  create: TimezoneCreateWithoutDetailsInput
+}
+
+input TimezoneCreateOrConnectWithoutdetailsInput {
+  create: TimezoneCreateWithoutDetailsInput!
+  where: TimezoneWhereUniqueInput!
+}
+
+input TimezoneCreateWithoutDetailsInput {
+  db_format: String!
+  label: String!
+  offset_seconds: Int!
+  php_format: String!
+  supported: Boolean!
+}
+
+input TimezoneOrderByInput {
+  company_details: SortOrder
+  db_format: SortOrder
+  label: SortOrder
+  offset_seconds: SortOrder
+  php_format: SortOrder
+  supported: SortOrder
+  timezone_id: SortOrder
+}
+
+input TimezoneUpdateInput {
+  db_format: StringFieldUpdateOperationsInput
+  details: CompanyDetailsUpdateOneWithoutTimezoneInput
+  label: StringFieldUpdateOperationsInput
+  offset_seconds: IntFieldUpdateOperationsInput
+  php_format: StringFieldUpdateOperationsInput
+  supported: BoolFieldUpdateOperationsInput
+}
+
+input TimezoneUpdateManyMutationInput {
+  db_format: StringFieldUpdateOperationsInput
+  label: StringFieldUpdateOperationsInput
+  offset_seconds: IntFieldUpdateOperationsInput
+  php_format: StringFieldUpdateOperationsInput
+  supported: BoolFieldUpdateOperationsInput
+}
+
+input TimezoneUpdateOneWithoutDetailsInput {
+  connect: TimezoneWhereUniqueInput
+  connectOrCreate: TimezoneCreateOrConnectWithoutdetailsInput
+  create: TimezoneCreateWithoutDetailsInput
+  delete: Boolean
+  disconnect: Boolean
+  update: TimezoneUpdateWithoutDetailsInput
+  upsert: TimezoneUpsertWithoutDetailsInput
+}
+
+input TimezoneUpdateWithoutDetailsInput {
+  db_format: StringFieldUpdateOperationsInput
+  label: StringFieldUpdateOperationsInput
+  offset_seconds: IntFieldUpdateOperationsInput
+  php_format: StringFieldUpdateOperationsInput
+  supported: BoolFieldUpdateOperationsInput
+}
+
+input TimezoneUpsertWithoutDetailsInput {
+  create: TimezoneCreateWithoutDetailsInput!
+  update: TimezoneUpdateWithoutDetailsInput!
+}
+
+input TimezoneWhereInput {
+  AND: [TimezoneWhereInput!]
+  NOT: [TimezoneWhereInput!]
+  OR: [TimezoneWhereInput!]
+  company_details: IntNullableFilter
+  db_format: StringFilter
+  details: CompanyDetailsWhereInput
+  label: StringFilter
+  offset_seconds: IntFilter
+  php_format: StringFilter
+  supported: BoolFilter
+  timezone_id: IntFilter
+}
+
+input TimezoneWhereUniqueInput {
+  timezone_id: Int
+}
+
 type TwoFactorHistory {
   company: Company!
   company_id: Int!
@@ -6209,4 +9375,120 @@ enum bookitpro_general_integration_method {
   cardsave
   sagepay
   stripe
+}
+
+type candidate {
+  candidate_status: String
+  company_id: Int!
+  contact_id: Int!
+  cover_letter: String!
+  created_date: DateTime!
+  date_available: DateTime!
+  how_heard: String!
+  id: Int!
+  job_references: String!
+  linkedin: String!
+  opening_id: Int!
+  rating: Int!
+  referred_by: String!
+  resume: String!
+}
+
+input candidateCreateInput {
+  candidate_status: String
+  company_id: Int!
+  contact_id: Int!
+  cover_letter: String!
+  created_date: DateTime!
+  date_available: DateTime!
+  how_heard: String!
+  job_references: String!
+  linkedin: String!
+  opening_id: Int!
+  rating: Int
+  referred_by: String!
+  resume: String!
+}
+
+input candidateOrderByInput {
+  candidate_status: SortOrder
+  company_id: SortOrder
+  contact_id: SortOrder
+  cover_letter: SortOrder
+  created_date: SortOrder
+  date_available: SortOrder
+  how_heard: SortOrder
+  id: SortOrder
+  job_references: SortOrder
+  linkedin: SortOrder
+  opening_id: SortOrder
+  rating: SortOrder
+  referred_by: SortOrder
+  resume: SortOrder
+}
+
+input candidateUpdateInput {
+  candidate_status: NullableStringFieldUpdateOperationsInput
+  company_id: IntFieldUpdateOperationsInput
+  contact_id: IntFieldUpdateOperationsInput
+  cover_letter: StringFieldUpdateOperationsInput
+  created_date: DateTimeFieldUpdateOperationsInput
+  date_available: DateTimeFieldUpdateOperationsInput
+  how_heard: StringFieldUpdateOperationsInput
+  job_references: StringFieldUpdateOperationsInput
+  linkedin: StringFieldUpdateOperationsInput
+  opening_id: IntFieldUpdateOperationsInput
+  rating: IntFieldUpdateOperationsInput
+  referred_by: StringFieldUpdateOperationsInput
+  resume: StringFieldUpdateOperationsInput
+}
+
+input candidateUpdateManyMutationInput {
+  candidate_status: NullableStringFieldUpdateOperationsInput
+  company_id: IntFieldUpdateOperationsInput
+  contact_id: IntFieldUpdateOperationsInput
+  cover_letter: StringFieldUpdateOperationsInput
+  created_date: DateTimeFieldUpdateOperationsInput
+  date_available: DateTimeFieldUpdateOperationsInput
+  how_heard: StringFieldUpdateOperationsInput
+  job_references: StringFieldUpdateOperationsInput
+  linkedin: StringFieldUpdateOperationsInput
+  opening_id: IntFieldUpdateOperationsInput
+  rating: IntFieldUpdateOperationsInput
+  referred_by: StringFieldUpdateOperationsInput
+  resume: StringFieldUpdateOperationsInput
+}
+
+input candidateWhereInput {
+  AND: [candidateWhereInput!]
+  NOT: [candidateWhereInput!]
+  OR: [candidateWhereInput!]
+  candidate_status: StringNullableFilter
+  company_id: IntFilter
+  contact_id: IntFilter
+  cover_letter: StringFilter
+  created_date: DateTimeFilter
+  date_available: DateTimeFilter
+  how_heard: StringFilter
+  id: IntFilter
+  job_references: StringFilter
+  linkedin: StringFilter
+  opening_id: IntFilter
+  rating: IntFilter
+  referred_by: StringFilter
+  resume: StringFilter
+}
+
+input candidateWhereUniqueInput {
+  id: Int
+}
+
+enum class_master_class_pay {
+  is_false
+  is_true
+}
+
+enum company_details_tax_name {
+  GST
+  VAT
 }

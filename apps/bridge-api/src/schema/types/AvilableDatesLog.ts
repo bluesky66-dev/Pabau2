@@ -16,7 +16,7 @@ export const avilableDatesLogQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.avilableDatesLog();
-    t.crud.avilableDatesLogs({ filtering: true, ordering: true , pagination: true });
+    t.crud.avilableDatesLogs({ filtering: true, ordering: true });
 
     t.field('avilableDatesLogsCount', {
       type: 'Int',

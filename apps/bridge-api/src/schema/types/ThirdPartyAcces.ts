@@ -21,7 +21,7 @@ export const thirdPartyAccesQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.thirdPartyAcces();
-    t.crud.thirdPartyAcces({ filtering: true, ordering: true , pagination: true });
+    t.crud.thirdPartyAcces({ filtering: true, ordering: true });
 
     t.field('thirdPartyAccesCount', {
       type: 'Int',

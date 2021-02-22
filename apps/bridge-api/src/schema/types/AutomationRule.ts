@@ -20,7 +20,7 @@ export const automationRuleQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.automationRule();
-    t.crud.automationRules({ filtering: true, ordering: true , pagination: true });
+    t.crud.automationRules({ filtering: true, ordering: true });
 
     t.field('automationRulesCount', {
       type: 'Int',

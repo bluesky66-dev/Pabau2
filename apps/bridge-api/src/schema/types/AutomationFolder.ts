@@ -14,7 +14,7 @@ export const automationFolderQuery = extendType({
   type: 'Query',
   definition(t) {
     t.crud.automationFolder();
-    t.crud.automationFolders({ filtering: true, ordering: true , pagination: true });
+    t.crud.automationFolders({ filtering: true, ordering: true });
 
     t.field('automationFoldersCount', {
       type: 'Int',
