@@ -1,3 +1,4 @@
+export * from './lib/tile-input-div/TileInputDiv'
 export * from './lib/read-review/ReadReview'
 export * from './lib/add-suggestion/AddSuggestion'
 export * from './lib/daily/Daily'

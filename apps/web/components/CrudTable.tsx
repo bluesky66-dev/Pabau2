@@ -38,6 +38,7 @@ interface P {
   createPage?: boolean
   notificationBanner?: React.ReactNode
   createPageOnClick?(): void
+  addFilter?: boolean
   needTranslation?: boolean
   addFilter?: boolean
 }
@@ -122,6 +123,7 @@ const CrudTable: FC<P> = ({
   notificationBanner,
   createPage = false,
   createPageOnClick,
+  addFilter,
   needTranslation = false,
   addFilter,
 }) => {
@@ -202,7 +204,20 @@ const CrudTable: FC<P> = ({
   })
 
   useEffect(() => {
-    if (data) setSourceData(data)
+    if (data) {
+      if (data[0].__typename === 'issuing_company') {
+        const newData = data.map((d) => {
+          const { country, city, street, post_code } = d
+          return {
+            ...d,
+            address: country + ', ' + city + ', ' + street + ', ' + post_code,
+          }
+        })
+        setSourceData(newData)
+      } else {
+        setSourceData(data)
+      }
+    }
     if (aggregateData)
       setPaginateData({
         ...paginateData,
@@ -436,6 +451,7 @@ const CrudTable: FC<P> = ({
                   onSearch={onSearch}
                   schema={schema}
                   tableSearch={tableSearch}
+                  addFilter={addFilter}
                   needTranslation={needTranslation}
                   addFilter={addFilter}
                 />
@@ -499,6 +515,7 @@ const CrudTable: FC<P> = ({
                 onSearch={onSearch}
                 schema={schema}
                 tableSearch={tableSearch}
+                addFilter={addFilter}
                 needTranslation={needTranslation}
                 addFilter={addFilter}
               />
@@ -509,7 +526,6 @@ const CrudTable: FC<P> = ({
             style={{ height: '100%' }}
             sticky={{ offsetScroll: 80, offsetHeader: 80 }}
             pagination={sourceData?.length > 10 ? {} : false}
-            scroll={{ x: 'max-content' }}
             draggable={true}
             isCustomColorExist={checkCustomColorIconExsist('color')}
             isCustomIconExist={checkCustomColorIconExsist('icon')}

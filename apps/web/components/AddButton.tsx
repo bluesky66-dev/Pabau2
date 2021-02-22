@@ -20,6 +20,7 @@ interface P {
   onFilterSource: () => void
   onSearch: (term: string) => void
   tableSearch?: boolean
+  addFilter?: boolean
   needTranslation?: boolean
   addFilter?: boolean
 }
@@ -31,6 +32,7 @@ const AddButton: FC<P> = ({
   onFilterSource,
   onSearch,
   tableSearch = true,
+  addFilter = true,
   needTranslation,
   addFilter = true,
 }) => {
