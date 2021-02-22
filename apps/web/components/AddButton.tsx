@@ -22,7 +22,6 @@ interface P {
   tableSearch?: boolean
   addFilter?: boolean
   needTranslation?: boolean
-  addFilter?: boolean
 }
 
 const AddButton: FC<P> = ({
@@ -34,7 +33,6 @@ const AddButton: FC<P> = ({
   tableSearch = true,
   addFilter = true,
   needTranslation,
-  addFilter = true,
 }) => {
   const [isActive, setIsActive] = useState(true)
   const [mobFilterDrawer, setMobFilterDrawer] = useState(false)

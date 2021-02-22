@@ -40,7 +40,6 @@ interface P {
   createPageOnClick?(): void
   addFilter?: boolean
   needTranslation?: boolean
-  addFilter?: boolean
 }
 
 const languages = [
@@ -125,7 +124,6 @@ const CrudTable: FC<P> = ({
   createPageOnClick,
   addFilter,
   needTranslation = false,
-  addFilter,
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [isActive, setIsActive] = useState(true)
@@ -263,45 +261,45 @@ const CrudTable: FC<P> = ({
     console.log('got submittal!', values)
     await (values.id
       ? editMutation({
-          variables: values,
-          optimisticResponse: {},
-          update: (proxy) => {
-            if (listQuery) {
-              const existing = proxy.readQuery({
+        variables: values,
+        optimisticResponse: {},
+        update: (proxy) => {
+          if (listQuery) {
+            const existing = proxy.readQuery({
+              query: listQuery,
+            })
+            if (existing) {
+              const key = Object.keys(existing)[0]
+              proxy.writeQuery({
                 query: listQuery,
+                data: {
+                  [key]: [...existing[key], values],
+                },
               })
-              if (existing) {
-                const key = Object.keys(existing)[0]
-                proxy.writeQuery({
-                  query: listQuery,
-                  data: {
-                    [key]: [...existing[key], values],
-                  },
-                })
-              }
             }
-          },
-        })
+          }
+        },
+      })
       : addMutation({
-          variables: values,
-          optimisticResponse: {},
-          update: (proxy) => {
-            if (listQuery) {
-              const existing = proxy.readQuery({
+        variables: values,
+        optimisticResponse: {},
+        update: (proxy) => {
+          if (listQuery) {
+            const existing = proxy.readQuery({
+              query: listQuery,
+            })
+            if (existing) {
+              const key = Object.keys(existing)[0]
+              proxy.writeQuery({
                 query: listQuery,
+                data: {
+                  [key]: [...existing[key], values],
+                },
               })
-              if (existing) {
-                const key = Object.keys(existing)[0]
-                proxy.writeQuery({
-                  query: listQuery,
-                  data: {
-                    [key]: [...existing[key], values],
-                  },
-                })
-              }
             }
-          },
-        }))
+          }
+        },
+      }))
     resetForm()
     setModalShowing(false)
   }
@@ -445,17 +443,16 @@ const CrudTable: FC<P> = ({
                   addFilter={addFilter}
                 />
               ) : (
-                <AddButton
-                  onClick={createPageOnClick}
-                  onFilterSource={onFilterMarketingSource}
-                  onSearch={onSearch}
-                  schema={schema}
-                  tableSearch={tableSearch}
-                  addFilter={addFilter}
-                  needTranslation={needTranslation}
-                  addFilter={addFilter}
-                />
-              )}
+                  <AddButton
+                    onClick={createPageOnClick}
+                    onFilterSource={onFilterMarketingSource}
+                    onSearch={onSearch}
+                    schema={schema}
+                    tableSearch={tableSearch}
+                    addFilter={addFilter}
+                    needTranslation={needTranslation}
+                  />
+                )}
             </div>
           </MobileHeader>
         </div>
@@ -509,17 +506,16 @@ const CrudTable: FC<P> = ({
                 addFilter={addFilter}
               />
             ) : (
-              <AddButton
-                onClick={createPageOnClick}
-                onFilterSource={onFilterMarketingSource}
-                onSearch={onSearch}
-                schema={schema}
-                tableSearch={tableSearch}
-                addFilter={addFilter}
-                needTranslation={needTranslation}
-                addFilter={addFilter}
-              />
-            )}
+                <AddButton
+                  onClick={createPageOnClick}
+                  onFilterSource={onFilterMarketingSource}
+                  onSearch={onSearch}
+                  schema={schema}
+                  tableSearch={tableSearch}
+                  addFilter={addFilter}
+                  needTranslation={needTranslation}
+                />
+              )}
           </div>
           <Table
             loading={isLoading}
