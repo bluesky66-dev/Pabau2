@@ -7,7 +7,12 @@ import {
   ProfileOutlined,
 } from '@ant-design/icons'
 import { Radio } from 'antd'
-import { BasicModal as Modal, ButtonTypes } from '@pabau/ui'
+import {
+  BasicModal as Modal,
+  ButtonTypes,
+  Notification,
+  NotificationType,
+} from '@pabau/ui'
 import SendLeadDevloperModal from './lead-forms/SendLeadDevloperModal'
 
 export const LeadIntegration: React.FC = () => {
@@ -18,6 +23,12 @@ export const LeadIntegration: React.FC = () => {
   const [openPabauLeadModal, setPabauLeadModal] = useState(false)
   const [typeOfIntegration, setTypeOfIntegration] = useState('Developer')
   const [sendToDeveloperModal, setSendToDeveloperModal] = useState(false)
+
+  const onSendToDeveloper = () => {
+    Notification(NotificationType.success, `Success! Sent to developer`)
+    setSendToDeveloperModal((e) => !e)
+    setPabauLeadModal((e) => !e)
+  }
 
   return (
     <>
@@ -160,9 +171,7 @@ export const LeadIntegration: React.FC = () => {
 
       <SendLeadDevloperModal
         openModal={sendToDeveloperModal}
-        onSendToDeveloper={() => {
-          setSendToDeveloperModal((e) => !e)
-        }}
+        onSendToDeveloper={onSendToDeveloper}
         onClose={() => setSendToDeveloperModal((e) => !e)}
       />
     </>

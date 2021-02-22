@@ -50,7 +50,7 @@ export function BasicModal({
   newButtonText,
   newButtonDisable = false,
   dangerButtonText,
-  isValidate,
+  isValidate = true,
   footer = true,
   wrapClassName,
   btnType = ButtonTypes.primary,
