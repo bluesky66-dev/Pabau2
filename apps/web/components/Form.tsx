@@ -5,6 +5,7 @@ import { ColorPicker, FontIcon, HelpTooltip } from '@pabau/ui'
 import { FormikContextType } from 'formik'
 interface P {
   schema: Schema
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   formik: FormikContextType<any>
   layout?: 'horizontal' | 'inline' | 'vertical'
 }
@@ -70,7 +71,7 @@ const Form: FC<P> = ({ schema, formik, layout = 'vertical' }) => {
                     }}
                     heading={values.appointment_type + ' ' + full}
                   />
-                  {!formik.values[name] && formik.errors?.color && (
+                  {!values[name] && formik.errors?.color && (
                     <span style={{ color: 'red' }}>{formik.errors?.color}</span>
                   )}
                 </div>

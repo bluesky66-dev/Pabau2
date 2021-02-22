@@ -379,7 +379,7 @@ const CrudTable: FC<P> = ({
           } else if (
             c[1].required && // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            !e[c[0]].length &&
+            e[c[0]].length === 0 &&
             c[1].validateMsg
           ) {
             a[c[0]] = c[1].validateMsg
