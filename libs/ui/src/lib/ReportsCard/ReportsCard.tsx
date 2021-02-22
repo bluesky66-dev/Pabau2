@@ -42,7 +42,6 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
   graphData = [],
 }) => {
   const [showAll, setShowAll] = useState(false)
-  const id = reports[0] ? reports[reports.length - 1].id + 1 : 1
 
   const showMoreHandler = () => setShowAll((showAll) => !showAll)
 
@@ -72,10 +71,10 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
               }}
             />
 
-            <XAxis id={uuidv4()} visible={false}></XAxis>
+            <XAxis id="XAxis" visible={false}></XAxis>
 
-            <YAxis id={uuidv4()} visible={false}>
-              <AreaSeries id={uuidv4()} name={catHeading} data={graphData} />
+            <YAxis id="YAxis" visible={false}>
+              <AreaSeries id={catHeading} name={catHeading} data={graphData} />
             </YAxis>
           </HighchartsChart>
         </HighchartsProvider>
@@ -94,7 +93,7 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
                     favorite={report.favorite}
                   />
                   <ShowMore
-                    key={id}
+                    key={uuidv4()}
                     length={reports.length}
                     showAll={showAll}
                     showMoreHandler={showMoreHandler}
@@ -117,7 +116,7 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
             i > 8 ? (
               i < 10 ? (
                 <ShowMore
-                  key={id}
+                  key={uuidv4()}
                   length={reports.length}
                   showAll={showAll}
                   showMoreHandler={showMoreHandler}
@@ -149,7 +148,7 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
                 favorite={report.favorite}
               />
             ) : (
-              <div key={id} className={styles.reportsCardCell}></div>
+              <div key={uuidv4()} className={styles.reportsCardCell}></div>
             )
           })}
     </div>
