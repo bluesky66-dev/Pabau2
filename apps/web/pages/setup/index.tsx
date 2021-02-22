@@ -43,7 +43,7 @@ const Index: FC = () => {
         },
         { title: 'Integrations', data: [] },
         { title: 'Data', data: ['Custom Fields', 'Data Imports'] },
-        { title: 'Pabau ProductList', data: ['Billing Activity', 'Addons'] },
+        { title: 'Pabau Subscription', data: ['Billing Activity', 'Addons'] },
       ],
       image: clinicImage,
     },
