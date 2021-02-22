@@ -66,13 +66,23 @@ export const VoucherCard: FC<VoucherCardProps> = ({
     height: `${cardWidth / 25}px`,
   }
 
+  const flipCard = (e) => {
+    if (cardRef?.current) {
+      if (cardRef.current.classList.contains('flip')) {
+        cardRef.current.classList.remove('flip')
+      } else {
+        cardRef.current.classList.add('flip')
+      }
+    }
+  }
+
   return (
     <div className={styles.voucherCardMain}>
       <div
         className="flip-card"
         style={{ width: `${cardWidth}px`, height: `${cardWidth / 2}px` }}
       >
-        <div className="flip-card-inner" ref={cardRef}>
+        <div className="flip-card-inner" ref={cardRef} onClick={flipCard}>
           <div
             className={`flip-card-front ${voucherType}`}
             style={
@@ -91,12 +101,12 @@ export const VoucherCard: FC<VoucherCardProps> = ({
             <div className={styles.frontFaceContent}>
               <div className={styles.pRelative}>
                 <div className={styles.buttonsRow}>
-                  <div>
+                  <div onClick={flipCard}>
                     {bookNowButton && (
                       <Button type="default">{buttonLabel}</Button>
                     )}
                   </div>
-                  <div>
+                  <div onClick={flipCard}>
                     {dotMenuShow && <DotButton menuList={DotMenuOptions} />}
                   </div>
                 </div>
