@@ -1,6 +1,6 @@
 import React, { ReactText, useState } from 'react'
-import { SingleReport } from '../SingleReport/SingleReport'
-import { ShowMore } from '../ShowMore/ShowMore'
+import { SingleReport } from '../singleReport/SingleReport'
+import { ShowMore } from '../showMore/ShowMore'
 import { v4 as uuidv4 } from 'uuid'
 
 import styles from './ReportsCard.module.less'
