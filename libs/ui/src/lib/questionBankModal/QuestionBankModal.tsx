@@ -17,6 +17,8 @@ interface P extends BasicModalProps {
   questions: Array<IQuestionOptions>
   options: Array<IMenuOption>
   onAdd: (questions: Array<IQuestionOptions> | undefined) => void
+  visible: boolean
+  onCancel?: () => void
 }
 
 export const QuestionBankModal: FC<P> = ({
@@ -24,13 +26,15 @@ export const QuestionBankModal: FC<P> = ({
   questions,
   options,
   onAdd,
+  visible,
+  onCancel,
   ...props
 }) => {
   const { TabPane } = Tabs
 
   const [checkedQuestions, setCheckedQuestions] = useState<
-    Array<IQuestionOptions> | undefined
-  >(undefined)
+    Array<IQuestionOptions>
+  >([])
   const [questionList, setQuestionList] = useState<Array<IQuestionOptions>>(
     questions
   )
@@ -56,6 +60,21 @@ export const QuestionBankModal: FC<P> = ({
     console.log('Question ' + key + ' is clicked')
   }
 
+  const handleClose = () => {
+    setCheckedQuestions([])
+    const data = questionList?.map((i) => {
+      return { ...i, checked: false }
+    })
+    setQuestionList(data)
+    onCancel?.()
+  }
+
+  const handleAddQuestion = (checkedQuestions: Array<IQuestionOptions>) => {
+    onAdd(checkedQuestions)
+    setCheckedQuestions([])
+    onCancel?.()
+  }
+
   const preparePreviewContent = () => {
     return (
       <>
@@ -72,20 +91,22 @@ export const QuestionBankModal: FC<P> = ({
             </Row>
           ))}
         </div>
-        <div className={customStyles.btnWrap}>
-          <Button
-            className={
-              checkedQuestions?.length === 0
-                ? customStyles.disabledBtn
-                : customStyles.addButton
-            }
-            disabled={checkedQuestions?.length === 0}
-            type={'primary'}
-            onClick={() => onAdd(checkedQuestions)}
-          >
-            + Add ({checkedQuestions?.length}) Questions
-          </Button>
-        </div>
+        <Row>
+          <Col span={24} className={customStyles.btnWrap}>
+            <Button
+              className={
+                checkedQuestions?.length === 0
+                  ? customStyles.disabledBtn
+                  : customStyles.addButton
+              }
+              disabled={checkedQuestions?.length === 0}
+              type={'primary'}
+              onClick={() => handleAddQuestion(checkedQuestions)}
+            >
+              + Add ({checkedQuestions?.length}) Questions
+            </Button>
+          </Col>
+        </Row>
       </>
     )
   }
@@ -112,6 +133,8 @@ export const QuestionBankModal: FC<P> = ({
   return (
     <BasicModal
       {...props}
+      visible={visible}
+      onCancel={handleClose}
       title={title}
       modalWidth={682}
       footer={false}
