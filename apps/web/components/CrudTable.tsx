@@ -39,6 +39,7 @@ interface P {
   notificationBanner?: React.ReactNode
   createPageOnClick?(): void
   needTranslation?: boolean
+  addFilter?: boolean
 }
 
 const languages = [
@@ -122,6 +123,7 @@ const CrudTable: FC<P> = ({
   createPage = false,
   createPageOnClick,
   needTranslation = false,
+  addFilter,
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [isActive, setIsActive] = useState(true)
@@ -425,6 +427,7 @@ const CrudTable: FC<P> = ({
                   schema={schema}
                   tableSearch={tableSearch}
                   needTranslation={needTranslation}
+                  addFilter={addFilter}
                 />
               ) : (
                 <AddButton
@@ -434,6 +437,7 @@ const CrudTable: FC<P> = ({
                   schema={schema}
                   tableSearch={tableSearch}
                   needTranslation={needTranslation}
+                  addFilter={addFilter}
                 />
               )}
             </div>
@@ -486,6 +490,7 @@ const CrudTable: FC<P> = ({
                 schema={schema}
                 tableSearch={tableSearch}
                 needTranslation={needTranslation}
+                addFilter={addFilter}
               />
             ) : (
               <AddButton
@@ -495,6 +500,7 @@ const CrudTable: FC<P> = ({
                 schema={schema}
                 tableSearch={tableSearch}
                 needTranslation={needTranslation}
+                addFilter={addFilter}
               />
             )}
           </div>
