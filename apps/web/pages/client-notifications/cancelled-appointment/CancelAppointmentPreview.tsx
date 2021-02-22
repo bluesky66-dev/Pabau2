@@ -249,7 +249,6 @@ const CancelAppointmentPreview: FC<P> = ({
           isFooterText={true}
           footerText={informationMessage}
           footer={activeSocialIcons.length > 0 || informationMessage.length > 0}
-          pa
         >
           <CancelAClassBooking
             dateTime={selectLangData.dateTime}
