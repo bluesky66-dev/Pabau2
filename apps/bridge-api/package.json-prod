@@ -17,4 +17,7 @@
     "prisma": "*",
     "apollo-server": "*"
   }
+  "resolutions": {
+    "**/immer": "8.0.1"
+  },
 }
