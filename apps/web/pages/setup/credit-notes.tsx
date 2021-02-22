@@ -78,11 +78,17 @@ const EDIT_MUTATION = gql`
     $id: uuid!
     $name: String!
     $is_active: Boolean
+    $invoice_prefix: String
     $order: Int
   ) {
     update_credit_note_type_by_pk(
       pk_columns: { id: $id }
-      _set: { name: $name, is_active: $is_active, order: $order }
+      _set: {
+        name: $name
+        invoice_prefix: $invoice_prefix
+        is_active: $is_active
+        order: $order
+      }
     ) {
       __typename
       id
