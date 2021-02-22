@@ -34,7 +34,6 @@ import {
   ReviewSlider,
   ReviewSliderProps,
   AddQuestion,
-  QuestionBankModal,
   IQuestionOptions,
   QuestionField,
 } from '@pabau/ui'
@@ -642,7 +641,6 @@ export const Index: FC<ReviewsConfigProps> = ({
 
   const Step2 = ({ settings, questionData }) => {
     const [questions, setQuestions] = useState<QuestionField[]>([])
-    const [visible, setVisible] = useState(false)
     const [setting, setSetting] = useState<FeedbackSurveyBuilder>(
       defaultBuilderSetting
     )
@@ -665,18 +663,22 @@ export const Index: FC<ReviewsConfigProps> = ({
       const questionItems = data.filter((a) => a.key !== key)
       setQuestions(questionItems)
     }
-    const onGoTo = () => {
-      setVisible(true)
-    }
-    const handleAddFromQuestionBank = (question) => {
-      const tmpQuestions = question.map((q, index) => ({
-        title: q.question,
-        key: questions.length + index + 1,
-      }))
-      const data = [...questions, ...tmpQuestions]
+
+    const onQuestionBankAddButton = (
+      question: Array<IQuestionOptions> | undefined
+    ): void => {
+      const data = [...questions]
+      if (question) {
+        for (const a of question) {
+          data.push({
+            title: a.question,
+            key: questions.length + Math.floor(Math.random() * 100),
+          })
+        }
+      }
       setQuestions(data)
-      setVisible(false)
     }
+
     useEffect(() => {
       if (questionData) setQuestions(questionData)
       if (settings) {
@@ -763,19 +765,8 @@ export const Index: FC<ReviewsConfigProps> = ({
                   onAddQuestion={() => onAddQuestion()}
                   onDeleteButton={(key) => onDeleteButton(key)}
                   isDeleteDisable={questions?.length === 1}
-                  onGoTo={() => onGoTo()}
+                  onQuestionBankAddButton={onQuestionBankAddButton}
                 />
-                {visible && (
-                  <QuestionBankModal
-                    visible={visible}
-                    title="Question Bank"
-                    questions={setting.questionsBank}
-                    options={[]}
-                    onAdd={(question) => handleAddFromQuestionBank(question)}
-                    onOk={() => setVisible(false)}
-                    onCancel={() => setVisible(false)}
-                  />
-                )}
               </div>
             </div>
             <div>
@@ -882,19 +873,8 @@ export const Index: FC<ReviewsConfigProps> = ({
                   onAddQuestion={() => onAddQuestion()}
                   onDeleteButton={(key) => onDeleteButton(key)}
                   isDeleteDisable={questions?.length === 1}
-                  onGoTo={() => onGoTo()}
+                  onQuestionBankAddButton={onQuestionBankAddButton}
                 />
-                {visible && (
-                  <QuestionBankModal
-                    visible={visible}
-                    title="Question Bank"
-                    questions={setting.questionsBank}
-                    options={[]}
-                    onAdd={(question) => handleAddFromQuestionBank(question)}
-                    onOk={() => setVisible(false)}
-                    onCancel={() => setVisible(false)}
-                  />
-                )}
               </div>
               <div className={styles.previewPanel}>
                 {!surveyFormat && (
