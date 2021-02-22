@@ -5862,8 +5862,8 @@ type CompanyDetails {
   street: String!
   subscription: String!
   tax_name: company_details_tax_name!
-  timezone: Timezone
-  timezone_id: Int
+  timezone: Timezone!
+  timezone_id: Int!
   twitter_page: String!
   use_google_auth: Boolean!
   vat: String!
@@ -5948,8 +5948,7 @@ input CompanyDetailsCreateInput {
   street: String!
   subscription: String!
   tax_name: company_details_tax_name
-  timezone: TimezoneCreateNestedOneWithoutDetailsInput
-  timezone_id: Int
+  timezone: TimezoneCreateNestedOneWithoutCompanyDetailsInput
   twitter_page: String!
   use_google_auth: Boolean
   vat: String!
@@ -5958,16 +5957,16 @@ input CompanyDetailsCreateInput {
   youtube_page: String!
 }
 
+input CompanyDetailsCreateNestedManyWithoutTimezoneInput {
+  connect: [CompanyDetailsWhereUniqueInput!]
+  connectOrCreate: [CompanyDetailsCreateOrConnectWithouttimezoneInput!]
+  create: [CompanyDetailsCreateWithoutTimezoneInput!]
+}
+
 input CompanyDetailsCreateNestedOneWithoutCompanyInput {
   connect: CompanyDetailsWhereUniqueInput
   connectOrCreate: CompanyDetailsCreateOrConnectWithoutcompanyInput
   create: CompanyDetailsCreateWithoutCompanyInput
-}
-
-input CompanyDetailsCreateNestedOneWithoutTimezoneInput {
-  connect: CompanyDetailsWhereUniqueInput
-  connectOrCreate: CompanyDetailsCreateOrConnectWithouttimezoneInput
-  create: CompanyDetailsCreateWithoutTimezoneInput
 }
 
 input CompanyDetailsCreateOrConnectWithoutcompanyInput {
@@ -6055,8 +6054,7 @@ input CompanyDetailsCreateWithoutCompanyInput {
   street: String!
   subscription: String!
   tax_name: company_details_tax_name
-  timezone: TimezoneCreateNestedOneWithoutDetailsInput
-  timezone_id: Int
+  timezone: TimezoneCreateNestedOneWithoutCompanyDetailsInput
   twitter_page: String!
   use_google_auth: Boolean
   vat: String!
@@ -6141,13 +6139,18 @@ input CompanyDetailsCreateWithoutTimezoneInput {
   street: String!
   subscription: String!
   tax_name: company_details_tax_name
-  timezone_id: Int
   twitter_page: String!
   use_google_auth: Boolean
   vat: String!
   website: String!
   week_start_day: String
   youtube_page: String!
+}
+
+input CompanyDetailsListRelationFilter {
+  every: CompanyDetailsWhereInput
+  none: CompanyDetailsWhereInput
+  some: CompanyDetailsWhereInput
 }
 
 input CompanyDetailsOrderByInput {
@@ -6237,6 +6240,95 @@ input CompanyDetailsOrderByInput {
   youtube_page: SortOrder
 }
 
+input CompanyDetailsScalarWhereInput {
+  AND: [CompanyDetailsScalarWhereInput!]
+  NOT: [CompanyDetailsScalarWhereInput!]
+  OR: [CompanyDetailsScalarWhereInput!]
+  accept_insurance: IntFilter
+  admin: IntFilter
+  append_client_pref: IntFilter
+  auto_sms: IntFilter
+  calendar_version: StringFilter
+  capital_surname: BoolFilter
+  city: StringFilter
+  class_teacher_singular: StringFilter
+  class_term_plural: StringFilter
+  class_term_singular: StringFilter
+  company_id: IntFilter
+  company_name: StringFilter
+  company_notes: StringFilter
+  completed_setup: BoolFilter
+  contact_term_plural: StringFilter
+  contact_term_singular: StringFilter
+  converted_value: FloatFilter
+  country: StringFilter
+  county: StringFilter
+  currency: StringFilter
+  cycles_display: IntFilter
+  date_format: StringFilter
+  db_lock: IntFilter
+  debrand_logo: IntFilter
+  default_inv_template_id: IntFilter
+  default_search: StringFilter
+  demo_mode: IntFilter
+  details_id: IntFilter
+  diagnosis_codes_type: StringFilter
+  disable_prescriptions: IntFilter
+  employee_clock_track: BoolFilter
+  employee_term_plural: StringFilter
+  employee_term_singular: StringFilter
+  employees: StringFilter
+  enable_2fa: IntFilter
+  enable_ad: IntFilter
+  enable_ad_code: StringNullableFilter
+  enable_ip_filter: IntNullableFilter
+  enable_sens_data: IntFilter
+  facebook_page: StringFilter
+  fax: StringFilter
+  flag_enabled: IntFilter
+  footer_logo: StringFilter
+  head_office: IntFilter
+  header_logo: StringFilter
+  healthcode_live: BoolNullableFilter
+  industry_sector: StringFilter
+  info_email: StringFilter
+  is_surgical: IntFilter
+  language: StringFilter
+  legacy_consultations: BoolFilter
+  linkedin_page: StringFilter
+  lock_export: IntFilter
+  lock_prescription: IntFilter
+  logo: StringFilter
+  medical_approvals: IntFilter
+  merge_bookings_tabs: BoolFilter
+  new_reports: IntFilter
+  phone: StringFilter
+  phone_prefix: IntFilter
+  post_code: StringFilter
+  preferences_email: IntFilter
+  preferences_newsletters: IntFilter
+  preferences_post: IntFilter
+  preferences_sms: IntFilter
+  private_treatment_notes: IntFilter
+  rota_version: StringFilter
+  secure_medical_forms: IntFilter
+  sensitive_data_question: IntFilter
+  show_report_logo: BoolFilter
+  slug: StringNullableFilter
+  sms_active: IntFilter
+  stock_manager: StringFilter
+  street: StringFilter
+  subscription: StringFilter
+  tax_name: Enumcompany_details_tax_nameFilter
+  timezone_id: IntFilter
+  twitter_page: StringFilter
+  use_google_auth: BoolFilter
+  vat: StringFilter
+  website: StringFilter
+  week_start_day: StringFilter
+  youtube_page: StringFilter
+}
+
 input CompanyDetailsUpdateInput {
   accept_insurance: IntFieldUpdateOperationsInput
   admin: IntFieldUpdateOperationsInput
@@ -6313,8 +6405,7 @@ input CompanyDetailsUpdateInput {
   street: StringFieldUpdateOperationsInput
   subscription: StringFieldUpdateOperationsInput
   tax_name: Enumcompany_details_tax_nameFieldUpdateOperationsInput
-  timezone: TimezoneUpdateOneWithoutDetailsInput
-  timezone_id: NullableIntFieldUpdateOperationsInput
+  timezone: TimezoneUpdateOneRequiredWithoutCompanyDetailsInput
   twitter_page: StringFieldUpdateOperationsInput
   use_google_auth: BoolFieldUpdateOperationsInput
   vat: StringFieldUpdateOperationsInput
@@ -6398,13 +6489,30 @@ input CompanyDetailsUpdateManyMutationInput {
   street: StringFieldUpdateOperationsInput
   subscription: StringFieldUpdateOperationsInput
   tax_name: Enumcompany_details_tax_nameFieldUpdateOperationsInput
-  timezone_id: NullableIntFieldUpdateOperationsInput
   twitter_page: StringFieldUpdateOperationsInput
   use_google_auth: BoolFieldUpdateOperationsInput
   vat: StringFieldUpdateOperationsInput
   website: StringFieldUpdateOperationsInput
   week_start_day: StringFieldUpdateOperationsInput
   youtube_page: StringFieldUpdateOperationsInput
+}
+
+input CompanyDetailsUpdateManyWithWhereWithoutTimezoneInput {
+  data: CompanyDetailsUpdateManyMutationInput!
+  where: CompanyDetailsScalarWhereInput!
+}
+
+input CompanyDetailsUpdateManyWithoutTimezoneInput {
+  connect: [CompanyDetailsWhereUniqueInput!]
+  connectOrCreate: [CompanyDetailsCreateOrConnectWithouttimezoneInput!]
+  create: [CompanyDetailsCreateWithoutTimezoneInput!]
+  delete: [CompanyDetailsWhereUniqueInput!]
+  deleteMany: [CompanyDetailsScalarWhereInput!]
+  disconnect: [CompanyDetailsWhereUniqueInput!]
+  set: [CompanyDetailsWhereUniqueInput!]
+  update: [CompanyDetailsUpdateWithWhereUniqueWithoutTimezoneInput!]
+  updateMany: [CompanyDetailsUpdateManyWithWhereWithoutTimezoneInput!]
+  upsert: [CompanyDetailsUpsertWithWhereUniqueWithoutTimezoneInput!]
 }
 
 input CompanyDetailsUpdateOneWithoutCompanyInput {
@@ -6417,14 +6525,9 @@ input CompanyDetailsUpdateOneWithoutCompanyInput {
   upsert: CompanyDetailsUpsertWithoutCompanyInput
 }
 
-input CompanyDetailsUpdateOneWithoutTimezoneInput {
-  connect: CompanyDetailsWhereUniqueInput
-  connectOrCreate: CompanyDetailsCreateOrConnectWithouttimezoneInput
-  create: CompanyDetailsCreateWithoutTimezoneInput
-  delete: Boolean
-  disconnect: Boolean
-  update: CompanyDetailsUpdateWithoutTimezoneInput
-  upsert: CompanyDetailsUpsertWithoutTimezoneInput
+input CompanyDetailsUpdateWithWhereUniqueWithoutTimezoneInput {
+  data: CompanyDetailsUpdateWithoutTimezoneInput!
+  where: CompanyDetailsWhereUniqueInput!
 }
 
 input CompanyDetailsUpdateWithoutCompanyInput {
@@ -6502,8 +6605,7 @@ input CompanyDetailsUpdateWithoutCompanyInput {
   street: StringFieldUpdateOperationsInput
   subscription: StringFieldUpdateOperationsInput
   tax_name: Enumcompany_details_tax_nameFieldUpdateOperationsInput
-  timezone: TimezoneUpdateOneWithoutDetailsInput
-  timezone_id: NullableIntFieldUpdateOperationsInput
+  timezone: TimezoneUpdateOneRequiredWithoutCompanyDetailsInput
   twitter_page: StringFieldUpdateOperationsInput
   use_google_auth: BoolFieldUpdateOperationsInput
   vat: StringFieldUpdateOperationsInput
@@ -6588,7 +6690,6 @@ input CompanyDetailsUpdateWithoutTimezoneInput {
   street: StringFieldUpdateOperationsInput
   subscription: StringFieldUpdateOperationsInput
   tax_name: Enumcompany_details_tax_nameFieldUpdateOperationsInput
-  timezone_id: NullableIntFieldUpdateOperationsInput
   twitter_page: StringFieldUpdateOperationsInput
   use_google_auth: BoolFieldUpdateOperationsInput
   vat: StringFieldUpdateOperationsInput
@@ -6597,14 +6698,15 @@ input CompanyDetailsUpdateWithoutTimezoneInput {
   youtube_page: StringFieldUpdateOperationsInput
 }
 
+input CompanyDetailsUpsertWithWhereUniqueWithoutTimezoneInput {
+  create: CompanyDetailsCreateWithoutTimezoneInput!
+  update: CompanyDetailsUpdateWithoutTimezoneInput!
+  where: CompanyDetailsWhereUniqueInput!
+}
+
 input CompanyDetailsUpsertWithoutCompanyInput {
   create: CompanyDetailsCreateWithoutCompanyInput!
   update: CompanyDetailsUpdateWithoutCompanyInput!
-}
-
-input CompanyDetailsUpsertWithoutTimezoneInput {
-  create: CompanyDetailsCreateWithoutTimezoneInput!
-  update: CompanyDetailsUpdateWithoutTimezoneInput!
 }
 
 input CompanyDetailsWhereInput {
@@ -6689,7 +6791,7 @@ input CompanyDetailsWhereInput {
   subscription: StringFilter
   tax_name: Enumcompany_details_tax_nameFilter
   timezone: TimezoneWhereInput
-  timezone_id: IntNullableFilter
+  timezone_id: IntFilter
   twitter_page: StringFilter
   use_google_auth: BoolFilter
   vat: StringFilter
@@ -9117,9 +9219,7 @@ input ThirdPartyAccesWhereUniqueInput {
 }
 
 type Timezone {
-  company_details: Int
   db_format: String!
-  details: CompanyDetails
   label: String!
   offset_seconds: Int!
   php_format: String!
@@ -9128,26 +9228,26 @@ type Timezone {
 }
 
 input TimezoneCreateInput {
+  CompanyDetails: CompanyDetailsCreateNestedManyWithoutTimezoneInput
   db_format: String!
-  details: CompanyDetailsCreateNestedOneWithoutTimezoneInput
   label: String!
   offset_seconds: Int!
   php_format: String!
   supported: Boolean!
 }
 
-input TimezoneCreateNestedOneWithoutDetailsInput {
+input TimezoneCreateNestedOneWithoutCompanyDetailsInput {
   connect: TimezoneWhereUniqueInput
-  connectOrCreate: TimezoneCreateOrConnectWithoutdetailsInput
-  create: TimezoneCreateWithoutDetailsInput
+  connectOrCreate: TimezoneCreateOrConnectWithoutCompanyDetailsInput
+  create: TimezoneCreateWithoutCompanyDetailsInput
 }
 
-input TimezoneCreateOrConnectWithoutdetailsInput {
-  create: TimezoneCreateWithoutDetailsInput!
+input TimezoneCreateOrConnectWithoutCompanyDetailsInput {
+  create: TimezoneCreateWithoutCompanyDetailsInput!
   where: TimezoneWhereUniqueInput!
 }
 
-input TimezoneCreateWithoutDetailsInput {
+input TimezoneCreateWithoutCompanyDetailsInput {
   db_format: String!
   label: String!
   offset_seconds: Int!
@@ -9156,7 +9256,6 @@ input TimezoneCreateWithoutDetailsInput {
 }
 
 input TimezoneOrderByInput {
-  company_details: SortOrder
   db_format: SortOrder
   label: SortOrder
   offset_seconds: SortOrder
@@ -9166,8 +9265,8 @@ input TimezoneOrderByInput {
 }
 
 input TimezoneUpdateInput {
+  CompanyDetails: CompanyDetailsUpdateManyWithoutTimezoneInput
   db_format: StringFieldUpdateOperationsInput
-  details: CompanyDetailsUpdateOneWithoutTimezoneInput
   label: StringFieldUpdateOperationsInput
   offset_seconds: IntFieldUpdateOperationsInput
   php_format: StringFieldUpdateOperationsInput
@@ -9182,17 +9281,15 @@ input TimezoneUpdateManyMutationInput {
   supported: BoolFieldUpdateOperationsInput
 }
 
-input TimezoneUpdateOneWithoutDetailsInput {
+input TimezoneUpdateOneRequiredWithoutCompanyDetailsInput {
   connect: TimezoneWhereUniqueInput
-  connectOrCreate: TimezoneCreateOrConnectWithoutdetailsInput
-  create: TimezoneCreateWithoutDetailsInput
-  delete: Boolean
-  disconnect: Boolean
-  update: TimezoneUpdateWithoutDetailsInput
-  upsert: TimezoneUpsertWithoutDetailsInput
+  connectOrCreate: TimezoneCreateOrConnectWithoutCompanyDetailsInput
+  create: TimezoneCreateWithoutCompanyDetailsInput
+  update: TimezoneUpdateWithoutCompanyDetailsInput
+  upsert: TimezoneUpsertWithoutCompanyDetailsInput
 }
 
-input TimezoneUpdateWithoutDetailsInput {
+input TimezoneUpdateWithoutCompanyDetailsInput {
   db_format: StringFieldUpdateOperationsInput
   label: StringFieldUpdateOperationsInput
   offset_seconds: IntFieldUpdateOperationsInput
@@ -9200,18 +9297,17 @@ input TimezoneUpdateWithoutDetailsInput {
   supported: BoolFieldUpdateOperationsInput
 }
 
-input TimezoneUpsertWithoutDetailsInput {
-  create: TimezoneCreateWithoutDetailsInput!
-  update: TimezoneUpdateWithoutDetailsInput!
+input TimezoneUpsertWithoutCompanyDetailsInput {
+  create: TimezoneCreateWithoutCompanyDetailsInput!
+  update: TimezoneUpdateWithoutCompanyDetailsInput!
 }
 
 input TimezoneWhereInput {
   AND: [TimezoneWhereInput!]
+  CompanyDetails: CompanyDetailsListRelationFilter
   NOT: [TimezoneWhereInput!]
   OR: [TimezoneWhereInput!]
-  company_details: IntNullableFilter
   db_format: StringFilter
-  details: CompanyDetailsWhereInput
   label: StringFilter
   offset_seconds: IntFilter
   php_format: StringFilter

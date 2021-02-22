@@ -4589,8 +4589,7 @@ export interface NexusGenInputs {
     street: string; // String!
     subscription: string; // String!
     tax_name?: NexusGenEnums['company_details_tax_name'] | null; // company_details_tax_name
-    timezone?: NexusGenInputs['TimezoneCreateNestedOneWithoutDetailsInput'] | null; // TimezoneCreateNestedOneWithoutDetailsInput
-    timezone_id?: number | null; // Int
+    timezone?: NexusGenInputs['TimezoneCreateNestedOneWithoutCompanyDetailsInput'] | null; // TimezoneCreateNestedOneWithoutCompanyDetailsInput
     twitter_page: string; // String!
     use_google_auth?: boolean | null; // Boolean
     vat: string; // String!
@@ -4598,15 +4597,15 @@ export interface NexusGenInputs {
     week_start_day?: string | null; // String
     youtube_page: string; // String!
   }
+  CompanyDetailsCreateNestedManyWithoutTimezoneInput: { // input type
+    connect?: NexusGenInputs['CompanyDetailsWhereUniqueInput'][] | null; // [CompanyDetailsWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['CompanyDetailsCreateOrConnectWithouttimezoneInput'][] | null; // [CompanyDetailsCreateOrConnectWithouttimezoneInput!]
+    create?: NexusGenInputs['CompanyDetailsCreateWithoutTimezoneInput'][] | null; // [CompanyDetailsCreateWithoutTimezoneInput!]
+  }
   CompanyDetailsCreateNestedOneWithoutCompanyInput: { // input type
     connect?: NexusGenInputs['CompanyDetailsWhereUniqueInput'] | null; // CompanyDetailsWhereUniqueInput
     connectOrCreate?: NexusGenInputs['CompanyDetailsCreateOrConnectWithoutcompanyInput'] | null; // CompanyDetailsCreateOrConnectWithoutcompanyInput
     create?: NexusGenInputs['CompanyDetailsCreateWithoutCompanyInput'] | null; // CompanyDetailsCreateWithoutCompanyInput
-  }
-  CompanyDetailsCreateNestedOneWithoutTimezoneInput: { // input type
-    connect?: NexusGenInputs['CompanyDetailsWhereUniqueInput'] | null; // CompanyDetailsWhereUniqueInput
-    connectOrCreate?: NexusGenInputs['CompanyDetailsCreateOrConnectWithouttimezoneInput'] | null; // CompanyDetailsCreateOrConnectWithouttimezoneInput
-    create?: NexusGenInputs['CompanyDetailsCreateWithoutTimezoneInput'] | null; // CompanyDetailsCreateWithoutTimezoneInput
   }
   CompanyDetailsCreateOrConnectWithoutcompanyInput: { // input type
     create: NexusGenInputs['CompanyDetailsCreateWithoutCompanyInput']; // CompanyDetailsCreateWithoutCompanyInput!
@@ -4691,8 +4690,7 @@ export interface NexusGenInputs {
     street: string; // String!
     subscription: string; // String!
     tax_name?: NexusGenEnums['company_details_tax_name'] | null; // company_details_tax_name
-    timezone?: NexusGenInputs['TimezoneCreateNestedOneWithoutDetailsInput'] | null; // TimezoneCreateNestedOneWithoutDetailsInput
-    timezone_id?: number | null; // Int
+    timezone?: NexusGenInputs['TimezoneCreateNestedOneWithoutCompanyDetailsInput'] | null; // TimezoneCreateNestedOneWithoutCompanyDetailsInput
     twitter_page: string; // String!
     use_google_auth?: boolean | null; // Boolean
     vat: string; // String!
@@ -4776,13 +4774,17 @@ export interface NexusGenInputs {
     street: string; // String!
     subscription: string; // String!
     tax_name?: NexusGenEnums['company_details_tax_name'] | null; // company_details_tax_name
-    timezone_id?: number | null; // Int
     twitter_page: string; // String!
     use_google_auth?: boolean | null; // Boolean
     vat: string; // String!
     website: string; // String!
     week_start_day?: string | null; // String
     youtube_page: string; // String!
+  }
+  CompanyDetailsListRelationFilter: { // input type
+    every?: NexusGenInputs['CompanyDetailsWhereInput'] | null; // CompanyDetailsWhereInput
+    none?: NexusGenInputs['CompanyDetailsWhereInput'] | null; // CompanyDetailsWhereInput
+    some?: NexusGenInputs['CompanyDetailsWhereInput'] | null; // CompanyDetailsWhereInput
   }
   CompanyDetailsOrderByInput: { // input type
     accept_insurance?: NexusGenEnums['SortOrder'] | null; // SortOrder
@@ -4870,6 +4872,94 @@ export interface NexusGenInputs {
     week_start_day?: NexusGenEnums['SortOrder'] | null; // SortOrder
     youtube_page?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
+  CompanyDetailsScalarWhereInput: { // input type
+    AND?: NexusGenInputs['CompanyDetailsScalarWhereInput'][] | null; // [CompanyDetailsScalarWhereInput!]
+    NOT?: NexusGenInputs['CompanyDetailsScalarWhereInput'][] | null; // [CompanyDetailsScalarWhereInput!]
+    OR?: NexusGenInputs['CompanyDetailsScalarWhereInput'][] | null; // [CompanyDetailsScalarWhereInput!]
+    accept_insurance?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    admin?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    append_client_pref?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    auto_sms?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    calendar_version?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    capital_surname?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
+    city?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    class_teacher_singular?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    class_term_plural?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    class_term_singular?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    company_id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    company_name?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    company_notes?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    completed_setup?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
+    contact_term_plural?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    contact_term_singular?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    converted_value?: NexusGenInputs['FloatFilter'] | null; // FloatFilter
+    country?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    county?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    currency?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    cycles_display?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    date_format?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    db_lock?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    debrand_logo?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    default_inv_template_id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    default_search?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    demo_mode?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    details_id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    diagnosis_codes_type?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    disable_prescriptions?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    employee_clock_track?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
+    employee_term_plural?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    employee_term_singular?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    employees?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    enable_2fa?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    enable_ad?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    enable_ad_code?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    enable_ip_filter?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
+    enable_sens_data?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    facebook_page?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    fax?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    flag_enabled?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    footer_logo?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    head_office?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    header_logo?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    healthcode_live?: NexusGenInputs['BoolNullableFilter'] | null; // BoolNullableFilter
+    industry_sector?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    info_email?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    is_surgical?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    language?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    legacy_consultations?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
+    linkedin_page?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    lock_export?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    lock_prescription?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    logo?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    medical_approvals?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    merge_bookings_tabs?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
+    new_reports?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    phone?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    phone_prefix?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    post_code?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    preferences_email?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    preferences_newsletters?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    preferences_post?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    preferences_sms?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    private_treatment_notes?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    rota_version?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    secure_medical_forms?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    sensitive_data_question?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    show_report_logo?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
+    slug?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
+    sms_active?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    stock_manager?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    street?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    subscription?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    tax_name?: NexusGenInputs['Enumcompany_details_tax_nameFilter'] | null; // Enumcompany_details_tax_nameFilter
+    timezone_id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    twitter_page?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    use_google_auth?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
+    vat?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    website?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    week_start_day?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    youtube_page?: NexusGenInputs['StringFilter'] | null; // StringFilter
+  }
   CompanyDetailsUpdateInput: { // input type
     accept_insurance?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
     admin?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
@@ -4946,8 +5036,7 @@ export interface NexusGenInputs {
     street?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     subscription?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     tax_name?: NexusGenInputs['Enumcompany_details_tax_nameFieldUpdateOperationsInput'] | null; // Enumcompany_details_tax_nameFieldUpdateOperationsInput
-    timezone?: NexusGenInputs['TimezoneUpdateOneWithoutDetailsInput'] | null; // TimezoneUpdateOneWithoutDetailsInput
-    timezone_id?: NexusGenInputs['NullableIntFieldUpdateOperationsInput'] | null; // NullableIntFieldUpdateOperationsInput
+    timezone?: NexusGenInputs['TimezoneUpdateOneRequiredWithoutCompanyDetailsInput'] | null; // TimezoneUpdateOneRequiredWithoutCompanyDetailsInput
     twitter_page?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     use_google_auth?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     vat?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -5030,13 +5119,28 @@ export interface NexusGenInputs {
     street?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     subscription?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     tax_name?: NexusGenInputs['Enumcompany_details_tax_nameFieldUpdateOperationsInput'] | null; // Enumcompany_details_tax_nameFieldUpdateOperationsInput
-    timezone_id?: NexusGenInputs['NullableIntFieldUpdateOperationsInput'] | null; // NullableIntFieldUpdateOperationsInput
     twitter_page?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     use_google_auth?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     vat?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     website?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     week_start_day?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     youtube_page?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+  }
+  CompanyDetailsUpdateManyWithWhereWithoutTimezoneInput: { // input type
+    data: NexusGenInputs['CompanyDetailsUpdateManyMutationInput']; // CompanyDetailsUpdateManyMutationInput!
+    where: NexusGenInputs['CompanyDetailsScalarWhereInput']; // CompanyDetailsScalarWhereInput!
+  }
+  CompanyDetailsUpdateManyWithoutTimezoneInput: { // input type
+    connect?: NexusGenInputs['CompanyDetailsWhereUniqueInput'][] | null; // [CompanyDetailsWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['CompanyDetailsCreateOrConnectWithouttimezoneInput'][] | null; // [CompanyDetailsCreateOrConnectWithouttimezoneInput!]
+    create?: NexusGenInputs['CompanyDetailsCreateWithoutTimezoneInput'][] | null; // [CompanyDetailsCreateWithoutTimezoneInput!]
+    delete?: NexusGenInputs['CompanyDetailsWhereUniqueInput'][] | null; // [CompanyDetailsWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['CompanyDetailsScalarWhereInput'][] | null; // [CompanyDetailsScalarWhereInput!]
+    disconnect?: NexusGenInputs['CompanyDetailsWhereUniqueInput'][] | null; // [CompanyDetailsWhereUniqueInput!]
+    set?: NexusGenInputs['CompanyDetailsWhereUniqueInput'][] | null; // [CompanyDetailsWhereUniqueInput!]
+    update?: NexusGenInputs['CompanyDetailsUpdateWithWhereUniqueWithoutTimezoneInput'][] | null; // [CompanyDetailsUpdateWithWhereUniqueWithoutTimezoneInput!]
+    updateMany?: NexusGenInputs['CompanyDetailsUpdateManyWithWhereWithoutTimezoneInput'][] | null; // [CompanyDetailsUpdateManyWithWhereWithoutTimezoneInput!]
+    upsert?: NexusGenInputs['CompanyDetailsUpsertWithWhereUniqueWithoutTimezoneInput'][] | null; // [CompanyDetailsUpsertWithWhereUniqueWithoutTimezoneInput!]
   }
   CompanyDetailsUpdateOneWithoutCompanyInput: { // input type
     connect?: NexusGenInputs['CompanyDetailsWhereUniqueInput'] | null; // CompanyDetailsWhereUniqueInput
@@ -5047,14 +5151,9 @@ export interface NexusGenInputs {
     update?: NexusGenInputs['CompanyDetailsUpdateWithoutCompanyInput'] | null; // CompanyDetailsUpdateWithoutCompanyInput
     upsert?: NexusGenInputs['CompanyDetailsUpsertWithoutCompanyInput'] | null; // CompanyDetailsUpsertWithoutCompanyInput
   }
-  CompanyDetailsUpdateOneWithoutTimezoneInput: { // input type
-    connect?: NexusGenInputs['CompanyDetailsWhereUniqueInput'] | null; // CompanyDetailsWhereUniqueInput
-    connectOrCreate?: NexusGenInputs['CompanyDetailsCreateOrConnectWithouttimezoneInput'] | null; // CompanyDetailsCreateOrConnectWithouttimezoneInput
-    create?: NexusGenInputs['CompanyDetailsCreateWithoutTimezoneInput'] | null; // CompanyDetailsCreateWithoutTimezoneInput
-    delete?: boolean | null; // Boolean
-    disconnect?: boolean | null; // Boolean
-    update?: NexusGenInputs['CompanyDetailsUpdateWithoutTimezoneInput'] | null; // CompanyDetailsUpdateWithoutTimezoneInput
-    upsert?: NexusGenInputs['CompanyDetailsUpsertWithoutTimezoneInput'] | null; // CompanyDetailsUpsertWithoutTimezoneInput
+  CompanyDetailsUpdateWithWhereUniqueWithoutTimezoneInput: { // input type
+    data: NexusGenInputs['CompanyDetailsUpdateWithoutTimezoneInput']; // CompanyDetailsUpdateWithoutTimezoneInput!
+    where: NexusGenInputs['CompanyDetailsWhereUniqueInput']; // CompanyDetailsWhereUniqueInput!
   }
   CompanyDetailsUpdateWithoutCompanyInput: { // input type
     accept_insurance?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
@@ -5131,8 +5230,7 @@ export interface NexusGenInputs {
     street?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     subscription?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     tax_name?: NexusGenInputs['Enumcompany_details_tax_nameFieldUpdateOperationsInput'] | null; // Enumcompany_details_tax_nameFieldUpdateOperationsInput
-    timezone?: NexusGenInputs['TimezoneUpdateOneWithoutDetailsInput'] | null; // TimezoneUpdateOneWithoutDetailsInput
-    timezone_id?: NexusGenInputs['NullableIntFieldUpdateOperationsInput'] | null; // NullableIntFieldUpdateOperationsInput
+    timezone?: NexusGenInputs['TimezoneUpdateOneRequiredWithoutCompanyDetailsInput'] | null; // TimezoneUpdateOneRequiredWithoutCompanyDetailsInput
     twitter_page?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     use_google_auth?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     vat?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -5216,7 +5314,6 @@ export interface NexusGenInputs {
     street?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     subscription?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     tax_name?: NexusGenInputs['Enumcompany_details_tax_nameFieldUpdateOperationsInput'] | null; // Enumcompany_details_tax_nameFieldUpdateOperationsInput
-    timezone_id?: NexusGenInputs['NullableIntFieldUpdateOperationsInput'] | null; // NullableIntFieldUpdateOperationsInput
     twitter_page?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     use_google_auth?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
     vat?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -5224,13 +5321,14 @@ export interface NexusGenInputs {
     week_start_day?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     youtube_page?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
   }
+  CompanyDetailsUpsertWithWhereUniqueWithoutTimezoneInput: { // input type
+    create: NexusGenInputs['CompanyDetailsCreateWithoutTimezoneInput']; // CompanyDetailsCreateWithoutTimezoneInput!
+    update: NexusGenInputs['CompanyDetailsUpdateWithoutTimezoneInput']; // CompanyDetailsUpdateWithoutTimezoneInput!
+    where: NexusGenInputs['CompanyDetailsWhereUniqueInput']; // CompanyDetailsWhereUniqueInput!
+  }
   CompanyDetailsUpsertWithoutCompanyInput: { // input type
     create: NexusGenInputs['CompanyDetailsCreateWithoutCompanyInput']; // CompanyDetailsCreateWithoutCompanyInput!
     update: NexusGenInputs['CompanyDetailsUpdateWithoutCompanyInput']; // CompanyDetailsUpdateWithoutCompanyInput!
-  }
-  CompanyDetailsUpsertWithoutTimezoneInput: { // input type
-    create: NexusGenInputs['CompanyDetailsCreateWithoutTimezoneInput']; // CompanyDetailsCreateWithoutTimezoneInput!
-    update: NexusGenInputs['CompanyDetailsUpdateWithoutTimezoneInput']; // CompanyDetailsUpdateWithoutTimezoneInput!
   }
   CompanyDetailsWhereInput: { // input type
     AND?: NexusGenInputs['CompanyDetailsWhereInput'][] | null; // [CompanyDetailsWhereInput!]
@@ -5314,7 +5412,7 @@ export interface NexusGenInputs {
     subscription?: NexusGenInputs['StringFilter'] | null; // StringFilter
     tax_name?: NexusGenInputs['Enumcompany_details_tax_nameFilter'] | null; // Enumcompany_details_tax_nameFilter
     timezone?: NexusGenInputs['TimezoneWhereInput'] | null; // TimezoneWhereInput
-    timezone_id?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
+    timezone_id?: NexusGenInputs['IntFilter'] | null; // IntFilter
     twitter_page?: NexusGenInputs['StringFilter'] | null; // StringFilter
     use_google_auth?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
     vat?: NexusGenInputs['StringFilter'] | null; // StringFilter
@@ -6826,23 +6924,23 @@ export interface NexusGenInputs {
     id?: number | null; // Int
   }
   TimezoneCreateInput: { // input type
+    CompanyDetails?: NexusGenInputs['CompanyDetailsCreateNestedManyWithoutTimezoneInput'] | null; // CompanyDetailsCreateNestedManyWithoutTimezoneInput
     db_format: string; // String!
-    details?: NexusGenInputs['CompanyDetailsCreateNestedOneWithoutTimezoneInput'] | null; // CompanyDetailsCreateNestedOneWithoutTimezoneInput
     label: string; // String!
     offset_seconds: number; // Int!
     php_format: string; // String!
     supported: boolean; // Boolean!
   }
-  TimezoneCreateNestedOneWithoutDetailsInput: { // input type
+  TimezoneCreateNestedOneWithoutCompanyDetailsInput: { // input type
     connect?: NexusGenInputs['TimezoneWhereUniqueInput'] | null; // TimezoneWhereUniqueInput
-    connectOrCreate?: NexusGenInputs['TimezoneCreateOrConnectWithoutdetailsInput'] | null; // TimezoneCreateOrConnectWithoutdetailsInput
-    create?: NexusGenInputs['TimezoneCreateWithoutDetailsInput'] | null; // TimezoneCreateWithoutDetailsInput
+    connectOrCreate?: NexusGenInputs['TimezoneCreateOrConnectWithoutCompanyDetailsInput'] | null; // TimezoneCreateOrConnectWithoutCompanyDetailsInput
+    create?: NexusGenInputs['TimezoneCreateWithoutCompanyDetailsInput'] | null; // TimezoneCreateWithoutCompanyDetailsInput
   }
-  TimezoneCreateOrConnectWithoutdetailsInput: { // input type
-    create: NexusGenInputs['TimezoneCreateWithoutDetailsInput']; // TimezoneCreateWithoutDetailsInput!
+  TimezoneCreateOrConnectWithoutCompanyDetailsInput: { // input type
+    create: NexusGenInputs['TimezoneCreateWithoutCompanyDetailsInput']; // TimezoneCreateWithoutCompanyDetailsInput!
     where: NexusGenInputs['TimezoneWhereUniqueInput']; // TimezoneWhereUniqueInput!
   }
-  TimezoneCreateWithoutDetailsInput: { // input type
+  TimezoneCreateWithoutCompanyDetailsInput: { // input type
     db_format: string; // String!
     label: string; // String!
     offset_seconds: number; // Int!
@@ -6850,7 +6948,6 @@ export interface NexusGenInputs {
     supported: boolean; // Boolean!
   }
   TimezoneOrderByInput: { // input type
-    company_details?: NexusGenEnums['SortOrder'] | null; // SortOrder
     db_format?: NexusGenEnums['SortOrder'] | null; // SortOrder
     label?: NexusGenEnums['SortOrder'] | null; // SortOrder
     offset_seconds?: NexusGenEnums['SortOrder'] | null; // SortOrder
@@ -6859,8 +6956,8 @@ export interface NexusGenInputs {
     timezone_id?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
   TimezoneUpdateInput: { // input type
+    CompanyDetails?: NexusGenInputs['CompanyDetailsUpdateManyWithoutTimezoneInput'] | null; // CompanyDetailsUpdateManyWithoutTimezoneInput
     db_format?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    details?: NexusGenInputs['CompanyDetailsUpdateOneWithoutTimezoneInput'] | null; // CompanyDetailsUpdateOneWithoutTimezoneInput
     label?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     offset_seconds?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
     php_format?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -6873,33 +6970,30 @@ export interface NexusGenInputs {
     php_format?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     supported?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
   }
-  TimezoneUpdateOneWithoutDetailsInput: { // input type
+  TimezoneUpdateOneRequiredWithoutCompanyDetailsInput: { // input type
     connect?: NexusGenInputs['TimezoneWhereUniqueInput'] | null; // TimezoneWhereUniqueInput
-    connectOrCreate?: NexusGenInputs['TimezoneCreateOrConnectWithoutdetailsInput'] | null; // TimezoneCreateOrConnectWithoutdetailsInput
-    create?: NexusGenInputs['TimezoneCreateWithoutDetailsInput'] | null; // TimezoneCreateWithoutDetailsInput
-    delete?: boolean | null; // Boolean
-    disconnect?: boolean | null; // Boolean
-    update?: NexusGenInputs['TimezoneUpdateWithoutDetailsInput'] | null; // TimezoneUpdateWithoutDetailsInput
-    upsert?: NexusGenInputs['TimezoneUpsertWithoutDetailsInput'] | null; // TimezoneUpsertWithoutDetailsInput
+    connectOrCreate?: NexusGenInputs['TimezoneCreateOrConnectWithoutCompanyDetailsInput'] | null; // TimezoneCreateOrConnectWithoutCompanyDetailsInput
+    create?: NexusGenInputs['TimezoneCreateWithoutCompanyDetailsInput'] | null; // TimezoneCreateWithoutCompanyDetailsInput
+    update?: NexusGenInputs['TimezoneUpdateWithoutCompanyDetailsInput'] | null; // TimezoneUpdateWithoutCompanyDetailsInput
+    upsert?: NexusGenInputs['TimezoneUpsertWithoutCompanyDetailsInput'] | null; // TimezoneUpsertWithoutCompanyDetailsInput
   }
-  TimezoneUpdateWithoutDetailsInput: { // input type
+  TimezoneUpdateWithoutCompanyDetailsInput: { // input type
     db_format?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     label?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     offset_seconds?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
     php_format?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     supported?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
   }
-  TimezoneUpsertWithoutDetailsInput: { // input type
-    create: NexusGenInputs['TimezoneCreateWithoutDetailsInput']; // TimezoneCreateWithoutDetailsInput!
-    update: NexusGenInputs['TimezoneUpdateWithoutDetailsInput']; // TimezoneUpdateWithoutDetailsInput!
+  TimezoneUpsertWithoutCompanyDetailsInput: { // input type
+    create: NexusGenInputs['TimezoneCreateWithoutCompanyDetailsInput']; // TimezoneCreateWithoutCompanyDetailsInput!
+    update: NexusGenInputs['TimezoneUpdateWithoutCompanyDetailsInput']; // TimezoneUpdateWithoutCompanyDetailsInput!
   }
   TimezoneWhereInput: { // input type
     AND?: NexusGenInputs['TimezoneWhereInput'][] | null; // [TimezoneWhereInput!]
+    CompanyDetails?: NexusGenInputs['CompanyDetailsListRelationFilter'] | null; // CompanyDetailsListRelationFilter
     NOT?: NexusGenInputs['TimezoneWhereInput'][] | null; // [TimezoneWhereInput!]
     OR?: NexusGenInputs['TimezoneWhereInput'][] | null; // [TimezoneWhereInput!]
-    company_details?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
     db_format?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    details?: NexusGenInputs['CompanyDetailsWhereInput'] | null; // CompanyDetailsWhereInput
     label?: NexusGenInputs['StringFilter'] | null; // StringFilter
     offset_seconds?: NexusGenInputs['IntFilter'] | null; // IntFilter
     php_format?: NexusGenInputs['StringFilter'] | null; // StringFilter
@@ -8005,7 +8099,7 @@ export interface NexusGenObjects {
     street: string; // String!
     subscription: string; // String!
     tax_name: NexusGenEnums['company_details_tax_name']; // company_details_tax_name!
-    timezone_id?: number | null; // Int
+    timezone_id: number; // Int!
     twitter_page: string; // String!
     use_google_auth: boolean; // Boolean!
     vat: string; // String!
@@ -8135,7 +8229,6 @@ export interface NexusGenObjects {
     passcode: number; // Int!
   }
   Timezone: { // root type
-    company_details?: number | null; // Int
     db_format: string; // String!
     label: string; // String!
     offset_seconds: number; // Int!
@@ -9070,8 +9163,8 @@ export interface NexusGenFieldTypes {
     street: string; // String!
     subscription: string; // String!
     tax_name: NexusGenEnums['company_details_tax_name']; // company_details_tax_name!
-    timezone: NexusGenRootTypes['Timezone'] | null; // Timezone
-    timezone_id: number | null; // Int
+    timezone: NexusGenRootTypes['Timezone']; // Timezone!
+    timezone_id: number; // Int!
     twitter_page: string; // String!
     use_google_auth: boolean; // Boolean!
     vat: string; // String!
@@ -9846,9 +9939,7 @@ export interface NexusGenFieldTypes {
     passcode: number; // Int!
   }
   Timezone: { // field return type
-    company_details: number | null; // Int
     db_format: string; // String!
-    details: NexusGenRootTypes['CompanyDetails'] | null; // CompanyDetails
     label: string; // String!
     offset_seconds: number; // Int!
     php_format: string; // String!
@@ -11549,9 +11640,7 @@ export interface NexusGenFieldTypeNames {
     passcode: 'Int'
   }
   Timezone: { // field return type name
-    company_details: 'Int'
     db_format: 'String'
-    details: 'CompanyDetails'
     label: 'String'
     offset_seconds: 'Int'
     php_format: 'String'

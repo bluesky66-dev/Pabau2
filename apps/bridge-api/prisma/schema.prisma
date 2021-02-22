@@ -1194,7 +1194,6 @@ model ClassNotes {
 model CompanyDetails {
   details_id              Int                      @id @default(autoincrement())
   company_id              Int
-  company Company @relation(fields: [company_id], references: [id])
   company_name            String
   subscription            String
   industry_sector         String
@@ -1224,7 +1223,7 @@ model CompanyDetails {
   db_lock                 Int
   stock_manager           String
   company_notes           String
-  timezone_id             Int?                     @default(511)
+  timezone_id             Int                     @default(511)
   converted_value         Float
   enable_2fa              Int
   enable_ad               Int                      @default(0)
@@ -1276,7 +1275,8 @@ model CompanyDetails {
   lock_export             Int
   language                String
   completed_setup         Boolean                  @default(false)
-  timezone                Timezone?
+  timezone Timezone @relation(fields: [timezone_id], references: [timezone_id])
+  company Company @relation(fields: [company_id], references: [id])
 
 
   @@map("company_details")
@@ -1364,6 +1364,16 @@ model CompanySubscription {
   @@map("company_subscription")
   @@index([company_id], name: "company_id")
   @@index([license_type], name: "lic_type")
+}
+model Timezone {
+  timezone_id     Int               @id @default(autoincrement())
+  label           String
+  php_format      String
+  db_format       String
+  offset_seconds  Int
+  supported       Boolean
+
+  @@map("timezone")
 }
 //model class_products {
 //  id             Int       @id @default(autoincrement())
@@ -11228,21 +11238,12 @@ model CompanySubscription {
 //  description String
 //}
 //
-model Timezone {
-  timezone_id     Int               @id @default(autoincrement())
-  label           String
-  php_format      String
-  db_format       String
-  offset_seconds  Int
-  supported       Boolean
-  company_details Int?
-  details CompanyDetails? @relation(fields: [company_details], references: [details_id])
-}
+
 //
 //model tmax_jobs {
 //  id         Int      @id @default(autoincrement())
 //  company    Int
-//  date_added DateTime
+//  date_added DateTim
 //  slot       Int
 //  delay      Int
 //  time       Int
