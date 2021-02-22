@@ -1,0 +1,110 @@
+{
+    "a": {
+        "translation": "translation"
+    },
+    "marketingsource-header-create": {
+        "translation": "Erstellen Sie eine Marketingquelle"
+    },
+    "marketingsource-title": {
+        "translation": ""
+    },
+    "marketingsource-name-textfield": {
+        "translation": "Name"
+    },
+    "marketingsource-name-placeholder": {
+        "translation": "Z.B. Facebook"
+    },
+    "marketingsource-header-edit": {
+        "translation": "Marketingquelle bearbeiten"
+    },
+    "KEY": {
+        "translation": ""
+    },
+    "search.placeholder": {
+        "translation": ""
+    },
+    "avatar.balance": {
+        "translation": ""
+    },
+    "avatar.account.settings": {
+        "translation": ""
+    },
+    "avatar.tasks": {
+        "translation": ""
+    },
+    "avatar.give.feedback": {
+        "translation": ""
+    },
+    "avatar.help.support": {
+        "translation": ""
+    },
+    "avatar.help.support.header": {
+        "translation": ""
+    },
+    "avatar.help.support.centre": {
+        "translation": ""
+    },
+    "avatar.help.video.guides": {
+        "translation": ""
+    },
+    "avatar.help.contact.support": {
+        "translation": ""
+    },
+    "avatar.select.language": {
+        "translation": ""
+    },
+    "avatar.change.company": {
+        "translation": ""
+    },
+    "avatar.logout": {
+        "translation": ""
+    },
+    "search.client.label": {
+        "translation": ""
+    },
+    "search.lead.label": {
+        "translation": ""
+    },
+    "search.result.one": {
+        "translation": ""
+    },
+    "search.result.two": {
+        "translation": ""
+    },
+    "search.new.client": {
+        "translation": ""
+    },
+    "search.advanced.search": {
+        "translation": ""
+    },
+    "notifications.header": {
+        "translation": ""
+    },
+    "notifications.tab.activity": {
+        "translation": "Aktivität"
+    },
+    "notifications.tab.news": {
+        "translation": "Nachrichten"
+    },
+    "notifications.today": {
+        "translation": "Heute"
+    },
+    "notifications.yesterday": {
+        "translation": "Gestern"
+    },
+    "notifications.report": {
+        "translation": "Bericht"
+    },
+    "notifications.appointment": {
+        "translation": "Geplanter Termin"
+    },
+    "notifications.lead": {
+        "translation": "Führt"
+    },
+    "news.learn": {
+        "translation": "Mehr erfahren"
+    },
+    "marketingsource-input-search": {
+        "translation": "Suche"
+    }
+}
