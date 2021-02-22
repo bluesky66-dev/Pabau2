@@ -285,7 +285,7 @@ export const data = [
       },
       {
         key: 'CO145',
-        name: 'CO145 - Contact Activity',
+        name: 'CO145 - Account Balance by Date',
         permissions: {
           scheduler: true,
           therapist: false,
@@ -746,6 +746,28 @@ export const data = [
           admin: true,
         },
       },
+      {
+        key: 'OT001',
+        name: 'OT001 - Sales Conversion',
+        permissions: {
+          scheduler: true,
+          therapist: false,
+          manager: false,
+          director: true,
+          admin: true,
+        },
+      },
+      {
+        key: 'OT002',
+        name: 'OT002 - Telesales Report',
+        permissions: {
+          scheduler: true,
+          therapist: false,
+          manager: false,
+          director: true,
+          admin: true,
+        },
+      },
     ],
   },
   {
@@ -967,6 +989,17 @@ export const data = [
           admin: true,
         },
       },
+      {
+        key: 'OT009',
+        name: 'OT009 - Clinic Conversion',
+        permissions: {
+          scheduler: true,
+          therapist: false,
+          manager: false,
+          director: true,
+          admin: true,
+        },
+      },
     ],
   },
   {
@@ -1024,8 +1057,8 @@ export const data = [
     name: 'Staff Reports',
     children: [
       {
-        key: 'BETA',
-        name: 'BETA - Staff Bookouts',
+        key: 'Team',
+        name: 'Team Report',
         permissions: {
           scheduler: true,
           therapist: false,
@@ -1035,8 +1068,8 @@ export const data = [
         },
       },
       {
-        key: 'ST000',
-        name: 'ST000 - Staff Appointment Schedule',
+        key: 'BETA',
+        name: 'BETA - Staff Bookouts',
         permissions: {
           scheduler: true,
           therapist: false,
@@ -1168,7 +1201,7 @@ export const data = [
       },
       {
         key: 'ST037',
-        name: 'ST037 - Timeslots Report',
+        name: 'ST037 - Staff Clock In/Out',
         permissions: {
           scheduler: true,
           therapist: false,
