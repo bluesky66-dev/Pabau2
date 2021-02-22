@@ -29,14 +29,14 @@ interface SchemaItem {
   extra?: JSX.Element
   cssWidth?: string
   type?:
-  | 'string'
-  | 'boolean'
-  | 'number'
-  | 'radio-group'
-  | 'color-picker'
-  | 'checkbox'
-  | 'icon'
-  | 'select'
+    | 'string'
+    | 'boolean'
+    | 'number'
+    | 'radio-group'
+    | 'color-picker'
+    | 'checkbox'
+    | 'icon'
+    | 'select'
   defaultvalue?: string | number | boolean
   visible?: boolean
   required?: boolean
