@@ -107,7 +107,9 @@
     "ts-node-dev": "^1.1.1",
     "tslib": "^2.1.0",
     "uuid": "^8.3.2",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "highcharts": "^9.0.1",
+    "react-jsx-highcharts": "^4.2.0"
   },
   "devDependencies": {
     "@babel/core": "7.12.17",
@@ -134,7 +136,7 @@
     "@nrwl/cli": "11.3.0",
     "@nrwl/cypress": "11.3.0",
     "@nrwl/eslint-plugin-nx": "11.3.0",
-    "@nrwl/jest": "11.3.0",
+    "@nrwl/jest": "11.2.12",
     "@nrwl/linter": "11.3.0",
     "@nrwl/nest": "11.3.0",
     "@nrwl/next": "11.3.0",
