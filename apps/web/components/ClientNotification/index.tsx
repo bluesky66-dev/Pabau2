@@ -59,6 +59,7 @@ const Index: FC<P> = ({
           setEnableReminder(true)
           setSmartDelivery(true)
           setHideAppearanceTabPane(false)
+          setStandardTap('1')
         } else {
           console.log('this is email tab')
           handleSelectedTab(value)

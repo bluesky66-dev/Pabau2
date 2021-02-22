@@ -248,7 +248,8 @@ const CancelAppointmentPreview: FC<P> = ({
           backGroundColor={backGroundColor}
           isFooterText={true}
           footerText={informationMessage}
-          footer={activeSocialIcons.length === 0 ? false : true}
+          footer={activeSocialIcons.length > 0 || informationMessage.length > 0}
+          pa
         >
           <CancelAClassBooking
             dateTime={selectLangData.dateTime}
