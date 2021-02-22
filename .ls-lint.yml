@@ -1,11 +1,27 @@
 ls:
+  apps:
+    '{web,connect,mgmt}':
+      pages:
+        .tsx: kebabcase
+    .tsx: pascalcase
   libs:
-
-  .js: point.case
+    ui:
+      src:
+        lib:
+          .stories.tsx: pascalcase
+          .spec.tsx: pascalcase
+          .tsx: pascalcase
 
 #  .js: regex:[a-z0-9]+ # the final regex pattern will be ^[a-z0-9]+$
 
 ignore:
   - .git
-  - node_modules
+  - '**/node_modules'
+  - 'apps/mobile'
+  - 'apps/{web,connect,mgmt}/pages/_app.tsx'
+  - 'apps/web/pages/_app.tsx'
+  - 'apps/connect/pages/_app.tsx'
+  - 'apps/mgmt/pages/_app.tsx'
+  - 'setupJest.js'
+  - 'node_modules'
   - dist

@@ -1,10 +1,9 @@
 import React from 'react'
 import styles from './Stepper.module.less'
-
 export interface StepperItem {
   step: number
   name: string
-  imgPath: string
+  img: JSX.Element | string
   isActive: boolean
   index: number
 }
@@ -44,7 +43,11 @@ function StepperList(props) {
                   : styles.icondisablecircle
               }
             >
-              <img src={element.imgPath} alt="" />
+              {React.isValidElement(element.img) ? (
+                <div>{element.img}</div>
+              ) : (
+                <img src={element.img} alt="" />
+              )}
             </div>
             <span
               className={
