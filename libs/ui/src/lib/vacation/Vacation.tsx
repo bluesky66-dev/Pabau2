@@ -1,10 +1,8 @@
 import React, { FC } from 'react'
-import { Tooltip, Image } from 'antd'
-import plane from '../../assets/images/plane.svg'
-import vacation from '../../assets/images/vacation1.png'
+import { Tooltip } from 'antd'
+import { ReactComponent as Plane } from '../../assets/images/plane.svg'
 import styles from './Vacation.module.less'
 
-/* eslint-disable-next-line */
 export interface VacationProps {
   from: string
   to: string
@@ -28,7 +26,7 @@ const Vacation: FC<VacationProps> = (props) => {
         title={
           <div className={styles.vacationTooltipContainer}>
             <div className={styles.vacationTooltipDesc}>
-              <Image src={plane} preview={false} width={16} />
+              <Plane />
               <p>On vacation:</p>
             </div>
             <div className={styles.vacationTooltipContent}>
@@ -40,7 +38,9 @@ const Vacation: FC<VacationProps> = (props) => {
         color="white"
         placement="bottomLeft"
       >
-        <Image src={vacation} preview={false} width={32} />
+        <div className={styles.vacation}>
+          <Plane />
+        </div>
       </Tooltip>
     </div>
   )
