@@ -2,13 +2,92 @@ import React, { FC, useState, useEffect } from 'react'
 import Layout from '../../../components/Layout/Layout'
 import { TabbedTable, Button, Table, Breadcrumb, Pagination } from '@pabau/ui'
 import { Card, Input, Row, Col } from 'antd'
-import { data } from './mock'
 import {
   SearchOutlined,
   ApartmentOutlined,
   FileProtectOutlined,
 } from '@ant-design/icons'
 import styles from './index.module.less'
+
+const data = [
+  {
+    id: 1,
+    key: '1',
+    name: 'Paracetamol (Acetominophen)',
+    unit: 'Mg',
+    frequency: '1 per day',
+    route: 'Orally',
+    comment: 'Twice per 6 hours after treatment',
+    is_active: 1,
+    index: 0,
+  },
+  {
+    id: 2,
+    key: '2',
+    name: 'From a friend',
+    unit: 'Mg',
+    frequency: 'coffee',
+    route: 'Monday, 4 Feb 2019',
+    comment: 'Twice per 6 hours after treatment',
+    is_active: 0,
+    index: 1,
+  },
+  {
+    id: 3,
+    key: '3',
+    name: 'Instagram',
+    unit: 'Mg',
+    frequency: 'clock',
+    route: 'Orally',
+    comment: 'Twice per 6 hours after treatment',
+    is_active: 0,
+    index: 2,
+  },
+  {
+    id: 4,
+    key: '4',
+    name: 'Imported',
+    unit: 'Mg',
+    frequency: '1 per day',
+    route: 'Orally',
+    comment: 'Twice per 6 hours after treatment',
+    is_active: 1,
+    index: 3,
+  },
+  {
+    id: 5,
+    key: '5',
+    name: 'Walk-in',
+    unit: 'Mg',
+    frequency: '1 per day',
+    route: 'Orally',
+    comment: 'Twice per 6 hours after treatment',
+    is_active: 1,
+    index: 4,
+  },
+  {
+    id: 6,
+    key: '6',
+    name: 'Facebook',
+    unit: 'Mg',
+    frequency: '1 per day',
+    route: 'Orally',
+    comment: 'Twice per 6 hours after treatment',
+    is_active: 0,
+    index: 5,
+  },
+  {
+    id: 7,
+    key: '7',
+    name: 'Fresha',
+    unit: 'Mg',
+    frequency: '1 per day',
+    route: 'Orally',
+    comment: 'Twice per 6 hours after treatment',
+    is_active: 0,
+    index: 6,
+  },
+]
 
 const columns = [
   {
