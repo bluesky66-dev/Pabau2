@@ -143,9 +143,10 @@ const CrudModal: FC<P> = ({
         specialBooleanValue={specialBoolean}
         onSpecialBooleanClick={() => {
           setSpecialBoolean((e) => !e)
-          if (editingRow) {
-            editingRow.is_active = !specialBoolean
-          }
+          formik.setFieldValue('is_active', !specialBoolean)
+          // if (editingRow) {
+          //   editingRow.is_active = !specialBoolean
+          // }
         }}
         isValidate={
           editingRow?.isCreate ? formik.dirty && formik.isValid : formik.isValid
