@@ -27,7 +27,11 @@ interface P {
   onSaveReview?: (reviewData?: ReviewDataWithText) => void
 }
 
-const ReviewChoice: FC<P> = ({ reviewData, reviewedData, onSaveReview }) => {
+export const ReviewChoice: FC<P> = ({
+  reviewData,
+  reviewedData,
+  onSaveReview,
+}) => {
   const isMobile = useMedia('(max-width: 768px)', false)
   const [currentReview, setCurrentReview] = useState({
     header: '',
@@ -115,7 +119,7 @@ const ReviewChoice: FC<P> = ({ reviewData, reviewedData, onSaveReview }) => {
               <div className={styles.descriptionHead}>
                 <span className={styles.descriptionTitle}>{review.header}</span>
                 <span className={styles.plusLabel}>
-                  <PabauPlus label="plus" openModal={false} />
+                  <PabauPlus label="plus" />
                 </span>
               </div>
               <Badge label="Disabled" disabled={false} />

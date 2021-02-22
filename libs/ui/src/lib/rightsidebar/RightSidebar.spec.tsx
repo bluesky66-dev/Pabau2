@@ -4,7 +4,23 @@ import RightSidebar from './RightSidebar'
 
 describe('RightSidebar', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<RightSidebar />)
+    const { baseElement } = render(
+      <RightSidebar
+        selectedForm={{
+          id: '',
+          formType: '',
+          formName: '',
+          txtQuestion: '',
+          txtBlock: '',
+          txtInputType: '',
+          arrItems: [],
+          required: false,
+        }}
+        component={''}
+        formType={''}
+        display={false}
+      />
+    )
     expect(baseElement).toBeTruthy()
   })
 })
