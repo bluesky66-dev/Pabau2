@@ -32,10 +32,25 @@ export const Badge: FC<P> = ({ label, disabled }) => {
 
 export default Badge
 
+type ModalType = 'Marketing' | 'Care' | 'Staff' | 'Intelligence'
+
 export interface PlusProps {
   label?: string
   disabled?: boolean
-  modalType: 'Marketing' | 'Care' | 'Staff' | 'Intelligence'
+  modalType: ModalType
+}
+
+const getColor = (type: ModalType) => {
+  switch (type) {
+    case 'Care':
+      return '#2a4aad'
+    case 'Marketing':
+      return '#40A0C1'
+    case 'Staff':
+      return '#4e30b0'
+    case 'Intelligence':
+      return '#8e339d'
+  }
 }
 
 export const PabauPlus: FC<PlusProps> = ({
@@ -69,11 +84,13 @@ export const PabauPlus: FC<PlusProps> = ({
     linkText,
   } = modalBody || {}
 
-  const text = (
+  const color = getColor(modalType)
+
+  const tooltipContent = (
     <div style={{ color: '#000' }}>
       <div style={{ padding: 12, display: 'flex' }}>
-        <div className={styles.upArrow}>
-          <ArrowUpOutlined />
+        <div className={styles.upArrow} style={{ borderColor: color }}>
+          <ArrowUpOutlined style={{ color }} />
         </div>
         <div>
           <Typography.Text className={styles.primaryText}>
@@ -89,7 +106,7 @@ export const PabauPlus: FC<PlusProps> = ({
         <Button
           disabled={disabled}
           type="primary"
-          style={{ width: '100%' }}
+          style={{ width: '100%', background: color, borderColor: color }}
           onClick={handleClick}
         >
           Get Feature
@@ -102,7 +119,7 @@ export const PabauPlus: FC<PlusProps> = ({
     <div>
       <Tooltip
         arrowPointAtCenter
-        title={text}
+        title={tooltipContent}
         color="#FFF"
         overlayClassName={styles.tooltipCard}
       >
