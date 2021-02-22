@@ -4,10 +4,15 @@ import { NestFactory } from '@nestjs/core'
 import { AppController } from './app/app.controller'
 import { Logger } from '@nestjs/common'
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const cors=require('cors');
+
 async function bootstrapDevServer() {
   const app = await NestFactory.create(AppModule)
   // const globalPrefix = 'api'
   // app.setGlobalPrefix(globalPrefix)
+
+  app.use(cors());
   const port = process.env.PORT || 3333
   await app.listen(port, () => {
     Logger.log('Listening at http://localhost:' + port + '/')
