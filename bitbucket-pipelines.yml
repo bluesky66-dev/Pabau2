@@ -24,6 +24,7 @@ pipelines:
             - nodemodules
             - yarncustom
           script:
+            - /bin/bash -c 'yarn audit --no-progress --non-interactive; [[ $? -gt 2 ]] && exit 1 || exit 0'
 
             # Get an oauth access token using the client credentials, parsing out the token with jq.
             - apt-get update && apt-get install -y curl jq
@@ -39,7 +40,7 @@ pipelines:
               export PR_AUTHOR=$(curl -sS -H "Authorization: Bearer ${access_token}" "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/pullrequests/${BITBUCKET_PR_ID}" | jq -r '.author.display_name')
 
             # get the commit message for this commit
-            - export LAST_COMMIT_LOG=$(git log HEAD~1 -1 | tail -n +4 | perl -p -e 's/[\r\n]//' | awk '{$1=$1;print}')
+            - export LAST_COMMIT_LOG=$(git log HEAD -1 | tail -n +4 | perl -p -e 's/[\r\n]//' | awk '{$1=$1;print}')
             - echo "${LAST_COMMIT_LOG}"
 
             - touch /tmp/bot_message.txt
@@ -98,9 +99,24 @@ pipelines:
             - nodemodules
             - yarncustom
           script:
+            - /bin/bash -c 'yarn audit --no-progress --non-interactive; [[ $? -gt 2 ]] && exit 1 || exit 0'
             - touch /tmp/bot_message.txt
             - apt-get update -y && apt-get install -y curl jq time
             - /usr/bin/time -v yarn install --frozen-lockfile --prefer-offline
+
+            # TODO: move these to eslint so that `yarn lint` picks up these errors instead
+            - npm i -g typescript
+            - tsc --noEmit -p apps/backend/
+            - tsc --noEmit -p apps/connect/
+            - tsc --noEmit -p apps/connect-e2e/
+            - tsc --noEmit -p apps/mgmt/
+            - tsc --noEmit -p apps/mgmt-e2e/
+            - tsc --noEmit -p apps/ui-e2e/
+            - tsc --noEmit -p apps/web/
+            - tsc --noEmit -p apps/web-e2e/
+            - tsc --noEmit -p libs/ui/tsconfig.lib.json
+            - tsc --noEmit -p libs/yup/tsconfig.lib.json
+
             - /usr/bin/time -v yarn affected:lint --base=HEAD~1 --with-deps --parallel
             - /usr/bin/time -v yarn affected:test --base=HEAD~1 --parallel
 
@@ -125,7 +141,7 @@ pipelines:
 
             - npm i -g ts-node && ts-node tools/cicd/PrintChangedUrls.ts "HEAD~2" "$(cat /tmp/bot_url_web.txt)" "$(cat /tmp/bot_url_ui.txt)" >> /tmp/bot_message.txt
             - |
-              printf "*New Version Staged for Production*\n## v${PACKAGE_JSON_VERSION}\n${LAST_COMMIT_LOG}" > /tmp/bot_message2.txt
+              printf "*New Version Staged for Production*\n## v${PACKAGE_JSON_VERSION}\n${LAST_COMMIT_LOG}\n\n" > /tmp/bot_message2.txt
             - cat /tmp/bot_message.txt >> /tmp/bot_message2.txt
 
             # Post to Slack

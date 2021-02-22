@@ -1,4 +1,4 @@
-import React, { FC, useState, MouseEvent } from 'react'
+import React, { FC, useState } from 'react'
 import { Input } from 'antd'
 import { Button, BasicModal, Avatar } from '@pabau/ui'
 import { SearchOutlined, PlusOutlined } from '@ant-design/icons'
@@ -14,16 +14,16 @@ interface groupData {
 }
 
 interface P {
-  groupData?: groupData
+  groupData: groupData
   searchMember?: Member[]
-  isGroupModalVisible?: boolean
+  isGroupModalVisible: boolean
   memberModalTitle?: string
   searchMemberText?: string
   selectedGroup?: string
   onClick?: () => void
   onOk?: () => void
-  onCancel?: (e?: MouseEvent<HTMLElement>) => void
-  onChange?: (e: MouseEvent<HTMLElement>) => void
+  onCancel?(): void
+  onChange?(): void
 }
 
 export const AddGroupModal: FC<P> = ({ ...props }) => {
@@ -42,24 +42,21 @@ export const AddGroupModal: FC<P> = ({ ...props }) => {
   const [searchMemberText, setSearchMemberText] = useState('')
 
   const searchGroupMember = (value) => {
-    const results = Array<Member>()
+    const results = new Array<Member>()
     if (groupData && selectedGroup) {
-      for (const key in groupData[selectedGroup]) {
-        if (
-          value !== '' &&
-          groupData[selectedGroup][key].userName.indexOf(value) !== -1
-        ) {
-          results.push(groupData[selectedGroup][key])
+      for (const v of groupData[selectedGroup]) {
+        if (value !== '' && v.userName.includes(value)) {
+          results.push(v)
         }
       }
-      setSearchMember([...results])
+      setSearchMember(results)
     }
   }
 
-  const handleChange = (e) => {
+  const handleChange: Input['handleChange'] = (e) => {
     setSearchMemberText(e.target.value)
     searchGroupMember(e.target.value)
-    onChange?.(e)
+    onChange?.()
   }
 
   return (
@@ -92,15 +89,15 @@ export const AddGroupModal: FC<P> = ({ ...props }) => {
         />
         {searchMemberText === '' &&
           selectedGroup &&
-          groupData?.[selectedGroup].map((member, index) => (
-            <div key={member.userName} className={styles.modalMember}>
+          groupData?.[selectedGroup].map(({ userName, profileURL }) => (
+            <div key={userName} className={styles.modalMember}>
               <div className={styles.memberInfo}>
                 <Avatar
                   className={styles.memberAvatar}
                   size={32}
-                  src={member.profileURL}
+                  src={profileURL}
                 />
-                <span className={styles.memberName}>{member.userName}</span>
+                <span className={styles.memberName}>{userName}</span>
               </div>
               <Button type="default" size="middle">
                 Remove
@@ -108,15 +105,15 @@ export const AddGroupModal: FC<P> = ({ ...props }) => {
             </div>
           ))}
         {searchMemberText !== '' &&
-          searchMember?.map((member, index) => (
-            <div key={member.userName} className={styles.modalMember}>
+          searchMember?.map(({ userName, profileURL }) => (
+            <div key={userName} className={styles.modalMember}>
               <div className={styles.memberInfo}>
                 <Avatar
                   className={styles.memberAvatar}
                   size={32}
-                  src={member.profileURL}
+                  src={profileURL}
                 />
-                <span className={styles.memberName}>{member.userName}</span>
+                <span className={styles.memberName}>{userName}</span>
               </div>
               <Button type="default" size="middle">
                 Remove

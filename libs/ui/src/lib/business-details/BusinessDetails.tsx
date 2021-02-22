@@ -73,12 +73,11 @@ export const BusinessDetails: FC<BusinessDetailsProps> = ({
 
   const handleSaveChanges = () => {
     Notification(NotificationType.success, 'Successfully saved changes')
-    onSave &&
-      onSave({
-        basicInformation: basicInfo,
-        languageSetting: langSetting,
-        businessLocation: bizLocation,
-      })
+    onSave?.({
+      basicInformation: basicInfo,
+      languageSetting: langSetting,
+      businessLocation: bizLocation,
+    })
   }
   const handleBasicInfoChange = (key, value) => {
     const _basicInfo: BasicInformation = { ...basicInfo }

@@ -2,11 +2,21 @@
   .question-bank-modal-body {
     padding: 0;
   }
+
+  :global {
+    .ant-modal-body {
+      >div {
+        padding: 0 !important;
+      }
+    }
+  }
 }
+
 .previewContainer {
   height: 467px;
   overflow: auto;
   background: #fff;
+
   @media screen and (max-width: 576px) {
     height: calc(100vh - 232px);
     padding: 20px 0;
@@ -16,20 +26,20 @@
   .questionRow {
     padding: 16px 16px;
     margin-bottom: 12px;
-    background: #FFFFFF;
-    border: 1px solid #ECEDF0;
+    background: #ffffff;
+    border: 1px solid #ecedf0;
     box-sizing: border-box;
     border-radius: 4px;
 
     .questionContent {
       margin-bottom: 0;
-      color: #3D3D46;
+      color: #3d3d46;
       font-size: 16px;
       line-height: 24px;
 
       .customDropdown {
         span {
-          color: #3D3D46;
+          color: #3d3d46;
           font-size: 16px;
           font-weight: 400;
         }
@@ -37,64 +47,68 @@
     }
   }
 }
+
 .btnWrap {
   display: flex;
   justify-content: flex-end;
   padding: 24px 0;
+
   .ant-btn {
     background: transparent !important;
   }
-  @media screen and (max-width: 992px) {
+
+  @media screen and (max-width: 991px) {
     padding: 20px 0;
-    button {
-      width: 100% !important;
-    }
   }
 }
+
 .tabContainer {
   :global .ant-tabs-nav {
     @media screen and (max-width: 576px) {
       margin-bottom: 0 !important;
     }
+
     .ant-tabs-nav-wrap {
       .ant-tabs-nav-list {
-
         width: 100%;
 
-          .ant-tabs-tab {
-            flex:1;
-            display: flex;
-            justify-content: center;
-            margin: 0;
-            background: #fff;
+        .ant-tabs-tab {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+          margin: 0;
+          background: #fff;
         }
       }
     }
-
   }
+
   :global .ant-tabs-content-holder {
     padding: 40px;
+
     @media screen and (max-width: 992px) {
-      padding: 16px!important;
+      padding: 16px !important;
       background: #fff !important;
     }
   }
 }
+
 .wrapperQuestion {
-  background: #F7F7F9;
+  background: #f7f7f9;
+
   .mobDevice {
     .queBank {
       font-weight: 500;
       line-height: 50px;
       text-transform: capitalize;
-      color: #3D3D46;
+      color: #3d3d46;
       margin-bottom: 16px;
       padding: 0 16px;
       background: #fff;
 
       span {
         margin-right: 10px;
-        color: #9292A3;
+        color: #9292a3;
       }
     }
   }

@@ -1,28 +1,25 @@
-// import { MeicalForm } from '@pabau/ui'
+import { MedicalFormTypes } from '@pabau/ui'
 import React, { FC, useEffect, useState } from 'react'
-import Conditions from '../medicalform/Conditions'
-import Dob from '../medicalform/Dob'
-import Drawing from '../medicalform/Drawing'
-import Dropdown from '../medicalform/Dropdown'
-import Drugs from '../medicalform/Drugs'
-import Heading from '../medicalform/Heading'
-import LabTest from '../medicalform/LabTest'
-import LongAnswer from '../medicalform/LongAnswer'
-import MultipleChoice from '../medicalform/MultipleChoice'
-import ShortAnswer from '../medicalform/ShortAnswer'
-import Signature from '../medicalform/Signature'
-import SingleChoice from '../medicalform/SingleChoice'
-import TravelDestination from '../medicalform/TravelDestination'
-import VaccineHistory from '../medicalform/VaccineHistory'
-import VaccineScheduler from '../medicalform/VaccineScheduler'
+import SettingElement from '../medicalform/SettingElement'
 import styles from './RightSidebar.module.less'
 
 interface P {
-  componentName?: string
-  display?: boolean
+  selectedForm: MedicalFormTypes
+  component: string
+  formType: string
+  display: boolean
+  handlingFormSetting?: (componentID?: string) => void
+  handlingDeleteForm?: (componentID?: string) => void
 }
 
-const RightSidebar: FC<P> = ({ componentName, display }) => {
+const RightSidebar: FC<P> = ({
+  selectedForm,
+  component,
+  formType,
+  display,
+  handlingFormSetting,
+  handlingDeleteForm,
+}) => {
   const [isVisible, setIsVisible] = useState(display)
 
   useEffect(() => {
@@ -33,10 +30,15 @@ const RightSidebar: FC<P> = ({ componentName, display }) => {
     right: '0px',
   }
   const hideStyle = {
-    right: '-400px',
+    right: '-100%',
   }
-  const hideSideBar = () => {
+  const handleSave = () => {
     setIsVisible(false)
+    handlingFormSetting?.('')
+  }
+  const handleDelete = () => {
+    setIsVisible(false)
+    handlingDeleteForm?.(selectedForm?.id)
   }
 
   return (
@@ -45,39 +47,13 @@ const RightSidebar: FC<P> = ({ componentName, display }) => {
         className={styles.componentDiv}
         style={isVisible ? showStyle : hideStyle}
       >
-        {componentName === 'Conditions' && (
-          <Conditions hideSideBar={hideSideBar} />
-        )}
-        {componentName === 'Dob' && <Dob hideSideBar={hideSideBar} />}
-        {componentName === 'Drawing' && <Drawing hideSideBar={hideSideBar} />}
-        {componentName === 'Dropdown' && <Dropdown hideSideBar={hideSideBar} />}
-        {componentName === 'Drugs' && <Drugs hideSideBar={hideSideBar} />}
-        {componentName === 'LabTest' && <LabTest hideSideBar={hideSideBar} />}
-        {componentName === 'LongAnswer' && (
-          <LongAnswer hideSideBar={hideSideBar} />
-        )}
-        {componentName === 'Heading' && <Heading hideSideBar={hideSideBar} />}
-        {componentName === 'MultipleChoice' && (
-          <MultipleChoice hideSideBar={hideSideBar} />
-        )}
-        {componentName === 'ShortAnswer' && (
-          <ShortAnswer hideSideBar={hideSideBar} />
-        )}
-        {componentName === 'Signature' && (
-          <Signature hideSideBar={hideSideBar} />
-        )}
-        {componentName === 'SingleChoice' && (
-          <SingleChoice hideSideBar={hideSideBar} />
-        )}
-        {componentName === 'TravelDestination' && (
-          <TravelDestination hideSideBar={hideSideBar} />
-        )}
-        {componentName === 'VaccineHistory' && (
-          <VaccineHistory hideSideBar={hideSideBar} />
-        )}
-        {componentName === 'VaccineScheduler' && (
-          <VaccineScheduler hideSideBar={hideSideBar} />
-        )}
+        <SettingElement
+          type={formType}
+          component={component}
+          selectedForm={selectedForm}
+          handleSave={handleSave}
+          handleDelete={handleDelete}
+        />
       </div>
     </div>
   )

@@ -5,6 +5,7 @@ import {
   MobileHeader,
   Notification,
   NotificationType,
+  SimpleDropdown,
 } from '@pabau/ui'
 import React, { FC, useEffect, useState } from 'react'
 import { DocumentNode, useMutation } from '@apollo/client'
@@ -20,6 +21,7 @@ import Layout from './Layout/Layout'
 import { LeftOutlined } from '@ant-design/icons'
 import classNames from 'classnames'
 import Link from 'next/link'
+import { useTranslationI18 } from '../hooks/useTranslationI18'
 
 const { Title } = Typography
 
@@ -32,7 +34,79 @@ interface P {
   aggregateQuery?: DocumentNode
   tableSearch?: boolean
   updateOrderQuery?: DocumentNode
+  showNotificationBanner?: boolean
+  createPage?: boolean
+  notificationBanner?: React.ReactNode
+  createPageOnClick?(): void
+  needTranslation?: boolean
 }
+
+const languages = [
+  {
+    key: 'en',
+    value: 'English(UK)',
+  },
+  {
+    key: 'en-us',
+    value: 'English(US)',
+  },
+  {
+    key: 'de',
+    value: 'German',
+  },
+  {
+    key: 'fr',
+    value: 'French',
+  },
+  {
+    key: 'es',
+    value: 'Spanish',
+  },
+  {
+    key: 'ar',
+    value: 'Arabic',
+  },
+  {
+    key: 'bg',
+    value: 'Bulgarian',
+  },
+  {
+    key: 'cs',
+    value: 'Czech',
+  },
+  {
+    key: 'da',
+    value: 'Danish',
+  },
+  {
+    key: 'hu',
+    value: 'Hungarian',
+  },
+  {
+    key: 'lv',
+    value: 'Latvian',
+  },
+  {
+    key: 'no',
+    value: 'Norwegian',
+  },
+  {
+    key: 'pl',
+    value: 'Polish',
+  },
+  {
+    key: 'sv',
+    value: 'Swedish',
+  },
+  {
+    key: 'ro',
+    value: 'Romanian',
+  },
+  {
+    key: 'ru',
+    value: 'Russian',
+  },
+]
 
 const CrudTable: FC<P> = ({
   schema,
@@ -43,10 +117,22 @@ const CrudTable: FC<P> = ({
   aggregateQuery,
   tableSearch = true,
   updateOrderQuery,
+  showNotificationBanner = false,
+  notificationBanner,
+  createPage = false,
+  createPageOnClick,
+  needTranslation = false,
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [isActive, setIsActive] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
+  const [currentLanguage, setCurrentLanguage] = useState<string>('English(UK)')
+  const { t, i18n } = useTranslationI18()
+
+  useEffect(() => {
+    const data = languages.find(({ value }) => value === currentLanguage)
+    i18n.changeLanguage(data.key)
+  }, [currentLanguage, i18n])
   // eslint-disable-next-line graphql/template-strings
   const [editMutation] = useMutation(editQuery, {
     onCompleted(data) {
@@ -64,7 +150,10 @@ const CrudTable: FC<P> = ({
   })
   const [updateOrderMutation] = useMutation(updateOrderQuery, {
     onError(err) {
-      Notification(NotificationType.error, 'Error! Marketing source update.')
+      Notification(
+        NotificationType.error,
+        `Error! ${schema.messages.update.error}`
+      )
     },
   })
   const [addMutation] = useMutation(addQuery, {
@@ -89,9 +178,11 @@ const CrudTable: FC<P> = ({
     currentPage: 1,
     showingRecords: 0,
   })
-  const [modalShowing, setModalShowing] = useState<
-    Record<string, string | boolean | number> | false
-  >(false)
+  const [modalShowing, setModalShowing] = useState(false)
+  const [editingRow, setEditingRow] = useState<
+    Record<string, string | boolean | number>
+  >({})
+
   const { data, error, loading } = useLiveQuery(listQuery, {
     variables: {
       isActive,
@@ -153,48 +244,47 @@ const CrudTable: FC<P> = ({
 
   const onSubmit = async (values, { resetForm }) => {
     console.log('got submittal!', values)
-    if (values.id)
-      await editMutation({
-        variables: values,
-        optimisticResponse: {},
-        update: (proxy) => {
-          if (listQuery) {
-            const existing = proxy.readQuery({
-              query: listQuery,
-            })
-            if (existing) {
-              const key = Object.keys(existing)[0]
-              proxy.writeQuery({
+    await (values.id
+      ? editMutation({
+          variables: values,
+          optimisticResponse: {},
+          update: (proxy) => {
+            if (listQuery) {
+              const existing = proxy.readQuery({
                 query: listQuery,
-                data: {
-                  [key]: [...existing[key], values],
-                },
               })
+              if (existing) {
+                const key = Object.keys(existing)[0]
+                proxy.writeQuery({
+                  query: listQuery,
+                  data: {
+                    [key]: [...existing[key], values],
+                  },
+                })
+              }
             }
-          }
-        },
-      })
-    else
-      await addMutation({
-        variables: values,
-        optimisticResponse: {},
-        update: (proxy) => {
-          if (listQuery) {
-            const existing = proxy.readQuery({
-              query: listQuery,
-            })
-            if (existing) {
-              const key = Object.keys(existing)[0]
-              proxy.writeQuery({
+          },
+        })
+      : addMutation({
+          variables: values,
+          optimisticResponse: {},
+          update: (proxy) => {
+            if (listQuery) {
+              const existing = proxy.readQuery({
                 query: listQuery,
-                data: {
-                  [key]: [...existing[key], values],
-                },
               })
+              if (existing) {
+                const key = Object.keys(existing)[0]
+                proxy.writeQuery({
+                  query: listQuery,
+                  data: {
+                    [key]: [...existing[key], values],
+                  },
+                })
+              }
             }
-          }
-        },
-      })
+          },
+        }))
     resetForm()
     setModalShowing(false)
   }
@@ -263,7 +353,12 @@ const CrudTable: FC<P> = ({
   }
 
   const createNew = () => {
-    setModalShowing({ name: '', isCreate: true })
+    setModalShowing((e) => !e)
+    setEditingRow({ name: '', isCreate: true })
+  }
+
+  const handleLanguageChange = (language: string): void => {
+    setCurrentLanguage(language)
   }
 
   return (
@@ -271,16 +366,16 @@ const CrudTable: FC<P> = ({
       enableReinitialize={true}
       validate={(e) =>
         Object.entries(fields).reduce((a, c) => {
-          if (c[1].min) {
+          if (
+            c[1].min && // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            c[1].min > e[c[0]].length
+          ) {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            if (c[1].min > e[c[0]].length) {
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              a[
-                c[0]
-              ] = `The value for ${c[1].shortLower} must be more than ${c[1].min} characters.`
-            }
+            a[
+              c[0]
+            ] = `The value for ${c[1].shortLower} must be more than ${c[1].min} characters.`
           }
           return a
           // eslint-disable-next-line
@@ -292,10 +387,7 @@ const CrudTable: FC<P> = ({
       }}
       //initialValues={typeof modalShowing === 'object' ? modalShowing : undefined}
       initialValues={
-        // eslint-disable-next-line
-        typeof modalShowing === 'object' && (modalShowing as any)?.id
-          ? modalShowing
-          : formikFields() //TODO: remove this, it should come from schema.fields[].*
+        editingRow?.id ? editingRow : formikFields() //TODO: remove this, it should come from schema.fields[].*
       }
     >
       <>
@@ -311,15 +403,30 @@ const CrudTable: FC<P> = ({
                 <Link href="/">
                   <LeftOutlined />
                 </Link>
-                <p> {schema.full || schema.short} </p>
+                <p>
+                  {' '}
+                  {needTranslation
+                    ? t('marketingsource-title.translation')
+                    : schema.full || schema.short}{' '}
+                </p>
               </div>
-              {addQuery && (
+              {addQuery && !createPage ? (
                 <AddButton
                   onClick={createNew}
                   onFilterSource={onFilterMarketingSource}
                   onSearch={onSearch}
                   schema={schema}
                   tableSearch={tableSearch}
+                  needTranslation={needTranslation}
+                />
+              ) : (
+                <AddButton
+                  onClick={createPageOnClick}
+                  onFilterSource={onFilterMarketingSource}
+                  onSearch={onSearch}
+                  schema={schema}
+                  tableSearch={tableSearch}
+                  needTranslation={needTranslation}
                 />
               )}
             </div>
@@ -329,7 +436,7 @@ const CrudTable: FC<P> = ({
         {modalShowing && (
           <CrudModal
             schema={schema}
-            editingRow={modalShowing}
+            editingRow={editingRow}
             addQuery={addQuery}
             listQuery={listQuery}
             deleteQuery={deleteQuery}
@@ -338,6 +445,7 @@ const CrudTable: FC<P> = ({
         )}
 
         <Layout>
+          {showNotificationBanner && notificationBanner}
           <div
             className={classNames(
               styles.tableMainHeading,
@@ -346,17 +454,40 @@ const CrudTable: FC<P> = ({
           >
             <div style={{ background: '#FFF' }}>
               <Breadcrumb
-                breadcrumbItems={['Setup', schema.full || schema.short]}
+                breadcrumbItems={[
+                  { breadcrumbName: 'Setup', path: 'setup' },
+                  { breadcrumbName: schema.full || schema.short, path: '' },
+                ]}
               />
               <Title>{schema.full || schema.short}</Title>
             </div>
-            {addQuery && (
+            {needTranslation && (
+              <div className={styles.btn}>
+                <SimpleDropdown
+                  label={'Change Language'}
+                  dropdownItems={prepareLanguages(languages)}
+                  value={currentLanguage}
+                  onSelected={handleLanguageChange}
+                />
+              </div>
+            )}
+            {addQuery && !createPage ? (
               <AddButton
                 onClick={createNew}
                 onFilterSource={onFilterMarketingSource}
                 onSearch={onSearch}
                 schema={schema}
                 tableSearch={tableSearch}
+                needTranslation={needTranslation}
+              />
+            ) : (
+              <AddButton
+                onClick={createPageOnClick}
+                onFilterSource={onFilterMarketingSource}
+                onSearch={onSearch}
+                schema={schema}
+                tableSearch={tableSearch}
+                needTranslation={needTranslation}
               />
             )}
           </div>
@@ -371,7 +502,7 @@ const CrudTable: FC<P> = ({
             isCustomIconExist={checkCustomColorIconExsist('icon')}
             noDataBtnText={schema.full}
             noDataText={schema.fullLower}
-            onAddTemplate={() => setModalShowing({ isCreate: true })}
+            onAddTemplate={() => createNew()}
             searchTerm={searchTerm}
             columns={[
               ...Object.entries(schema.fields).map(([k, v]) => ({
@@ -403,13 +534,17 @@ const CrudTable: FC<P> = ({
                 }
               }
               setSourceData(newData)
-              console.log('newData, oldIndex, newIndex ', {
+              console.log('newData, oldIndex, newIndex', {
                 newData,
                 oldIndex,
                 newIndex,
               })
             }}
-            onRowClick={(e) => setModalShowing(e)}
+            onRowClick={(e) => {
+              setEditingRow(e)
+              setModalShowing((e) => !e)
+            }}
+            needTranslation={needTranslation}
           />
           <Pagination
             total={paginateData.total}
@@ -424,6 +559,13 @@ const CrudTable: FC<P> = ({
       </>
     </Formik>
   )
+}
+
+function prepareLanguages(languages): Array<string> {
+  const array = languages?.map(({ value }) => {
+    return value
+  })
+  return array
 }
 
 export default CrudTable
