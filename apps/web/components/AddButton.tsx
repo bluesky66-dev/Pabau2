@@ -5,6 +5,7 @@ import {
   FilterOutlined,
   PlusSquareFilled,
   SearchOutlined,
+  InboxOutlined,
 } from '@ant-design/icons'
 import { Drawer, Input, Popover, Radio } from 'antd'
 import classNames from 'classnames'
@@ -151,15 +152,30 @@ const AddButton: FC<P> = ({
               : 'Filter'}
           </Button>
         </Popover>
-        <Button
-          className={styles.createSourceBtn}
-          type="primary"
-          onClick={() => onClick?.()}
-        >
-          {needTranslation
-            ? t('marketingsource-header-create.translation')
-            : schema.createButtonLabel}
-        </Button>
+        {schema.createButtonLabel && (
+          <Button
+            className={styles.createSourceBtn}
+            type="primary"
+            onClick={() => onClick?.()}
+          >
+            {needTranslation
+              ? t('marketingsource-header-create.translation')
+              : schema.createButtonLabel}
+          </Button>
+        )}
+        {schema.inboxButton && (
+          <Button
+            className={styles.inboxSourceBtn}
+            type="primary"
+            onClick={() => onClick?.()}
+          >
+            <InboxOutlined />{' '}
+            {needTranslation
+              ? t('marketingsource-header-create.translation')
+              : 'Inbox'}
+            <span className={styles.inboxMsgNum}> 3</span>
+          </Button>
+        )}
       </div>
     </>
   )

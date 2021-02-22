@@ -103,6 +103,7 @@ const schema: Schema = {
   short: 'Labs',
   shortLower: 'labs',
   draggable: false,
+  inboxButton: true,
   messages: {
     create: {
       success: 'New lab created.',
@@ -208,11 +209,6 @@ export const Index: FC = () => {
               <div className={styles.cardTitle}>
                 <h1>{schema.short}</h1>
               </div>
-            </div>
-            <div>
-              <Button type="primary" size="large" icon={<InboxOutlined />}>
-                Inbox
-              </Button>
             </div>
           </div>
           <div className={styles.cardBody}>

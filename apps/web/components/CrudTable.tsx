@@ -453,6 +453,7 @@ const CrudTable: FC<P> = ({
 
         <Layout>
           {showNotificationBanner && notificationBanner}
+          {rest.children}
           <div
             className={classNames(
               styles.tableMainHeading,
@@ -474,6 +475,7 @@ const CrudTable: FC<P> = ({
                 {schema.full || schema.short}
               </Title>
             </div>
+
             {needTranslation && (
               <div className={styles.btn}>
                 <SimpleDropdown

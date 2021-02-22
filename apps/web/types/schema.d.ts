@@ -16,6 +16,7 @@ interface Schema {
   notification?: Record<NotificationItems>
   breadScrumbs?: array<BreadScrumb>
   createButtonLabel?: string
+  inboxButton?: boolean
 }
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface SchemaItem {
