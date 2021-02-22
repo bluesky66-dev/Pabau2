@@ -1,10 +1,20 @@
 import React, { ReactText, useState } from 'react'
 import { SingleReport } from '../SingleReport/SingleReport'
 import { ShowMore } from '../ShowMore/ShowMore'
+import { v4 as uuidv4 } from 'uuid'
 
 import styles from './ReportsCard.module.less'
 
-import ReactHighcharts from 'react-highcharts'
+import Highcharts from 'highcharts'
+import {
+  HighchartsProvider,
+  HighchartsChart,
+  Chart,
+  XAxis,
+  YAxis,
+  Tooltip,
+  AreaSeries,
+} from 'react-jsx-highcharts'
 
 interface report {
   id: number
@@ -25,61 +35,14 @@ interface ReportsCardProps {
 
 export const ReportsCard: React.FC<ReportsCardProps> = ({
   reports = [],
-  catHeading,
-  graphDescription,
-  description,
-  chartLabel,
-  graphData,
+  catHeading = '',
+  graphDescription = '',
+  description = '',
+  chartLabel = '',
+  graphData = [],
 }) => {
   const [showAll, setShowAll] = useState(false)
   const id = reports[0] ? reports[reports.length - 1].id + 1 : 1
-
-  const config = {
-    chart: {
-      type: 'area',
-      backgroundColor: 'rgba(236, 237, 240, 0.2)',
-      height: '36px',
-      borderRadius: 3,
-      marginBottom: 5,
-    },
-
-    title: {
-      text: '',
-    },
-
-    subtitle: {
-      text: '',
-    },
-
-    xAxis: {
-      visible: false,
-    },
-
-    yAxis: {
-      visible: false,
-    },
-
-    credits: {
-      enabled: false,
-    },
-
-    legend: {
-      enabled: false,
-    },
-
-    tooltip: {
-      formatter: function () {
-        return `${this.key} - ${chartLabel + this.y}`
-      },
-    },
-
-    series: [
-      {
-        name: catHeading,
-        data: graphData,
-      },
-    ],
-  }
 
   const showMoreHandler = () => setShowAll((showAll) => !showAll)
 
@@ -93,7 +56,29 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
       </div>
 
       <div className={styles.reportsCardGraph}>
-        <ReactHighcharts config={config} />
+        <HighchartsProvider Highcharts={Highcharts}>
+          <HighchartsChart>
+            <Chart
+              height="36px"
+              borderRadius={3}
+              marginBottom={0}
+              backgroundColor="rgba(236, 237, 240, 0.2)"
+              type="area"
+            />
+
+            <Tooltip
+              formatter={function () {
+                return `${this.key} - ${chartLabel + this.y}`
+              }}
+            />
+
+            <XAxis id={uuidv4()} visible={false}></XAxis>
+
+            <YAxis id={uuidv4()} visible={false}>
+              <AreaSeries id={uuidv4()} name={catHeading} data={graphData} />
+            </YAxis>
+          </HighchartsChart>
+        </HighchartsProvider>
       </div>
 
       {showAll
