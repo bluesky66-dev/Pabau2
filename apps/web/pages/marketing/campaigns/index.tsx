@@ -62,6 +62,7 @@ const UPDATE_ORDER_MUTATION = gql`
 const schema: Schema = {
   full: 'Marketing Campaign',
   short: 'Campaign',
+  createButtonLabel: 'Create Campaign',
   fields: {
     name: {
       full: 'Friendly Name',

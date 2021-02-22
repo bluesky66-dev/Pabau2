@@ -92,6 +92,7 @@ const schema: Schema = {
   fullLower: 'job title',
   short: 'Job Title',
   shortLower: 'job title',
+  createButtonLabel: 'Create Job Title',
   messages: {
     create: {
       success: 'You have successfully created a job title',

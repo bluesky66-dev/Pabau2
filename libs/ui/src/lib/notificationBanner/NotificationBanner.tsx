@@ -10,6 +10,9 @@ interface P {
   imgPath?: string
   allowClose?: boolean
   setHide: [boolean, React.Dispatch<React.SetStateAction<boolean>>]
+  showPaymentButton?: boolean
+  email?: string
+  showEmail?: boolean
 }
 
 export const NotificationBanner: FC<P> = ({
@@ -17,10 +20,13 @@ export const NotificationBanner: FC<P> = ({
   desc,
   imgPath,
   allowClose,
+  email,
   setHide: [isHide, setHide],
   // selectLanguageHook: [string, React.Dispatch<React.SetStateAction<string>>]
   // childHook: [isHide, React.Dispatch<React.SetStateAction<[]>>]
   // const [isHide, setHide] = useState(false)
+  showPaymentButton = true,
+  showEmail = false,
 }) => {
   return (
     <div
@@ -31,15 +37,17 @@ export const NotificationBanner: FC<P> = ({
         <Col md={16} sm={12}>
           <p className={styles.title1}>{title}</p>
           <p className={styles.title2}>{desc}</p>
-          <Button
-            className={styles.btnPayment}
-            // onClick={() => {}}
-
-            size="middle"
-            type="link"
-          >
-            Enable Payments
-          </Button>
+          {showEmail && <p className={styles.linkEmail}>{email}</p>}
+          {showPaymentButton && (
+            <Button
+              className={styles.btnPayment}
+              // onClick={() => {}}
+              size="middle"
+              type="link"
+            >
+              Enable Payments
+            </Button>
+          )}
         </Col>
         {allowClose && (
           <img

@@ -274,9 +274,6 @@
       filter: {}
 - table:
     schema: public
-    name: family_relationships
-- table:
-    schema: public
     name: issuing_company
   insert_permissions:
   - role: public
@@ -349,54 +346,6 @@
       - updated_at
       filter: {}
       check: null
-  delete_permissions:
-  - role: public
-    permission:
-      filter: {}
-- table:
-    schema: public
-    name: labs_dashboard
-  insert_permissions:
-  - role: public
-    permission:
-      check: {}
-      columns:
-      - client
-      - lab
-      - labNo
-      - lastUpdate
-      - public
-      - requested
-      - requester
-      - test
-      backend_only: false
-  select_permissions:
-  - role: public
-    permission:
-      columns:
-      - client
-      - lab
-      - labNo
-      - lastUpdate
-      - public
-      - requested
-      - requester
-      - test
-      filter: {}
-  update_permissions:
-  - role: public
-    permission:
-      columns:
-      - labNo
-      - client
-      - test
-      - requested
-      - lastUpdate
-      - lab
-      - requester
-      - public
-      filter: {}
-      check: {}
   delete_permissions:
   - role: public
     permission:

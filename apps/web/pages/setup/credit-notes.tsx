@@ -107,6 +107,7 @@ const schema: Schema = {
   fullLower: 'Credit note type',
   short: 'Credit Note Type',
   shortLower: 'credit note type',
+  createButtonLabel: 'Create Credit Note Type',
   messages: {
     create: {
       success: 'You have successfully created a credit note',

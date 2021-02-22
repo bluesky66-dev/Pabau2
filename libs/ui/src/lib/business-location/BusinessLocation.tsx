@@ -107,8 +107,12 @@ export const BusinessLocation: FC<BusinessLocationProps> = ({
       <p>Where is your business located?</p>
       <GooglePlacesAutocomplete
         apiKey={apiKey}
-        initialValue={location}
-        onSelect={(result) => handleChange(result.description)}
+        selectProps={{
+          value: location,
+          inputValue: location,
+          onInputChange: (val) => setLocation(val),
+          onChange: (result) => handleChange(result.value.description),
+        }}
       />
       <div className={styles.businessLocationDetails}>
         <p
