@@ -2,7 +2,8 @@ import React, { FC, useEffect, useState } from 'react'
 // import { ReactComponent as CheckBadge } from '../../assets/images/check-badge.svg'
 import styles from './ColorPicker.module.less'
 import classNames from 'classnames'
-import { CheckOutlined } from '@ant-design/icons'
+import { CheckOutlined, PlusOutlined } from '@ant-design/icons'
+import { SketchPicker } from 'react-color'
 interface P {
   color: string
   selected: boolean
@@ -17,7 +18,7 @@ const ColorItem: FC<P> = (props: P) => {
     <div
       className={classNames(styles.colorItem, selected && styles.selectedColor)}
       style={{
-        backgroundColor: selected ? "#fff" : color,
+        backgroundColor: selected ? '#fff' : color,
         // border: hovering || selected ? '1px solid #54B2D3' : 'none',
         boxSizing: 'border-box',
         // opacity: hovering || selected ? '1' : '0.2',
@@ -68,6 +69,7 @@ export const ColorPicker: FC<PickerProps> = ({
   ]
 
   const [selColor, setSelColor] = useState(selectedColor)
+  const [isAddingColor, setIsAddingColor] = useState(false)
 
   useEffect(() => {
     setSelColor(selectedColor)
@@ -76,6 +78,13 @@ export const ColorPicker: FC<PickerProps> = ({
   const onClickColorItem = (color) => {
     setSelColor(color)
     onSelected(color)
+  }
+  const onClickAddCustomColor = () => {
+    setIsAddingColor((e) => !e)
+  }
+  const handleChangeComplete = (color) => {
+    onClickColorItem(color.hex)
+    colorData.push(color.hex)
   }
 
   return (
@@ -93,6 +102,15 @@ export const ColorPicker: FC<PickerProps> = ({
           />
         ))}
       </div>
+      <div className={styles.addColor} onClick={() => onClickAddCustomColor()}>
+        <PlusOutlined />
+      </div>
+      {isAddingColor && (
+        <SketchPicker
+          color={selColor}
+          onChangeComplete={(color) => handleChangeComplete(color)}
+        />
+      )}
     </div>
   )
 }
