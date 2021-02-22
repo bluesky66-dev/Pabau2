@@ -1,12 +1,12 @@
-import React, { PropsWithChildren } from 'react'
+import React, { FC } from 'react'
 import { EmailSMSPreviewProps, MedicalFormProps } from './EmailSMSPreview'
 import { Col, Row } from 'antd'
 import styles from './EmailSMSPreview.module.less'
 
-export function MedicalForm({
+export const MedicalForm: FC<MedicalFormProps & EmailSMSPreviewProps> = ({
   message,
   contactNumber,
-}: PropsWithChildren<MedicalFormProps & EmailSMSPreviewProps>): JSX.Element {
+}) => {
   return (
     <Row className={styles.messageContent}>
       <Col>

@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import React, { FC } from 'react'
 import { EmailSMSPreviewProps, GiftVoucherProps } from './EmailSMSPreview'
 import { Col, Divider, Row } from 'antd'
 import styles from './EmailSMSPreview.module.less'
@@ -9,12 +9,12 @@ import {
   TwitterOutlined,
 } from '@ant-design/icons'
 
-export function GiftVaoucher({
+export const GiftVoucher: FC<GiftVoucherProps & EmailSMSPreviewProps> = ({
   value,
   voucherCode,
   expiry,
   consultancyName,
-}: PropsWithChildren<GiftVoucherProps & EmailSMSPreviewProps>): JSX.Element {
+}) => {
   return (
     <>
       <Row gutter={[0, 4]} className={styles.break}>
@@ -65,4 +65,4 @@ export function GiftVaoucher({
   )
 }
 
-export default GiftVaoucher
+export default GiftVoucher

@@ -1,16 +1,12 @@
-import React, { PropsWithChildren } from 'react'
+import React, { FC } from 'react'
 import { EmailSMSPreviewProps, NoShowAppointmentProps } from './EmailSMSPreview'
 import { Col, Row } from 'antd'
 import styles from './EmailSMSPreview.module.less'
 import { Button } from '../button/button'
 
-export function NoShowAppointment({
-  message,
-  contactNumber,
-  footerContact,
-}: PropsWithChildren<
+export const NoShowAppointment: FC<
   NoShowAppointmentProps & EmailSMSPreviewProps
->): JSX.Element {
+> = ({ message, contactNumber, footerContact }) => {
   return (
     <>
       <Row gutter={[0, 4]} className={styles.break}>

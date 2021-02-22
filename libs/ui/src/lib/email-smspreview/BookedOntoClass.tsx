@@ -1,18 +1,12 @@
-import React, { PropsWithChildren } from 'react'
+import React, { FC } from 'react'
 import { BookedOntoClassProps, EmailSMSPreviewProps } from './EmailSMSPreview'
 import { Col, Divider, Row } from 'antd'
 import { ReactComponent as Calendar } from '../../assets/images/calendar.svg'
 import styles from './EmailSMSPreview.module.less'
 
-export function BookedOntoClass({
-  dateTime,
-  consultancyName,
-  consultationDetail,
-  message,
-  address,
-}: PropsWithChildren<
+export const BookedOntoClass: FC<
   BookedOntoClassProps & EmailSMSPreviewProps
->): JSX.Element {
+> = ({ dateTime, consultancyName, consultationDetail, message, address }) => {
   return (
     <>
       <Divider className={styles.dividerHr} />
@@ -26,8 +20,8 @@ export function BookedOntoClass({
       </Row>
       <Row className={styles.calenderDateTime}>
         <Col>
-          <p className={styles.calenderDate}>{dateTime}</p>
-          <p className={styles.calenderDate}>{consultationDetail}</p>
+          <p>{dateTime}</p>
+          <p>{consultationDetail}</p>
         </Col>
       </Row>
       <Row className={styles.consultancyNameAddr}>
@@ -43,8 +37,8 @@ export function BookedOntoClass({
       </Row>
       <Row className={styles.textBox}>
         <Col>
-          <p className={styles.text}>Kind regards,</p>
-          <p className={styles.text}>Your friends at The Clinic</p>
+          <p>Kind regards,</p>
+          <p>Your friends at The Clinic</p>
         </Col>
       </Row>
     </>

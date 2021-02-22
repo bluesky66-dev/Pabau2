@@ -1,14 +1,12 @@
-import React, { PropsWithChildren } from 'react'
+import React, { FC } from 'react'
 import { EmailSMSPreviewProps, ClassRescheduledProps } from './EmailSMSPreview'
 import { Col, Row } from 'antd'
 import styles from './EmailSMSPreview.module.less'
 import { Button } from '../button/button'
 
-export function RequestFeedBack({
-  message,
-}: PropsWithChildren<
+export const RequestFeedBack: FC<
   ClassRescheduledProps & EmailSMSPreviewProps
->): JSX.Element {
+> = ({ message }) => {
   return (
     <>
       <Row gutter={[0, 4]} className={styles.break}>
@@ -30,8 +28,8 @@ export function RequestFeedBack({
       </Row>
       <Row gutter={[0, 4]} className={styles.textBox}>
         <Col>
-          <p className={styles.text}>Thank you for your support!</p>
-          <p className={styles.text}>Your friends at The Clinic</p>
+          <p>Thank you for your support!</p>
+          <p>Your friends at The Clinic</p>
         </Col>
       </Row>
     </>

@@ -1,14 +1,12 @@
-import React, { PropsWithChildren } from 'react'
+import React, { FC } from 'react'
 import { EmailSMSPreviewProps, ClassRescheduledProps } from './EmailSMSPreview'
 import { Col, Row } from 'antd'
 import styles from './EmailSMSPreview.module.less'
 import { Button } from '../button/button'
 
-export function ClassWaitList({
-  message,
-}: PropsWithChildren<
+export const ClassWaitList: FC<
   ClassRescheduledProps & EmailSMSPreviewProps
->): JSX.Element {
+> = ({ message }) => {
   return (
     <>
       <Row gutter={[0, 4]} className={styles.break}>

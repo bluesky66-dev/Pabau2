@@ -187,7 +187,7 @@ export const EmailSMSPreview = (
   }
 
   return (
-    <div>
+    <div className={styles.previewWrapper}>
       <Row justify="center" className={styles.previewButtonGroup}>
         <Radio.Group defaultValue="email" buttonStyle="solid">
           <Radio.Button

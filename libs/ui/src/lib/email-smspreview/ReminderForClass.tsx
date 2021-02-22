@@ -1,14 +1,11 @@
-import React, { PropsWithChildren } from 'react'
+import React, { FC } from 'react'
 import { EmailSMSPreviewProps, ReminderForClassProps } from './EmailSMSPreview'
 import { Col, Row } from 'antd'
 import styles from './EmailSMSPreview.module.less'
 
-export function ReminderForClass({
-  message,
-  contactNumber,
-}: PropsWithChildren<
+export const ReminderForClass: FC<
   ReminderForClassProps & EmailSMSPreviewProps
->): JSX.Element {
+> = ({ message, contactNumber }) => {
   return (
     <>
       <Row gutter={[0, 4]} className={styles.break}>
