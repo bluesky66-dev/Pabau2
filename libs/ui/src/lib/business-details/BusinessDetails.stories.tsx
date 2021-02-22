@@ -5,7 +5,9 @@ export default {
   component: BusinessDetails,
   title: 'Business Details/Details',
   args: {},
-  argTypes: {},
+  argTypes: {
+    onSave: { action: 'onSave' },
+  },
 }
 
 const DetailsStory = ({ ...args }) => {

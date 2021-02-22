@@ -37,7 +37,9 @@ const members = [
 export default {
   component: AddPeopleModal,
   title: 'Chat/AddPeopleModal',
-  onClick: { action: 'onClick' },
+  argTypes: {
+    onCancel: { action: 'onCancel' },
+  },
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 

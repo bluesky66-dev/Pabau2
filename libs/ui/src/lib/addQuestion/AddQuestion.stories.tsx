@@ -23,8 +23,8 @@ export default {
   argTypes: {
     description: { control: { type: 'text' } },
     questions: { control: { type: 'object' } },
+    onChange: { action: 'onChange' },
   },
-  onChange: { action: 'onChange' },
 }
 
 export const AddQuestionStory: FC<AddQuestionProps> = ({

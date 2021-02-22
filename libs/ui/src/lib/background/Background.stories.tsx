@@ -25,7 +25,9 @@ export default {
       return name
     },
   },
-  onChange: { action: 'onChange' },
+  argTypes: {
+    onChange: { action: 'onChange' },
+  },
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 

@@ -23,7 +23,7 @@ interface P {
   onClick?: () => void
   onOk?: () => void
   onCancel?(): void
-  onChange?(): void
+  onChange?(value: string): void
 }
 
 export const AddGroupModal: FC<P> = ({ ...props }) => {
@@ -56,7 +56,7 @@ export const AddGroupModal: FC<P> = ({ ...props }) => {
   const handleChange: Input['handleChange'] = (e) => {
     setSearchMemberText(e.target.value)
     searchGroupMember(e.target.value)
-    onChange?.()
+    onChange?.(e.target.value)
   }
 
   return (

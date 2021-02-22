@@ -60,7 +60,9 @@ const groupData = {
 export default {
   component: AddGroupModal,
   title: 'Chat/AddGroupModal',
-  onClick: { action: 'onClick' },
+  argTypes: {
+    onChange: { action: 'onChange' },
+  },
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 

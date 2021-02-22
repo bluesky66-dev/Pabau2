@@ -25,11 +25,7 @@ export default {
         type: 'array',
       },
     },
-    onChange: {
-      control: {
-        disable: true,
-      },
-    },
+    onChange: { action: 'onChange' },
   },
 }
 

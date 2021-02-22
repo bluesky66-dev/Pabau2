@@ -5,7 +5,9 @@ export default {
   component: BusinessDetailsNotifications,
   title: 'Business Details/Notifications',
   args: {},
-  argTypes: {},
+  argTypes: {
+    onSave: { action: 'onSave' },
+  },
 }
 
 const NotificationsStory = ({ ...args }) => {
@@ -13,8 +15,3 @@ const NotificationsStory = ({ ...args }) => {
 }
 
 export const Basic = NotificationsStory.bind({})
-Basic.args = {
-  onSave: (val) => {
-    console.log(val)
-  },
-}
