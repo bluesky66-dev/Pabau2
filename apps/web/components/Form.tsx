@@ -1,16 +1,18 @@
 import React, { FC } from 'react'
 import { Form as AntForm, Input, Radio, Checkbox } from 'formik-antd'
 // import { Radio } from 'antd'
-import { ColorPicker, FontIcon } from '@pabau/ui'
-import { FormikValues } from 'formik'
+import { ColorPicker, FontIcon, HelpTooltip } from '@pabau/ui'
+import { FormikContextType } from 'formik'
 interface P {
   schema: Schema
-  values: FormikValues
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  formik: FormikContextType<any>
   layout?: 'horizontal' | 'inline' | 'vertical'
 }
 
-const Form: FC<P> = ({ schema, values, layout = 'vertical' }) => {
+const Form: FC<P> = ({ schema, formik, layout = 'vertical' }) => {
   const { fields } = schema
+  const { values } = formik
 
   return (
     <AntForm layout={layout} requiredMark={false}>
@@ -28,6 +30,7 @@ const Form: FC<P> = ({ schema, values, layout = 'vertical' }) => {
               type,
               radio,
               full,
+              required,
             },
           ],
           i
@@ -58,24 +61,34 @@ const Form: FC<P> = ({ schema, values, layout = 'vertical' }) => {
             )}
 
             {type === 'color-picker' && (
-              <AntForm.Item key={name} name={name}>
+              <AntForm.Item key={name} name={name} required={required}>
                 <div style={{ width: '344px' }}>
                   <ColorPicker
                     selectedColor={values.color}
                     isDarkColor={true}
                     onSelected={(val) => {
-                      values.color = val
+                      formik.setFieldValue(name, val)
                     }}
                     heading={values.appointment_type + ' ' + full}
                   />
+                  {!values[name] && formik.errors?.color && (
+                    <span style={{ color: 'red' }}>{formik.errors?.color}</span>
+                  )}
                 </div>
               </AntForm.Item>
             )}
             {type === 'checkbox' && (
               <AntForm.Item key={name} name={name}>
-                <Checkbox name={name} defaultChecked={true}>
+                <Checkbox
+                  name={name}
+                  defaultChecked={true}
+                  className={'track-time-checkbox'}
+                >
                   {full}
                 </Checkbox>
+                {description && (
+                  <HelpTooltip placement={'top'} helpText={description} />
+                )}
               </AntForm.Item>
             )}
             {(type === 'string' || type === 'number') && (
