@@ -23,21 +23,21 @@
   - role: public
     permission:
       columns:
-      - city
-      - country
-      - created_at
-      - email
-      - id
       - integration
       - is_active
-      - name
       - order
-      - phone
       - postal_code
       - provider_number
+      - city
+      - country
+      - email
+      - name
+      - phone
       - street
       - street2
+      - created_at
       - updated_at
+      - id
       filter: {}
       allow_aggregations: true
   update_permissions:
@@ -471,69 +471,6 @@
 - table:
     schema: public
     name: leads
-  insert_permissions:
-  - role: public
-    permission:
-      check: {}
-      columns:
-      - is_active
-      - status
-      - created_at
-      - updated_at
-      - lead_age
-      - order
-      - phone
-      - email
-      - interest
-      - lead_name
-      - lead_owner
-      - lead_source
-      - lead_status
-      - location
-      - id
-      backend_only: false
-  select_permissions:
-  - role: public
-    permission:
-      columns:
-      - is_active
-      - status
-      - created_at
-      - updated_at
-      - lead_age
-      - order
-      - phone
-      - email
-      - interest
-      - lead_name
-      - lead_owner
-      - lead_source
-      - lead_status
-      - location
-      - id
-      filter: {}
-      allow_aggregations: true
-  update_permissions:
-  - role: public
-    permission:
-      columns:
-      - is_active
-      - status
-      - created_at
-      - updated_at
-      - lead_age
-      - order
-      - phone
-      - email
-      - interest
-      - lead_name
-      - lead_owner
-      - lead_source
-      - lead_status
-      - location
-      - id
-      filter: {}
-      check: {}
   delete_permissions:
   - role: public
     permission:
@@ -733,14 +670,17 @@
       - created_at
       - id
       - is_active
+      - order
       - salutation
       - updated_at
       filter: {}
+      allow_aggregations: true
   update_permissions:
   - role: public
     permission:
       columns:
       - is_active
+      - order
       - salutation
       filter: {}
       check: null

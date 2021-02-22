@@ -3,6 +3,7 @@ import { NextPage } from 'next'
 import React from 'react'
 import CrudLayout from '../../components/CrudLayout/CrudLayout'
 
+/* eslint-disable graphql/template-strings */
 const LIST_QUERY = gql`
   query salutation(
     $isActive: Boolean = true
@@ -13,7 +14,7 @@ const LIST_QUERY = gql`
     salutation(
       offset: $offset
       limit: $limit
-      order_by: { salutation: desc }
+      order_by: { order: desc }
       where: {
         is_active: { _eq: $isActive }
         _or: [{ _and: [{ salutation: { _ilike: $searchTerm } }] }]
@@ -23,7 +24,7 @@ const LIST_QUERY = gql`
       id
       salutation
       is_active
-    
+      order
     }
   }
 `
@@ -54,7 +55,9 @@ const DELETE_MUTATION = gql`
 `
 const ADD_MUTATION = gql`
   mutation insert_salutation_one($salutation: String!, $is_active: Boolean) {
-    insert_salutation_one(object: { salutation: $salutation, is_active: $is_active }) {
+    insert_salutation_one(
+      object: { salutation: $salutation, is_active: $is_active }
+    ) {
       __typename
       id
     }
@@ -63,25 +66,25 @@ const ADD_MUTATION = gql`
 const EDIT_MUTATION = gql`
   mutation update_salutation_by_pk(
     $id: uuid!
-    $name: String!
+    $salutation: String!
     $is_active: Boolean
     $order: Int
   ) {
     update_salutation_by_pk(
       pk_columns: { id: $id }
-      _set: { salutation: $salutation, is_active: $is_active}
+      _set: { salutation: $salutation, is_active: $is_active, order: $order }
     ) {
       __typename
       id
       is_active
-    
+      order
     }
   }
 `
 
 const UPDATE_ORDER_MUTATION = gql`
-  mutation update_salutation_order($id: uuid!) {
-    update_departments(where: { id: { _eq: $id } }) {
+  mutation update_salutation_order($id: uuid!, $order: Int) {
+    update_salutation(where: { id: { _eq: $id } }, _set: { order: $order }) {
       affected_rows
     }
   }
@@ -92,18 +95,19 @@ const schema: Schema = {
   fullLower: 'salutation',
   short: 'Salutation',
   shortLower: 'salutation',
+  createButtonLabel: 'Create Salutation',
   messages: {
     create: {
-      success: 'You have successfully created a department',
-      error: 'While creating a department',
+      success: 'You have successfully created a salutation',
+      error: 'While creating a salutation',
     },
     update: {
-      success: 'You have successfully updated a department',
-      error: 'While updating a department',
+      success: 'You have successfully updated a salutation',
+      error: 'While updating a salutation',
     },
     delete: {
-      success: 'You have successfully deleted a department',
-      error: 'While deleting a department',
+      success: 'You have successfully deleted a salutation',
+      error: 'While deleting a salutation',
     },
   },
   fields: {
@@ -113,7 +117,7 @@ const schema: Schema = {
       short: 'Salutation',
       shortLower: 'salutation',
       min: 2,
-      example: 'Mr.',
+      example: 'King',
       // description: 'A friendly name',
       // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
@@ -127,7 +131,7 @@ const schema: Schema = {
   },
 }
 
-export const Departments: NextPage = () => {
+export const Salutation: NextPage = () => {
   return (
     <CrudLayout
       schema={schema}
@@ -138,8 +142,9 @@ export const Departments: NextPage = () => {
       editQuery={EDIT_MUTATION}
       aggregateQuery={LIST_AGGREGATE_QUERY}
       updateOrderQuery={UPDATE_ORDER_MUTATION}
+      addFilter={false}
     />
   )
 }
 
-export default Departments
+export default Salutation

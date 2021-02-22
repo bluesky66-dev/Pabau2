@@ -31,7 +31,7 @@ const AddButton: FC<P> = ({
   onFilterSource,
   onSearch,
   tableSearch = true,
-  addFilter,
+  addFilter = true,
   needTranslation,
 }) => {
   const [isActive, setIsActive] = useState(true)

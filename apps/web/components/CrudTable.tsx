@@ -433,6 +433,7 @@ const CrudTable: FC<P> = ({
                   schema={schema}
                   tableSearch={tableSearch}
                   needTranslation={needTranslation}
+                  addFilter={addFilter}
                 />
               ) : (
                 <AddButton
@@ -495,6 +496,7 @@ const CrudTable: FC<P> = ({
                 schema={schema}
                 tableSearch={tableSearch}
                 needTranslation={needTranslation}
+                addFilter={addFilter}
               />
             ) : (
               <AddButton

@@ -262,7 +262,7 @@ type Labs {
   order: Int!
   phone: String!
   postal_code: numeric!
-  provider_number: numeric!
+  provider_number: numeric
   street: String!
   street2: String
   updated_at: timestamptz!
@@ -1769,23 +1769,6 @@ type credit_note_type_variance_fields {
   order: Float
 }
 
-scalar date
-
-"""
-Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'.
-"""
-input date_comparison_exp {
-  _eq: date
-  _gt: date
-  _gte: date
-  _in: [date!]
-  _is_null: Boolean
-  _lt: date
-  _lte: date
-  _neq: date
-  _nin: [date!]
-}
-
 """
 columns and relationships of "departments"
 """
@@ -2251,7 +2234,7 @@ type issuing_company {
   is_draft: Boolean!
   name: String!
   order: Int!
-  phone: numeric
+  phone: String!
   post_code: numeric
   street: String
   updated_at: timestamptz!
@@ -2288,7 +2271,6 @@ type issuing_company_aggregate_fields {
 type issuing_company_avg_fields {
   invoice_starting_number: Float
   order: Float
-  phone: Float
   post_code: Float
 }
 
@@ -2310,7 +2292,7 @@ input issuing_company_bool_exp {
   is_draft: Boolean_comparison_exp
   name: String_comparison_exp
   order: Int_comparison_exp
-  phone: numeric_comparison_exp
+  phone: String_comparison_exp
   post_code: numeric_comparison_exp
   street: String_comparison_exp
   updated_at: timestamptz_comparison_exp
@@ -2332,7 +2314,6 @@ input type for incrementing numeric columns in table "issuing_company"
 input issuing_company_inc_input {
   invoice_starting_number: numeric
   order: Int
-  phone: numeric
   post_code: numeric
 }
 
@@ -2349,7 +2330,7 @@ input issuing_company_insert_input {
   is_draft: Boolean
   name: String
   order: Int
-  phone: numeric
+  phone: String
   post_code: numeric
   street: String
   vat_registered: Boolean
@@ -2367,7 +2348,7 @@ type issuing_company_max_fields {
   invoice_template: String
   name: String
   order: Int
-  phone: numeric
+  phone: String
   post_code: numeric
   street: String
   updated_at: timestamptz
@@ -2385,7 +2366,7 @@ type issuing_company_min_fields {
   invoice_template: String
   name: String
   order: Int
-  phone: numeric
+  phone: String
   post_code: numeric
   street: String
   updated_at: timestamptz
@@ -2507,7 +2488,7 @@ input issuing_company_set_input {
   is_draft: Boolean
   name: String
   order: Int
-  phone: numeric
+  phone: String
   post_code: numeric
   street: String
   vat_registered: Boolean
@@ -2518,7 +2499,6 @@ input issuing_company_set_input {
 type issuing_company_stddev_fields {
   invoice_starting_number: Float
   order: Float
-  phone: Float
   post_code: Float
 }
 
@@ -2526,7 +2506,6 @@ type issuing_company_stddev_fields {
 type issuing_company_stddev_pop_fields {
   invoice_starting_number: Float
   order: Float
-  phone: Float
   post_code: Float
 }
 
@@ -2534,7 +2513,6 @@ type issuing_company_stddev_pop_fields {
 type issuing_company_stddev_samp_fields {
   invoice_starting_number: Float
   order: Float
-  phone: Float
   post_code: Float
 }
 
@@ -2542,7 +2520,6 @@ type issuing_company_stddev_samp_fields {
 type issuing_company_sum_fields {
   invoice_starting_number: numeric
   order: Int
-  phone: numeric
   post_code: numeric
 }
 
@@ -2597,7 +2574,6 @@ enum issuing_company_update_column {
 type issuing_company_var_pop_fields {
   invoice_starting_number: Float
   order: Float
-  phone: Float
   post_code: Float
 }
 
@@ -2605,7 +2581,6 @@ type issuing_company_var_pop_fields {
 type issuing_company_var_samp_fields {
   invoice_starting_number: Float
   order: Float
-  phone: Float
   post_code: Float
 }
 
@@ -2613,7 +2588,6 @@ type issuing_company_var_samp_fields {
 type issuing_company_variance_fields {
   invoice_starting_number: Float
   order: Float
-  phone: Float
   post_code: Float
 }
 
@@ -3006,155 +2980,12 @@ enum labs_dashboard_update_column {
 }
 
 """
-leads table
-
-
-columns and relationships of "leads"
-"""
-type leads {
-  created_at: date
-  email: String!
-  id: uuid!
-  interest: String!
-  is_active: Boolean!
-  lead_age: Int!
-  lead_name: String!
-  lead_owner: String!
-  lead_source: String!
-  lead_status: String!
-  location: String!
-  order: Int!
-  phone: numeric!
-  status: Boolean!
-  updated_at: date
-}
-
-"""
-aggregated selection of "leads"
-"""
-type leads_aggregate {
-  aggregate: leads_aggregate_fields
-  nodes: [leads!]!
-}
-
-"""
-aggregate fields of "leads"
-"""
-type leads_aggregate_fields {
-  avg: leads_avg_fields
-  count(columns: [leads_select_column!], distinct: Boolean): Int!
-  max: leads_max_fields
-  min: leads_min_fields
-  stddev: leads_stddev_fields
-  stddev_pop: leads_stddev_pop_fields
-  stddev_samp: leads_stddev_samp_fields
-  sum: leads_sum_fields
-  var_pop: leads_var_pop_fields
-  var_samp: leads_var_samp_fields
-  variance: leads_variance_fields
-}
-
-"""aggregate avg on columns"""
-type leads_avg_fields {
-  lead_age: Float
-  order: Float
-  phone: Float
-}
-
-"""
 Boolean expression to filter rows from the table "leads". All fields are combined with a logical 'AND'.
 """
 input leads_bool_exp {
   _and: [leads_bool_exp!]
   _not: leads_bool_exp
   _or: [leads_bool_exp!]
-  created_at: date_comparison_exp
-  email: String_comparison_exp
-  id: uuid_comparison_exp
-  interest: String_comparison_exp
-  is_active: Boolean_comparison_exp
-  lead_age: Int_comparison_exp
-  lead_name: String_comparison_exp
-  lead_owner: String_comparison_exp
-  lead_source: String_comparison_exp
-  lead_status: String_comparison_exp
-  location: String_comparison_exp
-  order: Int_comparison_exp
-  phone: numeric_comparison_exp
-  status: Boolean_comparison_exp
-  updated_at: date_comparison_exp
-}
-
-"""
-unique or primary key constraints on table "leads"
-"""
-enum leads_constraint {
-  """unique or primary key constraint"""
-  leads_pkey
-}
-
-"""
-input type for incrementing numeric columns in table "leads"
-"""
-input leads_inc_input {
-  lead_age: Int
-  order: Int
-  phone: numeric
-}
-
-"""
-input type for inserting data into table "leads"
-"""
-input leads_insert_input {
-  created_at: date
-  email: String
-  id: uuid
-  interest: String
-  is_active: Boolean
-  lead_age: Int
-  lead_name: String
-  lead_owner: String
-  lead_source: String
-  lead_status: String
-  location: String
-  order: Int
-  phone: numeric
-  status: Boolean
-  updated_at: date
-}
-
-"""aggregate max on columns"""
-type leads_max_fields {
-  created_at: date
-  email: String
-  id: uuid
-  interest: String
-  lead_age: Int
-  lead_name: String
-  lead_owner: String
-  lead_source: String
-  lead_status: String
-  location: String
-  order: Int
-  phone: numeric
-  updated_at: date
-}
-
-"""aggregate min on columns"""
-type leads_min_fields {
-  created_at: date
-  email: String
-  id: uuid
-  interest: String
-  lead_age: Int
-  lead_name: String
-  lead_owner: String
-  lead_source: String
-  lead_status: String
-  location: String
-  order: Int
-  phone: numeric
-  updated_at: date
 }
 
 """
@@ -3163,212 +2994,6 @@ response of any mutation on the table "leads"
 type leads_mutation_response {
   """number of rows affected by the mutation"""
   affected_rows: Int!
-
-  """data from the rows affected by the mutation"""
-  returning: [leads!]!
-}
-
-"""
-on conflict condition type for table "leads"
-"""
-input leads_on_conflict {
-  constraint: leads_constraint!
-  update_columns: [leads_update_column!]!
-  where: leads_bool_exp
-}
-
-"""Ordering options when selecting data from "leads"."""
-input leads_order_by {
-  created_at: order_by
-  email: order_by
-  id: order_by
-  interest: order_by
-  is_active: order_by
-  lead_age: order_by
-  lead_name: order_by
-  lead_owner: order_by
-  lead_source: order_by
-  lead_status: order_by
-  location: order_by
-  order: order_by
-  phone: order_by
-  status: order_by
-  updated_at: order_by
-}
-
-"""primary key columns input for table: leads"""
-input leads_pk_columns_input {
-  id: uuid!
-}
-
-"""
-select columns of table "leads"
-"""
-enum leads_select_column {
-  """column name"""
-  created_at
-
-  """column name"""
-  email
-
-  """column name"""
-  id
-
-  """column name"""
-  interest
-
-  """column name"""
-  is_active
-
-  """column name"""
-  lead_age
-
-  """column name"""
-  lead_name
-
-  """column name"""
-  lead_owner
-
-  """column name"""
-  lead_source
-
-  """column name"""
-  lead_status
-
-  """column name"""
-  location
-
-  """column name"""
-  order
-
-  """column name"""
-  phone
-
-  """column name"""
-  status
-
-  """column name"""
-  updated_at
-}
-
-"""
-input type for updating data in table "leads"
-"""
-input leads_set_input {
-  created_at: date
-  email: String
-  id: uuid
-  interest: String
-  is_active: Boolean
-  lead_age: Int
-  lead_name: String
-  lead_owner: String
-  lead_source: String
-  lead_status: String
-  location: String
-  order: Int
-  phone: numeric
-  status: Boolean
-  updated_at: date
-}
-
-"""aggregate stddev on columns"""
-type leads_stddev_fields {
-  lead_age: Float
-  order: Float
-  phone: Float
-}
-
-"""aggregate stddev_pop on columns"""
-type leads_stddev_pop_fields {
-  lead_age: Float
-  order: Float
-  phone: Float
-}
-
-"""aggregate stddev_samp on columns"""
-type leads_stddev_samp_fields {
-  lead_age: Float
-  order: Float
-  phone: Float
-}
-
-"""aggregate sum on columns"""
-type leads_sum_fields {
-  lead_age: Int
-  order: Int
-  phone: numeric
-}
-
-"""
-update columns of table "leads"
-"""
-enum leads_update_column {
-  """column name"""
-  created_at
-
-  """column name"""
-  email
-
-  """column name"""
-  id
-
-  """column name"""
-  interest
-
-  """column name"""
-  is_active
-
-  """column name"""
-  lead_age
-
-  """column name"""
-  lead_name
-
-  """column name"""
-  lead_owner
-
-  """column name"""
-  lead_source
-
-  """column name"""
-  lead_status
-
-  """column name"""
-  location
-
-  """column name"""
-  order
-
-  """column name"""
-  phone
-
-  """column name"""
-  status
-
-  """column name"""
-  updated_at
-}
-
-"""aggregate var_pop on columns"""
-type leads_var_pop_fields {
-  lead_age: Float
-  order: Float
-  phone: Float
-}
-
-"""aggregate var_samp on columns"""
-type leads_var_samp_fields {
-  lead_age: Float
-  order: Float
-  phone: Float
-}
-
-"""aggregate variance on columns"""
-type leads_variance_fields {
-  lead_age: Float
-  order: Float
-  phone: Float
 }
 
 """
@@ -4104,11 +3729,6 @@ type mutation_root {
   ): leads_mutation_response
 
   """
-  delete single row from the table: "leads"
-  """
-  delete_leads_by_pk(id: uuid!): leads
-
-  """
   delete data from the table: "marketing_campaign"
   """
   delete_marketing_campaign(
@@ -4386,28 +4006,6 @@ type mutation_root {
     """on conflict condition"""
     on_conflict: labs_dashboard_on_conflict
   ): labs_dashboard
-
-  """
-  insert data into the table: "leads"
-  """
-  insert_leads(
-    """the rows to be inserted"""
-    objects: [leads_insert_input!]!
-
-    """on conflict condition"""
-    on_conflict: leads_on_conflict
-  ): leads_mutation_response
-
-  """
-  insert a single row into the table: "leads"
-  """
-  insert_leads_one(
-    """the row to be inserted"""
-    object: leads_insert_input!
-
-    """on conflict condition"""
-    on_conflict: leads_on_conflict
-  ): leads
 
   """
   insert data into the table: "marketing_campaign"
@@ -4757,32 +4355,6 @@ type mutation_root {
   ): labs_dashboard
 
   """
-  update data of the table: "leads"
-  """
-  update_leads(
-    """increments the numeric columns with given value of the filtered values"""
-    _inc: leads_inc_input
-
-    """sets the columns of the filtered rows to the given values"""
-    _set: leads_set_input
-
-    """filter the rows which have to be updated"""
-    where: leads_bool_exp!
-  ): leads_mutation_response
-
-  """
-  update single row of the table: "leads"
-  """
-  update_leads_by_pk(
-    """increments the numeric columns with given value of the filtered values"""
-    _inc: leads_inc_input
-
-    """sets the columns of the filtered rows to the given values"""
-    _set: leads_set_input
-    pk_columns: leads_pk_columns_input!
-  ): leads
-
-  """
   update data of the table: "marketing_campaign"
   """
   update_marketing_campaign(
@@ -4890,6 +4462,9 @@ type mutation_root {
   update data of the table: "salutation"
   """
   update_salutation(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: salutation_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: salutation_set_input
 
@@ -4901,6 +4476,9 @@ type mutation_root {
   update single row of the table: "salutation"
   """
   update_salutation_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: salutation_inc_input
+
     """sets the columns of the filtered rows to the given values"""
     _set: salutation_set_input
     pk_columns: salutation_pk_columns_input!
@@ -5840,49 +5418,6 @@ type query_root {
   labs_dashboard_by_pk(labNo: Int!): labs_dashboard
 
   """
-  fetch data from the table: "leads"
-  """
-  leads(
-    """distinct select on columns"""
-    distinct_on: [leads_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [leads_order_by!]
-
-    """filter the rows returned"""
-    where: leads_bool_exp
-  ): [leads!]!
-
-  """
-  fetch aggregated fields from the table: "leads"
-  """
-  leads_aggregate(
-    """distinct select on columns"""
-    distinct_on: [leads_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [leads_order_by!]
-
-    """filter the rows returned"""
-    where: leads_bool_exp
-  ): leads_aggregate!
-
-  """fetch data from the table: "leads" using primary key columns"""
-  leads_by_pk(id: uuid!): leads
-
-  """
   fetch data from the table: "locations"
   """
   locations(
@@ -6125,6 +5660,26 @@ type query_root {
     where: salutation_bool_exp
   ): [salutation!]!
 
+  """
+  fetch aggregated fields from the table: "salutation"
+  """
+  salutation_aggregate(
+    """distinct select on columns"""
+    distinct_on: [salutation_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [salutation_order_by!]
+
+    """filter the rows returned"""
+    where: salutation_bool_exp
+  ): salutation_aggregate!
+
   """fetch data from the table: "salutation" using primary key columns"""
   salutation_by_pk(id: uuid!): salutation
 }
@@ -6136,8 +5691,39 @@ type salutation {
   created_at: timestamptz!
   id: uuid!
   is_active: Boolean!
+  order: Int!
   salutation: String!
   updated_at: timestamptz!
+}
+
+"""
+aggregated selection of "salutation"
+"""
+type salutation_aggregate {
+  aggregate: salutation_aggregate_fields
+  nodes: [salutation!]!
+}
+
+"""
+aggregate fields of "salutation"
+"""
+type salutation_aggregate_fields {
+  avg: salutation_avg_fields
+  count(columns: [salutation_select_column!], distinct: Boolean): Int!
+  max: salutation_max_fields
+  min: salutation_min_fields
+  stddev: salutation_stddev_fields
+  stddev_pop: salutation_stddev_pop_fields
+  stddev_samp: salutation_stddev_samp_fields
+  sum: salutation_sum_fields
+  var_pop: salutation_var_pop_fields
+  var_samp: salutation_var_samp_fields
+  variance: salutation_variance_fields
+}
+
+"""aggregate avg on columns"""
+type salutation_avg_fields {
+  order: Float
 }
 
 """
@@ -6150,6 +5736,7 @@ input salutation_bool_exp {
   created_at: timestamptz_comparison_exp
   id: uuid_comparison_exp
   is_active: Boolean_comparison_exp
+  order: Int_comparison_exp
   salutation: String_comparison_exp
   updated_at: timestamptz_comparison_exp
 }
@@ -6163,11 +5750,36 @@ enum salutation_constraint {
 }
 
 """
+input type for incrementing numeric columns in table "salutation"
+"""
+input salutation_inc_input {
+  order: Int
+}
+
+"""
 input type for inserting data into table "salutation"
 """
 input salutation_insert_input {
   is_active: Boolean
   salutation: String
+}
+
+"""aggregate max on columns"""
+type salutation_max_fields {
+  created_at: timestamptz
+  id: uuid
+  order: Int
+  salutation: String
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type salutation_min_fields {
+  created_at: timestamptz
+  id: uuid
+  order: Int
+  salutation: String
+  updated_at: timestamptz
 }
 
 """
@@ -6195,6 +5807,7 @@ input salutation_order_by {
   created_at: order_by
   id: order_by
   is_active: order_by
+  order: order_by
   salutation: order_by
   updated_at: order_by
 }
@@ -6218,6 +5831,9 @@ enum salutation_select_column {
   is_active
 
   """column name"""
+  order
+
+  """column name"""
   salutation
 
   """column name"""
@@ -6229,7 +5845,28 @@ input type for updating data in table "salutation"
 """
 input salutation_set_input {
   is_active: Boolean
+  order: Int
   salutation: String
+}
+
+"""aggregate stddev on columns"""
+type salutation_stddev_fields {
+  order: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type salutation_stddev_pop_fields {
+  order: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type salutation_stddev_samp_fields {
+  order: Float
+}
+
+"""aggregate sum on columns"""
+type salutation_sum_fields {
+  order: Int
 }
 
 """
@@ -6240,7 +5877,25 @@ enum salutation_update_column {
   is_active
 
   """column name"""
+  order
+
+  """column name"""
   salutation
+}
+
+"""aggregate var_pop on columns"""
+type salutation_var_pop_fields {
+  order: Float
+}
+
+"""aggregate var_samp on columns"""
+type salutation_var_samp_fields {
+  order: Float
+}
+
+"""aggregate variance on columns"""
+type salutation_variance_fields {
+  order: Float
 }
 
 type subscription_root {
@@ -6666,49 +6321,6 @@ type subscription_root {
   labs_dashboard_by_pk(labNo: Int!): labs_dashboard
 
   """
-  fetch data from the table: "leads"
-  """
-  leads(
-    """distinct select on columns"""
-    distinct_on: [leads_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [leads_order_by!]
-
-    """filter the rows returned"""
-    where: leads_bool_exp
-  ): [leads!]!
-
-  """
-  fetch aggregated fields from the table: "leads"
-  """
-  leads_aggregate(
-    """distinct select on columns"""
-    distinct_on: [leads_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
-
-    """sort the rows by one or more columns"""
-    order_by: [leads_order_by!]
-
-    """filter the rows returned"""
-    where: leads_bool_exp
-  ): leads_aggregate!
-
-  """fetch data from the table: "leads" using primary key columns"""
-  leads_by_pk(id: uuid!): leads
-
-  """
   fetch data from the table: "locations"
   """
   locations(
@@ -6948,6 +6560,26 @@ type subscription_root {
     """filter the rows returned"""
     where: salutation_bool_exp
   ): [salutation!]!
+
+  """
+  fetch aggregated fields from the table: "salutation"
+  """
+  salutation_aggregate(
+    """distinct select on columns"""
+    distinct_on: [salutation_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [salutation_order_by!]
+
+    """filter the rows returned"""
+    where: salutation_bool_exp
+  ): salutation_aggregate!
 
   """fetch data from the table: "salutation" using primary key columns"""
   salutation_by_pk(id: uuid!): salutation
