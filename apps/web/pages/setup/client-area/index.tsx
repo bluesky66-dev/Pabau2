@@ -69,19 +69,22 @@ export interface ClientAreaBuilderSetting {
 }
 
 export interface ClientAreaWidget {
+  id: number
   icon: ReactNode
   isPlus: boolean
-  isEnable: boolean
+  isEnabled: boolean
   title: string
   description: string
 }
 
+export interface ClientAreaWidgetsItem {
+  title: string
+  description: string
+  widgets: ClientAreaWidget[]
+}
+
 export interface ClientAreaWidgets {
-  [key: string]: {
-    title: string
-    description: string
-    widgets: ClientAreaWidget[]
-  }
+  [key: string]: ClientAreaWidgetsItem
 }
 
 export interface ClientAreaShare {
@@ -495,14 +498,14 @@ export const Index: FC<ClientAreaProps> = ({
     )
     const [currentWidget, setCurrentWidget] = useState({
       mainKey: '',
-      index: 0,
-      isEnable: false,
+      id: 0,
+      isEnabled: false,
     })
     const handleClickWidgetOps = () => {
       const widgets = { ...setting }
       widgets[currentWidget.mainKey].widgets[
-        currentWidget.index
-      ].isEnable = !currentWidget.isEnable
+        currentWidget.id
+      ].isEnabled = !currentWidget.isEnabled
       setSetting({ ...widgets })
       setVisible(false)
     }
@@ -530,16 +533,16 @@ export const Index: FC<ClientAreaProps> = ({
                     {setting[item].description}
                   </p>
                 </div>
-                {setting[item].widgets.map((widget, index) => (
+                {setting[item].widgets.map((widget) => (
                   <div
                     className={styles.clientAreaWidget}
                     key={widget.title}
                     onClick={() => {
                       setVisible(true)
                       setCurrentWidget({
-                        isEnable: widget.isEnable,
+                        isEnabled: widget.isEnabled,
                         mainKey: item,
-                        index,
+                        id: widget.id,
                       })
                     }}
                   >
@@ -555,8 +558,8 @@ export const Index: FC<ClientAreaProps> = ({
                     </div>
                     <div className={styles.clientAreaWidgetStatus}>
                       <Badge
-                        label={widget.isEnable ? 'Enabled' : 'Disabled'}
-                        disabled={widget.isEnable}
+                        label={widget.isEnabled ? 'Enabled' : 'Disabled'}
+                        disabled={widget.isEnabled}
                       />
                     </div>
                   </div>
@@ -577,7 +580,7 @@ export const Index: FC<ClientAreaProps> = ({
               <div>
                 <p className={styles.widgetModalTitle}>
                   {
-                    setting[currentWidget.mainKey].widgets[currentWidget.index]
+                    setting[currentWidget.mainKey].widgets[currentWidget.id]
                       .title
                   }
                 </p>
@@ -589,10 +592,10 @@ export const Index: FC<ClientAreaProps> = ({
                 </p>
                 <div className={styles.widgetModalOps}>
                   <Button
-                    type={!currentWidget.isEnable ? 'primary' : 'ghost'}
+                    type={!currentWidget.isEnabled ? 'primary' : 'ghost'}
                     onClick={() => handleClickWidgetOps()}
                   >
-                    {!currentWidget.isEnable ? 'Enable' : 'Disable'}
+                    {!currentWidget.isEnabled ? 'Enable' : 'Disable'}
                   </Button>
                 </div>
               </div>
