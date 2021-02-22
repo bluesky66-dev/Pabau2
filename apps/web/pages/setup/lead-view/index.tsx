@@ -7,23 +7,23 @@ import { useRouter } from 'next/router'
 export interface LeadsProps {}
 
 const LIST_QUERY = gql`
-  query leads(
+  query lead(
     $isActive: Boolean = true
     $offset: Int
     $limit: Int
     $searchTerm: String = ""
   ) {
-    leads(
+    lead(
       offset: $offset
       limit: $limit
       order_by: { order: desc }
       where: {
         is_active: { _eq: $isActive }
-        _or: [{ _and: [{ lead_name: { _ilike: $searchTerm } }] }]
+        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
       }
     ) {
       id
-      lead_name
+      name
       order
       status
       is_active
@@ -32,9 +32,9 @@ const LIST_QUERY = gql`
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query leads_aggregate($searchTerm: String = "") {
-    leads_aggregate(
-      where: { _or: [{ _and: [{ lead_name: { _ilike: $searchTerm } }] }] }
+  query lead_aggregate($searchTerm: String = "") {
+    lead_aggregate(
+      where: { _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }] }
     ) {
       aggregate {
         count
@@ -43,8 +43,8 @@ const LIST_AGGREGATE_QUERY = gql`
   }
 `
 const DELETE_MUTATION = gql`
-  mutation delete_leads_by_pk($id: uuid!) {
-    delete_leads_by_pk(id: $id) {
+  mutation delete_lead_by_pk($id: uuid!) {
+    delete_lead_by_pk(id: $id) {
       __typename
       id
     }
@@ -52,16 +52,16 @@ const DELETE_MUTATION = gql`
 `
 const ADD_MUTATION = gql`
   mutation MyMutation {
-    insert_leads_one(
+    insert_lead_one(
       object: {
         email: "nido_i@hotmail.com"
         interest: "xyz"
         is_active: true
-        lead_age: 30
-        lead_name: "aysha"
-        lead_owner: "rulaa"
-        lead_source: "xyz"
-        lead_status: "married"
+        age: 30
+        name: "aysha"
+        owner: "rulaa"
+        source: "xyz"
+        status: "married"
         location: "gilgit"
         order: 2
         phone: "45455545454"
@@ -73,12 +73,12 @@ const ADD_MUTATION = gql`
       id
       is_active
       order
-      lead_age
+      age
       interest
-      lead_name
-      lead_owner
-      lead_source
-      lead_status
+      name
+      owner
+      source
+      status
       location
       phone
       status
@@ -86,14 +86,14 @@ const ADD_MUTATION = gql`
   }
 `
 const EDIT_MUTATION = gql`
-  mutation update_leads_by_pk(
+  mutation update_lead_by_pk(
     $id: uuid!
-    $lead_name: String
+    $name: String
     $is_active: Boolean = true
   ) {
-    update_leads_by_pk(
+    update_lead_by_pk(
       pk_columns: { id: $id }
-      _set: { lead_name: $lead_name, is_active: $is_active }
+      _set: { name: $name, is_active: $is_active }
     ) {
       __typename
       id
@@ -106,8 +106,8 @@ const EDIT_MUTATION = gql`
  * TODO refactor UPDATE_ORDER_MUTATION with legacy db
  */
 const UPDATE_ORDER_MUTATION = gql`
-  mutation update_leads_order($id: uuid!, $order: Int) {
-    update_leads(where: { id: { _eq: $id } }, _set: { order: $order }) {
+  mutation update_lead_order($id: uuid!, $order: Int) {
+    update_lead(where: { id: { _eq: $id } }, _set: { order: $order }) {
       affected_rows
     }
   }
@@ -135,7 +135,7 @@ const schema: Schema = {
   deleteBtnLabel: 'Yes, Delete leads',
 
   fields: {
-    lead_name: {
+    name: {
       full: 'Lead Name',
       fullLower: 'lead name',
       short: 'Name',
