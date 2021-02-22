@@ -153,7 +153,7 @@ const CrudModal: FC<P> = ({
       >
         <Form
           // ref={formRef} typeof editingRow === 'object' ? editingRow : undefined}
-          values={formik.values}
+          formik={formik}
           schema={schemaForm}
           // initialValues={typeof editingRow === 'object' ? editingRow : { name: 'erm' }}
           // onSubmit={async (form: Record<string, unknown>) => {
