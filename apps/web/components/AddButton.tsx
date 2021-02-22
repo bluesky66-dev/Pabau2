@@ -8,6 +8,7 @@ import {
 } from '@ant-design/icons'
 import { Drawer, Input, Popover, Radio } from 'antd'
 import classNames from 'classnames'
+import { useTranslationI18 } from '../hooks/useTranslationI18'
 // import { isMobile, isTablet } from 'react-device-detect'
 // import { useKeyPressEvent } from 'react-use'
 
@@ -20,6 +21,7 @@ interface P {
   onSearch: (term: string) => void
   tableSearch?: boolean
   addFilter?: boolean
+  needTranslation?: boolean
 }
 
 const AddButton: FC<P> = ({
@@ -29,11 +31,13 @@ const AddButton: FC<P> = ({
   onFilterSource,
   onSearch,
   tableSearch = true,
-  addFilter = true,
+  addFilter,
+  needTranslation,
 }) => {
   const [isActive, setIsActive] = useState(true)
   const [mobFilterDrawer, setMobFilterDrawer] = useState(false)
   const [marketingSourceSearch, setMarketingSourceSearch] = useState('')
+  const { t } = useTranslationI18()
 
   // useKeyPressEvent('n', () => {
   //   onClick?.()
@@ -129,7 +133,9 @@ const AddButton: FC<P> = ({
         {tableSearch && (
           <Input
             className={styles.searchMarketingStyle}
-            placeholder="Search"
+            placeholder={
+              needTranslation ? t('search-placeholder.translation') : 'Search'
+            }
             value={marketingSourceSearch}
             onChange={(e) => setMarketingSourceSearch(e.target.value)}
             suffix={<SearchOutlined style={{ color: '#8C8C8C' }} />}
@@ -144,7 +150,10 @@ const AddButton: FC<P> = ({
         >
           {addFilter && (
             <Button className={styles.filterBtn}>
-              <FilterOutlined /> Filter
+              <FilterOutlined />{' '}
+              {needTranslation
+                ? t('marketingsource-button-filter.translation')
+                : 'Filter'}
             </Button>
           )}
         </Popover>
@@ -153,7 +162,9 @@ const AddButton: FC<P> = ({
           type="primary"
           onClick={() => onClick?.()}
         >
-          {'Create ' + schema.short}
+          {needTranslation
+            ? t('marketingsource-header-create.translation')
+            : schema.createButtonLabel}
         </Button>
       </div>
     </>

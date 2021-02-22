@@ -97,6 +97,7 @@ const schema: Schema = {
   fullLower: 'petty cash types',
   short: 'Petty Cash',
   shortLower: 'petty cash types',
+  createButtonLabel: 'Create Petty Cash',
   messages: {
     create: {
       success: 'You have successfully created a petty cash',
