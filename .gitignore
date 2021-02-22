@@ -1,4 +1,5 @@
 .env
+apps/web/.env.local
 package-lock.json
 
 # See http://help.github.com/ignore-files/ for more about ignoring files.
@@ -94,7 +95,6 @@ buck-out/
 
 ## CocoaPods
 **/ios/Pods/
-/
 
 ## Nested node_modules
 

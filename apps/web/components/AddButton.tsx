@@ -8,6 +8,7 @@ import {
 } from '@ant-design/icons'
 import { Drawer, Input, Popover, Radio } from 'antd'
 import classNames from 'classnames'
+import { useTranslationI18 } from '../hooks/useTranslationI18'
 // import { isMobile, isTablet } from 'react-device-detect'
 // import { useKeyPressEvent } from 'react-use'
 
@@ -18,6 +19,8 @@ interface P {
   onClick?: () => void
   onFilterSource: () => void
   onSearch: (term: string) => void
+  tableSearch?: boolean
+  needTranslation?: boolean
 }
 
 const AddButton: FC<P> = ({
@@ -26,10 +29,13 @@ const AddButton: FC<P> = ({
   children,
   onFilterSource,
   onSearch,
+  tableSearch = true,
+  needTranslation,
 }) => {
   const [isActive, setIsActive] = useState(true)
   const [mobFilterDrawer, setMobFilterDrawer] = useState(false)
   const [marketingSourceSearch, setMarketingSourceSearch] = useState('')
+  const { t } = useTranslationI18()
 
   // useKeyPressEvent('n', () => {
   //   onClick?.()
@@ -37,7 +43,7 @@ const AddButton: FC<P> = ({
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      onSearch && onSearch(marketingSourceSearch)
+      onSearch?.(marketingSourceSearch)
     }, WAIT_INTERVAL)
 
     return () => clearTimeout(timer)
@@ -75,7 +81,9 @@ const AddButton: FC<P> = ({
     <>
       {/* Mobile header */}
       <div className={classNames(styles.marketingIcon, styles.desktopViewNone)}>
-        <SearchOutlined className={styles.marketingIconStyle} />
+        {tableSearch && (
+          <SearchOutlined className={styles.marketingIconStyle} />
+        )}
         <FilterOutlined
           className={styles.marketingIconStyle}
           onClick={() => setMobFilterDrawer((e) => !e)}
@@ -118,14 +126,18 @@ const AddButton: FC<P> = ({
       <div
         className={classNames(styles.marketingSource, styles.mobileViewNone)}
       >
-        <Input
-          className={styles.searchMarketingStyle}
-          placeholder="Search"
-          value={marketingSourceSearch}
-          onChange={(e) => setMarketingSourceSearch(e.target.value)}
-          suffix={<SearchOutlined style={{ color: '#8C8C8C' }} />}
-          autoFocus
-        />
+        {tableSearch && (
+          <Input
+            className={styles.searchMarketingStyle}
+            placeholder={
+              needTranslation ? t('search-placeholder.translation') : 'Search'
+            }
+            value={marketingSourceSearch}
+            onChange={(e) => setMarketingSourceSearch(e.target.value)}
+            suffix={<SearchOutlined style={{ color: '#8C8C8C' }} />}
+            autoFocus
+          />
+        )}
         <Popover
           trigger="click"
           content={filterContent}
@@ -133,7 +145,10 @@ const AddButton: FC<P> = ({
           overlayClassName={styles.filterPopover}
         >
           <Button className={styles.filterBtn}>
-            <FilterOutlined /> Filter
+            <FilterOutlined />{' '}
+            {needTranslation
+              ? t('marketingsource-button-filter.translation')
+              : 'Filter'}
           </Button>
         </Popover>
         <Button
@@ -141,7 +156,9 @@ const AddButton: FC<P> = ({
           type="primary"
           onClick={() => onClick?.()}
         >
-          {'Create ' + schema.short}
+          {needTranslation
+            ? t('marketingsource-header-create.translation')
+            : schema.createButtonLabel}
         </Button>
       </div>
     </>

@@ -1,10 +1,11 @@
 import React, { PropsWithChildren } from 'react'
 import { Modal } from 'antd'
 import Button from '../button/button'
-import { Checkbox } from '@pabau/ui'
+import { Checkbox, ButtonTypes } from '@pabau/ui'
 import styles from './basicmodal.module.less'
 import { ModalProps } from 'antd/lib/modal'
-interface P {
+import classNames from 'classnames'
+export interface BasicModalProps {
   onOk?: () => void
   onCancel?: () => void
   onDelete?: () => void
@@ -12,6 +13,7 @@ interface P {
   newButtonText?: string
   title?: string
   modalWidth?: number
+  isValidate?: boolean
   footer?: boolean
 
   /**
@@ -30,6 +32,8 @@ interface P {
   specialBooleanValue?: boolean
 
   dangerButtonText?: string
+  newButtonDisable?: boolean
+  btnType?: ButtonTypes
 }
 
 export function BasicModal({
@@ -43,12 +47,15 @@ export function BasicModal({
   specialBooleanLabel,
   specialBooleanValue,
   onSpecialBooleanClick,
-  newButtonText = 'OK',
+  newButtonText,
+  newButtonDisable = false,
   dangerButtonText,
+  isValidate,
   footer = true,
   wrapClassName,
+  btnType = ButtonTypes.primary,
   ...props
-}: PropsWithChildren<P & ModalProps>): JSX.Element {
+}: PropsWithChildren<BasicModalProps & ModalProps>): JSX.Element {
   return (
     <Modal
       title={title}
@@ -60,10 +67,10 @@ export function BasicModal({
       width={modalWidth}
       // destroyOnClose={true}
       // modalRender={(E) => E}
-      wrapClassName={styles.modal + ' ' + wrapClassName}
+      wrapClassName={classNames(styles.modal, wrapClassName)}
       {...props}
     >
-      <div>{children}</div>
+      <div className={styles.modalContent}>{children}</div>
       {footer && (
         <div className={styles.modalFooter}>
           {specialBooleanLabel && onSpecialBooleanClick && (
@@ -77,15 +84,22 @@ export function BasicModal({
           {dangerButtonText && (
             <Button
               type="default"
-              className={styles.deleteBtnStyle}
+              className={classNames(styles.deleteBtnStyle, styles.btnStyle)}
               onClick={() => onDelete?.()}
             >
               {dangerButtonText}
             </Button>
           )}
-          <Button type="primary" onClick={() => onOk?.()}>
-            {newButtonText}
-          </Button>
+          {newButtonText && (
+            <Button
+              type={btnType}
+              className={styles.btnStyle}
+              disabled={newButtonDisable}
+              onClick={() => onOk?.()}
+            >
+              {newButtonText}
+            </Button>
+          )}
         </div>
       )}
     </Modal>
