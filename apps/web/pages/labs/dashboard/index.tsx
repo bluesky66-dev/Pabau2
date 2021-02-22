@@ -1,8 +1,6 @@
 import React, { FC, ReactNode } from 'react'
-import { Button, Breadcrumb } from '@pabau/ui'
 import CrudLayout from '../../../components/CrudLayout/CrudLayout'
 import { gql } from '@apollo/client'
-import { InboxOutlined } from '@ant-design/icons'
 import ProcessingIcon from './assets/ProcessingIcon'
 import SendIcon from './assets/SendIcon'
 import notificationImage from '../../../assets/images/Illustration.svg'
