@@ -8,13 +8,18 @@
     "**/.next": true,
     "**/public/vendors": true
   },
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+  "eslint.format.enable": true,
+  "eslint.codeActionsOnSave.mode": "all",
+  "eslint.codeAction.showDocumentation": {
+    "enable": true
   },
-  "editor.formatOnSave": true,
-  "editor.formatOnPaste": false,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  "eslint.alwaysShowStatus": true,
+  "eslint.lintTask.enable": true,
+  "editor.suggestSelection": "first",
+  "explorer.confirmDelete": false,
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.formatOnSave": true
 }

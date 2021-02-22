@@ -14,6 +14,7 @@ const schema: Schema = {
   fullLower: 'labs',
   short: 'Lab',
   shortLower: 'lab',
+  createButtonLabel: 'Create Lab',
   messages: {
     create: {
       success: 'You have successfully created a lab',

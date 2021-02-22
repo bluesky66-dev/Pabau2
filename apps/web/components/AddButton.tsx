@@ -8,6 +8,7 @@ import {
 } from '@ant-design/icons'
 import { Drawer, Input, Popover, Radio } from 'antd'
 import classNames from 'classnames'
+import { useTranslationI18 } from '../hooks/useTranslationI18'
 // import { isMobile, isTablet } from 'react-device-detect'
 // import { useKeyPressEvent } from 'react-use'
 
@@ -19,7 +20,7 @@ interface P {
   onFilterSource: () => void
   onSearch: (term: string) => void
   tableSearch?: boolean
-  filter?: boolean
+  needTranslation?: boolean
 }
 
 const AddButton: FC<P> = ({
@@ -29,13 +30,16 @@ const AddButton: FC<P> = ({
   onFilterSource,
   onSearch,
   tableSearch = true,
-  filter = true,
+  needTranslation,
 }) => {
   const [isActive, setIsActive] = useState(true)
   const [mobFilterDrawer, setMobFilterDrawer] = useState(false)
   const [marketingSourceSearch, setMarketingSourceSearch] = useState('')
+  const { t } = useTranslationI18()
 
-  console.log('filter', filter)
+  // useKeyPressEvent('n', () => {
+  //   onClick?.()
+  // })
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -80,12 +84,10 @@ const AddButton: FC<P> = ({
         {tableSearch && (
           <SearchOutlined className={styles.marketingIconStyle} />
         )}
-        {filter && (
-          <FilterOutlined
-            className={styles.marketingIconStyle}
-            onClick={() => setMobFilterDrawer((e) => !e)}
-          />
-        )}
+        <FilterOutlined
+          className={styles.marketingIconStyle}
+          onClick={() => setMobFilterDrawer((e) => !e)}
+        />
         <PlusSquareFilled
           className={styles.plusIconStyle}
           onClick={() => onClick?.()}
@@ -127,7 +129,9 @@ const AddButton: FC<P> = ({
         {tableSearch && (
           <Input
             className={styles.searchMarketingStyle}
-            placeholder="Search"
+            placeholder={
+              needTranslation ? t('search-placeholder.translation') : 'Search'
+            }
             value={marketingSourceSearch}
             onChange={(e) => setMarketingSourceSearch(e.target.value)}
             suffix={<SearchOutlined style={{ color: '#8C8C8C' }} />}
@@ -140,18 +144,21 @@ const AddButton: FC<P> = ({
           placement="bottomRight"
           overlayClassName={styles.filterPopover}
         >
-          {filter && (
-            <Button className={styles.filterBtn}>
-              <FilterOutlined /> Filter
-            </Button>
-          )}
+          <Button className={styles.filterBtn}>
+            <FilterOutlined />{' '}
+            {needTranslation
+              ? t('marketingsource-button-filter.translation')
+              : 'Filter'}
+          </Button>
         </Popover>
         <Button
           className={styles.createSourceBtn}
           type="primary"
           onClick={() => onClick?.()}
         >
-          {'Create ' + schema.short}
+          {needTranslation
+            ? t('marketingsource-header-create.translation')
+            : schema.createButtonLabel}
         </Button>
       </div>
     </>
