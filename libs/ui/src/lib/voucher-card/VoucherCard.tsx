@@ -1,9 +1,14 @@
 import React, { FC, useRef } from 'react'
 import { Button, DotButton } from '@pabau/ui'
-import { DeleteOutlined } from '@ant-design/icons'
+import {
+  DeleteOutlined,
+  ExclamationCircleOutlined,
+  EditOutlined,
+  NotificationOutlined,
+} from '@ant-design/icons'
 import styles from './VoucherCard.module.less'
 export interface VoucherCardProps {
-  cardWidth: number
+  cardWidth?: number
   backgroundColor1: string
   backgroundColor2: string
   gradientType: string
@@ -20,7 +25,7 @@ export interface VoucherCardProps {
   voucherRelation: string
   voucherRelationLabel: string
   currencyType: string
-  onMenuClick: () => void
+  onMenuClick?: () => void
 }
 
 export const VoucherCard: FC<VoucherCardProps> = ({
@@ -47,12 +52,29 @@ export const VoucherCard: FC<VoucherCardProps> = ({
   const voucherTypes = ['flowers', 'valentine', 'birthday']
   const DotMenuOptions = [
     {
+      key: 1,
+      icon: <EditOutlined />,
+      label: 'Edit',
+    },
+    {
       key: 2,
+      icon: <NotificationOutlined />,
+      label: 'Promote',
+    },
+    {
+      key: 3,
       icon: <DeleteOutlined />,
       label: 'Delete',
       onClick: () => {
-        onMenuClick()
+        if (onMenuClick) {
+          onMenuClick()
+        }
       },
+    },
+    {
+      key: 4,
+      icon: <ExclamationCircleOutlined />,
+      label: 'Show terms and conditions',
     },
   ]
   const cardFaceBgColor = {
@@ -62,8 +84,8 @@ export const VoucherCard: FC<VoucherCardProps> = ({
   }
 
   const dotsStyles = {
-    width: `${cardWidth / 25 / 2}px`,
-    height: `${cardWidth / 25}px`,
+    width: `${cardWidth ? `${cardWidth / 25 / 2}px` : '25px'}`,
+    height: `${cardWidth ? `${cardWidth / 25}px` : '10px'}`,
   }
 
   const flipCard = (e) => {
@@ -80,7 +102,10 @@ export const VoucherCard: FC<VoucherCardProps> = ({
     <div className={styles.voucherCardMain}>
       <div
         className="flip-card"
-        style={{ width: `${cardWidth}px`, height: `${cardWidth / 2}px` }}
+        style={{
+          width: `${cardWidth ? `${cardWidth}px` : `100%`}`,
+          height: `${cardWidth ? `${cardWidth / 2}px` : '100%'}`,
+        }}
       >
         <div className="flip-card-inner" ref={cardRef} onClick={flipCard}>
           <div

@@ -1,16 +1,35 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import Layout from './../../../components/Layout/Layout'
-import { TabbedTable, Button, Breadcrumb } from '@pabau/ui'
+import { TabbedTable, Button, Breadcrumb, VoucherCard } from '@pabau/ui'
 import { Card, Row, Col } from 'antd'
-import { FileProtectOutlined } from '@ant-design/icons'
 import styles from './index.module.less'
 
 /* eslint-disable-next-line */
 export interface GiftVouchersProps {}
 
-const GiftVouchers: FC<GiftVouchersProps> = () => {
-  const [libItems] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])
+const giftCardSettings = {
+  cardWidth: 525,
+  backgroundColor1: '#9013FE',
+  backgroundColor2: '#BD10E0',
+  gradientType: 'linear-gradient',
+  borderColor: '#000',
+  bookNowButton: true,
+  buttonLabel: 'Book Now',
+  dotMenuShow: true,
 
+  voucherType: '',
+  voucherNum: 100001,
+  voucherPrice: 100,
+  voucherPriceLabel: 'Voucher Value',
+  voucherSoldPrice: 100,
+  voucherSoldPriceLabel: 'Sold 5',
+  voucherRelation: 'Family',
+  voucherRelationLabel: 'Redeem on all services',
+  currencyType: '£',
+}
+
+const GiftVouchers: FC<GiftVouchersProps> = () => {
+  const [gifts, setGifts] = useState([])
   const tabItems = ['Types', 'Circlulation']
 
   const cardHeader = (
@@ -34,29 +53,51 @@ const GiftVouchers: FC<GiftVouchersProps> = () => {
     </div>
   )
 
+  useEffect(() => {
+    setGifts([
+      { ...giftCardSettings },
+      { ...giftCardSettings },
+      {
+        ...giftCardSettings,
+        gradientType: 'linear-gradient',
+        voucherType: 'birthday',
+      },
+      {
+        ...giftCardSettings,
+        gradientType: 'linear-gradient',
+        voucherType: 'valentine',
+      },
+      {
+        ...giftCardSettings,
+        gradientType: 'radial-gradient',
+      },
+      {
+        ...giftCardSettings,
+        gradientType: 'linear-gradient',
+        voucherType: 'flowers',
+      },
+    ])
+  }, [])
+
   return (
     <Layout>
-      <div className={styles.drugsListingMain}>
+      <div className={styles.giftVoucherMain}>
         <Card title={cardHeader}>
           <div className={styles.body}>
             <TabbedTable tabItems={tabItems}>
-              <div className={styles.library}>
+              <div className={styles.types}>
                 <Row>
-                  {libItems.length > 0 &&
-                    libItems.map((el, key) => (
+                  {gifts.length > 0 &&
+                    gifts.map((gift, key) => (
                       <Col
-                        lg={6}
-                        md={8}
-                        sm={16}
+                        lg={8}
+                        md={12}
+                        sm={12}
                         xs={24}
                         key={`col-key-${key * 123}`}
                       >
-                        <div className={styles.libraryCard}>
-                          <div>
-                            <FileProtectOutlined color="#9292A3;" />
-                          </div>
-                          <h4>BNF Drug Database</h4>
-                          <p>1082 drugs</p>
+                        <div className={styles.voucherCard}>
+                          <VoucherCard {...gift} />
                         </div>
                       </Col>
                     ))}

@@ -2,10 +2,38 @@
   :global {
     .flip-card {
       background-color: transparent;
-      min-width: 300px;
-      min-height: 150px;
       perspective: 1000px;
       border-radius: 7.5px;
+
+      @media screen and (max-width: 1440px) {
+        max-width: 400px;
+      }
+      @media screen and (max-width: 1024px) {
+        max-width: 275px;
+      }
+      @media screen and (max-width: 991px) {
+        max-width: 405px;
+        max-height: 220px;
+      }
+      @media screen and (max-width: 768px) {
+        max-width: 295px;
+        max-height: 250px;
+      }
+      @media screen and (max-width: 767px) and (min-width: 560px) {
+        max-width: 350px;
+      }
+      @media screen and (max-width: 550px) {
+        max-width: 500px;
+      }
+      @media screen and (max-width: 425px) {
+        max-width: 380px;
+      }
+      @media screen and (max-width: 375px) {
+        max-width: 330px;
+      }
+      @media screen and (max-width: 320px) {
+        max-width: 280px;
+      }
     }
 
     .flip-card-inner {
@@ -192,6 +220,10 @@
       flex-wrap: wrap;
       min-height: 32px;
 
+      @media screen and (max-width: 1024px) {
+        margin-bottom: 15px;
+      }
+
       :global {
         div:first-child {
           display: flex;
@@ -330,7 +362,7 @@
         align-items: center;
         flex-direction: column;
         height: 100%;
-        flex-wrap: wrap;
+        // flex-wrap: wrap;
         padding: 30px 40px;
 
         h1 {

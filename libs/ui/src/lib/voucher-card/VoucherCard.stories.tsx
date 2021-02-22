@@ -83,7 +83,6 @@ export const FlowersVoucherCard = VoucherCardStory.bind({})
 export const BookingVoucherCard = VoucherCardStory.bind({})
 
 BasicVoucherCard.args = {
-  cardWidth: 500,
   backgroundColor1: '#9013FE',
   backgroundColor2: '#BD10E0',
   gradientType: 'linear-gradient',
@@ -94,7 +93,6 @@ BasicVoucherCard.args = {
 }
 
 ValentineVoucherCard.args = {
-  cardWidth: 500,
   backgroundColor1: '#9013FE',
   backgroundColor2: '#BD10E0',
   gradientType: 'linear-gradient',
@@ -105,7 +103,6 @@ ValentineVoucherCard.args = {
 }
 
 BirthdayVoucherCard.args = {
-  cardWidth: 500,
   backgroundColor1: '#9013FE',
   backgroundColor2: '#BD10E0',
   gradientType: 'linear-gradient',
@@ -116,7 +113,6 @@ BirthdayVoucherCard.args = {
 }
 
 FlowersVoucherCard.args = {
-  cardWidth: 500,
   backgroundColor1: '#9013FE',
   backgroundColor2: '#BD10E0',
   gradientType: 'linear-gradient',
@@ -127,7 +123,6 @@ FlowersVoucherCard.args = {
 }
 
 BookingVoucherCard.args = {
-  cardWidth: 500,
   backgroundColor1: '#9013FE',
   backgroundColor2: '#BD10E0',
   gradientType: 'linear-gradient',
