@@ -79,6 +79,7 @@ const EDIT_MUTATION = gql`
     $name: String!
     $is_active: Boolean
     $invoice_prefix: String
+    $code: Int
     $order: Int
   ) {
     update_credit_note_type_by_pk(
@@ -88,6 +89,7 @@ const EDIT_MUTATION = gql`
         invoice_prefix: $invoice_prefix
         is_active: $is_active
         order: $order
+        code: $code
       }
     ) {
       __typename
