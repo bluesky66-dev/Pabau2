@@ -15,10 +15,7 @@ const LIST_QUERY = gql`
       offset: $offset
       limit: $limit
       order_by: { order: desc }
-      where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ salutation: { _ilike: $searchTerm } }] }]
-      }
+      where: { _or: [{ _and: [{ salutation: { _ilike: $searchTerm } }] }] }
     ) {
       __typename
       id
