@@ -470,7 +470,66 @@
       filter: {}
 - table:
     schema: public
-    name: leads
+    name: lead
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - is_active
+      - created_at
+      - updated_at
+      - age
+      - order
+      - phone
+      - email
+      - interest
+      - location
+      - name
+      - owner
+      - source
+      - status
+      - id
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - created_at
+      - updated_at
+      - age
+      - order
+      - phone
+      - email
+      - interest
+      - location
+      - name
+      - owner
+      - source
+      - status
+      - id
+      filter: {}
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - created_at
+      - updated_at
+      - age
+      - order
+      - phone
+      - email
+      - interest
+      - location
+      - name
+      - owner
+      - source
+      - status
+      - id
+      filter: {}
+      check: null
   delete_permissions:
   - role: public
     permission:
@@ -664,20 +723,6 @@
       - order
       - start_time
       backend_only: false
-  select_permissions:
-  - role: public
-    permission:
-      columns:
-      - is_active
-      - id
-      - order
-      - days
-      - name
-      - created_at
-      - updated_at
-      - end_time
-      - start_time
-      filter: {}
   update_permissions:
   - role: public
     permission:
@@ -730,3 +775,6 @@
   - role: public
     permission:
       filter: {}
+- table:
+    schema: public
+    name: third_parties

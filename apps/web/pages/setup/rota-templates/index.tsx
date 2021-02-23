@@ -38,16 +38,6 @@ const schema: Schema = {
       cssWidth: 'max',
       type: 'string',
     },
-    days: {
-      full: 'Days',
-      fullLower: 'days',
-      short: 'Days',
-      shortLower: 'days',
-      min: 2,
-      example: 'Mon',
-      cssWidth: 'max',
-      type: 'string',
-    },
     start_time: {
       full: 'Start Time',
       fullLower: 'start time',
@@ -56,7 +46,8 @@ const schema: Schema = {
       min: 2,
       example: '09:00',
       cssWidth: 'max',
-      type: 'string',
+      type: 'time',
+      col: 12,
     },
     end_time: {
       full: 'End Time',
@@ -66,7 +57,27 @@ const schema: Schema = {
       min: 2,
       example: '17:00',
       cssWidth: 'max',
-      type: 'string',
+      type: 'time',
+      col: 12,
+    },
+    days: {
+      full: 'Days',
+      fullLower: 'days',
+      short: 'Days',
+      selectOptions: [
+        { label: 'Mon', value: 'Mon' },
+        { label: 'Tue', value: 'Tue' },
+        { label: 'Wed', value: 'Wed' },
+        { label: 'Thu', value: 'Thu' },
+        { label: 'Fri', value: 'Fri' },
+        { label: 'Sat', value: 'Sat' },
+        { label: 'Sun', value: 'Sun' },
+      ],
+      shortLower: 'days',
+      min: 2,
+      example: 'Mon',
+      cssWidth: 'max',
+      type: 'days-checkbox',
     },
     is_active: {
       full: 'Status',
@@ -133,8 +144,8 @@ const ADD_MUTATION = gql`
   mutation insert_rota_templates_one(
     $name: String!
     $days: String!
-    $start_time: String!
-    $end_time: String!
+    $start_time: timetz!
+    $end_time: timetz!
     $is_active: Boolean
   ) {
     insert_rota_templates_one(
@@ -154,21 +165,15 @@ const ADD_MUTATION = gql`
 const EDIT_MUTATION = gql`
   mutation update_rota_templates_by_pk(
     $id: uuid!
-    $name: String!
-    $days: String!
-    $start_time: String!
-    $end_time: String!
+    $name: String
+    $days: String
+    $start_time: String
+    $end_time: String
     $is_active: Boolean
   ) {
-    update_Labs_by_pk(
+    update_rota_templates_by_pk(
       pk_columns: { id: $id }
-      _set: {
-        name: $name
-        days: $days
-        start_time: $start_time
-        end_time: $end_time
-        is_active: $is_active
-      }
+      _set: { name: $name }
     ) {
       __typename
       id
@@ -200,7 +205,6 @@ export function RotaTemplate(props: RotaTemplateProps) {
         aggregateQuery={LIST_AGGREGATE_QUERY}
         updateOrderQuery={UPDATE_ORDER_MUTATION}
         showNotificationBanner={true}
-        createPage={true}
       />
       )
     </div>

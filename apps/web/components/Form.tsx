@@ -1,17 +1,30 @@
 import React, { FC } from 'react'
-import { Form as AntForm, Input, Radio, Checkbox } from 'formik-antd'
-// import { Radio } from 'antd'
+import {
+  Form as AntForm,
+  Input,
+  Radio,
+  Checkbox,
+  TimePicker,
+} from 'formik-antd'
 import { ColorPicker, FontIcon } from '@pabau/ui'
 import { FormikValues } from 'formik'
+import moment from 'moment'
 interface P {
   schema: Schema
   values: FormikValues
   layout?: 'horizontal' | 'inline' | 'vertical'
+  setFieldValue: (key: string, value: string) => void
 }
 
-const Form: FC<P> = ({ schema, values, layout = 'vertical' }) => {
-  const { fields } = schema
+const CheckboxGroup = Checkbox.Group
 
+const Form: FC<P> = ({
+  schema,
+  values,
+  layout = 'vertical',
+  setFieldValue,
+}) => {
+  const { fields } = schema
   return (
     <AntForm layout={layout} requiredMark={false}>
       {Object.entries(fields).map(
@@ -28,6 +41,8 @@ const Form: FC<P> = ({ schema, values, layout = 'vertical' }) => {
               type,
               radio,
               full,
+              col = 24,
+              selectOptions,
             },
           ],
           i
@@ -44,6 +59,29 @@ const Form: FC<P> = ({ schema, values, layout = 'vertical' }) => {
                 </Radio.Group>
               </AntForm.Item>
             ) : null}
+            {type === 'days-checkbox' ? (
+              <div>
+                <AntForm.Item label={short} key={name} name={name}>
+                  <CheckboxGroup name={name} options={selectOptions} />
+                </AntForm.Item>
+              </div>
+            ) : null}
+            {type === 'time' && (
+              <AntForm.Item label={short} key={name} name={name}>
+                <TimePicker
+                  name={name}
+                  format="HH:mm"
+                  value={moment(
+                    new Date().toISOString().split('T').shift() +
+                      ' ' +
+                      values[name]
+                  )}
+                  onChange={(time, timeString) => {
+                    setFieldValue(name, timeString)
+                  }}
+                />
+              </AntForm.Item>
+            )}
             {type === 'icon' && values.appointment_type === 'Icon' && (
               <AntForm.Item key={name} name={name}>
                 <FontIcon

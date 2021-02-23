@@ -32,13 +32,16 @@ interface SchemaItem {
     | 'radio-group'
     | 'color-picker'
     | 'checkbox'
+    | 'days-checkbox'
     | 'icon'
     | 'select'
+    | 'time'
   defaultvalue?: string | number | boolean
   visible?: boolean
   required?: boolean
   radio?: TypeValues[]
   selectOptions?: TypeValues[]
+  col?: number
 }
 
 interface TypeValues {

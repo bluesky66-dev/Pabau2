@@ -383,6 +383,9 @@ const CrudTable: FC<P> = ({
       }
       onSubmit={(values, { resetForm }) => {
         console.log('formik onsubmit', values)
+        if (values.days) {
+          values.days = values.days.toString()
+        }
         onSubmit(values, { resetForm })
       }}
       //initialValues={typeof modalShowing === 'object' ? modalShowing : undefined}
