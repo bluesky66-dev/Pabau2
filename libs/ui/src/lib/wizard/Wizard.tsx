@@ -6,19 +6,23 @@ import { StepperInterface } from './mock'
 interface WizardProps {
   onPrev?: () => void
   onNext?: () => void
+  onSmartOrder?: () => void
   active: number
   allSteps: number
   stepperData: StepperInterface[]
   disableNextStep?: boolean
+  smartOrderBtn?: boolean
 }
 
 export const Wizard: React.FC<WizardProps> = ({
   onPrev,
   onNext,
+  onSmartOrder,
   active,
   allSteps,
   stepperData,
   disableNextStep = false,
+  smartOrderBtn = false,
   children,
 }) => {
   return (
@@ -39,13 +43,24 @@ export const Wizard: React.FC<WizardProps> = ({
           Step {active + 1}/{allSteps}
         </span>
 
-        <Button
-          type="primary"
-          onClick={(event) => onNext?.()}
-          disabled={disableNextStep || allSteps - 1 <= active}
-        >
-          Next Step
-        </Button>
+        <div>
+          {smartOrderBtn && (
+            <Button
+              type="default"
+              onClick={(event) => onSmartOrder?.()}
+              style={{ marginRight: '10px' }}
+            >
+              Smart Order
+            </Button>
+          )}
+          <Button
+            type="primary"
+            onClick={(event) => onNext?.()}
+            disabled={disableNextStep || allSteps - 1 <= active}
+          >
+            Next Step
+          </Button>
+        </div>
       </div>
     </div>
   )

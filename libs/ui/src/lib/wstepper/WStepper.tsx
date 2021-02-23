@@ -7,6 +7,7 @@ interface WStepperProps {
   active: number
   data: StepperItem[]
   disableNextStep?: boolean
+  smartOrderBtn?: boolean
   onActiveStepChange?: (index) => void
 }
 
@@ -16,6 +17,7 @@ export const WStepper: React.FC<WStepperProps> = ({
   data,
   disableNextStep = false,
   onActiveStepChange,
+  ...props
 }) => {
   const [index, setIndex] = React.useState(0)
 
@@ -30,6 +32,7 @@ export const WStepper: React.FC<WStepperProps> = ({
   return (
     <div className={styles.container}>
       <Wizard
+        {...props}
         onPrev={() => setIndex(index - 1)}
         onNext={() => setIndex(index + 1)}
         active={index}

@@ -1,0 +1,210 @@
+.mainPurchaseOrder {
+  :global {
+    .ant-card-head,
+    .ant-card-body {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    .ant-card-body {
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
+    .ant-tabs {
+      min-height: calc(100vh - 250px) !important;
+    }
+    hr.Wizard_bottomline__1H48w {
+      margin: 0px;
+
+      @media screen and (max-width: 992px) {
+        display: none;
+      }
+    }
+    .ant-tabs-tab {
+      background-color: transparent;
+      padding: 12px 40px;
+    }
+  }
+  .purchaseOrderHeader {
+    padding: 0px 24px;
+    .breadcrumbDiv {
+      :global .ant-breadcrumb {
+        padding: 0px;
+        margin-bottom: 10px;
+      }
+    }
+    .heading {
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 25px;
+      color: #3d3d46;
+    }
+  }
+  .purchaseOrderBody {
+    .orderBuilderSection {
+      border-bottom: 1px solid #ecedf0;
+      margin-bottom: 80px;
+      .heading {
+        padding: 10px 25px;
+        border-bottom: 1px solid #ecedf0;
+        span {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 18px;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          color: #9292a3;
+        }
+
+        @media screen and (max-width: 992px) {
+          border-top: 1px solid #ecedf0;
+        }
+      }
+
+      .marginBottom {
+        margin-bottom: 25px;
+      }
+
+      :global {
+        label {
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 22px;
+          display: flex;
+          align-items: center;
+          color: #9292a3;
+          margin-bottom: 2.5px;
+        }
+      }
+
+      .orderDetailsControls {
+        border-right: 1px solid #ecedf0;
+        .controls {
+          padding: 10px 25px;
+          .orderHeading {
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 20px;
+            color: #3d3d46;
+          }
+          :global {
+            .ant-collapse-header {
+              border: none;
+              padding-left: 0px !important;
+              padding-right: 0px !important;
+            }
+          }
+        }
+      }
+
+      .generalPadding {
+        padding: 40px 20px;
+      }
+      .listingHead {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+
+        :global {
+          div:first-child {
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 20px;
+            color: #3d3d46;
+          }
+          div:last-child {
+            input {
+              min-width: 250px;
+            }
+          }
+        }
+      }
+
+      .orderCategorySelection {
+        .orderDetails {
+          .categorySelection {
+            .categoryListing {
+              border: 1px solid #ecedf0;
+              box-sizing: border-box;
+              border-radius: 4px;
+              min-height: 400px;
+              max-height: 420px;
+              padding: 20px 10px;
+              overflow-y: auto;
+              display: flex;
+              justify-content: center;
+              align-items: flex-start;
+              flex-wrap: wrap;
+
+              :global .ant-col {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+
+              .category {
+                max-width: 150px;
+                padding-bottom: 20px;
+                // border: 1px solid red;
+
+                .categoryCard {
+                  position: relative;
+                  cursor: pointer;
+                  height: 140px;
+                  width: 140px;
+                  border: 1px solid #ecedf0;
+                  border-radius: 4px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  .categoryCheckBox {
+                    display: none;
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    z-index: 1;
+                  }
+                }
+                .categoryName {
+                  display: block;
+                  padding: 0px 10px;
+                  cursor: pointer;
+                  font-size: 14px;
+                  line-height: 18px;
+                  color: #3d3d46;
+                  margin-top: 5px;
+                  text-align: center;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  width: 100%;
+                }
+
+                &:hover {
+                  .categoryCard {
+                    border-color: #54b2d3;
+                  }
+                  .categoryName {
+                    color: #54b2d3;
+                  }
+                }
+              }
+              .checkedCateogry {
+                .categoryCard {
+                  border-color: #54b2d3;
+                }
+                .categoryName {
+                  color: #54b2d3;
+                }
+                .categoryCheckBox {
+                  display: block !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
