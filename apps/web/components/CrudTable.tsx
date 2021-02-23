@@ -142,7 +142,6 @@ const CrudTable: FC<P> = ({
       )
     },
     onError(err) {
-      console.log('err', err)
       Notification(
         NotificationType.error,
         `Error! ${schema.messages.update.error}`
