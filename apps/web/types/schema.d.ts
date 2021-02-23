@@ -38,6 +38,7 @@ interface SchemaItem {
   visible?: boolean
   required?: boolean
   radio?: TypeValues[]
+  validateMsg?: string
   selectOptions?: TypeValues[]
 }
 
