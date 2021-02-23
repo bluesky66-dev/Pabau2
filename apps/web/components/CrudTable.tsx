@@ -185,21 +185,48 @@ const CrudTable: FC<P> = ({
     Record<string, string | boolean | number>
   >({})
 
-  const { data, error, loading } = useLiveQuery(listQuery, {
-    variables: {
-      isActive,
-      searchTerm: '%' + searchTerm + '%',
-      offset: paginateData.offset,
-      limit: paginateData.limit,
-    },
-  })
+  const getQueryVariables = () => {
+    let queryOptions = {
+      variables: {
+        isActive,
+        searchTerm: '%' + searchTerm + '%',
+        offset: paginateData.offset,
+        limit: paginateData.limit,
+      },
+    }
 
-  const { data: aggregateData } = useLiveQuery(aggregateQuery, {
-    variables: {
-      isActive,
-      searchTerm: '%' + searchTerm + '%',
-    },
-  })
+    if (!tableSearch) {
+      delete queryOptions.variables.searchTerm
+    }
+    if (!addFilter) {
+      delete queryOptions.variables.isActive
+    }
+    return queryOptions
+  }
+
+  const getAggregateQueryVariables = () => {
+    let queryOptions = {
+      variables: {
+        isActive,
+        searchTerm: '%' + searchTerm + '%',
+      },
+    }
+
+    if (!tableSearch) {
+      delete queryOptions.variables.searchTerm
+    }
+    if (!addFilter) {
+      delete queryOptions.variables.isActive
+    }
+    return queryOptions
+  }
+
+  const { data, error, loading } = useLiveQuery(listQuery, getQueryVariables())
+
+  const { data: aggregateData } = useLiveQuery(
+    aggregateQuery,
+    getAggregateQueryVariables()
+  )
 
   useEffect(() => {
     if (data) {
@@ -261,45 +288,45 @@ const CrudTable: FC<P> = ({
     console.log('got submittal!', values)
     await (values.id
       ? editMutation({
-        variables: values,
-        optimisticResponse: {},
-        update: (proxy) => {
-          if (listQuery) {
-            const existing = proxy.readQuery({
-              query: listQuery,
-            })
-            if (existing) {
-              const key = Object.keys(existing)[0]
-              proxy.writeQuery({
+          variables: values,
+          optimisticResponse: {},
+          update: (proxy) => {
+            if (listQuery) {
+              const existing = proxy.readQuery({
                 query: listQuery,
-                data: {
-                  [key]: [...existing[key], values],
-                },
               })
+              if (existing) {
+                const key = Object.keys(existing)[0]
+                proxy.writeQuery({
+                  query: listQuery,
+                  data: {
+                    [key]: [...existing[key], values],
+                  },
+                })
+              }
             }
-          }
-        },
-      })
+          },
+        })
       : addMutation({
-        variables: values,
-        optimisticResponse: {},
-        update: (proxy) => {
-          if (listQuery) {
-            const existing = proxy.readQuery({
-              query: listQuery,
-            })
-            if (existing) {
-              const key = Object.keys(existing)[0]
-              proxy.writeQuery({
+          variables: values,
+          optimisticResponse: {},
+          update: (proxy) => {
+            if (listQuery) {
+              const existing = proxy.readQuery({
                 query: listQuery,
-                data: {
-                  [key]: [...existing[key], values],
-                },
               })
+              if (existing) {
+                const key = Object.keys(existing)[0]
+                proxy.writeQuery({
+                  query: listQuery,
+                  data: {
+                    [key]: [...existing[key], values],
+                  },
+                })
+              }
             }
-          }
-        },
-      }))
+          },
+        }))
     resetForm()
     setModalShowing(false)
   }
@@ -443,16 +470,16 @@ const CrudTable: FC<P> = ({
                   addFilter={addFilter}
                 />
               ) : (
-                  <AddButton
-                    onClick={createPageOnClick}
-                    onFilterSource={onFilterMarketingSource}
-                    onSearch={onSearch}
-                    schema={schema}
-                    tableSearch={tableSearch}
-                    addFilter={addFilter}
-                    needTranslation={needTranslation}
-                  />
-                )}
+                <AddButton
+                  onClick={createPageOnClick}
+                  onFilterSource={onFilterMarketingSource}
+                  onSearch={onSearch}
+                  schema={schema}
+                  tableSearch={tableSearch}
+                  addFilter={addFilter}
+                  needTranslation={needTranslation}
+                />
+              )}
             </div>
           </MobileHeader>
         </div>
@@ -506,16 +533,16 @@ const CrudTable: FC<P> = ({
                 addFilter={addFilter}
               />
             ) : (
-                <AddButton
-                  onClick={createPageOnClick}
-                  onFilterSource={onFilterMarketingSource}
-                  onSearch={onSearch}
-                  schema={schema}
-                  tableSearch={tableSearch}
-                  addFilter={addFilter}
-                  needTranslation={needTranslation}
-                />
-              )}
+              <AddButton
+                onClick={createPageOnClick}
+                onFilterSource={onFilterMarketingSource}
+                onSearch={onSearch}
+                schema={schema}
+                tableSearch={tableSearch}
+                addFilter={addFilter}
+                needTranslation={needTranslation}
+              />
+            )}
           </div>
           <Table
             loading={isLoading}

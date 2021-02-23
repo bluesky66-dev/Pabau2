@@ -5,18 +5,8 @@ import CrudLayout from '../../components/CrudLayout/CrudLayout'
 
 /* eslint-disable graphql/template-strings */
 const LIST_QUERY = gql`
-  query salutation(
-    $isActive: Boolean = true
-    $offset: Int
-    $limit: Int
-    $searchTerm: String = ""
-  ) {
-    salutation(
-      offset: $offset
-      limit: $limit
-      order_by: { order: desc }
-      where: { _or: [{ _and: [{ salutation: { _ilike: $searchTerm } }] }] }
-    ) {
+  query salutation($offset: Int, $limit: Int) {
+    salutation(offset: $offset, limit: $limit, order_by: { order: desc }) {
       __typename
       id
       salutation
@@ -26,16 +16,8 @@ const LIST_QUERY = gql`
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query salutation_aggregate(
-    $isActive: Boolean = true
-    $searchTerm: String = ""
-  ) {
-    salutation_aggregate(
-      where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ salutation: { _ilike: $searchTerm } }] }]
-      }
-    ) {
+  query salutation_aggregate {
+    salutation_aggregate {
       aggregate {
         count
       }
