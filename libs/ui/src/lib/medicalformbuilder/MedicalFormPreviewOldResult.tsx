@@ -16,45 +16,42 @@ interface P {
 }
 const MedicalFormPreviewOldResult: FC<P> = ({ formData }) => {
   let formDataArray = []
-
   if (formData !== '') {
     formDataArray = JSON.parse(Base64.decode(formData))
-    let name = ''
-    let label = ''
-    formDataArray['form_structure'].map((form, index) => {
-      if (form.title) {
-        if (typeof form.title === 'object') {
-          const obj = Base64.decode(Base64.encode(form.title))
-          form.title = obj[1]['value'].trim()
-        } else {
-          form.title = form.title.trim()
-        }
-      }
-      if (form.title) {
-        name = form.title
-      } else {
-        if (typeof form.values === 'object') {
-          const obj = Base64.decode(Base64.encode(form.title))
-          name = obj[1]['value'].trim()
-        } else {
-          name = form.values
-        }
-      }
-      name = name.toLowerCase().trim()
-      label = form.title ? form.title.trim() : form.values.trim()
-      if (form.cssClass === 'cl_services') label = 'Services'
-      else if (form.cssClass === 'cl_drugs') label = 'Drugs'
-      else if (form.cssClass === 'labs_tests') label = 'Labs Tests'
-      else if (form.cssClass === 'vaccine_scheduler') label = ''
-      form.name = name
-      form.label = label
-    })
   }
 
   return (
     <div className={styles.MedicalFormPreviewOldResultPanel}>
       <h2 className={previewStypes.medicalFormName}>Preview Form</h2>
       {formDataArray['form_structure']?.map((form, index) => {
+        let name = ''
+        let label = ''
+        if (form.title) {
+          if (typeof form.title === 'object') {
+            const obj = Base64.decode(Base64.encode(form.title))
+            form.title = obj[1]['value'].trim()
+          } else {
+            form.title = form.title.trim()
+          }
+        }
+        if (form.title) {
+          name = form.title
+        } else {
+          if (typeof form.values === 'object') {
+            const obj = Base64.decode(Base64.encode(form.title))
+            name = obj[1]['value'].trim()
+          } else {
+            name = form.values
+          }
+        }
+        name = name.toLowerCase().trim()
+        label = form.title ? form.title.trim() : form.values.trim()
+        if (form.cssClass === 'cl_services') label = 'Services'
+        else if (form.cssClass === 'cl_drugs') label = 'Drugs'
+        else if (form.cssClass === 'labs_tests') label = 'Labs Tests'
+        else if (form.cssClass === 'vaccine_scheduler') label = ''
+        form.name = name
+        form.label = label
         return (
           <>
             <div className={previewStypes.medicalFormLabel}>{form.label}</div>
