@@ -1,10 +1,22 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react'
+import {
+  MessageOutlined,
+  UserOutlined,
+  SendOutlined,
+  MailOutlined,
+} from '@ant-design/icons'
 import classNames from 'classnames'
 import { CheckOutlined } from '@ant-design/icons'
-import { Button } from '@pabau/ui'
+import { Button, InstallationModal } from '@pabau/ui'
 import styles from './Integration.module.less'
+import logo from './../../assets/images/pabau-badge-1.png'
+import {
+  longDescription,
+  mobileViewDescription,
+  webViewDescription,
+} from '../../mocks/SetupIntegration'
 
-interface itemsSchema {
+interface ItemsSchema {
   title: string
   subTitle: string
   logoImage: ReactElement
@@ -12,11 +24,20 @@ interface itemsSchema {
   categories: Array<string>
 }
 
+interface ModalSchema {
+  title: string
+  subTitle: string
+  logoImage: string
+  installed: number
+  categories: Array<string>
+}
+
 interface P {
   heading?: string
-  category: string
-  items: itemsSchema[]
+  category?: string
+  items: ItemsSchema[]
   limit?: number
+  installed?: number
 }
 
 const AllCollectionsHeaderCollections = [
@@ -39,8 +60,34 @@ const AllCollectionsHeaderCollections = [
     backColor: '/',
   },
 ]
+const WorksWith = [
+  {
+    key: 0,
+    title: 'Outbound',
+    subTitle: 'Send in outbound messages',
+    logoImage: <SendOutlined />,
+  },
+  {
+    key: 1,
+    title: 'Messenger',
+    subTitle: 'Add to Messenger home',
+    logoImage: <MessageOutlined />,
+  },
+  {
+    key: 2,
+    title: 'Inbox',
+    subTitle: 'Send in conversations',
+    logoImage: <MailOutlined />,
+  },
+  {
+    key: 3,
+    title: 'Operator',
+    subTitle: 'Use as follow up actions',
+    logoImage: <UserOutlined />,
+  },
+]
 
-const AllCollectionsHeader: FC = () => {
+const IntegrationHeader: FC = () => {
   return (
     <div>
       <div className={styles.tabMenuWrapper}>
@@ -59,21 +106,38 @@ const AllCollectionsHeader: FC = () => {
   )
 }
 
-export const AllCollectionsBody: FC<P> = ({
+export const IntegrationTabBody: FC<P> = ({
   heading,
   category = 'ALL',
   items,
   limit,
+  installed = -1,
 }) => {
   category = category.toUpperCase()
   const [data, setData] = useState([])
-  const [tempLimit, setTempLimit] = useState(limit || 0)
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
+  const [modalData, setModalData] = useState<ModalSchema>({
+    title: '',
+    subTitle: '',
+    installed: 0,
+    logoImage: logo,
+    categories: [],
+  })
 
   useEffect(() => {
     if (category !== 'ALL') {
       const mapArray = []
       for (const a of items) {
-        if (a.categories.indexOf(category) === 0) {
+        if (a.categories.indexOf(category) !== -1) {
+          mapArray.push(a)
+        }
+      }
+      setData([...mapArray])
+      return
+    } else if (installed === 1) {
+      const mapArray = []
+      for (const a of items) {
+        if (a.installed === 1) {
           mapArray.push(a)
         }
       }
@@ -83,13 +147,12 @@ export const AllCollectionsBody: FC<P> = ({
       setData([...items])
       return
     }
+  }, [items, category, data.length, installed])
 
-    if (tempLimit) {
-      setTempLimit(tempLimit)
-    } else {
-      setTempLimit(data.length)
-    }
-  }, [items, category, data.length, tempLimit])
+  const modalOpen = (key) => {
+    setIsModalVisible(true)
+    setModalData(key)
+  }
 
   return (
     <>
@@ -103,6 +166,7 @@ export const AllCollectionsBody: FC<P> = ({
                 ? classNames(styles.itemBox, styles.active)
                 : classNames(styles.itemBox)
             }
+            onClick={() => modalOpen(value)}
           >
             <span className={styles.checkWrap}>
               <CheckOutlined />
@@ -115,8 +179,21 @@ export const AllCollectionsBody: FC<P> = ({
           </div>
         ))}
       </div>
+      <InstallationModal
+        visible={isModalVisible}
+        logo={modalData.logoImage}
+        title={modalData.title}
+        description={modalData.subTitle}
+        buttonType={'Install Now'}
+        categories={modalData.categories}
+        onCancel={() => setIsModalVisible(false)}
+        worksWith={WorksWith}
+        longDescription={longDescription}
+        mobileViewDescription={mobileViewDescription}
+        webViewDescription={webViewDescription}
+      />
     </>
   )
 }
 
-export default AllCollectionsHeader
+export default IntegrationHeader
