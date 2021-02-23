@@ -129,7 +129,7 @@ export function CreateTaxRateModal(props: CreateTaxRateProps) {
               marginTop: 20,
             }}
           >
-            <Form.Item name="isActive">
+            <Form.Item name="isActive" valuePropName="checked">
               <Checkbox>Active</Checkbox>
             </Form.Item>
             {isEdit && (
