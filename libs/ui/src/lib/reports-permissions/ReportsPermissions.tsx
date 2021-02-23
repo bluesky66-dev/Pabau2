@@ -5,15 +5,15 @@ import * as Icons from '@fortawesome/free-solid-svg-icons'
 
 import styles from './ReportsPermissions.module.less'
 
-export type PermissionsType = {
+export type PermissionType = {
   key: string
   name: string
 }
 
-export type PermissionsGroupType = {
+export type PermissionGroupType = {
   key: string
   name: string
-  children?: PermissionsType[]
+  children?: PermissionType[]
 }
 
 /* eslint-disable-next-line */
@@ -21,7 +21,7 @@ export interface ReportsPermissionsProps {
   pageTitle: string
   subTitle: string
   permissions: string[]
-  data: PermissionsGroupType[]
+  data: PermissionGroupType[]
   viewAll?: boolean
   onChange?: (permission: string, checked: boolean) => void
 }
