@@ -315,58 +315,58 @@ export const Index: FC = () => {
       </MobileHeader>
     </div>
   ) : (
-    <Layout active={'Lab'}>
-      <div className={styles.labWrapper}>
-        <Form
-          name="basic"
-          initialValues={{
-            remember: true,
-          }}
-          layout="vertical"
-          onFinish={handleSubmit}
-        >
-          <div className={styles.createHeaderWrapper}>
-            <div className={styles.creatHead}>
-              <div className={styles.headBreadTitle}>
-                <Breadcrumb
-                  breadcrumbItems={[
-                    { breadcrumbName: 'Setup', path: 'setup' },
-                    { breadcrumbName: 'Labs', path: 'setup/labs' },
-                    { breadcrumbName: 'Create Lab', path: '' },
-                  ]}
-                />
-                <Title>Create Lab</Title>
-              </div>
-              <div className={styles.creatRight}>
-                <Checkbox
-                  className={styles.checkActivate}
-                  disabled={false}
-                  checked={values.isActive}
-                  onChange={(e) => setFieldValue('isActive', e.target.checked)}
-                >
-                  Active
+      <Layout active={'Lab'}>
+        <div className={styles.labWrapper}>
+          <Form
+            name="basic"
+            initialValues={{
+              remember: true,
+            }}
+            layout="vertical"
+            onFinish={handleSubmit}
+          >
+            <div className={styles.createHeaderWrapper}>
+              <div className={styles.creatHead}>
+                <div className={styles.headBreadTitle}>
+                  <Breadcrumb
+                    breadcrumbItems={[
+                      { breadcrumbName: 'Setup', path: 'setup' },
+                      { breadcrumbName: 'Labs', path: 'setup/labs' },
+                      { breadcrumbName: 'Create Lab', path: '' },
+                    ]}
+                  />
+                  <Title>Create Lab</Title>
+                </div>
+                <div className={styles.creatRight}>
+                  <Checkbox
+                    className={styles.checkActivate}
+                    disabled={false}
+                    checked={values.isActive}
+                    onChange={(e) => setFieldValue('isActive', e.target.checked)}
+                  >
+                    Active
                 </Checkbox>
-                <Button
-                  className={styles.cancelBtn}
-                  onClick={() => router.push('/setup/labs')}
-                >
-                  Cancel
+                  <Button
+                    className={styles.cancelBtn}
+                    onClick={() => router.push('/setup/labs')}
+                  >
+                    Cancel
                 </Button>
-                <Button
-                  className={styles.createBtn}
-                  type="primary"
-                  htmlType="submit"
-                >
-                  Create Lab
+                  <Button
+                    className={styles.createBtn}
+                    type="primary"
+                    htmlType="submit"
+                  >
+                    Create Lab
                 </Button>
+                </div>
               </div>
             </div>
-          </div>
-          {renderForm()}
-        </Form>
-      </div>
-    </Layout>
-  )
+            {renderForm()}
+          </Form>
+        </div>
+      </Layout>
+    )
 }
 
 export default Index

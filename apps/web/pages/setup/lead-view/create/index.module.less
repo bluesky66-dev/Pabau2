@@ -1,0 +1,191 @@
+
+.basic-info {
+  background-color: #fff; 
+  padding-top: 20px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 8px;
+      h6 {
+    color: #3D3D46;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 12px;
+       }
+}
+.lead-create-form{
+    .form-box{
+      display : flex;
+      flex-direction : column;
+    } 
+}
+
+.table-main-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    .btn {
+      width: 100px;
+      margin-left: 10px;
+    }
+  }
+  .marketing-source {
+    .create-source-btn {
+      margin-top: 24px;
+      margin-left: 16px;
+      margin-right: 24px;
+      margin-bottom: 27px;
+      height: 40px;
+      min-width: 124px;
+      // font-size: 14px;
+      font-family: 'Circular-Std-Medium';
+      font-weight: 400;
+    }
+ 
+    .search-marketing-style {
+      width: 256px;
+      height: 40px;
+      background: #ffffff;
+      border: 1px solid var(--border-color-base);
+    }
+    :global {
+      .ant-input-affix-wrapper {
+        padding: 8px 12px;
+        border-radius: 4px;
+      }
+    }
+  }
+  
+
+  .marketing-source-header {
+    background-color: #fff;
+  }
+  
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .table-main-heading {
+      display: block;
+    }
+    .filter-btn,
+    .create-source-btn {
+      margin-top: 0px !important;
+    }
+    .marketing-source {
+      padding-left: 24px;
+      padding-top: 14px;
+    }
+  }
+  
+  .desktop-view-none {
+    display: none;
+  }
+  
+  @media (min-width: 200px) and (max-width: 767px) {
+    .mobile-view-none {
+      display: none;
+    }
+    .desktop-view-none {
+      display: block;
+    }
+  
+    .leads-view-create-page {
+      .marketing-text-style {
+        display: flex;
+        align-items: center;
+        p {
+          margin-bottom: 0px;
+          font-family: Circular-Std-Medium;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 17px;
+          line-height: 22px;
+          text-transform: capitalize;
+          color: var(--grey-text-color);
+          padding-left: 10px;
+        }
+      }
+    }
+    .marketing-icon-style {
+      font-size: 19px;
+      color: var(--light-grey-color);
+      padding-right: 25px;
+    }
+    .plus-icon-style {
+      color: var(--primary-color);
+      font-size: 25px;
+      border-radius: 4px;
+    }
+    .all-content-align-mobile {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .marketing-icon {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+
+  
+  .clinic-lead-capture-form {
+    background-color: #fff;
+    :global {
+      .ant-form-item {
+        margin-bottom: 16px;
+      }
+    }
+    .form-box {
+      border-radius: 4px;
+      padding-top: 19px;
+      padding-left: 32px;
+      padding-right: 32px;
+      padding-bottom: 19px;
+    }
+    .img-center-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 34px;
+    }
+  }
+  .form-send-btn-center {
+    padding-top: 16px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .clinic-label-style {
+    label {
+      color: var(--light-grey-color);
+      font-size: 14px;
+      margin-bottom: 0px;
+    }
+    :global {
+      .ant-input {
+        border-radius:4px;
+        padding: 8px 11px;
+      }
+    }
+  }
+
+@media (min-width: 200px) and (max-width: 767px) {
+    .clinic-lead-capture-form {
+      padding-top: 16px;
+      padding-bottom: 16px;
+      padding-left: 16px;
+      padding-right: 16px;
+      .form-box {
+        padding: 0;
+        border: none;
+      }
+      .img-center-box {
+        padding-bottom: 20px;
+        padding-top: 4px;
+      }
+    }
+    .form-send-btn-center {
+      padding-top: 5px;
+    }
+}
+
+  

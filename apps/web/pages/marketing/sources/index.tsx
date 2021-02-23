@@ -103,6 +103,7 @@ const UPDATE_ORDER_MUTATION = gql`
 
 export const Index: NextPage = () => {
   const { t } = useTranslation('common')
+
   const schema: Schema = {
     full: t('marketingsource-title.translation'),
     fullLower: t('marketingsource-title.translation'),
@@ -140,8 +141,9 @@ export const Index: NextPage = () => {
       public: {
         full: t('marketingsource-tableColumn-active.translation'),
         type: 'number',
-        defaultvalue: 1,
+        defaultvalue: 1
       },
+      
     },
   }
   return (

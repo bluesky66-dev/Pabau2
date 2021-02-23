@@ -246,45 +246,45 @@ const CrudTable: FC<P> = ({
     console.log('got submittal!', values)
     await (values.id
       ? editMutation({
-          variables: values,
-          optimisticResponse: {},
-          update: (proxy) => {
-            if (listQuery) {
-              const existing = proxy.readQuery({
+        variables: values,
+        optimisticResponse: {},
+        update: (proxy) => {
+          if (listQuery) {
+            const existing = proxy.readQuery({
+              query: listQuery,
+            })
+            if (existing) {
+              const key = Object.keys(existing)[0]
+              proxy.writeQuery({
                 query: listQuery,
+                data: {
+                  [key]: [...existing[key], values],
+                },
               })
-              if (existing) {
-                const key = Object.keys(existing)[0]
-                proxy.writeQuery({
-                  query: listQuery,
-                  data: {
-                    [key]: [...existing[key], values],
-                  },
-                })
-              }
             }
-          },
-        })
+          }
+        },
+      })
       : addMutation({
-          variables: values,
-          optimisticResponse: {},
-          update: (proxy) => {
-            if (listQuery) {
-              const existing = proxy.readQuery({
+        variables: values,
+        optimisticResponse: {},
+        update: (proxy) => {
+          if (listQuery) {
+            const existing = proxy.readQuery({
+              query: listQuery,
+            })
+            if (existing) {
+              const key = Object.keys(existing)[0]
+              proxy.writeQuery({
                 query: listQuery,
+                data: {
+                  [key]: [...existing[key], values],
+                },
               })
-              if (existing) {
-                const key = Object.keys(existing)[0]
-                proxy.writeQuery({
-                  query: listQuery,
-                  data: {
-                    [key]: [...existing[key], values],
-                  },
-                })
-              }
             }
-          },
-        }))
+          }
+        },
+      }))
     resetForm()
     setModalShowing(false)
   }
@@ -360,7 +360,7 @@ const CrudTable: FC<P> = ({
   const handleLanguageChange = (language: string): void => {
     setCurrentLanguage(language)
   }
-
+  // console.log('aqwe',addQuery,createPage);
   return (
     <Formik
       enableReinitialize={true}
@@ -420,15 +420,15 @@ const CrudTable: FC<P> = ({
                   needTranslation={needTranslation}
                 />
               ) : (
-                <AddButton
-                  onClick={createPageOnClick}
-                  onFilterSource={onFilterMarketingSource}
-                  onSearch={onSearch}
-                  schema={schema}
-                  tableSearch={tableSearch}
-                  needTranslation={needTranslation}
-                />
-              )}
+                  <AddButton
+                    onClick={createPageOnClick}
+                    onFilterSource={onFilterMarketingSource}
+                    onSearch={onSearch}
+                    schema={schema}
+                    tableSearch={tableSearch}
+                    needTranslation={needTranslation}
+                  />
+                )}
             </div>
           </MobileHeader>
         </div>
@@ -481,15 +481,15 @@ const CrudTable: FC<P> = ({
                 needTranslation={needTranslation}
               />
             ) : (
-              <AddButton
-                onClick={createPageOnClick}
-                onFilterSource={onFilterMarketingSource}
-                onSearch={onSearch}
-                schema={schema}
-                tableSearch={tableSearch}
-                needTranslation={needTranslation}
-              />
-            )}
+                <AddButton
+                  onClick={createPageOnClick}
+                  onFilterSource={onFilterMarketingSource}
+                  onSearch={onSearch}
+                  schema={schema}
+                  tableSearch={tableSearch}
+                  needTranslation={needTranslation}
+                />
+              )}
           </div>
           <Table
             loading={isLoading}

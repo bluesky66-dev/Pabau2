@@ -4,7 +4,7 @@ import CrudLayout from '../../../components/CrudLayout/CrudLayout'
 import { useRouter } from 'next/router'
 
 /* eslint-disable-next-line */
-export interface LeadsProps {}
+export interface LeadsProps { }
 
 const LIST_QUERY = gql`
   query lead(
@@ -118,6 +118,7 @@ const schema: Schema = {
   fullLower: 'leads view',
   short: 'Leads',
   shortLower: 'leads',
+  createButtonLabel: 'Create lead View',
   messages: {
     create: {
       success: 'New leads created.',
@@ -159,7 +160,7 @@ export function Leads(props: LeadsProps) {
   const router = useRouter()
 
   const createPageOnClick = () => {
-    router.push('/setup/leads/create')
+    router.push('/setup/lead-view/create')
   }
 
   return (
