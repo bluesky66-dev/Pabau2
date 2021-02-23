@@ -1,11 +1,13 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Input as AntInput } from 'antd'
-import { Button, Switch } from '@pabau/ui'
+import { Button, Switch, QuestionBankModal } from '@pabau/ui'
 import {
   CloseOutlined,
   PlusOutlined,
   UnorderedListOutlined,
 } from '@ant-design/icons'
+import { data, menuOptions } from '../questionBank/mock'
+import { IQuestionOptions } from '../questionBank/QuestionBank'
 
 import styles from './AddQuestion.module.less'
 
@@ -15,6 +17,9 @@ export interface QuestionField {
 }
 
 export interface AddQuestionProps {
+  onQuestionBankAddButton: (
+    questions: Array<IQuestionOptions> | undefined
+  ) => void
   description?: string
   questions?: QuestionField[]
   title?: string
@@ -26,7 +31,6 @@ export interface AddQuestionProps {
   onChange?: (value: string, index: number) => void
   onAddQuestion?: () => void
   onDeleteButton?: (index: number) => void
-  onGoTo?: () => void
 }
 
 export const AddQuestion: FC<AddQuestionProps> = ({
@@ -40,8 +44,12 @@ export const AddQuestion: FC<AddQuestionProps> = ({
   onChange,
   onAddQuestion,
   onDeleteButton,
-  onGoTo,
+  onQuestionBankAddButton,
 }) => {
+  const [isModalVisible, setModalVisible] = useState<boolean>(false)
+  const onClick = () => {
+    setModalVisible(true)
+  }
   return (
     <div className={styles.questionWrapper}>
       <h1>
@@ -84,13 +92,17 @@ export const AddQuestion: FC<AddQuestionProps> = ({
           <PlusOutlined /> {addQuestionLabel}
         </div>
       </div>
-      <Button
-        type="primary"
-        className={styles.btnBank}
-        onClick={() => onGoTo?.()}
-      >
+      <Button type="primary" className={styles.btnBank} onClick={onClick}>
         {goToButtonLabel}
       </Button>
+      <QuestionBankModal
+        title={'Question Bank'}
+        questions={data}
+        options={menuOptions}
+        onAdd={onQuestionBankAddButton}
+        visible={isModalVisible}
+        onCancel={() => setModalVisible(false)}
+      />
     </div>
   )
 }

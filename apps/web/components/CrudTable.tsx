@@ -376,6 +376,13 @@ const CrudTable: FC<P> = ({
             a[
               c[0]
             ] = `The value for ${c[1].shortLower} must be more than ${c[1].min} characters.`
+          } else if (
+            c[1].required && // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            e[c[0]].length === 0 &&
+            c[1].validateMsg
+          ) {
+            a[c[0]] = c[1].validateMsg
           }
           return a
           // eslint-disable-next-line
