@@ -23,21 +23,21 @@
   - role: public
     permission:
       columns:
-      - city
-      - country
-      - created_at
-      - email
-      - id
       - integration
       - is_active
-      - name
       - order
-      - phone
       - postal_code
       - provider_number
+      - city
+      - country
+      - email
+      - name
+      - phone
       - street
       - street2
+      - created_at
       - updated_at
+      - id
       filter: {}
       allow_aggregations: true
   update_permissions:
@@ -111,6 +111,27 @@
   - role: public
     permission:
       filter: {}
+- table:
+    schema: public
+    name: business_details
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - business_location
+      - business_type
+      - businses_name
+      - company_email
+      - currency
+      - date_format
+      - default_language_clients
+      - default_language_staff
+      - phone
+      - time_zone
+      - website
+      - week_start
+      backend_only: false
 - table:
     schema: public
     name: cancellation_reasons
@@ -470,26 +491,25 @@
       filter: {}
 - table:
     schema: public
-    name: leads
+    name: lead
   insert_permissions:
   - role: public
     permission:
       check: {}
       columns:
       - is_active
-      - status
       - created_at
       - updated_at
-      - lead_age
+      - age
       - order
       - phone
       - email
       - interest
-      - lead_name
-      - lead_owner
-      - lead_source
-      - lead_status
       - location
+      - name
+      - owner
+      - source
+      - status
       - id
       backend_only: false
   select_permissions:
@@ -497,43 +517,40 @@
     permission:
       columns:
       - is_active
-      - status
       - created_at
       - updated_at
-      - lead_age
+      - age
       - order
       - phone
       - email
       - interest
-      - lead_name
-      - lead_owner
-      - lead_source
-      - lead_status
       - location
+      - name
+      - owner
+      - source
+      - status
       - id
       filter: {}
-      allow_aggregations: true
   update_permissions:
   - role: public
     permission:
       columns:
       - is_active
-      - status
       - created_at
       - updated_at
-      - lead_age
+      - age
       - order
       - phone
       - email
       - interest
-      - lead_name
-      - lead_owner
-      - lead_source
-      - lead_status
       - location
+      - name
+      - owner
+      - source
+      - status
       - id
       filter: {}
-      check: {}
+      check: null
   delete_permissions:
   - role: public
     permission:
@@ -541,6 +558,22 @@
 - table:
     schema: public
     name: locations
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - address
+      - image
+      - is_active
+      - is_day
+      - is_night
+      - is_parking
+      - is_pharmacy
+      - is_time
+      - name
+      - order
+      backend_only: false
   select_permissions:
   - role: public
     permission:
@@ -557,8 +590,25 @@
       - is_time
       - name
       - order
+      - updated_at
       filter: {}
       allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - address
+      - image
+      - is_active
+      - is_day
+      - is_night
+      - is_parking
+      - is_pharmacy
+      - is_time
+      - name
+      - order
+      filter: {}
+      check: null
 - table:
     schema: public
     name: marketing_campaign
@@ -715,6 +765,49 @@
 - table:
     schema: public
     name: rota_templates
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - days
+      - end_time
+      - is_active
+      - name
+      - order
+      - start_time
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - created_at
+      - updated_at
+      - name
+      - days
+      - start_time
+      - end_time
+      - is_active
+      - order
+      - id
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - days
+      - end_time
+      - is_active
+      - name
+      - order
+      - start_time
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: salutation
@@ -733,6 +826,7 @@
       - created_at
       - id
       - is_active
+      - order
       - salutation
       - updated_at
       filter: {}
@@ -742,6 +836,7 @@
     permission:
       columns:
       - is_active
+      - order
       - salutation
       filter: {}
       check: null
@@ -749,3 +844,6 @@
   - role: public
     permission:
       filter: {}
+- table:
+    schema: public
+    name: third_parties

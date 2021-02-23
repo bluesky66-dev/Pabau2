@@ -15,7 +15,7 @@ const LIST_QUERY = gql`
     locations(
       offset: $offset
       limit: $limit
-      order_by: { order: desc }
+      order_by: { order: asc }
       where: {
         is_active: { _eq: $isActive }
         _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
@@ -38,6 +38,17 @@ const LIST_QUERY = gql`
   }
 `
 
+/**
+ * TODO refactor UPDATE_ORDER_MUTATION with legacy db
+ */
+const UPDATE_ORDER_MUTATION = gql`
+  mutation update_locations_order($id: uuid!, $order: Int) {
+    update_locations(where: { id: { _eq: $id } }, _set: { order: $order }) {
+      affected_rows
+    }
+  }
+`
+
 const schema: Schema = {
   full: 'Locations',
   fullLower: 'locations',
@@ -47,7 +58,13 @@ const schema: Schema = {
 }
 
 export function Locations(props: LocationsProps) {
-  return <LocationTable schema={schema} listQuery={LIST_QUERY} />
+  return (
+    <LocationTable
+      schema={schema}
+      listQuery={LIST_QUERY}
+      updateOrderQuery={UPDATE_ORDER_MUTATION}
+    />
+  )
 }
 
 export default Locations
