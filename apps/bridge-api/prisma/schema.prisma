@@ -1375,330 +1375,362 @@ model Timezone {
 
   @@map("timezone")
 }
-//model class_products {
-//  id             Int       @id @default(autoincrement())
-//  code           String
-//  name           String
-//  unit           String?
-//  size           String
-//  product_order  Int?
-//  um             String
-//  cost           Float?
-//  price          Float
-//  alert_quantity Int       @default(20)
-//  image          String?   @default("no_image.jpg")
-//  category_id    Int
-//  occupier       Int?
-//  uid            Int?
-//  created_date   DateTime?
-//  modified_date  DateTime?
-//  product_desc   String
-//}
+model ClassProduct {
+  id             Int       @id @default(autoincrement())
+  code           String
+  name           String
+  unit           String?
+  size           String
+  product_order  Int?
+  um             String
+  cost           Float?
+  price          Float
+  alert_quantity Int       @default(20)
+  image          String?   @default("no_image.jpg")
+  category_id    Int
+  occupier       Int?
+  uid            Int?
+  created_date   DateTime?
+  modified_date  DateTime?
+  product_desc   String
+
+  @@map("class_products")
+
+}
 //
-//model class_sms_history {
-//  id       Int    @id @default(autoincrement())
-//  class_id Int
-//  user_id  Int
-//  message  String
-//  datetime String
-//}
+model ClassSmsHistory {
+  id       Int    @id @default(autoincrement())
+  class_id Int
+  user_id  Int
+  message  String
+  datetime String
+
+  @@map("class_sms_history")
+
+}
 //
-//model class_template_settings {
-//  id                                  Int       @id @default(autoincrement())
-//  company_id                          Int       @default(0)
-//  class_wait_list_template_enable     Int?      @default(0)
-//  class_wait_list_template_id         Int?      @default(0)
-//  class_wait_list_sms_template_enable Int       @default(0)
-//  class_wait_list_sms_template_id     Int       @default(0)
-//  uid                                 Int?
-//  creation_date                       DateTime?
-//  modified_date                       DateTime?
-//}
+model ClassTemplateSetting {
+  id                                  Int       @id @default(autoincrement())
+  company_id                          Int       @default(0)
+  class_wait_list_template_enable     Int?      @default(0)
+  class_wait_list_template_id         Int?      @default(0)
+  class_wait_list_sms_template_enable Int       @default(0)
+  class_wait_list_sms_template_id     Int       @default(0)
+  uid                                 Int?
+  creation_date                       DateTime?
+  modified_date                       DateTime?
+
+  @@map("class_template_settings")
+}
 //
-//model cleverpin_settings {
-//  id         Int    @id @default(autoincrement())
-//  image_url  String
-//  company_id Int
-//}
+model CleverpinSetting {
+  id         Int    @id @default(autoincrement())
+  image_url  String
+  company_id Int
+
+  @@map("cleverpin_settings")
+}
 //
-//model client_form_settings {
-//  id                  Int @id @default(autoincrement())
-//  company_id          Int
-//  enable_medical      Int
-//  form_id             Int
-//  not_seen_months     Int
-//  enable_new_and_old  Int
-//  checked_by_default  Int
-//  new_client_template Int
-//  not_seen_template   Int
-//}
+model ClientFormSetting {
+  id                  Int @id @default(autoincrement())
+  company_id          Int
+  enable_medical      Int
+  form_id             Int
+  not_seen_months     Int
+  enable_new_and_old  Int
+  checked_by_default  Int
+  new_client_template Int
+  not_seen_template   Int
+
+  @@map("client_form_settings")
+}
 //
-//model clinical_softwares {
-//  id         Int    @id @default(autoincrement())
-//  name       String
-//  difficulty Int
-//  frequency  Int
-//}
+model ClinicalSoftware {
+  id         Int    @id @default(autoincrement())
+  name       String
+  difficulty Int
+  frequency  Int
+
+  @@map("clinical_softwares")
+}
 //
-//model clockin_break {
-//  break_time_id    Int @id @default(autoincrement())
-//  clock_id         Int
-//  break_time_start Int @default(0)
-//  break_time_out   Int @default(0)
-//}
+model ClockinBreak {
+  break_time_id    Int @id @default(autoincrement())
+  clock_id         Int
+  break_time_start Int @default(0)
+  break_time_out   Int @default(0)
+
+  @@map("clockin_break")
+}
+
+model ClockinLongpoll {
+  id          Int     @id @default(autoincrement())
+  clocked_out Boolean
+  uid         Int
+  occupier    Int
+
+  @@map("clockin_longpoll")
+  @@index([occupier], name: "occupier")
+}
+
+model ClockinTimesheet {
+  clock_id           Int     @id @default(autoincrement())
+  staff_uid          Int
+  company_id         Int
+  clockin            Int
+  clockout           Int
+  total_break_time   Int     @default(0)
+  total_working_time Int     @default(0)
+  notes              String
+  approved           Boolean
+  staff_name         String
+  ip_address         String
+
+  @@map("clockin_timesheets")
+  @@index([company_id], name: "company_id")
+  @@index([staff_uid], name: "staff_uid")
+  @@index([company_id, staff_uid], name: "uid_occupier")
+}
+model CmAccountNote {
+  ID          Int                     @id @default(autoincrement())
+  OwnerID     Int
+  AccountID   Int
+  Note        String
+  Status      cm_account_notes_Status @default(Enable)
+  CreatedDate DateTime
+  IpAddress   Int
+
+  @@map("cm_account_notes")
+}
+model CmAppointmentsCustomImportHelper {
+  id                    Int     @id @default(autoincrement())
+  occupier              Int
+  custom_appointment_id Int
+  custom_contact_name   String
+  custom_field_name     String
+  custom_field_value    String?
+  added                 Int
+  appointment_id        Int
+
+  @@map("cm_appointments_custom_import_helper")
+  @@index([custom_appointment_id], name: "custom_appointment_id")
+}
+model CmAppointmentCustom {
+  id                 Int    @id @default(autoincrement())
+  appointment_id     Int
+  occupier           Int
+  custom_field_id    Int
+  custom_field_value String
+  imported           Int
+
+  @@map("cm_appointment_custom")
+  @@index([appointment_id], name: "appointment_id")
+  @@index([custom_field_id], name: "custom_field_id")
+  @@index([custom_field_value], name: "custom_field_value")
+  @@index([occupier], name: "occupier")
+}
+model CmAuthorization {
+  id             Int    @id @default(autoincrement())
+  company_id     Int
+  appointment_id Int
+  contact_id     Int
+  title          String
+  total_sessions Int
+  diagnosis_code String
+
+  @@map("cm_authorization")
+
+}
+model CmBookingNote {
+  ID            Int                     @id @default(autoincrement())
+  OwnerID       Int
+  AppointmentID Int
+  Note          String
+  Status        cm_booking_notes_Status @default(Enable)
+  CreatedDate   DateTime
+  IpAddress     Int
+
+  @@map("cm_booking_notes")
+}
+model CmCase {
+  id           Int     @id @default(autoincrement())
+  case_number  String
+  type         String?
+  contact      String?
+  email        String?
+  subject      String?
+  phone        String?
+  request      String?
+  critical     String?
+  description  String?
+  related_to   Int?
+  module_type  Int?
+  user_id      Int?
+  module2_type Int?
+  user2_id     Int?
+  ownerid      Int?
+  status       String?
+  priority     String?
+  reason       String?
+  reported_by  String?
+  comments     String?
+  CreatedDate  Int?
+  IpAddress    String?
+  company_id    Int @map("occupier")
+  company Company @relation(fields: [company_id], references: [id])
+
+  @@map("cm_cases")
+}
+model CmCaseNote {
+  ID          Int                  @id @default(autoincrement())
+  OwnerID     Int
+  CaseID      Int
+  Note        String
+  Status      cm_case_notes_Status @default(Enable)
+  CreatedDate DateTime
+  IpAddress   Int
+
+  @@map("cm_case_notes")
+}
 //
-//model clockin_longpoll {
-//  id          Int     @id @default(autoincrement())
-//  clocked_out Boolean
-//  uid         Int
-//  occupier    Int
-//
-//  @@index([occupier], name: "occupier")
-//}
-//
-//model clockin_timesheets {
-//  clock_id           Int     @id @default(autoincrement())
-//  staff_uid          Int
-//  company_id         Int
-//  clockin            Int
-//  clockout           Int
-//  total_break_time   Int     @default(0)
-//  total_working_time Int     @default(0)
-//  notes              String
-//  approved           Boolean
-//  staff_name         String
-//  ip_address         String
-//
-//  @@index([company_id], name: "company_id")
-//  @@index([staff_uid], name: "staff_uid")
-//  @@index([company_id, staff_uid], name: "uid_occupier")
-//}
-//
-//model cm_account_notes {
-//  ID          Int                     @id @default(autoincrement())
-//  OwnerID     Int
-//  AccountID   Int
-//  Note        String
-//  Status      cm_account_notes_Status @default(Enable)
-//  CreatedDate DateTime
-//  IpAddress   Int
-//}
-//
-//model cm_appointments_custom_import_helper {
-//  id                    Int     @id @default(autoincrement())
-//  occupier              Int
-//  custom_appointment_id Int
-//  custom_contact_name   String
-//  custom_field_name     String
-//  custom_field_value    String?
-//  added                 Int
-//  appointment_id        Int
-//
-//  @@index([custom_appointment_id], name: "custom_appointment_id")
-//}
-//
-//model cm_appointment_custom {
-//  id                 Int    @id @default(autoincrement())
-//  appointment_id     Int
-//  occupier           Int
-//  custom_field_id    Int
-//  custom_field_value String
-//  imported           Int
-//
-//  @@index([appointment_id], name: "appointment_id")
-//  @@index([custom_field_id], name: "custom_field_id")
-//  @@index([custom_field_value], name: "custom_field_value")
-//  @@index([occupier], name: "occupier")
-//}
-//
-//model cm_authorization {
-//  id             Int    @id @default(autoincrement())
-//  company_id     Int
-//  appointment_id Int
-//  contact_id     Int
-//  title          String
-//  total_sessions Int
-//  diagnosis_code String
-//}
-//
-//model cm_booking_notes {
-//  ID            Int                     @id @default(autoincrement())
-//  OwnerID       Int
-//  AppointmentID Int
-//  Note          String
-//  Status        cm_booking_notes_Status @default(Enable)
-//  CreatedDate   DateTime
-//  IpAddress     Int
-//}
-//
-//model cm_cases {
-//  id           Int     @id @default(autoincrement())
-//  case_number  String
-//  occupier     Int
-//  type         String?
-//  contact      String?
-//  email        String?
-//  subject      String?
-//  phone        String?
-//  request      String?
-//  critical     String?
-//  description  String?
-//  related_to   Int?
-//  module_type  Int?
-//  user_id      Int?
-//  module2_type Int?
-//  user2_id     Int?
-//  ownerid      Int?
-//  status       String?
-//  priority     String?
-//  reason       String?
-//  reported_by  String?
-//  comments     String?
-//  CreatedDate  Int?
-//  IpAddress    String?
-//}
-//
-//model cm_case_notes {
-//  ID          Int                  @id @default(autoincrement())
-//  OwnerID     Int
-//  CaseID      Int
-//  Note        String
-//  Status      cm_case_notes_Status @default(Enable)
-//  CreatedDate DateTime
-//  IpAddress   Int
-//}
-//
-//model cm_case_replies {
-//  ID          Int      @id @default(autoincrement())
-//  OwnerID     Int
-//  CaseID      Int
-//  Description String
-//  CreatedDate DateTime
-//  IpAddress   Int
-//  CompanyID   Int
-//}
-//
-//model cm_compaigns {
-//  ID               Int      @id @default(autoincrement())
-//  OwnerID          String
-//  Occupier         String
-//  CompaignName     String
-//  Type             Int
-//  Status           Int
-//  StartDate        DateTime
-//  EndDate          DateTime
-//  ExpectedRevenue  String
-//  BudgetedCost     String
-//  ActualCost       String
-//  ExpectedResponse String
-//  NumSent          String
-//  Description      String
-//  CreatedDate      DateTime
-//  IpAddress        Int
-//}
-//
-//model cm_compaign_notes {
-//  ID          Int                      @id @default(autoincrement())
-//  OwnerID     Int
-//  BookingID   Int
-//  Note        String
-//  Status      cm_compaign_notes_Status @default(Enable)
-//  CreatedDate DateTime
-//  IpAddress   Int
-//}
-//
-//model cm_contacts {
-//  ID                       Int                         @id @default(autoincrement())
-//  Avatar                   String
-//  OwnerID                  Int
-//  Salutation               String                      @default("None")
-//  Fname                    String
-//  Occupier                 Int
-//  location_id              Int                         @default(0)
-//  Email                    String
-//  Phone                    String
-//  OtherPhone               String
-//  Mobile                   String
-//  Assistant                String
-//  ReportsTo                String
-//  LeadSource               String
-//  Lname                    String
-//  Title                    String
-//  Department               String
-//  HomePhone                String
-//  Fax                      String
-//  DOB                      DateTime?
-//  AsstPhone                String
-//  EmailOptOut              cm_contacts_EmailOptOut     @default(No)
-//  SkypeId                  String
-//  AddToQuickBooks          cm_contacts_AddToQuickBooks @default(No)
-//  SecondaryEmail           String
-//  Twitter                  String
-//  MailingStreet            String
-//  OtherStreet              String
-//  MailingCity              String
-//  OtherCity                String
-//  MailingProvince          String
-//  OtherProvince            String
-//  MailingPostal            String
-//  OtherPostal              String
-//  MailingCountry           String
-//  OtherCountry             String
-//  Description              String
-//  Status                   cm_contacts_Status          @default(Enable)
-//  CreatedDate              DateTime
-//  IpAddress                Int
-//  fbimg                    String
-//  MarketingSource          Int
-//  RefferalSource           String?
-//  LeadID                   Int
-//  group_tag                String
-//  polite_notice            String
-//  custom_id                String
-//  gender                   String
-//  MarketingOptInAll        Int?
-//  MarketingOptInEmail      Int?
-//  MarketingOptInPhone      Int?
-//  MarketingOptInPost       Int?
-//  MarketingOptInText       Int?
-//  notes_drop               String
-//  imported                 Int
-//  alerts_drop              String
-//  MarketingSourceRelated   Int
-//  customer_reference       String
-//  MarketingOptInNewsletter Int                         @default(1)
-//  custom_marketing_source  String
-//  insurer_id               Int
-//  is_active                Int                         @default(1)
-//  xero_contact_id          String
-//  is_ambassador            Int                         @default(0)
-//  UpdatedDate              DateTime
-//  xero_updated_date        DateTime
-//  discount_type            Int
-//  custom_clinic_id         Int
-//  ambassador_id            Int
-//  contract_id              Int
-//  privacy_policy           String
-//  need_to_knows            Boolean                     @default(false)
-//  contact_type             Int                         @default(0)
-//
-//  @@index([CreatedDate], name: "CreatedDate")
-//  @@index([Email], name: "Email")
-//  @@index([Fname], name: "Fname")
-//  @@index([LeadID], name: "LeadID")
-//  @@index([Lname], name: "Lname")
-//  @@index([Mobile], name: "Mobile")
-//  @@index([Occupier], name: "Occupier")
-//  @@index([Occupier, is_active], name: "Occupier_2")
-//  @@index([OwnerID], name: "OwnerID")
-//  @@index([Fname, Lname, Occupier], name: "cm_leads_index")
-//  @@index([contract_id], name: "contract_id")
-//  @@index([custom_id], name: "custom_id")
-//  @@index([customer_reference], name: "customer_reference")
-//  @@index([is_active], name: "is_active")
-//  @@index([OwnerID, Occupier], name: "owner_company")
-//}
-//
+model CmCaseReply {
+  ID          Int      @id @default(autoincrement())
+  OwnerID     Int
+  CaseID      Int
+  Description String
+  CreatedDate DateTime
+  IpAddress   Int
+  CompanyID   Int
+  company Company @relation(fields: [company_id], references: [id])
+
+  @@map("cm_case_replies")
+}
+model CmCampaign {
+  ID               Int      @id @default(autoincrement())
+  OwnerID          String
+  CompaignName     String
+  Type             Int
+  Status           Int
+  StartDate        DateTime
+  EndDate          DateTime
+  ExpectedRevenue  String
+  BudgetedCost     String
+  ActualCost       String
+  ExpectedResponse String
+  NumSent          String
+  Description      String
+  CreatedDate      DateTime
+  IpAddress        Int
+  company_id    Int @map("Occupier")
+  company Company @relation(fields: [company_id], references: [id])
+
+  @@map("cm_compaigns")
+
+}
+model CmCampaignNote {
+  ID          Int                      @id @default(autoincrement())
+  OwnerID     Int
+  BookingID   Int
+  Note        String
+  Status      cm_compaign_notes_Status @default(Enable)
+  CreatedDate DateTime
+  IpAddress   Int
+
+  @@map("cm_compaign_notes")
+}
+model CmContact {
+  ID                       Int                         @id @default(autoincrement())
+  Avatar                   String
+  OwnerID                  Int
+  Salutation               String                      @default("None")
+  Fname                    String
+  Occupier                 Int
+  location_id              Int                         @default(0)
+  Email                    String
+  Phone                    String
+  OtherPhone               String
+  Mobile                   String
+  Assistant                String
+  ReportsTo                String
+  LeadSource               String
+  Lname                    String
+  Title                    String
+  Department               String
+  HomePhone                String
+  Fax                      String
+  DOB                      DateTime?
+  AsstPhone                String
+  EmailOptOut              cm_contacts_EmailOptOut     @default(No)
+  SkypeId                  String
+  AddToQuickBooks          cm_contacts_AddToQuickBooks @default(No)
+  SecondaryEmail           String
+  Twitter                  String
+  MailingStreet            String
+  OtherStreet              String
+  MailingCity              String
+  OtherCity                String
+  MailingProvince          String
+  OtherProvince            String
+  MailingPostal            String
+  OtherPostal              String
+  MailingCountry           String
+  OtherCountry             String
+  Description              String
+  Status                   cm_contacts_Status          @default(Enable)
+  CreatedDate              DateTime
+  IpAddress                Int
+  fbimg                    String
+  MarketingSource          Int
+  RefferalSource           String?
+  LeadID                   Int
+  group_tag                String
+  polite_notice            String
+  custom_id                String
+  gender                   String
+  MarketingOptInAll        Int?
+  MarketingOptInEmail      Int?
+  MarketingOptInPhone      Int?
+  MarketingOptInPost       Int?
+  MarketingOptInText       Int?
+  notes_drop               String
+  imported                 Int
+  alerts_drop              String
+  MarketingSourceRelated   Int
+  customer_reference       String
+  MarketingOptInNewsletter Int                         @default(1)
+  custom_marketing_source  String
+  insurer_id               Int
+  is_active                Int                         @default(1)
+  xero_contact_id          String
+  is_ambassador            Int                         @default(0)
+  UpdatedDate              DateTime
+  xero_updated_date        DateTime
+  discount_type            Int
+  custom_clinic_id         Int
+  ambassador_id            Int
+  contract_id              Int
+  privacy_policy           String
+  need_to_knows            Boolean                     @default(false)
+  contact_type             Int                         @default(0)
+
+
+  @@map("cm_contacts")
+  @@index([CreatedDate], name: "CreatedDate")
+  @@index([Email], name: "Email")
+  @@index([Fname], name: "Fname")
+  @@index([LeadID], name: "LeadID")
+  @@index([Lname], name: "Lname")
+  @@index([Mobile], name: "Mobile")
+  @@index([Occupier], name: "Occupier")
+  @@index([Occupier, is_active], name: "Occupier_2")
+  @@index([OwnerID], name: "OwnerID")
+  @@index([Fname, Lname, Occupier], name: "cm_leads_index")
+  @@index([contract_id], name: "contract_id")
+  @@index([custom_id], name: "custom_id")
+  @@index([customer_reference], name: "customer_reference")
+  @@index([is_active], name: "is_active")
+  @@index([OwnerID, Occupier], name: "owner_company")
+}
 //model cm_contacts_alerts_import_helper {
 //  id                Int    @id @default(autoincrement())
 //  contact_custom_id Int

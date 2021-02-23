@@ -9,8 +9,8 @@ echo "DEBUG: DOCKER_USERNAME=${DOCKER_USERNAME}"
 echo "DEBUG: DOCKER_PASSWORD=${DOCKER_PASSWORD}"
 
 # TODO!!
-echo "ABORTING UNTIL https://github.com/prisma/prisma/issues/5304 IS FIXED!!!!"
-exit;
+#echo "ABORTING UNTIL https://github.com/prisma/prisma/issues/5304 IS FIXED!!!!"
+#exit;
 
 echo "Building..."
 yarn run nx run "${APP_NAME}:build" --prod
