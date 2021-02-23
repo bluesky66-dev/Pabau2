@@ -188,12 +188,15 @@ const schema: Schema = {
       full: 'Color',
       type: 'color-picker',
       visible: false,
+      required: true,
+      validateMsg: 'Please select at least one color.',
     },
     track_time: {
       full: 'Track time',
       type: 'checkbox',
       defaultvalue: true,
       visible: false,
+      description: 'Track time.',
     },
     is_active: {
       full: 'Active',
