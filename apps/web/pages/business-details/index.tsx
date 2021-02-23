@@ -28,7 +28,12 @@ export const Index: FC = () => {
       <CommonHeader />
       <Layout>
         <div className={styles.businessDetailsContainer}>
-          <Breadcrumb breadcrumbItems={['Setup', 'Business Details']} />
+          <Breadcrumb
+            breadcrumbItems={[
+              { breadcrumbName: 'Setup', path: 'setup' },
+              { breadcrumbName: 'Business Details', path: '' },
+            ]}
+          />
           <Title>Business Details</Title>
         </div>
         <div className={styles.tabsForDesktop}>

@@ -25,10 +25,10 @@ export const QuestionBankStory = ({ data }: P): JSX.Element => {
   }, [data])
 
   const handleChange = (e, key: number) => {
-    const data = menuOptions.filter(({ key }) => key === e.key)
+    const data = menuOptions.find(({ key }) => key === e.key)
     setQuestions(
       questions.map((i) =>
-        i.key === key ? { ...i, selectedValue: data[0].value } : i
+        i.key === key ? { ...i, selectedValue: data.value } : i
       )
     )
   }

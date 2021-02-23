@@ -7,5 +7,7 @@ module.exports = {
     '<rootDir>/apps/mgmt',
     '<rootDir>/apps/connect',
     '<rootDir>/apps/mobile',
+    '<rootDir>/apps/bridge-api',
+    '<rootDir>/libs/i18n',
   ],
 }

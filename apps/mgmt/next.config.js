@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const withAntdLess = require('next-plugin-antd-less')
 const withImages = require('next-images')
 const withNx = require('@nrwl/next/plugins/with-nx')
