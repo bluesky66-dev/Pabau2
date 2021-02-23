@@ -218,14 +218,26 @@ const CrudTable: FC<P> = ({
     },
   })
 
+  const getAddress = (data) => {
+    const { country, city, street, post_code } = data
+    let address
+    if (country || city || street || post_code) {
+      address = `${country ? country : ''}${city ? ', ' + city : ''}${
+        street ? ', ' + street : ''
+      }${post_code ? ', ' + post_code : ''}`
+    } else if (!country && !city && !street && !post_code) {
+      address = 'No address found'
+    }
+    return address
+  }
+
   useEffect(() => {
     if (data) {
       if (data[0]?.__typename === 'issuing_company') {
         const newData = data.map((d) => {
-          const { country, city, street, post_code } = d
           return {
             ...d,
-            address: country + ', ' + city + ', ' + street + ', ' + post_code,
+            address: getAddress(d),
           }
         })
         setSourceData(newData)
@@ -385,8 +397,12 @@ const CrudTable: FC<P> = ({
   }
 
   const createNew = () => {
-    setModalShowing((e) => !e)
-    setEditingRow({ name: '', isCreate: true })
+    if (!createPage) {
+      setModalShowing((e) => !e)
+      setEditingRow({ name: '', isCreate: true })
+    } else {
+      createPageOnClick()
+    }
   }
 
   const handleLanguageChange = (language: string): void => {

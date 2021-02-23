@@ -25,6 +25,7 @@ export const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
       setPhoneNumber(value)
     } else {
       setPhoneNumber('44')
+      setValid(true)
     }
   }, [value, countryCode])
   const handleChangeInput = (val, country) => {

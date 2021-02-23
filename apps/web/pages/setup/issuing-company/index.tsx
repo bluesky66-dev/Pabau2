@@ -17,7 +17,6 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import countries from 'i18n-iso-countries'
 import english from 'i18n-iso-countries/langs/en.json'
-import csc from 'country-state-city'
 import { useMedia } from 'react-use'
 
 import styles from './issuing-company.module.less'
@@ -53,6 +52,7 @@ const LIST_QUERY = gql`
       invoice_prefix
       invoice_starting_number
       vat_registered
+      is_draft
     }
   }
 `
@@ -84,16 +84,16 @@ const DELETE_MUTATION = gql`
 const ADD_MUTATION = gql`
   mutation insert_issuing_company_one(
     $companyName: String!
-    $phone: String!
-    $website: String!
-    $country: String!
-    $city: String!
-    $street: String!
-    $postCode: numeric!
-    $invoiceTemplate: String!
-    $invoicePrefix: String!
-    $invoiceStartingNumber: numeric!
-    $vatRegistered: Boolean!
+    $phone: String
+    $website: String
+    $country: String
+    $city: String
+    $street: String
+    $postCode: numeric
+    $invoiceTemplate: String
+    $invoicePrefix: String
+    $invoiceStartingNumber: numeric
+    $vatRegistered: Boolean
     $isDraft: Boolean
   ) {
     insert_issuing_company_one(
@@ -122,16 +122,16 @@ const EDIT_MUTATION = gql`
   mutation update_issuing_company_by_pk(
     $id: uuid!
     $companyName: String!
-    $phone: String!
-    $website: String!
-    $country: String!
-    $city: String!
-    $street: String!
-    $postCode: numeric!
-    $invoiceTemplate: String!
-    $invoicePrefix: String!
-    $invoiceStartingNumber: numeric!
-    $vatRegistered: Boolean!
+    $phone: String
+    $website: String
+    $country: String
+    $city: String
+    $street: String
+    $postCode: numeric
+    $invoiceTemplate: String
+    $invoicePrefix: String
+    $invoiceStartingNumber: numeric
+    $vatRegistered: Boolean
     $isDraft: Boolean
   ) {
     update_issuing_company_by_pk(
@@ -172,6 +172,7 @@ const schema: Schema = {
   fullLower: 'issuing company',
   short: 'issuing company',
   shortLower: 'issuing company',
+  createButtonLabel: 'Create Issuing Company',
   messages: {
     create: {
       success: 'You have successfully created a IssuingCompany',
@@ -261,7 +262,6 @@ export const IssuingCompany: NextPage = () => {
   const isMobile = useMedia('(max-width: 768px)', false)
   const [showModal, setShowModal] = useState<boolean>(false)
   const { Option } = Select
-  const [countryCode, setCountryCode] = useState<string>(null)
   const [focused, setFocused] = useState<focusedTypes>({})
   const [addMutation] = useMutation(ADD_MUTATION, {
     onCompleted(data) {
@@ -314,22 +314,12 @@ export const IssuingCompany: NextPage = () => {
   countries.registerLocale(english)
   const countriesName = countries.getNames('en')
 
-  const createOptions = (type: string) => {
-    let options = []
-    if (type === 'country') {
-      options = Object.keys(countriesName).map((c) => (
-        <Option key={c} value={countriesName[c]}>
-          {countriesName[c]}
-        </Option>
-      ))
-    } else if (type === 'city') {
-      const cities = csc.getCitiesOfCountry(countryCode)
-      options = cities.map((city) => (
-        <Option key={city.name} value={city.name}>
-          {city.name}
-        </Option>
-      ))
-    }
+  const createOptions = () => {
+    const options = Object.keys(countriesName).map((c) => (
+      <Option key={c} value={countriesName[c]}>
+        {countriesName[c]}
+      </Option>
+    ))
     return options
   }
 
@@ -356,14 +346,14 @@ export const IssuingCompany: NextPage = () => {
   const formikFields = () => {
     const initialValues: inputTypes = {
       companyName: '',
-      phone: '',
-      website: '',
-      country: '',
-      city: '',
-      street: '',
+      phone: undefined,
+      website: null,
+      country: null,
+      city: null,
+      street: null,
       postCode: undefined,
-      invoiceTemplate: '',
-      invoicePrefix: '',
+      invoiceTemplate: null,
+      invoicePrefix: null,
       invoiceStartingNumber: undefined,
       vatRegistered: false,
       isDraft: false,
@@ -373,21 +363,6 @@ export const IssuingCompany: NextPage = () => {
 
   const issuingCompanySchema = Yup.object({
     companyName: Yup.string().required('Company name is required'),
-    phone: Yup.string().required('Phone number is required'),
-    website:
-      Yup.string().required('website is required') ||
-      Yup.string().url('website is invalid'),
-    country: Yup.string().required('Country is required'),
-    city: Yup.string().required('City name is required'),
-    street: Yup.string().required('Street name is required'),
-    postCode:
-      Yup.string().required('Post code in required') ||
-      Yup.string().length(6, 'Post code must be 6 digit'),
-    invoiceTemplate: Yup.string().required('Invoice template is required'),
-    invoicePrefix: Yup.string().required('Invoice prefix is required'),
-    invoiceStartingNumber: Yup.string().required(
-      'Invoice starting number is required'
-    ),
   })
 
   const formik = useFormik({
@@ -433,10 +408,6 @@ export const IssuingCompany: NextPage = () => {
   }
 
   const handleSelectCountry = (value: string) => {
-    const code = Object.keys(countriesName).find(
-      (c) => countriesName[c] === value
-    )
-    setCountryCode(code)
     onchange(value, 'country')
     onchange('', 'city')
   }
@@ -470,7 +441,7 @@ export const IssuingCompany: NextPage = () => {
 
   const headerContent = () => {
     return (
-      <div className={styles.issuesCompanyHeader}>
+      <div className={styles.issuingCompanyHeader}>
         <h4>{!editPage.id ? 'Create' : 'Edit'} Issuing Company</h4>
         <div className={styles.issueRegister}>
           <div className={styles.vatReg}>
@@ -496,15 +467,9 @@ export const IssuingCompany: NextPage = () => {
             </Button>
           </div>
           <div>
-            {!formik.values.vatRegistered ? (
-              <Button type="primary" disabled={true}>
-                {!editPage.id ? 'Create' : 'Save'}
-              </Button>
-            ) : (
-              <Button type="primary" onClick={() => formik.handleSubmit()}>
-                {!editPage.id ? 'Create' : 'Save'}
-              </Button>
-            )}
+            <Button type="primary" onClick={() => formik.handleSubmit()}>
+              {!editPage.id ? 'Create' : 'Save'}
+            </Button>
           </div>
         </div>
       </div>
@@ -578,34 +543,26 @@ export const IssuingCompany: NextPage = () => {
               <Form.Item label={'Country'}>
                 <Select
                   showSearch
-                  defaultValue={
+                  value={
                     formik.values.country
                       ? formik.values.country
                       : 'Select country'
                   }
-                  value={formik.values.country}
                   onChange={(e) => handleSelectCountry(e)}
                 >
-                  {createOptions('country')}
+                  {createOptions()}
                 </Select>
                 {formik.errors.country ? (
                   <div className={styles.error}>{formik.errors.country}</div>
                 ) : null}
               </Form.Item>
               <Form.Item label={'City'}>
-                <Select
-                  showSearch
-                  disabled={countryCode ? false : true}
-                  defaultValue={
-                    formik.values.city && countryCode
-                      ? formik.values.city
-                      : 'Select city'
-                  }
+                <Input
+                  name="city"
+                  placeholder="Enter city"
+                  onChange={formik.handleChange}
                   value={formik.values.city}
-                  onChange={(e) => onchange(e, 'city')}
-                >
-                  {createOptions('city')}
-                </Select>
+                />
                 {formik.errors.city ? (
                   <div className={styles.error}>{formik.errors.city}</div>
                 ) : null}
@@ -615,7 +572,6 @@ export const IssuingCompany: NextPage = () => {
                   name="street"
                   placeholder="Enter street"
                   className="input-style"
-                  // onChange={(e) => onchange(e, 'street')}
                   onChange={formik.handleChange}
                   value={formik.values.street}
                 />
