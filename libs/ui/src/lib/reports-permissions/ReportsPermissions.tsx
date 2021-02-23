@@ -70,7 +70,7 @@ export const ReportsPermissions: FC<ReportsPermissionsProps> = ({
                     <div className={styles.permission}>
                       <Switch
                         defaultChecked={permissions.indexOf(item.key) !== -1}
-                        onChange={(checked) => onChange(item.key, checked)}
+                        onChange={(checked) => onChange?.(item.key, checked)}
                       />
                     </div>
                   </div>
