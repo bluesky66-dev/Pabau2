@@ -248,7 +248,7 @@ const PhoneNumberAreaCodes = [
 export default {
   component: PhoneNumberInput,
   title: 'Basics/PhoneNumberInput',
-  args: { countryCode: 'GB' },
+  args: { countryCode: 'GB', label: 'Phone Number' },
   argTypes: {
     countryCode: {
       control: {

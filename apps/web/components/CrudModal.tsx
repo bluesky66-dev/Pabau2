@@ -28,7 +28,7 @@ const CrudModal: FC<P> = ({
         `Success! ${schema.messages.delete.success}`
       )
     },
-    onError(err) {
+    onError() {
       Notification(
         NotificationType.error,
         `Error! ${schema.messages.delete.error}`
@@ -74,8 +74,7 @@ const CrudModal: FC<P> = ({
           onClose?.()
         }}
         onOk={async () => {
-          // eslint-disable-next-line
-          const { id } = editingRow as any
+          const { id } = editingRow as { id: string }
           await deleteMutation({
             variables: { id },
             optimisticResponse: {},
@@ -139,15 +138,15 @@ const CrudModal: FC<P> = ({
             ? `Create`
             : 'Save'
         }
-        // eslint-disable-next-line
         dangerButtonText={editingRow?.id && `Delete`}
         specialBooleanLabel={!!specialFormElement && 'Active'}
         specialBooleanValue={specialBoolean}
         onSpecialBooleanClick={() => {
           setSpecialBoolean((e) => !e)
-          if (editingRow) {
-            editingRow.is_active = !specialBoolean
-          }
+          formik.setFieldValue('is_active', !specialBoolean)
+          // if (editingRow) {
+          //   editingRow.is_active = !specialBoolean
+          // }
         }}
         isValidate={
           editingRow?.isCreate ? formik.dirty && formik.isValid : formik.isValid
@@ -155,7 +154,7 @@ const CrudModal: FC<P> = ({
       >
         <Form
           // ref={formRef} typeof editingRow === 'object' ? editingRow : undefined}
-          values={formik.values}
+          formik={formik}
           schema={schemaForm}
           // initialValues={typeof editingRow === 'object' ? editingRow : { name: 'erm' }}
           // onSubmit={async (form: Record<string, unknown>) => {

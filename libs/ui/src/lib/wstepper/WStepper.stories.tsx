@@ -1,6 +1,7 @@
 import React from 'react'
 
 import WStepper from './WStepper'
+import { data } from '../wizard/mock'
 
 export default {
   component: WStepper,
@@ -21,6 +22,7 @@ const wstepperStory = ({ ...args }) => {
   return (
     <WStepper
       {...args}
+      data={data}
       active={args.active}
       breadcrumbTxt={args.breadcrumbTxt}
       headerTxt={args.headerTxt}

@@ -1,16 +1,14 @@
 import '../src/assets/fonts/fonts.css'
 import 'react-phone-input-2/lib/style.css'
-import 'react-google-places-autocomplete/dist/index.min.css'
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
-require('../src/styles/antd.less')
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 import { withI18next } from 'storybook-addon-i18next'
-
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import Backend from 'i18next-xhr-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { addDecorator } from '@storybook/react'
+require('../src/styles/antd.less')
 
 const en = {
   welcome: {
@@ -67,3 +65,8 @@ addDecorator(
     },
   })
 )
+
+export const parameters = {
+  actions: { argTypesRegex: "^on[A-Z].*" },
+  layout: 'centered',
+}

@@ -16,7 +16,7 @@ const WebinarCard: FC = () => {
   const [isOpenViewSchedule, setIsOpenViewSchedule] = useState<boolean>(false)
 
   const handleOpenModal = (buttonType: string, id?: string) => {
-    const filterData = data.filter((thread) => thread.id === id)[0]
+    const filterData = data.find((thread) => thread.id === id)
     const selectedData: WebinarModalProps = {
       ...filterData,
       buttonType: buttonType,

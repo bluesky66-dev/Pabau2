@@ -40,6 +40,6 @@ BasicAddSuggestion.args = {
   defaultSelected: ['Category', 'All inclusive'],
   label: 'Select Suggestions',
   onChange: (data: Array<string | number>) => {
-    console.log('SELECTED: ', data)
+    console.log('SELECTED:', data)
   },
 }
