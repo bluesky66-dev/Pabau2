@@ -58,8 +58,9 @@ const LocationTable: FC<P> = ({ schema, listQuery, updateOrderQuery }) => {
     const { destination, source } = result
 
     // do nothing
-    let items = reorder(locationData, source.index, destination.index)
-    let newData = items.map((locItem: any, i) => {
+    const items = reorder(locationData, source.index, destination.index)
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    const newData = items.map((locItem: any, i) => {
       locItem.order = locationData[i].order
       return locItem
     })
@@ -77,8 +78,10 @@ const LocationTable: FC<P> = ({ schema, listQuery, updateOrderQuery }) => {
 
   // a little function to help us with reordering the result
   const reorder = (list, startIndex, endIndex) => {
-    let result = Array.from(list)
+    const result = [...list]
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     const startArrayId = result.findIndex((l: any) => l.order === startIndex)
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     const endArrayId = result.findIndex((l: any) => l.order === endIndex)
 
     const [removed] = result.splice(startArrayId, 1)
@@ -121,12 +124,6 @@ const LocationTable: FC<P> = ({ schema, listQuery, updateOrderQuery }) => {
 
     // styles we need to apply on draggables
     ...draggableStyle,
-  })
-
-  const getListStyle = (isDraggingOver) => ({
-    background: isDraggingOver ? 'lightblue' : 'lightgrey',
-    // padding: grid,
-    // width: 250
   })
 
   return (
