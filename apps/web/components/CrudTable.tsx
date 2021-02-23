@@ -186,7 +186,7 @@ const CrudTable: FC<P> = ({
   >({})
 
   const getQueryVariables = () => {
-    let queryOptions = {
+    const queryOptions = {
       variables: {
         isActive,
         searchTerm: '%' + searchTerm + '%',
@@ -205,7 +205,7 @@ const CrudTable: FC<P> = ({
   }
 
   const getAggregateQueryVariables = () => {
-    let queryOptions = {
+    const queryOptions = {
       variables: {
         isActive,
         searchTerm: '%' + searchTerm + '%',
