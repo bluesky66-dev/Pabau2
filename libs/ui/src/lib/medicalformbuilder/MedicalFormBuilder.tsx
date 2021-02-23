@@ -5,6 +5,7 @@ import styles from './MedicalFormBuilder.module.less'
 import MedicalFormEdit from './MedicalFormEdit'
 import MedicalFormInfo from './MedicalFormInfo'
 import MedicalFormPreview from './MedicalFormPreview'
+import MedicalFormPreviewOld from './MedicalFormPreviewOld'
 import MedicalFormSetting from './MedicalFormSetting'
 
 const { TabPane } = Tabs
@@ -37,6 +38,17 @@ const MedicalFormBuilder: FC = () => {
           key="2"
         >
           <MedicalFormPreview />
+        </TabPane>
+        <TabPane
+          tab={
+            <span className={styles.tabName}>
+              <EyeOutlined />
+              Preview for pabau1.0
+            </span>
+          }
+          key="3"
+        >
+          <MedicalFormPreviewOld />
         </TabPane>
       </Tabs>
     </>
