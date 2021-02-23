@@ -25,7 +25,7 @@ function convert(doc: DocumentNode): DocumentNode {
   const firstParen = body.indexOf('(')
   const i =
     firstParen === -1 || firstCurly < firstParen ? firstCurly : firstParen
-  const snipped = body.substr(i)
+  const snipped = body.slice(i)
   return gql(`subscription ${snipped}`)
 }
 

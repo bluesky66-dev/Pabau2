@@ -1,11 +1,11 @@
 import React, { PropsWithChildren } from 'react'
 import { Modal } from 'antd'
 import Button from '../button/button'
-import { Checkbox } from '@pabau/ui'
+import { Checkbox, ButtonTypes } from '@pabau/ui'
 import styles from './basicmodal.module.less'
 import { ModalProps } from 'antd/lib/modal'
 import classNames from 'classnames'
-interface P {
+export interface BasicModalProps {
   onOk?: () => void
   onCancel?: () => void
   onDelete?: () => void
@@ -33,6 +33,7 @@ interface P {
 
   dangerButtonText?: string
   newButtonDisable?: boolean
+  btnType?: ButtonTypes
 }
 
 export function BasicModal({
@@ -52,8 +53,9 @@ export function BasicModal({
   isValidate,
   footer = true,
   wrapClassName,
+  btnType = ButtonTypes.primary,
   ...props
-}: PropsWithChildren<P & ModalProps>): JSX.Element {
+}: PropsWithChildren<BasicModalProps & ModalProps>): JSX.Element {
   return (
     <Modal
       title={title}
@@ -90,9 +92,9 @@ export function BasicModal({
           )}
           {newButtonText && (
             <Button
-              type="primary"
+              type={btnType}
               className={styles.btnStyle}
-              disabled={newButtonDisable}
+              disabled={newButtonDisable || !isValidate}
               onClick={() => onOk?.()}
             >
               {newButtonText}
