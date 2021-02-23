@@ -7,9 +7,7 @@ import {
 } from '@pabau/ui'
 
 import { Filter } from './Filter'
-
 import styles from './ViewSchedule.module.less'
-import classNames from 'classnames'
 
 export interface discoverAndLearnProps {
   key: string
@@ -67,13 +65,7 @@ export const ViewScheduleModal: FC<ViewScheduleProps> = ({
       <div>
         {webinar?.map((thread, index) => {
           return (
-            <div
-              className={classNames(
-                styles.discoverWrap,
-                index !== 0 && styles.discoverBorder
-              )}
-              key={thread.key}
-            >
+            <div className={styles.discoverWrap} key={thread.key}>
               <h4>{thread.day}</h4>
               <div className={styles.webinarWrapperModal}>
                 {thread.webinar.length > 0 ? (
@@ -117,9 +109,7 @@ export const ViewScheduleModal: FC<ViewScheduleProps> = ({
               onClear={handleClear}
             />
           </div>
-          {filteredWebinars &&
-            filteredWebinars?.length > 0 &&
-            webinarContent(filteredWebinars)}
+          {!!filteredWebinars?.length && webinarContent(filteredWebinars)}
         </div>
       </div>
     )

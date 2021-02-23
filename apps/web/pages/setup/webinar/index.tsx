@@ -13,7 +13,7 @@ import { data, viewScheduleData } from '../../../assets/webinarMock'
 const WebinarCard: FC = () => {
   const [isOpenModal, setIsOpen] = useState<boolean>(false)
   const [modalData, setModalData] = useState({})
-  const [isOpenViewSchedule, setIsOpenViewSchedule] = useState<boolean>(false)
+  const [isOpenViewSchedule, setIsOpenViewSchedule] = useState(false)
 
   const handleOpenModal = (buttonType: string, id?: string) => {
     const filterData = data.find((thread) => thread.id === id)

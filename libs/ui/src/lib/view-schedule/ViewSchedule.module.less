@@ -5,9 +5,11 @@
     max-width: unset;
     width: 100%;
   }
+
   .schedule-content {
     background: #fff;
     border-right: 4px;
+
     h2 {
       font-style: normal;
       font-weight: 500;
@@ -17,6 +19,7 @@
       color: #3D3D46;
       border-bottom: 1px solid #E4E6EB;
     }
+
     .upcoming-wrap {
       height: 140px;
       display: flex;
@@ -27,6 +30,7 @@
       line-height: 22px;
       color: #3D3D46
     }
+
     .filter-wrap {
       display: flex;
       justify-content: space-between;
@@ -39,6 +43,7 @@
         margin-bottom: 0;
         border-bottom: none;
       }
+
       .filter-btn {
         background: #FFFFFF;
         border: 1px solid #ECEDF0;
@@ -49,26 +54,34 @@
         font-size: 14px;
         line-height: 22px;
         cursor: pointer;
+
         &:focus, &:hover {
           border: 1px solid #40A0C1;
           color: #40A0C1;
+
           svg {
             color: #40A0C1;
           }
         }
+
         span {
           margin-right: 5px;
+
           svg {
             color: #9292a3;
           }
         }
       }
     }
+
     .discover-wrap {
       margin: 4px 24px 24px;
-     &.discover-border {
-       border-top: 1px solid #E4E6EB;
-     }
+      border-top: 1px solid #E4E6EB;
+
+      &:first-child {
+        border-top: unset;
+      }
+
       h4 {
         margin-top: 10px;
         margin-bottom: 0;
@@ -83,9 +96,8 @@
     //@media screen and (max-width: 991px) {
     //  overflow-x: auto;
     //}
-      .web-box {
-        margin-right: 16px;
-
+    .web-box {
+      margin-right: 16px;
     }
   }
 }

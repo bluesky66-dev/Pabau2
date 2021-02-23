@@ -42,8 +42,8 @@ export const Filter: FC<P> = ({ webinarList, onClear, handleShowResult }) => {
     if (filters?.includes(key) && val === 'Select') {
       const data = filters?.splice(filters?.indexOf(key), 1)
       setFilters(data)
-    } else if (!filters?.includes(key)) {
-      filters?.push(key)
+    } else if (filters && !filters?.includes(key)) {
+      filters.push(key)
       setFilters(filters)
     }
   }
@@ -129,9 +129,9 @@ function filterEachWebinar(
 ): WebinarProps[] {
   let filteredData: WebinarProps[] = [...webinars]
   if (filters) {
-    filters.forEach((item) => {
+    for (const item of filters) {
       filteredData = filterCategory(filteredData, filterOptions, item)
-    })
+    }
   }
   return filteredData
 }

@@ -34,7 +34,7 @@ export const Webinar: FC<WebinarProps> = ({
   onClick,
   isYourSchedule,
 }) => {
-  const [hover, setHover] = useState<boolean>(false)
+  const [hover, setHover] = useState(false)
 
   return (
     <div className={styles.webinarBannerEnd}>
