@@ -3,7 +3,6 @@ import React, { FC, useEffect, useState } from 'react'
 import { BasicModal as Modal, Notification, NotificationType } from '@pabau/ui'
 import { DocumentNode, useMutation } from '@apollo/client'
 import { useFormikContext } from 'formik'
-
 interface P {
   schema: Schema
   addQuery?: DocumentNode
@@ -144,9 +143,10 @@ const CrudModal: FC<P> = ({
         specialBooleanValue={specialBoolean}
         onSpecialBooleanClick={() => {
           setSpecialBoolean((e) => !e)
-          if (editingRow) {
-            editingRow.is_active = !specialBoolean
-          }
+          formik.setFieldValue('is_active', !specialBoolean)
+          // if (editingRow) {
+          //   editingRow.is_active = !specialBoolean
+          // }
         }}
         isValidate={
           editingRow?.isCreate ? formik.dirty && formik.isValid : formik.isValid
@@ -154,7 +154,7 @@ const CrudModal: FC<P> = ({
       >
         <Form
           // ref={formRef} typeof editingRow === 'object' ? editingRow : undefined}
-          values={formik.values}
+          formik={formik}
           schema={schemaForm}
           // initialValues={typeof editingRow === 'object' ? editingRow : { name: 'erm' }}
           // onSubmit={async (form: Record<string, unknown>) => {
