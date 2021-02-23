@@ -14,14 +14,16 @@ interface Schema {
   shemaType?: string
   deleteDescField?: string
   tooltip?: string
+  createButtonLabel?: string
 }
+/* eslint-disable @typescript-eslint/no-explicit-any */
 interface SchemaItem {
   full?: string
   fullLower?: string
   short?: string
   shortLower?: string
   min?: number
-  example?: string | number
+  example?: string | number | any
   description?: string
   extra?: JSX.Element
   cssWidth?: string
@@ -38,6 +40,7 @@ interface SchemaItem {
   visible?: boolean
   required?: boolean
   radio?: TypeValues[]
+  validateMsg?: string
   selectOptions?: TypeValues[]
   collapsible?: boolean
 }

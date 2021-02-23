@@ -137,6 +137,7 @@ const schema: Schema = {
     },
   },
   tooltip: 'payment type',
+  createButtonLabel: 'Create Payment Type',
   fields: {
     payment_type: {
       full: '',
