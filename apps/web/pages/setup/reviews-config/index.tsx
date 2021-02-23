@@ -163,11 +163,11 @@ export const Index: FC<ReviewsConfigProps> = ({
 
   const ReviewsConfigFooter = ({ step, onNext, onPrev }) => {
     const handleClickNext = () => {
-      reviewsConfigRef.current.scrollIntoView()
+      reviewsConfigRef.current.scrollIntoView({ behavior: 'smooth' })
       onNext()
     }
     const handleClickPrev = () => {
-      reviewsConfigRef.current.scrollIntoView()
+      reviewsConfigRef.current.scrollIntoView({ behavior: 'smooth' })
       onPrev()
     }
     return (
