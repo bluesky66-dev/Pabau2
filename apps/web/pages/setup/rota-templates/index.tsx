@@ -167,13 +167,19 @@ const EDIT_MUTATION = gql`
     $id: uuid!
     $name: String
     $days: String
-    $start_time: String
-    $end_time: String
+    $start_time: timetz
+    $end_time: timetz
     $is_active: Boolean
   ) {
     update_rota_templates_by_pk(
       pk_columns: { id: $id }
-      _set: { name: $name }
+      _set: {
+        name: $name
+        days: $days
+        start_time: $start_time
+        end_time: $end_time
+        is_active: $is_active
+      }
     ) {
       __typename
       id

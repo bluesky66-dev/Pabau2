@@ -6,25 +6,22 @@ import {
   Checkbox,
   TimePicker,
 } from 'formik-antd'
-import { ColorPicker, FontIcon } from '@pabau/ui'
-import { FormikValues } from 'formik'
+import { FormikContextType } from 'formik'
+import { ColorPicker, FontIcon, HelpTooltip } from '@pabau/ui'
 import moment from 'moment'
 interface P {
   schema: Schema
-  values: FormikValues
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  formik: FormikContextType<any>
   layout?: 'horizontal' | 'inline' | 'vertical'
-  setFieldValue: (key: string, value: string) => void
 }
 
 const CheckboxGroup = Checkbox.Group
 
-const Form: FC<P> = ({
-  schema,
-  values,
-  layout = 'vertical',
-  setFieldValue,
-}) => {
+const Form: FC<P> = ({ schema, formik, layout = 'vertical' }) => {
   const { fields } = schema
+  const { values } = formik
+
   return (
     <AntForm layout={layout} requiredMark={false}>
       {Object.entries(fields).map(
@@ -43,6 +40,7 @@ const Form: FC<P> = ({
               full,
               col = 24,
               selectOptions,
+              required,
             },
           ],
           i
@@ -77,7 +75,7 @@ const Form: FC<P> = ({
                       values[name]
                   )}
                   onChange={(time, timeString) => {
-                    setFieldValue(name, timeString)
+                    formik.setFieldValue(name, timeString)
                   }}
                 />
               </AntForm.Item>
@@ -96,24 +94,34 @@ const Form: FC<P> = ({
             )}
 
             {type === 'color-picker' && (
-              <AntForm.Item key={name} name={name}>
+              <AntForm.Item key={name} name={name} required={required}>
                 <div style={{ width: '344px' }}>
                   <ColorPicker
                     selectedColor={values.color}
                     isDarkColor={true}
                     onSelected={(val) => {
-                      values.color = val
+                      formik.setFieldValue(name, val)
                     }}
                     heading={values.appointment_type + ' ' + full}
                   />
+                  {!values[name] && formik.errors?.color && (
+                    <span style={{ color: 'red' }}>{formik.errors?.color}</span>
+                  )}
                 </div>
               </AntForm.Item>
             )}
             {type === 'checkbox' && (
               <AntForm.Item key={name} name={name}>
-                <Checkbox name={name} defaultChecked={true}>
+                <Checkbox
+                  name={name}
+                  defaultChecked={true}
+                  className={'track-time-checkbox'}
+                >
                   {full}
                 </Checkbox>
+                {description && (
+                  <HelpTooltip placement={'top'} helpText={description} />
+                )}
               </AntForm.Item>
             )}
             {(type === 'string' || type === 'number') && (

@@ -1,6 +1,6 @@
 {
   "name": "pabau",
-  "version": "2.0.157",
+  "version": "2.0.164",
   "license": "Copyright Hambrand Technologies Ltd",
   "bump-rebuild-all": 5,
   "scripts": {
@@ -85,6 +85,7 @@
     "rc-queue-anim": "^1.8.5",
     "react": "17.0.1",
     "react-beautiful-dnd": "^13.0.0",
+    "react-copy-to-clipboard": "^5.0.3",
     "react-device-detect": "^1.15.0",
     "react-dom": "17.0.1",
     "react-google-places-autocomplete": "3.1.1",
@@ -147,7 +148,9 @@
     "@nrwl/workspace": "11.3.0",
     "@react-native-community/cli-platform-android": "4.13.0",
     "@react-native-community/cli-platform-ios": "4.13.0",
+    "@storybook/addon-a11y": "^6.1.18",
     "@storybook/addon-essentials": "^6.1.18",
+    "@storybook/addon-storysource": "^6.1.18",
     "@storybook/react": "^6.1.18",
     "@testing-library/jest-native": "3.4.3",
     "@testing-library/react": "11.2.5",
