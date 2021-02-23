@@ -2,8 +2,6 @@ import React, { FC } from 'react'
 import { Button } from '@pabau/ui'
 import TickMarkIcon from './assets/TickMark'
 import styles from '../index.module.less'
-
-/* eslint-disable-next-line */
 export interface P {
   finishTitle: string
   finishDescription: string
