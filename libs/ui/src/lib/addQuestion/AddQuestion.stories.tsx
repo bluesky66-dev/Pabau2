@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, FC } from 'react'
 import AddQuestion, { QuestionField, AddQuestionProps } from './AddQuestion'
+import { IQuestionOptions } from '../questionBank/QuestionBank'
 import {
   title,
   description,
@@ -62,6 +63,21 @@ export const AddQuestionStory: FC<AddQuestionProps> = ({
     setQuestions(questions)
   }
 
+  const onQuestionBankAddButton = (
+    questions: Array<IQuestionOptions> | undefined
+  ): void => {
+    const data = [...question]
+    if (questions) {
+      for (const a of questions) {
+        data.push({
+          title: a.question,
+          key: question.length + Math.floor(Math.random() * 100),
+        })
+      }
+    }
+    setQuestions(data)
+  }
+
   useEffect(() => {
     if (questions) setQuestions([...questions])
   }, [questions])
@@ -86,6 +102,7 @@ export const AddQuestionStory: FC<AddQuestionProps> = ({
       onAddQuestion={onAddQuestion}
       onDeleteButton={onDeleteButton}
       isDeleteDisable={isDeleteDisable}
+      onQuestionBankAddButton={onQuestionBankAddButton}
     />
   )
 }
