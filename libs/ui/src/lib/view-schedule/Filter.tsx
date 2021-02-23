@@ -3,8 +3,7 @@ import { Popover } from 'antd'
 import { FilterOutlined } from '@ant-design/icons'
 import _ from 'lodash'
 
-import { discoverAndLearnProps } from '@pabau/ui'
-import { WebinarProps } from '@pabau/ui'
+import { discoverAndLearnProps, WebinarProps } from '@pabau/ui'
 
 import { filterOptions, lengthOptions } from './mock'
 
@@ -114,9 +113,13 @@ function filterWebinar(
 ): discoverAndLearnProps[] | undefined {
   const duplicateData = _.cloneDeep(discoverAndLearn)
   if (discoverAndLearn && duplicateData) {
-    discoverAndLearn.forEach(({ webinar }, index) => {
-      const data = filterEachWebinar(webinar, filterOptions, filters)
-      duplicateData[index].webinar = data
+    discoverAndLearn.map(({ webinar }, index) => {
+      duplicateData[index].webinar = filterEachWebinar(
+        webinar,
+        filterOptions,
+        filters
+      )
+      return null
     })
   }
   return duplicateData
