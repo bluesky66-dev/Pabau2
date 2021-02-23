@@ -15,6 +15,7 @@ interface P {
   createPage?: boolean
   notificationBanner?: React.ReactNode
   createPageOnClick?(): void
+  needTranslation?: boolean
 }
 
 const CrudLayout: FC<P> = ({ ...props }) => <CrudTable {...props} />
