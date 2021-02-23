@@ -140,11 +140,11 @@ export const Index: FC<ClientAreaProps> = ({
 
   const ClientAreaFooter = ({ step, onNext, onPrev }) => {
     const handleClickNext = () => {
-      clientAreaRef.current.scrollIntoView()
+      clientAreaRef.current.scrollIntoView({ behavior: 'smooth' })
       onNext()
     }
     const handleClickPrev = () => {
-      clientAreaRef.current.scrollIntoView()
+      clientAreaRef.current.scrollIntoView({ behavior: 'smooth' })
       onPrev()
     }
     return (
