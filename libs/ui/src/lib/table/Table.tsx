@@ -14,6 +14,7 @@ export interface DragProps {
   draggable?: boolean
   isCustomColorExist?: boolean
   isCustomIconExist?: boolean
+  customColumnRender?: boolean
   updateDataSource?: ({ newData, oldIndex, newIndex }) => void
 }
 
@@ -65,6 +66,7 @@ export const Table: FC<TableType> = ({
   onAddTemplate,
   searchTerm = '',
   needTranslation,
+  customColumnRender = false,
   ...props
 }) => {
   const onSortEnd = ({ oldIndex, newIndex }) => {
@@ -215,7 +217,7 @@ export const Table: FC<TableType> = ({
       }}
       pagination={false}
       dataSource={dataSource}
-      columns={renderSortHandler()}
+      columns={customColumnRender ? props.columns : renderSortHandler()}
       rowKey="key"
       className={styles.dragTable}
       locale={{

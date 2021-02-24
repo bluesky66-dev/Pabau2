@@ -8,6 +8,12 @@
     .ant-card-body {
       padding-top: 0px;
       padding-bottom: 0px;
+
+      tr.selected {
+        td {
+          background-color: red;
+        }
+      }
     }
     .ant-tabs {
       min-height: calc(100vh - 250px) !important;
@@ -26,6 +32,11 @@
   }
   .purchaseOrderHeader {
     padding: 0px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
     .breadcrumbDiv {
       :global .ant-breadcrumb {
         padding: 0px;
@@ -137,6 +148,18 @@
               align-items: flex-start;
               flex-wrap: wrap;
 
+              &:hover::-webkit-scrollbar-thumb {
+                background-color: rgba(0, 0, 0, 0.2);
+              }
+              &::-webkit-scrollbar {
+                width: 10px;
+              }
+              &::-webkit-scrollbar-thumb {
+                border: 3px solid rgba(0, 0, 0, 0);
+                background-clip: padding-box;
+                background-color: rgba(0, 0, 0, 0.15);
+              }
+
               :global .ant-col {
                 display: flex;
                 justify-content: center;
@@ -203,8 +226,525 @@
               }
             }
           }
+          .productSelection {
+            .productListing {
+              background-color: #fff;
+              border: 1px solid #ecedf0;
+              box-sizing: border-box;
+              border-radius: 4px;
+
+              :global {
+                .ant-table-body {
+                  min-height: 400px;
+                }
+                .ant-table-body:hover::-webkit-scrollbar-thumb {
+                  background-color: rgba(0, 0, 0, 0.2);
+                }
+                .ant-table-body::-webkit-scrollbar {
+                  width: 10px;
+                }
+                .ant-table-body::-webkit-scrollbar-thumb {
+                  border: 3px solid rgba(0, 0, 0, 0);
+                  background-clip: padding-box;
+                  background-color: rgba(0, 0, 0, 0.15);
+                }
+                .ant-table-footer {
+                  padding: 0px;
+                }
+                .ant-table-footer .footer {
+                  border: 1px solid #e8e8e8;
+                  border-left: none;
+                  border-right: none;
+                  padding: 15px;
+                  display: flex;
+                  justify-content: flex-end;
+                }
+
+                .ant-table-row-expand-icon {
+                  position: relative;
+                  /* background: transparent;
+                    border: none; */
+                }
+
+                .ant-table-row-collapsed:after {
+                  content: 'A';
+                  // content: url("https://img.icons8.com/cotton/72/online-shop-2.png");
+                  font-family: 'anticon' !important;
+                  font-style: normal;
+                  vertical-align: baseline;
+                  text-align: center;
+                  text-transform: none;
+                  text-rendering: auto;
+
+                  right: 0px;
+                  top: 0;
+                  display: inline-block;
+                  transform: scale(0.15) rotate(0deg);
+                  transition: transform 0.3s
+                    cubic-bezier(0.645, 0.045, 0.355, 1);
+                  zoom: 1;
+                  position: absolute;
+                  left: -7px;
+                  top: -30.75px;
+                  /* margin-left: -28px;
+                    margin-top: -30.5px; */
+                }
+
+                .ant-table-row-expanded:after {
+                  // content: url("https://img.icons8.com/cotton/72/online-shop-2.png");
+                  content: 'B';
+                  font-family: 'anticon' !important;
+                  font-style: normal;
+                  vertical-align: baseline;
+                  text-align: center;
+                  text-transform: none;
+                  text-rendering: auto;
+
+                  right: 16px;
+                  top: 0;
+                  display: inline-block;
+                  transform: scale(0.15) rotate(180deg);
+                  transition: transform 0.3s
+                    cubic-bezier(0.645, 0.045, 0.355, 1);
+                  zoom: 1;
+                  position: absolute;
+                  left: 12px;
+                  top: -30px;
+                  /* margin-left: -28px;
+                    margin-top: -30.5px; */
+                }
+              }
+            }
+          }
+        }
+      }
+      .tblFooter {
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column;
+
+        :global {
+          div {
+            padding: 12.5px 10px;
+            background-color: #fff;
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            border-top: 1px solid #f1f1f1;
+            font-size: 14px;
+            line-height: 22px;
+            color: #3d3d46;
+          }
+          div:first {
+            font-weight: normal;
+          }
+          div:last-child {
+            font-weight: bold;
+            color: #3d3d46;
+          }
         }
       }
     }
+
+    .orderProcessingSection {
+      margin-bottom: 80px;
+      padding: 10px 12.5px;
+      .processingCard {
+        border: 1px solid #ecedf0;
+        border-radius: 4px;
+        min-height: 200px;
+      }
+      .orderProcessingControls {
+        padding: 20px 12.5px;
+
+        .cardHeader {
+          padding: 20px;
+          border-bottom: 1px solid #ecedf0;
+          display: flex;
+          justify-content: flex-start;
+          align-items: flex-start;
+
+          & > div {
+            padding-right: 10px;
+          }
+
+          & > div:first-child {
+            svg {
+              fill: #54b2d3;
+            }
+          }
+
+          & > div:last-child {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+
+            div:first-child {
+              font-weight: bold;
+              font-size: 16px;
+              line-height: 24px;
+              color: #3d3d46;
+            }
+            div:last-child {
+              font-weight: normal;
+              font-size: 12px;
+              line-height: 16px;
+              color: #9292a3;
+            }
+          }
+        }
+        .cardBody {
+          display: flex;
+          width: 100%;
+          flex-direction: column;
+
+          & > div:first-child {
+            padding: 20px;
+            span {
+              font-weight: normal;
+              font-size: 12px;
+              line-height: 16px;
+              color: #9292a3;
+            }
+            div {
+              font-weight: 500;
+              font-size: 14px;
+              line-height: 22px;
+              color: #3d3d46;
+            }
+            p {
+              font-weight: normal;
+              font-size: 14px;
+              line-height: 22px;
+              color: #3d3d46;
+            }
+          }
+          & > div:last-child {
+            border-top: 1px solid #ecedf0;
+            border-bottom: 1px solid #ecedf0;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+
+            span:first-child {
+              font-size: 12px;
+              line-height: 16px;
+              color: #9292a3;
+            }
+            span:last-child {
+              font-weight: normal;
+              font-size: 14px;
+              line-height: 20px;
+              color: #3d3d46;
+            }
+          }
+        }
+        .cardFooter {
+          padding: 20px;
+        }
+      }
+      .orderProcessingDetails {
+        padding: 20px 12.5px;
+
+        .artifactLogisticsImg {
+          border-radius: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 20px;
+        }
+        .processingTable {
+          padding: 20px;
+
+          & > div {
+            border: 1px solid #ecedf0;
+            padding: 1px 0px;
+            border-radius: 4px;
+            :global {
+              .ant-table-thead {
+                tr th {
+                  border-top: none;
+                  &:first-child {
+                    border-top-left-radius: 4px;
+                  }
+                  &:last-child {
+                    border-top-right-radius: 4px;
+                  }
+                }
+              }
+              .ant-table-body {
+                border: none;
+                border-radius: 4px;
+              }
+              .ant-table-body:hover::-webkit-scrollbar-thumb {
+                background-color: rgba(0, 0, 0, 0.2);
+              }
+              .ant-table-body::-webkit-scrollbar {
+                width: 10px;
+              }
+              .ant-table-body::-webkit-scrollbar-thumb {
+                border: 3px solid rgba(0, 0, 0, 0);
+                background-clip: padding-box;
+                background-color: rgba(0, 0, 0, 0.15);
+              }
+              .ant-table-footer {
+                padding: 0px;
+              }
+              .ant-table-footer .footer {
+                border: 1px solid #e8e8e8;
+                border-left: none;
+                border-right: none;
+                padding: 15px;
+                display: flex;
+                justify-content: flex-end;
+              }
+
+              .ant-table-row-expand-icon {
+                position: relative;
+                /* background: transparent;
+                    border: none; */
+              }
+
+              .ant-table-row-collapsed:after {
+                content: 'A';
+                // content: url("https://img.icons8.com/cotton/72/online-shop-2.png");
+                font-family: 'anticon' !important;
+                font-style: normal;
+                vertical-align: baseline;
+                text-align: center;
+                text-transform: none;
+                text-rendering: auto;
+
+                right: 0px;
+                top: 0;
+                display: inline-block;
+                transform: scale(0.15) rotate(0deg);
+                transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                zoom: 1;
+                position: absolute;
+                left: -7px;
+                top: -30.75px;
+                /* margin-left: -28px;
+                    margin-top: -30.5px; */
+              }
+
+              .ant-table-row-expanded:after {
+                // content: url("https://img.icons8.com/cotton/72/online-shop-2.png");
+                content: 'B';
+                font-family: 'anticon' !important;
+                font-style: normal;
+                vertical-align: baseline;
+                text-align: center;
+                text-transform: none;
+                text-rendering: auto;
+
+                right: 16px;
+                top: 0;
+                display: inline-block;
+                transform: scale(0.15) rotate(180deg);
+                transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+                zoom: 1;
+                position: absolute;
+                left: 12px;
+                top: -30px;
+                /* margin-left: -28px;
+                    margin-top: -30.5px; */
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .orderReceivingSection {
+      margin-bottom: 80px;
+      padding: 20px 25px;
+      .orderReceivingTable {
+        min-height: 400px;
+
+        & > div {
+          border: 1px solid #ecedf0;
+          border-radius: 4px;
+        }
+
+        :global {
+          .ant-table-thead {
+            tr th {
+              border-top: none;
+              &:first-child {
+                border-top-left-radius: 4px;
+              }
+              &:last-child {
+                border-top-right-radius: 4px;
+              }
+            }
+          }
+          .ant-table-body {
+            min-height: 400px;
+            border-radius: 4px;
+          }
+          .ant-table-body:hover::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.2);
+          }
+          .ant-table-body::-webkit-scrollbar {
+            width: 10px;
+          }
+          .ant-table-body::-webkit-scrollbar-thumb {
+            border: 3px solid rgba(0, 0, 0, 0);
+            background-clip: padding-box;
+            background-color: rgba(0, 0, 0, 0.15);
+          }
+        }
+      }
+    }
+
+    .orderSummarySection {
+      margin-bottom: 80px;
+      padding: 20px 35px;
+
+      .summaryHeader {
+        padding: 5px 0px 25px 0px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+
+        div:first-child {
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 24px;
+          color: #3d3d46;
+        }
+      }
+      .summaryTableDiv {
+        border: 1px solid #ecedf0;
+        border-radius: 4px;
+        min-height: 300px;
+
+        .summaryTable {
+          border-right: 1px solid #ecedf0;
+
+          @media screen and (max-width: 575px) {
+            border-right: none;
+            border-bottom: 1px solid #ecedf0;
+          }
+
+          :global {
+            .ant-table-thead {
+              tr th {
+                border-top: none;
+                &:first-child {
+                  border-top-left-radius: 4px;
+                }
+                &:last-child {
+                  border-top-right-radius: 4px;
+                }
+              }
+            }
+            .ant-table-body {
+              min-height: 300px;
+              border-radius: 4px;
+            }
+            .ant-table-body:hover::-webkit-scrollbar-thumb {
+              background-color: rgba(0, 0, 0, 0.2);
+            }
+            .ant-table-body::-webkit-scrollbar {
+              width: 10px;
+            }
+            .ant-table-body::-webkit-scrollbar-thumb {
+              border: 3px solid rgba(0, 0, 0, 0);
+              background-clip: padding-box;
+              background-color: rgba(0, 0, 0, 0.15);
+            }
+            .ant-table-footer {
+              background-color: #fff;
+              border-top: 1px solid #f1f1f1;
+            }
+          }
+          .tblFooter {
+            display: flex;
+            align-items: flex-end;
+            flex-direction: column;
+
+            :global {
+              div {
+                display: flex;
+                justify-content: flex-end;
+                width: 100%;
+                font-size: 14px;
+                line-height: 22px;
+                color: #3d3d46;
+              }
+              div:first {
+                font-weight: normal;
+              }
+              div:last-child {
+                font-weight: bold;
+                color: #3d3d46;
+              }
+            }
+          }
+        }
+        @media screen and (max-width: 1024px) {
+          :global {
+            .ant-col.ant-col-sm-14 {
+              flex: 0 0 60%;
+              max-width: 60%;
+            }
+            .ant-col.ant-col-sm-10 {
+              flex: 0 0 40%;
+              max-width: 40%;
+            }
+          }
+        }
+        .summaryStatus {
+          padding: 45px 40px;
+
+          div {
+            min-height: 200px;
+            background: #f6fbfd;
+            border: 1px solid #a5d7e8;
+            box-sizing: border-box;
+            border-radius: 4px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            span {
+              font-weight: 500;
+              font-size: 24px;
+              line-height: 32px;
+              display: flex;
+              align-items: center;
+              text-align: center;
+              color: #54b2d3;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+:global {
+  label {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    color: #9292a3;
+  }
+  input {
+    font-size: 14px !important;
+
+    &::placeholder {
+      font-size: 14px !important;
+    }
+  }
+  .ant-select-selector {
+    font-size: 14px !important;
   }
 }

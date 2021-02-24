@@ -4,6 +4,7 @@ import styles from './SMSLabel.module.less'
 export interface SMSLabelProps {
   status: string
   block?: boolean
+  label?: string | number
 }
 
 export const SMSLabel: FC<SMSLabelProps> = ({ status, block, ...props }) => {

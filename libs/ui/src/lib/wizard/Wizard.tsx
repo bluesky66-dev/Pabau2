@@ -6,23 +6,31 @@ import { StepperInterface } from './mock'
 interface WizardProps {
   onPrev?: () => void
   onNext?: () => void
-  onSmartOrder?: () => void
+  extraBtnClick?: () => void
   active: number
   allSteps: number
   stepperData: StepperInterface[]
+  showNextBtn?: boolean
+  nextBtnLabel?: string | number
   disableNextStep?: boolean
-  smartOrderBtn?: boolean
+  disablePrevStep?: boolean
+  extraBtn?: boolean
+  extraBtnLabel?: string | number
 }
 
 export const Wizard: React.FC<WizardProps> = ({
   onPrev,
   onNext,
-  onSmartOrder,
+  extraBtnClick,
   active,
   allSteps,
   stepperData,
+  showNextBtn = true,
   disableNextStep = false,
-  smartOrderBtn = false,
+  disablePrevStep = true,
+  extraBtn = false,
+  extraBtnLabel = 'Extra Button',
+  nextBtnLabel = 'Next Step',
   children,
 }) => {
   return (
@@ -35,7 +43,7 @@ export const Wizard: React.FC<WizardProps> = ({
       <div className={styels.footer}>
         <Button
           onClick={(event) => onPrev?.()}
-          disabled={active < 1 || active === allSteps - 1}
+          disabled={active < 1 || (active === allSteps - 1 && disablePrevStep)}
         >
           Previous Step
         </Button>
@@ -44,22 +52,24 @@ export const Wizard: React.FC<WizardProps> = ({
         </span>
 
         <div>
-          {smartOrderBtn && (
+          {extraBtn && (
             <Button
               type="default"
-              onClick={(event) => onSmartOrder?.()}
+              onClick={(event) => extraBtnClick?.()}
               style={{ marginRight: '10px' }}
             >
-              Smart Order
+              {extraBtnLabel}
             </Button>
           )}
-          <Button
-            type="primary"
-            onClick={(event) => onNext?.()}
-            disabled={disableNextStep || allSteps - 1 <= active}
-          >
-            Next Step
-          </Button>
+          {showNextBtn && (
+            <Button
+              type="primary"
+              onClick={(event) => onNext?.()}
+              disabled={disableNextStep || allSteps - 1 <= active}
+            >
+              {nextBtnLabel}
+            </Button>
+          )}
         </div>
       </div>
     </div>

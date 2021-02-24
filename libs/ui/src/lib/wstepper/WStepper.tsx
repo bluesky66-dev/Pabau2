@@ -6,8 +6,13 @@ import { StepperItem } from '@pabau/ui'
 interface WStepperProps {
   active: number
   data: StepperItem[]
+  showNextBtn?: boolean
   disableNextStep?: boolean
-  smartOrderBtn?: boolean
+  disablePrevStep?: boolean
+  nextBtnLabel: string | number
+  extraBtn?: boolean
+  extraBtnLabel?: string | number
+  extraBtnClick?: () => void
   onActiveStepChange?: (index) => void
 }
 
