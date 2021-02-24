@@ -202,21 +202,48 @@ const CrudTable: FC<P> = ({
     Record<string, string | boolean | number>
   >({})
 
-  const { data, error, loading } = useLiveQuery(listQuery, {
-    variables: {
-      isActive,
-      searchTerm: '%' + searchTerm + '%',
-      offset: paginateData.offset,
-      limit: paginateData.limit,
-    },
-  })
+  const getQueryVariables = () => {
+    const queryOptions = {
+      variables: {
+        isActive,
+        searchTerm: '%' + searchTerm + '%',
+        offset: paginateData.offset,
+        limit: paginateData.limit,
+      },
+    }
 
-  const { data: aggregateData } = useLiveQuery(aggregateQuery, {
-    variables: {
-      isActive,
-      searchTerm: '%' + searchTerm + '%',
-    },
-  })
+    if (!tableSearch) {
+      delete queryOptions.variables.searchTerm
+    }
+    if (!addFilter) {
+      delete queryOptions.variables.isActive
+    }
+    return queryOptions
+  }
+
+  const getAggregateQueryVariables = () => {
+    const queryOptions = {
+      variables: {
+        isActive,
+        searchTerm: '%' + searchTerm + '%',
+      },
+    }
+
+    if (!tableSearch) {
+      delete queryOptions.variables.searchTerm
+    }
+    if (!addFilter) {
+      delete queryOptions.variables.isActive
+    }
+    return queryOptions
+  }
+
+  const { data, error, loading } = useLiveQuery(listQuery, getQueryVariables())
+
+  const { data: aggregateData } = useLiveQuery(
+    aggregateQuery,
+    getAggregateQueryVariables()
+  )
 
   const getAddress = (data) => {
     const { country, city, street, post_code } = data
@@ -473,6 +500,7 @@ const CrudTable: FC<P> = ({
                   schema={schema}
                   tableSearch={tableSearch}
                   needTranslation={needTranslation}
+                  addFilter={addFilter}
                 />
               ) : (
                 <AddButton
@@ -535,6 +563,7 @@ const CrudTable: FC<P> = ({
                 schema={schema}
                 tableSearch={tableSearch}
                 needTranslation={needTranslation}
+                addFilter={addFilter}
               />
             ) : (
               <AddButton
