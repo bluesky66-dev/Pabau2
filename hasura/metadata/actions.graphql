@@ -1,2 +1,18 @@
+type Query {
+  login (
+    data: LoginInput!
+  ): loginOutput
+}
 
+
+
+
+input LoginInput {
+  username : String!
+  password : String!
+}
+
+type loginOutput {
+  accessToken : String!
+}
 
