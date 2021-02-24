@@ -158,7 +158,7 @@ export const Index: FC<OnlineBookingProps> = ({
                   )}
                 </div>
               ))}
-            <Collapse defaultActiveKey={['advanced']} ghost>
+            <Collapse ghost>
               <Panel header="Advanced settings" key="advanced">
                 {setting.apperance
                   .filter((item) => item.advanced === true)
@@ -257,7 +257,7 @@ export const Index: FC<OnlineBookingProps> = ({
                   )}
                 </div>
               ))}
-            <Collapse defaultActiveKey={['advanced']} ghost>
+            <Collapse ghost>
               <Panel header="Advanced settings" key="advanced">
                 {setting.booking
                   .filter((item) => item.advanced === true)
