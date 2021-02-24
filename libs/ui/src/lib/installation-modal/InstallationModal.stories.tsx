@@ -27,7 +27,7 @@ export default {
       'Web View Description Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     installationModalImage,
     installationModalWindowImage,
-    buttonType: 'Install Now',
+    installed: 0,
     worksWith: [
       {
         key: 0,
@@ -71,7 +71,7 @@ const InstallationModalStory = ({
   webViewDescription,
   installationModalImage,
   installationModalWindowImage,
-  buttonType,
+  installed,
   worksWith,
   categories,
 }) => (
@@ -85,7 +85,7 @@ const InstallationModalStory = ({
     webViewDescription={webViewDescription}
     installationModalImage={installationModalImage}
     installationModalWindowImage={installationModalWindowImage}
-    buttonType={buttonType}
+    installed={installed}
     worksWith={worksWith}
     categories={categories}
   />

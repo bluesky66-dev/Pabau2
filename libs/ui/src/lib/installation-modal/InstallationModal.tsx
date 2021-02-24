@@ -24,7 +24,7 @@ export interface InstallationModalProps {
   webViewDescription?: string
   installationModalImage?: string
   installationModalWindowImage?: string
-  buttonType?: string
+  installed?: number
   onCancel?: () => void
   onSubmit?: () => void
   worksWith?: WorksWith[]
@@ -41,12 +41,16 @@ export const InstallationModal: FC<InstallationModalProps> = ({
   webViewDescription,
   installationModalImage = installationModalImage1,
   installationModalWindowImage = installationModalWindowImage1,
-  buttonType,
+  installed,
   onCancel,
   onSubmit,
   worksWith,
   categories,
 }) => {
+  let buttonType = 'Install Now'
+  if (installed === 1) {
+    buttonType = 'Uninstall'
+  }
   return (
     <Modal
       visible={visible}
@@ -69,7 +73,6 @@ export const InstallationModal: FC<InstallationModalProps> = ({
         <div className={styles.head}>
           <h3>Works with</h3>
           <div className={styles.serviceBoxWrapper}>
-            {console.log('workWith', worksWith)}
             {worksWith?.map((value) => (
               <div className={styles.serviceBox} key={value.key}>
                 <span className={styles.circle}>{value.logoImage}</span>

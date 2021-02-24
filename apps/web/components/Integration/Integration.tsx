@@ -184,7 +184,7 @@ export const IntegrationTabBody: FC<P> = ({
         logo={modalData.logoImage}
         title={modalData.title}
         description={modalData.subTitle}
-        buttonType={'Install Now'}
+        installed={modalData.installed}
         categories={modalData.categories}
         onCancel={() => setIsModalVisible(false)}
         worksWith={WorksWith}

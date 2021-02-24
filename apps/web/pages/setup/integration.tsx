@@ -82,7 +82,7 @@ export const Integration: FC<IntegrationProps> = (props) => {
   return (
     <div>
       <Layout>
-        <div style={{ backgroundColor: '#fff' }}>
+        <div className={styles.mainDiv}>
           <div className={styles.headWrapper}>
             <div>
               <Breadcrumb
