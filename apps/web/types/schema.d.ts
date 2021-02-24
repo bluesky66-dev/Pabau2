@@ -13,6 +13,7 @@ interface Schema {
   fields: Record<string, SchemaItem>
   shemaType?: string
   createButtonLabel?: string
+  searchPlaceholder?: string
 }
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface SchemaItem {

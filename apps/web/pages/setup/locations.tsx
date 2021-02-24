@@ -54,6 +54,8 @@ const schema: Schema = {
   fullLower: 'locations',
   short: 'Location',
   shortLower: 'location',
+  createButtonLabel: 'Create Location',
+  searchPlaceholder: 'Search by name, city or tag',
   fields: {},
 }
 

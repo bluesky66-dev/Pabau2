@@ -130,7 +130,11 @@ const AddButton: FC<P> = ({
           <Input
             className={styles.searchMarketingStyle}
             placeholder={
-              needTranslation ? t('search-placeholder.translation') : 'Search'
+              needTranslation
+                ? t('search-placeholder.translation')
+                : schema.searchPlaceholder
+                ? schema.searchPlaceholder
+                : 'Search'
             }
             value={marketingSourceSearch}
             onChange={(e) => setMarketingSourceSearch(e.target.value)}
