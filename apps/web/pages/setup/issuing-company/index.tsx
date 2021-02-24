@@ -10,6 +10,7 @@ import {
   Notification,
   NotificationType,
   BasicModal as Modal,
+  Checkbox,
 } from '@pabau/ui'
 import { Form, Select, Input } from 'antd'
 import { CloseOutlined, DeleteFilled } from '@ant-design/icons'
@@ -23,21 +24,8 @@ import styles from './issuing-company.module.less'
 
 /* eslint-disable graphql/template-strings */
 const LIST_QUERY = gql`
-  query issuing_company(
-    $isActive: Boolean = true
-    $offset: Int
-    $limit: Int
-    $searchTerm: String = ""
-  ) {
-    issuing_company(
-      offset: $offset
-      limit: $limit
-      order_by: { name: desc }
-      where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-      }
-    ) {
+  query issuing_company($offset: Int, $limit: Int) {
+    issuing_company(offset: $offset, limit: $limit, order_by: { order: desc }) {
       __typename
       id
       name
@@ -53,20 +41,13 @@ const LIST_QUERY = gql`
       invoice_starting_number
       vat_registered
       is_draft
+      order
     }
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query issuing_company_aggregate(
-    $isActive: Boolean = true
-    $searchTerm: String = ""
-  ) {
-    issuing_company_aggregate(
-      where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-      }
-    ) {
+  query issuing_company_aggregate {
+    issuing_company_aggregate {
       aggregate {
         count
       }
@@ -95,6 +76,7 @@ const ADD_MUTATION = gql`
     $invoiceStartingNumber: numeric
     $vatRegistered: Boolean
     $isDraft: Boolean
+    $isActive: Boolean
   ) {
     insert_issuing_company_one(
       object: {
@@ -109,8 +91,8 @@ const ADD_MUTATION = gql`
         invoice_prefix: $invoicePrefix
         invoice_starting_number: $invoiceStartingNumber
         vat_registered: $vatRegistered
-        is_active: true
         is_draft: $isDraft
+        is_active: $isActive
       }
     ) {
       __typename
@@ -133,6 +115,7 @@ const EDIT_MUTATION = gql`
     $invoiceStartingNumber: numeric
     $vatRegistered: Boolean
     $isDraft: Boolean
+    $isActive: Boolean
   ) {
     update_issuing_company_by_pk(
       pk_columns: { id: $id }
@@ -148,8 +131,8 @@ const EDIT_MUTATION = gql`
         invoice_prefix: $invoicePrefix
         invoice_starting_number: $invoiceStartingNumber
         vat_registered: $vatRegistered
-        is_active: true
         is_draft: $isDraft
+        is_active: $isActive
       }
     ) {
       __typename
@@ -160,8 +143,11 @@ const EDIT_MUTATION = gql`
 `
 
 const UPDATE_ORDER_MUTATION = gql`
-  mutation update_issuing_company_order($id: uuid!) {
-    update_issuing_company(where: { id: { _eq: $id } }) {
+  mutation update_issuing_company_order($id: uuid!, $order: Int) {
+    update_issuing_company(
+      where: { id: { _eq: $id } }
+      _set: { order: $order }
+    ) {
       affected_rows
     }
   }
@@ -233,6 +219,7 @@ interface inputTypes {
   invoiceStartingNumber?: string
   vatRegistered?: boolean
   isDraft?: boolean
+  isActive?: boolean
 }
 
 interface editFieldsTypes {
@@ -357,6 +344,7 @@ export const IssuingCompany: NextPage = () => {
       invoiceStartingNumber: undefined,
       vatRegistered: false,
       isDraft: false,
+      isActive: true,
     }
     return initialValues
   }
@@ -369,7 +357,6 @@ export const IssuingCompany: NextPage = () => {
     enableReinitialize: true,
     initialValues: editPage?.id ? setEditFields() : formikFields(),
     validationSchema: issuingCompanySchema,
-    validateOnChange: false,
     onSubmit: (values) => {
       formik.validateForm().then(async () => {
         await (!editPage.id
@@ -448,6 +435,16 @@ export const IssuingCompany: NextPage = () => {
             <small>VAT registered</small>{' '}
             <Switch checked={formik.values.vatRegistered} onClick={onChecked} />
           </div>
+          <div className={styles.statusBox}>
+            <Checkbox
+              checked={formik.values.isActive}
+              onChange={(e) =>
+                formik.setFieldValue('isActive', e.target.checked)
+              }
+            >
+              <span>Active</span>
+            </Checkbox>
+          </div>
           <div className={styles.btnCancel}>
             <Button
               type="default"
@@ -512,9 +509,6 @@ export const IssuingCompany: NextPage = () => {
                     onchange(e, 'phone')
                   }}
                 />
-                {formik.errors.phone ? (
-                  <div className={styles.error}>{formik.errors.phone}</div>
-                ) : null}
               </Form.Item>
               <Form.Item label="Website">
                 <Input
@@ -523,9 +517,6 @@ export const IssuingCompany: NextPage = () => {
                   onChange={formik.handleChange}
                   value={formik.values.website}
                 />
-                {formik.errors.website ? (
-                  <div className={styles.error}>{formik.errors.website}</div>
-                ) : null}
               </Form.Item>
             </div>
           </div>
@@ -552,9 +543,6 @@ export const IssuingCompany: NextPage = () => {
                 >
                   {createOptions()}
                 </Select>
-                {formik.errors.country ? (
-                  <div className={styles.error}>{formik.errors.country}</div>
-                ) : null}
               </Form.Item>
               <Form.Item label={'City'}>
                 <Input
@@ -563,9 +551,6 @@ export const IssuingCompany: NextPage = () => {
                   onChange={formik.handleChange}
                   value={formik.values.city}
                 />
-                {formik.errors.city ? (
-                  <div className={styles.error}>{formik.errors.city}</div>
-                ) : null}
               </Form.Item>
               <Form.Item label="Street">
                 <Input
@@ -575,9 +560,6 @@ export const IssuingCompany: NextPage = () => {
                   onChange={formik.handleChange}
                   value={formik.values.street}
                 />
-                {formik.errors.street ? (
-                  <div className={styles.error}>{formik.errors.street}</div>
-                ) : null}
               </Form.Item>
               <Form.Item label="Post code">
                 <Input
@@ -587,9 +569,6 @@ export const IssuingCompany: NextPage = () => {
                   onChange={formik.handleChange}
                   value={formik.values.postCode}
                 />
-                {formik.errors.postCode ? (
-                  <div className={styles.error}>{formik.errors.postCode}</div>
-                ) : null}
               </Form.Item>
             </div>
           </div>
@@ -613,11 +592,6 @@ export const IssuingCompany: NextPage = () => {
                   <Option value="">Select invoice template</Option>
                   <Option value="test">test</Option>
                 </Select>
-                {formik.errors.website ? (
-                  <div className={styles.error}>
-                    {formik.errors.invoiceTemplate}
-                  </div>
-                ) : null}
               </Form.Item>
               <Form.Item label="Invoice prefix">
                 <Input
@@ -626,11 +600,6 @@ export const IssuingCompany: NextPage = () => {
                   onChange={formik.handleChange}
                   value={formik.values.invoicePrefix}
                 />
-                {formik.errors.invoicePrefix ? (
-                  <div className={styles.error}>
-                    {formik.errors.invoicePrefix}
-                  </div>
-                ) : null}
               </Form.Item>
               <Form.Item label="Invoice starting number">
                 <Input
@@ -639,11 +608,6 @@ export const IssuingCompany: NextPage = () => {
                   onChange={formik.handleChange}
                   value={formik.values.invoiceStartingNumber}
                 />
-                {formik.errors.invoiceStartingNumber ? (
-                  <div className={styles.error}>
-                    {formik.errors.invoiceStartingNumber}
-                  </div>
-                ) : null}
               </Form.Item>
             </div>
           </div>

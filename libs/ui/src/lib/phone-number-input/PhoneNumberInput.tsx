@@ -21,7 +21,7 @@ export const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
   const [phoneNumber, setPhoneNumber] = useState('')
   const [valid, setValid] = useState(true)
   useEffect(() => {
-    if (value !== '') {
+    if (value) {
       setPhoneNumber(value)
     } else {
       setPhoneNumber('44')
