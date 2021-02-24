@@ -1,25 +1,40 @@
 import React, { FC, useState, useEffect } from 'react'
 import { useMedia } from 'react-use'
+import classNames from 'classnames'
 import {
   Breadcrumb,
   Button,
   TabMenu,
   Checkbox,
   SimpleDropdown,
+  Switch,
+  Input,
 } from '@pabau/ui'
-import { Typography, Collapse, Form, Input as AntInput, Tooltip } from 'antd'
+import {
+  Typography,
+  Collapse,
+  Form,
+  Input as AntInput,
+  Tooltip,
+  Radio,
+} from 'antd'
 import {
   LeftOutlined,
   CalendarOutlined,
   UserAddOutlined,
   QuestionCircleOutlined,
+  CheckCircleFilled,
 } from '@ant-design/icons'
 import Layout from '../../../components/Layout/Layout'
 import CommonHeader from '../CommonHeader'
 import onlineBookingBg from '../../../assets/images/online-booking-bg.png'
 import onlineBookingPreviewEmpty from '../../../assets/images/online-booking-preview-empty.png'
+import noPaymentGateway from '../../../assets/images/no-payment-gateway.png'
 import { ReactComponent as Palette } from '../../../assets/images/palette.svg'
-import { defaultBuilderData } from '../../../assets/onlineBookingData'
+import {
+  defaultBuilderData,
+  paymentMethodItems,
+} from '../../../assets/onlineBookingData'
 import styles from './index.module.less'
 
 const { Title } = Typography
@@ -367,6 +382,147 @@ export const Index: FC<OnlineBookingProps> = ({
       </div>
     )
   }
+  const Payment = () => {
+    const [viewMore, setViewMore] = useState(false)
+    const [requirement, setRequirement] = useState(1)
+    const [rollingDeposit, setRollingDeposit] = useState(true)
+    const [defaultDeposit, setDefaultDeposit] = useState('')
+    const radioStyle = {
+      display: 'block',
+      height: '22px',
+      lineHeight: '22px',
+      marginBottom: '18px',
+      color: 'var(--grey-text-color)',
+    }
+    return (
+      <div className={styles.onlineBookingPayment}>
+        <div className={styles.paymentGatewayConfig}>
+          <img src={noPaymentGateway} alt="" />
+          <p>No payment gateways configured</p>
+          <p>Configure your first payment gateway to accept online payments</p>
+          <Button type="primary">Configure</Button>
+        </div>
+        <div className={styles.onlinePaymentTerms}>
+          <p>Online payment terms</p>
+          <span>
+            You can charge the full amount or a deposit for online bookings.
+            <br />
+            You can also change these settings{' '}
+            <a href="/setup/online-booking" target="_target">
+              per service
+            </a>
+          </span>
+        </div>
+        <Switch
+          size="small"
+          checked={viewMore}
+          onChange={(checked) => setViewMore(checked)}
+        />
+        {viewMore && (
+          <div className={styles.deposit}>
+            <div className={styles.depositHeader}>Deposit</div>
+            <div className={styles.depositRequirements}>
+              <p>Requirements</p>
+              <Radio.Group
+                value={requirement}
+                onChange={(e) => setRequirement(e.target.value)}
+              >
+                <Radio style={radioStyle} value={1}>
+                  No Deposit required
+                </Radio>
+                <Radio style={radioStyle} value={2}>
+                  Require default deposit{' '}
+                  <Tooltip title="lorem ipsum">
+                    <QuestionCircleOutlined
+                      style={{
+                        marginLeft: '8px',
+                        color: 'var(--light-grey-color)',
+                      }}
+                    />
+                  </Tooltip>
+                </Radio>
+                <Radio style={radioStyle} value={3}>
+                  Take full payment for the service
+                </Radio>
+              </Radio.Group>
+            </div>
+            <div className={styles.depositDefault}>
+              <p>Default deposit</p>
+              <Input
+                label="This will be over-ridden if the service has a deposit set"
+                text={defaultDeposit}
+                onChange={(val) => setDefaultDeposit(val)}
+                placeHolderText="£0.00"
+              />
+            </div>
+            <div className={styles.depositRolling}>
+              <p>Rolling Deposit</p>
+              <p>
+                If the client has money on their account (min. £25.00), they
+                will need to do a payment, meaning payment process is
+                completelly skipped
+              </p>
+              <Radio.Group
+                value={rollingDeposit}
+                onChange={(e) => setRollingDeposit(e.target.value)}
+              >
+                <Radio style={radioStyle} value={true}>
+                  Yes
+                </Radio>
+                <Radio style={radioStyle} value={false}>
+                  No
+                </Radio>
+              </Radio.Group>
+            </div>
+          </div>
+        )}
+        {viewMore && (
+          <div className={styles.paymentMethods}>
+            <div className={styles.paymentMethodsHeader}>Payment Methods</div>
+            <div className={styles.paymentMethodsContainer}>
+              {paymentMethodItems.map((item) => (
+                <React.Fragment key={item.title}>
+                  {item.showInstructions === true && (
+                    <div
+                      className={classNames(
+                        styles.paymentMethodItem,
+                        styles.showInstructions
+                      )}
+                    >
+                      <div className={styles.itemLogo}>{item.logo}</div>
+                      <div className={styles.itemShowInstructions}>
+                        Show instructions
+                      </div>
+                    </div>
+                  )}
+                  {item.showInstructions !== true && (
+                    <div
+                      className={
+                        item.selected
+                          ? classNames(
+                              styles.paymentMethodItem,
+                              styles.selectedItem
+                            )
+                          : styles.paymentMethodItem
+                      }
+                    >
+                      <div className={styles.itemLogo}>{item.logo}</div>
+                      <div className={styles.itemTitle}>{item.title}</div>
+                      <div className={styles.selectedSymbol}>
+                        <CheckCircleFilled
+                          style={{ color: 'var(--primary-color)' }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    )
+  }
   return (
     <>
       <CommonHeader />
@@ -402,7 +558,7 @@ export const Index: FC<OnlineBookingProps> = ({
                 minHeight="1px"
               >
                 <Builder builder={builder} />
-                <div>2</div>
+                <Payment />
                 <div>3</div>
                 <div>4</div>
               </TabMenu>

@@ -1,3 +1,9 @@
+import { ReactComponent as Mastercard } from './images/payments/Mastercard.svg'
+import { ReactComponent as Maestro } from './images/payments/Maestro.svg'
+import { ReactComponent as Visa } from './images/payments/Visa.svg'
+import { ReactComponent as Amex } from './images/payments/Amex.svg'
+import { ReactComponent as ApplePay } from './images/payments/ApplePay.svg'
+
 export const defaultBuilderData = {
   apperance: [
     {
@@ -176,3 +182,31 @@ export const defaultBuilderData = {
     },
   ],
 }
+
+export const paymentMethodItems = [
+  {
+    title: 'Mastercard',
+    logo: <Mastercard />,
+    selected: false,
+  },
+  {
+    title: 'Maestro',
+    logo: <Maestro />,
+    selected: false,
+  },
+  {
+    title: 'Visa',
+    logo: <Visa />,
+    selected: true,
+  },
+  {
+    title: 'Amex',
+    logo: <Amex />,
+    selected: false,
+  },
+  {
+    title: 'ApplePay',
+    logo: <ApplePay />,
+    showInstructions: true,
+  },
+]
