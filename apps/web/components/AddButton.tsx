@@ -20,6 +20,7 @@ interface P {
   onFilterSource: () => void
   onSearch: (term: string) => void
   tableSearch?: boolean
+  addFilter?: boolean
   needTranslation?: boolean
 }
 
@@ -30,6 +31,7 @@ const AddButton: FC<P> = ({
   onFilterSource,
   onSearch,
   tableSearch = true,
+  addFilter = true,
   needTranslation,
 }) => {
   const [isActive, setIsActive] = useState(true)
@@ -84,10 +86,12 @@ const AddButton: FC<P> = ({
         {tableSearch && (
           <SearchOutlined className={styles.marketingIconStyle} />
         )}
-        <FilterOutlined
-          className={styles.marketingIconStyle}
-          onClick={() => setMobFilterDrawer((e) => !e)}
-        />
+        {addFilter && (
+          <FilterOutlined
+            className={styles.marketingIconStyle}
+            onClick={() => setMobFilterDrawer((e) => !e)}
+          />
+        )}
         <PlusSquareFilled
           className={styles.plusIconStyle}
           onClick={() => onClick?.()}
@@ -148,12 +152,14 @@ const AddButton: FC<P> = ({
           placement="bottomRight"
           overlayClassName={styles.filterPopover}
         >
-          <Button className={styles.filterBtn}>
-            <FilterOutlined />{' '}
-            {needTranslation
-              ? t('marketingsource-button-filter.translation')
-              : 'Filter'}
-          </Button>
+          {addFilter && (
+            <Button className={styles.filterBtn}>
+              <FilterOutlined />{' '}
+              {needTranslation
+                ? t('marketingsource-button-filter.translation')
+                : 'Filter'}
+            </Button>
+          )}
         </Popover>
         <Button
           className={styles.createSourceBtn}
