@@ -18,6 +18,7 @@ import {
   Input as AntInput,
   Tooltip,
   Radio,
+  Alert,
 } from 'antd'
 import {
   LeftOutlined,
@@ -25,6 +26,8 @@ import {
   UserAddOutlined,
   QuestionCircleOutlined,
   CheckCircleFilled,
+  CheckOutlined,
+  CopyOutlined,
 } from '@ant-design/icons'
 import Layout from '../../../components/Layout/Layout'
 import CommonHeader from '../CommonHeader'
@@ -36,6 +39,7 @@ import {
   defaultBuilderData,
   paymentMethodItems,
   analyticsSettingsData,
+  promoteData,
 } from '../../../assets/onlineBookingData'
 import styles from './index.module.less'
 
@@ -530,7 +534,7 @@ export const Index: FC<OnlineBookingProps> = ({
     )
   }
   const Analytics = () => {
-    const isMobile = useMedia('(max-width: 567px)', false)
+    const isMobile = useMedia('(max-width: 767px)', false)
     return (
       <div className={styles.onlineBookingAnalytics}>
         <div className={styles.analyticsSettings}>
@@ -557,6 +561,132 @@ export const Index: FC<OnlineBookingProps> = ({
               </div>
             </div>
           ))}
+        </div>
+      </div>
+    )
+  }
+  const Promote = () => {
+    const isMdScreen = useMedia('(min-width: 992px)', false)
+    const ButtonTab = () => {
+      const [buttonStyles, setButtonStyles] = useState(promoteData.button)
+      const handleSelectStyle = (item) => {
+        const btnStyles = [...buttonStyles]
+        for (const style of btnStyles) {
+          style.selected = style.title === item.title
+        }
+        setButtonStyles([...btnStyles])
+      }
+      return (
+        <>
+          <div className={styles.promoteTabHeader}>
+            <h2>Button</h2>
+            <p>Pick a style</p>
+          </div>
+          <div className={styles.promoteButtonTab}>
+            {buttonStyles.map((style) => (
+              <div
+                className={
+                  style.selected
+                    ? classNames(
+                        styles.promoteButtonStyleItem,
+                        styles.promoteButtonStyleSelected
+                      )
+                    : styles.promoteButtonStyleItem
+                }
+                key={style.title}
+                onClick={() => handleSelectStyle(style)}
+              >
+                <div className={styles.buttonPreview}>
+                  <p>Press this button to try it out!</p>
+                  <div
+                    className={styles.buttonPreviewButton}
+                    style={{
+                      color: style.color,
+                      backgroundColor: style.bgColor,
+                      border: `1px solid ${style.borderColor}`,
+                    }}
+                  >
+                    Book Now
+                  </div>
+                </div>
+                <div className={styles.buttonDesc}>
+                  <div className={styles.buttonStyleTitle}>
+                    {style.selected && (
+                      <CheckOutlined style={{ marginRight: '4px' }} />
+                    )}{' '}
+                    {style.title}
+                  </div>
+                  {style.selected && (
+                    <div className={styles.copyEmbedCode}>
+                      <CopyOutlined />
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )
+    }
+    const BookingPortalTab = () => {
+      const [form] = Form.useForm()
+      const [link, setLink] = useState('prelive-connnect.pabau.com/bookings')
+      return (
+        <>
+          <div className={styles.promoteTabHeader}>
+            <h2>Booking portal</h2>
+            <p>Here is your portal link</p>
+          </div>
+          <div className={styles.promoteBookingPortalTab}>
+            <p>Book now link</p>
+            <p>
+              Copy and paste the link below to add the button to your website,
+              blog posts, email signature to anywhere else online.
+              <br />
+              <br />
+              The Link leads straight to your online booking service menus,
+              lettings clients easily book new appointments in just a few
+              clicks.
+              <br />
+              <br />
+              Your link works perfectly with anny device including desktops,
+              tables and mobiles.
+            </p>
+            <Form form={form} layout="vertical">
+              <Form.Item label="Link">
+                <Input text={link} onChange={(val) => setLink(val)} />
+                <Button
+                  type="primary"
+                  icon={<CopyOutlined />}
+                  style={{ marginLeft: '1rem' }}
+                >
+                  Copy Link
+                </Button>
+              </Form.Item>
+            </Form>
+            <Alert
+              message="Attention"
+              description="Please note you are in test mode, please do not embedd this link anywhere"
+              type="warning"
+            />
+          </div>
+        </>
+      )
+    }
+    return (
+      <div className={styles.onlineBookingPromote}>
+        <div className={styles.onlineBookingPromotePanel}>
+          <h2>Promote</h2>
+          <TabMenu
+            tabPosition={isMdScreen ? 'left' : 'top'}
+            minHeight="1px"
+            menuItems={['Button', 'Booking portal', 'Widget', 'Facebook App']}
+          >
+            <ButtonTab />
+            <BookingPortalTab />
+            <div>Widget</div>
+            <div>Facebook App</div>
+          </TabMenu>
         </div>
       </div>
     )
@@ -598,7 +728,7 @@ export const Index: FC<OnlineBookingProps> = ({
                 <Builder builder={builder} />
                 <Payment />
                 <Analytics />
-                <div>4</div>
+                <Promote />
               </TabMenu>
             )}
           </div>

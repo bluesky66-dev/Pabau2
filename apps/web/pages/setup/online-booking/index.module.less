@@ -173,6 +173,12 @@
     width: 100%;
     background-color: white;
     border-radius: 4px;
+    @media (max-width: 767px) {
+      border-radius: 0;
+    }
+  }
+  @media (max-width: 767px) {
+    padding: 0;
   }
 }
 
@@ -386,6 +392,7 @@
   background-color: transparent !important;
   display: flex;
   align-items: center;
+  padding-left: 1rem;
 }
 
 .onlineBookingAnalytics {
@@ -401,9 +408,12 @@
     width: 100%;
     background-color: white;
     border-radius: 4px;
+    @media (max-width: 767px) {
+      border-radius: 0;
+    }
   }
-  @media (max-width: 567px) {
-    padding: 4px;
+  @media (max-width: 767px) {
+    padding: 0;
   }
 }
 
@@ -417,7 +427,7 @@
     color: var(--grey-text-color);
     margin: 0;
   }
-  @media (max-width: 567px) {
+  @media (max-width: 767px) {
     padding: 1rem;
   }
 }
@@ -437,7 +447,7 @@
       justify-content: center;
       align-items: center;
       border-right: 1px solid var(--border-color-base);
-      @media (max-width: 567px) {
+      @media (max-width: 767px) {
         border: none;
         border-bottom: 1px solid var(--border-color-base);
       }
@@ -482,12 +492,12 @@
         margin: 0;
         margin-bottom: 14px;
       }
-      @media (max-width: 567px) {
+      @media (max-width: 767px) {
         padding: 8px;
       }
     }
   }
-  @media (max-width: 567px) {
+  @media (max-width: 767px) {
     grid-template-columns: 1fr;
     grid-template-rows: 150px min-content;
   }
@@ -497,8 +507,201 @@
   position: absolute;
   top: 20px;
   right: 20px;
-  @media (max-width: 567px) {
+  @media (max-width: 767px) {
     top: 8px;
     right: 8px;
+  }
+}
+
+.onlineBookingPromote {
+  width: 100%;
+  padding: 40px 24px;
+  background-color: #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > div {
+    max-width: 736px;
+    width: 100%;
+    background-color: white;
+    border-radius: 4px;
+    @media (max-width: 767px) {
+      border-radius: 0;
+    }
+  }
+  @media (max-width: 767px) {
+    padding: 0;
+  }
+}
+
+.onlineBookingPromotePanel {
+  >h2 {
+    width: 100%;
+    font-family: var(--font-family);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--grey-text-color);
+    margin: 0;
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--border-color-base);
+  }
+}
+
+.promoteTabHeader {
+  width: 100%;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-color-base);
+  >h2 {
+    font-family: var(--font-family);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    color: var(--grey-text-color);
+    margin: 0;
+    margin-bottom: 2px;
+  }
+  >p {
+    font-family: var(--font-family);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--light-grey-color);
+    margin: 0;
+  }
+}
+
+.promoteButtonTab {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 24px 8px 0 24px;
+}
+
+.promoteButtonStyleItem {
+  cursor: pointer;
+  width: 150px;
+  margin-right: 1rem;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttonPreview {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border-color-base);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  padding: 24px;
+
+  > p {
+    text-align: center;
+    font-family: var(--font-family);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    color: var(--light-grey-color);
+    margin: 0;
+    margin-top: 12px;
+  }
+}
+
+.buttonPreviewButton {
+  border-radius: 4px;
+  padding: 6px 16px;
+}
+
+.buttonDesc {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.buttonStyleTitle {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  padding: 8px;
+  border-radius: 20px;
+  border: 1px solid var(--border-color-base);
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;  
+  color: var(--light-grey-color);
+}
+
+.promoteButtonStyleSelected {
+  .buttonPreview {
+    border: 1px solid var(--primary-color);
+  }
+  .buttonStyleTitle {
+    border: 1px solid var(--primary-color);
+    background-color: #eef7fb;
+    color: var(--primary-color);
+  }
+}
+
+.copyEmbedCode {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--border-color-base);
+  border-radius: 50%;
+  color: var(--light-grey-color);
+  margin-left: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.promoteBookingPortalTab {
+  width: 100%;
+  padding: 24px;
+  > p {
+    &:nth-child(1) {
+      font-family: var(--font-family);
+      font-size: 14px;
+      line-height: 24px;
+      font-weight: 400;
+      color: var(--grey-text-color);
+      margin: 0;
+    }
+    &:nth-child(2) {
+      font-family: var(--font-family);
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 400;
+      color: var(--light-grey-color);
+      margin: 0;
+      margin-bottom: 20px;
+    }
+  }
+  :global {
+    .ant-form-item-label {
+      padding-bottom: 2px;
+      label {
+        color: var(--light-grey-color);
+        font-family: var(--font-family);
+        font-size: 14px;
+        line-height: 22px;
+        font-weight: 400;
+      }
+    }
+    .ant-form-item-control-input-content {
+      display: flex;
+    }
+    .ant-alert-message {
+      color: var(--grey-text-color);
+    }
+    .ant-alert-description {
+      color: var(--light-grey-color);
+    }
   }
 }

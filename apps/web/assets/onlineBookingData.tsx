@@ -231,3 +231,44 @@ export const analyticsSettingsData = [
     logo: <FacebookPixel />,
   },
 ]
+
+export const promoteData = {
+  button: [
+    {
+      title: 'No styling',
+      selected: true,
+      bgColor: '#54b2d3',
+      borderColor: '#54b2d3',
+      color: '#fff',
+      embedCode:
+        '<a href=”https://www.capterra.com/reviews/140062/Pabau-CRM? utm_source=venfor&utm_medium=badge&utm_campaignn=capterra_reviews_badge”> <img border=”0” src=”https://assets.caoterra.com/badge/ee5fd76v=2099212&p=14006” /> </a>',
+    },
+    {
+      title: 'Dark',
+      selected: false,
+      bgColor: '#3d3d46',
+      borderColor: '#3d3d46',
+      color: '#fff',
+      embedCode:
+        '<a href=”https://www.capterra.com/reviews/140062/Pabau-CRM? utm_source=venfor&utm_medium=badge&utm_campaignn=capterra_reviews_badge”> <img border=”0” src=”https://assets.caoterra.com/badge/ee5fd76v=2099212&p=14006” /> </a>',
+    },
+    {
+      title: 'Light',
+      selected: false,
+      bgColor: '#fff',
+      borderColor: '#ecedf0',
+      color: '#9292a3',
+      embedCode:
+        '<a href=”https://www.capterra.com/reviews/140062/Pabau-CRM? utm_source=venfor&utm_medium=badge&utm_campaignn=capterra_reviews_badge”> <img border=”0” src=”https://assets.caoterra.com/badge/ee5fd76v=2099212&p=14006” /> </a>',
+    },
+    {
+      title: 'Green',
+      selected: false,
+      bgColor: '#65cd98',
+      borderColor: '#65cd98',
+      color: '#fff',
+      embedCode:
+        '<a href=”https://www.capterra.com/reviews/140062/Pabau-CRM? utm_source=venfor&utm_medium=badge&utm_campaignn=capterra_reviews_badge”> <img border=”0” src=”https://assets.caoterra.com/badge/ee5fd76v=2099212&p=14006” /> </a>',
+    },
+  ],
+}
