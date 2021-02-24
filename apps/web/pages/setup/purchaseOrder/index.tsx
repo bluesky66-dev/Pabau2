@@ -33,6 +33,32 @@ import styles from './index.module.less'
 const { Option } = Select
 const { TextArea } = Input
 
+const discrepancy = (text) => {
+  return <OrderDiscrepancy number={text} word={1} />
+}
+const quantitySelector = () => {
+  return (
+    <Select
+      size="large"
+      placeholder="Quantity"
+      defaultActiveFirstOption={true}
+      style={{ width: '100%' }}
+    >
+      <Option value="0">0</Option>
+      <Option value="10">10</Option>
+    </Select>
+  )
+}
+const unitPriceInput = () => {
+  return <Input size="middle" type="text" value={0} />
+}
+const quantityReceivedInput = () => {
+  return <Input size="middle" type="text" value={0} />
+}
+const statuLabel = () => {
+  return <StatusLabel label="All" type="good" block={true} />
+}
+
 const productsColumns = [
   {
     title: 'Oxy',
@@ -50,9 +76,7 @@ const productsColumns = [
     visible: true,
     width: '10%',
     sorter: (a, b) => a.status.length - b.status.length,
-    render: (text) => {
-      return <OrderDiscrepancy number={text} word={1} />
-    },
+    render: (text) => discrepancy(text),
   },
   {
     title: 'Supply Price',
@@ -68,19 +92,7 @@ const productsColumns = [
     key: 'quantity',
     visible: true,
     width: '25%',
-    render: () => {
-      return (
-        <Select
-          size="large"
-          placeholder="Quantity"
-          defaultActiveFirstOption={true}
-          style={{ width: '100%' }}
-        >
-          <Option value="0">0</Option>
-          <Option value="10">10</Option>
-        </Select>
-      )
-    },
+    render: () => quantitySelector(),
   },
   {
     title: 'Total',
@@ -149,9 +161,7 @@ const receivingProductsColumns = [
     key: 'price',
     visible: true,
     width: '12.5%',
-    render: () => {
-      return <Input size="middle" type="text" value={0} />
-    },
+    render: () => unitPriceInput(),
   },
   {
     title: 'Quantity Received',
@@ -159,9 +169,7 @@ const receivingProductsColumns = [
     key: 'quant_received',
     visible: true,
     width: '12.5%',
-    render: () => {
-      return <Input size="middle" type="text" value={0} />
-    },
+    render: () => quantityReceivedInput(),
   },
   {
     title: 'Status',
@@ -169,9 +177,7 @@ const receivingProductsColumns = [
     key: 'status',
     visible: true,
     width: '10%',
-    render: () => {
-      return <StatusLabel label="All" type="good" block={true} />
-    },
+    render: () => statuLabel(),
   },
 ]
 
