@@ -609,6 +609,10 @@
       - order
       filter: {}
       check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: marketing_campaign
