@@ -9,6 +9,7 @@ import {
   SimpleDropdown,
   Switch,
   Input,
+  Badge,
 } from '@pabau/ui'
 import {
   Typography,
@@ -34,6 +35,7 @@ import { ReactComponent as Palette } from '../../../assets/images/palette.svg'
 import {
   defaultBuilderData,
   paymentMethodItems,
+  analyticsSettingsData,
 } from '../../../assets/onlineBookingData'
 import styles from './index.module.less'
 
@@ -527,6 +529,38 @@ export const Index: FC<OnlineBookingProps> = ({
       </div>
     )
   }
+  const Analytics = () => {
+    const isMobile = useMedia('(max-width: 567px)', false)
+    return (
+      <div className={styles.onlineBookingAnalytics}>
+        <div className={styles.analyticsSettings}>
+          <p>Analytics settings</p>
+          {analyticsSettingsData.map((setting) => (
+            <div className={styles.analyticsSettingItem} key={setting.title}>
+              <div>{setting.logo}</div>
+              <div>
+                <h2>
+                  {setting.title} {setting.isPlus && <span>Plus</span>}
+                </h2>
+                <p>{setting.description}</p>
+                <div style={{ width: isMobile ? '100%' : 'auto' }}>
+                  <Button type="primary" block={isMobile}>
+                    Set Up Now
+                  </Button>
+                </div>
+                <div className={styles.analyticsStatus}>
+                  <Badge
+                    label={setting.isEnabled ? 'Enabled' : 'Disabled'}
+                    disabled={setting.isEnabled}
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
   return (
     <>
       <CommonHeader />
@@ -563,7 +597,7 @@ export const Index: FC<OnlineBookingProps> = ({
               >
                 <Builder builder={builder} />
                 <Payment />
-                <div>3</div>
+                <Analytics />
                 <div>4</div>
               </TabMenu>
             )}

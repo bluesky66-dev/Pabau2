@@ -3,6 +3,8 @@ import { ReactComponent as Maestro } from './images/payments/Maestro.svg'
 import { ReactComponent as Visa } from './images/payments/Visa.svg'
 import { ReactComponent as Amex } from './images/payments/Amex.svg'
 import { ReactComponent as ApplePay } from './images/payments/ApplePay.svg'
+import { ReactComponent as GoogleTagManager } from './images/google-tag-manager.svg'
+import { ReactComponent as FacebookPixel } from './images/facebook-pixel.svg'
 
 export const defaultBuilderData = {
   apperance: [
@@ -208,5 +210,24 @@ export const paymentMethodItems = [
     title: 'ApplePay',
     logo: <ApplePay />,
     showInstructions: true,
+  },
+]
+
+export const analyticsSettingsData = [
+  {
+    title: 'Google Tag Manager',
+    description:
+      'Send events about certain actions to Google Analytics and create goals based on events to track conversations',
+    isEnabled: false,
+    isPlus: true,
+    logo: <GoogleTagManager />,
+  },
+  {
+    title: 'Facebook Pixel',
+    description:
+      'Use Facebook Ads Pixel to track events, and create audiences based on their activities',
+    isEnabled: false,
+    isPlus: true,
+    logo: <FacebookPixel />,
   },
 ]
