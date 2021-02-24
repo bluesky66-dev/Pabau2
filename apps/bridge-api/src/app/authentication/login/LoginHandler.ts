@@ -21,15 +21,11 @@ export class LoginHandler {
   }
 
   public async handleRequest(): Promise<string> {
-    console.log(this.loginInput.username)
     this.user = await this.prisma.user.findMany({
-      where:{username:{equals:this.loginInput.username}}
+      where: {username: {equals: this.loginInput.username}}
     });
-    if(!this.user[0].id){
-      throw new UnauthorizedException('Invalid credentials')
-    }
     return jwt.sign({
-      'username': this.user[0].email,
+      'username': this.user[0].id,
       'company': this.user[0].company
     }, 'asdasdasd')
   }
