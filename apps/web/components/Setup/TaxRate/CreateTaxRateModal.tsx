@@ -3,41 +3,6 @@ import { Input, Checkbox, Form, Collapse, Typography } from 'antd'
 import { Button, BasicModal } from '@pabau/ui'
 import styles from './TaxRateComponents.module.less'
 
-const children = [
-  {
-    key: 1,
-    description: 'Maggie (0 Recipents)',
-  },
-  {
-    key: 2,
-    description: 'Maggie (0 Recipents)',
-  },
-  {
-    key: 3,
-    description: 'Test one (0 Recipents)',
-  },
-  {
-    key: 4,
-    description: 'Test one (0 Recipents)',
-  },
-  {
-    key: 5,
-    description: 'Maggie (0 Recipents)',
-  },
-  {
-    key: 6,
-    description: 'Maggie (1 Recipents)',
-  },
-  {
-    key: 7,
-    description: 'New Group00 (192 Recipents)',
-  },
-  {
-    key: 8,
-    description: 'New Group33 (192 Recipents)',
-  },
-]
-
 export interface CreateTaxRateProps {
   visible: boolean
   onCancel: () => void
@@ -162,26 +127,6 @@ export function CreateTaxRateModal(props: CreateTaxRateProps) {
             <Button type="primary" onClick={handleDelete}>
               Yes, Delete
             </Button>
-          </div>
-        </div>
-      </BasicModal>
-      <BasicModal
-        width={682}
-        // visible={visible}
-        title="To which list shall we send?"
-        footer={false}
-        centered={true}
-        onCancel={() => onCancel()}
-      >
-        <div style={{ paddingBottom: 40 }}>
-          {children.map((val) => (
-            <div key={val.key} style={{ marginBottom: 24 }}>
-              <Checkbox>{val.description}</Checkbox>
-            </div>
-          ))}
-
-          <div style={{ textAlign: 'right' }}>
-            <Button type="primary">Save and Exit</Button>
           </div>
         </div>
       </BasicModal>
