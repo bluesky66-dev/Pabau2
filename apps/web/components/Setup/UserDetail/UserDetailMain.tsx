@@ -13,7 +13,13 @@ const { TabPane } = Tabs
 
 export interface customFieldsProps {
   id: string
-  name: string
+  label: string
+  name?: string
+  value?: string
+  control?: string
+  type?: string
+  options?: string[]
+  placeholder?: string
 }
 
 const UserDetailMain: FC = () => {
@@ -22,7 +28,6 @@ const UserDetailMain: FC = () => {
 
   const handleSaveCustomFields = (field: customFieldsProps[]) => {
     setFieldsData(field)
-    console.log(field)
   }
 
   const handleCloseModal = () => {
@@ -63,7 +68,7 @@ const UserDetailMain: FC = () => {
         <div className={styles.userDetailLeftTabs}>
           <Tabs tabPosition={'left'}>
             <TabPane tab={<span>Personal Details</span>} key="1">
-              <PersonalDetail />
+              <PersonalDetail field={fieldsData} />
             </TabPane>
             <TabPane tab={<span>Services</span>} key="2">
               Content of Tab

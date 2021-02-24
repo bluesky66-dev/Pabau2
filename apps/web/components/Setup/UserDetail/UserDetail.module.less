@@ -52,8 +52,14 @@
         .ant-tabs-nav-wrap {
           width: 200px;
           .ant-tabs-nav-list {
+            .ant-tabs-ink-bar {
+              right: unset;
+            }
             .ant-tabs-tab {
-              margin-bottom: 8px;
+              margin-bottom: 0;
+              &.ant-tabs-tab-active {
+                background: #EEF7FB;
+              }
               .ant-tabs-tab-btn {
                 width: 100%;
                 span {
@@ -76,7 +82,65 @@
     }
   }
 }
+.custom-form-wrapper{
+  padding: 24px;
+  display: flex;
+  .main-form {
+    flex: 1 50%;
+    .checkbox-wrapper {
+      .labelText {
+        font-size: 14px;
+        line-height: 18px;
+        color: #9292A3;
+        margin-bottom: 16px;
+      }
+      :global .ant-checkbox-group {
+        display: flex;
+        flex-direction: column;
+        .ant-checkbox-wrapper {
+          margin-left: 0;
+          margin-bottom: 22px;
+        }
+      }
+    }
+    :global .ant-form-item {
+      max-width: 448px;
+      .ant-form-item-label {
+        label {
+          font-size: 14px;
+          line-height: 22px;
+          color: #9292A3;
+        }
+      }
+      .ant-form-item-control {
+        .ant-form-item-control-input-content {
+          input[type="text"], input[type="number"], input[type="tel"] {
+            //min-height: 40px;
+          }
+          .ant-picker {
+            //min-height: 40px;
+            width: 100%;
+          }
 
+        }
+        .ant-select {
+          .ant-select-selector {
+            border-radius: 4px;
+            //min-height: 40px;
+            .ant-select-selection-search {
+              input[type="search"] {
+                //min-height: 40px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .chart {
+    flex: 1 35%;
+  }
+}
 .personal-detail-head {
   padding: 20px 24px;
   border-bottom: 1px solid #ECEDF0;

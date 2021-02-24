@@ -96,7 +96,7 @@ const CustomizeFields: FC<customizeFieldsProps> = ({
                             className={styles.customFieldsDraggableBox}
                           >
                             <div className={styles.dragIconName}>
-                              <Customize /> <span>{data.name}</span>
+                              <Customize /> <span>{data.label}</span>
                             </div>
                             <div
                               className={styles.dragClose}
@@ -116,7 +116,7 @@ const CustomizeFields: FC<customizeFieldsProps> = ({
         </Droppable>
       </DragDropContext>
       <div className={styles.customFieldsDragAdd}>
-        <Button type={'default'} className={styles.addFields}>
+        <Button className={styles.addFields}>
           <PlusOutlined />
           Add Fields
         </Button>
