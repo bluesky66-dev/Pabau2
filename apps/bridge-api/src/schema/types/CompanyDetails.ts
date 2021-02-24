@@ -5,7 +5,6 @@ export const CompanyDetails = objectType({
   definition(t) {
     t.model.details_id();
     t.model.company_id();
-    t.model.company();
     t.model.company_name();
     t.model.subscription();
     t.model.industry_sector();
@@ -88,6 +87,7 @@ export const CompanyDetails = objectType({
     t.model.language();
     t.model.completed_setup();
     t.model.timezone();
+    t.model.company();
   },
 });
 

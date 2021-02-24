@@ -9,8 +9,6 @@ export const Timezone = objectType({
     t.model.db_format();
     t.model.offset_seconds();
     t.model.supported();
-    t.model.company_details();
-    t.model.details();
   },
 });
 
