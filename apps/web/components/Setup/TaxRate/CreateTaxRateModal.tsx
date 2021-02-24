@@ -75,7 +75,6 @@ export function CreateTaxRateModal(props: CreateTaxRateProps) {
             </Form.Item>
 
             <Collapse
-              defaultActiveKey={['1']}
               ghost
               expandIconPosition="right"
               className={styles.advanceCollapse}
