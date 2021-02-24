@@ -9,7 +9,7 @@ interface WStepperProps {
   showNextBtn?: boolean
   disableNextStep?: boolean
   disablePrevStep?: boolean
-  nextBtnLabel: string | number
+  nextBtnLabel?: string | number
   extraBtn?: boolean
   extraBtnLabel?: string | number
   extraBtnClick?: () => void
