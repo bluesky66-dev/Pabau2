@@ -1,0 +1,88 @@
+version: '1'
+services:
+  redis:
+    image: redis
+  datadog:
+    links:
+      - redis
+    image: gcr.io/datadoghq/agent:latest
+    environment:
+      - DD_SITE=datadoghq.com
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
+  db:
+    image: mariadb:10.5
+    environment:
+      MYSQL_DATABASE: pabau
+      MYSQL_PASSWORD: '456'
+      MYSQL_ROOT_PASSWORD: '123'
+      MYSQL_USER: web
+    ports:
+      - "3307:3306"
+    volumes:
+      - ../../../db/pabau_master_autogen.sql:/docker-entrypoint-initdb.d/1.sql:ro
+      - ./nano.sql:/docker-entrypoint-initdb.d/2.sql:ro
+    command: >
+      mysqld
+        --general_log=ON
+        --general_log_file=/tmp/querylog.txt
+        --key-buffer-size=64K
+        --max-allowed-packet=107374182
+        --max-connections=1500
+        --sql-mode=NO_ENGINE_SUBSTITUTION
+        --query-cache-limit=100K
+        --query-cache-size=4M
+        --query-cache-type=2
+        --innodb-buffer-pool-size=48M
+        --innodb-buffer-pool-instances=1
+        --log-error=/var/log/mysql/error.log
+        --expire-logs-days=2
+        --myisam-recover-options=BACKUP
+        --thread-cache-size=32
+        --table-open-cache=2000
+        --skip-ssl
+        --character-set-server=utf8mb4
+        --collation-server=utf8mb4_unicode_ci
+        --performance-schema=off
+    restart: unless-stopped
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 888:80/tcp
+  postgres:
+    image: postgres:12
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgrespassword
+  graphql-engine:
+    image: hasura/graphql-engine:pull5655-633f084f
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "postgres"
+    command:
+      - graphql-engine
+      - --mysql-host
+      - localhost
+      - --mysql-user
+      - web
+      - --mysql-port
+      - 3307
+      - --mysql-dbname
+      - pabau
+      - --mysql-password
+      - 456>
+      - serve
+    restart: always
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      HASURA_GRAPHQL_ADMIN_SECRET: 456
+  volumes:
+    db_data:
