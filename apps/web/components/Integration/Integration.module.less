@@ -4,17 +4,15 @@
   flex-direction: column;
 
   .collection-wrapper {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-gap: 29px;
+    grid-template-columns: repeat(3, minmax(auto, 1fr));
+    margin: 0 auto;
 
     .collection-box {
-      max-width: 290px;
-      min-width: 290px;
       padding: 24px;
-      margin-right: 29px;
       background: linear-gradient(254.53deg, #E86D22 0%, #FDB720 100%);
       border-radius: 10px;
-      margin-bottom: 29px;
 
       &:nth-of-type(2) {
         background: linear-gradient(254.53deg, #077DFF 0%, #5AA8FF 100%);
@@ -46,21 +44,18 @@
 }
 
 .item-wrapper {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-gap: 29px;
+  grid-template-columns: repeat(3, minmax(auto, 1fr));
   padding: 24px;
 
   .item-box {
     padding: 16px;
-    max-width: 296px;
-    min-width: 296px;
     background: #FFFFFF;
     border: 1px solid #ECEDF0;
     box-sizing: border-box;
     border-radius: 4px;
-    margin-right: 20px;
     position: relative;
-    margin-bottom: 20px;
 
     .img {
       width: 50px;

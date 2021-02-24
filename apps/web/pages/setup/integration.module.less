@@ -35,6 +35,7 @@
   display: flex;
   :global .ant-tabs {
     .ant-tabs-nav {
+      min-width: 200px;
       .ant-tabs-nav-wrap {
         .ant-tabs-nav-list {
           .ant-tabs-tab {
@@ -45,6 +46,13 @@
             color: #3D3D46;
             font-size: 16px;
           }
+        }
+      }
+    }
+    .ant-tabs-content-holder {
+      .ant-tabs-content {
+        .ant-tabs-tabpane {
+            padding-left: 0;
         }
       }
     }
