@@ -33,7 +33,7 @@ const LIST_QUERY = gql`
 `
 const LIST_AGGREGATE_QUERY = gql`
   query lead_aggregate($isActive: Boolean = true, $searchTerm: String = "") {
-    lead_aggregate(
+    Labs_aggregate(
       where: {
         is_active: { _eq: $isActive }
         _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]

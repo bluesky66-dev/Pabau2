@@ -54,12 +54,12 @@ const ADD_MUTATION = gql`
       id
       is_active
       order
-      lead_age
+      age
       interest
-      lead_name
-      lead_owner
-      lead_source
-      lead_status
+      name
+      owner
+      source
+      status
       location
       phone
       status
@@ -311,7 +311,7 @@ export const LeadCreateView: FC<LeadSchema> = () => {
       }}
       //initialValues={typeof modalShowing === 'object' ? modalShowing : undefined}
       initialValues={formikFields()}
-    // requiredMark={required}
+      // requiredMark={required}
     >
       <div className={styles.leadsViewCreatePage}>
         <MobileHeader className={styles.marketingSourceHeader}>
