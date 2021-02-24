@@ -36,7 +36,6 @@ const AdvanceField: React.FC<AdvanceFieldInterface> = ({ options, input, handleS
             {input &&
                 < Col >
                     <Input
-                        size={'large'}
                         style={{ minWidth: '192px', width: '100%' }}
                         name={input?.full}
                         type={input?.type}

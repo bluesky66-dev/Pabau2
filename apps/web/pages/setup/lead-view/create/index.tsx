@@ -5,7 +5,7 @@ import {
   MobileHeader,
   Input
 } from '@pabau/ui'
-import AddButton from './AddButton';
+import AddButton from './addButton';
 import Link from 'next/link'
 import { Typography, Col, Row } from 'antd'
 import { Form as AntForm } from 'antd'
