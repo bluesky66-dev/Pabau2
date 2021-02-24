@@ -11,7 +11,7 @@ interface WorksWith {
   key: number
   title: string
   subTitle: string
-  logoImage: JSX.Element
+  logoImage: string
 }
 
 export interface InstallationModalProps {
@@ -75,7 +75,9 @@ export const InstallationModal: FC<InstallationModalProps> = ({
           <div className={styles.serviceBoxWrapper}>
             {worksWith?.map((value) => (
               <div className={styles.serviceBox} key={value.key}>
-                <span className={styles.circle}>{value.logoImage}</span>
+                <span className={styles.circle}>
+                  <img src={value.logoImage} alt={value.title} />
+                </span>
                 <div className={styles.serviceText}>
                   <h4>{value.title}</h4>
                   <p>{value.subTitle}</p>
@@ -91,20 +93,22 @@ export const InstallationModal: FC<InstallationModalProps> = ({
               <p key={key}>{value}</p>
             ))}
           </div>
-          <a
-            href="https://prelive-crm.new.pabau.com/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Terms of service
-          </a>
-          <a
-            href="https://prelive-crm.new.pabau.com/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Privacy policy
-          </a>
+          <div className={styles.linkList}>
+            <a
+              href="https://prelive-crm.new.pabau.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Terms of service
+            </a>
+            <a
+              href="https://prelive-crm.new.pabau.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Privacy policy
+            </a>
+          </div>
         </div>
       </div>
       <div className={styles.testimonialText}>

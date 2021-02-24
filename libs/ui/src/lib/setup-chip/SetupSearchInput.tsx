@@ -5,10 +5,14 @@ import { Input } from 'antd'
 import styles from './SetupChip.module.less'
 
 export interface SetupSearchProps {
+  placeholder?: string
   onChange?: (newText: string) => void
 }
 
-export const SetupSearchInput: FC<SetupSearchProps> = ({ onChange }) => {
+export const SetupSearchInput: FC<SetupSearchProps> = ({
+  onChange,
+  placeholder = 'Search',
+}) => {
   const [searchTerm, setSearchTerm] = useState('')
 
   const handleSearchTerm = (e) => {
@@ -19,7 +23,7 @@ export const SetupSearchInput: FC<SetupSearchProps> = ({ onChange }) => {
   return (
     <Input
       className={styles.searchInputStyle}
-      placeholder="Search"
+      placeholder={placeholder}
       value={searchTerm}
       onChange={(e) => handleSearchTerm(e)}
       suffix={

@@ -94,11 +94,14 @@ export const Integration: FC<IntegrationProps> = (props) => {
               <Title>Integration</Title>
             </div>
             <div className={styles.searchWrapper}>
-              <SetupSearchInput onChange={handleSearch} />
+              <SetupSearchInput
+                onChange={handleSearch}
+                placeholder="Search by integration name"
+              />
             </div>
           </div>
           {!searchValue ? (
-            <div>
+            <div className={styles.manageWrapper}>
               <Tabs
                 tabPosition="left"
                 defaultActiveKey={active}

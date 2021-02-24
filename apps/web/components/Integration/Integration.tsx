@@ -1,15 +1,10 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react'
-import {
-  MessageOutlined,
-  UserOutlined,
-  SendOutlined,
-  MailOutlined,
-} from '@ant-design/icons'
 import classNames from 'classnames'
 import { CheckOutlined } from '@ant-design/icons'
 import { Button, InstallationModal } from '@pabau/ui'
 import styles from './Integration.module.less'
 import logo from './../../assets/images/pabau-badge-1.png'
+import { WorksWith } from '../../mocks/SetupIntegration'
 import {
   longDescription,
   mobileViewDescription,
@@ -58,32 +53,6 @@ const AllCollectionsHeaderCollections = [
     title: 'Supercharge customer data',
     route: '/',
     backColor: '/',
-  },
-]
-const WorksWith = [
-  {
-    key: 0,
-    title: 'Outbound',
-    subTitle: 'Send in outbound messages',
-    logoImage: <SendOutlined />,
-  },
-  {
-    key: 1,
-    title: 'Messenger',
-    subTitle: 'Add to Messenger home',
-    logoImage: <MessageOutlined />,
-  },
-  {
-    key: 2,
-    title: 'Inbox',
-    subTitle: 'Send in conversations',
-    logoImage: <MailOutlined />,
-  },
-  {
-    key: 3,
-    title: 'Operator',
-    subTitle: 'Use as follow up actions',
-    logoImage: <UserOutlined />,
   },
 ]
 
@@ -156,7 +125,11 @@ export const IntegrationTabBody: FC<P> = ({
 
   return (
     <>
-      {heading && heading.length > 0 && <div>{heading}</div>}
+      {heading && heading.length > 0 && (
+        <div className={styles.popularWrapper}>
+          <h5>{heading}</h5>
+        </div>
+      )}
       <div className={styles.itemWrapper}>
         {data.slice(0, limit).map((value, key) => (
           <div

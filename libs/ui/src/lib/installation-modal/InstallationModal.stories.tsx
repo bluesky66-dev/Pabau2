@@ -1,14 +1,12 @@
 import React from 'react'
-import {
-  MessageOutlined,
-  UserOutlined,
-  SendOutlined,
-  MailOutlined,
-} from '@ant-design/icons'
 import InstallationModalComponent from './InstallationModal'
 import logo from '../../assets/images/pabau.png'
 import installationModalImage from '../../assets/images/installationModalImage.png'
 import installationModalWindowImage from '../../assets/images/installationModalWindowImage.png'
+import message from '../../assets/images/message.svg'
+import send from '../../assets/images/send.svg'
+import inbox from '../../assets/images/inbox.svg'
+import integrationUser from '../../assets/images/integrationUser.svg'
 
 export default {
   component: InstallationModalComponent,
@@ -33,25 +31,25 @@ export default {
         key: 0,
         title: 'Outbound',
         subTitle: 'Send in outbound messages',
-        logoImage: <SendOutlined />,
+        logoImage: send,
       },
       {
         key: 1,
         title: 'Messenger',
         subTitle: 'Add to Messenger home',
-        logoImage: <MessageOutlined />,
+        logoImage: message,
       },
       {
         key: 2,
         title: 'Inbox',
         subTitle: 'Send in conversations',
-        logoImage: <MailOutlined />,
+        logoImage: inbox,
       },
       {
         key: 3,
         title: 'Operator',
         subTitle: 'Use as follow up actions',
-        logoImage: <UserOutlined />,
+        logoImage: integrationUser,
       },
     ],
     categories: ['Lead capture', 'Phone & video'],

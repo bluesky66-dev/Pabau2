@@ -7,6 +7,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
+
 
   .search-wrapper {
     display: flex;
@@ -15,11 +17,11 @@
     position: relative;
     padding-right: 24px;
 
-    span {
-      position: absolute;
-      right: 18px;
-      top: 4px;
-    }
+    // span {
+    //   position: absolute;
+    //   right: 18px;
+    //   top: 4px;
+    // }
 
     .Input_input-container {
       height: 40px;
@@ -28,6 +30,34 @@
       border-radius: 4px;
     }
   }
+}
+.manage-wrapper {
+  display: flex;
+  :global .ant-tabs {
+    .ant-tabs-nav {
+      .ant-tabs-nav-wrap {
+        .ant-tabs-nav-list {
+          .ant-tabs-tab {
+            color: #9292A3;
+            font-size: 14px;
+          }
+          .ant-tabs-tab-disabled {
+            color: #3D3D46;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+  .popular-wrapper {
+      padding: 0 24px;
+      h5 {
+        font-size: 16px;
+        line-height: 24px;
+        color: #3D3D46;
+        margin-bottom: 0;
+      }
+  } 
 }
 
 .error-wrapper {
