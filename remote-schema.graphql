@@ -8298,6 +8298,11 @@ type Labs_variance_fields {
   provider_number: Float
 }
 
+input LoginInput {
+  password: String!
+  username: String!
+}
+
 type MarketingSource {
   company: Company
   company_id: Int
@@ -12088,6 +12093,10 @@ type locations_variance_fields {
   order: Float
 }
 
+type loginOutput {
+  accessToken: String!
+}
+
 """
 columns and relationships of "marketing_campaign"
 """
@@ -15173,6 +15182,7 @@ type query_root {
 
   """fetch data from the table: "locations" using primary key columns"""
   locations_by_pk(id: uuid!): locations
+  login(data: LoginInput!): loginOutput
   marketingSource(where: MarketingSourceWhereUniqueInput!): MarketingSource
   marketingSources(after: MarketingSourceWhereUniqueInput, before: MarketingSourceWhereUniqueInput, first: Int, last: Int, orderBy: [MarketingSourceOrderByInput!], where: MarketingSourceWhereInput): [MarketingSource]!
   marketingSourcesCount(where: MarketingSourceWhereInput): Int
