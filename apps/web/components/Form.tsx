@@ -1,13 +1,7 @@
 import React, { FC } from 'react'
-import {
-  Form as AntForm,
-  Input,
-  Radio,
-  Checkbox,
-  TimePicker,
-} from 'formik-antd'
+import { Form as AntForm, Input, Radio, Checkbox } from 'formik-antd'
 import { FormikContextType } from 'formik'
-import { ColorPicker, FontIcon, HelpTooltip } from '@pabau/ui'
+import { ColorPicker, FontIcon, HelpTooltip, TimeInput } from '@pabau/ui'
 import moment from 'moment'
 interface P {
   schema: Schema
@@ -66,14 +60,24 @@ const Form: FC<P> = ({ schema, formik, layout = 'vertical' }) => {
             ) : null}
             {type === 'time' && (
               <AntForm.Item label={short} key={name} name={name}>
-                <TimePicker
+                <TimeInput
                   name={name}
                   format="HH:mm"
-                  value={moment(
-                    new Date().toISOString().split('T').shift() +
-                      ' ' +
-                      values[name]
-                  )}
+                  value={
+                    values[name].length > 0
+                      ? values[name].length > 5
+                        ? moment(
+                            new Date().toISOString().split('T').shift() +
+                              ' ' +
+                              values[name].slice(0, 5)
+                          )
+                        : moment(
+                            new Date().toISOString().split('T').shift() +
+                              ' ' +
+                              values[name]
+                          )
+                      : values[name]
+                  }
                   onChange={(time, timeString) => {
                     formik.setFieldValue(name, timeString)
                   }}
