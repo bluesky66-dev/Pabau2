@@ -413,11 +413,15 @@ export const Index: FC<OnlineBookingProps> = ({
             </a>
           </span>
         </div>
-        <Switch
-          size="small"
-          checked={viewMore}
-          onChange={(checked) => setViewMore(checked)}
-        />
+        <div className={styles.viewMore}>
+          <Switch
+            size="small"
+            checked={viewMore}
+            onChange={(checked) => setViewMore(checked)}
+            style={{ marginRight: '8px' }}
+          />
+          View more
+        </div>
         {viewMore && (
           <div className={styles.deposit}>
             <div className={styles.depositHeader}>Deposit</div>
