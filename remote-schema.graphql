@@ -7951,8 +7951,8 @@ input Int_comparison_exp {
 columns and relationships of "Labs"
 """
 type Labs {
-  city: String!
-  country: String!
+  city: String
+  country: String
   created_at: timestamptz!
   email: String!
   id: uuid!
@@ -7961,9 +7961,9 @@ type Labs {
   name: String!
   order: Int!
   phone: String!
-  postal_code: numeric!
-  provider_number: numeric
-  street: String!
+  postal_code: numeric
+  provider_number: numeric!
+  street: String
   street2: String
   updated_at: timestamptz!
 }
@@ -9560,6 +9560,32 @@ enum bookitpro_general_integration_method {
 }
 
 """
+input type for inserting data into table "business_details"
+"""
+input business_details_insert_input {
+  business_location: String
+  business_type: String
+  businses_name: String
+  company_email: String
+  currency: String
+  date_format: String
+  default_language_clients: String
+  default_language_staff: String
+  phone: String
+  time_zone: String
+  website: String
+  week_start: String
+}
+
+"""
+response of any mutation on the table "business_details"
+"""
+type business_details_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+}
+
+"""
 columns and relationships of "cancellation_reasons"
 """
 type cancellation_reasons {
@@ -10777,15 +10803,15 @@ type issuing_company {
   invoice_prefix: String
   invoice_starting_number: numeric
   invoice_template: String
-  is_active: Boolean!
-  is_draft: Boolean!
+  is_active: Boolean
+  is_draft: Boolean
   name: String!
   order: Int!
-  phone: String!
+  phone: String
   post_code: numeric
   street: String
   updated_at: timestamptz!
-  vat_registered: Boolean!
+  vat_registered: Boolean
   website: String
 }
 
@@ -11782,6 +11808,7 @@ type locations {
   is_time: Boolean!
   name: String!
   order: Int!
+  updated_at: timestamptz!
 }
 
 """
@@ -11833,6 +11860,38 @@ input locations_bool_exp {
   is_time: Boolean_comparison_exp
   name: String_comparison_exp
   order: Int_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "locations"
+"""
+enum locations_constraint {
+  """unique or primary key constraint"""
+  locations_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "locations"
+"""
+input locations_inc_input {
+  order: Int
+}
+
+"""
+input type for inserting data into table "locations"
+"""
+input locations_insert_input {
+  address: String
+  image: String
+  is_active: Boolean
+  is_day: Boolean
+  is_night: Boolean
+  is_parking: Boolean
+  is_pharmacy: Boolean
+  is_time: Boolean
+  name: String
+  order: Int
 }
 
 """aggregate max on columns"""
@@ -11843,6 +11902,7 @@ type locations_max_fields {
   image: String
   name: String
   order: Int
+  updated_at: timestamptz
 }
 
 """aggregate min on columns"""
@@ -11853,6 +11913,27 @@ type locations_min_fields {
   image: String
   name: String
   order: Int
+  updated_at: timestamptz
+}
+
+"""
+response of any mutation on the table "locations"
+"""
+type locations_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [locations!]!
+}
+
+"""
+on conflict condition type for table "locations"
+"""
+input locations_on_conflict {
+  constraint: locations_constraint!
+  update_columns: [locations_update_column!]!
+  where: locations_bool_exp
 }
 
 """Ordering options when selecting data from "locations"."""
@@ -11869,6 +11950,12 @@ input locations_order_by {
   is_time: order_by
   name: order_by
   order: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: locations"""
+input locations_pk_columns_input {
+  id: uuid!
 }
 
 """
@@ -11910,6 +11997,25 @@ enum locations_select_column {
 
   """column name"""
   order
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "locations"
+"""
+input locations_set_input {
+  address: String
+  image: String
+  is_active: Boolean
+  is_day: Boolean
+  is_night: Boolean
+  is_parking: Boolean
+  is_pharmacy: Boolean
+  is_time: Boolean
+  name: String
+  order: Int
 }
 
 """aggregate stddev on columns"""
@@ -11930,6 +12036,41 @@ type locations_stddev_samp_fields {
 """aggregate sum on columns"""
 type locations_sum_fields {
   order: Int
+}
+
+"""
+update columns of table "locations"
+"""
+enum locations_update_column {
+  """column name"""
+  address
+
+  """column name"""
+  image
+
+  """column name"""
+  is_active
+
+  """column name"""
+  is_day
+
+  """column name"""
+  is_night
+
+  """column name"""
+  is_parking
+
+  """column name"""
+  is_pharmacy
+
+  """column name"""
+  is_time
+
+  """column name"""
+  name
+
+  """column name"""
+  order
 }
 
 """aggregate var_pop on columns"""
@@ -12775,6 +12916,11 @@ type mutation_root {
   ): rota_templates_mutation_response
 
   """
+  delete single row from the table: "rota_templates"
+  """
+  delete_rota_templates_by_pk(id: uuid!): rota_templates
+
+  """
   delete data from the table: "salutation"
   """
   delete_salutation(
@@ -12830,6 +12976,14 @@ type mutation_root {
     """on conflict condition"""
     on_conflict: appointment_status_on_conflict
   ): appointment_status
+
+  """
+  insert data into the table: "business_details"
+  """
+  insert_business_details(
+    """the rows to be inserted"""
+    objects: [business_details_insert_input!]!
+  ): business_details_mutation_response
 
   """
   insert data into the table: "cancellation_reasons"
@@ -13024,6 +13178,28 @@ type mutation_root {
   ): lead
 
   """
+  insert data into the table: "locations"
+  """
+  insert_locations(
+    """the rows to be inserted"""
+    objects: [locations_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: locations_on_conflict
+  ): locations_mutation_response
+
+  """
+  insert a single row into the table: "locations"
+  """
+  insert_locations_one(
+    """the row to be inserted"""
+    object: locations_insert_input!
+
+    """on conflict condition"""
+    on_conflict: locations_on_conflict
+  ): locations
+
+  """
   insert data into the table: "marketing_campaign"
   """
   insert_marketing_campaign(
@@ -13121,6 +13297,17 @@ type mutation_root {
     """on conflict condition"""
     on_conflict: rota_templates_on_conflict
   ): rota_templates_mutation_response
+
+  """
+  insert a single row into the table: "rota_templates"
+  """
+  insert_rota_templates_one(
+    """the row to be inserted"""
+    object: rota_templates_insert_input!
+
+    """on conflict condition"""
+    on_conflict: rota_templates_on_conflict
+  ): rota_templates
 
   """
   insert data into the table: "salutation"
@@ -13549,6 +13736,32 @@ type mutation_root {
   ): lead
 
   """
+  update data of the table: "locations"
+  """
+  update_locations(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: locations_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: locations_set_input
+
+    """filter the rows which have to be updated"""
+    where: locations_bool_exp!
+  ): locations_mutation_response
+
+  """
+  update single row of the table: "locations"
+  """
+  update_locations_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: locations_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: locations_set_input
+    pk_columns: locations_pk_columns_input!
+  ): locations
+
+  """
   update data of the table: "marketing_campaign"
   """
   update_marketing_campaign(
@@ -13665,6 +13878,18 @@ type mutation_root {
     """filter the rows which have to be updated"""
     where: rota_templates_bool_exp!
   ): rota_templates_mutation_response
+
+  """
+  update single row of the table: "rota_templates"
+  """
+  update_rota_templates_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: rota_templates_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: rota_templates_set_input
+    pk_columns: rota_templates_pk_columns_input!
+  ): rota_templates
 
   """
   update data of the table: "salutation"
@@ -15133,6 +15358,49 @@ type query_root {
   petty_cash_types_by_pk(id: uuid!): petty_cash_types
 
   """
+  fetch data from the table: "rota_templates"
+  """
+  rota_templates(
+    """distinct select on columns"""
+    distinct_on: [rota_templates_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [rota_templates_order_by!]
+
+    """filter the rows returned"""
+    where: rota_templates_bool_exp
+  ): [rota_templates!]!
+
+  """
+  fetch aggregated fields from the table: "rota_templates"
+  """
+  rota_templates_aggregate(
+    """distinct select on columns"""
+    distinct_on: [rota_templates_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [rota_templates_order_by!]
+
+    """filter the rows returned"""
+    where: rota_templates_bool_exp
+  ): rota_templates_aggregate!
+
+  """fetch data from the table: "rota_templates" using primary key columns"""
+  rota_templates_by_pk(id: uuid!): rota_templates
+
+  """
   fetch data from the table: "salutation"
   """
   salutation(
@@ -15191,12 +15459,69 @@ type query_root {
 }
 
 """
+rota_template
+
+
+columns and relationships of "rota_templates"
+"""
+type rota_templates {
+  created_at: timestamptz!
+  days: String!
+  end_time: timetz!
+  id: uuid!
+  is_active: Boolean!
+  name: String!
+  order: Int!
+  start_time: timetz!
+  updated_at: timestamptz!
+}
+
+"""
+aggregated selection of "rota_templates"
+"""
+type rota_templates_aggregate {
+  aggregate: rota_templates_aggregate_fields
+  nodes: [rota_templates!]!
+}
+
+"""
+aggregate fields of "rota_templates"
+"""
+type rota_templates_aggregate_fields {
+  avg: rota_templates_avg_fields
+  count(columns: [rota_templates_select_column!], distinct: Boolean): Int!
+  max: rota_templates_max_fields
+  min: rota_templates_min_fields
+  stddev: rota_templates_stddev_fields
+  stddev_pop: rota_templates_stddev_pop_fields
+  stddev_samp: rota_templates_stddev_samp_fields
+  sum: rota_templates_sum_fields
+  var_pop: rota_templates_var_pop_fields
+  var_samp: rota_templates_var_samp_fields
+  variance: rota_templates_variance_fields
+}
+
+"""aggregate avg on columns"""
+type rota_templates_avg_fields {
+  order: Float
+}
+
+"""
 Boolean expression to filter rows from the table "rota_templates". All fields are combined with a logical 'AND'.
 """
 input rota_templates_bool_exp {
   _and: [rota_templates_bool_exp!]
   _not: rota_templates_bool_exp
   _or: [rota_templates_bool_exp!]
+  created_at: timestamptz_comparison_exp
+  days: String_comparison_exp
+  end_time: timetz_comparison_exp
+  id: uuid_comparison_exp
+  is_active: Boolean_comparison_exp
+  name: String_comparison_exp
+  order: Int_comparison_exp
+  start_time: timetz_comparison_exp
+  updated_at: timestamptz_comparison_exp
 }
 
 """
@@ -15229,12 +15554,39 @@ input rota_templates_insert_input {
   start_time: timetz
 }
 
+"""aggregate max on columns"""
+type rota_templates_max_fields {
+  created_at: timestamptz
+  days: String
+  end_time: timetz
+  id: uuid
+  name: String
+  order: Int
+  start_time: timetz
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type rota_templates_min_fields {
+  created_at: timestamptz
+  days: String
+  end_time: timetz
+  id: uuid
+  name: String
+  order: Int
+  start_time: timetz
+  updated_at: timestamptz
+}
+
 """
 response of any mutation on the table "rota_templates"
 """
 type rota_templates_mutation_response {
   """number of rows affected by the mutation"""
   affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [rota_templates!]!
 }
 
 """
@@ -15244,6 +15596,56 @@ input rota_templates_on_conflict {
   constraint: rota_templates_constraint!
   update_columns: [rota_templates_update_column!]!
   where: rota_templates_bool_exp
+}
+
+"""Ordering options when selecting data from "rota_templates"."""
+input rota_templates_order_by {
+  created_at: order_by
+  days: order_by
+  end_time: order_by
+  id: order_by
+  is_active: order_by
+  name: order_by
+  order: order_by
+  start_time: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: rota_templates"""
+input rota_templates_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "rota_templates"
+"""
+enum rota_templates_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  days
+
+  """column name"""
+  end_time
+
+  """column name"""
+  id
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  order
+
+  """column name"""
+  start_time
+
+  """column name"""
+  updated_at
 }
 
 """
@@ -15256,6 +15658,26 @@ input rota_templates_set_input {
   name: String
   order: Int
   start_time: timetz
+}
+
+"""aggregate stddev on columns"""
+type rota_templates_stddev_fields {
+  order: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type rota_templates_stddev_pop_fields {
+  order: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type rota_templates_stddev_samp_fields {
+  order: Float
+}
+
+"""aggregate sum on columns"""
+type rota_templates_sum_fields {
+  order: Int
 }
 
 """
@@ -15279,6 +15701,21 @@ enum rota_templates_update_column {
 
   """column name"""
   start_time
+}
+
+"""aggregate var_pop on columns"""
+type rota_templates_var_pop_fields {
+  order: Float
+}
+
+"""aggregate var_samp on columns"""
+type rota_templates_var_samp_fields {
+  order: Float
+}
+
+"""aggregate variance on columns"""
+type rota_templates_variance_fields {
+  order: Float
 }
 
 """
@@ -16162,6 +16599,49 @@ type subscription_root {
   petty_cash_types_by_pk(id: uuid!): petty_cash_types
 
   """
+  fetch data from the table: "rota_templates"
+  """
+  rota_templates(
+    """distinct select on columns"""
+    distinct_on: [rota_templates_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [rota_templates_order_by!]
+
+    """filter the rows returned"""
+    where: rota_templates_bool_exp
+  ): [rota_templates!]!
+
+  """
+  fetch aggregated fields from the table: "rota_templates"
+  """
+  rota_templates_aggregate(
+    """distinct select on columns"""
+    distinct_on: [rota_templates_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [rota_templates_order_by!]
+
+    """filter the rows returned"""
+    where: rota_templates_bool_exp
+  ): rota_templates_aggregate!
+
+  """fetch data from the table: "rota_templates" using primary key columns"""
+  rota_templates_by_pk(id: uuid!): rota_templates
+
+  """
   fetch data from the table: "salutation"
   """
   salutation(
@@ -16223,6 +16703,21 @@ input timestamptz_comparison_exp {
 }
 
 scalar timetz
+
+"""
+Boolean expression to compare columns of type "timetz". All fields are combined with logical 'AND'.
+"""
+input timetz_comparison_exp {
+  _eq: timetz
+  _gt: timetz
+  _gte: timetz
+  _in: [timetz!]
+  _is_null: Boolean
+  _lt: timetz
+  _lte: timetz
+  _neq: timetz
+  _nin: [timetz!]
+}
 
 scalar uuid
 
