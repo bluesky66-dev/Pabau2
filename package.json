@@ -1,6 +1,6 @@
 {
   "name": "pabau",
-  "version": "2.0.161",
+  "version": "2.0.165",
   "license": "Copyright Hambrand Technologies Ltd",
   "bump-rebuild-all": 5,
   "scripts": {
@@ -150,7 +150,9 @@
     "@nrwl/workspace": "11.3.0",
     "@react-native-community/cli-platform-android": "4.13.0",
     "@react-native-community/cli-platform-ios": "4.13.0",
+    "@storybook/addon-a11y": "^6.1.18",
     "@storybook/addon-essentials": "^6.1.18",
+    "@storybook/addon-storysource": "^6.1.18",
     "@storybook/react": "^6.1.18",
     "@testing-library/jest-native": "3.4.3",
     "@testing-library/react": "11.2.5",
