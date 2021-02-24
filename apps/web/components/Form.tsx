@@ -16,7 +16,12 @@ interface TypeValues {
   value: string
 }
 
-const Form: FC<P> = ({ schema,formik, layout = 'vertical' , selectOptions}) => {
+const Form: FC<P> = ({
+  schema,
+  formik,
+  layout = 'vertical',
+  selectOptions,
+}) => {
   const { fields } = schema
   const { values } = formik
 

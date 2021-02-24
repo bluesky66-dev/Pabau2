@@ -1,22 +1,15 @@
 import React, { FC, useState } from 'react'
-import {
-  Layout,
-  Breadcrumb,
-  MobileHeader,
-  Input
-} from '@pabau/ui'
-import AddButton from './addButton';
+import { Layout, Breadcrumb, MobileHeader, Input } from '@pabau/ui'
+import AddButton from './addButton'
 import Link from 'next/link'
 import { Typography, Col, Row } from 'antd'
 import { Form as AntForm } from 'antd'
 import { gql } from '@apollo/client'
 import { LeftOutlined } from '@ant-design/icons'
 import { Formik, FormikErrors } from 'formik'
-import { Checkbox } from 'formik-antd'
 import classNames from 'classnames'
 import styles from './index.module.less'
 import FieldRow from './FieldRow'
-
 
 const { Title } = Typography
 
@@ -26,8 +19,8 @@ interface LeadSchema extends Schema {
 }
 
 interface LeadSchemaItem extends SchemaItem {
-  advance?: AdvanceField;
-  input?: SchemaItem;
+  advance?: AdvanceField
+  input?: SchemaItem
 }
 
 interface AdvanceField {
@@ -41,20 +34,19 @@ interface TypeValues {
 
 const ADD_MUTATION = gql`
   mutation MyMutation {
-    insert_leads_one(
+    insert_lead_one(
       object: {
         email: "nido_i@hotmail.com"
         interest: "xyz"
         is_active: true
-        lead_age: 30
-        lead_name: "aysha"
-        lead_owner: "rulaa"
-        lead_source: "xyz"
-        lead_status: "married"
+        age: 30
+        name: "aysha"
+        owner: "rulaa"
+        source: "xyz"
         location: "gilgit"
         order: 2
         phone: "45455545454"
-        status: true
+        status: "true"
         id: "123e4567-e89b-12d3-a456-426614174011"
       }
     ) {
@@ -75,13 +67,7 @@ const ADD_MUTATION = gql`
   }
 `
 
-
-export const LeadCreateView: FC<LeadSchema> = ({
-
-  // showNotificationBanner = false,
-  // notificationBanner,
-}) => {
-
+export const LeadCreateView: FC<LeadSchema> = () => {
   const [schema, setSchema] = useState<LeadSchema>({
     full: 'Create Lead View',
     fullLower: 'create lead view',
@@ -140,11 +126,11 @@ export const LeadCreateView: FC<LeadSchema> = ({
         advance: {
           selectOptions: [
             {
-              label: "is",
-              value: "is"
+              label: 'is',
+              value: 'is',
             },
-          ]
-        }
+          ],
+        },
       },
       location: {
         full: 'Location',
@@ -153,15 +139,15 @@ export const LeadCreateView: FC<LeadSchema> = ({
         advance: {
           selectOptions: [
             {
-              label: "equal",
-              value: "equal"
+              label: 'equal',
+              value: 'equal',
             },
             {
-              label: "any",
-              value: "any"
+              label: 'any',
+              value: 'any',
             },
-          ]
-        }
+          ],
+        },
       },
       owner: {
         full: 'Lead owner',
@@ -170,15 +156,15 @@ export const LeadCreateView: FC<LeadSchema> = ({
         advance: {
           selectOptions: [
             {
-              label: "equal",
-              value: "equal"
+              label: 'equal',
+              value: 'equal',
             },
             {
-              label: "any",
-              value: "any"
+              label: 'any',
+              value: 'any',
             },
-          ]
-        }
+          ],
+        },
       },
       status: {
         full: 'Lead status',
@@ -187,15 +173,15 @@ export const LeadCreateView: FC<LeadSchema> = ({
         advance: {
           selectOptions: [
             {
-              label: "equal",
-              value: "equal"
+              label: 'equal',
+              value: 'equal',
             },
             {
-              label: "any",
-              value: "any"
+              label: 'any',
+              value: 'any',
             },
-          ]
-        }
+          ],
+        },
       },
       source: {
         full: 'Lead Source',
@@ -204,15 +190,15 @@ export const LeadCreateView: FC<LeadSchema> = ({
         advance: {
           selectOptions: [
             {
-              label: "equal",
-              value: "equal"
+              label: 'equal',
+              value: 'equal',
             },
             {
-              label: "any",
-              value: "any"
+              label: 'any',
+              value: 'any',
             },
-          ]
-        }
+          ],
+        },
       },
       interest: {
         full: 'Interest',
@@ -221,15 +207,15 @@ export const LeadCreateView: FC<LeadSchema> = ({
         advance: {
           selectOptions: [
             {
-              label: "equal",
-              value: "equal"
+              label: 'equal',
+              value: 'equal',
             },
             {
-              label: "any",
-              value: "any"
+              label: 'any',
+              value: 'any',
             },
-          ]
-        }
+          ],
+        },
       },
       is_active: {
         full: 'Active',
@@ -238,165 +224,10 @@ export const LeadCreateView: FC<LeadSchema> = ({
       },
     },
   })
-  // let schema: LeadSchema = {
-  //   full: 'Lead View',
-  //   fullLower: 'lead view',
-  //   short: 'Lead',
-  //   shortLower: 'lead',
-  //   createButtonLabel: 'Create',
-  //   messages: {
-  //     create: {
-  //       success: 'New leads created.',
-  //       error: 'While creating leads',
-  //     },
-  //     update: {
-  //       success: '',
-  //       error: '',
-  //     },
-  //     delete: {
-  //       success: '',
-  //       error: '',
-  //     },
-  //   },
-  //   fields: {
-  //     name: {
-  //       full: 'Lead Name',
-  //       type: 'checkbox',
-  //       defaultvalue: false,
-  //     },
-  //     email: {
-  //       full: 'Email',
-  //       type: 'checkbox',
-  //       defaultvalue: false,
-  //     },
-  //     phone: {
-  //       full: 'Phone',
-  //       type: 'checkbox',
-  //       defaultvalue: false,
-  //     },
-  //     age: {
-  //       full: 'Lead Age',
-  //       type: 'checkbox',
-  //       defaultvalue: false,
-  //     },
-  //     created_at: {
-  //       full: 'Created Date',
-  //       type: 'checkbox',
-  //       defaultvalue: false,
-  //       advance: {
-  //         selectOptions: [
-  //           {
-  //             label: "equal",
-  //             value: "equal"
-  //           },
-  //           {
-  //             label: "not equal",
-  //             value: "not equal"
-  //           },
-  //         ]
-  //       }
-  //     },
-  //     location: {
-  //       full: 'Location',
-  //       type: 'checkbox',
-  //       defaultvalue: false,
-  //       advance: {
-  //         selectOptions: [
-  //           {
-  //             label: "equal",
-  //             value: "equal"
-  //           },
-  //           {
-  //             label: "not equal",
-  //             value: "not equal"
-  //           },
-  //         ]
-  //       }
-  //     },
-  //     owner: {
-  //       full: 'Lead owner',
-  //       type: 'checkbox',
-  //       defaultvalue: false,
-  //       advance: {
-  //         selectOptions: [
-  //           {
-  //             label: "equal",
-  //             value: "equal"
-  //           },
-  //           {
-  //             label: "not equal",
-  //             value: "not equal"
-  //           },
-  //         ]
-  //       }
-  //     },
-  //     status: {
-  //       full: 'Lead status',
-  //       type: 'checkbox',
-  //       defaultvalue: false,
-  //       advance: {
-  //         selectOptions: [
-  //           {
-  //             label: "equal",
-  //             value: "equal"
-  //           },
-  //           {
-  //             label: "not equal",
-  //             value: "not equal"
-  //           },
-  //         ]
-  //       }
-  //     },
-  //     source: {
-  //       full: 'Lead Source',
-  //       type: 'checkbox',
-  //       defaultvalue: false,
-  //       advance: {
-  //         selectOptions: [
-  //           {
-  //             label: "equal",
-  //             value: "equal"
-  //           },
-  //           {
-  //             label: "not equal",
-  //             value: "not equal"
-  //           },
-  //         ]
-  //       }
-  //     },
-  //     interest: {
-  //       full: 'Interest',
-  //       type: 'checkbox',
-  //       defaultvalue: false,
-  //       advance: {
-  //         selectOptions: [
-  //           {
-  //             label: "equal",
-  //             value: "equal"
-  //           },
-  //           {
-  //             label: "not equal",
-  //             value: "not equal"
-  //           },
-  //         ]
-  //       }
-  //     },
-  //     is_active: {
-  //       full: 'Active',
-  //       type: 'checkbox',
-  //       defaultvalue: false,
-  //     },
-  //   },
-  // }
-  const [modalShowing, setModalShowing] = useState(false);
-  const { fields } = schema;
 
   const handleAddField = (selectedItem: any) => {
-
     Object.entries(schema.fields).map((field: any, i) => {
-
-      console.log(field, schema.fields, selectedItem);
-      if ((field[1].full).toLowerCase() === (selectedItem.full).toLowerCase()) {
+      if (field[1].full.toLowerCase() === selectedItem.full.toLowerCase()) {
         setSchema({
           ...schema,
           fields: {
@@ -404,33 +235,23 @@ export const LeadCreateView: FC<LeadSchema> = ({
             [field[0]]: {
               ...selectedItem,
               advance: {
-                selectOptions: [...selectedItem.advance.selectOptions, {
-                  label: "not equal",
-                  value: "not equal"
-                }],
-              }
-            }
-          }
+                selectOptions: [
+                  ...selectedItem.advance.selectOptions,
+                  {
+                    label: 'not equal',
+                    value: 'not equal',
+                  },
+                ],
+              },
+            },
+          },
         })
       }
     })
   }
 
   const createNew = () => {
-    setModalShowing((e) => !e)
-    // setEditingRow({ name: '', isCreate: true })
-  }
-  const onFilterMarketingSource = () => {
-    // resetPagination()
-    // setIsActive((e) => !e)
-    console.log('hello')
-  }
-
-  const onSearch = async (val) => {
-    // if (val !== searchTerm) {
-    //   resetPagination()
-    //   setSearchTerm(val)
-    console.log('hello');
+    console.log('new')
   }
 
   const formikFields = () => {
@@ -465,7 +286,6 @@ export const LeadCreateView: FC<LeadSchema> = ({
 
   return (
     <Formik
-
       enableReinitialize={true}
       validate={(e) => {
         if (schema) {
@@ -493,24 +313,21 @@ export const LeadCreateView: FC<LeadSchema> = ({
       initialValues={formikFields()}
     // requiredMark={required}
     >
-      <>
-        <div
-          className={styles.leadsViewCreatePage}
-        >
-          <MobileHeader className={styles.marketingSourceHeader}>
-            <div className={styles.allContentAlignMobile}>
-              <div className={styles.marketingTextStyle}>
-                <Link href="/">
-                  <LeftOutlined />
-                </Link>
-                {/* <p>
+      <div className={styles.leadsViewCreatePage}>
+        <MobileHeader className={styles.marketingSourceHeader}>
+          <div className={styles.allContentAlignMobile}>
+            <div className={styles.marketingTextStyle}>
+              <Link href="/">
+                <LeftOutlined />
+              </Link>
+              {/* <p>
                   {' '}
                   {needTranslation
                     ? t('marketingsource-title.translation')
                     : schema.full || schema.short}{' '}
                 </p> */}
-              </div>
-              {/* {addQuery && !createPage ? (
+            </div>
+            {/* {addQuery && !createPage ? (
                 <AddButton
                   onClick={createNew}
                   onFilterSource={onFilterMarketingSource}
@@ -529,74 +346,70 @@ export const LeadCreateView: FC<LeadSchema> = ({
                   needTranslation={needTranslation}
                 />
               )} */}
-            </div>
-          </MobileHeader>
+          </div>
+        </MobileHeader>
 
-          <Layout>
-            {/* {showNotificationBanner && notificationBanner} */}
-            <div
-              className={classNames(
-                styles.tableMainHeading,
-                styles.mobileViewNone
-              )}
-            >
-              <div style={{ background: '#FFF' }}>
-                <Breadcrumb
-                  breadcrumbItems={[
-                    { breadcrumbName: 'Setup', path: 'setup' },
-                    { breadcrumbName: schema.full || schema.short, path: '/setup/lead-view' },
-                    { breadcrumbName: schema.full, path: '/setup/lead-view/create' }
-                  ]}
-                />
-                <Title>{schema.full || schema.short}</Title>
-              </div>
-              {ADD_MUTATION && (
-                <AddButton
-                  onClick={createNew}
-                  schema={schema}
-                />
-              )}
-            </div>
-            <Row className={styles.headNameInput}>
-              <Col xs={24} md={12}>
-                <AntForm
-                  layout={'vertical'}
-                  requiredMark={true}
-                >
-                  <AntForm.Item
-                    label={schema?.input?.full}
-                    name={schema?.input?.full}
-                  >
-                    <Input
-                      name={schema?.input?.full}
-                      type={schema?.input?.type}
-                      placeHolderText={schema?.input?.example}
-                    />
-                  </AntForm.Item>
-                </AntForm>
-              </Col>
-            </Row>
-            <div
-              className={styles.basicInfo}>
-              <h6>Primary columns to display</h6>
-              <AntForm
-                layout={'vertical'}
-                requiredMark={true}
-                className={styles.leadCreateForm}
-              >
-                <div className={styles.formBox}>
+        <Layout>
+          {/* {showNotificationBanner && notificationBanner} */}
+          <div
+            className={classNames(
+              styles.tableMainHeading,
+              styles.mobileViewNone
+            )}
+          >
+            <div style={{ background: '#FFF' }}>
+              <Breadcrumb
+                breadcrumbItems={[
+                  { breadcrumbName: 'Setup', path: 'setup' },
                   {
-                    Object.entries(schema.fields).map(
-                      (
-                        item, i
-                      ) => {
-                        return <FieldRow field={item} handleAddField={handleAddField} />
-                      })
-                  }
-                </div>
-              </AntForm>
+                    breadcrumbName: schema.full || schema.short,
+                    path: '/setup/lead-view',
+                  },
+                  {
+                    breadcrumbName: schema.full,
+                    path: '/setup/lead-view/create',
+                  },
+                ]}
+              />
+              <Title>{schema.full || schema.short}</Title>
             </div>
-            {/* <Pagination
+            {ADD_MUTATION && <AddButton onClick={createNew} schema={schema} />}
+          </div>
+          <Row className={styles.headNameInput}>
+            <Col xs={24} md={12}>
+              <AntForm layout={'vertical'} requiredMark={true}>
+                <AntForm.Item
+                  label={schema?.input?.full}
+                  name={schema?.input?.full}
+                >
+                  <Input
+                    name={schema?.input?.full}
+                    type={schema?.input?.type}
+                    placeHolderText={schema?.input?.example}
+                  />
+                </AntForm.Item>
+              </AntForm>
+            </Col>
+          </Row>
+          <div className={styles.basicInfo}>
+            <h6>Primary columns to display</h6>
+            <AntForm
+              layout={'vertical'}
+              requiredMark={true}
+              className={styles.leadCreateForm}
+            >
+              <div className={styles.formBox}>
+                {Object.entries(schema.fields).map((item, i) => {
+                  return (
+                    <div key={i}>
+                      <FieldRow field={item} handleAddField={handleAddField} />
+                    </div>
+                  )
+                })}
+              </div>
+            </AntForm>
+          </div>
+          {/* <Pagination
             total={paginateData.total}
             defaultPageSize={10}
             showSizeChanger={false}
@@ -605,10 +418,9 @@ export const LeadCreateView: FC<LeadSchema> = ({
             current={paginateData.currentPage}
             showingRecords={paginateData.showingRecords}
           /> */}
-          </Layout>
-        </div>
-      </>
-    </Formik >
+        </Layout>
+      </div>
+    </Formik>
   )
 }
 

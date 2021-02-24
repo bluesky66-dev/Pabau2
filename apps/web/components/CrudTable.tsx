@@ -288,45 +288,45 @@ const CrudTable: FC<P> = ({
     console.log('got submittal!', values)
     await (values.id
       ? editMutation({
-        variables: values,
-        optimisticResponse: {},
-        update: (proxy) => {
-          if (listQuery) {
-            const existing = proxy.readQuery({
-              query: listQuery,
-            })
-            if (existing) {
-              const key = Object.keys(existing)[0]
-              proxy.writeQuery({
+          variables: values,
+          optimisticResponse: {},
+          update: (proxy) => {
+            if (listQuery) {
+              const existing = proxy.readQuery({
                 query: listQuery,
-                data: {
-                  [key]: [...existing[key], values],
-                },
               })
+              if (existing) {
+                const key = Object.keys(existing)[0]
+                proxy.writeQuery({
+                  query: listQuery,
+                  data: {
+                    [key]: [...existing[key], values],
+                  },
+                })
+              }
             }
-          }
-        },
-      })
+          },
+        })
       : addMutation({
-        variables: values,
-        optimisticResponse: {},
-        update: (proxy) => {
-          if (listQuery) {
-            const existing = proxy.readQuery({
-              query: listQuery,
-            })
-            if (existing) {
-              const key = Object.keys(existing)[0]
-              proxy.writeQuery({
+          variables: values,
+          optimisticResponse: {},
+          update: (proxy) => {
+            if (listQuery) {
+              const existing = proxy.readQuery({
                 query: listQuery,
-                data: {
-                  [key]: [...existing[key], values],
-                },
               })
+              if (existing) {
+                const key = Object.keys(existing)[0]
+                proxy.writeQuery({
+                  query: listQuery,
+                  data: {
+                    [key]: [...existing[key], values],
+                  },
+                })
+              }
             }
-          }
-        },
-      }))
+          },
+        }))
     resetForm()
     setModalShowing(false)
   }

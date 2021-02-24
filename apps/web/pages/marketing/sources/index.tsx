@@ -133,9 +133,8 @@ export const Index: NextPage = () => {
       public: {
         full: t('marketingsource-tableColumn-active.translation'),
         type: 'number',
-        defaultvalue: 1
+        defaultvalue: 1,
       },
-      
     },
   }
   return (

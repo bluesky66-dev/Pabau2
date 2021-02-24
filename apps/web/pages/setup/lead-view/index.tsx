@@ -32,9 +32,12 @@ const LIST_QUERY = gql`
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query lead_aggregate($searchTerm: String = "") {
+  query lead_aggregate($isActive: Boolean = true, $searchTerm: String = "") {
     lead_aggregate(
-      where: { _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }] }
+      where: {
+        is_active: { _eq: $isActive }
+        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
+      }
     ) {
       aggregate {
         count
@@ -61,11 +64,10 @@ const ADD_MUTATION = gql`
         name: "aysha"
         owner: "rulaa"
         source: "xyz"
-        status: "married"
         location: "gilgit"
         order: 2
         phone: "45455545454"
-        status: true
+        status: "true"
         id: "123e4567-e89b-12d3-a456-426614174011"
       }
     ) {

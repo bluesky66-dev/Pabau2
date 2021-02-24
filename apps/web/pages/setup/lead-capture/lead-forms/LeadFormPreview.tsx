@@ -82,7 +82,7 @@ export const LeadFormPreview: React.FC<LeadFormPreviewInterface> = ({
         }}
         //initialValues={typeof modalShowing === 'object' ? modalShowing : undefined}
         initialValues={formikFields()}
-      // requiredMark={required}
+        // requiredMark={required}
       >
         <AntForm
           layout={'vertical'}
