@@ -1601,7 +1601,7 @@ model CmCaseReply {
   CreatedDate DateTime
   IpAddress   Int
   CompanyID   Int
-  company Company @relation(fields: [company_id], references: [id])
+  company Company @relation(fields: [CompanyID], references: [id])
 
   @@map("cm_case_replies")
 }
@@ -11556,111 +11556,113 @@ model CmContact {
 //  @@index([sms_campaign_id], name: "sms_campaign_id")
 //}
 //
-//model users {
-//  id                             Int                              @id @default(autoincrement())
-//  username                       String?
-//  full_name                      String
-//  password                       String?
-//  password_algor                 Int?                             @default(1)
-//  salt                           String?
-//  created                        DateTime?
-//  last_login                     DateTime?
-//  company                        Int
-//  hash                           String
-//  email                          String
-//  admin                          Int
-//  address                        String
-//  timezone                       String
-//  locale                         String
-//  language                       String
-//  job_title                      String
-//  department                     String
-//  division                       String
-//  super                          Int
-//  default_page                   String
-//  signature                      String
-//  image                          String
-//  position                       String
-//  location                       String
-//  deleted                        Int
-//  pass_code                      String
-//  phone_number                   String
-//  hide_online_bookings           Int
-//  passcode                       String
-//  last_loaded_page               String
-//  temporary_password             Boolean
-//  custom_id                      String
-//  hide_calendar                  Int
-//  calendar_order                 Int
-//  clocked_in                     DateTime?
-//  clocked_out                    DateTime?
-//  last_password_reset            Int
-//  force_password                 Int
-//  limited_user                   Int
-//  can_void                       Int                              @default(1)
-//  can_refund                     Boolean                          @default(true)
-//  can_report                     Int                              @default(1)
-//  can_rota                       Int                              @default(1)
-//  staff_read_only                Int
-//  stock_read_only                Int
-//  all_reports                    Int                              @default(1)
-//  performance_stats              Int
-//  disable_tutorial               Int
-//  all_services                   Int                              @default(1)
-//  delete_treatment               Int                              @default(0)
-//  admin_tasks                    Int
-//  admin_leads                    Int
-//  imported                       Int
-//  login_fail_count               Int
-//  can_edit_booking_time          Int                              @default(1)
-//  user_color                     String
-//  disable_multiple_clinics       Int
-//  is_hcp                         Int                              @default(0)
-//  login_disabled                 Int
-//  can_patient_appoint            Int                              @default(1)
-//  can_patient_communicatons      Int                              @default(1)
-//  can_patient_photos             Int                              @default(1)
-//  can_patient_fiancials          Int                              @default(1)
-//  can_patient_treatments         Int                              @default(1)
-//  can_patient_docs               Int                              @default(1)
-//  can_patient_packages           Int                              @default(1)
-//  can_patient_prescription       Int                              @default(1)
-//  can_patient_consents           Int                              @default(1)
-//  can_patient_giftvoucher        Int                              @default(1)
-//  can_patient_loyalty            Int                              @default(1)
-//  can_patient_recall             Int                              @default(1)
-//  can_patient_memberships        Int                              @default(1)
-//  can_cancel_booking             Int                              @default(1)
-//  notify_on_booking              Boolean
-//  can_edit_communications        Boolean                          @default(true)
-//  can_delete_communications      Boolean                          @default(true)
-//  can_view_full_cal              Boolean                          @default(true)
-//  permission_last_role           String                           @default("")
-//  can_merge                      Boolean                          @default(true)
-//  can_discount                   Int?                             @default(1)
-//  can_discount_single            Boolean                          @default(true)
-//  restored                       Int
-//  google_auth_secret             String?
-//  default_contract_id            Int
-//  can_see_personal               Int                              @default(1)
-//  appear_on_rota                 Int                              @default(1)
-//  can_patient_medical_history    Int                              @default(1)
-//  can_lab_requests               Boolean                          @default(false)
-//  detailed_view                  Int
-//  can_make_blockout              Int                              @default(1)
-//  can_delete_blockout            Int                              @default(1)
-//  can_move_blockout              Int                              @default(1)
-//  main_contact                   Boolean
-//  user_security_questions_answer user_security_questions_answer[]
-//
-//  @@index([calendar_order], name: "calendar_order")
-//  @@index([company], name: "company")
-//  @@index([deleted], name: "deleted")
-//  @@index([email], name: "email")
-//  @@index([full_name], name: "full_name")
-//  @@index([hash], name: "hash_index")
-//  @@index([username], name: "username")
-//}
+model User {
+  id                             Int                              @id @default(autoincrement())
+  username                       String?
+  full_name                      String
+  password                       String?
+  password_algor                 Int?                             @default(1)
+  salt                           String?
+  created                        DateTime?
+  last_login                     DateTime?
+  company                        Int
+  hash                           String
+  email                          String
+  admin                          Int
+  address                        String
+  timezone                       String
+  locale                         String
+  language                       String
+  job_title                      String
+  department                     String
+  division                       String
+  super                          Int
+  default_page                   String
+  signature                      String
+  image                          String
+  position                       String
+  location                       String
+  deleted                        Int
+  pass_code                      String
+  phone_number                   String
+  hide_online_bookings           Int
+  passcode                       String
+  last_loaded_page               String
+  temporary_password             Boolean
+  custom_id                      String
+  hide_calendar                  Int
+  calendar_order                 Int
+  clocked_in                     DateTime?
+  clocked_out                    DateTime?
+  last_password_reset            Int
+  force_password                 Int
+  limited_user                   Int
+  can_void                       Int                              @default(1)
+  can_refund                     Boolean                          @default(true)
+  can_report                     Int                              @default(1)
+  can_rota                       Int                              @default(1)
+  staff_read_only                Int
+  stock_read_only                Int
+  all_reports                    Int                              @default(1)
+  performance_stats              Int
+  disable_tutorial               Int
+  all_services                   Int                              @default(1)
+  delete_treatment               Int                              @default(0)
+  admin_tasks                    Int
+  admin_leads                    Int
+  imported                       Int
+  login_fail_count               Int
+  can_edit_booking_time          Int                              @default(1)
+  user_color                     String
+  disable_multiple_clinics       Int
+  is_hcp                         Int                              @default(0)
+  login_disabled                 Int
+  can_patient_appoint            Int                              @default(1)
+  can_patient_communicatons      Int                              @default(1)
+  can_patient_photos             Int                              @default(1)
+  can_patient_fiancials          Int                              @default(1)
+  can_patient_treatments         Int                              @default(1)
+  can_patient_docs               Int                              @default(1)
+  can_patient_packages           Int                              @default(1)
+  can_patient_prescription       Int                              @default(1)
+  can_patient_consents           Int                              @default(1)
+  can_patient_giftvoucher        Int                              @default(1)
+  can_patient_loyalty            Int                              @default(1)
+  can_patient_recall             Int                              @default(1)
+  can_patient_memberships        Int                              @default(1)
+  can_cancel_booking             Int                              @default(1)
+  notify_on_booking              Boolean
+  can_edit_communications        Boolean                          @default(true)
+  can_delete_communications      Boolean                          @default(true)
+  can_view_full_cal              Boolean                          @default(true)
+  permission_last_role           String                           @default("")
+  can_merge                      Boolean                          @default(true)
+  can_discount                   Int?                             @default(1)
+  can_discount_single            Boolean                          @default(true)
+  restored                       Int
+  google_auth_secret             String?
+  default_contract_id            Int
+  can_see_personal               Int                              @default(1)
+  appear_on_rota                 Int                              @default(1)
+  can_patient_medical_history    Int                              @default(1)
+  can_lab_requests               Boolean                          @default(false)
+  detailed_view                  Int
+  can_make_blockout              Int                              @default(1)
+  can_delete_blockout            Int                              @default(1)
+  can_move_blockout              Int                              @default(1)
+  main_contact                   Boolean
+  user_security_questions_answer UserSecurityQuestionsAnser[]
+
+
+  @@map("users")
+  @@index([calendar_order], name: "calendar_order")
+  @@index([company], name: "company")
+  @@index([deleted], name: "deleted")
+  @@index([email], name: "email")
+  @@index([full_name], name: "full_name")
+  @@index([hash], name: "hash_index")
+  @@index([username], name: "username")
+}
 //
 //model users_hours {
 //  id         Int       @id @default(autoincrement())
@@ -11983,16 +11985,17 @@ model CmContact {
 //  last_name     String
 //}
 //
-//model user_security_questions_answer {
-//  id          Int    @id @default(autoincrement())
-//  user_id     Int
-//  question    String
-//  question_no Int
-//  answer      String
-//  users       users  @relation(fields: [user_id], references: [id])
-//
-//  @@index([user_id], name: "user_id")
-//}
+model UserSecurityQuestionsAnser {
+  id          Int    @id @default(autoincrement())
+  user_id     Int
+  question    String
+  question_no Int
+  answer      String
+  users       User  @relation(fields: [user_id], references: [id])
+
+  @@map("user_security_questions_answer")
+  @@index([user_id], name: "user_id")
+}
 //
 //model user_targets {
 //  id           Int      @id @default(autoincrement())
