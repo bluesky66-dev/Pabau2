@@ -49,6 +49,26 @@ export const Index: FC = () => {
       time_zone: '',
       week_start: '',
       vat: '',
+      disable_prescriptions: false,
+      medical_approvals: false,
+      is_surgical: false,
+      secure_medical_forms: false,
+      appointment_singular: 'Patient',
+      appointment_plural: 'Patients',
+      attendees_singular: 'Class',
+      attendees_plural: 'Classes',
+      employee_singular: 'Employee',
+      employee_plural: 'Employees',
+      teacher_singular: 'Teacher',
+      teacher_plural: 'Teachers',
+      client_postal: 'Whould you like to receive postal communications?',
+      client_sms: 'Whould you like to receive SMS messages from us?',
+      client_email: 'Whould you like to receive email communications?',
+      client_phone: 'Whould you like to receive phone calls?',
+      leads_postal: 'Whould you like to receive postal communications?',
+      leads_sms: 'Whould you like to receive SMS messages from us?',
+      leads_email: 'Whould you like to receive email communications?',
+      leads_phone: 'Whould you like to receive phone calls?',
     }
     switch (type) {
       case 'business': {
@@ -68,26 +88,40 @@ export const Index: FC = () => {
           timezone,
           weekStart,
         } = languageSetting
-        data = {
-          businses_name: businessName,
-          business_type: businessType,
-          company_email: companyEmail,
-          phone,
-          website,
-          currency,
-          business_location: businessLocation,
-          date_format: dateFormat,
-          default_language_clients: defaultLanuageClients,
-          default_language_staff: defaultLanuageStaff,
-          time_zone: timezone,
-          week_start: weekStart,
-        }
+        data.businses_name=businessName
+        data.business_type=businessType
+        data.company_email=companyEmail
+        data.phone=phone
+        data.website=website
+        data.currency=currency
+        data.business_location=businessLocation
+        data.date_format=dateFormat
+        data.default_language_clients=defaultLanuageClients
+        data.default_language_staff=defaultLanuageStaff
+        data.time_zone=timezone
+        data.week_start=weekStart
         break
       }
       case 'terminology': {
-        const { config } = values
+        const { config, optIns } = values
         const vat = config[4].items[0].value
         data.vat = vat
+        data.appointment_singular=config[0].items[0].value
+        data.appointment_plural=config[0].item[1].value
+        data.attendees_singular=config[1].item[0].value
+        data.attendees_plural=config[1].item[1].value
+        data.employee_singular=config[2].item[0].value
+        data.employee_plural=config[2].item[1].value
+        data.teacher_singular=config[3].item[0].value
+        data.teacher_plural=config[3].item[1].value
+        data.client_postal=optIns[0].items[0].value
+        data.client_sms=optIns[0].items[1].value
+        data.client_email=optIns[0].items[2].value
+        data.client_phone=optIns[0].items[3].value
+        data.leads_postal=optIns[1].items[0].value
+        data.leads_sms=optIns[1].items[1].value
+        data.leads_email=optIns[1].items[2].value
+        data.leads_phone=optIns[1].items[3].value
         break
       }
       case 'system': {
@@ -97,10 +131,10 @@ export const Index: FC = () => {
           performSurgical,
           secureMedicalForms,
         } = values
-        data.disable_prescriptions = disablePrescriptions ? 10 : 0
-        data.medical_approvals = medicalApprovals ? 10 : 0
-        data.is_surgical = performSurgical ? 10 : 0
-        data.secure_medical_forms = secureMedicalForms ? 10 : 0
+        data.disable_prescriptions = disablePrescriptions
+        data.medical_approvals = medicalApprovals
+        data.is_surgical = performSurgical
+        data.secure_medical_forms = secureMedicalForms
         break
       }
       case 'notification': {
