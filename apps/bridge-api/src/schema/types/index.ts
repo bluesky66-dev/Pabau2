@@ -93,3 +93,4 @@ export * from './CmContact';
 export * from './User';
 export * from './UserSecurityQuestionsAnser';
 export * from './Ping'
+export * from './Authentication'
