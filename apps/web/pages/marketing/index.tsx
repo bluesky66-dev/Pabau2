@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Layout } from '@pabau/ui'
+import Layout from '../../components/Layout/Layout'
 import Link from 'next/link'
 import { useKeyPressEvent } from 'react-use'
 import { useRouter } from 'next/router'

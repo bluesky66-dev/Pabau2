@@ -3,12 +3,13 @@ import { useMedia } from 'react-use'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
-import { Button, Layout, Breadcrumb } from '@pabau/ui'
+import { Button, Breadcrumb } from '@pabau/ui'
 import { Row, Col, Card } from 'antd'
 import { LeftOutlined } from '@ant-design/icons'
 import { LoyaltySettingsObj } from '../../../mocks/LoyaltySettings'
 import General from '../../../components/Setup/Settings/LoyaltySettings/General'
 import styles from './loyalty.module.less'
+import Layout from '../../../components/Layout/Layout'
 
 interface P {
   general: GeneralLoyaltyConfig

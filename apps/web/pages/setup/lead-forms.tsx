@@ -1,11 +1,5 @@
 import React, { useState } from 'react'
-import {
-  Layout,
-  Breadcrumb,
-  WStepper,
-  StepperItem,
-  MobileHeader,
-} from '@pabau/ui'
+import { Breadcrumb, WStepper, StepperItem, MobileHeader } from '@pabau/ui'
 import styles from './lead-forms.module.less'
 import LeadSettings from './lead-capture/LeadSetting'
 import LeadIntegration from './lead-capture/LeadIntegration'
@@ -24,6 +18,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from '@fortawesome/free-solid-svg-icons'
 import { Typography } from 'antd'
 import Link from 'next/link'
+import Layout from '../../components/Layout/Layout'
 
 const { Title } = Typography
 

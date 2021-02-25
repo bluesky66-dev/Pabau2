@@ -4,7 +4,7 @@ import {
   LockOutlined,
   UserOutlined,
 } from '@ant-design/icons'
-import { Layout } from '@pabau/ui'
+import Layout from '../../components/Layout/Layout'
 import { Button, Col, Row, Tabs } from 'antd'
 import React, { FC } from 'react'
 import styles from './index.module.less'

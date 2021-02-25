@@ -1,18 +1,13 @@
 import React, { FC, useState } from 'react'
 import { useMedia } from 'react-use'
-
 import { Button, TabMenu } from '@pabau/ui'
 import { Row, Col, Card } from 'antd'
-import { Layout } from '@pabau/ui'
-
 import { RightOutlined, LeftOutlined } from '@ant-design/icons'
-
 import { PosConfigObj } from '../../../mocks/PosConfiguration'
-
 import General from '../../../components/Setup/Settings/PosConfiguration/General'
 import Appearance from '../../../components/Setup/Settings/PosConfiguration/Appearance'
-
 import styles from './pos-configuration.module.less'
+import Layout from '../../../components/Layout/Layout'
 
 interface P {
   general: GeneralPosConfig
