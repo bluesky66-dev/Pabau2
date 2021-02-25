@@ -15,6 +15,68 @@ import { IntegrationBodyCollections } from '../../mocks/SetupIntegration'
 const { Title } = Typography
 const { TabPane } = Tabs
 
+const tabMenuItems = [
+  {
+    tabTitle: 'Manage',
+    key: '0',
+    disable: true,
+  },
+  {
+    tabTitle: 'Your installed apps',
+    key: '1',
+    disable: false,
+    category: 'ALL',
+    installed: 1,
+  },
+  {
+    tabTitle: 'Features',
+    key: '2',
+    disable: true,
+  },
+  {
+    tabTitle: 'All Collections',
+    key: '3',
+    disable: false,
+    category: 'ALL',
+    limit: 6,
+  },
+  {
+    tabTitle: 'Popular',
+    key: '4',
+    disable: false,
+    category: 'Popular',
+  },
+  {
+    tabTitle: 'Financial',
+    key: '5',
+    disable: false,
+    category: 'FINANCIAL',
+  },
+  {
+    tabTitle: 'Bookings',
+    key: '6',
+    disable: false,
+    category: 'Bookings',
+  },
+  {
+    tabTitle: 'Labs',
+    key: '7',
+    disable: false,
+    category: 'Labs',
+  },
+  {
+    tabTitle: 'Marketing',
+    key: '8',
+    disable: false,
+    category: 'Marketing',
+  },
+  {
+    tabTitle: 'Vaccination',
+    key: '9',
+    disable: false,
+    category: 'Vaccination',
+  },
+]
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IntegrationProps {}
 
@@ -53,9 +115,11 @@ const Search: FC<SearchProps> = ({ data, searchString }) => {
 }
 
 export const Integration: FC<IntegrationProps> = (props) => {
-  const [active, setActive] = useState<string>('4')
+  const [active, setActive] = useState<string>('3')
   const [searchValue, setSearchValue] = useState<string>('')
-  const [searchItemsArray, setSearchItemsArray] = useState<SearchItemProps[]>([])
+  const [searchItemsArray, setSearchItemsArray] = useState<SearchItemProps[]>(
+    []
+  )
 
   const handleSearch = (searchTerm: string) => {
     setSearchValue(searchTerm)
@@ -103,100 +167,53 @@ export const Integration: FC<IntegrationProps> = (props) => {
                 activeKey={active}
                 onTabClick={(value) => setActive(value)}
               >
-                <TabPane
-                  tab="Manage"
-                  key="0"
-                  disabled={true}
-                  style={{ color: 'red', fontSize: '10px' }}
-                />
-                <TabPane tab="Your installed apps" key="1">
-                  <IntegrationTabBody
-                    category="ALL"
-                    items={IntegrationBodyCollections}
-                    limit={6}
-                    installed={1}
-                  />
-                </TabPane>
-                <TabPane tab="Features" key="2" disabled={true} />
-                <TabPane tab="All Collections" key="4">
-                  <div>
-                    <IntegrationHeader />
-                    <IntegrationTabBody
-                      heading="You recenly viewed"
-                      category="ALL"
-                      items={IntegrationBodyCollections}
-                      limit={6}
+                {tabMenuItems.map((tabMenuItem) =>
+                  tabMenuItem.disable ? (
+                    <TabPane
+                      tab={tabMenuItem.tabTitle}
+                      key={tabMenuItem.key}
+                      disabled={tabMenuItem.disable}
                     />
-                    <div className={styles.popularWrapper}>
-                      <h5>Popular</h5>
-                      <div
-                        className={styles.seeAll}
-                        onClick={() => setActive('5')}
-                      >
-                        see all &#x2794;
-                      </div>
-                    </div>
-                    <IntegrationTabBody
-                      category="Popular"
-                      items={IntegrationBodyCollections}
-                      limit={6}
-                    />
-                  </div>
-                </TabPane>
-                <TabPane tab="Popular" key="5">
-                  <div>
-                    <IntegrationHeader />
-                    <IntegrationTabBody
-                      category="Popular"
-                      items={IntegrationBodyCollections}
-                    />
-                  </div>
-                </TabPane>
-                <TabPane tab="Financial" key="6">
-                  <div>
-                    <IntegrationHeader />
-                    <IntegrationTabBody
-                      category="FINANCIAL"
-                      items={IntegrationBodyCollections}
-                    />
-                  </div>
-                </TabPane>
-                <TabPane tab="Bookings" key="7">
-                  <div>
-                    <IntegrationHeader />
-                    <IntegrationTabBody
-                      category="Bookings"
-                      items={IntegrationBodyCollections}
-                    />
-                  </div>
-                </TabPane>
-                <TabPane tab="Labs" key="8">
-                  <div>
-                    <IntegrationHeader />
-                    <IntegrationTabBody
-                      category="Labs"
-                      items={IntegrationBodyCollections}
-                    />
-                  </div>
-                </TabPane>
-                <TabPane tab="Marketing" key="9">
-                  <div>
-                    <IntegrationHeader />
-                    <IntegrationTabBody
-                      category="Marketing"
-                      items={IntegrationBodyCollections}
-                    />
-                  </div>
-                </TabPane>
-                <TabPane tab="Vaccination" key="10">
-                  <div>
-                    <IntegrationHeader />
-                    <IntegrationTabBody
-                      category="Vaccination"
-                      items={IntegrationBodyCollections}
-                    />
-                  </div>
-                </TabPane>
+                  ) : (
+                    <TabPane tab={tabMenuItem.tabTitle} key={tabMenuItem.key}>
+                      {tabMenuItem.tabTitle === 'All Collections' ? (
+                        <div>
+                          <IntegrationHeader />
+                          <IntegrationTabBody
+                            heading="You recenly viewed"
+                            category="ALL"
+                            items={IntegrationBodyCollections}
+                            limit={6}
+                          />
+                          <div className={styles.popularWrapper}>
+                            <h5>Popular</h5>
+                            <div
+                              className={styles.seeAll}
+                              onClick={() => setActive('4')}
+                            >
+                              see all &#x2794;
+                            </div>
+                          </div>
+                          <IntegrationTabBody
+                            category="Popular"
+                            items={IntegrationBodyCollections}
+                            limit={6}
+                          />
+                        </div>
+                      ) : (
+                        <div>
+                          <IntegrationHeader />
+                          <IntegrationTabBody
+                            category={tabMenuItem.category}
+                            items={IntegrationBodyCollections}
+                            installed={tabMenuItem.installed}
+                            limit={tabMenuItem.limit}
+                          />
+                        </div>
+                      )}
+                    </TabPane>
+                  )
+                )}
               </Tabs>
             </div>
           ) : (
