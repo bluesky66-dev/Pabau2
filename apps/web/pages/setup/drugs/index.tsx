@@ -1,11 +1,12 @@
 import React, { FC, useState, useEffect } from 'react'
 import Layout from '../../../components/Layout/Layout'
 import { TabbedTable, Button, Table, Breadcrumb, Pagination } from '@pabau/ui'
-import { Card, Input, Row, Col } from 'antd'
+import { Card, Input, Row, Col, Popover, Radio } from 'antd'
 import {
   SearchOutlined,
   ApartmentOutlined,
   FileProtectOutlined,
+  FilterOutlined,
 } from '@ant-design/icons'
 import styles from './index.module.less'
 
@@ -144,12 +145,49 @@ export interface P {
 }
 
 const Index: FC<P> = ({ ...props }) => {
+  const [isActive, setIsActive] = useState(null)
   const [paginationState, setPaginationState] = useState(true)
+  const [showCreateBtn, setShowCreateBtn] = useState(true)
   const [searchTerm, setSearchTerm] = useState(null)
   const [dataSource, setDataSource] = useState(null)
   const [libItems] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])
 
-  const tabItems = ['Tablesheet', 'Library']
+  const tabItems = ['Drugs', 'Library']
+
+  const onStatusFilter = (val) => {
+    setIsActive(val)
+    if (val) {
+      const activeElems = data.filter((el) => el.is_active === 1)
+      setDataSource(activeElems)
+    } else {
+      const inActiveElems = data.filter((el) => el.is_active === 0)
+      setDataSource(inActiveElems)
+    }
+  }
+
+  const filterContent = (isMobile = false) => (
+    <div className={styles.filterContent}>
+      {!isMobile && (
+        <div className={styles.filterHeader}>
+          <h6>Filter by</h6>
+          <p>Status</p>
+        </div>
+      )}
+      <div className={styles.radioTextStyle}>
+        <Radio.Group
+          onChange={(e) => onStatusFilter(e.target.value)}
+          value={isActive}
+        >
+          <Radio value={true}>
+            <span>Active</span>
+          </Radio>
+          <Radio value={false}>
+            <span>Inactive</span>
+          </Radio>
+        </Radio.Group>
+      </div>
+    </div>
+  )
 
   const cardHeader = (
     <div className={styles.header}>
@@ -174,18 +212,39 @@ const Index: FC<P> = ({ ...props }) => {
             setSearchTerm(e.target.value)
           }}
         />
-        <Button type="primary" size="large">
-          Create Drug
-        </Button>
+        {showCreateBtn && (
+          <div>
+            <Popover
+              trigger="click"
+              content={filterContent}
+              placement="bottomRight"
+              overlayClassName={styles.filterPopover}
+            >
+              <Button className={styles.filterBtn} size="large">
+                <FilterOutlined /> Filter
+              </Button>
+            </Popover>
+            <Button type="primary" size="large">
+              Create Drug
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   )
 
-  const onTabChange = (key: number | string) => {
-    if (Number(key) === 1) {
-      setPaginationState(false)
-    } else {
-      setPaginationState(true)
+  const onTabChange = (item: string | number) => {
+    switch (item) {
+      case tabItems[0]:
+        setShowCreateBtn(true)
+        setPaginationState(true)
+        break
+      case tabItems[1]:
+        setShowCreateBtn(false)
+        setPaginationState(false)
+        break
+      default:
+        return
     }
   }
 
@@ -198,7 +257,10 @@ const Index: FC<P> = ({ ...props }) => {
       <div className={styles.drugsListingMain}>
         <Card title={cardHeader}>
           <div className={styles.body}>
-            <TabbedTable tabItems={tabItems} onTabChange={onTabChange}>
+            <TabbedTable
+              tabItems={tabItems}
+              onTabChange={(key) => onTabChange(tabItems[key])}
+            >
               <div className={styles.tableSheet}>
                 <Table
                   columns={columns}
@@ -238,9 +300,9 @@ const Index: FC<P> = ({ ...props }) => {
         {paginationState && (
           <div className={styles.paginationDiv}>
             <Pagination
-              showingRecords={7}
+              showingRecords={dataSource?.length}
               defaultCurrent={1}
-              total={7}
+              total={dataSource?.length}
               pageSize={10}
             />
           </div>
