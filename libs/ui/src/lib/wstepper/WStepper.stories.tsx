@@ -19,15 +19,7 @@ const wstepperStory = ({ ...args }) => {
   // const { active = 0, allSteps = 4 } = args
   // const [index, setIndex] = React.useState(active)
   // return <Wizard {...args} active={index} onPrev={() => setIndex(index - 1)} onNext={() => setIndex(index + 1)} allSteps={args.allSteps} breadcrumb={args.breadcrumb} header={args.header}></Wizard>;
-  return (
-    <WStepper
-      {...args}
-      data={data}
-      active={args.active}
-      breadcrumbTxt={args.breadcrumbTxt}
-      headerTxt={args.headerTxt}
-    ></WStepper>
-  )
+  return <WStepper {...args} data={data} active={args.active}></WStepper>
 }
 
 export const wstepper = wstepperStory.bind({})

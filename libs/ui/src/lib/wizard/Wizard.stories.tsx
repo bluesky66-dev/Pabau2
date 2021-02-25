@@ -28,7 +28,6 @@ const WizardStory = ({ ...args }) => {
       onPrev={() => setIndex(index - 1)}
       onNext={() => setIndex(index + 1)}
       allSteps={args.allSteps}
-      stepperData={data}
     ></Wizard>
   )
 }
