@@ -6,7 +6,7 @@ import CrudLayout from '../../../components/CrudLayout/CrudLayout'
 
 const LIST_QUERY = gql`
   query marketing_campaigns {
-    marketingSources {
+    marketing_campaign(order_by: { created_at: desc }) {
       __typename
       id
       name
@@ -15,7 +15,7 @@ const LIST_QUERY = gql`
 `
 const LIST_AGGREGATE_QUERY = gql`
   query marketing_campaign_aggregate {
-    marketingSources {
+    marketing_campaign_aggregate {
       aggregate {
         count
       }
@@ -25,7 +25,7 @@ const LIST_AGGREGATE_QUERY = gql`
 
 const DELETE_MUTATION = gql`
   mutation delete_marketing_campaign($id: uuid!) {
-    deleteOneMarketingSource(where: { id: $id }) {
+    delete_marketing_campaign_by_pk(id: $id) {
       __typename
       id
     }
@@ -33,7 +33,7 @@ const DELETE_MUTATION = gql`
 `
 const ADD_MUTATION = gql`
   mutation add_marketing_campaign($name: String!) {
-    createOneMarketingSource(object: { name: $name }) {
+    insert_marketing_campaign_one(object: { name: $name }) {
       __typename
       id
     }
@@ -41,7 +41,10 @@ const ADD_MUTATION = gql`
 `
 const EDIT_MUTATION = gql`
   mutation update_marketing_campaign_by_pk($id: uuid!, $name: String!) {
-    updateOneMarketingSource(pk_columns: { id: $id }, _set: { name: $name }) {
+    update_marketing_campaign_by_pk(
+      pk_columns: { id: $id }
+      _set: { name: $name }
+    ) {
       __typename
       id
     }
