@@ -225,8 +225,8 @@ export const LeadCreateView: FC<LeadSchema> = () => {
     },
   })
 
-  const handleAddField = (selectedItem: any) => {
-    Object.entries(schema.fields).map((field: any, i) => {
+  const handleAddField = (selectedItem) => {
+    Object.entries(schema.fields).map((field, i) => {
       if (field[1].full.toLowerCase() === selectedItem.full.toLowerCase()) {
         setSchema({
           ...schema,
@@ -247,6 +247,7 @@ export const LeadCreateView: FC<LeadSchema> = () => {
           },
         })
       }
+      return 1
     })
   }
 

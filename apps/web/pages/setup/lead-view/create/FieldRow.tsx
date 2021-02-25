@@ -4,7 +4,7 @@ import { Form as AntForm, Col, Row } from 'antd'
 import AdvanceField from './AdvanceField'
 import styles from './index.module.less'
 
-function FieldRow<SchemaItem>({ field, handleAddField }) {
+function FieldRow({ field, handleAddField }) {
   return (
     <div>
       {field[0] === 'is_active' ? null : field[1].advance ? (
@@ -21,17 +21,11 @@ function FieldRow<SchemaItem>({ field, handleAddField }) {
             </Col>
             <Col xs={24} md={18} lg={20} xl={21}>
               <div className={styles.dropdownsWrapper}>
-                {Object.entries(field).map((item: any, i: number) => {
-                  return (
-                    <div key={i}>
-                      <AdvanceField
-                        options={item[1].advance?.selectOptions}
-                        input={item[1]?.input}
-                        handleSelected={() => ''}
-                      />
-                    </div>
-                  )
-                })}
+                <AdvanceField
+                  options={field[1]?.advance?.selectOptions}
+                  input={field[1]?.input}
+                  handleSelected={() => ''}
+                />
                 <div>
                   {field[0] === 'created_at' ? (
                     <Button type="text">days ago</Button>
