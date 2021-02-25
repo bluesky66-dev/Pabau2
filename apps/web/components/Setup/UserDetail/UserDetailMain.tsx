@@ -1,10 +1,10 @@
 import React, { FC, useState } from 'react'
-import { Tabs } from 'antd'
+import { Modal, Tabs } from 'antd'
 
 import Layout from '../../Layout/Layout'
-import { Breadcrumb, Avatar, Button, BasicModal, PabauPlus } from '@pabau/ui'
+import { Breadcrumb, Avatar, Button, PabauPlus } from '@pabau/ui'
 import styles from './UserDetail.module.less'
-import { userDetail, fields } from '../../../mocks/UserDetail'
+import { userDetail, fields, graphData } from '../../../mocks/UserDetail'
 import AvatarImage from '../../../assets/images/avatar.png'
 import PersonalDetail from './PersonalDetail'
 import CustomizeFields from './CustomizeFields'
@@ -68,7 +68,7 @@ const UserDetailMain: FC = () => {
         <div className={styles.userDetailLeftTabs}>
           <Tabs tabPosition={'left'}>
             <TabPane tab={<span>Personal Details</span>} key="1">
-              <PersonalDetail field={fieldsData} />
+              <PersonalDetail field={fieldsData} graphData={graphData} />
             </TabPane>
             <TabPane tab={<span>Services</span>} key="2">
               Content of Tab
@@ -108,19 +108,20 @@ const UserDetailMain: FC = () => {
           </Tabs>
         </div>
       </div>
-      <BasicModal
-        visible={showModal}
-        onCancel={() => handleCloseModal()}
+      <Modal
         title={'Customize fields for all employees'}
+        visible={showModal}
         footer={false}
         width={682}
+        className={styles.customModal}
+        onCancel={() => handleCloseModal()}
       >
         <CustomizeFields
           field={fieldsData}
           handleSaveCustomFields={handleSaveCustomFields}
           handleCloseModal={handleCloseModal}
         />
-      </BasicModal>
+      </Modal>
     </Layout>
   )
 }

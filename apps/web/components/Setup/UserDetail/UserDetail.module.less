@@ -86,7 +86,9 @@
   padding: 24px;
   display: flex;
   .main-form {
-    flex: 1 50%;
+    flex: 1 1 65%;
+    padding-right: 50px;
+    transition: all 0.2s;
     .checkbox-wrapper {
       .labelText {
         font-size: 14px;
@@ -139,6 +141,75 @@
   }
   .chart {
     flex: 1 35%;
+    max-width: 270px;
+    transition: all 0.2s;
+    :global .highcharts-axis-line {
+      stroke: none;
+    }
+    .chart-box {
+      border: 1px solid #ECEDF0;
+      padding: 16px;
+      p {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18px;
+        color: #3D3D46;
+        margin-bottom: 0;
+      }
+      span {
+        font-size: 10px;
+        line-height: 8px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #9292A3;
+      }
+      button {
+        border: 1px solid #54B2D3;
+        border-radius: 4px;
+        width: 90%;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin: 0 auto;
+        span {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 20px;
+          color: #54B2D3;
+          align-self: center;
+          display: flex;
+          text-transform: lowercase;
+          svg  {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+    }
+    .remain-portion {
+      background: #FAFAFA;
+      border-radius: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 16px;
+      margin-top: 19px;
+      p {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        color: #3D3D46;
+        margin-bottom: 8px;
+      }
+      span {
+        font-size: 12px;
+        line-height: 16px;
+        color: #9292A3;
+      }
+    }
   }
 }
 .personal-detail-head {
@@ -173,6 +244,13 @@
 
 .custom-fields-wrapper {
   padding-bottom: 40px;
+  h4 {
+    font-size: 16px;
+    line-height: 20px;
+    color: #9292A3;
+    border-bottom: 1px solid #ECEDF0;
+    padding: 4px 40px 20px;
+  }
   .custom-fields-basic-info {
     display: flex;
     margin-bottom: 16px;
@@ -230,7 +308,7 @@
     }
   }
   .custom-fields-drag-add {
-    margin-bottom: 16px;
+    margin-bottom: 40px;
     .add-fields {
       background: #FFFFFF;
       border: 1px solid #ECEDF0;
@@ -257,4 +335,40 @@
       line-height: 20px;
     }
   }
+}
+.custom-modal {
+  background: #FFFFFF;
+  box-shadow: 4px 4px 23px rgba(0, 34, 65, 0.15);
+  border-radius: 4px;
+  padding-bottom: 0;
+  margin-bottom: 40px;
+  overflow: hidden;
+  .custom-fields-wrapper {
+    .custom-field-content {
+      padding: 10px 40px 0;
+    }
+  }
+  :global .ant-modal-content {
+    .ant-modal-close {
+      top: 20px;
+      right: 20px;
+    }
+    .ant-modal-header{
+      border: none;
+      padding: 40px 40px 0;
+      .ant-modal-title {
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 28px;
+        color: #3D3D46;
+      }
+    }
+    .ant-modal-body {
+     padding: 0;
+      .modal-content{
+       border-top: 1px solid #ECEDF0;
+       padding: 0;
+     }
+   }
+ }
 }

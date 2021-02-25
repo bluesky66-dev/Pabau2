@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, ReactText } from 'react'
 import { Form, Input, Select, Checkbox } from 'formik-antd'
 import { DatePicker } from 'antd'
 import { Formik } from 'formik'
@@ -11,13 +11,26 @@ import {
 } from '@pabau/ui'
 import styles from './UserDetail.module.less'
 import { customFieldsProps } from './UserDetailMain'
+import dynamic from 'next/dynamic'
+
+export interface GraphDataProps {
+  daysLeft: string
+  seriesData: ReactText[][]
+  time: string
+  holidayRemaining: number
+}
 
 interface PersonalDetail {
   field: customFieldsProps[]
+  graphData: GraphDataProps
 }
 const { TextArea } = Input
 
-const PersonalDetail: FC<PersonalDetail> = ({ field }) => {
+const GraphDetail = dynamic(() => import('./GraphDetail'), {
+  ssr: false,
+})
+
+const PersonalDetail: FC<PersonalDetail> = ({ field, graphData }) => {
   const formikFields = () => {
     const initialValues = {}
     if (field.length > 0) {
@@ -35,9 +48,11 @@ const PersonalDetail: FC<PersonalDetail> = ({ field }) => {
         enableReinitialize={true}
         initialValues={formikFields()}
         validationSchema={Yup.object({
-          firstname: Yup.string().required(),
-          lastname: Yup.string().required(),
-          email: Yup.string().required().email('Invalid email'),
+          firstname: Yup.string().required('First name is required'),
+          lastname: Yup.string().required('Last name is required'),
+          email: Yup.string()
+            .required('Email is required')
+            .email('Invalid email'),
         })}
         onSubmit={() => {
           Notification(NotificationType.success, 'Success! Saved changes.')
@@ -153,7 +168,9 @@ const PersonalDetail: FC<PersonalDetail> = ({ field }) => {
                       )
                     })}
                 </div>
-                <div className={styles.chart}></div>
+                <div className={styles.chart}>
+                  <GraphDetail graphData={graphData} />
+                </div>
               </div>
             </div>
           </Form>

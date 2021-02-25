@@ -57,78 +57,78 @@ const CustomizeFields: FC<customizeFieldsProps> = ({
 
   return (
     <div className={styles.customFieldsWrapper}>
-      <div>
-        <h4>Drag to reorder information on the Personal Tab</h4>
-      </div>
-      <div className={styles.customFieldsBasicInfo}>
-        <p>Basic Information</p>
-        <UpOutlined />
-      </div>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="droppable">
-          {(provided, snapshot) => (
-            <div
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              style={getListStyle(snapshot.isDraggingOver)}
-            >
-              {fieldData.length > 0 &&
-                fieldData.map((data, index) => {
-                  return (
-                    <Draggable
-                      key={data.id}
-                      draggableId={data.id}
-                      index={index}
-                    >
-                      {(provided, snapshot) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          style={getItemStyle(
-                            snapshot.isDragging,
-                            provided.draggableProps.style
-                          )}
-                          className={styles.customFieldsDraggable}
-                        >
+      <h4>Drag to reorder information on the Personal Tab</h4>
+      <div className={styles.customFieldContent}>
+        <div className={styles.customFieldsBasicInfo}>
+          <p>Basic Information</p>
+          <UpOutlined />
+        </div>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="droppable">
+            {(provided, snapshot) => (
+              <div
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                style={getListStyle(snapshot.isDraggingOver)}
+              >
+                {fieldData.length > 0 &&
+                  fieldData.map((data, index) => {
+                    return (
+                      <Draggable
+                        key={data.id}
+                        draggableId={data.id}
+                        index={index}
+                      >
+                        {(provided, snapshot) => (
                           <div
-                            key={data.id}
-                            className={styles.customFieldsDraggableBox}
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={getItemStyle(
+                              snapshot.isDragging,
+                              provided.draggableProps.style
+                            )}
+                            className={styles.customFieldsDraggable}
                           >
-                            <div className={styles.dragIconName}>
-                              <Customize /> <span>{data.label}</span>
-                            </div>
                             <div
-                              className={styles.dragClose}
-                              onClick={() => handleClose(data.id)}
+                              key={data.id}
+                              className={styles.customFieldsDraggableBox}
                             >
-                              <CloseOutlined />
+                              <div className={styles.dragIconName}>
+                                <Customize /> <span>{data.label}</span>
+                              </div>
+                              <div
+                                className={styles.dragClose}
+                                onClick={() => handleClose(data.id)}
+                              >
+                                <CloseOutlined />
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      )}
-                    </Draggable>
-                  )
-                })}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-      <div className={styles.customFieldsDragAdd}>
-        <Button className={styles.addFields}>
-          <PlusOutlined />
-          Add Fields
-        </Button>
-      </div>
-      <div className={styles.customFieldsDragSave}>
-        <Button
-          className={styles.dragSave}
-          type={'primary'}
-          onClick={handleSave}
-        >
-          Save
-        </Button>
+                        )}
+                      </Draggable>
+                    )
+                  })}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+        <div className={styles.customFieldsDragAdd}>
+          <Button className={styles.addFields}>
+            <PlusOutlined />
+            Add Fields
+          </Button>
+        </div>
+        <div className={styles.customFieldsDragSave}>
+          <Button
+            className={styles.dragSave}
+            type={'primary'}
+            onClick={handleSave}
+          >
+            Save
+          </Button>
+        </div>
       </div>
     </div>
   )

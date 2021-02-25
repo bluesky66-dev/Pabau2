@@ -90,3 +90,13 @@ export const fields = [
     ],
   },
 ]
+
+export const graphData = {
+  daysLeft: 'Jun 24-30 (4 days left)',
+  seriesData: [
+    [5, 3, 4, 7, 2, 6, 7],
+    [2, 5, 3, 2, 1, 2, 3],
+  ],
+  time: '12h 58m',
+  holidayRemaining: 3,
+}
