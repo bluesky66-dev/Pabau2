@@ -15,7 +15,7 @@ export const data = [
     color: '#9CF075',
     icon: 'coffee',
     createdDate: 'Monday, 4 Feb 2019',
-    is_active: false,
+    is_active: true,
     isLocked: false,
     index: 1,
   },

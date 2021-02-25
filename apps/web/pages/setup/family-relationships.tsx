@@ -95,6 +95,7 @@ const schema: Schema = {
   fullLower: 'family relationship',
   short: 'Family Relationship',
   shortLower: 'family relationship',
+  createButtonLabel: 'Create Family Relationship',
   fields: {
     name: {
       full: 'Friendly Name',

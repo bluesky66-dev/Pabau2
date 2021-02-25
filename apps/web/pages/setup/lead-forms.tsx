@@ -7,7 +7,6 @@ import LeadTesting from './lead-capture/LeadTesting'
 import LeadResult from './lead-capture/LeadResult'
 import LeadFormResult from './lead-capture/lead-forms/LeadFormResult'
 import LeadCustomizeForm from './lead-capture/lead-forms/LeadCustomizeForm'
-import SendLeadDevloperModal from './lead-capture/lead-forms/SendLeadDevloperModal'
 import {
   FlagOutlined,
   HomeOutlined,
@@ -28,20 +27,18 @@ export const LeadForms: React.FC = () => {
   const [activeStepper, setActiveStepper] = useState('API')
   const [activeStep, setActiveStep] = useState(0)
 
-  const [sendToDeveloperModal, setSendToDeveloperModal] = useState(false)
-
   const apiStepper: StepperItem[] = [
     {
       step: 1,
       name: 'Basic',
-      imgPath: <HomeOutlined />,
+      img: <HomeOutlined />,
       isActive: true,
       index: 0,
     },
     {
       step: 2,
       name: 'Configure(API)',
-      imgPath: (
+      img: (
         <FontAwesomeIcon
           icon={Icons.faPencilAlt}
           style={{ fontSize: '12px' }}
@@ -53,14 +50,14 @@ export const LeadForms: React.FC = () => {
     {
       step: 3,
       name: 'Testing(API)',
-      imgPath: <ToolOutlined />,
+      img: <ToolOutlined />,
       isActive: false,
       index: 2,
     },
     {
       step: 4,
       name: 'Result',
-      imgPath: <FlagOutlined />,
+      img: <FlagOutlined />,
       isActive: false,
       index: 3,
     },
@@ -70,14 +67,14 @@ export const LeadForms: React.FC = () => {
     {
       step: 1,
       name: 'Basic',
-      imgPath: <HomeOutlined />,
+      img: <HomeOutlined />,
       isActive: true,
       index: 0,
     },
     {
       step: 2,
       name: 'Customize Form',
-      imgPath: (
+      img: (
         <FontAwesomeIcon
           icon={Icons.faPencilAlt}
           style={{ fontSize: '12px' }}
@@ -89,7 +86,7 @@ export const LeadForms: React.FC = () => {
     {
       step: 3,
       name: 'Result',
-      imgPath: <FlagOutlined />,
+      img: <FlagOutlined />,
       isActive: false,
       index: 2,
     },
@@ -137,10 +134,6 @@ export const LeadForms: React.FC = () => {
               allAPISteps[activeStep] === 'Testing(API)'
             }
             onActiveStepChange={(step) => {
-              if (activeStepper === 'Form' && allFormSteps[step] === 'Result') {
-                setSendToDeveloperModal((e) => !e)
-                return
-              }
               setActiveStep(step)
             }}
           >
@@ -170,14 +163,6 @@ export const LeadForms: React.FC = () => {
             )}
           </WStepper>
         </div>
-        <SendLeadDevloperModal
-          openModal={sendToDeveloperModal}
-          onSendToDeveloper={() => {
-            setSendToDeveloperModal((e) => !e)
-            setActiveStep(allFormSteps.length - 1)
-          }}
-          onClose={() => setSendToDeveloperModal((e) => !e)}
-        />
       </Layout>
     </>
   )
