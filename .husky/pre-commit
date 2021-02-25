@@ -1,0 +1,5 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+yarn run affected:lint --base=origin/master --parallel
+yarn run affected:test --base=origin/master --parallel
