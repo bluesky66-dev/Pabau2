@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { AppProps } from 'next/app'
 import {
   ApolloClient,
@@ -17,6 +17,7 @@ import * as Icons from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import Login from './login'
 require('../styles/global.less')
 require('../../../libs/ui/src/styles/antd.less')
 
@@ -147,7 +148,8 @@ export default function CustomApp({
   Component,
   pageProps,
 }: AppProps): JSX.Element {
-  return (
+  const [authenticated, authenticate] = useState(true)
+  return authenticated ? (
     <ApolloProvider client={client}>
       <style jsx global>{`
         @font-face {
@@ -168,5 +170,7 @@ export default function CustomApp({
       `}</style>
       <Component {...pageProps} />
     </ApolloProvider>
+  ) : (
+    <Login />
   )
 }
