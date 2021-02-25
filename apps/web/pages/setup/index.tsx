@@ -153,6 +153,7 @@ const Index: FC = () => {
     setSearchValue(searchTerm)
     if (searchTerm) {
       setTitle('Search Results')
+      const unused = 'blah'
       const searchDataArray = []
 
       setupGridData.map((data: SetupGridProps) => {
