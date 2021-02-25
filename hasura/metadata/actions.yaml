@@ -1,14 +1,6 @@
-actions:
-- name: login
-  definition:
-    kind: ""
-    handler: https://api-toshe.pabau.me/login
-  permissions:
-  - role: public
+actions: []
 custom_types:
   enums: []
-  input_objects:
-  - name: LoginInput
-  objects:
-  - name: loginOutput
+  input_objects: []
+  objects: []
   scalars: []

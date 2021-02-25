@@ -8859,6 +8859,225 @@ input String_comparison_exp {
   _similar: String
 }
 
+"""
+columns and relationships of "Taxes"
+"""
+type Taxes {
+  Name: String!
+  Status: Boolean!
+  Value: Int!
+  created_at: timetz!
+  id: uuid!
+  updated_at: timetz!
+}
+
+"""
+aggregated selection of "Taxes"
+"""
+type Taxes_aggregate {
+  aggregate: Taxes_aggregate_fields
+  nodes: [Taxes!]!
+}
+
+"""
+aggregate fields of "Taxes"
+"""
+type Taxes_aggregate_fields {
+  avg: Taxes_avg_fields
+  count(columns: [Taxes_select_column!], distinct: Boolean): Int!
+  max: Taxes_max_fields
+  min: Taxes_min_fields
+  stddev: Taxes_stddev_fields
+  stddev_pop: Taxes_stddev_pop_fields
+  stddev_samp: Taxes_stddev_samp_fields
+  sum: Taxes_sum_fields
+  var_pop: Taxes_var_pop_fields
+  var_samp: Taxes_var_samp_fields
+  variance: Taxes_variance_fields
+}
+
+"""aggregate avg on columns"""
+type Taxes_avg_fields {
+  Value: Float
+}
+
+"""
+Boolean expression to filter rows from the table "Taxes". All fields are combined with a logical 'AND'.
+"""
+input Taxes_bool_exp {
+  Name: String_comparison_exp
+  Status: Boolean_comparison_exp
+  Value: Int_comparison_exp
+  _and: [Taxes_bool_exp!]
+  _not: Taxes_bool_exp
+  _or: [Taxes_bool_exp!]
+  created_at: timetz_comparison_exp
+  id: uuid_comparison_exp
+  updated_at: timetz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "Taxes"
+"""
+enum Taxes_constraint {
+  """unique or primary key constraint"""
+  Taxes_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "Taxes"
+"""
+input Taxes_inc_input {
+  Value: Int
+}
+
+"""
+input type for inserting data into table "Taxes"
+"""
+input Taxes_insert_input {
+  Name: String
+  Status: Boolean
+  Value: Int
+}
+
+"""aggregate max on columns"""
+type Taxes_max_fields {
+  Name: String
+  Value: Int
+  created_at: timetz
+  id: uuid
+  updated_at: timetz
+}
+
+"""aggregate min on columns"""
+type Taxes_min_fields {
+  Name: String
+  Value: Int
+  created_at: timetz
+  id: uuid
+  updated_at: timetz
+}
+
+"""
+response of any mutation on the table "Taxes"
+"""
+type Taxes_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [Taxes!]!
+}
+
+"""
+on conflict condition type for table "Taxes"
+"""
+input Taxes_on_conflict {
+  constraint: Taxes_constraint!
+  update_columns: [Taxes_update_column!]!
+  where: Taxes_bool_exp
+}
+
+"""Ordering options when selecting data from "Taxes"."""
+input Taxes_order_by {
+  Name: order_by
+  Status: order_by
+  Value: order_by
+  created_at: order_by
+  id: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: Taxes"""
+input Taxes_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "Taxes"
+"""
+enum Taxes_select_column {
+  """column name"""
+  Name
+
+  """column name"""
+  Status
+
+  """column name"""
+  Value
+
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "Taxes"
+"""
+input Taxes_set_input {
+  Name: String
+  Status: Boolean
+  Value: Int
+  updated_at: timetz
+}
+
+"""aggregate stddev on columns"""
+type Taxes_stddev_fields {
+  Value: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type Taxes_stddev_pop_fields {
+  Value: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type Taxes_stddev_samp_fields {
+  Value: Float
+}
+
+"""aggregate sum on columns"""
+type Taxes_sum_fields {
+  Value: Int
+}
+
+"""
+update columns of table "Taxes"
+"""
+enum Taxes_update_column {
+  """column name"""
+  Name
+
+  """column name"""
+  Status
+
+  """column name"""
+  Value
+
+  """column name"""
+  updated_at
+}
+
+"""aggregate var_pop on columns"""
+type Taxes_var_pop_fields {
+  Value: Float
+}
+
+"""aggregate var_samp on columns"""
+type Taxes_var_samp_fields {
+  Value: Float
+}
+
+"""aggregate variance on columns"""
+type Taxes_variance_fields {
+  Value: Float
+}
+
 type ThirdPartyAcces {
   access_id: Int
   company: Company
@@ -9540,6 +9759,171 @@ input bigint_comparison_exp {
   _lte: bigint
   _neq: bigint
   _nin: [bigint!]
+}
+
+"""
+columns and relationships of "block_out_options"
+"""
+type block_out_options {
+  backgroundColor: String
+  created_at: timestamptz!
+  defaultTime: Int!
+  id: uuid!
+  is_active: Boolean!
+  name: String!
+  paidBlockOut: Boolean
+  type: String!
+  updated_at: timestamptz!
+}
+
+"""
+Boolean expression to filter rows from the table "block_out_options". All fields are combined with a logical 'AND'.
+"""
+input block_out_options_bool_exp {
+  _and: [block_out_options_bool_exp!]
+  _not: block_out_options_bool_exp
+  _or: [block_out_options_bool_exp!]
+  backgroundColor: String_comparison_exp
+  created_at: timestamptz_comparison_exp
+  defaultTime: Int_comparison_exp
+  id: uuid_comparison_exp
+  is_active: Boolean_comparison_exp
+  name: String_comparison_exp
+  paidBlockOut: Boolean_comparison_exp
+  type: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "block_out_options"
+"""
+enum block_out_options_constraint {
+  """unique or primary key constraint"""
+  block_out_options_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "block_out_options"
+"""
+input block_out_options_inc_input {
+  defaultTime: Int
+}
+
+"""
+input type for inserting data into table "block_out_options"
+"""
+input block_out_options_insert_input {
+  backgroundColor: String
+  defaultTime: Int
+  is_active: Boolean
+  name: String
+  paidBlockOut: Boolean
+  type: String
+}
+
+"""
+response of any mutation on the table "block_out_options"
+"""
+type block_out_options_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [block_out_options!]!
+}
+
+"""
+on conflict condition type for table "block_out_options"
+"""
+input block_out_options_on_conflict {
+  constraint: block_out_options_constraint!
+  update_columns: [block_out_options_update_column!]!
+  where: block_out_options_bool_exp
+}
+
+"""Ordering options when selecting data from "block_out_options"."""
+input block_out_options_order_by {
+  backgroundColor: order_by
+  created_at: order_by
+  defaultTime: order_by
+  id: order_by
+  is_active: order_by
+  name: order_by
+  paidBlockOut: order_by
+  type: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: block_out_options"""
+input block_out_options_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "block_out_options"
+"""
+enum block_out_options_select_column {
+  """column name"""
+  backgroundColor
+
+  """column name"""
+  created_at
+
+  """column name"""
+  defaultTime
+
+  """column name"""
+  id
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  paidBlockOut
+
+  """column name"""
+  type
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "block_out_options"
+"""
+input block_out_options_set_input {
+  backgroundColor: String
+  defaultTime: Int
+  is_active: Boolean
+  name: String
+  paidBlockOut: Boolean
+  type: String
+}
+
+"""
+update columns of table "block_out_options"
+"""
+enum block_out_options_update_column {
+  """column name"""
+  backgroundColor
+
+  """column name"""
+  defaultTime
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  paidBlockOut
+
+  """column name"""
+  type
 }
 
 enum booking_master_cancel_status {
@@ -12748,6 +13132,19 @@ type mutation_root {
   delete_Labs_by_pk(id: uuid!): Labs
 
   """
+  delete data from the table: "Taxes"
+  """
+  delete_Taxes(
+    """filter the rows which have to be deleted"""
+    where: Taxes_bool_exp!
+  ): Taxes_mutation_response
+
+  """
+  delete single row from the table: "Taxes"
+  """
+  delete_Taxes_by_pk(id: uuid!): Taxes
+
+  """
   delete data from the table: "appointment_status"
   """
   delete_appointment_status(
@@ -12759,6 +13156,19 @@ type mutation_root {
   delete single row from the table: "appointment_status"
   """
   delete_appointment_status_by_pk(id: uuid!): appointment_status
+
+  """
+  delete data from the table: "block_out_options"
+  """
+  delete_block_out_options(
+    """filter the rows which have to be deleted"""
+    where: block_out_options_bool_exp!
+  ): block_out_options_mutation_response
+
+  """
+  delete single row from the table: "block_out_options"
+  """
+  delete_block_out_options_by_pk(id: uuid!): block_out_options
 
   """
   delete data from the table: "cancellation_reasons"
@@ -12865,6 +13275,19 @@ type mutation_root {
   delete_lead_by_pk(id: uuid!): lead
 
   """
+  delete data from the table: "locations"
+  """
+  delete_locations(
+    """filter the rows which have to be deleted"""
+    where: locations_bool_exp!
+  ): locations_mutation_response
+
+  """
+  delete single row from the table: "locations"
+  """
+  delete_locations_by_pk(id: uuid!): locations
+
+  """
   delete data from the table: "marketing_campaign"
   """
   delete_marketing_campaign(
@@ -12965,6 +13388,28 @@ type mutation_root {
   ): Labs
 
   """
+  insert data into the table: "Taxes"
+  """
+  insert_Taxes(
+    """the rows to be inserted"""
+    objects: [Taxes_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: Taxes_on_conflict
+  ): Taxes_mutation_response
+
+  """
+  insert a single row into the table: "Taxes"
+  """
+  insert_Taxes_one(
+    """the row to be inserted"""
+    object: Taxes_insert_input!
+
+    """on conflict condition"""
+    on_conflict: Taxes_on_conflict
+  ): Taxes
+
+  """
   insert data into the table: "appointment_status"
   """
   insert_appointment_status(
@@ -12985,6 +13430,28 @@ type mutation_root {
     """on conflict condition"""
     on_conflict: appointment_status_on_conflict
   ): appointment_status
+
+  """
+  insert data into the table: "block_out_options"
+  """
+  insert_block_out_options(
+    """the rows to be inserted"""
+    objects: [block_out_options_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: block_out_options_on_conflict
+  ): block_out_options_mutation_response
+
+  """
+  insert a single row into the table: "block_out_options"
+  """
+  insert_block_out_options_one(
+    """the row to be inserted"""
+    object: block_out_options_insert_input!
+
+    """on conflict condition"""
+    on_conflict: block_out_options_on_conflict
+  ): block_out_options
 
   """
   insert data into the table: "business_details"
@@ -13511,6 +13978,32 @@ type mutation_root {
   ): Labs
 
   """
+  update data of the table: "Taxes"
+  """
+  update_Taxes(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: Taxes_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: Taxes_set_input
+
+    """filter the rows which have to be updated"""
+    where: Taxes_bool_exp!
+  ): Taxes_mutation_response
+
+  """
+  update single row of the table: "Taxes"
+  """
+  update_Taxes_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: Taxes_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: Taxes_set_input
+    pk_columns: Taxes_pk_columns_input!
+  ): Taxes
+
+  """
   update data of the table: "appointment_status"
   """
   update_appointment_status(
@@ -13535,6 +14028,32 @@ type mutation_root {
     _set: appointment_status_set_input
     pk_columns: appointment_status_pk_columns_input!
   ): appointment_status
+
+  """
+  update data of the table: "block_out_options"
+  """
+  update_block_out_options(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: block_out_options_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: block_out_options_set_input
+
+    """filter the rows which have to be updated"""
+    where: block_out_options_bool_exp!
+  ): block_out_options_mutation_response
+
+  """
+  update single row of the table: "block_out_options"
+  """
+  update_block_out_options_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: block_out_options_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: block_out_options_set_input
+    pk_columns: block_out_options_pk_columns_input!
+  ): block_out_options
 
   """
   update data of the table: "cancellation_reasons"
@@ -14549,6 +15068,49 @@ type query_root {
 
   """fetch data from the table: "Labs" using primary key columns"""
   Labs_by_pk(id: uuid!): Labs
+
+  """
+  fetch data from the table: "Taxes"
+  """
+  Taxes(
+    """distinct select on columns"""
+    distinct_on: [Taxes_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Taxes_order_by!]
+
+    """filter the rows returned"""
+    where: Taxes_bool_exp
+  ): [Taxes!]!
+
+  """
+  fetch aggregated fields from the table: "Taxes"
+  """
+  Taxes_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Taxes_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Taxes_order_by!]
+
+    """filter the rows returned"""
+    where: Taxes_bool_exp
+  ): Taxes_aggregate!
+
+  """fetch data from the table: "Taxes" using primary key columns"""
+  Taxes_by_pk(id: uuid!): Taxes
   acLog(where: AcLogWhereUniqueInput!): AcLog
   acLogAction(where: AcLogActionWhereUniqueInput!): AcLogAction
   acLogActions(after: AcLogActionWhereUniqueInput, before: AcLogActionWhereUniqueInput, first: Int, last: Int, orderBy: [AcLogActionOrderByInput!], where: AcLogActionWhereInput): [AcLogAction]!
@@ -14693,6 +15255,31 @@ type query_root {
   blockReason(where: BlockReasonWhereUniqueInput!): BlockReason
   blockReasons(after: BlockReasonWhereUniqueInput, before: BlockReasonWhereUniqueInput, first: Int, last: Int, orderBy: [BlockReasonOrderByInput!], where: BlockReasonWhereInput): [BlockReason]!
   blockReasonsCount(where: BlockReasonWhereInput): Int
+
+  """
+  fetch data from the table: "block_out_options"
+  """
+  block_out_options(
+    """distinct select on columns"""
+    distinct_on: [block_out_options_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [block_out_options_order_by!]
+
+    """filter the rows returned"""
+    where: block_out_options_bool_exp
+  ): [block_out_options!]!
+
+  """
+  fetch data from the table: "block_out_options" using primary key columns
+  """
+  block_out_options_by_pk(id: uuid!): block_out_options
   bnfDrug(where: BnfDrugWhereUniqueInput!): BnfDrug
   bnfDrugs(after: BnfDrugWhereUniqueInput, before: BnfDrugWhereUniqueInput, first: Int, last: Int, orderBy: [BnfDrugOrderByInput!], where: BnfDrugWhereInput): [BnfDrug]!
   bnfDrugsCount(where: BnfDrugWhereInput): Int
@@ -15987,6 +16574,49 @@ type subscription_root {
   Labs_by_pk(id: uuid!): Labs
 
   """
+  fetch data from the table: "Taxes"
+  """
+  Taxes(
+    """distinct select on columns"""
+    distinct_on: [Taxes_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Taxes_order_by!]
+
+    """filter the rows returned"""
+    where: Taxes_bool_exp
+  ): [Taxes!]!
+
+  """
+  fetch aggregated fields from the table: "Taxes"
+  """
+  Taxes_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Taxes_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Taxes_order_by!]
+
+    """filter the rows returned"""
+    where: Taxes_bool_exp
+  ): Taxes_aggregate!
+
+  """fetch data from the table: "Taxes" using primary key columns"""
+  Taxes_by_pk(id: uuid!): Taxes
+
+  """
   fetch data from the table: "appointment_status"
   """
   appointment_status(
@@ -16030,6 +16660,31 @@ type subscription_root {
   fetch data from the table: "appointment_status" using primary key columns
   """
   appointment_status_by_pk(id: uuid!): appointment_status
+
+  """
+  fetch data from the table: "block_out_options"
+  """
+  block_out_options(
+    """distinct select on columns"""
+    distinct_on: [block_out_options_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [block_out_options_order_by!]
+
+    """filter the rows returned"""
+    where: block_out_options_bool_exp
+  ): [block_out_options!]!
+
+  """
+  fetch data from the table: "block_out_options" using primary key columns
+  """
+  block_out_options_by_pk(id: uuid!): block_out_options
 
   """
   fetch data from the table: "cancellation_reasons"
