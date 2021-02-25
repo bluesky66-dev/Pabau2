@@ -89,20 +89,12 @@ const schema: Schema = {
 
 /* eslint-disable graphql/template-strings */
 export const LIST_QUERY = gql`
-  query rota_templates(
-    $isActive: Boolean = true
-    $offset: Int
-    $limit: Int
-    $searchTerm: String = ""
-  ) {
+  query rota_templates($isActive: Boolean = true, $offset: Int, $limit: Int) {
     rota_templates(
       offset: $offset
       limit: $limit
       order_by: { order: desc }
-      where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-      }
+      where: { is_active: { _eq: $isActive } }
     ) {
       __typename
       id
@@ -210,7 +202,7 @@ export function RotaTemplate(props: RotaTemplateProps) {
         editQuery={EDIT_MUTATION}
         aggregateQuery={LIST_AGGREGATE_QUERY}
         updateOrderQuery={UPDATE_ORDER_MUTATION}
-        showNotificationBanner={true}
+        addFilter={true}
       />
       )
     </div>
