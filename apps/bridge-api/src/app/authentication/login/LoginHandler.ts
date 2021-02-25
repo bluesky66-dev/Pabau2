@@ -6,6 +6,10 @@ import jwt from 'jsonwebtoken'
 import { UnauthorizedException } from "@nestjs/common";
 import { JwtPayloadDto } from "../dto/jwtPayload.dto";
 
+interface ExtendedRequest extends NodeJS.ReadStream {
+  input: string;
+}
+
 export class LoginHandler {
 
   private result: ServerResponse;
