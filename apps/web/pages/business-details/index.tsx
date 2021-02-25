@@ -15,7 +15,6 @@ import CommonHeader from '../setup/CommonHeader'
 import styles from './index.module.less'
 import { gql, useMutation } from '@apollo/client'
 const { Title } = Typography
-const apiKey = process.env.google_api_key
 export const Index: FC = () => {
   const tabMenuItems = [
     'Details',
@@ -25,91 +24,9 @@ export const Index: FC = () => {
     'Notifications',
   ]
   const ADD_MUTATION = gql`
-    mutation MyMutation($variable: CompanyDetailsCreateInput!) {
-      createOneCompanyDetails(data: $variable) {
-        accept_insurance
-        admin
-        append_client_pref
-        auto_sms
-        calendar_version
-        capital_surname
-        city
-        class_teacher_singular
-        class_term_plural
-        class_term_singular
-        company_id
-        company_name
-        company_notes
-        completed_setup
-        contact_term_plural
-        contact_term_singular
-        converted_value
-        country
-        county
-        currency
-        cycles_display
-        date_format
-        db_lock
-        debrand_logo
-        default_inv_template_id
-        default_search
-        demo_mode
-        details_id
-        diagnosis_codes_type
-        disable_prescriptions
-        employee_clock_track
-        employee_term_plural
-        employee_term_singular
-        employees
-        enable_2fa
-        enable_ad
-        enable_ad_code
-        enable_ip_filter
-        enable_sens_data
-        facebook_page
-        fax
-        flag_enabled
-        footer_logo
-        head_office
-        header_logo
-        healthcode_live
-        industry_sector
-        info_email
-        is_surgical
-        language
-        legacy_consultations
-        linkedin_page
-        lock_export
-        lock_prescription
-        logo
-        medical_approvals
-        merge_bookings_tabs
-        new_reports
-        phone
-        phone_prefix
-        post_code
-        preferences_email
-        preferences_newsletters
-        preferences_post
-        preferences_sms
-        private_treatment_notes
-        rota_version
-        secure_medical_forms
-        sensitive_data_question
-        show_report_logo
-        slug
-        sms_active
-        stock_manager
-        street
-        subscription
-        tax_name
-        timezone_id
-        twitter_page
-        use_google_auth
-        vat
-        website
-        week_start_day
-        youtube_page
+    mutation MyMutation($variable: [business_details_insert_input!]!) {
+      insert_business_details(objects: $variable) {
+        affected_rows
       }
     }
   `
@@ -119,63 +36,23 @@ export const Index: FC = () => {
   const onSave = async (values, type) => {
     console.log(values, type)
     let data = {
-      accept_insurance: 10,
-      admin: 10,
-      append_client_pref: 10,
-      calendar_version: '',
-      city: '',
-      company: {},
-      company_name: '',
-      company_notes: '',
-      converted_value: 1.5,
-      country: '',
-      county: '',
-      currency: '',
-      date_format: '',
-      db_lock: 10,
-      debrand_logo: 10,
-      default_inv_template_id: 10,
-      demo_mode: 10,
-      disable_prescriptions: 10,
-      employees: '',
-      enable_2fa: 10,
-      enable_sens_data: 10,
-      facebook_page: '',
-      fax: '',
-      footer_logo: '',
-      head_office: 10,
-      header_logo: '',
-      industry_sector: '',
-      info_email: '',
-      is_surgical: 10,
-      language: '',
-      linkedin_page: '',
-      lock_export: 10,
-      lock_prescription: 10,
-      logo: '',
-      medical_approvals: 10,
-      new_reports: 10,
+      businses_name: '',
+      business_type: '',
+      company_email: '',
       phone: '',
-      phone_prefix: 10,
-      post_code: '',
-      private_treatment_notes: 10,
-      rota_version: '',
-      secure_medical_forms: 0,
-      sms_active: 10,
-      stock_manager: '',
-      street: '',
-      subscription: '',
-      twitter_page: '',
-      vat: '',
       website: '',
-      week_start_day: '',
-      youtube_page: '',
+      currency: '',
+      business_location: '',
+      date_format: '',
+      default_language_clients: '',
+      default_language_staff: '',
+      time_zone: '',
+      week_start: '',
+      vat: '',
     }
-    let address
     switch (type) {
       case 'business': {
         const { basicInformation, businessLocation, languageSetting } = values
-        address = businessLocation
         const {
           businessName,
           businessType,
@@ -191,73 +68,19 @@ export const Index: FC = () => {
           timezone,
           weekStart,
         } = languageSetting
-        // data = {
-        //   business_name: businessName,
-        //   business_type: businessType,
-        //   company_email: companyEmail,
-        //   phone,
-        //   website,
-        //   currency,
-        //   business_location: businessLocation,
-        //   date_format: dateFormat,
-        //   default_language_clients: defaultLanuageClients,
-        //   default_language_staff: defaultLanuageStaff,
-        //   time_zone: timezone,
-        //   week_start: weekStart,
-        // }
         data = {
-          accept_insurance: 10,
-          admin: 10,
-          append_client_pref: 10,
-          calendar_version: '',
-          city: '',
-          company: {},
-          company_name: businessName,
-          company_notes: '',
-          converted_value: 1.5,
-          country: '',
-          county: '',
-          currency,
-          date_format: dateFormat,
-          db_lock: 10,
-          debrand_logo: 10,
-          default_inv_template_id: 10,
-          demo_mode: 10,
-          disable_prescriptions: 10,
-          employees: '',
-          enable_2fa: 10,
-          enable_sens_data: 10,
-          facebook_page: '',
-          fax: '',
-          footer_logo: '',
-          head_office: 10,
-          header_logo: '',
-          industry_sector: '',
-          info_email: companyEmail,
-          is_surgical: 10,
-          language: defaultLanuageClients,
-          linkedin_page: '',
-          lock_export: 10,
-          lock_prescription: 10,
-          logo: '',
-          medical_approvals: 10,
-          new_reports: 10,
+          businses_name: businessName,
+          business_type: businessType,
+          company_email: companyEmail,
           phone,
-          phone_prefix: 10,
-          post_code: '',
-          private_treatment_notes: 10,
-          rota_version: '',
-          secure_medical_forms: 0,
-          sms_active: 10,
-          stock_manager: '',
-          street: '',
-          subscription: '',
-          // timezone_id: timezone,
-          twitter_page: '',
-          vat: '',
           website,
-          week_start_day: weekStart,
-          youtube_page: '',
+          currency,
+          business_location: businessLocation,
+          date_format: dateFormat,
+          default_language_clients: defaultLanuageClients,
+          default_language_staff: defaultLanuageStaff,
+          time_zone: timezone,
+          week_start: weekStart,
         }
         break
       }
@@ -285,48 +108,6 @@ export const Index: FC = () => {
       }
     }
     try {
-      if (address) {
-        const response = await fetch(
-          `https://maps.googleapis.com/maps/api/geocode/json?address=${address.replace(
-            /\s/g,
-            '+'
-          )}&key=${apiKey}`
-        )
-        const res = await response.json()
-        if (res.status === 'OK') {
-          const addressComponents = res.results[0].address_components
-          const streetNumber = addressComponents.find((item) =>
-            item.types.includes('street_number')
-          )
-          if (streetNumber) {
-            data.street = streetNumber.long_name
-          }
-          // const route = addressComponents.find((item) =>
-          //   item.types.includes('route')
-          // )
-          // const locality = addressComponents.find((item) =>
-          //   item.types.includes('locality')
-          // )
-          // const area1 = addressComponents.find((item) =>
-          //   item.types.includes('administrative_area_level_1')
-          // )
-          // const area2 = addressComponents.find((item) =>
-          //   item.types.includes('administrative_area_level_2')
-          // )
-          const country = addressComponents.find((item) =>
-            item.types.includes('country')
-          )
-          if (country) {
-            data.country = country.long_name
-          }
-          const postcode = addressComponents.find((item) =>
-            item.types.includes('postal_code')
-          )
-          if (postcode) {
-            data.post_code = postcode.long_name
-          }
-        }
-      }
       await createBusinessDetails({
         variables: {
           variable: data,
