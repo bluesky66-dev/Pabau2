@@ -230,18 +230,18 @@ const CrudTable: FC<P> = ({
 
   useEffect(() => {
     if (data) {
-      if (data[0].__typename === 'issuing_company') {
-        const newData = data.map((d) => {
-          const { country, city, street, post_code } = d
-          return {
-            ...d,
-            address: country + ', ' + city + ', ' + street + ', ' + post_code,
-          }
-        })
-        setSourceData(newData)
-      } else {
-        setSourceData(data)
-      }
+      // if (data[0].__typename === 'issuing_company') {
+      //   const newData = data.map((d) => {
+      //     const { country, city, street, post_code } = d
+      //     return {
+      //       ...d,
+      //       address: country + ', ' + city + ', ' + street + ', ' + post_code,
+      //     }
+      //   })
+      //   setSourceData(newData)
+      // } else {
+      setSourceData(data)
+      // }
     }
     if (aggregateData)
       setPaginateData({

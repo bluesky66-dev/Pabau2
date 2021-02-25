@@ -64,6 +64,44 @@
       filter: {}
 - table:
     schema: public
+    name: Taxes
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - name
+      - is_active
+      - value
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - name
+      - is_active
+      - value
+      - created_at
+      - id
+      - updated_at
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - name
+      - is_active
+      - value
+      - updated_at
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
     name: appointment_status
   insert_permissions:
   - role: public
@@ -113,25 +151,181 @@
       filter: {}
 - table:
     schema: public
+    name: block_out_options
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - backgroundColor
+      - defaultTime
+      - is_active
+      - name
+      - paidBlockOut
+      - type
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - id
+      - name
+      - type
+      - is_active
+      - paidBlockOut
+      - backgroundColor
+      - defaultTime
+      - created_at
+      - updated_at
+      filter: {}
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - backgroundColor
+      - defaultTime
+      - is_active
+      - name
+      - paidBlockOut
+      - type
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
     name: business_details
   insert_permissions:
   - role: public
     permission:
       check: {}
       columns:
+      - disable_prescriptions
+      - history_data
+      - medical_approvals
+      - perform_surgical
+      - secure_medical_forms
+      - id
+      - booking_multiple_attendees_plural
+      - booking_multiple_attendees_singular
       - business_location
       - business_type
       - businses_name
+      - client_email
+      - client_phone
+      - client_postal
+      - client_sms
       - company_email
       - currency
       - date_format
       - default_language_clients
       - default_language_staff
+      - employee_plural
+      - employee_singular
+      - leads_email
+      - leads_phone
+      - leads_postal
+      - leads_sms
+      - people_attend_appointment_plural
+      - people_attend_appointment_singular
       - phone
+      - teacher_plural
+      - teacher_singular
       - time_zone
+      - treatment_cycles
+      - vat
       - website
       - week_start
       backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - disable_prescriptions
+      - history_data
+      - medical_approvals
+      - perform_surgical
+      - secure_medical_forms
+      - id
+      - booking_multiple_attendees_plural
+      - booking_multiple_attendees_singular
+      - business_location
+      - business_type
+      - businses_name
+      - client_email
+      - client_phone
+      - client_postal
+      - client_sms
+      - company_email
+      - currency
+      - date_format
+      - default_language_clients
+      - default_language_staff
+      - employee_plural
+      - employee_singular
+      - leads_email
+      - leads_phone
+      - leads_postal
+      - leads_sms
+      - people_attend_appointment_plural
+      - people_attend_appointment_singular
+      - phone
+      - teacher_plural
+      - teacher_singular
+      - time_zone
+      - treatment_cycles
+      - vat
+      - website
+      - week_start
+      filter: {}
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - disable_prescriptions
+      - history_data
+      - medical_approvals
+      - perform_surgical
+      - secure_medical_forms
+      - id
+      - booking_multiple_attendees_plural
+      - booking_multiple_attendees_singular
+      - business_location
+      - business_type
+      - businses_name
+      - client_email
+      - client_phone
+      - client_postal
+      - client_sms
+      - company_email
+      - currency
+      - date_format
+      - default_language_clients
+      - default_language_staff
+      - employee_plural
+      - employee_singular
+      - leads_email
+      - leads_phone
+      - leads_postal
+      - leads_sms
+      - people_attend_appointment_plural
+      - people_attend_appointment_singular
+      - phone
+      - teacher_plural
+      - teacher_singular
+      - time_zone
+      - treatment_cycles
+      - vat
+      - website
+      - week_start
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: cancellation_reasons
@@ -609,6 +803,10 @@
       - order
       filter: {}
       check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: marketing_campaign
@@ -847,3 +1045,51 @@
 - table:
     schema: public
     name: third_parties
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - is_active
+      - phone
+      - email
+      - name
+      - provider_no
+      - type
+      - created_at
+      - updated_at
+      - id
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - phone
+      - email
+      - name
+      - provider_no
+      - type
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - phone
+      - email
+      - name
+      - provider_no
+      - type
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
