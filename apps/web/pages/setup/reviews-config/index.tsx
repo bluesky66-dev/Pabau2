@@ -40,7 +40,7 @@ import {
 } from '@pabau/ui'
 import confetti from 'canvas-confetti'
 import Layout from '../../../components/Layout/Layout'
-import CommonHeader from '../CommonHeader'
+import CommonHeader from '../common-header'
 import reviewsConfigBanner from '../../../assets/images/reviews-config-banner.png'
 import userAvatar from '../../../assets/images/users/alex.png'
 import clinicLogo from '../../../assets/images/clinic-logo.png'

@@ -1,10 +1,10 @@
 import React from 'react'
 
-import WStepper from './WStepper'
-import { data } from '../wizard/mock'
+import Wstepper from './Wstepper'
+import { data } from '../wizard/Mock'
 
 export default {
-  component: WStepper,
+  component: Wstepper,
   title: 'Wizard/Wstepper',
   args: { active: 0, breadcrumbTxt: 'Setup', headerTxt: 'Lead Capture' },
   argTypes: {
@@ -20,13 +20,13 @@ const wstepperStory = ({ ...args }) => {
   // const [index, setIndex] = React.useState(active)
   // return <Wizard {...args} active={index} onPrev={() => setIndex(index - 1)} onNext={() => setIndex(index + 1)} allSteps={args.allSteps} breadcrumb={args.breadcrumb} header={args.header}></Wizard>;
   return (
-    <WStepper
+    <Wstepper
       {...args}
       data={data}
       active={args.active}
       breadcrumbTxt={args.breadcrumbTxt}
       headerTxt={args.headerTxt}
-    ></WStepper>
+    ></Wstepper>
   )
 }
 
