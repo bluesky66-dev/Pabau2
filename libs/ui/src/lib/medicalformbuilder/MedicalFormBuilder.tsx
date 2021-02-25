@@ -4,18 +4,18 @@ import React, { FC } from 'react'
 import styles from './MedicalFormBuilder.module.less'
 import MedicalFormEdit from './MedicalFormEdit'
 import MedicalFormInfo from './MedicalFormInfo'
+import { PreviewData } from './MedicalFormInterface'
 import MedicalFormPreview from './MedicalFormPreview'
-import MedicalFormPreviewOld from './MedicalFormPreviewOld'
 import MedicalFormSetting from './MedicalFormSetting'
 
 const { TabPane } = Tabs
 
-const MedicalFormBuilder: FC = () => {
+const MedicalFormBuilder: FC<PreviewData> = ({ previewData }) => {
   return (
-    <>
+    <div className={styles.medicalFormBody}>
       <MedicalFormInfo formName="IPL Treatment Record (Clone)" />
       <MedicalFormSetting />
-      <Tabs defaultActiveKey="1" centered className={styles.medicalFormMain}>
+      <Tabs defaultActiveKey="1" centered className={styles.medicalFormMainTab}>
         <TabPane
           tab={
             <span className={styles.tabName}>
@@ -26,7 +26,7 @@ const MedicalFormBuilder: FC = () => {
           }
           key="1"
         >
-          <MedicalFormEdit />
+          <MedicalFormEdit previewData={previewData} />
         </TabPane>
         <TabPane
           tab={
@@ -39,19 +39,8 @@ const MedicalFormBuilder: FC = () => {
         >
           <MedicalFormPreview />
         </TabPane>
-        <TabPane
-          tab={
-            <span className={styles.tabName}>
-              <EyeOutlined />
-              Preview for pabau1.0
-            </span>
-          }
-          key="3"
-        >
-          <MedicalFormPreviewOld />
-        </TabPane>
       </Tabs>
-    </>
+    </div>
   )
 }
 

@@ -1,4 +1,5 @@
 import { Col, Row } from 'antd'
+import { Base64 } from 'js-base64'
 import React, { FC, useState } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { v4 as uuidv4 } from 'uuid'
@@ -6,6 +7,7 @@ import RightSidebar from '../rightsidebar/RightSidebar'
 import styles from './MedicalFormBuilder.module.less'
 import MedicalFormEditLeft from './MedicalFormEditLeft'
 import MedicalFormEditMain from './MedicalFormEditMain'
+import { PreviewData } from './MedicalFormInterface'
 
 const medicalForms = [
   { id: 0, formType: 'basic', formName: 'basic_heading' },
@@ -58,7 +60,13 @@ const copy = (source, destination, droppableSource, endIndex) => {
   return destination
 }
 
-const MedicalFormEdit: FC = () => {
+const MedicalFormEdit: FC<PreviewData> = ({ previewData }) => {
+  console.log('previewData =', previewData)
+  let previewDataArray = []
+  if (previewData !== '') {
+    previewDataArray = JSON.parse(Base64.decode(previewData ? previewData : ''))
+  }
+  console.log('previewDataArray =', previewDataArray)
   const [draggedForms, setDraggedForms] = useState([])
   const [selectedForm, setSelectedForm] = useState({
     id: '',

@@ -38,3 +38,7 @@ export const defaultSelectedFormInfos: SelectedForms = {
   presciption: false,
   labForm: false,
 }
+
+export interface PreviewData {
+  previewData?: string
+}

@@ -1,5 +1,5 @@
-import { Select } from 'antd'
 import React, { FC, useState } from 'react'
+import { Select } from 'antd'
 import styles from './AddSuggestion.module.less'
 const { Option } = Select
 
