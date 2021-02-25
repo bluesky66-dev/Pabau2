@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import DocumentUploadModal, {
-  DraggableProps,
+  DocumentUploadDraggableProp,
   FolderOptions,
 } from './DocumentUploadModal'
 import userImage from '../../assets/images/user.png'
@@ -40,7 +40,7 @@ interface P {
   userName: string
   position: string
   checkboxTooltip?: string
-  draggerProps?: DraggableProps
+  draggerProps?: DocumentUploadDraggableProp
   folderOptions: FolderOptions[]
 }
 
