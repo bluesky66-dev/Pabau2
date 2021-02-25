@@ -8,6 +8,7 @@ import {
   WhatsAppOutlined,
   InstagramOutlined,
   TwitterOutlined,
+  LinkedinOutlined,
 } from '@ant-design/icons'
 
 export interface EmailSMSPreviewProps {
@@ -24,6 +25,11 @@ export interface EmailSMSPreviewProps {
   footer?: boolean
   isGiftVoucher?: boolean
   hideLogo?: boolean
+  previewButtonGroup?: boolean
+  previewCustomStatus?: string
+  activeSocialIcons?: string[]
+  buttonColor?: string
+  backGroundColor?: string
 }
 
 export interface FooterProps {
@@ -31,6 +37,7 @@ export interface FooterProps {
   contact?: boolean
   text?: string
   isFooterText?: boolean
+  activeSocialIcons?: string[]
 }
 
 export interface NoShowAppointmentProps {
@@ -111,7 +118,22 @@ export function EmailSMSFooter(props: FooterProps): JSX.Element {
     contact = false,
     text,
     isFooterText = false,
+    activeSocialIcons = [],
   } = props
+
+  const setSocialIcon = (value) => {
+    if (value.includes('facebook')) {
+      return <FacebookOutlined className={styles.color} />
+    } else if (value.includes('whatsApp')) {
+      return <WhatsAppOutlined className={styles.color} />
+    } else if (value.includes('linksIn')) {
+      return <LinkedinOutlined className={styles.color} />
+    } else if (value.includes('instagram')) {
+      return <InstagramOutlined className={styles.color} />
+    } else if (value.includes('twitter')) {
+      return <TwitterOutlined className={styles.color} />
+    }
+  }
   return (
     <>
       <Divider className={styles.dividerHr} />
@@ -150,10 +172,7 @@ export function EmailSMSFooter(props: FooterProps): JSX.Element {
         <Row className={styles.footerIcon}>
           <Col>
             <div className={styles.iconGroup}>
-              <FacebookOutlined className={styles.color} />
-              <WhatsAppOutlined className={styles.color} />
-              <InstagramOutlined className={styles.color} />
-              <TwitterOutlined className={styles.color} />
+              {activeSocialIcons.map((value, index) => setSocialIcon(value))}
             </div>
           </Col>
         </Row>
@@ -179,35 +198,44 @@ export const EmailSMSPreview = (
     footer = true,
     isGiftVoucher = false,
     hideLogo = false,
+    previewButtonGroup = true,
+    previewCustomStatus,
+    backGroundColor = '',
+    activeSocialIcons = ['facebook', 'whatsApp', 'instagram', 'twitter'],
   } = props
-  const [previewStatus, setPreviewStatus] = React.useState('email')
+  const [previewStatus, setPreviewStatus] = React.useState(
+    previewCustomStatus || 'email'
+  )
 
   const handleSmsTabChanged = (value) => {
     setPreviewStatus(value)
   }
 
   return (
-    <div className={styles.previewWrapper}>
-      <Row justify="center" className={styles.previewButtonGroup}>
-        <Radio.Group defaultValue="email" buttonStyle="solid">
-          <Radio.Button
-            className={styles.radioLeftButton}
-            value="email"
-            onClick={() => handleSmsTabChanged('email')}
-          >
-            Email
-          </Radio.Button>
-          <Radio.Button
-            className={styles.radioRightButton}
-            value="sms"
-            onClick={() => handleSmsTabChanged('sms')}
-          >
-            SMS Text
-          </Radio.Button>
-        </Radio.Group>
-      </Row>
+    <div>
+      {previewButtonGroup && (
+        <Row justify="center" className={styles.previewButtonGroup}>
+          <Radio.Group defaultValue="email" buttonStyle="solid">
+            <Radio.Button
+              className={styles.radioLeftButton}
+              value="email"
+              onClick={() => handleSmsTabChanged('email')}
+            >
+              Email
+            </Radio.Button>
+            <Radio.Button
+              className={styles.radioRightButton}
+              value="sms"
+              onClick={() => handleSmsTabChanged('sms')}
+            >
+              SMS Text
+            </Radio.Button>
+          </Radio.Group>
+        </Row>
+      )}
       {previewStatus === 'email' && (
         <div
+          style={{ backgroundColor: backGroundColor }}
           className={`${styles.emailPreview} ${
             isGiftVoucher && `${styles.giftVoucher}`
           }`}
@@ -248,6 +276,7 @@ export const EmailSMSPreview = (
                 iconGroup={footerIconGroup}
                 text={footerText}
                 isFooterText={isFooterText}
+                activeSocialIcons={activeSocialIcons}
               />
             )}
           </div>

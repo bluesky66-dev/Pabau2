@@ -1,5 +1,5 @@
 .tabs-align {
-  height: 700px;
+  height: 720px;
   overflow-y: scroll;
   border-bottom: 1px solid #ecedf0;
   .collapse-align-first {
@@ -10,7 +10,6 @@
       justify-content: flex-start;
       border: none;
     }
-
     :global {
       .ant-collapse-item {
         .ant-collapse-header {
@@ -18,7 +17,12 @@
           font-weight: 700;
           font-size: 16px;
           line-height: 24px;
+          padding-bottom: 16px;
+          padding-top: 16px;
           width: 230px;
+          @media screen and (max-width: 767px) {
+            width: 100%;
+          }
         }
       }
     }
@@ -93,8 +97,51 @@
   color: #00a1e1;
 }
 
-.papauPlusContainer {
+.client-lang {
   position: relative;
+}
+
+.papauPlusContainer {
+  position: absolute;
   left: 220px;
-  top: 34px;
+  top: 16px;
+  @media screen and (max-width: 767px) {
+    left: 155px;
+  }
+}
+
+.line1 {
+  //   font-family: Circular Std;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  color: #9292a3 !important;
+  //   color: red !important;
+}
+
+.reminder {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  color: #9292a3;
+}
+
+.inform-text {
+  margin-top: 16px;
+}
+
+.client-lang-logo {
+  margin-top: 12px;
+}
+
+.hidesection {
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+}
+
+.message-section {
+  padding: 0px 16px;
+  padding-bottom: 16px;
 }
