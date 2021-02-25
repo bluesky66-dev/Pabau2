@@ -15,7 +15,7 @@ export const schema: Omit<GraphQLSchema, "extensions"> & { extensions: { nexus: 
     experimentalCRUD: true, prismaClient: ctx => ctx.prisma = prisma })],
   outputs: {
     schema: __dirname + '/../schema.graphql',
-    typegen: join( __dirname, '/generated/', 'typegen-nexus-plugin-prisma.d.ts' )
+    typegen: __dirname + '/generated/typegen-nexus-plugin-prisma.d.ts'
   },
   sourceTypes: {
     modules: [
