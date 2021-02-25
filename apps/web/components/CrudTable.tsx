@@ -270,7 +270,7 @@ const CrudTable: FC<P> = ({
 
   useEffect(() => {
     if (data) {
-      if (data[0]?.__typename === 'issuing_company') {
+      if (schema.full === 'Issuing Company') {
         const newData = data.map((d) => {
           return {
             ...d,
