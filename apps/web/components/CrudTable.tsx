@@ -246,14 +246,24 @@ const CrudTable: FC<P> = ({
   )
 
   const getAddress = (data) => {
+    const addressPreference = new Set([
+      'country',
+      'city',
+      'street',
+      'post_code',
+    ])
     const { country, city, street, post_code } = data
     let address
-    if (country || city || street || post_code) {
-      address = `${country ? country : ''}${city ? ', ' + city : ''}${
-        street ? ', ' + street : ''
-      }${post_code ? ', ' + post_code : ''}`
-    } else if (!country && !city && !street && !post_code) {
+    const addressPart = []
+    if (!country && !city && !street && !post_code) {
       address = 'No address found'
+    } else {
+      for (const key in data) {
+        if (addressPreference.has(key) && data[key]) {
+          addressPart.push(data[key])
+        }
+      }
+      address = addressPart.join(',').toString().replace(/,/g, ', ')
     }
     return address
   }
