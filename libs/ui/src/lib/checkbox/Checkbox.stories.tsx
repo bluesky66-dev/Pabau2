@@ -1,9 +1,9 @@
 /* eslint-disable */
 
 import React from 'react'
-import ButtonCheckbox from './buttonCheckbox'
-import Checkbox from './checkbox'
-import CustomCheckbox from './customCheckbox'
+import ButtonCheckbox from './ButtonCheckbox'
+import Checkbox from './Checkbox'
+import CustomCheckbox from './CustomCheckBox'
 
 export default {
   component: Checkbox,

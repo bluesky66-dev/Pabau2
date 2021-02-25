@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons'
 import { Radio } from 'antd'
 import { BasicModal as Modal, ButtonTypes } from '@pabau/ui'
-import SendLeadDevloperModal from './lead-forms/SendLeadDevloperModal'
+import SendLeadDevloperModal from './lead-forms/send-lead-devloper-modal'
 
 export const LeadIntegration: React.FC = () => {
   const [captureLeadIntegrationStep, setCaptureLeadIntegrationStep] = useState(

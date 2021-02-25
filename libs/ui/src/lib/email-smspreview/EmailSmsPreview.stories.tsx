@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react'
-import EmailSMSPreview, {
+import EmailSmsPreview, {
   NoShowAppointmentProps,
   EmailSMSPreviewProps,
   BookedOntoClassProps,
@@ -10,7 +10,7 @@ import EmailSMSPreview, {
   LeadResponsesProps,
   ConnectRegistrationProps,
   MedicalFormProps,
-} from './EmailSMSPreview'
+} from './EmailSmsPreview'
 import NoShowAppointmentComponent from './NoShowAppointment'
 import BookedOnClass from './BookedOntoClass'
 import CancelAClassBooking from './CancelAClassBooking'
@@ -30,8 +30,8 @@ import NewAppoinmentsIsBooked from './NewAppointmentIsBooked'
 import UpComingAppointmentReminder from './UpComingAppoinmentReminder'
 
 export default {
-  component: EmailSMSPreview,
-  title: 'Notification/EmailSMSPreview',
+  component: EmailSmsPreview,
+  title: 'Notification/EmailSmsPreview',
   args: {
     greeting: 'Hi, Anna',
     subtitle: 'Sorry you missed your appointment!',
@@ -75,7 +75,7 @@ const NoShowAppointmentStory = ({
   smsMessage,
   smsFooterText,
 }: PropsWithChildren<EmailSMSPreviewProps & NoShowAppointmentProps>) => (
-  <EmailSMSPreview
+  <EmailSmsPreview
     greeting={greeting}
     subtitle={subtitle}
     footerContact={footerContact}
@@ -92,7 +92,7 @@ const NoShowAppointmentStory = ({
       footerContact={footerContact}
       isFooterText={isFooterText}
     />
-  </EmailSMSPreview>
+  </EmailSmsPreview>
 )
 
 export const NoShowAppointment = NoShowAppointmentStory.bind({})
@@ -132,7 +132,7 @@ const BookedOnClassStory = ({
   address,
   message,
 }: PropsWithChildren<EmailSMSPreviewProps & BookedOntoClassProps>) => (
-  <EmailSMSPreview
+  <EmailSmsPreview
     greeting={greeting}
     subtitle={subtitle}
     footerContact={footerContact}
@@ -150,7 +150,7 @@ const BookedOnClassStory = ({
       address={address}
       message={message}
     />
-  </EmailSMSPreview>
+  </EmailSmsPreview>
 )
 export const BookedOntoClass = BookedOnClassStory.bind({})
 BookedOntoClass.args = {
@@ -185,7 +185,7 @@ const cancelledAClassBookingStory = ({
   smsMessage,
   smsFooterText,
 }: PropsWithChildren<EmailSMSPreviewProps & CancelAClassBookingProps>) => (
-  <EmailSMSPreview
+  <EmailSmsPreview
     greeting={greeting}
     footerIconGroup={footerIconGroup}
     smsGreeting={smsGreeting}
@@ -200,7 +200,7 @@ const cancelledAClassBookingStory = ({
       address={address}
       message={message}
     />
-  </EmailSMSPreview>
+  </EmailSmsPreview>
 )
 
 export const cancelledAClassBooking = cancelledAClassBookingStory.bind({})
@@ -250,7 +250,7 @@ const missedAClassStory = ({
   smsMessage,
   smsFooterText,
 }: PropsWithChildren<EmailSMSPreviewProps & NoShowAppointmentProps>) => (
-  <EmailSMSPreview
+  <EmailSmsPreview
     greeting={greeting}
     subtitle={subtitle}
     footerContact={footerContact}
@@ -267,7 +267,7 @@ const missedAClassStory = ({
       footerContact={footerContact}
       isFooterText={isFooterText}
     />
-  </EmailSMSPreview>
+  </EmailSmsPreview>
 )
 export const missedAClass = missedAClassStory.bind({})
 missedAClass.args = {
@@ -317,7 +317,7 @@ const classRescheduledStory = ({
   smsMessage,
   smsFooterText,
 }: PropsWithChildren<EmailSMSPreviewProps & ClassRescheduledProps>) => (
-  <EmailSMSPreview
+  <EmailSmsPreview
     greeting={greeting}
     subtitle={subtitle}
     footerContact={footerContact}
@@ -327,7 +327,7 @@ const classRescheduledStory = ({
     smsFooterText={smsFooterText}
   >
     <ClassRescheduled message={message} footerText={footerText} />
-  </EmailSMSPreview>
+  </EmailSmsPreview>
 )
 
 export const ClassReschedule = classRescheduledStory.bind({})
@@ -369,7 +369,7 @@ const ReminderForClassStory = ({
   smsMessage,
   smsFooterText,
 }: PropsWithChildren<EmailSMSPreviewProps & ReminderForClassProps>) => (
-  <EmailSMSPreview
+  <EmailSmsPreview
     greeting={greeting}
     footerIconGroup={footerIconGroup}
     smsGreeting={smsGreeting}
@@ -377,7 +377,7 @@ const ReminderForClassStory = ({
     smsFooterText={smsFooterText}
   >
     <ReminderForClass message={message} contactNumber={contactNumber} />
-  </EmailSMSPreview>
+  </EmailSmsPreview>
 )
 
 export const ReminderForClasses = ReminderForClassStory.bind({})
@@ -404,7 +404,7 @@ const ClassWaitListStory = ({
   smsMessage,
   smsFooterText,
 }: PropsWithChildren<EmailSMSPreviewProps & ClassRescheduledProps>) => (
-  <EmailSMSPreview
+  <EmailSmsPreview
     greeting={greeting}
     footerIconGroup={footerIconGroup}
     footerContact={footerContact}
@@ -415,7 +415,7 @@ const ClassWaitListStory = ({
     smsFooterText={smsFooterText}
   >
     <ClassWaitList message={message} />
-  </EmailSMSPreview>
+  </EmailSmsPreview>
 )
 
 export const ClassWaitLists = ClassWaitListStory.bind({})
@@ -446,7 +446,7 @@ const ClassesSpotAvailableStory = ({
   smsMessage,
   smsFooterText,
 }: PropsWithChildren<EmailSMSPreviewProps & ClassRescheduledProps>) => (
-  <EmailSMSPreview
+  <EmailSmsPreview
     greeting={greeting}
     footerIconGroup={footerIconGroup}
     footerContact={footerContact}
@@ -457,7 +457,7 @@ const ClassesSpotAvailableStory = ({
     smsFooterText={smsFooterText}
   >
     <ClassesSpotAvailable message={message} />
-  </EmailSMSPreview>
+  </EmailSmsPreview>
 )
 
 export const ClassSpotAvailable = ClassesSpotAvailableStory.bind({})
@@ -486,7 +486,7 @@ const ReferralStory = ({
   smsMessage,
   smsFooterText,
 }: PropsWithChildren<EmailSMSPreviewProps & ReminderForClassProps>) => (
-  <EmailSMSPreview
+  <EmailSmsPreview
     greeting={greeting}
     footerIconGroup={footerIconGroup}
     smsGreeting={smsGreeting}
@@ -494,7 +494,7 @@ const ReferralStory = ({
     smsFooterText={smsFooterText}
   >
     <Referral message={message} footerText={footerText} />
-  </EmailSMSPreview>
+  </EmailSmsPreview>
 )
 
 export const Referrals = ReferralStory.bind({})
@@ -519,14 +519,14 @@ const InvoicesStory = ({
   smsGreeting,
   smsMessage,
 }: PropsWithChildren<EmailSMSPreviewProps & ReminderForClassProps>) => (
-  <EmailSMSPreview
+  <EmailSmsPreview
     greeting={greeting}
     footerIconGroup={footerIconGroup}
     smsMessage={smsMessage}
     smsGreeting={smsGreeting}
   >
     <Invoices message={message} footerText={footerText} />
-  </EmailSMSPreview>
+  </EmailSmsPreview>
 )
 
 export const Invoice = InvoicesStory.bind({})
@@ -554,7 +554,7 @@ const LeadResponsesStory = ({
   smsMessage,
   smsFooterText,
 }: PropsWithChildren<EmailSMSPreviewProps & LeadResponsesProps>) => (
-  <EmailSMSPreview
+  <EmailSmsPreview
     greeting={greeting}
     footerIconGroup={footerIconGroup}
     footerContact={footerContact}
@@ -571,7 +571,7 @@ const LeadResponsesStory = ({
       footerContact={footerContact}
       isFooterText={isFooterText}
     />
-  </EmailSMSPreview>
+  </EmailSmsPreview>
 )
 
 export const LeadResponse = LeadResponsesStory.bind({})
@@ -618,7 +618,7 @@ const GiftVoucherStory = ({
   isGiftVoucher,
   footer,
 }: PropsWithChildren<EmailSMSPreviewProps & GiftVoucherProps>) => (
-  <EmailSMSPreview
+  <EmailSmsPreview
     greeting={greeting}
     footerIconGroup={footerIconGroup}
     isGiftVoucher={isGiftVoucher}
@@ -630,7 +630,7 @@ const GiftVoucherStory = ({
       expiry={expiry}
       consultancyName={consultancyName}
     />
-  </EmailSMSPreview>
+  </EmailSmsPreview>
 )
 
 export const GiftVouchers = GiftVoucherStory.bind({})
@@ -657,7 +657,7 @@ const ConnectRegistrationStory = ({
   footerText,
   isFooterText,
 }: PropsWithChildren<EmailSMSPreviewProps & ConnectRegistrationProps>) => (
-  <EmailSMSPreview
+  <EmailSmsPreview
     greeting={greeting}
     footerIconGroup={footerIconGroup}
     footerContact={footerContact}
@@ -672,7 +672,7 @@ const ConnectRegistrationStory = ({
       text={text}
       footerContact={footerContact}
     />
-  </EmailSMSPreview>
+  </EmailSmsPreview>
 )
 
 export const ConnectRegistrations = ConnectRegistrationStory.bind({})
@@ -713,14 +713,14 @@ const MedicalFormStory = ({
   contactNumber,
   message,
 }: PropsWithChildren<EmailSMSPreviewProps & MedicalFormProps>) => (
-  <EmailSMSPreview
+  <EmailSmsPreview
     greeting={greeting}
     footerIconGroup={footerIconGroup}
     footerText={footerText}
     isFooterText={isFooterText}
   >
     <MedicalForm contactNumber={contactNumber} message={message} />
-  </EmailSMSPreview>
+  </EmailSmsPreview>
 )
 
 export const MedicalForms = MedicalFormStory.bind({})
@@ -739,9 +739,9 @@ const RequestFeedBackStory = ({
   message,
   footerIconGroup,
 }: PropsWithChildren<EmailSMSPreviewProps & ClassRescheduledProps>) => (
-  <EmailSMSPreview greeting={greeting} footerIconGroup={footerIconGroup}>
+  <EmailSmsPreview greeting={greeting} footerIconGroup={footerIconGroup}>
     <RequestFeedBacks message={message} />
-  </EmailSMSPreview>
+  </EmailSmsPreview>
 )
 
 export const RequestFeedBack = RequestFeedBackStory.bind({})
@@ -759,7 +759,7 @@ const NewAppoinmentsIsBookedStory = ({
   footer,
   hideLogo,
 }: PropsWithChildren<EmailSMSPreviewProps>) => (
-  <EmailSMSPreview
+  <EmailSmsPreview
     footer={footer}
     smsGreeting={smsGreeting}
     smsMessage={smsMessage}
@@ -767,7 +767,7 @@ const NewAppoinmentsIsBookedStory = ({
     hideLogo={hideLogo}
   >
     <NewAppoinmentsIsBooked />
-  </EmailSMSPreview>
+  </EmailSmsPreview>
 )
 
 export const NewAppoinmentsBooked = NewAppoinmentsIsBookedStory.bind({})
@@ -789,7 +789,7 @@ const UpcomingAppointmentReminderStory = ({
   smsMessage,
   smsFooterText,
 }: PropsWithChildren<EmailSMSPreviewProps & ReminderForClassProps>) => (
-  <EmailSMSPreview
+  <EmailSmsPreview
     greeting={greeting}
     footerIconGroup={footerIconGroup}
     smsGreeting={smsGreeting}
@@ -800,7 +800,7 @@ const UpcomingAppointmentReminderStory = ({
       message={message}
       contactNumber={contactNumber}
     />
-  </EmailSMSPreview>
+  </EmailSmsPreview>
 )
 
 export const UpComingAppointmentReminders = UpcomingAppointmentReminderStory.bind(
