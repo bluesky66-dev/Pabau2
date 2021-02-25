@@ -1,5 +1,4 @@
 import { Col, Row } from 'antd'
-import { Base64 } from 'js-base64'
 import React, { FC, useState } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { v4 as uuidv4 } from 'uuid'
@@ -62,11 +61,12 @@ const copy = (source, destination, droppableSource, endIndex) => {
 
 const MedicalFormEdit: FC<PreviewData> = ({ previewData }) => {
   console.log('previewData =', previewData)
-  let previewDataArray = []
-  if (previewData !== '') {
-    previewDataArray = JSON.parse(Base64.decode(previewData))
-  }
-  console.log('previewDataArray =', previewDataArray)
+  // let previewDataArray = []
+  // if (typeof previewData != 'undefined' && previewData !== '') {
+  //   previewDataArray = JSON.parse(Base64.decode(previewData))
+  // }
+  // console.log('previewDataArray =', previewDataArray)
+
   const [draggedForms, setDraggedForms] = useState([])
   const [selectedForm, setSelectedForm] = useState({
     id: '',
