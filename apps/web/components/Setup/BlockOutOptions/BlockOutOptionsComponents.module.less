@@ -1,0 +1,147 @@
+.full-screen-modal {
+  max-width: 100%;
+  top: 0;
+  height: 100vh;
+  z-index: 1;
+  padding-bottom: 0;
+
+  @media screen and (max-width: 767px) {
+    margin: 0;
+  }
+
+  :global .ant-modal-content {
+    height: 100%;
+
+    .ant-modal-body {
+      padding: 0;
+      height: 100%;
+    }
+  }
+
+  .form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    border-bottom: 1px solid #ecedf0;
+
+    span {
+      svg {
+        color: #9292a3;
+        font-size: 18px;
+      }
+    }
+
+    .header-title {
+      color: #3d3d46;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      text-transform: capitalize;
+      margin-left: 20px;
+    }
+
+    .deleteBtn {
+
+    }
+  }
+
+  .body {
+    background: #F7F7F9;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+
+    .bodyContent {
+      background: #FFFFFF;
+      border-radius: 4px;
+      width: 550px;
+      max-width: 100%;
+      min-height: 400px;
+      padding: 32px;
+
+      .typeLeft {
+        border-bottom-left-radius: 4px;
+        border-top-left-radius: 4px;
+        border-right-width: 0;
+      }
+
+      .typeRight {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-left-width: 0;
+      }
+
+      .typeLeft, .typeRight {
+        border: 1px solid #ECEDF0;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #3D3D46;
+        position: relative;
+        padding: 28px 20px 10px;
+
+        .dash {
+          background: #54B2D3;
+          height: 2px;
+          width: 20px;
+        }
+
+        .check {
+          color: #54B2D3;
+          position: absolute;
+          font-size: 15px;
+          top: 12px;
+          right: 12px;
+        }
+      }
+
+      .selectedLeft {
+        border-right-width: 1px;
+      }
+
+      .selectedRight {
+        border-left-width: 1px;
+      }
+
+      .selectedLeft, .selectedRight {
+        background: #EEF7FB;
+        border: 1px solid #B0DBEB;
+        box-sizing: border-box;
+      }
+
+      .colorBox {
+        height: 40px;
+        width: 40px;
+        border-radius: 4px;
+        margin-right: 8px;
+      }
+
+      .slider {
+        :global {
+          .ant-slider-track {
+            background: #54B2D3;
+          }
+        }
+      }
+    }
+  }
+}
+
+:global {
+  .ant-slider-tooltip {
+    .ant-tooltip-inner, .ant-tooltip-arrow-content {
+      background: #54B2D3;
+    }
+  }
+}

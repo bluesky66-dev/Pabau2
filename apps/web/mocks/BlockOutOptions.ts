@@ -1,0 +1,38 @@
+export const blockOutOptions = [
+  {
+    key: 1,
+    name: 'Break',
+    type: 'Blockout',
+    is_active: true,
+    paidBlockOut: true,
+    backgroundColor: '54B2D3',
+    defaultTime: 30,
+  },
+  {
+    key: 2,
+    name: 'Buffer Time',
+    type: 'Blockout',
+    is_active: true,
+    paidBlockOut: true,
+    backgroundColor: '54B2D3',
+    defaultTime: 30,
+  },
+  {
+    key: 3,
+    name: 'Lunch',
+    type: 'Blockout',
+    is_active: true,
+    paidBlockOut: true,
+    backgroundColor: '54B2D3',
+    defaultTime: 30,
+  },
+  {
+    key: 4,
+    name: 'Consulting',
+    type: 'Opening',
+    is_active: true,
+    paidBlockOut: undefined,
+    backgroundColor: '54B2D3',
+    defaultTime: 30,
+  },
+]
