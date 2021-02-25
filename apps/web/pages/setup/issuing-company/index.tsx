@@ -505,9 +505,7 @@ export const IssuingCompany: NextPage = () => {
                 <PhoneNumberInput
                   label="Phone"
                   value={handlePhoneInputValue()}
-                  onChange={(e: string, valid: boolean) => {
-                    onchange(e, 'phone')
-                  }}
+                  onChange={(e: string) => onchange(e, 'phone')}
                 />
               </Form.Item>
               <Form.Item label="Website">
@@ -585,12 +583,18 @@ export const IssuingCompany: NextPage = () => {
             <div className={styles.customForm}>
               <Form.Item label="Invoice template">
                 <Select
-                  defaultValue="Select invoice template"
                   onChange={(e) => onchange(e, 'invoiceTemplate')}
-                  value={formik.values.invoiceTemplate}
+                  value={
+                    formik.values.invoiceTemplate
+                      ? formik.values.invoiceTemplate
+                      : 'Select invoice template'
+                  }
                 >
-                  <Option value="">Select invoice template</Option>
-                  <Option value="test">test</Option>
+                  <Option value="I">I</Option>
+                  <Option value="II">II</Option>
+                  <Option value="III">III</Option>
+                  <Option value="IV">IV</Option>
+                  <Option value="V">V</Option>
                 </Select>
               </Form.Item>
               <Form.Item label="Invoice prefix">

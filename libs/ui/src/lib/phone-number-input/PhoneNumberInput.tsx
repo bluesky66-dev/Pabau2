@@ -9,7 +9,7 @@ export interface PhoneNumberInputProps {
   countryCode?: string
   label?: string
   value?: string
-  onChange(val, valid): void
+  onChange(val): void
 }
 
 export const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
@@ -39,7 +39,7 @@ export const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
       setValid(false)
     }
     setPhoneNumber(val)
-    onChange(`${val}`, valid)
+    onChange(`${val}`)
   }
 
   return (
