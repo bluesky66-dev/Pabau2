@@ -262,22 +262,22 @@ export const Index: FC = () => {
         break
       }
       case 'terminology': {
-        const { config, optIns } = values
+        const { config } = values
+        const vat = config[4].items[0].value
+        data.vat = vat
         break
       }
       case 'system': {
         const {
           disablePrescriptions,
-          historyData,
           medicalApprovals,
           performSurgical,
           secureMedicalForms,
-          tretmentCycles,
         } = values
-        data.disable_prescriptions = disablePrescriptions === 'Yes' ? 10 : 0
-        data.medical_approvals = medicalApprovals === 'Yes' ? 10 : 0
-        data.is_surgical = performSurgical === 'Yes' ? 10 : 0
-        data.secure_medical_forms = secureMedicalForms === 'Yes' ? 10 : 0
+        data.disable_prescriptions = disablePrescriptions ? 10 : 0
+        data.medical_approvals = medicalApprovals ? 10 : 0
+        data.is_surgical = performSurgical ? 10 : 0
+        data.secure_medical_forms = secureMedicalForms ? 10 : 0
         break
       }
       case 'notification': {
