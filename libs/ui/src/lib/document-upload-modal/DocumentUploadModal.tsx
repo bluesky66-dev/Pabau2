@@ -9,7 +9,7 @@ import { Button, Checkbox } from '@pabau/ui'
 import { UploadProps } from 'antd/es/upload'
 import FileUploder from '../file-uploder/FileUploder'
 
-export interface DraggableProps {
+export interface DocumentUploadDraggableProp {
   multiple?: boolean
   name?: string
 }
@@ -30,7 +30,7 @@ export interface DocumentUploadModalProps {
   onFolderChange?: (value) => void
   onFileDelete?(file: UploadProps): void
   onFileChange?(file: UploadProps): void
-  draggerProps?: DraggableProps
+  draggerProps?: DocumentUploadDraggableProp
   folderOptions: FolderOptions[]
 }
 
