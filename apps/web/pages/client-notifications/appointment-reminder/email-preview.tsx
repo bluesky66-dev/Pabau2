@@ -1,34 +1,4 @@
-/**
- * This is a Pabau Appointment
- */
-
 import React, { FC } from 'react'
-import { Row, Col, Divider } from 'antd'
-import {
-  InstagramOutlined,
-  FacebookOutlined,
-  LinkedinOutlined,
-  TwitterOutlined,
-} from '@ant-design/icons'
-import { Button } from '@pabau/ui'
-import styles from './Appointment.module.less'
-import { ReactComponent as NormalClinicLogo } from '../../assets/images/normal-clinic-logo.svg'
-import { ReactComponent as Calendar } from '../../assets/images/calendar.svg'
-
-import ENSVG from '../../assets/images/lang-logos/en.svg'
-import FRSVG from '../../assets/images/lang-logos/french.svg'
-import SPSVG from '../../assets/images/lang-logos/spanish.svg'
-import ARSVG from '../../assets/images/lang-logos/arabic.svg'
-import BGSVG from '../../assets/images/lang-logos/bulgarian.svg'
-import CSSVG from '../../assets/images/lang-logos/czech.svg'
-import HUSVG from '../../assets/images/lang-logos/hungarian.svg'
-import LVSVG from '../../assets/images/lang-logos/latvian.svg'
-import NOSVG from '../../assets/images/lang-logos/norwegian.svg'
-import PLSVG from '../../assets/images/lang-logos/polish.svg'
-import SWSVG from '../../assets/images/lang-logos/swedish.svg'
-import ROSVG from '../../assets/images/lang-logos/romanian.svg'
-import RUSVG from '../../assets/images/lang-logos/russian.svg'
-import DASVG from '../../assets/images/lang-logos/dutch.svg'
 
 interface LangData {
   [key: string]: Email
@@ -293,7 +263,7 @@ interface P {
   activeSocialIcons?: string[]
 }
 
-export const Appointment: FC<P> = ({
+export const AppointmentEmailPreview: FC<P> = ({
   requestConfirm,
   allowRescheduling,
   allowCancellation,
@@ -306,198 +276,348 @@ export const Appointment: FC<P> = ({
   medicalMessage,
   backGroundColor,
   buttonColor,
-  standardTapIndex,
   activeSocialIcons = [],
 }) => {
   const [selectLangData, setSelectLangData] = React.useState<Email>(
-    langData['en']
+    langData[selectLanguage?.toLowerCase() || 'en']
   )
+
   // const selectLangData = langData['en']
   React.useEffect(() => {
-    if (langData[`${selectLanguage.toLowerCase()}`]) {
+    if (langData[`${selectLanguage?.toLowerCase()}`]) {
       setSelectLangData({ ...langData[`${selectLanguage.toLowerCase()}`] })
     }
   }, [selectLanguage])
 
   function setSocialIcon(value) {
     if (value.includes('facebook')) {
-      return <FacebookOutlined style={{ padding: '5px' }} />
+      return (
+        <img
+          src={
+            'https://i.pinimg.com/564x/51/d3/66/51d366ff959f153a09c2dca347ab7855.jpg'
+          }
+          width="13px"
+          height="13px"
+          alt={'fb'}
+          style={{ padding: '5px' }}
+        />
+      )
     } else if (value.includes('linksIn')) {
-      return <LinkedinOutlined style={{ padding: '5px' }} />
+      return (
+        <img
+          src={
+            'https://icons-for-free.com/iconfiles/png/512/linked+in+linkedin+logo+social+square+icon-1320086773461479453.png'
+          }
+          width="13px"
+          height="13px"
+          alt={'in'}
+          style={{ padding: '5px' }}
+        />
+      )
     } else if (value.includes('instagram')) {
-      return <InstagramOutlined style={{ padding: '5px' }} />
+      return (
+        <img
+          src={
+            'https://www.citypng.com/public/uploads/preview/-11590150289tqivt8c6o1.png'
+          }
+          width="13px"
+          height="13px"
+          alt={'insta'}
+          style={{ padding: '5px' }}
+        />
+      )
     } else if (value.includes('twitter')) {
-      return <TwitterOutlined style={{ padding: '5px' }} />
+      return (
+        <img
+          src={
+            'https://listimg.pinclipart.com/picdir/s/190-1902138_twitter-square-black-and-white-icon-logo-vector.png'
+          }
+          width="13px"
+          height="13px"
+          alt={'twitter'}
+          style={{ padding: '5px' }}
+        />
+      )
     }
   }
-
-  function getFlag(country) {
-    switch (country) {
-      case 'EN':
-        return ENSVG
-      case 'FR':
-        return FRSVG
-      case 'SP':
-        return SPSVG
-      case 'AR':
-        return ARSVG
-      case 'BG':
-        return BGSVG
-      case 'CS':
-        return CSSVG
-      case 'DA':
-        return DASVG
-      case 'HU':
-        return HUSVG
-      case 'LV':
-        return LVSVG
-      case 'NO':
-        return NOSVG
-      case 'PL':
-        return PLSVG
-      case 'SW':
-        return SWSVG
-      case 'RO':
-        return ROSVG
-      case 'RU':
-        return RUSVG
-    }
-  }
-
   return (
-    <div>
-      {standardTapIndex === '1' ? (
-        <div
-          className={styles.cardAppointment}
-          style={{ backgroundColor: backGroundColor }}
-        >
-          <Row justify="center" className={styles.logo}>
-            <Col>
-              <NormalClinicLogo />
-            </Col>
-          </Row>
-          <Row gutter={[0, 4]}>
-            <Col>
-              <span className={styles.greetingText}>
-                {selectLangData.greeting}
+    <div
+      style={{
+        backgroundColor: backGroundColor || '#fff',
+        padding: '24px',
+        fontFamily: 'Arial, Helvetica, sans-serif !important',
+        fontSize: '13px',
+        color: 'rgba(0, 0, 0, 0.65)',
+        width: '440px',
+        maxWidth: '440px',
+        margin: '40px auto',
+        boxShadow: '0px 5px 15px rgba(0, 0, 0, 0.35)',
+        border: '2px solid rgba(0,0,0,0.06)',
+      }}
+    >
+      <table cellSpacing="0" cellPadding="0" width="100%">
+        <tr>
+          <td>
+            <div
+              style={{
+                borderBottom: '50px solid transparent',
+                textAlign: 'center',
+              }}
+            >
+              <img
+                src="https://seeklogo.com/images/N/normal-clinic-logo-190E3BCE57-seeklogo.com.png"
+                alt={'logo'}
+                width={'85px'}
+              />
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style={{ padding: '4px 0' }}>
+            <span
+              style={{
+                fontSize: '20px',
+                lineHeight: '18px',
+                color: 'rgba(0, 0, 0, 0.65)',
+              }}
+            >
+              {selectLangData.greeting}
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td
+            style={{
+              margin: '24px 0 14px 0',
+              borderTop: '1px solid rgba(0, 0, 0, 0.06)',
+              display: 'block',
+            }}
+          ></td>
+        </tr>
+        <tr>
+          <td style={{ padding: '4px 0' }}>
+            <div
+              style={{
+                fontSize: '13px',
+                color: 'rgba(0, 0, 0, 0.65)',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <img
+                src={
+                  'https://i.pinimg.com/originals/b0/b8/5c/b0b85cd8797638d0c80035f572b0cbd3.jpg'
+                }
+                width="13px"
+                height="13px"
+                alt={'calender'}
+                style={{ padding: '5px 0' }}
+              />
+
+              <span style={{ marginLeft: '5px', lineHeight: '23px' }}>
+                {selectLangData.detail}
               </span>
-            </Col>
-          </Row>
-          <Divider className={styles.divider} />
-          <Row justify="start" align="middle" gutter={[0, 4]}>
-            <Col>
-              <Calendar />
-              <span style={{ marginLeft: '5px' }}>{selectLangData.detail}</span>
-            </Col>
-          </Row>
-          <Row gutter={[0, 4]}>
-            <Col>
-              <span>{selectLangData.date}</span>
-              {allowRescheduling && (
-                <Button type="link" className={styles.anchor}>
-                  {selectLangData.reschedule}
-                </Button>
-              )}
-            </Col>
-          </Row>
-          <Row gutter={[0, 4]}>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style={{ padding: '4px 0' }}>
+            <span
+              style={{
+                fontSize: '13px',
+                color: 'rgba(0, 0, 0, 0.65)',
+                marginRight: '8px',
+              }}
+            >
+              {selectLangData.date}
+            </span>
+            {allowRescheduling && (
+              <button
+                style={{
+                  fontSize: '10px',
+                  color: '#00a1e1',
+                  borderRadius: '4px',
+                  letterSpacing: '0.05em',
+                  padding: '4px 1em',
+                  background: 'transparent',
+                  borderColor: 'transparent',
+                  boxShadow: 'none',
+                  outline: 'none',
+                }}
+              >
+                {selectLangData.reschedule}
+              </button>
+            )}
+          </td>
+        </tr>
+        <tr>
+          <td>
             {showService && (
-              <Col>
+              <div>
                 <span>
                   {selectLangData.service}{' '}
                   {showEmployeeName ? selectLangData.employee : ''}
                 </span>
-              </Col>
+              </div>
             )}
-          </Row>
-          <Row gutter={[0, 4]}>
-            <Col>
-              <span className={styles.mainAppointment}>
-                {selectLangData.title}
-              </span>
-            </Col>
-          </Row>
-          <Row gutter={[0, 16]}>
-            <Col>
-              <span className={styles.address}>{selectLangData.address}</span>
-            </Col>
-          </Row>
-          <Row gutter={[0, 16]} justify="space-between">
-            {allowCancellation && (
-              <Col>
-                <Button
-                  type="default"
-                  className={styles.button}
-                  backgroundColor={buttonColor}
+          </td>
+        </tr>
+        <tr>
+          <td style={{ padding: '4px 0' }}>
+            <span
+              style={{
+                fontSize: '13px',
+                lineHeight: '18px',
+                fontWeight: 'bold',
+              }}
+            >
+              {selectLangData.title}
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td style={{ paddingBottom: '10px' }}>
+            <span style={{ fontSize: '10px', lineHeight: '15px' }}>
+              {selectLangData.address}
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td style={{ paddingBottom: '8px' }}>
+            <table cellSpacing="0" cellPadding="0" width="100%">
+              <tr>
+                <td>
+                  {allowCancellation && (
+                    <div style={{ padding: '8px 0' }}>
+                      <button
+                        style={{
+                          border: '1px solid #00a1e1',
+                          background: buttonColor || '#fff',
+                          color: '#00a1e1',
+                          fontSize: '0.8rem',
+                          borderRadius: '4px',
+                          letterSpacing: '0.05em',
+                          padding: '4px 1em',
+                          lineHeight: '1.5715',
+                          fontWeight: 400,
+                          boxShadow: '0 2px 0 rgba(0, 0, 0, 0.02)',
+                          outline: 'none',
+                        }}
+                      >
+                        {selectLangData.cancelButton}
+                      </button>
+                    </div>
+                  )}
+                </td>
+                <td>
+                  {requestConfirm && (
+                    <div style={{ padding: '8px 0' }}>
+                      <button
+                        style={{
+                          border: '1px solid #54b2d3',
+                          background: buttonColor || '#54b2d3',
+                          color: '#fff',
+                          fontSize: '0.8rem',
+                          borderRadius: '4px',
+                          letterSpacing: '0.05em',
+                          padding: '4px 1em',
+                          lineHeight: '1.5715',
+                          fontWeight: 400,
+                          boxShadow: '0 2px 0 rgba(0, 0, 0, 0.05)',
+                          textShadow: '0 -1px 0 rgba(0, 0, 0, 0.12)',
+                          outline: 'none',
+                        }}
+                      >
+                        {selectLangData.confirmButton}
+                      </button>
+                    </div>
+                  )}
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        {displayPolicy && (
+          <>
+            <tr>
+              <td style={{ padding: '4px 0' }}>
+                <span>{selectLangData.policy}</span>
+              </td>
+            </tr>
+            <tr>
+              <td style={{ padding: '8px 0' }}>
+                <button
+                  style={{
+                    fontSize: '10px',
+                    color: '#00a1e1',
+                    borderRadius: '4px',
+                    letterSpacing: '0.05em',
+                    padding: '4px 1em',
+                    background: 'transparent',
+                    borderColor: 'transparent',
+                    lineHeight: '1.5715',
+                    fontWeight: 400,
+                    outline: 'none',
+                  }}
                 >
-                  {selectLangData.cancelButton}
-                </Button>
-              </Col>
-            )}
-            {requestConfirm && (
-              <Col>
-                <Button type="primary" backgroundColor={buttonColor}>
-                  {selectLangData.confirmButton}
-                </Button>
-              </Col>
-            )}
-          </Row>
-          {displayPolicy && (
-            <>
-              <Row gutter={[0, 8]}>
-                <Col>
-                  <span>{selectLangData.policy}</span>
-                </Col>
-              </Row>
-              <Row gutter={[0, 8]}>
-                <Col>
-                  <Button type="link" className={styles.anchor}>
-                    {selectLangData.cancelPolicy}
-                  </Button>
-                </Col>
-              </Row>
-            </>
-          )}
+                  {selectLangData.cancelPolicy}
+                </button>
+              </td>
+            </tr>
+          </>
+        )}
 
-          <Divider />
+        <tr>
+          <td
+            style={{
+              margin: '24px 0 14px 0',
+              borderTop: '1px solid rgba(0, 0, 0, 0.06)',
+              display: 'block',
+            }}
+          ></td>
+        </tr>
 
-          <Row justify="center" style={{ marginBottom: '20px' }}>
-            <span className={styles.breaktext}>{medicalMessage}</span>
-          </Row>
-
-          <Row justify="center">
+        <tr>
+          <td style={{ paddingBottom: '20px' }}>
+            <span>{medicalMessage}</span>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
             {addMedicalHisButton && (
-              <Button
-                type="default"
-                className={styles.button}
-                backgroundColor={buttonColor}
+              <button
+                style={{
+                  border: '1px solid #00a1e1',
+                  background: buttonColor || '#fff',
+                  color: '#00a1e1',
+                  fontSize: '0.8rem',
+                  borderRadius: '4px',
+                  letterSpacing: '0.05em',
+                  padding: '4px 1em',
+                  lineHeight: '1.5715',
+                  fontWeight: 400,
+                  boxShadow: '0 2px 0 rgba(0, 0, 0, 0.02)',
+                  outline: 'none',
+                }}
               >
                 {selectLangData.complete}
-              </Button>
+              </button>
             )}
-          </Row>
-
-          <Row justify="center" style={{ marginTop: '20px' }}>
-            <span className={styles.breaktext}>{informationMessage}</span>
-          </Row>
-
-          <Row justify="center" style={{ marginTop: '20px' }}>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style={{ paddingTop: '20px' }}>
+            <span>{informationMessage}</span>
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style={{ paddingTop: '20px' }}>
             {activeSocialIcons.map((value, index) => setSocialIcon(value))}
-          </Row>
-        </div>
-      ) : (
-        <div
-          className={styles.cardAddTemplateContainer}
-          style={{ backgroundColor: backGroundColor }}
-        >
-          <Button type="default" className={styles.addTemplateTxt}>
-            <img src={getFlag(selectLanguage)} alt="" />
-            &nbsp;+ Add Template
-          </Button>
-        </div>
-      )}
+          </td>
+        </tr>
+      </table>
     </div>
   )
 }
 
-export default Appointment
+export default AppointmentEmailPreview

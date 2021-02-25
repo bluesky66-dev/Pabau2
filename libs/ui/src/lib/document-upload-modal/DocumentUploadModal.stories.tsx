@@ -20,7 +20,6 @@ export default {
     ],
     checkboxTooltip: 'tooltip',
     draggerProps: { multiple: true, name: 'file' },
-    DropAreaWidth: 522,
   },
   argsTypes: {
     title: { control: { type: 'text' } },
@@ -31,7 +30,6 @@ export default {
     folderOptions: { control: { type: 'object' } },
     draggerProps: { control: { type: 'object' } },
     checkboxTooltip: { control: { type: 'text' } },
-    DropAreaWidth: { control: { type: 'number' } },
   },
 }
 
@@ -44,7 +42,6 @@ interface P {
   checkboxTooltip?: string
   draggerProps?: DraggableProps
   folderOptions: FolderOptions[]
-  DropAreaWidth?: number
 }
 
 export const DocumentUploadModalStory: FC<P> = ({
@@ -56,7 +53,6 @@ export const DocumentUploadModalStory: FC<P> = ({
   checkboxTooltip,
   draggerProps,
   folderOptions,
-  DropAreaWidth,
   ...args
 }): JSX.Element => {
   const [open, setOpen] = useState(visible)
@@ -81,7 +77,6 @@ export const DocumentUploadModalStory: FC<P> = ({
       checkboxTooltip={checkboxTooltip}
       draggerProps={draggerProps}
       folderOptions={folderOptions}
-      DropAreaWidth={DropAreaWidth}
       {...args}
     />
   )

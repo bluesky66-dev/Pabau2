@@ -6,7 +6,6 @@ export default {
   title: 'Modals/FileUploder',
   args: {
     draggerProps: { multiple: true, name: 'file' },
-    DropAreaWidth: 240,
   },
   argsTypes: {
     draggerProps: { control: { type: 'object' } },

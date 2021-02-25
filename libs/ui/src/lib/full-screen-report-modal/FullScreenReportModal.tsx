@@ -5,8 +5,9 @@ import { LeftOutlined, MoreOutlined } from '@ant-design/icons'
 import styles from './FullScreenReportModal.module.less'
 
 export interface FullScreenReportModalProps {
-  title?: string
+  title?: () => JSX.Element | string
   visible?: boolean
+  header?: boolean
   onBackClick?: () => void
   content?: () => JSX.Element
 }
@@ -14,6 +15,7 @@ export interface FullScreenReportModalProps {
 export const FullScreenReportModal: FC<FullScreenReportModalProps> = ({
   title,
   visible,
+  header,
   onBackClick,
   content,
 }) => {
@@ -27,15 +29,23 @@ export const FullScreenReportModal: FC<FullScreenReportModalProps> = ({
     >
       <>
         <div className={styles.header}>
-          <div>
+          <div className={styles.headerContent}>
             <LeftOutlined onClick={() => onBackClick?.()} />
-            <span className={styles.headerTitle}>{title}</span>
+            {header ? (
+              <span className={styles.headerTitle}>{title?.()}</span>
+            ) : (
+              <span className={styles.headerTitle}>{title}</span>
+            )}
           </div>
-          <button className={styles.headerMore}>
-            <MoreOutlined />
-          </button>
+          {header ? (
+            <div></div>
+          ) : (
+            <button className={styles.headerMore}>
+              <MoreOutlined />
+            </button>
+          )}
         </div>
-        {content?.()}
+        <div>{content?.()}</div>
       </>
     </Modal>
   )
