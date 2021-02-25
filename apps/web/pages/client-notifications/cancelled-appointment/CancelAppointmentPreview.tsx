@@ -240,7 +240,7 @@ const CancelAppointmentPreview: FC<P> = ({
     <div>
       {standardTapIndex === '1' ? (
         <EmailSMSPreview
-          greeting={'Hi Maria,'}
+          greeting={selectLangData.greeting}
           footerIconGroup={true}
           previewButtonGroup={false}
           previewCustomStatus={'email'}

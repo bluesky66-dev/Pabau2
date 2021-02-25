@@ -2,6 +2,7 @@ import React, { FC, useState, forwardRef } from 'react'
 import { ClientNotification, Standard, Appointment, Smstext } from '@pabau/ui'
 import CancelAppointmentPreview from '../../pages/client-notifications/cancelled-appointment/CancelAppointmentPreview'
 import NoShowAppointmentPreview from '../../pages/client-notifications/noshow-appointment/NoShowAppointmentPreview'
+import NewAppointmentPreview from '../../pages/client-notifications/new-appointment/NewAppointmentPreview'
 
 interface P {
   onSeletedTab: (number) => void
@@ -184,6 +185,21 @@ const Index: FC<P> = forwardRef(
               selectLanguage={selectLanguage}
               buttonColor={buttonColor}
               informationMessage={informationMessage}
+            />
+          ) : type === 'newAppointment' ? (
+            <NewAppointmentPreview
+              requestConfirm={requestConfirmation}
+              allowRescheduling={allowRescheduling}
+              allowCancellation={allowCancellation}
+              displayPolicy={displayPolicy}
+              showService={showService}
+              showEmployeeName={showEmployeeName}
+              selectLanguage={selectLanguage}
+              backGroundColor={backGroundColor}
+              buttonColor={buttonColor}
+              informationMessage={informationMessage}
+              standardTapIndex={standardTapIndex}
+              activeSocialIcons={activeSocialIcons}
             />
           ) : (
             <Appointment

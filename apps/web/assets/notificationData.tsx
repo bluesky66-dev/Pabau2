@@ -30,7 +30,7 @@ const notificationData = {
         'Automatically sends to clients when they book their appointment',
       icon: <ScheduleOutlined />,
       smartDelivery: true,
-      link: null,
+      link: '/client-notifications/new-appointment',
       disabled: true,
     },
     {

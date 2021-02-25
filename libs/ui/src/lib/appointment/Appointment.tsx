@@ -48,11 +48,13 @@ interface Email {
   policy: string
   cancelPolicy: string
   complete: string
+  newAppointmentGreeting: string
 }
 
 const langData: LangData = {
   en: {
     greeting: 'Hi Kristy, see you soon!',
+    newAppointmentGreeting: 'Hi Kristy, your appointment is confirmed.',
     detail: 'Appointment details:',
     date: 'Monday, 16 November at 11:00',
     reschedule: 'Reschedule',
@@ -68,6 +70,7 @@ const langData: LangData = {
   },
   sp: {
     greeting: 'Hola Kristy, ¡hasta pronto!',
+    newAppointmentGreeting: 'Hola Kristy, tu cita está confirmada.',
     detail: 'Detalles de la cita:',
     date: 'Lunes 16 de noviembre a las 11:00',
     reschedule: 'Reprogramar',
@@ -83,6 +86,7 @@ const langData: LangData = {
   },
   fr: {
     greeting: 'Salut Kristy, à bientôt!',
+    newAppointmentGreeting: 'Bonjour Kristy, votre rendez-vous est confirmé.',
     detail: 'Détails du rendez-vous:',
     date: 'Lundi 16 novembre à 11:00',
     reschedule: 'Replanifier',
@@ -98,6 +102,7 @@ const langData: LangData = {
   },
   ru: {
     greeting: 'Привет, Кристи, до скорой встречи!',
+    newAppointmentGreeting: 'Привет, Кристи, твоя встреча подтверждена.',
     detail: 'Сведения о встрече:',
     date: 'Понедельник, 16 ноября в 11:00',
     reschedule: 'Перенести график',
@@ -113,6 +118,7 @@ const langData: LangData = {
   },
   ar: {
     greeting: 'مرحبًا كريستي ، أراك قريبًا!',
+    newAppointmentGreeting: 'مرحبا كريستي ، تم تأكيد موعدك.',
     detail: 'تفاصيل الموعد:',
     date: 'الاثنين 16 نوفمبر الساعة 11:00',
     reschedule: 'إعادة الجدولة',
@@ -128,6 +134,7 @@ const langData: LangData = {
   },
   bg: {
     greeting: 'Здравей, Кристи, до скоро!',
+    newAppointmentGreeting: 'Здравей, Кристи, уговорената среща е потвърдена',
     detail: 'Подробности за назначаването:',
     date: 'Понеделник, 16 ноември от 11:00',
     reschedule: 'Разсрочване',
@@ -144,6 +151,7 @@ const langData: LangData = {
 
   cs: {
     greeting: 'Ahoj Kristy, uvidíme se brzy!',
+    newAppointmentGreeting: 'Ahoj Kristy, tvé jmenování je potvrzeno.',
     detail: 'Podrobnosti o schůzce:',
     date: 'Pondělí 16. listopadu v 11:00',
     reschedule: 'Přeplánovat',
@@ -160,6 +168,7 @@ const langData: LangData = {
 
   da: {
     greeting: 'Hej Kristy, vi ses snart!',
+    newAppointmentGreeting: 'Hej Kristy, din aftale er bekræftet.',
     detail: 'Udnævnelsesoplysninger:',
     date: 'Mandag 16. november kl. 11:00',
     reschedule: 'Planlæg om',
@@ -175,6 +184,7 @@ const langData: LangData = {
   },
   hu: {
     greeting: 'Szia Kristy, hamarosan találkozunk!',
+    newAppointmentGreeting: 'Szia Kristy, kinevezésedet megerősítették.',
     detail: 'Kinevezés részletei:',
     date: 'November 16., hétfő, 11:00',
     reschedule: 'Átütemezés',
@@ -190,6 +200,7 @@ const langData: LangData = {
   },
   lv: {
     greeting: 'Sveika Kristij, tiekamies drīz!',
+    newAppointmentGreeting: 'Sveika, Kristij, jūsu iecelšana ir apstiprināta.',
     detail: 'Informācija par iecelšanu amatā:',
     date: 'Pirmdien, 16. novembrī, pulksten 11:00',
     reschedule: 'Pārplānojiet',
@@ -205,6 +216,7 @@ const langData: LangData = {
   },
   no: {
     greeting: 'Hei Kristy, vi sees snart!',
+    newAppointmentGreeting: 'Hei Kristy, avtalen din er bekreftet.',
     detail: 'Avtaledetaljer:',
     date: 'Mandag 16. november kl 11:00',
     reschedule: 'Planlegge på nytt',
@@ -220,6 +232,7 @@ const langData: LangData = {
   },
   pl: {
     greeting: 'Cześć Kristy, do zobaczenia wkrótce!',
+    newAppointmentGreeting: 'Cześć Kristy, twoja wizyta została potwierdzona.',
     detail: 'Szczegóły wizyty:',
     date: 'Poniedziałek, 16 listopada o godzinie 11:00',
     reschedule: 'Przełóż',
@@ -236,6 +249,7 @@ const langData: LangData = {
   },
   sw: {
     greeting: 'Hej Kristy, vi ses snart!',
+    newAppointmentGreeting: 'Hej Kristy, ditt möte är bekräftat.',
     detail: 'Tidsinformation:',
     date: 'Måndag 16 november kl 11:00',
     reschedule: 'Boka om',
@@ -251,6 +265,7 @@ const langData: LangData = {
   },
   ro: {
     greeting: 'Bună Kristy, ne vedem în curând!',
+    newAppointmentGreeting: 'Salut Kristy, numirea ta este confirmată.',
     detail: 'Detalii despre programare:',
     date: 'Luni, 16 noiembrie la 11:00',
     reschedule: 'Reprogramează',
@@ -291,6 +306,7 @@ interface P {
   medicalMessage?: string
   standardTapIndex?: string
   activeSocialIcons?: string[]
+  type?: string
 }
 
 export const Appointment: FC<P> = ({
@@ -308,6 +324,7 @@ export const Appointment: FC<P> = ({
   buttonColor,
   standardTapIndex,
   activeSocialIcons = [],
+  type = '',
 }) => {
   const [selectLangData, setSelectLangData] = React.useState<Email>(
     langData['en']
@@ -379,7 +396,9 @@ export const Appointment: FC<P> = ({
           <Row gutter={[0, 4]}>
             <Col>
               <span className={styles.greetingText}>
-                {selectLangData.greeting}
+                {type === 'new'
+                  ? selectLangData.newAppointmentGreeting
+                  : selectLangData.greeting}
               </span>
             </Col>
           </Row>
@@ -459,11 +478,16 @@ export const Appointment: FC<P> = ({
             </>
           )}
 
-          <Divider />
+          {(medicalMessage ||
+            addMedicalHisButton ||
+            informationMessage ||
+            activeSocialIcons.length > 0) && <Divider />}
 
-          <Row justify="center" style={{ marginBottom: '20px' }}>
-            <span className={styles.breaktext}>{medicalMessage}</span>
-          </Row>
+          {medicalMessage && (
+            <Row justify="center" style={{ marginBottom: '20px' }}>
+              <span className={styles.breaktext}>{medicalMessage}</span>
+            </Row>
+          )}
 
           <Row justify="center">
             {addMedicalHisButton && (
@@ -477,9 +501,11 @@ export const Appointment: FC<P> = ({
             )}
           </Row>
 
-          <Row justify="center" style={{ marginTop: '20px' }}>
-            <span className={styles.breaktext}>{informationMessage}</span>
-          </Row>
+          {informationMessage && (
+            <Row justify="center" style={{ marginTop: '20px' }}>
+              <span className={styles.breaktext}>{informationMessage}</span>
+            </Row>
+          )}
 
           <Row justify="center" style={{ marginTop: '20px' }}>
             {activeSocialIcons.map((value, index) => setSocialIcon(value))}
