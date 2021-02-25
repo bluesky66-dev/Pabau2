@@ -1,11 +1,14 @@
 import React, { FC } from 'react'
-import { EmailSMSPreviewProps, ClassRescheduledProps } from './EmailSMSPreview'
+import {
+  EmailSMSPreviewProps,
+  ClassesSpotAvailableProps,
+} from './EmailSMSPreview'
 import { Col, Row } from 'antd'
 import styles from './EmailSMSPreview.module.less'
 import { Button } from '../button/button'
 
 export const ClassesSpotAvailable: FC<
-  ClassRescheduledProps & EmailSMSPreviewProps
+  ClassesSpotAvailableProps & EmailSMSPreviewProps
 > = ({ message }) => {
   return (
     <>

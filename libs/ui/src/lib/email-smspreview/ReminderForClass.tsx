@@ -26,9 +26,7 @@ export const ReminderForClass: FC<
       </Row>
       <Row gutter={[0, 16]}>
         <Col>
-          <span className={styles.line}>
-            We look forward to seeing you then!
-          </span>
+          <span className={styles.line}>We’ll see you soon!</span>
         </Col>
       </Row>
       <Row className={styles.textBox}>

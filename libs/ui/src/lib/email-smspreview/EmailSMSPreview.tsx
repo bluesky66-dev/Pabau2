@@ -105,6 +105,24 @@ export interface MedicalFormProps {
   text?: string
 }
 
+export interface NewAppoinmentsIsBookedProps {
+  message?: string
+  contactNumber?: number
+}
+
+export interface ClassWaitListProps {
+  message?: string
+}
+
+export interface ClassesSpotAvailableProps {
+  message?: string
+}
+
+export interface UpComingAppoinmentReminderProps {
+  message?: string
+  contactNumber?: number
+}
+
 export function EmailSMSFooter(props: FooterProps): JSX.Element {
   const {
     iconGroup = true,

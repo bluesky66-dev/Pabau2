@@ -1,10 +1,13 @@
 import React, { FC } from 'react'
-import { EmailSMSPreviewProps, ReminderForClassProps } from './EmailSMSPreview'
+import {
+  EmailSMSPreviewProps,
+  UpComingAppoinmentReminderProps,
+} from './EmailSMSPreview'
 import { Col, Row } from 'antd'
 import styles from './EmailSMSPreview.module.less'
 
 export const UpComingAppointmentReminder: FC<
-  ReminderForClassProps & EmailSMSPreviewProps
+  UpComingAppoinmentReminderProps & EmailSMSPreviewProps
 > = ({ message, contactNumber }) => {
   return (
     <>

@@ -1,7 +1,47 @@
-import React from 'react'
+import React, { FC } from 'react'
+import {
+  EmailSMSPreviewProps,
+  NewAppoinmentsIsBookedProps,
+} from './EmailSMSPreview'
+import { Col, Row } from 'antd'
+import styles from './EmailSMSPreview.module.less'
 
-export function NewAppoinmentsIsBooked(): JSX.Element {
-  return <div></div>
+export const NewAppoinmentsIsBooked: FC<
+  NewAppoinmentsIsBookedProps & EmailSMSPreviewProps
+> = ({ message, contactNumber }) => {
+  return (
+    <>
+      <Row gutter={[0, 4]} className={styles.break}>
+        <Col>
+          <span className={styles.message}>{message}</span>
+        </Col>
+      </Row>
+      <Row gutter={[0, 4]} className={styles.break}>
+        <Col>
+          <span className={styles.message}>
+            {' '}
+            We truly care about your well-being, so if you have any questions or
+            needs in advance of your appointment, you are welcome to call us
+            anytime at{' '}
+            <span className={styles.contactInfo}>{contactNumber}</span>
+          </span>
+        </Col>
+      </Row>
+      <Row gutter={[0, 16]}>
+        <Col>
+          <span className={styles.line}>
+            We look forward to seeing you then!
+          </span>
+        </Col>
+      </Row>
+      <Row className={styles.textBox}>
+        <Col>
+          <p>Kind regards,</p>
+          <p>Your friends at The Clinic</p>
+        </Col>
+      </Row>
+    </>
+  )
 }
 
 export default NewAppoinmentsIsBooked
