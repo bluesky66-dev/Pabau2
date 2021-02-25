@@ -109,6 +109,10 @@
     align-items: center;
   }
 
+  .modal-body {
+    padding: 0px 40px 0px 40px;
+  }
+
   :global {
     .pretty {
       margin-right: 24px;
@@ -131,6 +135,9 @@
     }
     .ant-checkbox + span {
       padding-right: 24px !important;
+    }
+    .track-time-checkbox .ant-checkbox + span {
+      padding-right: 10px !important;
     }
     .ant-btn[disabled] {
       background-color: #d5d5d5 !important;
@@ -155,7 +162,6 @@
   }
   .delete-btn-style {
     min-width: 74px;
-    height: 40px;
     border: 1px solid var(--border-color-base);
     font-size: 14px;
     border-radius: 4px;
