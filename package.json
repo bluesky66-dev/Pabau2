@@ -60,7 +60,6 @@
     "apollo-server": "^2.20.0",
     "canvas-confetti": "^1.3.3",
     "classnames": "^2.2.6",
-    "country-state-city": "^2.0.0",
     "document-register-element": "1.14.10",
     "eslint-plugin-unicorn": "^28.0.2",
     "file-loader": "^6.2.0",
