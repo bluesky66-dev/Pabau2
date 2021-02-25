@@ -5,13 +5,13 @@ import Highlighter from 'react-highlight-words'
 import { SetupEmptySearch } from '@pabau/ui'
 import styles from '../Setup.module.less'
 
-interface searchProps {
+interface SearchItemProps {
   subTitle: string
   title: string
 }
 
 interface P {
-  data: searchProps[]
+  data: SearchItemProps[]
   searchTerm: string
 }
 

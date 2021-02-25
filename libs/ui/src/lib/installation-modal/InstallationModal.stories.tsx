@@ -1,6 +1,6 @@
 import React from 'react'
 import InstallationModalComponent from './InstallationModal'
-import logo from '../../assets/images/pabau.png'
+import logo from '../../assets/images/logo.svg'
 import installationModalImage from '../../assets/images/installationModalImage.png'
 import installationModalWindowImage from '../../assets/images/installationModalWindowImage.png'
 import message from '../../assets/images/message.svg'

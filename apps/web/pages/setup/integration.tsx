@@ -18,13 +18,13 @@ const { TabPane } = Tabs
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IntegrationProps {}
 
-interface searchProps {
+interface SearchItemProps {
   categories: string
   title: string
 }
 
 interface SearchProps {
-  data: searchProps[]
+  data: SearchItemProps[]
   searchString: string
 }
 
@@ -41,14 +41,13 @@ const Search: FC<SearchProps> = ({ data, searchString }) => {
                   searchWords={[searchString]}
                   textToHighlight={thread.title}
                 />
-                <span>&nbsp;-&nbsp;</span>
-                <div className={styles.searchTitle}>{thread.categories}</div>
+                <div className={styles.searchTitle}> - {thread.categories}</div>
               </div>
             </div>
           ))}
         </div>
       )}
-      {data && data.length === 0 && <SetupEmptySearch />}
+      {!(data?.length > 0) && <SetupEmptySearch />}
     </Card>
   )
 }
@@ -56,11 +55,7 @@ const Search: FC<SearchProps> = ({ data, searchString }) => {
 export const Integration: FC<IntegrationProps> = (props) => {
   const [active, setActive] = useState<string>('4')
   const [searchValue, setSearchValue] = useState<string>('')
-  const [searchItemsArray, setSearchItemsArray] = useState<searchProps[]>([])
-
-  const handleClick = (key: string) => {
-    setActive(key)
-  }
+  const [searchItemsArray, setSearchItemsArray] = useState<SearchItemProps[]>([])
 
   const handleSearch = (searchTerm: string) => {
     setSearchValue(searchTerm)
@@ -106,7 +101,7 @@ export const Integration: FC<IntegrationProps> = (props) => {
                 tabPosition="left"
                 defaultActiveKey={active}
                 activeKey={active}
-                onTabClick={handleClick}
+                onTabClick={(value) => setActive(value)}
               >
                 <TabPane
                   tab="Manage"
@@ -136,7 +131,7 @@ export const Integration: FC<IntegrationProps> = (props) => {
                       <h5>Popular</h5>
                       <div
                         className={styles.seeAll}
-                        onClick={(event) => handleClick('5')}
+                        onClick={() => setActive('5')}
                       >
                         see all &#x2794;
                       </div>
