@@ -48,6 +48,7 @@ export function NewBlockOutOptions(props: NewBlockOutOptionsProps) {
   }
 
   const onTypeCheck = (type: string) => () => {
+    form.setFields([{ name: 'type', value: type }])
     setType(type)
   }
 
@@ -78,6 +79,7 @@ export function NewBlockOutOptions(props: NewBlockOutOptionsProps) {
               ? editData?.backgroundColor
               : backgroundColor,
             defaultTime: isEdit ? editData?.defaultTime : 50,
+            type,
           }}
           className={styles.form}
           onSubmitCapture={(e) => {
@@ -134,32 +136,34 @@ export function NewBlockOutOptions(props: NewBlockOutOptionsProps) {
               </Item>
 
               <Paragraph style={{ marginBottom: 6 }}>Type</Paragraph>
-              <div style={{ display: 'flex', flex: 1 }}>
-                <div
-                  onClick={onTypeCheck('Blockout')}
-                  className={`${styles.typeLeft} ${
-                    type === 'Blockout' && styles.selectedLeft
-                  }`}
-                >
-                  {type === 'Blockout' && (
-                    <CheckCircleFilled className={styles.check} />
-                  )}
-                  <div className={styles.dash} />
-                  <p style={{ marginTop: 16 }}>Blockout</p>
+              <Item style={{ marginBottom: 0 }} name="type">
+                <div style={{ display: 'flex', flex: 1 }}>
+                  <div
+                    onClick={onTypeCheck('Blockout')}
+                    className={`${styles.typeLeft} ${
+                      type === 'Blockout' && styles.selectedLeft
+                    }`}
+                  >
+                    {type === 'Blockout' && (
+                      <CheckCircleFilled className={styles.check} />
+                    )}
+                    <div className={styles.dash} />
+                    <p style={{ marginTop: 16 }}>Blockout</p>
+                  </div>
+                  <div
+                    onClick={onTypeCheck('Opening')}
+                    className={`${styles.typeRight}  ${
+                      type === 'Opening' && styles.selectedRight
+                    }`}
+                  >
+                    {type === 'Opening' && (
+                      <CheckCircleFilled className={styles.check} />
+                    )}
+                    <div className={styles.dash} />
+                    <p style={{ marginTop: 16 }}>Opening</p>
+                  </div>
                 </div>
-                <div
-                  onClick={onTypeCheck('Opening')}
-                  className={`${styles.typeRight}  ${
-                    type === 'Opening' && styles.selectedRight
-                  }`}
-                >
-                  {type === 'Opening' && (
-                    <CheckCircleFilled className={styles.check} />
-                  )}
-                  <div className={styles.dash} />
-                  <p style={{ marginTop: 16 }}>Opening</p>
-                </div>
-              </div>
+              </Item>
 
               {type === 'Blockout' && (
                 <>
