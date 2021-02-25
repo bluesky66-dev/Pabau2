@@ -74,7 +74,7 @@ const notificationData = {
         'Automatically sends to clients when an appointment is marked as no show',
       icon: <UserDeleteOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/noshow-appointment',
       disabled: true,
     },
     {

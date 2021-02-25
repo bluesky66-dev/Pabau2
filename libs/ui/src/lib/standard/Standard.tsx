@@ -42,8 +42,10 @@ interface P {
   hideDisplayPolicyOption?: boolean
   showService: boolean
   onShowService: (boolean) => void
+  hideServiceOption?: boolean
   showEmployeeName: boolean
   onShowEmployeeName: (boolean) => void
+  hideEmployeeNameOption?: boolean
   addMedicalHisButton: boolean
   onAddMedicalHisButton: (boolean) => void
   hideMedicalHistoryOption?: boolean
@@ -91,8 +93,10 @@ export const Standard: FC<P> = ({
   hideDisplayPolicyOption = false,
   showService,
   onShowService,
+  hideServiceOption = false,
   showEmployeeName,
   onShowEmployeeName,
+  hideEmployeeNameOption = false,
   addMedicalHisButton,
   onAddMedicalHisButton,
   hideMedicalHistoryOption = false,
@@ -299,26 +303,30 @@ export const Standard: FC<P> = ({
                       </Checkbox>
                     </Row>
                   )}
-                  <Row>
-                    <Checkbox
-                      className={styles.checkboxStyle}
-                      value="show_service"
-                      checked={showService}
-                      onChange={() => onShowService(!showService)}
-                    >
-                      Show service
-                    </Checkbox>
-                  </Row>
-                  <Row>
-                    <Checkbox
-                      className={styles.checkboxStyle}
-                      value="show_employee_name"
-                      checked={showEmployeeName}
-                      onChange={() => onShowEmployeeName(!showEmployeeName)}
-                    >
-                      Show employee name
-                    </Checkbox>
-                  </Row>
+                  {!hideServiceOption && (
+                    <Row>
+                      <Checkbox
+                        className={styles.checkboxStyle}
+                        value="show_service"
+                        checked={showService}
+                        onChange={() => onShowService(!showService)}
+                      >
+                        Show service
+                      </Checkbox>
+                    </Row>
+                  )}
+                  {!hideEmployeeNameOption && (
+                    <Row>
+                      <Checkbox
+                        className={styles.checkboxStyle}
+                        value="show_employee_name"
+                        checked={showEmployeeName}
+                        onChange={() => onShowEmployeeName(!showEmployeeName)}
+                      >
+                        Show employee name
+                      </Checkbox>
+                    </Row>
+                  )}
                   {!hideMedicalHistoryOption && (
                     <>
                       <Row>

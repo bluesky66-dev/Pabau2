@@ -43,6 +43,8 @@ export interface FooterProps {
 export interface NoShowAppointmentProps {
   message?: string
   contactNumber?: string
+  closingText?: string
+  signatureBlock?: string
 }
 
 export interface BookedOntoClassProps {

@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react'
 import { ClientNotification, Standard, Appointment, Smstext } from '@pabau/ui'
 import CancelAppointmentPreview from '../../pages/client-notifications/cancelled-appointment/CancelAppointmentPreview'
+import NoShowAppointmentPreview from '../../pages/client-notifications/noshow-appointment/NoShowAppointmentPreview'
 
 interface P {
   onSeletedTab: (number) => void
@@ -11,7 +12,10 @@ interface P {
   hideAllowReschedulingOption?: boolean
   hideAllowCancellationOption?: boolean
   hideDisplayPolicyOption?: boolean
+  hideServiceOption?: boolean
+  hideEmployeeNameOption?: boolean
   type?: string
+  smsCustom?: string
 }
 
 const Index: FC<P> = ({
@@ -23,7 +27,10 @@ const Index: FC<P> = ({
   hideAllowReschedulingOption = false,
   hideAllowCancellationOption = false,
   hideDisplayPolicyOption = false,
+  hideServiceOption = false,
+  hideEmployeeNameOption = false,
   type = '',
+  smsCustom = '',
 }) => {
   const [enableReminder, setEnableReminder] = useState(false)
   const [smartDelivery, setSmartDelivery] = useState(false)
@@ -41,7 +48,7 @@ const Index: FC<P> = ({
   const [informationMessage, setInformationMessage] = useState('')
   const [standardTapIndex, setStandardTap] = useState('1')
   const [hideAppearanceTabPane, setHideAppearanceTabPane] = useState(true)
-  const [smsMessage, setSmsMessage] = useState('Hi, Kristy')
+  const [smsMessage, setSmsMessage] = useState(smsCustom || 'Hi, Kristy')
 
   const [activeSocialIcons, setActiveSocialIcons] = React.useState([])
   const [disableCustomTab, setDisableCustomTab] = useState(false)
@@ -114,11 +121,24 @@ const Index: FC<P> = ({
           hideDisplayPolicyOption={hideDisplayPolicyOption}
           hideMedicalHistoryOption={hideMedicalHistoryOption}
           hideReminderTimeFrameTabPane={hideReminderTimeFrameTabPane}
+          hideEmployeeNameOption={hideEmployeeNameOption}
+          hideServiceOption={hideServiceOption}
         />
       }
       previewComponent={
         type === 'cancel' ? (
           <CancelAppointmentPreview
+            standardTapIndex={standardTapIndex}
+            backGroundColor={backGroundColor}
+            activeSocialIcons={activeSocialIcons}
+            selectLanguage={selectLanguage}
+            showService={showService}
+            showEmployeeName={showEmployeeName}
+            buttonColor={buttonColor}
+            informationMessage={informationMessage}
+          />
+        ) : type === 'noShowAppointment' ? (
+          <NoShowAppointmentPreview
             standardTapIndex={standardTapIndex}
             backGroundColor={backGroundColor}
             activeSocialIcons={activeSocialIcons}
