@@ -5,8 +5,8 @@ import {
   MessageOutlined,
 } from '@ant-design/icons'
 import { notification } from 'antd'
-import Button from './button'
-import DropdownButton from './dropdownButton'
+import Button from './Button'
+import DropdownButton from './DropdownButton'
 
 export default {
   component: Button,

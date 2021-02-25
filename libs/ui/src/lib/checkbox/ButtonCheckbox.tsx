@@ -1,7 +1,7 @@
 import { CheckOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import React, { PropsWithChildren, useState } from 'react'
-import styles from './checkbox.module.less'
+import styles from './Checkbox.module.less'
 
 interface CheckboxProps {
   label?: string

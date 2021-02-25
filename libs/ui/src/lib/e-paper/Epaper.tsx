@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import dynamic from 'next/dynamic'
 import { RightOutlined, LeftOutlined } from '@ant-design/icons'
-import styles from './EPaper.module.less'
+import styles from './Epaper.module.less'
 
 export interface EPaperProps {
   title: string
@@ -13,11 +13,11 @@ export interface EPaperProps {
   onDocumentLoadSuccess?: ({ numPages: number }) => void
 }
 
-const MyEPaper = dynamic(() => import('./MyEPaper'), {
+const MyEPaper = dynamic(() => import('./MyEpaper'), {
   ssr: false,
 })
 
-export const EPaper: FC<EPaperProps> = ({
+export const Epaper: FC<EPaperProps> = ({
   title,
   pdfURL,
   images,
@@ -83,4 +83,4 @@ export const EPaper: FC<EPaperProps> = ({
   )
 }
 
-export default EPaper
+export default Epaper

@@ -23,7 +23,7 @@ import { ReactComponent as LaunchSVG } from '../../assets/images/launch.svg'
 import { ReactComponent as PABAULOGO } from '../../assets/images/pabaulogo.svg'
 import { ReactComponent as UPSVG } from '../../assets/images/UP.svg'
 import { ReactComponent as TaskSVG } from '../../assets/images/Vector.svg'
-import styles from './dropdown.module.less'
+import styles from './Dropdown.module.less'
 
 // import { isMobile, isTablet } from 'react-device-detect'
 export interface DropDownInterface {

@@ -1,12 +1,12 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import WStepper from './WStepper'
+import Wstepper from './Wstepper'
 
-describe('WStepper', () => {
+describe('Wstepper', () => {
   it('should render successfully', () => {
     const { baseElement } = render(
-      <WStepper active={0} breadcrumbTxt={''} headerTxt={''} data={[]} />
+      <Wstepper active={0} data={[]} />
     )
     expect(baseElement).toBeTruthy()
   })

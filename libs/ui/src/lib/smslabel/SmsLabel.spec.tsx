@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import EPaper from './EPaper'
+import SmsLabel from './SmsLabel'
 
-describe('EPaper', () => {
+describe('SmsLabel', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<EPaper />)
+    const { baseElement } = render(<SmsLabel />)
     expect(baseElement).toBeTruthy()
   })
 })

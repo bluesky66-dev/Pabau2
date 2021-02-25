@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import React from 'react'
-import Dropdown from './dropdown'
+import Dropdown from './Dropdown'
 
 export default {
   component: Dropdown,

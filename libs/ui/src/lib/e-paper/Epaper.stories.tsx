@@ -1,9 +1,9 @@
 import React, { FC, useState, useEffect } from 'react'
 
-import EPaper from './EPaper'
+import Epaper from './Epaper'
 
 export default {
-  component: EPaper,
+  component: Epaper,
   title: 'Basics/ePaper',
   args: {
     title: 'Ganog’s-Review-of-Medical-Psysiology.pdf',
@@ -44,7 +44,7 @@ export const EPaperStory: FC<P> = ({ title, pdfURL, images }) => {
   }
 
   return (
-    <EPaper
+    <Epaper
       title={title}
       numPages={numPages}
       pageNumber={pageNumber}

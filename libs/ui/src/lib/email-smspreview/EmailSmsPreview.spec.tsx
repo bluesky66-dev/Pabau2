@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import Dropdown from './dropdown'
+import EmailSmsPreview from './EmailSmsPreview'
 
-describe('Avatar Dropdown', () => {
+describe('EmailSmsPreview', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Dropdown />)
+    const { baseElement } = render(<EmailSmsPreview />)
     expect(baseElement).toBeTruthy()
   })
 })
