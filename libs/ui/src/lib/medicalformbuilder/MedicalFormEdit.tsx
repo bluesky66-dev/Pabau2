@@ -64,7 +64,7 @@ const MedicalFormEdit: FC<PreviewData> = ({ previewData }) => {
   console.log('previewData =', previewData)
   let previewDataArray = []
   if (previewData !== '') {
-    previewDataArray = JSON.parse(Base64.decode(previewData ? previewData : ''))
+    previewDataArray = JSON.parse(Base64.decode(previewData))
   }
   console.log('previewDataArray =', previewDataArray)
   const [draggedForms, setDraggedForms] = useState([])

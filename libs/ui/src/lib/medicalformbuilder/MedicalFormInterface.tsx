@@ -40,5 +40,5 @@ export const defaultSelectedFormInfos: SelectedForms = {
 }
 
 export interface PreviewData {
-  previewData?: string
+  previewData: string
 }
