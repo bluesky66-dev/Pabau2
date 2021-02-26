@@ -164,29 +164,30 @@ const MedicalFormEdit: FC<PreviewData> = ({ previewData }) => {
     setDraggedForms([])
     if (typeof previewData != 'undefined' && previewData !== '') {
       const previewDataArray = JSON.parse(Base64.decode(previewData))
-      previewDataArray['form_structure']?.map((form) => {
-        console.log('preview form data =', form)
-        let formName = ''
-        const mappingInfo = previewMapping.filter(
-          (item) => Object.keys(item)[0] === form.cssClass
-        )
-        if (mappingInfo?.length > 0) {
-          formName = mappingInfo[0][form.cssClass]
-          const mappingForm = medicalForms.filter(
-            (item) => item.formName === formName
+      if (previewDataArray['form_structure']) {
+        for (const form of previewDataArray['form_structure']) {
+          console.log('preview form data =', form)
+          let formName = ''
+          const mappingInfo = previewMapping.filter(
+            (item) => Object.keys(item)[0] === form.cssClass
           )
-          if (mappingForm?.length > 0) {
-            copy(
-              medicalForms,
-              draggedForms ? draggedForms : [],
-              mappingForm[0].id,
-              draggedForms ? draggedForms.length : 0,
-              getFormInfo(form)
+          if (mappingInfo?.length > 0) {
+            formName = mappingInfo[0][form.cssClass]
+            const mappingForm = medicalForms.filter(
+              (item) => item.formName === formName
             )
+            if (mappingForm?.length > 0) {
+              copy(
+                medicalForms,
+                draggedForms ? draggedForms : [],
+                mappingForm[0].id,
+                draggedForms ? draggedForms.length : 0,
+                getFormInfo(form)
+              )
+            }
           }
         }
-        return
-      })
+      }
       setDraggedForms(draggedForms)
       forceUpdate()
     }
