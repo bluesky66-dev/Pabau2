@@ -21,9 +21,19 @@ import { I18nextProvider } from 'react-i18next'
 import i18next from 'i18next'
 import de from '../locales/de.json'
 import en from '../locales/en.json'
+import * as Sentry from '@sentry/react'
+import { Integrations } from '@sentry/tracing'
 require('../styles/global.less')
 require('../../../libs/ui/src/styles/antd.less')
 require('react-phone-input-2/lib/style.css')
+
+Sentry.init({
+  dsn:
+    'https://c7185e52dd3a43ceb066bb154572adda@o134884.ingest.sentry.io/298098',
+  release: 'pabau2',
+  integrations: [new Integrations.BrowserTracing()],
+  tracesSampleRate: 1,
+})
 
 const cache = new InMemoryCache()
 const GRAPHQL_ENDPOINT = 'wss://api.new.pabau.com/v1/graphql'
@@ -161,32 +171,33 @@ i18next.init({
   },
 })
 
-export default function CustomApp({
-  Component,
-  pageProps,
-}: AppProps): JSX.Element {
+function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
-    <ApolloProvider client={client}>
-      <I18nextProvider i18n={i18next}>
-        <style jsx global>{`
-          @font-face {
-            font-family: 'Circular-Std-Black';
-            src: local('Circular-Std-Black'),
-              url(../public/fonts/CircularStd-Black.otf) format('opentype');
-          }
+    <Sentry.ErrorBoundary fallback={'An error has occurred'}>
+      <ApolloProvider client={client}>
+        <I18nextProvider i18n={i18next}>
+          <style jsx global>{`
+            @font-face {
+              font-family: 'Circular-Std-Black';
+              src: local('Circular-Std-Black'),
+                url(../public/fonts/CircularStd-Black.otf) format('opentype');
+            }
 
-          @font-face {
-            font-family: 'Circular-Std-Book';
-            src: url('/fonts/CircularStd-Book.otf') format('opentype');
-          }
+            @font-face {
+              font-family: 'Circular-Std-Book';
+              src: url('/fonts/CircularStd-Book.otf') format('opentype');
+            }
 
-          @font-face {
-            font-family: 'Circular-Std-Medium';
-            src: url('/fonts/CircularStd-Medium.otf') format('opentype');
-          }
-        `}</style>
-        <Component {...pageProps} />
-      </I18nextProvider>
-    </ApolloProvider>
+            @font-face {
+              font-family: 'Circular-Std-Medium';
+              src: url('/fonts/CircularStd-Medium.otf') format('opentype');
+            }
+          `}</style>
+          <Component {...pageProps} />
+        </I18nextProvider>
+      </ApolloProvider>
+    </Sentry.ErrorBoundary>
   )
 }
+
+export default Sentry.withProfiler(CustomApp)
