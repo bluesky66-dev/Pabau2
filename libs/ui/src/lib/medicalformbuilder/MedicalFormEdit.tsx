@@ -164,6 +164,7 @@ const MedicalFormEdit: FC<PreviewData> = ({ previewData }) => {
     setDraggedForms([])
     if (typeof previewData != 'undefined' && previewData !== '') {
       const previewDataArray = JSON.parse(Base64.decode(previewData))
+      const previewForms = []
       if (previewDataArray['form_structure']) {
         for (const form of previewDataArray['form_structure']) {
           console.log('preview form data =', form)
@@ -179,16 +180,16 @@ const MedicalFormEdit: FC<PreviewData> = ({ previewData }) => {
             if (mappingForm?.length > 0) {
               copy(
                 medicalForms,
-                draggedForms ? draggedForms : [],
+                previewForms,
                 mappingForm[0].id,
-                draggedForms ? draggedForms.length : 0,
+                previewForms.length,
                 getFormInfo(form)
               )
             }
           }
         }
       }
-      setDraggedForms(draggedForms)
+      setDraggedForms(previewForms)
       forceUpdate()
     }
   }, [previewData])
