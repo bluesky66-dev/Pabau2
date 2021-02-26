@@ -115,7 +115,7 @@ const getFormInfo = (form) => {
     }
   }
 
-  name = name ? name.toLowerCase().trim() : ''
+  // name = name ? name.toLowerCase().trim() : ''
   label = form.title ? form.title.trim() : ''
   label = label === '' && form.values ? form.values.trim() : label
 
@@ -160,11 +160,10 @@ const MedicalFormEdit: FC<PreviewData> = ({ previewData }) => {
   const [selectedForm, setSelectedForm] = useState(defaultFormValue)
   const [displaySettingBar, setDisplaySettingBar] = useState(false)
 
-  let previewDataArray = []
   useEffect(() => {
     setDraggedForms([])
     if (typeof previewData != 'undefined' && previewData !== '') {
-      previewDataArray = JSON.parse(Base64.decode(previewData))
+      const previewDataArray = JSON.parse(Base64.decode(previewData))
       previewDataArray['form_structure']?.map((form) => {
         console.log('preview form data =', form)
         let formName = ''
