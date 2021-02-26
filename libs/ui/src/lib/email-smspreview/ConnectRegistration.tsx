@@ -2,9 +2,9 @@ import React, { FC } from 'react'
 import {
   EmailSMSPreviewProps,
   ConnectRegistrationProps,
-} from './EmailSMSPreview'
+} from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
+import styles from './EmailSmsPreview.module.less'
 
 export const ConnectRegistration: FC<
   ConnectRegistrationProps & EmailSMSPreviewProps

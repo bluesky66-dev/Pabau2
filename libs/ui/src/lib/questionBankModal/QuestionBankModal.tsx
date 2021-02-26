@@ -3,8 +3,8 @@ import { Tabs, Row, Col } from 'antd'
 import { IQuestionOptions } from '../questionBank/QuestionBank'
 import { menuOptions } from '../questionBank/mock'
 import QuestionBank from '../questionBank/QuestionBank'
-import Button from '../button/button'
-import BasicModal, { BasicModalProps } from '../modal/basicmodal'
+import Button from '../button/Button'
+import BasicModal, { BasicModalProps } from '../modal/BasicModal'
 import customStyles from './QuestionBankModal.module.less'
 
 interface IMenuOption {

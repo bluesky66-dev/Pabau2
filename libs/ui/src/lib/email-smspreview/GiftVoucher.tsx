@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import { EmailSMSPreviewProps, GiftVoucherProps } from './EmailSMSPreview'
+import { EmailSMSPreviewProps, GiftVoucherProps } from './EmailSmsPreview'
 import { Col, Divider, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
+import styles from './EmailSmsPreview.module.less'
 import {
   FacebookOutlined,
   WhatsAppOutlined,
