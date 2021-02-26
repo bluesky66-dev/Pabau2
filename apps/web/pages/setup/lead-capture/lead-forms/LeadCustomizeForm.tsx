@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Row, Col, Tabs } from 'antd'
 import classNames from 'classnames'
-import LeadFormBuilder from './lead-form-builder'
-import LeadFormPreview from './lead-form-preview'
+import LeadFormBuilder from './LeadFormBuilder'
+import LeadFormPreview from './LeadFormPreview'
 import styles from './Lead-forms.module.less'
 import { FieldType } from '@pabau/ui'
 

@@ -211,7 +211,7 @@ export const CancellationReasons: NextPage = () => {
     <CrudLayout
       schema={schema}
       tableSearch={false}
-      filter={false}
+      addFilter={false}
       addQuery={ADD_MUTATION}
       deleteQuery={DELETE_MUTATION}
       listQuery={LIST_QUERY}

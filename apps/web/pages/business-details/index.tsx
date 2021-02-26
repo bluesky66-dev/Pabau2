@@ -10,7 +10,7 @@ import {
   BusinessDetailsNotifications,
 } from '@pabau/ui'
 import Layout from '../../components/Layout/Layout'
-import CommonHeader from '../setup/common-header'
+import CommonHeader from '../setup/CommonHeader'
 import styles from './index.module.less'
 
 const { Title } = Typography

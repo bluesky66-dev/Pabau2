@@ -21,5 +21,11 @@
   "git.confirmSync": false,
   "git.autofetch": true,
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[less]": {
+    "editor.defaultFormatter": "Wscats.qf"
+  }
 }

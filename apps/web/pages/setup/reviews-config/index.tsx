@@ -36,11 +36,10 @@ import {
   AddQuestion,
   IQuestionOptions,
   QuestionField,
-  CopyEmbedCodeModal,
 } from '@pabau/ui'
 import confetti from 'canvas-confetti'
 import Layout from '../../../components/Layout/Layout'
-import CommonHeader from '../common-header'
+import CommonHeader from '../CommonHeader'
 import reviewsConfigBanner from '../../../assets/images/reviews-config-banner.png'
 import userAvatar from '../../../assets/images/users/alex.png'
 import clinicLogo from '../../../assets/images/clinic-logo.png'
@@ -163,11 +162,11 @@ export const Index: FC<ReviewsConfigProps> = ({
 
   const ReviewsConfigFooter = ({ step, onNext, onPrev }) => {
     const handleClickNext = () => {
-      reviewsConfigRef.current.scrollIntoView({ behavior: 'smooth' })
+      reviewsConfigRef.current.scrollIntoView()
       onNext()
     }
     const handleClickPrev = () => {
-      reviewsConfigRef.current.scrollIntoView({ behavior: 'smooth' })
+      reviewsConfigRef.current.scrollIntoView()
       onPrev()
     }
     return (
@@ -936,8 +935,6 @@ export const Index: FC<ReviewsConfigProps> = ({
     const [currentReviews, setCurrentReviews] = useState<ReviewSliderProps>(
       defaultPreview
     )
-    const [embedCodeView, setEmbedCodeView] = useState(false)
-    const [embedCode, setEmbedCode] = useState('')
     return (
       <>
         <div className={styles.reviewsConfigBody}>
@@ -982,15 +979,7 @@ export const Index: FC<ReviewsConfigProps> = ({
                 <div>
                   <p>{badge.title}</p>
                   <div>
-                    <Button
-                      type="primary"
-                      onClick={() => {
-                        setEmbedCodeView(true)
-                        setEmbedCode(badge.embedCode)
-                      }}
-                    >
-                      View Embed Code
-                    </Button>
+                    <Button type="primary">View Embed Code</Button>
                     {!isMobile ? (
                       <>
                         {badge.wordpressPlugin && (
@@ -1054,15 +1043,7 @@ export const Index: FC<ReviewsConfigProps> = ({
                 <div>
                   <p>{widget.title}</p>
                   <div>
-                    <Button
-                      type="primary"
-                      onClick={() => {
-                        setEmbedCodeView(true)
-                        setEmbedCode(widget.embedCode)
-                      }}
-                    >
-                      View Embed Code
-                    </Button>
+                    <Button type="primary">View Embed Code</Button>
                     {!isMobile ? (
                       <>
                         {widget.wordpressPlugin && (
@@ -1131,24 +1112,6 @@ export const Index: FC<ReviewsConfigProps> = ({
           >
             <ReviewSlider {...currentReviews} />
           </BasicModal>
-        )}
-        {embedCodeView && (
-          <CopyEmbedCodeModal
-            visible={embedCodeView}
-            code={embedCode}
-            title="Copy embed code"
-            subTitle="Paste this snippet into your webbsite’s source code"
-            modalWidth={600}
-            onClose={() => {
-              setEmbedCodeView(false)
-            }}
-            onDownloadImg={() => {
-              return
-            }}
-            onEmailInput={() => {
-              return
-            }}
-          />
         )}
       </>
     )

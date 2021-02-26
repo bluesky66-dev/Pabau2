@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from '@fortawesome/free-solid-svg-icons'
 import { Image } from 'antd'
 import PabauLogo from '../../../assets/images/logo.svg'
-import LeadTestWaiting from './waiting-request'
+import LeadTestWaiting from './WaitingRequest'
 
 interface LeadTestingInterface {
   onAPIFlowComplete: () => void

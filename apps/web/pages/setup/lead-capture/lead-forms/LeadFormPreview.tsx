@@ -7,6 +7,7 @@ import classNames from 'classnames'
 import styles from './Lead-forms.module.less'
 import { Button } from '@pabau/ui'
 const { Option } = Select
+
 interface colors {
   fontColor: string
   buttonColor: string

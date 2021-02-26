@@ -230,7 +230,7 @@ const CrudTable: FC<P> = ({
 
   useEffect(() => {
     if (data) {
-      if (data[0]?.__typename === 'issuing_company') {
+      if (data[0].__typename === 'issuing_company') {
         const newData = data.map((d) => {
           const { country, city, street, post_code } = d
           return {
@@ -402,7 +402,7 @@ const CrudTable: FC<P> = ({
   const handleLanguageChange = (language: string): void => {
     setCurrentLanguage(language)
   }
-
+  // console.log('aqwe',addQuery,createPage);
   return (
     <Formik
       enableReinitialize={true}
@@ -476,8 +476,8 @@ const CrudTable: FC<P> = ({
                   onSearch={onSearch}
                   schema={schema}
                   tableSearch={tableSearch}
-                  addFilter={addFilter}
                   needTranslation={needTranslation}
+                  addFilter={addFilter}
                 />
               )}
             </div>
@@ -530,7 +530,6 @@ const CrudTable: FC<P> = ({
                 schema={schema}
                 tableSearch={tableSearch}
                 needTranslation={needTranslation}
-                addFilter={addFilter}
               />
             ) : (
               <AddButton
@@ -539,7 +538,6 @@ const CrudTable: FC<P> = ({
                 onSearch={onSearch}
                 schema={schema}
                 tableSearch={tableSearch}
-                addFilter={addFilter}
                 needTranslation={needTranslation}
               />
             )}

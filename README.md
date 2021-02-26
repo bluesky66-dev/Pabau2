@@ -142,8 +142,7 @@ To view the Backend, you can either visit [https://backend.new.pabau.com](https:
 - [eslint](https://eslint.org/) / [prettier](https://prettier.io/) - auto-cleans your code on save
 - [Hasura](https://hasura.io/) - used as our ORM layer, provides websocket push notifications
 - [Postgres](https://www.postgresql.org/) - the underlying SQL database that sits behind Hasura
-- [Prisma]() - a graphql server that allows us to bridge to our old database
-- [NestJS](https://nestjs.com/) - a backend that only hasura will call, for things like sending email(and converted to Vercel's [Serverless Functions](https://vercel.com/docs/serverless-functions/introduction) at deploy-time)
+- Backend uses [NestJS](https://nestjs.com/) (and converted to Vercel's [Serverless Functions](https://vercel.com/docs/serverless-functions/introduction) at deploy-time)
 - [ant.design](https://ant.design/) - the base for most of our UI components
 - [Vercel](https://vercel.com/) - Our hosting platform (except for hasura, which is on our [Rancher](https://rancher.com/) self-hosted platform)
 - [React Hooks](https://reactjs.org/docs/hooks-intro.html) - modern React using Functional Programming principles
