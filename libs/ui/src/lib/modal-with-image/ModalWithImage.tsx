@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Row, Col, Button } from 'antd'
 
-import BasicModal from '../modal/basicmodal'
+import BasicModal from '../modal/BasicModal'
 
 import customStyles from './ModalWithImage.module.less'
 

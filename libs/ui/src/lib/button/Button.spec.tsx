@@ -1,8 +1,8 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import Button from './button'
-import DropDownButton from './dropdownButton'
+import Button from './Button'
+import DropdownButton from './DropdownButton'
 
 describe('Button', () => {
   it('should render successfully', () => {
@@ -11,7 +11,7 @@ describe('Button', () => {
   })
 
   it('should render dropdown button successfully', () => {
-    const { baseElement } = render(<DropDownButton />)
+    const { baseElement } = render(<DropdownButton />)
     expect(baseElement).toBeTruthy()
   })
 })

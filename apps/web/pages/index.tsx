@@ -4,7 +4,8 @@ import { version } from '../../../package.json'
 import useTranslation from '../hooks/useTranslation'
 import Grid from '../components/Grid'
 import Layout from '../components/Layout/Layout'
-import CommonHeader from './setup/CommonHeader'
+import CommonHeader from './setup/common-header'
+
 const Index: FC = () => {
   const { t } = useTranslation()
   const [showGrid, setShowGrid] = useState(false)

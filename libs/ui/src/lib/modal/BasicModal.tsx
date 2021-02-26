@@ -1,8 +1,8 @@
 import React, { PropsWithChildren } from 'react'
 import { Modal } from 'antd'
-import Button from '../button/button'
+import Button from '../button/Button'
 import { Checkbox, ButtonTypes } from '@pabau/ui'
-import styles from './basicmodal.module.less'
+import styles from './BasicModal.module.less'
 import { ModalProps } from 'antd/lib/modal'
 import classNames from 'classnames'
 export interface BasicModalProps {

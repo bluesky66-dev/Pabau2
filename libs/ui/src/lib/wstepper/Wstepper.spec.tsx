@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import EPaper from './EPaper'
+import Wstepper from './Wstepper'
 
-describe('EPaper', () => {
+describe('Wstepper', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<EPaper />)
+    const { baseElement } = render(<Wstepper active={0} data={[]} />)
     expect(baseElement).toBeTruthy()
   })
 })

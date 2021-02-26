@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, ReactNode } from 'react'
 import { Row, Col, Divider, Radio } from 'antd'
-import styles from './EmailSMSPreview.module.less'
+import styles from './EmailSmsPreview.module.less'
 import { ReactComponent as NormalClinicLogo } from '../../assets/images/normal-clinic-logo.svg'
 import { ReactComponent as GiftVoucherLogo } from '../../assets/images/gift-voucher.svg'
 import {
@@ -162,7 +162,7 @@ export function EmailSMSFooter(props: FooterProps): JSX.Element {
   )
 }
 
-export const EmailSMSPreview = (
+export const EmailSmsPreview = (
   props: PropsWithChildren<EmailSMSPreviewProps>
 ): JSX.Element => {
   const {
@@ -284,4 +284,4 @@ export const EmailSMSPreview = (
   )
 }
 
-export default EmailSMSPreview
+export default EmailSmsPreview

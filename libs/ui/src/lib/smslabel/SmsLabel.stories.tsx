@@ -1,9 +1,10 @@
 import React from 'react'
-import { SMSLabel } from './SMSLabel'
+import { SmsLabel } from './SmsLabel'
 
 export default {
-  title: 'UI/SMSLabel',
-  component: SMSLabel,
+  title: 'UI/SmsLabel',
+  component: SmsLabel,
+  args: { status: '?' },
   argTypes: {
     status: {
       control: {
@@ -14,7 +15,7 @@ export default {
   },
 }
 
-const SMSLabelStory = ({ ...args }) => <SMSLabel {...args} />
+const SMSLabelStory = ({ status }) => <SmsLabel status={status} />
 
 export const BasicSMSLabel = SMSLabelStory.bind({})
 

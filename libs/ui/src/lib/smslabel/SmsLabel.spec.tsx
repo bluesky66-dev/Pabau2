@@ -1,11 +1,11 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import Checkbox from './Checkbox'
+import SmsLabel from './SmsLabel'
 
-describe('Checkbox', () => {
+describe('SmsLabel', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Checkbox />)
+    const { baseElement } = render(<SmsLabel />)
     expect(baseElement).toBeTruthy()
   })
 })
