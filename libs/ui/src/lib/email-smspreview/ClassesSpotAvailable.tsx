@@ -2,10 +2,10 @@ import React, { FC } from 'react'
 import {
   EmailSMSPreviewProps,
   ClassesSpotAvailableProps,
-} from './EmailSMSPreview'
+} from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
-import { Button } from '../button/button'
+import styles from './EmailSmsPreview.module.less'
+import { Button } from '../button/Button'
 
 export const ClassesSpotAvailable: FC<
   ClassesSpotAvailableProps & EmailSMSPreviewProps

@@ -2,9 +2,9 @@ import React, { FC } from 'react'
 import {
   EmailSMSPreviewProps,
   NewAppoinmentsIsBookedProps,
-} from './EmailSMSPreview'
+} from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
+import styles from './EmailSmsPreview.module.less'
 
 export const NewAppoinmentsIsBooked: FC<
   NewAppoinmentsIsBookedProps & EmailSMSPreviewProps

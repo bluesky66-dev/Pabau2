@@ -5,8 +5,13 @@ import CrudLayout from '../../components/CrudLayout/CrudLayout'
 
 /* eslint-disable graphql/template-strings */
 const LIST_QUERY = gql`
-  query salutation($offset: Int, $limit: Int) {
-    salutation(offset: $offset, limit: $limit, order_by: { order: desc }) {
+  query salutation($isActive: Boolean = true, $offset: Int, $limit: Int) {
+    salutation(
+      offset: $offset
+      limit: $limit
+      order_by: { order: desc }
+      where: { is_active: { _eq: $isActive } }
+    ) {
       __typename
       id
       salutation
@@ -16,8 +21,8 @@ const LIST_QUERY = gql`
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query salutation_aggregate {
-    salutation_aggregate {
+  query salutation_aggregate($isActive: Boolean = true) {
+    salutation_aggregate(where: { is_active: { _eq: $isActive } }) {
       aggregate {
         count
       }
@@ -97,8 +102,6 @@ const schema: Schema = {
       shortLower: 'salutation',
       min: 2,
       example: 'King',
-      // description: 'A friendly name',
-      // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
       type: 'string',
     },
@@ -121,7 +124,7 @@ export const Salutation: NextPage = () => {
       editQuery={EDIT_MUTATION}
       aggregateQuery={LIST_AGGREGATE_QUERY}
       updateOrderQuery={UPDATE_ORDER_MUTATION}
-      addFilter={false}
+      addFilter={true}
     />
   )
 }
