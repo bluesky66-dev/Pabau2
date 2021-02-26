@@ -11,7 +11,7 @@ import {
   BusinessDetailsNotifications,
 } from '@pabau/ui'
 import Layout from '../../components/Layout/Layout'
-import CommonHeader from '../setup/CommonHeader'
+import CommonHeader from '../setup/common-header'
 import styles from './index.module.less'
 import { gql, useMutation } from '@apollo/client'
 const { Title } = Typography
