@@ -10,7 +10,6 @@ import {
   Notification,
   NotificationType,
   BasicModal as Modal,
-  Checkbox,
 } from '@pabau/ui'
 import { Form, Select, Input } from 'antd'
 import { CloseOutlined, DeleteFilled } from '@ant-design/icons'
