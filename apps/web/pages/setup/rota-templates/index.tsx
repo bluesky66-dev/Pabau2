@@ -2,7 +2,7 @@ import React from 'react'
 import { gql } from '@apollo/client'
 import CrudLayout from '../../../components/CrudLayout/CrudLayout'
 
-import './index.module.less'
+import styles from './index.module.less'
 
 /* eslint-disable-next-line */
 export interface RotaTemplateProps {}
@@ -112,12 +112,7 @@ const LIST_AGGREGATE_QUERY = gql`
     $isActive: Boolean = true
     $searchTerm: String = ""
   ) {
-    rota_templates_aggregate(
-      where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-      }
-    ) {
+    rota_templates_aggregate(where: { is_active: { _eq: $isActive } }) {
       aggregate {
         count
       }
@@ -192,7 +187,7 @@ const UPDATE_ORDER_MUTATION = gql`
 `
 export function RotaTemplate(props: RotaTemplateProps) {
   return (
-    <div>
+    <div className={styles.customTable}>
       <CrudLayout
         schema={schema}
         tableSearch={false}
