@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import styles from './UserDetail.module.less'
+import styles from '../UserDetail.module.less'
 import {
   Chart,
   HighchartsChart,

@@ -372,3 +372,69 @@
    }
  }
 }
+.permission-tab-wrapper {
+  h4 {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 25px;
+    color: #3D3D46;
+    padding: 20px 24px;
+    margin-bottom: 0;
+  }
+  .tab-set-permission {
+    border-top: 1px solid #ECEDF0;
+    :global .ant-tabs-nav {
+      .ant-tabs-nav-wrap {
+        .ant-tabs-nav-list {
+          .ant-tabs-tab {
+            &.ant-tabs-tab-active {
+              background: transparent !important;
+            }
+          }
+        }
+      }
+    }
+    .module-wrapper {
+      padding: 24px;
+      .module-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .module-header {
+          h5 {
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 20px;
+            margin-bottom: 8px;
+            color: #3D3D46;
+          }
+          p {
+            font-size: 14px;
+            line-height: 18px;
+            margin-bottom: 0;
+            color: #9292A3;
+          }
+        }
+        .role-dropdown {
+             :global .ant-form {
+              .ant-form-item {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                .ant-form-item-label {
+                  font-size: 14px;
+                  line-height: 22px;
+                  margin-right: 8px;
+                  color: #9292A3;
+                  padding-bottom: 0;
+                }
+                .ant-form-item-control {
+                  width: 214px;
+                }
+              }
+          }
+        }
+      }
+    }
+  }
+}

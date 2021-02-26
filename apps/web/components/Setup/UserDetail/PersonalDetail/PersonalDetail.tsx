@@ -9,8 +9,8 @@ import {
   NotificationType,
   PhoneNumberInput,
 } from '@pabau/ui'
-import styles from './UserDetail.module.less'
-import { customFieldsProps } from './UserDetailMain'
+import styles from '../UserDetail.module.less'
+import { customFieldsProps } from '../index'
 import dynamic from 'next/dynamic'
 
 export interface GraphDataProps {

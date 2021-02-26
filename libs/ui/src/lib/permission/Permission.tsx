@@ -20,9 +20,10 @@ export interface PermissionProps {
   title?: string
   description?: string
   fields?: PermissionFieldType[]
-  onChange?: (index: number, ind: number) => void
-  CheckAll?: () => void
-  UnCheckAll?: () => void
+  onChange?: (index: number, ind: number, rowId?: string) => void
+  CheckAll?: (rowId?: string) => void
+  UnCheckAll?: (rowId?: string) => void
+  rowId?: string
 }
 export const Permission: FC<PermissionProps> = ({
   title,
@@ -31,6 +32,7 @@ export const Permission: FC<PermissionProps> = ({
   onChange,
   CheckAll,
   UnCheckAll,
+  rowId,
 }) => {
   return (
     <div className={styles.PermissiononWrap}>
@@ -39,10 +41,10 @@ export const Permission: FC<PermissionProps> = ({
       <Row>
         <Col span={24}>
           <div className={styles.CheckBtn}>
-            <Button type="link" onClick={CheckAll}>
+            <Button type="link" onClick={() => CheckAll?.(rowId)}>
               CheckAll
             </Button>
-            <Button type="link" onClick={UnCheckAll}>
+            <Button type="link" onClick={() => UnCheckAll?.(rowId)}>
               UncheckAll
             </Button>
           </div>
@@ -66,7 +68,7 @@ export const Permission: FC<PermissionProps> = ({
                 <div>
                   <Switch
                     checked={data.value}
-                    onClick={() => onChange?.(index, ind)}
+                    onClick={() => onChange?.(index, ind, rowId)}
                   />
                 </div>
               </div>

@@ -6,8 +6,9 @@ import { Breadcrumb, Avatar, Button, PabauPlus } from '@pabau/ui'
 import styles from './UserDetail.module.less'
 import { userDetail, fields, graphData } from '../../../mocks/UserDetail'
 import AvatarImage from '../../../assets/images/avatar.png'
-import PersonalDetail from './PersonalDetail'
-import CustomizeFields from './CustomizeFields'
+import PersonalDetail from './PersonalDetail/PersonalDetail'
+import Permission from './Permissions/Permissions'
+import CustomizeFields from './PersonalDetail/CustomizeFields'
 
 const { TabPane } = Tabs
 
@@ -22,7 +23,7 @@ export interface customFieldsProps {
   placeholder?: string
 }
 
-const UserDetailMain: FC = () => {
+const Index: FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false)
   const [fieldsData, setFieldsData] = useState<customFieldsProps[]>(fields)
 
@@ -74,7 +75,7 @@ const UserDetailMain: FC = () => {
               Content of Tab
             </TabPane>
             <TabPane tab={<span>Permissions</span>} key="3">
-              Content of Tab
+              <Permission />
             </TabPane>
             <TabPane tab={<span>Documents</span>} key="4">
               Content of Tab
@@ -126,4 +127,4 @@ const UserDetailMain: FC = () => {
   )
 }
 
-export default UserDetailMain
+export default Index

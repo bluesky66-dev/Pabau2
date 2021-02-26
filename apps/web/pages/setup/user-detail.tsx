@@ -1,14 +1,9 @@
 import React from 'react'
 
-import UserDetailMain from '../../components/Setup/UserDetail/UserDetailMain'
-import './user-detail.module.less'
+import Index from '../../components/Setup/UserDetail'
 
 export function UserDetail(props) {
-  return (
-    <div>
-      <UserDetailMain />
-    </div>
-  )
+  return <Index />
 }
 
 export default UserDetail

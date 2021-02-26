@@ -1,11 +1,11 @@
 import React, { FC, useState } from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
-import styles from './UserDetail.module.less'
+import styles from '../UserDetail.module.less'
 import { CloseOutlined, PlusOutlined, UpOutlined } from '@ant-design/icons'
 import { Button } from '@pabau/ui'
-import { ReactComponent as Customize } from '../../../assets/images/customize.svg'
-import { customFieldsProps } from './UserDetailMain'
+import { ReactComponent as Customize } from '../../../../assets/images/customize.svg'
+import { customFieldsProps } from '../index'
 
 interface customizeFieldsProps {
   field: customFieldsProps[]
