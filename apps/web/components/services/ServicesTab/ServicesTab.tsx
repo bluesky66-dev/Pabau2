@@ -22,6 +22,7 @@ const data = [
     price: '£100–300',
     index: 1,
     status: 'sell',
+    color: '#faad14',
     edit: true,
   },
   {
@@ -33,6 +34,7 @@ const data = [
     price: '£300',
     index: 2,
     status: 'both',
+    color: '#faad14',
     edit: true,
   },
   {
@@ -44,6 +46,7 @@ const data = [
     price: '£900',
     index: 3,
     status: 'both',
+    color: '#faad14',
     edit: true,
   },
   {
@@ -55,6 +58,7 @@ const data = [
     price: '£900',
     index: 4,
     status: 'sell',
+    color: '#faad14',
     edit: true,
   },
   {
@@ -66,6 +70,7 @@ const data = [
     price: '£900',
     index: 5,
     status: 'both',
+    color: '#faad14',
     edit: true,
   },
   {
@@ -77,6 +82,7 @@ const data = [
     price: '£900',
     index: 6,
     status: 'sell',
+    color: '#faad14',
     edit: true,
   },
   {
@@ -88,6 +94,7 @@ const data = [
     price: '£900',
     index: 7,
     status: 'both',
+    color: '#faad14',
     edit: true,
   },
   {
@@ -99,6 +106,7 @@ const data = [
     price: '£900',
     index: 8,
     status: 'both',
+    color: '#faad14',
     edit: true,
   },
   {
@@ -110,6 +118,7 @@ const data = [
     price: '£900',
     index: 9,
     status: 'sell',
+    color: '#faad14',
     edit: true,
   },
   {
@@ -121,6 +130,7 @@ const data = [
     price: '£900',
     index: 10,
     status: 'sell',
+    color: '#faad14',
     edit: true,
   },
 ]
@@ -130,10 +140,16 @@ const columnsView1 = [
     title: 'Name',
     dataIndex: 'name',
     visible: true,
-    render: function renderSourceName(val) {
+    render: function renderSourceName(val, rowData) {
       return (
         <div className={styles.serviceName}>
-          <span className={styles.dot}></span>
+          <span
+            className={styles.dot}
+            style={{
+              backgroundColor: `${rowData?.color}`,
+              borderColor: `${rowData?.color}`,
+            }}
+          ></span>
           <span>
             <VideoCameraOutlined />
           </span>
@@ -266,9 +282,10 @@ const columnsView2 = [
 
 export interface SP {
   searchTerm?: string
+  updatedCategories?: []
 }
 
-const ServicesTab: FC<SP> = ({ searchTerm, ...rest }) => {
+const ServicesTab: FC<SP> = ({ searchTerm, updatedCategories, ...rest }) => {
   const services = ['Seasonal Offers', 'The Beauty & Skin Clinic – Prepaid']
   const togglesViews = ['Standard View', 'Detailed View']
   const LeftTabMenuItems = [
@@ -423,6 +440,7 @@ const ServicesTab: FC<SP> = ({ searchTerm, ...rest }) => {
                   key: e.id,
                   ...e,
                 }))}
+                scroll={{ x: 'max-content' }}
                 columns={columns}
                 pagination={false}
                 searchTerm={searchTerm}

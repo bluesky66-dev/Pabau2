@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react'
 import Layout from '../../../components/Layout/Layout'
 import ServicesTab from '../../../components/services/ServicesTab/ServicesTab'
 import CategoriesTab from '../../../components/services/CategoriesTab/CategoriesTab'
+import LibrariesTab from '../../../components/services/LibrariesTab/LibrariesTab'
 import { TabMenu, Breadcrumb, Button, Pagination } from '@pabau/ui'
 import { Card, Input, Popover, Radio, Select } from 'antd'
 import {
@@ -14,15 +15,18 @@ import styles from './index.module.less'
 const { Option } = Select
 
 const Index: FC = () => {
+  const TopTabMenuItems = ['Services', 'Categories', 'Library']
+  const AddBtnLabels = ['New Service', 'New Category']
+
   const [isStatusActive, setIsStatusActive] = useState(null)
   const [isBookingActive, setIsBookingActive] = useState(null)
   const [showCreateBtn] = useState(true)
   const [totalCategories, setTotalCategories] = useState(0)
   const [paginationState, setPaginationState] = useState(false)
   const [searchTerm, setSearchTerm] = useState(null)
-  const [addBtnLabel, setAddBtnLabel] = useState('Add Service')
-
-  const TopTabMenuItems = ['Services', 'Categories', 'Library']
+  const [addBtnLabel, setAddBtnLabel] = useState(AddBtnLabels[0])
+  const [updatedCategories, setUpdatedCategories] = useState(null)
+  const [addCategoryModal, setAddCategoryModal] = useState(false)
 
   const filterContent = (isMobile = false) => (
     <div className="filterContent">
@@ -76,6 +80,18 @@ const Index: FC = () => {
     </div>
   )
 
+  const addBtnClick = () => {
+    switch (addBtnLabel) {
+      case AddBtnLabels[0]:
+        break
+      case AddBtnLabels[1]:
+        setAddCategoryModal(true)
+        break
+      default:
+        return
+    }
+  }
+
   const CardHeader = (
     <div className={styles.header}>
       <div className="leftDiv">
@@ -114,7 +130,7 @@ const Index: FC = () => {
                 <FilterOutlined /> Filter
               </Button>
             </Popover>
-            <Button type="primary" size="large">
+            <Button type="primary" size="large" onClick={() => addBtnClick()}>
               {addBtnLabel}
             </Button>
           </div>
@@ -127,19 +143,23 @@ const Index: FC = () => {
     switch (tab) {
       case TopTabMenuItems[0]:
         setPaginationState(false)
-        setAddBtnLabel('New Service')
+        setAddBtnLabel(AddBtnLabels[0])
         break
       case TopTabMenuItems[1]:
         setPaginationState(true)
-        setAddBtnLabel('New Category')
+        setAddBtnLabel(AddBtnLabels[1])
         break
       case TopTabMenuItems[2]:
-        setAddBtnLabel('New Service')
+        setAddBtnLabel(AddBtnLabels[0])
         setPaginationState(false)
         break
       default:
         return
     }
+  }
+
+  const emitCategories = (categories) => {
+    setUpdatedCategories(categories)
   }
 
   return (
@@ -151,18 +171,28 @@ const Index: FC = () => {
               tabPosition="top"
               menuItems={TopTabMenuItems}
               className={styles.topTabMenu}
-              minHeight="50vh"
+              minHeight="60vh"
               onTabClick={(tab) => onTabClick(TopTabMenuItems[tab])}
             >
               <div className={styles.servicesTab}>
-                <ServicesTab searchTerm={searchTerm} />
+                <ServicesTab
+                  searchTerm={searchTerm}
+                  updatedCategories={updatedCategories}
+                />
               </div>
               <div className={styles.categoriesTab}>
                 <CategoriesTab
                   totalRecords={(total) => setTotalCategories(total)}
+                  modalShowState={addCategoryModal}
+                  categoriesUpdates={(categories) => emitCategories(categories)}
+                  closeModal={() =>
+                    setAddCategoryModal((addCategoryModal) => !addCategoryModal)
+                  }
                 />
               </div>
-              <div></div>
+              <div className={styles.librariesTab}>
+                <LibrariesTab />
+              </div>
             </TabMenu>
           </div>
         </Card>
