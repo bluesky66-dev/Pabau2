@@ -1,6 +1,6 @@
 import React from 'react'
 import { HelpTooltip } from './HelpTooltip'
-import { Input } from './input'
+import { Input } from './Input'
 import { notification } from 'antd'
 import { Passcode as PasscodeBox } from './Passcode'
 import { PasswordWithHelper as PasswordWithHelperBox } from './PasswordWithHelper'
