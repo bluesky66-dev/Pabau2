@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import { EmailSMSPreviewProps, ClassRescheduledProps } from './EmailSMSPreview'
+import { EmailSMSPreviewProps, ClassRescheduledProps } from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
+import styles from './EmailSmsPreview.module.less'
 
 export const ClassRescheduled: FC<
   ClassRescheduledProps & EmailSMSPreviewProps

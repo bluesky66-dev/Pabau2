@@ -1,8 +1,10 @@
 /* eslint-disable */
 import React, { useEffect } from 'react'
-import styles from './WStepper.module.less'
+import styles from './Wstepper.module.less'
 import Wizard from '../wizard/Wizard'
-import { StepperItem } from '@pabau/ui'
+import { StepperItem, Button } from '@pabau/ui'
+import Stepper from '../stepper/Stepper'
+
 interface WStepperProps {
   active: number
   data: StepperItem[]
@@ -10,7 +12,7 @@ interface WStepperProps {
   onActiveStepChange?: (index) => void
 }
 
-export const WStepper: React.FC<WStepperProps> = ({
+export const Wstepper: React.FC<WStepperProps> = ({
   active,
   children,
   data,
@@ -29,18 +31,23 @@ export const WStepper: React.FC<WStepperProps> = ({
 
   return (
     <div className={styles.container}>
+      <div className={styles.stepperContianer}>
+        <div>
+          <Stepper datasource={data} step={active} />
+        </div>
+      </div>
+
+      {children}
+
       <Wizard
-        onPrev={() => setIndex(index - 1)}
         onNext={() => setIndex(index + 1)}
+        onPrev={() => setIndex(index - 1)}
         active={index}
         allSteps={data.length}
-        stepperData={data}
         disableNextStep={disableNextStep}
-      >
-        {children}
-      </Wizard>
+      />
     </div>
   )
 }
 
-export default WStepper
+export default Wstepper

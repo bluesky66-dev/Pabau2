@@ -1,8 +1,8 @@
 /* eslint-disable */
 
 import React from 'react'
-import BasicModalStory from './basicmodal'
-import ConfirmModalStory from './confirmmodal'
+import BasicModalStory from './BasicModal'
+import ConfirmModalStory from './ConfirmModal'
 
 export default {
   component: BasicModalStory,

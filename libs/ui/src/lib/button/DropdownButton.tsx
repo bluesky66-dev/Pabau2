@@ -18,7 +18,7 @@ interface P extends NativeButtonProps {
   onMenuClick?(val): void
 }
 
-export const DropDownButton: FC<P> = ({
+export const DropdownButton: FC<P> = ({
   className,
   disabled,
   color,
@@ -62,4 +62,4 @@ export const DropDownButton: FC<P> = ({
   )
 }
 
-export default DropDownButton
+export default DropdownButton

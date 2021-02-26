@@ -9,9 +9,9 @@ interface P {
   onDocumentLoadSuccess?: ({ numPages: number }) => void
 }
 
-const MyEPaper: FC<P> = ({ pdfURL, pageNumber, onDocumentLoadSuccess }) => (
+const MyEpaper: FC<P> = ({ pdfURL, pageNumber, onDocumentLoadSuccess }) => (
   <Document file={{ url: pdfURL }} onLoadSuccess={onDocumentLoadSuccess}>
     <Page pageNumber={pageNumber} scale={1.3} renderAnnotationLayer={false} />
   </Document>
 )
-export default MyEPaper
+export default MyEpaper
