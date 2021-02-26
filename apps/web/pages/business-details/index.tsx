@@ -35,7 +35,7 @@ export const Index: FC = () => {
   })
   const onSave = async (values, type) => {
     console.log(values, type)
-    let data = {
+    const data = {
       businses_name: '',
       business_type: '',
       company_email: '',
@@ -51,12 +51,12 @@ export const Index: FC = () => {
       vat: '',
       disable_prescriptions: false,
       medical_approvals: false,
-      is_surgical: false,
+      perform_surgical: false,
       secure_medical_forms: false,
-      appointment_singular: 'Patient',
-      appointment_plural: 'Patients',
-      attendees_singular: 'Class',
-      attendees_plural: 'Classes',
+      people_attend_appointment_singular: 'Patient',
+      people_attend_appointment_plural: 'Patients',
+      booking_multiple_attendees_singular: 'Class',
+      booking_multiple_attendees_plural: 'Classes',
       employee_singular: 'Employee',
       employee_plural: 'Employees',
       teacher_singular: 'Teacher',
@@ -88,40 +88,40 @@ export const Index: FC = () => {
           timezone,
           weekStart,
         } = languageSetting
-        data.businses_name=businessName
-        data.business_type=businessType
-        data.company_email=companyEmail
-        data.phone=phone
-        data.website=website
-        data.currency=currency
-        data.business_location=businessLocation
-        data.date_format=dateFormat
-        data.default_language_clients=defaultLanuageClients
-        data.default_language_staff=defaultLanuageStaff
-        data.time_zone=timezone
-        data.week_start=weekStart
+        data.businses_name = businessName
+        data.business_type = businessType
+        data.company_email = companyEmail
+        data.phone = phone
+        data.website = website
+        data.currency = currency
+        data.business_location = businessLocation
+        data.date_format = dateFormat
+        data.default_language_clients = defaultLanuageClients
+        data.default_language_staff = defaultLanuageStaff
+        data.time_zone = timezone
+        data.week_start = weekStart
         break
       }
       case 'terminology': {
         const { config, optIns } = values
         const vat = config[4].items[0].value
         data.vat = vat
-        data.appointment_singular=config[0].items[0].value
-        data.appointment_plural=config[0].item[1].value
-        data.attendees_singular=config[1].item[0].value
-        data.attendees_plural=config[1].item[1].value
-        data.employee_singular=config[2].item[0].value
-        data.employee_plural=config[2].item[1].value
-        data.teacher_singular=config[3].item[0].value
-        data.teacher_plural=config[3].item[1].value
-        data.client_postal=optIns[0].items[0].value
-        data.client_sms=optIns[0].items[1].value
-        data.client_email=optIns[0].items[2].value
-        data.client_phone=optIns[0].items[3].value
-        data.leads_postal=optIns[1].items[0].value
-        data.leads_sms=optIns[1].items[1].value
-        data.leads_email=optIns[1].items[2].value
-        data.leads_phone=optIns[1].items[3].value
+        data.people_attend_appointment_singular = config[0].items[0].value
+        data.people_attend_appointment_plural = config[0].item[1].value
+        data.booking_multiple_attendees_singular = config[1].item[0].value
+        data.booking_multiple_attendees_plural = config[1].item[1].value
+        data.employee_singular = config[2].item[0].value
+        data.employee_plural = config[2].item[1].value
+        data.teacher_singular = config[3].item[0].value
+        data.teacher_plural = config[3].item[1].value
+        data.client_postal = optIns[0].items[0].value
+        data.client_sms = optIns[0].items[1].value
+        data.client_email = optIns[0].items[2].value
+        data.client_phone = optIns[0].items[3].value
+        data.leads_postal = optIns[1].items[0].value
+        data.leads_sms = optIns[1].items[1].value
+        data.leads_email = optIns[1].items[2].value
+        data.leads_phone = optIns[1].items[3].value
         break
       }
       case 'system': {
@@ -133,7 +133,7 @@ export const Index: FC = () => {
         } = values
         data.disable_prescriptions = disablePrescriptions
         data.medical_approvals = medicalApprovals
-        data.is_surgical = performSurgical
+        data.perform_surgical = performSurgical
         data.secure_medical_forms = secureMedicalForms
         break
       }
