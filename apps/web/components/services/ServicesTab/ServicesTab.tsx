@@ -341,7 +341,7 @@ const ServicesTab: FC<SP> = ({ searchTerm, ...rest }) => {
         <PlusOutlined /> Add new service
       </Menu.Item>
       <Menu.Item>
-        <EditOutlined /> Edit service
+        <EditOutlined /> Edit category
       </Menu.Item>
     </Menu>
   )
