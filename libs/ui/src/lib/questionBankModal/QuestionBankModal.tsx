@@ -1,16 +1,10 @@
 import React, { FC, useState } from 'react'
-import { useMedia } from 'react-use'
 import { Tabs, Row, Col } from 'antd'
-import { LeftOutlined } from '@ant-design/icons'
-
 import { IQuestionOptions } from '../questionBank/QuestionBank'
-
 import { menuOptions } from '../questionBank/mock'
-
 import QuestionBank from '../questionBank/QuestionBank'
 import Button from '../button/button'
-import BasicModal from '../modal/basicmodal'
-
+import BasicModal, { BasicModalProps } from '../modal/basicmodal'
 import customStyles from './QuestionBankModal.module.less'
 
 interface IMenuOption {
@@ -18,30 +12,32 @@ interface IMenuOption {
   value: string
 }
 
-interface P {
+interface P extends BasicModalProps {
   title: string
   questions: Array<IQuestionOptions>
   options: Array<IMenuOption>
   onAdd: (questions: Array<IQuestionOptions> | undefined) => void
+  visible: boolean
+  onCancel?: () => void
 }
 
-const QuestionBankModal: FC<P> = ({
+export const QuestionBankModal: FC<P> = ({
   title,
   questions,
   options,
   onAdd,
+  visible,
+  onCancel,
   ...props
 }) => {
   const { TabPane } = Tabs
 
   const [checkedQuestions, setCheckedQuestions] = useState<
-    Array<IQuestionOptions> | undefined
-  >(undefined)
+    Array<IQuestionOptions>
+  >([])
   const [questionList, setQuestionList] = useState<Array<IQuestionOptions>>(
     questions
   )
-
-  const isMobile = useMedia('(max-width: 768px)', false)
 
   const handleChange = (e, key: number) => {
     const data = menuOptions.find(({ key }) => key === e.key)
@@ -62,6 +58,21 @@ const QuestionBankModal: FC<P> = ({
 
   const handleClick = (key: number) => {
     console.log('Question ' + key + ' is clicked')
+  }
+
+  const handleClose = () => {
+    setCheckedQuestions([])
+    const data = questionList?.map((i) => {
+      return { ...i, checked: false }
+    })
+    setQuestionList(data)
+    onCancel?.()
+  }
+
+  const handleAddQuestion = (checkedQuestions: Array<IQuestionOptions>) => {
+    onAdd(checkedQuestions)
+    setCheckedQuestions([])
+    onCancel?.()
   }
 
   const preparePreviewContent = () => {
@@ -90,7 +101,7 @@ const QuestionBankModal: FC<P> = ({
               }
               disabled={checkedQuestions?.length === 0}
               type={'primary'}
-              onClick={() => onAdd(checkedQuestions)}
+              onClick={() => handleAddQuestion(checkedQuestions)}
             >
               + Add ({checkedQuestions?.length}) Questions
             </Button>
@@ -120,29 +131,19 @@ const QuestionBankModal: FC<P> = ({
   }
 
   return (
-    <div className={customStyles.wrapperQuestion}>
-      {isMobile ? (
-        <div className={customStyles.mobDevice}>
-          <div className={customStyles.queBank}>
-            <LeftOutlined />
-            Question Bank
-          </div>
-          {renderContent()}
-        </div>
-      ) : (
-        <BasicModal
-          {...props}
-          title={title}
-          modalWidth={682}
-          footer={false}
-          wrapClassName={customStyles.questionBankModal}
-        >
-          <div className={customStyles.questionBankModalBody}>
-            {renderContent()}
-          </div>
-        </BasicModal>
-      )}
-    </div>
+    <BasicModal
+      {...props}
+      visible={visible}
+      onCancel={handleClose}
+      title={title}
+      modalWidth={682}
+      footer={false}
+      wrapClassName={customStyles.questionBankModal}
+    >
+      <div className={customStyles.questionBankModalBody}>
+        {renderContent()}
+      </div>
+    </BasicModal>
   )
 }
 

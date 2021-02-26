@@ -11,6 +11,7 @@ export interface ReadReviewProps {
   avatarSrc?: string
   name?: string
   defaultRating?: number
+  color?: string
 }
 
 export const ReadReview: FC<ReadReviewProps> = ({
@@ -20,6 +21,7 @@ export const ReadReview: FC<ReadReviewProps> = ({
   avatarSrc,
   name,
   defaultRating,
+  color,
 }) => {
   return (
     <div className={styles.readReviewCard}>
@@ -39,6 +41,7 @@ export const ReadReview: FC<ReadReviewProps> = ({
               className={styles.reviewRate}
               allowHalf
               defaultValue={defaultRating}
+              style={{ color: color || '#54B2D3' }}
             />
           </div>
         </div>

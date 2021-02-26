@@ -2,11 +2,21 @@
   .question-bank-modal-body {
     padding: 0;
   }
+
+  :global {
+    .ant-modal-body {
+      >div {
+        padding: 0 !important;
+      }
+    }
+  }
 }
+
 .previewContainer {
   height: 467px;
   overflow: auto;
   background: #fff;
+
   @media screen and (max-width: 576px) {
     height: calc(100vh - 232px);
     padding: 20px 0;
@@ -37,25 +47,27 @@
     }
   }
 }
+
 .btnWrap {
   display: flex;
   justify-content: flex-end;
   padding: 24px 0;
+
   .ant-btn {
     background: transparent !important;
   }
-  @media screen and (max-width: 992px) {
+
+  @media screen and (max-width: 991px) {
     padding: 20px 0;
-    button {
-      width: 100% !important;
-    }
   }
 }
+
 .tabContainer {
   :global .ant-tabs-nav {
     @media screen and (max-width: 576px) {
       margin-bottom: 0 !important;
     }
+
     .ant-tabs-nav-wrap {
       .ant-tabs-nav-list {
         width: 100%;
@@ -70,16 +82,20 @@
       }
     }
   }
+
   :global .ant-tabs-content-holder {
     padding: 40px;
+
     @media screen and (max-width: 992px) {
       padding: 16px !important;
       background: #fff !important;
     }
   }
 }
+
 .wrapperQuestion {
   background: #f7f7f9;
+
   .mobDevice {
     .queBank {
       font-weight: 500;

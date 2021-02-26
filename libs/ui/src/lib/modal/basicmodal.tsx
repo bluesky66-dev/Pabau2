@@ -5,7 +5,7 @@ import { Checkbox, ButtonTypes } from '@pabau/ui'
 import styles from './basicmodal.module.less'
 import { ModalProps } from 'antd/lib/modal'
 import classNames from 'classnames'
-interface P {
+export interface BasicModalProps {
   onOk?: () => void
   onCancel?: () => void
   onDelete?: () => void
@@ -55,7 +55,7 @@ export function BasicModal({
   wrapClassName,
   btnType = ButtonTypes.primary,
   ...props
-}: PropsWithChildren<P & ModalProps>): JSX.Element {
+}: PropsWithChildren<BasicModalProps & ModalProps>): JSX.Element {
   return (
     <Modal
       title={title}
@@ -94,7 +94,7 @@ export function BasicModal({
             <Button
               type={btnType}
               className={styles.btnStyle}
-              disabled={newButtonDisable}
+              disabled={newButtonDisable || !isValidate}
               onClick={() => onOk?.()}
             >
               {newButtonText}
