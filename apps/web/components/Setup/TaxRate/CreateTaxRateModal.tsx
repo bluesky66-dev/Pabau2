@@ -10,7 +10,7 @@ export interface CreateTaxRateProps {
   isEdit?: boolean
   editData?: {
     name: string
-    amount: number
+    value: number
     glCode: string
     is_active: boolean
   }
@@ -49,8 +49,8 @@ export function CreateTaxRateModal(props: CreateTaxRateProps) {
           name="control-hooks"
           initialValues={{
             name: isEdit ? editData?.name || '' : '',
-            amount: isEdit ? editData?.amount || '' : '',
-            isActive: isEdit ? !!editData?.is_active : false,
+            value: isEdit ? editData?.value || '' : '',
+            isActive: isEdit ? !!editData?.is_active : true,
             glCode: isEdit ? editData?.glCode || '' : '',
           }}
           onFinish={(values) => {
@@ -68,7 +68,7 @@ export function CreateTaxRateModal(props: CreateTaxRateProps) {
             </Form.Item>
             <Form.Item
               label="Amount"
-              name="amount"
+              name="value"
               rules={[{ required: true, message: 'Tax amount is required' }]}
             >
               <Input placeholder="20" addonAfter="%" />

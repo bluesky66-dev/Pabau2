@@ -11,6 +11,7 @@ import {
 import TaxRateList from '../../components/Setup/TaxRate/TaxRateList'
 import styles from './tax-rate.module.less'
 import CreateTaxRateModal from '../../components/Setup/TaxRate/CreateTaxRateModal'
+import { gql, useMutation } from '@apollo/client'
 
 /* eslint-disable-next-line */
 export interface TaxRateProps {}
@@ -22,13 +23,80 @@ const cardBodyStyle = {
   alignItems: 'flex-start',
 }
 
+const LIST_QUERY = gql`
+  query Taxes($offset: Int, $limit: Int) {
+    tax_rates(offset: $offset, limit: $limit, order_by: { order: asc }) {
+      id
+      name
+      is_active
+      value
+      glCode
+      order
+    }
+  }
+`
+
+const ADD_MUTATION = gql`
+  mutation insert_tax_rates_one(
+    $name: String
+    $value: Int
+    $isActive: Boolean = true
+    $glCode: String
+  ) {
+    insert_tax_rates_one(
+      object: {
+        name: $name
+        value: $value
+        is_active: $isActive
+        glCode: $glCode
+      }
+    ) {
+      id
+    }
+  }
+`
+
 export function TaxRate(props: TaxRateProps) {
   const { Title, Paragraph, Text } = Typography
   const [showCreateTax, setShowCreateTax] = useState(false)
 
+  const [addMutation] = useMutation(ADD_MUTATION, {
+    onCompleted() {
+      Notification(
+        NotificationType.success,
+        `Success! You have successfully created a tax rate`
+      )
+    },
+    onError(err) {
+      console.log(err)
+      Notification(NotificationType.error, `Error! While creating a tax rate`)
+    },
+  })
+
+  const onCreate = async (values) => {
+    await addMutation({
+      variables: { ...values, value: Number.parseInt(values.value) },
+      optimisticResponse: {},
+      update: (proxy) => {
+        const existing = proxy.readQuery({
+          query: LIST_QUERY,
+        })
+        if (existing) {
+          const key = Object.keys(existing)[0]
+          proxy.writeQuery({
+            query: LIST_QUERY,
+            data: {
+              [key]: [...existing[key], values],
+            },
+          })
+        }
+      },
+    })
+  }
+
   return (
     <Layout active={'setup/tax-rate'}>
-      <Card bodyStyle={{ padding: 0 }}>
+      <Card bodyStyle={{ padding: 0 }} style={{ borderBottomWidth: 0 }}>
         <Row className={styles.headerContainer}>
           <Col>
             <Breadcrumb
@@ -45,8 +113,11 @@ export function TaxRate(props: TaxRateProps) {
             </Button>
           </Col>
         </Row>
-        <TaxRateList />
       </Card>
+      <TaxRateList
+        listQuery={LIST_QUERY}
+        onCreateTaxRate={() => setShowCreateTax(true)}
+      />
 
       <Card className={styles.bottomCard}>
         <Title style={{ paddingBottom: 8 }}>
@@ -94,12 +165,7 @@ export function TaxRate(props: TaxRateProps) {
       <CreateTaxRateModal
         visible={showCreateTax}
         onCancel={() => setShowCreateTax(false)}
-        onSave={() => {
-          Notification(
-            NotificationType.success,
-            'Success! You have successfully added a tax rate'
-          )
-        }}
+        onSave={onCreate}
       />
     </Layout>
   )
