@@ -9,6 +9,10 @@ import Teaming from './team'
 import Filing from './file'
 import Foldering from './folder'
 
+const Index: FC = () => {
+  return <div></div>
+}
+
 export const Dots: FC = () => {
   return <Doting />
 }
@@ -40,3 +44,5 @@ export const File: FC = () => {
 export const Folder: FC = () => {
   return <Foldering />
 }
+
+export default Index
