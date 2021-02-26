@@ -82,7 +82,7 @@ export const data = [
 ]
 
 export const viewScheduleData = {
-  title: 'Webinars',
+  title: () => 'Webinars',
   schedule: [
     {
       key: '1',
