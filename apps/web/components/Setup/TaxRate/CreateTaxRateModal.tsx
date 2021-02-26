@@ -71,7 +71,7 @@ export function CreateTaxRateModal(props: CreateTaxRateProps) {
               name="value"
               rules={[{ required: true, message: 'Tax amount is required' }]}
             >
-              <Input placeholder="20" addonAfter="%" />
+              <Input placeholder="20" addonAfter="%" type="number" />
             </Form.Item>
 
             <Collapse
