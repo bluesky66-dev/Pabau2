@@ -125,7 +125,7 @@ const data = [
   },
 ]
 
-const columnsView2 = [
+const columnsView1 = [
   {
     title: 'Name',
     dataIndex: 'name',
@@ -188,7 +188,7 @@ const columnsView2 = [
   },
 ]
 
-const columnsView1 = [
+const columnsView2 = [
   {
     title: 'Name',
     dataIndex: 'name',
@@ -272,7 +272,7 @@ const ServicesTab: FC<SP> = ({ searchTerm, ...rest }) => {
   const services = ['Seasonal Offers', 'The Beauty & Skin Clinic – Prepaid']
   const togglesViews = ['Standard View', 'Detailed View']
   const LeftTabMenuItems = [
-    'Classes',
+    'Groups',
     'Appointments',
     'Enrollments',
     'Arrivals',
@@ -281,8 +281,8 @@ const ServicesTab: FC<SP> = ({ searchTerm, ...rest }) => {
     'Injectables',
   ]
 
-  const [columns, setColumns] = useState(columnsView2)
-  const [selectedToggleView, setSelectedToggleView] = useState(togglesViews[1])
+  const [columns, setColumns] = useState(columnsView1)
+  const [selectedToggleView, setSelectedToggleView] = useState(togglesViews[0])
   const [selectedService, setSelectedService] = useState(services[0])
   const [paginationState] = useState(true)
   const [sourceData, setSourceData] = useState(null)
@@ -408,7 +408,7 @@ const ServicesTab: FC<SP> = ({ searchTerm, ...rest }) => {
           tabPosition="left"
           menuItems={LeftTabMenuItems}
           className={styles.leftTabMenu}
-          disabledKeys={['Classes']}
+          disabledKeys={[`${LeftTabMenuItems[0]}`]}
           activeDefaultKey="1"
           minHeight="50vh"
           size="large"

@@ -1,7 +1,8 @@
 import React, { FC, useState } from 'react'
 import Layout from '../../../components/Layout/Layout'
 import ServicesTab from '../../../components/services/ServicesTab/ServicesTab'
-import { TabMenu, Breadcrumb, Button } from '@pabau/ui'
+import CategoriesTab from '../../../components/services/CategoriesTab/CategoriesTab'
+import { TabMenu, Breadcrumb, Button, Pagination } from '@pabau/ui'
 import { Card, Input, Popover, Radio, Select } from 'antd'
 import {
   SearchOutlined,
@@ -16,7 +17,10 @@ const Index: FC = () => {
   const [isStatusActive, setIsStatusActive] = useState(null)
   const [isBookingActive, setIsBookingActive] = useState(null)
   const [showCreateBtn] = useState(true)
+  const [totalCategories, setTotalCategories] = useState(0)
+  const [paginationState, setPaginationState] = useState(false)
   const [searchTerm, setSearchTerm] = useState(null)
+  const [addBtnLabel, setAddBtnLabel] = useState('Add Service')
 
   const TopTabMenuItems = ['Services', 'Categories', 'Library']
 
@@ -111,13 +115,32 @@ const Index: FC = () => {
               </Button>
             </Popover>
             <Button type="primary" size="large">
-              New Service
+              {addBtnLabel}
             </Button>
           </div>
         )}
       </div>
     </div>
   )
+
+  const onTabClick = (tab) => {
+    switch (tab) {
+      case TopTabMenuItems[0]:
+        setPaginationState(false)
+        setAddBtnLabel('New Service')
+        break
+      case TopTabMenuItems[1]:
+        setPaginationState(true)
+        setAddBtnLabel('New Category')
+        break
+      case TopTabMenuItems[2]:
+        setAddBtnLabel('New Service')
+        setPaginationState(false)
+        break
+      default:
+        return
+    }
+  }
 
   return (
     <Layout>
@@ -129,15 +152,30 @@ const Index: FC = () => {
               menuItems={TopTabMenuItems}
               className={styles.topTabMenu}
               minHeight="50vh"
+              onTabClick={(tab) => onTabClick(TopTabMenuItems[tab])}
             >
               <div className={styles.servicesTab}>
                 <ServicesTab searchTerm={searchTerm} />
               </div>
-              <div></div>
+              <div className={styles.categoriesTab}>
+                <CategoriesTab
+                  totalRecords={(total) => setTotalCategories(total)}
+                />
+              </div>
               <div></div>
             </TabMenu>
           </div>
         </Card>
+        {paginationState && (
+          <div className={styles.paginationDiv}>
+            <Pagination
+              showingRecords={totalCategories}
+              defaultCurrent={1}
+              total={totalCategories}
+              pageSize={10}
+            />
+          </div>
+        )}
       </div>
     </Layout>
   )
