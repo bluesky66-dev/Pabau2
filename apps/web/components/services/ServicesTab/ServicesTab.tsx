@@ -8,7 +8,7 @@ import {
   EditOutlined,
   VideoCameraOutlined,
 } from '@ant-design/icons'
-import { Donate, File, Folder, Injection, Key, Team, Globe } from '../../assets'
+import { Donate, File, Folder, Injection, Key, Team, Globe } from '../assets'
 import Label from '../StatusLabel/label'
 import styles from './services_tab.module.less'
 

@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import Layout from '../../../components/Layout/Layout'
-import ServicesTab from './components/ServicesTab/ServicesTab'
+import ServicesTab from '../../../components/services/ServicesTab/ServicesTab'
 import { TabMenu, Breadcrumb, Button } from '@pabau/ui'
 import { Card, Input, Popover, Radio, Select } from 'antd'
 import {
