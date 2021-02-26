@@ -1,141 +1,266 @@
 import React, { FC, useState, useEffect } from 'react'
-import { TabMenu, Table, DotButton } from '@pabau/ui'
-import { Button, Dropdown, Menu } from 'antd'
+import { TabMenu, Table, DotButton, Pagination, Avatar } from '@pabau/ui'
+import { Button, Dropdown, Menu, Popover, Tooltip } from 'antd'
 import {
   CaretDownFilled,
   MenuFoldOutlined,
   PlusOutlined,
   EditOutlined,
+  VideoCameraOutlined,
 } from '@ant-design/icons'
+import { Donate, File, Folder, Injection, Key, Team, Globe } from '../../assets'
+import Label from '../StatusLabel/label'
 import styles from './services_tab.module.less'
 
 const data = [
   {
     id: 1,
     key: '1',
-    name: 'Paracetamol (Acetominophen)',
-    unit: 'Mg',
-    frequency: '1 per day',
-    route: 'Orally',
-    comment: 'Twice per 6 hours after treatment',
-    is_active: 1,
-    index: 0,
+    name: 'Online Consulation',
+    duration: '1 hour 25 min',
+    staff: '4',
+    price: '£100–300',
+    index: 1,
+    status: 'sell',
+    edit: true,
   },
   {
     id: 2,
     key: '2',
-    name: 'From a friend',
-    unit: 'Mg',
-    frequency: 'coffee',
-    route: 'Monday, 4 Feb 2019',
-    comment: 'Twice per 6 hours after treatment',
-    is_active: 0,
-    index: 1,
+    name: '3 ml Contour',
+    duration: '1 hour 25 min',
+    staff: '8',
+    price: '£300',
+    index: 2,
+    status: 'both',
+    edit: true,
   },
   {
     id: 3,
     key: '3',
-    name: 'Instagram',
-    unit: 'Mg',
-    frequency: 'clock',
-    route: 'Orally',
-    comment: 'Twice per 6 hours after treatment',
-    is_active: 0,
-    index: 2,
+    name: '2 ml Contour',
+    duration: '1 hour 25 min',
+    staff: '12',
+    price: '£900',
+    index: 3,
+    status: 'both',
+    edit: true,
   },
   {
     id: 4,
     key: '4',
-    name: 'Imported',
-    unit: 'Mg',
-    frequency: '1 per day',
-    route: 'Orally',
-    comment: 'Twice per 6 hours after treatment',
-    is_active: 1,
-    index: 3,
+    name: 'Elemis peptide facial & brow wax & tint',
+    duration: '1 hour 25 min',
+    staff: '5',
+    price: '£900',
+    index: 4,
+    status: 'sell',
+    edit: true,
   },
   {
     id: 5,
     key: '5',
-    name: 'Walk-in',
-    unit: 'Mg',
-    frequency: '1 per day',
-    route: 'Orally',
-    comment: 'Twice per 6 hours after treatment',
-    is_active: 1,
-    index: 4,
+    name: '1 ml filler',
+    duration: '1 hour 25 min',
+    staff: '4',
+    price: '£900',
+    index: 5,
+    status: 'both',
+    edit: true,
   },
   {
     id: 6,
     key: '6',
     name: 'Facebook',
-    unit: 'Mg',
-    frequency: '1 per day',
-    route: 'Orally',
-    comment: 'Twice per 6 hours after treatment',
-    is_active: 0,
-    index: 5,
+    duration: '1 hour 25 min',
+    staff: '8',
+    price: '£900',
+    index: 6,
+    status: 'sell',
+    edit: true,
   },
   {
     id: 7,
     key: '7',
     name: 'Fresha',
-    unit: 'Mg',
-    frequency: '1 per day',
-    route: 'Orally',
-    comment: 'Twice per 6 hours after treatment',
-    is_active: 0,
-    index: 6,
+    duration: '1 hour 25 min',
+    staff: '10',
+    price: '£900',
+    index: 7,
+    status: 'both',
+    edit: true,
+  },
+  {
+    id: 8,
+    key: '8',
+    name: 'Fresha',
+    duration: '1 hour 25 min',
+    staff: '6',
+    price: '£900',
+    index: 8,
+    status: 'both',
+    edit: true,
+  },
+  {
+    id: 9,
+    key: '9',
+    name: 'Fresha',
+    duration: '1 hour 25 min',
+    staff: '19',
+    price: '£900',
+    index: 9,
+    status: 'sell',
+    edit: true,
+  },
+  {
+    id: 10,
+    key: '10',
+    name: 'Fresha',
+    duration: '1 hour 25 min',
+    staff: '14',
+    price: '£900',
+    index: 10,
+    status: 'sell',
+    edit: true,
   },
 ]
 
-const columns = [
+const columnsView2 = [
   {
     title: 'Name',
     dataIndex: 'name',
-    className: 'leftPadding',
     visible: true,
-    sorter: (a, b) => a.name.length - b.name.length,
+    render: function renderSourceName(val) {
+      return (
+        <div className={styles.serviceName}>
+          <span className={styles.dot}></span>
+          <span>
+            <VideoCameraOutlined />
+          </span>
+          <span>{val}</span>
+        </div>
+      )
+    },
   },
   {
-    title: 'Units',
-    dataIndex: 'unit',
+    title: 'Duration',
+    dataIndex: 'duration',
     visible: true,
-    sorter: (a, b) => a.unit.length - b.unit.length,
   },
   {
-    title: 'Frequency',
-    dataIndex: 'frequency',
+    title: 'Staff assigned',
+    dataIndex: 'staff',
     visible: true,
-    filters: [
-      {
-        text: '1 per day',
-        value: '1 per day',
-      },
-      {
-        text: '6-8 hour',
-        value: '6-8 hour',
-      },
-    ],
-    onFilter: (value, record) => record.frequency.indexOf(value) === 0,
-    sorter: (a, b) => a.frequency.length - b.frequency.length,
+    render: function renderSourceName(val) {
+      return (
+        <div className={styles.staff}>
+          <Popover
+            trigger="hover"
+            content={() => {
+              return (
+                <div className="avatarsPopover">
+                  <span>
+                    <Avatar name={val} />
+                  </span>
+                  <span>
+                    <Avatar name={val} />
+                  </span>
+                  <span>
+                    <Avatar name={val} />
+                  </span>
+                  <span>
+                    <Avatar name={val} />
+                  </span>
+                </div>
+              )
+            }}
+          >
+            <span className={styles.staffCount}>{val}</span>
+          </Popover>
+        </div>
+      )
+    },
   },
   {
-    title: 'Route',
-    dataIndex: 'route',
+    title: 'Price',
+    dataIndex: 'price',
     visible: true,
-    sorter: (a, b) => a.route.length - b.route.length,
   },
+]
+
+const columnsView1 = [
   {
-    title: 'Comment',
-    dataIndex: 'comment',
+    title: 'Name',
+    dataIndex: 'name',
     visible: true,
-    sorter: (a, b) => a.comment.length - b.comment.length,
+    width: '50%',
+    render: function renderSourceName(val) {
+      return (
+        <div className={styles.serviceName}>
+          <span>{val}</span>
+        </div>
+      )
+    },
   },
   {
     title: 'Status',
-    dataIndex: 'is_active',
+    dataIndex: 'status',
     visible: true,
+    width: '25%',
+    render: function renderSourceName(val) {
+      return (
+        <div>
+          <Label type={`${val}`} />
+        </div>
+      )
+    },
+  },
+  {
+    title: '',
+    dataIndex: 'edit',
+    visible: true,
+    width: '25%',
+    render: function renderSourceName() {
+      return (
+        <div className={styles.editIconsDiv}>
+          <Tooltip placement="top" title="Prompt Text">
+            <span>
+              <Donate />
+            </span>
+          </Tooltip>
+          <Tooltip placement="top" title="Prompt Text">
+            <span>
+              <Key />
+            </span>
+          </Tooltip>
+          <Tooltip placement="top" title="Prompt Text">
+            <span>
+              <File />
+            </span>
+          </Tooltip>
+          <Tooltip placement="top" title="Prompt Text">
+            <span>
+              <Globe />
+            </span>
+          </Tooltip>
+          <Tooltip placement="top" title="Prompt Text">
+            <span>
+              <Folder />
+            </span>
+          </Tooltip>
+          <Tooltip placement="top" title="Prompt Text">
+            <span>
+              <Injection />
+            </span>
+          </Tooltip>
+          <Tooltip placement="top" title="Prompt Text">
+            <span>
+              <Team />
+            </span>
+          </Tooltip>
+        </div>
+      )
+    },
   },
 ]
 
@@ -155,13 +280,30 @@ const ServicesTab: FC<SP> = ({ searchTerm, ...rest }) => {
     'Contracts',
     'Injectables',
   ]
+
+  const [columns, setColumns] = useState(columnsView2)
+  const [selectedToggleView, setSelectedToggleView] = useState(togglesViews[1])
   const [selectedService, setSelectedService] = useState(services[0])
-  const [selectedToggleView, setSelectedToggleView] = useState(togglesViews[0])
+  const [paginationState] = useState(true)
   const [sourceData, setSourceData] = useState(null)
 
   useEffect(() => {
     setSourceData(data)
   }, [setSourceData])
+
+  const setTableView = (view) => {
+    setSelectedToggleView(view)
+    switch (view) {
+      case togglesViews[0]:
+        setColumns(columnsView1)
+        break
+      case togglesViews[1]:
+        setColumns(columnsView2)
+        break
+      default:
+        return
+    }
+  }
 
   const servicesOverlay = (
     <Menu>
@@ -184,9 +326,7 @@ const ServicesTab: FC<SP> = ({ searchTerm, ...rest }) => {
       {togglesViews.map((serviceView, key) => (
         <Menu.Item
           key={`page-size-${key}`}
-          onClick={() => {
-            setSelectedToggleView(serviceView)
-          }}
+          onClick={() => setTableView(serviceView)}
           className={selectedToggleView === serviceView && 'active'}
         >
           {serviceView}
@@ -244,6 +384,23 @@ const ServicesTab: FC<SP> = ({ searchTerm, ...rest }) => {
     )
   }
 
+  const serviceFooter = () => {
+    return (
+      <div>
+        {paginationState && (
+          <div className={styles.paginationDiv}>
+            <Pagination
+              showingRecords={sourceData?.length}
+              defaultCurrent={1}
+              total={sourceData?.length}
+              pageSize={10}
+            />
+          </div>
+        )}
+      </div>
+    )
+  }
+
   return (
     <div className={styles.servicesTabMain}>
       <div>
@@ -253,6 +410,7 @@ const ServicesTab: FC<SP> = ({ searchTerm, ...rest }) => {
           className={styles.leftTabMenu}
           disabledKeys={['Classes']}
           activeDefaultKey="1"
+          minHeight="50vh"
           size="large"
         >
           <div></div>
@@ -270,6 +428,7 @@ const ServicesTab: FC<SP> = ({ searchTerm, ...rest }) => {
                 searchTerm={searchTerm}
                 noDataBtnText="Services"
                 noDataText="service"
+                footer={serviceFooter}
               />
             </div>
           </div>
