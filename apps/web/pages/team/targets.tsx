@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout } from '@pabau/ui'
+import Layout from '../../components/Layout/Layout'
 import './targets.module.less'
 
 /* eslint-disable-next-line */

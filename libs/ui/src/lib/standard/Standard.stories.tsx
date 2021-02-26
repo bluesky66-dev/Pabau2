@@ -25,6 +25,7 @@ const Story: React.FC = ({ ...args }) => {
   const [selectLanguage, setSelectLanguage] = useState('EN')
   const [medicalMessage, setMedicalMessage] = useState('')
   const [informationMessage, setInformationMessage] = useState('')
+  const [smsMessage, setSmsMessage] = useState('Hi, Kristy')
 
   return (
     <div style={{ width: '392px' }}>
@@ -57,6 +58,12 @@ const Story: React.FC = ({ ...args }) => {
         onMedicalMessage={(value) => setMedicalMessage(value)}
         informationMessage={informationMessage}
         onInformationMessage={(value) => setInformationMessage(value)}
+        onStandardTabChanged={(value) => {
+          console.log(value)
+        }}
+        hideAppearanceTabPane={true}
+        smsMessage={smsMessage}
+        onSmsMessage={(value) => setSmsMessage(value)}
       />
       <p>{medicalMessage}</p>
     </div>
