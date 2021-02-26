@@ -4,20 +4,12 @@ import React from 'react'
 import CrudLayout from '../../components/CrudLayout/CrudLayout'
 
 const LIST_QUERY = gql`
-  query departments(
-    $isActive: Boolean = true
-    $offset: Int
-    $limit: Int
-    $searchTerm: String = ""
-  ) {
+  query departments($isActive: Boolean = true, $offset: Int, $limit: Int) {
     departments(
       offset: $offset
       limit: $limit
       order_by: { order: desc }
-      where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-      }
+      where: { is_active: { _eq: $isActive } }
     ) {
       __typename
       id
@@ -28,16 +20,8 @@ const LIST_QUERY = gql`
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query departments_aggregate(
-    $isActive: Boolean = true
-    $searchTerm: String = ""
-  ) {
-    departments_aggregate(
-      where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-      }
-    ) {
+  query departments_aggregate($isActive: Boolean = true) {
+    departments_aggregate(where: { is_active: { _eq: $isActive } }) {
       aggregate {
         count
       }
