@@ -32,6 +32,7 @@ export interface DocumentUploadModalProps {
   onFileChange?(file: UploadProps): void
   draggerProps?: DocumentUploadDraggableProp
   folderOptions: FolderOptions[]
+  acceptFileType?: string
 }
 
 const DocumentUploadModal: FC<DocumentUploadModalProps> = ({
@@ -46,6 +47,7 @@ const DocumentUploadModal: FC<DocumentUploadModalProps> = ({
   onFileChange,
   onFileDelete,
   draggerProps,
+  acceptFileType,
   ...props
 }) => {
   const [fileList, setFileList] = useState<UploadProps[]>([])
@@ -75,6 +77,7 @@ const DocumentUploadModal: FC<DocumentUploadModalProps> = ({
             draggerProps={draggerProps}
             onFileChange={handlefileChanges}
             onDelete={handleDeleteFiles}
+            acceptFileType={acceptFileType}
           />
           <div className={styles.filter}>
             <div className={styles.filterName}>Folder</div>

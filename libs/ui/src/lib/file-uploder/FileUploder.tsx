@@ -23,6 +23,7 @@ export interface FileUploderProps {
   draggerProps?: DraggableProps
   onDelete?(file: UploadProps[]): void
   onFileChange?(file: UploadProps): void
+  acceptFileType?: string
 }
 
 const FileUploder: FC<FileUploderProps> = (props) => {
@@ -70,15 +71,16 @@ const FileUploder: FC<FileUploderProps> = (props) => {
           <Dragger
             {...props?.draggerProps}
             onChange={handleFileOnChange}
+            accept={props.acceptFileType}
             className={styles.dropBox}
           >
             <div className={styles.DropFileText}>
               <img src={Download} className={styles.image} alt="" />
-              <p className={styles.text}>Drop Files here to upload</p>
+              <p className={styles.text}>Drop Files Here To Upload</p>
             </div>
             <div className={styles.orBox}>or</div>
             <Button type="primary" className={styles.chooseFileButton}>
-              Choose Files
+              Choose File(s)
             </Button>
           </Dragger>
         </div>
