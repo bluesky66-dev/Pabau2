@@ -64,6 +64,9 @@
       filter: {}
 - table:
     schema: public
+    name: Library
+- table:
+    schema: public
     name: appointment_status
   insert_permissions:
   - role: public
@@ -113,25 +116,281 @@
       filter: {}
 - table:
     schema: public
+    name: block_out_options
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - backgroundColor
+      - defaultTime
+      - is_active
+      - name
+      - paidBlockOut
+      - type
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - id
+      - name
+      - type
+      - is_active
+      - paidBlockOut
+      - backgroundColor
+      - defaultTime
+      - created_at
+      - updated_at
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - backgroundColor
+      - defaultTime
+      - is_active
+      - name
+      - paidBlockOut
+      - type
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
     name: business_details
   insert_permissions:
   - role: public
     permission:
       check: {}
       columns:
+      - disable_prescriptions
+      - history_data
+      - medical_approvals
+      - perform_surgical
+      - secure_medical_forms
+      - id
+      - booking_multiple_attendees_plural
+      - booking_multiple_attendees_singular
       - business_location
       - business_type
       - businses_name
+      - client_email
+      - client_phone
+      - client_postal
+      - client_sms
       - company_email
       - currency
       - date_format
       - default_language_clients
       - default_language_staff
+      - employee_plural
+      - employee_singular
+      - leads_email
+      - leads_phone
+      - leads_postal
+      - leads_sms
+      - people_attend_appointment_plural
+      - people_attend_appointment_singular
       - phone
+      - teacher_plural
+      - teacher_singular
       - time_zone
+      - treatment_cycles
+      - vat
       - website
       - week_start
       backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - disable_prescriptions
+      - history_data
+      - medical_approvals
+      - perform_surgical
+      - secure_medical_forms
+      - id
+      - booking_multiple_attendees_plural
+      - booking_multiple_attendees_singular
+      - business_location
+      - business_type
+      - businses_name
+      - client_email
+      - client_phone
+      - client_postal
+      - client_sms
+      - company_email
+      - currency
+      - date_format
+      - default_language_clients
+      - default_language_staff
+      - employee_plural
+      - employee_singular
+      - leads_email
+      - leads_phone
+      - leads_postal
+      - leads_sms
+      - people_attend_appointment_plural
+      - people_attend_appointment_singular
+      - phone
+      - teacher_plural
+      - teacher_singular
+      - time_zone
+      - treatment_cycles
+      - vat
+      - website
+      - week_start
+      filter: {}
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - disable_prescriptions
+      - history_data
+      - medical_approvals
+      - perform_surgical
+      - secure_medical_forms
+      - id
+      - booking_multiple_attendees_plural
+      - booking_multiple_attendees_singular
+      - business_location
+      - business_type
+      - businses_name
+      - client_email
+      - client_phone
+      - client_postal
+      - client_sms
+      - company_email
+      - currency
+      - date_format
+      - default_language_clients
+      - default_language_staff
+      - employee_plural
+      - employee_singular
+      - leads_email
+      - leads_phone
+      - leads_postal
+      - leads_sms
+      - people_attend_appointment_plural
+      - people_attend_appointment_singular
+      - phone
+      - teacher_plural
+      - teacher_singular
+      - time_zone
+      - treatment_cycles
+      - vat
+      - website
+      - week_start
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: calendar_settings
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - advanced_calendar_lockout
+      - allow_appointments_to_overlap
+      - allow_service_without_contract_price
+      - appointment_reminder
+      - auto_complete
+      - auto_lock
+      - disable_booking_from_package
+      - disable_filtering_by_service
+      - email_confirmation
+      - enable_initials
+      - end_time
+      - font_size
+      - group_user_columns_by_location
+      - hide_appointment_times
+      - hide_client_name_on_appointment_arrival_notification
+      - hide_show_accounts
+      - hide_surnames
+      - ordering_the_employees_by_location
+      - raise_invoice_when_appointment_is_completed
+      - request_feedback
+      - revert_to_original_room_view
+      - sms_confirmation
+      - start_time
+      - time_slot_size
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - advanced_calendar_lockout
+      - allow_appointments_to_overlap
+      - allow_service_without_contract_price
+      - appointment_reminder
+      - auto_complete
+      - disable_booking_from_package
+      - disable_filtering_by_service
+      - email_confirmation
+      - enable_initials
+      - group_user_columns_by_location
+      - hide_appointment_times
+      - hide_client_name_on_appointment_arrival_notification
+      - hide_show_accounts
+      - hide_surnames
+      - ordering_the_employees_by_location
+      - raise_invoice_when_appointment_is_completed
+      - request_feedback
+      - revert_to_original_room_view
+      - sms_confirmation
+      - auto_lock
+      - time_slot_size
+      - font_size
+      - end_time
+      - start_time
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - advanced_calendar_lockout
+      - allow_appointments_to_overlap
+      - allow_service_without_contract_price
+      - appointment_reminder
+      - auto_complete
+      - auto_lock
+      - disable_booking_from_package
+      - disable_filtering_by_service
+      - email_confirmation
+      - enable_initials
+      - end_time
+      - font_size
+      - group_user_columns_by_location
+      - hide_appointment_times
+      - hide_client_name_on_appointment_arrival_notification
+      - hide_show_accounts
+      - hide_surnames
+      - ordering_the_employees_by_location
+      - raise_invoice_when_appointment_is_completed
+      - request_feedback
+      - revert_to_original_room_view
+      - sms_confirmation
+      - start_time
+      - time_slot_size
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: cancellation_reasons
@@ -171,6 +430,49 @@
       - type
       filter: {}
       check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: category
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - groupName
+      - is_active
+      - name
+      - order
+      - productsAssigned
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - created_at
+      - groupName
+      - id
+      - is_active
+      - name
+      - order
+      - productsAssigned
+      - updated_at
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - groupName
+      - is_active
+      - name
+      - order
+      - productsAssigned
+      filter: {}
+      check: {}
   delete_permissions:
   - role: public
     permission:
@@ -609,6 +911,10 @@
       - order
       filter: {}
       check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: marketing_campaign
@@ -764,6 +1070,144 @@
       filter: {}
 - table:
     schema: public
+    name: product_lists
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - category
+      - cost
+      - is_active
+      - name
+      - order
+      - quantity
+      - retail
+      - status
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - category
+      - cost
+      - created_at
+      - id
+      - is_active
+      - name
+      - order
+      - quantity
+      - retail
+      - status
+      - updated_at
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - category
+      - cost
+      - is_active
+      - name
+      - order
+      - quantity
+      - retail
+      - status
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: prototype
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - is_active
+      - name
+      - order
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - created_at
+      - id
+      - is_active
+      - name
+      - order
+      - updated_at
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - name
+      - order
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: purchase_order
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - create_date
+      - created_by
+      - is_active
+      - location
+      - po_number
+      - supplier
+      - total_cost
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - create_date
+      - created_at
+      - created_by
+      - id
+      - is_active
+      - location
+      - po_number
+      - supplier
+      - total_cost
+      - updated_at
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - create_date
+      - created_by
+      - is_active
+      - location
+      - po_number
+      - supplier
+      - total_cost
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
     name: rota_templates
   insert_permissions:
   - role: public
@@ -846,4 +1290,183 @@
       filter: {}
 - table:
     schema: public
+    name: stock_take
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - count_no
+      - counted_by
+      - location
+      - name
+      - start_date
+      - status
+      - total
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - count_no
+      - counted_by
+      - created_at
+      - id
+      - location
+      - name
+      - start_date
+      - status
+      - total
+      - updated_at
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - count_no
+      - counted_by
+      - location
+      - name
+      - start_date
+      - status
+      - total
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: supplier
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - is_active
+      - order
+      - products_assigned
+      - supplier_name
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - created_at
+      - id
+      - is_active
+      - order
+      - products_assigned
+      - supplier_name
+      - updated_at
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - order
+      - products_assigned
+      - supplier_name
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: tax_rates
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - glCode
+      - is_active
+      - name
+      - order
+      - value
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - created_at
+      - glCode
+      - id
+      - is_active
+      - name
+      - order
+      - updated_at
+      - value
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - glCode
+      - is_active
+      - name
+      - order
+      - updated_at
+      - value
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
     name: third_parties
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - email
+      - is_active
+      - name
+      - order
+      - phone
+      - provider_no
+      - type
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - created_at
+      - email
+      - id
+      - is_active
+      - name
+      - order
+      - phone
+      - provider_no
+      - type
+      - updated_at
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - email
+      - is_active
+      - name
+      - order
+      - phone
+      - provider_no
+      - type
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
