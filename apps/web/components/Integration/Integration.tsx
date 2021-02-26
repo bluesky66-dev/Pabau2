@@ -152,7 +152,6 @@ export const IntegrationTabBody: FC<P> = ({
           </div>
         ))}
       </div>
-      {console.log('asds')}
       <InstallationModal
         visible={isModalVisible}
         logo={modalData.logoImage}
