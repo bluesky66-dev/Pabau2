@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import BasicModal from '../modal/basicmodal'
+import BasicModal from '../modal/BasicModal'
 
 import styles from './DocumentUploadModal.module.less'
 import { Avatar } from '../avatar/Avatar'
