@@ -1,18 +1,12 @@
 import React, { useState } from 'react'
-import {
-  Layout,
-  Breadcrumb,
-  WStepper,
-  StepperItem,
-  MobileHeader,
-} from '@pabau/ui'
+import { Breadcrumb, WStepper, StepperItem, MobileHeader } from '@pabau/ui'
 import styles from './lead-forms.module.less'
-import LeadSettings from './lead-capture/LeadSetting'
-import LeadIntegration from './lead-capture/LeadIntegration'
-import LeadTesting from './lead-capture/LeadTesting'
-import LeadResult from './lead-capture/LeadResult'
-import LeadFormResult from './lead-capture/lead-forms/LeadFormResult'
-import LeadCustomizeForm from './lead-capture/lead-forms/LeadCustomizeForm'
+import LeadSettings from './lead-capture/lead-setting'
+import LeadIntegration from './lead-capture/lead-integration'
+import LeadTesting from './lead-capture/lead-testing'
+import LeadResult from './lead-capture/lead-result'
+import LeadFormResult from './lead-capture/lead-forms/lead-form-result'
+import LeadCustomizeForm from './lead-capture/lead-forms/lead-customize-form'
 import {
   FlagOutlined,
   HomeOutlined,
@@ -23,6 +17,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Icons from '@fortawesome/free-solid-svg-icons'
 import { Typography } from 'antd'
 import Link from 'next/link'
+import Layout from '../../components/Layout/Layout'
 
 const { Title } = Typography
 

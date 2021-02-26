@@ -1,6 +1,6 @@
 import React from 'react'
-import { Layout } from '@pabau/ui'
 import './cases.module.less'
+import Layout from '../../components/Layout/Layout'
 
 /* eslint-disable-next-line */
 export interface CasesProps {}

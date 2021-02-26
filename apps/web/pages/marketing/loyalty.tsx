@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout } from '@pabau/ui'
+import Layout from '../../components/Layout/Layout'
 import './loyalty.module.less'
 
 /* eslint-disable-next-line */

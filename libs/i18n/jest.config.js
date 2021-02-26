@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 module.exports = {
   displayName: 'i18n2',
   preset: '../../jest.preset.js',

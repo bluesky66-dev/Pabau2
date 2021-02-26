@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Layout } from '@pabau/ui'
+import Layout from '../../components/Layout/Layout'
 import Iframe from '../../components/Iframe'
 
 const Index: FC = () => {
