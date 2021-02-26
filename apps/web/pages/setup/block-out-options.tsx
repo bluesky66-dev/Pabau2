@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Breadcrumb,
   Button,
@@ -6,8 +6,9 @@ import {
   NotificationType,
   Table,
   useLiveQuery,
+  Pagination,
 } from '@pabau/ui'
-import { Card, Col, Pagination, Row, Select, Typography } from 'antd'
+import { Card, Col, Row, Typography } from 'antd'
 
 import Layout from '../../components/Layout/Layout'
 import NewBlockTypeModal from '../../components/Setup/BlockOutOptions/NewBlockTypeModal'
@@ -15,8 +16,7 @@ import styles from './block-out-options.module.less'
 import { gql, useMutation } from '@apollo/client'
 
 /* eslint-disable-next-line */
-export interface BlockOutOptionsProps {
-}
+export interface BlockOutOptionsProps {}
 
 const columns = [
   {
@@ -120,9 +120,18 @@ const DELETE_MUTATION = gql`
   }
 `
 
+const LIST_AGGREGATE_QUERY = gql`
+  query block_out_options_aggregate {
+    block_out_options_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+`
+
 export function BlockOutOptions(props: BlockOutOptionsProps) {
-  const { Paragraph, Text, Title } = Typography
-  const { Option } = Select
+  const { Paragraph, Title } = Typography
 
   const [showModal, setShowModal] = useState(false)
   const [edit, setEdit] = useState(null)
@@ -131,6 +140,7 @@ export function BlockOutOptions(props: BlockOutOptionsProps) {
     total: 0,
     offset: 0,
     limit: 10,
+    showingRecords: 0,
   })
 
   const { data, error, loading } = useLiveQuery(LIST_QUERY, {
@@ -139,6 +149,8 @@ export function BlockOutOptions(props: BlockOutOptionsProps) {
       limit: paginateData.limit,
     },
   })
+
+  const { data: aggregateData } = useLiveQuery(LIST_AGGREGATE_QUERY)
 
   const [addMutation] = useMutation(ADD_MUTATION, {
     onCompleted() {
@@ -185,6 +197,17 @@ export function BlockOutOptions(props: BlockOutOptionsProps) {
     },
   })
 
+  useEffect(() => {
+    if (aggregateData) {
+      setPaginateData({
+        ...paginateData,
+        total: aggregateData.aggregate?.count,
+        showingRecords: data?.length,
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, aggregateData])
+
   const onRowClick = (data) => {
     setEdit(data)
     setShowModal(true)
@@ -192,7 +215,7 @@ export function BlockOutOptions(props: BlockOutOptionsProps) {
 
   const onPaginationChange = (currentPage) => {
     const offset = paginateData.limit * (currentPage - 1)
-    setPaginateData((d) => ({ ...d, offset, currentPage: currentPage }))
+    setPaginateData((d) => ({ ...d, offset, currentPage }))
   }
 
   const createClick = () => {
@@ -291,7 +314,7 @@ export function BlockOutOptions(props: BlockOutOptionsProps) {
         </Row>
         <Table
           columns={columns}
-          dataSource={data}
+          dataSource={data?.map((d) => ({ ...d, key: d.id }))}
           onRowClick={onRowClick}
           loading={loading}
           noDataText="block type"
@@ -301,36 +324,14 @@ export function BlockOutOptions(props: BlockOutOptionsProps) {
         />
         {error && <Paragraph type="danger">{error.message}</Paragraph>}
       </Card>
-      <div style={{ margin: '24px 0' }} className={styles.row}>
-        <Paragraph type="secondary" style={{ marginBottom: 0 }}>
-          SHOWING <Text>4</Text> RESULTS FROM <Text>4</Text>
-        </Paragraph>
-        <div className={styles.row} style={{ marginLeft: 32 }}>
-          <div>
-            <Text type="secondary">ROWS PER PAGE:</Text>
-            <Select
-              value={paginateData.limit}
-              style={{ width: 65 }}
-              bordered={false}
-              onChange={(limit) =>
-                setPaginateData((data) => ({ ...data, limit }))
-              }
-            >
-              <Option value={10}>10</Option>
-              <Option value={25}>25</Option>
-              <Option value={50}>50</Option>
-              <Option value={100}>100</Option>
-            </Select>
-          </div>
-          <Pagination
-            defaultCurrent={1}
-            total={paginateData.total}
-            pageSize={paginateData.limit}
-            current={paginateData.currentPage}
-            onChange={onPaginationChange}
-          />
-        </div>
-      </div>
+      <Pagination
+        showingRecords={paginateData.showingRecords}
+        defaultCurrent={1}
+        total={paginateData.total}
+        pageSize={paginateData.limit}
+        current={paginateData.currentPage}
+        onChange={onPaginationChange}
+      />
       {showModal && (
         <NewBlockTypeModal
           visible={showModal}
