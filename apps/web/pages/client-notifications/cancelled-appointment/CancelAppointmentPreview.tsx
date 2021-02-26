@@ -1,20 +1,7 @@
 import React, { FC } from 'react'
-import { Button, EmailSMSPreview, CancelAClassBooking } from '@pabau/ui'
+import { Button, EmailSmsPreview, CancelAClassBooking } from '@pabau/ui'
+import { getFlag } from '../utils'
 import styles from './index.module.less'
-import ENSVG from '../../../../../libs/ui/src/assets/images/lang-logos/en.svg'
-import FRSVG from '../../../../../libs/ui/src/assets/images/lang-logos/french.svg'
-import SPSVG from '../../../../../libs/ui/src/assets/images/lang-logos/spanish.svg'
-import ARSVG from '../../../../../libs/ui/src/assets/images/lang-logos/arabic.svg'
-import BGSVG from '../../../../../libs/ui/src/assets/images/lang-logos/bulgarian.svg'
-import CSSVG from '../../../../../libs/ui/src/assets/images/lang-logos/czech.svg'
-import DASVG from '../../../../../libs/ui/src/assets/images/lang-logos/dutch.svg'
-import HUSVG from '../../../../../libs/ui/src/assets/images/lang-logos/hungarian.svg'
-import LVSVG from '../../../../../libs/ui/src/assets/images/lang-logos/latvian.svg'
-import NOSVG from '../../../../../libs/ui/src/assets/images/lang-logos/norwegian.svg'
-import PLSVG from '../../../../../libs/ui/src/assets/images/lang-logos/polish.svg'
-import SWSVG from '../../../../../libs/ui/src/assets/images/lang-logos/swedish.svg'
-import ROSVG from '../../../../../libs/ui/src/assets/images/lang-logos/romanian.svg'
-import RUSVG from '../../../../../libs/ui/src/assets/images/lang-logos/russian.svg'
 
 interface P {
   standardTapIndex: string
@@ -25,6 +12,7 @@ interface P {
   showService?: boolean
   showEmployeeName?: boolean
   informationMessage?: string
+  type?: string
 }
 
 interface LangData {
@@ -39,6 +27,7 @@ interface Data {
   title: string
   address: string
   text: string
+  classText: string
   message: string
 }
 
@@ -51,6 +40,7 @@ const langData: LangData = {
     title: 'M-A Hair Dressing & Spa',
     address: '574 Beferly Road, H3454, England, GB',
     text: 'Your appointment is now cancelled!',
+    classText: 'Your class appointment is now cancelled!',
     message: 'we would love to see tou again in the near future!',
   },
   sp: {
@@ -61,6 +51,7 @@ const langData: LangData = {
     title: 'M-A Hair Dressing & Spa',
     address: '574 Beferly Road, H3454, Inglaterra, GB',
     text: '¡Tu cita ahora está cancelada!',
+    classText: '¡Tu cita de clase ahora está cancelada!',
     message: '¡Nos encantaría volver a verlo en un futuro próximo!',
   },
   fr: {
@@ -71,6 +62,7 @@ const langData: LangData = {
     title: 'M-A Hair Dressing & Spa',
     address: '574 Beferly Road, H3454, England, GB',
     text: 'Votre rendez-vous est maintenant annulé!',
+    classText: 'Votre rendez-vous de classe est maintenant annulé!',
     message: 'nous serions ravis de vous revoir dans un proche avenir!',
   },
   ru: {
@@ -81,6 +73,7 @@ const langData: LangData = {
     title: 'M-A Hair Dressing & Spa',
     address: '574 Beferly Road, H3454, England, GB',
     text: 'Ваша встреча отменена!',
+    classText: 'Запись в класс отменена!',
     message: 'мы будем рады снова увидеть Ту в ближайшем будущем!',
   },
   ar: {
@@ -91,6 +84,7 @@ const langData: LangData = {
     title: 'M-A لتصفيف الشعر وسبا',
     address: '574 طريق بيفرلي ، H3454 ، إنجلترا ، GB',
     text: 'تم إلغاء موعدك الآن!',
+    classText: 'تم إلغاء موعد صفك الآن!',
     message: 'نود رؤيتك مرة أخرى في المستقبل القريب!',
   },
   bg: {
@@ -101,6 +95,7 @@ const langData: LangData = {
     title: 'M-A Фризьорство и Спа',
     address: '574 Beferly Road, H3454, Англия, Великобритания',
     text: 'Вашата среща вече е отменена!',
+    classText: 'Вашата среща в час вече е отменена!',
     message: 'бихме се радвали да видим Tou отново в близко бъдеще!',
   },
   cs: {
@@ -111,6 +106,7 @@ const langData: LangData = {
     title: 'M-A Hair Dressing & Spa',
     address: '574 Beferly Road, H3454, England, GB',
     text: 'Vaše schůzka je nyní zrušena!',
+    classText: 'Vaše schůzka ve třídě je nyní zrušena!',
     message: 'rádi bychom se v blízké budoucnosti znovu setkali!',
   },
   da: {
@@ -121,6 +117,7 @@ const langData: LangData = {
     title: 'M-A Hair Dressing & Spa',
     address: '574 Beferly Road, H3454, England, GB',
     text: 'Din aftale er nu annulleret!',
+    classText: 'Din klasseaftale er nu annulleret!',
     message: 'Vi vil meget gerne se tou igen i den nærmeste fremtid!',
   },
   hu: {
@@ -131,6 +128,7 @@ const langData: LangData = {
     title: 'M-A hajviselet és fürdő',
     address: '574 Beferly Road, H3454, Anglia, GB',
     text: 'Időpontját most törölték!',
+    classText: 'Az osztály időpontját most töröltük!',
     message: 'szívesen látnánk a tou-t a közeljövőben!',
   },
   lv: {
@@ -141,6 +139,7 @@ const langData: LangData = {
     title: 'M-A matu apstrāde un spa',
     address: '574 Beferly Road, H3454, Anglija, GB',
     text: 'Jūsu tikšanās tagad ir atcelta!',
+    classText: 'Jūsu klases iecelšana tagad ir atcelta!',
     message: 'mēs labprāt tuvākajā nākotnē atkal redzētu tou!',
   },
   no: {
@@ -151,6 +150,7 @@ const langData: LangData = {
     title: 'M-A Hair Dressing & Spa',
     address: '574 Beferly Road, H3454, England, GB',
     text: 'Din avtale er nå kansellert!',
+    classText: 'Klasseavtalen din er nå kansellert!',
     message: 'Vi vil gjerne se tou igjen i nær fremtid!',
   },
   pl: {
@@ -161,6 +161,7 @@ const langData: LangData = {
     title: 'M-A Hair Dressing & Spa',
     address: '574 Beferly Road, H3454, Anglia, Wielka Brytania',
     text: 'Twoje spotkanie jest teraz odwołane!',
+    classText: 'Twoje spotkanie klasowe jest teraz odwołane!',
     message: 'chcielibyśmy ponownie zobaczyć tou w najbliższej przyszłości!',
   },
   sw: {
@@ -171,6 +172,7 @@ const langData: LangData = {
     title: 'M-A Hair Dressing & Spa',
     address: '574 Beferly Road, H3454, England, GB',
     text: 'Ditt möte avbryts nu!',
+    classText: 'Ditt klassavtal har nu avbrutits!',
     message: 'vi skulle gärna se tou igen inom en snar framtid!',
   },
   ro: {
@@ -181,6 +183,7 @@ const langData: LangData = {
     title: 'M-A Hair Dressing & Spa',
     address: '574 Beferly Road, H3454, Anglia, GB',
     text: 'Programarea dvs. este anulată!',
+    classText: 'Programarea dvs. de curs este anulată!',
     message: 'ne-ar plăcea să vedem din nou în viitorul apropiat!',
   },
 }
@@ -194,6 +197,7 @@ const CancelAppointmentPreview: FC<P> = ({
   showService,
   buttonColor,
   informationMessage,
+  type,
 }) => {
   const [selectLangData, setSelectLangData] = React.useState<Data>(
     langData['en']
@@ -204,42 +208,10 @@ const CancelAppointmentPreview: FC<P> = ({
     }
   }, [selectLanguage])
 
-  const getFlag = (country) => {
-    switch (country) {
-      case 'EN':
-        return ENSVG
-      case 'FR':
-        return FRSVG
-      case 'SP':
-        return SPSVG
-      case 'AR':
-        return ARSVG
-      case 'BG':
-        return BGSVG
-      case 'CS':
-        return CSSVG
-      case 'DA':
-        return DASVG
-      case 'HU':
-        return HUSVG
-      case 'LV':
-        return LVSVG
-      case 'NO':
-        return NOSVG
-      case 'PL':
-        return PLSVG
-      case 'SW':
-        return SWSVG
-      case 'RO':
-        return ROSVG
-      case 'RU':
-        return RUSVG
-    }
-  }
   return (
     <div>
       {standardTapIndex === '1' ? (
-        <EmailSMSPreview
+        <EmailSmsPreview
           greeting={selectLangData.greeting}
           footerIconGroup={true}
           previewButtonGroup={false}
@@ -252,7 +224,11 @@ const CancelAppointmentPreview: FC<P> = ({
         >
           <CancelAClassBooking
             dateTime={selectLangData.dateTime}
-            text={selectLangData.text}
+            text={
+              type === 'cancelClassBooking'
+                ? selectLangData.classText
+                : selectLangData.text
+            }
             consultancyName={selectLangData.title}
             consultationDetail={
               showService
@@ -265,7 +241,7 @@ const CancelAppointmentPreview: FC<P> = ({
             message={selectLangData.message}
             buttonColor={buttonColor}
           />
-        </EmailSMSPreview>
+        </EmailSmsPreview>
       ) : (
         <div
           className={styles.cardAddTemplateContainer}

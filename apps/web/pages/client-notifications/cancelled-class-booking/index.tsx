@@ -22,7 +22,6 @@ const Index: FC = () => {
       console.log(email)
       Notification(NotificationType.success, 'Test message sent')
     }
-
     if (setIndexTab === 2) {
       Notification(NotificationType.success, 'Test SMS sent')
     }
@@ -38,11 +37,11 @@ const Index: FC = () => {
             breadcrumbName: 'Notification Messages',
           },
           {
-            path: 'client-notifications/noshow-appointment',
-            breadcrumbName: 'No Show Appointment',
+            path: 'client-notifications/cancelled-class-booking',
+            breadcrumbName: 'Cancelled a class booking',
           },
         ]}
-        title={'No Show Appointment'}
+        title={'Cancelled a class booking'}
         setIndexTab={setIndexTab}
         showNotification={showNotification}
         setEmail={setEmail}
@@ -55,15 +54,10 @@ const Index: FC = () => {
         hideDisplayPolicyOption={true}
         hideMedicalHistoryOption={true}
         hideReminderTimeFrameTabPane={true}
-        hideServiceOption={true}
-        hideEmployeeNameOption={true}
         standardMessage={
-          'this notification automatically sends to clients the moment they missed an appointment'
+          'this notification automatically sends to clients when they cancel a class booking'
         }
-        type={'noShowAppointment'}
-        smsCustom={
-          'Hi Anna,<br/> We had you scheduled today at 11:30 but unfortunately you didn\'t show up.<br/>Please get back in touch on <span style="color: #00A1E1;">+4444444444</span> to reschedule.<br/>Your friends at The Clinic'
-        }
+        type={'cancelClassBooking'}
       />
     </Layout>
   )

@@ -112,7 +112,7 @@ const notificationData = {
         'Automatically sends to clients when they cancel a class booking',
       icon: <CloseCircleOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/cancelled-class-booking',
       disabled: true,
     },
     {

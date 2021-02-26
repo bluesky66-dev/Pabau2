@@ -166,7 +166,7 @@ const Index: FC<P> = forwardRef(
         }
         previewComponent={
           isPreviewComponent &&
-          (type === 'cancel' ? (
+          (type === 'cancel' || type === 'cancelClassBooking' ? (
             <CancelAppointmentPreview
               standardTapIndex={standardTapIndex}
               backGroundColor={backGroundColor}
@@ -176,6 +176,7 @@ const Index: FC<P> = forwardRef(
               showEmployeeName={showEmployeeName}
               buttonColor={buttonColor}
               informationMessage={informationMessage}
+              type={type}
             />
           ) : type === 'noShowAppointment' ? (
             <NoShowAppointmentPreview
