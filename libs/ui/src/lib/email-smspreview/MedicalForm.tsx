@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import { EmailSMSPreviewProps, MedicalFormProps } from './EmailSMSPreview'
+import { EmailSMSPreviewProps, MedicalFormProps } from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
+import styles from './EmailSmsPreview.module.less'
 
 export const MedicalForm: FC<MedicalFormProps & EmailSMSPreviewProps> = ({
   message,

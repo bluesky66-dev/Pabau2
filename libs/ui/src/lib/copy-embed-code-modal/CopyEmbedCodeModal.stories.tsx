@@ -1,5 +1,8 @@
 import React from 'react'
-import { CopyEmbedCodeModal } from './CopyEmbedCodeModal'
+import {
+  CopyEmbedCodeModal,
+  CopyEmbedCodeModalProps,
+} from './CopyEmbedCodeModal'
 
 export default {
   title: 'Modals/CopyEmbedCodeModal',
@@ -17,7 +20,7 @@ export default {
   },
 }
 
-const CopyEmbedCodeModalStory = ({ ...args }) => (
+const CopyEmbedCodeModalStory = ({ ...args }: CopyEmbedCodeModalProps) => (
   <CopyEmbedCodeModal {...args} />
 )
 export const BasicEmbedCodeModal = CopyEmbedCodeModalStory.bind({})
