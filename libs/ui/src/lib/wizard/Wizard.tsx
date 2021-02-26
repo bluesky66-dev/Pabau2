@@ -2,7 +2,7 @@ import React from 'react'
 import Stepper from '../stepper/Stepper'
 import styels from './Wizard.module.less'
 import { Button } from '@pabau/ui'
-import { StepperInterface } from './mock'
+import { StepperInterface } from './Mock'
 interface WizardProps {
   onPrev?: () => void
   onNext?: () => void
