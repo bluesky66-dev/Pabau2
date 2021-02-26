@@ -13,7 +13,7 @@ import SWSVG from '../../../../libs/ui/src/assets/images/lang-logos/swedish.svg'
 import ROSVG from '../../../../libs/ui/src/assets/images/lang-logos/romanian.svg'
 import RUSVG from '../../../../libs/ui/src/assets/images/lang-logos/russian.svg'
 
-export const getFlag = (country) => {
+const getFlag = (country) => {
   switch (country) {
     case 'EN':
       return ENSVG
@@ -45,3 +45,5 @@ export const getFlag = (country) => {
       return RUSVG
   }
 }
+
+export default getFlag

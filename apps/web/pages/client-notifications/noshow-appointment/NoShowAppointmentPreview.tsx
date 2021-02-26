@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Button, EmailSmsPreview, NoShowAppointment } from '@pabau/ui'
-import { getFlag } from '../utils'
+import getFlag from '../utils'
 import styles from './index.module.less'
 
 interface P {
