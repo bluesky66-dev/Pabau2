@@ -7,7 +7,7 @@ import { discoverAndLearnProps, WebinarProps } from '@pabau/ui'
 
 import { filterOptions, lengthOptions } from './mock'
 
-import { Button } from '../button/button'
+import { Button } from '@pabau/ui'
 import { SimpleDropdown } from '../simple-dropdown/SimpleDropdown'
 
 import styles from './ViewSchedule.module.less'
