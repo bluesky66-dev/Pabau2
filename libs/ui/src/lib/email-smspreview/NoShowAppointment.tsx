@@ -6,7 +6,14 @@ import { Button } from '../button/Button'
 
 export const NoShowAppointment: FC<
   NoShowAppointmentProps & EmailSMSPreviewProps
-> = ({ message, contactNumber, footerContact }) => {
+> = ({
+  message,
+  contactNumber,
+  footerContact,
+  buttonColor,
+  closingText,
+  signatureBlock,
+}) => {
   return (
     <>
       <Row gutter={[0, 4]} className={styles.break}>
@@ -34,15 +41,15 @@ export const NoShowAppointment: FC<
         </Row>
       )}
       <Row gutter={[0, 4]} className={styles.bookAppointment}>
-        <Button className={styles.bookButton}>Book now</Button>
+        <Button backgroundColor={buttonColor} className={styles.bookButton}>
+          Book now
+        </Button>
       </Row>
       {!footerContact && (
         <Row gutter={[0, 4]} className={styles.textBox}>
           <Col>
-            <p className={styles.text}>
-              Looking forward to hearing from you soon,
-            </p>
-            <p className={styles.text}>Your friends at The Clinic</p>
+            <p className={styles.text}>{closingText}</p>
+            <p className={styles.text}>{signatureBlock}</p>
           </Col>
         </Row>
       )}

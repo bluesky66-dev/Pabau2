@@ -1,14 +1,12 @@
-import React, { FC, useRef } from 'react'
+import React, { FC } from 'react'
 import { Typography, Input, Modal, Menu, Dropdown, Checkbox, Row } from 'antd'
 import { Button, Breadcrumb, PhoneNumberInput, Notification } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import ClientNotification from '../../../components/ClientNotification/index'
 import styles from './index.module.less'
-import CommonHeader from '../../setup/common-header'
+import CommonHeader from '../../setup/CommonHeader'
 import { DownOutlined, LeftOutlined } from '@ant-design/icons'
-import { renderToString } from 'react-dom/server'
-import AppointmentEmailPreview from './email-preview'
-import { apiURL } from '../../../baseUrl'
+
 const { Title } = Typography
 
 enum NotificationType {
@@ -25,73 +23,21 @@ const Index: FC = () => {
   const [sendEmail, setSendEmail] = React.useState(false)
   const [validEmail, setValidEmail] = React.useState(false)
   const [visible, setVisible] = React.useState(false)
-  const [email, setEmail] = React.useState('')
-  const ref = useRef()
 
   function handleSendEmailBtn(value) {
     setSendEmail(value)
   }
 
-  const showNotification = () => {
-    if (validEmail && setIndexTab === 1) {
-      setSendEmail(false)
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const propsData = ref?.current?.propsData() || {}
-      const {
-        requestConfirm,
-        allowRescheduling,
-        allowCancellation,
-        displayPolicy,
-        showService,
-        showEmployeeName,
-        addMedicalHisButton,
-        selectLanguage,
-        backGroundColor,
-        buttonColor,
-        informationMessage,
-        medicalMessage,
-        standardTapIndex,
-        activeSocialIcons,
-      } = propsData
+  const handleVisibleChange = (flag) => {
+    setVisible(flag)
+  }
 
-      const requestOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': apiURL,
-        },
-        body: JSON.stringify({
-          bodyContent: `${renderToString(
-            <AppointmentEmailPreview
-              requestConfirm={requestConfirm}
-              allowRescheduling={allowRescheduling}
-              allowCancellation={allowCancellation}
-              displayPolicy={displayPolicy}
-              showService={showService}
-              showEmployeeName={showEmployeeName}
-              addMedicalHisButton={addMedicalHisButton}
-              selectLanguage={selectLanguage}
-              backGroundColor={backGroundColor}
-              buttonColor={buttonColor}
-              informationMessage={informationMessage}
-              medicalMessage={medicalMessage}
-              standardTapIndex={standardTapIndex}
-              activeSocialIcons={activeSocialIcons}
-            />
-          )}`,
-          email: email,
-          subject: 'TEST',
-        }),
-      }
-      fetch(`${apiURL}/notification-email`, requestOptions).then((res) => {
-        if (res.status === 201) {
-          Notification(NotificationType.success, 'Test Email sent')
-        } else {
-          Notification(NotificationType.error, 'Test Email failed')
-        }
-      })
+  function showNotification() {
+    if (validEmail && setIndexTab === 1) {
+      Notification(NotificationType.success, 'Test message sent')
+      setSendEmail(false)
     }
+
     if (setIndexTab === 2) {
       Notification(NotificationType.success, 'Test SMS sent')
       setSendEmail(false)
@@ -103,12 +49,11 @@ const Index: FC = () => {
       /* eslint-disable-next-line */
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     )
-    const searchFind = regexp.test(search)
-    setValidEmail(searchFind)
-    if (searchFind) {
-      setEmail(search)
-    }
+
+    const serchfind = regexp.test(search)
+    setValidEmail(serchfind)
   }
+
   const menu = (
     <Menu className={styles.menuListUl}>
       <Menu.Item className={styles.menuListItem}>
@@ -126,10 +71,6 @@ const Index: FC = () => {
     </Menu>
   )
 
-  const handleVisibleChange = (flag) => {
-    setVisible(flag)
-  }
-
   return (
     <>
       <CommonHeader />
@@ -144,8 +85,8 @@ const Index: FC = () => {
                   breadcrumbName: 'Notification Messages',
                 },
                 {
-                  path: 'client-notifications/appointment-reminder',
-                  breadcrumbName: 'Upcoming appointment reminder',
+                  path: 'client-notifications/noshow-appointment',
+                  breadcrumbName: 'No Show Appointment',
                 },
               ]}
             />
@@ -154,7 +95,7 @@ const Index: FC = () => {
             <span className={`${styles.backArrow} ${styles.hideSection}`}>
               <LeftOutlined className={styles.leftIcon} />
             </span>
-            Upcoming appointment reminder
+            No Show Appointment
           </Title>
         </div>
         <div
@@ -216,7 +157,6 @@ const Index: FC = () => {
                   />
                 </div>
               )}
-
               <div className={styles.footerBtnGroup}>
                 <Button
                   type="default"
@@ -242,7 +182,6 @@ const Index: FC = () => {
               </div>
             </div>
           </Modal>
-
           <Button
             className={styles.notificationSaveButton}
             style={{
@@ -262,8 +201,22 @@ const Index: FC = () => {
           </Button>
         </div>
         <ClientNotification
-          ref={ref}
           onSeletedTab={(value) => setSelectedTab(value)}
+          hideRequestConfirmationOption={true}
+          hideAllowReschedulingOption={true}
+          hideAllowCancellationOption={true}
+          hideDisplayPolicyOption={true}
+          hideMedicalHistoryOption={true}
+          hideReminderTimeFrameTabPane={true}
+          hideServiceOption={true}
+          hideEmployeeNameOption={true}
+          standardMessage={
+            'this notification automatically sends to clients the moment they missed an appointment'
+          }
+          type={'noShowAppointment'}
+          smsCustom={
+            'Hi Anna,<br/> We had you scheduled today at 11:30 but unfortunately you didn\'t show up.<br/>Please get back in touch on <span style="color: #00A1E1;">+4444444444</span> to reschedule.<br/>Your friends at The Clinic'
+          }
         />
       </Layout>
     </>
