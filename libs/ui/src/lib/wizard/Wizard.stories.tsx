@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Wizard from './Wizard'
-import { data } from './mock'
+import { data } from './Mock'
 
 export default {
   component: Wizard,
