@@ -27,7 +27,7 @@ export const FeaturePermission: FC<FeatureProps> = ({
 }) => {
   return (
     <div className={styles.featureWrapper}>
-      {feature.length > 0 &&
+      {feature?.length > 0 &&
         feature.map((feature) => {
           return (
             <FeatureAccordion
