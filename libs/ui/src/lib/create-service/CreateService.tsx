@@ -26,6 +26,9 @@ import {
 } from '@ant-design/icons'
 import { ReactComponent as Read } from '../../assets/images/pricing/read.svg'
 import { ReactComponent as Money } from '../../assets/images/pricing/money.svg'
+import { ReactComponent as Botox } from '../../assets/images/botox.svg'
+import { ReactComponent as Treatment } from '../../assets/images/form-type/treatment.svg'
+import { ReactComponent as MedicalHistory } from '../../assets/images/form-type/medical-history.svg'
 import styles from './CreateService.module.less'
 
 const { Panel } = Collapse
@@ -704,7 +707,15 @@ export const CreateService: FC<CreateServiceProps> = ({
                   </div>
                 </div>
               </div>
-              <div>1</div>
+              <TabMenu
+                menuItems={['Employees', 'Resources', 'Locations']}
+                tabPosition="top"
+                minHeight="1px"
+              >
+                <div>1</div>
+                <div>1</div>
+                <div>1</div>
+              </TabMenu>
               <div className={styles.createServiceOnlineBooking}>
                 <div className={styles.createServiceSection}>
                   <h2 className={styles.createServiceSectionTitle}>General</h2>
@@ -786,7 +797,104 @@ export const CreateService: FC<CreateServiceProps> = ({
                   </Collapse>
                 </div>
               </div>
-              <div className={styles.createServiceClientPathway}>1</div>
+              <div className={styles.createServiceClientPathway}>
+                <div
+                  className={styles.createServiceClientPathwayItemsContainer}
+                >
+                  <div className={styles.createServiceSection}>
+                    <h2
+                      className={styles.createServiceSectionTitle}
+                      style={{ margin: 0 }}
+                    >
+                      Precare
+                    </h2>
+                    <h3
+                      className={styles.createServiceSectionSubTitle}
+                      style={{ marginBottom: '1rem' }}
+                    >
+                      This is the communication to be set prior to someone
+                      having this service
+                    </h3>
+                    <div className={styles.createServiceClientPathwayItems}>
+                      <div className={styles.createServiceClientPathwayItem}>
+                        <div>
+                          <Botox />
+                        </div>
+                        <p>Botox Precare</p>
+                      </div>
+                      <div className={styles.createServiceClientPathwayItem}>
+                        <div>
+                          <MedicalHistory />
+                        </div>
+                        <p>Medical History</p>
+                      </div>
+                      <div className={styles.createServiceClientPathwayItem}>
+                        <div>
+                          <Treatment />
+                        </div>
+                        <p>Appointment reminder</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={styles.createServiceSection}>
+                    <h2
+                      className={styles.createServiceSectionTitle}
+                      style={{ margin: 0 }}
+                    >
+                      During
+                    </h2>
+                    <h3
+                      className={styles.createServiceSectionSubTitle}
+                      style={{ marginBottom: '1rem' }}
+                    >
+                      These are the forms to be used during this service
+                    </h3>
+                    <div className={styles.createServiceClientPathwayItems}>
+                      <div className={styles.createServiceClientPathwayItem}>
+                        <div>
+                          <Botox />
+                        </div>
+                        <p>Botox treatment form</p>
+                      </div>
+                      <div className={styles.createServiceClientPathwayItem}>
+                        <div>
+                          <Botox />
+                        </div>
+                        <p>Botox consent</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={styles.createServiceSection}>
+                    <h2
+                      className={styles.createServiceSectionTitle}
+                      style={{ margin: 0 }}
+                    >
+                      Aftercare
+                    </h2>
+                    <h3
+                      className={styles.createServiceSectionSubTitle}
+                      style={{ marginBottom: '1rem' }}
+                    >
+                      Here are the communications to be sent after the service
+                      has been checked out
+                    </h3>
+                    <div className={styles.createServiceClientPathwayItems}>
+                      <div className={styles.createServiceClientPathwayItem}>
+                        <div>
+                          <Botox />
+                        </div>
+                        <p>Botox aftercare</p>
+                      </div>
+                      <div className={styles.createServiceClientPathwayItem}>
+                        <div>
+                          <Botox />
+                        </div>
+                        <p>Botox recall</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </TabMenu>
           </div>
         </React.Fragment>
