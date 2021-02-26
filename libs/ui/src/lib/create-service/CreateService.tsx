@@ -1,4 +1,6 @@
 import React, { FC, useState, useEffect } from 'react'
+import classNames from 'classnames'
+import CurrencyInput from 'react-currency-input'
 import { Button, TabMenu, Switch, Input, Checkbox, Slider } from '@pabau/ui'
 import {
   Modal,
@@ -8,6 +10,7 @@ import {
   Tooltip,
   InputNumber,
   Divider,
+  Input as AntInput,
 } from 'antd'
 import {
   CalendarOutlined,
@@ -19,6 +22,7 @@ import {
   PlusOutlined,
   QuestionCircleOutlined,
   CheckCircleFilled,
+  PercentageOutlined,
 } from '@ant-design/icons'
 import { ReactComponent as Read } from '../../assets/images/pricing/read.svg'
 import { ReactComponent as Money } from '../../assets/images/pricing/money.svg'
@@ -43,6 +47,7 @@ export const CreateService: FC<CreateServiceProps> = ({
   const [serviceType, setServiceType] = useState('')
   const [isSelected, setIsSelected] = useState(false)
   const [serviceName, setServiceName] = useState('')
+  const [selectedColor, setSelectedColor] = useState('')
   const [category, setCategory] = useState('')
   const [servicePrice, setServicePrice] = useState('')
   const [sliderValue, setSliderValue] = useState(0)
@@ -72,6 +77,32 @@ export const CreateService: FC<CreateServiceProps> = ({
       ],
     },
   ]
+  const durations = [
+    '5min',
+    '10min',
+    '15min',
+    '20min',
+    '25min',
+    '30min',
+    '35min',
+    '40min',
+    '45min',
+    '50min',
+    '55 min',
+    '1h',
+    '1h 5min',
+    '1h 10min',
+    '1h 15min',
+    '1h 20min',
+    '1h 25min',
+    '1h 30min',
+    '1h 35min',
+    '1h 40min',
+    '1h 45min',
+    '1h 50min',
+    '1h 55 min',
+    '2h',
+  ]
   const [pricingOptions, setPricingOptions] = useState([
     {
       title: 'Book & Sell',
@@ -92,12 +123,87 @@ export const CreateService: FC<CreateServiceProps> = ({
       selected: false,
     },
   ])
-  const hanldeSelectPricingOption = (item) => {
+  const [paymentProcessing, setPaymentProcessing] = useState([
+    {
+      type: 'Amount',
+      selected: false,
+    },
+    {
+      type: 'Percent',
+      selected: true,
+    },
+  ])
+  const [patientBookings, setPatientBookings] = useState([
+    {
+      type: 'Existing & New',
+      selected: true,
+    },
+    {
+      type: 'Existing',
+      selected: false,
+    },
+    {
+      type: 'New',
+      selected: false,
+    },
+  ])
+  const [availableOn, setAvailableOn] = useState([
+    {
+      weekDay: 'Mon',
+      isAvailable: false,
+    },
+    {
+      weekDay: 'Tue',
+      isAvailable: false,
+    },
+    {
+      weekDay: 'Wed',
+      isAvailable: false,
+    },
+    {
+      weekDay: 'Thu',
+      isAvailable: false,
+    },
+    {
+      weekDay: 'Fri',
+      isAvailable: false,
+    },
+    {
+      weekDay: 'Sat',
+      isAvailable: false,
+    },
+    {
+      weekDay: 'Sun',
+      isAvailable: false,
+    },
+  ])
+  const handleSelectPricingOption = (item) => {
     const options = [...pricingOptions]
     for (const option of options) {
       option.selected = option.title === item.title
     }
     setPricingOptions([...options])
+  }
+  const handleSelectPaymentProcessingOption = (item) => {
+    const options = [...paymentProcessing]
+    for (const option of options) {
+      option.selected = option.type === item.type
+    }
+    setPaymentProcessing([...options])
+  }
+  const handleSelectPatientBookings = (item) => {
+    const options = [...patientBookings]
+    for (const option of options) {
+      option.selected = option.type === item.type
+    }
+    setPatientBookings([...options])
+  }
+  const handleChangeAvailableOn = (weekDay, status) => {
+    const options = [...availableOn]
+    for (const option of options) {
+      if (option.weekDay === weekDay) option.isAvailable = status
+    }
+    setAvailableOn([...options])
   }
   useEffect(() => {
     setShowModal(visible)
@@ -299,9 +405,22 @@ export const CreateService: FC<CreateServiceProps> = ({
                       {appointmentColors.map((color) => (
                         <div
                           key={color}
-                          className={styles.appointmentColorItem}
-                          style={{ backgroundColor: color }}
-                        />
+                          className={
+                            color === selectedColor
+                              ? classNames(
+                                  styles.appointmentColorItem,
+                                  styles.appointmentColorSelected
+                                )
+                              : styles.appointmentColorItem
+                          }
+                          onClick={() => setSelectedColor(color)}
+                        >
+                          <div
+                            style={{
+                              backgroundColor: color,
+                            }}
+                          />
+                        </div>
                       ))}
                     </div>
                     <div>
@@ -466,7 +585,7 @@ export const CreateService: FC<CreateServiceProps> = ({
                           className={
                             option.selected ? styles.pricingOptionSelected : ''
                           }
-                          onClick={() => hanldeSelectPricingOption(option)}
+                          onClick={() => handleSelectPricingOption(option)}
                         >
                           <div className={styles.pricingOptionLogos}>
                             {option.isBook && <Read />}
@@ -483,17 +602,28 @@ export const CreateService: FC<CreateServiceProps> = ({
                     </div>
                   </div>
                   <div className={styles.createServiceSectionItem}>
-                    <Input
-                      label="Service price"
-                      text={servicePrice}
-                      onChange={(val) => setServicePrice(val)}
-                      placeHolderText="£"
-                    />
+                    <Form form={form} layout="vertical">
+                      <Form.Item label="Service price">
+                        <div className={styles.currencyInput}>
+                          <CurrencyInput
+                            prefix="£"
+                            value={servicePrice}
+                            onChange={(val) => setServicePrice(val)}
+                          />
+                        </div>
+                      </Form.Item>
+                    </Form>
                   </div>
                   <div className={styles.createServiceSectionItem}>
                     <Form form={form} layout="vertical">
                       <Form.Item label="Duration">
-                        <Select placeholder="Select duration"></Select>
+                        <Select placeholder="Select duration">
+                          {durations.map((duration) => (
+                            <Option key={duration} value={duration}>
+                              {duration}
+                            </Option>
+                          ))}
+                        </Select>
                       </Form.Item>
                     </Form>
                   </div>
@@ -505,10 +635,158 @@ export const CreateService: FC<CreateServiceProps> = ({
                     </Form>
                   </div>
                 </div>
+                <div className={styles.createServiceSection}>
+                  <h2
+                    className={styles.createServiceSectionTitle}
+                    style={{ margin: 0 }}
+                  >
+                    Deposits & Online Payments
+                  </h2>
+                  <h3
+                    className={styles.createServiceSectionSubTitle}
+                    style={{ marginBottom: '1rem' }}
+                  >
+                    Setup payments processing with Stripe in order to bill
+                    online for services
+                  </h3>
+                  <div className={styles.createServiceSectionItem}>
+                    <div className={styles.paymentProcessing}>
+                      {paymentProcessing.map((option) => (
+                        <div
+                          key={option.type}
+                          className={
+                            option.selected
+                              ? styles.paymentProcessingOptionSelected
+                              : ''
+                          }
+                          onClick={() =>
+                            handleSelectPaymentProcessingOption(option)
+                          }
+                        >
+                          <div className={styles.paymentProcessingOptionLogos}>
+                            {option.type === 'Amount' && <Money />}
+                            {option.type === 'Percent' && (
+                              <PercentageOutlined />
+                            )}
+                          </div>
+                          <div className={styles.paymentProcessingOptionTitle}>
+                            {option.type}
+                          </div>
+                          <div className={styles.paymentProcessingChecked}>
+                            <CheckCircleFilled />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className={styles.createServiceSectionItem}>
+                    <Form form={form} layout="vertical">
+                      <Form.Item label="Amount">
+                        <div className={styles.currencyInput}>
+                          <CurrencyInput prefix="£" />
+                        </div>
+                      </Form.Item>
+                    </Form>
+                  </div>
+                  <div className={styles.createServiceSectionItem}>
+                    <Checkbox defaultChecked={false}>
+                      Require payment before completing booking
+                    </Checkbox>
+                  </div>
+                  <div className={styles.enableOnlinePayment}>
+                    <p>Enable online payment</p>
+                    <p>
+                      Activate payments with Pabau to befeit from deposit during
+                      and after sale and get access to no show protection,
+                      payment terminals, safe online paymets and many more.
+                    </p>
+                    <p>Enable Reviews</p>
+                  </div>
+                </div>
               </div>
               <div>1</div>
-              <div>1</div>
-              <div>1</div>
+              <div className={styles.createServiceOnlineBooking}>
+                <div className={styles.createServiceSection}>
+                  <h2 className={styles.createServiceSectionTitle}>General</h2>
+                  <div className={styles.createServiceSectionItem}>
+                    <Input
+                      label="Friendly name"
+                      placeHolderText="Enter friendly name"
+                    />
+                  </div>
+                  <div
+                    className={styles.createServiceSectionItem}
+                    style={{ margin: 0 }}
+                  >
+                    <Form form={form} layout="vertical">
+                      <Form.Item label="Description">
+                        <AntInput.TextArea
+                          rows={4}
+                          placeholder="e.g. the world’s most spectacular product"
+                        />
+                      </Form.Item>
+                    </Form>
+                  </div>
+                </div>
+                <div className={styles.advancedSettings}>
+                  <Collapse ghost>
+                    <Panel header="Advanced settings" key="advanced-settings">
+                      <div className={styles.createServiceSection}>
+                        <h2 className={styles.createServiceSectionTitle}>
+                          Restrict patient bookings to
+                        </h2>
+                        <div className={styles.patientBookings}>
+                          {patientBookings.map((option) => (
+                            <div
+                              key={option.type}
+                              className={
+                                option.selected
+                                  ? styles.patientBookingsSelected
+                                  : ''
+                              }
+                              onClick={() =>
+                                handleSelectPatientBookings(option)
+                              }
+                            >
+                              <div className={styles.patientBookingsChecked}>
+                                <CheckCircleFilled />
+                              </div>
+                              <div className={styles.patientBookingsTitle}>
+                                {option.type}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div className={styles.createServiceSection}>
+                        <h2 className={styles.createServiceSectionTitle}>
+                          Available on
+                        </h2>
+                        <div className={styles.availableOn}>
+                          {availableOn.map((option) => (
+                            <div
+                              className={styles.availableOnItem}
+                              key={option.weekDay}
+                            >
+                              <Checkbox
+                                defaultChecked={option.isAvailable}
+                                onChange={(e) =>
+                                  handleChangeAvailableOn(
+                                    option.weekDay,
+                                    e.target.checked
+                                  )
+                                }
+                              />
+                              <span>{option.weekDay}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </Panel>
+                  </Collapse>
+                </div>
+              </div>
+              <div className={styles.createServiceClientPathway}>1</div>
             </TabMenu>
           </div>
         </React.Fragment>
