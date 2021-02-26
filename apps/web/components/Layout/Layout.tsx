@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Layout as PabauLayout, LayoutProps, Offline } from '@pabau/ui'
 import Search from '../Search'
-import { Offline as OfflineProvider } from 'react-detect-offline'
+import { Online as OfflineProvider } from 'react-detect-offline'
 const onMessageType = (e) => {
   //add mutation for send message textbox
 }
