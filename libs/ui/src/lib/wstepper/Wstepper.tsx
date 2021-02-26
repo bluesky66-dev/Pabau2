@@ -31,15 +31,14 @@ export const Wstepper: React.FC<WStepperProps> = ({
 
   return (
     <div className={styles.container}>
-      <hr className={styles.line} />
-
-      <Stepper datasource={data} step={active} />
-
-      <hr className={styles.bottomline} />
+      <div className={styles.stepperContianer}>
+        <div>
+          <Stepper datasource={data} step={active} />
+        </div>
+      </div>
 
       {children}
 
-      {/* <div style={{ marginTop: '20px' }}></div> */}
       <Wizard
         onNext={() => setIndex(index + 1)}
         onPrev={() => setIndex(index - 1)}
