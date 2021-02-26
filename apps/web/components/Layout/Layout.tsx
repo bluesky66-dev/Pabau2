@@ -1,6 +1,13 @@
-import React, { FC } from 'react'
-import { Layout as PabauLayout, LayoutProps } from '@pabau/ui'
+import React, { FC, useEffect, useState } from 'react'
+import {
+  Layout as PabauLayout,
+  LayoutProps,
+  Notification,
+  NotificationType,
+} from '@pabau/ui'
+import { gql, useMutation } from '@apollo/client'
 import Search from '../Search'
+import Login from '../../pages/login'
 
 const onMessageType = (e) => {
   //add mutation for send message textbox
@@ -12,7 +19,13 @@ const onCreateChannel = (name, description, isPrivate) => {
 }
 
 const Layout: FC<LayoutProps> = ({ children, ...props }) => {
-  return (
+  const [authenticated, authenticate] = useState(false)
+  useEffect(() => {
+    if (localStorage.getItem('token') !== null) {
+      authenticate(true)
+    }
+  }, [authenticated])
+  return authenticated ? (
     <PabauLayout
       searchRender={() => <Search />}
       onCreateChannel={onCreateChannel}
@@ -21,6 +34,8 @@ const Layout: FC<LayoutProps> = ({ children, ...props }) => {
     >
       {children}
     </PabauLayout>
+  ) : (
+    <Login />
   )
 }
 

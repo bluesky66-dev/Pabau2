@@ -15,16 +15,16 @@ const server = new ApolloServer({
 });
 app.use(bodyParser.json());
 
-app.post('/login', async (req, res) => {
-  try{
-    const login = await new LoginHandler(req, res).handleRequest();
-    return res.json({
-      accessToken: login
-    });
-  } catch (error){
-    console.log(error)
-  }
-});
+// app.post('/login', async (req, res) => {
+//   try{
+//     const login = await new LoginHandler(req, res).handleRequest();
+//     return res.json({
+//       accessToken: login
+//     });
+//   } catch (error){
+//     console.log(error)
+//   }
+// });
 
 server.applyMiddleware({app})
 

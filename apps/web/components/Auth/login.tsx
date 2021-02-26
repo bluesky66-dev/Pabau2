@@ -1,24 +1,39 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import styles from '../../pages/login.module.less'
-import { Button } from '@pabau/ui'
+import { Button, Notification, NotificationType } from '@pabau/ui'
 import * as Yup from 'yup'
 import { Form, Input, Checkbox, SubmitButton } from 'formik-antd'
 import { Formik } from 'formik'
 import { EyeInvisibleOutlined, LinkedinFilled } from '@ant-design/icons'
 import { ReactComponent as GoogleIcon } from '../../assets/images/google.svg'
 import { ReactComponent as SSOIcon } from '../../assets/images/sso.svg'
+import { gql, useMutation } from '@apollo/client'
+import { router } from 'next/client'
+import { useRouter } from 'next/router'
 
 export interface LoginFormProps {
   email: string
   password: string
-  remember: boolean
+  remember?: boolean
 }
 
 interface LoginProps {
   handlePageShow: (page: string) => void
 }
 
+const LOGIN_MUTATION = gql`
+  mutation login($email: String!, $password: String!) {
+    login(username: $email, password: $password)
+  }
+`
+
 const LoginMain: FC<LoginProps> = ({ handlePageShow }) => {
+  const router = useRouter()
+  const [
+    login,
+    { loading: mutationLoading, error: mutationError },
+  ] = useMutation(LOGIN_MUTATION)
+
   return (
     <div>
       <div className={styles.signInForm}>
@@ -42,9 +57,19 @@ const LoginMain: FC<LoginProps> = ({ handlePageShow }) => {
               .required('Email is required'),
             password: Yup.string().required('Password is required'),
           })}
-          onSubmit={(value: LoginFormProps) => {
-            console.log(value)
-            handlePageShow('twoStepAuth')
+          onSubmit={async (value: LoginFormProps) => {
+            const { email, password } = value
+            const result = await login({
+              variables: {
+                email,
+                password,
+              },
+            })
+            if (!result) {
+              console.log('Wrong user/password')
+            }
+            localStorage.setItem('token', JSON.stringify(result))
+            router.push('/index')
           }}
           render={() => (
             <Form layout="vertical">

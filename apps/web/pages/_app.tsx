@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { AppProps } from 'next/app'
 import {
   ApolloClient,
@@ -17,15 +17,12 @@ import * as Icons from '@fortawesome/free-solid-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import Login from './login'
 require('../styles/global.less')
 require('../../../libs/ui/src/styles/antd.less')
 
 const cache = new InMemoryCache()
 const GRAPHQL_ENDPOINT = 'wss://api.new.pabau.com/v1/graphql'
-const GRAPHQL_HTTP_ENDPOINT =
-  process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT ||
-  'https://api.new.pabau.com/v1/graphql'
+const GRAPHQL_HTTP_ENDPOINT = 'http://host.docker.internal:4000/graphql'
 
 const iconList = Object.keys(Icons)
   .filter((key) => key !== 'fas' && key !== 'prefix')
@@ -148,8 +145,7 @@ export default function CustomApp({
   Component,
   pageProps,
 }: AppProps): JSX.Element {
-  const [authenticated, authenticate] = useState(true)
-  return authenticated ? (
+  return (
     <ApolloProvider client={client}>
       <style jsx global>{`
         @font-face {
@@ -170,7 +166,5 @@ export default function CustomApp({
       `}</style>
       <Component {...pageProps} />
     </ApolloProvider>
-  ) : (
-    <Login />
   )
 }
