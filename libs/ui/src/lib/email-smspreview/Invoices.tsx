@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import { InvoicesProps, CancelAClassBookingProps } from './EmailSMSPreview'
+import { InvoicesProps, CancelAClassBookingProps } from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
+import styles from './EmailSmsPreview.module.less'
 
 export const Invoices: FC<CancelAClassBookingProps & InvoicesProps> = ({
   message,

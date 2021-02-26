@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import { EmailSMSPreviewProps, ReminderForClassProps } from './EmailSMSPreview'
+import { EmailSMSPreviewProps, ReminderForClassProps } from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
+import styles from './EmailSmsPreview.module.less'
 
 export const ReminderForClass: FC<
   ReminderForClassProps & EmailSMSPreviewProps
