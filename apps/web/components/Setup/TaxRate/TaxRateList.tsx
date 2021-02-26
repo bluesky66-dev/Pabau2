@@ -148,6 +148,7 @@ export function TaxRate({ listQuery, onCreateTaxRate }: TaxRateProps) {
         total: aggregateData?.aggregate.count,
         showingRecords: data?.length,
       })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, aggregateData])
 
   const onRowClick = (data) => {
@@ -261,7 +262,7 @@ export function TaxRate({ listQuery, onCreateTaxRate }: TaxRateProps) {
           draggable={true}
           columns={taxRateColumns}
           loading={loading}
-          dataSource={data?.map((e: { id: any }) => ({ key: e.id, ...e }))}
+          dataSource={data?.map((e: { id: string }) => ({ key: e.id, ...e }))}
           onRowClick={onRowClick}
           onAddTemplate={onCreateTaxRate}
           noDataText="block type"
