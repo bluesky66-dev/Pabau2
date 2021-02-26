@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
-import { EmailSMSPreviewProps, ClassRescheduledProps } from './EmailSMSPreview'
+import { EmailSMSPreviewProps, ClassRescheduledProps } from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
-import { Button } from '../button/button'
+import styles from './EmailSmsPreview.module.less'
+import { Button } from '../button/Button'
 
 export const RequestFeedBack: FC<
   ClassRescheduledProps & EmailSMSPreviewProps

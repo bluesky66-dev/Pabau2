@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
-import { BookedOntoClassProps, EmailSMSPreviewProps } from './EmailSMSPreview'
+import { BookedOntoClassProps, EmailSMSPreviewProps } from './EmailSmsPreview'
 import { Col, Divider, Row } from 'antd'
 import { ReactComponent as Calendar } from '../../assets/images/calendar.svg'
-import styles from './EmailSMSPreview.module.less'
+import styles from './EmailSmsPreview.module.less'
 
 export const BookedOntoClass: FC<
   BookedOntoClassProps & EmailSMSPreviewProps
