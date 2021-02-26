@@ -24,8 +24,13 @@ import styles from './issuing-company.module.less'
 
 /* eslint-disable graphql/template-strings */
 const LIST_QUERY = gql`
-  query issuing_company($offset: Int, $limit: Int) {
-    issuing_company(offset: $offset, limit: $limit, order_by: { order: desc }) {
+  query issuing_company($isActive: Boolean = true, $offset: Int, $limit: Int) {
+    issuing_company(
+      offset: $offset
+      limit: $limit
+      order_by: { order: desc }
+      where: { is_active: { _eq: $isActive } }
+    ) {
       __typename
       id
       name
@@ -46,8 +51,8 @@ const LIST_QUERY = gql`
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query issuing_company_aggregate {
-    issuing_company_aggregate {
+  query issuing_company_aggregate($isActive: Boolean = true) {
+    issuing_company_aggregate(where: { is_active: { _eq: $isActive } }) {
       aggregate {
         count
       }
@@ -267,6 +272,7 @@ export const IssuingCompany: NextPage = () => {
         NotificationType.success,
         `Success! You have successfully updated an issuing company`
       )
+      setShowModal(false)
     },
     onError(err) {
       Notification(
@@ -368,11 +374,6 @@ export const IssuingCompany: NextPage = () => {
     },
   })
 
-  const handleSaveAsDraft = async () => {
-    await formik.setFieldValue('isDraft', true)
-    await formik.handleSubmit()
-  }
-
   const showDeleteConfirmDialog = () => {
     setShowDeleteModal(true)
   }
@@ -386,13 +387,8 @@ export const IssuingCompany: NextPage = () => {
     setFocused({ general: false, address: false, financial: false })
     setShowModal(true)
   }
-  const onChecked = () => {
-    onchange(!formik.values.vatRegistered, 'vatRegistered')
-  }
-
-  const handleSelectCountry = (value: string) => {
-    onchange(value, 'country')
-    onchange('', 'city')
+  const onChecked = (value: boolean, key: string) => {
+    formik.setFieldValue(key, value)
   }
 
   const handleFocusElement = (name: string, status: boolean) => {
@@ -415,11 +411,7 @@ export const IssuingCompany: NextPage = () => {
   }
 
   const showActionButtons = () => {
-    if (!isMobile) {
-      return !editPage.id ? 'Save as draft' : 'Delete'
-    } else {
-      return !editPage.id ? 'Draft' : <DeleteFilled />
-    }
+    return !isMobile ? 'Delete' : <DeleteFilled />
   }
 
   const headerContent = () => {
@@ -429,17 +421,19 @@ export const IssuingCompany: NextPage = () => {
         <div className={styles.issueRegister}>
           <div className={styles.vatReg}>
             <small>VAT registered</small>{' '}
-            <Switch checked={formik.values.vatRegistered} onClick={onChecked} />
-          </div>
-          <div className={styles.statusBox}>
-            <Checkbox
-              checked={formik.values.isActive}
-              onChange={(e) =>
-                formik.setFieldValue('isActive', e.target.checked)
+            <Switch
+              checked={formik.values.vatRegistered}
+              onClick={() =>
+                onChecked(!formik.values.vatRegistered, 'vatRegistered')
               }
-            >
-              <span>Active</span>
-            </Checkbox>
+            />
+          </div>
+          <div className={styles.active}>
+            <small>Active</small>{' '}
+            <Switch
+              checked={formik.values.isActive}
+              onClick={() => onChecked(!formik.values.isActive, 'isActive')}
+            />
           </div>
           <div className={styles.btnCancel}>
             <Button
@@ -449,16 +443,13 @@ export const IssuingCompany: NextPage = () => {
               {!isMobile ? 'Cancel' : <CloseOutlined />}
             </Button>
           </div>
-          <div className={styles.btnDraft}>
-            <Button
-              type="default"
-              onClick={
-                !editPage.id ? handleSaveAsDraft : showDeleteConfirmDialog
-              }
-            >
-              {showActionButtons()}
-            </Button>
-          </div>
+          {editPage.id && (
+            <div className={styles.btnDelete}>
+              <Button type="default" onClick={showDeleteConfirmDialog}>
+                {showActionButtons()}
+              </Button>
+            </div>
+          )}
           <div>
             <Button type="primary" onClick={() => formik.handleSubmit()}>
               {!editPage.id ? 'Create' : 'Save'}
@@ -533,7 +524,7 @@ export const IssuingCompany: NextPage = () => {
                       ? formik.values.country
                       : 'Select country'
                   }
-                  onChange={(e) => handleSelectCountry(e)}
+                  onChange={(e) => onchange(e, 'country')}
                 >
                   {createOptions()}
                 </Select>
@@ -626,7 +617,7 @@ export const IssuingCompany: NextPage = () => {
         editQuery={EDIT_MUTATION}
         aggregateQuery={LIST_AGGREGATE_QUERY}
         updateOrderQuery={UPDATE_ORDER_MUTATION}
-        addFilter={false}
+        addFilter={true}
         createPage={true}
         createPageOnClick={createPageOnClick}
         setEditPage={handleSetEditPage}
