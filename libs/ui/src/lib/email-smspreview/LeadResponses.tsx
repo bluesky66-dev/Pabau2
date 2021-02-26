@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import { EmailSMSPreviewProps, LeadResponsesProps } from './EmailSMSPreview'
+import { EmailSMSPreviewProps, LeadResponsesProps } from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
+import styles from './EmailSmsPreview.module.less'
 
 export const LeadResponses: FC<LeadResponsesProps & EmailSMSPreviewProps> = ({
   message,

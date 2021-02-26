@@ -9,7 +9,7 @@ import { Button } from '@pabau/ui'
 import styles from './Menu.module.less'
 import classNames from 'classnames'
 import Link from 'next/link'
-import { sidebarMenu } from './sidebarMenu'
+import { sidebarMenu } from './SidebarMenu'
 const { SubMenu } = AntMenu
 const { Sider } = Layout
 
