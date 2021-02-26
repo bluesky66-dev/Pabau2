@@ -285,7 +285,11 @@ const InnerElement: FC<P> = ({
                       marginLeft: 'auto',
                       marginRight: 'auto',
                     }}
-                    src={innerDrawingIcon}
+                    src={
+                      formData.arrItems?.length > 0
+                        ? `https://prelive-crm.pabau.com${formData.arrItems[0].name}`
+                        : innerDrawingIcon
+                    }
                     alt=""
                   />
                 )}

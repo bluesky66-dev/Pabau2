@@ -12,7 +12,7 @@ const { TabPane } = Tabs
 
 const MedicalFormBuilder: FC<PreviewData> = ({ previewData }) => {
   return (
-    <div className={styles.medicalFormBody}>
+    <>
       <MedicalFormInfo formName="IPL Treatment Record (Clone)" />
       <MedicalFormSetting />
       <Tabs defaultActiveKey="1" centered className={styles.medicalFormMainTab}>
@@ -40,7 +40,7 @@ const MedicalFormBuilder: FC<PreviewData> = ({ previewData }) => {
           <MedicalFormPreview />
         </TabPane>
       </Tabs>
-    </div>
+    </>
   )
 }
 

@@ -1,12 +1,18 @@
 import { Col, Row } from 'antd'
-import React, { FC, useState } from 'react'
+import { Base64 } from 'js-base64'
+import React, { FC, useEffect, useReducer, useState } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { v4 as uuidv4 } from 'uuid'
 import RightSidebar from '../rightsidebar/RightSidebar'
 import styles from './MedicalFormBuilder.module.less'
 import MedicalFormEditLeft from './MedicalFormEditLeft'
 import MedicalFormEditMain from './MedicalFormEditMain'
-import { PreviewData } from './MedicalFormInterface'
+import {
+  ArrayItem,
+  defaultFormValue,
+  OptionType,
+  PreviewData,
+} from './MedicalFormInterface'
 
 const medicalForms = [
   { id: 0, formType: 'basic', formName: 'basic_heading' },
@@ -38,6 +44,33 @@ const medicalForms = [
   { id: 26, formType: 'custom', formName: 'custom_referredby' },
   { id: 27, formType: 'custom', formName: 'custom_telephonenumber' },
 ]
+const previewMapping = [
+  { heading: 'basic_heading' },
+  { staticText: 'basic_longanswer' },
+  { input_text: 'basic_shortanswer' },
+  { team: 'basic_shortanswer' },
+  { textarea: 'basic_textblock' },
+  { checkbox: 'basic_multiplechoice' },
+  { radio: 'basic_singlechoice' },
+  { select: 'basic_dropdown' },
+  { image: 'basic_drawing' },
+  { staticImage: 'basic_drawing' },
+  { signature: 'basic_signature' },
+  { cl_drugs: 'basic_drugs' },
+  { labs_tests: 'basic_labtests' },
+  { vaccine_scheduler: 'basic_vaccinescheduler' },
+  { vaccine_history: 'basic_vaccinehistory' },
+  { travel_destination: 'basic_traveldestination' },
+  { btn_medical_condition: 'basic_conditions' },
+  { diagram: 'empty' },
+  { facediagram: 'empty' },
+  { diagram_mini: 'empty' },
+  { photo_and_drawer: 'empty' },
+  { epaper: 'empty' },
+  { custom_photo_and_drawer: 'empty' },
+  { cl_services: 'empty' },
+  { history_data: 'empty' },
+]
 
 const reorder = (list, startIndex, endIndex) => {
   const [removed] = list.splice(startIndex, 1)
@@ -45,58 +78,125 @@ const reorder = (list, startIndex, endIndex) => {
   return list
 }
 
-const copy = (source, destination, droppableSource, endIndex) => {
-  const item = source[droppableSource.index]
+const copy = (source, destination, droppableSourceId, endIndex, formInfo) => {
+  const item = source[droppableSourceId]
   destination.splice(endIndex, 0, {
     ...item,
     id: uuidv4(),
-    txtQuestion: '',
-    txtBlock: '',
-    txtInputType: '',
-    arrItems: [],
-    required: false,
+    txtQuestion: formInfo.txtQuestion,
+    txtBlock: formInfo.txtBlock,
+    txtInputType: formInfo.txtInputType,
+    arrItems: formInfo.arrItems,
+    required: formInfo.required,
   })
   return destination
 }
 
-const MedicalFormEdit: FC<PreviewData> = ({ previewData }) => {
-  console.log('previewData =', previewData)
-  // let previewDataArray = []
-  // if (typeof previewData != 'undefined' && previewData !== '') {
-  //   previewDataArray = JSON.parse(Base64.decode(previewData))
-  // }
-  // console.log('previewDataArray =', previewDataArray)
+const getFormInfo = (form) => {
+  console.log('form =', form)
+  let name = ''
+  let label = ''
+  if (form.title) {
+    if (typeof form.title === 'object') {
+      const obj = Base64.decode(Base64.encode(form.title))
+      form.title = obj[1]['value'].trim()
+    } else {
+      form.title = form.title.trim()
+    }
+  }
+  if (form.title) {
+    name = form.title
+  } else {
+    if (typeof form.values === 'object') {
+      const obj = Base64.decode(Base64.encode(form.title))
+      name = obj[1]['value'].trim()
+    } else {
+      name = form.values
+    }
+  }
 
-  const [draggedForms, setDraggedForms] = useState([])
-  const [selectedForm, setSelectedForm] = useState({
-    id: '',
-    formType: '',
-    formName: '',
-    txtQuestion: '',
-    txtBlock: '',
+  name = name ? name.toLowerCase().trim() : ''
+  label = form.title ? form.title.trim() : ''
+  label = label === '' && form.values ? form.values.trim() : label
+
+  if (form.cssClass === 'cl_services') label = 'Services'
+  else if (form.cssClass === 'cl_drugs') label = 'Drugs'
+  else if (form.cssClass === 'labs_tests') label = 'Labs Tests'
+  else if (form.cssClass === 'vaccine_scheduler') label = ''
+
+  let txtBlockValue = ''
+  if (form.cssClass === 'textarea') {
+    txtBlockValue = form.defaults ? form.defaults : ''
+  }
+
+  let arrItemsValue: OptionType[] = []
+  if (
+    form.cssClass === 'checkbox' ||
+    form.cssClass === 'radio' ||
+    form.cssClass === 'select' ||
+    form.cssClass === 'staticImage' ||
+    form.cssClass === 'image'
+  ) {
+    const arrayItems: ArrayItem[] = form.values
+    arrItemsValue = Object.entries(arrayItems).map(([key, value]) => ({
+      id: Number.parseInt(key),
+      name: value.value,
+      editing: false,
+    }))
+  }
+
+  return {
+    txtQuestion: label,
+    txtBlock: txtBlockValue,
     txtInputType: '',
-    arrItems: [],
-    required: false,
-  })
+    arrItems: arrItemsValue,
+    required: form.required === 'true' ? true : false,
+  }
+}
+
+const MedicalFormEdit: FC<PreviewData> = ({ previewData }) => {
+  const [, forceUpdate] = useReducer((x) => x + 1, 0)
+  const [draggedForms, setDraggedForms] = useState([])
+  const [selectedForm, setSelectedForm] = useState(defaultFormValue)
   const [displaySettingBar, setDisplaySettingBar] = useState(false)
+
+  let previewDataArray = []
+  useEffect(() => {
+    setDraggedForms([])
+    if (typeof previewData != 'undefined' && previewData !== '') {
+      previewDataArray = JSON.parse(Base64.decode(previewData))
+      previewDataArray['form_structure']?.map((form) => {
+        console.log('preview form data =', form)
+        let formName = ''
+        const mappingInfo = previewMapping.filter(
+          (item) => Object.keys(item)[0] === form.cssClass
+        )
+        if (mappingInfo?.length > 0) {
+          formName = mappingInfo[0][form.cssClass]
+          const mappingForm = medicalForms.filter(
+            (item) => item.formName === formName
+          )
+          if (mappingForm?.length > 0) {
+            copy(
+              medicalForms,
+              draggedForms ? draggedForms : [],
+              mappingForm[0].id,
+              draggedForms ? draggedForms.length : 0,
+              getFormInfo(form)
+            )
+          }
+        }
+      })
+      setDraggedForms(draggedForms)
+      forceUpdate()
+    }
+  }, [previewData])
+
   const handlingFormSetting = (componentID) => {
     setDisplaySettingBar(componentID === '' ? false : true)
     if (componentID !== '') {
       const sel_form = draggedForms.filter((item) => item['id'] === componentID)
-      setSelectedForm(
-        sel_form
-          ? sel_form[0]
-          : {
-              id: '',
-              formType: '',
-              formName: '',
-              txtQuestion: '',
-              txtBlock: '',
-              txtInputType: '',
-              arrItems: [],
-              required: false,
-            }
-      )
+      setSelectedForm(sel_form ? sel_form[0] : defaultFormValue)
     }
   }
   const handlingDeleteForm = (componentID) => {
@@ -118,12 +218,24 @@ const MedicalFormEdit: FC<PreviewData> = ({ previewData }) => {
           break
         case 'LeftSideBasic':
           setDraggedForms((state) =>
-            copy(medicalForms, state, source, destination.index)
+            copy(
+              medicalForms,
+              state,
+              source.index,
+              destination.index,
+              defaultFormValue
+            )
           )
           break
         case 'LeftSideCustom':
           setDraggedForms((state) =>
-            copy(medicalForms, state, source, destination.index)
+            copy(
+              medicalForms,
+              state,
+              source.index,
+              destination.index,
+              defaultFormValue
+            )
           )
           break
 
