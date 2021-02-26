@@ -94,7 +94,7 @@ const copy = (source, destination, droppableSourceId, endIndex, formInfo) => {
 
 const getFormInfo = (form) => {
   console.log('form =', form)
-  let name = ''
+  // let name = ''
   let label = ''
   if (form.title) {
     if (typeof form.title === 'object') {
@@ -104,16 +104,16 @@ const getFormInfo = (form) => {
       form.title = form.title.trim()
     }
   }
-  if (form.title) {
-    name = form.title
-  } else {
-    if (typeof form.values === 'object') {
-      const obj = Base64.decode(Base64.encode(form.title))
-      name = obj[1]['value'].trim()
-    } else {
-      name = form.values
-    }
-  }
+  // if (form.title) {
+  //   name = form.title
+  // } else {
+  //   if (typeof form.values === 'object') {
+  //     const obj = Base64.decode(Base64.encode(form.title))
+  //     name = obj[1]['value'].trim()
+  //   } else {
+  //     name = form.values
+  //   }
+  // }
 
   // name = name ? name.toLowerCase().trim() : ''
   label = form.title ? form.title.trim() : ''
@@ -185,6 +185,7 @@ const MedicalFormEdit: FC<PreviewData> = ({ previewData }) => {
             )
           }
         }
+        return
       })
       setDraggedForms(draggedForms)
       forceUpdate()
