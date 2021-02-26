@@ -2,8 +2,8 @@ import React, { FC } from 'react'
 import { Modal } from 'antd'
 import { Button } from '@pabau/ui'
 
-import installationModalImage1 from '../../assets/images/installationModalImage.png'
-import installationModalWindowImage1 from '../../assets/images/installationModalWindowImage.png'
+import { ReactComponent as ModalImage } from '../../assets/images/installationModalImage.svg'
+import { ReactComponent as ModalWindowImage } from '../../assets/images/installationModalWindowImage.svg'
 
 import styles from './InstallationModal.module.less'
 
@@ -22,8 +22,8 @@ export interface InstallationModalProps {
   longDescription?: string
   mobileViewDescription?: string
   webViewDescription?: string
-  installationModalImage?: string
-  installationModalWindowImage?: string
+  installationModalImage?: JSX.Element
+  installationModalWindowImage?: JSX.Element
   installed?: number
   onCancel?: () => void
   onSubmit?: () => void
@@ -39,8 +39,8 @@ export const InstallationModal: FC<InstallationModalProps> = ({
   longDescription,
   mobileViewDescription,
   webViewDescription,
-  installationModalImage = installationModalImage1,
-  installationModalWindowImage = installationModalWindowImage1,
+  installationModalImage = <ModalImage />,
+  installationModalWindowImage = <ModalWindowImage />,
   installed,
   onCancel,
   onSubmit,
@@ -125,24 +125,14 @@ export const InstallationModal: FC<InstallationModalProps> = ({
       </div>
       <div className={styles.driveWrapper}>
         <div className={styles.conversationWrapper}>
-          <div className={styles.imgWrap}>
-            <img
-              alt={title + ' - Mobile preview'}
-              src={installationModalImage}
-            />
-          </div>
+          <div className={styles.imgWrap}>{installationModalImage}</div>
           <div className={styles.imgRightText}>
             <h2>Drive more webinar registration</h2>
             <p>{mobileViewDescription}</p>
           </div>
         </div>
         <div className={styles.conversationWrapper}>
-          <div className={styles.imgWrap}>
-            <img
-              alt={title + ' - Window preview'}
-              src={installationModalWindowImage}
-            />
-          </div>
+          <div className={styles.imgWrap}>{installationModalWindowImage}</div>
           <div className={styles.imgRightText}>
             <h2>Include webinar details in a conversation</h2>
             <p>{webViewDescription}</p>

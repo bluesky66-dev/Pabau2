@@ -1,8 +1,8 @@
 import React from 'react'
 import InstallationModalComponent from './InstallationModal'
 import logo from '../../assets/images/logo.svg'
-import installationModalImage from '../../assets/images/installationModalImage.svg'
-import installationModalWindowImage from '../../assets/images/installationModalWindowImage.svg'
+import { ReactComponent as InstallationModalImage } from '../../assets/images/installationModalImage.svg'
+import { ReactComponent as InstallationModalWindowImage } from '../../assets/images/installationModalWindowImage.svg'
 import message from '../../assets/images/message.svg'
 import send from '../../assets/images/send.svg'
 import inbox from '../../assets/images/inbox.svg'
@@ -23,8 +23,8 @@ export default {
       'Mobile View Description Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.',
     webViewDescription:
       'Web View Description Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    installationModalImage,
-    installationModalWindowImage,
+    installationModalImage: <InstallationModalImage />,
+    installationModalWindowImage: <InstallationModalWindowImage />,
     installed: 0,
     worksWith: [
       {
