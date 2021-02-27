@@ -129,7 +129,7 @@ const notificationData = {
       description: 'Automatically sends to clients when a class is rescheduled',
       icon: <SyncOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/class-rescheduled',
       disabled: true,
     },
     {

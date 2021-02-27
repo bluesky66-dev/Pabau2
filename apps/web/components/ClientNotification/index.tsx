@@ -204,7 +204,7 @@ const Index: FC<P> = forwardRef(
               standardTapIndex={standardTapIndex}
               activeSocialIcons={activeSocialIcons}
             />
-          ) : type === 'reschedule' ? (
+          ) : type === 'reschedule' || type === 'classReschedule' ? (
             <RescheduleAppointmentPreview
               requestConfirm={requestConfirmation}
               allowRescheduling={allowRescheduling}
