@@ -47,7 +47,7 @@ const notificationData = {
         'Automatically sends to clients when their appointment start time is changed',
       icon: <SyncOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/rescheduled-appointment',
       disabled: true,
     },
     {

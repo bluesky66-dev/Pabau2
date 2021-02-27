@@ -7,9 +7,11 @@ import {
   Notification,
   BreadcrumbItemInterface,
 } from '@pabau/ui'
+import { useFormik } from 'formik'
 import styles from './style.module.less'
 import CommonHeader from '../setup/common-header'
 import { DownOutlined, LeftOutlined } from '@ant-design/icons'
+import * as Yup from 'yup'
 
 const { Title } = Typography
 
@@ -24,48 +26,40 @@ enum NotificationType {
 
 interface p {
   setIndexTab: number
-  showNotification(): void
-  setEmail(val: string): void
+  handleNotificationSubmit?(val: string): void
   title: string
   breadcrumbItems: BreadcrumbItemInterface[]
 }
 
 const CommonNotificationHeader: FC<p> = ({
   setIndexTab,
-  showNotification,
   breadcrumbItems,
   title,
-  setEmail,
+  handleNotificationSubmit,
 }) => {
   const [sendEmail, setSendEmail] = React.useState(false)
-  const [validEmail, setValidEmail] = React.useState(false)
   const [visible, setVisible] = React.useState(false)
-
-  function handleSendEmailBtn(value) {
-    setSendEmail(value)
-  }
 
   const handleVisibleChange = (flag) => {
     setVisible(flag)
   }
 
   const handleShowNotification = () => {
-    showNotification()
     setSendEmail(false)
   }
 
-  function isEmail(search: string) {
-    const regexp = new RegExp(
-      /* eslint-disable-next-line */
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    )
-
-    const searchFind = regexp.test(search)
-    setValidEmail(searchFind)
-    if (searchFind) {
-      setEmail(search)
-    }
-  }
+  const sendEmailForm = useFormik({
+    initialValues: {
+      email: '',
+    },
+    validationSchema: Yup.object({
+      email: Yup.string().email('Invalid email address'),
+    }),
+    onSubmit: (val) => {
+      handleNotificationSubmit?.(val.email)
+      setSendEmail(false)
+    },
+  })
 
   const menu = (
     <Menu className={styles.menuListUl}>
@@ -127,7 +121,7 @@ const CommonNotificationHeader: FC<p> = ({
             className={styles.notificationSendButton}
             style={{ margin: '1em 8px', height: '40px', fontSize: '14px' }}
             type="default"
-            onClick={() => handleSendEmailBtn(!sendEmail)}
+            onClick={() => setSendEmail(!sendEmail)}
           >
             {setIndexTab === 1 ? 'Send Test Email' : 'Send Test SMS'}
           </Button>
@@ -139,52 +133,61 @@ const CommonNotificationHeader: FC<p> = ({
             wrapClassName={styles.modal}
             footer={null}
           >
-            <div>
-              {setIndexTab === 1 ? (
-                <div>
-                  <p style={{ color: '#9292A3' }}>Email</p>
-                  <Input
-                    placeholder="client@email.com"
-                    onChange={(event) => isEmail(event.target.value)}
-                  />
-                </div>
-              ) : (
-                <div>
-                  <PhoneNumberInput
-                    countryCode={'GB'}
-                    onChange={(val) => {
-                      console.log(val)
-                    }}
-                  />
-                </div>
-              )}
-              <div className={styles.footerBtnGroup}>
-                <Button
-                  type="default"
-                  style={{ marginRight: '10px' }}
-                  onClick={() => setSendEmail(false)}
-                >
-                  Cancel
-                </Button>
-                {setIndexTab === 1 && (
-                  <Button
-                    type="primary"
-                    disabled={validEmail ? false : true}
-                    onClick={() => handleShowNotification()}
-                  >
-                    Send
-                  </Button>
+            <form onSubmit={sendEmailForm.handleSubmit}>
+              <div>
+                {setIndexTab === 1 ? (
+                  <div>
+                    <p style={{ color: '#9292A3' }}>Email</p>
+                    <Input
+                      placeholder="client@email.com"
+                      onChange={sendEmailForm.handleChange('email')}
+                    />
+                  </div>
+                ) : (
+                  <div>
+                    <PhoneNumberInput
+                      countryCode={'GB'}
+                      onChange={(val) => {
+                        console.log(val)
+                      }}
+                    />
+                  </div>
                 )}
-                {setIndexTab === 2 && (
+                <div className={styles.footerBtnGroup}>
                   <Button
-                    type="primary"
-                    onClick={() => handleShowNotification()}
+                    type="default"
+                    style={{ marginRight: '10px' }}
+                    onClick={() => setSendEmail(false)}
                   >
-                    Send
+                    Cancel
                   </Button>
-                )}
+                  {setIndexTab === 1 && (
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      disabled={
+                        sendEmailForm.errors.email === undefined &&
+                        sendEmailForm.values.email !== ''
+                          ? false
+                          : true
+                      }
+                      //onClick={() => handleShowNotification()}
+                    >
+                      Send
+                    </Button>
+                  )}
+                  {setIndexTab === 2 && (
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      onClick={() => handleShowNotification()}
+                    >
+                      Send
+                    </Button>
+                  )}
+                </div>
               </div>
-            </div>
+            </form>
           </Modal>
           <Button
             className={styles.notificationSaveButton}
