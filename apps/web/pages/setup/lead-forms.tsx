@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Breadcrumb, WStepper, StepperItem, MobileHeader } from '@pabau/ui'
+import { Breadcrumb, Wstepper, StepperItem, MobileHeader } from '@pabau/ui'
 import styles from './lead-forms.module.less'
 import LeadSettings from './lead-capture/lead-setting'
 import LeadIntegration from './lead-capture/lead-integration'
@@ -126,7 +126,7 @@ export const LeadForms: React.FC = () => {
             />
             <Title>Lead Capture</Title>
           </div>
-          <WStepper
+          <Wstepper
             data={activeStepper === 'API' ? apiStepper : formStepper}
             active={activeStep}
             disableNextStep={
@@ -161,7 +161,7 @@ export const LeadForms: React.FC = () => {
                 {allFormSteps[activeStep] === 'Result' && <LeadFormResult />}
               </>
             )}
-          </WStepper>
+          </Wstepper>
         </div>
       </Layout>
     </>
