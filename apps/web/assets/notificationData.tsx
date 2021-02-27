@@ -121,7 +121,7 @@ const notificationData = {
         "Automatically sends to clients when they don't show for a class",
       icon: <UserDeleteOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/class-noshow',
       disabled: true,
     },
     {

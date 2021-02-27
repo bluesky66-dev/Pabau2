@@ -180,7 +180,7 @@ const Index: FC<P> = forwardRef(
               informationMessage={informationMessage}
               type={type}
             />
-          ) : type === 'noShowAppointment' ? (
+          ) : type === 'noShowAppointment' || type === 'missedAClass' ? (
             <NoShowAppointmentPreview
               standardTapIndex={standardTapIndex}
               backGroundColor={backGroundColor}
