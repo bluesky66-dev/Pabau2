@@ -8,6 +8,15 @@
   left: 50%;
   transform: translateX(-50%);
   top: 60px;
+  display: flex;
+    align-items: center;
+    max-width: 90%;
+}
+.offlineDiv p{
+  margin-bottom: 0;
+  width: 291px;
+  white-space: nowrap;
+  max-width: 100%;
 }
 .reconnectBtn {
   color: #fff;
@@ -19,4 +28,20 @@
   padding: 4px 15px;
   border-radius: 5px;
   margin-left: 10px;
+  min-width: 115px;
+}
+
+@media screen and (max-width:490px){
+  .offlineDiv p{
+    white-space: pre-wrap;
+    margin-bottom: 5px;
+    font-size: 10px;
+    text-align: center;
+  }
+  .offlineDiv{
+    flex-direction: column;
+  }
+  .reconnectBtn{
+    font-size: 10px;
+  }
 }

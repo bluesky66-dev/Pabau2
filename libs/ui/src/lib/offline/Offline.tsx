@@ -26,7 +26,9 @@ export const Offline: FC<OfflineProps> = (props) => {
   }, [setTime, props.time])
   return (
     <div className={styles.offlineDiv}>
-      {message} {time} seconds...
+      <p>
+        {message} {time} seconds...
+      </p>
       <button type="button" className={styles.reconnectBtn}>
         {buttonLabel}
         <LoadingOutlined
