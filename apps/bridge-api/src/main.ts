@@ -2,7 +2,6 @@ import { ApolloServer } from 'apollo-server-express'
 import express from 'express';
 import { schema } from './schema'
 import { createContext } from './context'
-import bodyParser from 'body-parser'
 
 const PORT = 4000;
 const app = express();
@@ -11,7 +10,6 @@ const server = new ApolloServer({
   context: createContext,
   tracing: true,
 });
-app.use(bodyParser.json());
 
 server.applyMiddleware({app})
 
