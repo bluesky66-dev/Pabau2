@@ -74,6 +74,9 @@ const NoShowAppointmentStory = ({
   smsGreeting,
   smsMessage,
   smsFooterText,
+  buttonColor = '',
+  closingText,
+  signatureBlock,
 }: PropsWithChildren<EmailSMSPreviewProps & NoShowAppointmentProps>) => (
   <EmailSmsPreview
     greeting={greeting}
@@ -91,6 +94,9 @@ const NoShowAppointmentStory = ({
       contactNumber={contactNumber}
       footerContact={footerContact}
       isFooterText={isFooterText}
+      buttonColor={buttonColor}
+      closingText={closingText}
+      signatureBlock={signatureBlock}
     />
   </EmailSmsPreview>
 )
@@ -109,6 +115,8 @@ NoShowAppointment1.args = {
   footerText:
     'Looking forward to hearing from you soon,<br/>Your friends at The Clinic',
   isFooterText: true,
+  closingText: 'Looking forward to hearing from you soon',
+  signatureBlock: 'Your friends at The Clinic',
   smsGreeting: 'Hi Anna, sorry you missed your appointment!',
   smsMessage:
     'We hope everything is okay with you. We had you scheduled to see Dr. Christine today at 11:00 but unfortunately, you didn\'t show up. Please get back in touch on <span style="color: #00A1E1;">+44 000 987 507</span> to reschedule',
@@ -184,6 +192,7 @@ const cancelledAClassBookingStory = ({
   smsGreeting,
   smsMessage,
   smsFooterText,
+  buttonColor = '',
 }: PropsWithChildren<EmailSMSPreviewProps & CancelAClassBookingProps>) => (
   <EmailSmsPreview
     greeting={greeting}
@@ -199,6 +208,7 @@ const cancelledAClassBookingStory = ({
       consultationDetail={consultationDetail}
       address={address}
       message={message}
+      buttonColor={buttonColor}
     />
   </EmailSmsPreview>
 )

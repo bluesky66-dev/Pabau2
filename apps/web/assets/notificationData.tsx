@@ -30,7 +30,7 @@ const notificationData = {
         'Automatically sends to clients when they book their appointment',
       icon: <ScheduleOutlined />,
       smartDelivery: true,
-      link: null,
+      link: '/client-notifications/new-appointment',
       disabled: true,
     },
     {
@@ -38,7 +38,7 @@ const notificationData = {
       description: 'Automatically sends to clients ahead of their appointment',
       icon: <BellOutlined />,
       smartDelivery: true,
-      link: null,
+      link: '/client-notifications/appointment-reminder',
       disabled: true,
     },
     {
@@ -65,7 +65,7 @@ const notificationData = {
         'Automatically sends to clients when an appointment is cancelled',
       icon: <CloseCircleOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/cancelled-appointment',
       disabled: true,
     },
     {
@@ -74,7 +74,7 @@ const notificationData = {
         'Automatically sends to clients when an appointment is marked as no show',
       icon: <UserDeleteOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/noshow-appointment',
       disabled: true,
     },
     {
@@ -112,7 +112,7 @@ const notificationData = {
         'Automatically sends to clients when they cancel a class booking',
       icon: <CloseCircleOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/cancelled-class-booking',
       disabled: true,
     },
     {
