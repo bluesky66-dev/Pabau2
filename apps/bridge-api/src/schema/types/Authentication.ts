@@ -1,6 +1,6 @@
 import { extendType, nonNull, stringArg } from 'nexus';
 import { AuthenticationHandler } from "../../app/authentication/AuthenticationHandler";
-import { Context } from "../../types";
+import { Context } from "../../context";
 import { LoginInputDto } from "../../app/authentication/dto";
 
 export const Authentication = extendType({
@@ -13,11 +13,11 @@ export const Authentication = extendType({
         password: nonNull(stringArg())
       },
       async resolve(_root, loginInput:LoginInputDto, ctx:Context) {
-        if(!loginInput.username || loginInput.password){
+        if(!loginInput.username || !loginInput.password){
           throw new Error("Unauthorized access")
         }
         try{
-          return new AuthenticationHandler(ctx, loginInput).handleLoginRequest()
+          return await new AuthenticationHandler(ctx, loginInput).handleLoginRequest()
         } catch {
           throw new Error("Unauthorized access")
         }

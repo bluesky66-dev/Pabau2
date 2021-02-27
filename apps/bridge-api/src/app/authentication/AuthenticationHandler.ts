@@ -1,7 +1,8 @@
 import { LoginInputDto, JwtPayloadDto, UserDto as User } from "./dto";
 import jwt from 'jsonwebtoken'
-import { Context } from "../../types";
+import { Context } from "../../context";
 import * as crypto from "crypto";
+import { BinaryToTextEncoding } from "crypto";
 
 export class AuthenticationHandler {
 
@@ -11,12 +12,11 @@ export class AuthenticationHandler {
 
   //TODO Refactor once company select screen is defined
   public async handleLoginRequest(): Promise<string> {
-    const { username, password }:LoginInputDto = this.loginInput;
-    const hash = await AuthenticationHandler.generateHash(password, 'md5');
+    const hash = await AuthenticationHandler.generateHash(this.loginInput.password, 'md5', 'hex');
     this.user = await this.ctx.prisma.user.findMany({
       where: {
         username: {
-          equals: username
+          equals: this.loginInput.username
         },
         password: {
           equals: hash
@@ -26,12 +26,8 @@ export class AuthenticationHandler {
     return this.generateJWT();
   }
 
-  private static async generateHash(password:string, encryption:string): Promise<string>{
-    try{
-      return crypto.createHash(encryption).update(password).digest('hex');
-    } catch {
-      throw new Error("Unauthorized access")
-    }
+  private static async generateHash(password:string, encryption:string, encoding:BinaryToTextEncoding): Promise<string>{
+      return crypto.createHash(encryption).update(password).digest(encoding);
   }
 
   private async generateJWT(): Promise<string>{
@@ -39,8 +35,9 @@ export class AuthenticationHandler {
       throw new Error("Unauthorized access");
     }
     const token: JwtPayloadDto = {
-      'username': this.user[0].id,
+      'user': this.user[0].id,
       'company': this.user[0].company,
+      'username': this.user[0].username,
       'https://hasura.io/jwt/claims': {
         "x-hasura-allowed-roles": [
           "public","admin"
