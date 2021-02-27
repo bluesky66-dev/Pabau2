@@ -94,7 +94,7 @@ const notificationData = {
         "Automatically sends to clients when they're booked for a class",
       icon: <ScheduleOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/class-booked',
       disabled: true,
     },
     {

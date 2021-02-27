@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Button, EmailSmsPreview, CancelAClassBooking } from '@pabau/ui'
+import { Button, EmailSmsPreview, BookedOntoClass } from '@pabau/ui'
 import { getFlag } from '../../../mocks/utils'
 import styles from './index.module.less'
 
@@ -26,8 +26,6 @@ interface Data {
   employee: string
   title: string
   address: string
-  text: string
-  classText: string
   message: string
 }
 
@@ -39,9 +37,7 @@ const langData: LangData = {
     employee: ' with John Smith',
     title: 'M-A Hair Dressing & Spa',
     address: '574 Beferly Road, H3454, England, GB',
-    text: 'Your appointment is now cancelled!',
-    classText: 'Your class appointment is now cancelled!',
-    message: 'we would love to see tou again in the near future!',
+    message: 'We look forward to seeing you then!',
   },
   sp: {
     greeting: 'Hola Kristy, ¡hasta pronto!',
@@ -50,9 +46,7 @@ const langData: LangData = {
     employee: ' con John Smith',
     title: 'M-A Hair Dressing & Spa',
     address: '574 Beferly Road, H3454, Inglaterra, GB',
-    text: '¡Tu cita ahora está cancelada!',
-    classText: '¡Tu cita de clase ahora está cancelada!',
-    message: '¡Nos encantaría volver a verlo en un futuro próximo!',
+    message: '¡Esperamos verte entonces!',
   },
   fr: {
     greeting: 'Salut Kristy, à bientôt!',
@@ -61,9 +55,7 @@ const langData: LangData = {
     employee: ' avec John Smith',
     title: 'M-A Hair Dressing & Spa',
     address: '574 Beferly Road, H3454, England, GB',
-    text: 'Votre rendez-vous est maintenant annulé!',
-    classText: 'Votre rendez-vous de classe est maintenant annulé!',
-    message: 'nous serions ravis de vous revoir dans un proche avenir!',
+    message: 'Nous attendons avec impatience de vous voir alors!',
   },
   ru: {
     greeting: 'Привет, Кристи, до скорой встречи!',
@@ -72,9 +64,7 @@ const langData: LangData = {
     employee: ' с Джоном Смитом',
     title: 'M-A Hair Dressing & Spa',
     address: '574 Beferly Road, H3454, England, GB',
-    text: 'Ваша встреча отменена!',
-    classText: 'Запись в класс отменена!',
-    message: 'мы будем рады снова увидеть Ту в ближайшем будущем!',
+    message: 'Мы с нетерпением ждем встречи с вами!',
   },
   ar: {
     greeting: 'مرحبًا كريستي ، أراك قريبًا!',
@@ -83,9 +73,7 @@ const langData: LangData = {
     employee: ' مع جون سميث',
     title: 'M-A لتصفيف الشعر وسبا',
     address: '574 طريق بيفرلي ، H3454 ، إنجلترا ، GB',
-    text: 'تم إلغاء موعدك الآن!',
-    classText: 'تم إلغاء موعد صفك الآن!',
-    message: 'نود رؤيتك مرة أخرى في المستقبل القريب!',
+    message: 'نحن نتطلع لرؤيتك بعد ذلك!',
   },
   bg: {
     greeting: 'Здравей, Кристи, до скоро!',
@@ -94,9 +82,7 @@ const langData: LangData = {
     employee: ' с Джон Смит',
     title: 'M-A Фризьорство и Спа',
     address: '574 Beferly Road, H3454, Англия, Великобритания',
-    text: 'Вашата среща вече е отменена!',
-    classText: 'Вашата среща в час вече е отменена!',
-    message: 'бихме се радвали да видим Tou отново в близко бъдеще!',
+    message: 'Очакваме Ви с нетърпение тогава!',
   },
   cs: {
     greeting: 'Ahoj Kristy, uvidíme se brzy!',
@@ -105,9 +91,7 @@ const langData: LangData = {
     employee: ' s Johnem Smithem',
     title: 'M-A Hair Dressing & Spa',
     address: '574 Beferly Road, H3454, England, GB',
-    text: 'Vaše schůzka je nyní zrušena!',
-    classText: 'Vaše schůzka ve třídě je nyní zrušena!',
-    message: 'rádi bychom se v blízké budoucnosti znovu setkali!',
+    message: 'Těšíme se na setkání s vámi!',
   },
   da: {
     greeting: 'Hej Kristy, vi ses snart!',
@@ -116,9 +100,7 @@ const langData: LangData = {
     employee: ' med John Smith',
     title: 'M-A Hair Dressing & Spa',
     address: '574 Beferly Road, H3454, England, GB',
-    text: 'Din aftale er nu annulleret!',
-    classText: 'Din klasseaftale er nu annulleret!',
-    message: 'Vi vil meget gerne se tou igen i den nærmeste fremtid!',
+    message: 'Vi ser frem til at se dig da!',
   },
   hu: {
     greeting: 'Szia Kristy, hamarosan találkozunk!',
@@ -127,9 +109,7 @@ const langData: LangData = {
     employee: ' John Smith-szel',
     title: 'M-A hajviselet és fürdő',
     address: '574 Beferly Road, H3454, Anglia, GB',
-    text: 'Időpontját most törölték!',
-    classText: 'Az osztály időpontját most töröltük!',
-    message: 'szívesen látnánk a tou-t a közeljövőben!',
+    message: 'Szeretettel várunk benneteket akkor!',
   },
   lv: {
     greeting: 'Sveika Kristij, tiekamies drīz!',
@@ -138,9 +118,7 @@ const langData: LangData = {
     employee: ' ar Džonu Smitu',
     title: 'M-A matu apstrāde un spa',
     address: '574 Beferly Road, H3454, Anglija, GB',
-    text: 'Jūsu tikšanās tagad ir atcelta!',
-    classText: 'Jūsu klases iecelšana tagad ir atcelta!',
-    message: 'mēs labprāt tuvākajā nākotnē atkal redzētu tou!',
+    message: 'Gaidīsim jūs toreiz!',
   },
   no: {
     greeting: 'Hei Kristy, vi sees snart!',
@@ -149,9 +127,7 @@ const langData: LangData = {
     employee: ' med John Smith',
     title: 'M-A Hair Dressing & Spa',
     address: '574 Beferly Road, H3454, England, GB',
-    text: 'Din avtale er nå kansellert!',
-    classText: 'Klasseavtalen din er nå kansellert!',
-    message: 'Vi vil gjerne se tou igjen i nær fremtid!',
+    message: 'Vi gleder oss til å se deg da!',
   },
   pl: {
     greeting: 'Cześć Kristy, do zobaczenia wkrótce!',
@@ -160,9 +136,7 @@ const langData: LangData = {
     employee: ' z Johnem Smithem',
     title: 'M-A Hair Dressing & Spa',
     address: '574 Beferly Road, H3454, Anglia, Wielka Brytania',
-    text: 'Twoje spotkanie jest teraz odwołane!',
-    classText: 'Twoje spotkanie klasowe jest teraz odwołane!',
-    message: 'chcielibyśmy ponownie zobaczyć tou w najbliższej przyszłości!',
+    message: 'Z niecierpliwością czekamy na spotkanie z Państwem!',
   },
   sw: {
     greeting: 'Hej Kristy, vi ses snart!',
@@ -171,9 +145,7 @@ const langData: LangData = {
     employee: ' med John Smith',
     title: 'M-A Hair Dressing & Spa',
     address: '574 Beferly Road, H3454, England, GB',
-    text: 'Ditt möte avbryts nu!',
-    classText: 'Ditt klassavtal har nu avbrutits!',
-    message: 'vi skulle gärna se tou igen inom en snar framtid!',
+    message: 'Vi ser fram emot att träffa dig då!',
   },
   ro: {
     greeting: 'Bună Kristy, ne vedem în curând!',
@@ -182,13 +154,11 @@ const langData: LangData = {
     employee: ' cu John Smith',
     title: 'M-A Hair Dressing & Spa',
     address: '574 Beferly Road, H3454, Anglia, GB',
-    text: 'Programarea dvs. este anulată!',
-    classText: 'Programarea dvs. de curs este anulată!',
-    message: 'ne-ar plăcea să vedem din nou în viitorul apropiat!',
+    message: 'Așteptăm cu nerăbdare atunci!',
   },
 }
 
-const CancelAppointmentPreview: FC<P> = ({
+const BookedOntoClassPreview: FC<P> = ({
   standardTapIndex,
   backGroundColor,
   activeSocialIcons,
@@ -197,7 +167,6 @@ const CancelAppointmentPreview: FC<P> = ({
   showService,
   buttonColor,
   informationMessage,
-  type,
 }) => {
   const [selectLangData, setSelectLangData] = React.useState<Data>(
     langData['en']
@@ -222,13 +191,8 @@ const CancelAppointmentPreview: FC<P> = ({
           footerText={informationMessage}
           footer={activeSocialIcons.length > 0 || informationMessage.length > 0}
         >
-          <CancelAClassBooking
+          <BookedOntoClass
             dateTime={selectLangData.dateTime}
-            text={
-              type === 'cancelClassBooking'
-                ? selectLangData.classText
-                : selectLangData.text
-            }
             consultancyName={selectLangData.title}
             consultationDetail={
               showService
@@ -257,4 +221,4 @@ const CancelAppointmentPreview: FC<P> = ({
   )
 }
 
-export default CancelAppointmentPreview
+export default BookedOntoClassPreview

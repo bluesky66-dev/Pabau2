@@ -4,6 +4,7 @@ import CancelAppointmentPreview from '../../pages/client-notifications/cancelled
 import NoShowAppointmentPreview from '../../pages/client-notifications/noshow-appointment/NoShowAppointmentPreview'
 import NewAppointmentPreview from '../../pages/client-notifications/new-appointment/NewAppointmentPreview'
 import RescheduleAppointmentPreview from '../../pages/client-notifications/rescheduled-appointment/RescheduleAppointmentPreview'
+import BookedOntoClassPreview from '../../pages/client-notifications/class-booked/BookedOntoClassPreview'
 
 interface P {
   onSeletedTab: (number) => void
@@ -219,6 +220,18 @@ const Index: FC<P> = forwardRef(
               activeSocialIcons={activeSocialIcons}
               addMedicalHisButton={addMedicalHisButton}
               medicalMessage={medicalMessage}
+            />
+          ) : type === 'bookedOntoClass' ? (
+            <BookedOntoClassPreview
+              standardTapIndex={standardTapIndex}
+              backGroundColor={backGroundColor}
+              activeSocialIcons={activeSocialIcons}
+              selectLanguage={selectLanguage}
+              showService={showService}
+              showEmployeeName={showEmployeeName}
+              buttonColor={buttonColor}
+              informationMessage={informationMessage}
+              type={type}
             />
           ) : (
             <Appointment
