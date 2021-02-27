@@ -1,4 +1,4 @@
-export interface User {
+export interface UserDto {
   id: number,
   hash: string,
   salt: string,
