@@ -1592,7 +1592,6 @@ model CmCaseNote {
 
   @@map("cm_case_notes")
 }
-//
 model CmCaseReply {
   ID          Int      @id @default(autoincrement())
   OwnerID     Int
@@ -1625,7 +1624,6 @@ model CmCampaign {
   company Company @relation(fields: [company_id], references: [id])
 
   @@map("cm_compaigns")
-
 }
 model CmCampaignNote {
   ID          Int                      @id @default(autoincrement())
@@ -1638,6 +1636,7 @@ model CmCampaignNote {
 
   @@map("cm_compaign_notes")
 }
+
 model CmContact {
   ID                       Int                         @id @default(autoincrement())
   Avatar                   String
@@ -1731,19 +1730,22 @@ model CmContact {
   @@index([is_active], name: "is_active")
   @@index([OwnerID, Occupier], name: "owner_company")
 }
-//model cm_contacts_alerts_import_helper {
-//  id                Int    @id @default(autoincrement())
-//  contact_custom_id Int
-//  alert             String
-//  date              String
-//  custom_user_name  String
-//  occupier          String
-//  imported          Int
-//  custom_user_id    Int
-//  added             Int
-//
-//  @@index([contact_custom_id], name: "contact_custom_id")
-//}
+
+model cm_contacts_alerts_import_helper {
+
+  id                Int    @id @default(autoincrement())
+  contact_custom_id Int
+  alert             String
+  date              String
+  custom_user_name  String
+  occupier          String
+  imported          Int
+  custom_user_id    Int
+  added             Int
+
+  @@index([contact_custom_id], name: "contact_custom_id")
+}
+
 //
 //model cm_contacts_backup_hb {
 //  ID                     Int                                   @id @default(autoincrement())

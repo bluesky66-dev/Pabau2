@@ -1,9 +1,7 @@
 import { extendType, nonNull, stringArg } from 'nexus';
-import jwt from "jsonwebtoken";
-import { User } from '../../app/authentication/dto/user.dto'
-import { createHash } from 'crypto'
-import * as crypto from "crypto";
-
+import { AuthenticationHandler } from "../../app/authentication/AuthenticationHandler";
+import { Context } from "../../types";
+import { LoginInputDto } from "../../app/authentication/dto";
 
 export const Authentication = extendType({
   type: 'Mutation',
@@ -14,35 +12,12 @@ export const Authentication = extendType({
         username: nonNull(stringArg()),
         password: nonNull(stringArg())
       },
-      async resolve(_root, {username, password}, ctx) {
-        if(!username && !password){
+      async resolve(_root, loginInput:LoginInputDto, ctx:Context) {
+        if(!loginInput.username || loginInput.password){
           throw new Error("Unauthorized access")
         }
-        const hash = crypto.createHash('md5').update(password).digest('hex')
         try{
-          const user: User[] = await ctx.prisma.user.findMany({
-            where: {
-              username: {
-                equals: username
-              },
-              password: {
-                equals: hash
-              }
-            },
-          })
-          return jwt.sign({
-            'user': user[0].id,
-            'company': user[0].company,
-            'https://hasura.io/jwt/claims': {
-              "x-hasura-allowed-roles": [
-                "public","admin"
-              ],
-              "x-hasura-default-role": "public",
-              "x-hasura-user-id": "1234567890",
-              "x-hasura-org-id": "123",
-              "x-hasura-james": "123"
-            }
-          }, 'madskills')
+          return new AuthenticationHandler(ctx, loginInput).handleLoginRequest()
         } catch {
           throw new Error("Unauthorized access")
         }
