@@ -19,7 +19,7 @@ const Layout: FC<LayoutProps> = ({ children, ...props }) => {
       onMessageType={onMessageType}
       {...props}
     >
-      <OfflineProvider>
+      <OfflineProvider polling={{ url: 'https://ipv4.icanhazip.com' }}>
         <Offline
           time={15}
           message="Connection lost. Reconnecting in"
