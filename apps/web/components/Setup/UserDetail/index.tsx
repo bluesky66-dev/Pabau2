@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react'
-import { Modal, Tabs } from 'antd'
+import { Modal, Tabs, Drawer } from 'antd'
+import { useMedia } from 'react-use'
 
 import Layout from '../../Layout/Layout'
 import {
@@ -15,6 +16,7 @@ import PersonalDetail from './PersonalDetail/PersonalDetail'
 import Permission from './Permissions/Permissions'
 import CustomizeFields from './PersonalDetail/CustomizeFields'
 import AvatarImage from '../../../assets/images/avatar.png'
+import { LeftOutlined } from '@ant-design/icons'
 const { TabPane } = Tabs
 
 export interface customFieldsProps {
@@ -30,6 +32,7 @@ export interface customFieldsProps {
 
 const Index: FC = () => {
   const [tabKey, setTabKey] = useState<string>('1')
+  const isMobile = useMedia('(max-width: 768px)')
   const [userImage, setUserImage] = useState<string>(AvatarImage)
   const [showModal, setShowModal] = useState<boolean>(false)
   const [showAvatarUploader, setShowAvatarUploader] = useState(false)
@@ -55,96 +58,136 @@ const Index: FC = () => {
     setTabKey(key)
   }
   return (
-    <Layout>
-      <div className={styles.userDetailMainWrapper}>
-        <div className={styles.userDetailWrapper}>
-          <div className={styles.userDetailHeader}>
-            <div>
-              <Breadcrumb
-                breadcrumbItems={[
-                  { breadcrumbName: 'Setup', path: 'setup' },
-                  { breadcrumbName: 'User Detail', path: '' },
-                  { breadcrumbName: userDetail.name, path: '' },
-                ]}
-              />
-              <div className={styles.userHead}>
-                <div onClick={handleShowAvatarUploader}>
-                  <Avatar src={userImage} size={'large'} />
-                </div>
-                <div className={styles.userHeadTitle}>
-                  <h2>{userDetail.name}</h2>
-                  <p>{userDetail.post}</p>
-                </div>
-              </div>
+    <div className={styles.userDetailMain}>
+      <Layout>
+        <div className={styles.userDetailMainWrapper}>
+          <div className={styles.userDetailWrapper}>
+            <div className={styles.mobileUserHeader}>
+              <LeftOutlined /> <h2>{userDetail.name}</h2>
             </div>
-            {tabKey === '1' && (
-              <div className={styles.customizeBtn}>
-                <Button
-                  className={styles.customizeFieldsBtn}
-                  type={'primary'}
-                  onClick={() => setShowModal(true)}
-                >
-                  Customize fields
-                </Button>
+            <div className={styles.userDetailHeader}>
+              <div>
+                <Breadcrumb
+                  breadcrumbItems={[
+                    { breadcrumbName: 'Setup', path: 'setup' },
+                    { breadcrumbName: 'User Detail', path: '' },
+                    { breadcrumbName: userDetail.name, path: '' },
+                  ]}
+                />
+                <div className={styles.userHead}>
+                  <div onClick={handleShowAvatarUploader}>
+                    <Avatar src={userImage} size={'large'} />
+                  </div>
+                  <div className={styles.userHeadTitle}>
+                    <h2>{userDetail.name}</h2>
+                    <p>{userDetail.post}</p>
+                  </div>
+                </div>
               </div>
-            )}
+              {tabKey === '1' && (
+                <div className={styles.customizeBtn}>
+                  <Button
+                    className={styles.customizeFieldsBtn}
+                    type={'primary'}
+                    onClick={() => setShowModal(true)}
+                  >
+                    Customize fields
+                  </Button>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-        <div className={styles.userDetailLeftTabs}>
-          <Tabs tabPosition={'left'} onChange={handleTabChange}>
-            <TabPane tab={<span>Personal Details</span>} key="1">
-              <PersonalDetail field={fieldsData} graphData={graphData} />
-            </TabPane>
-            <TabPane tab={<span>Services</span>} key="2">
-              Content of Tab
-            </TabPane>
-            <TabPane tab={<span>Permissions</span>} key="3">
-              <Permission />
-            </TabPane>
-            <TabPane tab={<span>Documents</span>} key="4">
-              Content of Tab
-            </TabPane>
-            <TabPane tab={<span>Emergency</span>} key="5">
-              Content of Tab
-            </TabPane>
-            <TabPane tab={<span>Training</span>} key="6">
-              Content of Tab
-            </TabPane>
-            <TabPane
-              tab={
-                <span>
-                  Performance <PabauPlus label={'Plus'} />
-                </span>
-              }
-              key="7"
+          <div className={styles.userDetailLeftTabs}>
+            <Tabs
+              tabPosition={isMobile ? 'top' : 'left'}
+              onChange={handleTabChange}
             >
-              Content of Tab
-            </TabPane>
-          </Tabs>
+              <TabPane tab={<span>Personal Details</span>} key="1">
+                <PersonalDetail field={fieldsData} graphData={graphData} />
+              </TabPane>
+              <TabPane tab={<span>Services</span>} key="2">
+                Content of Tab
+              </TabPane>
+              <TabPane tab={<span>Permissions</span>} key="3">
+                <Permission />
+              </TabPane>
+              <TabPane tab={<span>Documents</span>} key="4">
+                Content of Tab
+              </TabPane>
+              <TabPane tab={<span>Emergency</span>} key="5">
+                Content of Tab
+              </TabPane>
+              <TabPane tab={<span>Training</span>} key="6">
+                Content of Tab
+              </TabPane>
+              <TabPane
+                tab={
+                  <span>
+                    Performance <PabauPlus label={'Plus'} />
+                  </span>
+                }
+                key="7"
+              >
+                Content of Tab
+              </TabPane>
+            </Tabs>
+          </div>
+          {tabKey === '1' && (
+            <div className={styles.customizeMobileBtn}>
+              <Button className={styles.customizeFieldsCancelBtn}>
+                Cancel
+              </Button>
+              <Button
+                className={styles.customizeFieldsBtn}
+                type={'primary'}
+                onClick={() => setShowModal(true)}
+              >
+                Customize fields
+              </Button>
+            </div>
+          )}
         </div>
-      </div>
-      <Modal
-        title={'Customize fields for all employees'}
-        visible={showModal}
-        footer={false}
-        width={682}
-        className={styles.customModal}
-        onCancel={() => handleCloseModal()}
-      >
-        <CustomizeFields
-          field={fieldsData}
-          handleSaveCustomFields={handleSaveCustomFields}
-          handleCloseModal={handleCloseModal}
+        {!isMobile ? (
+          <Modal
+            title={'Customize fields for all employees'}
+            visible={showModal}
+            footer={false}
+            width={682}
+            className={styles.customModal}
+            onCancel={() => handleCloseModal()}
+          >
+            <CustomizeFields
+              field={fieldsData}
+              handleSaveCustomFields={handleSaveCustomFields}
+              handleCloseModal={handleCloseModal}
+            />
+          </Modal>
+        ) : (
+          <Drawer
+            placement={'bottom'}
+            closable={false}
+            onClose={handleCloseModal}
+            visible={showModal}
+            key={'drawer'}
+          >
+            <CustomizeFields
+              field={fieldsData}
+              handleSaveCustomFields={handleSaveCustomFields}
+              handleCloseModal={handleCloseModal}
+              isMobile={isMobile}
+            />
+          </Drawer>
+        )}
+
+        <AvatarUploader
+          visible={showAvatarUploader}
+          title={'Edit Photo'}
+          imageURL={AvatarImage}
+          onCreate={handleChangeImage}
+          onCancel={() => setShowAvatarUploader(false)}
         />
-      </Modal>
-      <AvatarUploader
-        visible={showAvatarUploader}
-        title={'Edit Photo'}
-        imageURL={AvatarImage}
-        onCreate={handleChangeImage}
-        onCancel={() => setShowAvatarUploader(false)}
-      />
-    </Layout>
+      </Layout>
+    </div>
   )
 }
 

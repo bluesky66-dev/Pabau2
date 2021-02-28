@@ -11,6 +11,7 @@ interface customizeFieldsProps {
   field: customFieldsProps[]
   handleSaveCustomFields: (field: customFieldsProps[]) => void
   handleCloseModal: () => void
+  isMobile?: boolean
 }
 
 const getListStyle = (isDraggingOver) => ({
@@ -32,6 +33,7 @@ const CustomizeFields: FC<customizeFieldsProps> = ({
   field,
   handleSaveCustomFields,
   handleCloseModal,
+  isMobile,
 }) => {
   const [fieldData, setFieldData] = useState<customFieldsProps[]>(field)
 
@@ -57,6 +59,7 @@ const CustomizeFields: FC<customizeFieldsProps> = ({
 
   return (
     <div className={styles.customFieldsWrapper}>
+      {isMobile && <h2>Customize fields for all employees</h2>}
       <h4>Drag to reorder information on the Personal Tab</h4>
       <div className={styles.customFieldContent}>
         <div className={styles.customFieldsBasicInfo}>

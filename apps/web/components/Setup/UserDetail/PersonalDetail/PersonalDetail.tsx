@@ -172,6 +172,18 @@ const PersonalDetail: FC<PersonalDetail> = ({ field, graphData }) => {
                   <GraphDetail graphData={graphData} />
                 </div>
               </div>
+              <div className={styles.personalDetailHeadMobileBtn}>
+                <Button className={styles.personalBtn}>
+                  Send reset password email
+                </Button>
+                <Button
+                  htmlType={'submit'}
+                  className={styles.personalBtn}
+                  onClick={() => handleSubmit}
+                >
+                  Save changes
+                </Button>
+              </div>
             </div>
           </Form>
         )}
