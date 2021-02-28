@@ -1,9 +1,9 @@
-type UserRole = "public" | "admin"
+type UserRole = 'public' | 'admin'
 
 interface Hasura {
   "x-hasura-allowed-roles": UserRole[];
   "x-hasura-default-role": UserRole;
-  "x-hasura-user-id"?: number | string;
+  "x-hasura-user-id": number | string;
   "x-hasura-org-id": number | string;
   "x-hasura-james"?: number | string;
 }

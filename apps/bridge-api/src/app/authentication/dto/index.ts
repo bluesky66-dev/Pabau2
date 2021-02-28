@@ -1,3 +1,3 @@
 export * from './jwt-payload.dto'
 export * from './login-input.dto'
-export * from './user.dto'
+export * from './login-output.dto'
