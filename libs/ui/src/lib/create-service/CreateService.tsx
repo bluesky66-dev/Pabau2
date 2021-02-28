@@ -54,6 +54,7 @@ export const CreateService: FC<CreateServiceProps> = ({
   const [category, setCategory] = useState('')
   const [servicePrice, setServicePrice] = useState('')
   const [sliderValue, setSliderValue] = useState(0)
+  const [paymentUnit, setPaymentUnit] = useState('%')
   const appointmentColors = [
     '#7986cb',
     '#64b5f6',
@@ -191,6 +192,9 @@ export const CreateService: FC<CreateServiceProps> = ({
     const options = [...paymentProcessing]
     for (const option of options) {
       option.selected = option.type === item.type
+      if (option.type === item.type) {
+        setPaymentUnit(option.type === 'Amount' ? '£' : '%')
+      }
     }
     setPaymentProcessing([...options])
   }
@@ -340,7 +344,9 @@ export const CreateService: FC<CreateServiceProps> = ({
             >
               <div className={styles.createServiceGeneral}>
                 <div className={styles.createServiceSection}>
-                  <h2 className={styles.createServiceSectionTitle}>General</h2>
+                  <h2 className={styles.createServiceSectionTitle}>
+                    Service info
+                  </h2>
                   <div className={styles.createServiceSectionItem}>
                     <Input
                       label="Service name"
@@ -351,14 +357,18 @@ export const CreateService: FC<CreateServiceProps> = ({
                   </div>
                   {serviceType !== 'Service' && (
                     <div className={styles.createServiceSectionItem}>
-                      <Slider
-                        title={''}
-                        value={sliderValue}
-                        onChange={(val) => setSliderValue(val)}
-                        calculatedValue={`${sliderValue}`}
-                        min={0}
-                        max={50}
-                      />
+                      <Form form={form} layout="vertical">
+                        <Form.Item label="Max number clients allowed">
+                          <Slider
+                            title={''}
+                            value={sliderValue}
+                            onChange={(val) => setSliderValue(val)}
+                            calculatedValue={`${sliderValue}`}
+                            min={0}
+                            max={50}
+                          />
+                        </Form.Item>
+                      </Form>
                     </div>
                   )}
                   <div className={styles.createServiceSectionItem}>
@@ -600,6 +610,9 @@ export const CreateService: FC<CreateServiceProps> = ({
                           <div className={styles.pricingChecked}>
                             <CheckCircleFilled />
                           </div>
+                          <Tooltip title="lorem ipsum" mouseLeaveDelay={2}>
+                            <div className={styles.tooltipContainer} />
+                          </Tooltip>
                         </div>
                       ))}
                     </div>
@@ -633,7 +646,11 @@ export const CreateService: FC<CreateServiceProps> = ({
                   <div className={styles.createServiceSectionItem}>
                     <Form form={form} layout="vertical">
                       <Form.Item label="Tax">
-                        <Select placeholder="Select tax"></Select>
+                        <Select placeholder="Select tax">
+                          <Option value="defaultSetting">
+                            Default setting
+                          </Option>
+                        </Select>
                       </Form.Item>
                     </Form>
                   </div>
@@ -686,7 +703,7 @@ export const CreateService: FC<CreateServiceProps> = ({
                     <Form form={form} layout="vertical">
                       <Form.Item label="Amount">
                         <div className={styles.currencyInput}>
-                          <CurrencyInput prefix="£" />
+                          <CurrencyInput prefix={paymentUnit} />
                         </div>
                       </Form.Item>
                     </Form>
@@ -720,9 +737,20 @@ export const CreateService: FC<CreateServiceProps> = ({
                 <div className={styles.createServiceSection}>
                   <h2 className={styles.createServiceSectionTitle}>General</h2>
                   <div className={styles.createServiceSectionItem}>
+                    <div className={styles.enableServiceOnline}>
+                      <Switch
+                        size="small"
+                        defaultChecked={true}
+                        style={{ marginRight: '8px' }}
+                      />{' '}
+                      Enable this service online
+                    </div>
+                  </div>
+                  <div className={styles.createServiceSectionItem}>
                     <Input
                       label="Friendly name"
                       placeHolderText="Enter friendly name"
+                      tooltip="lorem ipsum"
                     />
                   </div>
                   <div
