@@ -19,13 +19,7 @@ const onCreateChannel = (name, description, isPrivate) => {
 }
 
 const Layout: FC<LayoutProps> = ({ children, ...props }) => {
-  const [authenticated, authenticate] = useState(false)
-  useEffect(() => {
-    if (localStorage.getItem('token') !== null) {
-      authenticate(true)
-    }
-  }, [authenticated])
-  return authenticated ? (
+  return (
     <PabauLayout
       searchRender={() => <Search />}
       onCreateChannel={onCreateChannel}
@@ -34,8 +28,6 @@ const Layout: FC<LayoutProps> = ({ children, ...props }) => {
     >
       {children}
     </PabauLayout>
-  ) : (
-    <Login />
   )
 }
 
