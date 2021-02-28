@@ -122,17 +122,6 @@ const Index: FC = () => {
             </TabPane>
           </Tabs>
         </div>
-        {tabKey === '1' && (
-          <div className={styles.customizeBtn}>
-            <Button
-              className={styles.customizeFieldsBtn}
-              type={'primary'}
-              onClick={() => setShowModal(true)}
-            >
-              Customize fields
-            </Button>
-          </div>
-        )}
       </div>
       <Modal
         title={'Customize fields for all employees'}
