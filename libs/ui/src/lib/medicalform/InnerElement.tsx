@@ -1,5 +1,6 @@
 import { MedicalFormTypes } from '@pabau/ui'
 import React, { FC } from 'react'
+import 'react-quill/dist/quill.snow.css'
 import conditionsIcon from '../../assets/images/medicalform_conditions.svg'
 import customCompanyIcon from '../../assets/images/medicalform_custom_company.svg'
 import customDobIcon from '../../assets/images/medicalform_custom_dob.svg'
@@ -294,16 +295,25 @@ const InnerElement: FC<P> = ({
                   />
                 )}
                 {formData.txtQuestion !== '' &&
+                  formData.formName !== 'basic_textblock' &&
                   formData.formName !== 'basic_singlechoice' &&
                   formData.formName !== 'basic_multiplechoice' &&
                   formData.formName !== 'basic_dropdown' && (
-                    <p>{formData.txtQuestion}</p>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: formData.txtQuestion }}
+                    />
                   )}
+                {formData.formName === 'basic_textblock' && (
+                  <div
+                    dangerouslySetInnerHTML={{ __html: formData.txtBlock }}
+                  />
+                )}
                 {formData.txtBlock !== '' &&
+                  formData.formName !== 'basic_textblock' &&
                   formData.formName !== 'basic_singlechoice' &&
                   formData.formName !== 'basic_multiplechoice' &&
                   formData.formName !== 'basic_dropdown' && (
-                    <p>
+                    <div>
                       {formData.txtBlock?.split('\n').map(function (item) {
                         return (
                           <>
@@ -312,7 +322,10 @@ const InnerElement: FC<P> = ({
                           </>
                         )
                       })}
-                    </p>
+                    </div>
+                    // <div
+                    //   dangerouslySetInnerHTML={{ __html: formData.txtBlock }}
+                    // />
                   )}
                 {((formData.arrItems && formData.arrItems?.length > 0) ||
                   formData.txtQuestion !== '') &&

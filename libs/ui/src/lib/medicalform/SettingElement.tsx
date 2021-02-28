@@ -28,6 +28,7 @@ import SettingElementFileUpload from './SettingElementFileUpload'
 import SettingElementMultiOptions from './SettingElementMultiOptions'
 import SettingElementOption from './SettingElementOption'
 import SettingElementQuestion from './SettingElementQuestion'
+import SettingElementTextBlock from './SettingElementTextBlock'
 import SettingElementTextBox from './SettingElementTextBox'
 import SettingElementTypeOption from './SettingElementTypeOption'
 import SettingMedicalForm from './SettingMedicalForm'
@@ -55,7 +56,7 @@ const SettingElement: FC<P> = ({
   const [form, setForm] = useState(JSON.parse(JSON.stringify(selectedForm)))
   const [addedItems, setAddedItems] = useState(0)
   const [errMsg, setErrMsg] = useState('')
-
+  console.log('form =', form)
   const componentInfos = [
     {
       component: 'basic_heading',
@@ -403,8 +404,16 @@ const SettingElement: FC<P> = ({
             {filteredComponent[0].component === 'basic_shortanswer' && (
               <SettingElementTypeOption title="Input type" />
             )}
-            {filteredComponent[0].component === 'basic_textblock' && (
+            {filteredComponent[0].component === 'basic_longanswer' && (
               <SettingElementTextBox
+                desc="Enter your text"
+                title="Text"
+                value={form.txtBlock}
+                onChangeText={onChangeText}
+              />
+            )}
+            {filteredComponent[0].component === 'basic_textblock' && (
+              <SettingElementTextBlock
                 desc="Enter your text"
                 title="Text"
                 value={form.txtBlock}

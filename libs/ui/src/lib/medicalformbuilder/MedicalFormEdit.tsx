@@ -46,10 +46,10 @@ const medicalForms = [
 ]
 const previewMapping = [
   { heading: 'basic_heading' },
-  { staticText: 'basic_longanswer' },
+  { staticText: 'basic_textblock' },
   { input_text: 'basic_shortanswer' },
   { team: 'basic_shortanswer' },
-  { textarea: 'basic_textblock' },
+  { textarea: 'basic_longanswer' },
   { checkbox: 'basic_multiplechoice' },
   { radio: 'basic_singlechoice' },
   { select: 'basic_dropdown' },
@@ -123,10 +123,15 @@ const getFormInfo = (form) => {
   else if (form.cssClass === 'cl_drugs') label = 'Drugs'
   else if (form.cssClass === 'labs_tests') label = 'Labs Tests'
   else if (form.cssClass === 'vaccine_scheduler') label = ''
+  else if (form.cssClass === 'staticText') label = ''
 
   let txtBlockValue = ''
   if (form.cssClass === 'textarea') {
     txtBlockValue = form.defaults ? form.defaults : ''
+  }
+
+  if (form.cssClass === 'staticText') {
+    txtBlockValue = form.values.trim()
   }
 
   let arrItemsValue: OptionType[] = []
@@ -167,7 +172,6 @@ const MedicalFormEdit: FC<PreviewData> = ({ previewData }) => {
       const previewForms = []
       if (previewDataArray['form_structure']) {
         for (const form of previewDataArray['form_structure']) {
-          console.log('preview form data =', form)
           let formName = ''
           const mappingInfo = previewMapping.filter(
             (item) => Object.keys(item)[0] === form.cssClass
