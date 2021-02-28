@@ -1,7 +1,17 @@
 import React, { FC, useState, useEffect } from 'react'
 import classNames from 'classnames'
 import CurrencyInput from 'react-currency-input'
-import { Button, TabMenu, Switch, Input, Checkbox, Slider } from '@pabau/ui'
+import {
+  Button,
+  TabMenu,
+  Switch,
+  Input,
+  Checkbox,
+  Slider,
+  Employees,
+  Employee,
+  SearchTags,
+} from '@pabau/ui'
 import {
   Modal,
   Collapse,
@@ -35,12 +45,18 @@ const { Panel } = Collapse
 const { Option, OptGroup } = Select
 
 export interface CreateServiceProps {
+  employees: Employee[]
+  rooms: Array<string>
+  equipment: Array<string>
   visible: boolean
   onClose: () => void
   onCreate?: () => void
 }
 
 export const CreateService: FC<CreateServiceProps> = ({
+  employees,
+  rooms,
+  equipment,
   visible,
   onClose,
   onCreate,
@@ -729,9 +745,30 @@ export const CreateService: FC<CreateServiceProps> = ({
                 tabPosition="top"
                 minHeight="1px"
               >
-                <div>1</div>
-                <div>1</div>
-                <div>1</div>
+                <div className={styles.employeesContainer}>
+                  <div className={styles.createServiceSection}>
+                    <Employees employees={employees} />
+                  </div>
+                </div>
+                <div className={styles.resoucesContainer}>
+                  <div className={styles.createServiceSection}>
+                    <SearchTags
+                      title="Rooms"
+                      description="Search rooms"
+                      items={rooms}
+                      itemType="room"
+                    />
+                  </div>
+                  <div className={styles.createServiceSection}>
+                    <SearchTags
+                      title="Equipment"
+                      description="Select equipment"
+                      items={equipment}
+                      itemType="equipment"
+                    />
+                  </div>
+                </div>
+                <div>Locations</div>
               </TabMenu>
               <div className={styles.createServiceOnlineBooking}>
                 <div className={styles.createServiceSection}>
