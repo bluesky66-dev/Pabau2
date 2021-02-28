@@ -98,6 +98,7 @@
     "react-grid-layout": "^1.2.0",
     "react-highlight-words": "^0.17.0",
     "react-i18next": "^11.8.7",
+    "react-image-crop": "^8.6.6",
     "react-jsx-highcharts": "^4.2.0",
     "react-native": "0.63.4",
     "react-pdf": "^5.2.0",

@@ -1,5 +1,6 @@
 export * from './lib/accordion/Accordion'
 export * from './lib/add-suggestion/AddSuggestion'
+export * from './lib/avatar-uploader/AvatarUploader'
 export * from './lib/business-details-notifications/BusinessDetailsNotifications'
 export * from './lib/business-location/BusinessLocation'
 export * from './lib/business-types/BusinessTypes'
