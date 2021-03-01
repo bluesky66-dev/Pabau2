@@ -256,6 +256,7 @@ export const IssuingCompany: NextPage = () => {
         NotificationType.success,
         `Success! You have successfully created an issuing company`
       )
+      setShowModal(false)
     },
     onError(err) {
       Notification(

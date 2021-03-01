@@ -1298,6 +1298,8 @@
       columns:
       - count_no
       - counted_by
+      - discrepanciesDown
+      - discrepanciesUp
       - location
       - name
       - start_date
@@ -1311,6 +1313,8 @@
       - count_no
       - counted_by
       - created_at
+      - discrepanciesDown
+      - discrepanciesUp
       - id
       - location
       - name
@@ -1326,6 +1330,8 @@
       columns:
       - count_no
       - counted_by
+      - discrepanciesDown
+      - discrepanciesUp
       - location
       - name
       - start_date
