@@ -9,7 +9,7 @@ import { ContactsOutlined, LockOutlined, MenuOutlined } from '@ant-design/icons'
 import styles from './Table.module.less'
 import { TableProps } from 'antd/es/table'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import { useTranslation } from 'react-i18next'
 export interface DragProps {
   draggable?: boolean
   isCustomColorExist?: boolean
@@ -48,6 +48,7 @@ export type TableType = {
   noDataIcon?: JSX.Element
   onAddTemplate?: () => void
   searchTerm?: string
+  needTranslation?: boolean
 } & TableProps<never> &
   DragProps
 
@@ -63,6 +64,7 @@ export const Table: FC<TableType> = ({
   noDataIcon = <ContactsOutlined />,
   onAddTemplate,
   searchTerm = '',
+  needTranslation,
   ...props
 }) => {
   const onSortEnd = ({ oldIndex, newIndex }) => {
@@ -79,6 +81,7 @@ export const Table: FC<TableType> = ({
     )
     return <SortItem index={index} {...restProps} />
   }
+  const { t } = useTranslation('common')
 
   const DraggableContainer = (props) => (
     <SortContainer
@@ -104,7 +107,13 @@ export const Table: FC<TableType> = ({
         className={isActive ? styles.activeBtn : styles.disableSourceBtn}
         disabled={!isActive}
       >
-        {isActive ? 'Active' : 'Inactive'}
+        {needTranslation
+          ? isActive
+            ? t('marketingsource-tableRow-active-btn.translation')
+            : t('marketingsource-tableRow-inActive-btn.translation')
+          : isActive
+          ? 'Active'
+          : 'Inactive'}
       </Button>
     )
   }
@@ -159,9 +168,8 @@ export const Table: FC<TableType> = ({
               col.dataIndex === 'is_active' ||
               col.dataIndex === 'integration')
           ) {
-            console.log(col.dataIndex)
             col.render = renderActiveButton
-          } else {
+          } else if (!col.render) {
             col.render = renderTableSource
           }
           return col
@@ -172,7 +180,6 @@ export const Table: FC<TableType> = ({
       ? [{ ...dragColumn }, ...(props.columns || [])]
       : props.columns
   }
-
   return !dataSource?.length && !props.loading && !searchTerm ? (
     <div className={styles.noDataTableBox}>
       <div className={styles.noDataTextStyle}>

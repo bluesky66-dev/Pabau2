@@ -1,9 +1,10 @@
 import React, { FC } from 'react'
 import { Tabs } from 'antd'
+import { TabsProps } from 'antd/lib/tabs'
 import styles from './TabMenu.module.less'
 
 const { TabPane } = Tabs
-interface P {
+interface P extends TabsProps {
   tabPosition?: 'top' | 'left'
   menuItems: Array<string>
   minHeight?: string
@@ -14,10 +15,11 @@ export const TabMenu: FC<P> = ({
   children,
   menuItems,
   minHeight = '100vh',
+  ...props
 }) => {
   return (
     <div className={styles.calendarSettings}>
-      <Tabs tabPosition={tabPosition} style={{ minHeight }}>
+      <Tabs {...props} tabPosition={tabPosition} style={{ minHeight }}>
         {Array.isArray(children) &&
           children?.map((tab, i) => (
             <TabPane tab={menuItems[i]} key={i}>
