@@ -28,6 +28,7 @@ export const Index: FC = () => {
       isActive: false,
       services: [],
       advancedSetting: 'currency',
+      roomFee: '$50',
     },
     onSubmit: async (values) => {
       router.push('/setup/rooms')
@@ -191,7 +192,11 @@ export const Index: FC = () => {
                   </Radio.Group>
                 </Form.Item>
                 <Form.Item label="Room Fee">
-                  <Input placeholder="$ 50" />
+                  <Input
+                    placeholder="$"
+                    value={values.roomFee}
+                    onChange={(e) => setFieldValue('roomFee', e.target.value)}
+                  />
                 </Form.Item>
               </Card>
             </div>
