@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import ReactQuill from 'react-quill'
-import './quill.css'
+import '../../assets/css/quill.css'
 
 interface P {
   title: string
