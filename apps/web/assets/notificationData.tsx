@@ -176,7 +176,7 @@ const notificationData = {
         'The default email template you will send with a clients invoice attached',
       icon: <MoneyCollectOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/invoice',
       disabled: true,
     },
     {

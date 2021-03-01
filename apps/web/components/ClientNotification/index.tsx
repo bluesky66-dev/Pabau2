@@ -6,6 +6,7 @@ import NewAppointmentPreview from '../../pages/client-notifications/new-appointm
 import RescheduleAppointmentPreview from '../../pages/client-notifications/rescheduled-appointment/RescheduleAppointmentPreview'
 import BookedOntoClassPreview from '../../pages/client-notifications/class-booked/BookedOntoClassPreview'
 import WaitListPreview from '../../pages/client-notifications/waitlist/WaitListPreview'
+import InvoicePreview from '../../pages/client-notifications/invoice/InvoicePreview'
 
 interface P {
   onSeletedTab: (number) => void
@@ -204,6 +205,15 @@ const Index: FC<P> = forwardRef(
               informationMessage={informationMessage}
               standardTapIndex={standardTapIndex}
               activeSocialIcons={activeSocialIcons}
+            />
+          ) : type === 'invoice' ? (
+            <InvoicePreview
+              informationMessage={informationMessage}
+              buttonColor={buttonColor}
+              selectLanguage={selectLanguage}
+              activeSocialIcons={activeSocialIcons}
+              backGroundColor={backGroundColor}
+              standardTapIndex={standardTapIndex}
             />
           ) : type === 'reschedule' || type === 'classReschedule' ? (
             <RescheduleAppointmentPreview

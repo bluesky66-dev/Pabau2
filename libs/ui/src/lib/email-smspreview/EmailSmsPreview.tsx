@@ -90,6 +90,8 @@ export interface ReferralProps {
 export interface InvoicesProps {
   message?: string
   footerText?: string
+  message1?: string
+  showInvoiceButton?: boolean
 }
 
 export interface LeadResponsesProps {
