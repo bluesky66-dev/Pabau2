@@ -25,7 +25,7 @@ const Subscription: FC = () => {
 
   return (
     <Layout>
-      <Card bodyStyle={{ padding: 0 }}>
+      <Card bodyStyle={{ padding: 0 }} style={{ borderBottomWidth: 0 }}>
         <Row className={styles.headerContainer}>
           <Col>
             <Breadcrumb
@@ -76,25 +76,26 @@ const Subscription: FC = () => {
             </div>
           </Col>
         </Row>
-        <Divider style={{ margin: 0 }} />
-        <TabMenu
-          tabPosition={'top'}
-          menuItems={[
-            'Products',
-            'Category',
-            'Supplier',
-            'Purchase orders',
-            'Stock take ',
-          ]}
-          onTabClick={(activeKey) => setActiveTab(activeKey)}
-        >
-          <Products />
-          <Category showGroup={showGroups} />
-          <Supplier />
-          <PurchaseOrder />
-          <StokeTake />
-        </TabMenu>
       </Card>
+      <Divider style={{ margin: 0 }} />
+      <TabMenu
+        tabPosition={'top'}
+        menuItems={[
+          'Products',
+          'Category',
+          'Supplier',
+          'Purchase orders',
+          'Stock take ',
+        ]}
+        onTabClick={(activeKey) => setActiveTab(activeKey)}
+        tabBarStyle={{ backgroundColor: '#FFF' }}
+      >
+        <Products />
+        <Category showGroup={showGroups} />
+        <Supplier />
+        <PurchaseOrder />
+        <StokeTake />
+      </TabMenu>
     </Layout>
   )
 }

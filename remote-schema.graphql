@@ -9542,6 +9542,258 @@ input bigint_comparison_exp {
   _nin: [bigint!]
 }
 
+"""
+columns and relationships of "block_out_options"
+"""
+type block_out_options {
+  backgroundColor: String
+  created_at: timestamptz!
+  defaultTime: Int!
+  id: uuid!
+  is_active: Boolean!
+  name: String!
+  paidBlockOut: Boolean
+  type: String!
+  updated_at: timestamptz!
+}
+
+"""
+aggregated selection of "block_out_options"
+"""
+type block_out_options_aggregate {
+  aggregate: block_out_options_aggregate_fields
+  nodes: [block_out_options!]!
+}
+
+"""
+aggregate fields of "block_out_options"
+"""
+type block_out_options_aggregate_fields {
+  avg: block_out_options_avg_fields
+  count(columns: [block_out_options_select_column!], distinct: Boolean): Int!
+  max: block_out_options_max_fields
+  min: block_out_options_min_fields
+  stddev: block_out_options_stddev_fields
+  stddev_pop: block_out_options_stddev_pop_fields
+  stddev_samp: block_out_options_stddev_samp_fields
+  sum: block_out_options_sum_fields
+  var_pop: block_out_options_var_pop_fields
+  var_samp: block_out_options_var_samp_fields
+  variance: block_out_options_variance_fields
+}
+
+"""aggregate avg on columns"""
+type block_out_options_avg_fields {
+  defaultTime: Float
+}
+
+"""
+Boolean expression to filter rows from the table "block_out_options". All fields are combined with a logical 'AND'.
+"""
+input block_out_options_bool_exp {
+  _and: [block_out_options_bool_exp!]
+  _not: block_out_options_bool_exp
+  _or: [block_out_options_bool_exp!]
+  backgroundColor: String_comparison_exp
+  created_at: timestamptz_comparison_exp
+  defaultTime: Int_comparison_exp
+  id: uuid_comparison_exp
+  is_active: Boolean_comparison_exp
+  name: String_comparison_exp
+  paidBlockOut: Boolean_comparison_exp
+  type: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "block_out_options"
+"""
+enum block_out_options_constraint {
+  """unique or primary key constraint"""
+  block_out_options_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "block_out_options"
+"""
+input block_out_options_inc_input {
+  defaultTime: Int
+}
+
+"""
+input type for inserting data into table "block_out_options"
+"""
+input block_out_options_insert_input {
+  backgroundColor: String
+  defaultTime: Int
+  is_active: Boolean
+  name: String
+  paidBlockOut: Boolean
+  type: String
+}
+
+"""aggregate max on columns"""
+type block_out_options_max_fields {
+  backgroundColor: String
+  created_at: timestamptz
+  defaultTime: Int
+  id: uuid
+  name: String
+  type: String
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type block_out_options_min_fields {
+  backgroundColor: String
+  created_at: timestamptz
+  defaultTime: Int
+  id: uuid
+  name: String
+  type: String
+  updated_at: timestamptz
+}
+
+"""
+response of any mutation on the table "block_out_options"
+"""
+type block_out_options_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [block_out_options!]!
+}
+
+"""
+on conflict condition type for table "block_out_options"
+"""
+input block_out_options_on_conflict {
+  constraint: block_out_options_constraint!
+  update_columns: [block_out_options_update_column!]!
+  where: block_out_options_bool_exp
+}
+
+"""Ordering options when selecting data from "block_out_options"."""
+input block_out_options_order_by {
+  backgroundColor: order_by
+  created_at: order_by
+  defaultTime: order_by
+  id: order_by
+  is_active: order_by
+  name: order_by
+  paidBlockOut: order_by
+  type: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: block_out_options"""
+input block_out_options_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "block_out_options"
+"""
+enum block_out_options_select_column {
+  """column name"""
+  backgroundColor
+
+  """column name"""
+  created_at
+
+  """column name"""
+  defaultTime
+
+  """column name"""
+  id
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  paidBlockOut
+
+  """column name"""
+  type
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "block_out_options"
+"""
+input block_out_options_set_input {
+  backgroundColor: String
+  defaultTime: Int
+  is_active: Boolean
+  name: String
+  paidBlockOut: Boolean
+  type: String
+}
+
+"""aggregate stddev on columns"""
+type block_out_options_stddev_fields {
+  defaultTime: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type block_out_options_stddev_pop_fields {
+  defaultTime: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type block_out_options_stddev_samp_fields {
+  defaultTime: Float
+}
+
+"""aggregate sum on columns"""
+type block_out_options_sum_fields {
+  defaultTime: Int
+}
+
+"""
+update columns of table "block_out_options"
+"""
+enum block_out_options_update_column {
+  """column name"""
+  backgroundColor
+
+  """column name"""
+  defaultTime
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  paidBlockOut
+
+  """column name"""
+  type
+}
+
+"""aggregate var_pop on columns"""
+type block_out_options_var_pop_fields {
+  defaultTime: Float
+}
+
+"""aggregate var_samp on columns"""
+type block_out_options_var_samp_fields {
+  defaultTime: Float
+}
+
+"""aggregate variance on columns"""
+type block_out_options_variance_fields {
+  defaultTime: Float
+}
+
 enum booking_master_cancel_status {
   is_false
   is_true
@@ -9565,19 +9817,145 @@ enum bookitpro_general_integration_method {
 }
 
 """
+columns and relationships of "business_details"
+"""
+type business_details {
+  booking_multiple_attendees_plural: String!
+  booking_multiple_attendees_singular: String!
+  business_location: String!
+  business_type: String!
+  businses_name: String!
+  client_email: String!
+  client_phone: String!
+  client_postal: String!
+  client_sms: String!
+  company_email: String!
+  currency: String!
+  date_format: String!
+  default_language_clients: String!
+  default_language_staff: String!
+  disable_prescriptions: Boolean!
+  employee_plural: String!
+  employee_singular: String!
+  history_data: Boolean!
+  id: Int!
+  leads_email: String!
+  leads_phone: String!
+  leads_postal: String!
+  leads_sms: String!
+  medical_approvals: Boolean!
+  people_attend_appointment_plural: String!
+  people_attend_appointment_singular: String!
+  perform_surgical: Boolean!
+  phone: String
+  secure_medical_forms: Boolean!
+  teacher_plural: String!
+  teacher_singular: String!
+  time_zone: String!
+  treatment_cycles: String!
+  vat: String!
+  website: String!
+  week_start: String!
+}
+
+"""
+Boolean expression to filter rows from the table "business_details". All fields are combined with a logical 'AND'.
+"""
+input business_details_bool_exp {
+  _and: [business_details_bool_exp!]
+  _not: business_details_bool_exp
+  _or: [business_details_bool_exp!]
+  booking_multiple_attendees_plural: String_comparison_exp
+  booking_multiple_attendees_singular: String_comparison_exp
+  business_location: String_comparison_exp
+  business_type: String_comparison_exp
+  businses_name: String_comparison_exp
+  client_email: String_comparison_exp
+  client_phone: String_comparison_exp
+  client_postal: String_comparison_exp
+  client_sms: String_comparison_exp
+  company_email: String_comparison_exp
+  currency: String_comparison_exp
+  date_format: String_comparison_exp
+  default_language_clients: String_comparison_exp
+  default_language_staff: String_comparison_exp
+  disable_prescriptions: Boolean_comparison_exp
+  employee_plural: String_comparison_exp
+  employee_singular: String_comparison_exp
+  history_data: Boolean_comparison_exp
+  id: Int_comparison_exp
+  leads_email: String_comparison_exp
+  leads_phone: String_comparison_exp
+  leads_postal: String_comparison_exp
+  leads_sms: String_comparison_exp
+  medical_approvals: Boolean_comparison_exp
+  people_attend_appointment_plural: String_comparison_exp
+  people_attend_appointment_singular: String_comparison_exp
+  perform_surgical: Boolean_comparison_exp
+  phone: String_comparison_exp
+  secure_medical_forms: Boolean_comparison_exp
+  teacher_plural: String_comparison_exp
+  teacher_singular: String_comparison_exp
+  time_zone: String_comparison_exp
+  treatment_cycles: String_comparison_exp
+  vat: String_comparison_exp
+  website: String_comparison_exp
+  week_start: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "business_details"
+"""
+enum business_details_constraint {
+  """unique or primary key constraint"""
+  business_details_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "business_details"
+"""
+input business_details_inc_input {
+  id: Int
+}
+
+"""
 input type for inserting data into table "business_details"
 """
 input business_details_insert_input {
+  booking_multiple_attendees_plural: String
+  booking_multiple_attendees_singular: String
   business_location: String
   business_type: String
   businses_name: String
+  client_email: String
+  client_phone: String
+  client_postal: String
+  client_sms: String
   company_email: String
   currency: String
   date_format: String
   default_language_clients: String
   default_language_staff: String
+  disable_prescriptions: Boolean
+  employee_plural: String
+  employee_singular: String
+  history_data: Boolean
+  id: Int
+  leads_email: String
+  leads_phone: String
+  leads_postal: String
+  leads_sms: String
+  medical_approvals: Boolean
+  people_attend_appointment_plural: String
+  people_attend_appointment_singular: String
+  perform_surgical: Boolean
   phone: String
+  secure_medical_forms: Boolean
+  teacher_plural: String
+  teacher_singular: String
   time_zone: String
+  treatment_cycles: String
+  vat: String
   website: String
   week_start: String
 }
@@ -9588,6 +9966,695 @@ response of any mutation on the table "business_details"
 type business_details_mutation_response {
   """number of rows affected by the mutation"""
   affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [business_details!]!
+}
+
+"""
+on conflict condition type for table "business_details"
+"""
+input business_details_on_conflict {
+  constraint: business_details_constraint!
+  update_columns: [business_details_update_column!]!
+  where: business_details_bool_exp
+}
+
+"""Ordering options when selecting data from "business_details"."""
+input business_details_order_by {
+  booking_multiple_attendees_plural: order_by
+  booking_multiple_attendees_singular: order_by
+  business_location: order_by
+  business_type: order_by
+  businses_name: order_by
+  client_email: order_by
+  client_phone: order_by
+  client_postal: order_by
+  client_sms: order_by
+  company_email: order_by
+  currency: order_by
+  date_format: order_by
+  default_language_clients: order_by
+  default_language_staff: order_by
+  disable_prescriptions: order_by
+  employee_plural: order_by
+  employee_singular: order_by
+  history_data: order_by
+  id: order_by
+  leads_email: order_by
+  leads_phone: order_by
+  leads_postal: order_by
+  leads_sms: order_by
+  medical_approvals: order_by
+  people_attend_appointment_plural: order_by
+  people_attend_appointment_singular: order_by
+  perform_surgical: order_by
+  phone: order_by
+  secure_medical_forms: order_by
+  teacher_plural: order_by
+  teacher_singular: order_by
+  time_zone: order_by
+  treatment_cycles: order_by
+  vat: order_by
+  website: order_by
+  week_start: order_by
+}
+
+"""primary key columns input for table: business_details"""
+input business_details_pk_columns_input {
+  id: Int!
+}
+
+"""
+select columns of table "business_details"
+"""
+enum business_details_select_column {
+  """column name"""
+  booking_multiple_attendees_plural
+
+  """column name"""
+  booking_multiple_attendees_singular
+
+  """column name"""
+  business_location
+
+  """column name"""
+  business_type
+
+  """column name"""
+  businses_name
+
+  """column name"""
+  client_email
+
+  """column name"""
+  client_phone
+
+  """column name"""
+  client_postal
+
+  """column name"""
+  client_sms
+
+  """column name"""
+  company_email
+
+  """column name"""
+  currency
+
+  """column name"""
+  date_format
+
+  """column name"""
+  default_language_clients
+
+  """column name"""
+  default_language_staff
+
+  """column name"""
+  disable_prescriptions
+
+  """column name"""
+  employee_plural
+
+  """column name"""
+  employee_singular
+
+  """column name"""
+  history_data
+
+  """column name"""
+  id
+
+  """column name"""
+  leads_email
+
+  """column name"""
+  leads_phone
+
+  """column name"""
+  leads_postal
+
+  """column name"""
+  leads_sms
+
+  """column name"""
+  medical_approvals
+
+  """column name"""
+  people_attend_appointment_plural
+
+  """column name"""
+  people_attend_appointment_singular
+
+  """column name"""
+  perform_surgical
+
+  """column name"""
+  phone
+
+  """column name"""
+  secure_medical_forms
+
+  """column name"""
+  teacher_plural
+
+  """column name"""
+  teacher_singular
+
+  """column name"""
+  time_zone
+
+  """column name"""
+  treatment_cycles
+
+  """column name"""
+  vat
+
+  """column name"""
+  website
+
+  """column name"""
+  week_start
+}
+
+"""
+input type for updating data in table "business_details"
+"""
+input business_details_set_input {
+  booking_multiple_attendees_plural: String
+  booking_multiple_attendees_singular: String
+  business_location: String
+  business_type: String
+  businses_name: String
+  client_email: String
+  client_phone: String
+  client_postal: String
+  client_sms: String
+  company_email: String
+  currency: String
+  date_format: String
+  default_language_clients: String
+  default_language_staff: String
+  disable_prescriptions: Boolean
+  employee_plural: String
+  employee_singular: String
+  history_data: Boolean
+  id: Int
+  leads_email: String
+  leads_phone: String
+  leads_postal: String
+  leads_sms: String
+  medical_approvals: Boolean
+  people_attend_appointment_plural: String
+  people_attend_appointment_singular: String
+  perform_surgical: Boolean
+  phone: String
+  secure_medical_forms: Boolean
+  teacher_plural: String
+  teacher_singular: String
+  time_zone: String
+  treatment_cycles: String
+  vat: String
+  website: String
+  week_start: String
+}
+
+"""
+update columns of table "business_details"
+"""
+enum business_details_update_column {
+  """column name"""
+  booking_multiple_attendees_plural
+
+  """column name"""
+  booking_multiple_attendees_singular
+
+  """column name"""
+  business_location
+
+  """column name"""
+  business_type
+
+  """column name"""
+  businses_name
+
+  """column name"""
+  client_email
+
+  """column name"""
+  client_phone
+
+  """column name"""
+  client_postal
+
+  """column name"""
+  client_sms
+
+  """column name"""
+  company_email
+
+  """column name"""
+  currency
+
+  """column name"""
+  date_format
+
+  """column name"""
+  default_language_clients
+
+  """column name"""
+  default_language_staff
+
+  """column name"""
+  disable_prescriptions
+
+  """column name"""
+  employee_plural
+
+  """column name"""
+  employee_singular
+
+  """column name"""
+  history_data
+
+  """column name"""
+  id
+
+  """column name"""
+  leads_email
+
+  """column name"""
+  leads_phone
+
+  """column name"""
+  leads_postal
+
+  """column name"""
+  leads_sms
+
+  """column name"""
+  medical_approvals
+
+  """column name"""
+  people_attend_appointment_plural
+
+  """column name"""
+  people_attend_appointment_singular
+
+  """column name"""
+  perform_surgical
+
+  """column name"""
+  phone
+
+  """column name"""
+  secure_medical_forms
+
+  """column name"""
+  teacher_plural
+
+  """column name"""
+  teacher_singular
+
+  """column name"""
+  time_zone
+
+  """column name"""
+  treatment_cycles
+
+  """column name"""
+  vat
+
+  """column name"""
+  website
+
+  """column name"""
+  week_start
+}
+
+"""
+columns and relationships of "calendar_settings"
+"""
+type calendar_settings {
+  advanced_calendar_lockout: Boolean!
+  allow_appointments_to_overlap: Boolean!
+  allow_service_without_contract_price: Boolean!
+  appointment_reminder: Boolean!
+  auto_complete: Boolean!
+  auto_lock: Int!
+  created_at: timestamptz!
+  disable_booking_from_package: Boolean!
+  disable_filtering_by_service: Boolean!
+  email_confirmation: Boolean!
+  enable_initials: Boolean!
+  end_time: time!
+  font_size: String
+  group_user_columns_by_location: Boolean!
+  hide_appointment_times: Boolean!
+  hide_client_name_on_appointment_arrival_notification: Boolean!
+  hide_show_accounts: Boolean!
+  hide_surnames: Boolean!
+  id: uuid!
+  ordering_the_employees_by_location: Boolean!
+  raise_invoice_when_appointment_is_completed: Boolean!
+  request_feedback: Boolean!
+  revert_to_original_room_view: Boolean!
+  sms_confirmation: Boolean!
+  start_time: time!
+  time_slot_size: Int!
+  updated_at: timestamptz!
+}
+
+"""
+Boolean expression to filter rows from the table "calendar_settings". All fields are combined with a logical 'AND'.
+"""
+input calendar_settings_bool_exp {
+  _and: [calendar_settings_bool_exp!]
+  _not: calendar_settings_bool_exp
+  _or: [calendar_settings_bool_exp!]
+  advanced_calendar_lockout: Boolean_comparison_exp
+  allow_appointments_to_overlap: Boolean_comparison_exp
+  allow_service_without_contract_price: Boolean_comparison_exp
+  appointment_reminder: Boolean_comparison_exp
+  auto_complete: Boolean_comparison_exp
+  auto_lock: Int_comparison_exp
+  created_at: timestamptz_comparison_exp
+  disable_booking_from_package: Boolean_comparison_exp
+  disable_filtering_by_service: Boolean_comparison_exp
+  email_confirmation: Boolean_comparison_exp
+  enable_initials: Boolean_comparison_exp
+  end_time: time_comparison_exp
+  font_size: String_comparison_exp
+  group_user_columns_by_location: Boolean_comparison_exp
+  hide_appointment_times: Boolean_comparison_exp
+  hide_client_name_on_appointment_arrival_notification: Boolean_comparison_exp
+  hide_show_accounts: Boolean_comparison_exp
+  hide_surnames: Boolean_comparison_exp
+  id: uuid_comparison_exp
+  ordering_the_employees_by_location: Boolean_comparison_exp
+  raise_invoice_when_appointment_is_completed: Boolean_comparison_exp
+  request_feedback: Boolean_comparison_exp
+  revert_to_original_room_view: Boolean_comparison_exp
+  sms_confirmation: Boolean_comparison_exp
+  start_time: time_comparison_exp
+  time_slot_size: Int_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "calendar_settings"
+"""
+enum calendar_settings_constraint {
+  """unique or primary key constraint"""
+  calendar_settings_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "calendar_settings"
+"""
+input calendar_settings_inc_input {
+  auto_lock: Int
+  time_slot_size: Int
+}
+
+"""
+input type for inserting data into table "calendar_settings"
+"""
+input calendar_settings_insert_input {
+  advanced_calendar_lockout: Boolean
+  allow_appointments_to_overlap: Boolean
+  allow_service_without_contract_price: Boolean
+  appointment_reminder: Boolean
+  auto_complete: Boolean
+  auto_lock: Int
+  disable_booking_from_package: Boolean
+  disable_filtering_by_service: Boolean
+  email_confirmation: Boolean
+  enable_initials: Boolean
+  end_time: time
+  font_size: String
+  group_user_columns_by_location: Boolean
+  hide_appointment_times: Boolean
+  hide_client_name_on_appointment_arrival_notification: Boolean
+  hide_show_accounts: Boolean
+  hide_surnames: Boolean
+  ordering_the_employees_by_location: Boolean
+  raise_invoice_when_appointment_is_completed: Boolean
+  request_feedback: Boolean
+  revert_to_original_room_view: Boolean
+  sms_confirmation: Boolean
+  start_time: time
+  time_slot_size: Int
+}
+
+"""
+response of any mutation on the table "calendar_settings"
+"""
+type calendar_settings_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [calendar_settings!]!
+}
+
+"""
+on conflict condition type for table "calendar_settings"
+"""
+input calendar_settings_on_conflict {
+  constraint: calendar_settings_constraint!
+  update_columns: [calendar_settings_update_column!]!
+  where: calendar_settings_bool_exp
+}
+
+"""Ordering options when selecting data from "calendar_settings"."""
+input calendar_settings_order_by {
+  advanced_calendar_lockout: order_by
+  allow_appointments_to_overlap: order_by
+  allow_service_without_contract_price: order_by
+  appointment_reminder: order_by
+  auto_complete: order_by
+  auto_lock: order_by
+  created_at: order_by
+  disable_booking_from_package: order_by
+  disable_filtering_by_service: order_by
+  email_confirmation: order_by
+  enable_initials: order_by
+  end_time: order_by
+  font_size: order_by
+  group_user_columns_by_location: order_by
+  hide_appointment_times: order_by
+  hide_client_name_on_appointment_arrival_notification: order_by
+  hide_show_accounts: order_by
+  hide_surnames: order_by
+  id: order_by
+  ordering_the_employees_by_location: order_by
+  raise_invoice_when_appointment_is_completed: order_by
+  request_feedback: order_by
+  revert_to_original_room_view: order_by
+  sms_confirmation: order_by
+  start_time: order_by
+  time_slot_size: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: calendar_settings"""
+input calendar_settings_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "calendar_settings"
+"""
+enum calendar_settings_select_column {
+  """column name"""
+  advanced_calendar_lockout
+
+  """column name"""
+  allow_appointments_to_overlap
+
+  """column name"""
+  allow_service_without_contract_price
+
+  """column name"""
+  appointment_reminder
+
+  """column name"""
+  auto_complete
+
+  """column name"""
+  auto_lock
+
+  """column name"""
+  created_at
+
+  """column name"""
+  disable_booking_from_package
+
+  """column name"""
+  disable_filtering_by_service
+
+  """column name"""
+  email_confirmation
+
+  """column name"""
+  enable_initials
+
+  """column name"""
+  end_time
+
+  """column name"""
+  font_size
+
+  """column name"""
+  group_user_columns_by_location
+
+  """column name"""
+  hide_appointment_times
+
+  """column name"""
+  hide_client_name_on_appointment_arrival_notification
+
+  """column name"""
+  hide_show_accounts
+
+  """column name"""
+  hide_surnames
+
+  """column name"""
+  id
+
+  """column name"""
+  ordering_the_employees_by_location
+
+  """column name"""
+  raise_invoice_when_appointment_is_completed
+
+  """column name"""
+  request_feedback
+
+  """column name"""
+  revert_to_original_room_view
+
+  """column name"""
+  sms_confirmation
+
+  """column name"""
+  start_time
+
+  """column name"""
+  time_slot_size
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "calendar_settings"
+"""
+input calendar_settings_set_input {
+  advanced_calendar_lockout: Boolean
+  allow_appointments_to_overlap: Boolean
+  allow_service_without_contract_price: Boolean
+  appointment_reminder: Boolean
+  auto_complete: Boolean
+  auto_lock: Int
+  disable_booking_from_package: Boolean
+  disable_filtering_by_service: Boolean
+  email_confirmation: Boolean
+  enable_initials: Boolean
+  end_time: time
+  font_size: String
+  group_user_columns_by_location: Boolean
+  hide_appointment_times: Boolean
+  hide_client_name_on_appointment_arrival_notification: Boolean
+  hide_show_accounts: Boolean
+  hide_surnames: Boolean
+  ordering_the_employees_by_location: Boolean
+  raise_invoice_when_appointment_is_completed: Boolean
+  request_feedback: Boolean
+  revert_to_original_room_view: Boolean
+  sms_confirmation: Boolean
+  start_time: time
+  time_slot_size: Int
+}
+
+"""
+update columns of table "calendar_settings"
+"""
+enum calendar_settings_update_column {
+  """column name"""
+  advanced_calendar_lockout
+
+  """column name"""
+  allow_appointments_to_overlap
+
+  """column name"""
+  allow_service_without_contract_price
+
+  """column name"""
+  appointment_reminder
+
+  """column name"""
+  auto_complete
+
+  """column name"""
+  auto_lock
+
+  """column name"""
+  disable_booking_from_package
+
+  """column name"""
+  disable_filtering_by_service
+
+  """column name"""
+  email_confirmation
+
+  """column name"""
+  enable_initials
+
+  """column name"""
+  end_time
+
+  """column name"""
+  font_size
+
+  """column name"""
+  group_user_columns_by_location
+
+  """column name"""
+  hide_appointment_times
+
+  """column name"""
+  hide_client_name_on_appointment_arrival_notification
+
+  """column name"""
+  hide_show_accounts
+
+  """column name"""
+  hide_surnames
+
+  """column name"""
+  ordering_the_employees_by_location
+
+  """column name"""
+  raise_invoice_when_appointment_is_completed
+
+  """column name"""
+  request_feedback
+
+  """column name"""
+  revert_to_original_room_view
+
+  """column name"""
+  sms_confirmation
+
+  """column name"""
+  start_time
+
+  """column name"""
+  time_slot_size
 }
 
 """
@@ -9935,6 +11002,256 @@ input candidateWhereInput {
 
 input candidateWhereUniqueInput {
   id: Int
+}
+
+"""
+columns and relationships of "category"
+"""
+type category {
+  created_at: timestamptz!
+  groupName: String
+  id: uuid!
+  is_active: Boolean!
+  name: String!
+  order: Int!
+  productsAssigned: Int!
+  updated_at: timestamptz!
+}
+
+"""
+aggregated selection of "category"
+"""
+type category_aggregate {
+  aggregate: category_aggregate_fields
+  nodes: [category!]!
+}
+
+"""
+aggregate fields of "category"
+"""
+type category_aggregate_fields {
+  avg: category_avg_fields
+  count(columns: [category_select_column!], distinct: Boolean): Int!
+  max: category_max_fields
+  min: category_min_fields
+  stddev: category_stddev_fields
+  stddev_pop: category_stddev_pop_fields
+  stddev_samp: category_stddev_samp_fields
+  sum: category_sum_fields
+  var_pop: category_var_pop_fields
+  var_samp: category_var_samp_fields
+  variance: category_variance_fields
+}
+
+"""aggregate avg on columns"""
+type category_avg_fields {
+  order: Float
+  productsAssigned: Float
+}
+
+"""
+Boolean expression to filter rows from the table "category". All fields are combined with a logical 'AND'.
+"""
+input category_bool_exp {
+  _and: [category_bool_exp!]
+  _not: category_bool_exp
+  _or: [category_bool_exp!]
+  created_at: timestamptz_comparison_exp
+  groupName: String_comparison_exp
+  id: uuid_comparison_exp
+  is_active: Boolean_comparison_exp
+  name: String_comparison_exp
+  order: Int_comparison_exp
+  productsAssigned: Int_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "category"
+"""
+enum category_constraint {
+  """unique or primary key constraint"""
+  category_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "category"
+"""
+input category_inc_input {
+  order: Int
+  productsAssigned: Int
+}
+
+"""
+input type for inserting data into table "category"
+"""
+input category_insert_input {
+  groupName: String
+  is_active: Boolean
+  name: String
+  order: Int
+  productsAssigned: Int
+}
+
+"""aggregate max on columns"""
+type category_max_fields {
+  created_at: timestamptz
+  groupName: String
+  id: uuid
+  name: String
+  order: Int
+  productsAssigned: Int
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type category_min_fields {
+  created_at: timestamptz
+  groupName: String
+  id: uuid
+  name: String
+  order: Int
+  productsAssigned: Int
+  updated_at: timestamptz
+}
+
+"""
+response of any mutation on the table "category"
+"""
+type category_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [category!]!
+}
+
+"""
+on conflict condition type for table "category"
+"""
+input category_on_conflict {
+  constraint: category_constraint!
+  update_columns: [category_update_column!]!
+  where: category_bool_exp
+}
+
+"""Ordering options when selecting data from "category"."""
+input category_order_by {
+  created_at: order_by
+  groupName: order_by
+  id: order_by
+  is_active: order_by
+  name: order_by
+  order: order_by
+  productsAssigned: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: category"""
+input category_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "category"
+"""
+enum category_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  groupName
+
+  """column name"""
+  id
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  order
+
+  """column name"""
+  productsAssigned
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "category"
+"""
+input category_set_input {
+  groupName: String
+  is_active: Boolean
+  name: String
+  order: Int
+  productsAssigned: Int
+}
+
+"""aggregate stddev on columns"""
+type category_stddev_fields {
+  order: Float
+  productsAssigned: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type category_stddev_pop_fields {
+  order: Float
+  productsAssigned: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type category_stddev_samp_fields {
+  order: Float
+  productsAssigned: Float
+}
+
+"""aggregate sum on columns"""
+type category_sum_fields {
+  order: Int
+  productsAssigned: Int
+}
+
+"""
+update columns of table "category"
+"""
+enum category_update_column {
+  """column name"""
+  groupName
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  order
+
+  """column name"""
+  productsAssigned
+}
+
+"""aggregate var_pop on columns"""
+type category_var_pop_fields {
+  order: Float
+  productsAssigned: Float
+}
+
+"""aggregate var_samp on columns"""
+type category_var_samp_fields {
+  order: Float
+  productsAssigned: Float
+}
+
+"""aggregate variance on columns"""
+type category_variance_fields {
+  order: Float
+  productsAssigned: Float
 }
 
 enum class_master_class_pay {
@@ -12761,6 +14078,45 @@ type mutation_root {
   delete_appointment_status_by_pk(id: uuid!): appointment_status
 
   """
+  delete data from the table: "block_out_options"
+  """
+  delete_block_out_options(
+    """filter the rows which have to be deleted"""
+    where: block_out_options_bool_exp!
+  ): block_out_options_mutation_response
+
+  """
+  delete single row from the table: "block_out_options"
+  """
+  delete_block_out_options_by_pk(id: uuid!): block_out_options
+
+  """
+  delete data from the table: "business_details"
+  """
+  delete_business_details(
+    """filter the rows which have to be deleted"""
+    where: business_details_bool_exp!
+  ): business_details_mutation_response
+
+  """
+  delete single row from the table: "business_details"
+  """
+  delete_business_details_by_pk(id: Int!): business_details
+
+  """
+  delete data from the table: "calendar_settings"
+  """
+  delete_calendar_settings(
+    """filter the rows which have to be deleted"""
+    where: calendar_settings_bool_exp!
+  ): calendar_settings_mutation_response
+
+  """
+  delete single row from the table: "calendar_settings"
+  """
+  delete_calendar_settings_by_pk(id: uuid!): calendar_settings
+
+  """
   delete data from the table: "cancellation_reasons"
   """
   delete_cancellation_reasons(
@@ -12772,6 +14128,19 @@ type mutation_root {
   delete single row from the table: "cancellation_reasons"
   """
   delete_cancellation_reasons_by_pk(id: uuid!): cancellation_reasons
+
+  """
+  delete data from the table: "category"
+  """
+  delete_category(
+    """filter the rows which have to be deleted"""
+    where: category_bool_exp!
+  ): category_mutation_response
+
+  """
+  delete single row from the table: "category"
+  """
+  delete_category_by_pk(id: uuid!): category
 
   """
   delete data from the table: "credit_note_type"
@@ -12865,6 +14234,19 @@ type mutation_root {
   delete_lead_by_pk(id: uuid!): lead
 
   """
+  delete data from the table: "locations"
+  """
+  delete_locations(
+    """filter the rows which have to be deleted"""
+    where: locations_bool_exp!
+  ): locations_mutation_response
+
+  """
+  delete single row from the table: "locations"
+  """
+  delete_locations_by_pk(id: uuid!): locations
+
+  """
   delete data from the table: "marketing_campaign"
   """
   delete_marketing_campaign(
@@ -12917,6 +14299,45 @@ type mutation_root {
   delete_petty_cash_types_by_pk(id: uuid!): petty_cash_types
 
   """
+  delete data from the table: "product_lists"
+  """
+  delete_product_lists(
+    """filter the rows which have to be deleted"""
+    where: product_lists_bool_exp!
+  ): product_lists_mutation_response
+
+  """
+  delete single row from the table: "product_lists"
+  """
+  delete_product_lists_by_pk(id: uuid!): product_lists
+
+  """
+  delete data from the table: "prototype"
+  """
+  delete_prototype(
+    """filter the rows which have to be deleted"""
+    where: prototype_bool_exp!
+  ): prototype_mutation_response
+
+  """
+  delete single row from the table: "prototype"
+  """
+  delete_prototype_by_pk(id: uuid!): prototype
+
+  """
+  delete data from the table: "purchase_order"
+  """
+  delete_purchase_order(
+    """filter the rows which have to be deleted"""
+    where: purchase_order_bool_exp!
+  ): purchase_order_mutation_response
+
+  """
+  delete single row from the table: "purchase_order"
+  """
+  delete_purchase_order_by_pk(id: uuid!): purchase_order
+
+  """
   delete data from the table: "rota_templates"
   """
   delete_rota_templates(
@@ -12941,6 +14362,58 @@ type mutation_root {
   delete single row from the table: "salutation"
   """
   delete_salutation_by_pk(id: uuid!): salutation
+
+  """
+  delete data from the table: "stock_take"
+  """
+  delete_stock_take(
+    """filter the rows which have to be deleted"""
+    where: stock_take_bool_exp!
+  ): stock_take_mutation_response
+
+  """
+  delete single row from the table: "stock_take"
+  """
+  delete_stock_take_by_pk(id: uuid!): stock_take
+
+  """
+  delete data from the table: "supplier"
+  """
+  delete_supplier(
+    """filter the rows which have to be deleted"""
+    where: supplier_bool_exp!
+  ): supplier_mutation_response
+
+  """
+  delete single row from the table: "supplier"
+  """
+  delete_supplier_by_pk(id: uuid!): supplier
+
+  """
+  delete data from the table: "tax_rates"
+  """
+  delete_tax_rates(
+    """filter the rows which have to be deleted"""
+    where: tax_rates_bool_exp!
+  ): tax_rates_mutation_response
+
+  """
+  delete single row from the table: "tax_rates"
+  """
+  delete_tax_rates_by_pk(id: uuid!): tax_rates
+
+  """
+  delete data from the table: "third_parties"
+  """
+  delete_third_parties(
+    """filter the rows which have to be deleted"""
+    where: third_parties_bool_exp!
+  ): third_parties_mutation_response
+
+  """
+  delete single row from the table: "third_parties"
+  """
+  delete_third_parties_by_pk(id: uuid!): third_parties
 
   """
   insert data into the table: "Labs"
@@ -12987,12 +14460,70 @@ type mutation_root {
   ): appointment_status
 
   """
+  insert data into the table: "block_out_options"
+  """
+  insert_block_out_options(
+    """the rows to be inserted"""
+    objects: [block_out_options_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: block_out_options_on_conflict
+  ): block_out_options_mutation_response
+
+  """
+  insert a single row into the table: "block_out_options"
+  """
+  insert_block_out_options_one(
+    """the row to be inserted"""
+    object: block_out_options_insert_input!
+
+    """on conflict condition"""
+    on_conflict: block_out_options_on_conflict
+  ): block_out_options
+
+  """
   insert data into the table: "business_details"
   """
   insert_business_details(
     """the rows to be inserted"""
     objects: [business_details_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: business_details_on_conflict
   ): business_details_mutation_response
+
+  """
+  insert a single row into the table: "business_details"
+  """
+  insert_business_details_one(
+    """the row to be inserted"""
+    object: business_details_insert_input!
+
+    """on conflict condition"""
+    on_conflict: business_details_on_conflict
+  ): business_details
+
+  """
+  insert data into the table: "calendar_settings"
+  """
+  insert_calendar_settings(
+    """the rows to be inserted"""
+    objects: [calendar_settings_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: calendar_settings_on_conflict
+  ): calendar_settings_mutation_response
+
+  """
+  insert a single row into the table: "calendar_settings"
+  """
+  insert_calendar_settings_one(
+    """the row to be inserted"""
+    object: calendar_settings_insert_input!
+
+    """on conflict condition"""
+    on_conflict: calendar_settings_on_conflict
+  ): calendar_settings
 
   """
   insert data into the table: "cancellation_reasons"
@@ -13015,6 +14546,28 @@ type mutation_root {
     """on conflict condition"""
     on_conflict: cancellation_reasons_on_conflict
   ): cancellation_reasons
+
+  """
+  insert data into the table: "category"
+  """
+  insert_category(
+    """the rows to be inserted"""
+    objects: [category_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: category_on_conflict
+  ): category_mutation_response
+
+  """
+  insert a single row into the table: "category"
+  """
+  insert_category_one(
+    """the row to be inserted"""
+    object: category_insert_input!
+
+    """on conflict condition"""
+    on_conflict: category_on_conflict
+  ): category
 
   """
   insert data into the table: "colors"
@@ -13297,6 +14850,72 @@ type mutation_root {
   ): petty_cash_types
 
   """
+  insert data into the table: "product_lists"
+  """
+  insert_product_lists(
+    """the rows to be inserted"""
+    objects: [product_lists_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: product_lists_on_conflict
+  ): product_lists_mutation_response
+
+  """
+  insert a single row into the table: "product_lists"
+  """
+  insert_product_lists_one(
+    """the row to be inserted"""
+    object: product_lists_insert_input!
+
+    """on conflict condition"""
+    on_conflict: product_lists_on_conflict
+  ): product_lists
+
+  """
+  insert data into the table: "prototype"
+  """
+  insert_prototype(
+    """the rows to be inserted"""
+    objects: [prototype_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: prototype_on_conflict
+  ): prototype_mutation_response
+
+  """
+  insert a single row into the table: "prototype"
+  """
+  insert_prototype_one(
+    """the row to be inserted"""
+    object: prototype_insert_input!
+
+    """on conflict condition"""
+    on_conflict: prototype_on_conflict
+  ): prototype
+
+  """
+  insert data into the table: "purchase_order"
+  """
+  insert_purchase_order(
+    """the rows to be inserted"""
+    objects: [purchase_order_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: purchase_order_on_conflict
+  ): purchase_order_mutation_response
+
+  """
+  insert a single row into the table: "purchase_order"
+  """
+  insert_purchase_order_one(
+    """the row to be inserted"""
+    object: purchase_order_insert_input!
+
+    """on conflict condition"""
+    on_conflict: purchase_order_on_conflict
+  ): purchase_order
+
+  """
   insert data into the table: "rota_templates"
   """
   insert_rota_templates(
@@ -13339,6 +14958,94 @@ type mutation_root {
     """on conflict condition"""
     on_conflict: salutation_on_conflict
   ): salutation
+
+  """
+  insert data into the table: "stock_take"
+  """
+  insert_stock_take(
+    """the rows to be inserted"""
+    objects: [stock_take_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: stock_take_on_conflict
+  ): stock_take_mutation_response
+
+  """
+  insert a single row into the table: "stock_take"
+  """
+  insert_stock_take_one(
+    """the row to be inserted"""
+    object: stock_take_insert_input!
+
+    """on conflict condition"""
+    on_conflict: stock_take_on_conflict
+  ): stock_take
+
+  """
+  insert data into the table: "supplier"
+  """
+  insert_supplier(
+    """the rows to be inserted"""
+    objects: [supplier_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: supplier_on_conflict
+  ): supplier_mutation_response
+
+  """
+  insert a single row into the table: "supplier"
+  """
+  insert_supplier_one(
+    """the row to be inserted"""
+    object: supplier_insert_input!
+
+    """on conflict condition"""
+    on_conflict: supplier_on_conflict
+  ): supplier
+
+  """
+  insert data into the table: "tax_rates"
+  """
+  insert_tax_rates(
+    """the rows to be inserted"""
+    objects: [tax_rates_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: tax_rates_on_conflict
+  ): tax_rates_mutation_response
+
+  """
+  insert a single row into the table: "tax_rates"
+  """
+  insert_tax_rates_one(
+    """the row to be inserted"""
+    object: tax_rates_insert_input!
+
+    """on conflict condition"""
+    on_conflict: tax_rates_on_conflict
+  ): tax_rates
+
+  """
+  insert data into the table: "third_parties"
+  """
+  insert_third_parties(
+    """the rows to be inserted"""
+    objects: [third_parties_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: third_parties_on_conflict
+  ): third_parties_mutation_response
+
+  """
+  insert a single row into the table: "third_parties"
+  """
+  insert_third_parties_one(
+    """the row to be inserted"""
+    object: third_parties_insert_input!
+
+    """on conflict condition"""
+    on_conflict: third_parties_on_conflict
+  ): third_parties
   updateManyAcLog(data: AcLogUpdateManyMutationInput!, where: AcLogWhereInput): AffectedRowsOutput
   updateManyAcLogAction(data: AcLogActionUpdateManyMutationInput!, where: AcLogActionWhereInput): AffectedRowsOutput
   updateManyAcLogUrl(data: AcLogUrlUpdateManyMutationInput!, where: AcLogUrlWhereInput): AffectedRowsOutput
@@ -13537,6 +15244,84 @@ type mutation_root {
   ): appointment_status
 
   """
+  update data of the table: "block_out_options"
+  """
+  update_block_out_options(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: block_out_options_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: block_out_options_set_input
+
+    """filter the rows which have to be updated"""
+    where: block_out_options_bool_exp!
+  ): block_out_options_mutation_response
+
+  """
+  update single row of the table: "block_out_options"
+  """
+  update_block_out_options_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: block_out_options_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: block_out_options_set_input
+    pk_columns: block_out_options_pk_columns_input!
+  ): block_out_options
+
+  """
+  update data of the table: "business_details"
+  """
+  update_business_details(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: business_details_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: business_details_set_input
+
+    """filter the rows which have to be updated"""
+    where: business_details_bool_exp!
+  ): business_details_mutation_response
+
+  """
+  update single row of the table: "business_details"
+  """
+  update_business_details_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: business_details_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: business_details_set_input
+    pk_columns: business_details_pk_columns_input!
+  ): business_details
+
+  """
+  update data of the table: "calendar_settings"
+  """
+  update_calendar_settings(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: calendar_settings_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: calendar_settings_set_input
+
+    """filter the rows which have to be updated"""
+    where: calendar_settings_bool_exp!
+  ): calendar_settings_mutation_response
+
+  """
+  update single row of the table: "calendar_settings"
+  """
+  update_calendar_settings_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: calendar_settings_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: calendar_settings_set_input
+    pk_columns: calendar_settings_pk_columns_input!
+  ): calendar_settings
+
+  """
   update data of the table: "cancellation_reasons"
   """
   update_cancellation_reasons(
@@ -13561,6 +15346,32 @@ type mutation_root {
     _set: cancellation_reasons_set_input
     pk_columns: cancellation_reasons_pk_columns_input!
   ): cancellation_reasons
+
+  """
+  update data of the table: "category"
+  """
+  update_category(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: category_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: category_set_input
+
+    """filter the rows which have to be updated"""
+    where: category_bool_exp!
+  ): category_mutation_response
+
+  """
+  update single row of the table: "category"
+  """
+  update_category_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: category_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: category_set_input
+    pk_columns: category_pk_columns_input!
+  ): category
 
   """
   update data of the table: "credit_note_type"
@@ -13875,6 +15686,84 @@ type mutation_root {
   ): petty_cash_types
 
   """
+  update data of the table: "product_lists"
+  """
+  update_product_lists(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: product_lists_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: product_lists_set_input
+
+    """filter the rows which have to be updated"""
+    where: product_lists_bool_exp!
+  ): product_lists_mutation_response
+
+  """
+  update single row of the table: "product_lists"
+  """
+  update_product_lists_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: product_lists_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: product_lists_set_input
+    pk_columns: product_lists_pk_columns_input!
+  ): product_lists
+
+  """
+  update data of the table: "prototype"
+  """
+  update_prototype(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: prototype_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: prototype_set_input
+
+    """filter the rows which have to be updated"""
+    where: prototype_bool_exp!
+  ): prototype_mutation_response
+
+  """
+  update single row of the table: "prototype"
+  """
+  update_prototype_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: prototype_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: prototype_set_input
+    pk_columns: prototype_pk_columns_input!
+  ): prototype
+
+  """
+  update data of the table: "purchase_order"
+  """
+  update_purchase_order(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: purchase_order_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: purchase_order_set_input
+
+    """filter the rows which have to be updated"""
+    where: purchase_order_bool_exp!
+  ): purchase_order_mutation_response
+
+  """
+  update single row of the table: "purchase_order"
+  """
+  update_purchase_order_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: purchase_order_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: purchase_order_set_input
+    pk_columns: purchase_order_pk_columns_input!
+  ): purchase_order
+
+  """
   update data of the table: "rota_templates"
   """
   update_rota_templates(
@@ -13925,6 +15814,110 @@ type mutation_root {
     _set: salutation_set_input
     pk_columns: salutation_pk_columns_input!
   ): salutation
+
+  """
+  update data of the table: "stock_take"
+  """
+  update_stock_take(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: stock_take_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: stock_take_set_input
+
+    """filter the rows which have to be updated"""
+    where: stock_take_bool_exp!
+  ): stock_take_mutation_response
+
+  """
+  update single row of the table: "stock_take"
+  """
+  update_stock_take_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: stock_take_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: stock_take_set_input
+    pk_columns: stock_take_pk_columns_input!
+  ): stock_take
+
+  """
+  update data of the table: "supplier"
+  """
+  update_supplier(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: supplier_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: supplier_set_input
+
+    """filter the rows which have to be updated"""
+    where: supplier_bool_exp!
+  ): supplier_mutation_response
+
+  """
+  update single row of the table: "supplier"
+  """
+  update_supplier_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: supplier_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: supplier_set_input
+    pk_columns: supplier_pk_columns_input!
+  ): supplier
+
+  """
+  update data of the table: "tax_rates"
+  """
+  update_tax_rates(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: tax_rates_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: tax_rates_set_input
+
+    """filter the rows which have to be updated"""
+    where: tax_rates_bool_exp!
+  ): tax_rates_mutation_response
+
+  """
+  update single row of the table: "tax_rates"
+  """
+  update_tax_rates_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: tax_rates_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: tax_rates_set_input
+    pk_columns: tax_rates_pk_columns_input!
+  ): tax_rates
+
+  """
+  update data of the table: "third_parties"
+  """
+  update_third_parties(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: third_parties_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: third_parties_set_input
+
+    """filter the rows which have to be updated"""
+    where: third_parties_bool_exp!
+  ): third_parties_mutation_response
+
+  """
+  update single row of the table: "third_parties"
+  """
+  update_third_parties_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: third_parties_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: third_parties_set_input
+    pk_columns: third_parties_pk_columns_input!
+  ): third_parties
   upsertOneAcLog(create: AcLogCreateInput!, update: AcLogUpdateInput!, where: AcLogWhereUniqueInput!): AcLog
   upsertOneAcLogAction(create: AcLogActionCreateInput!, update: AcLogActionUpdateInput!, where: AcLogActionWhereUniqueInput!): AcLogAction
   upsertOneAcLogUrl(create: AcLogUrlCreateInput!, update: AcLogUrlUpdateInput!, where: AcLogUrlWhereUniqueInput!): AcLogUrl
@@ -14506,6 +16499,795 @@ type petty_cash_types_variance_fields {
   order: Float
 }
 
+"""
+columns and relationships of "product_lists"
+"""
+type product_lists {
+  category: String!
+  cost: numeric!
+  created_at: timestamptz!
+  id: uuid!
+  is_active: Boolean!
+  name: String!
+  order: Int!
+  quantity: Int!
+  retail: numeric!
+  status: String!
+  updated_at: timestamptz!
+}
+
+"""
+aggregated selection of "product_lists"
+"""
+type product_lists_aggregate {
+  aggregate: product_lists_aggregate_fields
+  nodes: [product_lists!]!
+}
+
+"""
+aggregate fields of "product_lists"
+"""
+type product_lists_aggregate_fields {
+  avg: product_lists_avg_fields
+  count(columns: [product_lists_select_column!], distinct: Boolean): Int!
+  max: product_lists_max_fields
+  min: product_lists_min_fields
+  stddev: product_lists_stddev_fields
+  stddev_pop: product_lists_stddev_pop_fields
+  stddev_samp: product_lists_stddev_samp_fields
+  sum: product_lists_sum_fields
+  var_pop: product_lists_var_pop_fields
+  var_samp: product_lists_var_samp_fields
+  variance: product_lists_variance_fields
+}
+
+"""aggregate avg on columns"""
+type product_lists_avg_fields {
+  cost: Float
+  order: Float
+  quantity: Float
+  retail: Float
+}
+
+"""
+Boolean expression to filter rows from the table "product_lists". All fields are combined with a logical 'AND'.
+"""
+input product_lists_bool_exp {
+  _and: [product_lists_bool_exp!]
+  _not: product_lists_bool_exp
+  _or: [product_lists_bool_exp!]
+  category: String_comparison_exp
+  cost: numeric_comparison_exp
+  created_at: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  is_active: Boolean_comparison_exp
+  name: String_comparison_exp
+  order: Int_comparison_exp
+  quantity: Int_comparison_exp
+  retail: numeric_comparison_exp
+  status: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "product_lists"
+"""
+enum product_lists_constraint {
+  """unique or primary key constraint"""
+  product_lists_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "product_lists"
+"""
+input product_lists_inc_input {
+  cost: numeric
+  order: Int
+  quantity: Int
+  retail: numeric
+}
+
+"""
+input type for inserting data into table "product_lists"
+"""
+input product_lists_insert_input {
+  category: String
+  cost: numeric
+  is_active: Boolean
+  name: String
+  order: Int
+  quantity: Int
+  retail: numeric
+  status: String
+}
+
+"""aggregate max on columns"""
+type product_lists_max_fields {
+  category: String
+  cost: numeric
+  created_at: timestamptz
+  id: uuid
+  name: String
+  order: Int
+  quantity: Int
+  retail: numeric
+  status: String
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type product_lists_min_fields {
+  category: String
+  cost: numeric
+  created_at: timestamptz
+  id: uuid
+  name: String
+  order: Int
+  quantity: Int
+  retail: numeric
+  status: String
+  updated_at: timestamptz
+}
+
+"""
+response of any mutation on the table "product_lists"
+"""
+type product_lists_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [product_lists!]!
+}
+
+"""
+on conflict condition type for table "product_lists"
+"""
+input product_lists_on_conflict {
+  constraint: product_lists_constraint!
+  update_columns: [product_lists_update_column!]!
+  where: product_lists_bool_exp
+}
+
+"""Ordering options when selecting data from "product_lists"."""
+input product_lists_order_by {
+  category: order_by
+  cost: order_by
+  created_at: order_by
+  id: order_by
+  is_active: order_by
+  name: order_by
+  order: order_by
+  quantity: order_by
+  retail: order_by
+  status: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: product_lists"""
+input product_lists_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "product_lists"
+"""
+enum product_lists_select_column {
+  """column name"""
+  category
+
+  """column name"""
+  cost
+
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  order
+
+  """column name"""
+  quantity
+
+  """column name"""
+  retail
+
+  """column name"""
+  status
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "product_lists"
+"""
+input product_lists_set_input {
+  category: String
+  cost: numeric
+  is_active: Boolean
+  name: String
+  order: Int
+  quantity: Int
+  retail: numeric
+  status: String
+}
+
+"""aggregate stddev on columns"""
+type product_lists_stddev_fields {
+  cost: Float
+  order: Float
+  quantity: Float
+  retail: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type product_lists_stddev_pop_fields {
+  cost: Float
+  order: Float
+  quantity: Float
+  retail: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type product_lists_stddev_samp_fields {
+  cost: Float
+  order: Float
+  quantity: Float
+  retail: Float
+}
+
+"""aggregate sum on columns"""
+type product_lists_sum_fields {
+  cost: numeric
+  order: Int
+  quantity: Int
+  retail: numeric
+}
+
+"""
+update columns of table "product_lists"
+"""
+enum product_lists_update_column {
+  """column name"""
+  category
+
+  """column name"""
+  cost
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  order
+
+  """column name"""
+  quantity
+
+  """column name"""
+  retail
+
+  """column name"""
+  status
+}
+
+"""aggregate var_pop on columns"""
+type product_lists_var_pop_fields {
+  cost: Float
+  order: Float
+  quantity: Float
+  retail: Float
+}
+
+"""aggregate var_samp on columns"""
+type product_lists_var_samp_fields {
+  cost: Float
+  order: Float
+  quantity: Float
+  retail: Float
+}
+
+"""aggregate variance on columns"""
+type product_lists_variance_fields {
+  cost: Float
+  order: Float
+  quantity: Float
+  retail: Float
+}
+
+"""
+columns and relationships of "prototype"
+"""
+type prototype {
+  created_at: timestamptz!
+  id: uuid!
+  is_active: Boolean!
+  name: String!
+  order: Int!
+  updated_at: timestamptz!
+}
+
+"""
+aggregated selection of "prototype"
+"""
+type prototype_aggregate {
+  aggregate: prototype_aggregate_fields
+  nodes: [prototype!]!
+}
+
+"""
+aggregate fields of "prototype"
+"""
+type prototype_aggregate_fields {
+  avg: prototype_avg_fields
+  count(columns: [prototype_select_column!], distinct: Boolean): Int!
+  max: prototype_max_fields
+  min: prototype_min_fields
+  stddev: prototype_stddev_fields
+  stddev_pop: prototype_stddev_pop_fields
+  stddev_samp: prototype_stddev_samp_fields
+  sum: prototype_sum_fields
+  var_pop: prototype_var_pop_fields
+  var_samp: prototype_var_samp_fields
+  variance: prototype_variance_fields
+}
+
+"""aggregate avg on columns"""
+type prototype_avg_fields {
+  order: Float
+}
+
+"""
+Boolean expression to filter rows from the table "prototype". All fields are combined with a logical 'AND'.
+"""
+input prototype_bool_exp {
+  _and: [prototype_bool_exp!]
+  _not: prototype_bool_exp
+  _or: [prototype_bool_exp!]
+  created_at: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  is_active: Boolean_comparison_exp
+  name: String_comparison_exp
+  order: Int_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "prototype"
+"""
+enum prototype_constraint {
+  """unique or primary key constraint"""
+  prototype_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "prototype"
+"""
+input prototype_inc_input {
+  order: Int
+}
+
+"""
+input type for inserting data into table "prototype"
+"""
+input prototype_insert_input {
+  is_active: Boolean
+  name: String
+  order: Int
+}
+
+"""aggregate max on columns"""
+type prototype_max_fields {
+  created_at: timestamptz
+  id: uuid
+  name: String
+  order: Int
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type prototype_min_fields {
+  created_at: timestamptz
+  id: uuid
+  name: String
+  order: Int
+  updated_at: timestamptz
+}
+
+"""
+response of any mutation on the table "prototype"
+"""
+type prototype_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [prototype!]!
+}
+
+"""
+on conflict condition type for table "prototype"
+"""
+input prototype_on_conflict {
+  constraint: prototype_constraint!
+  update_columns: [prototype_update_column!]!
+  where: prototype_bool_exp
+}
+
+"""Ordering options when selecting data from "prototype"."""
+input prototype_order_by {
+  created_at: order_by
+  id: order_by
+  is_active: order_by
+  name: order_by
+  order: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: prototype"""
+input prototype_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "prototype"
+"""
+enum prototype_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  order
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "prototype"
+"""
+input prototype_set_input {
+  is_active: Boolean
+  name: String
+  order: Int
+}
+
+"""aggregate stddev on columns"""
+type prototype_stddev_fields {
+  order: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type prototype_stddev_pop_fields {
+  order: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type prototype_stddev_samp_fields {
+  order: Float
+}
+
+"""aggregate sum on columns"""
+type prototype_sum_fields {
+  order: Int
+}
+
+"""
+update columns of table "prototype"
+"""
+enum prototype_update_column {
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  order
+}
+
+"""aggregate var_pop on columns"""
+type prototype_var_pop_fields {
+  order: Float
+}
+
+"""aggregate var_samp on columns"""
+type prototype_var_samp_fields {
+  order: Float
+}
+
+"""aggregate variance on columns"""
+type prototype_variance_fields {
+  order: Float
+}
+
+"""
+columns and relationships of "purchase_order"
+"""
+type purchase_order {
+  create_date: String!
+  created_at: timestamptz!
+  created_by: String!
+  id: uuid!
+  is_active: Boolean!
+  location: String!
+  po_number: String!
+  supplier: String!
+  total_cost: Int!
+  updated_at: timestamptz!
+}
+
+"""
+aggregated selection of "purchase_order"
+"""
+type purchase_order_aggregate {
+  aggregate: purchase_order_aggregate_fields
+  nodes: [purchase_order!]!
+}
+
+"""
+aggregate fields of "purchase_order"
+"""
+type purchase_order_aggregate_fields {
+  avg: purchase_order_avg_fields
+  count(columns: [purchase_order_select_column!], distinct: Boolean): Int!
+  max: purchase_order_max_fields
+  min: purchase_order_min_fields
+  stddev: purchase_order_stddev_fields
+  stddev_pop: purchase_order_stddev_pop_fields
+  stddev_samp: purchase_order_stddev_samp_fields
+  sum: purchase_order_sum_fields
+  var_pop: purchase_order_var_pop_fields
+  var_samp: purchase_order_var_samp_fields
+  variance: purchase_order_variance_fields
+}
+
+"""aggregate avg on columns"""
+type purchase_order_avg_fields {
+  total_cost: Float
+}
+
+"""
+Boolean expression to filter rows from the table "purchase_order". All fields are combined with a logical 'AND'.
+"""
+input purchase_order_bool_exp {
+  _and: [purchase_order_bool_exp!]
+  _not: purchase_order_bool_exp
+  _or: [purchase_order_bool_exp!]
+  create_date: String_comparison_exp
+  created_at: timestamptz_comparison_exp
+  created_by: String_comparison_exp
+  id: uuid_comparison_exp
+  is_active: Boolean_comparison_exp
+  location: String_comparison_exp
+  po_number: String_comparison_exp
+  supplier: String_comparison_exp
+  total_cost: Int_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "purchase_order"
+"""
+enum purchase_order_constraint {
+  """unique or primary key constraint"""
+  product_list_purchase_order_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "purchase_order"
+"""
+input purchase_order_inc_input {
+  total_cost: Int
+}
+
+"""
+input type for inserting data into table "purchase_order"
+"""
+input purchase_order_insert_input {
+  create_date: String
+  created_by: String
+  is_active: Boolean
+  location: String
+  po_number: String
+  supplier: String
+  total_cost: Int
+}
+
+"""aggregate max on columns"""
+type purchase_order_max_fields {
+  create_date: String
+  created_at: timestamptz
+  created_by: String
+  id: uuid
+  location: String
+  po_number: String
+  supplier: String
+  total_cost: Int
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type purchase_order_min_fields {
+  create_date: String
+  created_at: timestamptz
+  created_by: String
+  id: uuid
+  location: String
+  po_number: String
+  supplier: String
+  total_cost: Int
+  updated_at: timestamptz
+}
+
+"""
+response of any mutation on the table "purchase_order"
+"""
+type purchase_order_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [purchase_order!]!
+}
+
+"""
+on conflict condition type for table "purchase_order"
+"""
+input purchase_order_on_conflict {
+  constraint: purchase_order_constraint!
+  update_columns: [purchase_order_update_column!]!
+  where: purchase_order_bool_exp
+}
+
+"""Ordering options when selecting data from "purchase_order"."""
+input purchase_order_order_by {
+  create_date: order_by
+  created_at: order_by
+  created_by: order_by
+  id: order_by
+  is_active: order_by
+  location: order_by
+  po_number: order_by
+  supplier: order_by
+  total_cost: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: purchase_order"""
+input purchase_order_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "purchase_order"
+"""
+enum purchase_order_select_column {
+  """column name"""
+  create_date
+
+  """column name"""
+  created_at
+
+  """column name"""
+  created_by
+
+  """column name"""
+  id
+
+  """column name"""
+  is_active
+
+  """column name"""
+  location
+
+  """column name"""
+  po_number
+
+  """column name"""
+  supplier
+
+  """column name"""
+  total_cost
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "purchase_order"
+"""
+input purchase_order_set_input {
+  create_date: String
+  created_by: String
+  is_active: Boolean
+  location: String
+  po_number: String
+  supplier: String
+  total_cost: Int
+}
+
+"""aggregate stddev on columns"""
+type purchase_order_stddev_fields {
+  total_cost: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type purchase_order_stddev_pop_fields {
+  total_cost: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type purchase_order_stddev_samp_fields {
+  total_cost: Float
+}
+
+"""aggregate sum on columns"""
+type purchase_order_sum_fields {
+  total_cost: Int
+}
+
+"""
+update columns of table "purchase_order"
+"""
+enum purchase_order_update_column {
+  """column name"""
+  create_date
+
+  """column name"""
+  created_by
+
+  """column name"""
+  is_active
+
+  """column name"""
+  location
+
+  """column name"""
+  po_number
+
+  """column name"""
+  supplier
+
+  """column name"""
+  total_cost
+}
+
+"""aggregate var_pop on columns"""
+type purchase_order_var_pop_fields {
+  total_cost: Float
+}
+
+"""aggregate var_samp on columns"""
+type purchase_order_var_samp_fields {
+  total_cost: Float
+}
+
+"""aggregate variance on columns"""
+type purchase_order_variance_fields {
+  total_cost: Float
+}
+
 type query_root {
   """
   fetch data from the table: "Labs"
@@ -14693,6 +17475,51 @@ type query_root {
   blockReason(where: BlockReasonWhereUniqueInput!): BlockReason
   blockReasons(after: BlockReasonWhereUniqueInput, before: BlockReasonWhereUniqueInput, first: Int, last: Int, orderBy: [BlockReasonOrderByInput!], where: BlockReasonWhereInput): [BlockReason]!
   blockReasonsCount(where: BlockReasonWhereInput): Int
+
+  """
+  fetch data from the table: "block_out_options"
+  """
+  block_out_options(
+    """distinct select on columns"""
+    distinct_on: [block_out_options_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [block_out_options_order_by!]
+
+    """filter the rows returned"""
+    where: block_out_options_bool_exp
+  ): [block_out_options!]!
+
+  """
+  fetch aggregated fields from the table: "block_out_options"
+  """
+  block_out_options_aggregate(
+    """distinct select on columns"""
+    distinct_on: [block_out_options_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [block_out_options_order_by!]
+
+    """filter the rows returned"""
+    where: block_out_options_bool_exp
+  ): block_out_options_aggregate!
+
+  """
+  fetch data from the table: "block_out_options" using primary key columns
+  """
+  block_out_options_by_pk(id: uuid!): block_out_options
   bnfDrug(where: BnfDrugWhereUniqueInput!): BnfDrug
   bnfDrugs(after: BnfDrugWhereUniqueInput, before: BnfDrugWhereUniqueInput, first: Int, last: Int, orderBy: [BnfDrugOrderByInput!], where: BnfDrugWhereInput): [BnfDrug]!
   bnfDrugsCount(where: BnfDrugWhereInput): Int
@@ -14723,12 +17550,62 @@ type query_root {
   bugLog(where: BugLogWhereUniqueInput!): BugLog
   bugLogs(after: BugLogWhereUniqueInput, before: BugLogWhereUniqueInput, first: Int, last: Int, orderBy: [BugLogOrderByInput!], where: BugLogWhereInput): [BugLog]!
   bugLogsCount(where: BugLogWhereInput): Int
+
+  """
+  fetch data from the table: "business_details"
+  """
+  business_details(
+    """distinct select on columns"""
+    distinct_on: [business_details_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [business_details_order_by!]
+
+    """filter the rows returned"""
+    where: business_details_bool_exp
+  ): [business_details!]!
+
+  """
+  fetch data from the table: "business_details" using primary key columns
+  """
+  business_details_by_pk(id: Int!): business_details
   calRangeRequest(where: CalRangeRequestWhereUniqueInput!): CalRangeRequest
   calRangeRequests(after: CalRangeRequestWhereUniqueInput, before: CalRangeRequestWhereUniqueInput, first: Int, last: Int, orderBy: [CalRangeRequestOrderByInput!], where: CalRangeRequestWhereInput): [CalRangeRequest]!
   calRangeRequestsCount(where: CalRangeRequestWhereInput): Int
   calendarView(where: CalendarViewWhereUniqueInput!): CalendarView
   calendarViews(after: CalendarViewWhereUniqueInput, before: CalendarViewWhereUniqueInput, first: Int, last: Int, orderBy: [CalendarViewOrderByInput!], where: CalendarViewWhereInput): [CalendarView]!
   calendarViewsCount(where: CalendarViewWhereInput): Int
+
+  """
+  fetch data from the table: "calendar_settings"
+  """
+  calendar_settings(
+    """distinct select on columns"""
+    distinct_on: [calendar_settings_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [calendar_settings_order_by!]
+
+    """filter the rows returned"""
+    where: calendar_settings_bool_exp
+  ): [calendar_settings!]!
+
+  """
+  fetch data from the table: "calendar_settings" using primary key columns
+  """
+  calendar_settings_by_pk(id: uuid!): calendar_settings
   campaignAttachment(where: CampaignAttachmentWhereUniqueInput!): CampaignAttachment
   campaignAttachments(after: CampaignAttachmentWhereUniqueInput, before: CampaignAttachmentWhereUniqueInput, first: Int, last: Int, orderBy: [CampaignAttachmentOrderByInput!], where: CampaignAttachmentWhereInput): [CampaignAttachment]!
   campaignAttachmentsCount(where: CampaignAttachmentWhereInput): Int
@@ -14794,6 +17671,49 @@ type query_root {
   cashupReportCustomsCount(where: CashupReportCustomWhereInput): Int
   cashupReports(after: CashupReportWhereUniqueInput, before: CashupReportWhereUniqueInput, first: Int, last: Int, orderBy: [CashupReportOrderByInput!], where: CashupReportWhereInput): [CashupReport]!
   cashupReportsCount(where: CashupReportWhereInput): Int
+
+  """
+  fetch data from the table: "category"
+  """
+  category(
+    """distinct select on columns"""
+    distinct_on: [category_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [category_order_by!]
+
+    """filter the rows returned"""
+    where: category_bool_exp
+  ): [category!]!
+
+  """
+  fetch aggregated fields from the table: "category"
+  """
+  category_aggregate(
+    """distinct select on columns"""
+    distinct_on: [category_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [category_order_by!]
+
+    """filter the rows returned"""
+    where: category_bool_exp
+  ): category_aggregate!
+
+  """fetch data from the table: "category" using primary key columns"""
+  category_by_pk(id: uuid!): category
   checkinAppt(where: CheckinApptWhereUniqueInput!): CheckinAppt
   checkinAppts(after: CheckinApptWhereUniqueInput, before: CheckinApptWhereUniqueInput, first: Int, last: Int, orderBy: [CheckinApptOrderByInput!], where: CheckinApptWhereInput): [CheckinAppt]!
   checkinApptsCount(where: CheckinApptWhereInput): Int
@@ -15368,6 +18288,135 @@ type query_root {
   petty_cash_types_by_pk(id: uuid!): petty_cash_types
 
   """
+  fetch data from the table: "product_lists"
+  """
+  product_lists(
+    """distinct select on columns"""
+    distinct_on: [product_lists_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [product_lists_order_by!]
+
+    """filter the rows returned"""
+    where: product_lists_bool_exp
+  ): [product_lists!]!
+
+  """
+  fetch aggregated fields from the table: "product_lists"
+  """
+  product_lists_aggregate(
+    """distinct select on columns"""
+    distinct_on: [product_lists_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [product_lists_order_by!]
+
+    """filter the rows returned"""
+    where: product_lists_bool_exp
+  ): product_lists_aggregate!
+
+  """fetch data from the table: "product_lists" using primary key columns"""
+  product_lists_by_pk(id: uuid!): product_lists
+
+  """
+  fetch data from the table: "prototype"
+  """
+  prototype(
+    """distinct select on columns"""
+    distinct_on: [prototype_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [prototype_order_by!]
+
+    """filter the rows returned"""
+    where: prototype_bool_exp
+  ): [prototype!]!
+
+  """
+  fetch aggregated fields from the table: "prototype"
+  """
+  prototype_aggregate(
+    """distinct select on columns"""
+    distinct_on: [prototype_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [prototype_order_by!]
+
+    """filter the rows returned"""
+    where: prototype_bool_exp
+  ): prototype_aggregate!
+
+  """fetch data from the table: "prototype" using primary key columns"""
+  prototype_by_pk(id: uuid!): prototype
+
+  """
+  fetch data from the table: "purchase_order"
+  """
+  purchase_order(
+    """distinct select on columns"""
+    distinct_on: [purchase_order_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [purchase_order_order_by!]
+
+    """filter the rows returned"""
+    where: purchase_order_bool_exp
+  ): [purchase_order!]!
+
+  """
+  fetch aggregated fields from the table: "purchase_order"
+  """
+  purchase_order_aggregate(
+    """distinct select on columns"""
+    distinct_on: [purchase_order_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [purchase_order_order_by!]
+
+    """filter the rows returned"""
+    where: purchase_order_bool_exp
+  ): purchase_order_aggregate!
+
+  """fetch data from the table: "purchase_order" using primary key columns"""
+  purchase_order_by_pk(id: uuid!): purchase_order
+
+  """
   fetch data from the table: "rota_templates"
   """
   rota_templates(
@@ -15458,8 +18507,180 @@ type query_root {
   secondAtQuestion(where: SecondAtQuestionWhereUniqueInput!): SecondAtQuestion
   secondAtQuestions(after: SecondAtQuestionWhereUniqueInput, before: SecondAtQuestionWhereUniqueInput, first: Int, last: Int, orderBy: [SecondAtQuestionOrderByInput!], where: SecondAtQuestionWhereInput): [SecondAtQuestion]!
   secondAtQuestionsCount(where: SecondAtQuestionWhereInput): Int
+
+  """
+  fetch data from the table: "stock_take"
+  """
+  stock_take(
+    """distinct select on columns"""
+    distinct_on: [stock_take_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [stock_take_order_by!]
+
+    """filter the rows returned"""
+    where: stock_take_bool_exp
+  ): [stock_take!]!
+
+  """
+  fetch aggregated fields from the table: "stock_take"
+  """
+  stock_take_aggregate(
+    """distinct select on columns"""
+    distinct_on: [stock_take_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [stock_take_order_by!]
+
+    """filter the rows returned"""
+    where: stock_take_bool_exp
+  ): stock_take_aggregate!
+
+  """fetch data from the table: "stock_take" using primary key columns"""
+  stock_take_by_pk(id: uuid!): stock_take
+
+  """
+  fetch data from the table: "supplier"
+  """
+  supplier(
+    """distinct select on columns"""
+    distinct_on: [supplier_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [supplier_order_by!]
+
+    """filter the rows returned"""
+    where: supplier_bool_exp
+  ): [supplier!]!
+
+  """
+  fetch aggregated fields from the table: "supplier"
+  """
+  supplier_aggregate(
+    """distinct select on columns"""
+    distinct_on: [supplier_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [supplier_order_by!]
+
+    """filter the rows returned"""
+    where: supplier_bool_exp
+  ): supplier_aggregate!
+
+  """fetch data from the table: "supplier" using primary key columns"""
+  supplier_by_pk(id: uuid!): supplier
+
+  """
+  fetch data from the table: "tax_rates"
+  """
+  tax_rates(
+    """distinct select on columns"""
+    distinct_on: [tax_rates_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [tax_rates_order_by!]
+
+    """filter the rows returned"""
+    where: tax_rates_bool_exp
+  ): [tax_rates!]!
+
+  """
+  fetch aggregated fields from the table: "tax_rates"
+  """
+  tax_rates_aggregate(
+    """distinct select on columns"""
+    distinct_on: [tax_rates_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [tax_rates_order_by!]
+
+    """filter the rows returned"""
+    where: tax_rates_bool_exp
+  ): tax_rates_aggregate!
+
+  """fetch data from the table: "tax_rates" using primary key columns"""
+  tax_rates_by_pk(id: uuid!): tax_rates
   thirdPartyAcces(after: ThirdPartyAccesWhereUniqueInput, before: ThirdPartyAccesWhereUniqueInput, first: Int, last: Int, orderBy: [ThirdPartyAccesOrderByInput!], where: ThirdPartyAccesWhereInput): [ThirdPartyAcces]!
   thirdPartyAccesCount(where: ThirdPartyAccesWhereInput): Int
+
+  """
+  fetch data from the table: "third_parties"
+  """
+  third_parties(
+    """distinct select on columns"""
+    distinct_on: [third_parties_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [third_parties_order_by!]
+
+    """filter the rows returned"""
+    where: third_parties_bool_exp
+  ): [third_parties!]!
+
+  """
+  fetch aggregated fields from the table: "third_parties"
+  """
+  third_parties_aggregate(
+    """distinct select on columns"""
+    distinct_on: [third_parties_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [third_parties_order_by!]
+
+    """filter the rows returned"""
+    where: third_parties_bool_exp
+  ): third_parties_aggregate!
+
+  """fetch data from the table: "third_parties" using primary key columns"""
+  third_parties_by_pk(id: uuid!): third_parties
   timezone(where: TimezoneWhereUniqueInput!): Timezone
   timezones(after: TimezoneWhereUniqueInput, before: TimezoneWhereUniqueInput, first: Int, last: Int, orderBy: [TimezoneOrderByInput!], where: TimezoneWhereInput): [Timezone]!
   timezonesCount(where: TimezoneWhereInput): Int
@@ -15942,6 +19163,319 @@ type salutation_variance_fields {
   order: Float
 }
 
+"""
+columns and relationships of "stock_take"
+"""
+type stock_take {
+  count_no: String!
+  counted_by: String!
+  created_at: timestamptz!
+  discrepanciesDown: Int
+  discrepanciesUp: Int
+  id: uuid!
+  location: String!
+  name: String!
+  start_date: String!
+  status: String
+  total: numeric!
+  updated_at: timestamptz!
+}
+
+"""
+aggregated selection of "stock_take"
+"""
+type stock_take_aggregate {
+  aggregate: stock_take_aggregate_fields
+  nodes: [stock_take!]!
+}
+
+"""
+aggregate fields of "stock_take"
+"""
+type stock_take_aggregate_fields {
+  avg: stock_take_avg_fields
+  count(columns: [stock_take_select_column!], distinct: Boolean): Int!
+  max: stock_take_max_fields
+  min: stock_take_min_fields
+  stddev: stock_take_stddev_fields
+  stddev_pop: stock_take_stddev_pop_fields
+  stddev_samp: stock_take_stddev_samp_fields
+  sum: stock_take_sum_fields
+  var_pop: stock_take_var_pop_fields
+  var_samp: stock_take_var_samp_fields
+  variance: stock_take_variance_fields
+}
+
+"""aggregate avg on columns"""
+type stock_take_avg_fields {
+  discrepanciesDown: Float
+  discrepanciesUp: Float
+  total: Float
+}
+
+"""
+Boolean expression to filter rows from the table "stock_take". All fields are combined with a logical 'AND'.
+"""
+input stock_take_bool_exp {
+  _and: [stock_take_bool_exp!]
+  _not: stock_take_bool_exp
+  _or: [stock_take_bool_exp!]
+  count_no: String_comparison_exp
+  counted_by: String_comparison_exp
+  created_at: timestamptz_comparison_exp
+  discrepanciesDown: Int_comparison_exp
+  discrepanciesUp: Int_comparison_exp
+  id: uuid_comparison_exp
+  location: String_comparison_exp
+  name: String_comparison_exp
+  start_date: String_comparison_exp
+  status: String_comparison_exp
+  total: numeric_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "stock_take"
+"""
+enum stock_take_constraint {
+  """unique or primary key constraint"""
+  product_list_stock_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "stock_take"
+"""
+input stock_take_inc_input {
+  discrepanciesDown: Int
+  discrepanciesUp: Int
+  total: numeric
+}
+
+"""
+input type for inserting data into table "stock_take"
+"""
+input stock_take_insert_input {
+  count_no: String
+  counted_by: String
+  discrepanciesDown: Int
+  discrepanciesUp: Int
+  location: String
+  name: String
+  start_date: String
+  status: String
+  total: numeric
+}
+
+"""aggregate max on columns"""
+type stock_take_max_fields {
+  count_no: String
+  counted_by: String
+  created_at: timestamptz
+  discrepanciesDown: Int
+  discrepanciesUp: Int
+  id: uuid
+  location: String
+  name: String
+  start_date: String
+  status: String
+  total: numeric
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type stock_take_min_fields {
+  count_no: String
+  counted_by: String
+  created_at: timestamptz
+  discrepanciesDown: Int
+  discrepanciesUp: Int
+  id: uuid
+  location: String
+  name: String
+  start_date: String
+  status: String
+  total: numeric
+  updated_at: timestamptz
+}
+
+"""
+response of any mutation on the table "stock_take"
+"""
+type stock_take_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [stock_take!]!
+}
+
+"""
+on conflict condition type for table "stock_take"
+"""
+input stock_take_on_conflict {
+  constraint: stock_take_constraint!
+  update_columns: [stock_take_update_column!]!
+  where: stock_take_bool_exp
+}
+
+"""Ordering options when selecting data from "stock_take"."""
+input stock_take_order_by {
+  count_no: order_by
+  counted_by: order_by
+  created_at: order_by
+  discrepanciesDown: order_by
+  discrepanciesUp: order_by
+  id: order_by
+  location: order_by
+  name: order_by
+  start_date: order_by
+  status: order_by
+  total: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: stock_take"""
+input stock_take_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "stock_take"
+"""
+enum stock_take_select_column {
+  """column name"""
+  count_no
+
+  """column name"""
+  counted_by
+
+  """column name"""
+  created_at
+
+  """column name"""
+  discrepanciesDown
+
+  """column name"""
+  discrepanciesUp
+
+  """column name"""
+  id
+
+  """column name"""
+  location
+
+  """column name"""
+  name
+
+  """column name"""
+  start_date
+
+  """column name"""
+  status
+
+  """column name"""
+  total
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "stock_take"
+"""
+input stock_take_set_input {
+  count_no: String
+  counted_by: String
+  discrepanciesDown: Int
+  discrepanciesUp: Int
+  location: String
+  name: String
+  start_date: String
+  status: String
+  total: numeric
+}
+
+"""aggregate stddev on columns"""
+type stock_take_stddev_fields {
+  discrepanciesDown: Float
+  discrepanciesUp: Float
+  total: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type stock_take_stddev_pop_fields {
+  discrepanciesDown: Float
+  discrepanciesUp: Float
+  total: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type stock_take_stddev_samp_fields {
+  discrepanciesDown: Float
+  discrepanciesUp: Float
+  total: Float
+}
+
+"""aggregate sum on columns"""
+type stock_take_sum_fields {
+  discrepanciesDown: Int
+  discrepanciesUp: Int
+  total: numeric
+}
+
+"""
+update columns of table "stock_take"
+"""
+enum stock_take_update_column {
+  """column name"""
+  count_no
+
+  """column name"""
+  counted_by
+
+  """column name"""
+  discrepanciesDown
+
+  """column name"""
+  discrepanciesUp
+
+  """column name"""
+  location
+
+  """column name"""
+  name
+
+  """column name"""
+  start_date
+
+  """column name"""
+  status
+
+  """column name"""
+  total
+}
+
+"""aggregate var_pop on columns"""
+type stock_take_var_pop_fields {
+  discrepanciesDown: Float
+  discrepanciesUp: Float
+  total: Float
+}
+
+"""aggregate var_samp on columns"""
+type stock_take_var_samp_fields {
+  discrepanciesDown: Float
+  discrepanciesUp: Float
+  total: Float
+}
+
+"""aggregate variance on columns"""
+type stock_take_variance_fields {
+  discrepanciesDown: Float
+  discrepanciesUp: Float
+  total: Float
+}
+
 type subscription_root {
   """
   fetch data from the table: "Labs"
@@ -16032,6 +19566,101 @@ type subscription_root {
   appointment_status_by_pk(id: uuid!): appointment_status
 
   """
+  fetch data from the table: "block_out_options"
+  """
+  block_out_options(
+    """distinct select on columns"""
+    distinct_on: [block_out_options_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [block_out_options_order_by!]
+
+    """filter the rows returned"""
+    where: block_out_options_bool_exp
+  ): [block_out_options!]!
+
+  """
+  fetch aggregated fields from the table: "block_out_options"
+  """
+  block_out_options_aggregate(
+    """distinct select on columns"""
+    distinct_on: [block_out_options_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [block_out_options_order_by!]
+
+    """filter the rows returned"""
+    where: block_out_options_bool_exp
+  ): block_out_options_aggregate!
+
+  """
+  fetch data from the table: "block_out_options" using primary key columns
+  """
+  block_out_options_by_pk(id: uuid!): block_out_options
+
+  """
+  fetch data from the table: "business_details"
+  """
+  business_details(
+    """distinct select on columns"""
+    distinct_on: [business_details_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [business_details_order_by!]
+
+    """filter the rows returned"""
+    where: business_details_bool_exp
+  ): [business_details!]!
+
+  """
+  fetch data from the table: "business_details" using primary key columns
+  """
+  business_details_by_pk(id: Int!): business_details
+
+  """
+  fetch data from the table: "calendar_settings"
+  """
+  calendar_settings(
+    """distinct select on columns"""
+    distinct_on: [calendar_settings_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [calendar_settings_order_by!]
+
+    """filter the rows returned"""
+    where: calendar_settings_bool_exp
+  ): [calendar_settings!]!
+
+  """
+  fetch data from the table: "calendar_settings" using primary key columns
+  """
+  calendar_settings_by_pk(id: uuid!): calendar_settings
+
+  """
   fetch data from the table: "cancellation_reasons"
   """
   cancellation_reasons(
@@ -16075,6 +19704,49 @@ type subscription_root {
   fetch data from the table: "cancellation_reasons" using primary key columns
   """
   cancellation_reasons_by_pk(id: uuid!): cancellation_reasons
+
+  """
+  fetch data from the table: "category"
+  """
+  category(
+    """distinct select on columns"""
+    distinct_on: [category_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [category_order_by!]
+
+    """filter the rows returned"""
+    where: category_bool_exp
+  ): [category!]!
+
+  """
+  fetch aggregated fields from the table: "category"
+  """
+  category_aggregate(
+    """distinct select on columns"""
+    distinct_on: [category_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [category_order_by!]
+
+    """filter the rows returned"""
+    where: category_bool_exp
+  ): category_aggregate!
+
+  """fetch data from the table: "category" using primary key columns"""
+  category_by_pk(id: uuid!): category
 
   """
   fetch data from the table: "colors"
@@ -16609,6 +20281,135 @@ type subscription_root {
   petty_cash_types_by_pk(id: uuid!): petty_cash_types
 
   """
+  fetch data from the table: "product_lists"
+  """
+  product_lists(
+    """distinct select on columns"""
+    distinct_on: [product_lists_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [product_lists_order_by!]
+
+    """filter the rows returned"""
+    where: product_lists_bool_exp
+  ): [product_lists!]!
+
+  """
+  fetch aggregated fields from the table: "product_lists"
+  """
+  product_lists_aggregate(
+    """distinct select on columns"""
+    distinct_on: [product_lists_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [product_lists_order_by!]
+
+    """filter the rows returned"""
+    where: product_lists_bool_exp
+  ): product_lists_aggregate!
+
+  """fetch data from the table: "product_lists" using primary key columns"""
+  product_lists_by_pk(id: uuid!): product_lists
+
+  """
+  fetch data from the table: "prototype"
+  """
+  prototype(
+    """distinct select on columns"""
+    distinct_on: [prototype_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [prototype_order_by!]
+
+    """filter the rows returned"""
+    where: prototype_bool_exp
+  ): [prototype!]!
+
+  """
+  fetch aggregated fields from the table: "prototype"
+  """
+  prototype_aggregate(
+    """distinct select on columns"""
+    distinct_on: [prototype_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [prototype_order_by!]
+
+    """filter the rows returned"""
+    where: prototype_bool_exp
+  ): prototype_aggregate!
+
+  """fetch data from the table: "prototype" using primary key columns"""
+  prototype_by_pk(id: uuid!): prototype
+
+  """
+  fetch data from the table: "purchase_order"
+  """
+  purchase_order(
+    """distinct select on columns"""
+    distinct_on: [purchase_order_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [purchase_order_order_by!]
+
+    """filter the rows returned"""
+    where: purchase_order_bool_exp
+  ): [purchase_order!]!
+
+  """
+  fetch aggregated fields from the table: "purchase_order"
+  """
+  purchase_order_aggregate(
+    """distinct select on columns"""
+    distinct_on: [purchase_order_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [purchase_order_order_by!]
+
+    """filter the rows returned"""
+    where: purchase_order_bool_exp
+  ): purchase_order_aggregate!
+
+  """fetch data from the table: "purchase_order" using primary key columns"""
+  purchase_order_by_pk(id: uuid!): purchase_order
+
+  """
   fetch data from the table: "rota_templates"
   """
   rota_templates(
@@ -16693,6 +20494,953 @@ type subscription_root {
 
   """fetch data from the table: "salutation" using primary key columns"""
   salutation_by_pk(id: uuid!): salutation
+
+  """
+  fetch data from the table: "stock_take"
+  """
+  stock_take(
+    """distinct select on columns"""
+    distinct_on: [stock_take_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [stock_take_order_by!]
+
+    """filter the rows returned"""
+    where: stock_take_bool_exp
+  ): [stock_take!]!
+
+  """
+  fetch aggregated fields from the table: "stock_take"
+  """
+  stock_take_aggregate(
+    """distinct select on columns"""
+    distinct_on: [stock_take_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [stock_take_order_by!]
+
+    """filter the rows returned"""
+    where: stock_take_bool_exp
+  ): stock_take_aggregate!
+
+  """fetch data from the table: "stock_take" using primary key columns"""
+  stock_take_by_pk(id: uuid!): stock_take
+
+  """
+  fetch data from the table: "supplier"
+  """
+  supplier(
+    """distinct select on columns"""
+    distinct_on: [supplier_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [supplier_order_by!]
+
+    """filter the rows returned"""
+    where: supplier_bool_exp
+  ): [supplier!]!
+
+  """
+  fetch aggregated fields from the table: "supplier"
+  """
+  supplier_aggregate(
+    """distinct select on columns"""
+    distinct_on: [supplier_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [supplier_order_by!]
+
+    """filter the rows returned"""
+    where: supplier_bool_exp
+  ): supplier_aggregate!
+
+  """fetch data from the table: "supplier" using primary key columns"""
+  supplier_by_pk(id: uuid!): supplier
+
+  """
+  fetch data from the table: "tax_rates"
+  """
+  tax_rates(
+    """distinct select on columns"""
+    distinct_on: [tax_rates_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [tax_rates_order_by!]
+
+    """filter the rows returned"""
+    where: tax_rates_bool_exp
+  ): [tax_rates!]!
+
+  """
+  fetch aggregated fields from the table: "tax_rates"
+  """
+  tax_rates_aggregate(
+    """distinct select on columns"""
+    distinct_on: [tax_rates_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [tax_rates_order_by!]
+
+    """filter the rows returned"""
+    where: tax_rates_bool_exp
+  ): tax_rates_aggregate!
+
+  """fetch data from the table: "tax_rates" using primary key columns"""
+  tax_rates_by_pk(id: uuid!): tax_rates
+
+  """
+  fetch data from the table: "third_parties"
+  """
+  third_parties(
+    """distinct select on columns"""
+    distinct_on: [third_parties_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [third_parties_order_by!]
+
+    """filter the rows returned"""
+    where: third_parties_bool_exp
+  ): [third_parties!]!
+
+  """
+  fetch aggregated fields from the table: "third_parties"
+  """
+  third_parties_aggregate(
+    """distinct select on columns"""
+    distinct_on: [third_parties_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [third_parties_order_by!]
+
+    """filter the rows returned"""
+    where: third_parties_bool_exp
+  ): third_parties_aggregate!
+
+  """fetch data from the table: "third_parties" using primary key columns"""
+  third_parties_by_pk(id: uuid!): third_parties
+}
+
+"""
+columns and relationships of "supplier"
+"""
+type supplier {
+  created_at: timestamptz!
+  id: uuid!
+  is_active: Boolean!
+  order: Int!
+  products_assigned: Int!
+  supplier_name: String!
+  updated_at: timestamptz!
+}
+
+"""
+aggregated selection of "supplier"
+"""
+type supplier_aggregate {
+  aggregate: supplier_aggregate_fields
+  nodes: [supplier!]!
+}
+
+"""
+aggregate fields of "supplier"
+"""
+type supplier_aggregate_fields {
+  avg: supplier_avg_fields
+  count(columns: [supplier_select_column!], distinct: Boolean): Int!
+  max: supplier_max_fields
+  min: supplier_min_fields
+  stddev: supplier_stddev_fields
+  stddev_pop: supplier_stddev_pop_fields
+  stddev_samp: supplier_stddev_samp_fields
+  sum: supplier_sum_fields
+  var_pop: supplier_var_pop_fields
+  var_samp: supplier_var_samp_fields
+  variance: supplier_variance_fields
+}
+
+"""aggregate avg on columns"""
+type supplier_avg_fields {
+  order: Float
+  products_assigned: Float
+}
+
+"""
+Boolean expression to filter rows from the table "supplier". All fields are combined with a logical 'AND'.
+"""
+input supplier_bool_exp {
+  _and: [supplier_bool_exp!]
+  _not: supplier_bool_exp
+  _or: [supplier_bool_exp!]
+  created_at: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  is_active: Boolean_comparison_exp
+  order: Int_comparison_exp
+  products_assigned: Int_comparison_exp
+  supplier_name: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "supplier"
+"""
+enum supplier_constraint {
+  """unique or primary key constraint"""
+  product_list_supplier_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "supplier"
+"""
+input supplier_inc_input {
+  order: Int
+  products_assigned: Int
+}
+
+"""
+input type for inserting data into table "supplier"
+"""
+input supplier_insert_input {
+  is_active: Boolean
+  order: Int
+  products_assigned: Int
+  supplier_name: String
+}
+
+"""aggregate max on columns"""
+type supplier_max_fields {
+  created_at: timestamptz
+  id: uuid
+  order: Int
+  products_assigned: Int
+  supplier_name: String
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type supplier_min_fields {
+  created_at: timestamptz
+  id: uuid
+  order: Int
+  products_assigned: Int
+  supplier_name: String
+  updated_at: timestamptz
+}
+
+"""
+response of any mutation on the table "supplier"
+"""
+type supplier_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [supplier!]!
+}
+
+"""
+on conflict condition type for table "supplier"
+"""
+input supplier_on_conflict {
+  constraint: supplier_constraint!
+  update_columns: [supplier_update_column!]!
+  where: supplier_bool_exp
+}
+
+"""Ordering options when selecting data from "supplier"."""
+input supplier_order_by {
+  created_at: order_by
+  id: order_by
+  is_active: order_by
+  order: order_by
+  products_assigned: order_by
+  supplier_name: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: supplier"""
+input supplier_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "supplier"
+"""
+enum supplier_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  id
+
+  """column name"""
+  is_active
+
+  """column name"""
+  order
+
+  """column name"""
+  products_assigned
+
+  """column name"""
+  supplier_name
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "supplier"
+"""
+input supplier_set_input {
+  is_active: Boolean
+  order: Int
+  products_assigned: Int
+  supplier_name: String
+}
+
+"""aggregate stddev on columns"""
+type supplier_stddev_fields {
+  order: Float
+  products_assigned: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type supplier_stddev_pop_fields {
+  order: Float
+  products_assigned: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type supplier_stddev_samp_fields {
+  order: Float
+  products_assigned: Float
+}
+
+"""aggregate sum on columns"""
+type supplier_sum_fields {
+  order: Int
+  products_assigned: Int
+}
+
+"""
+update columns of table "supplier"
+"""
+enum supplier_update_column {
+  """column name"""
+  is_active
+
+  """column name"""
+  order
+
+  """column name"""
+  products_assigned
+
+  """column name"""
+  supplier_name
+}
+
+"""aggregate var_pop on columns"""
+type supplier_var_pop_fields {
+  order: Float
+  products_assigned: Float
+}
+
+"""aggregate var_samp on columns"""
+type supplier_var_samp_fields {
+  order: Float
+  products_assigned: Float
+}
+
+"""aggregate variance on columns"""
+type supplier_variance_fields {
+  order: Float
+  products_assigned: Float
+}
+
+"""
+columns and relationships of "tax_rates"
+"""
+type tax_rates {
+  created_at: timetz!
+  glCode: String
+  id: uuid!
+  is_active: Boolean!
+  name: String!
+  order: Int!
+  updated_at: timetz!
+  value: Int!
+}
+
+"""
+aggregated selection of "tax_rates"
+"""
+type tax_rates_aggregate {
+  aggregate: tax_rates_aggregate_fields
+  nodes: [tax_rates!]!
+}
+
+"""
+aggregate fields of "tax_rates"
+"""
+type tax_rates_aggregate_fields {
+  avg: tax_rates_avg_fields
+  count(columns: [tax_rates_select_column!], distinct: Boolean): Int!
+  max: tax_rates_max_fields
+  min: tax_rates_min_fields
+  stddev: tax_rates_stddev_fields
+  stddev_pop: tax_rates_stddev_pop_fields
+  stddev_samp: tax_rates_stddev_samp_fields
+  sum: tax_rates_sum_fields
+  var_pop: tax_rates_var_pop_fields
+  var_samp: tax_rates_var_samp_fields
+  variance: tax_rates_variance_fields
+}
+
+"""aggregate avg on columns"""
+type tax_rates_avg_fields {
+  order: Float
+  value: Float
+}
+
+"""
+Boolean expression to filter rows from the table "tax_rates". All fields are combined with a logical 'AND'.
+"""
+input tax_rates_bool_exp {
+  _and: [tax_rates_bool_exp!]
+  _not: tax_rates_bool_exp
+  _or: [tax_rates_bool_exp!]
+  created_at: timetz_comparison_exp
+  glCode: String_comparison_exp
+  id: uuid_comparison_exp
+  is_active: Boolean_comparison_exp
+  name: String_comparison_exp
+  order: Int_comparison_exp
+  updated_at: timetz_comparison_exp
+  value: Int_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "tax_rates"
+"""
+enum tax_rates_constraint {
+  """unique or primary key constraint"""
+  Taxes_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "tax_rates"
+"""
+input tax_rates_inc_input {
+  order: Int
+  value: Int
+}
+
+"""
+input type for inserting data into table "tax_rates"
+"""
+input tax_rates_insert_input {
+  glCode: String
+  is_active: Boolean
+  name: String
+  order: Int
+  value: Int
+}
+
+"""aggregate max on columns"""
+type tax_rates_max_fields {
+  created_at: timetz
+  glCode: String
+  id: uuid
+  name: String
+  order: Int
+  updated_at: timetz
+  value: Int
+}
+
+"""aggregate min on columns"""
+type tax_rates_min_fields {
+  created_at: timetz
+  glCode: String
+  id: uuid
+  name: String
+  order: Int
+  updated_at: timetz
+  value: Int
+}
+
+"""
+response of any mutation on the table "tax_rates"
+"""
+type tax_rates_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [tax_rates!]!
+}
+
+"""
+on conflict condition type for table "tax_rates"
+"""
+input tax_rates_on_conflict {
+  constraint: tax_rates_constraint!
+  update_columns: [tax_rates_update_column!]!
+  where: tax_rates_bool_exp
+}
+
+"""Ordering options when selecting data from "tax_rates"."""
+input tax_rates_order_by {
+  created_at: order_by
+  glCode: order_by
+  id: order_by
+  is_active: order_by
+  name: order_by
+  order: order_by
+  updated_at: order_by
+  value: order_by
+}
+
+"""primary key columns input for table: tax_rates"""
+input tax_rates_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "tax_rates"
+"""
+enum tax_rates_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  glCode
+
+  """column name"""
+  id
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  order
+
+  """column name"""
+  updated_at
+
+  """column name"""
+  value
+}
+
+"""
+input type for updating data in table "tax_rates"
+"""
+input tax_rates_set_input {
+  glCode: String
+  is_active: Boolean
+  name: String
+  order: Int
+  updated_at: timetz
+  value: Int
+}
+
+"""aggregate stddev on columns"""
+type tax_rates_stddev_fields {
+  order: Float
+  value: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type tax_rates_stddev_pop_fields {
+  order: Float
+  value: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type tax_rates_stddev_samp_fields {
+  order: Float
+  value: Float
+}
+
+"""aggregate sum on columns"""
+type tax_rates_sum_fields {
+  order: Int
+  value: Int
+}
+
+"""
+update columns of table "tax_rates"
+"""
+enum tax_rates_update_column {
+  """column name"""
+  glCode
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  order
+
+  """column name"""
+  updated_at
+
+  """column name"""
+  value
+}
+
+"""aggregate var_pop on columns"""
+type tax_rates_var_pop_fields {
+  order: Float
+  value: Float
+}
+
+"""aggregate var_samp on columns"""
+type tax_rates_var_samp_fields {
+  order: Float
+  value: Float
+}
+
+"""aggregate variance on columns"""
+type tax_rates_variance_fields {
+  order: Float
+  value: Float
+}
+
+"""
+columns and relationships of "third_parties"
+"""
+type third_parties {
+  created_at: timestamptz!
+  email: String
+  id: uuid!
+  is_active: Boolean!
+  name: String!
+  order: Int!
+  phone: String
+  provider_no: String
+  type: String
+  updated_at: timestamptz!
+}
+
+"""
+aggregated selection of "third_parties"
+"""
+type third_parties_aggregate {
+  aggregate: third_parties_aggregate_fields
+  nodes: [third_parties!]!
+}
+
+"""
+aggregate fields of "third_parties"
+"""
+type third_parties_aggregate_fields {
+  avg: third_parties_avg_fields
+  count(columns: [third_parties_select_column!], distinct: Boolean): Int!
+  max: third_parties_max_fields
+  min: third_parties_min_fields
+  stddev: third_parties_stddev_fields
+  stddev_pop: third_parties_stddev_pop_fields
+  stddev_samp: third_parties_stddev_samp_fields
+  sum: third_parties_sum_fields
+  var_pop: third_parties_var_pop_fields
+  var_samp: third_parties_var_samp_fields
+  variance: third_parties_variance_fields
+}
+
+"""aggregate avg on columns"""
+type third_parties_avg_fields {
+  order: Float
+}
+
+"""
+Boolean expression to filter rows from the table "third_parties". All fields are combined with a logical 'AND'.
+"""
+input third_parties_bool_exp {
+  _and: [third_parties_bool_exp!]
+  _not: third_parties_bool_exp
+  _or: [third_parties_bool_exp!]
+  created_at: timestamptz_comparison_exp
+  email: String_comparison_exp
+  id: uuid_comparison_exp
+  is_active: Boolean_comparison_exp
+  name: String_comparison_exp
+  order: Int_comparison_exp
+  phone: String_comparison_exp
+  provider_no: String_comparison_exp
+  type: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "third_parties"
+"""
+enum third_parties_constraint {
+  """unique or primary key constraint"""
+  third_parties_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "third_parties"
+"""
+input third_parties_inc_input {
+  order: Int
+}
+
+"""
+input type for inserting data into table "third_parties"
+"""
+input third_parties_insert_input {
+  email: String
+  is_active: Boolean
+  name: String
+  order: Int
+  phone: String
+  provider_no: String
+  type: String
+}
+
+"""aggregate max on columns"""
+type third_parties_max_fields {
+  created_at: timestamptz
+  email: String
+  id: uuid
+  name: String
+  order: Int
+  phone: String
+  provider_no: String
+  type: String
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type third_parties_min_fields {
+  created_at: timestamptz
+  email: String
+  id: uuid
+  name: String
+  order: Int
+  phone: String
+  provider_no: String
+  type: String
+  updated_at: timestamptz
+}
+
+"""
+response of any mutation on the table "third_parties"
+"""
+type third_parties_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [third_parties!]!
+}
+
+"""
+on conflict condition type for table "third_parties"
+"""
+input third_parties_on_conflict {
+  constraint: third_parties_constraint!
+  update_columns: [third_parties_update_column!]!
+  where: third_parties_bool_exp
+}
+
+"""Ordering options when selecting data from "third_parties"."""
+input third_parties_order_by {
+  created_at: order_by
+  email: order_by
+  id: order_by
+  is_active: order_by
+  name: order_by
+  order: order_by
+  phone: order_by
+  provider_no: order_by
+  type: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: third_parties"""
+input third_parties_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "third_parties"
+"""
+enum third_parties_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  email
+
+  """column name"""
+  id
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  order
+
+  """column name"""
+  phone
+
+  """column name"""
+  provider_no
+
+  """column name"""
+  type
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "third_parties"
+"""
+input third_parties_set_input {
+  email: String
+  is_active: Boolean
+  name: String
+  order: Int
+  phone: String
+  provider_no: String
+  type: String
+}
+
+"""aggregate stddev on columns"""
+type third_parties_stddev_fields {
+  order: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type third_parties_stddev_pop_fields {
+  order: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type third_parties_stddev_samp_fields {
+  order: Float
+}
+
+"""aggregate sum on columns"""
+type third_parties_sum_fields {
+  order: Int
+}
+
+"""
+update columns of table "third_parties"
+"""
+enum third_parties_update_column {
+  """column name"""
+  email
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  order
+
+  """column name"""
+  phone
+
+  """column name"""
+  provider_no
+
+  """column name"""
+  type
+}
+
+"""aggregate var_pop on columns"""
+type third_parties_var_pop_fields {
+  order: Float
+}
+
+"""aggregate var_samp on columns"""
+type third_parties_var_samp_fields {
+  order: Float
+}
+
+"""aggregate variance on columns"""
+type third_parties_variance_fields {
+  order: Float
+}
+
+scalar time
+
+"""
+Boolean expression to compare columns of type "time". All fields are combined with logical 'AND'.
+"""
+input time_comparison_exp {
+  _eq: time
+  _gt: time
+  _gte: time
+  _in: [time!]
+  _is_null: Boolean
+  _lt: time
+  _lte: time
+  _neq: time
+  _nin: [time!]
 }
 
 scalar timestamptz

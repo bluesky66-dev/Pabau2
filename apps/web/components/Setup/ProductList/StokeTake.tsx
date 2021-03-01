@@ -1,14 +1,13 @@
-import React, { FC } from 'react'
-import { Typography } from 'antd'
-import { Table, OrderDiscrepancy } from '@pabau/ui'
+import React, { FC, useEffect, useState } from 'react'
+import { Table, OrderDiscrepancy, useLiveQuery, Pagination } from '@pabau/ui'
+import { gql } from '@apollo/client'
 
-import { StokeTake as StokeTakeData } from './mock'
 import styles from './productListComponents.module.less'
 
 const StockTakeColumns = [
   {
     title: 'Count NO',
-    dataIndex: 'countNO',
+    dataIndex: 'count_no',
     className: 'drag-visible',
     visible: true,
   },
@@ -20,13 +19,13 @@ const StockTakeColumns = [
   },
   {
     title: 'Start Date',
-    dataIndex: 'startDate',
+    dataIndex: 'start_date',
     className: 'drag-visible',
     visible: true,
   },
   {
     title: 'CountedBy',
-    dataIndex: 'countedBy',
+    dataIndex: 'counted_by',
     className: 'drag-visible',
     visible: true,
   },
@@ -49,12 +48,12 @@ const StockTakeColumns = [
     visible: true,
     width: 125,
     // eslint-disable-next-line react/display-name
-    render: (_, { discrepancies }) => (
+    render: (_, { discrepanciesUp, discrepanciesDown }) => (
       <span className={styles.row}>
         <span style={{ marginRight: 6 }}>
-          <OrderDiscrepancy number={discrepancies.up} word={1} />
+          <OrderDiscrepancy number={discrepanciesUp} word={1} />
         </span>
-        <OrderDiscrepancy number={discrepancies.down} word={0} />
+        <OrderDiscrepancy number={discrepanciesDown} word={0} />
       </span>
     ),
   },
@@ -80,21 +79,85 @@ const StockTakeColumns = [
   },
 ]
 
-const StokeTake: FC = () => {
-  const { Text, Paragraph } = Typography
+const LIST_QUERY = gql`
+  query stock_take($offset: Int, $limit: Int) {
+    stock_take(offset: $offset, limit: $limit) {
+      id
+      name
+      count_no
+      start_date
+      counted_by
+      total
+      location
+      status
+      discrepanciesUp
+      discrepanciesDown
+    }
+  }
+`
 
+const LIST_AGGREGATE = gql`
+  query stock_take_aggregate {
+    stock_take_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+`
+
+const StokeTake: FC = () => {
+  const [paginateData, setPaginateData] = useState({
+    total: 0,
+    offset: 0,
+    limit: 10,
+    currentPage: 1,
+    showingRecords: 0,
+  })
+
+  const { data, loading } = useLiveQuery(LIST_QUERY, {
+    variables: {
+      offset: paginateData.offset,
+      limit: paginateData.limit,
+    },
+  })
+
+  console.log(data)
+
+  const { data: aggregateData } = useLiveQuery(LIST_AGGREGATE)
+
+  useEffect(() => {
+    if (aggregateData) {
+      setPaginateData((d) => ({
+        ...d,
+        total: aggregateData?.aggregate.count,
+        showingRecords: data?.length,
+      }))
+    }
+  }, [data, aggregateData])
+
+  const onPaginationChange = (currentPage) => {
+    const offset = paginateData.limit * (currentPage - 1)
+    setPaginateData({ ...paginateData, offset, currentPage: currentPage })
+  }
   return (
     <div>
       <Table
-        pagination={false}
+        loading={loading}
+        noDataText="stocks"
+        noDataBtnText="new stock"
         columns={StockTakeColumns}
-        dataSource={StokeTakeData as never[]}
+        dataSource={data?.map((d) => ({ ...d, key: d.id }))}
       />
-      <div style={{ margin: 24 }}>
-        <Paragraph type="secondary">
-          SHOWING <Text>3</Text> RESULTS FROM <Text>3</Text>
-        </Paragraph>
-      </div>
+      <Pagination
+        total={paginateData.total}
+        defaultPageSize={10}
+        showSizeChanger={false}
+        onChange={onPaginationChange}
+        pageSize={paginateData.limit}
+        current={paginateData.currentPage}
+        showingRecords={paginateData.showingRecords}
+      />
     </div>
   )
 }
