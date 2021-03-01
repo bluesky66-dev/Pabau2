@@ -71,7 +71,17 @@ const Form: FC<P> = ({ schema, formik, layout = 'vertical' }) => {
                       : styles.inputSecondTimeWrapper
                   }
                 >
-                  <AntForm.Item label={short} key={name} name={name}>
+                  <AntForm.Item
+                    label={short}
+                    key={name}
+                    name={name}
+                    className={
+                      values[name] === '' &&
+                      formik.errors?.name &&
+                      styles.errorTimeWrapper
+                    }
+                  >
+                    <div>{name}</div>
                     <TimeInput
                       name={name}
                       value={
@@ -93,6 +103,11 @@ const Form: FC<P> = ({ schema, formik, layout = 'vertical' }) => {
                         formik.setFieldValue(name, timeString)
                       }}
                     />
+                    {values[name] === '' && formik.errors?.name && (
+                      <span style={{ color: '#f5222d' }}>
+                        {formik.errors[name]}
+                      </span>
+                    )}
                   </AntForm.Item>
                 </div>
               )}

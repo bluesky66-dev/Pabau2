@@ -33,32 +33,35 @@ const schema: Schema = {
       fullLower: 'name',
       short: 'Name',
       shortLower: 'name',
-      min: 2,
       example: 'Weekly Standard',
       cssWidth: 'max',
       type: 'string',
+      validateMsg: 'Rota template name is required',
+      required: true,
     },
     start_time: {
       full: 'Start Time',
       fullLower: 'start time',
       short: 'Start Time',
       shortLower: 'start time',
-      min: 2,
       example: '09:00',
       cssWidth: 'max',
       type: 'time',
       col: 12,
+      validateMsg: 'Start time is required',
+      required: true,
     },
     end_time: {
       full: 'End Time',
       fullLower: 'end time',
       short: 'End Time',
       shortLower: 'end time',
-      min: 2,
       example: '17:00',
       cssWidth: 'max',
       type: 'time',
       col: 12,
+      validateMsg: 'End time is required',
+      required: true,
     },
     days: {
       full: 'Days',
@@ -74,10 +77,11 @@ const schema: Schema = {
         { label: 'Sun', value: 'Sun' },
       ],
       shortLower: 'days',
-      min: 2,
       example: 'Mon',
       cssWidth: 'max',
       type: 'days-checkbox',
+      validateMsg: 'Days is required',
+      required: true,
     },
     is_active: {
       full: 'Status',
@@ -108,10 +112,7 @@ export const LIST_QUERY = gql`
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query rota_templates_aggregate(
-    $isActive: Boolean = true
-    $searchTerm: String = ""
-  ) {
+  query rota_templates_aggregate($isActive: Boolean = true) {
     rota_templates_aggregate(where: { is_active: { _eq: $isActive } }) {
       aggregate {
         count
