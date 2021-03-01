@@ -10,7 +10,7 @@ const Index: FC = () => {
   const showNotification = (email) => {
     if (setIndexTab === 1) {
       console.log(email)
-      Notification(NotificationType.success, 'Test message sent')
+      Notification(NotificationType.success, 'Test Email sent')
     }
     if (setIndexTab === 2) {
       Notification(NotificationType.success, 'Test SMS sent')
@@ -27,26 +27,19 @@ const Index: FC = () => {
             breadcrumbName: 'Notification Messages',
           },
           {
-            path: 'client-notifications/cancelled-class-booking',
-            breadcrumbName: 'Cancelled a class booking',
+            path: 'client-notifications/class-reminder',
+            breadcrumbName: 'Reminder for class',
           },
         ]}
-        title={'Cancelled a class booking'}
+        title={'Reminder for class'}
         setIndexTab={setIndexTab}
         handleNotificationSubmit={showNotification}
       />
       <ClientNotification
         onSeletedTab={(value) => setSelectedTab(value)}
-        hideRequestConfirmationOption={true}
-        hideAllowReschedulingOption={true}
-        hideAllowCancellationOption={true}
-        hideDisplayPolicyOption={true}
-        hideMedicalHistoryOption={true}
-        hideReminderTimeFrameTabPane={true}
         standardMessage={
-          'this notification automatically sends to clients when they cancel a class booking'
+          'this notification automatically sends a reminder to a client who has registered to a class'
         }
-        type={'cancelClassBooking'}
       />
     </Layout>
   )

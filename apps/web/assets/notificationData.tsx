@@ -138,7 +138,7 @@ const notificationData = {
         'Automatically sends a reminder to a client who has registered to a class',
       icon: <BellOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/class-reminder',
       disabled: true,
     },
     {

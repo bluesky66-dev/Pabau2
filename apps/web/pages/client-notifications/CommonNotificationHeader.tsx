@@ -5,6 +5,7 @@ import {
   Breadcrumb,
   PhoneNumberInput,
   Notification,
+  NotificationType,
   BreadcrumbItemInterface,
 } from '@pabau/ui'
 import { useFormik } from 'formik'
@@ -14,15 +15,6 @@ import { DownOutlined, LeftOutlined } from '@ant-design/icons'
 import * as Yup from 'yup'
 
 const { Title } = Typography
-
-enum NotificationType {
-  info = 'info',
-  success = 'success',
-  error = 'error',
-  warning = 'warning',
-  loading = 'loading',
-  connect = 'connect',
-}
 
 interface p {
   setIndexTab: number

@@ -1,20 +1,11 @@
 import React, { FC, useRef } from 'react'
-import { Notification } from '@pabau/ui'
+import { Notification, NotificationType } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import ClientNotification from '../../../components/ClientNotification/index'
 import { renderToString } from 'react-dom/server'
 import AppointmentEmailPreview from './email-preview'
 import { apiURL } from '../../../baseUrl'
 import CommonNotificationHeader from '../CommonNotificationHeader'
-
-enum NotificationType {
-  info = 'info',
-  success = 'success',
-  error = 'error',
-  warning = 'warning',
-  loading = 'loading',
-  connect = 'connect',
-}
 
 const Index: FC = () => {
   const [setIndexTab, setSelectedTab] = React.useState(1)
@@ -105,6 +96,9 @@ const Index: FC = () => {
       <ClientNotification
         ref={ref}
         onSeletedTab={(value) => setSelectedTab(value)}
+        standardMessage={
+          'the notification automatically sends to clients ahead of their appointment'
+        }
       />
     </Layout>
   )

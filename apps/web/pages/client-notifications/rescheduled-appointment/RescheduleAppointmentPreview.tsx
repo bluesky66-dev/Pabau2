@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
-import { Button, Appointment } from '@pabau/ui'
-import { getFlag } from '../../../mocks/utils'
-import styles from './index.module.less'
+import { Appointment } from '@pabau/ui'
+import CustomTemplate from '../CustomTemplate'
 
 interface P {
   requestConfirm?: boolean
@@ -57,15 +56,10 @@ const RescheduleAppointmentPreview: FC<P> = ({
           type={'reschedule'}
         />
       ) : (
-        <div
-          className={styles.cardAddTemplateContainer}
-          style={{ backgroundColor: backGroundColor }}
-        >
-          <Button type="default" className={styles.addTemplateTxt}>
-            <img src={getFlag(selectLanguage)} alt="" />
-            &nbsp;+ Add Template
-          </Button>
-        </div>
+        <CustomTemplate
+          backGroundColor={backGroundColor}
+          selectLanguage={selectLanguage}
+        />
       )}
     </div>
   )

@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
-import { Button, EmailSmsPreview, NoShowAppointment } from '@pabau/ui'
-import { getFlag } from '../../../mocks/utils'
-import styles from './index.module.less'
+import { EmailSmsPreview, NoShowAppointment } from '@pabau/ui'
+import CustomTemplate from '../CustomTemplate'
 
 interface P {
   standardTapIndex: string
@@ -182,15 +181,10 @@ const NoShowAppointmentPreview: FC<P> = ({
           />
         </EmailSmsPreview>
       ) : (
-        <div
-          className={styles.cardAddTemplateContainer}
-          style={{ backgroundColor: backGroundColor }}
-        >
-          <Button type="default" className={styles.addTemplateTxt}>
-            <img src={getFlag(selectLanguage)} alt="" />
-            &nbsp;+ Add Template
-          </Button>
-        </div>
+        <CustomTemplate
+          backGroundColor={backGroundColor}
+          selectLanguage={selectLanguage}
+        />
       )}
     </div>
   )

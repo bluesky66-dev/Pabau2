@@ -1,17 +1,8 @@
 import React, { FC } from 'react'
-import { Notification } from '@pabau/ui'
+import { Notification, NotificationType } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import ClientNotification from '../../../components/ClientNotification/index'
 import CommonNotificationHeader from '../CommonNotificationHeader'
-
-enum NotificationType {
-  info = 'info',
-  success = 'success',
-  error = 'error',
-  warning = 'warning',
-  loading = 'loading',
-  connect = 'connect',
-}
 
 const Index: FC = () => {
   const [setIndexTab, setSelectedTab] = React.useState(1)
@@ -47,6 +38,7 @@ const Index: FC = () => {
       <ClientNotification
         onSeletedTab={(value) => setSelectedTab(value)}
         type={'reschedule'}
+        hideReminderTimeFrameTabPane={true}
         hideMedicalHistoryOption={false}
         standardMessage={
           'this notification automatically sends to clients when their appointment start time is changed'
