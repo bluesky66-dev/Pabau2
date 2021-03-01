@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Drawer, Menu } from 'antd'
 import { Button, Search, Dropdown as AvatarDropDown } from '@pabau/ui'
 import styles from './MobileSidebar.module.less'
@@ -24,6 +24,7 @@ interface SidebarProps {
   onSideBarClosed: () => void
   onClickNotificationDrawer: () => void
   onClickChatDrawer: () => void
+  user?: any
 }
 
 export const MobileSidebar: FC<SidebarProps> = ({
@@ -31,11 +32,16 @@ export const MobileSidebar: FC<SidebarProps> = ({
   onSideBarClosed,
   onClickNotificationDrawer,
   onClickChatDrawer,
+  user,
 }) => {
   const router = useRouter()
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([])
   const [openProfileDrawer, setProfileDrawer] = useState<boolean>(false)
+
+  useEffect(() => {
+    console.log('Mobile' + user)
+  })
 
   const mobileSidebar: SidebarMenuItem[] = [
     {
@@ -156,6 +162,7 @@ export const MobileSidebar: FC<SidebarProps> = ({
           <AvatarDropDown
             isOpen={openProfileDrawer}
             onCloseDrawer={() => setProfileDrawer((e) => !e)}
+            user={user}
           />
         )}
         <div className={styles.buttonMenu}>
