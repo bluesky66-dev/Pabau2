@@ -24,7 +24,7 @@ import { ReactComponent as PABAULOGO } from '../../assets/images/pabaulogo.svg'
 import { ReactComponent as UPSVG } from '../../assets/images/UP.svg'
 import { ReactComponent as TaskSVG } from '../../assets/images/Vector.svg'
 import styles from './Dropdown.module.less'
-import useLogin from '../../../../../apps/web/hooks/useLogin'
+import useLogin from '../../hooks/useLogin'
 import { useLiveQuery } from '../../hooks/useLiveQuery'
 import { gql } from '@apollo/client'
 
