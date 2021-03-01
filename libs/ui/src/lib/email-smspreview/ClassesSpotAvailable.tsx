@@ -6,7 +6,7 @@ import { Button } from '../button/Button'
 
 export const ClassesSpotAvailable: FC<
   ClassRescheduledProps & EmailSMSPreviewProps
-> = ({ message }) => {
+> = ({ message, buttonColor }) => {
   return (
     <>
       <Row gutter={[0, 4]} className={styles.break}>
@@ -22,7 +22,9 @@ export const ClassesSpotAvailable: FC<
         </Col>
       </Row>
       <Row gutter={[0, 4]} className={styles.bookAppointment}>
-        <Button className={styles.bookButton}>Book now</Button>
+        <Button backgroundColor={buttonColor} className={styles.bookButton}>
+          Book now
+        </Button>
       </Row>
     </>
   )

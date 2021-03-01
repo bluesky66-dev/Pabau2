@@ -156,7 +156,7 @@ const notificationData = {
         'Automatically sends to clients when a class slot becomes available',
       icon: <FileDoneOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/class-spot-available',
       disabled: true,
     },
   ],
