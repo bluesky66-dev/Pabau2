@@ -8,7 +8,7 @@ export default function useLogin(
 ): [boolean, JwtPayloadDto | null] {
   const [cookie] = useCookies(['user'])
   const [authenticated, authenticate] = useState<boolean>(registered)
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState<any>()
   useEffect(() => {
     if ({}.propertyIsEnumerable.call(cookie, 'user')) {
       setUser(jwt.decode(cookie.user))
