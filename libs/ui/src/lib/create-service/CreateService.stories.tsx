@@ -43,6 +43,10 @@ export const CreateServiceStory: FC = () => {
           { name: 'Jordan Martin' },
           { name: 'Grant Dudley' },
         ]}
+        locations={[
+          'London Road, London, England',
+          'Lorem Street, Liverpool, England',
+        ]}
         visible={visible}
         onClose={() => setVisible(false)}
       />

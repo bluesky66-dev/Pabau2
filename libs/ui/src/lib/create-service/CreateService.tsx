@@ -44,8 +44,14 @@ import styles from './CreateService.module.less'
 const { Panel } = Collapse
 const { Option, OptGroup } = Select
 
+interface LocationItem {
+  location: string
+  selected: boolean
+}
+
 export interface CreateServiceProps {
   employees: Employee[]
+  locations: Array<string>
   rooms: Array<string>
   equipment: Array<string>
   visible: boolean
@@ -55,6 +61,7 @@ export interface CreateServiceProps {
 
 export const CreateService: FC<CreateServiceProps> = ({
   employees,
+  locations,
   rooms,
   equipment,
   visible,
@@ -71,6 +78,7 @@ export const CreateService: FC<CreateServiceProps> = ({
   const [servicePrice, setServicePrice] = useState('')
   const [sliderValue, setSliderValue] = useState(0)
   const [paymentUnit, setPaymentUnit] = useState('%')
+  const [locationItems, setLocationItems] = useState<LocationItem[]>([])
   const appointmentColors = [
     '#7986cb',
     '#64b5f6',
@@ -228,9 +236,31 @@ export const CreateService: FC<CreateServiceProps> = ({
     }
     setAvailableOn([...options])
   }
+  const handleSelectAll = (e) => {
+    if (e.target.checked) {
+      const items = [...locationItems]
+      for (const item of items) {
+        item.selected = true
+      }
+      setLocationItems([...items])
+    }
+  }
+  const handleCheckLocation = (e, location) => {
+    const items = [...locationItems]
+    for (const item of items) {
+      item.selected =
+        location.location === item.location ? e.target.checked : item.selected
+    }
+    setLocationItems([...items])
+  }
   useEffect(() => {
     setShowModal(visible)
   }, [visible])
+  useEffect(() => {
+    setLocationItems([
+      ...locations.map((location) => ({ location, selected: false })),
+    ])
+  }, [locations])
   const ChooseServiceType = () => {
     return (
       <div className={styles.chooseServiceType}>
@@ -768,7 +798,44 @@ export const CreateService: FC<CreateServiceProps> = ({
                     />
                   </div>
                 </div>
-                <div>Locations</div>
+                <div className={styles.locationsContainer}>
+                  <div className={styles.createServiceSection}>
+                    <h2
+                      className={styles.createServiceSectionTitle}
+                      style={{ margin: 0 }}
+                    >
+                      Locations
+                    </h2>
+                    <h3
+                      className={styles.createServiceSectionSubTitle}
+                      style={{ marginBottom: '1rem' }}
+                    >
+                      Choose the locations this discount can be applied
+                    </h3>
+                    <div className={styles.locationItem}>
+                      <Checkbox
+                        defaultChecked={false}
+                        onChange={(e) => handleSelectAll(e)}
+                      >
+                        Select all
+                      </Checkbox>
+                    </div>
+                    {locationItems?.map((location) => (
+                      <div
+                        key={location.location}
+                        className={styles.locationItem}
+                      >
+                        <Checkbox
+                          defaultChecked={location.selected}
+                          checked={location.selected}
+                          onChange={(e) => handleCheckLocation(e, location)}
+                        >
+                          {location.location}
+                        </Checkbox>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </TabMenu>
               <div className={styles.createServiceOnlineBooking}>
                 <div className={styles.createServiceSection}>
