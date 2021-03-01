@@ -28,10 +28,10 @@ const Index: FC = () => {
           },
           {
             path: 'client-notifications/invoice',
-            breadcrumbName: 'New appointment is booked',
+            breadcrumbName: 'Invoice',
           },
         ]}
-        title={'New appointment is booked'}
+        title={'Invoice'}
         setIndexTab={setIndexTab}
         handleNotificationSubmit={showNotification}
       />
