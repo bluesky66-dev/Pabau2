@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import ReactQuill from 'react-quill'
-import '../../assets/css/quill.css'
+import 'react-quill/dist/quill.snow.css'
 
 interface P {
   title: string
@@ -16,6 +16,7 @@ const SettingElementTextBlock: FC<P> = ({
   onChangeText,
 }) => {
   const onTextChange = (e) => {
+    console.log('e =', e)
     onChangeText?.(e)
   }
   return (
