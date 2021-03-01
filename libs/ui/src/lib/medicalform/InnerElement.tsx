@@ -1,6 +1,5 @@
 import { MedicalFormTypes } from '@pabau/ui'
 import React, { FC } from 'react'
-import 'react-quill/dist/quill.snow.css'
 import conditionsIcon from '../../assets/images/medicalform_conditions.svg'
 import customCompanyIcon from '../../assets/images/medicalform_custom_company.svg'
 import customDobIcon from '../../assets/images/medicalform_custom_dob.svg'
