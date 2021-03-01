@@ -51,6 +51,7 @@ const Index: FC = () => {
         standardMessage={
           'this notification automatically sends to clients when a class is rescheduled'
         }
+        hideReminderTimeFrameTabPane={true}
       />
     </Layout>
   )
