@@ -30,6 +30,8 @@ export interface EmailSMSPreviewProps {
   activeSocialIcons?: string[]
   buttonColor?: string
   backGroundColor?: string
+  contactEmail?: string
+  contactInfoNumber?: string
 }
 
 export interface FooterProps {
@@ -38,6 +40,8 @@ export interface FooterProps {
   text?: string
   isFooterText?: boolean
   activeSocialIcons?: string[]
+  contactEmail?: string
+  contactInfoNumber?: string
 }
 
 export interface NoShowAppointmentProps {
@@ -121,6 +125,8 @@ export function EmailSMSFooter(props: FooterProps): JSX.Element {
     text,
     isFooterText = false,
     activeSocialIcons = [],
+    contactInfoNumber,
+    contactEmail,
   } = props
 
   const setSocialIcon = (value) => {
@@ -150,12 +156,16 @@ export function EmailSMSFooter(props: FooterProps): JSX.Element {
           </Row>
           <Row gutter={[0, 4]} className={styles.bookAppointment}>
             <Col>
-              <span className={styles.contactInfo}>+44 000 987 507</span>
+              <span className={styles.contactInfo}>
+                {contactInfoNumber || '+44 000 987 507'}
+              </span>
             </Col>
           </Row>
           <Row gutter={[0, 4]} className={styles.bookAppointment}>
             <Col>
-              <span className={styles.contactInfo}>info@theclinic.com</span>
+              <span className={styles.contactInfo}>
+                {contactEmail || 'info@theclinic.com'}
+              </span>
             </Col>
           </Row>
         </>
@@ -203,6 +213,8 @@ export const EmailSmsPreview = (
     previewButtonGroup = true,
     previewCustomStatus,
     backGroundColor = '',
+    contactEmail,
+    contactInfoNumber,
     activeSocialIcons = ['facebook', 'whatsApp', 'instagram', 'twitter'],
   } = props
   const [previewStatus, setPreviewStatus] = React.useState(
@@ -279,6 +291,8 @@ export const EmailSmsPreview = (
                 text={footerText}
                 isFooterText={isFooterText}
                 activeSocialIcons={activeSocialIcons}
+                contactInfoNumber={contactInfoNumber}
+                contactEmail={contactEmail}
               />
             )}
           </div>

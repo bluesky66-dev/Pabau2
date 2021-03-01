@@ -83,7 +83,7 @@ const notificationData = {
         'Automatically sends to clients when an appointment slot becomes available',
       icon: <FileSyncOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/waitlist',
       disabled: true,
     },
   ],
