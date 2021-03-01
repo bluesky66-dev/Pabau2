@@ -47,6 +47,7 @@ const Index: FC = () => {
       <ClientNotification
         onSeletedTab={(value) => setSelectedTab(value)}
         type={'reschedule'}
+        hideReminderTimeFrameTabPane={true}
         hideMedicalHistoryOption={false}
         standardMessage={
           'this notification automatically sends to clients when their appointment start time is changed'
