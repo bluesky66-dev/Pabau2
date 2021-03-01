@@ -1,5 +1,3 @@
-import React from 'react'
-import { AppProps } from 'next/app'
 import {
   ApolloClient,
   ApolloLink,
@@ -10,17 +8,21 @@ import {
 } from '@apollo/client'
 import { WebSocketLink } from '@apollo/client/link/ws'
 import { getMainDefinition } from '@apollo/client/utilities'
-import { OperationDefinitionNode } from 'graphql'
-import 'react-phone-input-2/lib/style.css'
+import { library } from '@fortawesome/fontawesome-svg-core'
 // import 'react-google-places-autocomplete/dist/index.min.css'
 import * as Icons from '@fortawesome/free-solid-svg-icons'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-import { I18nextProvider } from 'react-i18next'
+import { OperationDefinitionNode } from 'graphql'
 import i18next from 'i18next'
+import { AppProps } from 'next/app'
+import React from 'react'
+import { I18nextProvider } from 'react-i18next'
+import 'react-phone-input-2/lib/style.css'
+import 'react-quill/dist/quill.snow.css'
+import 'slick-carousel/slick/slick-theme.css'
+import 'slick-carousel/slick/slick.css'
 import de from '../locales/de.json'
 import en from '../locales/en.json'
+
 require('../styles/global.less')
 require('../../../libs/ui/src/styles/antd.less')
 require('react-phone-input-2/lib/style.css')

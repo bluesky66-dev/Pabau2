@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
 import ReactQuill from 'react-quill'
-import '../../styles/quill.snow.css'
 
 interface P {
   title: string
