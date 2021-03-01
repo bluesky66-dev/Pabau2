@@ -13,25 +13,25 @@ import HGSVG from '../../assets/images/lang-logos/hungarian.svg'
 import LTSVG from '../../assets/images/lang-logos/latvian.svg'
 import NWSVG from '../../assets/images/lang-logos/norwegian.svg'
 import POSVG from '../../assets/images/lang-logos/polish.svg'
-import SHSVG from '../../assets/images/lang-logos/spanish.svg'
 import SWSVG from '../../assets/images/lang-logos/swedish.svg'
 import ROMSVG from '../../assets/images/lang-logos/romanian.svg'
 import RUSSVG from '../../assets/images/lang-logos/russian.svg'
+import DASVG from '../../assets/images/lang-logos/dutch.svg'
 
 const languageMenu: LangData[] = [
   {
     label: 'English',
     shortLabel: 'EN',
     logo: ENSVG,
-    selected: false,
-    default: false,
+    selected: true,
+    default: true,
   },
   {
     label: 'French',
     shortLabel: 'FR',
     logo: FRSVG,
-    selected: true,
-    default: true,
+    selected: false,
+    default: false,
   },
   {
     label: 'Spanish',
@@ -64,7 +64,7 @@ const languageMenu: LangData[] = [
   {
     label: 'Danish',
     shortLabel: 'DA',
-    logo: FRSVG,
+    logo: DASVG,
     selected: false,
     default: false,
   },
@@ -93,13 +93,6 @@ const languageMenu: LangData[] = [
     label: 'Polish',
     shortLabel: 'PL',
     logo: POSVG,
-    selected: false,
-    default: false,
-  },
-  {
-    label: 'Spannish',
-    shortLabel: 'SH',
-    logo: SHSVG,
     selected: false,
     default: false,
   },
@@ -148,13 +141,13 @@ const LanguagePop: FC<P> = ({
         (item) => item.shortLabel === languageMenu[index].shortLabel
       )
     ) {
-      if (preferredLangTemp.length < 4) {
-        languageMenu[index].selected = true
-        preferredLangTemp.push({ ...languageMenu[index] })
-      } else {
-        // preferredLangTemp.pop()
-        // preferredLangTemp.push({ ...languageMenu[index] })
-      }
+      // if (preferredLangTemp.length < 4) {
+      languageMenu[index].selected = true
+      preferredLangTemp.push({ ...languageMenu[index] })
+      // } else {
+      // preferredLangTemp.pop()
+      // preferredLangTemp.push({ ...languageMenu[index] })
+      // }
     }
     setPreferredLang([...preferredLangTemp])
   }
@@ -196,6 +189,8 @@ const LanguagePop: FC<P> = ({
 interface ClientLanguageProps {
   selectLanguageHook: [string, React.Dispatch<React.SetStateAction<string>>]
   defaultLanguage: string
+  isClickable: boolean
+  isHover: boolean
 }
 
 const defaultLan = (defaultLanguage: string): LangData => {
@@ -218,6 +213,8 @@ function isDefault(item: LangData, defaultLanguage: string): boolean {
 export const ClientLanguage: FC<ClientLanguageProps> = ({
   selectLanguageHook: [selectLanguage, setSelectLanguage],
   defaultLanguage,
+  isClickable,
+  isHover,
 }) => {
   const [preferredLang, setPreferredLang] = useState<LangData[]>([])
 
@@ -239,9 +236,24 @@ export const ClientLanguage: FC<ClientLanguageProps> = ({
     setPreferredLang([...preferredLang])
   }
 
+  const [flagStatus, setFlagStatus] = useState(false)
+
   useEffect(() => {
     setPreferredLang([defaultLan(defaultLanguage)])
   }, [defaultLanguage])
+
+  function checkEvent1(value) {
+    if (isHover) {
+      setFlagStatus(true)
+      setSelectLanguage(value)
+    }
+  }
+  function checkEvent2(value) {
+    if (isClickable) {
+      setFlagStatus(true)
+      setSelectLanguage(value)
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -250,8 +262,19 @@ export const ClientLanguage: FC<ClientLanguageProps> = ({
           return (
             <div
               key={item.label}
-              className={styles.preferredLanguage}
-              onClick={() => setSelectLanguage(item.shortLabel)}
+              className={`${
+                flagStatus && item.shortLabel === selectLanguage
+                  ? styles.preferredLanguage
+                  : styles.preferredLanguageOut
+              } ${
+                isHover && item.shortLabel === selectLanguage
+                  ? styles.preferredLanguageMouseIn
+                  : styles.preferredLanguageMouseOut
+              }`}
+              onMouseEnter={() => checkEvent1(item.shortLabel)}
+              onClick={() => checkEvent2(item.shortLabel)}
+              onMouseOver={() => setFlagStatus(true)}
+              onMouseLeave={() => setFlagStatus(true)}
             >
               <Image
                 key={item.label}
@@ -271,7 +294,7 @@ export const ClientLanguage: FC<ClientLanguageProps> = ({
           )
         })}
       </div>
-      <div className={styles.popover}>
+      <div className={styles.addpopover}>
         <Popover
           content={
             <LanguagePop childHook={[preferredLang, setPreferredLang]} />
@@ -279,7 +302,10 @@ export const ClientLanguage: FC<ClientLanguageProps> = ({
           placement="topLeft"
           trigger="click"
         >
-          <PlusOutlined className={styles.popButton} />
+          <div className={styles.addLanguageBtn}>
+            <PlusOutlined className={styles.popButton} />
+          </div>
+          <span className={styles.addLanguageText}>Add language</span>
         </Popover>
       </div>
     </div>
