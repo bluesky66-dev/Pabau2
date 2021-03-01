@@ -16,7 +16,7 @@ import { Avatar, Badge, Drawer, Image, Menu, Popover } from 'antd'
 import classNames from 'classnames'
 import Link from 'next/link'
 import QueueAnim from 'rc-queue-anim'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { ReactComponent as JASVG } from '../../assets/images/JA.svg'
 import { languageMenu } from '../../assets/images/lang-logos'
 import { ReactComponent as LaunchSVG } from '../../assets/images/launch.svg'
@@ -24,11 +24,29 @@ import { ReactComponent as PABAULOGO } from '../../assets/images/pabaulogo.svg'
 import { ReactComponent as UPSVG } from '../../assets/images/UP.svg'
 import { ReactComponent as TaskSVG } from '../../assets/images/Vector.svg'
 import styles from './Dropdown.module.less'
+import useLogin from '../../../../../apps/web/hooks/useLogin'
+import { useLiveQuery } from '../../hooks/useLiveQuery'
+import { gql } from '@apollo/client'
 
 // import { isMobile, isTablet } from 'react-device-detect'
 export interface DropDownInterface {
   isOpen?: boolean
   onCloseDrawer?: () => void
+  user?: any
+}
+
+const ACTIVE_USER = gql`
+  query currentUser($user: Int!) {
+    users(where: { id: { equals: $user } }) {
+      full_name
+      company
+    }
+  }
+`
+
+interface CurrentUserProps {
+  full_name: string
+  company: number
 }
 
 export const Dropdown: FC<DropDownInterface> = ({
@@ -40,7 +58,29 @@ export const Dropdown: FC<DropDownInterface> = ({
   // used for mobile device
   const [openProfileDrawer, setProfileDrawer] = useState(isOpen)
   const [activeMenuTitle, setActiveMenuTitle] = useState('Profile')
+  const [authenticated, user] = useLogin(false)
+  const [currentUserId, setCurrentUserId] = useState<null | number>(null)
+  const [currentUser, setCurrentUser] = useState<CurrentUserProps>({
+    full_name: 'William Branham',
+    company: 8254,
+  })
 
+  useEffect(() => {
+    if (user) {
+      setCurrentUserId(user.user)
+    }
+  }, [authenticated, user])
+
+  const { data } = useLiveQuery(ACTIVE_USER, {
+    variables: { user: currentUserId },
+  })
+
+  useEffect(() => {
+    if (data) {
+      console.log(data[0])
+      setCurrentUser(data[0])
+    }
+  }, [data])
   const menu = (
     <Menu className={styles.avatarMenu}>
       <Menu.Item
@@ -54,7 +94,7 @@ export const Dropdown: FC<DropDownInterface> = ({
         <RightOutlined className={styles.dropdownIcon} />
       </Menu.Item>
       <Menu.Item className={styles.userinfo}>
-        <div className={styles.userName}>William Branham</div>
+        <div className={styles.userName}>{currentUser.full_name}</div>
         <div className={styles.userBalance}>
           <p>Balance</p>
           <span>9445,00</span>

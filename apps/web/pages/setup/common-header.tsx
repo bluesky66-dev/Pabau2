@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { SearchOutlined } from '@ant-design/icons'
 import { SetupSearchInput } from '@pabau/ui'
 import {
@@ -13,10 +13,11 @@ import styles from './Setup.module.less'
 import classNames from 'classnames'
 
 interface P {
+  userData?: any
   handleSearch?: (searchTerm: string) => void
 }
 
-const CommonHeader: FC<P> = ({ handleSearch }) => {
+const CommonHeader: FC<P> = ({ userData, handleSearch }) => {
   const [openMenuDrawer, setMenuDrawer] = useState<boolean>(false)
   const [openNotificationDrawer, setNotificationDrawer] = useState<boolean>(
     false
@@ -58,6 +59,7 @@ const CommonHeader: FC<P> = ({ handleSearch }) => {
           onSideBarClosed={() => setMenuDrawer((e) => !openMenuDrawer)}
           onClickNotificationDrawer={() => setNotificationDrawer((e) => !e)}
           onClickChatDrawer={() => setMessageDrawer((e) => !e)}
+          user={userData}
         />
       )}
       {openNotificationDrawer && (

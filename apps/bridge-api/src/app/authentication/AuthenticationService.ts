@@ -1,5 +1,5 @@
 import { LoginInputDto, JwtPayloadDto} from "./dto";
-import { User } from './models/User'
+import { User } from '../models/User'
 import jwt from 'jsonwebtoken'
 import { Context } from "../../context";
 import * as crypto from "crypto";

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import styles from '../../pages/login.module.less'
 import { Button, Notification, NotificationType } from '@pabau/ui'
 import * as Yup from 'yup'
@@ -10,6 +10,7 @@ import { ReactComponent as SSOIcon } from '../../assets/images/sso.svg'
 import { gql, useMutation } from '@apollo/client'
 import { router } from 'next/client'
 import { useRouter } from 'next/router'
+import { useCookies } from 'react-cookie'
 
 export interface LoginFormProps {
   email: string
@@ -20,19 +21,37 @@ export interface LoginFormProps {
 interface LoginProps {
   handlePageShow: (page: string) => void
 }
-
 const LOGIN_MUTATION = gql`
   mutation login($email: String!, $password: String!) {
     login(username: $email, password: $password)
   }
 `
-
 const LoginMain: FC<LoginProps> = ({ handlePageShow }) => {
   const router = useRouter()
   const [
     login,
     { loading: mutationLoading, error: mutationError },
   ] = useMutation(LOGIN_MUTATION)
+  const [cookie, setCookie] = useCookies(['user'])
+
+  const loginHandler = async (loginProps: LoginFormProps): Promise<boolean> => {
+    const { email, password } = loginProps
+    const result = await login({
+      variables: {
+        email,
+        password,
+      },
+    })
+    if (!result) {
+      throw new Error('Wrong user/password')
+    }
+    setCookie('user', JSON.stringify(result.data?.login), {
+      path: '/',
+      maxAge: 3600,
+      sameSite: true,
+    })
+    return true
+  }
 
   return (
     <div>
@@ -58,18 +77,9 @@ const LoginMain: FC<LoginProps> = ({ handlePageShow }) => {
             password: Yup.string().required('Password is required'),
           })}
           onSubmit={async (value: LoginFormProps) => {
-            const { email, password } = value
-            const result = await login({
-              variables: {
-                email,
-                password,
-              },
-            })
-            if (!result) {
-              console.log('Wrong user/password')
+            if (await loginHandler(value)) {
+              await router.push('/index')
             }
-            localStorage.setItem('token', JSON.stringify(result))
-            router.push('/index')
           }}
           render={() => (
             <Form layout="vertical">
