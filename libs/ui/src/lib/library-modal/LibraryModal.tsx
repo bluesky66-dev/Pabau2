@@ -84,6 +84,7 @@ interface BType {
 export interface LibraryModalProps {
   image?: string
   title: string
+  modalWidth?: number
   subTitle: string
   visible: boolean
   bundleTypes?: BType[]
@@ -91,12 +92,13 @@ export interface LibraryModalProps {
   onInstall?: () => void
 }
 
-const LibraryModal: FC<LibraryModalProps> = ({
+export const LibraryModal: FC<LibraryModalProps> = ({
   image,
   title,
   subTitle,
   visible,
   bundleTypes = [],
+  modalWidth = 500,
   onClose,
   onInstall,
   ...rest
@@ -135,11 +137,16 @@ const LibraryModal: FC<LibraryModalProps> = ({
         className={styles.mainLibraryInstallerModal}
         title={title}
         visible={visible}
-        modalWidth={600}
+        modalWidth={modalWidth}
       >
         <h4 className={styles.subTitle}>{subTitle}</h4>
         <div className={styles.image}>
-          <div style={{ backgroundImage: `url(${image})` }}></div>
+          <div
+            style={{
+              backgroundImage: `url(${image})`,
+              height: `${modalWidth / 2}px`,
+            }}
+          ></div>
         </div>
         <div>
           <Row>
