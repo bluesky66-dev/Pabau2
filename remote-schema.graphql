@@ -16375,7 +16375,7 @@ enum labs_dashboard_update_column {
 }
 
 """
-lead view 
+lead view
 
 
 columns and relationships of "lead"
@@ -22351,6 +22351,135 @@ type query_root {
   """
   petty_cash_types_by_pk(id: uuid!): petty_cash_types
   ping: String
+
+  """
+  fetch data from the table: "product_lists"
+  """
+  product_lists(
+    """distinct select on columns"""
+    distinct_on: [product_lists_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [product_lists_order_by!]
+
+    """filter the rows returned"""
+    where: product_lists_bool_exp
+  ): [product_lists!]!
+
+  """
+  fetch aggregated fields from the table: "product_lists"
+  """
+  product_lists_aggregate(
+    """distinct select on columns"""
+    distinct_on: [product_lists_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [product_lists_order_by!]
+
+    """filter the rows returned"""
+    where: product_lists_bool_exp
+  ): product_lists_aggregate!
+
+  """fetch data from the table: "product_lists" using primary key columns"""
+  product_lists_by_pk(id: uuid!): product_lists
+
+  """
+  fetch data from the table: "prototype"
+  """
+  prototype(
+    """distinct select on columns"""
+    distinct_on: [prototype_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [prototype_order_by!]
+
+    """filter the rows returned"""
+    where: prototype_bool_exp
+  ): [prototype!]!
+
+  """
+  fetch aggregated fields from the table: "prototype"
+  """
+  prototype_aggregate(
+    """distinct select on columns"""
+    distinct_on: [prototype_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [prototype_order_by!]
+
+    """filter the rows returned"""
+    where: prototype_bool_exp
+  ): prototype_aggregate!
+
+  """fetch data from the table: "prototype" using primary key columns"""
+  prototype_by_pk(id: uuid!): prototype
+
+  """
+  fetch data from the table: "purchase_order"
+  """
+  purchase_order(
+    """distinct select on columns"""
+    distinct_on: [purchase_order_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [purchase_order_order_by!]
+
+    """filter the rows returned"""
+    where: purchase_order_bool_exp
+  ): [purchase_order!]!
+
+  """
+  fetch aggregated fields from the table: "purchase_order"
+  """
+  purchase_order_aggregate(
+    """distinct select on columns"""
+    distinct_on: [purchase_order_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [purchase_order_order_by!]
+
+    """filter the rows returned"""
+    where: purchase_order_bool_exp
+  ): purchase_order_aggregate!
+
+  """fetch data from the table: "purchase_order" using primary key columns"""
+  purchase_order_by_pk(id: uuid!): purchase_order
 
   """
   fetch data from the table: "product_lists"

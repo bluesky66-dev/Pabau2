@@ -56,7 +56,7 @@ const DELETE_MUTATION = gql`
 const ADD_MUTATION = gql`
   mutation add_credit_note_types(
     $name: String!
-    $code: Int
+    $code: String
     $invoice_prefix: String
     $is_active: Boolean
   ) {
