@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 
 import Wstepper from './Wstepper'
-import { data } from '../wizard/Mock'
-
+import { data } from '../stepper/mock'
 export default {
   component: Wstepper,
   parameters: {
