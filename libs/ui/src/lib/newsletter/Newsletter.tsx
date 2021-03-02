@@ -23,6 +23,25 @@ export interface NewsletterProps {
   ClicksColor: string
   ShowSizeChanger: boolean
 }
+
+export interface DataProps {
+  key: string
+  name: string
+  email: string
+  status: string
+  isOpened: boolean
+  isClicked: boolean
+  isBooked: boolean
+  revenue: string
+  info: {
+    sent: string
+    delivered: string
+    opened: string
+    clicked: string
+    bounced: string
+  }
+}
+
 export const Newsletter: FC<NewsletterProps> = ({
   TableTitle,
   TilesTitle,
@@ -35,20 +54,20 @@ export const Newsletter: FC<NewsletterProps> = ({
   ShowSizeChanger,
 }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
-  const [dataSource, setDataSource] = useState(data)
+  const [dataSource, setDataSource] = useState<DataProps[]>(data)
 
   const onSelectedRowKeysChange = (selectedRowKeys) => {
     setSelectedRowKeys(selectedRowKeys)
   }
 
-  const selectRow = (record) => {
-    const selectedRowKeys = [...selectedRowKeys]
-    if (selectedRowKeys.indexOf(record.key) >= 0) {
-      selectedRowKeys.splice(selectedRowKeys.indexOf(record.key), 1)
+  const selectRow = (record: { key: never }) => {
+    const selectedRowKey = [...selectedRowKeys]
+    if (selectedRowKey.indexOf(record.key) >= 0) {
+      selectedRowKey.splice(selectedRowKey.indexOf(record.key), 1)
     } else {
-      selectedRowKeys.push(record.key)
+      selectedRowKey.push(record.key)
     }
-    setSelectedRowKeys(selectedRowKeys)
+    setSelectedRowKeys(selectedRowKey)
   }
 
   const rowSelection = {
@@ -192,17 +211,19 @@ export const Newsletter: FC<NewsletterProps> = ({
                 placeholder="Search"
                 onSearch={(e) => {
                   const currValue = e
-                  const filteredData = data.filter((entry) => {
-                    return (
-                      entry.name
-                        .toLowerCase()
-                        .includes(currValue.toLowerCase()) ||
-                      entry.email
-                        .toLowerCase()
-                        .includes(currValue.toLowerCase())
-                    )
-                  })
-                  setDataSource(filteredData)
+                  const filter = data.filter(
+                    (entry: { name: string; email: string }) => {
+                      return (
+                        entry.name
+                          .toLowerCase()
+                          .includes(currValue.toLowerCase()) ||
+                        entry.email
+                          .toLowerCase()
+                          .includes(currValue.toLowerCase())
+                      )
+                    }
+                  )
+                  setDataSource(filter)
                 }}
                 style={{ width: 200 }}
               />

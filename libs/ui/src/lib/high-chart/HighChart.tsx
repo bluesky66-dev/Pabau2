@@ -3,8 +3,16 @@ import * as Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import './HighChart.module.less'
 
-export const HighChart: FC = (props: HighchartsReact.Props) => {
-  const { ClicksLabel, OpensLabel, ChartTitle, OpensColor, ClicksColor } = props
+export interface HighChartProps {
+  ChartTitle: string
+  OpensLabel: string
+  ClicksLabel: string
+  OpensColor: string
+  ClicksColor: string
+}
+
+export const HighChart: FC<HighChartProps> = (props) => {
+  const { ChartTitle, ClicksLabel, OpensLabel, OpensColor, ClicksColor } = props
   const options: Highcharts.Options = {
     title: {
       text: ChartTitle,
