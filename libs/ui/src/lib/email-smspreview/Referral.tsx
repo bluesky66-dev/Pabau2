@@ -1,13 +1,13 @@
-import React, { PropsWithChildren } from 'react'
-import { ReferralProps, CancelAClassBookingProps } from './EmailSMSPreview'
+import React, { FC } from 'react'
+import { ReferralProps, EmailSMSPreviewProps } from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
-import { Button } from '../button/button'
+import styles from './EmailSmsPreview.module.less'
+import { Button } from '../button/Button'
 
-export function Referral({
+export const Referral: FC<EmailSMSPreviewProps & ReferralProps> = ({
   message,
   footerText,
-}: PropsWithChildren<CancelAClassBookingProps & ReferralProps>): JSX.Element {
+}) => {
   return (
     <>
       <Row gutter={[0, 4]} className={styles.break}>

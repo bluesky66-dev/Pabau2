@@ -1,13 +1,15 @@
-import React, { PropsWithChildren } from 'react'
+import React, { FC } from 'react'
 import {
   EmailSMSPreviewProps,
   CancelAClassBookingProps,
-} from './EmailSMSPreview'
+} from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
-import { Button } from '../button/button'
+import styles from './EmailSmsPreview.module.less'
+import { Button } from '../button/Button'
 
-export function CancelAClassBooking({
+export const CancelAClassBooking: FC<
+  CancelAClassBookingProps & EmailSMSPreviewProps
+> = ({
   dateTime,
   consultancyName,
   consultationDetail,
@@ -15,20 +17,18 @@ export function CancelAClassBooking({
   address,
   text,
   buttonColor,
-}: PropsWithChildren<
-  CancelAClassBookingProps & EmailSMSPreviewProps
->): JSX.Element {
+}) => {
   return (
     <>
-      <Row className={styles.cancelTag}>
+      <Row className={`${styles.cancelTag} ${styles.top}`}>
         <Col>
           <span>{text}</span>
         </Col>
       </Row>
       <Row className={styles.calenderDateTime}>
         <Col>
-          <p className={styles.calenderDate}>{dateTime}</p>
-          <p className={styles.calenderDate}>{consultationDetail}</p>
+          <p>{dateTime}</p>
+          <p>{consultationDetail}</p>
         </Col>
       </Row>
       <Row className={styles.cancelBtn}>

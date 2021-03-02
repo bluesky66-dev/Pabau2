@@ -1,12 +1,12 @@
-import React, { PropsWithChildren } from 'react'
-import { InvoicesProps, CancelAClassBookingProps } from './EmailSMSPreview'
+import React, { FC } from 'react'
+import { InvoicesProps, EmailSMSPreviewProps } from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
+import styles from './EmailSmsPreview.module.less'
 
-export function Invoices({
+export const Invoices: FC<EmailSMSPreviewProps & InvoicesProps> = ({
   message,
   footerText,
-}: PropsWithChildren<CancelAClassBookingProps & InvoicesProps>): JSX.Element {
+}) => {
   return (
     <>
       <Row gutter={[0, 4]} className={styles.break}>

@@ -1,13 +1,11 @@
-import React, { PropsWithChildren } from 'react'
-import { EmailSMSPreviewProps, ClassRescheduledProps } from './EmailSMSPreview'
+import React, { FC } from 'react'
+import { EmailSMSPreviewProps, ClassRescheduledProps } from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
+import styles from './EmailSmsPreview.module.less'
 
-export function ClassRescheduled({
-  message,
-}: PropsWithChildren<
+export const ClassRescheduled: FC<
   ClassRescheduledProps & EmailSMSPreviewProps
->): JSX.Element {
+> = ({ message }) => {
   return (
     <>
       <Row gutter={[0, 4]} className={styles.break}>
@@ -20,8 +18,8 @@ export function ClassRescheduled({
       </Row>
       <Row className={styles.textBox}>
         <Col>
-          <p className={styles.text}>Kind regards,</p>
-          <p className={styles.text}>Your friends at The Clinic</p>
+          <p>Kind regards,</p>
+          <p>Your friends at The Clinic</p>
         </Col>
       </Row>
     </>

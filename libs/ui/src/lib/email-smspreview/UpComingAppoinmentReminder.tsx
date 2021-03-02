@@ -1,14 +1,14 @@
-import React, { PropsWithChildren } from 'react'
-import { EmailSMSPreviewProps, ReminderForClassProps } from './EmailSMSPreview'
+import React, { FC } from 'react'
+import {
+  EmailSMSPreviewProps,
+  UpComingAppoinmentReminderProps,
+} from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
+import styles from './EmailSmsPreview.module.less'
 
-export function UpComingAppointmentReminder({
-  message,
-  contactNumber,
-}: PropsWithChildren<
-  ReminderForClassProps & EmailSMSPreviewProps
->): JSX.Element {
+export const UpComingAppointmentReminder: FC<
+  UpComingAppoinmentReminderProps & EmailSMSPreviewProps
+> = ({ message, contactNumber }) => {
   return (
     <>
       <Row gutter={[0, 4]} className={styles.break}>
@@ -36,8 +36,8 @@ export function UpComingAppointmentReminder({
       </Row>
       <Row className={styles.textBox}>
         <Col>
-          <p className={styles.text}>Kind regards,</p>
-          <p className={styles.text}>Your friends at The Clinic</p>
+          <p>Kind regards,</p>
+          <p>Your friends at The Clinic</p>
         </Col>
       </Row>
     </>

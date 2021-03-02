@@ -1,14 +1,15 @@
-import React, { PropsWithChildren } from 'react'
-import { EmailSMSPreviewProps, ClassRescheduledProps } from './EmailSMSPreview'
+import React, { FC } from 'react'
+import {
+  EmailSMSPreviewProps,
+  ClassesSpotAvailableProps,
+} from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
-import { Button } from '../button/button'
+import styles from './EmailSmsPreview.module.less'
+import { Button } from '../button/Button'
 
-export function ClassesSpotAvailable({
-  message,
-}: PropsWithChildren<
-  ClassRescheduledProps & EmailSMSPreviewProps
->): JSX.Element {
+export const ClassesSpotAvailable: FC<
+  ClassesSpotAvailableProps & EmailSMSPreviewProps
+> = ({ message }) => {
   return (
     <>
       <Row gutter={[0, 4]} className={styles.break}>

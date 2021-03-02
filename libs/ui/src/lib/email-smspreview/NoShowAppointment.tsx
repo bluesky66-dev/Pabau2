@@ -1,16 +1,12 @@
-import React, { PropsWithChildren } from 'react'
-import { EmailSMSPreviewProps, NoShowAppointmentProps } from './EmailSMSPreview'
+import React, { FC } from 'react'
+import { EmailSMSPreviewProps, NoShowAppointmentProps } from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
-import { Button } from '../button/button'
+import styles from './EmailSmsPreview.module.less'
+import { Button } from '../button/Button'
 
-export function NoShowAppointment({
-  message,
-  contactNumber,
-  footerContact,
-}: PropsWithChildren<
+export const NoShowAppointment: FC<
   NoShowAppointmentProps & EmailSMSPreviewProps
->): JSX.Element {
+> = ({ message, contactNumber, footerContact }) => {
   return (
     <>
       <Row gutter={[0, 4]} className={styles.break}>
@@ -29,7 +25,10 @@ export function NoShowAppointment({
           </Col>
         </Row>
       ) : (
-        <Row gutter={[0, 4]} className={styles.titleRow}>
+        <Row
+          gutter={[0, 4]}
+          className={`${styles.titleRow} ${styles.centerline}`}
+        >
           <Col>
             <span className={styles.message}>
               Click here to get your appointment online

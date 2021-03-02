@@ -1,14 +1,14 @@
-import React, { PropsWithChildren } from 'react'
-import { EmailSMSPreviewProps, MissedAClassProps } from './EmailSMSPreview'
+import React, { FC } from 'react'
+import { EmailSMSPreviewProps, MissedAClassProps } from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
-import { Button } from '../button/button'
+import styles from './EmailSmsPreview.module.less'
+import { Button } from '../button/Button'
 
-export function MissedAClass({
+export const MissedAClass: FC<MissedAClassProps & EmailSMSPreviewProps> = ({
   message,
   contactNumber,
   footerContact,
-}: PropsWithChildren<MissedAClassProps & EmailSMSPreviewProps>): JSX.Element {
+}) => {
   return (
     <>
       <Row className={styles.messageContent}>
@@ -42,10 +42,8 @@ export function MissedAClass({
         <Row gutter={[0, 4]} className={styles.textBox}>
           <Col>
             <Col>
-              <p className={styles.text}>
-                Looking forward to hearing from you soon,
-              </p>
-              <p className={styles.text}>Your friends at The Clinic</p>
+              <p>Looking forward to hearing from you soon,</p>
+              <p>Your friends at The Clinic</p>
             </Col>
           </Col>
         </Row>

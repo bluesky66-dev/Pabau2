@@ -1,21 +1,14 @@
-import React, { PropsWithChildren } from 'react'
+import React, { FC } from 'react'
 import {
   EmailSMSPreviewProps,
   ConnectRegistrationProps,
-} from './EmailSMSPreview'
+} from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
+import styles from './EmailSmsPreview.module.less'
 
-export function ConnectRegistration({
-  message,
-  connectURL,
-  username,
-  password,
-  text,
-  footerContact,
-}: PropsWithChildren<
+export const ConnectRegistration: FC<
   ConnectRegistrationProps & EmailSMSPreviewProps
->): JSX.Element {
+> = ({ message, connectURL, username, password, text, footerContact }) => {
   return (
     <>
       <Row gutter={[0, 4]} className={styles.break}>
@@ -32,8 +25,8 @@ export function ConnectRegistration({
             </span>
           </div>
           <div className={styles.loginDetail}>
-            <span className={styles.loginData}>Username:&nbsp;{username}</span>
-            <span className={styles.loginData}>Password:&nbsp;{password}</span>
+            <span>Username: {username}</span>
+            <span>Password: {password}</span>
           </div>
         </Col>
       </Row>

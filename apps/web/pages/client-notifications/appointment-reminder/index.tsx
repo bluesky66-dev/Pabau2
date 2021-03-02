@@ -1,12 +1,14 @@
-import React, { FC } from 'react'
+import React, { FC, useRef } from 'react'
 import { Typography, Input, Modal, Menu, Dropdown, Checkbox, Row } from 'antd'
 import { Button, Breadcrumb, PhoneNumberInput, Notification } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import ClientNotification from '../../../components/ClientNotification/index'
 import styles from './index.module.less'
-import CommonHeader from '../../setup/CommonHeader'
+import CommonHeader from '../../setup/common-header'
 import { DownOutlined, LeftOutlined } from '@ant-design/icons'
-
+import { renderToString } from 'react-dom/server'
+import AppointmentEmailPreview from './email-preview'
+import { apiURL } from '../../../baseUrl'
 const { Title } = Typography
 
 enum NotificationType {
@@ -21,16 +23,74 @@ enum NotificationType {
 const Index: FC = () => {
   const [setIndexTab, setSelectedTab] = React.useState(1)
   const [sendEmail, setSendEmail] = React.useState(false)
-  const [valideEmail, setValidEmail] = React.useState(false)
+  const [validEmail, setValidEmail] = React.useState(false)
+  const [visible, setVisible] = React.useState(false)
+  const [email, setEmail] = React.useState('')
+  const ref = useRef()
 
   function handleSendEmailBtn(value) {
     setSendEmail(value)
   }
 
-  function showNotification() {
-    if (valideEmail && setIndexTab === 1) {
-      Notification(NotificationType.success, 'Test message sent')
+  const showNotification = () => {
+    if (validEmail && setIndexTab === 1) {
       setSendEmail(false)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const propsData = ref?.current?.propsData() || {}
+      const {
+        requestConfirm,
+        allowRescheduling,
+        allowCancellation,
+        displayPolicy,
+        showService,
+        showEmployeeName,
+        addMedicalHisButton,
+        selectLanguage,
+        backGroundColor,
+        buttonColor,
+        informationMessage,
+        medicalMessage,
+        standardTapIndex,
+        activeSocialIcons,
+      } = propsData
+
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': apiURL,
+        },
+        body: JSON.stringify({
+          bodyContent: `${renderToString(
+            <AppointmentEmailPreview
+              requestConfirm={requestConfirm}
+              allowRescheduling={allowRescheduling}
+              allowCancellation={allowCancellation}
+              displayPolicy={displayPolicy}
+              showService={showService}
+              showEmployeeName={showEmployeeName}
+              addMedicalHisButton={addMedicalHisButton}
+              selectLanguage={selectLanguage}
+              backGroundColor={backGroundColor}
+              buttonColor={buttonColor}
+              informationMessage={informationMessage}
+              medicalMessage={medicalMessage}
+              standardTapIndex={standardTapIndex}
+              activeSocialIcons={activeSocialIcons}
+            />
+          )}`,
+          email: email,
+          subject: 'TEST',
+        }),
+      }
+      fetch(`${apiURL}/notification-email`, requestOptions).then((res) => {
+        if (res.status === 201) {
+          Notification(NotificationType.success, 'Test Email sent')
+        } else {
+          Notification(NotificationType.error, 'Test Email failed')
+        }
+      })
     }
     if (setIndexTab === 2) {
       Notification(NotificationType.success, 'Test SMS sent')
@@ -43,8 +103,11 @@ const Index: FC = () => {
       /* eslint-disable-next-line */
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     )
-    const serchfind = regexp.test(search)
-    setValidEmail(serchfind)
+    const searchFind = regexp.test(search)
+    setValidEmail(searchFind)
+    if (searchFind) {
+      setEmail(search)
+    }
   }
   const menu = (
     <Menu className={styles.menuListUl}>
@@ -62,6 +125,10 @@ const Index: FC = () => {
       </Menu.Item>
     </Menu>
   )
+
+  const handleVisibleChange = (flag) => {
+    setVisible(flag)
+  }
 
   return (
     <>
@@ -102,7 +169,13 @@ const Index: FC = () => {
           }}
         >
           <span className={styles.hideSection}>
-            <Dropdown overlay={menu} placement="bottomRight" arrow>
+            <Dropdown
+              overlay={menu}
+              placement="bottomRight"
+              onVisibleChange={handleVisibleChange}
+              visible={visible}
+              arrow
+            >
               <Button size={'large'}>
                 Enable settings <DownOutlined />
               </Button>
@@ -155,7 +228,7 @@ const Index: FC = () => {
                 {setIndexTab === 1 && (
                   <Button
                     type="primary"
-                    disabled={valideEmail ? false : true}
+                    disabled={validEmail ? false : true}
                     onClick={() => showNotification()}
                   >
                     Send
@@ -188,7 +261,10 @@ const Index: FC = () => {
             Save
           </Button>
         </div>
-        <ClientNotification onSeletedTab={(value) => setSelectedTab(value)} />
+        <ClientNotification
+          ref={ref}
+          onSeletedTab={(value) => setSelectedTab(value)}
+        />
       </Layout>
     </>
   )

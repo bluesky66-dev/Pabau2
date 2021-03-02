@@ -1,13 +1,13 @@
-import React, { PropsWithChildren } from 'react'
-import { EmailSMSPreviewProps, LeadResponsesProps } from './EmailSMSPreview'
+import React, { FC } from 'react'
+import { EmailSMSPreviewProps, LeadResponsesProps } from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
+import styles from './EmailSmsPreview.module.less'
 
-export function LeadResponses({
+export const LeadResponses: FC<LeadResponsesProps & EmailSMSPreviewProps> = ({
   message,
   text,
   isFooterText,
-}: PropsWithChildren<LeadResponsesProps & EmailSMSPreviewProps>): JSX.Element {
+}) => {
   return (
     <>
       <Row gutter={[0, 4]} className={styles.break}>
