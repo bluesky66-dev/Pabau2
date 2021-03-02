@@ -1,0 +1,1263 @@
+export const reportCardsData = [
+  {
+    catHeading: 'Sales',
+    graphDescription: 'Revenue by week',
+    description:
+      'Monitor your overall finances including sales, refunds, taxes, payments and more',
+    chartLabel: '£',
+    reports: [
+      {
+        id: 1,
+        reportCode: 'FI000',
+        reportName: 'Daily Sales',
+        isNew: true,
+        favorite: true,
+      },
+
+      {
+        id: 2,
+        reportCode: 'FI001',
+        reportName: 'Daily Reconciliation',
+        isNew: true,
+        favorite: false,
+      },
+
+      {
+        id: 3,
+        reportCode: 'FI002',
+        reportName: 'Daily Payments',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 4,
+        reportCode: 'FI005',
+        reportName: 'Receipts by Employee - Detailed',
+        isNew: true,
+        favorite: true,
+      },
+      {
+        id: 5,
+        reportCode: 'FI006 ',
+        reportName: 'Sales by Employee Detailed Cross',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 6,
+        reportCode: 'FI010',
+        reportName: 'Receipts by Retail Category',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 7,
+        reportCode: 'FI011',
+        reportName: 'Receipts by Service Category',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 8,
+        reportCode: '"FI012',
+        reportName: 'Receipts by Category',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 9,
+        reportCode: 'FI014',
+        reportName: 'Sales by Category',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 10,
+        reportCode: 'FI015',
+        reportName: 'Receipts by Employee (Service)',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 11,
+        reportCode: 'FI017',
+        reportName: 'Receipts by Employee Detailed (VAT)',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 12,
+        reportCode: 'FI019',
+        reportName: 'VAT Report',
+        isNew: false,
+        favorite: true,
+      },
+
+      {
+        id: 13,
+        reportCode: 'FI025',
+        reportName: 'Receipts by Month',
+        isNew: true,
+        favorite: false,
+      },
+
+      {
+        id: 14,
+        reportCode: 'FI026',
+        reportName: 'Monthly Taking (Summary)',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 15,
+        reportCode: 'FI030',
+        reportName: 'Receipts by Employee (Service)',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 16,
+        reportCode: 'FI031',
+        reportName: 'Invoice Activity',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 17,
+        reportCode: 'FI035',
+        reportName: 'Receipts by Payment Method',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 18,
+        reportCode: 'FI040',
+        reportName: 'Expenses',
+        isNew: true,
+        favorite: false,
+      },
+
+      {
+        id: 19,
+        reportCode: 'FI055',
+        reportName: 'Unpaid Visits',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 20,
+        reportCode: 'FI060 ',
+        reportName: 'Free Giveaways',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 21,
+        reportCode: 'FI065',
+        reportName: 'Appointment Income Projection',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 22,
+        reportCode: 'FI070',
+        reportName: ' Discount Report',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 23,
+        reportCode: 'FI075',
+        reportName: 'Outstanding Invoices',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 24,
+        reportCode: 'FI080',
+        reportName: ' Sales vs Expense',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 25,
+        reportCode: 'FI085',
+        reportName: 'Service vs Retail Receipts',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 26,
+        reportCode: 'FI090',
+        reportName: 'Aged Insurance Debt Report',
+        isNew: true,
+        favorite: false,
+      },
+
+      {
+        id: 27,
+        reportCode: 'FI155',
+        reportName: 'Insurance Report',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 28,
+        reportCode: 'OT001',
+        reportName: 'Sales Conversion',
+        isNew: true,
+        favorite: false,
+      },
+
+      {
+        id: 29,
+        reportCode: 'OT002',
+        reportName: 'Telesales Report',
+        isNew: true,
+        favorite: false,
+      },
+    ],
+    graphData: [
+      ['Jan', 20],
+      ['Feb', 5],
+      ['Mar', 12],
+      ['Apr', 20],
+      ['May', 5],
+      ['Jun', 12],
+      ['Jul', 20],
+      ['Aug', 5],
+      ['Sep', 12],
+      ['Oct', 20],
+      ['Nov', 5],
+      ['Dec', 12],
+    ],
+  },
+  {
+    catHeading: 'Clients',
+    graphDescription: 'New clients by week',
+    description:
+      'Monitor your overall finances including sales, refunds, taxes, payments and more',
+    chartLabel: 'int',
+    reports: [
+      {
+        id: 1,
+        reportCode: 'CO001',
+        reportName: 'Basic Information',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 2,
+        reportCode: 'CO003',
+        reportName: 'Birthday',
+        isNew: true,
+        favorite: false,
+      },
+
+      {
+        id: 3,
+        reportCode: 'CO010',
+        reportName: 'Outstanding Packages',
+        isNew: true,
+        favorite: true,
+      },
+
+      {
+        id: 4,
+        reportCode: 'CO021',
+        reportName: 'Booked Appointments',
+        isNew: true,
+        favorite: false,
+      },
+
+      {
+        id: 5,
+        reportCode: 'CO025',
+        reportName: 'Missed/Cancelled Appoint...',
+        isNew: true,
+        favorite: true,
+      },
+
+      {
+        id: 6,
+        reportCode: 'CO030',
+        reportName: 'Last Spend',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 7,
+        reportCode: 'CO031',
+        reportName: 'Last Visit',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 8,
+        reportCode: 'CO035 ',
+        reportName: 'Clients by Location',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 9,
+        reportCode: 'CO045',
+        reportName: 'Big Spender by Receipt',
+        isNew: false,
+        favorite: true,
+      },
+
+      {
+        id: 10,
+        reportCode: 'CO050',
+        reportName: 'Client Receipts by Category',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 11,
+        reportCode: 'CO046',
+        reportName: 'First Visit',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 12,
+        reportCode: 'CO060',
+        reportName: 'Duplicate Clients',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 13,
+        reportCode: 'CO105',
+        reportName: 'Patient Prescriptions',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 14,
+        reportCode: 'CO065',
+        reportName: 'Client Retail Purchases',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 15,
+        reportCode: 'CO070',
+        reportName: 'Account Balance',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 16,
+        reportCode: 'CO075',
+        reportName: 'Client Service Sales',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 17,
+        reportCode: 'CO147',
+        reportName: 'Medical Data Report',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 18,
+        reportCode: 'CO110',
+        reportName: 'Clients Treatment Interest',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 19,
+        reportCode: 'CO111',
+        reportName: 'Never Purchased Before',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 20,
+        reportCode: 'CO115',
+        reportName: 'Client Enquiry Conversion',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 21,
+        reportCode: 'CO130',
+        reportName: 'Product Consumption',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 22,
+        reportCode: 'CO135',
+        reportName: 'Account Activity',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 23,
+        reportCode: 'CO140',
+        reportName: 'Last Customer Bookings by Employee',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 24,
+        reportCode: 'CO145',
+        reportName: 'Contact Activity',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 25,
+        reportCode: 'CO146',
+        reportName: 'Treatment Missing Data',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 26,
+        reportCode: 'CO145',
+        reportName: 'Account Balance by Date',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 27,
+        reportCode: 'VA001',
+        reportName: 'Vaccination Report',
+        isNew: false,
+        favorite: true,
+      },
+    ],
+    graphData: [
+      ['Jan', 20],
+      ['Feb', 5],
+      ['Mar', 12],
+      ['Apr', 20],
+      ['May', 5],
+      ['Jun', 12],
+      ['Jul', 20],
+      ['Aug', 5],
+      ['Sep', 12],
+      ['Oct', 20],
+      ['Nov', 5],
+      ['Dec', 12],
+    ],
+  },
+  {
+    catHeading: 'Appointments',
+    graphDescription: 'Appointments',
+    description:
+      'Monitor your overall finances including sales, refunds, taxes, payments and more',
+    chartLabel: '0',
+    reports: [
+      {
+        id: 1,
+        reportCode: 'CO021',
+        reportName: 'Booked Appointments',
+        isNew: true,
+        favorite: true,
+      },
+
+      {
+        id: 2,
+        reportCode: 'CO025',
+        reportName: 'Missed/Cancelled Appointments',
+        isNew: true,
+        favorite: false,
+      },
+
+      {
+        id: 3,
+        reportCode: 'ST000',
+        reportName: 'Staff Appointment Schedule',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 4,
+        reportCode: 'CO006',
+        reportName: 'Appointments by Service Type Count',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 5,
+        reportCode: 'CO036',
+        reportName: 'Connect Registration & Bookings',
+        isNew: false,
+        favorite: true,
+      },
+
+      {
+        id: 6,
+        reportCode: 'CO040',
+        reportName: 'Consultation Conversion',
+        isNew: true,
+        favorite: false,
+      },
+
+      {
+        id: 7,
+        reportCode: 'ST025',
+        reportName: 'Employee Appointment Summary',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 8,
+        reportCode: 'BETA',
+        reportName: 'Locations Report',
+        isNew: false,
+        favorite: true,
+      },
+
+      {
+        id: 9,
+        reportCode: 'OT003',
+        reportName: 'Classes and Appointments report',
+        isNew: false,
+        favorite: true,
+      },
+
+      {
+        id: 10,
+        reportCode: 'CO125',
+        reportName: 'Surgery Preparations',
+        isNew: true,
+        favorite: true,
+      },
+      {
+        id: 10,
+        reportCode: 'CO140',
+        reportName: 'Last Customer Bookings by Employee',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 10,
+        reportCode: 'OT014',
+        reportName: 'Room Utilization',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 10,
+        reportCode: 'OT009',
+        reportName: 'Clinic Conversion',
+        isNew: true,
+        favorite: false,
+      },
+    ],
+    graphData: [
+      ['Jan', 20],
+      ['Feb', 5],
+      ['Mar', 12],
+      ['Apr', 20],
+      ['May', 5],
+      ['Jun', 12],
+      ['Jul', 20],
+      ['Aug', 5],
+      ['Sep', 12],
+      ['Oct', 20],
+      ['Nov', 5],
+      ['Dec', 12],
+    ],
+  },
+  {
+    catHeading: 'Marketing',
+    graphDescription: 'Marketing',
+    description:
+      'Monitor your overall finances including sales, refunds, taxes, payments and more',
+    chartLabel: '£',
+    reports: [
+      {
+        id: 1,
+        reportCode: 'MA020',
+        reportName: 'Referral Sources',
+        isNew: true,
+        favorite: true,
+      },
+
+      {
+        id: 2,
+        reportCode: 'CO085',
+        reportName: 'Gift Cards',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 3,
+        reportCode: 'CO090',
+        reportName: 'Gift Card Analysis',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 4,
+        reportCode: 'CO095',
+        reportName: 'Client Recalls',
+        isNew: false,
+        favorite: false,
+      },
+      {
+        id: 5,
+        reportCode: 'FI004',
+        reportName: 'Daily Sales',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 6,
+        reportCode: 'CO100',
+        reportName: 'Loyalty Report',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 7,
+        reportCode: 'MA005',
+        reportName: 'Opt In Text Contacts',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 8,
+        reportCode: 'MA010',
+        reportName: 'Opt In Email Contacts',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 9,
+        reportCode: 'MA025',
+        reportName: 'Feedback Results',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 10,
+        reportCode: 'MA030',
+        reportName: 'Survey Feedback',
+        isNew: false,
+        favorite: false,
+      },
+      {
+        id: 11,
+        reportCode: 'MA001',
+        reportName: 'Sales by Referral Source',
+        isNew: false,
+        favorite: false,
+      },
+    ],
+    graphData: [
+      ['Jan', 20],
+      ['Feb', 5],
+      ['Mar', 12],
+      ['Apr', 20],
+      ['May', 5],
+      ['Jun', 12],
+      ['Jul', 20],
+      ['Aug', 5],
+      ['Sep', 12],
+      ['Oct', 20],
+      ['Nov', 5],
+      ['Dec', 12],
+    ],
+  },
+  {
+    catHeading: 'Leads',
+    graphDescription: 'New leads by week',
+    description:
+      'Monitor your overall finances including sales, refunds, taxes, payments and more',
+    chartLabel: '£',
+    reports: [
+      {
+        id: 1,
+        reportCode: 'LE000',
+        reportName: 'Open Leads',
+        isNew: true,
+        favorite: true,
+      },
+
+      {
+        id: 2,
+        reportCode: 'LE001',
+        reportName: 'Converted Leads',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 3,
+        reportCode: 'LE005',
+        reportName: 'Leads',
+        isNew: true,
+        favorite: false,
+      },
+
+      {
+        id: 4,
+        reportCode: 'LE015',
+        reportName: 'Leads by Status',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 5,
+        reportCode: 'LE020',
+        reportName: 'Leads by Sources',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 6,
+        reportCode: 'LE035',
+        reportName: 'Leads by Interest',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 7,
+        reportCode: 'LE040',
+        reportName: 'Leads by Clinic',
+        isNew: false,
+        favorite: false,
+      },
+    ],
+    graphData: [
+      ['Jan', 20],
+      ['Feb', 5],
+      ['Mar', 12],
+      ['Apr', 20],
+      ['May', 5],
+      ['Jun', 12],
+      ['Jul', 20],
+      ['Aug', 5],
+      ['Sep', 12],
+      ['Oct', 20],
+      ['Nov', 5],
+      ['Dec', 12],
+    ],
+  },
+  {
+    catHeading: 'Staff',
+    graphDescription: 'Retail by week',
+    description:
+      'Monitor your overall finances including sales, refunds, taxes, payments and more',
+    chartLabel: '£',
+    reports: [
+      {
+        id: 1,
+        reportCode: 'ST001',
+        reportName: 'Staff Performance Summary',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 2,
+        reportCode: 'ST002',
+        reportName: 'Commission Summary',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 3,
+        reportCode: 'ST004',
+        reportName: 'Staff Performance Tracker',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 4,
+        reportCode: 'ST015',
+        reportName: 'Staff Hourrs',
+        isNew: false,
+        favorite: true,
+      },
+      {
+        id: 5,
+        reportCode: 'ST025',
+        reportName: 'Employee Appointment Summary',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 6,
+        reportCode: 'BETA',
+        reportName: 'Staff Booking',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 7,
+        reportCode: 'ST005',
+        reportName: 'Employee Holidays To Date',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 8,
+        reportCode: 'ST035',
+        reportName: 'Staff Days Off',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 9,
+        reportCode: 'ST033',
+        reportName: 'Daily Employee Stats',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 10,
+        reportCode: 'ST031',
+        reportName: 'Daily Employee Stats (Summary)',
+        isNew: false,
+        favorite: false,
+      },
+      {
+        id: 11,
+        reportCode: 'ST003',
+        reportName: 'Commission Report (Retail)',
+        isNew: false,
+        favorite: false,
+      },
+      {
+        id: 12,
+        reportCode: 'ST015',
+        reportName: 'Staff Hours',
+        isNew: false,
+        favorite: false,
+      },
+      {
+        id: 13,
+        reportCode: 'ST035',
+        reportName: 'Staff Days Off',
+        isNew: false,
+        favorite: false,
+      },
+      {
+        id: 14,
+        reportCode: 'ST036',
+        reportName: 'Staff Payroll Report',
+        isNew: false,
+        favorite: false,
+      },
+      {
+        id: 15,
+        reportCode: 'ST037',
+        reportName: 'Timeslots Report',
+        isNew: false,
+        favorite: false,
+      },
+      {
+        id: 16,
+        reportCode: 'ST037',
+        reportName: 'Staff Clock In/Out',
+        isNew: false,
+        favorite: false,
+      },
+    ],
+    graphData: [
+      ['Jan', 20],
+      ['Feb', 5],
+      ['Mar', 12],
+      ['Apr', 20],
+      ['May', 5],
+      ['Jun', 12],
+      ['Jul', 20],
+      ['Aug', 5],
+      ['Sep', 12],
+      ['Oct', 20],
+      ['Nov', 5],
+      ['Dec', 12],
+    ],
+  },
+  {
+    catHeading: 'Stock',
+    graphDescription: 'Retail by week',
+    description:
+      'Monitor your overall finances including sales, refunds, taxes, payments and more',
+    chartLabel: '£',
+    reports: [
+      {
+        id: 1,
+        reportCode: 'STK001',
+        reportName: 'Stock Report',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 2,
+        reportCode: 'STK005',
+        reportName: 'Low Stock',
+        isNew: true,
+        favorite: true,
+      },
+
+      {
+        id: 3,
+        reportCode: 'STK015',
+        reportName: 'Cost of Goods',
+        isNew: false,
+        favorite: false,
+      },
+
+      {
+        id: 4,
+        reportCode: 'STK025',
+        reportName: 'Stock Count',
+        isNew: false,
+        favorite: false,
+      },
+    ],
+    graphData: [
+      ['Jan', 20],
+      ['Feb', 5],
+      ['Mar', 12],
+      ['Apr', 20],
+      ['May', 5],
+      ['Jun', 12],
+      ['Jul', 20],
+      ['Aug', 5],
+      ['Sep', 12],
+      ['Oct', 20],
+      ['Nov', 5],
+      ['Dec', 12],
+    ],
+  },
+  // {
+  //   catHeading: 'Sales',
+  //   graphDescription: 'Revenue by week',
+  //   description:
+  //     'Monitor your overall finances including sales, refunds, taxes, payments and more',
+  //   chartLabel: '£',
+  //   reports: [
+  //     {
+  //       id: 1,
+  //       reportCode: 'FI000',
+  //       reportName: 'Daily Sales',
+  //       isNew: true,
+  //       favorite: true,
+  //     },
+
+  //     {
+  //       id: 2,
+  //       reportCode: 'FI001',
+  //       reportName: 'Daily Reconciliation',
+  //       isNew: true,
+  //       favorite: false,
+  //     },
+
+  //     {
+  //       id: 3,
+  //       reportCode: 'FI002',
+  //       reportName: 'Daily Payments',
+  //       isNew: false,
+  //       favorite: false,
+  //     },
+
+  //     {
+  //       id: 4,
+  //       reportCode: 'FI003',
+  //       reportName: 'Receipts by Employee (detail...',
+  //       isNew: true,
+  //       favorite: true,
+  //     },
+  //     {
+  //       id: 5,
+  //       reportCode: 'FI004',
+  //       reportName: 'Daily Sales',
+  //       isNew: false,
+  //       favorite: true,
+  //     },
+
+  //     {
+  //       id: 6,
+  //       reportCode: 'FI005',
+  //       reportName: 'Daily Reconciliation',
+  //       isNew: true,
+  //       favorite: false,
+  //     },
+
+  //     {
+  //       id: 7,
+  //       reportCode: 'FI006',
+  //       reportName: 'Daily Payments',
+  //       isNew: false,
+  //       favorite: false,
+  //     },
+
+  //     {
+  //       id: 8,
+  //       reportCode: 'FI007',
+  //       reportName: 'Receipts by Employee (detail...',
+  //       isNew: false,
+  //       favorite: true,
+  //     },
+
+  //     {
+  //       id: 9,
+  //       reportCode: 'FI008',
+  //       reportName: 'Daily Sales',
+  //       isNew: false,
+  //       favorite: true,
+  //     },
+
+  //     {
+  //       id: 10,
+  //       reportCode: 'FI009',
+  //       reportName: 'Daily Reconciliation',
+  //       isNew: true,
+  //       favorite: false,
+  //     },
+  //   ],
+  //   graphData: [
+  //     ['Jan', 20],
+  //     ['Feb', 5],
+  //     ['Mar', 12],
+  //     ['Apr', 20],
+  //     ['May', 5],
+  //     ['Jun', 12],
+  //     ['Jul', 20],
+  //     ['Aug', 5],
+  //     ['Sep', 12],
+  //     ['Oct', 20],
+  //     ['Nov', 5],
+  //     ['Dec', 12],
+  //   ],
+  // },
+  // {
+  //   catHeading: 'Sales',
+  //   graphDescription: 'Revenue by week',
+  //   description:
+  //     'Monitor your overall finances including sales, refunds, taxes, payments and more',
+  //   chartLabel: '£',
+  //   reports: [
+  //     {
+  //       id: 1,
+  //       reportCode: 'FI000',
+  //       reportName: 'Daily Sales',
+  //       isNew: true,
+  //       favorite: true,
+  //     },
+
+  //     {
+  //       id: 2,
+  //       reportCode: 'FI001',
+  //       reportName: 'Daily Reconciliation',
+  //       isNew: true,
+  //       favorite: false,
+  //     },
+
+  //     {
+  //       id: 3,
+  //       reportCode: 'FI002',
+  //       reportName: 'Daily Payments',
+  //       isNew: false,
+  //       favorite: false,
+  //     },
+
+  //     {
+  //       id: 4,
+  //       reportCode: 'FI003',
+  //       reportName: 'Receipts by Employee (detail...',
+  //       isNew: true,
+  //       favorite: true,
+  //     },
+  //     {
+  //       id: 5,
+  //       reportCode: 'FI004',
+  //       reportName: 'Daily Sales',
+  //       isNew: false,
+  //       favorite: true,
+  //     },
+
+  //     {
+  //       id: 6,
+  //       reportCode: 'FI005',
+  //       reportName: 'Daily Reconciliation',
+  //       isNew: true,
+  //       favorite: false,
+  //     },
+
+  //     {
+  //       id: 7,
+  //       reportCode: 'FI006',
+  //       reportName: 'Daily Payments',
+  //       isNew: false,
+  //       favorite: false,
+  //     },
+
+  //     {
+  //       id: 8,
+  //       reportCode: 'FI007',
+  //       reportName: 'Receipts by Employee (detail...',
+  //       isNew: false,
+  //       favorite: true,
+  //     },
+
+  //     {
+  //       id: 9,
+  //       reportCode: 'FI008',
+  //       reportName: 'Daily Sales',
+  //       isNew: false,
+  //       favorite: true,
+  //     },
+
+  //     {
+  //       id: 10,
+  //       reportCode: 'FI009',
+  //       reportName: 'Daily Reconciliation',
+  //       isNew: true,
+  //       favorite: false,
+  //     },
+  //   ],
+  //   graphData: [
+  //     ['Jan', 20],
+  //     ['Feb', 5],
+  //     ['Mar', 12],
+  //     ['Apr', 20],
+  //     ['May', 5],
+  //     ['Jun', 12],
+  //     ['Jul', 20],
+  //     ['Aug', 5],
+  //     ['Sep', 12],
+  //     ['Oct', 20],
+  //     ['Nov', 5],
+  //     ['Dec', 12],
+  //   ],
+  // },
+  // {
+  //   catHeading: 'Sales',
+  //   graphDescription: 'Revenue by week',
+  //   description:
+  //     'Monitor your overall finances including sales, refunds, taxes, payments and more',
+  //   chartLabel: '£',
+  //   reports: [
+  //     {
+  //       id: 1,
+  //       reportCode: 'FI000',
+  //       reportName: 'Daily Sales',
+  //       isNew: true,
+  //       favorite: true,
+  //     },
+
+  //     {
+  //       id: 2,
+  //       reportCode: 'FI001',
+  //       reportName: 'Daily Reconciliation',
+  //       isNew: true,
+  //       favorite: false,
+  //     },
+
+  //     {
+  //       id: 3,
+  //       reportCode: 'FI002',
+  //       reportName: 'Daily Payments',
+  //       isNew: false,
+  //       favorite: false,
+  //     },
+
+  //     {
+  //       id: 4,
+  //       reportCode: 'FI003',
+  //       reportName: 'Receipts by Employee (detail...',
+  //       isNew: true,
+  //       favorite: true,
+  //     },
+  //     {
+  //       id: 5,
+  //       reportCode: 'FI004',
+  //       reportName: 'Daily Sales',
+  //       isNew: false,
+  //       favorite: true,
+  //     },
+
+  //     {
+  //       id: 6,
+  //       reportCode: 'FI005',
+  //       reportName: 'Daily Reconciliation',
+  //       isNew: true,
+  //       favorite: false,
+  //     },
+
+  //     {
+  //       id: 7,
+  //       reportCode: 'FI006',
+  //       reportName: 'Daily Payments',
+  //       isNew: false,
+  //       favorite: false,
+  //     },
+
+  //     {
+  //       id: 8,
+  //       reportCode: 'FI007',
+  //       reportName: 'Receipts by Employee (detail...',
+  //       isNew: false,
+  //       favorite: true,
+  //     },
+
+  //     {
+  //       id: 9,
+  //       reportCode: 'FI008',
+  //       reportName: 'Daily Sales',
+  //       isNew: false,
+  //       favorite: true,
+  //     },
+
+  //     {
+  //       id: 10,
+  //       reportCode: 'FI009',
+  //       reportName: 'Daily Reconciliation',
+  //       isNew: true,
+  //       favorite: false,
+  //     },
+  //   ],
+  //   graphData: [
+  //     ['Jan', 20],
+  //     ['Feb', 5],
+  //     ['Mar', 12],
+  //     ['Apr', 20],
+  //     ['May', 5],
+  //     ['Jun', 12],
+  //     ['Jul', 20],
+  //     ['Aug', 5],
+  //     ['Sep', 12],
+  //     ['Oct', 20],
+  //     ['Nov', 5],
+  //     ['Dec', 12],
+  //   ],
+  // },
+]
