@@ -22,6 +22,7 @@ import { LeftOutlined } from '@ant-design/icons'
 import classNames from 'classnames'
 import Link from 'next/link'
 import { useTranslationI18 } from '../hooks/useTranslationI18'
+import { useRouter } from 'next/router'
 
 const { Title } = Typography
 
@@ -39,6 +40,8 @@ interface P {
   notificationBanner?: React.ReactNode
   createPageOnClick?(): void
   needTranslation?: boolean
+  editPage?: boolean
+  editPageRouteLink?: string
 }
 
 const languages = [
@@ -122,12 +125,15 @@ const CrudTable: FC<P> = ({
   createPage = false,
   createPageOnClick,
   needTranslation = false,
+  editPage = false,
+  editPageRouteLink,
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [isActive, setIsActive] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const [currentLanguage, setCurrentLanguage] = useState<string>('English(UK)')
   const { t, i18n } = useTranslationI18()
+  const router = useRouter()
 
   useEffect(() => {
     const data = languages.find(({ value }) => value === currentLanguage)
@@ -502,7 +508,9 @@ const CrudTable: FC<P> = ({
             isCustomIconExist={checkCustomColorIconExsist('icon')}
             noDataBtnText={schema.full}
             noDataText={schema.fullLower}
-            onAddTemplate={() => createNew()}
+            onAddTemplate={
+              createPage ? () => createPageOnClick() : () => createNew()
+            }
             searchTerm={searchTerm}
             columns={[
               ...Object.entries(schema.fields).map(([k, v]) => ({
@@ -541,8 +549,12 @@ const CrudTable: FC<P> = ({
               })
             }}
             onRowClick={(e) => {
-              setEditingRow(e)
-              setModalShowing((e) => !e)
+              if (editPage) {
+                router.push(`${editPageRouteLink}/${e.id}`)
+              } else {
+                setEditingRow(e)
+                setModalShowing((e) => !e)
+              }
             }}
             needTranslation={needTranslation}
           />

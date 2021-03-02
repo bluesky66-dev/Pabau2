@@ -2,7 +2,6 @@ import React, { FC } from 'react'
 import {
   Layout,
   Breadcrumb,
-  Checkbox,
   Button,
   PhoneNumberInput,
   Notification,
@@ -10,8 +9,9 @@ import {
   MobileHeader,
 } from '@pabau/ui'
 import { Typography } from 'antd'
-import { useFormik } from 'formik'
-import { Form, Input } from 'antd'
+import * as Yup from 'yup'
+import { Formik } from 'formik'
+import { Form, Input, SubmitButton, Checkbox } from 'formik-antd'
 import { useRouter } from 'next/router'
 import { gql, useMutation } from '@apollo/client'
 import { useMedia } from 'react-use'
@@ -23,16 +23,16 @@ const { Title } = Typography
 
 const ADD_MUTATION = gql`
   mutation insert_Labs_one(
-    $city: String!
-    $country: String!
+    $city: String
+    $country: String
     $email: String!
     $isActive: Boolean
     $name: String!
     $phone: String!
     $postalCode: numeric
     $providerNumber: numeric
-    $street: String!
-    $street2: String!
+    $street: String
+    $street2: String
   ) {
     insert_Labs_one(
       object: {
@@ -52,6 +52,18 @@ const ADD_MUTATION = gql`
     }
   }
 `
+export interface CreateLabFormProps {
+  name: string
+  providerNumber: number
+  phone: string
+  email: string
+  country: string
+  city: string
+  street: string
+  street2: string
+  postalCode: number
+  isActive: boolean
+}
 
 export const Index: FC = () => {
   const isMobile = useMedia('(max-width: 768px)', false)
@@ -68,106 +80,39 @@ export const Index: FC = () => {
     },
   })
 
-  const { handleSubmit, setFieldValue, values, handleChange } = useFormik({
-    initialValues: {
-      name: '',
-      providerNumber: undefined,
-      phone: '',
-      email: '',
-      country: '',
-      city: '',
-      street: '',
-      street2: '',
-      postalCode: undefined,
-      isActive: true,
-    },
-    onSubmit: async (values) => {
-      await addMutation({
-        variables: values,
-        optimisticResponse: {},
-      })
-      router.push('/setup/labs')
-    },
-  })
-
-  const renderForm = () => {
+  const renderForm = (setFieldValue) => {
     return (
-      <>
+      <div>
         <div className={styles.basicInfo}>
           <h6>Basic information</h6>
           <div className={styles.infoList}>
-            <Form.Item
-              className={styles.listing}
-              label="Name"
-              name="name"
-              rules={[
-                {
-                  required: true,
-                  message: 'Name Is Required',
-                },
-              ]}
-            >
-              <Input
-                name="name"
-                placeholder="eg London View"
-                value={values.name}
-                onChange={handleChange}
-              />
+            <Form.Item className={styles.listing} label="Name" name="name">
+              <Input name="name" autoComplete="off" placeholder="eg Biolabs" />
             </Form.Item>
             <Form.Item
               className={styles.listing}
               label="Provider No"
-              name="providerNo"
-              rules={[
-                {
-                  required: true,
-                  message: 'Provide No is required',
-                },
-              ]}
+              name="providerNumber"
             >
               <Input
                 name="providerNumber"
                 type="number"
-                value={values.providerNumber}
-                onChange={handleChange}
+                placeholder="eg 1234"
               />
             </Form.Item>
           </div>
           <div className={styles.infoList}>
-            <Form.Item
-              className={styles.listing}
-              rules={[
-                {
-                  required: true,
-                  message: 'Phone is required',
-                },
-              ]}
-            >
+            <Form.Item className={styles.listing} name={'phone'}>
               <PhoneNumberInput
                 label="Phone"
                 onChange={(value) => setFieldValue('phone', value)}
               />
             </Form.Item>
-            <Form.Item
-              className={styles.listing}
-              label="Email"
-              name="email"
-              rules={[
-                {
-                  required: true,
-                  message: 'Email is required',
-                },
-                {
-                  type: 'email',
-                  message: 'Please enter valid email!',
-                },
-              ]}
-            >
+            <Form.Item className={styles.listing} label="Email" name="email">
               <Input
                 name="email"
+                autoComplete="off"
                 placeholder="email@company.com"
-                value={values.email}
-                onChange={handleChange}
               />
             </Form.Item>
           </div>
@@ -179,53 +124,18 @@ export const Index: FC = () => {
               className={styles.listing}
               label="Country"
               name="country"
-              rules={[
-                {
-                  required: true,
-                  message: 'Country is required',
-                },
-              ]}
             >
-              <Input
-                name="country"
-                placeholder="eg London View"
-                value={values.country}
-                onChange={handleChange}
-              />
+              <Input name="country" autoComplete="off" />
             </Form.Item>
           </div>
           <div className={styles.infoList}>
-            <Form.Item
-              className={styles.listing}
-              label="City"
-              name="city"
-              rules={[
-                {
-                  required: true,
-                  message: 'City is required',
-                },
-              ]}
-            >
-              <Input name="city" value={values.city} onChange={handleChange} />
+            <Form.Item className={styles.listing} label="City" name="city">
+              <Input name="city" autoComplete="off" />
             </Form.Item>
           </div>
           <div className={styles.infoList}>
-            <Form.Item
-              className={styles.listing}
-              label="Street"
-              name="street"
-              rules={[
-                {
-                  required: true,
-                  message: 'Street is required',
-                },
-              ]}
-            >
-              <Input
-                name="street"
-                value={values.street}
-                onChange={handleChange}
-              />
+            <Form.Item className={styles.listing} label="Street" name="street">
+              <Input name="street" autoComplete="off" />
             </Form.Item>
           </div>
           <div className={styles.infoList}>
@@ -233,18 +143,8 @@ export const Index: FC = () => {
               className={styles.listing}
               label="Street2"
               name="street2"
-              rules={[
-                {
-                  required: true,
-                  message: 'Street2 is required',
-                },
-              ]}
             >
-              <Input
-                name="street2"
-                value={values.street2}
-                onChange={handleChange}
-              />
+              <Input name="street2" autoComplete="off" />
             </Form.Item>
           </div>
           <div className={styles.infoList}>
@@ -252,118 +152,163 @@ export const Index: FC = () => {
               className={styles.listing}
               label="Postal Code"
               name="postalCode"
-              rules={[
-                {
-                  required: true,
-                  message: 'Postal Code is required',
-                },
-              ]}
             >
-              <Input
-                type="number"
-                name="postalCode"
-                value={values.postalCode}
-                onChange={handleChange}
-              />
+              <Input type="number" name="postalCode" autoComplete="off" />
             </Form.Item>
           </div>
         </div>
-      </>
+      </div>
     )
   }
 
   return isMobile ? (
     <div>
       <MobileHeader className={styles.createLabMobileHeader}>
-        <Form
-          name="basic"
+        <Formik
           initialValues={{
-            remember: true,
+            name: '',
+            providerNumber: undefined,
+            phone: '',
+            email: '',
+            country: undefined,
+            city: undefined,
+            street: undefined,
+            street2: undefined,
+            postalCode: undefined,
+            isActive: true,
           }}
-          layout="vertical"
-          onFinish={handleSubmit}
+          validationSchema={Yup.object({
+            name: Yup.string().required('Name is required'),
+            email: Yup.string()
+              .email('Please enter valid email id')
+              .required('Email is required'),
+            providerNumber: Yup.number()
+              .required('Provider No is required')
+              .positive()
+              .integer(),
+            phone: Yup.string().required('phone is required'),
+          })}
+          onSubmit={async (values: CreateLabFormProps) => {
+            console.log('asdasdasdasdas', values)
+            await addMutation({
+              variables: values,
+              optimisticResponse: {},
+            })
+            router.push('/setup/labs')
+          }}
         >
-          <div className={styles.allContentAlignMobile}>
-            <div className={styles.labTextStyle}>
-              <LeftOutlined onClick={() => router.push('/setup/labs')} />
-              <p>Create Lab</p>
-              <Checkbox
-                className={styles.checkActivate}
-                disabled={false}
-                checked={values.isActive}
-                onChange={(e) => setFieldValue('isActive', e.target.checked)}
-              >
-                Active
-              </Checkbox>
-              <Button
-                className={styles.cancelBtn}
-                onClick={() => router.push('/setup/labs')}
-              >
-                <CloseOutlined />
-              </Button>
-              <Button
-                className={styles.createBtn}
-                type="primary"
-                htmlType="submit"
-              >
-                Create Lab
-              </Button>
-            </div>
-          </div>
-          {renderForm()}
-        </Form>
+          {({ setFieldValue }) => (
+            <Form
+              name="basic"
+              initialValues={{
+                remember: true,
+              }}
+              layout="vertical"
+            >
+              <div className={styles.allContentAlignMobile}>
+                <div className={styles.labTextStyle}>
+                  <LeftOutlined onClick={() => router.push('/setup/labs')} />
+                  <p>Create Lab</p>
+                  <Checkbox className={styles.checkActivate} name="isActive">
+                    Active
+                  </Checkbox>
+                  <Button
+                    className={styles.cancelBtn}
+                    onClick={() => router.push('/setup/labs')}
+                  >
+                    <CloseOutlined />
+                  </Button>
+                  <SubmitButton
+                    className={styles.createBtn}
+                    type="primary"
+                    htmlType="submit"
+                  >
+                    Create Lab
+                  </SubmitButton>
+                </div>
+              </div>
+              {renderForm(setFieldValue)}
+            </Form>
+          )}
+        </Formik>
       </MobileHeader>
     </div>
   ) : (
     <Layout active={'Lab'}>
       <div className={styles.labWrapper}>
-        <Form
-          name="basic"
+        <Formik
           initialValues={{
-            remember: true,
+            name: '',
+            providerNumber: undefined,
+            phone: '',
+            email: '',
+            country: undefined,
+            city: undefined,
+            street: undefined,
+            street2: undefined,
+            postalCode: undefined,
+            isActive: true,
           }}
-          layout="vertical"
-          onFinish={handleSubmit}
+          validationSchema={Yup.object({
+            name: Yup.string().required('Name is required'),
+            email: Yup.string()
+              .email('Please enter valid email id')
+              .required('Email is required'),
+            providerNumber: Yup.number()
+              .required('Provider No is required')
+              .positive()
+              .integer(),
+            phone: Yup.string().required('phone is required'),
+          })}
+          onSubmit={async (values: CreateLabFormProps) => {
+            console.log('asdasdasdasdas', values)
+            await addMutation({
+              variables: values,
+              optimisticResponse: {},
+            })
+            router.push('/setup/labs')
+          }}
         >
-          <div className={styles.createHeaderWrapper}>
-            <div className={styles.creatHead}>
-              <div className={styles.headBreadTitle}>
-                <Breadcrumb
-                  breadcrumbItems={[
-                    { breadcrumbName: 'Setup', path: 'setup' },
-                    { breadcrumbName: 'Labs', path: 'setup/labs' },
-                    { breadcrumbName: 'Create Lab', path: '' },
-                  ]}
-                />
-                <Title>Create Lab</Title>
+          {({ setFieldValue }) => (
+            <Form
+              name="basic"
+              initialValues={{
+                remember: true,
+              }}
+              layout="vertical"
+            >
+              <div className={styles.createHeaderWrapper}>
+                <div className={styles.creatHead}>
+                  <div className={styles.headBreadTitle}>
+                    <Breadcrumb
+                      breadcrumbItems={[
+                        { breadcrumbName: 'Setup', path: 'setup' },
+                        { breadcrumbName: 'Labs', path: 'setup/labs' },
+                        { breadcrumbName: 'Create Lab', path: '' },
+                      ]}
+                    />
+                    <Title>Create Lab</Title>
+                  </div>
+                  <div className={styles.creatRight}>
+                    <Checkbox name="isActive" className={styles.checkActivate}>
+                      Active
+                    </Checkbox>
+                    <Button
+                      className={styles.cancelBtn}
+                      onClick={() => router.push('/setup/labs')}
+                    >
+                      Cancel
+                    </Button>
+                    <SubmitButton className={styles.createBtn} type="primary">
+                      Create Lab
+                    </SubmitButton>
+                  </div>
+                </div>
               </div>
-              <div className={styles.creatRight}>
-                <Checkbox
-                  className={styles.checkActivate}
-                  disabled={false}
-                  checked={values.isActive}
-                  onChange={(e) => setFieldValue('isActive', e.target.checked)}
-                >
-                  Active
-                </Checkbox>
-                <Button
-                  className={styles.cancelBtn}
-                  onClick={() => router.push('/setup/labs')}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  className={styles.createBtn}
-                  type="primary"
-                  htmlType="submit"
-                >
-                  Create Lab
-                </Button>
-              </div>
-            </div>
-          </div>
-          {renderForm()}
-        </Form>
+              {renderForm(setFieldValue)}
+            </Form>
+          )}
+        </Formik>
       </div>
     </Layout>
   )

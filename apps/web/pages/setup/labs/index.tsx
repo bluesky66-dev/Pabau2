@@ -62,7 +62,7 @@ export const LIST_QUERY = gql`
     Labs(
       offset: $offset
       limit: $limit
-      order_by: { id: desc }
+      order_by: { order: desc }
       where: {
         is_active: { _eq: $isActive }
         _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
@@ -73,6 +73,7 @@ export const LIST_QUERY = gql`
       name
       is_active
       integration
+      order
     }
   }
 `
@@ -99,9 +100,32 @@ const DELETE_MUTATION = gql`
   }
 `
 const ADD_MUTATION = gql`
-  mutation insert_departments_one($name: String!, $is_active: Boolean) {
-    insert_departments_one(object: { name: $name, is_active: $is_active }) {
-      __typename
+  mutation insert_Labs_one(
+    $city: String
+    $country: String
+    $email: String!
+    $isActive: Boolean
+    $name: String!
+    $phone: String!
+    $postalCode: numeric
+    $providerNumber: numeric
+    $street: String
+    $street2: String
+  ) {
+    insert_Labs_one(
+      object: {
+        city: $city
+        country: $country
+        email: $email
+        is_active: $isActive
+        name: $name
+        phone: $phone
+        postal_code: $postalCode
+        provider_number: $providerNumber
+        street: $street
+        street2: $street2
+      }
+    ) {
       id
     }
   }
@@ -120,8 +144,8 @@ const EDIT_MUTATION = gql`
   }
 `
 const UPDATE_ORDER_MUTATION = gql`
-  mutation update_departments_order($id: uuid!, $order: Int) {
-    update_departments(where: { id: { _eq: $id } }, _set: { order: $order }) {
+  mutation update_Labs_order($id: uuid!, $order: Int) {
+    update_Labs(where: { id: { _eq: $id } }, _set: { order: $order }) {
       affected_rows
     }
   }
@@ -164,6 +188,8 @@ export function Labs(props: LabsProps) {
         createPage={true}
         createPageOnClick={createPageOnClick}
         notificationBanner={<NotificationRender />}
+        editPage={true}
+        editPageRouteLink="/setup/labs/edit"
       />
     </div>
   )
