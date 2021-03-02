@@ -14,7 +14,7 @@ import styles from './index.module.less'
 
 const { Option } = Select
 
-const Index: FC = () => {
+export const Index: FC = () => {
   const TopTabMenuItems = ['Services', 'Categories', 'Library']
   const AddBtnLabels = ['New Service', 'New Category']
 
@@ -24,6 +24,7 @@ const Index: FC = () => {
   const [totalCategories, setTotalCategories] = useState(0)
   const [paginationState, setPaginationState] = useState(false)
   const [searchTerm, setSearchTerm] = useState(null)
+  const [addBtnState, setAddBtnState] = useState(true)
   const [addBtnLabel, setAddBtnLabel] = useState(AddBtnLabels[0])
   const [updatedCategories, setUpdatedCategories] = useState(null)
   const [addCategoryModal, setAddCategoryModal] = useState(false)
@@ -130,9 +131,11 @@ const Index: FC = () => {
                 <FilterOutlined /> Filter
               </Button>
             </Popover>
-            <Button type="primary" size="large" onClick={() => addBtnClick()}>
-              {addBtnLabel}
-            </Button>
+            {addBtnState && (
+              <Button type="primary" size="large" onClick={() => addBtnClick()}>
+                {addBtnLabel}
+              </Button>
+            )}
           </div>
         )}
       </div>
@@ -142,15 +145,17 @@ const Index: FC = () => {
   const onTabClick = (tab) => {
     switch (tab) {
       case TopTabMenuItems[0]:
+        setAddBtnState(true)
         setPaginationState(false)
         setAddBtnLabel(AddBtnLabels[0])
         break
       case TopTabMenuItems[1]:
+        setAddBtnState(true)
         setPaginationState(true)
         setAddBtnLabel(AddBtnLabels[1])
         break
       case TopTabMenuItems[2]:
-        setAddBtnLabel(AddBtnLabels[0])
+        setAddBtnState(false)
         setPaginationState(false)
         break
       default:

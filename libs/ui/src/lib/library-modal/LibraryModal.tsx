@@ -91,7 +91,7 @@ export interface LibraryModalProps {
   onInstall?: () => void
 }
 
-const LibraryModal: FC<LibraryModalProps> = ({
+export const LibraryModal: FC<LibraryModalProps> = ({
   image,
   title,
   subTitle,
@@ -136,6 +136,7 @@ const LibraryModal: FC<LibraryModalProps> = ({
         title={title}
         visible={visible}
         modalWidth={600}
+        onCancel={() => onClose?.()}
       >
         <h4 className={styles.subTitle}>{subTitle}</h4>
         <div className={styles.image}>

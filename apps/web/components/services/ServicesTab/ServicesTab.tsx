@@ -285,7 +285,11 @@ export interface SP {
   updatedCategories?: []
 }
 
-const ServicesTab: FC<SP> = ({ searchTerm, updatedCategories, ...rest }) => {
+export const ServicesTab: FC<SP> = ({
+  searchTerm,
+  updatedCategories,
+  ...rest
+}) => {
   const services = ['Seasonal Offers', 'The Beauty & Skin Clinic – Prepaid']
   const togglesViews = ['Standard View', 'Detailed View']
   const LeftTabMenuItems = [

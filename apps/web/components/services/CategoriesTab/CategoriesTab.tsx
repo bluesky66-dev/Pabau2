@@ -115,7 +115,7 @@ export interface CP {
   categoriesUpdates?: (categories: NewCategory[]) => void
 }
 
-const CateogriesTab: FC<CP> = ({
+export const CateogriesTab: FC<CP> = ({
   perPage,
   searchTerm,
   modalShowState = false,
