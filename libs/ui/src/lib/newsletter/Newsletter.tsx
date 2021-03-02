@@ -1,25 +1,58 @@
-import React, { FC } from 'react'
-import Checkbox from '../checkbox/Checkbox'
+import React, { FC, useState } from 'react'
 import { Table } from '../table/Table'
-import { data } from './mock'
 import {
   CheckCircleTwoTone,
   CloseCircleOutlined,
   InfoCircleOutlined,
 } from '@ant-design/icons'
-import { Button, Tooltip } from 'antd'
-import HighChart from './HighChart'
+import { Tooltip, Input } from 'antd'
+import { Button } from '../button/Button'
+import HighChart from '../high-chart/HighChart'
 
-export const Newsletter: FC = () => {
+const { Search } = Input
+export interface NewsletterProps {
+  TableTitle: string
+  TilesTitle: string
+  data: []
+  ChartTitle: string
+  OpensLabel: string
+  ClicksLabel: string
+  OpensColor: string
+  ClicksColor: string
+}
+export const Newsletter: FC<NewsletterProps> = ({
+  TableTitle,
+  TilesTitle,
+  data,
+  ChartTitle,
+  OpensLabel,
+  ClicksLabel,
+  OpensColor,
+  ClicksColor,
+}) => {
+  const [selectedRowKeys, setSelectedRowKeys] = useState([])
+  const [dataSource, setDataSource] = useState(data)
+
+  const onSelectedRowKeysChange = (selectedRowKeys) => {
+    setSelectedRowKeys(selectedRowKeys)
+  }
+
+  const selectRow = (record) => {
+    const selectedRowKeys = [...selectedRowKeys]
+    if (selectedRowKeys.indexOf(record.key) >= 0) {
+      selectedRowKeys.splice(selectedRowKeys.indexOf(record.key), 1)
+    } else {
+      selectedRowKeys.push(record.key)
+    }
+    setSelectedRowKeys(selectedRowKeys)
+  }
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectedRowKeysChange,
+  }
+
   const columns = [
-    {
-      title: <Checkbox />,
-      dataIndex: 'isPlus',
-      key: 'isPlus',
-      visible: true,
-      // eslint-disable-next-line react/display-name
-      render: () => <Checkbox />,
-    },
     {
       title: 'Name',
       dataIndex: 'name',
@@ -41,7 +74,11 @@ export const Newsletter: FC = () => {
       className: 'drag-visible',
       visible: true,
       // eslint-disable-next-line react/display-name
-      render: (value) => <Button color="#54B2D3">{value}</Button>,
+      render: (value) => (
+        <Button color="#54B2D3" backgroundColor="white">
+          {value}
+        </Button>
+      ),
     },
     {
       title: 'Opened',
@@ -119,8 +156,39 @@ export const Newsletter: FC = () => {
 
   return (
     <div>
-      <HighChart />
-      <Table columns={columns} dataSource={data} pagination={false} />
+      <HighChart
+        ChartTitle={ChartTitle}
+        OpensLabel={OpensLabel}
+        ClicksLabel={ClicksLabel}
+        OpensColor={OpensColor}
+        ClicksColor={ClicksColor}
+      />
+      <h2>{TilesTitle}</h2>
+      <Search
+        placeholder="Search"
+        onSearch={(e) => {
+          const currValue = e
+          const filteredData = data.filter((entry) => {
+            return (
+              entry.name.includes(currValue) || entry.email.includes(currValue)
+            )
+          })
+          setDataSource(filteredData)
+        }}
+        style={{ width: 200 }}
+      />
+      <h2>{TableTitle}</h2>
+      <Table
+        rowSelection={rowSelection}
+        columns={columns}
+        dataSource={dataSource}
+        pagination={false}
+        onRow={(record) => ({
+          onClick: () => {
+            selectRow(record)
+          },
+        })}
+      />
     </div>
   )
 }
