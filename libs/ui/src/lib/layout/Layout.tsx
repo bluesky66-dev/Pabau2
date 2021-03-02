@@ -48,6 +48,7 @@ export const Layout: FC<LayoutProps> = ({
           searchRender={searchRender}
           onCreateChannel={onCreateChannel}
           onMessageType={onMessageType}
+          {...rest}
         />
         <AntLayout className={styles.headerMargin}>
           <Menu onSideBarCollapsed={onSideBarCollapsed} active={active} />

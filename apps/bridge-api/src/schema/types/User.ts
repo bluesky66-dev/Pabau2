@@ -11,7 +11,7 @@ export const User = objectType({
     t.model.salt();
     t.model.created();
     t.model.last_login();
-    t.model.company();
+    t.model.company_id();
     t.model.hash();
     t.model.email();
     t.model.admin();
@@ -98,6 +98,7 @@ export const User = objectType({
     t.model.can_move_blockout();
     t.model.main_contact();
     t.model.user_security_questions_answer();
+    t.model.company();
   },
 });
 

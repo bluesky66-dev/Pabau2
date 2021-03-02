@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
 import { SearchOutlined } from '@ant-design/icons'
 import { SetupSearchInput } from '@pabau/ui'
 import {
@@ -13,11 +13,10 @@ import styles from './Setup.module.less'
 import classNames from 'classnames'
 
 interface P {
-  userData?: any
   handleSearch?: (searchTerm: string) => void
 }
 
-const CommonHeader: FC<P> = ({ userData, handleSearch }) => {
+const CommonHeader: FC<P> = ({ handleSearch }) => {
   const [openMenuDrawer, setMenuDrawer] = useState<boolean>(false)
   const [openNotificationDrawer, setNotificationDrawer] = useState<boolean>(
     false
@@ -33,7 +32,7 @@ const CommonHeader: FC<P> = ({ userData, handleSearch }) => {
             <MenuOutlined
               className="menuHeaderIconColor"
               onClick={() => {
-                setMenuDrawer((e) => !openMenuDrawer)
+                setMenuDrawer(() => !openMenuDrawer)
               }}
             />
             <p>Setup</p>
@@ -56,10 +55,9 @@ const CommonHeader: FC<P> = ({ userData, handleSearch }) => {
       {openMenuDrawer && (
         <MobileSidebar
           searchRender={() => <Search />}
-          onSideBarClosed={() => setMenuDrawer((e) => !openMenuDrawer)}
+          onSideBarClosed={() => setMenuDrawer(() => !openMenuDrawer)}
           onClickNotificationDrawer={() => setNotificationDrawer((e) => !e)}
           onClickChatDrawer={() => setMessageDrawer((e) => !e)}
-          user={userData}
         />
       )}
       {openNotificationDrawer && (

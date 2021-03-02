@@ -34,8 +34,9 @@
     "dep-graph": "nx dep-graph",
     "prisma": "prisma",
     "prisma:generate": "prisma generate",
+    "prisma:format": "prisma format",
     "nexus:generate": "ts-node-dev --transpile-only apps/bridge-api/src/schema",
-    "nexus:types:generate": "npx cnt --mq -f -o -c --schema apps/bridge-api/prisma/schema.prisma --outDir  apps/bridge-api/src/generated/types",
+    "nexus:types:generate": "npx cnt --mq -f -o -c --schema apps/bridge-api/prisma/schema.prisma --outDir  apps/bridge-api/src/schema/types",
     "postinstall": "husky install"
   },
   "private": true,
