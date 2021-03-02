@@ -108,8 +108,8 @@ export const Menu: FC<P> = ({ onSideBarCollapsed, active }) => {
               className={classNames(
                 styles.sidebarMenu,
                 selectedKeys.includes(menuData.menuName + index) &&
-                  !activeMenu &&
-                  styles.subMenuActive
+                !activeMenu &&
+                styles.subMenuActive
               )}
             >
               {menuData.children.map((subMenu, subIndex) => {
@@ -132,21 +132,19 @@ export const Menu: FC<P> = ({ onSideBarCollapsed, active }) => {
               <Link href="/setup">
                 {collapsed ? (
                   <SettingOutlined
-                    className={`${
-                      activeMenu === 'setup'
+                    className={`${activeMenu === 'setup'
                         ? styles.activeSidebarMenu
                         : styles.sidebarMenu
-                    }`}
+                      }`}
                   />
                 ) : (
                   <Button
                     icon={
                       <SettingOutlined
-                        className={`${
-                          activeMenu === 'setup'
+                        className={`${activeMenu === 'setup'
                             ? styles.activeSidebarMenu
                             : styles.sidebarMenu
-                        }`}
+                          }`}
                       />
                     }
                     className={styles.setupBtn}
