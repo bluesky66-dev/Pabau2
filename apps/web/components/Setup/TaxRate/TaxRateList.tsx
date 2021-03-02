@@ -43,7 +43,7 @@ const EDIT_MUTATION = gql`
   mutation update_tax_rates_by_pk(
     $id: uuid!
     $name: String
-    $value: Int
+    $value: Float
     $isActive: Boolean = true
     $glCode: String
   ) {
@@ -161,7 +161,7 @@ export function TaxRate({ listQuery, onCreateTaxRate }: TaxRateProps) {
       variables: {
         ...editData,
         ...values,
-        value: Number.parseInt(values.value),
+        value: Number.parseFloat(values.value),
       },
       optimisticResponse: {},
       update: (proxy) => {

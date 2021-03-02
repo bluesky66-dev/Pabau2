@@ -39,7 +39,7 @@ const LIST_QUERY = gql`
 const ADD_MUTATION = gql`
   mutation insert_tax_rates_one(
     $name: String
-    $value: Int
+    $value: Float
     $isActive: Boolean = true
     $glCode: String
   ) {
@@ -75,7 +75,7 @@ export function TaxRate(props: TaxRateProps) {
 
   const onCreate = async (values) => {
     await addMutation({
-      variables: { ...values, value: Number.parseInt(values.value) },
+      variables: { ...values, value: Number.parseFloat(values.value) },
       optimisticResponse: {},
       update: (proxy) => {
         const existing = proxy.readQuery({
