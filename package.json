@@ -1,6 +1,6 @@
 {
   "name": "pabau",
-  "version": "2.0.172",
+  "version": "2.0.173",
   "license": "Copyright Hambrand Technologies Ltd",
   "bump-rebuild-all": 5,
   "scripts": {
@@ -204,8 +204,7 @@
   },
   "resolutions": {
     "**/immer": "8.0.1",
-    "**/prismjs": "1.23.0",
-    "**/node-fetch": "2.6.1"
+    "**/prismjs": "1.23.0"
   },
   "husky": {
     "skipCI": true,
