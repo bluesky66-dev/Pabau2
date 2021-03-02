@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react'
 import classNames from 'classnames'
-import CurrencyInput from 'react-currency-input'
+import NumberFormat, { NumberFormatValues } from 'react-number-format'
 import {
   Button,
   TabMenu,
@@ -75,7 +75,7 @@ export const CreateService: FC<CreateServiceProps> = ({
   const [serviceName, setServiceName] = useState('')
   const [selectedColor, setSelectedColor] = useState('')
   const [category, setCategory] = useState('')
-  const [servicePrice, setServicePrice] = useState('')
+  const [servicePrice, setServicePrice] = useState('0')
   const [sliderValue, setSliderValue] = useState(0)
   const [paymentUnit, setPaymentUnit] = useState('%')
   const [locationItems, setLocationItems] = useState<LocationItem[]>([])
@@ -667,10 +667,16 @@ export const CreateService: FC<CreateServiceProps> = ({
                     <Form form={form} layout="vertical">
                       <Form.Item label="Service price">
                         <div className={styles.currencyInput}>
-                          <CurrencyInput
+                          <NumberFormat
+                            className="ant-input"
                             prefix="£"
+                            defaultValue="0"
+                            thousandSeparator={true}
+                            inputMode="numeric"
                             value={servicePrice}
-                            onChange={(val) => setServicePrice(val)}
+                            onValueChange={(val: NumberFormatValues) =>
+                              setServicePrice(val.value)
+                            }
                           />
                         </div>
                       </Form.Item>
@@ -749,7 +755,11 @@ export const CreateService: FC<CreateServiceProps> = ({
                     <Form form={form} layout="vertical">
                       <Form.Item label="Amount">
                         <div className={styles.currencyInput}>
-                          <CurrencyInput prefix={paymentUnit} />
+                          <NumberFormat
+                            className="ant-input"
+                            prefix={paymentUnit}
+                            defaultValue={0}
+                          />
                         </div>
                       </Form.Item>
                     </Form>
