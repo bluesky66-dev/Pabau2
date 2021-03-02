@@ -10,7 +10,7 @@ import {
   BusinessDetailsNotifications,
 } from '@pabau/ui'
 import Layout from '../../components/Layout/Layout'
-import CommonHeader from '../setup/CommonHeader'
+import CommonHeader from '../setup/common-header'
 import styles from './index.module.less'
 
 const { Title } = Typography
@@ -28,7 +28,12 @@ export const Index: FC = () => {
       <CommonHeader />
       <Layout>
         <div className={styles.businessDetailsContainer}>
-          <Breadcrumb breadcrumbItems={['Setup', 'Business Details']} />
+          <Breadcrumb
+            breadcrumbItems={[
+              { breadcrumbName: 'Setup', path: 'setup' },
+              { breadcrumbName: 'Business Details', path: '' },
+            ]}
+          />
           <Title>Business Details</Title>
         </div>
         <div className={styles.tabsForDesktop}>

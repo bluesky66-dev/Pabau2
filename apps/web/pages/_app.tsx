@@ -12,13 +12,29 @@ import { WebSocketLink } from '@apollo/client/link/ws'
 import { getMainDefinition } from '@apollo/client/utilities'
 import { OperationDefinitionNode } from 'graphql'
 import 'react-phone-input-2/lib/style.css'
-import 'react-google-places-autocomplete/dist/index.min.css'
+// import 'react-google-places-autocomplete/dist/index.min.css'
+import * as Icons from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import { I18nextProvider } from 'react-i18next'
+import i18next from 'i18next'
+import de from '../locales/de.json'
+import en from '../locales/en.json'
 require('../styles/global.less')
 require('../../../libs/ui/src/styles/antd.less')
+require('react-phone-input-2/lib/style.css')
 
 const cache = new InMemoryCache()
 const GRAPHQL_ENDPOINT = 'wss://api.new.pabau.com/v1/graphql'
+const GRAPHQL_HTTP_ENDPOINT =
+  process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT ||
+  'https://api.new.pabau.com/v1/graphql'
 
+const iconList = Object.keys(Icons)
+  .filter((key) => key !== 'fas' && key !== 'prefix')
+  .map((icon) => Icons[icon])
+library.add(...iconList)
 // const request = async (operation) => {
 //   operation.setContext({
 //     http: {
@@ -55,7 +71,7 @@ const GRAPHQL_ENDPOINT = 'wss://api.new.pabau.com/v1/graphql'
 // })
 
 const httpLink = new HttpLink({
-  uri: 'https://api.new.pabau.com/v1/graphql',
+  uri: GRAPHQL_HTTP_ENDPOINT,
 })
 
 const wsLink = process.browser
@@ -132,30 +148,45 @@ const client = new ApolloClient({
   cache,
 })
 
+i18next.init({
+  interpolation: { escapeValue: false },
+  lng: 'en',
+  resources: {
+    en: {
+      common: en,
+    },
+    de: {
+      common: de,
+    },
+  },
+})
+
 export default function CustomApp({
   Component,
   pageProps,
 }: AppProps): JSX.Element {
   return (
     <ApolloProvider client={client}>
-      <style jsx global>{`
-        @font-face {
-          font-family: 'Circular-Std-Black';
-          src: local('Circular-Std-Black'),
-            url(../public/fonts/CircularStd-Black.otf) format('opentype');
-        }
+      <I18nextProvider i18n={i18next}>
+        <style jsx global>{`
+          @font-face {
+            font-family: 'Circular-Std-Black';
+            src: local('Circular-Std-Black'),
+              url(../public/fonts/CircularStd-Black.otf) format('opentype');
+          }
 
-        @font-face {
-          font-family: 'Circular-Std-Book';
-          src: url('/fonts/CircularStd-Book.otf') format('opentype');
-        }
+          @font-face {
+            font-family: 'Circular-Std-Book';
+            src: url('/fonts/CircularStd-Book.otf') format('opentype');
+          }
 
-        @font-face {
-          font-family: 'Circular-Std-Medium';
-          src: url('/fonts/CircularStd-Medium.otf') format('opentype');
-        }
-      `}</style>
-      <Component {...pageProps} />
+          @font-face {
+            font-family: 'Circular-Std-Medium';
+            src: url('/fonts/CircularStd-Medium.otf') format('opentype');
+          }
+        `}</style>
+        <Component {...pageProps} />
+      </I18nextProvider>
     </ApolloProvider>
   )
 }

@@ -1,0 +1,41 @@
+ls:
+  apps:
+    web:
+      pages:
+        .stories.tsx: 'regex:[^.]'
+        .spec.tsx: 'regex:[^.]'
+        .jsx: 'regex:[^.]'
+        .woff: 'regex:[^.]'
+        .ttf: 'regex:[^.]'
+        .png: 'regex:[^.]'
+        .jpg: 'regex:[^.]'
+        .svg: 'regex:[^.]'
+        .json: 'regex:[^.]'
+        .tsx: kebabcase
+        .module.less: kebabcase
+      components:
+        .stories.tsx: pascalcase
+        .spec.tsx: pascalcase
+        .tsx: pascalcase
+        .module.less: pascalcase
+        .json: pascalcase
+
+#  .js: regex:[a-z0-9]+ # the final regex pattern will be ^[a-z0-9]+$
+
+ignore:
+  - .git
+  - '**/node_modules'
+  - 'apps/mobile'
+  - 'apps/{web,connect,mgmt}/pages/_app.tsx'
+  - 'apps/{web,connect,mgmt}/pages/**/index.tsx'
+  - 'apps/{web,connect,mgmt}/components/**/index.tsx'
+  - 'apps/{web,connect,mgmt}/components/**/index.module.less'
+  - 'apps/web/components/Setup/Settings/LoyaltySettings/common.module.less'
+  - 'apps/web/components/Setup/Settings/PosConfiguration/common.module.less'
+  - 'apps/web/components/Setup/Settings/ReferralSettings/common.module.less'
+  - 'apps/web/pages/_app.tsx'
+  - 'apps/connect/pages/_app.tsx'
+  - 'apps/mgmt/pages/_app.tsx'
+  - 'setupJest.js'
+  - 'node_modules'
+  - dist

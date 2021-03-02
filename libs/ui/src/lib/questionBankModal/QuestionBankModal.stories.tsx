@@ -5,6 +5,7 @@ import { data, menuOptions } from '../questionBank/mock'
 
 interface P {
   data: IQuestionOptions[]
+  visible: boolean
 }
 
 export default {
@@ -32,10 +33,11 @@ export const QuestionBankModalStory = (args: P): JSX.Element => {
   return (
     <QuestionBankModal
       {...args}
-      title={'Question Bank'}
+      title="Question Bank"
       questions={questions}
       options={menuOptions}
       onAdd={handleAdd}
+      visible={args.visible}
     />
   )
 }

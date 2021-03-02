@@ -25,13 +25,15 @@
       tr {
         border-bottom: 1px solid #f1f1f1;
       }
+      td {
+        @media screen and (max-width: 767px) {
+          width: 155px;  
+        }
+      }
     }
     tr:hover {
       background-color: #eef7fb;
       cursor: pointer;
-      td {
-        // color: var(--primary-color);
-      }
     }
     .ant-table-cell .drag-visible {
       cursor: pointer !important;
@@ -106,4 +108,49 @@
 
 .text-center {
   text-align: center !important;
+}
+.no-data-table-box {
+  height: 277px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .round-design {
+    background-color: transparent;
+    border: 1px solid #ebecef;
+    :global {
+      .anticon {
+        color: var(--light-grey-color);
+        font-size: 22px;
+      }
+    }
+  }
+
+  .noData-text-style {
+    text-align: center;
+    p {
+      color: var(--grey-text-color);
+      font-size: 16px;
+      margin-bottom: 0px;
+      margin-top: 24px;
+    }
+    .space-between-text {
+      margin-bottom: 28px;
+    }
+    .create-temaplate-btn {
+      padding: 8px 13px;
+      font-family: 'Circular-Std-Medium';
+      font-weight: 500;
+      font-size: 14px;
+      min-width: 155px;
+      height: 40px;
+    }
+  }
+}
+@media screen and (max-width: 767px) {
+:global .ant-table-sticky-scroll {
+  display: none;
+  }
 }

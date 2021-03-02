@@ -1,0 +1,45 @@
+.message-input-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border: 1px solid var(--border-color-base);
+  .message-input {
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    color: #3d3d46;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    &::placeholder {
+      color: #9292a3;
+    }
+  }
+  .message-symbol {
+    display: flex;
+    margin-right: 10px;
+    .message-emoji {
+      margin: 0 8px;
+      padding: 2px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    .message-attach {
+      margin: 0 8px;
+      padding: 2px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    .message-stroke {
+      margin: 0 8px;
+      padding: 2px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+  }
+}

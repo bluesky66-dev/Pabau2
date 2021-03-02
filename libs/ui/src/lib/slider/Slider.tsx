@@ -11,7 +11,7 @@ export interface SliderProps extends SliderSingleProps {
   calculatedValue: string
 }
 
-const Slider: FC<SliderProps> = ({
+export const Slider: FC<SliderProps> = ({
   title,
   disabled,
   value,
@@ -33,13 +33,13 @@ const Slider: FC<SliderProps> = ({
               value={value}
               disabled={disabled}
               handleStyle={{
-                backgroundColor: '#65CD98',
-                borderColor: '#65CD98',
+                backgroundColor: 'var(--primary-color)',
+                borderColor: 'var(--primary-color)',
                 width: '16px',
                 height: '16px',
                 marginTop: '-6px',
               }}
-              trackStyle={{ backgroundColor: '#65CD98' }}
+              trackStyle={{ backgroundColor: 'var(--primary-color)' }}
               className={styles.sliderMain}
             />
           </Col>

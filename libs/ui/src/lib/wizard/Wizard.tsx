@@ -1,18 +1,12 @@
 import React from 'react'
-
 import styels from './Wizard.module.less'
-import { Button, Breadcrumb } from '@pabau/ui'
-import { Typography } from 'antd'
-
-const { Title } = Typography
-
+import { Button } from '@pabau/ui'
 interface WizardProps {
-  onPrev: () => void
-  onNext: () => void
+  onPrev?: () => void
+  onNext?: () => void
   active: number
   allSteps: number
-  breadcrumb: string
-  header: string
+  disableNextStep?: boolean
 }
 
 export const Wizard: React.FC<WizardProps> = ({
@@ -20,45 +14,27 @@ export const Wizard: React.FC<WizardProps> = ({
   onNext,
   active,
   allSteps,
-  breadcrumb,
-  header,
-  children,
+  disableNextStep = false,
 }) => {
-  function prevClick() {
-    onPrev()
-  }
-
-  function nextClick() {
-    onNext()
-  }
-
   return (
-    <div className={styels.container}>
-      <div style={{ backgroundColor: '#FFF' }}>
-        <Breadcrumb breadcrumbItems={[breadcrumb, header]} />
-        <Title>{header}</Title>
-      </div>
+    <div className={styels.footer}>
+      <Button
+        onClick={(event) => onPrev?.()}
+        disabled={active < 1 || active === allSteps - 1}
+      >
+        Previous Step
+      </Button>
+      <span className={styels.breadcrumbgraytxt}>
+        Step {active + 1}/{allSteps}
+      </span>
 
-      <hr className={styels.line} />
-      {children}
-      <hr className={styels.bottomline} />
-
-      <div className={styels.footer}>
-        <Button onClick={(event) => prevClick()} disabled={active <= 1}>
-          Previous Step
-        </Button>
-        <span className={styels.breadcrumbgraytxt}>
-          Step {active}/{allSteps}
-        </span>
-
-        <Button
-          type="primary"
-          onClick={(event) => nextClick()}
-          disabled={active >= allSteps}
-        >
-          Next Step
-        </Button>
-      </div>
+      <Button
+        type="primary"
+        onClick={(event) => onNext?.()}
+        disabled={disableNextStep || allSteps - 1 <= active}
+      >
+        Next Step
+      </Button>
     </div>
   )
 }

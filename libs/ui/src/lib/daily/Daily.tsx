@@ -8,8 +8,7 @@ export interface DailyProps {
 export const Daily: FC<DailyProps> = ({ tickedDays = [] }) => {
   const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
   const isTicked = (idx) => {
-    const ticked = tickedDays.find((day) => day === idx + 1)
-    return ticked
+    return tickedDays.find((day) => day === idx + 1)
   }
   return (
     <div className={styles.dailyContainer}>

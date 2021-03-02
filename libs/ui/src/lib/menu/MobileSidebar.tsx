@@ -3,7 +3,7 @@ import { Drawer, Menu } from 'antd'
 import { Button, Search, Dropdown as AvatarDropDown } from '@pabau/ui'
 import styles from './MobileSidebar.module.less'
 import classNames from 'classnames'
-import { sidebarMenu, SidebarMenuItem } from './sidebarMenu'
+import { sidebarMenu, SidebarMenuItem } from './SidebarMenu'
 import {
   BellOutlined,
   CloseOutlined,

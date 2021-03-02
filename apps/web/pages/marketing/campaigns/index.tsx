@@ -51,9 +51,21 @@ const EDIT_MUTATION = gql`
   }
 `
 
+const UPDATE_ORDER_MUTATION = gql`
+  mutation update_marketing_campaign_order($id: uuid!, $order: Int) {
+    update_marketing_campaign(
+      where: { id: { _eq: $id } }
+      _set: { order: $order }
+    ) {
+      affected_rows
+    }
+  }
+`
+
 const schema: Schema = {
   full: 'Marketing Campaign',
   short: 'Campaign',
+  createButtonLabel: 'Create Campaign',
   fields: {
     name: {
       full: 'Friendly Name',
@@ -78,6 +90,7 @@ export const Index: NextPage = () => {
       listQuery={LIST_QUERY}
       editQuery={EDIT_MUTATION}
       aggregateQuery={LIST_AGGREGATE_QUERY}
+      updateOrderQuery={UPDATE_ORDER_MUTATION}
     />
   )
 }
