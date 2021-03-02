@@ -1,5 +1,9 @@
+import dynamic from 'next/dynamic'
 import React, { FC } from 'react'
-import ReactQuill from 'react-quill'
+
+const ReactQuill = dynamic(() => import('./MyReactQuill'), {
+  ssr: false,
+})
 
 interface P {
   title: string
@@ -20,7 +24,7 @@ const SettingElementTextBlock: FC<P> = ({
   return (
     <>
       <h3 style={{ marginTop: '5px' }}>{title}</h3>
-      <ReactQuill value={value} onChange={onTextChange} />
+      <ReactQuill value={value} onTextChange={onTextChange} />
     </>
   )
 }
