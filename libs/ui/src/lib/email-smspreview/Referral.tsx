@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
-import { ReferralProps, CancelAClassBookingProps } from './EmailSmsPreview'
+import { ReferralProps, EmailSMSPreviewProps } from './EmailSmsPreview'
 import { Col, Row } from 'antd'
 import styles from './EmailSmsPreview.module.less'
 import { Button } from '../button/Button'
 
-export const Referral: FC<CancelAClassBookingProps & ReferralProps> = ({
+export const Referral: FC<EmailSMSPreviewProps & ReferralProps> = ({
   message,
   footerText,
 }) => {
