@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
 import { Drawer, Menu } from 'antd'
 import { Button, Search, Dropdown as AvatarDropDown } from '@pabau/ui'
 import styles from './MobileSidebar.module.less'
@@ -24,7 +24,6 @@ interface SidebarProps {
   onSideBarClosed: () => void
   onClickNotificationDrawer: () => void
   onClickChatDrawer: () => void
-  user?: any
 }
 
 export const MobileSidebar: FC<SidebarProps> = ({
@@ -32,16 +31,11 @@ export const MobileSidebar: FC<SidebarProps> = ({
   onSideBarClosed,
   onClickNotificationDrawer,
   onClickChatDrawer,
-  user,
 }) => {
   const router = useRouter()
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([])
   const [openProfileDrawer, setProfileDrawer] = useState<boolean>(false)
-
-  useEffect(() => {
-    console.log('Mobile' + user)
-  })
 
   const mobileSidebar: SidebarMenuItem[] = [
     {
@@ -71,7 +65,7 @@ export const MobileSidebar: FC<SidebarProps> = ({
     )
   }
 
-  const onClickMenu = (e) => {
+  const onClickMenu = async (e) => {
     setSelectedKeys([e.key])
     if (e.key.includes('Notifications')) {
       onClickNotificationDrawer()
@@ -79,7 +73,7 @@ export const MobileSidebar: FC<SidebarProps> = ({
       onClickChatDrawer()
     }
     if (e.key.includes('Marketing')) {
-      router.push('/marketing/sources')
+      await router.push('/marketing/sources')
     }
   }
 
@@ -162,7 +156,6 @@ export const MobileSidebar: FC<SidebarProps> = ({
           <AvatarDropDown
             isOpen={openProfileDrawer}
             onCloseDrawer={() => setProfileDrawer((e) => !e)}
-            user={user}
           />
         )}
         <div className={styles.buttonMenu}>
