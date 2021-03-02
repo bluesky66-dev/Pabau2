@@ -44,7 +44,6 @@ const LIST_QUERY = gql`
       invoice_prefix
       invoice_starting_number
       vat_registered
-      is_draft
       order
     }
   }
@@ -79,7 +78,6 @@ const ADD_MUTATION = gql`
     $invoicePrefix: String
     $invoiceStartingNumber: numeric
     $vatRegistered: Boolean
-    $isDraft: Boolean
     $isActive: Boolean
   ) {
     insert_issuing_company_one(
@@ -95,7 +93,6 @@ const ADD_MUTATION = gql`
         invoice_prefix: $invoicePrefix
         invoice_starting_number: $invoiceStartingNumber
         vat_registered: $vatRegistered
-        is_draft: $isDraft
         is_active: $isActive
       }
     ) {
@@ -118,7 +115,6 @@ const EDIT_MUTATION = gql`
     $invoicePrefix: String
     $invoiceStartingNumber: numeric
     $vatRegistered: Boolean
-    $isDraft: Boolean
     $isActive: Boolean
   ) {
     update_issuing_company_by_pk(
@@ -135,7 +131,6 @@ const EDIT_MUTATION = gql`
         invoice_prefix: $invoicePrefix
         invoice_starting_number: $invoiceStartingNumber
         vat_registered: $vatRegistered
-        is_draft: $isDraft
         is_active: $isActive
       }
     ) {
@@ -206,40 +201,38 @@ const schema: Schema = {
   },
 }
 
-interface inputTypes {
-  companyName?: string
-  phone?: string
-  website?: string
-  country?: string
-  city?: string
-  street?: string
-  postCode?: string
-  invoiceTemplate?: string
-  invoicePrefix?: string
-  invoiceStartingNumber?: string
-  vatRegistered?: boolean
-  isDraft?: boolean
-  isActive?: boolean
+interface InputTypes {
+  companyName: string
+  phone: string
+  website: string
+  country: string
+  city: string
+  street: string
+  postCode: string
+  invoiceTemplate: string
+  invoicePrefix: string
+  invoiceStartingNumber: string
+  vatRegistered: boolean
+  isActive: boolean
 }
 
-interface editFieldsTypes {
-  id?: string
-  name?: string
-  phone?: string
-  website?: string
-  country?: string
-  city?: string
-  street?: string
-  post_code?: string
-  invoice_template?: string
-  invoice_prefix?: string
-  invoice_starting_number?: string
-  vat_registered?: boolean
-  is_active?: boolean
-  is_draft?: boolean
+interface EditFieldsTypes {
+  id: string
+  name: string
+  phone: string
+  website: string
+  country: string
+  city: string
+  street: string
+  post_code: string
+  invoice_template: string
+  invoice_prefix: string
+  invoice_starting_number: string
+  vat_registered: boolean
+  is_active: boolean
 }
 
-interface focusedTypes {
+interface FocusedTypes {
   general?: boolean
   address?: boolean
   financial?: boolean
@@ -249,7 +242,11 @@ export const IssuingCompany: NextPage = () => {
   const isMobile = useMedia('(max-width: 768px)', false)
   const [showModal, setShowModal] = useState<boolean>(false)
   const { Option } = Select
-  const [focused, setFocused] = useState<focusedTypes>({})
+  const [focused, setFocused] = useState<FocusedTypes>({
+    general: false,
+    address: false,
+    financial: false,
+  })
   const [addMutation] = useMutation(ADD_MUTATION, {
     onCompleted(data) {
       Notification(
@@ -297,21 +294,6 @@ export const IssuingCompany: NextPage = () => {
     },
   })
 
-  const [editPage, setEditPage] = useState<editFieldsTypes>({})
-  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false)
-
-  countries.registerLocale(english)
-  const countriesName = countries.getNames('en')
-
-  const createOptions = () => {
-    const options = Object.keys(countriesName).map((c) => (
-      <Option key={c} value={countriesName[c]}>
-        {countriesName[c]}
-      </Option>
-    ))
-    return options
-  }
-
   const setEditFields = () => {
     const editObj = {
       id: editPage.id,
@@ -327,13 +309,12 @@ export const IssuingCompany: NextPage = () => {
       invoiceStartingNumber: editPage.invoice_starting_number,
       vatRegistered: editPage.vat_registered,
       isActive: editPage.is_active,
-      isDraft: editPage.is_draft,
     }
     return editObj
   }
 
   const formikFields = () => {
-    const initialValues: inputTypes = {
+    const initialValues: InputTypes = {
       companyName: '',
       phone: undefined,
       website: null,
@@ -345,10 +326,43 @@ export const IssuingCompany: NextPage = () => {
       invoicePrefix: null,
       invoiceStartingNumber: undefined,
       vatRegistered: false,
-      isDraft: false,
       isActive: true,
     }
     return initialValues
+  }
+
+  const formikEditFields = () => {
+    const fields: EditFieldsTypes = {
+      id: '',
+      name: '',
+      phone: '',
+      website: '',
+      country: '',
+      city: '',
+      street: '',
+      post_code: '',
+      invoice_template: '',
+      invoice_prefix: '',
+      invoice_starting_number: '',
+      vat_registered: false,
+      is_active: true,
+    }
+    return fields
+  }
+
+  const [editPage, setEditPage] = useState<EditFieldsTypes>(formikEditFields())
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false)
+
+  countries.registerLocale(english)
+  const countriesName = countries.getNames('en')
+
+  const createOptions = () => {
+    const options = Object.keys(countriesName).map((c) => (
+      <Option key={c} value={countriesName[c]}>
+        {countriesName[c]}
+      </Option>
+    ))
+    return options
   }
 
   const issuingCompanySchema = Yup.object({
@@ -383,7 +397,7 @@ export const IssuingCompany: NextPage = () => {
   }
 
   const createPageOnClick = () => {
-    setEditPage({})
+    setEditPage(formikEditFields())
     setFocused({ general: false, address: false, financial: false })
     setShowModal(true)
   }
@@ -395,7 +409,7 @@ export const IssuingCompany: NextPage = () => {
     setFocused({ [name]: status })
   }
 
-  const handleSetEditPage = (value: editFieldsTypes) => {
+  const handleSetEditPage = (value: EditFieldsTypes) => {
     setFocused({ general: true, address: true, financial: true })
     setEditPage(value)
     setShowModal(true)
