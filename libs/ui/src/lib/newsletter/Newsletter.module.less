@@ -1,0 +1,158 @@
+.newsletter-main-wrapper {
+    padding: 32px;
+    background-color: #F7F7F9;
+    .high-chart-block {
+        background: #FFFFFF;
+        border-radius: 4px;
+        padding: 24px;
+        margin-bottom: 32px;
+    }
+    .statistics-subscribers-block {
+        background: #FFFFFF;
+        border-radius: 4px;
+        .statistics-block {
+            padding: 24px;
+            h2 {
+                margin-bottom: 20px;
+                color: #3D3D46;
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 20px;
+            }
+        }
+        .subscribers-block {
+            .head {
+                display: flex;
+                justify-content: space-between;
+                border-top: 1px solid #ECEDF0;
+                margin: 0 24px 20px 24px;
+                h2 {
+                    font-weight: normal;
+                    font-size: 16px;
+                    line-height: 20px;
+                    color: #3D3D46;
+                    margin-top: 15px;
+                }
+                .head-search-filter {
+                   :global .ant-input-search {
+                       .ant-input {
+                           padding: 8px 12px;
+                       }
+                        .ant-input-group-addon {
+                            .ant-input-search-button {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border-left: none;
+                                height: 40px;
+                            }
+                        }
+                    }
+                    .filter-btn {
+                        margin-left: 16px;
+                        border: 1px solid #ECEDF0;
+                        border-radius: 4px;
+                        font-weight: 500;
+                        font-size: 14px;
+                        line-height: 20px;
+                        text-transform: capitalize;
+                        color: #9292A3;
+                        height: auto;
+                        padding: 9px 16px;
+                    }
+                }
+            }
+            .subscribers-table {
+               :global .ant-table-wrapper {
+                    .ant-table {
+                        border-radius: 0;
+                        .ant-table-container {
+                            border-radius: 0;
+                            table {
+                                border-radius: 0;
+                                thead {
+                                    tr {
+                                        th {
+                                            font-weight: 500;
+                                            font-size: 12px;
+                                            line-height: 18px;
+                                            color: #9292A3;
+                                            &.ant-table-selection-column {
+                                                padding-left: 24px;
+                                                padding-right: 24px;
+                                            }
+                                        }
+                                    }
+                                }
+                                tbody {
+                                    tr {
+                                        td {
+                                            color: #3D3D46;
+                                            font-weight: normal;
+                                            font-size: 14px;
+                                            line-height: 22px;
+                                            &.revenue {
+                                                color: #54B2D3;
+                                            }
+                                            &.statusbtn {
+                                                button {
+                                                    background: rgba(84, 178, 211, 0.05);
+                                                    border: 1px solid rgba(84, 178, 211, 0.5);
+                                                    border-radius: 4px;
+                                                    font-weight: normal;
+                                                    font-size: 14px;
+                                                    line-height: 20px;
+                                                    letter-spacing: -0.03em;
+                                                    color: #54B2D3;
+                                                    padding: 2px 20px;
+                                                    height: auto;
+                                                }
+                                            }
+                                            &.icon {
+                                                .anticon-check-circle {
+                                                    font-size: 21px;
+                                                    color: #65CD98;
+                                                }
+                                                .anticon-close-circle {
+                                                    font-size: 21px;
+                                                    color: #CFCFD7;
+                                                }
+                                            }
+                                            &.infoicon {
+                                                span {
+                                                    color: #9292A3;
+                                                    &.ant-tooltip-open {
+                                                        span {
+                                                            color: #40A0C1;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.info-tooltip {
+    padding: 6px 8px;
+    p {
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 29px;
+        color: #FFFFFF;
+        margin-bottom: 4px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+        span {
+            color: #9292A3;
+        }
+    }
+} 

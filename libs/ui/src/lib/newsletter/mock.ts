@@ -67,21 +67,4 @@ export const data = [
       bounced: '23/10/2020',
     },
   },
-  {
-    key: '5',
-    name: 'YouTube',
-    email: 'test5@gmail.com',
-    status: 'Delivered',
-    isOpened: true,
-    isClicked: false,
-    isBooked: true,
-    revenue: '£200.00',
-    info: {
-      sent: '23/10/2020',
-      delivered: '23/10/2020',
-      opened: '23/10/2020',
-      clicked: '23/10/2020',
-      bounced: '23/10/2020',
-    },
-  },
 ]

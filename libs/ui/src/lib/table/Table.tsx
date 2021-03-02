@@ -212,7 +212,7 @@ export const Table: FC<TableType> = ({
           //   onMouseLeave: (event) => {}, // mouse leave row
         }
       }}
-      pagination={false}
+      pagination={props.pageSize ? { pageSize: props.pageSize } : false}
       dataSource={dataSource}
       columns={renderSortHandler()}
       rowKey="key"

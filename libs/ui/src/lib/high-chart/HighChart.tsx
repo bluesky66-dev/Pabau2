@@ -8,6 +8,10 @@ export const HighChart: FC = (props: HighchartsReact.Props) => {
   const options: Highcharts.Options = {
     title: {
       text: ChartTitle,
+      align: 'left',
+    },
+    legend: {
+      align: 'left',
     },
     series: [
       {
@@ -23,7 +27,6 @@ export const HighChart: FC = (props: HighchartsReact.Props) => {
         fillColor: OpensColor,
         lineColor: '#54B2D3',
         color: '#54B2D3',
-        className: '',
       },
       {
         name: ClicksLabel,
@@ -58,9 +61,15 @@ export const HighChart: FC = (props: HighchartsReact.Props) => {
       series: {
         lineWidth: 1,
         shadow: false,
+        dataLabels: {
+          align: 'left',
+        },
         marker: {
           enabled: false,
           symbol: 'circle',
+          fillColor: 'white',
+          radius: 3,
+          lineColor: OpensColor,
           states: {
             hover: {
               enabled: true,

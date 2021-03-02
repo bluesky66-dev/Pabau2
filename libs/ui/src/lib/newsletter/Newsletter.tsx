@@ -4,10 +4,12 @@ import {
   CheckCircleTwoTone,
   CloseCircleOutlined,
   InfoCircleOutlined,
+  FilterOutlined,
 } from '@ant-design/icons'
 import { Tooltip, Input } from 'antd'
 import { Button } from '../button/Button'
 import HighChart from '../high-chart/HighChart'
+import styles from './Newsletter.module.less'
 
 const { Search } = Input
 export interface NewsletterProps {
@@ -19,6 +21,7 @@ export interface NewsletterProps {
   ClicksLabel: string
   OpensColor: string
   ClicksColor: string
+  PageSize: number
 }
 export const Newsletter: FC<NewsletterProps> = ({
   TableTitle,
@@ -29,6 +32,7 @@ export const Newsletter: FC<NewsletterProps> = ({
   ClicksLabel,
   OpensColor,
   ClicksColor,
+  PageSize,
 }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
   const [dataSource, setDataSource] = useState(data)
@@ -71,20 +75,16 @@ export const Newsletter: FC<NewsletterProps> = ({
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
-      className: 'drag-visible',
+      className: 'drag-visible statusbtn',
       visible: true,
       // eslint-disable-next-line react/display-name
-      render: (value) => (
-        <Button color="#54B2D3" backgroundColor="white">
-          {value}
-        </Button>
-      ),
+      render: (value) => <Button color="#54B2D3">{value}</Button>,
     },
     {
       title: 'Opened',
       dataIndex: 'isOpened',
       key: 'isOpened',
-      className: 'drag-visible',
+      className: 'drag-visible icon',
       visible: true,
       // eslint-disable-next-line react/display-name
       render: (value) =>
@@ -98,7 +98,7 @@ export const Newsletter: FC<NewsletterProps> = ({
       title: 'Clicked',
       dataIndex: 'isClicked',
       key: 'isClicked',
-      className: 'drag-visible',
+      className: 'drag-visible icon',
       visible: true,
       // eslint-disable-next-line react/display-name
       render: (value) =>
@@ -112,40 +112,55 @@ export const Newsletter: FC<NewsletterProps> = ({
       title: 'Booked',
       dataIndex: 'isBooked',
       key: 'isBooked',
-      className: 'drag-visible',
+      className: 'drag-visible icon',
       visible: true,
       // eslint-disable-next-line react/display-name
       render: (value) =>
         value ? (
-          <CheckCircleTwoTone twoToneColor="#52c41a" />
+          <CheckCircleTwoTone
+            twoToneColor="#52c41a"
+            className={styles.checkIcon}
+          />
         ) : (
-          <CloseCircleOutlined />
+          <CloseCircleOutlined className={styles.checkIcon} />
         ),
     },
     {
       title: 'Revenue',
       dataIndex: 'revenue',
       key: 'revenue',
-      className: 'drag-visible',
+      className: 'drag-visible revenue',
       visible: true,
     },
     {
       title: '',
       dataIndex: 'info',
       key: 'info',
+      className: 'infoicon',
       visible: true,
       // eslint-disable-next-line react/display-name
       render: (info) => (
         <Tooltip
-          placement="topLeft"
+          placement="left"
+          className={styles.tooltipInfo}
           title={
-            <>
-              <p>Sent:{info.sent}</p>
-              <p>Delivered: {info.delivered}</p>
-              <p>Opened: {info.opened}</p>
-              <p>Clicked: {info.clicked}</p>
-              <p>Bounced: {info.bounced}</p>
-            </>
+            <div className={styles.infoTooltip}>
+              <p>
+                <span>Sent:</span> {info.sent}
+              </p>
+              <p>
+                <span>Delivered:</span> {info.delivered}
+              </p>
+              <p>
+                <span>Opened:</span> {info.opened}
+              </p>
+              <p>
+                <span>Clicked:</span> {info.clicked}
+              </p>
+              <p>
+                <span>Bounced:</span> {info.bounced}
+              </p>
+            </div>
           }
         >
           <InfoCircleOutlined />{' '}
@@ -155,40 +170,70 @@ export const Newsletter: FC<NewsletterProps> = ({
   ]
 
   return (
-    <div>
-      <HighChart
-        ChartTitle={ChartTitle}
-        OpensLabel={OpensLabel}
-        ClicksLabel={ClicksLabel}
-        OpensColor={OpensColor}
-        ClicksColor={ClicksColor}
-      />
-      <h2>{TilesTitle}</h2>
-      <Search
-        placeholder="Search"
-        onSearch={(e) => {
-          const currValue = e
-          const filteredData = data.filter((entry) => {
-            return (
-              entry.name.includes(currValue) || entry.email.includes(currValue)
-            )
-          })
-          setDataSource(filteredData)
-        }}
-        style={{ width: 200 }}
-      />
-      <h2>{TableTitle}</h2>
-      <Table
-        rowSelection={rowSelection}
-        columns={columns}
-        dataSource={dataSource}
-        pagination={false}
-        onRow={(record) => ({
-          onClick: () => {
-            selectRow(record)
-          },
-        })}
-      />
+    <div className={styles.newsletterMainWrapper}>
+      <div className={styles.highChartBlock}>
+        <HighChart
+          ChartTitle={ChartTitle}
+          OpensLabel={OpensLabel}
+          ClicksLabel={ClicksLabel}
+          OpensColor={OpensColor}
+          ClicksColor={ClicksColor}
+        />
+      </div>
+      <div className={styles.statisticsSubscribersBlock}>
+        <div className={styles.statisticsBlock}>
+          <h2>{TilesTitle}</h2>
+        </div>
+        <div className={styles.subscribersBlock}>
+          <div className={styles.head}>
+            <h2>{TableTitle}</h2>
+            <div className={styles.headSearchFilter}>
+              <Search
+                placeholder="Search"
+                onSearch={(e) => {
+                  const currValue = e
+                  const filteredData = data.filter((entry) => {
+                    return (
+                      entry.name
+                        .toLowerCase()
+                        .includes(currValue.toLowerCase()) ||
+                      entry.email
+                        .toLowerCase()
+                        .includes(currValue.toLowerCase())
+                    )
+                  })
+                  setDataSource(filteredData)
+                }}
+                style={{ width: 200 }}
+              />
+              <Button
+                color="#54B2D3"
+                backgroundColor="white"
+                className={styles.filterBtn}
+                icon={<FilterOutlined />}
+              >
+                Filter
+              </Button>
+            </div>
+          </div>
+          <div className={styles.subscribersTable}>
+            <Table
+              rowSelection={rowSelection}
+              columns={columns}
+              dataSource={dataSource}
+              pageSize={PageSize}
+              onRow={(record) => ({
+                onClick: () => {
+                  selectRow(record)
+                },
+              })}
+            />
+            <span>
+              Showing {PageSize} results from {dataSource.length}
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

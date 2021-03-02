@@ -12,8 +12,9 @@ export default {
     ChartTitle: 'High Charts',
     OpensLabel: 'Opens',
     ClicksLabel: 'Clicks',
-    OpensColor: '#54B2D3',
-    ClicksColor: '#65CD98',
+    OpensColor: 'rgba(84, 178, 211, 0.40)',
+    ClicksColor: 'rgba(101, 205, 152, 0.40)',
+    PageSize: 2,
   },
   argTypes: {
     data: {
@@ -54,6 +55,11 @@ export default {
     ClicksColor: {
       control: {
         type: 'color',
+      },
+    },
+    PageSize: {
+      control: {
+        type: 'number',
       },
     },
   },
