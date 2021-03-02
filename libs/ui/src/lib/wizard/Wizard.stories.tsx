@@ -1,7 +1,5 @@
 import React from 'react'
-
 import Wizard from './Wizard'
-import { data } from './Mock'
 
 export default {
   component: Wizard,
@@ -14,6 +12,9 @@ export default {
     allSteps: { control: { type: 'number' } },
     onPrev: { action: 'clicked' },
     onNext: { action: 'clicked' },
+  },
+  parameters: {
+    layout: 'fullscreen',
   },
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
@@ -28,7 +29,6 @@ const WizardStory = ({ ...args }) => {
       onPrev={() => setIndex(index - 1)}
       onNext={() => setIndex(index + 1)}
       allSteps={args.allSteps}
-      stepperData={data}
     ></Wizard>
   )
 }
