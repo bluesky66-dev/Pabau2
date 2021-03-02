@@ -9,16 +9,14 @@ import {
 import { Drawer, Input, Popover, Radio } from 'antd'
 import classNames from 'classnames'
 import { useTranslationI18 } from '../hooks/useTranslationI18'
-// import { isMobile, isTablet } from 'react-device-detect'
-// import { useKeyPressEvent } from 'react-use'
 
 const WAIT_INTERVAL = 400
 
 interface P {
-  schema: Schema
+  schema: Partial<Schema>
   onClick?: () => void
   onFilterSource: () => void
-  onSearch: (term: string) => void
+  onSearch?: (term: string) => void
   tableSearch?: boolean
   addFilter?: boolean
   needTranslation?: boolean
@@ -51,6 +49,12 @@ const AddButton: FC<P> = ({
     return () => clearTimeout(timer)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [marketingSourceSearch])
+
+  const onReset = () => {
+    if (!isActive) {
+      setIsActive(true)
+    }
+  }
 
   const filterContent = (isMobile = false) => (
     <div className={styles.filterContent}>
@@ -105,9 +109,16 @@ const AddButton: FC<P> = ({
         <MobileHeader className={styles.marketingSourceFilterHeader}>
           <div className={styles.allContentAlignMobile}>
             <div className={styles.marketingTextStyle}>
-              <span>Reset</span>
+              <span style={{ cursor: 'pointer' }} onClick={onReset}>
+                Reset
+              </span>
               <p> Filter </p>
-              <span>Cancel</span>
+              <span
+                onClick={() => setMobFilterDrawer((e) => !e)}
+                style={{ cursor: 'pointer' }}
+              >
+                Cancel
+              </span>
             </div>
           </div>
         </MobileHeader>

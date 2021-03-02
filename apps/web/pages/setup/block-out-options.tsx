@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {
   Breadcrumb,
-  Button,
   Notification,
   NotificationType,
   Table,
@@ -9,11 +8,12 @@ import {
   Pagination,
 } from '@pabau/ui'
 import { Card, Col, Row, Typography } from 'antd'
+import { gql, useMutation } from '@apollo/client'
 
 import Layout from '../../components/Layout/Layout'
+import AddButton from '../../components/AddButton'
 import NewBlockTypeModal from '../../components/Setup/BlockOutOptions/NewBlockTypeModal'
 import styles from './block-out-options.module.less'
-import { gql, useMutation } from '@apollo/client'
 
 /* eslint-disable-next-line */
 export interface BlockOutOptionsProps {}
@@ -41,11 +41,16 @@ const columns = [
 ]
 
 const LIST_QUERY = gql`
-  query block_out_options($offset: Int, $limit: Int) {
+  query block_out_options(
+    $offset: Int
+    $limit: Int
+    $isActive: Boolean = true
+  ) {
     block_out_options(
       offset: $offset
       limit: $limit
       order_by: { created_at: desc }
+      where: { is_active: { _eq: $isActive } }
     ) {
       id
       name
@@ -133,6 +138,7 @@ const LIST_AGGREGATE_QUERY = gql`
 export function BlockOutOptions(props: BlockOutOptionsProps) {
   const { Paragraph, Title } = Typography
 
+  const [isActive, setIsActive] = useState(true)
   const [showModal, setShowModal] = useState(false)
   const [edit, setEdit] = useState(null)
   const [paginateData, setPaginateData] = useState({
@@ -147,6 +153,7 @@ export function BlockOutOptions(props: BlockOutOptionsProps) {
     variables: {
       offset: paginateData.offset,
       limit: paginateData.limit,
+      isActive,
     },
   })
 
@@ -293,6 +300,21 @@ export function BlockOutOptions(props: BlockOutOptionsProps) {
     setEdit(null)
   }
 
+  const resetPagination = () => {
+    setPaginateData({
+      total: 0,
+      offset: 0,
+      limit: 10,
+      currentPage: 1,
+      showingRecords: 0,
+    })
+  }
+
+  const onFilter = () => {
+    resetPagination()
+    setIsActive((e) => !e)
+  }
+
   return (
     <Layout>
       <Card bodyStyle={{ padding: 0 }}>
@@ -307,9 +329,14 @@ export function BlockOutOptions(props: BlockOutOptionsProps) {
             <Title>Block Out Options</Title>
           </Col>
           <Col>
-            <Button type="primary" onClick={createClick}>
-              New block type
-            </Button>
+            <AddButton
+              addFilter
+              onFilterSource={onFilter}
+              onClick={createClick}
+              schema={{ createButtonLabel: 'New block type' }}
+              tableSearch={false}
+              needTranslation={false}
+            />
           </Col>
         </Row>
         <Table
