@@ -122,10 +122,11 @@ const LibraryModal: FC<LibraryModalProps> = ({
 
   useEffect(() => {
     const bundles = { ...defaultBundleTypes }
+    const propsBundles = {}
     for (const key of bundleTypes) {
-      bundles[key.bundleType] = { ...bundles[key.bundleType], ...key }
+      propsBundles[key.bundleType] = { ...bundles[key.bundleType], ...key }
     }
-    setBundleTypes({ ...bundles })
+    setBundleTypes({ ...propsBundles })
   }, [bundleTypes])
 
   return (
