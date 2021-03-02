@@ -1,6 +1,51 @@
-.review {
-  left: 0;
-  margin: 25px 25px;
+.review{
+  padding: 24px;
+  display: flex;
+  .drop {
+    display: flex;
+    flex-direction: column;
+    label {
+      font-size: 14px;
+      line-height: 22px;
+      color: #9292A3;
+    }
+    :global .ant-picker, :global .ant-dropdown-trigger {
+      min-width: 180px;
+      max-width: 216px;
+
+    }
+  }
+}
+
+.review-wrap {
+  padding-top: 40px;
+  overflow: auto;
+
+}
+.note-wrap{
+  margin: 0 24px 24px;
+
+  span{
+    line-height: 16px;
+    color: #9292A3;
+  }
+    p{
+      margin-bottom: 4px;
+      color: #3D3D46;
+      &:first-child{
+        margin-top:10px ;
+      }
+      &::before {
+        display: inline-block;
+        content: '';
+        -webkit-border-radius: 0.375rem;
+        border-radius: 0.375rem;
+        height: 8px;
+        width: 8px;
+        margin-right: 0.5rem;
+        background-color: #54B2D3;
+      }
+  }
 }
 .reviewDate {
   font-size: 12px;

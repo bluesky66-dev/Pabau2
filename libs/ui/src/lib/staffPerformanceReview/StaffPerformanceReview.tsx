@@ -24,7 +24,7 @@ interface P {
   reviewPeriod?: periodType
 }
 
-const StaffPerformanceReview: FC<P> = () => {
+export const StaffPerformanceReview: FC<P> = () => {
   const [reviewDate, setReviewDate] = useState(new Date())
   const [reviewPeriod, setReviewPeriod] = useState('threeMonth')
 
@@ -34,7 +34,7 @@ const StaffPerformanceReview: FC<P> = () => {
 
   const menu = (
     <Menu onClick={handleMenuClick}>
-      <Menu.Item key="threeMonth">3 months</Menu.Item>
+      <Menu.Item key="threeMonth">Every 3 Months</Menu.Item>
       <Menu.Item key="annual">Annual</Menu.Item>
     </Menu>
   )
@@ -361,27 +361,53 @@ const StaffPerformanceReview: FC<P> = () => {
       }
     }
   }
+  const nextReminderDate = DateArray.findIndex(
+    (item) => item.status === 'finish'
+  )
+  const nextPeerFeedback = DateArray.findIndex(
+    (item) =>
+      (item?.status === 'process' || item?.status === 'wait') &&
+      /* eslint-disable @typescript-eslint/no-explicit-any */
+      (item as any)?.icon?.props?.title === 'Peer Feedback'
+  )
+
   return (
     <div>
       <div className={styles.review}>
-        <DatePicker
-          style={{ marginRight: '25px' }}
-          disabledDate={(current) => {
-            return (
-              moment().add(-1, 'days') >= current ||
-              moment().endOf('year') <= current
-            )
-          }}
-          onChange={onDateChange}
-        />
-        <Dropdown overlay={menu} placement="bottomCenter" arrow>
-          <Button>{reviewPeriod}</Button>
-        </Dropdown>
+        <div className={styles.drop}>
+          <label>Next Review Is Due...*</label>
+          <DatePicker
+            style={{ marginRight: '25px' }}
+            disabledDate={(current) => {
+              return (
+                moment().add(-1, 'days') >= current ||
+                moment().endOf('year') <= current
+              )
+            }}
+            onChange={onDateChange}
+          />
+        </div>
+        <div className={styles.drop}>
+          <label>Review Period Frequency</label>
+          <Dropdown overlay={menu} placement="bottomCenter" arrow>
+            <Button>{reviewPeriod}</Button>
+          </Dropdown>
+        </div>
       </div>
-      <div className={styles.reviewDate}>
-        NEXT REVIEW IS ON {DateFormatter(reviewDate)}
+      <div className={styles.noteWrap}>
+        <span>Note</span>
+        <div>
+          <p>
+            Next Peer Feedback requests will be sent out on&nbsp;
+            {DateFormatter(DateArray[nextPeerFeedback]?.date)}
+          </p>
+          <p>
+            Next Assessment reminders will be sent out on&nbsp;
+            {DateFormatter(DateArray[nextReminderDate]?.date)}
+          </p>
+        </div>
       </div>
-      <div>
+      <div className={styles.reviewWrap}>
         {reviewPeriod === 'annual' ? (
           <div>
             <Steps
