@@ -10,8 +10,6 @@ import {
   TwitterOutlined,
   LinkedinOutlined,
 } from '@ant-design/icons'
-import OutstandingInvoicePreview
-  from "../../../../../apps/web/pages/client-notifications/outstanding-invoice/OutstandingInvoicePreview";
 
 export interface EmailSMSPreviewProps {
   greeting?: string
