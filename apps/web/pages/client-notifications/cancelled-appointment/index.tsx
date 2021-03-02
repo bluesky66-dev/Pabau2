@@ -15,9 +15,8 @@ enum NotificationType {
 
 const Index: FC = () => {
   const [setIndexTab, setSelectedTab] = React.useState(1)
-  const [email, setEmail] = React.useState('')
 
-  function showNotification() {
+  const showNotification = (email) => {
     if (setIndexTab === 1) {
       console.log(email)
       Notification(NotificationType.success, 'Test message sent')
@@ -43,8 +42,7 @@ const Index: FC = () => {
         ]}
         title={'Cancelled appointment'}
         setIndexTab={setIndexTab}
-        showNotification={showNotification}
-        setEmail={setEmail}
+        handleNotificationSubmit={showNotification}
       />
       <ClientNotification
         onSeletedTab={(value) => setSelectedTab(value)}
