@@ -10,6 +10,7 @@ import classNames from 'classnames'
 
 import styles from './ImageSelectorModal.module.less'
 import imgList, { ImgBlock } from './ImageList'
+
 type Timeout = NodeJS.Timeout
 
 export interface ImageSelectorModalProps {
