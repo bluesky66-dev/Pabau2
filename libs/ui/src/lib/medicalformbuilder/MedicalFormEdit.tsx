@@ -1,5 +1,4 @@
 import { Col, Row } from 'antd'
-import { Base64 } from 'js-base64'
 import React, { FC, useEffect, useReducer, useState } from 'react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import { v4 as uuidv4 } from 'uuid'
@@ -98,7 +97,7 @@ const getFormInfo = (form) => {
   let label = ''
   if (form.title) {
     if (typeof form.title === 'object') {
-      const obj = Base64.decode(Base64.encode(form.title))
+      const obj = atob(btoa(form.title))
       form.title = obj[1]['value'].trim()
     } else {
       form.title = form.title.trim()
@@ -168,7 +167,7 @@ const MedicalFormEdit: FC<PreviewData> = ({ previewData }) => {
   useEffect(() => {
     setDraggedForms([])
     if (typeof previewData != 'undefined' && previewData !== '') {
-      const previewDataArray = JSON.parse(Base64.decode(previewData))
+      const previewDataArray = JSON.parse(atob(previewData))
       const previewForms = []
       if (previewDataArray['form_structure']) {
         for (const form of previewDataArray['form_structure']) {
