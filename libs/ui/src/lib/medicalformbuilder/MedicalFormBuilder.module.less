@@ -8,12 +8,17 @@
   :global {
     .ant-tabs-nav {
       margin-bottom: 0px;
+      height: 80px;
     }
     .ant-tabs-content-holder {
       background: #f7f7f9;
     }
+    .ant-tabs-tab {
+      align-items: flex-end;
+    }
   }
 }
+
 .medicalFormName {
   .label {
     font-style: normal;
@@ -110,8 +115,17 @@
 .medicalFormEditLeftPanelCollapse {
   display: block;
 }
+.MedicalFormEditLeft {
+  width: 336px;
+}
 .MedicalFormEditMain {
   max-height: 805px;
+  width:  calc(100% - 744px);
+}
+.MedicalFormEditRight {
+  width: 408px;
+  position: absolute;
+  right: 0px;
 }
 .medicalFormEditMainEmptyPanel {
   text-align: center;
@@ -157,6 +171,14 @@
 }
 .MedicalFormComponentPanel {
   display: block;
+  :global {
+    .ant-tabs-tabpane {
+      overflow: hidden;
+    }
+    .ant-tabs-nav {
+      height: 40px;
+    }
+  }
 }
 .medicalFormPreviewPanel {
   display: block;
@@ -165,6 +187,7 @@
   z-index: 1;
   position: absolute;
   right: 16px;
+  margin-top: 25px;
   .createButton {
     margin-right: 5px;
   }
@@ -176,7 +199,7 @@
   z-index: 1;
   position: absolute;
   left: 16px;
-  padding-top: 10px;
+  padding-top: 30px;
   span {
     font-style: normal;
     font-weight: 500;

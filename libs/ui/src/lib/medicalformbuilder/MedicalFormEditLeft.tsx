@@ -12,11 +12,21 @@ import MedicalFormGeneralPanel from './MedicalFormGeneralPanel'
 const { Panel } = Collapse
 
 interface P {
+  refreshDraggedFroms: () => void
+  isEditing: () => boolean
   medicalForms: MedicalForms[]
+  changeFormName: (formName: string) => void
+  formName: string
 }
 
 const MedicalFormEditLeft: FC<P> = ({ ...props }) => {
-  const { medicalForms } = props
+  const {
+    refreshDraggedFroms,
+    isEditing,
+    medicalForms,
+    changeFormName,
+    formName,
+  } = props
   const [selectedFormTypes, setSelectedFormTypes] = useState<SelectedForms>(
     defaultSelectedFormInfos
   )
@@ -26,6 +36,7 @@ const MedicalFormEditLeft: FC<P> = ({ ...props }) => {
   const [openPanel, setOpenPanel] = useState<string[]>(['1', '2'])
 
   const onSelectFormType = (setting) => {
+    refreshDraggedFroms?.()
     setSelectedFormTypes(setting)
     setOpenPanel(['2'])
     setComponentClass(styles.medicalFormEditLeftPanelCollapseComponentExpend)
@@ -56,7 +67,12 @@ const MedicalFormEditLeft: FC<P> = ({ ...props }) => {
           key="1"
           className={styles.medicalFormEditLeftPanelCollapseGeneral}
         >
-          <MedicalFormGeneralPanel onSelectFormType={onSelectFormType} />
+          <MedicalFormGeneralPanel
+            isEditing={isEditing}
+            onSelectFormType={onSelectFormType}
+            changeFormName={changeFormName}
+            formName={formName}
+          />
         </Panel>
         <Panel header="COMPONENTS" key="2" className={componentClass}>
           <MedicalFormComponentPanel

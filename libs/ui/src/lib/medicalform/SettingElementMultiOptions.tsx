@@ -86,8 +86,8 @@ const SettingElementMultiOptions: FC<P> = ({ onChange, paramItems }) => {
         <>
           {items.map((item, index) => (
             <div key={index} className={styles.multiOption}>
-              <Checkbox value={item.id} className={styles.checkbox}>
-                {item.editing && (
+              {item.editing && (
+                <Checkbox value={item.id} className={`${styles.checkboxEdit}`}>
                   <Input
                     autoFocus
                     className={styles.optionInput}
@@ -98,13 +98,14 @@ const SettingElementMultiOptions: FC<P> = ({ onChange, paramItems }) => {
                     onKeyPress={(e) => onKeyUp(e, index, item)}
                     value={item.name}
                   />
-                )}
-                {!item.editing && (
-                  <>
-                    <span>{item.name}</span>{' '}
-                  </>
-                )}
-              </Checkbox>
+                </Checkbox>
+              )}
+              {!item.editing && (
+                <Checkbox value={item.id} className={`${styles.checkbox}`}>
+                  <span>{item.name}</span>{' '}
+                </Checkbox>
+              )}
+
               {item.editing && (
                 <Button
                   className={styles.multiOptionBtn}

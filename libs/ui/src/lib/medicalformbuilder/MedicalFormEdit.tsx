@@ -6,12 +6,7 @@ import RightSidebar from '../rightsidebar/RightSidebar'
 import styles from './MedicalFormBuilder.module.less'
 import MedicalFormEditLeft from './MedicalFormEditLeft'
 import MedicalFormEditMain from './MedicalFormEditMain'
-import {
-  ArrayItem,
-  defaultFormValue,
-  OptionType,
-  PreviewData,
-} from './MedicalFormInterface'
+import { ArrayItem, defaultFormValue, OptionType } from './MedicalFormInterface'
 
 const medicalForms = [
   { id: 0, formType: 'basic', formName: 'basic_heading' },
@@ -158,7 +153,13 @@ const getFormInfo = (form) => {
   }
 }
 
-const MedicalFormEdit: FC<PreviewData> = ({ previewData }) => {
+interface P {
+  previewData: string
+  changeFormName: (formName: string) => void
+  formName: string
+}
+
+const MedicalFormEdit: FC<P> = ({ previewData, changeFormName, formName }) => {
   const [, forceUpdate] = useReducer((x) => x + 1, 0)
   const [draggedForms, setDraggedForms] = useState([])
   const [selectedForm, setSelectedForm] = useState(defaultFormValue)
@@ -197,6 +198,10 @@ const MedicalFormEdit: FC<PreviewData> = ({ previewData }) => {
     }
   }, [previewData])
 
+  const refreshDraggedFroms = () => {
+    setDraggedForms([])
+  }
+
   const handlingFormSetting = (componentID) => {
     setDisplaySettingBar(componentID === '' ? false : true)
     if (componentID !== '') {
@@ -204,11 +209,15 @@ const MedicalFormEdit: FC<PreviewData> = ({ previewData }) => {
       setSelectedForm(sel_form ? sel_form[0] : defaultFormValue)
     }
   }
+
+  const isEditing = () => {
+    return draggedForms.length > 0 ? true : false
+  }
+
   const handlingDeleteForm = (componentID) => {
     handlingFormSetting('')
     setDraggedForms(draggedForms.filter((item) => item['id'] !== componentID))
   }
-
   const onDragEnd = React.useCallback(
     (result) => {
       const { source, destination } = result
@@ -253,16 +262,22 @@ const MedicalFormEdit: FC<PreviewData> = ({ previewData }) => {
   return (
     <Row>
       <DragDropContext onDragEnd={onDragEnd}>
-        <Col span={6}>
-          <MedicalFormEditLeft medicalForms={medicalForms} />
+        <Col className={styles.MedicalFormEditLeft}>
+          <MedicalFormEditLeft
+            refreshDraggedFroms={refreshDraggedFroms}
+            isEditing={isEditing}
+            medicalForms={medicalForms}
+            changeFormName={changeFormName}
+            formName={formName}
+          />
         </Col>
-        <Col span={11} className={styles.MedicalFormEditMain}>
+        <Col className={styles.MedicalFormEditMain}>
           <MedicalFormEditMain
             draggedForms={draggedForms}
             handlingFormSetting={handlingFormSetting}
           />
         </Col>
-        <Col span={7}>
+        <Col className={styles.MedicalFormEditRight}>
           {selectedForm && (
             <RightSidebar
               selectedForm={selectedForm}

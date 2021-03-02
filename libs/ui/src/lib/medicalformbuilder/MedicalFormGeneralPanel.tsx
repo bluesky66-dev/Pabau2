@@ -9,11 +9,17 @@ import styles from './MedicalFormBuilder.module.less'
 import MedicalFormName from './MedicalFormName'
 
 interface MedicalFormGeneralProps {
+  isEditing: () => boolean
   onSelectFormType: (val: SelectedForms) => void
+  changeFormName: (formName: string) => void
+  formName: string
 }
 
 const MedicalFormGeneralPanel: FC<MedicalFormGeneralProps> = ({
+  isEditing,
   onSelectFormType,
+  changeFormName,
+  formName,
 }) => {
   const onChangeSetting = (setting) => {
     onSelectFormType(setting)
@@ -25,7 +31,12 @@ const MedicalFormGeneralPanel: FC<MedicalFormGeneralProps> = ({
   const defaultServices = []
   return (
     <div className={styles.medicalFormGeneralPanel}>
-      <MedicalFormName label="Form name" desc="Enter your form name" />
+      <MedicalFormName
+        changeFormName={changeFormName}
+        label="Form name"
+        desc="Enter your form name"
+        name={formName}
+      />
       <AddSuggestion
         label="Which service should this form be used for?"
         defaultSelected={defaultServices}
@@ -33,6 +44,7 @@ const MedicalFormGeneralPanel: FC<MedicalFormGeneralProps> = ({
         onChange={onSelectServices}
       />
       <FormType
+        isEditing={isEditing}
         setting={defaultSelectedFormInfos}
         onChangeSetting={onChangeSetting}
       />
