@@ -1,3 +1,5 @@
+export * from './lib/custom-progress/CustomProgress'
+export * from './lib/peer-feedback/PeerFeedback'
 export * from './lib/accordion/Accordion'
 export * from './lib/add-suggestion/AddSuggestion'
 export * from './lib/business-details-notifications/BusinessDetailsNotifications'
