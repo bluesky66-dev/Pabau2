@@ -632,18 +632,24 @@ const GiftVoucherStory = ({
   footerIconGroup,
   isGiftVoucher,
   footer,
+  footerContact,
+  displayContactMessage,
+  displayViewButton,
 }: PropsWithChildren<EmailSMSPreviewProps & GiftVoucherProps>) => (
   <EmailSmsPreview
     greeting={greeting}
     footerIconGroup={footerIconGroup}
     isGiftVoucher={isGiftVoucher}
     footer={footer}
+    footerContact={footerContact}
+    displayContactMessage={displayContactMessage}
   >
     <GiftVoucher
       value={value}
       voucherCode={voucherCode}
       expiry={expiry}
       consultancyName={consultancyName}
+      displayViewButton={displayViewButton}
     />
   </EmailSmsPreview>
 )
@@ -657,7 +663,10 @@ GiftVouchers.args = {
   consultancyName: 'M-A Hair Dressing & Spa',
   footerIconGroup: false,
   isGiftVoucher: true,
-  footer: false,
+  footer: true,
+  footerContact: true,
+  displayContactMessage: false,
+  displayViewButton: false,
 }
 
 const ConnectRegistrationStory = ({

@@ -32,6 +32,7 @@ export interface EmailSMSPreviewProps {
   backGroundColor?: string
   contactEmail?: string
   contactInfoNumber?: string
+  displayContactMessage?: boolean
 }
 
 export interface FooterProps {
@@ -42,6 +43,7 @@ export interface FooterProps {
   activeSocialIcons?: string[]
   contactEmail?: string
   contactInfoNumber?: string
+  displayContactMessage?: boolean
 }
 
 export interface NoShowAppointmentProps {
@@ -102,6 +104,7 @@ export interface GiftVoucherProps {
   voucherCode?: string
   expiry?: string
   consultancyName?: string
+  displayViewButton?: boolean
 }
 
 export interface ConnectRegistrationProps {
@@ -145,6 +148,7 @@ export function EmailSMSFooter(props: FooterProps): JSX.Element {
     activeSocialIcons = [],
     contactInfoNumber,
     contactEmail,
+    displayContactMessage = true,
   } = props
 
   const setSocialIcon = (value) => {
@@ -165,13 +169,15 @@ export function EmailSMSFooter(props: FooterProps): JSX.Element {
       <Divider className={styles.dividerHr} />
       {contact && (
         <>
-          <Row gutter={[0, 4]} className={styles.bookAppointment}>
-            <Col>
-              <span className={styles.message}>
-                Or get in touch with us via Phone or Email:
-              </span>
-            </Col>
-          </Row>
+          {displayContactMessage && (
+            <Row gutter={[0, 4]} className={styles.bookAppointment}>
+              <Col>
+                <span className={styles.message}>
+                  Or get in touch with us via Phone or Email:
+                </span>
+              </Col>
+            </Row>
+          )}
           <Row gutter={[0, 4]} className={styles.bookAppointment}>
             <Col>
               <span className={styles.contactInfo}>
@@ -192,7 +198,7 @@ export function EmailSMSFooter(props: FooterProps): JSX.Element {
         <Row gutter={[0, 4]} className={styles.textBox}>
           <Col>
             <span
-              className={styles.text}
+              className={`${styles.text} ${styles.footerText}`}
               dangerouslySetInnerHTML={{ __html: text || '' }}
             ></span>
           </Col>
@@ -234,6 +240,7 @@ export const EmailSmsPreview = (
     contactEmail,
     contactInfoNumber,
     activeSocialIcons = ['facebook', 'whatsApp', 'instagram', 'twitter'],
+    displayContactMessage = true,
   } = props
   const [previewStatus, setPreviewStatus] = React.useState(
     previewCustomStatus || 'email'
@@ -311,6 +318,7 @@ export const EmailSmsPreview = (
                 activeSocialIcons={activeSocialIcons}
                 contactInfoNumber={contactInfoNumber}
                 contactEmail={contactEmail}
+                displayContactMessage={displayContactMessage}
               />
             )}
           </div>

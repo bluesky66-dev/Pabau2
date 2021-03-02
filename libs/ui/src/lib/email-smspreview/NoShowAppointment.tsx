@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { EmailSMSPreviewProps, NoShowAppointmentProps } from './EmailSmsPreview'
 import { Col, Row } from 'antd'
 import styles from './EmailSmsPreview.module.less'
-import { Button } from '../button/Button'
+import { Button } from '@pabau/ui'
 
 export const NoShowAppointment: FC<
   NoShowAppointmentProps & EmailSMSPreviewProps

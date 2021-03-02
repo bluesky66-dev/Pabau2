@@ -7,6 +7,7 @@ import RescheduleAppointmentPreview from '../../pages/client-notifications/resch
 import BookedOntoClassPreview from '../../pages/client-notifications/class-booked/BookedOntoClassPreview'
 import WaitListPreview from '../../pages/client-notifications/waitlist/WaitListPreview'
 import ClassSpotAvailablePreview from '../../pages/client-notifications/class-spot-available/ClassSpotAvailablePreview'
+import GiftVoucherPreview from '../../pages/client-notifications/gift-vouchers/GiftVouchersPreview'
 
 interface P {
   onSeletedTab: (number) => void
@@ -247,6 +248,16 @@ const Index: FC<P> = forwardRef(
             />
           ) : type === 'classSpotAvailable' ? (
             <ClassSpotAvailablePreview
+              standardTapIndex={standardTapIndex}
+              backGroundColor={backGroundColor}
+              activeSocialIcons={activeSocialIcons}
+              selectLanguage={selectLanguage}
+              buttonColor={buttonColor}
+              informationMessage={informationMessage}
+              type={type}
+            />
+          ) : type === 'giftVoucher' ? (
+            <GiftVoucherPreview
               standardTapIndex={standardTapIndex}
               backGroundColor={backGroundColor}
               activeSocialIcons={activeSocialIcons}

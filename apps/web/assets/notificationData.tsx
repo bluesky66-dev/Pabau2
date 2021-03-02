@@ -194,7 +194,7 @@ const notificationData = {
         'The default email template you will send when clients purchase a gift voucher',
       icon: <GiftOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/gift-vouchers',
       disabled: true,
     },
   ],
