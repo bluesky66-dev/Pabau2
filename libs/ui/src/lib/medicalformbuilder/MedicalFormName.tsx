@@ -1,5 +1,5 @@
 import { Input } from 'antd'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
 import styles from './MedicalFormBuilder.module.less'
 
 interface P {
@@ -11,17 +11,14 @@ interface P {
 
 const MedicalFormName: FC<P> = ({ label, desc, name, changeFormName }) => {
   const [formName, setFormName] = useState(name)
-  useEffect(() => {
-    changeFormName(formName)
-  }, [formName])
+  const onChangeFormName = (e) => {
+    setFormName(e.target.value)
+    changeFormName(e.target.value)
+  }
   return (
     <div className={styles.medicalFormName}>
       <div className={styles.label}>{label}</div>
-      <Input
-        placeholder={desc}
-        value={formName}
-        onChange={(e) => setFormName(e.target.value)}
-      />
+      <Input placeholder={desc} value={formName} onChange={onChangeFormName} />
     </div>
   )
 }
