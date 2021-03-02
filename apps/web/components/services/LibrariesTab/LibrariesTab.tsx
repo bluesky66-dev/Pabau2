@@ -1,22 +1,54 @@
-import React, { FC, useState } from 'react'
+/* eslint-disable graphql/template-strings */
+import React, { FC, useState, useEffect } from 'react'
+import { gql } from '@apollo/client'
 import { Row, Col } from 'antd'
-import { LibraryModal } from '@pabau/ui'
+import { LibraryModal, useLiveQuery } from '@pabau/ui'
 import { FileProtectOutlined } from '@ant-design/icons'
 import styles from './library_tab.module.less'
 
-const LibsBundles = [
-  { bundleType: 'ConsentForm', title: 'Custom title to this bundle type' },
-  { bundleType: 'Stencil', title: 'This is my stencil' },
-  { bundleType: 'Contraindication', title: 'I"m suggesting this one as title' },
-]
+const LIST_QUERY = gql`
+  query library_installers($limit: Int = 10) {
+    library_installers(limit: $limit) {
+      library_name
+      library_image
+      library_description
+      library_location
+      library_language
+      data
+      created_date
+      id
+    }
+  }
+`
 
 export const LibrariesTab: FC = () => {
-  const [libItems] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])
+  const [libItems, setLibItems] = useState([])
   const [libraryInstaller, setLibraryInstaller] = useState(false)
+  const [libraryIntallerData, setLibraryInstallerData] = useState(null)
 
-  const showLibraryInstaller = () => {
+  const showLibraryInstaller = (item) => {
+    setLibraryInstallerData(item)
     setLibraryInstaller((libraryInstaller) => !libraryInstaller)
   }
+
+  const getQueryVariables = () => {
+    const queryOptions = {
+      variables: {
+        limit: 10,
+      },
+    }
+
+    return queryOptions
+  }
+
+  const { data, error, loading } = useLiveQuery(LIST_QUERY, getQueryVariables())
+
+  useEffect(() => {
+    if (!loading && data) {
+      setLibItems(data)
+    }
+    console.log('HEL')
+  }, [data, error, loading])
 
   return (
     <Row className={styles.library}>
@@ -25,7 +57,7 @@ export const LibrariesTab: FC = () => {
           <Col lg={6} md={8} sm={8} xs={24} key={`col-key-${key * 123}`}>
             <div
               className={styles.libraryCard}
-              onClick={() => showLibraryInstaller()}
+              onClick={() => showLibraryInstaller(el)}
             >
               <div>
                 <span>
@@ -33,22 +65,27 @@ export const LibrariesTab: FC = () => {
                 </span>
                 <span className="plus">Plus</span>
               </div>
-              <h4>BNF Lib Database</h4>
-              <p>{(el + 2) * 2}</p>
+              <h4>{el.library_name}</h4>
+              <p>{el.data?.length}</p>
             </div>
           </Col>
         ))}
       <Col md={24}>
-        <LibraryModal
-          image="https://wallpaperaccess.com/full/271965.jpg"
-          title="BNF Lib Service Bundle"
-          subTitle="BNF Lib Service Bundle Sub Title"
-          visible={libraryInstaller}
-          bundleTypes={LibsBundles}
-          onClose={() =>
-            setLibraryInstaller((libraryInstaller) => !libraryInstaller)
-          }
-        />
+        {libraryIntallerData && (
+          <LibraryModal
+            image={
+              libraryIntallerData?.library_image ||
+              'https://wallpaperaccess.com/full/271965.jpg'
+            }
+            title={libraryIntallerData?.library_name}
+            subTitle={libraryIntallerData?.library_description}
+            visible={libraryInstaller}
+            bundleTypes={libraryIntallerData?.data}
+            onClose={() =>
+              setLibraryInstaller((libraryInstaller) => !libraryInstaller)
+            }
+          />
+        )}
       </Col>
     </Row>
   )
