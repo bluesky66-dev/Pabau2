@@ -19,6 +19,7 @@ const SettingElementTextBlock: FC<P> = ({
   onChangeText,
 }) => {
   const onTextChange = (e) => {
+    console.log('e =', e)
     onChangeText?.(e)
   }
   return (
