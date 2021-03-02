@@ -203,7 +203,8 @@
     "vercel": "^21.2.0"
   },
   "resolutions": {
-    "**/immer": "8.0.1"
+    "**/immer": "8.0.1",
+    "**/prismjs": "1.23.0"
   },
   "husky": {
     "skipCI": true,
