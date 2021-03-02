@@ -30,7 +30,7 @@ import {
   CopyOutlined,
 } from '@ant-design/icons'
 import Layout from '../../../components/Layout/Layout'
-import CommonHeader from '../CommonHeader'
+import CommonHeader from '../common-header'
 import onlineBookingBg from '../../../assets/images/online-booking-bg.png'
 import onlineBookingPreviewEmpty from '../../../assets/images/online-booking-preview-empty.png'
 import noPaymentGateway from '../../../assets/images/no-payment-gateway.png'
