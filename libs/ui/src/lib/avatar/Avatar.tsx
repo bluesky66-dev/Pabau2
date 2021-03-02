@@ -11,8 +11,6 @@ enum Status {
   active = 'active',
   inactive = 'inactive',
 }
-
-/* eslint-disable-next-line */
 export interface AvatarProps extends NativeAvatarProps {
   isLoading?: boolean
   zIndex?: number

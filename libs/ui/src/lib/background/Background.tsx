@@ -12,7 +12,6 @@ export interface BackgroundProps {
   list?: listType[]
   onChange?: (name: string) => void
 }
-/* eslint-disable-next-line */
 
 export function Background(props: BackgroundProps): JSX.Element {
   const [selected, setSelected] = useState<string>()

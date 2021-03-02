@@ -1,23 +1,27 @@
-/* eslint-disable */
-import React from 'react'
-import NewsletterDelivery from './NewsletterDelivery'
-import { NewsletterSentProps } from './NewsletterSent'
+import React, { useState, useEffect, FC } from 'react'
+import NewsletterDelivery, {
+  cardData,
+  NewsletterDeliveryProps,
+} from './NewsletterDelivery'
+import { data } from './mock'
 
 export default {
   component: NewsletterDelivery,
   title: 'Basics/NewsletterDelivery',
-  args: { label: 'SENT', value: '1000' },
+  args: { data },
   argTypes: {
-    label: { control: { type: 'text' } },
+    data: { control: { type: 'object' } },
   },
 }
 
-const NewsletterStory = ({ ...args }: NewsletterSentProps) => (
-  <NewsletterDelivery {...args} />
-)
+export const NewsLetterDeliveryStory: FC<NewsletterDeliveryProps> = ({
+  data,
+}) => {
+  const [cardInfo, setCardInfo] = useState<cardData[]>([])
 
-export const NewsLetterDelivery = NewsletterStory.bind({})
-NewsLetterDelivery.args = {
-  label: 'SENT',
-  value: 3244,
+  useEffect(() => {
+    if (data) setCardInfo([...data])
+  }, [data])
+
+  return <NewsletterDelivery data={cardInfo} />
 }

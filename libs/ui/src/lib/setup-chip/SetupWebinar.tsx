@@ -4,21 +4,25 @@ import { Button } from '@pabau/ui'
 import { PlayCircleOutlined, PlusOutlined } from '@ant-design/icons'
 
 interface WebinarProps {
+  id?: string
   title?: string
   name?: string
   time?: string
   timeLeft?: string
   backgroundImage?: string
   isJoin?: boolean
+  onClick?: (type: string, id?: string) => void
 }
 
 export const Webinar: FC<WebinarProps> = ({
+  id,
   title,
   name,
   time,
   timeLeft,
   backgroundImage,
   isJoin,
+  onClick,
 }) => {
   return (
     <div className={styles.webinarBannerEnd}>
@@ -42,6 +46,7 @@ export const Webinar: FC<WebinarProps> = ({
                 <Button
                   className={styles.joinBtn}
                   icon={<PlayCircleOutlined />}
+                  onClick={() => onClick?.('join', id)}
                 >
                   Join class
                 </Button>
@@ -51,7 +56,11 @@ export const Webinar: FC<WebinarProps> = ({
             <div className={styles.countMe}>
               <h4 className={styles.countTime}> {timeLeft} start </h4>
               <div className={styles.joinBtnTopSpace}>
-                <Button className={styles.countBtn} icon={<PlusOutlined />}>
+                <Button
+                  className={styles.countBtn}
+                  icon={<PlusOutlined />}
+                  onClick={() => onClick?.('register', id)}
+                >
                   Count me in
                 </Button>
               </div>
