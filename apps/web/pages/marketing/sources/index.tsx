@@ -7,33 +7,36 @@ import { useTranslation } from 'react-i18next'
 
 const LIST_QUERY = gql`
   query marketing_sources(
-    $public: Int
-    $searchTerm: String
+    $isActive: Boolean = true
+    $searchTerm: String = ""
     $offset: Int
     $limit: Int
   ) {
-    marketingSources(
-      first: $offset
-      last: $limit
+    marketing_source(
+      offset: $offset
+      limit: $limit
+      order_by: { order: desc }
       where: {
-        public: { equals: $public }
-        OR: [{ AND: [{ source_name: { contains: $searchTerm } }] }]
+        is_active: { _eq: $isActive }
+        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
       }
     ) {
+      __typename
       id
-      source_name
-      public
+      name
+      is_active
+      order
     }
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
   query marketing_source_aggregate(
-    $public: Boolean = true
+    $isActive: Boolean = true
     $searchTerm: String = ""
   ) {
     marketing_source_aggregate(
       where: {
-        public: { _eq: $public }
+        is_active: { _eq: $isActive }
         _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
       }
     ) {
@@ -44,52 +47,41 @@ const LIST_AGGREGATE_QUERY = gql`
   }
 `
 const DELETE_MUTATION = gql`
-  mutation delete_marketing_source($id: Int) {
-    deleteOneMarketingSource(where: { id: $id }) {
+  mutation delete_marketing_source($id: uuid!) {
+    delete_marketing_source_by_pk(id: $id) {
       __typename
       id
     }
   }
 `
-
 const ADD_MUTATION = gql`
-  mutation add_marketing_source(
-    $imported: Int = 0
-    $is_active: Int = 1
-    $name: String!
-    $custom_id: Int = 0
-    $company_id: Int = 8901 #TODO refactor with actual company_id
-  ) {
-    createOneMarketingSource(
-      data: {
-        company: { connect: { id: $company_id } }
-        imported: $imported
-        source_name: $name
-        public: $is_active
-        custom_id: $custom_id
-      }
+  mutation add_marketing_source($name: String!, $is_active: Boolean) {
+    insert_marketing_source_one(
+      object: { name: $name, is_active: $is_active }
     ) {
+      __typename
       id
     }
   }
 `
 const EDIT_MUTATION = gql`
   mutation update_marketing_source_by_pk(
-    $id: Int!
-    $source_name: String
-    $public: Int = 1
+    $id: uuid!
+    $name: String!
+    $is_active: Boolean
+    $order: Int
   ) {
-    updateOneMarketingSource(
-      data: { source_name: { set: $source_name }, public: { set: $public } }
-      where: { id: $id }
+    update_marketing_source_by_pk(
+      pk_columns: { id: $id }
+      _set: { name: $name, is_active: $is_active, order: $order }
     ) {
+      __typename
       id
+      is_active
+      order
     }
   }
 `
-/**
- * TODO refactor UPDATE_ORDER_MUTATION with legacy db
- */
 const UPDATE_ORDER_MUTATION = gql`
   mutation update_marketing_source_order($id: uuid!, $order: Int) {
     update_marketing_source(
@@ -157,5 +149,4 @@ export const Index: NextPage = () => {
     />
   )
 }
-
 export default Index

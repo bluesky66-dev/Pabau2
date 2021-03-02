@@ -34,13 +34,13 @@ import {
   ReviewSlider,
   ReviewSliderProps,
   AddQuestion,
-  QuestionBankModal,
   IQuestionOptions,
   QuestionField,
+  CopyEmbedCodeModal,
 } from '@pabau/ui'
 import confetti from 'canvas-confetti'
 import Layout from '../../../components/Layout/Layout'
-import CommonHeader from '../CommonHeader'
+import CommonHeader from '../common-header'
 import reviewsConfigBanner from '../../../assets/images/reviews-config-banner.png'
 import userAvatar from '../../../assets/images/users/alex.png'
 import clinicLogo from '../../../assets/images/clinic-logo.png'
@@ -163,11 +163,11 @@ export const Index: FC<ReviewsConfigProps> = ({
 
   const ReviewsConfigFooter = ({ step, onNext, onPrev }) => {
     const handleClickNext = () => {
-      reviewsConfigRef.current.scrollIntoView()
+      reviewsConfigRef.current.scrollIntoView({ behavior: 'smooth' })
       onNext()
     }
     const handleClickPrev = () => {
-      reviewsConfigRef.current.scrollIntoView()
+      reviewsConfigRef.current.scrollIntoView({ behavior: 'smooth' })
       onPrev()
     }
     return (
@@ -642,7 +642,6 @@ export const Index: FC<ReviewsConfigProps> = ({
 
   const Step2 = ({ settings, questionData }) => {
     const [questions, setQuestions] = useState<QuestionField[]>([])
-    const [visible, setVisible] = useState(false)
     const [setting, setSetting] = useState<FeedbackSurveyBuilder>(
       defaultBuilderSetting
     )
@@ -665,18 +664,22 @@ export const Index: FC<ReviewsConfigProps> = ({
       const questionItems = data.filter((a) => a.key !== key)
       setQuestions(questionItems)
     }
-    const onGoTo = () => {
-      setVisible(true)
-    }
-    const handleAddFromQuestionBank = (question) => {
-      const tmpQuestions = question.map((q, index) => ({
-        title: q.question,
-        key: questions.length + index + 1,
-      }))
-      const data = [...questions, ...tmpQuestions]
+
+    const onQuestionBankAddButton = (
+      question: Array<IQuestionOptions> | undefined
+    ): void => {
+      const data = [...questions]
+      if (question) {
+        for (const a of question) {
+          data.push({
+            title: a.question,
+            key: questions.length + Math.floor(Math.random() * 100),
+          })
+        }
+      }
       setQuestions(data)
-      setVisible(false)
     }
+
     useEffect(() => {
       if (questionData) setQuestions(questionData)
       if (settings) {
@@ -763,19 +766,8 @@ export const Index: FC<ReviewsConfigProps> = ({
                   onAddQuestion={() => onAddQuestion()}
                   onDeleteButton={(key) => onDeleteButton(key)}
                   isDeleteDisable={questions?.length === 1}
-                  onGoTo={() => onGoTo()}
+                  onQuestionBankAddButton={onQuestionBankAddButton}
                 />
-                {visible && (
-                  <QuestionBankModal
-                    visible={visible}
-                    title="Question Bank"
-                    questions={setting.questionsBank}
-                    options={[]}
-                    onAdd={(question) => handleAddFromQuestionBank(question)}
-                    onOk={() => setVisible(false)}
-                    onCancel={() => setVisible(false)}
-                  />
-                )}
               </div>
             </div>
             <div>
@@ -882,19 +874,8 @@ export const Index: FC<ReviewsConfigProps> = ({
                   onAddQuestion={() => onAddQuestion()}
                   onDeleteButton={(key) => onDeleteButton(key)}
                   isDeleteDisable={questions?.length === 1}
-                  onGoTo={() => onGoTo()}
+                  onQuestionBankAddButton={onQuestionBankAddButton}
                 />
-                {visible && (
-                  <QuestionBankModal
-                    visible={visible}
-                    title="Question Bank"
-                    questions={setting.questionsBank}
-                    options={[]}
-                    onAdd={(question) => handleAddFromQuestionBank(question)}
-                    onOk={() => setVisible(false)}
-                    onCancel={() => setVisible(false)}
-                  />
-                )}
               </div>
               <div className={styles.previewPanel}>
                 {!surveyFormat && (
@@ -955,6 +936,8 @@ export const Index: FC<ReviewsConfigProps> = ({
     const [currentReviews, setCurrentReviews] = useState<ReviewSliderProps>(
       defaultPreview
     )
+    const [embedCodeView, setEmbedCodeView] = useState(false)
+    const [embedCode, setEmbedCode] = useState('')
     return (
       <>
         <div className={styles.reviewsConfigBody}>
@@ -999,7 +982,15 @@ export const Index: FC<ReviewsConfigProps> = ({
                 <div>
                   <p>{badge.title}</p>
                   <div>
-                    <Button type="primary">View Embed Code</Button>
+                    <Button
+                      type="primary"
+                      onClick={() => {
+                        setEmbedCodeView(true)
+                        setEmbedCode(badge.embedCode)
+                      }}
+                    >
+                      View Embed Code
+                    </Button>
                     {!isMobile ? (
                       <>
                         {badge.wordpressPlugin && (
@@ -1063,7 +1054,15 @@ export const Index: FC<ReviewsConfigProps> = ({
                 <div>
                   <p>{widget.title}</p>
                   <div>
-                    <Button type="primary">View Embed Code</Button>
+                    <Button
+                      type="primary"
+                      onClick={() => {
+                        setEmbedCodeView(true)
+                        setEmbedCode(widget.embedCode)
+                      }}
+                    >
+                      View Embed Code
+                    </Button>
                     {!isMobile ? (
                       <>
                         {widget.wordpressPlugin && (
@@ -1132,6 +1131,24 @@ export const Index: FC<ReviewsConfigProps> = ({
           >
             <ReviewSlider {...currentReviews} />
           </BasicModal>
+        )}
+        {embedCodeView && (
+          <CopyEmbedCodeModal
+            visible={embedCodeView}
+            code={embedCode}
+            title="Copy embed code"
+            subTitle="Paste this snippet into your webbsite’s source code"
+            modalWidth={600}
+            onClose={() => {
+              setEmbedCodeView(false)
+            }}
+            onDownloadImg={() => {
+              return
+            }}
+            onEmailInput={() => {
+              return
+            }}
+          />
         )}
       </>
     )

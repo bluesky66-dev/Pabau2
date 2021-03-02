@@ -168,9 +168,8 @@ export const Table: FC<TableType> = ({
               col.dataIndex === 'is_active' ||
               col.dataIndex === 'integration')
           ) {
-            console.log(col.dataIndex)
             col.render = renderActiveButton
-          } else {
+          } else if (!col.render) {
             col.render = renderTableSource
           }
           return col
@@ -181,7 +180,6 @@ export const Table: FC<TableType> = ({
       ? [{ ...dragColumn }, ...(props.columns || [])]
       : props.columns
   }
-
   return !dataSource?.length && !props.loading && !searchTerm ? (
     <div className={styles.noDataTableBox}>
       <div className={styles.noDataTextStyle}>

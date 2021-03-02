@@ -15,6 +15,7 @@ interface P {
   createPage?: boolean
   notificationBanner?: React.ReactNode
   createPageOnClick?(): void
+  addFilter?: boolean
   needTranslation?: boolean
   editPage?: boolean
   editPageRouteLink?: string

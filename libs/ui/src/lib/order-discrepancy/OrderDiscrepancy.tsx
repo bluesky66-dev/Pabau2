@@ -3,7 +3,7 @@ import styles from './OrderDiscrepancy.module.less'
 
 /* eslint-disable-next-line */
 export interface OrderDiscrepancyProps {
-  word: number
+  word: 0 | 1
   number: number
 }
 
