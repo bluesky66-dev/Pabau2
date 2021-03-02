@@ -21,7 +21,7 @@ const AddButton: FC<P> = ({ schema, onClick }) => {
             // setSpecialBoolean((e) => !e)
           }}
         >
-          {schema.fields.is_active.full}
+          {schema?.fields?.is_active?.full}
         </Checkbox>
         <Button
           className={styles.createSourceBtn}
@@ -29,7 +29,7 @@ const AddButton: FC<P> = ({ schema, onClick }) => {
           disabled={true}
           onClick={() => onClick?.()}
         >
-          {schema.createButtonLabel}
+          {schema?.createButtonLabel}
         </Button>
       </div>
     </>
