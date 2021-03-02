@@ -53,20 +53,12 @@ const schema: Schema = {
   },
 }
 export const LIST_QUERY = gql`
-  query Labs(
-    $isActive: Boolean = true
-    $offset: Int
-    $limit: Int
-    $searchTerm: String = ""
-  ) {
+  query Labs($isActive: Boolean = true, $offset: Int, $limit: Int) {
     Labs(
       offset: $offset
       limit: $limit
       order_by: { order: desc }
-      where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-      }
+      where: { is_active: { _eq: $isActive } }
     ) {
       __typename
       id
@@ -78,13 +70,8 @@ export const LIST_QUERY = gql`
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query Labs_aggregate($isActive: Boolean = true, $searchTerm: String = "") {
-    Labs_aggregate(
-      where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-      }
-    ) {
+  query Labs_aggregate($isActive: Boolean = true) {
+    Labs_aggregate(where: { is_active: { _eq: $isActive } }) {
       aggregate {
         count
       }
