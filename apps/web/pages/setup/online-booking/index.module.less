@@ -705,3 +705,199 @@
     }
   }
 }
+
+.promoteWidgetTab {
+  width: 100%;
+  padding: 24px;
+}
+
+.promoteWidgetTabItem {
+  margin-bottom: 20px;
+  :global {
+    .ant-select {
+      width: 100%;
+    }
+    .ant-form-item {
+      margin: 0;
+    }
+    .ant-form-item-label {
+      padding-bottom: 2px;
+      label {
+        font-family: var(--font-family);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 22px;
+        color: var(--light-grey-color); 
+      }
+    }
+  }
+}
+
+.promoteWidgetConfig {
+  width: 100%;
+}
+
+.pomoteWidgetSizeSetting {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 16px;
+  margin-bottom: 20px;
+}
+
+.promoteWidgetConfigOps {
+  margin-top: 20px;
+  display: flex;
+  > button {
+    margin-right: 1rem;
+    > div {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.promoteWidgetTabAdvanced {
+  width: 100%;
+  :global {
+    .ant-collapse {
+      &-content-box {
+        padding: 0 !important;
+      }
+      &-header {
+        padding-left: 22px !important;
+        padding-top: 0 !important;
+        color: var(--light-grey-color) !important;
+      }
+      &-arrow {
+        left: 0 !important;
+        padding: 0 !important;
+        transform: rotateX(-180deg) !important;
+        color: var(--light-grey-color) !important;
+      }
+    }
+  }
+}
+
+.advancedTitle {
+  font-family: var(--font-family);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--grey-text-color);
+  margin: 0;
+  margin-bottom: 4px;
+}
+
+.advancedSubTitle {
+  font-family: var(--font-family);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  font-style: normal;
+  color: var(--light-grey-color);
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+.promoteFacebookAppTab {
+  width: 100%;
+}
+
+.facebookAppLearnMore {
+  width: 100%;
+  padding: 20px 24px;
+  > p {
+    font-family: var(--font-family);
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    &:nth-child(1) {
+      color: var(--grey-text-color);
+    }
+    &:nth-child(2) {
+      color: var(--light-grey-color);
+      margin-bottom: 1rem;
+    }
+    &:nth-child(3) {
+      cursor: pointer;
+      color: var(--primary-color);
+    }
+  }
+}
+
+.socialItem {
+  width: 100%;
+  height: 56px;
+  border-top: 1px solid var(--border-color-base);
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  grid-column-gap: 8px;
+  > div {
+    &:nth-child(1) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--grey-text-color);
+      font-size: 21px;
+    }
+    &:nth-child(2) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      > span {
+        font-family: var(--font-family);
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 400;
+        &:nth-child(1) {
+          color: var(--grey-text-color);
+        }
+        &:nth-child(2) {
+          color: var(--light-grey-color);
+        }
+      }
+    }
+  }
+}
+
+.onlineBookingCustomHeader {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  background-color: white;
+  border-bottom: 1px solid var(--border-color-base);
+  >div {
+    &:nth-child(1) {
+      display: flex;
+      align-items: center;
+      font-family: var(--font-family);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 20px;
+      color: var(--grey-text-color);
+    }
+  }
+}
+
+.onlineBookingOps {
+  display: flex;
+  align-items: center;
+}
+
+.onlineBookingEnabled {
+  display: flex;
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--light-grey-color);
+  margin-right: 2rem;
+}

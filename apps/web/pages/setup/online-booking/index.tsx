@@ -28,6 +28,8 @@ import {
   CheckCircleFilled,
   CheckOutlined,
   CopyOutlined,
+  FacebookOutlined,
+  InstagramOutlined,
 } from '@ant-design/icons'
 import Layout from '../../../components/Layout/Layout'
 import CommonHeader from '../common-header'
@@ -35,6 +37,9 @@ import onlineBookingBg from '../../../assets/images/online-booking-bg.png'
 import onlineBookingPreviewEmpty from '../../../assets/images/online-booking-preview-empty.png'
 import noPaymentGateway from '../../../assets/images/no-payment-gateway.png'
 import { ReactComponent as Palette } from '../../../assets/images/palette.svg'
+import { ReactComponent as Code } from '../../../assets/images/code.svg'
+import { ReactComponent as Wix } from '../../../assets/images/Wix.svg'
+import { ReactComponent as Wordpress } from '../../../assets/images/Wordpress.svg'
 import {
   defaultBuilderData,
   paymentMethodItems,
@@ -673,6 +678,146 @@ export const Index: FC<OnlineBookingProps> = ({
         </>
       )
     }
+    const WidgetTab = () => {
+      return (
+        <>
+          <div className={styles.promoteTabHeader}>
+            <h2>Widget</h2>
+            <p>Some description here</p>
+          </div>
+          <div className={styles.promoteWidgetTab}>
+            <div className={styles.promoteWidgetTabItem}>
+              <div className={styles.promoteWidgetConfig}>
+                <div className={styles.pomoteWidgetSizeSetting}>
+                  <div>
+                    <Input label="Width" placeHolderText="px" />
+                  </div>
+                  <div>
+                    <Input label="Height" placeHolderText="px" />
+                  </div>
+                </div>
+                <div
+                  style={{
+                    width: '100%',
+                    height: '200px',
+                    backgroundColor: '#f7f7f9',
+                  }}
+                />
+                <div className={styles.promoteWidgetConfigOps}>
+                  <Button type="primary">
+                    <div>
+                      <Code style={{ marginRight: '4px' }} /> Copy code
+                    </div>
+                  </Button>
+                  <Button>
+                    <div>
+                      <Wix style={{ marginRight: '4px' }} /> Wix
+                    </div>
+                  </Button>
+                  <Button>
+                    <div>
+                      <Wordpress style={{ marginRight: '4px' }} /> Wordpress
+                    </div>
+                  </Button>
+                </div>
+              </div>
+            </div>
+            <div className={styles.promoteWidgetTabAdvanced}>
+              <Collapse ghost>
+                <Panel header="Advanced settings" key="advanced-settings">
+                  <p className={styles.advancedTitle}>
+                    Simple URL Builder for Online Bookings
+                  </p>
+                  <p className={styles.advacnedSubTitle}>
+                    Can be used for iframes & sharing hyperlinks
+                  </p>
+                  <div className={styles.promoteWidgetTabItem}>
+                    <SimpleDropdown
+                      label="Pre select location"
+                      dropdownItems={['None']}
+                      onSelected={(val) => val}
+                    />
+                  </div>
+                  <div className={styles.promoteWidgetTabItem}>
+                    <SimpleDropdown
+                      label="Pre select group category"
+                      dropdownItems={['None']}
+                      onSelected={(val) => val}
+                    />
+                  </div>
+                  <div className={styles.promoteWidgetTabItem}>
+                    <SimpleDropdown
+                      label="Pre select category"
+                      dropdownItems={['None']}
+                      onSelected={(val) => val}
+                    />
+                  </div>
+                  <div className={styles.promoteWidgetTabItem}>
+                    <SimpleDropdown
+                      label="Pre select service"
+                      dropdownItems={['None']}
+                      onSelected={(val) => val}
+                      tooltip="lorem ipsum"
+                    />
+                  </div>
+                  <div
+                    className={styles.promoteWidgetTabItem}
+                    style={{ margin: 0 }}
+                  >
+                    <SimpleDropdown
+                      label="Pre select staff"
+                      dropdownItems={['None']}
+                      onSelected={(val) => val}
+                    />
+                  </div>
+                </Panel>
+              </Collapse>
+            </div>
+          </div>
+        </>
+      )
+    }
+    const FacebookAppTab = () => {
+      return (
+        <>
+          <div className={styles.promoteTabHeader}>
+            <h2>Facebook App</h2>
+            <p>Some description here</p>
+          </div>
+          <div className={styles.promoteFacebookAppTab}>
+            <div className={styles.facebookAppLearnMore}>
+              <p>
+                Let clients book straight from your social pages with Book Now
+                buttons
+              </p>
+              <p>
+                To set up and edit the Book Now buttons, follow the steps for
+                each integration below
+              </p>
+              <p>Learn more</p>
+            </div>
+          </div>
+          <div className={styles.socialItem}>
+            <div>
+              <InstagramOutlined />
+            </div>
+            <div>
+              <span>Instagram</span>
+              <span>Coming soon</span>
+            </div>
+          </div>
+          <div className={styles.socialItem}>
+            <div>
+              <FacebookOutlined />
+            </div>
+            <div>
+              <span>Facebook</span>
+              <span>Coming soon</span>
+            </div>
+          </div>
+        </>
+      )
+    }
     return (
       <div className={styles.onlineBookingPromote}>
         <div className={styles.onlineBookingPromotePanel}>
@@ -684,8 +829,8 @@ export const Index: FC<OnlineBookingProps> = ({
           >
             <ButtonTab />
             <BookingPortalTab />
-            <div>Widget</div>
-            <div>Facebook App</div>
+            <WidgetTab />
+            <FacebookAppTab />
           </TabMenu>
         </div>
       </div>
@@ -696,27 +841,68 @@ export const Index: FC<OnlineBookingProps> = ({
       <CommonHeader />
       <Layout>
         <div className={styles.onlineBookingContainer}>
-          <div className={styles.onlineBookingHeader}>
-            {!isMobile && (
-              <>
-                <Breadcrumb
-                  breadcrumbItems={[
-                    { breadcrumbName: 'Setup', path: '/setup' },
-                    {
-                      breadcrumbName: 'Online Booking',
-                      path: '/setup/online-booking',
-                    },
-                  ]}
+          {!getStarted && (
+            <div className={styles.onlineBookingHeader}>
+              {!isMobile && (
+                <>
+                  <Breadcrumb
+                    breadcrumbItems={[
+                      { breadcrumbName: 'Setup', path: '/setup' },
+                      {
+                        breadcrumbName: 'Online Booking',
+                        path: '/setup/online-booking',
+                      },
+                    ]}
+                  />
+                  <Title>Online Booking</Title>
+                </>
+              )}
+              {isMobile && (
+                <Title>
+                  <LeftOutlined /> Online Booking
+                </Title>
+              )}
+            </div>
+          )}
+          {getStarted && (
+            <div className={styles.onlineBookingCustomHeader}>
+              <div>
+                <LeftOutlined
+                  style={{
+                    color: 'var(--light-grey-color)',
+                    marginRight: '24px',
+                    fontSize: '24px',
+                  }}
                 />
-                <Title>Online Booking</Title>
-              </>
-            )}
-            {isMobile && (
-              <Title>
-                <LeftOutlined /> Online Booking
-              </Title>
-            )}
-          </div>
+                Online Booking
+              </div>
+              <div className={styles.onlineBookingOps}>
+                <div className={styles.onlineBookingEnabled}>
+                  Enabled{' '}
+                  <Switch
+                    size="small"
+                    defaultChecked={true}
+                    style={{ marginLeft: '12px' }}
+                  />
+                </div>
+                <Button
+                  style={{
+                    marginRight: '1rem',
+                  }}
+                >
+                  Reset to defaults
+                </Button>
+                <Button
+                  style={{
+                    marginRight: '1rem',
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button type="primary">Save changes</Button>
+              </div>
+            </div>
+          )}
           <div className={styles.onlineBookingBody}>
             {!getStarted && <GetStarted />}
             {getStarted && (
