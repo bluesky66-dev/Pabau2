@@ -9,7 +9,7 @@ export class User {
   is_hcp: number;
   locale: string;
   address: string;
-  company: number;
+  company_id: number;
   created: Date;
   deleted: boolean | number;
   can_rota: boolean | number;

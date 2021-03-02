@@ -1,13 +1,8 @@
-import React, { FC, useEffect, useState } from 'react'
-import {
-  Layout as PabauLayout,
-  LayoutProps,
-  Notification,
-  NotificationType,
-} from '@pabau/ui'
+import React, { FC } from 'react'
+import { Layout as PabauLayout, LayoutProps } from '@pabau/ui'
 import Search from '../Search'
 
-const onMessageType = (e) => {
+const onMessageType = () => {
   //add mutation for send message textbox
 }
 

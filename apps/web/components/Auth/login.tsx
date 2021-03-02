@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import styles from '../../pages/login.module.less'
-import { Button, Notification, NotificationType } from '@pabau/ui'
+import { Button } from '@pabau/ui'
 import * as Yup from 'yup'
 import { Form, Input, Checkbox, SubmitButton } from 'formik-antd'
 import { Formik } from 'formik'
@@ -8,7 +8,6 @@ import { EyeInvisibleOutlined, LinkedinFilled } from '@ant-design/icons'
 import { ReactComponent as GoogleIcon } from '../../assets/images/google.svg'
 import { ReactComponent as SSOIcon } from '../../assets/images/sso.svg'
 import { gql, useMutation } from '@apollo/client'
-import { router } from 'next/client'
 import { useRouter } from 'next/router'
 import { useCookies } from 'react-cookie'
 
@@ -28,10 +27,8 @@ const LOGIN_MUTATION = gql`
 `
 const LoginMain: FC<LoginProps> = ({ handlePageShow }) => {
   const router = useRouter()
-  const [
-    login,
-    { loading: mutationLoading, error: mutationError },
-  ] = useMutation(LOGIN_MUTATION)
+  const [login] = useMutation(LOGIN_MUTATION)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cookie, setCookie] = useCookies(['user'])
 
   const loginHandler = async (loginProps: LoginFormProps): Promise<boolean> => {

@@ -14,15 +14,15 @@ model TwoFactorHistory {
   user_id      Int
   request_date DateTime
   is_confirmed Int
-  company Company @relation(fields: [company_id], references: [id])
+  company      Company  @relation(fields: [company_id], references: [id])
 
   @@map("2fa_history")
 }
 
 model ThirdPartyAcces {
-  id           Int    @id @default(autoincrement())
+  id           Int     @id @default(autoincrement())
   occupier     Int
-  company_id    Int @map("occupier")
+  company_id   Int     @map("occupier")
   company_name String
   email        String
   passcode     Int
@@ -30,33 +30,33 @@ model ThirdPartyAcces {
   last_name    String
   logo         String
   access_id    Int
-  company Company @relation(fields: [company_id], references: [id])
+  company      Company @relation(fields: [company_id], references: [id])
 
 
   @@map("3rd_party_access")
 }
 
 model AcceptEmailToken {
-  id         Int    @id @default(autoincrement())
+  id         Int     @id @default(autoincrement())
   company_id Int
   email      String
   token      Int
-  company Company @relation(fields: [company_id], references: [id])
+  company    Company @relation(fields: [company_id], references: [id])
 
   @@map("accept_email_token")
 }
 
 model AccountBalance {
-  id                   Int   @id @default(autoincrement())
-  contact_id           Int?  @unique
+  id                   Int     @id @default(autoincrement())
+  contact_id           Int?    @unique
   company_id           Int
   insurance_company_id Int
   balance              Float
   imported             Int
-  company Company @relation(fields: [company_id], references: [id])
+  company              Company @relation(fields: [company_id], references: [id])
 
-  @@map("account_balance")
   @@index([company_id], name: "company_id")
+  @@map("account_balance")
 }
 
 model AccountBalanceLog {
@@ -73,10 +73,10 @@ model AccountBalanceLog {
   imported             Int
   ref_sale_id          Int
 
-  @@map("account_balance_log")
 
   @@index([company_id], name: "comnpany_id")
   @@index([company_id, date_time], name: "company_time")
+  @@map("account_balance_log")
 }
 
 model AccountManager {
@@ -110,8 +110,8 @@ model AccountManager {
   con_per_3           String
   con_num_3           String
 
-  @@map("account_manager")
 
+  @@map("account_manager")
 }
 
 model AcLog {
@@ -131,7 +131,6 @@ model AcLog {
   row_data   String?
 
 
-  @@map("ac_logs")
   @@index([action_id], name: "action")
   @@index([humanize], name: "humanize")
   @@index([occupier], name: "occupier")
@@ -139,6 +138,7 @@ model AcLog {
   @@index([row_id], name: "row_id")
   @@index([url_id, action_id], name: "url_id")
   @@index([user_id], name: "user_id")
+  @@map("ac_logs")
 }
 
 model AcLogAction {
@@ -151,11 +151,11 @@ model AcLogAction {
   row_aff       Int
   row_id        Int
 
-  @@map("ac_log_actions")
   @@index([action_name], name: "action_name")
   @@index([action_status], name: "action_status")
   @@index([command], name: "command")
   @@index([table_aff], name: "table_aff")
+  @@map("ac_log_actions")
 }
 
 model AcLogUrl {
@@ -164,27 +164,28 @@ model AcLogUrl {
   file    String
   referer String
 
-  @@map("ac_log_urls")
   @@index([file], name: "file")
   @@index([referer], name: "referer")
   @@index([url], name: "url")
+  @@map("ac_log_urls")
 }
 
 model Company {
-  id             Int      @id @default(autoincrement())
+  id             Int                  @id @default(autoincrement())
   user           String
   digit8         Int
   admin          Int
   creation_date  DateTime
   image          String
-  slug           String?  @unique
+  slug           String?              @unique
   remote_url     String?
   remote_connect String?
   cron_enabled   Boolean?
-  details CompanyDetails?
-  subscription CompanySubscription?
+  details        CompanyDetails?
+  subscription   CompanySubscription?
 
   @@map("admin")
+
 }
 
 model AdvertCampaign {
@@ -256,9 +257,9 @@ model AppPermission {
   company Int
   appid   String
 
-  @@map("app_permissions")
   @@index([appid, company], name: "app_company")
   @@index([company], name: "company")
+  @@map("app_permissions")
 }
 
 model AppSubscription {
@@ -268,8 +269,8 @@ model AppSubscription {
   Description String
   price       Float
 
-  @@map("app_subscriptions")
   @@index([key_value], name: "key_value")
+  @@map("app_subscriptions")
 }
 
 model AppSubscriptionsCompanyPrice {
@@ -278,8 +279,8 @@ model AppSubscriptionsCompanyPrice {
   app_key_value String
   price         Float
 
-  @@map("app_subscriptions_company_prices")
   @@index([app_key_value], name: "app_key_value")
+  @@map("app_subscriptions_company_prices")
 }
 
 model AttachmentHelperLite {
@@ -288,6 +289,7 @@ model AttachmentHelperLite {
   f          String
   x          String
   type       Int
+
   @@map("attachment_helper_lite")
 }
 
@@ -319,15 +321,15 @@ model AtConcern {
 
 // The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 // model at_concern_choices {
-  // company_id Int
-  // concern_id Int
+// company_id Int
+// concern_id Int
 // }
 
 // The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 // model at_concern_relations {
-  // company_id Int
-  // concern_id Int
-  // product_id Int
+// company_id Int
+// concern_id Int
+// product_id Int
 // }
 
 model AtQuestion {
@@ -354,8 +356,8 @@ model AtQuestionsRelation {
   answer_id  Int
   product_id Int
 
-  @@map("at_question_relations")
   @@id([company_id, answer_id, product_id])
+  @@map("at_question_relations")
 }
 
 model AtQuizTake {
@@ -369,8 +371,8 @@ model AtQuizTake {
   answers2   String
   products   String
 
-  @@map("at_quiz_takes")
 
+  @@map("at_quiz_takes")
 }
 
 model AtSetting {
@@ -390,8 +392,8 @@ model AtTreatment {
   image       String
   description String
 
-  @@map("at_treatments")
 
+  @@map("at_treatments")
 }
 
 model AutomationAction {
@@ -402,8 +404,8 @@ model AutomationAction {
   action_data String
   order       Int
 
-  @@map("automation_actions")
   @@index([company], name: "company")
+  @@map("automation_actions")
 }
 
 model AutomationDelay {
@@ -416,10 +418,10 @@ model AutomationDelay {
   date_queued    DateTime
   appointment_id Int?
 
-  @@map("automation_delay")
   @@index([company], name: "company")
   @@index([date_queued], name: "date_queued")
   @@index([delay], name: "delay")
+  @@map("automation_delay")
 }
 
 model AutomationFolder {
@@ -454,11 +456,11 @@ model AutomationRule {
   needs_config Int
   folder_id    Int       @default(1)
 
-  @@map("automation_rules")
   @@index([active], name: "active")
   @@index([company], name: "company")
   @@index([date_end], name: "date_end")
   @@index([date_start], name: "date_start")
+  @@map("automation_rules")
 }
 
 model AutomationTrigger {
@@ -471,10 +473,10 @@ model AutomationTrigger {
   order        Int
 
 
-  @@map("automation_triggers")
   @@index([code], name: "code")
   @@index([company], name: "company")
   @@index([rule_id], name: "rule_id")
+  @@map("automation_triggers")
 }
 
 model AvilableDatesLog {
@@ -511,10 +513,10 @@ model Batch {
   creation_date DateTime
   expiry_date   DateTime?
 
-  @@map("batches")
   @@index([batch_no], name: "batch_no")
   @@index([company_id], name: "company_id")
   @@index([order_id], name: "order_id")
+  @@map("batches")
 }
 
 model BatchItem {
@@ -543,9 +545,9 @@ model BlockReason {
   type         Int     @default(0)
   custom_id    Int
 
-  @@map("block_reason")
   @@index([is_active], name: "is_active")
   @@index([occupier], name: "occupier")
+  @@map("block_reason")
 }
 
 model BnfDrug {
@@ -686,10 +688,10 @@ model BookingSetting {
   modified_date                     DateTime
   conference_reminder_id            Int?
 
-  @@map("bookings_settings")
   @@index([email_id], name: "email_id")
   @@index([email_reminder_id], name: "email_reminder_id")
   @@index([occupier], name: "occupier")
+  @@map("bookings_settings")
 }
 
 model BookingMaster {
@@ -707,9 +709,9 @@ model BookingMaster {
   payed_by       String
   waiting        Int
 
-  @@map("booking_master")
   @@index([class_id], name: "class_id")
   @@index([user_id], name: "user_id")
+  @@map("booking_master")
 }
 
 model BookingStatus {
@@ -725,8 +727,8 @@ model BookingStatus {
   ord         Float
   track_time  Boolean                     @default(false)
 
-  @@map("booking_statuses")
   @@unique([value, company_id], name: "value")
+  @@map("booking_statuses")
 }
 
 model BookingStatusChange {
@@ -738,9 +740,9 @@ model BookingStatusChange {
   company_id Int
   user_id    Int
 
-  @@map("booking_status_changes")
   @@index([booking_id], name: "booking_id")
   @@index([status], name: "status")
+  @@map("booking_status_changes")
 }
 
 model BookitProGeneral {
@@ -866,9 +868,9 @@ model CalendarView {
   favorite               Int    @default(0)
   favorite_id            Int    @default(-1)
 
-  @@map("calendar_views")
   @@index([occupier], name: "occupier")
   @@index([user_id], name: "user_id")
+  @@map("calendar_views")
 }
 
 model CalRangeRequest {
@@ -913,19 +915,19 @@ model CancellationPolicy {
 }
 
 model MarketingSource {
-  id          Int    @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   source_name String
-  company_id    Int @map("occupier")
+  company_id  Int     @map("occupier")
   custom_id   Int
   public      Int
   imported    Int
-  company Company @relation(fields: [company_id], references: [id])
+  company     Company @relation(fields: [company_id], references: [id])
 
-  @@map("marketing_sources")
+
   @@index([company_id], name: "company_id")
   @@index([public], name: "public")
   @@index([source_name], name: "source_name")
-
+  @@map("marketing_sources")
 }
 
 model MediaLlibraryAttachments {
@@ -940,7 +942,6 @@ model MediaLlibraryAttachments {
   statement_id            Int      @default(0)
   creation_date           DateTime
 
-  @@map("media_library_attachments")
 
   @@index([communication_id], name: "communication_id")
   @@index([company_id], name: "company_id")
@@ -948,8 +949,8 @@ model MediaLlibraryAttachments {
   @@index([contact_id], name: "contact_id")
   @@index([medical_form_contact_id], name: "medical_form_contact_id")
   @@index([sales_id], name: "sales_id")
+  @@map("media_library_attachments")
 }
-
 
 model CancelReason {
   id                        Int      @id @default(autoincrement())
@@ -960,9 +961,9 @@ model CancelReason {
   created_at                DateTime
   modified_at               DateTime
 
-  @@map("cancel_reason")
 
   @@index([occupier], name: "occupier")
+  @@map("cancel_reason")
 }
 
 model candidate {
@@ -996,8 +997,8 @@ model CardTypes {
   mastercard_credit_charge Float
   enable_reference         Int
 
-   @@map("card_types")
   @@index([company_id], name: "company_id")
+  @@map("card_types")
 }
 
 model CashupReport {
@@ -1023,8 +1024,8 @@ model CashupReport {
   cashup_date            DateTime
   finance_id             Int
 
-  @@map("cashup_report")
   @@index([cashup_date], name: "cashup_date")
+  @@map("cashup_report")
 }
 
 model CashupReportCustom {
@@ -1038,8 +1039,8 @@ model CashupReportCustom {
   custom_difference Float
   card_type         String
 
-  @@map("cashup_report_custom")
 
+  @@map("cashup_report_custom")
 }
 
 model CheckinAppt {
@@ -1056,10 +1057,10 @@ model CheckinAverages {
   product_id       Int
   avg_time_seconds Int
 
-  @@map("checkin_averages")
   @@index([product_id], name: "product_id")
   @@index([uid], name: "uid")
   @@index([uid, product_id], name: "uid_product")
+  @@map("checkin_averages")
 }
 
 model CheckinAveragesIdle {
@@ -1081,8 +1082,8 @@ model CheckinProduct {
   inv_product_id Int       @default(0)
 
 
-  @@map("checkin_products")
   @@index([queue_id], name: "queue_id")
+  @@map("checkin_products")
 }
 
 model CheckinQueue {
@@ -1107,13 +1108,13 @@ model CheckinQueue {
   date_binned   DateTime?
 
 
-  @@map("checkin_queue")
   @@index([accepted], name: "accepted")
   @@index([date_accepted], name: "date_accepted")
   @@index([date_end], name: "date_end")
   @@index([date_start], name: "date_start")
   @@index([finalise], name: "finalise")
   @@index([uid], name: "uid")
+  @@map("checkin_queue")
 }
 
 model ClasstypeMaster {
@@ -1223,7 +1224,7 @@ model CompanyDetails {
   db_lock                 Int
   stock_manager           String
   company_notes           String
-  timezone_id             Int                     @default(511)
+  timezone_id             Int                      @default(511)
   converted_value         Float
   enable_2fa              Int
   enable_ad               Int                      @default(0)
@@ -1275,19 +1276,19 @@ model CompanyDetails {
   lock_export             Int
   language                String
   completed_setup         Boolean                  @default(false)
-  timezone Timezone @relation(fields: [timezone_id], references: [timezone_id])
-  company Company @relation(fields: [company_id], references: [id])
+  timezone                Timezone                 @relation(fields: [timezone_id], references: [timezone_id])
+  company                 Company                  @relation(fields: [company_id], references: [id])
 
 
-  @@map("company_details")
   @@index([company_id], name: "company_id")
   @@index([timezone_id], name: "timezone_id")
+  @@map("company_details")
 }
 
 model CompanySubscription {
   license_id               Int       @id @default(autoincrement())
   company_id               Int
-  company Company @relation(fields: [company_id], references: [id])
+  company                  Company   @relation(fields: [company_id], references: [id])
   license_type             Int
   license_expiry           DateTime
   active                   Int
@@ -1361,20 +1362,23 @@ model CompanySubscription {
   onboarder_id             Int?
   is_referral              Int?      @default(0)
 
-  @@map("company_subscription")
   @@index([company_id], name: "company_id")
   @@index([license_type], name: "lic_type")
+  @@map("company_subscription")
 }
-model Timezone {
-  timezone_id     Int               @id @default(autoincrement())
-  label           String
-  php_format      String
-  db_format       String
-  offset_seconds  Int
-  supported       Boolean
 
+model Timezone {
+  timezone_id    Int     @id @default(autoincrement())
+  label          String
+  php_format     String
+  db_format      String
+  offset_seconds Int
+  supported      Boolean
+
+  CompanyDetails CompanyDetails[]
   @@map("timezone")
 }
+
 model ClassProduct {
   id             Int       @id @default(autoincrement())
   code           String
@@ -1394,9 +1398,10 @@ model ClassProduct {
   modified_date  DateTime?
   product_desc   String
 
-  @@map("class_products")
 
+  @@map("class_products")
 }
+
 //
 model ClassSmsHistory {
   id       Int    @id @default(autoincrement())
@@ -1405,9 +1410,10 @@ model ClassSmsHistory {
   message  String
   datetime String
 
-  @@map("class_sms_history")
 
+  @@map("class_sms_history")
 }
+
 //
 model ClassTemplateSetting {
   id                                  Int       @id @default(autoincrement())
@@ -1422,6 +1428,7 @@ model ClassTemplateSetting {
 
   @@map("class_template_settings")
 }
+
 //
 model CleverpinSetting {
   id         Int    @id @default(autoincrement())
@@ -1430,6 +1437,7 @@ model CleverpinSetting {
 
   @@map("cleverpin_settings")
 }
+
 //
 model ClientFormSetting {
   id                  Int @id @default(autoincrement())
@@ -1444,6 +1452,7 @@ model ClientFormSetting {
 
   @@map("client_form_settings")
 }
+
 //
 model ClinicalSoftware {
   id         Int    @id @default(autoincrement())
@@ -1453,6 +1462,7 @@ model ClinicalSoftware {
 
   @@map("clinical_softwares")
 }
+
 //
 model ClockinBreak {
   break_time_id    Int @id @default(autoincrement())
@@ -1469,8 +1479,8 @@ model ClockinLongpoll {
   uid         Int
   occupier    Int
 
-  @@map("clockin_longpoll")
   @@index([occupier], name: "occupier")
+  @@map("clockin_longpoll")
 }
 
 model ClockinTimesheet {
@@ -1486,11 +1496,12 @@ model ClockinTimesheet {
   staff_name         String
   ip_address         String
 
-  @@map("clockin_timesheets")
   @@index([company_id], name: "company_id")
   @@index([staff_uid], name: "staff_uid")
   @@index([company_id, staff_uid], name: "uid_occupier")
+  @@map("clockin_timesheets")
 }
+
 model CmAccountNote {
   ID          Int                     @id @default(autoincrement())
   OwnerID     Int
@@ -1502,6 +1513,7 @@ model CmAccountNote {
 
   @@map("cm_account_notes")
 }
+
 model CmAppointmentsCustomImportHelper {
   id                    Int     @id @default(autoincrement())
   occupier              Int
@@ -1512,9 +1524,10 @@ model CmAppointmentsCustomImportHelper {
   added                 Int
   appointment_id        Int
 
-  @@map("cm_appointments_custom_import_helper")
   @@index([custom_appointment_id], name: "custom_appointment_id")
+  @@map("cm_appointments_custom_import_helper")
 }
+
 model CmAppointmentCustom {
   id                 Int    @id @default(autoincrement())
   appointment_id     Int
@@ -1523,12 +1536,13 @@ model CmAppointmentCustom {
   custom_field_value String
   imported           Int
 
-  @@map("cm_appointment_custom")
   @@index([appointment_id], name: "appointment_id")
   @@index([custom_field_id], name: "custom_field_id")
   @@index([custom_field_value], name: "custom_field_value")
   @@index([occupier], name: "occupier")
+  @@map("cm_appointment_custom")
 }
+
 model CmAuthorization {
   id             Int    @id @default(autoincrement())
   company_id     Int
@@ -1538,9 +1552,10 @@ model CmAuthorization {
   total_sessions Int
   diagnosis_code String
 
-  @@map("cm_authorization")
 
+  @@map("cm_authorization")
 }
+
 model CmBookingNote {
   ID            Int                     @id @default(autoincrement())
   OwnerID       Int
@@ -1552,6 +1567,7 @@ model CmBookingNote {
 
   @@map("cm_booking_notes")
 }
+
 model CmCase {
   id           Int     @id @default(autoincrement())
   case_number  String
@@ -1576,11 +1592,12 @@ model CmCase {
   comments     String?
   CreatedDate  Int?
   IpAddress    String?
-  company_id    Int @map("occupier")
-  company Company @relation(fields: [company_id], references: [id])
+  company_id   Int     @map("occupier")
+  company      Company @relation(fields: [company_id], references: [id])
 
   @@map("cm_cases")
 }
+
 model CmCaseNote {
   ID          Int                  @id @default(autoincrement())
   OwnerID     Int
@@ -1592,6 +1609,7 @@ model CmCaseNote {
 
   @@map("cm_case_notes")
 }
+
 model CmCaseReply {
   ID          Int      @id @default(autoincrement())
   OwnerID     Int
@@ -1600,10 +1618,11 @@ model CmCaseReply {
   CreatedDate DateTime
   IpAddress   Int
   CompanyID   Int
-  company Company @relation(fields: [CompanyID], references: [id])
+  company     Company  @relation(fields: [CompanyID], references: [id])
 
   @@map("cm_case_replies")
 }
+
 model CmCampaign {
   ID               Int      @id @default(autoincrement())
   OwnerID          String
@@ -1620,11 +1639,12 @@ model CmCampaign {
   Description      String
   CreatedDate      DateTime
   IpAddress        Int
-  company_id    Int @map("Occupier")
-  company Company @relation(fields: [company_id], references: [id])
+  company_id       Int      @map("Occupier")
+  company          Company  @relation(fields: [company_id], references: [id])
 
   @@map("cm_compaigns")
 }
+
 model CmCampaignNote {
   ID          Int                      @id @default(autoincrement())
   OwnerID     Int
@@ -1713,7 +1733,6 @@ model CmContact {
   contact_type             Int                         @default(0)
 
 
-  @@map("cm_contacts")
   @@index([CreatedDate], name: "CreatedDate")
   @@index([Email], name: "Email")
   @@index([Fname], name: "Fname")
@@ -1729,22 +1748,23 @@ model CmContact {
   @@index([customer_reference], name: "customer_reference")
   @@index([is_active], name: "is_active")
   @@index([OwnerID, Occupier], name: "owner_company")
+  @@map("cm_contacts")
 }
 
-model cm_contacts_alerts_import_helper {
-
-  id                Int    @id @default(autoincrement())
-  contact_custom_id Int
-  alert             String
-  date              String
-  custom_user_name  String
-  occupier          String
-  imported          Int
-  custom_user_id    Int
-  added             Int
-
-  @@index([contact_custom_id], name: "contact_custom_id")
-}
+//model cm_contacts_alerts_import_helper {
+//
+//  id                Int    @id @default(autoincrement())
+//  contact_custom_id Int
+//  alert             String
+//  date              String
+//  custom_user_name  String
+//  occupier          String
+//  imported          Int
+//  custom_user_id    Int
+//  added             Int
+//
+//  @@index([contact_custom_id], name: "contact_custom_id")
+//}
 
 //
 //model cm_contacts_backup_hb {
@@ -11559,15 +11579,15 @@ model cm_contacts_alerts_import_helper {
 //}
 //
 model User {
-  id                             Int                              @id @default(autoincrement())
+  id                             Int                          @id @default(autoincrement())
   username                       String?
   full_name                      String
   password                       String?
-  password_algor                 Int?                             @default(1)
+  password_algor                 Int?                         @default(1)
   salt                           String?
   created                        DateTime?
   last_login                     DateTime?
-  company                        Int
+  company_id                     Int                          @map("company")
   hash                           String
   email                          String
   admin                          Int
@@ -11599,72 +11619,74 @@ model User {
   last_password_reset            Int
   force_password                 Int
   limited_user                   Int
-  can_void                       Int                              @default(1)
-  can_refund                     Boolean                          @default(true)
-  can_report                     Int                              @default(1)
-  can_rota                       Int                              @default(1)
+  can_void                       Int                          @default(1)
+  can_refund                     Boolean                      @default(true)
+  can_report                     Int                          @default(1)
+  can_rota                       Int                          @default(1)
   staff_read_only                Int
   stock_read_only                Int
-  all_reports                    Int                              @default(1)
+  all_reports                    Int                          @default(1)
   performance_stats              Int
   disable_tutorial               Int
-  all_services                   Int                              @default(1)
-  delete_treatment               Int                              @default(0)
+  all_services                   Int                          @default(1)
+  delete_treatment               Int                          @default(0)
   admin_tasks                    Int
   admin_leads                    Int
   imported                       Int
   login_fail_count               Int
-  can_edit_booking_time          Int                              @default(1)
+  can_edit_booking_time          Int                          @default(1)
   user_color                     String
   disable_multiple_clinics       Int
-  is_hcp                         Int                              @default(0)
+  is_hcp                         Int                          @default(0)
   login_disabled                 Int
-  can_patient_appoint            Int                              @default(1)
-  can_patient_communicatons      Int                              @default(1)
-  can_patient_photos             Int                              @default(1)
-  can_patient_fiancials          Int                              @default(1)
-  can_patient_treatments         Int                              @default(1)
-  can_patient_docs               Int                              @default(1)
-  can_patient_packages           Int                              @default(1)
-  can_patient_prescription       Int                              @default(1)
-  can_patient_consents           Int                              @default(1)
-  can_patient_giftvoucher        Int                              @default(1)
-  can_patient_loyalty            Int                              @default(1)
-  can_patient_recall             Int                              @default(1)
-  can_patient_memberships        Int                              @default(1)
-  can_cancel_booking             Int                              @default(1)
+  can_patient_appoint            Int                          @default(1)
+  can_patient_communicatons      Int                          @default(1)
+  can_patient_photos             Int                          @default(1)
+  can_patient_fiancials          Int                          @default(1)
+  can_patient_treatments         Int                          @default(1)
+  can_patient_docs               Int                          @default(1)
+  can_patient_packages           Int                          @default(1)
+  can_patient_prescription       Int                          @default(1)
+  can_patient_consents           Int                          @default(1)
+  can_patient_giftvoucher        Int                          @default(1)
+  can_patient_loyalty            Int                          @default(1)
+  can_patient_recall             Int                          @default(1)
+  can_patient_memberships        Int                          @default(1)
+  can_cancel_booking             Int                          @default(1)
   notify_on_booking              Boolean
-  can_edit_communications        Boolean                          @default(true)
-  can_delete_communications      Boolean                          @default(true)
-  can_view_full_cal              Boolean                          @default(true)
-  permission_last_role           String                           @default("")
-  can_merge                      Boolean                          @default(true)
-  can_discount                   Int?                             @default(1)
-  can_discount_single            Boolean                          @default(true)
+  can_edit_communications        Boolean                      @default(true)
+  can_delete_communications      Boolean                      @default(true)
+  can_view_full_cal              Boolean                      @default(true)
+  permission_last_role           String                       @default("")
+  can_merge                      Boolean                      @default(true)
+  can_discount                   Int?                         @default(1)
+  can_discount_single            Boolean                      @default(true)
   restored                       Int
   google_auth_secret             String?
   default_contract_id            Int
-  can_see_personal               Int                              @default(1)
-  appear_on_rota                 Int                              @default(1)
-  can_patient_medical_history    Int                              @default(1)
-  can_lab_requests               Boolean                          @default(false)
+  can_see_personal               Int                          @default(1)
+  appear_on_rota                 Int                          @default(1)
+  can_patient_medical_history    Int                          @default(1)
+  can_lab_requests               Boolean                      @default(false)
   detailed_view                  Int
-  can_make_blockout              Int                              @default(1)
-  can_delete_blockout            Int                              @default(1)
-  can_move_blockout              Int                              @default(1)
+  can_make_blockout              Int                          @default(1)
+  can_delete_blockout            Int                          @default(1)
+  can_move_blockout              Int                          @default(1)
   main_contact                   Boolean
   user_security_questions_answer UserSecurityQuestionsAnser[]
+  company                        Company                      @relation(fields: [company_id], references: [id])
 
 
-  @@map("users")
   @@index([calendar_order], name: "calendar_order")
-  @@index([company], name: "company")
+  @@index([company_id], name: "company")
   @@index([deleted], name: "deleted")
   @@index([email], name: "email")
   @@index([full_name], name: "full_name")
   @@index([hash], name: "hash_index")
   @@index([username], name: "username")
+  @@map("users")
 }
+
 //
 //model users_hours {
 //  id         Int       @id @default(autoincrement())
@@ -11993,11 +12015,12 @@ model UserSecurityQuestionsAnser {
   question    String
   question_no Int
   answer      String
-  users       User  @relation(fields: [user_id], references: [id])
+  users       User   @relation(fields: [user_id], references: [id])
 
-  @@map("user_security_questions_answer")
   @@index([user_id], name: "user_id")
+  @@map("user_security_questions_answer")
 }
+
 //
 //model user_targets {
 //  id           Int      @id @default(autoincrement())
@@ -13072,19 +13095,19 @@ model UserSecurityQuestionsAnser {
 //}
 
 enum booking_master_payment_status {
-   is_false @map("0")
-   is_true @map("1")
+  is_false  @map("0")
+  is_true   @map("1")
 }
 
 enum booking_master_cancel_status {
-   is_false @map("0")
-   is_true @map("1")
+  is_false  @map("0")
+  is_true   @map("1")
 }
 
 enum booking_statuses_indicator {
   LINE
   ICON
-  EMPTY_ENUM_VALUE @map("")
+  EMPTY_ENUM_VALUE  @map("")
 }
 
 enum bookitpro_general_integration_method {
@@ -13094,8 +13117,8 @@ enum bookitpro_general_integration_method {
 }
 
 enum class_master_class_pay {
-   is_false @map("0")
-   is_true @map("1")
+  is_false  @map("0")
+  is_true   @map("1")
 }
 
 enum cm_account_notes_Status {
@@ -13188,8 +13211,8 @@ enum cm_lead_notes_Status {
 }
 
 enum cm_linkprw_video {
-   is_false @map("0")
-   is_true @map("1")
+  is_false  @map("0")
+  is_true   @map("1")
 }
 
 enum cm_potentials_Status {
@@ -13272,8 +13295,8 @@ enum cm_vouchers_every {
 }
 
 enum cm_wallposts_linkprw {
-   is_false @map("0")
-   is_true @map("1")
+  is_false  @map("0")
+  is_true   @map("1")
 }
 
 enum cm_wallposts_status {
@@ -13411,10 +13434,10 @@ enum groups_group_postable {
 enum healthcode_submittals_status {
   Pending
   Submitted
-  Submitted_ @map("Submitted*")
+  Submitted_        @map("Submitted*")
   Error
   Remitted
-  EMPTY_ENUM_VALUE @map("")
+  EMPTY_ENUM_VALUE  @map("")
 }
 
 enum insurer_contracts_contract_type {
@@ -13433,7 +13456,7 @@ enum isc_gender {
   Both
   Female
   Male
-  EMPTY_ENUM_VALUE @map("")
+  EMPTY_ENUM_VALUE  @map("")
 }
 
 enum loyalty_campaign_type {
@@ -13503,8 +13526,8 @@ enum train_course_difficulty {
 }
 
 enum train_course_dates_status {
-   is_false @map("0")
-   is_true @map("1")
+  is_false  @map("0")
+  is_true   @map("1")
 }
 
 enum treatment_plans_status {
@@ -13539,11 +13562,11 @@ enum user_default_views_appointments {
 }
 
 enum vaccine_schedule_source {
-  Patient_verbal_ @map("Patient(verbal)")
-  Patient_record_ @map("Patient(record)")
-  Web_submission_by_Patient_unverified_ @map("Web submission by Patient(unverified)")
-  Web_submission_by_Patient_verified_ @map("Web submission by Patient(verified)")
-  Other_source @map("Other source")
+  Patient_verbal_                        @map("Patient(verbal)")
+  Patient_record_                        @map("Patient(record)")
+  Web_submission_by_Patient_unverified_  @map("Web submission by Patient(unverified)")
+  Web_submission_by_Patient_verified_    @map("Web submission by Patient(verified)")
+  Other_source                           @map("Other source")
 }
 
 enum xero_integration_payments_status {

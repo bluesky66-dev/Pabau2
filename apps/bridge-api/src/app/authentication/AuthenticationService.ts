@@ -34,7 +34,7 @@ export class AuthenticationService {
   private async generateJWT(key: string): Promise<string>{
     return jwt.sign(<JwtPayloadDto> {
       'user': this.user[0].id,
-      'company': this.user[0].company,
+      'company': this.user[0].company_id,
       'username': this.user[0].username,
       'https://hasura.io/jwt/claims': {
         "x-hasura-allowed-roles": [
@@ -42,7 +42,7 @@ export class AuthenticationService {
         ],
         'x-hasura-default-role': 'public',
         'x-hasura-user-id': this.user[0].id,
-        'x-hasura-org-id': this.user[0].company,
+        'x-hasura-org-id': this.user[0].company_id,
         'x-hasura-james': 123
       }
     }, key)
