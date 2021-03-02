@@ -16,17 +16,17 @@ export const NewsletterDelivery: FC<NewsletterDeliveryProps> = ({ data }) => {
   return (
     <div className={styles.wrapper}>
       {data?.map((dat, index) => (
-        <div className={styles.tile} key={dat.key}>
+        <div className={styles.tile} key={dat?.key}>
           <input
             type="checkbox"
-            name={dat.title}
-            id={dat.title}
+            name={dat?.title}
+            id={dat?.title}
             {...(index + 1)}
           />
-          <label htmlFor={dat.title}>
-            <p>{dat.title}</p>
-            <img src={dat.img} alt="" />
-            <h2>{dat.value.toLocaleString('en')}</h2>
+          <label htmlFor={dat?.title}>
+            <p>{dat?.title}</p>
+            <img src={dat?.img} alt="" />
+            <h2>{dat?.value?.toLocaleString('en')}</h2>
           </label>
         </div>
       ))}
