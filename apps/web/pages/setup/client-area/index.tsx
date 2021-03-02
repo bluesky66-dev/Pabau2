@@ -26,7 +26,7 @@ import {
 } from '@ant-design/icons'
 import confetti from 'canvas-confetti'
 import Layout from '../../../components/Layout/Layout'
-import CommonHeader from '../CommonHeader'
+import CommonHeader from '../common-header'
 import {
   defaultBuilderSetting,
   defaultStepData,
