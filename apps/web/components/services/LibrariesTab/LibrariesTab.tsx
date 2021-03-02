@@ -1,4 +1,3 @@
-/* eslint-disable graphql/template-strings */
 import React, { FC, useState, useEffect } from 'react'
 import { gql } from '@apollo/client'
 import { Row, Col } from 'antd'
