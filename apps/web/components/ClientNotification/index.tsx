@@ -8,6 +8,7 @@ import BookedOntoClassPreview from '../../pages/client-notifications/class-booke
 import WaitListPreview from '../../pages/client-notifications/waitlist/WaitListPreview'
 import ClassSpotAvailablePreview from '../../pages/client-notifications/class-spot-available/ClassSpotAvailablePreview'
 import GiftVoucherPreview from '../../pages/client-notifications/gift-vouchers/GiftVouchersPreview'
+import RequestFeedbackPreview from '../../pages/client-notifications/request-feedback/RequsetFeedbackPreview'
 
 interface P {
   onSeletedTab: (number) => void
@@ -258,6 +259,16 @@ const Index: FC<P> = forwardRef(
             />
           ) : type === 'giftVoucher' ? (
             <GiftVoucherPreview
+              standardTapIndex={standardTapIndex}
+              backGroundColor={backGroundColor}
+              activeSocialIcons={activeSocialIcons}
+              selectLanguage={selectLanguage}
+              buttonColor={buttonColor}
+              informationMessage={informationMessage}
+              type={type}
+            />
+          ) : type === 'requestFeedback' ? (
+            <RequestFeedbackPreview
               standardTapIndex={standardTapIndex}
               backGroundColor={backGroundColor}
               activeSocialIcons={activeSocialIcons}

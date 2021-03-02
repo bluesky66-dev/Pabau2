@@ -56,7 +56,7 @@ const notificationData = {
         'Automatically sends to clients when an appointment is checked out',
       icon: <StarOutlined />,
       smartDelivery: true,
-      link: null,
+      link: '/client-notifications/request-feedback',
       disabled: true,
     },
     {

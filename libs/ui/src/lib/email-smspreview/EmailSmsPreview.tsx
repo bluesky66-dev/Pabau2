@@ -74,6 +74,13 @@ export interface ClassRescheduledProps {
   message?: string
 }
 
+export interface RequestFeedbackProps {
+  message?: string
+  message1?: string
+  closingText?: string
+  signatureBlock?: string
+}
+
 export interface ReminderForClassProps {
   message?: string
   contactNumber?: number

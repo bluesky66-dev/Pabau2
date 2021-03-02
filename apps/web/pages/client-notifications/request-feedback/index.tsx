@@ -12,7 +12,6 @@ const Index: FC = () => {
       console.log(email)
       Notification(NotificationType.success, 'Test message sent')
     }
-
     if (setIndexTab === 2) {
       Notification(NotificationType.success, 'Test SMS sent')
     }
@@ -28,32 +27,27 @@ const Index: FC = () => {
             breadcrumbName: 'Notification Messages',
           },
           {
-            path: 'client-notifications/noshow-appointment',
-            breadcrumbName: 'No Show Appointment',
+            path: 'client-notifications/request-feedback',
+            breadcrumbName: 'Request feedback',
           },
         ]}
-        title={'No Show Appointment'}
+        title={'Request feedback'}
         setIndexTab={setIndexTab}
         handleNotificationSubmit={showNotification}
       />
       <ClientNotification
         onSeletedTab={(value) => setSelectedTab(value)}
+        type={'requestFeedback'}
+        hideReminderTimeFrameTabPane={true}
         hideRequestConfirmationOption={true}
+        hideMedicalHistoryOption={true}
         hideAllowReschedulingOption={true}
         hideAllowCancellationOption={true}
         hideDisplayPolicyOption={true}
-        hideMedicalHistoryOption={true}
-        hideReminderTimeFrameTabPane={true}
         hideServiceOption={true}
         hideEmployeeNameOption={true}
         standardMessage={
-          'This notification automatically sends to clients the moment they missed an appointment'
-        }
-        type={'noShowAppointment'}
-        smsCustom={
-          'Hi Anna,' +
-          " We had you scheduled today at 11:30 but unfortunately you didn't show up." +
-          ' Please get back in touch on to reschedule.Your friends at The Clinic'
+          'This notification automatically sends to clients when an appointment is checked out'
         }
       />
     </Layout>

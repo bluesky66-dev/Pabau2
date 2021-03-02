@@ -17,6 +17,7 @@ import EmailSmsPreview, {
   ReferralProps,
   InvoicesProps,
   UpComingAppoinmentReminderProps,
+  RequestFeedbackProps,
 } from './EmailSmsPreview'
 import NoShowAppointmentComponent from './NoShowAppointment'
 import BookedOnClass from './BookedOntoClass'
@@ -762,9 +763,17 @@ const RequestFeedBackStory = ({
   greeting,
   message,
   footerIconGroup,
-}: PropsWithChildren<EmailSMSPreviewProps & ClassRescheduledProps>) => (
+  closingText,
+  signatureBlock,
+  message1,
+}: PropsWithChildren<EmailSMSPreviewProps & RequestFeedbackProps>) => (
   <EmailSmsPreview greeting={greeting} footerIconGroup={footerIconGroup}>
-    <RequestFeedBacks message={message} />
+    <RequestFeedBacks
+      message={message}
+      message1={message1}
+      closingText={closingText}
+      signatureBlock={signatureBlock}
+    />
   </EmailSmsPreview>
 )
 
@@ -773,7 +782,11 @@ RequestFeedBack.args = {
   greeting: 'Hi Anna,',
   message:
     'Thank you for visiting The Clinic, we hope you were happy with our services!',
+  message1:
+    'We would love to hear about your experience in the survey below. Your feedback helps us create a better experience for you and for all of our customers.',
   footerIconGroup: true,
+  closingText: 'Thank you for your support!',
+  signatureBlock: 'Your friends at The Clinic',
 }
 
 const NewAppoinmentsIsBookedStory = ({
