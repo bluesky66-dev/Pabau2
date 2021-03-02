@@ -197,6 +197,15 @@ const notificationData = {
       link: null,
       disabled: true,
     },
+    {
+      header: 'Outstanding Invoice',
+      description:
+        'The default email template you will send with a clients Outstanding invoice attached',
+      icon: <MoneyCollectOutlined />,
+      smartDelivery: false,
+      link: '/client-notifications/outstanding-invoice',
+      disabled: true,
+    },
   ],
   Other: [
     {

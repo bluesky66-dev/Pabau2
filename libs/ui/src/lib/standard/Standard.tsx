@@ -65,6 +65,7 @@ interface P {
   onSmsMessage: (string) => void
   onActiveSocialIcon: (value: string[]) => void
   disableCustomTab: boolean
+  enablePay?: boolean
 }
 
 const { TabPane } = Tabs
@@ -116,6 +117,7 @@ export const Standard: FC<P> = ({
   onSmsMessage,
   onActiveSocialIcon,
   disableCustomTab,
+  enablePay = false,
 }) => {
   function callback(key) {
     onStandardTabChanged(key)
@@ -401,6 +403,13 @@ export const Standard: FC<P> = ({
                       }
                     />
                   </Row>
+                  {enablePay && (
+                    <Row className={styles.enablePay}>
+                      <Tooltip title="Enable Pay">
+                        <Button>Enable Pay</Button>
+                      </Tooltip>
+                    </Row>
+                  )}
                 </Panel>
               )}
 

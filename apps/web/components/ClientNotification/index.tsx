@@ -7,6 +7,7 @@ import RescheduleAppointmentPreview from '../../pages/client-notifications/resch
 import BookedOntoClassPreview from '../../pages/client-notifications/class-booked/BookedOntoClassPreview'
 import WaitListPreview from '../../pages/client-notifications/waitlist/WaitListPreview'
 import InvoicePreview from '../../pages/client-notifications/invoice/InvoicePreview'
+import OutstandingInvoicePreview from '../../pages/client-notifications/outstanding-invoice/OutstandingInvoicePreview'
 
 interface P {
   onSeletedTab: (number) => void
@@ -27,6 +28,7 @@ interface P {
   hideEmployeeNameOption?: boolean
   type?: string
   smsCustom?: string
+  enablePay?: boolean
 }
 
 // eslint-disable-next-line react/display-name
@@ -50,6 +52,7 @@ const Index: FC<P> = forwardRef(
       isSmsComponent = true,
       displayRadioGroup = true,
       displayButtons = true,
+      enablePay = false,
     },
     ref
   ) => {
@@ -165,6 +168,7 @@ const Index: FC<P> = forwardRef(
               hideReminderTimeFrameTabPane={hideReminderTimeFrameTabPane}
               hideEmployeeNameOption={hideEmployeeNameOption}
               hideServiceOption={hideServiceOption}
+              enablePay={enablePay}
             />
           )
         }
@@ -208,6 +212,15 @@ const Index: FC<P> = forwardRef(
             />
           ) : type === 'invoice' ? (
             <InvoicePreview
+              informationMessage={informationMessage}
+              buttonColor={buttonColor}
+              selectLanguage={selectLanguage}
+              activeSocialIcons={activeSocialIcons}
+              backGroundColor={backGroundColor}
+              standardTapIndex={standardTapIndex}
+            />
+          ) : type === 'outstandingInvoice' ? (
+            <OutstandingInvoicePreview
               informationMessage={informationMessage}
               buttonColor={buttonColor}
               selectLanguage={selectLanguage}

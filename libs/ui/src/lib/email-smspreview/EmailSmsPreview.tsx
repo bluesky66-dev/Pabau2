@@ -10,6 +10,8 @@ import {
   TwitterOutlined,
   LinkedinOutlined,
 } from '@ant-design/icons'
+import OutstandingInvoicePreview
+  from "../../../../../apps/web/pages/client-notifications/outstanding-invoice/OutstandingInvoicePreview";
 
 export interface EmailSMSPreviewProps {
   greeting?: string
@@ -92,6 +94,9 @@ export interface InvoicesProps {
   footerText?: string
   message1?: string
   showInvoiceButton?: boolean
+  message2?: string
+  message3?: string
+  senderFirstName?: string
 }
 
 export interface LeadResponsesProps {

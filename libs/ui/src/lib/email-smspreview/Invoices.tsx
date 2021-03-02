@@ -7,7 +7,10 @@ import styles from './EmailSmsPreview.module.less'
 export const Invoices: FC<EmailSMSPreviewProps & InvoicesProps> = ({
   message,
   footerText,
-  message1,
+  message1 = 'Please find attached a detailed copy of your invoice to this email.',
+  message2,
+  message3,
+  senderFirstName,
   showInvoiceButton = false,
   buttonColor,
 }) => {
@@ -18,12 +21,26 @@ export const Invoices: FC<EmailSMSPreviewProps & InvoicesProps> = ({
           <span className={styles.message}>{message}</span>
         </Col>
       </Row>
-      <Row gutter={[0, 4]} className={styles.break}>
-        <Col>
-          {message1 ||
-            'Please find attached a detailed copy of your invoice to this email.'}
-        </Col>
-      </Row>
+      {message1 && (
+        <Row gutter={[0, 4]} className={styles.break}>
+          <Col>{message1}</Col>
+        </Row>
+      )}
+      {message2 && (
+        <Row gutter={[0, 4]} className={styles.break}>
+          <Col>{message2}</Col>
+        </Row>
+      )}
+      {message3 && (
+        <Row gutter={[0, 4]} className={styles.break}>
+          <Col>{message3}</Col>
+        </Row>
+      )}
+      {senderFirstName && (
+        <Row gutter={[0, 4]} className={styles.break}>
+          <Col>{senderFirstName}</Col>
+        </Row>
+      )}
       {showInvoiceButton && (
         <Row gutter={[0, 4]} className={styles.invoiceButton}>
           <Col>
