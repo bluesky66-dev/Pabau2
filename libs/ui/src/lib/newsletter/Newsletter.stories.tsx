@@ -14,7 +14,7 @@ export default {
     ClicksLabel: 'Clicks',
     OpensColor: 'rgba(84, 178, 211, 0.40)',
     ClicksColor: 'rgba(101, 205, 152, 0.40)',
-    PageSize: 2,
+    ShowSizeChanger: true,
   },
   argTypes: {
     data: {
@@ -57,9 +57,9 @@ export default {
         type: 'color',
       },
     },
-    PageSize: {
+    ShowSizeChanger: {
       control: {
-        type: 'number',
+        type: 'boolean',
       },
     },
   },

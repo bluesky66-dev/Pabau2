@@ -77,11 +77,6 @@ export const HighChart: FC = (props: HighchartsReact.Props) => {
           },
         },
       },
-      scatter: {
-        dataLabels: {
-          enabled: true,
-        },
-      },
     },
   }
   return (

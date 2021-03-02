@@ -21,7 +21,7 @@ export interface NewsletterProps {
   ClicksLabel: string
   OpensColor: string
   ClicksColor: string
-  PageSize: number
+  ShowSizeChanger: boolean
 }
 export const Newsletter: FC<NewsletterProps> = ({
   TableTitle,
@@ -32,7 +32,7 @@ export const Newsletter: FC<NewsletterProps> = ({
   ClicksLabel,
   OpensColor,
   ClicksColor,
-  PageSize,
+  ShowSizeChanger,
 }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
   const [dataSource, setDataSource] = useState(data)
@@ -221,16 +221,13 @@ export const Newsletter: FC<NewsletterProps> = ({
               rowSelection={rowSelection}
               columns={columns}
               dataSource={dataSource}
-              pageSize={PageSize}
+              showSizeChanger={ShowSizeChanger}
               onRow={(record) => ({
                 onClick: () => {
                   selectRow(record)
                 },
               })}
             />
-            <span>
-              Showing {PageSize} results from {dataSource.length}
-            </span>
           </div>
         </div>
       </div>
