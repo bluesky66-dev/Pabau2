@@ -54,8 +54,7 @@ const Reports: FC = (props) => {
                 { breadcrumbName: 'Reports', path: '' },
               ]}
             />
-            <div>
-            </div>
+            <div></div>
             <Title>{!searchValue ? 'Reports' : 'Search results'}</Title>
           </Col>
           <Col span={18}>

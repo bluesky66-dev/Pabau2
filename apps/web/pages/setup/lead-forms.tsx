@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {
   Layout,
   Breadcrumb,
-  WStepper,
+  Wstepper as WStepper,
   StepperItem,
   MobileHeader,
 } from '@pabau/ui'

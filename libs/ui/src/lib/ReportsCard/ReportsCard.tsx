@@ -82,37 +82,37 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
 
       {showAll
         ? reports.map((report, i) => {
-          if (i === reports.length - 1) {
+            if (i === reports.length - 1) {
+              return (
+                <>
+                  <SingleReport
+                    key={report.id}
+                    reportCode={report.reportCode}
+                    reportName={report.reportName}
+                    isNew={report.isNew}
+                    favorite={report.favorite}
+                  />
+                  <ShowMore
+                    key={uuidv4()}
+                    length={reports.length}
+                    showAll={showAll}
+                    showMoreHandler={showMoreHandler}
+                  />
+                </>
+              )
+            }
             return (
-              <>
-                <SingleReport
-                  key={report.id}
-                  reportCode={report.reportCode}
-                  reportName={report.reportName}
-                  isNew={report.isNew}
-                  favorite={report.favorite}
-                />
-                <ShowMore
-                  key={uuidv4()}
-                  length={reports.length}
-                  showAll={showAll}
-                  showMoreHandler={showMoreHandler}
-                />
-              </>
+              <SingleReport
+                key={report.id}
+                reportCode={report.reportCode}
+                reportName={report.reportName}
+                isNew={report.isNew}
+                favorite={report.favorite}
+              />
             )
-          }
-          return (
-            <SingleReport
-              key={report.id}
-              reportCode={report.reportCode}
-              reportName={report.reportName}
-              isNew={report.isNew}
-              favorite={report.favorite}
-            />
-          )
-        })
+          })
         : reports.length > 10
-          ? reports.map((report, i) =>
+        ? reports.map((report, i) =>
             i > 8 ? (
               i < 10 ? (
                 <ShowMore
@@ -134,7 +134,7 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
               />
             )
           )
-          : [
+        : [
             ...reports,
             // eslint-disable-next-line unicorn/no-new-array
             ...new Array(10 - reports.length).fill(''),

@@ -226,8 +226,9 @@ export const EmailSmsPreview = (
       </Row>
       {previewStatus === 'email' && (
         <div
-          className={`${styles.emailPreview} ${isGiftVoucher && `${styles.giftVoucher}`
-            }`}
+          className={`${styles.emailPreview} ${
+            isGiftVoucher && `${styles.giftVoucher}`
+          }`}
         >
           {isGiftVoucher && (
             <div className={styles.giftVoucherBlock}>

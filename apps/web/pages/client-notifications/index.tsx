@@ -6,7 +6,7 @@ import {
   Breadcrumb,
   NotificationBanner,
   NotificationMessages,
-  DropDownButton,
+  DropdownButton as DropDownButton,
 } from '@pabau/ui'
 import Layout from '../../components/Layout/Layout'
 import CommonHeader from '../setup/CommonHeader'
