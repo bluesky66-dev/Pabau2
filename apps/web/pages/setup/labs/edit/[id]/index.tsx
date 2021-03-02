@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import { gql, useMutation, useQuery } from '@apollo/client'
+import { gql, useMutation } from '@apollo/client'
 import { useRouter } from 'next/router'
 import { useMedia } from 'react-use'
 import {
@@ -11,6 +11,7 @@ import {
   NotificationType,
   MobileHeader,
   Preloader,
+  useLiveQuery,
 } from '@pabau/ui'
 import { Typography } from 'antd'
 import * as Yup from 'yup'
@@ -149,40 +150,33 @@ export const Index: FC = () => {
       Notification(NotificationType.error, `Error! While editing a lab`)
     },
   })
-  const { data, error, loading } = useQuery(GET_RECORD, {
+  const { data, error, loading } = useLiveQuery(GET_RECORD, {
     skip: id === undefined,
     variables: {
       id,
     },
   })
 
-  console.log('id', id)
-
   if (response.error) {
     Notification(NotificationType.error, `Error! While fetching a lab record`)
     router.push('/setup/labs')
   }
 
-  console.log('response', response)
-
   useEffect(() => {
-    console.log('loading', loading)
     if (!loading && data) {
-      const labRecord = data['Labs_by_pk']
-      console.log('Inside the useEffect', labRecord)
       setResponse({
         data: {
-          id: labRecord.id,
-          name: labRecord.name,
-          providerNumber: labRecord.provider_number,
-          phone: labRecord.phone,
-          email: labRecord.email,
-          country: labRecord.country,
-          city: labRecord.city,
-          street: labRecord.street,
-          street2: labRecord.street2,
-          postalCode: labRecord.postal_code,
-          isActive: labRecord.is_active,
+          id: data.id,
+          name: data.name,
+          providerNumber: data.provider_number,
+          phone: data.phone,
+          email: data.email,
+          country: data.country,
+          city: data.city,
+          street: data.street,
+          street2: data.street2,
+          postalCode: data.postal_code,
+          isActive: data.is_active,
         },
         loading: loading,
         error: error?.toString(),
@@ -288,6 +282,7 @@ export const Index: FC = () => {
     <div>
       <MobileHeader className={styles.editLabMobileHeader}>
         <Formik
+          enableReinitialize={true}
           initialValues={response.data}
           validationSchema={Yup.object({
             name: Yup.string().required('Name is required'),
@@ -351,6 +346,7 @@ export const Index: FC = () => {
     <Layout active={'Lab'}>
       <div className={styles.createLabWrapper}>
         <Formik
+          enableReinitialize={true}
           initialValues={response.data}
           validationSchema={Yup.object({
             name: Yup.string().required('Name is required'),
