@@ -60,7 +60,7 @@ pipelines:
             - tsc --noEmit -p libs/yup/tsconfig.lib.json
 
             - yarn affected --base=origin/master --target=lint --with-deps --parallel
-            - yarn affected --base=origin/master --target=test --parallel
+            - yarn affected --base=origin/master --target=test
             - yarn affected --base=origin/master --target=export --prod
             - yarn affected --base=origin/master --target=deploy
             - cat /tmp/bot_message.txt
