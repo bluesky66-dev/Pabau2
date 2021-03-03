@@ -1,0 +1,148 @@
+.type-column {
+    display: flex;
+    align-items: center;
+
+    img {
+        height: 16px;
+    }
+
+    span {
+        padding-left: 8px;
+    }
+}
+
+
+.customContainer {
+    width: 100%;
+    :global {
+      .ant-table-thead > tr > th {
+        background: #ffffff;
+        border-top: 1px solid #f1f1f1;
+      }
+      .ant-table-tbody {
+        tr {
+          border-bottom: 1px solid #f1f1f1;
+        }
+      }
+      tr:hover {
+        background-color: #eef7fb;
+        cursor: pointer;
+      }
+      .ant-table-cell .drag-visible {
+        cursor: pointer !important;
+      }
+      .ant-table-cell {
+        .ant-table-expanded-row-fixed {
+          text-align: center;
+          padding: 24px;
+          font-family: 'Circular-Std-Book';
+          font-size: 14px;
+          font-weight: 500;
+        }
+      }
+      .align-center {
+        text-align: center;
+      }
+    }
+  }
+  
+  .active-btn {
+    background: rgba(84, 178, 211, 0.05);
+    border-radius: 4px;
+    border: 1px solid rgba(84, 178, 211, 0.5);
+    color: var(--primary-color);
+    cursor: pointer;
+    font-family: Circular-Std-Book;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 20px;
+    padding: 1px 12px;
+    width: 106px;
+    text-transform: none;
+    height: 24px;
+  }
+  
+  .inactive-btn {
+    background: rgba(165, 169, 170, 0.05);
+    border: 1px solid rgba(165, 169, 170, 0.5);
+    color: #a5a9aa;
+    font-family: Circular-Std-Book;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 20px;
+    padding: 1px 12px;
+    width: 106px;
+    border-radius: 4px;
+    height: 24px;
+    text-transform: none;
+    cursor: not-allowed;
+  }
+  
+  .require-setup-btn {
+    background: rgba(255, 168, 39, 0.05);
+    border: 1px solid rgba(255, 168, 39, 0.5);
+    color: #ffa827;
+    font-family: Circular-Std-Book;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 20px;
+    padding: 1px 12px;
+    min-width: 106px;
+    border-radius: 4px;
+    height: 24px;
+    text-transform: none;
+    cursor: not-allowed;
+  }
+  
+  .row-dragging {
+    background: #fafafa;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+  
+    td {
+      padding-right: 10px;
+      padding-left: 10px;
+    }
+  
+    tr {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+  
+  .tableOperations {
+    position: relative;
+    height: 25px;
+    > div {
+      position: absolute;
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      top: -16px;
+      left: -16px;
+      height: 57px;
+      > button {
+        &:first-child {
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+  
+  .ant-table-tbody {
+    tr:hover {
+      .tableOperations > div {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+      }
+    }
+  }
+  
+  .paginationContainer {
+    padding: 0 1rem;
+  }

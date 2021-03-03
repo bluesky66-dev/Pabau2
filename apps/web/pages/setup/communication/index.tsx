@@ -9,8 +9,8 @@ import {
   Button,
 } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
-import Custom from '../../../components/MedicalForms/Custom'
-import Library from '../../../components/MedicalForms/Library'
+import Custom from '../../../components/Setup/Communication/Custom'
+import Library from '../../../components/Setup/Communication/Library'
 import CommonHeader from '../common-header'
 import notificationBannerImage from '../../../assets/images/notification-image.png'
 import icon from '../../../assets/images/notification.png'
