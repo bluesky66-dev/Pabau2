@@ -142,15 +142,6 @@ const notificationData = {
       disabled: true,
     },
     {
-      header: 'Class wait list',
-      description:
-        'Automatically sends to clients when a class becomes available',
-      icon: <FileSyncOutlined />,
-      smartDelivery: false,
-      link: null,
-      disabled: true,
-    },
-    {
       header: 'Classes spot available',
       description:
         'Automatically sends to clients when a class slot becomes available',

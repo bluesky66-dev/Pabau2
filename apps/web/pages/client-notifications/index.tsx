@@ -18,7 +18,7 @@ const { Title } = Typography
 
 const Index: FC = () => {
   const [hideBanner, setHideBanner] = React.useState(false)
-  const menuItems = ['Appointments', 'Classes', 'Engagement', 'Other']
+  const menuItems = ['Appointments', 'Engagement', 'Classes', 'Other']
   const options = [
     {
       title: 'Pause notifications',
