@@ -5,7 +5,14 @@ import { Typography, Input, Row } from 'antd'
 import { Breadcrumb } from '@pabau/ui'
 import { SearchOutlined } from '@ant-design/icons'
 import styles from './index.module.less'
-import ActivityChart from './ActivityChart'
+import dynamic from 'next/dynamic'
+
+const ActivityChart = dynamic(
+  () => import('../../../components/activity-logs/ActivityChart'),
+  {
+    ssr: false,
+  }
+)
 
 /* eslint-disable-next-line */
 export interface IndexProps { }
@@ -47,8 +54,10 @@ export const Index: FC = () => {
             <span className={styles.text}>For the</span>
             <span className={styles.highlightText}> Last 30 days</span>
           </div>
+          <div>
+            <ActivityChart />
+          </div>
         </Row>
-        <ActivityChart />
       </Layout>
     </>
   )
