@@ -3,8 +3,8 @@ import jwt from 'jsonwebtoken'
 import { useCookies } from 'react-cookie'
 
 export interface LoginProps {
-  user_id: number
-  company_id: number
+  user: number
+  company: number
   username?: string
 }
 
@@ -23,8 +23,8 @@ export default function useLogin(registered = false): [boolean, LoginProps] {
           decoded: { user: number; company: number; username: string }
         ) {
           return {
-            user_id: decoded.user,
-            company_id: decoded.company,
+            user: decoded.user,
+            company: decoded.company,
             username: decoded.username,
           } as LoginProps
         }
