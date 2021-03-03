@@ -13,7 +13,6 @@ const SettingElementAdvanced: FC<P> = ({
   onChangeDefaults,
 }) => {
   const [advanced, setAdvanced] = useState(false)
-  console.log('SettingElementAdvanced:defaultFieldValue', defaultFieldValue)
   return (
     <>
       {advanced && (

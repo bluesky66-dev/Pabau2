@@ -185,7 +185,6 @@ const MedicalFormEdit: FC<P> = ({ previewData, changeFormName, formName }) => {
       const previewForms = []
       if (previewDataArray['form_structure']) {
         for (const form of previewDataArray['form_structure']) {
-          console.log('org form =', form)
           let formName = ''
           const mappingInfo = previewMapping.filter(
             (item) => Object.keys(item)[0] === form.cssClass

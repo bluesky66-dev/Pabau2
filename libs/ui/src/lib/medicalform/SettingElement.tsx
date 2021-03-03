@@ -286,6 +286,7 @@ const SettingElement: FC<P> = ({
 
   useEffect(() => {
     setForm(JSON.parse(JSON.stringify(selectedForm)))
+    setAddedItems(selectedForm.arrItems.length)
   }, [selectedForm])
 
   const eventhandler = (addedItems) => {

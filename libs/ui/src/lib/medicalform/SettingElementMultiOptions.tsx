@@ -159,6 +159,7 @@ const SettingElementMultiOptions: FC<P> = ({ onChange, paramItems }) => {
       >
         {btnTitle}
       </Button>
+      <br />
     </>
   )
 }
