@@ -1,9 +1,8 @@
 import React, { FC } from 'react'
 import CommonHeader from '../common-header'
 import Layout from '../../../components/Layout/Layout'
-import { Typography, Input, Row } from 'antd'
-import { Breadcrumb } from '@pabau/ui'
-import { SearchOutlined } from '@ant-design/icons'
+import { Typography, Row, Popover } from 'antd'
+import { Breadcrumb, SetupSearchInput } from '@pabau/ui'
 import styles from './index.module.less'
 import dynamic from 'next/dynamic'
 
@@ -14,10 +13,42 @@ const ActivityChart = dynamic(
   }
 )
 
+// const marketingSourceFilterData = [
+//   {
+//     key: 0,
+//     title: 'All marketing source activity',
+//     value: false,
+//   },
+//   {
+//     key: 1,
+//     title: 'Created marketing sources',
+//     value: false,
+//   },
+//   {
+//     key: 2,
+//     title: 'Updated marketing sources',
+//     value: false,
+//   },
+//   {
+//     key: 3,
+//     title: 'Deleted marketing sources',
+//     value: false,
+//   },
+// ]
+
 /* eslint-disable-next-line */
 export interface IndexProps { }
 
 export const Index: FC = () => {
+  const content = (
+    <div>
+      <SetupSearchInput />
+      <p>Marketing Sources</p>
+      <p>Media</p>
+      <p>security</p>
+    </div>
+  )
+
   return (
     <>
       <CommonHeader />
@@ -27,37 +58,39 @@ export const Index: FC = () => {
             <div>
               <Breadcrumb
                 breadcrumbItems={[
-                  { breadcrumbName: 'Setup', path: '' },
+                  { breadcrumbName: 'Setup', path: 'setup' },
                   {
                     breadcrumbName: 'Activity Logs',
-                    path: '/setup/activity-logs',
+                    path: '',
                   },
                 ]}
               />
               <Typography.Title>Activity Logs</Typography.Title>
             </div>
             <div>
-              <Input
-                className={styles.searchInputStyle}
-                placeholder={'Search'}
-                suffix={<SearchOutlined style={{ color: '#BFBFBF' }} />}
-              />
+              <SetupSearchInput />
             </div>
           </div>
-        </div>
-        <Row className={styles.appointmentWrapper}>
-          <div>
-            <span className={styles.text}>Showing</span>
-            <span className={styles.highlightText}> All Employees</span>
-            <span className={styles.text}>By</span>
-            <span className={styles.highlightText}> All Actions</span>
-            <span className={styles.text}>For the</span>
-            <span className={styles.highlightText}> Last 30 days</span>
-          </div>
+          <Row>
+            <div>
+              <span className={styles.text}>Showing</span>
+              <span className={styles.highlightText}> All Employees</span>
+              <span className={styles.text}>By</span>
+              <Popover
+                content={content}
+                title="Select actions"
+                placement="bottomRight"
+              >
+                <span className={styles.highlightText}> All Actions</span>
+              </Popover>
+              <span className={styles.text}>For the</span>
+              <span className={styles.highlightText}> Last 30 days</span>
+            </div>
+          </Row>
           <div>
             <ActivityChart />
           </div>
-        </Row>
+        </div>
       </Layout>
     </>
   )
