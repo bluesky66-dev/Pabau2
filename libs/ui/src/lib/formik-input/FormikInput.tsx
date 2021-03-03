@@ -8,7 +8,7 @@ export interface FormikInputProps extends InputProps {
   name: string
 }
 
-const FormikInput: FC<FormikInputProps> = ({ name, ...props }) => {
+export const FormikInput: FC<FormikInputProps> = ({ name, ...props }) => {
   return (
     <div>
       <Input name={name} {...props} />

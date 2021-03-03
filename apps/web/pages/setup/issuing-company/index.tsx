@@ -9,9 +9,10 @@ import {
   Button,
   Notification,
   NotificationType,
+  FormikInput,
   BasicModal as Modal,
 } from '@pabau/ui'
-import { Form, Select, Input } from 'antd'
+import { Form, Select } from 'antd'
 import { CloseOutlined, DeleteFilled } from '@ant-design/icons'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
@@ -490,7 +491,7 @@ export const IssuingCompany: NextPage = () => {
             <h3>General</h3>
             <div className={styles.customForm}>
               <Form.Item label="Company name">
-                <Input
+                <FormikInput
                   name="companyName"
                   placeholder="Enter company name"
                   onChange={formik.handleChange}
@@ -510,7 +511,7 @@ export const IssuingCompany: NextPage = () => {
                 />
               </Form.Item>
               <Form.Item label="Website">
-                <Input
+                <FormikInput
                   name="website"
                   placeholder="https://www.company.com"
                   onChange={formik.handleChange}
@@ -544,7 +545,7 @@ export const IssuingCompany: NextPage = () => {
                 </Select>
               </Form.Item>
               <Form.Item label={'City'}>
-                <Input
+                <FormikInput
                   name="city"
                   placeholder="Enter city"
                   onChange={formik.handleChange}
@@ -552,7 +553,7 @@ export const IssuingCompany: NextPage = () => {
                 />
               </Form.Item>
               <Form.Item label="Street">
-                <Input
+                <FormikInput
                   name="street"
                   placeholder="Enter street"
                   className="input-style"
@@ -561,7 +562,7 @@ export const IssuingCompany: NextPage = () => {
                 />
               </Form.Item>
               <Form.Item label="Post code">
-                <Input
+                <FormikInput
                   name="postCode"
                   placeholder="Enter post code"
                   className="input-style"
@@ -599,7 +600,7 @@ export const IssuingCompany: NextPage = () => {
                 </Select>
               </Form.Item>
               <Form.Item label="Invoice prefix">
-                <Input
+                <FormikInput
                   name="invoicePrefix"
                   placeholder="Enter invoice prefix"
                   onChange={formik.handleChange}
@@ -607,7 +608,7 @@ export const IssuingCompany: NextPage = () => {
                 />
               </Form.Item>
               <Form.Item label="Invoice starting number">
-                <Input
+                <FormikInput
                   name="invoiceStartingNumber"
                   placeholder="Enter Invoice starting number"
                   onChange={formik.handleChange}

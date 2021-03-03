@@ -8,7 +8,6 @@ export default {
     name: 'name',
     placeholder: 'Name',
   },
-  //   argTypes: { onBackClick: { action: 'clicked' } },
 }
 
 const FormikInputStory: FC<FormikInputProps> = ({ name, placeholder }) => (
