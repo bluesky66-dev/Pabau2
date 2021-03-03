@@ -6,6 +6,7 @@ import { Button } from '../button/Button'
 
 export const ClassWaitList: FC<ClassWaitListProps & EmailSMSPreviewProps> = ({
   message,
+  buttonColor,
 }) => {
   return (
     <>
