@@ -4,7 +4,7 @@ import {
   ApolloProvider,
   HttpLink,
   InMemoryCache,
-  split,
+  split
 } from '@apollo/client'
 import { WebSocketLink } from '@apollo/client/link/ws'
 import { getMainDefinition } from '@apollo/client/utilities'
