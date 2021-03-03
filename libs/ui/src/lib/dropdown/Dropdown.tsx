@@ -16,44 +16,55 @@ import { Avatar, Badge, Drawer, Image, Menu, Popover } from 'antd'
 import classNames from 'classnames'
 import Link from 'next/link'
 import QueueAnim from 'rc-queue-anim'
-import React, { FC, useContext, useEffect, useState } from 'react'
-import { ReactComponent as JASVG } from '../../assets/images/JA.svg'
+import React, { FC, useEffect, useState } from 'react'
 import { languageMenu } from '../../assets/images/lang-logos'
 import { ReactComponent as LaunchSVG } from '../../assets/images/launch.svg'
 import { ReactComponent as PABAULOGO } from '../../assets/images/pabaulogo.svg'
-import { ReactComponent as UPSVG } from '../../assets/images/UP.svg'
 import { ReactComponent as TaskSVG } from '../../assets/images/Vector.svg'
 import styles from './Dropdown.module.less'
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { UserContext } from '../../../../../apps/web/hooks/UserContext'
 
 // import { isMobile, isTablet } from 'react-device-detect'
 export interface DropDownInterface {
   isOpen?: boolean
   onCloseDrawer?: () => void
-  user?: UserProps
+  data?: { user: UserProps; company: CompanyProps }
 }
 
 interface UserProps {
-  user_id: string
-  company_id: string
-  username: string
+  full_name: string
+  username?: string
+  _typename?: string
+}
+
+interface CompanyProps {
+  details: CompanyDetails
+}
+
+interface CompanyDetails {
+  company_name: string
 }
 
 export const Dropdown: FC<DropDownInterface> = ({
   isOpen,
   onCloseDrawer,
+  ...rest
 }): JSX.Element => {
   const [activeMenu, setActiveMenu] = useState('Menu')
 
   // used for mobile device
   const [openProfileDrawer, setProfileDrawer] = useState(isOpen)
   const [activeMenuTitle, setActiveMenuTitle] = useState('Profile')
-  const user = useContext(UserContext)
+  const data: Pick<
+    DropDownInterface & { children?: React.ReactNode },
+    'data' | 'children'
+  > = rest
+  const [user, setCurrentUser] = useState<UserProps | null>(null)
+  const [company, setCurrentCompany] = useState<CompanyProps | null>(null)
+
   useEffect(() => {
-    console.log('Here')
-    console.log(user?.user_id)
-  })
+    setCurrentUser(data['user'])
+    setCurrentCompany(data['company'])
+  }, [data, user, company])
 
   const menu = (
     <Menu className={styles.avatarMenu}>
@@ -63,12 +74,16 @@ export const Dropdown: FC<DropDownInterface> = ({
       >
         <div className={styles.dropdownHeader}>
           <PABAULOGO />
-          <span className={styles.headerText}>{}</span>
+          <span className={styles.headerText}>
+            {company?.details.company_name ?? 'Pabau Clinic Software'}
+          </span>
         </div>
         <RightOutlined className={styles.dropdownIcon} />
       </Menu.Item>
       <Menu.Item className={styles.userinfo}>
-        <div className={styles.userName}>{}</div>
+        <div className={styles.userName}>
+          {user?.full_name ?? 'William Branham'}
+        </div>
         <div className={styles.userBalance}>
           <p>Balance</p>
           <span>9445,00</span>
@@ -159,32 +174,12 @@ export const Dropdown: FC<DropDownInterface> = ({
                 styles.activeMenu
               )}
             >
-              Pabau Clinic Software
+              {company?.details.company_name ?? 'Pabau Clinic Software'}
             </span>
           </div>
           <CheckCircleFilled
             className={classNames(styles.checkIcon, styles.activeMenu)}
           />
-        </Menu.Item>
-        <Menu.Item className={styles.subDropdownList}>
-          <div className={styles.subDropdownListHeader}>
-            <JASVG />
-            <span className={classNames(styles.subDropdownListHeaderText)}>
-              Jason Austin Har Salon’s & Barbershops
-            </span>
-          </div>
-        </Menu.Item>
-        <Menu.Item
-          className={styles.subDropdownList}
-          style={{ paddingTop: '12px', paddingBottom: '16px' }}
-        >
-          <div className={styles.subDropdownListHeader}>
-            <UPSVG />
-            <span className={classNames(styles.subDropdownListHeaderText)}>
-              University of Portsmouth Essential Student Guide – Info, Offers,
-              Nightlife
-            </span>
-          </div>
         </Menu.Item>
         <div style={{ marginTop: '8px' }} />
       </Menu>

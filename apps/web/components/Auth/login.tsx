@@ -74,8 +74,12 @@ const LoginMain: FC<LoginProps> = ({ handlePageShow }) => {
             password: Yup.string().required('Password is required'),
           })}
           onSubmit={async (value: LoginFormProps) => {
-            if (await loginHandler(value)) {
-              await router.push('/index')
+            try {
+              if (await loginHandler(value)) {
+                await router.push('/index')
+              }
+            } catch (error) {
+              console.error(error)
             }
           }}
           render={() => (
