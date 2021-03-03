@@ -85,6 +85,7 @@ export interface MissedAClassProps {
 export interface ReferralProps {
   message?: string
   footerText?: string
+  description?: string
 }
 
 export interface InvoicesProps {

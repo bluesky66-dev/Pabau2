@@ -167,7 +167,7 @@ const notificationData = {
         'The default email template you will send when someone is being referred into the business',
       icon: <GoldOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/referral',
       disabled: true,
     },
     {

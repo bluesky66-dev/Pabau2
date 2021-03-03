@@ -500,6 +500,7 @@ const ReferralStory = ({
   smsGreeting,
   smsMessage,
   smsFooterText,
+  description,
 }: PropsWithChildren<EmailSMSPreviewProps & ReferralProps>) => (
   <EmailSmsPreview
     greeting={greeting}
@@ -508,7 +509,11 @@ const ReferralStory = ({
     smsMessage={smsMessage}
     smsFooterText={smsFooterText}
   >
-    <Referral message={message} footerText={footerText} />
+    <Referral
+      message={message}
+      footerText={footerText}
+      description={description}
+    />
   </EmailSmsPreview>
 )
 
@@ -520,6 +525,8 @@ Referrals.args = {
   footerIconGroup: true,
   footerText:
     'We look forward to seeing you soon!<br/> Your friends at The Clinic',
+  description:
+    'As a loyal client, we would like to offer you 10% OFF for your next visit. Please find your voucher code below.',
   smsGreeting: 'Hi Sophia!',
   smsMessage:
     '<div>Thank you for your client referral. It means the world to us! </div><div>As a loyal client, we would like to offer you [REWARD] OFF for your next visit. Please find your voucher code below.</div>',
