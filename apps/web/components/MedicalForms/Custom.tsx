@@ -15,7 +15,7 @@ import {
   ShareAltOutlined,
   DeleteOutlined,
 } from '@ant-design/icons'
-import arrayMove from 'array-move'
+// import arrayMove from 'array-move'
 import {
   SortableContainer,
   SortableElement,
