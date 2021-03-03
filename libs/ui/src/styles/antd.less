@@ -10,10 +10,12 @@
 @text-color: rgba(0, 0, 0, 0.65); // major text color
 @text-color-secondary: rgba(0, 0, 0, 0.45); // secondary text color
 @disabled-color: rgba(0, 0, 0, 0.25); // disable state color
+@light-color: #ffffff;
+@red-focused-color: #df562b;
 // @border-radius-base: 4px; // major border radius
 @border-color-base: #ecedf0; // major border color
 @box-shadow-base: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
-  0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05); // major shadow for layers
+0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05); // major shadow for layers
 @font-variant-base: normal;
 @font-feature-settings-base: normal;
 @font-family: Circular-Std-Book, -apple-system, sans-serif;
@@ -33,7 +35,10 @@
   --border-color-base: @border-color-base;
   --box-shadow-base: @box-shadow-base;
   --grey-text-color: #3d3d46;
+  --light-color: @light-color;
+  --red-focused-color: @red-focused-color;
   --light-grey-color: #9292a3;
+  --light-grey-text-color: #9292a3;
   --time-notification-text-color: #b8b8c0;
   --font-variant-base: @font-variant-base;
   --font-feature-settings-base: @font-feature-settings-base;
@@ -48,7 +53,7 @@
 @font-face {
   font-family: 'Circular-Std-Bold';
   src: url('../assets/fonts/CircularStd-Bold.woff') format('woff'),
-    url('../assets/fonts/CircularStd-Bold.otf') format('otf');
+  url('../assets/fonts/CircularStd-Bold.otf') format('otf');
 }
 @font-face {
   font-family: 'Circular-Std-Black';

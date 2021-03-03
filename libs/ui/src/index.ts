@@ -4,6 +4,7 @@ export * from './lib/business-details-notifications/BusinessDetailsNotifications
 export * from './lib/business-location/BusinessLocation'
 export * from './lib/business-types/BusinessTypes'
 export * from './lib/business-details/BusinessDetails'
+export * from './lib/commission-range/CommissionRange'
 export * from './lib/copy-embed-code-modal/CopyEmbedCodeModal'
 export * from './lib/daily/Daily'
 export * from './lib/documents/Documents'
