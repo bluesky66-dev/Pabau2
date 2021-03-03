@@ -241,7 +241,7 @@ export const Newsletter: FC<NewsletterProps> = ({
             <Table
               rowSelection={rowSelection}
               columns={columns}
-              dataSource={dataSource}
+              dataSource={dataSource as never[]}
               showSizeChanger={ShowSizeChanger}
               onRow={(record) => ({
                 onClick: () => {
