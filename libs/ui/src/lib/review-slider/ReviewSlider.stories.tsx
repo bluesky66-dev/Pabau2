@@ -4,6 +4,9 @@ import { reviews, execellentData, averageData, reviewData, title } from './mock'
 
 export default {
   title: 'UI/ReviewSlider',
+  parameters: {
+    layout: 'fullscreen',
+  },
   args: {
     title,
     execellentData,
