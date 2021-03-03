@@ -49,6 +49,7 @@ const previewMapping = [
   { select: 'basic_dropdown' },
   { image: 'basic_drawing' },
   { staticImage: 'basic_drawing' },
+  { diagram_mini: 'basic_drawing' },
   { signature: 'basic_signature' },
   { cl_drugs: 'basic_drugs' },
   { labs_tests: 'basic_labtests' },
@@ -80,6 +81,7 @@ const copy = (source, destination, droppableSourceId, endIndex, formInfo) => {
     txtQuestion: formInfo.txtQuestion,
     txtBlock: formInfo.txtBlock,
     txtInputType: formInfo.txtInputType,
+    txtDefaults: formInfo.txtDefaults,
     arrItems: formInfo.arrItems,
     required: formInfo.required,
   })
@@ -87,7 +89,6 @@ const copy = (source, destination, droppableSourceId, endIndex, formInfo) => {
 }
 
 const getFormInfo = (form) => {
-  console.log('form =', form)
   // let name = ''
   let label = ''
   if (form.title) {
@@ -128,12 +129,23 @@ const getFormInfo = (form) => {
     txtBlockValue = form.values.trim()
   }
 
+  let txtInputTypeValue = ''
+  if (form.cssClass === 'input_text') {
+    txtInputTypeValue = form.fldtype
+  }
+
+  let txtDefaultsValue = ''
+  if (form.cssClass === 'input_text') {
+    txtDefaultsValue = form.defaults
+  }
+
   let arrItemsValue: OptionType[] = []
   if (
     form.cssClass === 'checkbox' ||
     form.cssClass === 'radio' ||
     form.cssClass === 'select' ||
     form.cssClass === 'staticImage' ||
+    form.cssClass === 'diagram_mini' ||
     form.cssClass === 'image'
   ) {
     const arrayItems: ArrayItem[] = form.values
@@ -147,7 +159,8 @@ const getFormInfo = (form) => {
   return {
     txtQuestion: label,
     txtBlock: txtBlockValue,
-    txtInputType: '',
+    txtInputType: txtInputTypeValue,
+    txtDefaults: txtDefaultsValue,
     arrItems: arrItemsValue,
     required: form.required === 'true' ? true : false,
   }
@@ -172,6 +185,7 @@ const MedicalFormEdit: FC<P> = ({ previewData, changeFormName, formName }) => {
       const previewForms = []
       if (previewDataArray['form_structure']) {
         for (const form of previewDataArray['form_structure']) {
+          console.log('org form =', form)
           let formName = ''
           const mappingInfo = previewMapping.filter(
             (item) => Object.keys(item)[0] === form.cssClass

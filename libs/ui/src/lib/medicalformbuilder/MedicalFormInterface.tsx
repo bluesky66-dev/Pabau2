@@ -11,6 +11,7 @@ export interface MedicalFormTypes {
   txtQuestion: string
   txtBlock: string
   txtInputType: string
+  txtDefaults: string
   arrItems: OptionType[]
   required: boolean
 }
@@ -54,6 +55,7 @@ export const defaultFormValue: MedicalFormTypes = {
   txtQuestion: '',
   txtBlock: '',
   txtInputType: '',
+  txtDefaults: '',
   arrItems: [],
   required: false,
 }

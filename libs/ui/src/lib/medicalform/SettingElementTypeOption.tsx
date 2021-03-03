@@ -3,6 +3,7 @@ import React, { FC, useState } from 'react'
 
 interface P {
   title: string
+  value: string
 }
 
 const typeOptions = [
@@ -12,14 +13,15 @@ const typeOptions = [
   { label: 'Date', value: 'date' },
 ]
 
-const SettingElementTypeOption: FC<P> = ({ title }) => {
-  const [selOption, setSelOption] = useState('text')
+const SettingElementTypeOption: FC<P> = ({ title, value }) => {
+  const [selOption, setSelOption] = useState(value)
   return (
     <>
       <h3 style={{ marginTop: '20px' }}>{title}</h3>
       <Radio.Group
         options={typeOptions}
-        value={selOption}
+        defaultValue={selOption}
+        value={value}
         onChange={(e) => setSelOption(e.target.value)}
         optionType="button"
         buttonStyle="solid"
