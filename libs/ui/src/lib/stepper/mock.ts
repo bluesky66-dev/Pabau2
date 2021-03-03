@@ -9,14 +9,14 @@ export const data = [
   },
   {
     step: 2,
-    name: 'Configure(API)',
+    name: 'Configure (API)',
     img: iconHome,
     isActive: true,
     index: 1,
   },
   {
     step: 3,
-    name: 'Testing(API)',
+    name: 'Testing (API)',
     img: iconHome,
     isActive: false,
     index: 2,
