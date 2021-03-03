@@ -45,7 +45,8 @@ export const Invoices: FC<EmailSMSPreviewProps & InvoicesProps> = ({
         <Row gutter={[0, 4]} className={styles.invoiceButton}>
           <Col>
             <Button
-              backgroundColor={buttonColor || 'blue'}
+              type="primary"
+              backgroundColor={buttonColor}
               className={styles.bookButton}
             >
               View Invoice
