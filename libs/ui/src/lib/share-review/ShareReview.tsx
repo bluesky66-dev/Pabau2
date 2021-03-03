@@ -1,9 +1,9 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useRef } from 'react'
 import { toPng } from 'html-to-image'
-import { Typography, Card, Image, Rate, Row, Col } from 'antd'
+import { Card, Image, Rate, Row, Col } from 'antd'
 import { StarFilled } from '@ant-design/icons'
 import './ShareReview.module.less'
-const { Paragraph } = Typography
+import header from '../../../../../apps/web/assets/images/brands/Pabau.png'
 export interface ShareReviewProps {
   text: string
   reviewScore: number
@@ -13,85 +13,122 @@ export interface ShareReviewProps {
 }
 export const ShareReview: FC<ShareReviewProps> = (props: ShareReviewProps) => {
   const [url, setUrl] = useState('')
+  const ref = useRef(null)
   return (
     <>
-      <div
-        ref={async (ref) => {
-          try {
-            if (!ref) {
-              return
-            }
-            if (url) {
-              return
-            }
-            setUrl(
-              await toPng(ref, {
-                width: 250,
-                height: 300,
-              })
-            )
-          } catch (error) {
-            console.log(error)
-          }
-        }}
-      >
-        <Card style={{ width: 250 }}>
-          {props.date && (
-            <Paragraph style={{ color: '#dfdfdf' }}>
-              {props.date.getDate().toString().padStart(2, '0')}/
-              {(props.date.getMonth() + 1).toString().padStart(2, '0')}
-            </Paragraph>
-          )}
-          <Paragraph strong>
-            {'"'}
-            {props.text}
-            {'"'}
-          </Paragraph>
-          <Row>
-            <Col span={6}>
-              <Image
-                src={props.logo}
-                style={{ width: '100%', height: 'auto' }}
-              />
-            </Col>
-            <Col span={18}>
+      <div ref={ref}>
+        <Card style={{ width: 550 }}>
+          <div
+            style={{
+              position: 'relative',
+              width: 480,
+              height: 480,
+            }}
+          >
+            <div style={{ margin: 20 }}>
+              <Row justify="end">
+                <Image src={header} />
+              </Row>
               <Row>
-                <Col span={12}>
-                  <Rate
-                    style={{ color: '#3ac7b4' }}
-                    disabled
-                    defaultValue={props.reviewScore}
-                    character={() => <StarFilled />}
-                  />
-                </Col>
-                <Col span={12}>asdasda</Col>
+                <span style={{ color: '#e4e4e4', fontWeight: 'bold' }}>
+                  {props.date?.getDate().toString().padStart(2, '0')}/
+                  {props.date &&
+                    (props.date.getMonth() + 1).toString().padStart(2, '0')}
+                </span>
               </Row>
-              <Row
-                style={{
-                  backgroundColor: '#3ac7b4',
-                  justifyContent: 'center',
-                  alignItems: 'center',
+              <div style={{ paddingTop: 20 }}>
+                <Row>
+                  <span
+                    style={{
+                      width: '80%',
+                      margin: '0 auto',
+                      fontSize: 22,
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {'"'}
+                    {props.text}
+                    {'"'}
+                  </span>
+                </Row>
+              </div>
+            </div>
+            <Row
+              align="bottom"
+              style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}
+            >
+              <Image
+                onLoad={async () => {
+                  try {
+                    if (!ref.current || url) {
+                      return
+                    }
+                    setUrl(
+                      await toPng(ref.current || new HTMLElement(), {
+                        width: 550,
+                        height: 520,
+                      })
+                    )
+                  } catch (error) {
+                    console.log(error)
+                  }
                 }}
-              >
-                <Paragraph
-                  style={{
-                    color: 'white',
-                    fontSize: 6,
-                    marginTop: '1em',
-                  }}
-                >
-                  {props.companyName}
-                </Paragraph>
-              </Row>
-            </Col>
-          </Row>
+                src={props.logo}
+                style={{ height: 80, width: 80 }}
+              />
+              <Col style={{ flex: 1 }}>
+                <Row justify="space-between">
+                  <Col
+                    style={{
+                      padding: '8px 16px',
+                    }}
+                  >
+                    <Rate
+                      character={() => (
+                        <StarFilled style={{ color: '#3BC6B5' }} />
+                      )}
+                    />
+                  </Col>
+                  <Col
+                    style={{
+                      padding: '8px 16px',
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: 18,
+                        fontWeight: 'bold',
+                        color: 'gray',
+                      }}
+                    >
+                      verfied patient
+                    </div>
+                  </Col>
+                </Row>
+                <Row>
+                  <div
+                    style={{
+                      textTransform: 'capitalize',
+                      fontSize: 18,
+                      padding: '8px 16px',
+                      fontWeight: 'bold',
+                      color: 'lightcyan',
+                      backgroundColor: '#3BC6B5',
+                      flex: 1,
+                    }}
+                  >
+                    {props.companyName}
+                  </div>
+                </Row>
+              </Col>
+            </Row>
+          </div>
         </Card>
       </div>
-      <Image src={url} style={{ width: 100, height: 100 }} />
       <a
         href={`http://www.facebook.com/sharer.php?u=https://www.pabau.com&picture=${url}`}
       >
-        Hey check out this review
+        Share
       </a>
     </>
   )
