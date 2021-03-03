@@ -6,13 +6,17 @@ import { FileProtectOutlined } from '@ant-design/icons'
 import styles from './library_tab.module.less'
 
 const LIST_QUERY = gql`
-  query library_installers($limit: Int = 10) {
-    library_installers(limit: $limit) {
+  query library_installers($limit: Int, $libLocation: String) {
+    library_installers(
+      limit: $limit
+      where: { library_location: { _ilike: $libLocation } }
+    ) {
       library_name
       library_image
       library_description
       library_location
       library_language
+      is_plus
       data
       created_date
       id
@@ -34,6 +38,7 @@ export const LibrariesTab: FC = () => {
     const queryOptions = {
       variables: {
         limit: 10,
+        libLocation: 'service',
       },
     }
 
@@ -46,7 +51,6 @@ export const LibrariesTab: FC = () => {
     if (!loading && data) {
       setLibItems(data)
     }
-    console.log('HEL')
   }, [data, error, loading])
 
   return (
@@ -62,7 +66,7 @@ export const LibrariesTab: FC = () => {
                 <span>
                   <FileProtectOutlined color="#9292A3;" />
                 </span>
-                <span className="plus">Plus</span>
+                {el.is_plus && <span className="plus">Plus</span>}
               </div>
               <h4>{el.library_name}</h4>
               <p>{el.data?.length}</p>

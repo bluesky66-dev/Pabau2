@@ -16892,6 +16892,7 @@ type library_installers {
     path: String
   ): jsonb!
   id: Int!
+  is_plus: Boolean!
   library_description: String!
   library_image: String
   library_language: String
@@ -16914,6 +16915,7 @@ input library_installers_bool_exp {
   created_date: timestamptz_comparison_exp
   data: jsonb_comparison_exp
   id: Int_comparison_exp
+  is_plus: Boolean_comparison_exp
   library_description: String_comparison_exp
   library_image: String_comparison_exp
   library_language: String_comparison_exp
@@ -16964,6 +16966,7 @@ input library_installers_insert_input {
   created_date: timestamptz
   data: jsonb
   id: Int
+  is_plus: Boolean
   library_description: String
   library_image: String
   library_language: String
@@ -16996,6 +16999,7 @@ input library_installers_order_by {
   created_date: order_by
   data: order_by
   id: order_by
+  is_plus: order_by
   library_description: order_by
   library_image: order_by
   library_language: order_by
@@ -17027,6 +17031,9 @@ enum library_installers_select_column {
   id
 
   """column name"""
+  is_plus
+
+  """column name"""
   library_description
 
   """column name"""
@@ -17049,6 +17056,7 @@ input library_installers_set_input {
   created_date: timestamptz
   data: jsonb
   id: Int
+  is_plus: Boolean
   library_description: String
   library_image: String
   library_language: String
@@ -17068,6 +17076,9 @@ enum library_installers_update_column {
 
   """column name"""
   id
+
+  """column name"""
+  is_plus
 
   """column name"""
   library_description

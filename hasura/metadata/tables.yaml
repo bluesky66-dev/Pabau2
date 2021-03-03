@@ -959,11 +959,13 @@
       - library_language
       - data
       - created_date
+      - is_plus
       backend_only: false
   select_permissions:
   - role: public
     permission:
       columns:
+      - is_plus
       - id
       - data
       - library_description
@@ -977,6 +979,7 @@
   - role: public
     permission:
       columns:
+      - is_plus
       - id
       - data
       - library_description
@@ -1168,6 +1171,9 @@
   - role: public
     permission:
       filter: {}
+- table:
+    schema: public
+    name: peer_review
 - table:
     schema: public
     name: petty_cash_types
