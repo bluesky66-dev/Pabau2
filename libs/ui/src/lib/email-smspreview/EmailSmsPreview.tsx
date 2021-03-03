@@ -93,8 +93,9 @@ export interface InvoicesProps {
   message1?: string
   showInvoiceButton?: boolean
   message2?: string
-  message3?: string
+  bestRegards?: string
   senderFirstName?: string
+  showEnablePay?: boolean
 }
 
 export interface LeadResponsesProps {

@@ -28,7 +28,7 @@ interface P {
   hideEmployeeNameOption?: boolean
   type?: string
   smsCustom?: string
-  enablePay?: boolean
+  hideEnablePay?: boolean
 }
 
 // eslint-disable-next-line react/display-name
@@ -52,7 +52,7 @@ const Index: FC<P> = forwardRef(
       isSmsComponent = true,
       displayRadioGroup = true,
       displayButtons = true,
-      enablePay = false,
+      hideEnablePay = false,
     },
     ref
   ) => {
@@ -64,6 +64,7 @@ const Index: FC<P> = forwardRef(
     const [displayPolicy, setDisplayPolicy] = useState(true)
     const [showService, setShowService] = useState(true)
     const [showEmployeeName, setShowEmployeeName] = useState(true)
+    const [showEnablePay, setShowEnablePay] = useState(true)
     const [addMedicalHisButton, setAddMedicalHisButton] = useState(true)
     const [backGroundColor, setBackGroundColor] = useState('')
     const [buttonColor, setButtonColor] = useState('')
@@ -168,7 +169,9 @@ const Index: FC<P> = forwardRef(
               hideReminderTimeFrameTabPane={hideReminderTimeFrameTabPane}
               hideEmployeeNameOption={hideEmployeeNameOption}
               hideServiceOption={hideServiceOption}
-              enablePay={enablePay}
+              hideEnablePay={hideEnablePay}
+              onShowEnablePay={(value) => setShowEnablePay(value)}
+              showEnablePay={showEnablePay}
             />
           )
         }
@@ -227,6 +230,7 @@ const Index: FC<P> = forwardRef(
               activeSocialIcons={activeSocialIcons}
               backGroundColor={backGroundColor}
               standardTapIndex={standardTapIndex}
+              showEnablePay={showEnablePay}
             />
           ) : type === 'reschedule' || type === 'classReschedule' ? (
             <RescheduleAppointmentPreview

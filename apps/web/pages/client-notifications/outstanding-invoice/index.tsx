@@ -49,7 +49,7 @@ const Index: FC = () => {
           'This notification automatically sends to clients when they book their appointment'
         }
         type={'outstandingInvoice'}
-        enablePay={true}
+        hideEnablePay={false}
       />
     </Layout>
   )

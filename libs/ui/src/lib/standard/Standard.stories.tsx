@@ -19,6 +19,7 @@ const Story: React.FC = ({ ...args }) => {
   const [displayPolicy, setDisplayPolicy] = useState(true)
   const [showService, setShowService] = useState(true)
   const [showEmployeeName, setShowEmployeeName] = useState(true)
+  const [showEnablePay, setShowEnablePay] = useState(true)
   const [addMedicalHisButton, setAddMedicalHisButton] = useState(true)
   const [backGroundColor, setBackGroundColor] = useState('')
   const [buttonColor, setButtonColor] = useState('')
@@ -64,6 +65,8 @@ const Story: React.FC = ({ ...args }) => {
         hideAppearanceTabPane={true}
         smsMessage={smsMessage}
         onSmsMessage={(value) => setSmsMessage(value)}
+        showEnablePay={showEnablePay}
+        onShowEnablePay={(value) => setShowEnablePay(value)}
       />
       <p>{medicalMessage}</p>
     </div>

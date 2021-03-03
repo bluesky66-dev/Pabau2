@@ -65,7 +65,9 @@ interface P {
   onSmsMessage: (string) => void
   onActiveSocialIcon: (value: string[]) => void
   disableCustomTab: boolean
-  enablePay?: boolean
+  hideEnablePay?: boolean
+  onShowEnablePay: (boolean) => void
+  showEnablePay?: boolean
 }
 
 const { TabPane } = Tabs
@@ -117,7 +119,9 @@ export const Standard: FC<P> = ({
   onSmsMessage,
   onActiveSocialIcon,
   disableCustomTab,
-  enablePay = false,
+  hideEnablePay = false,
+  showEnablePay,
+  onShowEnablePay,
 }) => {
   function callback(key) {
     onStandardTabChanged(key)
@@ -379,6 +383,26 @@ export const Standard: FC<P> = ({
                       </div>
                     </>
                   )}
+                  {!hideEnablePay && (
+                    <Row align="middle">
+                      <Checkbox
+                        className={styles.checkboxStyle}
+                        value="show_enable_pay"
+                        checked={showEnablePay}
+                        onChange={() => onShowEnablePay(!showEnablePay)}
+                      >
+                        Show enable pay
+                      </Checkbox>
+                      <Tooltip
+                        className={styles.tooltipStyle}
+                        placement="topLeft"
+                        color="#595959"
+                        title={`This will Enable Payment Button`}
+                      >
+                        <QuestionCircleOutlined />
+                      </Tooltip>
+                    </Row>
+                  )}
                   <ColorPicker
                     heading="Background color"
                     onSelected={(val) => onBackGroundColor(val)}
@@ -403,13 +427,6 @@ export const Standard: FC<P> = ({
                       }
                     />
                   </Row>
-                  {enablePay && (
-                    <Row className={styles.enablePay}>
-                      <Tooltip title="Enable Pay">
-                        <Button>Enable Pay</Button>
-                      </Tooltip>
-                    </Row>
-                  )}
                 </Panel>
               )}
 
