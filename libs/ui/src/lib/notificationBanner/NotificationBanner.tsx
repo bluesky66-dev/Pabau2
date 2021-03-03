@@ -4,6 +4,7 @@ import { Button } from '../button/Button'
 import styles from './NotificationBanner.module.less'
 import { Row, Col } from 'antd'
 import iconClose from '../../assets/images/icon_close.svg'
+import Link from 'next/link'
 
 interface P {
   title?: string
@@ -14,6 +15,8 @@ interface P {
   showPaymentButton?: boolean
   email?: string
   showEmail?: boolean
+  hrefPath?: string
+  hrefTitle?: string
 }
 
 export const NotificationBanner: FC<P> = ({
@@ -28,6 +31,8 @@ export const NotificationBanner: FC<P> = ({
   // const [isHide, setHide] = useState(false)
   showPaymentButton = true,
   showEmail = false,
+  hrefPath = '/',
+  hrefTitle = 'Enable Payments',
 }) => {
   return (
     <div
@@ -39,16 +44,18 @@ export const NotificationBanner: FC<P> = ({
           <p className={styles.title1}>{title}</p>
           <p className={styles.title2}>{desc}</p>
           {showEmail && <p className={styles.linkEmail}>{email}</p>}
-          {showPaymentButton && (
-            <Button
-              className={styles.btnPayment}
-              // onClick={() => {}}
-              size="middle"
-              type="link"
-            >
-              Enable Payments
-            </Button>
-          )}
+          <Link href={hrefPath}>
+            {showPaymentButton && (
+              <Button
+                className={styles.btnPayment}
+                // onClick={() => {}}
+                size="middle"
+                type="link"
+              >
+                {hrefTitle}
+              </Button>
+            )}
+          </Link>
         </Col>
         {allowClose && (
           <img
