@@ -6,20 +6,12 @@ import { NotificationBanner } from '@pabau/ui'
 import PaymentNotificationImage from '../../assets/images/payment-type-notify-image.png'
 
 const LIST_QUERY = gql`
-  query payment_types(
-    $isActive: Boolean = true
-    $searchTerm: String = ""
-    $offset: Int
-    $limit: Int
-  ) {
+  query payment_types($isActive: Boolean = true, $offset: Int, $limit: Int) {
     payment_types(
       offset: $offset
       limit: $limit
       order_by: { order: desc }
-      where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-      }
+      where: { is_active: { _eq: $isActive } }
     ) {
       __typename
       id
@@ -34,16 +26,8 @@ const LIST_QUERY = gql`
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query payment_types_aggregate(
-    $isActive: Boolean = true
-    $searchTerm: String = ""
-  ) {
-    payment_types_aggregate(
-      where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-      }
-    ) {
+  query payment_types_aggregate($isActive: Boolean = true) {
+    payment_types_aggregate(where: { is_active: { _eq: $isActive } }) {
       aggregate {
         count
       }
@@ -179,7 +163,6 @@ const schema: Schema = {
       fullLower: 'description',
       short: 'Description',
       shortLower: 'description',
-      min: 2,
       // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
       type: 'string',

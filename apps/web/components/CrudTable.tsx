@@ -121,7 +121,7 @@ const CrudTable: FC<P> = ({
   notificationBanner,
   createPage = false,
   createPageOnClick,
-  addFilter,
+  addFilter = true,
   needTranslation = false,
 }) => {
   const [isLoading, setIsLoading] = useState(true)
