@@ -7,6 +7,7 @@ import {
   FileImageOutlined,
   FileProtectOutlined,
   ForkOutlined,
+  AliyunOutlined,
 } from '@ant-design/icons'
 import { Button, BasicModal as LibraryInstallerModal } from '@pabau/ui'
 import { CheckCircleFilled } from '@ant-design/icons'
@@ -92,6 +93,11 @@ const defaultBundleTypes: DefaultBundleType = {
     selected: false,
     title: 'Recall',
     icon: <FieldTimeOutlined />,
+  },
+  Codes: {
+    selected: false,
+    title: 'Codes',
+    icon: <AliyunOutlined />,
   },
 }
 

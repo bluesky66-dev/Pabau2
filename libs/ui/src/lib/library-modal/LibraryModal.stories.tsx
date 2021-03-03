@@ -83,6 +83,11 @@ LibraryInstaller.args = {
       bundleType: 'Recall',
       title: 'Recall',
     },
+    {
+      ID: '182QSA',
+      bundleType: 'Codes',
+      title: 'Codes',
+    },
   ],
   visible: true,
 }
