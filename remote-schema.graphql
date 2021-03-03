@@ -12875,7 +12875,7 @@ enum labs_dashboard_update_column {
 }
 
 """
-lead view 
+lead view
 
 
 columns and relationships of "lead"
