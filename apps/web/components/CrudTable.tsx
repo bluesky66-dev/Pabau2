@@ -124,6 +124,7 @@ const CrudTable: FC<P> = ({
   createPageOnClick,
   addFilter,
   needTranslation = false,
+  ...rest
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [isActive, setIsActive] = useState(true)
@@ -483,7 +484,6 @@ const CrudTable: FC<P> = ({
             </div>
           </MobileHeader>
         </div>
-
         {modalShowing && (
           <CrudModal
             schema={schema}
@@ -497,6 +497,7 @@ const CrudTable: FC<P> = ({
 
         <Layout>
           {showNotificationBanner && notificationBanner}
+          {rest.children}
           <div
             className={classNames(
               styles.tableMainHeading,
@@ -504,14 +505,21 @@ const CrudTable: FC<P> = ({
             )}
           >
             <div style={{ background: '#FFF' }}>
-              <Breadcrumb
-                breadcrumbItems={[
-                  { breadcrumbName: 'Setup', path: 'setup' },
-                  { breadcrumbName: schema.full || schema.short, path: '' },
-                ]}
-              />
-              <Title>{schema.full || schema.short}</Title>
+              {!schema.breadScrumbs?.length && (
+                <Breadcrumb
+                  breadcrumbItems={[
+                    { breadcrumbName: 'Setup', path: 'setup' },
+                    { breadcrumbName: schema.full || schema.short, path: '' },
+                  ]}
+                />
+              )}
+              <Title
+                style={{ paddingBottom: schema.breadScrumbs?.length && '0px' }}
+              >
+                {schema.full || schema.short}
+              </Title>
             </div>
+
             {needTranslation && (
               <div className={styles.btn}>
                 <SimpleDropdown

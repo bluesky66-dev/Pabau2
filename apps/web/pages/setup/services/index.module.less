@@ -1,0 +1,217 @@
+.servicesMain {
+  :global {
+    .ant-card-head,
+    .ant-card-head-title,
+    .ant-card-body {
+      padding: 0px;
+      border: none;
+    }
+    .leftPadding {
+      padding-left: 30px !important;
+    }
+    th.leftPadding {
+      padding-left: 15px !important;
+    }
+    .ant-table-thead > tr > th:hover {
+      background: #eef7fb !important;
+    }
+  }
+  :global {
+    .ant-tabs-top {
+      .ant-tabs-nav-wrap {
+        border-bottom: 1px solid #ecedf0;
+      }
+      .ant-tabs-tab {
+        padding: 15px 50px !important;
+        background-color: transparent !important;
+      }
+    }
+  }
+
+  .header {
+    padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ecedf0;
+
+    .searchDrugsListing {
+      width: 256px;
+      height: 40px;
+      background: #ffffff;
+      border: 1px solid var(--border-color-base);
+
+      &:hover {
+        border-color: #7ec9e0;
+      }
+    }
+    button {
+      margin-left: 10px;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 20px;
+    }
+    :global {
+      div.leftDiv {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .ant-breadcrumb {
+          padding: 0px;
+          margin: 10px 0px 5px 0px;
+        }
+
+        h3 {
+          font-style: normal;
+          font-weight: bold;
+          font-size: 20px;
+          line-height: 25px;
+          color: #3d3d46;
+          margin: 5px 0px 10px 0px;
+        }
+      }
+      div.rightDiv {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+  .body {
+    .library {
+      padding: 10px;
+
+      :global {
+        .ant-col {
+          padding: 10px;
+        }
+      }
+
+      .libraryCard {
+        min-height: 144px;
+        background: #ffffff;
+        border: 1px solid #ecedf0;
+        border-radius: 4px;
+        box-sizing: border-box;
+        border-radius: 3px 4px 4px 3px;
+
+        padding: 20px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        :global {
+          div {
+            margin-bottom: 15px;
+            font-size: 18px;
+          }
+          h4 {
+            font-style: normal;
+            font-size: 14px;
+            line-height: 20px;
+            text-transform: capitalize;
+            color: #3d3d46;
+            margin-bottom: 0px;
+          }
+          p {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 22px;
+            color: #9292a3 !important;
+            margin-bottom: 0px;
+          }
+        }
+
+        &:hover {
+          cursor: pointer;
+          border-color: transparent;
+          box-shadow: 4px 0px 20px rgba(0, 34, 65, 0.1);
+
+          * {
+            color: #54b2d3;
+          }
+        }
+      }
+    }
+  }
+}
+.active-btn {
+  background: rgba(84, 178, 211, 0.05);
+  border-radius: 4px;
+  border: 1px solid rgba(84, 178, 211, 0.5);
+  color: var(--primary-color);
+  cursor: pointer;
+  font-family: Circular-Std-Book;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 20px;
+  padding: 1px 12px;
+  width: 106px;
+  text-transform: none;
+  height: 24px;
+}
+
+.disable-source-btn {
+  background: rgba(165, 169, 170, 0.05);
+  border: 1px solid rgba(165, 169, 170, 0.5);
+  color: #a5a9aa;
+  font-family: Circular-Std-Book;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 20px;
+  padding: 1px 12px;
+  width: 106px;
+  border-radius: 4px;
+  height: 24px;
+  text-transform: none;
+  cursor: not-allowed;
+}
+:global .ant-popover-inner-content {
+  display: flex;
+  justify-content: center;
+  padding: 0px;
+  .filterContent {
+    min-width: 320px !important;
+    h2 {
+      margin: 0px;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 18px;
+      color: #3d3d46;
+    }
+    label {
+      font-size: 14px;
+      line-height: 18px;
+      display: flex;
+      align-items: center;
+      color: #9292a3;
+      margin-bottom: 5px;
+    }
+
+    .ant-card-body {
+      & > div {
+        max-width: 144px;
+        margin-bottom: 15px;
+
+        &:last-child {
+          max-width: 100% !important;
+          margin-bottom: 0px;
+        }
+        .filtersInnerButtons {
+          display: flex;
+          justify-content: flex-end;
+          margin-top: 15px;
+          button {
+            margin-left: 10px;
+            margin-bottom: 0px;
+          }
+        }
+      }
+    }
+  }
+}
