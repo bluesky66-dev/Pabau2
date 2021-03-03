@@ -20,6 +20,7 @@ interface P {
   ref?: unknown
   standardMessage?: string
   hideReminderTimeFrameTabPane?: boolean
+  hideReminderSettingTabPane?: boolean
   hideRequestConfirmationOption?: boolean
   hideMedicalHistoryOption?: boolean
   hideAllowReschedulingOption?: boolean
@@ -45,6 +46,7 @@ const Index: FC<P> = forwardRef(
       hideDisplayPolicyOption = false,
       hideServiceOption = false,
       hideEmployeeNameOption = false,
+      hideReminderSettingTabPane = true,
       type = '',
       smsCustom = '',
       isTabComponent = true,
@@ -57,6 +59,7 @@ const Index: FC<P> = forwardRef(
   ) => {
     const [enableReminder, setEnableReminder] = useState(false)
     const [smartDelivery, setSmartDelivery] = useState(false)
+    const [smartFramework, setSmartFramework] = useState(false)
     const [requestConfirmation, setRequestConfirmation] = useState(true)
     const [allowRescheduling, setAllowRescheduling] = useState(true)
     const [allowCancellation, setAllowCancellation] = useState(true)
@@ -128,6 +131,8 @@ const Index: FC<P> = forwardRef(
               onEnableReminder={(value) => setEnableReminder(value)}
               smartDelivery={smartDelivery}
               onSmartDelivery={(value) => setSmartDelivery(value)}
+              smartFramework={smartFramework}
+              onSmartFramework={(value) => setSmartFramework(value)}
               requestConfirmation={requestConfirmation}
               onRequestConfirmation={(value) => setRequestConfirmation(value)}
               allowRescheduling={allowRescheduling}
@@ -165,6 +170,7 @@ const Index: FC<P> = forwardRef(
               hideDisplayPolicyOption={hideDisplayPolicyOption}
               hideMedicalHistoryOption={hideMedicalHistoryOption}
               hideReminderTimeFrameTabPane={hideReminderTimeFrameTabPane}
+              hideReminderSettingTabPane={hideReminderSettingTabPane}
               hideEmployeeNameOption={hideEmployeeNameOption}
               hideServiceOption={hideServiceOption}
             />

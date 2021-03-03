@@ -45,6 +45,7 @@ const Index: FC = () => {
         hideDisplayPolicyOption={true}
         hideServiceOption={true}
         hideEmployeeNameOption={true}
+        hideReminderSettingTabPane={false}
         standardMessage={
           'The default email template you will send when clients purchase a gift voucher'
         }
