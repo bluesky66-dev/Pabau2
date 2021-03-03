@@ -11,6 +11,7 @@
 .user-detail-main-wrapper {
   background: #FFFFFF;
   border-radius: 4px;
+  min-height: 100vh;
   .mobile-user-header {
     display: none;
     align-items: center;
@@ -99,6 +100,10 @@
     border-top: 1px solid #ECEDF0;
     :global .ant-tabs {
       .ant-tabs-nav {
+        min-height: 100vh;
+        @media screen and (max-width: 767px) {
+          min-height: auto;
+        }
         .ant-tabs-nav-wrap {
           width: 200px;
           .ant-tabs-nav-list {
@@ -201,6 +206,13 @@
         .ant-checkbox-wrapper {
           margin-left: 0;
           margin-bottom: 22px;
+          display: flex;
+          .ant-checkbox {
+            @media screen and (max-width: 992px) {
+              display: flex;
+              align-items: center;
+            }
+          }
         }
       }
     }
@@ -264,6 +276,12 @@
     .chart-box {
       border: 1px solid #ECEDF0;
       padding: 16px;
+      .custom-graphic-chart {
+        @media screen and (max-width: 767px) {
+          display: flex;
+          justify-content: center;
+        }
+      }
       p {
         font-weight: 500;
         font-size: 14px;

@@ -65,15 +65,10 @@ export const DocumentUploadModalStory: FC<P> = ({
     setOpen(false)
   }
 
-  const onFolderChange = (value) => {
-    console.log('folder', value)
-  }
-
   return (
     <DocumentUploadModal
       visible={open}
       onCancel={handleClose}
-      onFolderChange={onFolderChange}
       title={title}
       avatarSrc={avatarSrc}
       userName={userName}

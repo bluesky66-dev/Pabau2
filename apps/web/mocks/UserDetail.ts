@@ -458,3 +458,79 @@ export const feature = [
     ],
   },
 ]
+
+export const userDetailDocuments = {
+  name: 'Charlotte Abbott',
+  position: 'Sr. HR Administrator',
+}
+export const documentsFolder = [
+  {
+    name: 'Signed Documents',
+    files: [
+      {
+        key: '1',
+        name: 'Company Handbook.pdf',
+        status: 'Shared',
+        addedByDate: 'Added 07/09/2020 by Charlotte Abbott',
+        size: '25.5 MB',
+      },
+    ],
+  },
+  {
+    name: 'Resumes and Applications',
+    files: [
+      {
+        key: '2',
+        name: 'Company Handbook.pdf',
+        status: 'Shared',
+        addedByDate: 'Added 07/09/2020 by Charlotte Abbott',
+        size: '25.5 MB',
+      },
+      {
+        key: '3',
+        name: '1-9 (2017).pdf',
+        status: 'Shared',
+        addedByDate: 'Added 07/09/2020 by Charlotte Abbott',
+        size: '25.5 MB',
+      },
+    ],
+  },
+  {
+    name: 'Workflow Attachments',
+    files: [
+      {
+        key: '4',
+        name: 'Company Handbook.pdf',
+        status: 'Shared',
+        addedByDate: 'Added 07/09/2020 by Charlotte Abbott',
+        size: '25.5 MB',
+      },
+      {
+        key: '5',
+        name: '1-9 (2017).pdf',
+        status: 'Shared',
+        addedByDate: 'Added 07/09/2020 by Charlotte Abbott',
+        size: '25.5 MB',
+      },
+    ],
+  },
+  {
+    name: 'Tasklist Attachments',
+    files: [
+      {
+        key: '6',
+        name: 'Company Handbook.pdf',
+        status: 'Shared',
+        addedByDate: 'Added 07/09/2020 by Charlotte Abbott',
+        size: '25.5 MB',
+      },
+      {
+        key: '7',
+        name: '1-9 (2017).pdf',
+        status: 'Shared',
+        addedByDate: 'Added 07/09/2020 by Charlotte Abbott',
+        size: '25.5 MB',
+      },
+    ],
+  },
+]

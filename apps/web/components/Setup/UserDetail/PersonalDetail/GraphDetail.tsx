@@ -20,7 +20,7 @@ const GraphDetail: FC<GraphDetailProps> = ({ graphData }) => {
       <div className={styles.chartBox}>
         <p>This week</p>
         <span>{graphData.daysLeft}</span>
-        <div>
+        <div className={styles.customGraphicChart}>
           <HighchartsProvider Highcharts={Highcharts}>
             <HighchartsChart
               chart={{ type: 'column' }}

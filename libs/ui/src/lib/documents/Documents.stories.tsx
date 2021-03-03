@@ -13,7 +13,7 @@ BasicDocuments.args = {
   headingLabel: 'Documents',
   folders: [
     {
-      name: 'Resumes and Applications (0)',
+      name: 'Resumes and Applications',
       files: [
         {
           key: 1,

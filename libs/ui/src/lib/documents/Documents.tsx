@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react'
+import React, { FC } from 'react'
 import styles from './Documents.module.less'
 import { Button, Checkbox, Accordion, DotButton } from '@pabau/ui'
 import FileIcon from './FileIcon.svg'
@@ -11,50 +11,34 @@ import {
 import { Select } from 'antd'
 const { Option } = Select
 
-interface Files {
+export interface Files {
   key: string
   status: string
   name: string
   addedByDate: string
   size: string
 }
-interface Folders {
+export interface Folders {
   name: string
   files: Files[]
 }
 
-/* eslint-disable-next-line */
 export interface DocumentsProps {
   headingLabel: string
   folders: Folders[]
+  handleUpload: () => void
+  handleDelete?: (file: Files) => void
+  handleSortChange?: (value: string) => void
 }
 
 export const Documents: FC<DocumentsProps> = ({
   headingLabel,
   folders,
+  handleUpload,
+  handleDelete,
+  handleSortChange,
   ...rest
 }) => {
-  const fileInputRef = useRef<HTMLInputElement>(null)
-
-  const chooseFile = () => {
-    if (fileInputRef?.current) {
-      fileInputRef.current.click()
-    }
-  }
-
-  const DotMenuOptions = [
-    {
-      key: 1,
-      icon: <FileOutlined />,
-      label: 'Rename',
-    },
-    {
-      key: 2,
-      icon: <DeleteOutlined />,
-      label: 'Delete',
-    },
-  ]
-
   return (
     <div className={styles.documentsMain}>
       <div className={styles.header}>
@@ -66,11 +50,11 @@ export const Documents: FC<DocumentsProps> = ({
             <div className="label">Sort by</div>
             <div>
               <Select
-                defaultValue="lucy"
                 size="large"
                 style={{ width: '100%' }}
+                onChange={handleSortChange}
               >
-                <Option value="lucy">Lucy</Option>
+                <Option value="Name A-Z">Name A-Z</Option>
               </Select>
             </div>
           </div>
@@ -80,17 +64,16 @@ export const Documents: FC<DocumentsProps> = ({
               size="large"
               className={styles.addFolder}
               icon={<FolderAddOutlined />}
-            ></Button>
+            />
           </div>
-          <div onClick={chooseFile}>
-            <input type="file" style={{ display: 'none' }} ref={fileInputRef} />
+          <div>
             <Button
               type="default"
               size="large"
               className={styles.upload}
               icon={<DownloadOutlined />}
+              onClick={handleUpload}
             >
-              {/* <img src={UploadIcon} alt="Upload" width="100%" /> */}
               <div>Upload</div>
             </Button>
           </div>
@@ -103,7 +86,9 @@ export const Documents: FC<DocumentsProps> = ({
             folders.length > 0 &&
             folders.map((folder, index) => (
               <div key={`folder${index}`}>
-                <Accordion headerLabel={folder.name}>
+                <Accordion
+                  headerLabel={`${folder.name} (${folder.files.length})`}
+                >
                   {folder.files.length > 0 &&
                     folder.files.map((file, ind) => (
                       <div
@@ -136,7 +121,23 @@ export const Documents: FC<DocumentsProps> = ({
                         </div>
                         <div className="dottedMenu">
                           <div>
-                            <DotButton menuList={DotMenuOptions} />
+                            <DotButton
+                              menuList={[
+                                {
+                                  key: 1,
+                                  icon: <FileOutlined />,
+                                  label: 'Rename',
+                                },
+                                {
+                                  key: 2,
+                                  icon: <DeleteOutlined />,
+                                  label: 'Delete',
+                                  onClick: () => {
+                                    handleDelete?.(file)
+                                  },
+                                },
+                              ]}
+                            />
                           </div>
                         </div>
                       </div>

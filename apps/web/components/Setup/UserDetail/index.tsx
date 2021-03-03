@@ -14,6 +14,7 @@ import styles from './UserDetail.module.less'
 import { userDetail, fields, graphData } from '../../../mocks/UserDetail'
 import PersonalDetail from './PersonalDetail/PersonalDetail'
 import Permission from './Permissions/Permissions'
+import Document from './Documents/Documents'
 import CustomizeFields from './PersonalDetail/CustomizeFields'
 import AvatarImage from '../../../assets/images/avatar.png'
 import { LeftOutlined } from '@ant-design/icons'
@@ -112,7 +113,7 @@ const Index: FC = () => {
                 <Permission />
               </TabPane>
               <TabPane tab={<span>Documents</span>} key="4">
-                Content of Tab
+                <Document />
               </TabPane>
               <TabPane tab={<span>Emergency</span>} key="5">
                 Content of Tab

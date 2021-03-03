@@ -27,18 +27,21 @@ export interface DocumentUploadModalProps {
   position: string
   checkboxTooltip?: string
   onCancel?: () => void
-  onFolderChange?: (value) => void
   onFileDelete?(file: UploadProps): void
   onFileChange?(file: UploadProps): void
   draggerProps?: DocumentUploadDraggableProp
   folderOptions: FolderOptions[]
   acceptFileType?: string
+  onUpload?: (
+    fileList: UploadProps[],
+    folderName: string,
+    shared: boolean
+  ) => void
 }
 
-const DocumentUploadModal: FC<DocumentUploadModalProps> = ({
+export const DocumentUploadModal: FC<DocumentUploadModalProps> = ({
   visible,
   onCancel,
-  onFolderChange,
   title,
   avatarSrc,
   userName,
@@ -48,9 +51,12 @@ const DocumentUploadModal: FC<DocumentUploadModalProps> = ({
   onFileDelete,
   draggerProps,
   acceptFileType,
+  onUpload,
   ...props
 }) => {
   const [fileList, setFileList] = useState<UploadProps[]>([])
+  const [shared, setShared] = useState<boolean>(false)
+  const [folder, setFolder] = useState<string>('')
 
   const handlefileChanges = (files) => {
     setFileList(files)
@@ -60,6 +66,18 @@ const DocumentUploadModal: FC<DocumentUploadModalProps> = ({
   const handleDeleteFiles = (files) => {
     setFileList(files)
     onFileDelete?.(files)
+  }
+
+  const handleSharedChange = (e) => {
+    setShared(e.target.checked)
+  }
+
+  const onFolderChange = (value: string) => {
+    setFolder(value)
+  }
+
+  const handleUpload = () => {
+    onUpload?.(fileList, folder, shared)
   }
 
   const renderContent = () => {
@@ -97,7 +115,11 @@ const DocumentUploadModal: FC<DocumentUploadModalProps> = ({
             </Select>
           </div>
           <div>
-            <Checkbox className={styles.checkBox}>
+            <Checkbox
+              className={styles.checkBox}
+              checked={shared}
+              onChange={handleSharedChange}
+            >
               <span className={styles.checkLabel}>
                 {'Share these File(s) with the Employee'}
               </span>
@@ -119,6 +141,7 @@ const DocumentUploadModal: FC<DocumentUploadModalProps> = ({
               disabled={fileList.length === 0}
               size="large"
               type="primary"
+              onClick={handleUpload}
             >
               Upload
             </Button>
