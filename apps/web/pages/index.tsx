@@ -5,24 +5,44 @@ import useTranslation from '../hooks/useTranslation'
 import Grid from '../components/Grid'
 import Layout from '../components/Layout/Layout'
 import CommonHeader from './setup/common-header'
-import useLogin from '../hooks/useLogin'
+import useLogin from '../hooks/authentication/useLogin'
 import Login from './login'
-import { UserContext } from '../hooks/UserContext'
+import { gql, useQuery } from '@apollo/client'
+
+const CURRENT_USER = gql`
+  query retrieveAuthenticatedUser($Id: Int!, $CompanyId: Int!) {
+    user(where: { id: $Id }) {
+      username
+      full_name
+    }
+    company(where: { id: $CompanyId }) {
+      details {
+        company_name
+      }
+    }
+  }
+`
 
 const Index: FC = () => {
   const { t } = useTranslation()
   const [showGrid, setShowGrid] = useState(false)
   const [authenticated, user] = useLogin(false)
+  const { data } = useQuery(CURRENT_USER, {
+    variables: {
+      Id: user?.user ?? null,
+      CompanyId: user?.company ?? null,
+    },
+  })
 
   return authenticated ? (
-    <UserContext.Provider value={user}>
+    <>
       <CommonHeader />
-      <Layout pageTitle={t('common', 'index.title')} {...user}>
+      <Layout pageTitle={t('common', 'index.title')} {...data}>
         {!showGrid && <Button onClick={() => setShowGrid(true)}>Edit</Button>}
         <hr />
         {showGrid && <Grid />}v{version}
       </Layout>
-    </UserContext.Provider>
+    </>
   ) : (
     <Login />
   )
