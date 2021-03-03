@@ -97,6 +97,7 @@ export const PeerFeedback: FC<PeerFeedbackProps> = ({
     const p1 = Math.round((reviewData.value / reviewData.total) * 100)
     const p2 = Math.round((reviewData.value / reviewData.total) * 1000) / 10
     const p3 = 100 - p2
+    const val = { p1: p1, p2: p2, p3: p3 }
     return [p1, p2, p3]
   }
 
