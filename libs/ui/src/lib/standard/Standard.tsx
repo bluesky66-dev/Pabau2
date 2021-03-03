@@ -28,6 +28,9 @@ interface P {
   hideReminderTimeFrameTabPane?: boolean
   smartDelivery: boolean
   onSmartDelivery: (boolean) => void
+  hideReminderSettingTabPane?: boolean
+  smartFramework: boolean
+  onSmartFramework: (boolean) => void
   requestConfirmation: boolean
   onRequestConfirmation: (boolean) => void
   hideRequestConfirmationOption?: boolean
@@ -79,6 +82,9 @@ export const Standard: FC<P> = ({
   smartDelivery,
   onSmartDelivery,
   hideReminderTimeFrameTabPane = false,
+  smartFramework,
+  onSmartFramework,
+  hideReminderSettingTabPane = true,
   requestConfirmation,
   onRequestConfirmation,
   hideRequestConfirmationOption = false,
@@ -210,6 +216,54 @@ export const Standard: FC<P> = ({
                       <Col>
                         <span className={styles.reminder}>
                           Reminder advance notice
+                        </span>
+                      </Col>
+                    </Row>
+                    <Select defaultValue="48" style={{ width: '100%' }}>
+                      <Option value="48">48 hours</Option>
+                      <Option value="24">24 hours</Option>
+                      <Option value="12">12 hours</Option>
+                      <Option value="6">6 hours</Option>
+                    </Select>
+                  </>
+                </Panel>
+              )}
+              {!hideReminderSettingTabPane && (
+                <Panel
+                  className={styles.panelAlign}
+                  header="Reminder Setting"
+                  key="1"
+                >
+                  <>
+                    <Row align="middle">
+                      <Checkbox
+                        className={styles.checkboxStyle}
+                        value="smart_framework"
+                        checked={smartFramework}
+                        onChange={() => onSmartFramework(!smartFramework)}
+                      >
+                        Smart Framework
+                      </Checkbox>
+                      <Tooltip
+                        placement="topLeft"
+                        color="#595959"
+                        title={`"We will intelligently schedule additional confirmations to clients who have a history of forgetting"`}
+                      >
+                        <QuestionCircleOutlined />
+                      </Tooltip>
+                    </Row>
+                    <Row gutter={[0, 16]}>
+                      <Col>
+                        <span className={styles.line1}>
+                          Choose how far in after your reminder notification
+                          messages are sent to clients
+                        </span>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <span className={styles.reminder}>
+                          Reminder after notice
                         </span>
                       </Col>
                     </Row>
