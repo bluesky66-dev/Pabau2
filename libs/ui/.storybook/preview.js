@@ -1,7 +1,5 @@
 import '../src/assets/fonts/fonts.css'
 import 'react-phone-input-2/lib/style.css'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
 import 'react-image-crop/dist/ReactCrop.css'
 import { withI18next } from 'storybook-addon-i18next'
 import i18n from 'i18next'

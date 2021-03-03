@@ -3,7 +3,7 @@ import { useMedia } from 'react-use'
 import { Rate, Popover } from 'antd'
 import { RightOutlined, LeftOutlined } from '@ant-design/icons'
 import { Logo } from '@pabau/ui'
-import Slider from 'react-slick'
+import { Carousel } from 'antd'
 import styles from './ReviewSlider.module.less'
 
 interface TitleType {
@@ -26,6 +26,11 @@ export interface ReviewSliderProps {
   reviews: ReviewType[]
 }
 
+export interface ArrowProps {
+  type: string
+  onClick?: () => void
+}
+
 export const ReviewSlider: FC<ReviewSliderProps> = ({
   title,
   execellentData,
@@ -38,7 +43,7 @@ export const ReviewSlider: FC<ReviewSliderProps> = ({
     '(min-width: 768px) and (max-width: 1199px)',
     false
   )
-  const Arrow = (props) => {
+  const Arrow = (props: ArrowProps) => {
     const className = props.type === 'next' ? 'nextArrow' : 'prevArrow'
     return (
       <span className={className} onClick={props.onClick}>
@@ -87,7 +92,7 @@ export const ReviewSlider: FC<ReviewSliderProps> = ({
       <h1 className={styles.title}>{title}</h1>
       <Popover content={content} visible={true} placement="top">
         <div className={styles.sliderWrapper}>
-          <Slider
+          <Carousel
             nextArrow={<Arrow type="next" />}
             prevArrow={<Arrow type="prev" />}
             dots={false}
@@ -96,7 +101,7 @@ export const ReviewSlider: FC<ReviewSliderProps> = ({
             arrows={true}
           >
             {renderSlides()}
-          </Slider>
+          </Carousel>
         </div>
       </Popover>
     </div>
