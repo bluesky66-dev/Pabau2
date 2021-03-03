@@ -117,7 +117,7 @@ export const Index: NextPage = () => {
     },
     deleteBtnLabel: 'Yes, Delete Source',
     fields: {
-      source_name: {
+      name: {
         full: 'Friendly Name',
         fullLower: 'friendly name',
         short: t('marketingsource-name-textfield.translation'),
@@ -129,7 +129,7 @@ export const Index: NextPage = () => {
         cssWidth: 'max',
         type: 'string',
       },
-      public: {
+      is_active: {
         full: t('marketingsource-tableColumn-active.translation'),
         type: 'number',
         defaultvalue: 1,
