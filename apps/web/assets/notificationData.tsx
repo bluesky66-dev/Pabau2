@@ -241,7 +241,7 @@ const notificationData = {
         'The email the client receives when they register to your Online Booking portal',
       icon: <InteractionOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/connect-registration',
       disabled: true,
     },
     {
