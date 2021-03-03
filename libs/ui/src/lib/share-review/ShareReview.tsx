@@ -3,7 +3,7 @@ import { toPng } from 'html-to-image'
 import { Card, Image, Rate, Row, Col } from 'antd'
 import { StarFilled } from '@ant-design/icons'
 import './ShareReview.module.less'
-import header from '../../../../../apps/web/assets/images/brands/Pabau.png'
+import header from '../../assets/images/brands/Pabau.svg'
 export interface ShareReviewProps {
   text: string
   reviewScore: number
@@ -27,7 +27,13 @@ export const ShareReview: FC<ShareReviewProps> = (props: ShareReviewProps) => {
           >
             <div style={{ margin: 20 }}>
               <Row justify="end">
-                <Image src={header} />
+                <Image
+                  style={{
+                    width: 100,
+                    height: 100,
+                  }}
+                  src={header}
+                />
               </Row>
               <Row>
                 <span style={{ color: '#e4e4e4', fontWeight: 'bold' }}>
