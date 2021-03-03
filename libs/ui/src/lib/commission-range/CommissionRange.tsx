@@ -40,7 +40,7 @@ export const CommissionRange: FC<CommissionRangeProps> = ({
         key={index}
         className={styles.rangeItem}
         bar-color={colors[index % 3]}
-        style={{ width: `${width}%`, zIndex: rangeItems.length - index }}
+        style={{ width: `${width > 100 ? 100: width}%`, zIndex: rangeItems.length - index }}
       >
         <span className={styles.rangeValue}>{rangeItem.percent}%</span>
         <div className={styles.rangeBar}></div>

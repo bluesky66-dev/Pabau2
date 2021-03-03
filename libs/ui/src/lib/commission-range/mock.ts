@@ -42,15 +42,15 @@ export const productsData = {
   type: 'Service',
   rangeItems: [
     {
-      range: [0, 100],
+      range: [0, 2000],
       percent: 0,
     },
     {
-      range: [100, 500],
-      percent: 1,
+      range: [2000, 6000],
+      percent: 3,
     },
     {
-      range: [500, 9999],
+      range: [6000, 9999],
       percent: 5,
     },
   ],
@@ -58,17 +58,17 @@ export const productsData = {
     {
       name: 'Tom Coleman',
       avatar: 'https://avatars2.githubusercontent.com/u/132554',
-      revenue: 200,
+      revenue: 1000,
     },
     {
       name: 'Zoltan Olah',
       avatar: 'https://avatars0.githubusercontent.com/u/81672',
-      revenue: 2000,
+      revenue: 3000,
     },
     {
       name: 'Tim Hingston',
       avatar: 'https://avatars3.githubusercontent.com/u/1831709',
-      revenue: 6000,
+      revenue: 4000,
     },
     {
       name: 'Dominic Nguyen',
@@ -82,15 +82,15 @@ export const packagesData = {
   type: 'Service',
   rangeItems: [
     {
-      range: [0, 100],
+      range: [0, 3000],
       percent: 0,
     },
     {
-      range: [100, 500],
+      range: [3000, 5000],
       percent: 1,
     },
     {
-      range: [500, 9999],
+      range: [5000, 9999],
       percent: 5,
     },
   ],
@@ -98,7 +98,7 @@ export const packagesData = {
     {
       name: 'Tom Coleman',
       avatar: 'https://avatars2.githubusercontent.com/u/132554',
-      revenue: 200,
+      revenue: 1000,
     },
     {
       name: 'Zoltan Olah',
@@ -108,7 +108,7 @@ export const packagesData = {
     {
       name: 'Tim Hingston',
       avatar: 'https://avatars3.githubusercontent.com/u/1831709',
-      revenue: 6000,
+      revenue: 4500,
     },
     {
       name: 'Dominic Nguyen',
