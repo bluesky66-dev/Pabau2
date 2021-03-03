@@ -10,6 +10,7 @@ import { Tooltip, Input } from 'antd'
 import { Button } from '../button/Button'
 import HighChart from '../high-chart/HighChart'
 import styles from './Newsletter.module.less'
+import FullScreenReportModal from '../full-screen-report-modal/FullScreenReportModal'
 
 const { Search } = Input
 export interface NewsletterProps {
@@ -22,6 +23,9 @@ export interface NewsletterProps {
   OpensColor: string
   ClicksColor: string
   ShowSizeChanger: boolean
+  ModalHeader: boolean
+  ModalVisible: boolean
+  ModalTitle: string
 }
 
 export interface DataProps {
@@ -52,6 +56,9 @@ export const Newsletter: FC<NewsletterProps> = ({
   OpensColor,
   ClicksColor,
   ShowSizeChanger,
+  ModalHeader,
+  ModalVisible,
+  ModalTitle,
 }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([])
   const [dataSource, setDataSource] = useState<DataProps[]>(data)
@@ -189,70 +196,77 @@ export const Newsletter: FC<NewsletterProps> = ({
   ]
 
   return (
-    <div className={styles.newsletterMainWrapper}>
-      <div className={styles.highChartBlock}>
-        <HighChart
-          ChartTitle={ChartTitle}
-          OpensLabel={OpensLabel}
-          ClicksLabel={ClicksLabel}
-          OpensColor={OpensColor}
-          ClicksColor={ClicksColor}
-        />
-      </div>
-      <div className={styles.statisticsSubscribersBlock}>
-        <div className={styles.statisticsBlock}>
-          <h2>{TilesTitle}</h2>
-        </div>
-        <div className={styles.subscribersBlock}>
-          <div className={styles.head}>
-            <h2>{TableTitle}</h2>
-            <div className={styles.headSearchFilter}>
-              <Search
-                placeholder="Search"
-                onSearch={(e) => {
-                  const currValue = e
-                  const filter = data.filter(
-                    (entry: { name: string; email: string }) => {
-                      return (
-                        entry.name
-                          .toLowerCase()
-                          .includes(currValue.toLowerCase()) ||
-                        entry.email
-                          .toLowerCase()
-                          .includes(currValue.toLowerCase())
-                      )
-                    }
-                  )
-                  setDataSource(filter)
-                }}
-                style={{ width: 200 }}
-              />
-              <Button
-                color="#54B2D3"
-                backgroundColor="white"
-                className={styles.filterBtn}
-                icon={<FilterOutlined />}
-              >
-                Filter
-              </Button>
-            </div>
-          </div>
-          <div className={styles.subscribersTable}>
-            <Table
-              rowSelection={rowSelection}
-              columns={columns}
-              dataSource={dataSource as never[]}
-              showSizeChanger={ShowSizeChanger}
-              onRow={(record) => ({
-                onClick: () => {
-                  selectRow(record)
-                },
-              })}
+    <FullScreenReportModal
+      title={() => ModalTitle}
+      visible={ModalVisible}
+      header={ModalHeader}
+      content={() => (
+        <div className={styles.newsletterMainWrapper}>
+          <div className={styles.highChartBlock}>
+            <HighChart
+              ChartTitle={ChartTitle}
+              OpensLabel={OpensLabel}
+              ClicksLabel={ClicksLabel}
+              OpensColor={OpensColor}
+              ClicksColor={ClicksColor}
             />
           </div>
+          <div className={styles.statisticsSubscribersBlock}>
+            <div className={styles.statisticsBlock}>
+              <h2>{TilesTitle}</h2>
+            </div>
+            <div className={styles.subscribersBlock}>
+              <div className={styles.head}>
+                <h2>{TableTitle}</h2>
+                <div className={styles.headSearchFilter}>
+                  <Search
+                    placeholder="Search"
+                    onSearch={(e) => {
+                      const currValue = e
+                      const filter = data.filter(
+                        (entry: { name: string; email: string }) => {
+                          return (
+                            entry.name
+                              .toLowerCase()
+                              .includes(currValue.toLowerCase()) ||
+                            entry.email
+                              .toLowerCase()
+                              .includes(currValue.toLowerCase())
+                          )
+                        }
+                      )
+                      setDataSource(filter)
+                    }}
+                    style={{ width: 200 }}
+                  />
+                  <Button
+                    color="#54B2D3"
+                    backgroundColor="white"
+                    className={styles.filterBtn}
+                    icon={<FilterOutlined />}
+                  >
+                    Filter
+                  </Button>
+                </div>
+              </div>
+              <div className={styles.subscribersTable}>
+                <Table
+                  rowSelection={rowSelection}
+                  columns={columns}
+                  dataSource={dataSource as never[]}
+                  showSizeChanger={ShowSizeChanger}
+                  onRow={(record) => ({
+                    onClick: () => {
+                      selectRow(record)
+                    },
+                  })}
+                />
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    />
   )
 }
 

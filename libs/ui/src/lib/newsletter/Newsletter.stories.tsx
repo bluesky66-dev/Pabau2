@@ -15,6 +15,9 @@ export default {
     OpensColor: 'rgba(84, 178, 211, 0.40)',
     ClicksColor: 'rgba(101, 205, 152, 0.40)',
     ShowSizeChanger: true,
+    ModalHeader: true,
+    ModalVisible: true,
+    ModalTitle: 'FTT Skin Clinics update',
   },
   argTypes: {
     data: {
@@ -60,6 +63,21 @@ export default {
     ShowSizeChanger: {
       control: {
         type: 'boolean',
+      },
+    },
+    ModalHeader: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    ModalVisible: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    ModalTitle: {
+      control: {
+        type: 'text',
       },
     },
   },
