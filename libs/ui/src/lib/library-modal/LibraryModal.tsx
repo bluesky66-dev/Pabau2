@@ -1,13 +1,22 @@
 import React, { FC, useState, useEffect, ReactNode } from 'react'
 import { Row, Col } from 'antd'
+import {
+  FieldTimeOutlined,
+  AliwangwangOutlined,
+  MedicineBoxOutlined,
+  FileImageOutlined,
+  FileProtectOutlined,
+  ForkOutlined,
+} from '@ant-design/icons'
 import { Button, BasicModal as LibraryInstallerModal } from '@pabau/ui'
 import { CheckCircleFilled } from '@ant-design/icons'
 import { ReactComponent as Consent } from '../../assets/images/form-type/consent.svg'
 import { ReactComponent as EPaper } from '../../assets/images/form-type/file-pdf.svg'
 import { ReactComponent as LabForm } from '../../assets/images/form-type/lab-form.svg'
-import { ReactComponent as MedicalHistory } from '../../assets/images/form-type/medical-history.svg'
 import { ReactComponent as Presciption } from '../../assets/images/form-type/presciption.svg'
 import { ReactComponent as Treatment } from '../../assets/images/form-type/treatment.svg'
+import AfterCare from './assets/AfterCare'
+import BeforeCare from './assets/BeforeCare'
 import styles from './LibraryModal.module.less'
 
 interface DefaultBundleType {
@@ -22,7 +31,7 @@ const defaultBundleTypes: DefaultBundleType = {
   ConsentForm: {
     selected: false,
     title: 'Consent Form',
-    icon: <MedicalHistory />,
+    icon: <FileProtectOutlined />,
   },
   MedicalForm: {
     selected: false,
@@ -32,51 +41,62 @@ const defaultBundleTypes: DefaultBundleType = {
   TreatmentForm: {
     selected: false,
     title: 'Treatment Form',
-    icon: <Treatment />,
+    icon: <LabForm />,
   },
   PrescriptionForm: {
     selected: false,
     title: 'Prescription Form',
-    icon: <EPaper />,
+    icon: <Presciption />,
   },
   Service: {
     selected: false,
     title: 'Service',
-    icon: <Presciption />,
+    icon: <MedicineBoxOutlined />,
   },
   ServiceImage: {
     selected: false,
     title: 'Service Image',
-    icon: <LabForm />,
+    icon: <EPaper />,
   },
   ProductImage: {
     selected: false,
     title: 'Product Image',
-    icon: <LabForm />,
+    icon: <FileImageOutlined />,
   },
-  Care: {
+  Precare: {
     selected: false,
-    title: 'Care',
-    icon: <LabForm />,
+    title: 'Pre Care',
+    icon: <BeforeCare />,
+  },
+  Aftercare: {
+    selected: false,
+    title: 'After Care',
+    icon: <AfterCare />,
   },
   Stencil: {
     selected: false,
     title: 'Stencil',
-    icon: <LabForm />,
+    icon: <AliwangwangOutlined />,
   },
   Drugs: {
     selected: false,
     title: 'Drugs',
-    icon: <LabForm />,
+    icon: <Treatment />,
   },
   Contraindication: {
     selected: false,
     title: 'Contraindication',
-    icon: <LabForm />,
+    icon: <ForkOutlined />,
+  },
+  Recall: {
+    selected: false,
+    title: 'Recall',
+    icon: <FieldTimeOutlined />,
   },
 }
 
 interface BType {
+  ID?: string
   title: string
   bundleType: string
 }
@@ -140,44 +160,46 @@ export const LibraryModal: FC<LibraryModalProps> = ({
         onCancel={() => onClose?.()}
         modalWidth={modalWidth}
       >
-        <h4 className={styles.subTitle}>{subTitle}</h4>
-        <div className={styles.image}>
-          <div
-            style={{
-              backgroundImage: `url(${image})`,
-              height: `${modalWidth / 2}px`,
-            }}
-          ></div>
-        </div>
-        <div>
-          <Row>
-            {Object.keys(bundleTypesObject).map((key, index) => (
-              <Col key={key} span={6} className={aligns[index % 4]}>
-                <div className={styles.bundleTypeDiv}>
-                  {bundleTypesObject[key].selected && (
-                    <CheckCircleFilled className={styles.bundleTypeChecked} />
-                  )}
-                  <div
-                    className={
-                      bundleTypesObject[key].selected
-                        ? styles.bundleTypeSelected
-                        : ''
-                    }
-                  >
-                    <Button
-                      className={styles.bundleTypeButton}
-                      onClick={() => handleClickItem(key)}
+        <div className={styles.body}>
+          <h4 className={styles.subTitle}>{subTitle}</h4>
+          <div className={styles.image}>
+            <div
+              style={{
+                backgroundImage: `url(${image})`,
+                height: `${modalWidth / 2}px`,
+              }}
+            ></div>
+          </div>
+          <div>
+            <Row>
+              {Object.keys(bundleTypesObject).map((key, index) => (
+                <Col key={key} span={6} className={aligns[index % 4]}>
+                  <div className={styles.bundleTypeDiv}>
+                    {bundleTypesObject[key].selected && (
+                      <CheckCircleFilled className={styles.bundleTypeChecked} />
+                    )}
+                    <div
+                      className={
+                        bundleTypesObject[key].selected
+                          ? styles.bundleTypeSelected
+                          : ''
+                      }
                     >
-                      {bundleTypesObject[key].icon}
-                    </Button>
-                    <p className={styles.formTypeLabel}>
-                      {bundleTypesObject[key].title}
-                    </p>
+                      <Button
+                        className={styles.bundleTypeButton}
+                        onClick={() => handleClickItem(key)}
+                      >
+                        {bundleTypesObject[key].icon}
+                      </Button>
+                      <p className={styles.formTypeLabel}>
+                        {bundleTypesObject[key].title}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </Col>
-            ))}
-          </Row>
+                </Col>
+              ))}
+            </Row>
+          </div>
         </div>
         <div className={styles.footer}>
           <Button type="default" size="large" onClick={() => onClose?.()}>
