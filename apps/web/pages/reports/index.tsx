@@ -1,7 +1,12 @@
 import React, { FC, useState } from 'react'
-import { Card, Typography, Divider, Row, Col } from 'antd'
-import { Breadcrumb } from '@pabau/ui'
-import { SetupSearchInput, ReportsCard } from '@pabau/ui'
+import { Card, Col, Divider, Row, Typography } from 'antd'
+import {
+  Breadcrumb,
+  Notification,
+  NotificationType,
+  ReportsCard,
+  SetupSearchInput,
+} from '@pabau/ui'
 import SearchResults from './../setup/searchResults'
 import Layout from '../../components/Layout/Layout'
 import styles from './reports.module.less'
@@ -12,6 +17,7 @@ const Reports: FC = (props) => {
 
   const [searchData, setSearchData] = useState([])
   const [searchValue, setSearchValue] = useState<string>('')
+  const [reportsData, setReportsData] = useState(reportCardsData)
 
   const handleSearch = (searchTerm: string) => {
     setSearchValue(searchTerm)
@@ -47,7 +53,7 @@ const Reports: FC = (props) => {
     <Layout>
       <Card bodyStyle={{ padding: 0 }}>
         <Row className={styles.headerContainer}>
-          <Col className={styles.nml24}>
+          <Col span={24} sm={10}>
             <Breadcrumb
               breadcrumbItems={[
                 { breadcrumbName: 'Setup', path: 'setup' },
@@ -57,7 +63,7 @@ const Reports: FC = (props) => {
             <div></div>
             <Title>{!searchValue ? 'Reports' : 'Search results'}</Title>
           </Col>
-          <Col span={18}>
+          <Col span={24} sm={14}>
             <div className={styles.search}>
               <SetupSearchInput onChange={handleSearch} />
             </div>
@@ -66,9 +72,16 @@ const Reports: FC = (props) => {
         <Divider style={{ margin: 0 }} />
         {!searchValue ? (
           <Row className={styles.bodyContainer} gutter={24}>
-            {reportCardsData.map((item, index) => {
+            {reportsData.map((item, index) => {
               return (
-                <Col key={index} className={styles.reportContainer}>
+                <Col
+                  key={index}
+                  className={styles.reportContainer}
+                  xs={24}
+                  md={12}
+                  lg={8}
+                  xxl={6}
+                >
                   <ReportsCard
                     reports={item.reports}
                     graphData={item.graphData}
@@ -76,6 +89,21 @@ const Reports: FC = (props) => {
                     graphDescription={item.graphDescription}
                     description={item.description}
                     chartLabel={item.chartLabel}
+                    onReportFavorite={(reportId, isFav) => {
+                      const report = item.reports.find((r) => r.id === reportId)
+                      report.favorite = isFav
+                      reportsData[index] = {
+                        ...item,
+                        reports: [...item.reports],
+                      }
+                      setReportsData([...reportsData])
+                      Notification(
+                        NotificationType.success,
+                        `Success - this report was ${
+                          isFav ? 'favourited' : 'unfavorited'
+                        }`
+                      )
+                    }}
                   />
                 </Col>
               )

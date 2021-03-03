@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Button } from '@pabau/ui'
 import styles from './SingleReport.module.less'
 
 export interface SingleReportProps {
@@ -7,6 +7,7 @@ export interface SingleReportProps {
   reportName?: string
   isNew?: boolean
   favorite?: boolean
+  onReportFavorite?: (isFav: boolean) => void
 }
 
 export const SingleReport: React.FC<SingleReportProps> = ({
@@ -14,11 +15,20 @@ export const SingleReport: React.FC<SingleReportProps> = ({
   reportName,
   isNew,
   favorite,
+  onReportFavorite,
 }) => {
   return (
     <div className={styles.singleReport}>
-      <div className={styles.singleReportContainer}>
-        <div className={styles.singleReportStar}>
+      <div
+        className={styles.singleReportContainer}
+        style={{ width: `calc(100% - ${isNew ? '75px' : '0'})` }}
+      >
+        <Button
+          type="text"
+          size="small"
+          className={styles.singleReportStar}
+          onClick={() => onReportFavorite?.(!favorite)}
+        >
           {favorite ? (
             <svg
               width="14"
@@ -46,12 +56,10 @@ export const SingleReport: React.FC<SingleReportProps> = ({
               />
             </svg>
           )}
-        </div>
-        <span className={styles.singleReportCode}>{reportCode}</span>
-        &nbsp;
-        <span>-</span>
-        &nbsp;
-        <span className={styles.singleReportName}>{reportName}</span>
+        </Button>
+        <span className={styles.singleReportCode}>
+          {reportCode} - {reportName}
+        </span>
       </div>
       {isNew && <div className={styles.singleReportNew}>New</div>}
     </div>

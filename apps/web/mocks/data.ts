@@ -2,8 +2,7 @@ export const reportCardsData = [
   {
     catHeading: 'Sales',
     graphDescription: 'Revenue by week',
-    description:
-      'Monitor your overall finances including sales, refunds, taxes, payments and more',
+    description: 'Monitor your financial activities and business income',
     chartLabel: '£',
     reports: [
       {
@@ -39,8 +38,8 @@ export const reportCardsData = [
       },
       {
         id: 5,
-        reportCode: 'FI006 ',
-        reportName: 'Sales by Employee Detailed Cross',
+        reportCode: 'FI011',
+        reportName: 'Receipts by Service Category',
         isNew: true,
         favorite: false,
       },
@@ -53,8 +52,8 @@ export const reportCardsData = [
       },
       {
         id: 7,
-        reportCode: 'FI011',
-        reportName: 'Receipts by Service Category',
+        reportCode: 'FI022',
+        reportName: 'Daily Performance Stats',
         isNew: false,
         favorite: true,
       },
@@ -65,7 +64,6 @@ export const reportCardsData = [
         isNew: false,
         favorite: false,
       },
-
       {
         id: 9,
         reportCode: 'FI014',
@@ -75,144 +73,158 @@ export const reportCardsData = [
       },
       {
         id: 10,
-        reportCode: 'FI015',
-        reportName: 'Receipts by Employee (Service)',
+        reportCode: 'FI019',
+        reportName: 'VAT Report',
         isNew: true,
         favorite: false,
       },
       {
         id: 11,
-        reportCode: 'FI017',
-        reportName: 'Receipts by Employee Detailed (VAT)',
+        reportCode: 'FI006',
+        reportName: 'Sales by Employee Detailed Cross',
         isNew: true,
         favorite: false,
       },
       {
         id: 12,
-        reportCode: 'FI019',
-        reportName: 'VAT Report',
+        reportCode: 'FI015',
+        reportName: 'Receipts by Employee (Service)',
         isNew: false,
         favorite: true,
       },
 
       {
         id: 13,
-        reportCode: 'FI025',
-        reportName: 'Receipts by Month',
+        reportCode: 'FI016',
+        reportName: 'Receipts by Employee (Retail)',
         isNew: true,
         favorite: false,
       },
 
       {
         id: 14,
+        reportCode: 'FI025',
+        reportName: 'Receipts by Month',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 15,
         reportCode: 'FI026',
         reportName: 'Monthly Taking (Summary)',
         isNew: true,
         favorite: false,
       },
       {
-        id: 15,
-        reportCode: 'FI030',
-        reportName: 'Receipts by Employee (Service)',
-        isNew: true,
-        favorite: false,
-      },
-      {
         id: 16,
-        reportCode: 'FI031',
-        reportName: 'Invoice Activity',
+        reportCode: 'FI030',
+        reportName: 'Raised Invoices',
         isNew: true,
         favorite: false,
       },
       {
         id: 17,
-        reportCode: 'FI035',
-        reportName: 'Receipts by Payment Method',
+        reportCode: 'FI040',
+        reportName: 'Expenses',
         isNew: true,
         favorite: false,
       },
       {
         id: 18,
-        reportCode: 'FI040',
-        reportName: 'Expenses',
+        reportCode: 'FI075',
+        reportName: 'Outstanding Invoices',
         isNew: true,
         favorite: false,
       },
 
       {
         id: 19,
-        reportCode: 'FI055',
-        reportName: 'Unpaid Visits',
-        isNew: true,
-        favorite: false,
-      },
-      {
-        id: 20,
-        reportCode: 'FI060 ',
-        reportName: 'Free Giveaways',
-        isNew: true,
-        favorite: false,
-      },
-      {
-        id: 21,
-        reportCode: 'FI065',
-        reportName: 'Appointment Income Projection',
-        isNew: true,
-        favorite: false,
-      },
-      {
-        id: 22,
-        reportCode: 'FI070',
-        reportName: ' Discount Report',
-        isNew: true,
-        favorite: false,
-      },
-      {
-        id: 23,
-        reportCode: 'FI075',
-        reportName: 'Outstanding Invoices',
-        isNew: true,
-        favorite: false,
-      },
-      {
-        id: 24,
-        reportCode: 'FI080',
-        reportName: ' Sales vs Expense',
-        isNew: true,
-        favorite: false,
-      },
-      {
-        id: 25,
         reportCode: 'FI085',
         reportName: 'Service vs Retail Receipts',
         isNew: true,
         favorite: false,
       },
       {
-        id: 26,
+        id: 20,
         reportCode: 'FI090',
         reportName: 'Aged Insurance Debt Report',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 21,
+        reportCode: 'FI017',
+        reportName: 'Receipts by Employee Detailed (VAT)',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 22,
+        reportCode: 'FI031',
+        reportName: 'Invoice Activity',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 23,
+        reportCode: 'FI035',
+        reportName: 'Receipts by Payment Method',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 24,
+        reportCode: 'FI055',
+        reportName: 'Unpaid Visits',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 25,
+        reportCode: 'FI060',
+        reportName: 'Free Giveaways',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 26,
+        reportCode: 'FI065',
+        reportName: 'Appointment Income Projection',
         isNew: true,
         favorite: false,
       },
 
       {
         id: 27,
-        reportCode: 'FI155',
-        reportName: 'Insurance Report',
+        reportCode: 'FI070',
+        reportName: 'Discount Report',
         isNew: true,
         favorite: false,
       },
       {
         id: 28,
-        reportCode: 'OT001',
-        reportName: 'Sales Conversion',
+        reportCode: 'FI080',
+        reportName: 'Sales vs Expense',
         isNew: true,
         favorite: false,
       },
 
       {
         id: 29,
+        reportCode: 'FI155',
+        reportName: 'Insurance Report',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 30,
+        reportCode: 'OT001',
+        reportName: 'Sales Conversion',
+        isNew: true,
+        favorite: false,
+      },
+      {
+        id: 31,
         reportCode: 'OT002',
         reportName: 'Telesales Report',
         isNew: true,
@@ -237,8 +249,7 @@ export const reportCardsData = [
   {
     catHeading: 'Clients',
     graphDescription: 'New clients by week',
-    description:
-      'Monitor your overall finances including sales, refunds, taxes, payments and more',
+    description: ' Get an accurate understanding of your client’s data',
     chartLabel: 'int',
     reports: [
       {
@@ -251,6 +262,22 @@ export const reportCardsData = [
 
       {
         id: 2,
+        reportCode: 'CO020',
+        reportName: 'New Clients',
+        isNew: true,
+        favorite: false,
+      },
+
+      {
+        id: 3,
+        reportCode: 'CO045',
+        reportName: 'Big Spender by Receipt',
+        isNew: true,
+        favorite: true,
+      },
+
+      {
+        id: 4,
         reportCode: 'CO003',
         reportName: 'Birthday',
         isNew: true,
@@ -258,7 +285,7 @@ export const reportCardsData = [
       },
 
       {
-        id: 3,
+        id: 5,
         reportCode: 'CO010',
         reportName: 'Outstanding Packages',
         isNew: true,
@@ -266,55 +293,39 @@ export const reportCardsData = [
       },
 
       {
-        id: 4,
-        reportCode: 'CO021',
-        reportName: 'Booked Appointments',
-        isNew: true,
-        favorite: false,
-      },
-
-      {
-        id: 5,
-        reportCode: 'CO025',
-        reportName: 'Missed/Cancelled Appoint...',
-        isNew: true,
-        favorite: true,
-      },
-
-      {
         id: 6,
-        reportCode: 'CO030',
-        reportName: 'Last Spend',
+        reportCode: 'CO060',
+        reportName: 'Duplicate Clients',
         isNew: false,
         favorite: false,
       },
 
       {
         id: 7,
-        reportCode: 'CO031',
-        reportName: 'Last Visit',
-        isNew: false,
-        favorite: true,
-      },
-      {
-        id: 8,
-        reportCode: 'CO035 ',
+        reportCode: 'CO035',
         reportName: 'Clients by Location',
         isNew: false,
         favorite: true,
       },
       {
+        id: 8,
+        reportCode: 'CO050',
+        reportName: 'Client Receipts by Category',
+        isNew: false,
+        favorite: true,
+      },
+      {
         id: 9,
-        reportCode: 'CO045',
-        reportName: 'Big Spender by Receipt',
+        reportCode: 'CO030',
+        reportName: 'Last Spend',
         isNew: false,
         favorite: true,
       },
 
       {
         id: 10,
-        reportCode: 'CO050',
-        reportName: 'Client Receipts by Category',
+        reportCode: 'CO031',
+        reportName: 'Last Visit',
         isNew: false,
         favorite: true,
       },
@@ -327,111 +338,104 @@ export const reportCardsData = [
       },
       {
         id: 12,
-        reportCode: 'CO060',
-        reportName: 'Duplicate Clients',
-        isNew: false,
-        favorite: true,
-      },
-      {
-        id: 13,
         reportCode: 'CO105',
         reportName: 'Patient Prescriptions',
         isNew: false,
         favorite: true,
       },
       {
-        id: 14,
+        id: 13,
         reportCode: 'CO065',
         reportName: 'Client Retail Purchases',
         isNew: false,
         favorite: true,
       },
       {
-        id: 15,
+        id: 14,
         reportCode: 'CO070',
         reportName: 'Account Balance',
         isNew: false,
         favorite: true,
       },
       {
-        id: 16,
+        id: 15,
         reportCode: 'CO075',
         reportName: 'Client Service Sales',
         isNew: false,
         favorite: true,
       },
       {
-        id: 17,
+        id: 16,
         reportCode: 'CO147',
         reportName: 'Medical Data Report',
         isNew: false,
         favorite: true,
       },
       {
-        id: 18,
+        id: 17,
         reportCode: 'CO110',
         reportName: 'Clients Treatment Interest',
         isNew: false,
         favorite: true,
       },
       {
-        id: 19,
+        id: 18,
         reportCode: 'CO111',
         reportName: 'Never Purchased Before',
         isNew: false,
         favorite: true,
       },
       {
-        id: 20,
+        id: 19,
         reportCode: 'CO115',
         reportName: 'Client Enquiry Conversion',
         isNew: false,
         favorite: true,
       },
       {
-        id: 21,
+        id: 20,
         reportCode: 'CO130',
         reportName: 'Product Consumption',
         isNew: false,
         favorite: true,
       },
       {
-        id: 22,
+        id: 21,
         reportCode: 'CO135',
         reportName: 'Account Activity',
         isNew: false,
         favorite: true,
       },
       {
-        id: 23,
+        id: 22,
         reportCode: 'CO140',
         reportName: 'Last Customer Bookings by Employee',
         isNew: false,
         favorite: true,
       },
       {
-        id: 24,
+        id: 23,
         reportCode: 'CO145',
         reportName: 'Contact Activity',
         isNew: false,
         favorite: true,
       },
       {
-        id: 25,
+        id: 24,
         reportCode: 'CO146',
         reportName: 'Treatment Missing Data',
         isNew: false,
         favorite: true,
       },
       {
-        id: 26,
+        id: 25,
         reportCode: 'CO145',
         reportName: 'Account Balance by Date',
         isNew: false,
         favorite: true,
       },
       {
-        id: 27,
+        id: 26,
         reportCode: 'VA001',
         reportName: 'Vaccination Report',
         isNew: false,
@@ -456,8 +460,7 @@ export const reportCardsData = [
   {
     catHeading: 'Appointments',
     graphDescription: 'Appointments',
-    description:
-      'Monitor your overall finances including sales, refunds, taxes, payments and more',
+    description: 'Get key appointment insight for you and your team',
     chartLabel: '0',
     reports: [
       {
@@ -578,8 +581,7 @@ export const reportCardsData = [
   {
     catHeading: 'Marketing',
     graphDescription: 'Marketing',
-    description:
-      'Monitor your overall finances including sales, refunds, taxes, payments and more',
+    description: 'Measure the success of your Marketing channels',
     chartLabel: '£',
     reports: [
       {
@@ -615,14 +617,6 @@ export const reportCardsData = [
       },
       {
         id: 5,
-        reportCode: 'FI004',
-        reportName: 'Daily Sales',
-        isNew: false,
-        favorite: false,
-      },
-
-      {
-        id: 6,
         reportCode: 'CO100',
         reportName: 'Loyalty Report',
         isNew: false,
@@ -630,7 +624,7 @@ export const reportCardsData = [
       },
 
       {
-        id: 7,
+        id: 6,
         reportCode: 'MA005',
         reportName: 'Opt In Text Contacts',
         isNew: false,
@@ -638,7 +632,7 @@ export const reportCardsData = [
       },
 
       {
-        id: 8,
+        id: 7,
         reportCode: 'MA010',
         reportName: 'Opt In Email Contacts',
         isNew: false,
@@ -646,7 +640,7 @@ export const reportCardsData = [
       },
 
       {
-        id: 9,
+        id: 8,
         reportCode: 'MA025',
         reportName: 'Feedback Results',
         isNew: false,
@@ -654,14 +648,14 @@ export const reportCardsData = [
       },
 
       {
-        id: 10,
+        id: 9,
         reportCode: 'MA030',
         reportName: 'Survey Feedback',
         isNew: false,
         favorite: false,
       },
       {
-        id: 11,
+        id: 10,
         reportCode: 'MA001',
         reportName: 'Sales by Referral Source',
         isNew: false,
@@ -686,8 +680,7 @@ export const reportCardsData = [
   {
     catHeading: 'Leads',
     graphDescription: 'New leads by week',
-    description:
-      'Monitor your overall finances including sales, refunds, taxes, payments and more',
+    description: 'Track how your lead process is doing at all times',
     chartLabel: '£',
     reports: [
       {
@@ -763,8 +756,7 @@ export const reportCardsData = [
   {
     catHeading: 'Staff',
     graphDescription: 'Retail by week',
-    description:
-      'Monitor your overall finances including sales, refunds, taxes, payments and more',
+    description: 'KPI reports for reviews and target setting',
     chartLabel: '£',
     reports: [
       {
@@ -906,8 +898,7 @@ export const reportCardsData = [
   {
     catHeading: 'Stock',
     graphDescription: 'Retail by week',
-    description:
-      'Monitor your overall finances including sales, refunds, taxes, payments and more',
+    description: 'Track your product sales and monitor inventory',
     chartLabel: '£',
     reports: [
       {
@@ -942,6 +933,28 @@ export const reportCardsData = [
         favorite: false,
       },
     ],
+    graphData: [
+      ['Jan', 20],
+      ['Feb', 5],
+      ['Mar', 12],
+      ['Apr', 20],
+      ['May', 5],
+      ['Jun', 12],
+      ['Jul', 20],
+      ['Aug', 5],
+      ['Sep', 12],
+      ['Oct', 20],
+      ['Nov', 5],
+      ['Dec', 12],
+    ],
+  },
+  {
+    catHeading: 'Custom',
+    graphDescription: 'Revenue by week',
+    description:
+      'Monitor your overall finances including sales, refunds, taxes, payments and more',
+    chartLabel: '0',
+    reports: [],
     graphData: [
       ['Jan', 20],
       ['Feb', 5],

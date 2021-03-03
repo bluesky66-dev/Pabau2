@@ -31,6 +31,7 @@ interface ReportsCardProps {
   chartLabel?: string
   reports?: report[]
   graphData?: ReactText[][]
+  onReportFavorite?: (reportId: number, favorite: boolean) => void
 }
 
 export const ReportsCard: React.FC<ReportsCardProps> = ({
@@ -40,10 +41,13 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
   description = '',
   chartLabel = '',
   graphData = [],
+  onReportFavorite,
 }) => {
   const [showAll, setShowAll] = useState(false)
 
   const showMoreHandler = () => setShowAll((showAll) => !showAll)
+
+  const reportsData = showAll ? reports : reports?.slice(0, 9)
 
   return (
     <div className={styles.reportsCard}>
@@ -80,77 +84,30 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
         </HighchartsProvider>
       </div>
 
-      {showAll
-        ? reports.map((report, i) => {
-            if (i === reports.length - 1) {
-              return (
-                <>
-                  <SingleReport
-                    key={report.id}
-                    reportCode={report.reportCode}
-                    reportName={report.reportName}
-                    isNew={report.isNew}
-                    favorite={report.favorite}
-                  />
-                  <ShowMore
-                    key={uuidv4()}
-                    length={reports.length}
-                    showAll={showAll}
-                    showMoreHandler={showMoreHandler}
-                  />
-                </>
-              )
-            }
-            return (
-              <SingleReport
-                key={report.id}
-                reportCode={report.reportCode}
-                reportName={report.reportName}
-                isNew={report.isNew}
-                favorite={report.favorite}
-              />
-            )
-          })
-        : reports.length > 10
-        ? reports.map((report, i) =>
-            i > 8 ? (
-              i < 10 ? (
-                <ShowMore
-                  key={uuidv4()}
-                  length={reports.length}
-                  showAll={showAll}
-                  showMoreHandler={showMoreHandler}
-                />
-              ) : (
-                ''
-              )
-            ) : (
-              <SingleReport
-                key={report.id}
-                reportCode={report.reportCode}
-                reportName={report.reportName}
-                isNew={report.isNew}
-                favorite={report.favorite}
-              />
-            )
-          )
-        : [
-            ...reports,
-            // eslint-disable-next-line unicorn/no-new-array
-            ...new Array(10 - reports.length).fill(''),
-          ].map((report) => {
-            return report ? (
-              <SingleReport
-                key={report.id}
-                reportCode={report.reportCode}
-                reportName={report.reportName}
-                isNew={report.isNew}
-                favorite={report.favorite}
-              />
-            ) : (
-              <div key={uuidv4()} className={styles.reportsCardCell}></div>
-            )
-          })}
+      {reportsData.map((report) => (
+        <SingleReport
+          key={report.id}
+          reportCode={report.reportCode}
+          reportName={report.reportName}
+          isNew={report.isNew}
+          favorite={report.favorite}
+          onReportFavorite={(isFav) => onReportFavorite?.(report.id, isFav)}
+        />
+      ))}
+
+      {reports?.length < 10 &&
+        Array.from({ length: 10 - reports.length })
+          .fill('')
+          .map(() => <div key={uuidv4()} className={styles.reportsCardCell} />)}
+
+      {reports.length > 10 && (
+        <ShowMore
+          key={uuidv4()}
+          length={reports.length}
+          showAll={showAll}
+          showMoreHandler={showMoreHandler}
+        />
+      )}
     </div>
   )
 }

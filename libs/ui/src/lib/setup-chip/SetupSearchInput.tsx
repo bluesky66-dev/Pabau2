@@ -19,7 +19,7 @@ export const SetupSearchInput: FC<SetupSearchProps> = ({ onChange }) => {
   return (
     <Input
       className={styles.searchInputStyle}
-      placeholder="Search"
+      placeholder="Search by report name"
       value={searchTerm}
       onChange={(e) => handleSearchTerm(e)}
       suffix={

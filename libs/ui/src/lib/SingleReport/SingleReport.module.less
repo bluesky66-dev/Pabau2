@@ -2,7 +2,7 @@
   box-sizing: border-box;
 
   height: 39px;
-  width: 360px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -24,13 +24,18 @@
 }
 
 .singleReportStar {
-  margin-left: 17.38px;
+  margin-left: 8px;
   display: flex;
   align-items: center;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 .singleReportCode {
-  margin-left: 9.38px;
+  margin-left: 6px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .singleReportNew {
