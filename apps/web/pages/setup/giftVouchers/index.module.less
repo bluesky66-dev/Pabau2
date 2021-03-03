@@ -81,3 +81,68 @@
     }
   }
 }
+.noDataContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70vh;
+
+  .noDataTableBox {
+    height: 277px;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .round-design {
+      background-color: transparent;
+      border: 1px solid #ebecef;
+      :global {
+        .anticon {
+          color: var(--light-grey-color);
+          font-size: 22px;
+        }
+      }
+    }
+
+    .noData-text-style {
+      text-align: center;
+      .noDataIcon {
+        margin-bottom: 30px;
+      }
+      h2 {
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 32px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #3d3d46;
+        margin: 0px;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+      p {
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 22px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #9292a3;
+        margin-bottom: 15px;
+      }
+      .create-temaplate-btn {
+        padding: 8px 13px;
+        font-family: 'Circular-Std-Medium';
+        font-weight: 500;
+        font-size: 14px;
+        min-width: 155px;
+        height: 40px;
+      }
+    }
+  }
+}

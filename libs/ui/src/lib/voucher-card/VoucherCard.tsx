@@ -25,6 +25,7 @@ export interface VoucherCardProps {
   voucherRelation: string
   voucherRelationLabel: string
   currencyType: string
+  termsConditions?: string
   onMenuClick?: () => void
 }
 
@@ -46,6 +47,7 @@ export const VoucherCard: FC<VoucherCardProps> = ({
   voucherRelation,
   voucherRelationLabel,
   currencyType,
+  termsConditions = 'N/A',
   onMenuClick,
 }) => {
   const cardRef = useRef<HTMLDivElement>(null)
@@ -88,7 +90,7 @@ export const VoucherCard: FC<VoucherCardProps> = ({
     height: `${cardWidth ? `${cardWidth / 25}px` : '10px'}`,
   }
 
-  const flipCard = (e) => {
+  const flipCard = () => {
     if (cardRef?.current) {
       if (cardRef.current.classList.contains('flip')) {
         cardRef.current.classList.remove('flip')
@@ -103,7 +105,7 @@ export const VoucherCard: FC<VoucherCardProps> = ({
       <div
         className="flip-card"
         style={{
-          width: `${cardWidth ? `${cardWidth}px` : `100%`}`,
+          width: `${`100%`}`,
           height: `${cardWidth ? `${cardWidth / 2}px` : '100%'}`,
         }}
       >
@@ -174,11 +176,7 @@ export const VoucherCard: FC<VoucherCardProps> = ({
             <div className={styles.backFaceContent}>
               <div className={styles.pRelative}>
                 <h1>Terms & Conditions</h1>
-                <p>
-                  lorem ipsum, quia dolor sit, amet, consectetur, adipisci
-                  velit, sed quia non numquam eius modi tempora incidunt, ut
-                  labore et dolore magnam aliquam quaerat voluptatem.
-                </p>
+                <p>{termsConditions}</p>
               </div>
             </div>
           </div>

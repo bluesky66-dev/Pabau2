@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from 'react'
 import Layout from './../../../components/Layout/Layout'
 import { TabbedTable, Button, Breadcrumb, VoucherCard } from '@pabau/ui'
+import VoucherIcon from '../../../components/Setup/GiftVouchersList/assets/VocherIcon'
 import { Card, Row, Col } from 'antd'
 import styles from './index.module.less'
 
@@ -8,7 +9,7 @@ import styles from './index.module.less'
 export interface GiftVouchersProps {}
 
 const giftCardSettings = {
-  cardWidth: 525,
+  cardWidth: 500,
   backgroundColor1: '#9013FE',
   backgroundColor2: '#BD10E0',
   gradientType: 'linear-gradient',
@@ -26,6 +27,11 @@ const giftCardSettings = {
   voucherRelation: 'Family',
   voucherRelationLabel: 'Redeem on all services',
   currencyType: '£',
+  termsConditions: `
+    lorem ipsum, quia dolor sit, amet, consectetur, adipisci
+    velit, sed quia non numquam eius modi tempora incidunt, ut
+    labore et dolore magnam aliquam quaerat voluptatem.
+  `,
 }
 
 const GiftVouchers: FC<GiftVouchersProps> = () => {
@@ -79,15 +85,19 @@ const GiftVouchers: FC<GiftVouchersProps> = () => {
     ])
   }, [])
 
+  const onTabChange = (tab) => {
+    console.log('TAB:', tab)
+  }
+
   return (
     <Layout>
       <div className={styles.giftVoucherMain}>
         <Card title={cardHeader}>
           <div className={styles.body}>
-            <TabbedTable tabItems={tabItems}>
+            <TabbedTable tabItems={tabItems} onTabChange={() => onTabChange}>
               <div className={styles.types}>
                 <Row>
-                  {gifts.length > 0 &&
+                  {gifts.length < 0 ? (
                     gifts.map((gift, key) => (
                       <Col
                         lg={8}
@@ -100,7 +110,26 @@ const GiftVouchers: FC<GiftVouchersProps> = () => {
                           <VoucherCard {...gift} />
                         </div>
                       </Col>
-                    ))}
+                    ))
+                  ) : (
+                    <div className={styles.noDataContent}>
+                      <div className={styles.noDataTableBox}>
+                        <div className={styles.noDataTextStyle}>
+                          <div className={styles.noDataIcon}>
+                            <VoucherIcon />
+                          </div>
+                          <h2>Add a voucher type</h2>
+                          <p>You have no active voucher types</p>
+                          <Button
+                            className={styles.createTemaplateBtn}
+                            type="primary"
+                          >
+                            {`Add Voucher Type`}
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </Row>
               </div>
               <div className={styles.tableSheet}></div>

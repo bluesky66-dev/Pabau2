@@ -1,5 +1,5 @@
 import React from 'react'
-import { VoucherCard } from './VoucherCard'
+import VoucherCard, { VoucherCardProps } from './VoucherCard'
 
 export default {
   title: 'UI/VoucherCard',
@@ -23,6 +23,12 @@ export default {
     voucherRelation: 'Family',
     voucherRelationLabel: 'Redeem on all services',
     currencyType: '£',
+
+    termsConditions: `
+      lorem ipsum, quia dolor sit, amet, consectetur, adipisci
+      velit, sed quia non numquam eius modi tempora incidunt, ut
+      labore et dolore magnam aliquam quaerat voluptatem.
+    `,
   },
   argTypes: {
     cardWidth: {
@@ -73,9 +79,16 @@ export default {
       },
     },
   },
+  parameters: {
+    layout: 'fullscreen',
+  },
 }
 
-const VoucherCardStory = ({ ...args }) => <VoucherCard {...args} />
+const VoucherCardStory = ({ ...args }: VoucherCardProps) => (
+  <div style={{ margin: '20px', maxWidth: '500px' }}>
+    <VoucherCard {...args} />
+  </div>
+)
 export const BasicVoucherCard = VoucherCardStory.bind({})
 export const ValentineVoucherCard = VoucherCardStory.bind({})
 export const BirthdayVoucherCard = VoucherCardStory.bind({})
