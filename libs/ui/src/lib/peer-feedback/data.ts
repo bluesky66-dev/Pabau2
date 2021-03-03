@@ -29,7 +29,7 @@ export const users = [
 
 export const lastSendOut = 'Last sent out'
 
-export const reviewDate = '14/04/2017'
+export const reviewDate = new Date('2017-04-14T00:00:00')
 
 export const reviewFilled = 'Reviews Filled'
 

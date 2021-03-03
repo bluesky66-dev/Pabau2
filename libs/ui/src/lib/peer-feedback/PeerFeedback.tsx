@@ -72,7 +72,7 @@ export type PeerFeedbackProps = {
   title: string
   users?: User[]
   lastSendOut: string
-  reviewDate: string
+  reviewDate: Date
   reviewFilled: string
   filled: string
   reviewData: ReviewData
@@ -92,13 +92,36 @@ export const PeerFeedback: FC<PeerFeedbackProps> = ({
   reports,
   ...props
 }) => {
-  const calPercent = (reviewData: ReviewData) => {
-    if (!reviewData || reviewData.total === 0) return [0, 0, 100]
+  interface ReviewPercent {
+    progressPercentInt: number
+    progressPercent: number
+    progressRest: number
+  }
+
+  // const dateIsoFormat = (_date: Date): string => {
+  //   return moment(_date).format('YYYY-MM-DDTHH:MN:SS.MSSZ')
+  // }
+
+  const dateFormat = (_date: Date): string => {
+    return moment(_date).format('DD/MM/YYYY')
+  }
+
+  const calPercent = (reviewData: ReviewData): ReviewPercent => {
+    if (!reviewData || reviewData.total === 0)
+      return {
+        progressPercentInt: 0,
+        progressPercent: 0,
+        progressRest: 100,
+      }
     const p1 = Math.round((reviewData.value / reviewData.total) * 100)
     const p2 = Math.round((reviewData.value / reviewData.total) * 1000) / 10
     const p3 = 100 - p2
-    const val = { p1: p1, p2: p2, p3: p3 }
-    return [p1, p2, p3]
+    const val: ReviewPercent = {
+      progressPercentInt: p1,
+      progressPercent: p2,
+      progressRest: p3,
+    }
+    return val
   }
 
   const calPercentValue = calPercent(reviewData)
@@ -285,14 +308,15 @@ export const PeerFeedback: FC<PeerFeedbackProps> = ({
       </div>
       <div className={styles.subText}>{lastSendOut}</div>
       <div className={styles.subContent}>
-        {moment(reviewDate, 'DD/MM/YYYY').fromNow()}({reviewDate})
+        {moment(reviewDate, 'YYYY-MM-DDTHH:MN:SS.MSSZ').fromNow()}(
+        {dateFormat(reviewDate)})
       </div>
       <div className={styles.reviewContainer}>
         <div className={styles.reviewFilledText}>{reviewFilled}</div>
         <Row className={styles.filledPercentContainer}>
           <div className={styles.filledPercentTitle}>
             <div className={styles.filledPercentText}>
-              {calPercentValue[0]}% {filled}
+              {String(calPercentValue.progressPercentInt)}% {filled}
             </div>
             <div className={styles.filledNumber}>
               {reviewData.value} {'out of'} {reviewData.total}
@@ -300,8 +324,8 @@ export const PeerFeedback: FC<PeerFeedbackProps> = ({
           </div>
           <div className={styles.filledProgressContainer}>
             <CustomProgress
-              percent={calPercentValue[1]}
-              rest={calPercentValue[2]}
+              percent={calPercentValue.progressPercent}
+              rest={calPercentValue.progressRest}
               labelPercent="Filled"
               labelRest="Pending"
               colorPercent="#65CD98"
