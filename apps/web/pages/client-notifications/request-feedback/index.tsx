@@ -46,6 +46,7 @@ const Index: FC = () => {
         hideDisplayPolicyOption={true}
         hideServiceOption={true}
         hideEmployeeNameOption={true}
+        hideReminderSettingTabPane={false}
         standardMessage={
           'This notification automatically sends to clients when an appointment is checked out'
         }
