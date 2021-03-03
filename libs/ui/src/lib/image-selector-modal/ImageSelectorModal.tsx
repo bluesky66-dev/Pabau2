@@ -46,6 +46,14 @@ export const ImageSelectorModal: FC<ImageSelectorModalProps> = (props) => {
 
   useEffect(() => setSearch(initialSearch), [initialSearch])
 
+  // pre-load all the images after 1.5 sec of component load
+  useEffect(() => {
+    setTimeout(
+      () => imgList.map((image) => (new Image().src = image.source)),
+      1500
+    )
+  }, [])
+
   useEffect(() => {
     searchTimer.current && clearTimeout(searchTimer.current)
     searchTimer.current = setTimeout(() => {
@@ -66,12 +74,14 @@ export const ImageSelectorModal: FC<ImageSelectorModalProps> = (props) => {
   }
 
   const onSearch = (searchTerm = '') => {
-    const term = searchTerm.toLowerCase()
-    setImageList(
-      imgList.filter(({ tags }) => {
-        return tags.findIndex((t) => t.toLowerCase().includes(term)) > -1
-      })
+    const terms = searchTerm.toLowerCase().split(' ')
+    const list = imgList.filter(
+      ({ tags }) =>
+        tags.findIndex((t) => {
+          return terms.findIndex((term) => t.toLowerCase().includes(term)) > -1
+        }) > -1
     )
+    setImageList(searchTerm ? list : list.slice(0, 15))
   }
 
   return (
