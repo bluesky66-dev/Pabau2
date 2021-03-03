@@ -11,6 +11,7 @@ import {
   Employees,
   Employee,
   SearchTags,
+  ChooseModal,
 } from '@pabau/ui'
 import {
   Modal,
@@ -26,7 +27,6 @@ import {
   CalendarOutlined,
   VideoCameraOutlined,
   TeamOutlined,
-  CloseOutlined,
   LeftOutlined,
   PictureOutlined,
   PlusOutlined,
@@ -70,8 +70,8 @@ export const CreateService: FC<CreateServiceProps> = ({
 }) => {
   const [form] = Form.useForm()
   const [showModal, setShowModal] = useState(false)
+  const [showChooseModal, setShowChooseModal] = useState(false)
   const [serviceType, setServiceType] = useState('')
-  const [isSelected, setIsSelected] = useState(false)
   const [serviceName, setServiceName] = useState('')
   const [selectedColor, setSelectedColor] = useState('')
   const [category, setCategory] = useState('')
@@ -254,86 +254,53 @@ export const CreateService: FC<CreateServiceProps> = ({
     setLocationItems([...items])
   }
   useEffect(() => {
-    setShowModal(visible)
+    setShowChooseModal(visible)
+    setShowModal(false)
   }, [visible])
   useEffect(() => {
     setLocationItems([
       ...locations.map((location) => ({ location, selected: false })),
     ])
   }, [locations])
-  const ChooseServiceType = () => {
-    return (
-      <div className={styles.chooseServiceType}>
-        <h1>Choose a service type to add to your menu</h1>
-        <div
-          className={styles.chooseServiceTypeItem}
-          onClick={() => {
-            setServiceType('Service')
-            setIsSelected(true)
-          }}
-        >
-          <div>
-            <CalendarOutlined />
-          </div>
-          <div>
-            <p>Service</p>
-            <p>Services booked by one client in a single visit</p>
-          </div>
-        </div>
-        <div
-          className={styles.chooseServiceTypeItem}
-          onClick={() => {
-            setServiceType('Virtual')
-            setIsSelected(true)
-          }}
-        >
-          <div>
-            <VideoCameraOutlined />
-          </div>
-          <div>
-            <p>Virtual</p>
-            <p>Use Pabau’s online video conferencing</p>
-          </div>
-        </div>
-        <div
-          className={styles.chooseServiceTypeItem}
-          onClick={() => {
-            setServiceType('Class')
-            setIsSelected(true)
-          }}
-        >
-          <div>
-            <TeamOutlined />
-          </div>
-          <div>
-            <p>Class</p>
-            <p>Services booked by multiple clients in scheduled sessions</p>
-          </div>
-        </div>
-        <div
-          className={styles.closeChooseServiceType}
-          onClick={() => {
-            setShowModal(false)
-            onClose()
-          }}
-        >
-          <span>Esc</span>
-          <div>
-            <CloseOutlined />
-          </div>
-        </div>
-      </div>
-    )
-  }
   return (
-    <Modal
-      visible={showModal}
-      width="100%"
-      wrapClassName={styles.createService}
-      footer={null}
-    >
-      {!isSelected && <ChooseServiceType />}
-      {isSelected && (
+    <>
+      <ChooseModal
+        title="Choose a service type to add to your menu"
+        items={[
+          {
+            title: 'Service',
+            description: 'Services booked by one client in a single visit',
+            icon: <CalendarOutlined />,
+          },
+          {
+            title: 'Virtual',
+            description: 'Use Pabau’s online video conferencing',
+            icon: <VideoCameraOutlined />,
+          },
+          {
+            title: 'Class',
+            description:
+              'Services booked by multiple clients in scheduled sessions',
+            icon: <TeamOutlined />,
+          },
+        ]}
+        visible={showChooseModal}
+        onSelected={(item) => {
+          setShowChooseModal(false)
+          setShowModal(true)
+          setServiceType(item.title)
+        }}
+        onClose={() => {
+          setShowChooseModal(false)
+          setShowModal(false)
+        }}
+      />
+      <Modal
+        visible={showModal}
+        width="100%"
+        wrapClassName={styles.createService}
+        footer={null}
+      >
         <React.Fragment>
           <div className={styles.createServiceHeader}>
             <div>
@@ -358,7 +325,7 @@ export const CreateService: FC<CreateServiceProps> = ({
               <Button
                 onClick={() => {
                   setShowModal(false)
-                  setIsSelected(false)
+                  setShowChooseModal(false)
                   onClose()
                 }}
                 style={{
@@ -1040,8 +1007,8 @@ export const CreateService: FC<CreateServiceProps> = ({
             </TabMenu>
           </div>
         </React.Fragment>
-      )}
-    </Modal>
+      </Modal>
+    </>
   )
 }
 
