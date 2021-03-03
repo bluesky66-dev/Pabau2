@@ -63,10 +63,12 @@ export const ShareReview: FC<ShareReviewProps> = (props: ShareReviewProps) => {
                     if (!ref.current || url) {
                       return
                     }
+                    console.log('ref current')
                     setUrl(
                       await toPng(ref.current || new HTMLElement(), {
                         width: 550,
                         height: 520,
+                        imagePlaceholder: props.logo,
                       })
                     )
                   } catch (error) {
@@ -125,6 +127,7 @@ export const ShareReview: FC<ShareReviewProps> = (props: ShareReviewProps) => {
           </div>
         </Card>
       </div>
+      <Image src={url} />
       <a
         href={`http://www.facebook.com/sharer.php?u=https://www.pabau.com&picture=${url}`}
       >
