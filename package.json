@@ -69,6 +69,7 @@
     "formik-antd": "^2.0.1",
     "google-libphonenumber": "^3.2.17",
     "graphql": "^15.4.0",
+    "html-to-image": "^1.3.21",
     "husky": "^5.0.9",
     "i18n-iso-countries": "^6.5.0",
     "i18next": "^19.8.7",
