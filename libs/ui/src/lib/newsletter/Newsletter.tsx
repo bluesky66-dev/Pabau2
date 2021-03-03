@@ -46,6 +46,24 @@ export interface DataProps {
   }
 }
 
+const seriesData1 = [0, 3, 5, 7, 8]
+
+const seriesData2 = [0, 1, 3, 5, 6]
+
+const yAxisCategories = [
+  '0%',
+  '5%',
+  '10%',
+  '15%',
+  '20%',
+  '25%',
+  '30%',
+  '35%',
+  '40%',
+]
+
+const xAxisCategories = ['12h', '24h', '36h', '48h', '60h', '72h', '84h']
+
 export const Newsletter: FC<NewsletterProps> = ({
   TableTitle,
   TilesTitle,
@@ -209,6 +227,10 @@ export const Newsletter: FC<NewsletterProps> = ({
               ClicksLabel={ClicksLabel}
               OpensColor={OpensColor}
               ClicksColor={ClicksColor}
+              seriesData1={seriesData1}
+              seriesData2={seriesData2}
+              xAxisCategories={xAxisCategories}
+              yAxisCategories={yAxisCategories}
             />
           </div>
           <div className={styles.statisticsSubscribersBlock}>

@@ -9,10 +9,24 @@ export interface HighChartProps {
   ClicksLabel: string
   OpensColor: string
   ClicksColor: string
+  seriesData1: number[]
+  seriesData2: number[]
+  xAxisCategories: string[]
+  yAxisCategories: string[]
 }
 
 export const HighChart: FC<HighChartProps> = (props) => {
-  const { ChartTitle, ClicksLabel, OpensLabel, OpensColor, ClicksColor } = props
+  const {
+    ChartTitle,
+    ClicksLabel,
+    OpensLabel,
+    OpensColor,
+    ClicksColor,
+    seriesData1,
+    seriesData2,
+    xAxisCategories,
+    yAxisCategories,
+  } = props
   const options: Highcharts.Options = {
     title: {
       text: ChartTitle,
@@ -25,13 +39,7 @@ export const HighChart: FC<HighChartProps> = (props) => {
       {
         name: OpensLabel,
         type: 'area',
-        data: [
-          [0, 1],
-          [1, 3],
-          [3, 4],
-          [5, 6],
-          [6, 7],
-        ],
+        data: seriesData1,
         fillColor: OpensColor,
         lineColor: '#54B2D3',
         color: '#54B2D3',
@@ -39,13 +47,7 @@ export const HighChart: FC<HighChartProps> = (props) => {
       {
         name: ClicksLabel,
         type: 'area',
-        data: [
-          [0, 1],
-          [1, 2],
-          [3, 3],
-          [5, 5],
-          [6, 6],
-        ],
+        data: seriesData2,
         fillColor: ClicksColor,
         lineColor: '#65CD98',
         color: '#65CD98',
@@ -53,7 +55,7 @@ export const HighChart: FC<HighChartProps> = (props) => {
       },
     ],
     yAxis: {
-      categories: ['0%', '5%', '10%', '15%', '20%', '25%', '30%', '35%', '40%'],
+      categories: yAxisCategories,
       title: {
         text: '',
       },
@@ -61,7 +63,7 @@ export const HighChart: FC<HighChartProps> = (props) => {
       gridLineColor: '#F1F1F1',
     },
     xAxis: {
-      categories: ['12h', '24h', '36h', '48h', '60h', '72h'],
+      categories: xAxisCategories,
       gridLineWidth: 1,
       gridLineColor: '#F1F1F1',
     },
