@@ -36,7 +36,7 @@ export const ImageSelectorModal: FC<ImageSelectorModalProps> = (props) => {
     allowCustomImage = true,
   } = props
 
-  const [imageList, setImageList] = useState(imgList)
+  const [imageList, setImageList] = useState(imgList.slice(0, 20))
   const [search, setSearch] = useState('')
   const [selectedImg, setSelectedImg] = useState<ImgBlock | undefined>(
     undefined
