@@ -18,7 +18,6 @@ export interface DraggableProps {
   name?: string
 }
 
-/* eslint-disable-next-line */
 export interface FileUploderProps {
   draggerProps?: DraggableProps
   onDelete?(file: UploadProps[]): void
