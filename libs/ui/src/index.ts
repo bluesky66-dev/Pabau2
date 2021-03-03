@@ -1,4 +1,7 @@
 export * from './lib/high-chart/HighChart'
+export * from './lib/file-uploder/FileUploder'
+export * from './lib/read-review/ReadReview'
+export * from './lib/document-upload-modal/DocumentUploadModal'
 export * from './lib/accordion/Accordion'
 export * from './lib/add-suggestion/AddSuggestion'
 export * from './lib/business-details-notifications/BusinessDetailsNotifications'
