@@ -17,6 +17,15 @@
 }
 .collapsed-sidebar-margin {
   margin-left: 80px;
+  :global table {
+    tbody {
+      tr {
+        td {
+          word-break: break-all;
+        }
+      }
+    }
+  }
   @media (max-width: 767px) {
     margin-left: 0;
   }

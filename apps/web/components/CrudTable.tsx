@@ -37,6 +37,7 @@ interface P {
   createPage?: boolean
   notificationBanner?: React.ReactNode
   createPageOnClick?(): void
+  addFilter?: boolean
   needTranslation?: boolean
 }
 
@@ -120,6 +121,7 @@ const CrudTable: FC<P> = ({
   notificationBanner,
   createPage = false,
   createPageOnClick,
+  addFilter,
   needTranslation = false,
 }) => {
   const [isLoading, setIsLoading] = useState(true)
@@ -182,24 +184,64 @@ const CrudTable: FC<P> = ({
     Record<string, string | boolean | number>
   >({})
 
-  const { data, error, loading } = useLiveQuery(listQuery, {
-    variables: {
-      isActive,
-      searchTerm: '%' + searchTerm + '%',
-      offset: paginateData.offset,
-      limit: paginateData.limit,
-    },
-  })
+  const getQueryVariables = () => {
+    const queryOptions = {
+      variables: {
+        isActive,
+        searchTerm: '%' + searchTerm + '%',
+        offset: paginateData.offset,
+        limit: paginateData.limit,
+      },
+    }
 
-  const { data: aggregateData } = useLiveQuery(aggregateQuery, {
-    variables: {
-      isActive,
-      searchTerm: '%' + searchTerm + '%',
-    },
-  })
+    if (!tableSearch) {
+      delete queryOptions.variables.searchTerm
+    }
+    if (!addFilter) {
+      delete queryOptions.variables.isActive
+    }
+    return queryOptions
+  }
+
+  const getAggregateQueryVariables = () => {
+    const queryOptions = {
+      variables: {
+        isActive,
+        searchTerm: '%' + searchTerm + '%',
+      },
+    }
+
+    if (!tableSearch) {
+      delete queryOptions.variables.searchTerm
+    }
+    if (!addFilter) {
+      delete queryOptions.variables.isActive
+    }
+    return queryOptions
+  }
+
+  const { data, error, loading } = useLiveQuery(listQuery, getQueryVariables())
+
+  const { data: aggregateData } = useLiveQuery(
+    aggregateQuery,
+    getAggregateQueryVariables()
+  )
 
   useEffect(() => {
-    if (data) setSourceData(data)
+    if (data) {
+      if (data[0]?.__typename === 'issuing_company') {
+        const newData = data.map((d) => {
+          const { country, city, street, post_code } = d
+          return {
+            ...d,
+            address: country + ', ' + city + ', ' + street + ', ' + post_code,
+          }
+        })
+        setSourceData(newData)
+      } else {
+        setSourceData(data)
+      }
+    }
     if (aggregateData)
       setPaginateData({
         ...paginateData,
@@ -424,6 +466,7 @@ const CrudTable: FC<P> = ({
                   schema={schema}
                   tableSearch={tableSearch}
                   needTranslation={needTranslation}
+                  addFilter={addFilter}
                 />
               ) : (
                 <AddButton
@@ -432,6 +475,7 @@ const CrudTable: FC<P> = ({
                   onSearch={onSearch}
                   schema={schema}
                   tableSearch={tableSearch}
+                  addFilter={addFilter}
                   needTranslation={needTranslation}
                 />
               )}
@@ -485,6 +529,7 @@ const CrudTable: FC<P> = ({
                 schema={schema}
                 tableSearch={tableSearch}
                 needTranslation={needTranslation}
+                addFilter={addFilter}
               />
             ) : (
               <AddButton
@@ -493,6 +538,7 @@ const CrudTable: FC<P> = ({
                 onSearch={onSearch}
                 schema={schema}
                 tableSearch={tableSearch}
+                addFilter={addFilter}
                 needTranslation={needTranslation}
               />
             )}
@@ -502,7 +548,6 @@ const CrudTable: FC<P> = ({
             style={{ height: '100%' }}
             sticky={{ offsetScroll: 80, offsetHeader: 80 }}
             pagination={sourceData?.length > 10 ? {} : false}
-            scroll={{ x: 'max-content' }}
             draggable={true}
             isCustomColorExist={checkCustomColorIconExsist('color')}
             isCustomIconExist={checkCustomColorIconExsist('icon')}
