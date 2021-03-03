@@ -81,19 +81,18 @@ const Form: FC<P> = ({ schema, formik, layout = 'vertical' }) => {
                       styles.errorTimeWrapper
                     }
                   >
-                    <div>{name}</div>
                     <TimeInput
                       name={name}
                       value={
                         values[name].length > 0
                           ? values[name].length > 5
                             ? moment(
-                                new Date().toISOString().split('T').shift() +
+                                moment().format('YYYY-MM-DD') +
                                   ' ' +
                                   values[name].slice(0, 5)
                               )
                             : moment(
-                                new Date().toISOString().split('T').shift() +
+                                moment().format('YYYY-MM-DD') +
                                   ' ' +
                                   values[name]
                               )
