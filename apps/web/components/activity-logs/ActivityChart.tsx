@@ -1,15 +1,13 @@
 import React, { FC } from 'react'
-
 import {
   Chart,
   HighchartsChart,
   HighchartsProvider,
-  ColumnSeries,
   XAxis,
   YAxis,
+  ColumnSeries,
 } from 'react-jsx-highcharts'
 import Highcharts from 'highcharts'
-// import styles from './index.module.less'
 
 export const ActivityChart: FC = () => {
   return (
@@ -19,15 +17,21 @@ export const ActivityChart: FC = () => {
         <div>
           <HighchartsProvider Highcharts={Highcharts}>
             <HighchartsChart>
-              <Chart height="319px" width={757} />
-              <XAxis visible={false}>
+              <Chart type="column" height={231} width={637} />
+              <XAxis id="categories" type="category" visible={false} />
+              <YAxis
+                id="number"
+                labels={{ style: { color: '#9292A3', fontSize: '12px' } }}
+                tickInterval={10}
+              >
                 <ColumnSeries
-                  id={'chart'}
-                  name={'chart'}
+                  id="return-contribution"
+                  name="Column Name"
+                  color="#CFCFD7"
                   data={[
-                    1,
-                    2,
-                    4,
+                    20,
+                    27,
+                    38,
                     10,
                     15,
                     45,
@@ -56,17 +60,8 @@ export const ActivityChart: FC = () => {
                     55,
                     63,
                   ]}
-                  color={'#CFCFD7'}
                 />
-              </XAxis>
-              <YAxis
-                id="YAxis"
-                categories={['0', '10', '20']}
-                labels={{
-                  style: { color: '#9292A3', fontSize: '12px' },
-                  enabled: true,
-                }}
-              ></YAxis>
+              </YAxis>
             </HighchartsChart>
           </HighchartsProvider>
         </div>
@@ -74,5 +69,4 @@ export const ActivityChart: FC = () => {
     </div>
   )
 }
-
 export default ActivityChart
