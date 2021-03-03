@@ -14,6 +14,9 @@ import message from '../assets/images/message.svg'
 import send from '../assets/images/send.svg'
 import inbox from '../assets/images/inbox.svg'
 import integrationUser from '../assets/images/integrationUser.svg'
+import vaccine from '../assets/images/vaccine.png'
+import nathnac from '../assets/images/nathnac-logo.png'
+import hospital from '../assets/images/hospital.svg'
 
 export const IntegrationBodyCollections = [
   {
@@ -40,7 +43,7 @@ export const IntegrationBodyCollections = [
       'Keep your life and schedules orginized by publishing dates from your sheets to your iCal',
     logoImage: july17,
     installed: 0,
-    categories: ['POPULAR'],
+    categories: ['POPULAR', 'BOOKINGS'],
   },
   {
     key: 3,
@@ -58,7 +61,7 @@ export const IntegrationBodyCollections = [
       'Medically-led laboratory with a reputation for excellence in  providing quality accredited pathology services...',
     logoImage: gocardless,
     installed: 0,
-    categories: ['FINANCIAL'],
+    categories: ['POPULAR', 'FINANCIAL'],
   },
   {
     key: 5,
@@ -74,7 +77,7 @@ export const IntegrationBodyCollections = [
     subTitle: 'Configure your Pabau system and SAP reports',
     logoImage: SAP,
     installed: 0,
-    categories: ['POPULAR'],
+    categories: ['FINANCIAL'],
   },
   {
     key: 7,
@@ -91,7 +94,7 @@ export const IntegrationBodyCollections = [
       'BNF drug search while prescribing to lesan all the side effects of your drug',
     logoImage: BNF,
     installed: 0,
-    categories: ['POPULAR'],
+    categories: ['MARKETING'],
   },
   {
     key: 9,
@@ -99,7 +102,7 @@ export const IntegrationBodyCollections = [
     subTitle: 'Imort online bookings only directly from Doctolib',
     logoImage: Doctolib,
     installed: 0,
-    categories: ['BOOKINGS', 'LABS', 'POPULAR'],
+    categories: ['BOOKINGS'],
   },
   {
     key: 10,
@@ -107,7 +110,7 @@ export const IntegrationBodyCollections = [
     subTitle: 'Link Pabau to RingCentral',
     logoImage: RingCenral,
     installed: 0,
-    categories: ['POPULAR'],
+    categories: ['MARKETING'],
   },
   {
     key: 11,
@@ -116,6 +119,40 @@ export const IntegrationBodyCollections = [
     logoImage: Ometria,
     installed: 0,
     categories: ['MARKETING'],
+  },
+  {
+    key: 12,
+    title: 'The Doctors Lab',
+    subTitle:
+      'The Doctors Laboratory is a medical-led laboratory with a reputation for excellence in providing Quality accredited pathology services to the UK and across the world',
+    logoImage: Ometria,
+    installed: 0,
+    categories: ['POPULAR', 'LABS'],
+  },
+  {
+    key: 13,
+    title: 'Vaccine',
+    subTitle: 'This will enable the Pabau vaccine module on your account',
+    logoImage: vaccine,
+    installed: 0,
+    categories: ['VACCINATION'],
+  },
+  {
+    key: 14,
+    title: 'NathNac',
+    subTitle: 'Link Pabau to NathNac',
+    logoImage: nathnac,
+    installed: 0,
+    categories: ['VACCINATION'],
+  },
+  {
+    key: 15,
+    title: 'Hospital',
+    subTitle:
+      'This will enable the Pabau hospital module & inpatient booking management on your account',
+    logoImage: hospital,
+    installed: 0,
+    categories: ['BOOKINGS'],
   },
 ]
 export const WorksWith = [
