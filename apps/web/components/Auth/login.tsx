@@ -20,11 +20,8 @@ export interface LoginFormProps {
 interface LoginProps {
   handlePageShow: (page: string) => void
 }
-const LOGIN_MUTATION = gql`
-  mutation login($email: String!, $password: String!) {
-    login(username: $email, password: $password)
-  }
-`
+// eslint-disable-next-line
+const LOGIN_MUTATION = gql` mutation login($email: String!, $password: String!) { login(username: $email, password: $password) }`
 const LoginMain: FC<LoginProps> = ({ handlePageShow }) => {
   const router = useRouter()
   const [login] = useMutation(LOGIN_MUTATION)
