@@ -131,6 +131,7 @@ const BookedOnClassStory = ({
   consultancyName,
   address,
   message,
+  buttonColor,
 }: PropsWithChildren<EmailSMSPreviewProps & BookedOntoClassProps>) => (
   <EmailSMSPreview
     greeting={greeting}
@@ -798,7 +799,6 @@ const UpcomingAppointmentReminderStory = ({
     smsGreeting={smsGreeting}
     smsMessage={smsMessage}
     smsFooterText={smsFooterText}
-    hideLogo={hideLogo}
   >
     <UpComingAppointmentReminder
       message={message}

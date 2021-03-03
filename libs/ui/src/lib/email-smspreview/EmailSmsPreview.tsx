@@ -106,6 +106,24 @@ export interface ConnectRegistrationProps {
   text?: string
 }
 
+export interface NewAppoinmentsIsBookedProps {
+  message?: string
+  contactNumber?: number
+}
+
+export interface ClassWaitListProps {
+  message?: string
+}
+
+export interface ClassesSpotAvailableProps {
+  message?: string
+}
+
+export interface UpComingAppoinmentReminderProps {
+  message?: string
+  contactNumber?: number
+}
+
 export interface MedicalFormProps {
   message?: string
   contactNumber?: string
