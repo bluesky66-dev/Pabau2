@@ -9,19 +9,8 @@ import useLogin from '../hooks/authentication/useLogin'
 import Login from './login'
 import { gql, useQuery } from '@apollo/client'
 
-const CURRENT_USER = gql`
-  query retrieveAuthenticatedUser($Id: Int!, $CompanyId: Int!) {
-    user(where: { id: $Id }) {
-      username
-      full_name
-    }
-    company(where: { id: $CompanyId }) {
-      details {
-        company_name
-      }
-    }
-  }
-`
+// eslint-disable-next-line
+const CURRENT_USER = gql`  query retrieveAuthenticatedUser($Id: Int!, $CompanyId: Int!) { user(where: { id: $Id }) { username full_name } company(where: { id: $CompanyId }) { details {company_name  } }}`
 
 const Index: FC = () => {
   const { t } = useTranslation()
