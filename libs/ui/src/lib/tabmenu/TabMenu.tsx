@@ -22,7 +22,7 @@ export const TabMenu: FC<P> = ({
       <Tabs {...props} tabPosition={tabPosition} style={{ minHeight }}>
         {Array.isArray(children) &&
           children?.map((tab, i) => (
-            <TabPane tab={menuItems[i]} key={i}>
+            <TabPane tab={menuItems[i]} key={menuItems[i]}>
               {tab}
             </TabPane>
           ))}
