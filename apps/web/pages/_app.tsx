@@ -20,6 +20,7 @@ import 'react-phone-input-2/lib/style.css'
 import 'react-quill/dist/quill.snow.css'
 import de from '../locales/de.json'
 import en from '../locales/en.json'
+import fr from '../locales/fr.json'
 import ContextWrapper from '../components/ContextWrapper'
 require('../styles/global.less')
 require('../../../libs/ui/src/styles/antd.less')
@@ -157,6 +158,9 @@ i18next.init({
     },
     de: {
       common: de,
+    },
+    fr: {
+      common: fr,
     },
   },
 })
