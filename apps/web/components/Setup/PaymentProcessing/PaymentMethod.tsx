@@ -21,7 +21,7 @@ const PaymentMethod: FC<P> = ({
   const listItemRender = listItems.map((listItem, i) => {
     return (
       <div key={i} className={styles.listItem}>
-        <img src={checkboxOutlined} />
+        <img src={checkboxOutlined} alt="check outlined" />
         <span>{listItem}</span>
       </div>
     )
@@ -30,7 +30,7 @@ const PaymentMethod: FC<P> = ({
   return (
     <Row className={styles.paymentMethodCard}>
       <div className={styles.methodIconBox}>
-        <img src={icon} className={iconClass} />
+        <img src={icon} className={iconClass} alt={method} />
       </div>
       <div className={styles.methodMain}>
         <div>

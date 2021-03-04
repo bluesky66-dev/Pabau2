@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { Row, Col, Image } from 'antd'
+import { Row, Col } from 'antd'
 import styles from './index.module.less'
 import SectionTitle from './SectionTitle'
 import PaymentMethod from './PaymentMethod'
