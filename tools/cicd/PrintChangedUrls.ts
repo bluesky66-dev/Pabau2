@@ -6,8 +6,8 @@ import { dasherize, underscore } from 'inflected'
 import * as child_process from 'child_process'
 
 function removeIndexTsx(input: string): string {
-  if (input.endsWith('/index.tsx'))
-    return input.substr(0, input.length - '/index.tsx'.length)
+  if (input.endsWith('/Index.tsx'))
+    return input.substr(0, input.length - '/Index.tsx'.length)
   if (input.endsWith('.tsx'))
     return input.substr(0, input.length - '.tsx'.length)
   if (input.endsWith('.module.less'))
