@@ -17,20 +17,21 @@ export interface VoucherCardProps {
   dotMenuShow?: boolean
   borderColor: string
   voucherType: string
-  voucherNum: number
+  voucherNum?: number
   voucherPrice: number
   voucherPriceLabel: string
-  voucherSoldPrice: number
-  voucherSoldPriceLabel: string
+  voucherSoldPrice?: number
+  voucherSoldPriceLabel?: string
   voucherRelation: string
   voucherRelationLabel: string
-  currencyType: string
+  currencyType?: string
   termsConditions?: string
+  voucherBackgrounUrl?: string
   onMenuClick?: () => void
 }
 
 export const VoucherCard: FC<VoucherCardProps> = ({
-  cardWidth,
+  cardWidth = 500,
   backgroundColor1,
   backgroundColor2,
   gradientType,
@@ -46,8 +47,9 @@ export const VoucherCard: FC<VoucherCardProps> = ({
   voucherSoldPriceLabel,
   voucherRelation,
   voucherRelationLabel,
-  currencyType,
+  currencyType = '$',
   termsConditions = 'N/A',
+  voucherBackgrounUrl,
   onMenuClick,
 }) => {
   const cardRef = useRef<HTMLDivElement>(null)
@@ -114,7 +116,9 @@ export const VoucherCard: FC<VoucherCardProps> = ({
             className={`flip-card-front ${voucherType}`}
             style={
               !voucherType && !voucherTypes.includes(voucherType)
-                ? { ...cardFaceBgColor }
+                ? voucherBackgrounUrl
+                  ? { backgroundImage: `url(${voucherBackgrounUrl})` }
+                  : { ...cardFaceBgColor }
                 : {}
             }
           >
@@ -151,9 +155,11 @@ export const VoucherCard: FC<VoucherCardProps> = ({
                     <p>{voucherRelationLabel}</p>
                   </div>
                   <div className={styles.soldDetails}>
-                    <h1>{currencyType + voucherSoldPrice}</h1>
-                    <p>{voucherSoldPriceLabel}</p>
-                    <h1>#{voucherNum}</h1>
+                    <h1>
+                      {voucherSoldPrice && currencyType + voucherSoldPrice}
+                    </h1>
+                    <p>{voucherSoldPriceLabel && voucherSoldPriceLabel}</p>
+                    <h1>{voucherNum && `#${voucherNum}`}</h1>
                   </div>
                 </div>
               </div>

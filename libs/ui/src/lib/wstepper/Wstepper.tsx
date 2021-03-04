@@ -8,7 +8,13 @@ import Stepper from '../stepper/Stepper'
 interface WStepperProps {
   active: number
   data: StepperItem[]
+  showNextBtn?: boolean
   disableNextStep?: boolean
+  disablePrevStep?: boolean
+  nextBtnLabel?: string | number
+  extraBtn?: boolean
+  extraBtnLabel?: string | number
+  extraBtnClick?: () => void
   onActiveStepChange?: (index) => void
 }
 
@@ -18,6 +24,7 @@ export const Wstepper: React.FC<WStepperProps> = ({
   data,
   disableNextStep = false,
   onActiveStepChange,
+  ...props
 }) => {
   const [index, setIndex] = React.useState(0)
 
@@ -40,8 +47,9 @@ export const Wstepper: React.FC<WStepperProps> = ({
       {children}
 
       <Wizard
-        onNext={() => setIndex(index + 1)}
+        {...props}
         onPrev={() => setIndex(index - 1)}
+        onNext={() => setIndex(index + 1)}
         active={index}
         allSteps={data.length}
         disableNextStep={disableNextStep}
