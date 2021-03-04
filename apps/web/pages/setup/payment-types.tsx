@@ -122,6 +122,7 @@ const schema: Schema = {
   },
   tooltip: 'payment type',
   createButtonLabel: 'Create Payment Type',
+  padlocked: ['Card', 'Cash', 'Loyalty'],
   fields: {
     payment_type: {
       full: '',
@@ -152,6 +153,7 @@ const schema: Schema = {
       short: 'Payment Type',
       shortLower: 'payment type',
       min: 2,
+      max: 50,
       example: 'Beauty Scheme',
       // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
@@ -166,8 +168,8 @@ const schema: Schema = {
       // extra: <i>Please note: blah blah blahh</i>,
       cssWidth: 'max',
       type: 'string',
+      max: 50,
     },
-
     gl_code: {
       full: 'GL code',
       fullLower: 'gl code',
@@ -177,6 +179,7 @@ const schema: Schema = {
       extra: <span>Advanced</span>,
       cssWidth: 'max',
       type: 'string',
+      max: 50,
       visible: false,
       collapsible: true,
     },

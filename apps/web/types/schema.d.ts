@@ -15,6 +15,7 @@ interface Schema {
   deleteDescField?: string
   tooltip?: string
   createButtonLabel?: string
+  padlocked?: string[]
 }
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface SchemaItem {
@@ -23,6 +24,7 @@ interface SchemaItem {
   short?: string
   shortLower?: string
   min?: number
+  max?: number
   example?: string | number | any
   description?: string
   extra?: JSX.Element
