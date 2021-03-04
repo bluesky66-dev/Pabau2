@@ -131,8 +131,8 @@ export const Index: NextPage = () => {
       },
       is_active: {
         full: t('marketingsource-tableColumn-active.translation'),
-        type: 'number',
-        defaultvalue: 1,
+        type: 'boolean',
+        defaultvalue: true,
       },
     },
   }
