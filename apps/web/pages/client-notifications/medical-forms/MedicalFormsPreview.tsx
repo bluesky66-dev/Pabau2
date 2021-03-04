@@ -19,93 +19,108 @@ interface LangData {
 interface Data {
   greeting: string
   message: string
-  contactNumber: string
+  closingText: string
+  signatureBlock: string
 }
 
 const langData: LangData = {
   en: {
     greeting: 'Dear Sophia,',
-    contactNumber: '+44 000 987 507',
     message:
       'Please find attached your medical form in PDF format. If you have any questions do not hesitate to contact us at',
+    closingText: 'Kind regards,',
+    signatureBlock: 'Your friends at The Clinic',
   },
   sp: {
     greeting: 'Querida Sophia,',
-    contactNumber: '+44 000 987 507',
     message:
-      '¡Buenas noticias! Recientemente fuiste colocado en nuestra lista de espera y ahora hay una nueva clase disponible. Si aún desea reservar su cita, debe tomar medidas antes de que se tome el lugar.',
+      'Adjunto encontrará su formulario médico en formato PDF. Si tiene alguna pregunta no dude en contactarnos en',
+    closingText: 'Saludos cordiales,',
+    signatureBlock: 'Tus amigos en The Clinic',
   },
   fr: {
     greeting: 'Chère Sophia,',
-    contactNumber: '+44 000 987 507',
     message:
-      "Bonnes nouvelles! Vous avez récemment été inscrit sur notre liste d'attente et une nouvelle classe est maintenant disponible. Si vous souhaitez tout de même prendre rendez-vous, vous devez agir avant que la place ne soit prise.",
+      "Veuillez trouver ci-joint votre formulaire médical au format PDF. Si vous avez des questions, n'hésitez pas à nous contacter au",
+    closingText: 'Sincères amitiés,',
+    signatureBlock: 'Vos amis à la clinique',
   },
   ru: {
     greeting: 'Дорогая София,',
-    contactNumber: '+44 000 987 507',
     message:
-      'Хорошие новости! Вы недавно были помещены в наш список ожидания, и теперь доступен новый курс. Если вы все же хотите записаться на прием, вы должны принять меры до того, как место будет занято.',
+      'Приложите вашу медицинскую форму в формате PDF. Если у вас есть какие-либо вопросы, не стесняйтесь обращаться к нам по адресу',
+    closingText: 'С уважением,',
+    signatureBlock: 'Ваши друзья в клинике',
   },
   ar: {
     greeting: 'عزيزتي صوفيا ،',
-    contactNumber: '+44 000 987 507',
     message:
-      'أخبار جيدة! لقد تم وضعك مؤخرًا في قائمة الانتظار لدينا وهناك فصل جديد متاح الآن. إذا كنت لا تزال ترغب في حجز موعدك ، فيجب عليك اتخاذ إجراء قبل اتخاذ القرار.',
+      'يرجى الاطلاع على النموذج الطبي المرفق بصيغة PDF. إذا كان لديك أي أسئلة ، فلا تتردد في الاتصال بنا على',
+    closingText: 'أطيب التحيات،',
+    signatureBlock: 'أصدقاؤك في العيادة',
   },
   bg: {
     greeting: 'Скъпа София,',
-    contactNumber: '+44 000 987 507',
     message:
-      'Добри новини! Наскоро бяхте поставени в нашия списък за изчакване и вече е наличен нов клас. Ако все пак искате да запазите час, трябва да предприемете действия, преди мястото да бъде взето.',
+      'Приложете вашата медицинска форма в PDF формат. Ако имате въпроси, не се колебайте да се свържете с нас на',
+    closingText: 'Поздрави,',
+    signatureBlock: 'Вашите приятели в клиниката',
   },
   cs: {
     greeting: 'Drahá Sophia,',
-    contactNumber: '+44 000 987 507',
     message:
-      'Dobré zprávy! Nedávno jste byli zařazeni do našeho seznamu čekatelů a nyní je k dispozici nová třída. Pokud si přesto chcete zarezervovat termín, musíte před přijetím místa jednat.',
+      'V příloze naleznete váš lékařský formulář ve formátu PDF. V případě jakýchkoli dotazů nás neváhejte kontaktovat na',
+    closingText: 'S přátelským pozdravem,',
+    signatureBlock: 'Vaši přátelé na klinice',
   },
   da: {
     greeting: 'Kære Sophia,',
-    contactNumber: '+44 000 987 507',
     message:
-      'Gode nyheder! Du blev for nylig placeret i vores venteliste, og en ny klasse er nu tilgængelig. Hvis du stadig vil reservere din aftale, skal du tage skridt, inden stedet tages.',
+      'Se vedhæftet din medicinske formular i PDF-format. Hvis du har spørgsmål, så tøv ikke med at kontakte os på',
+    closingText: 'Med venlig hilsen,',
+    signatureBlock: 'Dine venner på klinikken',
   },
   hu: {
     greeting: 'Kedves Sophia,',
-    contactNumber: '+44 000 987 507',
     message:
-      'Jó hírek! Nemrég bekerült a várólistánkba, és most már elérhető egy új osztály. Ha továbbra is szeretné lefoglalni az időpontját, akkor lépéseket kell tennie, mielőtt a helyszínre kerül.',
+      'Kérjük, csatolja orvosi formáját PDF formátumban. Ha bármilyen kérdése van, forduljon hozzánk bizalommal a következő címen:',
+    closingText: 'Üdvözlettel,',
+    signatureBlock: 'A barátaid a Klinikán',
   },
   lv: {
     greeting: 'Mīļā Sofija,',
-    contactNumber: '+44 000 987 507',
     message:
-      'Labas ziņas! Jūs nesen tikāt ievietots mūsu gaidītāju sarakstā, un tagad ir pieejama jauna klase. Ja jūs joprojām vēlaties rezervēt savu tikšanos, jums ir jārīkojas pirms vietas noteikšanas.',
+      'Lūdzu, pievienojiet savu medicīnisko veidlapu PDF formātā. Ja jums ir kādi jautājumi, sazinieties ar mums pa e-pastu',
+    closingText: 'Ar cieņu,',
+    signatureBlock: 'Jūsu draugi klīnikā',
   },
   no: {
     greeting: 'Kjære Sophia,',
-    contactNumber: '+44 000 987 507',
     message:
-      'Gode nyheter! Du ble nylig plassert i ventelisten vår, og en ny klasse er nå tilgjengelig. Hvis du fremdeles vil bestille en avtale, må du ta affære før stedet blir tatt.',
+      'Vennligst finn vedlagt ditt medisinske skjema i PDF-format. Hvis du har spørsmål, ikke nøl med å kontakte oss på',
+    closingText: 'Vennlig hilsen,',
+    signatureBlock: 'Dine venner på The Clinic',
   },
   pl: {
     greeting: 'Droga Zofio,',
-    contactNumber: '+44 000 987 507',
     message:
-      'Dobre wieści! Niedawno umieszczono Cię na naszej liście oczekujących, a nowe zajęcia są już dostępne. Jeśli nadal chcesz umówić się na wizytę, musisz podjąć działania, zanim miejsce zostanie zajęte.',
+      'W załączeniu przesyłamy formularz medyczny w formacie PDF. Jeśli masz jakiekolwiek pytania, nie wahaj się z nami skontaktować pod adresem',
+    closingText: 'Z poważaniem,',
+    signatureBlock: 'Twoi przyjaciele z The Clinic',
   },
   sw: {
     greeting: 'Kära Sophia,',
-    contactNumber: '+44 000 987 507',
     message:
-      'Goda nyheter! Du placerades nyligen i vår väntelista och en ny klass är nu tillgänglig. Om du fortfarande vill boka din tid måste du vidta åtgärder innan platsen tas.',
+      'Vänligen se bifogat ditt medicinska formulär i PDF-format. Om du har några frågor tveka inte att kontakta oss på',
+    closingText: 'Vänliga Hälsningar,',
+    signatureBlock: 'Dina vänner på kliniken',
   },
   ro: {
     greeting: 'Dragă Sophia,',
-    contactNumber: '+44 000 987 507',
     message:
-      'Vești bune! Ați fost recent plasat în lista noastră de așteptare și o nouă clasă este acum disponibilă. Dacă doriți totuși să vă rezervați programarea, trebuie să luați măsuri înainte ca locul să fie luat.',
+      'Vă rugăm să găsiți atașat formularul dvs. medical în format PDF. Dacă aveți întrebări, nu ezitați să ne contactați la',
+    closingText: 'Salutări calde,',
+    signatureBlock: 'Prietenii tăi de la clinică',
   },
 }
 
@@ -136,12 +151,12 @@ const MedicalFormsPreview: FC<P> = ({
           activeSocialIcons={activeSocialIcons}
           backGroundColor={backGroundColor}
           isFooterText={true}
-          footerText={'Kind regards,<br/>Your friends at The Clinic'}
+          footerText={`${selectLangData.closingText}<br/>${selectLangData.signatureBlock}`}
         >
           <MedicalForm
             message={selectLangData.message}
             buttonColor={buttonColor}
-            contactNumber={selectLangData.contactNumber}
+            contactNumber="+44 000 987 507"
           />
         </EmailSmsPreview>
       ) : (
