@@ -14,7 +14,6 @@ import {
   YAxis,
   Tooltip,
   AreaSeries,
-  AreaSplineSeries,
 } from 'react-jsx-highcharts'
 
 interface report {
@@ -80,7 +79,7 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
               }}
             />
 
-            <XAxis id="XAxis" visible={false}></XAxis>
+            <XAxis id="XAxis" visible={false} />
 
             <YAxis id="YAxis" visible={false}>
               <AreaSeries
