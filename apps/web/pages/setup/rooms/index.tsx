@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
-import React from 'react'
+import React, { useState } from 'react'
+import { CreateRoom } from '@pabau/ui'
 import CrudLayout from '../../../components/CrudLayout/CrudLayout'
-import { useRouter } from 'next/router'
 
 /* eslint-disable-next-line */
 export interface RoomsProps {
@@ -126,10 +126,9 @@ const UPDATE_ORDER_MUTATION = gql`
 `
 
 export function Labs(props: RoomsProps) {
-  const router = useRouter()
-
+  const [visible, setVisible] = useState(false)
   const createPageOnClick = () => {
-    router.push('/setup/rooms/create')
+    setVisible(true)
   }
 
   return (
@@ -146,6 +145,11 @@ export function Labs(props: RoomsProps) {
         showNotificationBanner={true}
         createPage={true}
         createPageOnClick={createPageOnClick}
+      />
+      <CreateRoom
+        visible={visible}
+        onClose={() => setVisible(false)}
+        onCreate={() => setVisible(false)}
       />
     </div>
   )
