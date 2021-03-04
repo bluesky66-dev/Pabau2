@@ -183,7 +183,7 @@ import physo_18 from '../../assets/images/selection/physiotherapy/image_18.jpg'
 import physo_19 from '../../assets/images/selection/physiotherapy/image_19.jpg'
 
 export type ImgBlock = {
-  key: number
+  key?: number
   source: unknown
   url: string
   tags: string[]

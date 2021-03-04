@@ -95,6 +95,7 @@ export const ImageSelectorModal: FC<ImageSelectorModalProps> = (props) => {
       isValidate
       newButtonText={props.attachButtonText || 'Attach'}
       newButtonDisable={!selectedImg}
+      wrapClassName={styles.modalContainer}
     >
       <Input.Search
         defaultValue={initialSearch}
@@ -108,12 +109,8 @@ export const ImageSelectorModal: FC<ImageSelectorModalProps> = (props) => {
             <Col xs={{ span: 12 }} sm={{ span: 8 }} lg={{ span: 6 }}>
               <div className={styles.imgContainer}>
                 <PictureOutlined style={{ fontSize: 28, color: '#9292A3' }} />
-                <label
-                  htmlFor="file-upload"
-                  style={{ margin: '20px 0 12px' }}
-                  className={styles.chooseFileBtn}
-                >
-                  <PlusOutlined style={{ color: '#FFF', marginRight: 10 }} />
+                <label htmlFor="file-upload" className={styles.chooseFileBtn}>
+                  <PlusOutlined />
                   Choose file
                 </label>
                 <input
