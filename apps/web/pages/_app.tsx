@@ -19,6 +19,7 @@ import { I18nextProvider } from 'react-i18next'
 import i18next from 'i18next'
 import de from '../locales/de.json'
 import en from '../locales/en.json'
+import ContextWrapper from '../components/ContextWrapper'
 require('../styles/global.less')
 require('../../../libs/ui/src/styles/antd.less')
 require('react-phone-input-2/lib/style.css')
@@ -183,7 +184,9 @@ export default function CustomApp({
             src: url('/fonts/CircularStd-Medium.otf') format('opentype');
           }
         `}</style>
-        <Component {...pageProps} />
+        <ContextWrapper>
+          <Component {...pageProps} />
+        </ContextWrapper>
       </I18nextProvider>
     </ApolloProvider>
   )

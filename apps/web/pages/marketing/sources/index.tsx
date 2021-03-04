@@ -1,9 +1,10 @@
 import { gql } from '@apollo/client'
 import { NextPage } from 'next'
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import CrudLayout from '../../../components/CrudLayout/CrudLayout'
 /* eslint-disable graphql/template-strings */
 import { useTranslation } from 'react-i18next'
+import { UserContext } from '../../../context/UserContext'
 
 const LIST_QUERY = gql`
   query marketing_sources(
@@ -95,6 +96,14 @@ const UPDATE_ORDER_MUTATION = gql`
 
 export const Index: NextPage = () => {
   const { t } = useTranslation('common')
+
+  const user = useContext(UserContext)
+
+  useEffect(() => {
+    console.log('This is context')
+    console.log('+++++++', user)
+  })
+
   const schema: Schema = {
     full: t('marketingsource-title.translation'),
     fullLower: t('marketingsource-title.translation'),
