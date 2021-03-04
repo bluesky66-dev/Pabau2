@@ -136,6 +136,15 @@ export interface UpComingAppoinmentReminderProps {
   contactNumber?: number
 }
 
+export interface BirthDayPreviewProps {
+  wishingMessage?: string
+  messageLine1?: string
+  messageLine2?: string
+  messageLine3?: string
+  closingText?: string
+  signatureBlock?: string
+}
+
 export function EmailSMSFooter(props: FooterProps): JSX.Element {
   const {
     iconGroup = true,

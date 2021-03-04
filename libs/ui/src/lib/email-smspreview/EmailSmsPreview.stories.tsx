@@ -17,6 +17,7 @@ import EmailSmsPreview, {
   ReferralProps,
   InvoicesProps,
   UpComingAppoinmentReminderProps,
+  BirthDayPreviewProps,
 } from './EmailSmsPreview'
 import NoShowAppointmentComponent from './NoShowAppointment'
 import BookedOnClass from './BookedOntoClass'
@@ -35,6 +36,7 @@ import ClassesSpotAvailable from './ClassesSpotAvailable'
 import RequestFeedBacks from './RequestFeedBack'
 import NewAppoinmentsIsBooked from './NewAppointmentIsBooked'
 import UpComingAppointmentReminder from './UpComingAppoinmentReminder'
+import BirthdayPreviewComponent from './Birthday'
 
 export default {
   component: EmailSmsPreview,
@@ -658,6 +660,45 @@ GiftVouchers.args = {
   footerIconGroup: false,
   isGiftVoucher: true,
   footer: false,
+}
+
+const BirthdayPreviewStory = ({
+  footerIconGroup,
+  footer,
+  wishingMessage,
+  messageLine1,
+  messageLine2,
+  messageLine3,
+  closingText,
+  signatureBlock,
+}: PropsWithChildren<EmailSMSPreviewProps & BirthDayPreviewProps>) => (
+  <EmailSmsPreview
+    footerIconGroup={footerIconGroup}
+    footer={footer}
+    hideLogo={true}
+  >
+    <BirthdayPreviewComponent
+      wishingMessage={wishingMessage}
+      messageLine1={messageLine1}
+      messageLine2={messageLine2}
+      messageLine3={messageLine3}
+      closingText={closingText}
+      signatureBlock={signatureBlock}
+    />
+  </EmailSmsPreview>
+)
+
+export const BirthdayPreview = BirthdayPreviewStory.bind({})
+BirthdayPreview.args = {
+  wishingMessage: 'Happy Birthday!',
+  messageLine1:
+    'Your friends at clinic would like to wish you a glorious and happy birthday.',
+  messageLine2: "Here's a £30 voucher to spend on your next visit.",
+  messageLine3: 'We look forward to seeing you soon!',
+  closingText: 'Warm regards,',
+  signatureBlock: 'The clinic team',
+  footerIconGroup: true,
+  footer: true,
 }
 
 const ConnectRegistrationStory = ({

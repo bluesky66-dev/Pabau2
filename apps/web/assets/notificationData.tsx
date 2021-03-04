@@ -277,7 +277,7 @@ const notificationData = {
         "The default email template you will send if it's a client's birthday",
       icon: <CrownOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/birthday',
       disabled: true,
     },
   ],
