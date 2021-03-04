@@ -1,3 +1,4 @@
+export * from './lib/communication-filter/CommunicationFilter'
 export * from './lib/file-uploder/FileUploder'
 export * from './lib/read-review/ReadReview'
 export * from './lib/document-upload-modal/DocumentUploadModal'

@@ -1,10 +1,10 @@
 import React, { FC, useEffect, useState } from 'react'
 import {
   Pagination,
-  DotButton,
-  MedicalFormPreview,
-  VersionHistory,
-  VersionItem,
+  // DotButton,
+  // MedicalFormPreview,
+  // VersionHistory,
+  // VersionItem,
   Button,
 } from '@pabau/ui'
 import { Table } from 'antd'
@@ -14,21 +14,21 @@ import {
   ShareAltOutlined,
   DeleteOutlined,
 } from '@ant-design/icons'
-// import arrayMove from 'array-move'
+import arrayMove from 'array-move'
 import {
   SortableContainer,
   SortableElement,
   SortableHandle,
 } from 'react-sortable-hoc'
-// import { medicalFormData, medicalFormPreviewProps } from './mock'
-import treatmentType from '../../../assets/images/form-type/treatment.svg'
+import { communicationItems } from './mock'
+import treatmentType from '../../../assets/images/form-type/communication.svg'
 
 import styles from './Custom.module.less'
 
 interface CustomItem {
   index?: number | string
   name: string
-  formType: string
+  communicationType: string
   createdAt: string
   status: string
 }
@@ -56,26 +56,25 @@ const DragHandle = SortableHandle(() => (
 ))
 const SortableItem = SortableElement((props) => <tr {...props} />)
 const SortContainer = SortableContainer((props) => <tbody {...props} />)
-
+const defaultItems: CustomItem[] = communicationItems
 /* eslint-disable-next-line */
 interface CustomProps {
   items?: CustomItem[]
 }
 
 const Custom: FC<CustomProps> = ({ items }) => {
-  const [showVersions, setShowVersions] = useState(false)
   const [currentItem, setCurrentItem] = useState<CustomItem>()
-  const [medicalFormitems, setMedicalFormItems] = useState<CustomItem[]>([])
+  const [communicationItems, setCommunicationItems] = useState<CustomItem[]>([])
 
   interface TypeColumnProps {
-    templateType: string
+    communicationType: string
   }
 
-  const TypeColumn: FC<TypeColumnProps> = ({ templateType }) => {
+  const TypeColumn: FC<TypeColumnProps> = ({ communicationType }) => {
     return (
       <div className={styles.typeColumn}>
         <img src={treatmentType} alt="Template type" />
-        <span>{templateType}</span>
+        <span>{communicationType}</span>
       </div>
     )
   }
@@ -120,12 +119,12 @@ const Custom: FC<CustomProps> = ({ items }) => {
       dataIndex: 'name',
     },
     {
-      key: 'templateType',
+      key: 'communicationType',
       title: 'Type',
-      dataIndex: 'templateType',
+      dataIndex: 'communicationType',
       // eslint-disable-next-line react/display-name
-      render: (templateType: string) => (
-        <TypeColumn templateType={templateType} />
+      render: (communicationType: string) => (
+        <TypeColumn communicationType={communicationType} />
       ),
     },
     {
@@ -142,6 +141,40 @@ const Custom: FC<CustomProps> = ({ items }) => {
     },
   ]
 
+  const onSortEnd = ({ oldIndex, newIndex }) => {
+    if (oldIndex !== newIndex) {
+      const newData = arrayMove(
+        // eslint-disable-next-line unicorn/prefer-spread
+        [].concat(communicationItems),
+        oldIndex,
+        newIndex
+      ).filter((el) => !!el)
+      setCommunicationItems(newData)
+    }
+  }
+
+  const DraggableContainer = (props) => (
+    <SortContainer
+      useDragHandle
+      disableAutoscroll
+      helperClass="row-dragging"
+      onSortEnd={onSortEnd}
+      {...props}
+    />
+  )
+
+  const DraggableBodyRow = ({ className, style, ...restProps }) => {
+    const index = communicationItems.findIndex(
+      (x) => x.index === restProps['data-row-key']
+    )
+    return <SortableItem index={index} {...restProps} />
+  }
+
+  useEffect(() => {
+    // setCommunicationItems(items || defaultData)
+    setCommunicationItems(items || defaultItems)
+  }, [items])
+
   return (
     <div className={styles.customContainer}>
       {/* {currentItem && (
@@ -153,7 +186,7 @@ const Custom: FC<CustomProps> = ({ items }) => {
         />
       )} */}
       <Table
-        dataSource={medicalFormitems}
+        dataSource={communicationItems}
         columns={columns}
         pagination={false}
         rowKey="index"
@@ -164,12 +197,12 @@ const Custom: FC<CustomProps> = ({ items }) => {
             },
           }
         }}
-        // components={{
-        //   body: {
-        //     wrapper: DraggableContainer,
-        //     row: DraggableBodyRow,
-        //   },
-        // }}
+        components={{
+          body: {
+            wrapper: DraggableContainer,
+            row: DraggableBodyRow,
+          },
+        }}
       />
       <div className={styles.paginationContainer}>
         <Pagination showingRecords={10} total={50} />

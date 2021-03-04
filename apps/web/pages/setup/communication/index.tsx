@@ -59,7 +59,9 @@ export const Index: FC = () => {
                       placeholder="Search in Custom"
                     />
                   </div>
-                  <div>{/* <MedicalFilter /> */}</div>
+                  <div>
+                    <MedicalFilter />
+                  </div>
                   <div>
                     <Button type="primary">{'Create Template'}</Button>
                   </div>

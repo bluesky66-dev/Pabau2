@@ -11,7 +11,7 @@ import {
 import Layout from '../../../components/Layout/Layout'
 import Custom from '../../../components/MedicalForms/Custom'
 import Library from '../../../components/MedicalForms/Library'
-import CommonHeader from '../CommonHeader'
+import CommonHeader from '../common-header'
 import notificationBannerImage from '../../../assets/images/notification-image.png'
 import styles from './index.module.less'
 
@@ -35,7 +35,7 @@ export const Index: FC = () => {
         <div className={styles.medicalFormsContainer}>
           <div className={styles.medicalFormsHeader}>
             <div>
-              <Breadcrumb breadcrumbItems={['Setup', 'Medical Forms']} />
+              {/* <Breadcrumb breadcrumbItems={['Setup', 'Medical Forms']} /> */}
               <Title>Medical Forms</Title>
             </div>
             <div className={styles.medicalFormsOps}>
