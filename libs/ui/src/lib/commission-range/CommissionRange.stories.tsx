@@ -8,20 +8,13 @@ export default {
   args: servicesData,
   argTypes: {
     rangeItems: {
-      range: {
-        control: {
-          type: 'array',
-        },
-      },
-      percent: {
-        control: {
-          type: 'number',
-        },
+      control: {
+        type: 'object',
       },
     },
-    users: {
+    userRevenue: {
       control: {
-        type: 'array',
+        type: 'object',
       },
     },
     type: {

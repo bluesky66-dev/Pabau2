@@ -18,13 +18,13 @@ export interface CommissionRangeField {
 /* eslint-disable-next-line */
 export interface CommissionRangeProps {
   rangeItems: CommissionRangeField[]
-  users: UserField[]
+  userRevenue: UserField
   type: string
 }
 
 export const CommissionRange: FC<CommissionRangeProps> = ({
   rangeItems,
-  users,
+  userRevenue,
   type,
 }) => {
   rangeItems.sort((a, b) => {
@@ -55,20 +55,8 @@ export const CommissionRange: FC<CommissionRangeProps> = ({
       £{rangeItem.range[0]}
     </span>
   ))
-  let totalRevenue = 0
-  const renderUsers = users.map((user, index) => {
-    totalRevenue += user.revenue
-    const left = (user.revenue * 100) / maxRevenue
-    return (
-      <div
-        key={index}
-        className={styles.rangeUser}
-        style={{ left: `${left}%` }}
-      >
-        <img src={user.avatar} alt={user.name} />
-      </div>
-    )
-  })
+
+  const left = (userRevenue.revenue * 100) / maxRevenue
 
   return (
     <div className={styles.commissionRange}>
@@ -80,13 +68,18 @@ export const CommissionRange: FC<CommissionRangeProps> = ({
       <Row wrap={false}>
         <Col className={styles.rangeWrapper}>
           <div className={styles.rangeItems}>{renderRangeItems}</div>
-          {renderUsers}
+          <div
+            className={styles.rangeUser}
+            style={{ left: `${left > 100 ? 100 : left}%` }}
+          >
+            <img src={userRevenue.avatar} alt={userRevenue.name} />
+          </div>
         </Col>
       </Row>
       <Row className={styles.directionColumn}>
         <div className={styles.rangeSteps}>{renderRangeSteps}</div>
         <div className={styles.totalRevenue}>
-          <span>Total: £{totalRevenue}</span>
+          <span>Total: £{userRevenue.revenue}</span>
         </div>
       </Row>
     </div>

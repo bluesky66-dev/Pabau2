@@ -9,7 +9,7 @@ describe('CommissionRange', () => {
       <CommissionRange
         rangeItems={servicesData.rangeItems}
         type={servicesData.type}
-        users={servicesData.users}
+        userRevenue={servicesData.userRevenue}
       />
     )
     expect(baseElement).toBeTruthy()

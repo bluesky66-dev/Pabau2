@@ -6,40 +6,23 @@ export const servicesData = {
       percent: 0,
     },
     {
-      range: [100, 5000],
+      range: [1000, 5000],
       percent: 1,
     },
     {
-      range: [500, 9999],
+      range: [5000, 9999],
       percent: 5,
     },
   ],
-  users: [
-    {
-      name: 'Tom Coleman',
-      avatar: 'https://avatars2.githubusercontent.com/u/132554',
-      revenue: 200,
-    },
-    {
-      name: 'Zoltan Olah',
-      avatar: 'https://avatars0.githubusercontent.com/u/81672',
-      revenue: 2000,
-    },
-    {
-      name: 'Tim Hingston',
-      avatar: 'https://avatars3.githubusercontent.com/u/1831709',
-      revenue: 6000,
-    },
-    {
-      name: 'Dominic Nguyen',
-      avatar: 'https://avatars2.githubusercontent.com/u/263385',
-      revenue: 7000,
-    },
-  ],
+  userRevenue: {
+    name: 'Tom Coleman',
+    avatar: 'https://avatars2.githubusercontent.com/u/132554',
+    revenue: 200,
+  },
 }
 
 export const productsData = {
-  type: 'Service',
+  type: 'Product',
   rangeItems: [
     {
       range: [0, 2000],
@@ -54,32 +37,15 @@ export const productsData = {
       percent: 5,
     },
   ],
-  users: [
-    {
-      name: 'Tom Coleman',
-      avatar: 'https://avatars2.githubusercontent.com/u/132554',
-      revenue: 1000,
-    },
-    {
-      name: 'Zoltan Olah',
-      avatar: 'https://avatars0.githubusercontent.com/u/81672',
-      revenue: 3000,
-    },
-    {
-      name: 'Tim Hingston',
-      avatar: 'https://avatars3.githubusercontent.com/u/1831709',
-      revenue: 4000,
-    },
-    {
-      name: 'Dominic Nguyen',
-      avatar: 'https://avatars2.githubusercontent.com/u/263385',
-      revenue: 7000,
-    },
-  ],
+  userRevenue: {
+    name: 'Zoltan Olah',
+    avatar: 'https://avatars0.githubusercontent.com/u/81672',
+    revenue: 3000,
+  },
 }
 
 export const packagesData = {
-  type: 'Service',
+  type: 'Package',
   rangeItems: [
     {
       range: [0, 3000],
@@ -94,26 +60,9 @@ export const packagesData = {
       percent: 5,
     },
   ],
-  users: [
-    {
-      name: 'Tom Coleman',
-      avatar: 'https://avatars2.githubusercontent.com/u/132554',
-      revenue: 1000,
-    },
-    {
-      name: 'Zoltan Olah',
-      avatar: 'https://avatars0.githubusercontent.com/u/81672',
-      revenue: 2000,
-    },
-    {
-      name: 'Tim Hingston',
-      avatar: 'https://avatars3.githubusercontent.com/u/1831709',
-      revenue: 4500,
-    },
-    {
-      name: 'Dominic Nguyen',
-      avatar: 'https://avatars2.githubusercontent.com/u/263385',
-      revenue: 7000,
-    },
-  ],
+  userRevenue: {
+    name: 'Dominic Nguyen',
+    avatar: 'https://avatars2.githubusercontent.com/u/263385',
+    revenue: 7000,
+  },
 }
