@@ -13,6 +13,8 @@ export const Company = objectType({
     t.model.remote_url();
     t.model.remote_connect();
     t.model.cron_enabled();
+    t.model.details();
+    t.model.subscription();
   },
 });
 
@@ -21,6 +23,16 @@ export const companyQuery = extendType({
   definition(t) {
     t.crud.company();
     t.crud.companies({ filtering: true, ordering: true });
+
+    t.field('companiesCount', {
+      type: 'Int',
+      args: {
+        where: 'CompanyWhereInput',
+      },
+      async resolve(_root, args, ctx) {
+        return ctx.prisma.company.count(args);
+      },
+    });
   },
 });
 
