@@ -23,7 +23,7 @@ export interface FullScreenReportModalProps {
   onBackClick?: (e) => void
   onSave?: () => void
   onCreate?: () => void
-  onCancel?: () => void
+  onCancel?: (e) => void
   onReset?: () => void
   onDelete?: () => void
   deleteBtnText?: string
@@ -132,7 +132,7 @@ export const FullScreenReportModal: FC<FullScreenReportModalProps> = ({
                 )}
                 {operation === OperationType.cancel && (
                   <Button
-                    onClick={() => onCancel?.()}
+                    onClick={(e) => onCancel?.(e)}
                     style={{ marginRight: '1rem' }}
                   >
                     {cancelBtnText || 'Cancel'}

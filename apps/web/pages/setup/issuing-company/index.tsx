@@ -5,20 +5,17 @@ import CrudLayout from '../../../components/CrudLayout/CrudLayout'
 import {
   FullScreenReportModal,
   PhoneNumberInput,
-  Switch,
-  Button,
   Notification,
   NotificationType,
   FormikInput,
+  OperationType,
   BasicModal as Modal,
 } from '@pabau/ui'
 import { Form, Select } from 'antd'
-import { CloseOutlined, DeleteFilled } from '@ant-design/icons'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import countries from 'i18n-iso-countries'
 import english from 'i18n-iso-countries/langs/en.json'
-import { useMedia } from 'react-use'
 
 import styles from './issuing-company.module.less'
 
@@ -240,7 +237,6 @@ interface FocusedTypes {
 }
 
 export const IssuingCompany: NextPage = () => {
-  const isMobile = useMedia('(max-width: 768px)', false)
   const [showModal, setShowModal] = useState<boolean>(false)
   const { Option } = Select
   const [focused, setFocused] = useState<FocusedTypes>({
@@ -425,54 +421,21 @@ export const IssuingCompany: NextPage = () => {
     formik.handleReset(e)
   }
 
-  const showActionButtons = () => {
-    return !isMobile ? 'Delete' : <DeleteFilled />
-  }
-
-  const headerContent = () => {
-    return (
-      <div className={styles.issuingCompanyHeader}>
-        <h4>{!editPage.id ? 'Create' : 'Edit'} Issuing Company</h4>
-        <div className={styles.issueRegister}>
-          <div className={styles.vatReg}>
-            <small>VAT registered</small>{' '}
-            <Switch
-              checked={formik.values.vatRegistered}
-              onClick={() =>
-                onChecked(!formik.values.vatRegistered, 'vatRegistered')
-              }
-            />
-          </div>
-          <div className={styles.active}>
-            <small>Active</small>{' '}
-            <Switch
-              checked={formik.values.isActive}
-              onClick={() => onChecked(!formik.values.isActive, 'isActive')}
-            />
-          </div>
-          <div className={styles.btnCancel}>
-            <Button
-              type="default"
-              onClick={(e) => handleFullScreenModalBackClick(e)}
-            >
-              {!isMobile ? 'Cancel' : <CloseOutlined />}
-            </Button>
-          </div>
-          {editPage.id && (
-            <div className={styles.btnDelete}>
-              <Button type="default" onClick={showDeleteConfirmDialog}>
-                {showActionButtons()}
-              </Button>
-            </div>
-          )}
-          <div>
-            <Button type="primary" onClick={() => formik.handleSubmit()}>
-              {!editPage.id ? 'Create' : 'Save'}
-            </Button>
-          </div>
-        </div>
-      </div>
-    )
+  const handleOperations = () => {
+    return !editPage.id
+      ? [
+          OperationType.vat,
+          OperationType.active,
+          OperationType.cancel,
+          OperationType.create,
+        ]
+      : [
+          OperationType.vat,
+          OperationType.active,
+          OperationType.cancel,
+          OperationType.delete,
+          OperationType.save,
+        ]
   }
 
   const modalContents = () => {
@@ -638,12 +601,22 @@ export const IssuingCompany: NextPage = () => {
         setEditPage={handleSetEditPage}
       />
       <FullScreenReportModal
-        title={headerContent}
+        operations={handleOperations()}
+        title={`${!editPage.id ? 'Create' : 'Edit'} Issuing Company`}
         visible={showModal}
-        header={true}
         onBackClick={(e) => handleFullScreenModalBackClick(e)}
-        content={modalContents}
-      />
+        onCancel={(e) => handleFullScreenModalBackClick(e)}
+        activated={formik.values.isActive}
+        vatRegistered={formik.values.vatRegistered}
+        onVatRegistered={(value) => onChecked(value, 'vatRegistered')}
+        enableCreateBtn={true}
+        onActivated={(value) => onChecked(value, 'isActive')}
+        onCreate={() => formik.handleSubmit()}
+        onSave={() => formik.handleSubmit()}
+        onDelete={showDeleteConfirmDialog}
+      >
+        {modalContents()}
+      </FullScreenReportModal>
       <Modal
         modalWidth={682}
         centered={true}
