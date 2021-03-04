@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { EmailSmsPreview, MedicalForm } from '@pabau/ui'
-import CustomTemplate from '../CustomTemplate'
+import CustomTemplate from '../../../pages/client-notifications/CustomTemplate'
 
 interface P {
   standardTapIndex: string
