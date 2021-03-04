@@ -1,16 +1,26 @@
 import React from 'react'
 
-// import styles from './Smstext.module.less'
+import styles from './Smstext.module.less'
+import ic_sms from '../../assets/images/sms_triangle.svg'
 
 interface P {
-  message?: string
+  smsMessage?: string
   manageAppointment?: boolean
 }
 
-export const Smstext: React.FC<P> = ({ message, manageAppointment }) => {
+export const Smstext: React.FC<P> = ({ smsMessage, manageAppointment }) => {
   return (
-    <div>
-      <h1>Welcome to Smstext!</h1>
+    <div className={styles.container}>
+      <div className={styles.smsContainer}>
+        <span className={styles.smsText}>{smsMessage}</span>
+        <img
+          src={ic_sms}
+          alt=""
+          className={styles.icSms}
+          width="8"
+          height="14"
+        />
+      </div>
     </div>
   )
 }
