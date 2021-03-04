@@ -128,6 +128,7 @@ export const ColorPicker: FC<PickerProps> = ({
       
       {isAddingColor && (
         <SketchPicker
+        className={styles.customPicker}
           color={selColor}
           presetColors={[]}
           disableAlpha={true}
