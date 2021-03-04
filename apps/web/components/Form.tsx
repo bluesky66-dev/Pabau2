@@ -132,7 +132,6 @@ const Form: FC<P> = ({
                 <Input
                   //disabled={isSubmitting}
                   name={name}
-                  type={type}
                   placeholder={example && `eg ${example}`}
                   autoFocus={i === 0}
                 />

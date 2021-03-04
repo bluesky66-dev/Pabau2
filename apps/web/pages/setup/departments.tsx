@@ -114,6 +114,7 @@ const schema: Schema = {
       short: 'Name',
       shortLower: 'name',
       min: 2,
+      max: 50,
       example: 'Surgical Department',
       // description: 'A friendly name',
       // extra: <i>Please note: blah blah blahh</i>,
