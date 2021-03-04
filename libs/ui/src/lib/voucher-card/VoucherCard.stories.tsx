@@ -94,6 +94,7 @@ export const ValentineVoucherCard = VoucherCardStory.bind({})
 export const BirthdayVoucherCard = VoucherCardStory.bind({})
 export const FlowersVoucherCard = VoucherCardStory.bind({})
 export const BookingVoucherCard = VoucherCardStory.bind({})
+export const CustomVoucherCard = VoucherCardStory.bind({})
 
 BasicVoucherCard.args = {
   backgroundColor1: '#9013FE',
@@ -142,5 +143,15 @@ BookingVoucherCard.args = {
   borderColor: '#000',
   bookNowButton: true,
   voucherType: '',
+  buttonLabel: 'Book Now',
+}
+
+CustomVoucherCard.args = {
+  backgroundColor1: '#9013FE',
+  backgroundColor2: '#BD10E0',
+  gradientType: 'linear-gradient',
+  borderColor: '#000',
+  bookNowButton: true,
+  voucherType: 'Custom',
   buttonLabel: 'Book Now',
 }
