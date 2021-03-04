@@ -523,6 +523,50 @@
       columns:
       - is_active
       - name
+      - order
+      - service
+      - session
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - created_at
+      - id
+      - is_active
+      - name
+      - order
+      - service
+      - session
+      - updated_at
+      filter: {}
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - name
+      - order
+      - service
+      - session
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: credit_note_type
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - code
+      - invoice_prefix
+      - is_active
+      - name
       backend_only: false
   select_permissions:
   - role: public
@@ -901,6 +945,57 @@
       filter: {}
 - table:
     schema: public
+    name: library_installers
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - id
+      - library_name
+      - library_description
+      - library_image
+      - library_location
+      - library_language
+      - data
+      - created_date
+      - is_plus
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_plus
+      - id
+      - data
+      - library_description
+      - library_image
+      - library_language
+      - library_location
+      - library_name
+      - created_date
+      filter: {}
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_plus
+      - id
+      - data
+      - library_description
+      - library_image
+      - library_language
+      - library_location
+      - library_name
+      - created_date
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
     name: locations
   insert_permissions:
   - role: public
@@ -1076,6 +1171,9 @@
   - role: public
     permission:
       filter: {}
+- table:
+    schema: public
+    name: peer_review
 - table:
     schema: public
     name: petty_cash_types

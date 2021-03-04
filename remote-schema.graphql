@@ -16349,6 +16349,37 @@ type job_title_variance_fields {
   order: Float
 }
 
+scalar jsonb
+
+"""
+Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'.
+"""
+input jsonb_comparison_exp {
+  """is the column contained in the given json value"""
+  _contained_in: jsonb
+
+  """does the column contain the given json value at the top level"""
+  _contains: jsonb
+  _eq: jsonb
+  _gt: jsonb
+  _gte: jsonb
+
+  """does the string exist as a top-level key in the column"""
+  _has_key: String
+
+  """do all of these strings exist as top-level keys in the column"""
+  _has_keys_all: [String!]
+
+  """do any of these strings exist as top-level keys in the column"""
+  _has_keys_any: [String!]
+  _in: [jsonb!]
+  _is_null: Boolean
+  _lt: jsonb
+  _lte: jsonb
+  _neq: jsonb
+  _nin: [jsonb!]
+}
+
 """
 columns and relationships of "labs_dashboard"
 """
@@ -16849,6 +16880,220 @@ input library_insert_input {
   phone: String
   provider_no: String
   type: String
+}
+
+"""
+columns and relationships of "library_installers"
+"""
+type library_installers {
+  created_date: timestamptz!
+  data(
+    """JSON select path"""
+    path: String
+  ): jsonb!
+  id: Int!
+  is_plus: Boolean!
+  library_description: String!
+  library_image: String
+  library_language: String
+  library_location: String
+  library_name: String!
+}
+
+"""append existing jsonb value of filtered columns with new jsonb value"""
+input library_installers_append_input {
+  data: jsonb
+}
+
+"""
+Boolean expression to filter rows from the table "library_installers". All fields are combined with a logical 'AND'.
+"""
+input library_installers_bool_exp {
+  _and: [library_installers_bool_exp!]
+  _not: library_installers_bool_exp
+  _or: [library_installers_bool_exp!]
+  created_date: timestamptz_comparison_exp
+  data: jsonb_comparison_exp
+  id: Int_comparison_exp
+  is_plus: Boolean_comparison_exp
+  library_description: String_comparison_exp
+  library_image: String_comparison_exp
+  library_language: String_comparison_exp
+  library_location: String_comparison_exp
+  library_name: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "library_installers"
+"""
+enum library_installers_constraint {
+  """unique or primary key constraint"""
+  library_installers_pkey
+}
+
+"""
+delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+"""
+input library_installers_delete_at_path_input {
+  data: [String!]
+}
+
+"""
+delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+"""
+input library_installers_delete_elem_input {
+  data: Int
+}
+
+"""
+delete key/value pair or string element. key/value pairs are matched based on their key value
+"""
+input library_installers_delete_key_input {
+  data: String
+}
+
+"""
+input type for incrementing numeric columns in table "library_installers"
+"""
+input library_installers_inc_input {
+  id: Int
+}
+
+"""
+input type for inserting data into table "library_installers"
+"""
+input library_installers_insert_input {
+  created_date: timestamptz
+  data: jsonb
+  id: Int
+  is_plus: Boolean
+  library_description: String
+  library_image: String
+  library_language: String
+  library_location: String
+  library_name: String
+}
+
+"""
+response of any mutation on the table "library_installers"
+"""
+type library_installers_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [library_installers!]!
+}
+
+"""
+on conflict condition type for table "library_installers"
+"""
+input library_installers_on_conflict {
+  constraint: library_installers_constraint!
+  update_columns: [library_installers_update_column!]!
+  where: library_installers_bool_exp
+}
+
+"""Ordering options when selecting data from "library_installers"."""
+input library_installers_order_by {
+  created_date: order_by
+  data: order_by
+  id: order_by
+  is_plus: order_by
+  library_description: order_by
+  library_image: order_by
+  library_language: order_by
+  library_location: order_by
+  library_name: order_by
+}
+
+"""primary key columns input for table: library_installers"""
+input library_installers_pk_columns_input {
+  id: Int!
+}
+
+"""prepend existing jsonb value of filtered columns with new jsonb value"""
+input library_installers_prepend_input {
+  data: jsonb
+}
+
+"""
+select columns of table "library_installers"
+"""
+enum library_installers_select_column {
+  """column name"""
+  created_date
+
+  """column name"""
+  data
+
+  """column name"""
+  id
+
+  """column name"""
+  is_plus
+
+  """column name"""
+  library_description
+
+  """column name"""
+  library_image
+
+  """column name"""
+  library_language
+
+  """column name"""
+  library_location
+
+  """column name"""
+  library_name
+}
+
+"""
+input type for updating data in table "library_installers"
+"""
+input library_installers_set_input {
+  created_date: timestamptz
+  data: jsonb
+  id: Int
+  is_plus: Boolean
+  library_description: String
+  library_image: String
+  library_language: String
+  library_location: String
+  library_name: String
+}
+
+"""
+update columns of table "library_installers"
+"""
+enum library_installers_update_column {
+  """column name"""
+  created_date
+
+  """column name"""
+  data
+
+  """column name"""
+  id
+
+  """column name"""
+  is_plus
+
+  """column name"""
+  library_description
+
+  """column name"""
+  library_image
+
+  """column name"""
+  library_language
+
+  """column name"""
+  library_location
+
+  """column name"""
+  library_name
 }
 
 """aggregate max on columns"""
@@ -18237,6 +18482,19 @@ type mutation_root {
   delete_library_by_pk(id: uuid!): library
 
   """
+  delete data from the table: "library_installers"
+  """
+  delete_library_installers(
+    """filter the rows which have to be deleted"""
+    where: library_installers_bool_exp!
+  ): library_installers_mutation_response
+
+  """
+  delete single row from the table: "library_installers"
+  """
+  delete_library_installers_by_pk(id: Int!): library_installers
+
+  """
   delete data from the table: "locations"
   """
   delete_locations(
@@ -18774,6 +19032,28 @@ type mutation_root {
     """on conflict condition"""
     on_conflict: library_on_conflict
   ): library_mutation_response
+
+  """
+  insert data into the table: "library_installers"
+  """
+  insert_library_installers(
+    """the rows to be inserted"""
+    objects: [library_installers_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: library_installers_on_conflict
+  ): library_installers_mutation_response
+
+  """
+  insert a single row into the table: "library_installers"
+  """
+  insert_library_installers_one(
+    """the row to be inserted"""
+    object: library_installers_insert_input!
+
+    """on conflict condition"""
+    on_conflict: library_installers_on_conflict
+  ): library_installers
 
   """
   insert a single row into the table: "library"
@@ -19698,6 +19978,74 @@ type mutation_root {
     _set: library_set_input
     pk_columns: library_pk_columns_input!
   ): library
+
+  """
+  update data of the table: "library_installers"
+  """
+  update_library_installers(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: library_installers_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: library_installers_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: library_installers_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: library_installers_delete_key_input
+
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: library_installers_inc_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: library_installers_prepend_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: library_installers_set_input
+
+    """filter the rows which have to be updated"""
+    where: library_installers_bool_exp!
+  ): library_installers_mutation_response
+
+  """
+  update single row of the table: "library_installers"
+  """
+  update_library_installers_by_pk(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: library_installers_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: library_installers_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: library_installers_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: library_installers_delete_key_input
+
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: library_installers_inc_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: library_installers_prepend_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: library_installers_set_input
+    pk_columns: library_installers_pk_columns_input!
+  ): library_installers
 
   """
   update data of the table: "locations"
@@ -22353,6 +22701,31 @@ type query_root {
   library_by_pk(id: uuid!): library
 
   """
+  fetch data from the table: "library_installers"
+  """
+  library_installers(
+    """distinct select on columns"""
+    distinct_on: [library_installers_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [library_installers_order_by!]
+
+    """filter the rows returned"""
+    where: library_installers_bool_exp
+  ): [library_installers!]!
+
+  """
+  fetch data from the table: "library_installers" using primary key columns
+  """
+  library_installers_by_pk(id: Int!): library_installers
+
+  """
   fetch data from the table: "locations"
   """
   locations(
@@ -24423,6 +24796,31 @@ type subscription_root {
 
   """fetch data from the table: "library" using primary key columns"""
   library_by_pk(id: uuid!): library
+
+  """
+  fetch data from the table: "library_installers"
+  """
+  library_installers(
+    """distinct select on columns"""
+    distinct_on: [library_installers_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [library_installers_order_by!]
+
+    """filter the rows returned"""
+    where: library_installers_bool_exp
+  ): [library_installers!]!
+
+  """
+  fetch data from the table: "library_installers" using primary key columns
+  """
+  library_installers_by_pk(id: Int!): library_installers
 
   """
   fetch data from the table: "locations"
