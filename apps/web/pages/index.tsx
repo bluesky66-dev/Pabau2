@@ -8,9 +8,10 @@ import CommonHeader from './setup/common-header'
 import useLogin from '../hooks/authentication/useLogin'
 import Login from './login'
 import { gql, useQuery } from '@apollo/client'
+import { UserContext } from '../context/UserContext'
 
 // eslint-disable-next-line
-const CURRENT_USER = gql`  query retrieveAuthenticatedUser($Id: Int!, $CompanyId: Int!) { user(where: { id: $Id }) { username full_name } company(where: { id: $CompanyId }) { details {company_name  } }}`
+const CURRENT_USER = gql`  query retrieveAuthenticatedUser($Id: Int!, $CompanyId: Int!) { user(where: { id: $Id }) { username full_name } company(where: { id: $CompanyId }) { details {company_name,language  } }}`
 
 const Index: FC = () => {
   const { t } = useTranslation()
@@ -24,14 +25,14 @@ const Index: FC = () => {
   })
 
   return authenticated ? (
-    <>
+    <UserContext.Provider value={data}>
       <CommonHeader />
       <Layout pageTitle={t('common', 'index.title')} {...data}>
         {!showGrid && <Button onClick={() => setShowGrid(true)}>Edit</Button>}
         <hr />
         {showGrid && <Grid />}v{version}
       </Layout>
-    </>
+    </UserContext.Provider>
   ) : (
     <Login />
   )
