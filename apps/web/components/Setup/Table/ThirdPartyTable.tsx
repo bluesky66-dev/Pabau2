@@ -1,159 +1,36 @@
-import React, { useState, useEffect } from 'react'
+/* eslint-disable */
+import React, { useState, useEffect, FC } from 'react'
 import {
-  Breadcrumb,
-  Button,
   Notification,
   NotificationType,
   Table,
   useLiveQuery,
   Pagination,
-  TabbedTable
 } from '@pabau/ui'
-import { Card, Col, Row, Typography } from 'antd'
 
-import { gql, useMutation } from '@apollo/client'
+import styles from '../../../../../libs/ui/src/lib/table/Table.module.less'
+import { Typography } from 'antd'
 
-export interface BlockOutOptionsProps {}
+import { useMutation } from '@apollo/client'
+import { columns, thirdPartySchema, Queries, Mutations } from './Schema'
 
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    className: 'drag-visible',
-    visible: true,
-  },
-  {
-    title: 'Provide No',
-    dataIndex: 'provide_no',
-    className: 'drag-visible',
-    visible: true,
-  },
-  {
-    title: 'Type',
-    dataIndex: 'type',
-    className: 'drag-visible',
-    visible: true,
-  },
-  {
-    title: 'Email',
-    dataIndex: 'email',
-    className: 'drag-visible',
-    visible: true,
-  },
-  {
-    title: 'Phone',
-    dataIndex: 'phone',
-    className: 'drag-visible',
-    visible: true,
-  },
 
-  {
-    title: 'Status',
-    dataIndex: 'is_active',
-    className: 'drag-visible',
-    visible: true,
-    width: '160px',
-  },
-]
+interface ThirdPartyTableProps {
+  searchTerm?: string
+  isActive?: boolean
+  openModal?(): void
+}
 
-const LIST_QUERY = gql`
-  query Library($offset: Int, $limit: Int) {
-    Library(
-      offset: $offset
-      limit: $limit
-      order_by: { created_at: desc }
-    ) {
-      id
-      name
-      provider_no
-      email
-      phone
-      is_active
-      type
-  
-    }
-  }
-`
-
-const ADD_MUTATION = gql`
-  mutation insert_Library_one(
-    $name: String
-    $type: String
-    $email:String
-    $phone:Int
-    $provider_no:String
-    $isActive: Boolean
-  ) {
-    insert_Library_one(
-      object: {
-        name: $name
-        type: $type
-        email: $email
-        provider_no: $provider_no
-        phone: $phone
-        is_active: $isActive
-      }
-    ) {
-      id
-      name
-      email
-      phone
-      provider_no
-      type
-      
-    }
-  }
-`
-
-const EDIT_MUTATION = gql`
-  mutation update_job_title_by_pk(
-    $id: uuid!
-    $name: String
-    $type: String
-    $paidBlockOut: Boolean = false
-    $backgroundColor: String
-    $defaultTime: Int
-    $isActive: Boolean
-  ) {
-    update_Library_by_pk(
-      pk_columns: { id: $id }
-      _set: {
-        name: $name
-        type: $type
-        paidBlockOut: $paidBlockOut
-        backgroundColor: $backgroundColor
-        defaultTime: $defaultTime
-        is_active: $isActive
-      }
-    ) {
-      id
-    }
-  }
-`
-
-const DELETE_MUTATION = gql`
-  mutation delete_Library_by_pk($id: uuid!) {
-    delete_Library_by_pk(id: $id) {
-      id
-    }
-  }
-`
-
-const LIST_AGGREGATE_QUERY = gql`
-  query Library_aggregate {
-    Library_aggregate {
-      aggregate {
-        count
-      }
-    }
-  }
-`
-
-export function BlockOutOptions(props: BlockOutOptionsProps) {
+const ThirdPartyTable: FC<ThirdPartyTableProps> = ({
+  searchTerm,
+  isActive,
+  openModal,
+}) => {
   const { Paragraph, Title } = Typography
 
   const [showModal, setShowModal] = useState(false)
   const [edit, setEdit] = useState(null)
+  const [sourceData, setSourceData] = useState(null)
   const [paginateData, setPaginateData] = useState({
     currentPage: 0,
     total: 0,
@@ -162,16 +39,25 @@ export function BlockOutOptions(props: BlockOutOptionsProps) {
     showingRecords: 0,
   })
 
-  const { data, error, loading } = useLiveQuery(LIST_QUERY, {
+  const { data, error, loading } = useLiveQuery(Queries.LIST_QUERY, {
     variables: {
+      isActive,
+      company: true,
+      searchTerm: '%' + searchTerm + '%',
       offset: paginateData.offset,
       limit: paginateData.limit,
     },
   })
 
-  const { data: aggregateData } = useLiveQuery(LIST_AGGREGATE_QUERY)
+  const { data: aggregateData } = useLiveQuery(Queries.LIST_AGGREGATE_QUERY, {
+    variables: {
+      isActive,
+      company: true,
+      searchTerm: '%' + searchTerm + '%',
+    },
+  })
 
-  const [addMutation] = useMutation(ADD_MUTATION, {
+  const [addMutation] = useMutation(Mutations.ADD_MUTATION, {
     onCompleted() {
       Notification(
         NotificationType.success,
@@ -186,7 +72,7 @@ export function BlockOutOptions(props: BlockOutOptionsProps) {
     },
   })
 
-  const [editMutation] = useMutation(EDIT_MUTATION, {
+  const [editMutation] = useMutation(Mutations.EDIT_MUTATION, {
     onCompleted() {
       Notification(
         NotificationType.success,
@@ -201,7 +87,7 @@ export function BlockOutOptions(props: BlockOutOptionsProps) {
     },
   })
 
-  const [deleteMutation] = useMutation(DELETE_MUTATION, {
+  const [deleteMutation] = useMutation(Mutations.DELETE_MUTATION, {
     onCompleted() {
       Notification(
         NotificationType.success,
@@ -217,6 +103,9 @@ export function BlockOutOptions(props: BlockOutOptionsProps) {
   })
 
   useEffect(() => {
+    if (data) {
+      setSourceData(data)
+    }
     if (aggregateData) {
       setPaginateData({
         ...paginateData,
@@ -238,6 +127,7 @@ export function BlockOutOptions(props: BlockOutOptionsProps) {
   }
 
   const createClick = () => {
+    openModal()
     setShowModal(true)
     setEdit(null)
   }
@@ -247,41 +137,41 @@ export function BlockOutOptions(props: BlockOutOptionsProps) {
     setEdit(null)
     await (edit
       ? editMutation({
-          variables: { ...edit, ...values },
-          optimisticResponse: {},
-          update: (proxy) => {
-            const existing = proxy.readQuery({
-              query: LIST_QUERY,
+        variables: { ...edit, ...values },
+        optimisticResponse: {},
+        update: (proxy) => {
+          const existing = proxy.readQuery({
+            query: Queries.LIST_QUERY,
+          })
+          if (existing) {
+            const key = Object.keys(existing)[0]
+            proxy.writeQuery({
+              query: Queries.LIST_QUERY,
+              data: {
+                [key]: [...existing[key], values],
+              },
             })
-            if (existing) {
-              const key = Object.keys(existing)[0]
-              proxy.writeQuery({
-                query: LIST_QUERY,
-                data: {
-                  [key]: [...existing[key], values],
-                },
-              })
-            }
-          },
-        })
+          }
+        },
+      })
       : addMutation({
-          variables: values,
-          optimisticResponse: {},
-          update: (proxy) => {
-            const existing = proxy.readQuery({
-              query: LIST_QUERY,
+        variables: values,
+        optimisticResponse: {},
+        update: (proxy) => {
+          const existing = proxy.readQuery({
+            query: Queries.LIST_QUERY,
+          })
+          if (existing) {
+            const key = Object.keys(existing)[0]
+            proxy.writeQuery({
+              query: Queries.LIST_QUERY,
+              data: {
+                [key]: [...existing[key], values],
+              },
             })
-            if (existing) {
-              const key = Object.keys(existing)[0]
-              proxy.writeQuery({
-                query: LIST_QUERY,
-                data: {
-                  [key]: [...existing[key], values],
-                },
-              })
-            }
-          },
-        }))
+          }
+        },
+      }))
   }
 
   const onDelete = async () => {
@@ -290,13 +180,13 @@ export function BlockOutOptions(props: BlockOutOptionsProps) {
       optimisticResponse: {},
       update: (cache) => {
         const existing = cache.readQuery({
-          query: LIST_QUERY,
+          query: Queries.LIST_QUERY,
         })
         if (existing) {
           // eslint-disable-next-line @typescript-eslint/ban-types
           const key = Object.keys(existing as object)[0]
           cache.writeQuery({
-            query: LIST_QUERY,
+            query: Queries.LIST_QUERY,
             data: {
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
@@ -311,36 +201,37 @@ export function BlockOutOptions(props: BlockOutOptionsProps) {
     setShowModal(false)
     setEdit(null)
   }
-
   return (
-   
-        <div>
-        <div>
+    <>
+      <div className={styles.dragTable}>
         <Table
+          pagination={sourceData?.length > 10 ? {} : false}
+          style={{ height: '100%' }}
+          scroll={{ x: 'max-content' }}
+          // sticky={{ offsetScroll: 80, offsetHeader: 80 }}
+          draggable={true}
+          noDataBtnText={thirdPartySchema.full}
+          noDataText={thirdPartySchema.fullLower}
+          searchTerm={searchTerm}
           columns={columns}
           dataSource={data?.map((d) => ({ ...d, key: d.id }))}
           onRowClick={onRowClick}
           loading={loading}
-          noDataText="block type"
-          noDataBtnText="block type"
           onAddTemplate={createClick}
           rowKey="id"
         />
-        </div>
-     
-    <div>
+      </div>
       <Pagination
-        showingRecords={paginateData.showingRecords}
-        defaultCurrent={1}
         total={paginateData.total}
+        defaultPageSize={10}
+        showSizeChanger={false}
+        onChange={onPaginationChange}
         pageSize={paginateData.limit}
         current={paginateData.currentPage}
-        onChange={onPaginationChange}
+        showingRecords={paginateData.showingRecords}
       />
-      </div>
-      </div>
- 
+    </>
   )
 }
 
-export default BlockOutOptions
+export default React.memo(ThirdPartyTable)

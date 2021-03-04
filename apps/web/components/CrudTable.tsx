@@ -431,7 +431,6 @@ const CrudTable: FC<P> = ({
         }, {} as FormikErrors<any>)
       }
       onSubmit={(values, { resetForm }) => {
-        console.log('formik onsubmit', values)
         onSubmit(values, { resetForm })
       }}
       //initialValues={typeof modalShowing === 'object' ? modalShowing : undefined}

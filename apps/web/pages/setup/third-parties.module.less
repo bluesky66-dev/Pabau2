@@ -1,3 +1,7 @@
+.headerContainer {
+    justify-content: space-between;
+    align-items: center;
+}
 .mainWrapper {
   display: flex;
   flex-direction: column;
@@ -33,7 +37,7 @@
     border-radius: 4px;
     border-top: 3px solid #fff;
     margin-bottom: 20px;
-    opacity: 0.5;
+    // opacity: 0.5;
     @media screen and (max-width: 576px) {
       width: 100%;
     }
@@ -63,7 +67,7 @@
   }
 }
 
-.issuing-company-header {
+.third-parties-header {
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -76,17 +80,10 @@
     color: #3d3d46;
     margin-bottom: 0;
   }
-  .issue-register {
+  .third-parties-status {
     display: flex;
     align-items: center;
-    .status-box {
-      margin-left: 16px;
-      span {
-        font-size: 15px;
-        color: #9292a3;
-      }
-    }
-    .vat-reg, .active{
+    .active{
       small {
         margin-right: 8px;
         font-size: 14px;
