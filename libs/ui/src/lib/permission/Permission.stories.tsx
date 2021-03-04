@@ -59,8 +59,8 @@ export const PermissionStory: FC<P> = ({ fields, description, title }) => {
       description={description}
       title={title}
       onChange={onChange}
-      CheckAll={CheckAll}
-      UnCheckAll={UnCheckAll}
+      onCheckAllClicked={CheckAll}
+      onUnCheckAllClicked={UnCheckAll}
     />
   )
 }

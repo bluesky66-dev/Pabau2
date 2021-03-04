@@ -54,8 +54,8 @@ const Modules: FC = () => {
       <Permission
         fields={mainFields}
         onChange={onChange}
-        CheckAll={CheckAll}
-        UnCheckAll={UnCheckAll}
+        onCheckAllClicked={CheckAll}
+        onUnCheckAllClicked={UnCheckAll}
       />
     </div>
   )

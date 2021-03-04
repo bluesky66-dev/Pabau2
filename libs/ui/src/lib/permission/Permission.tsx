@@ -4,7 +4,6 @@ import { Button } from '@pabau/ui'
 import styles from './Permission.module.less'
 import { QuestionCircleOutlined } from '@ant-design/icons'
 
-/* eslint-disable-next-line */
 export interface ContainerType {
   name: string
   value: boolean
@@ -21,8 +20,8 @@ export interface PermissionProps {
   description?: string
   fields?: PermissionFieldType[]
   onChange?: (index: number, ind: number, rowId?: string) => void
-  CheckAll?: (rowId?: string) => void
-  UnCheckAll?: (rowId?: string) => void
+  onCheckAllClicked?: (rowId?: string) => void
+  onUnCheckAllClicked?: (rowId?: string) => void
   rowId?: string
 }
 export const Permission: FC<PermissionProps> = ({
@@ -30,8 +29,8 @@ export const Permission: FC<PermissionProps> = ({
   description,
   fields,
   onChange,
-  CheckAll,
-  UnCheckAll,
+  onCheckAllClicked,
+  onUnCheckAllClicked,
   rowId,
 }) => {
   return (
@@ -41,10 +40,10 @@ export const Permission: FC<PermissionProps> = ({
       <Row>
         <Col span={24}>
           <div className={styles.CheckBtn}>
-            <Button type="link" onClick={() => CheckAll?.(rowId)}>
+            <Button type="link" onClick={() => onCheckAllClicked?.(rowId)}>
               CheckAll
             </Button>
-            <Button type="link" onClick={() => UnCheckAll?.(rowId)}>
+            <Button type="link" onClick={() => onUnCheckAllClicked?.(rowId)}>
               UncheckAll
             </Button>
           </div>

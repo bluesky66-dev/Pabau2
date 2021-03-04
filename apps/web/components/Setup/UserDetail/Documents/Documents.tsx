@@ -8,6 +8,7 @@ import {
   userDetailDocuments,
 } from '../../../../mocks/UserDetail'
 import userImage from '../../../../assets/images/avatar.png'
+import styles from '../UserDetail.module.less'
 
 interface UploadCustomProps extends UploadProps {
   size: number
@@ -83,7 +84,7 @@ const Document: FC = () => {
   }
 
   return (
-    <div>
+    <div className={styles.documentWrapper}>
       <Documents
         headingLabel={'Documents'}
         folders={folderData}

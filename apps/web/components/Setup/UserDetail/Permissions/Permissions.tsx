@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { TabMenu } from '@pabau/ui'
 import Modules from './Modules'
 import Feature from './Feature'
+import Reports from './Reports'
 import styles from '../UserDetail.module.less'
 
 const Permissions: FC = () => {
@@ -15,7 +16,7 @@ const Permissions: FC = () => {
       >
         <Modules />
         <Feature />
-        <div>Reports</div>
+        <Reports />
       </TabMenu>
     </div>
   )

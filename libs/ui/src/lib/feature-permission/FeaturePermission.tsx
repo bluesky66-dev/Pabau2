@@ -39,8 +39,8 @@ export const FeaturePermission: FC<FeatureProps> = ({
                 <Permission
                   fields={feature.permissionFields}
                   onChange={onChange}
-                  CheckAll={CheckAll}
-                  UnCheckAll={UnCheckAll}
+                  onCheckAllClicked={CheckAll}
+                  onUnCheckAllClicked={UnCheckAll}
                   rowId={feature.id}
                 />
               </div>
