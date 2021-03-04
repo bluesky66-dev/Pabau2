@@ -6,6 +6,7 @@ import NewAppointmentPreview from '../../pages/client-notifications/new-appointm
 import RescheduleAppointmentPreview from '../../pages/client-notifications/rescheduled-appointment/RescheduleAppointmentPreview'
 import BookedOntoClassPreview from '../../pages/client-notifications/class-booked/BookedOntoClassPreview'
 import WaitListPreview from '../../pages/client-notifications/waitlist/WaitListPreview'
+import LeadResponsesPreview from '../../pages/client-notifications/lead-responses/LeadResponsesPreview'
 
 interface P {
   onSeletedTab: (number) => void
@@ -236,6 +237,16 @@ const Index: FC<P> = forwardRef(
             />
           ) : type === 'waitList' ? (
             <WaitListPreview
+              standardTapIndex={standardTapIndex}
+              backGroundColor={backGroundColor}
+              activeSocialIcons={activeSocialIcons}
+              selectLanguage={selectLanguage}
+              buttonColor={buttonColor}
+              informationMessage={informationMessage}
+              type={type}
+            />
+          ) : type === 'leadResponses' ? (
+            <LeadResponsesPreview
               standardTapIndex={standardTapIndex}
               backGroundColor={backGroundColor}
               activeSocialIcons={activeSocialIcons}

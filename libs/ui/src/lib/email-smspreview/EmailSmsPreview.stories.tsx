@@ -568,6 +568,7 @@ const LeadResponsesStory = ({
   smsGreeting,
   smsMessage,
   smsFooterText,
+  description,
 }: PropsWithChildren<EmailSMSPreviewProps & LeadResponsesProps>) => (
   <EmailSmsPreview
     greeting={greeting}
@@ -585,6 +586,7 @@ const LeadResponsesStory = ({
       footerIconGroup={footerIconGroup}
       footerContact={footerContact}
       isFooterText={isFooterText}
+      description={description}
     />
   </EmailSmsPreview>
 )
@@ -593,8 +595,9 @@ export const LeadResponse = LeadResponsesStory.bind({})
 export const LeadResponse1 = LeadResponsesStory.bind({})
 LeadResponse.args = {
   greeting: 'Hi Anna,',
-  message:
-    'Thank you for your inquiry!<br/> We received your form and we will get back to you as soon as possible.',
+  message: 'Thank you for your inquiry!',
+  description:
+    'We received your form and we will get back to you as soon as possible.',
   footerIconGroup: true,
   text: 'Kind regards,<br/> Your friends at The Clinic',
   footerText: 'Kind regards,<br/> Your friends at The Clinic',
@@ -609,8 +612,9 @@ LeadResponse.args = {
 
 LeadResponse1.args = {
   greeting: 'Hi Anna,',
-  message:
-    'Thank you for your inquiry!<br/> We received your form and we will get back to you as soon as possible.',
+  message: 'Thank you for your inquiry!',
+  description:
+    'We received your form and we will get back to you as soon as possible.',
   footerIconGroup: true,
   text: 'Kind regards,<br/> Your friends at The Clinic',
   footerText: 'Kind regards <br/> Your friends at The Clinic',

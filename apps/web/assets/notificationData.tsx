@@ -185,7 +185,7 @@ const notificationData = {
         'The default email template you will send to your lead when they submit their lead form',
       icon: <RiseOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/lead-responses',
       disabled: true,
     },
     {

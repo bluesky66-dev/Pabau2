@@ -95,6 +95,10 @@ export interface InvoicesProps {
 export interface LeadResponsesProps {
   message?: string
   text?: string
+  companyEmail?: string
+  companyPhone?: string
+  description?: string
+  messageLine?: string
 }
 
 export interface GiftVoucherProps {
