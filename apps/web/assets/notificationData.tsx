@@ -12,7 +12,6 @@ import {
   MoneyCollectOutlined,
   RiseOutlined,
   GiftOutlined,
-  MailOutlined,
   BarChartOutlined,
   SafetyOutlined,
   InteractionOutlined,
@@ -204,15 +203,6 @@ const notificationData = {
       description:
         'he default email template you will send when a client has used all their package sessions',
       icon: <ScheduleOutlined />,
-      smartDelivery: false,
-      link: null,
-      disabled: true,
-    },
-    {
-      header: 'Clinic requested email',
-      description:
-        'Here you can select the default appointment confirmation which gets out via email',
-      icon: <MailOutlined />,
       smartDelivery: false,
       link: null,
       disabled: true,
