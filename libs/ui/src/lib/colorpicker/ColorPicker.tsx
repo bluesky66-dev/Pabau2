@@ -7,16 +7,27 @@ import { SketchPicker } from 'react-color'
 interface P {
   color: string
   selected: boolean
+  isDarkColor?: boolean
   onClick(): void
   onHover?(): void
   onLeave?(): void
 }
 
-const ColorItem: FC<P> = (props: P) => {
-  const { color, selected, onClick, onHover, onLeave } = props
+const ColorItem: FC<P> = ({
+  color,
+  selected,
+  isDarkColor = false,
+  onClick,
+  onHover,
+  onLeave,
+}) => {
   return (
     <div
-      className={classNames(styles.colorItem, selected && styles.selectedColor)}
+      className={classNames(
+        styles.colorItem,
+        selected && styles.selectedColor,
+        !isDarkColor && styles.toggleOpacity
+      )}
       style={{
         backgroundColor: selected ? '#fff' : color,
         // border: hovering || selected ? '1px solid #54B2D3' : 'none',
@@ -37,6 +48,7 @@ const ColorItem: FC<P> = (props: P) => {
 interface PickerProps {
   heading: string
   selectedColor?: string
+  isDarkColor?: boolean
   onSelected(val): void
   onHover?(val): void
   onLeave?(val): void
@@ -64,6 +76,7 @@ const colorData = [
 export const ColorPicker: FC<PickerProps> = ({
   heading = 'Background color',
   selectedColor = '',
+  isDarkColor = false,
   onSelected,
   onHover,
   onLeave,
@@ -93,7 +106,9 @@ export const ColorPicker: FC<PickerProps> = ({
   }
 
   return (
-    <div style={{ marginTop: '16px' }}>
+    <div>
+      {' '}
+      {/*  style={{ marginTop: '16px' }} */}
       <span className={styles.heading}>{heading}</span>
       <div className={styles.colorPickerWrap}>
         {colorList.map((color) => (
@@ -101,6 +116,7 @@ export const ColorPicker: FC<PickerProps> = ({
             key={`${heading}${color}`}
             color={color}
             selected={color === selColor}
+            isDarkColor={isDarkColor}
             onClick={() => onClickColorItem(color)}
             onHover={() => onHover?.(color)}
             onLeave={() => onLeave?.(color)}

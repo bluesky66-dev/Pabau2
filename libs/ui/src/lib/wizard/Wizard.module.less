@@ -1,25 +1,3 @@
-.container {
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-}
-
-.headerSection {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.breadcrumbsection {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.breadcrumb {
-  display: flex;
-}
-
 .breadcrumbgraytxt {
   font-family: 'Circular-Std-Medium';
   margin-right: 4px;
@@ -30,77 +8,19 @@
   color: #9292a3;
 }
 
-.breadcrumblighttxt {
-  font-family: 'Circular-Std-Medium';
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 18px;
-  text-transform: capitalize;
-  color: #cfcfd7;
-}
-
-.blackbold {
-  font-family: 'Circular-Std-Bold';
-  font-style: normal;
-  font-weight: bold;
-  font-size: 20px;
-  line-height: 25px;
-  color: #3d3d46;
-  margin-top: 8px;
-}
-
-.line {
-  border: 1px solid #ecedf0;
-  margin: 20px 0px 20px 0px;
-}
-
-.descriptionsection {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.descriptiontxt {
-  width: 516px;
-  font-family: 'Circular-Std-Medium';
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 18px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-
-  color: #9292a3;
-}
-
-.cardsection {
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-}
-
-.cardtxt {
-  text-align: center;
-  padding: 8px;
-  font-family: 'Circular-Std-Bold';
-  font-style: normal;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 18px;
-  color: #3d3d46;
-}
-
-.bottomline {
-  border: 1px solid #ecedf0;
-  margin: 100px 0px 0px 0px;
-}
-
 .footer {
   padding: 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+@media (min-width: 200px) and (max-width: 767px) {
+  .footer {
+    position: relative;
+    padding-top: 5px;
+  }
 }

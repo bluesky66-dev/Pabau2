@@ -1,6 +1,6 @@
 import React from 'react'
 import { HelpTooltip } from './HelpTooltip'
-import { Input } from './input'
+import { Input } from './Input'
 import { notification } from 'antd'
 import { Passcode as PasscodeBox } from './Passcode'
 import { PasswordWithHelper as PasswordWithHelperBox } from './PasswordWithHelper'
@@ -76,6 +76,5 @@ export const InputNumberControl = InputNumberStory.bind({})
 InputNumberControl.args = {
   placeHolderText: 'Enter Number',
   value: 14.43,
-  requiredMsg: 'Number is required!',
-  isFormatter: true,
+  showCurrency: true,
 }

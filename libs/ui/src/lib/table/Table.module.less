@@ -25,6 +25,11 @@
       tr {
         border-bottom: 1px solid #f1f1f1;
       }
+      td {
+        @media screen and (max-width: 767px) {
+          width: 155px;
+        }
+      }
     }
     tr:hover {
       background-color: #eef7fb;
@@ -78,6 +83,11 @@
   width: 106px;
   text-transform: none;
   height: 24px;
+}
+
+.active-btn:hover {
+  background: rgba(84, 178, 211, 0.05);
+  color: var(--primary-color);
 }
 
 .disable-source-btn {
@@ -142,5 +152,10 @@
       min-width: 155px;
       height: 40px;
     }
+  }
+}
+@media screen and (max-width: 767px) {
+  :global .ant-table-sticky-scroll {
+    display: none;
   }
 }

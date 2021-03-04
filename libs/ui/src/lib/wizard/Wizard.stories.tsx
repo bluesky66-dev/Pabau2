@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Wizard from './Wizard'
 
 export default {
@@ -14,6 +13,9 @@ export default {
     onPrev: { action: 'clicked' },
     onNext: { action: 'clicked' },
   },
+  parameters: {
+    layout: 'fullscreen',
+  },
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 
@@ -27,8 +29,6 @@ const WizardStory = ({ ...args }) => {
       onPrev={() => setIndex(index - 1)}
       onNext={() => setIndex(index + 1)}
       allSteps={args.allSteps}
-      breadcrumb={args.breadcrumb}
-      header={args.header}
     ></Wizard>
   )
 }

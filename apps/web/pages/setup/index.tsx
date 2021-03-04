@@ -1,12 +1,12 @@
 import React, { FC, useState } from 'react'
 import { Layout } from '@pabau/ui'
-import CommonHeader from './CommonHeader'
+import CommonHeader from './common-header'
 import HeaderChip from './headerChip'
 import Grid from './grid'
 import WebinarCard from './webinar'
 import SearchResults from './searchResults'
-import GridMobile from './grid/gridMobile'
-import GridSubMenuMobile from './grid/gridSubTitleMobile'
+import GridMobile from './grid/grid-mobile'
+import GridSubMenuMobile from './grid/grid-sub-title-mobile'
 import { SetupSearchInput, SetupGridProps } from '@pabau/ui'
 import styles from './Setup.module.less'
 
@@ -34,7 +34,7 @@ const Index: FC = () => {
         {
           title: 'General settings',
           data: [
-            'Calendar Settings',
+            'Index Settings',
             'Loyalty',
             'Performance Settings',
             'Point of Sale Configuration',

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 import styles from './CustomModal.module.less'
 import { SecurityTools, SecurityToolsItemInfo } from '@pabau/ui'
-import BasicModal from '../modal/basicmodal'
+import BasicModal from '../modal/BasicModal'
 import { Menu, Dropdown, Button, Modal } from 'antd'
 import { DownOutlined, UserOutlined } from '@ant-design/icons'
 

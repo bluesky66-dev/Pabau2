@@ -5,8 +5,9 @@ import {
   MobileHeader,
   Notification,
   NotificationType,
+  SimpleDropdown,
 } from '@pabau/ui'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useState, useRef } from 'react'
 import { DocumentNode, useMutation } from '@apollo/client'
 import AddButton from './AddButton'
 import { Breadcrumb } from '@pabau/ui'
@@ -20,6 +21,7 @@ import Layout from './Layout/Layout'
 import { LeftOutlined } from '@ant-design/icons'
 import classNames from 'classnames'
 import Link from 'next/link'
+import { useTranslationI18 } from '../hooks/useTranslationI18'
 
 const { Title } = Typography
 
@@ -32,7 +34,80 @@ interface P {
   aggregateQuery?: DocumentNode
   tableSearch?: boolean
   updateOrderQuery?: DocumentNode
+  showNotificationBanner?: boolean
+  createPage?: boolean
+  notificationBanner?: React.ReactNode
+  createPageOnClick?(): void
+  addFilter?: boolean
+  needTranslation?: boolean
 }
+
+const languages = [
+  {
+    key: 'en',
+    value: 'English(UK)',
+  },
+  {
+    key: 'en-us',
+    value: 'English(US)',
+  },
+  {
+    key: 'de',
+    value: 'German',
+  },
+  {
+    key: 'fr',
+    value: 'French',
+  },
+  {
+    key: 'es',
+    value: 'Spanish',
+  },
+  {
+    key: 'ar',
+    value: 'Arabic',
+  },
+  {
+    key: 'bg',
+    value: 'Bulgarian',
+  },
+  {
+    key: 'cs',
+    value: 'Czech',
+  },
+  {
+    key: 'da',
+    value: 'Danish',
+  },
+  {
+    key: 'hu',
+    value: 'Hungarian',
+  },
+  {
+    key: 'lv',
+    value: 'Latvian',
+  },
+  {
+    key: 'no',
+    value: 'Norwegian',
+  },
+  {
+    key: 'pl',
+    value: 'Polish',
+  },
+  {
+    key: 'sv',
+    value: 'Swedish',
+  },
+  {
+    key: 'ro',
+    value: 'Romanian',
+  },
+  {
+    key: 'ru',
+    value: 'Russian',
+  },
+]
 
 const CrudTable: FC<P> = ({
   schema,
@@ -43,10 +118,24 @@ const CrudTable: FC<P> = ({
   aggregateQuery,
   tableSearch = true,
   updateOrderQuery,
+  showNotificationBanner = false,
+  notificationBanner,
+  createPage = false,
+  createPageOnClick,
+  addFilter = true,
+  needTranslation = false,
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [isActive, setIsActive] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
+  const [currentLanguage, setCurrentLanguage] = useState<string>('English(UK)')
+  const { t, i18n } = useTranslationI18()
+  const crudTableRef = useRef(null)
+
+  useEffect(() => {
+    const data = languages.find(({ value }) => value === currentLanguage)
+    i18n.changeLanguage(data.key)
+  }, [currentLanguage, i18n])
   // eslint-disable-next-line graphql/template-strings
   const [editMutation] = useMutation(editQuery, {
     onCompleted(data) {
@@ -64,7 +153,10 @@ const CrudTable: FC<P> = ({
   })
   const [updateOrderMutation] = useMutation(updateOrderQuery, {
     onError(err) {
-      Notification(NotificationType.error, 'Error! Marketing source update.')
+      Notification(
+        NotificationType.error,
+        `Error! ${schema.messages.update.error}`
+      )
     },
   })
   const [addMutation] = useMutation(addQuery, {
@@ -85,7 +177,7 @@ const CrudTable: FC<P> = ({
   const [paginateData, setPaginateData] = useState({
     total: 0,
     offset: 0,
-    limit: 10,
+    limit: 50,
     currentPage: 1,
     showingRecords: 0,
   })
@@ -94,24 +186,64 @@ const CrudTable: FC<P> = ({
     Record<string, string | boolean | number>
   >({})
 
-  const { data, error, loading } = useLiveQuery(listQuery, {
-    variables: {
-      isActive,
-      searchTerm: '%' + searchTerm + '%',
-      offset: paginateData.offset,
-      limit: paginateData.limit,
-    },
-  })
+  const getQueryVariables = () => {
+    const queryOptions = {
+      variables: {
+        isActive,
+        searchTerm: '%' + searchTerm + '%',
+        offset: paginateData.offset,
+        limit: paginateData.limit,
+      },
+    }
 
-  const { data: aggregateData } = useLiveQuery(aggregateQuery, {
-    variables: {
-      isActive,
-      searchTerm: '%' + searchTerm + '%',
-    },
-  })
+    if (!tableSearch) {
+      delete queryOptions.variables.searchTerm
+    }
+    if (!addFilter) {
+      delete queryOptions.variables.isActive
+    }
+    return queryOptions
+  }
+
+  const getAggregateQueryVariables = () => {
+    const queryOptions = {
+      variables: {
+        isActive,
+        searchTerm: '%' + searchTerm + '%',
+      },
+    }
+
+    if (!tableSearch) {
+      delete queryOptions.variables.searchTerm
+    }
+    if (!addFilter) {
+      delete queryOptions.variables.isActive
+    }
+    return queryOptions
+  }
+
+  const { data, error, loading } = useLiveQuery(listQuery, getQueryVariables())
+
+  const { data: aggregateData } = useLiveQuery(
+    aggregateQuery,
+    getAggregateQueryVariables()
+  )
 
   useEffect(() => {
-    if (data) setSourceData(data)
+    if (data) {
+      if (schema.full === 'Issuing Company') {
+        const newData = data.map((d) => {
+          const { country, city, street, post_code } = d
+          return {
+            ...d,
+            address: country + ', ' + city + ', ' + street + ', ' + post_code,
+          }
+        })
+        setSourceData(newData)
+      } else {
+        setSourceData(data)
+      }
+    }
     if (aggregateData)
       setPaginateData({
         ...paginateData,
@@ -121,6 +253,12 @@ const CrudTable: FC<P> = ({
     if (!loading && data) setIsLoading(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, aggregateData, loading])
+
+  useEffect(() => {
+    if (crudTableRef.current) {
+      crudTableRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [paginateData.currentPage])
 
   const onFilterMarketingSource = () => {
     resetPagination()
@@ -143,7 +281,7 @@ const CrudTable: FC<P> = ({
     setPaginateData({
       total: 0,
       offset: 0,
-      limit: 10,
+      limit: 50,
       currentPage: 1,
       showingRecords: 0,
     })
@@ -222,7 +360,7 @@ const CrudTable: FC<P> = ({
       case 'checkbox':
         return defaultVal || true
       case 'number':
-        return defaultVal || 0
+        return defaultVal
       default:
         return defaultVal || ''
     }
@@ -268,167 +406,245 @@ const CrudTable: FC<P> = ({
     setEditingRow({ name: '', isCreate: true })
   }
 
+  const handleLanguageChange = (language: string): void => {
+    setCurrentLanguage(language)
+  }
+
   return (
-    <Formik
-      enableReinitialize={true}
-      validate={(e) =>
-        Object.entries(fields).reduce((a, c) => {
-          if (
-            c[1].min && // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            c[1].min > e[c[0]].length
-          ) {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            a[
-              c[0]
-            ] = `The value for ${c[1].shortLower} must be more than ${c[1].min} characters.`
-          }
-          return a
-          // eslint-disable-next-line
-        }, {} as FormikErrors<any>)
-      }
-      onSubmit={(values, { resetForm }) => {
-        console.log('formik onsubmit', values)
-        onSubmit(values, { resetForm })
-      }}
-      //initialValues={typeof modalShowing === 'object' ? modalShowing : undefined}
-      initialValues={
-        editingRow?.id ? editingRow : formikFields() //TODO: remove this, it should come from schema.fields[].*
-      }
-    >
-      <>
-        <div
-          className={classNames(
-            styles.marketingSourcePage,
-            styles.desktopViewNone
-          )}
-        >
-          <MobileHeader className={styles.marketingSourceHeader}>
-            <div className={styles.allContentAlignMobile}>
-              <div className={styles.marketingTextStyle}>
-                <Link href="/">
-                  <LeftOutlined />
-                </Link>
-                <p> {schema.full || schema.short} </p>
+    <div ref={crudTableRef}>
+      <Formik
+        enableReinitialize={true}
+        validate={(e) =>
+          Object.entries(fields).reduce((a, c) => {
+            if (
+              c[1].min && // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              c[1].min > e[c[0]]?.length &&
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              e[c[0]]?.length <= 50
+            ) {
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              a[
+                c[0]
+              ] = `The value for ${c[1].shortLower} at least ${c[1].min} characters.`
+            } else if (
+              c[1].required && // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              e[c[0]]?.length === 0 &&
+              c[1].validateMsg
+            ) {
+              a[c[0]] = c[1].validateMsg
+            } else if (
+              c[1].max && // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              c[1].max < e[c[0]]?.toString().length
+            ) {
+              a[c[0]] = `The max length of ${c[1].max} characters is reached.`
+            } else if (
+              e[c[0]] &&
+              c[1].type === 'number' &&
+              // eslint-disable-next-line
+              !/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)(?:[eE][+-]?[0-9]+)?$/.test(
+                e[c[0]].toString()
+              )
+            ) {
+              a[c[0]] = `Invalid ${c[1].shortLower}.`
+            }
+            return a
+            // eslint-disable-next-line
+          }, {} as FormikErrors<any>)
+        }
+        onSubmit={(values, { resetForm }) => {
+          console.log('formik onsubmit', values)
+          onSubmit(values, { resetForm })
+        }}
+        //initialValues={typeof modalShowing === 'object' ? modalShowing : undefined}
+        initialValues={
+          editingRow?.id ? editingRow : formikFields() //TODO: remove this, it should come from schema.fields[].*
+        }
+      >
+        <>
+          <div
+            className={classNames(
+              styles.marketingSourcePage,
+              styles.desktopViewNone
+            )}
+          >
+            <MobileHeader className={styles.marketingSourceHeader}>
+              <div className={styles.allContentAlignMobile}>
+                <div className={styles.marketingTextStyle}>
+                  <Link href="/">
+                    <LeftOutlined />
+                  </Link>
+                  <p>
+                    {' '}
+                    {needTranslation
+                      ? t('marketingsource-title.translation')
+                      : schema.full || schema.short}{' '}
+                  </p>
+                </div>
+                {addQuery && !createPage ? (
+                  <AddButton
+                    onClick={createNew}
+                    onFilterSource={onFilterMarketingSource}
+                    onSearch={onSearch}
+                    schema={schema}
+                    tableSearch={tableSearch}
+                    needTranslation={needTranslation}
+                    addFilter={addFilter}
+                  />
+                ) : (
+                  <AddButton
+                    onClick={createPageOnClick}
+                    onFilterSource={onFilterMarketingSource}
+                    onSearch={onSearch}
+                    schema={schema}
+                    tableSearch={tableSearch}
+                    addFilter={addFilter}
+                    needTranslation={needTranslation}
+                  />
+                )}
               </div>
-              {addQuery && (
+            </MobileHeader>
+          </div>
+
+          {modalShowing && (
+            <CrudModal
+              schema={schema}
+              editingRow={editingRow}
+              addQuery={addQuery}
+              listQuery={listQuery}
+              deleteQuery={deleteQuery}
+              onClose={() => setModalShowing(false)}
+            />
+          )}
+
+          <Layout>
+            {showNotificationBanner && notificationBanner}
+            <div
+              className={classNames(
+                styles.tableMainHeading,
+                styles.mobileViewNone
+              )}
+            >
+              <div style={{ background: '#FFF' }}>
+                <Breadcrumb
+                  breadcrumbItems={[
+                    { breadcrumbName: 'Setup', path: 'setup' },
+                    { breadcrumbName: schema.full || schema.short, path: '' },
+                  ]}
+                />
+                <Title>{schema.full || schema.short}</Title>
+              </div>
+              {needTranslation && (
+                <div className={styles.btn}>
+                  <SimpleDropdown
+                    label={'Change Language'}
+                    dropdownItems={prepareLanguages(languages)}
+                    value={currentLanguage}
+                    onSelected={handleLanguageChange}
+                  />
+                </div>
+              )}
+              {addQuery && !createPage ? (
                 <AddButton
                   onClick={createNew}
                   onFilterSource={onFilterMarketingSource}
                   onSearch={onSearch}
                   schema={schema}
                   tableSearch={tableSearch}
+                  needTranslation={needTranslation}
+                  addFilter={addFilter}
+                />
+              ) : (
+                <AddButton
+                  onClick={createPageOnClick}
+                  onFilterSource={onFilterMarketingSource}
+                  onSearch={onSearch}
+                  schema={schema}
+                  tableSearch={tableSearch}
+                  addFilter={addFilter}
+                  needTranslation={needTranslation}
                 />
               )}
             </div>
-          </MobileHeader>
-        </div>
-
-        {modalShowing && (
-          <CrudModal
-            schema={schema}
-            editingRow={editingRow}
-            addQuery={addQuery}
-            listQuery={listQuery}
-            deleteQuery={deleteQuery}
-            onClose={() => setModalShowing(false)}
-          />
-        )}
-
-        <Layout>
-          <div
-            className={classNames(
-              styles.tableMainHeading,
-              styles.mobileViewNone
-            )}
-          >
-            <div style={{ background: '#FFF' }}>
-              <Breadcrumb
-                breadcrumbItems={[
-                  { breadcrumbName: 'Setup', path: 'setup' },
-                  { breadcrumbName: schema.full || schema.short, path: '' },
-                ]}
-              />
-              <Title>{schema.full || schema.short}</Title>
-            </div>
-            {addQuery && (
-              <AddButton
-                onClick={createNew}
-                onFilterSource={onFilterMarketingSource}
-                onSearch={onSearch}
-                schema={schema}
-                tableSearch={tableSearch}
-              />
-            )}
-          </div>
-          <Table
-            loading={isLoading}
-            style={{ height: '100%' }}
-            sticky={{ offsetScroll: 80, offsetHeader: 80 }}
-            pagination={sourceData?.length > 10 ? {} : false}
-            scroll={{ x: 'max-content' }}
-            draggable={true}
-            isCustomColorExist={checkCustomColorIconExsist('color')}
-            isCustomIconExist={checkCustomColorIconExsist('icon')}
-            noDataBtnText={schema.full}
-            noDataText={schema.fullLower}
-            onAddTemplate={() => createNew()}
-            searchTerm={searchTerm}
-            columns={[
-              ...Object.entries(schema.fields).map(([k, v]) => ({
-                dataIndex: k,
-                width: v.cssWidth,
-                title: v.short || v.full,
-                visible: Object.prototype.hasOwnProperty.call(v, 'visible')
-                  ? v.visible
-                  : true,
-              })),
-            ]}
-            // eslint-disable-next-line
-            dataSource={sourceData?.map((e: { id: any }) => ({
-              key: e.id,
-              ...e,
-            }))}
-            updateDataSource={({ newData, oldIndex, newIndex }) => {
-              newData = newData.map((data, i) => {
-                data.order = sourceData[i].order
-                return data
-              })
-              if (oldIndex > newIndex) {
-                for (let i = newIndex; i <= oldIndex; i++) {
-                  updateOrder(newData[i])
+            <Table
+              loading={isLoading}
+              style={{ height: '100%' }}
+              sticky={{ offsetScroll: 80, offsetHeader: 80 }}
+              pagination={sourceData?.length > 10 ? {} : false}
+              draggable={true}
+              isCustomColorExist={checkCustomColorIconExsist('color')}
+              isCustomIconExist={checkCustomColorIconExsist('icon')}
+              noDataBtnText={schema.full}
+              noDataText={schema.fullLower}
+              onAddTemplate={() => createNew()}
+              searchTerm={searchTerm}
+              columns={[
+                ...Object.entries(schema.fields).map(([k, v]) => ({
+                  dataIndex: k,
+                  width: v.cssWidth,
+                  title: v.short || v.full,
+                  visible: Object.prototype.hasOwnProperty.call(v, 'visible')
+                    ? v.visible
+                    : true,
+                })),
+              ]}
+              // eslint-disable-next-line
+              dataSource={sourceData?.map((e: { id: any }) => ({
+                key: e.id,
+                ...e,
+              }))}
+              updateDataSource={({ newData, oldIndex, newIndex }) => {
+                newData = newData.map((data, i) => {
+                  data.order = sourceData[i].order
+                  return data
+                })
+                if (oldIndex > newIndex) {
+                  for (let i = newIndex; i <= oldIndex; i++) {
+                    updateOrder(newData[i])
+                  }
+                } else {
+                  for (let i = oldIndex; i <= newIndex; i++) {
+                    updateOrder(newData[i])
+                  }
                 }
-              } else {
-                for (let i = oldIndex; i <= newIndex; i++) {
-                  updateOrder(newData[i])
-                }
-              }
-              setSourceData(newData)
-              console.log('newData, oldIndex, newIndex', {
-                newData,
-                oldIndex,
-                newIndex,
-              })
-            }}
-            onRowClick={(e) => {
-              setEditingRow(e)
-              setModalShowing((e) => !e)
-            }}
-          />
-          <Pagination
-            total={paginateData.total}
-            defaultPageSize={10}
-            showSizeChanger={false}
-            onChange={onPaginationChange}
-            pageSize={paginateData.limit}
-            current={paginateData.currentPage}
-            showingRecords={paginateData.showingRecords}
-          />
-        </Layout>
-      </>
-    </Formik>
+                setSourceData(newData)
+                console.log('newData, oldIndex, newIndex', {
+                  newData,
+                  oldIndex,
+                  newIndex,
+                })
+              }}
+              onRowClick={(e) => {
+                setEditingRow(e)
+                setModalShowing((e) => !e)
+              }}
+              needTranslation={needTranslation}
+            />
+            <Pagination
+              total={paginateData.total}
+              defaultPageSize={50}
+              showSizeChanger={false}
+              onChange={onPaginationChange}
+              pageSize={paginateData.limit}
+              current={paginateData.currentPage}
+              showingRecords={paginateData.showingRecords}
+            />
+          </Layout>
+        </>
+      </Formik>
+    </div>
   )
+}
+
+function prepareLanguages(languages): Array<string> {
+  const array = languages?.map(({ value }) => {
+    return value
+  })
+  return array
 }
 
 export default CrudTable

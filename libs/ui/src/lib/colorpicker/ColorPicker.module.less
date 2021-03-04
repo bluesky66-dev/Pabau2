@@ -28,6 +28,12 @@
     background-color: var(--primary-color);
   }
 }
+.toggle-opacity {
+  opacity: 0.2;
+  &:hover {
+    opacity: 1;
+  }
+}
 .color-item:hover .badge {
   opacity: 1;
 }
@@ -60,4 +66,13 @@
 }
 .add-color:hover {
   border: 2px solid #54b2d34d;
+
+  @media (min-width: 200px) and (max-width: 767px) {
+    .color-item {
+      margin: 4px;
+    }
+    .color-picker-wrap {
+      justify-content: flex-start;
+    }
+  }
 }

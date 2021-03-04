@@ -10,6 +10,52 @@ import Walter from '../../assets/images/users/walter.png'
 import Liza from '../../assets/images/users/liza.png'
 
 import AddGroupModal from './AddGroupModal'
+const groupData = {
+  general: [
+    {
+      userName: 'Alex Johnson',
+      profileURL: Alex,
+    },
+    {
+      userName: 'Arya Davis',
+      profileURL: Arya,
+    },
+    {
+      userName: 'James Ocean',
+      profileURL: James,
+    },
+    {
+      userName: 'Austin Winter',
+      profileURL: Austin,
+    },
+    {
+      userName: 'Walter Brown',
+      profileURL: Walter,
+    },
+    {
+      userName: 'Liza Frank',
+      profileURL: Liza,
+    },
+  ],
+  design: [
+    {
+      userName: 'Arya Davis',
+      profileURL: Arya,
+    },
+    {
+      userName: 'Stephen Cox',
+      profileURL: Stephen,
+    },
+    {
+      userName: 'Linda Starck',
+      profileURL: Linda,
+    },
+    {
+      userName: 'Walter Brown',
+      profileURL: Walter,
+    },
+  ],
+}
 
 export default {
   component: AddGroupModal,
@@ -18,57 +64,14 @@ export default {
   actions: { argTypesRegex: '^on[A-Z].*' },
 }
 
-const AddGroupModalStory = ({ ...args }) => <AddGroupModal {...args} />
+const AddGroupModalStory = ({ ...args }) => (
+  <AddGroupModal groupData={groupData} isGroupModalVisible={true} {...args} />
+)
 
 export const AddGroupMember = AddGroupModalStory.bind({})
 AddGroupMember.args = {
   memberModalTitle: 'General',
-  groupData: {
-    general: [
-      {
-        userName: 'Alex Johnson',
-        profileURL: Alex,
-      },
-      {
-        userName: 'Arya Davis',
-        profileURL: Arya,
-      },
-      {
-        userName: 'James Ocean',
-        profileURL: James,
-      },
-      {
-        userName: 'Austin Winter',
-        profileURL: Austin,
-      },
-      {
-        userName: 'Walter Brown',
-        profileURL: Walter,
-      },
-      {
-        userName: 'Liza Frank',
-        profileURL: Liza,
-      },
-    ],
-    design: [
-      {
-        userName: 'Arya Davis',
-        profileURL: Arya,
-      },
-      {
-        userName: 'Stephen Cox',
-        profileURL: Stephen,
-      },
-      {
-        userName: 'Linda Starck',
-        profileURL: Linda,
-      },
-      {
-        userName: 'Walter Brown',
-        profileURL: Walter,
-      },
-    ],
-  },
+  groupData: groupData,
   selectedGroup: 'general',
   isGroupModalVisible: true,
   searchMemberText: 'Li',
