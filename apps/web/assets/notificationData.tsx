@@ -223,7 +223,7 @@ const notificationData = {
         "The email you will send when you are emailing a client's timeline",
       icon: <BarChartOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/clinic-emailing-timeline',
       disabled: true,
     },
     {

@@ -7,6 +7,7 @@ import RescheduleAppointmentPreview from '../../pages/client-notifications/resch
 import BookedOntoClassPreview from '../../pages/client-notifications/class-booked/BookedOntoClassPreview'
 import WaitListPreview from '../../pages/client-notifications/waitlist/WaitListPreview'
 import MedicalFormsPreview from '../../components/ClientNotification/MedicalForms/MedicalFormsPreview'
+import ClinicEmailingTimelinePreview from '../../pages/client-notifications/clinic-emailing-timeline/ClinicEmailingTimelinePreview'
 
 interface P {
   onSeletedTab: (number) => void
@@ -70,7 +71,6 @@ const Index: FC<P> = forwardRef(
     const [standardTapIndex, setStandardTap] = useState('1')
     const [hideAppearanceTabPane, setHideAppearanceTabPane] = useState(true)
     const [smsMessage, setSmsMessage] = useState(smsCustom || 'Hi, Kristy')
-
     const [activeSocialIcons, setActiveSocialIcons] = React.useState([])
     const [disableCustomTab, setDisableCustomTab] = useState(false)
 
@@ -247,6 +247,14 @@ const Index: FC<P> = forwardRef(
             />
           ) : type === 'medical-forms' ? (
             <MedicalFormsPreview
+              standardTapIndex={standardTapIndex}
+              backGroundColor={backGroundColor}
+              activeSocialIcons={activeSocialIcons}
+              selectLanguage={selectLanguage}
+              buttonColor={buttonColor}
+            />
+          ) : type === 'clinic-emailing-timeline' ? (
+            <ClinicEmailingTimelinePreview
               standardTapIndex={standardTapIndex}
               backGroundColor={backGroundColor}
               activeSocialIcons={activeSocialIcons}
