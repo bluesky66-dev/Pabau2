@@ -126,6 +126,62 @@ import surgical_14 from '../../assets/images/selection/surgical/image_14.jpg'
 import surgical_15 from '../../assets/images/selection/surgical/image_15.jpg'
 import surgical_16 from '../../assets/images/selection/surgical/image_16.jpg'
 
+import hydra_1 from '../../assets/images/selection/hydrafacial/image_1.jpg'
+import hydra_2 from '../../assets/images/selection/hydrafacial/image_2.jpg'
+import hydra_3 from '../../assets/images/selection/hydrafacial/image_3.jpg'
+import hydra_4 from '../../assets/images/selection/hydrafacial/image_4.jpg'
+import hydra_5 from '../../assets/images/selection/hydrafacial/image_5.jpg'
+import hydra_6 from '../../assets/images/selection/hydrafacial/image_6.jpg'
+import hydra_7 from '../../assets/images/selection/hydrafacial/image_7.jpg'
+import hydra_8 from '../../assets/images/selection/hydrafacial/image_8.jpg'
+import hydra_9 from '../../assets/images/selection/hydrafacial/image_9.jpg'
+import hydra_10 from '../../assets/images/selection/hydrafacial/image_10.jpg'
+import hydra_11 from '../../assets/images/selection/hydrafacial/image_11.jpg'
+import hydra_12 from '../../assets/images/selection/hydrafacial/image_12.jpg'
+import hydra_13 from '../../assets/images/selection/hydrafacial/image_13.jpg'
+import hydra_14 from '../../assets/images/selection/hydrafacial/image_14.jpg'
+import hydra_15 from '../../assets/images/selection/hydrafacial/image_15.jpg'
+
+import massage_1 from '../../assets/images/selection/massage/image_1.jpg'
+import massage_2 from '../../assets/images/selection/massage/image_2.jpg'
+import massage_3 from '../../assets/images/selection/massage/image_3.jpg'
+import massage_4 from '../../assets/images/selection/massage/image_4.jpg'
+import massage_5 from '../../assets/images/selection/massage/image_5.jpg'
+import massage_6 from '../../assets/images/selection/massage/image_6.jpg'
+import massage_7 from '../../assets/images/selection/massage/image_7.jpg'
+import massage_8 from '../../assets/images/selection/massage/image_8.jpg'
+import massage_9 from '../../assets/images/selection/massage/image_9.jpg'
+import massage_10 from '../../assets/images/selection/massage/image_10.jpg'
+import massage_11 from '../../assets/images/selection/massage/image_11.jpg'
+import massage_12 from '../../assets/images/selection/massage/image_12.jpg'
+import massage_13 from '../../assets/images/selection/massage/image_13.jpg'
+import massage_14 from '../../assets/images/selection/massage/image_14.jpg'
+import massage_15 from '../../assets/images/selection/massage/image_15.jpg'
+import massage_16 from '../../assets/images/selection/massage/image_16.jpg'
+import massage_17 from '../../assets/images/selection/massage/image_17.jpg'
+import massage_18 from '../../assets/images/selection/massage/image_18.jpg'
+import massage_19 from '../../assets/images/selection/massage/image_19.jpg'
+
+import physo_1 from '../../assets/images/selection/physiotherapy/image_1.jpg'
+import physo_2 from '../../assets/images/selection/physiotherapy/image_2.jpg'
+import physo_3 from '../../assets/images/selection/physiotherapy/image_3.jpg'
+import physo_4 from '../../assets/images/selection/physiotherapy/image_4.jpg'
+import physo_5 from '../../assets/images/selection/physiotherapy/image_5.jpg'
+import physo_6 from '../../assets/images/selection/physiotherapy/image_6.jpg'
+import physo_7 from '../../assets/images/selection/physiotherapy/image_7.jpg'
+import physo_8 from '../../assets/images/selection/physiotherapy/image_8.jpg'
+import physo_9 from '../../assets/images/selection/physiotherapy/image_9.jpg'
+import physo_10 from '../../assets/images/selection/physiotherapy/image_10.jpg'
+import physo_11 from '../../assets/images/selection/physiotherapy/image_11.jpg'
+import physo_12 from '../../assets/images/selection/physiotherapy/image_12.jpg'
+import physo_13 from '../../assets/images/selection/physiotherapy/image_13.jpg'
+import physo_14 from '../../assets/images/selection/physiotherapy/image_14.jpg'
+import physo_15 from '../../assets/images/selection/physiotherapy/image_15.jpg'
+import physo_16 from '../../assets/images/selection/physiotherapy/image_16.jpg'
+import physo_17 from '../../assets/images/selection/physiotherapy/image_17.jpg'
+import physo_18 from '../../assets/images/selection/physiotherapy/image_18.jpg'
+import physo_19 from '../../assets/images/selection/physiotherapy/image_19.jpg'
+
 export type ImgBlock = {
   key: number
   source: unknown
@@ -133,7 +189,7 @@ export type ImgBlock = {
   tags: string[]
 }
 
-export default [
+let list = [
   {
     key: 1,
     source: botox_1,
@@ -861,4 +917,279 @@ export default [
     url: '/images/selection/surgical/image_16.jpg',
     tags: ['surgical'],
   },
+
+  {
+    source: hydra_1,
+    url: '/images/selection/hydrafacial/image_1.jpg',
+    tags: ['hydrafacial'],
+  },
+  {
+    source: hydra_2,
+    url: '/images/selection/hydrafacial/image_2.jpg',
+    tags: ['hydrafacial'],
+  },
+  {
+    source: hydra_3,
+    url: '/images/selection/hydrafacial/image_3.jpg',
+    tags: ['hydrafacial'],
+  },
+  {
+    source: hydra_4,
+    url: '/images/selection/hydrafacial/image_4.jpg',
+    tags: ['hydrafacial'],
+  },
+  {
+    source: hydra_5,
+    url: '/images/selection/hydrafacial/image_5.jpg',
+    tags: ['hydrafacial'],
+  },
+  {
+    source: hydra_6,
+    url: '/images/selection/hydrafacial/image_6.jpg',
+    tags: ['hydrafacial'],
+  },
+  {
+    source: hydra_7,
+    url: '/images/selection/hydrafacial/image_7.jpg',
+    tags: ['hydrafacial'],
+  },
+  {
+    source: hydra_8,
+    url: '/images/selection/hydrafacial/image_8.jpg',
+    tags: ['hydrafacial'],
+  },
+  {
+    source: hydra_9,
+    url: '/images/selection/hydrafacial/image_9.jpg',
+    tags: ['hydrafacial'],
+  },
+  {
+    source: hydra_10,
+    url: '/images/selection/hydrafacial/image_10.jpg',
+    tags: ['hydrafacial'],
+  },
+  {
+    source: hydra_11,
+    url: '/images/selection/hydrafacial/image_11.jpg',
+    tags: ['hydrafacial'],
+  },
+  {
+    source: hydra_12,
+    url: '/images/selection/hydrafacial/image_12.jpg',
+    tags: ['hydrafacial'],
+  },
+  {
+    source: hydra_13,
+    url: '/images/selection/hydrafacial/image_13.jpg',
+    tags: ['hydrafacial'],
+  },
+  {
+    source: hydra_14,
+    url: '/images/selection/hydrafacial/image_14.jpg',
+    tags: ['hydrafacial'],
+  },
+  {
+    source: hydra_15,
+    url: '/images/selection/hydrafacial/image_15.jpg',
+    tags: ['hydrafacial'],
+  },
+
+  {
+    source: massage_1,
+    url: '/images/selection/massage/image_1.jpg',
+    tags: ['massage'],
+  },
+  {
+    source: massage_2,
+    url: '/images/selection/massage/image_2.jpg',
+    tags: ['massage'],
+  },
+  {
+    source: massage_3,
+    url: '/images/selection/massage/image_3.jpg',
+    tags: ['massage'],
+  },
+  {
+    source: massage_4,
+    url: '/images/selection/massage/image_4.jpg',
+    tags: ['massage'],
+  },
+  {
+    source: massage_5,
+    url: '/images/selection/massage/image_5.jpg',
+    tags: ['massage'],
+  },
+  {
+    source: massage_6,
+    url: '/images/selection/massage/image_6.jpg',
+    tags: ['massage'],
+  },
+  {
+    source: massage_7,
+    url: '/images/selection/massage/image_7.jpg',
+    tags: ['massage'],
+  },
+  {
+    source: massage_8,
+    url: '/images/selection/massage/image_8.jpg',
+    tags: ['massage'],
+  },
+  {
+    source: massage_9,
+    url: '/images/selection/massage/image_9.jpg',
+    tags: ['massage'],
+  },
+  {
+    source: massage_10,
+    url: '/images/selection/massage/image_10.jpg',
+    tags: ['massage'],
+  },
+  {
+    source: massage_11,
+    url: '/images/selection/massage/image_11.jpg',
+    tags: ['massage'],
+  },
+  {
+    source: massage_12,
+    url: '/images/selection/massage/image_12.jpg',
+    tags: ['massage'],
+  },
+  {
+    source: massage_13,
+    url: '/images/selection/massage/image_13.jpg',
+    tags: ['massage'],
+  },
+  {
+    source: massage_14,
+    url: '/images/selection/massage/image_14.jpg',
+    tags: ['massage'],
+  },
+  {
+    source: massage_15,
+    url: '/images/selection/massage/image_15.jpg',
+    tags: ['massage'],
+  },
+  {
+    source: massage_16,
+    url: '/images/selection/massage/image_16.jpg',
+    tags: ['massage'],
+  },
+  {
+    source: massage_17,
+    url: '/images/selection/massage/image_17.jpg',
+    tags: ['massage'],
+  },
+  {
+    source: massage_18,
+    url: '/images/selection/massage/image_18.jpg',
+    tags: ['massage'],
+  },
+  {
+    source: massage_19,
+    url: '/images/selection/massage/image_19.jpg',
+    tags: ['massage'],
+  },
+
+  {
+    source: physo_1,
+    url: '/images/selection/physiotherapy/image_1.jpg',
+    tags: ['physiotherapy'],
+  },
+  {
+    source: physo_2,
+    url: '/images/selection/physiotherapy/image_2.jpg',
+    tags: ['physiotherapy'],
+  },
+  {
+    source: physo_3,
+    url: '/images/selection/physiotherapy/image_3.jpg',
+    tags: ['physiotherapy'],
+  },
+  {
+    source: physo_4,
+    url: '/images/selection/physiotherapy/image_4.jpg',
+    tags: ['physiotherapy'],
+  },
+  {
+    source: physo_5,
+    url: '/images/selection/physiotherapy/image_5.jpg',
+    tags: ['physiotherapy'],
+  },
+  {
+    source: physo_6,
+    url: '/images/selection/physiotherapy/image_6.jpg',
+    tags: ['physiotherapy'],
+  },
+  {
+    source: physo_7,
+    url: '/images/selection/physiotherapy/image_7.jpg',
+    tags: ['physiotherapy'],
+  },
+  {
+    source: physo_8,
+    url: '/images/selection/physiotherapy/image_8.jpg',
+    tags: ['physiotherapy'],
+  },
+  {
+    source: physo_9,
+    url: '/images/selection/physiotherapy/image_9.jpg',
+    tags: ['physiotherapy'],
+  },
+  {
+    source: physo_10,
+    url: '/images/selection/physiotherapy/image_10.jpg',
+    tags: ['physiotherapy'],
+  },
+  {
+    source: physo_11,
+    url: '/images/selection/physiotherapy/image_11.jpg',
+    tags: ['physiotherapy'],
+  },
+  {
+    source: physo_12,
+    url: '/images/selection/physiotherapy/image_12.jpg',
+    tags: ['physiotherapy'],
+  },
+  {
+    source: physo_13,
+    url: '/images/selection/physiotherapy/image_13.jpg',
+    tags: ['physiotherapy'],
+  },
+  {
+    source: physo_14,
+    url: '/images/selection/physiotherapy/image_14.jpg',
+    tags: ['physiotherapy'],
+  },
+  {
+    source: physo_15,
+    url: '/images/selection/physiotherapy/image_15.jpg',
+    tags: ['physiotherapy'],
+  },
+  {
+    source: physo_16,
+    url: '/images/selection/physiotherapy/image_16.jpg',
+    tags: ['physiotherapy'],
+  },
+  {
+    source: physo_17,
+    url: '/images/selection/physiotherapy/image_17.jpg',
+    tags: ['physiotherapy'],
+  },
+  {
+    source: physo_18,
+    url: '/images/selection/physiotherapy/image_18.jpg',
+    tags: ['physiotherapy'],
+  },
+  {
+    source: physo_19,
+    url: '/images/selection/physiotherapy/image_19.jpg',
+    tags: ['physiotherapy'],
+  },
 ]
+
+list = list.map((img, index) => {
+  img.key = index
+  return img
+})
+
+export default list
