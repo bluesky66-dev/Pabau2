@@ -106,5 +106,26 @@
     },
     "marketingsource-input-search": {
         "translation": "Suche"
+    },
+    "marketingsource-input-search-placeholder": {
+        "translation": "Suche"
+    },
+    "marketingsource-button-filter": {
+        "translation": "Filter"
+    },
+    "marketingsource-tableColumn-active": {
+        "translation": "Aktiv"
+    },
+    "marketingsource-tableRow-active-btn": {
+        "translation": "Aktiv"
+    },
+    "marketingsource-tableRow-inActive-btn": {
+        "translation": "Inaktiv"
+    },
+    "marketingsource-header-create-btn": {
+        "translation": "Quelle erstellen"
+    },
+    "marketingsource-header-breadcrumb-setup-link": {
+        "translation": "Einrichten"
     }
 }
