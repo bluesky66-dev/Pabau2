@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import { Button } from '../button/button'
+import { Button } from '../button/Button'
 import styles from './NotificationBanner.module.less'
 import { Row, Col } from 'antd'
 import iconClose from '../../assets/images/icon_close.svg'
