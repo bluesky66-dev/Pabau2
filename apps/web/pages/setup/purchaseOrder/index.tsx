@@ -24,10 +24,10 @@ import {
   SettingOutlined,
   SearchOutlined,
 } from '@ant-design/icons'
-import Artifact from './assets/artifact.png'
+import Artifact from '../../../components/Setup/PurchaseOrder/assets/artifact.png'
 import className from 'classnames'
 import Layout from '../../../components/Layout/Layout'
-import StatusLabel from './components/StatusLabel'
+import StatusLabel from '../../../components/Setup/PurchaseOrder/StatusLabel'
 import styles from './index.module.less'
 
 const { Option } = Select

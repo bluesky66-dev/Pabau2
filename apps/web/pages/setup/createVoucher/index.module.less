@@ -16,27 +16,95 @@
         display: none;
       }
     }
+    .ant-tabs-tab {
+      background-color: transparent;
+      padding: 12px 60px !important;
+    }
   }
+
+  .showDefault {
+    @media screen and (max-width: 525px) {
+      display: none;
+    }
+  }
+
+  .hideDefault {
+    display: none;
+    @media screen and (max-width: 525px) {
+      display: block;
+
+      :global {
+        .ant-tabs-nav-list {
+          width: 100%;
+          .ant-tabs-tab {
+            width: 100%;
+            padding: 12px 0px !important;
+            display: flex;
+            justify-content: center;
+          }
+        }
+        .VoucherCard_voucherCardMain__1otWm {
+          padding: 0px 50px !important;
+
+          .flip-card {
+            max-width: 100% !important;
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 375px) {
+      :global {
+        .VoucherCard_voucherCardMain__1otWm {
+          padding: 0px 70px !important;
+
+          .flip-card {
+            max-width: 100% !important;
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 320px) {
+      :global {
+        .VoucherCard_voucherCardMain__1otWm {
+          padding: 0px 100px !important;
+
+          .flip-card {
+            max-width: 100% !important;
+          }
+        }
+      }
+    }
+  }
+
   .voucherBuilderHeader {
-    padding: 0px 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    .leftCardHeading {
+      padding: 0px 24px;
 
-    .breadcrumbDiv {
-      :global .ant-breadcrumb {
-        padding: 0px;
-        margin-bottom: 10px;
+      @media screen and (max-width: 525px) {
+        padding: 0px 24px 10px 24px;
+        width: 100%;
+      }
+
+      .breadcrumbDiv {
+        :global .ant-breadcrumb {
+          padding: 0px;
+          margin-bottom: 10px;
+        }
+      }
+      .heading {
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 25px;
+        color: #3d3d46;
       }
     }
-    .heading {
-      font-weight: bold;
-      font-size: 20px;
-      line-height: 25px;
-      color: #3d3d46;
-    }
     .rightCardHeadBtns {
+      padding: 0px 24px;
+
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -57,10 +125,23 @@
         line-height: 18px;
         color: #54b2d3;
       }
+      @media screen and (max-width: 525px) {
+        padding: 12.5px 24px 0px 24px;
+        border-top: 1px solid #ecedf0;
+        width: 100%;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .switchDiv {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+        }
+      }
     }
   }
   .voucherBuilderBody {
-    .orderBuilderSection {
+    .voucherBuilderSection {
       border-bottom: 1px solid #ecedf0;
       margin-bottom: 80px;
       .heading {
@@ -98,6 +179,14 @@
 
       .voucherBuilderControls {
         border-right: 1px solid #ecedf0;
+
+        @media screen and (max-width: 1024px) {
+          &.ant-col-lg-6 {
+            display: block !important;
+            flex: 0 0 40% !important;
+            max-width: 40% !important;
+          }
+        }
         .controls {
           padding: 30px;
           .contDiv {
@@ -212,7 +301,7 @@
                 }
 
                 &:last-child div {
-                  background-image: url('./assets/cloud-upload.png') !important;
+                  background-image: url('./../../../components/Setup/CreateGiftVoucher/assets/cloud-upload.png') !important;
                   border: 1px solid #54b2d3 !important;
                   display: flex;
                   justify-content: center;
@@ -231,13 +320,20 @@
 
                 div {
                   cursor: pointer;
-                  border: 1px solid #ecedf0;
+                  border: 2px solid transparent;
                   height: 50px;
                   width: 100%;
                   margin-bottom: 5px;
                   border-radius: 2px;
                   background-repeat: no-repeat;
                   background-position: center;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+
+                  &.selectedColor {
+                    border: 2px solid green;
+                  }
                 }
               }
             }
@@ -271,6 +367,14 @@
       }
 
       .voucherPreviewSelection {
+        @media screen and (max-width: 1024px) {
+          &.ant-col-lg-18 {
+            display: block !important;
+            flex: 0 0 60% !important;
+            max-width: 60% !important;
+          }
+        }
+
         .voucherPreview {
           .previewHeader {
             border-bottom: 1px solid #ecedf0;
@@ -300,7 +404,8 @@
             margin-bottom: 50px;
 
             .card {
-              width: 500px;
+              min-width: 500px;
+              max-width: 100% !important;
             }
           }
         }

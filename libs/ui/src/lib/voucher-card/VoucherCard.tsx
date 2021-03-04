@@ -9,8 +9,9 @@ import {
 import styles from './VoucherCard.module.less'
 export interface VoucherCardProps {
   cardWidth?: number
-  backgroundColor1: string
-  backgroundColor2: string
+  backgroundColor1?: string
+  backgroundColor2?: string
+  background?: string
   gradientType: string
   bookNowButton?: boolean
   buttonLabel: string
@@ -34,6 +35,7 @@ export const VoucherCard: FC<VoucherCardProps> = ({
   cardWidth = 500,
   backgroundColor1,
   backgroundColor2,
+  background,
   gradientType,
   bookNowButton,
   buttonLabel,
@@ -118,6 +120,8 @@ export const VoucherCard: FC<VoucherCardProps> = ({
               !voucherType && !voucherTypes.includes(voucherType)
                 ? voucherBackgrounUrl
                   ? { backgroundImage: `url(${voucherBackgrounUrl})` }
+                  : background
+                  ? { background: background }
                   : { ...cardFaceBgColor }
                 : {}
             }
