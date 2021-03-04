@@ -41,7 +41,7 @@ export const CommissionRange: FC<CommissionRangeProps> = ({
         className={styles.rangeItem}
         bar-color={colors[index % 3]}
         style={{
-          width: `${width > 100 ? 100 : width}%`,
+          width: `calc(${width}% + ${index > 0 ? 8 : 0}px)`,
           zIndex: rangeItems.length - index,
         }}
       >
@@ -70,7 +70,10 @@ export const CommissionRange: FC<CommissionRangeProps> = ({
           <div className={styles.rangeItems}>{renderRangeItems}</div>
           <div
             className={styles.rangeUser}
-            style={{ left: `${left > 100 ? 100 : left}%` }}
+            style={{
+              left: `${left > 100 ? 100 : left}%`,
+              marginLeft: `-12px`,
+            }}
           >
             <img src={userRevenue.avatar} alt={userRevenue.name} />
           </div>
