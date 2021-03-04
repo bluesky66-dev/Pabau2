@@ -42,6 +42,25 @@ interface PickerProps {
   onLeave?(val): void
 }
 
+const colorData = [
+  '#03dbfc',
+  '#fca903',
+  '#8c03fc',
+  '#0ffc03',
+  '#03fcfc',
+  '#5e03fc',
+  '#03e7fc',
+  '#45fc03',
+  '#84fc03',
+  '#fcf403',
+  '#fcce03',
+  '#d2fc03',
+  '#f4fc03',
+  '#bf15c2',
+  '#486578',
+  '#9a3ac9',
+]
+
 export const ColorPicker: FC<PickerProps> = ({
   heading = 'Background color',
   selectedColor = '',
@@ -49,24 +68,7 @@ export const ColorPicker: FC<PickerProps> = ({
   onHover,
   onLeave,
 }) => {
-  const colorData = [
-    '#03dbfc',
-    '#fca903',
-    '#8c03fc',
-    '#0ffc03',
-    '#03fcfc',
-    '#5e03fc',
-    '#03e7fc',
-    '#45fc03',
-    '#84fc03',
-    '#fcf403',
-    '#fcce03',
-    '#d2fc03',
-    '#f4fc03',
-    '#bf15c2',
-    '#486578',
-    '#9a3ac9',
-  ]
+  const [colorList, setColorList] = useState(colorData)
 
   const [selColor, setSelColor] = useState(selectedColor)
   const [isAddingColor, setIsAddingColor] = useState(false)
@@ -81,17 +83,20 @@ export const ColorPicker: FC<PickerProps> = ({
   }
   const onClickAddCustomColor = () => {
     setIsAddingColor((e) => !e)
+    if (isAddingColor) {
+      colorData.push(selColor)
+      setColorList(colorData)
+    }
   }
   const handleChangeComplete = (color) => {
     onClickColorItem(color.hex)
-    colorData.push(color.hex)
   }
 
   return (
     <div style={{ marginTop: '16px' }}>
       <span className={styles.heading}>{heading}</span>
       <div className={styles.colorPickerWrap}>
-        {colorData.map((color) => (
+        {colorList.map((color) => (
           <ColorItem
             key={`${heading}${color}`}
             color={color}
@@ -108,6 +113,8 @@ export const ColorPicker: FC<PickerProps> = ({
       {isAddingColor && (
         <SketchPicker
           color={selColor}
+          presetColors={[]}
+          disableAlpha={true}
           onChangeComplete={(color) => handleChangeComplete(color)}
         />
       )}
