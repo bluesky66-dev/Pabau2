@@ -547,7 +547,7 @@ const InvoicesStory = ({
 export const Invoice = InvoicesStory.bind({})
 Invoice.args = {
   greeting: 'Dear Sophia,',
-  message: 'Thank you for your recent visit at M-A Hair Dressing & Spa.',
+  message: ['Thank you for your recent visit at M-A Hair Dressing & Spa.'],
   footerIconGroup: true,
   footerContact: false,
   footerText:

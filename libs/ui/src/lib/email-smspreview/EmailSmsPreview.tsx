@@ -88,11 +88,9 @@ export interface ReferralProps {
 }
 
 export interface InvoicesProps {
-  message?: string
+  message?: string[]
   footerText?: string
-  message1?: string
   showInvoiceButton?: boolean
-  message2?: string
   bestRegards?: string
   senderFirstName?: string
   showEnablePay?: boolean
