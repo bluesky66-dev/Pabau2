@@ -19,6 +19,7 @@ import { I18nextProvider } from 'react-i18next'
 import i18next from 'i18next'
 import de from '../locales/de.json'
 import en from '../locales/en.json'
+import fr from '../locales/fr.json'
 import ContextWrapper from '../components/ContextWrapper'
 require('../styles/global.less')
 require('../../../libs/ui/src/styles/antd.less')
@@ -156,6 +157,9 @@ i18next.init({
     },
     de: {
       common: de,
+    },
+    fr: {
+      common: fr,
     },
   },
 })
