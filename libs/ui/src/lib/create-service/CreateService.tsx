@@ -12,9 +12,10 @@ import {
   Employee,
   SearchTags,
   ChooseModal,
+  FullScreenReportModal,
+  OperationType,
 } from '@pabau/ui'
 import {
-  Modal,
   Collapse,
   Form,
   Select,
@@ -27,7 +28,6 @@ import {
   CalendarOutlined,
   VideoCameraOutlined,
   TeamOutlined,
-  LeftOutlined,
   PictureOutlined,
   PlusOutlined,
   QuestionCircleOutlined,
@@ -295,299 +295,147 @@ export const CreateService: FC<CreateServiceProps> = ({
           setShowModal(false)
         }}
       />
-      <Modal
+      <FullScreenReportModal
         visible={showModal}
-        width="100%"
-        wrapClassName={styles.createService}
-        footer={null}
+        title={`Create ${serviceType}`}
+        operations={[
+          OperationType.active,
+          OperationType.cancel,
+          OperationType.create,
+        ]}
+        activated={true}
+        cancelBtnText="Cancel"
+        createBtnText="Create"
+        enableCreateBtn={!!serviceName && !!servicePrice && !!category}
+        subMenu={[
+          'General',
+          'Pricing',
+          'Staff & Resources',
+          'Online Booking',
+          'Client pathway',
+        ]}
+        onCancel={() => {
+          setShowModal(false)
+          setShowChooseModal(false)
+          onClose()
+        }}
+        onCreate={() => {
+          onCreate?.()
+        }}
       >
-        <React.Fragment>
-          <div className={styles.createServiceHeader}>
-            <div>
-              <LeftOutlined
-                style={{
-                  color: 'var(--light-grey-color)',
-                  marginRight: '24px',
-                  fontSize: '24px',
-                }}
+        <div className={styles.createServiceGeneral}>
+          <div className={styles.createServiceSection}>
+            <h2 className={styles.createServiceSectionTitle}>Service info</h2>
+            <div className={styles.createServiceSectionItem}>
+              <Input
+                label="Service name"
+                placeHolderText="Enter service name"
+                text={serviceName}
+                onChange={(val) => setServiceName(val)}
               />
-              {`Create ${serviceType}`}
             </div>
-            <div className={styles.createServiceOps}>
-              <div className={styles.createServiceActive}>
-                Active{' '}
-                <Switch
-                  size="small"
-                  defaultChecked={true}
-                  style={{ marginLeft: '12px' }}
-                />
+            {serviceType !== 'Service' && (
+              <div className={styles.createServiceSectionItem}>
+                <Form form={form} layout="vertical">
+                  <Form.Item label="Max number clients allowed">
+                    <Slider
+                      title={''}
+                      value={sliderValue}
+                      onChange={(val) => setSliderValue(val)}
+                      calculatedValue={`${sliderValue}`}
+                      min={0}
+                      max={50}
+                    />
+                  </Form.Item>
+                </Form>
               </div>
-              <Button
-                onClick={() => {
-                  setShowModal(false)
-                  setShowChooseModal(false)
-                  onClose()
-                }}
-                style={{
-                  marginRight: '1rem',
-                }}
-              >
-                Cancel
-              </Button>
-              <Button
-                type="primary"
-                disabled={!serviceName || !servicePrice || !category}
-                onClick={() => onCreate?.()}
-              >
-                Create
-              </Button>
+            )}
+            <div className={styles.createServiceSectionItem}>
+              <Input
+                label="Service code"
+                placeHolderText="Enter service code"
+              />
+            </div>
+            <div className={styles.createServiceSectionItem}>
+              <Form form={form} layout="vertical">
+                <Form.Item label="Category">
+                  <Select
+                    style={{ width: '100%' }}
+                    placeholder="Select Category"
+                    onSelect={(val: string) => setCategory(val)}
+                  >
+                    {categories.map((item) => (
+                      <OptGroup
+                        label={
+                          <span
+                            style={{
+                              color: 'var(--grey-text-color)',
+                              fontSize: '14px',
+                            }}
+                          >
+                            {item?.groupTitle}
+                          </span>
+                        }
+                        key={item?.groupTitle}
+                      >
+                        {item?.groupItems?.map((subItem) => (
+                          <Option key={subItem} value={subItem}>
+                            {subItem}
+                          </Option>
+                        ))}
+                      </OptGroup>
+                    ))}
+                  </Select>
+                </Form.Item>
+              </Form>
+            </div>
+            <div className={styles.appointmentColor}>
+              <p className={styles.appointmentColorTitle}>Appointment colour</p>
+              <div className={styles.appointmentColorItems}>
+                {appointmentColors.map((color) => (
+                  <div
+                    key={color}
+                    className={
+                      color === selectedColor
+                        ? classNames(
+                            styles.appointmentColorItem,
+                            styles.appointmentColorSelected
+                          )
+                        : styles.appointmentColorItem
+                    }
+                    onClick={() => setSelectedColor(color)}
+                  >
+                    <div
+                      style={{
+                        backgroundColor: color,
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+              <div>
+                <p className={styles.createServiceSectionItemTitle}>Image</p>
+                <div className={styles.createServiceImageContainer}>
+                  <PictureOutlined
+                    style={{
+                      color: 'var(--light-grey-color)',
+                      fontSize: '32px',
+                    }}
+                  />
+                </div>
+                <Button icon={<PlusOutlined />}>Choose from library</Button>
+              </div>
             </div>
           </div>
-          <div className={styles.createServiceBody}>
-            <TabMenu
-              tabPosition="top"
-              menuItems={[
-                'General',
-                'Pricing',
-                'Staff & Resources',
-                'Online Booking',
-                'Client pathway',
-              ]}
-              minHeight="1px"
-            >
-              <div className={styles.createServiceGeneral}>
-                <div className={styles.createServiceSection}>
-                  <h2 className={styles.createServiceSectionTitle}>
-                    Service info
-                  </h2>
-                  <div className={styles.createServiceSectionItem}>
-                    <Input
-                      label="Service name"
-                      placeHolderText="Enter service name"
-                      text={serviceName}
-                      onChange={(val) => setServiceName(val)}
-                    />
-                  </div>
-                  {serviceType !== 'Service' && (
-                    <div className={styles.createServiceSectionItem}>
-                      <Form form={form} layout="vertical">
-                        <Form.Item label="Max number clients allowed">
-                          <Slider
-                            title={''}
-                            value={sliderValue}
-                            onChange={(val) => setSliderValue(val)}
-                            calculatedValue={`${sliderValue}`}
-                            min={0}
-                            max={50}
-                          />
-                        </Form.Item>
-                      </Form>
-                    </div>
-                  )}
-                  <div className={styles.createServiceSectionItem}>
-                    <Input
-                      label="Service code"
-                      placeHolderText="Enter service code"
-                    />
-                  </div>
-                  <div className={styles.createServiceSectionItem}>
-                    <Form form={form} layout="vertical">
-                      <Form.Item label="Category">
-                        <Select
-                          style={{ width: '100%' }}
-                          placeholder="Select Category"
-                          onSelect={(val: string) => setCategory(val)}
-                        >
-                          {categories.map((item) => (
-                            <OptGroup
-                              label={
-                                <span
-                                  style={{
-                                    color: 'var(--grey-text-color)',
-                                    fontSize: '14px',
-                                  }}
-                                >
-                                  {item?.groupTitle}
-                                </span>
-                              }
-                              key={item?.groupTitle}
-                            >
-                              {item?.groupItems?.map((subItem) => (
-                                <Option key={subItem} value={subItem}>
-                                  {subItem}
-                                </Option>
-                              ))}
-                            </OptGroup>
-                          ))}
-                        </Select>
-                      </Form.Item>
-                    </Form>
-                  </div>
-                  <div className={styles.appointmentColor}>
-                    <p className={styles.appointmentColorTitle}>
-                      Appointment colour
-                    </p>
-                    <div className={styles.appointmentColorItems}>
-                      {appointmentColors.map((color) => (
-                        <div
-                          key={color}
-                          className={
-                            color === selectedColor
-                              ? classNames(
-                                  styles.appointmentColorItem,
-                                  styles.appointmentColorSelected
-                                )
-                              : styles.appointmentColorItem
-                          }
-                          onClick={() => setSelectedColor(color)}
-                        >
-                          <div
-                            style={{
-                              backgroundColor: color,
-                            }}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                    <div>
-                      <p className={styles.createServiceSectionItemTitle}>
-                        Image
-                      </p>
-                      <div className={styles.createServiceImageContainer}>
-                        <PictureOutlined
-                          style={{
-                            color: 'var(--light-grey-color)',
-                            fontSize: '32px',
-                          }}
-                        />
-                      </div>
-                      <Button icon={<PlusOutlined />}>
-                        Choose from library
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-                <div className={styles.advancedSettings}>
-                  <Collapse ghost>
-                    <Panel header="Advanced settings" key="advanced-settings">
-                      <div className={styles.createServiceSection}>
-                        <h2
-                          className={styles.createServiceSectionTitle}
-                          style={{ margin: 0 }}
-                        >
-                          Bundling{' '}
-                          <Tooltip title="lorem ipsum">
-                            <QuestionCircleOutlined
-                              style={{
-                                color: 'var(--light-grey-color)',
-                                marginLeft: '5px',
-                              }}
-                            />
-                          </Tooltip>
-                        </h2>
-                        <h3
-                          className={styles.createServiceSectionSubTitle}
-                          style={{ marginBottom: '1rem' }}
-                        >
-                          Which items work well with a{' '}
-                          {serviceName || '{Service name}'}
-                        </h3>
-                        <div className={styles.createServiceBundling}>
-                          <div>
-                            <Select placeholder="Type"></Select>
-                          </div>
-                          <div>
-                            <Select placeholder="Select service or product"></Select>
-                          </div>
-                          <div>
-                            <InputNumber placeholder="0" />
-                          </div>
-                        </div>
-                        <Button icon={<PlusOutlined />}>Add bundle item</Button>
-                      </div>
-                      <div className={styles.createServiceSection}>
-                        <h2 className={styles.createServiceSectionTitle}>
-                          Auto consumption{' '}
-                          <Tooltip title="lorem ipsum">
-                            <QuestionCircleOutlined
-                              style={{
-                                color: 'var(--light-grey-color)',
-                                marginLeft: '5px',
-                              }}
-                            />
-                          </Tooltip>
-                        </h2>
-                        <div className={styles.createServiceAutoConsumption}>
-                          <div>
-                            <Select placeholder="Select product"></Select>
-                          </div>
-                          <div>
-                            <InputNumber placeholder="0" />
-                          </div>
-                        </div>
-                        <div>
-                          <Checkbox defaultChecked={false}>
-                            Consumable deduction
-                          </Checkbox>
-                        </div>
-                        <Divider style={{ margin: '15px 0' }} />
-                        <Button icon={<PlusOutlined />}>Add new item</Button>
-                      </div>
-                      <div
-                        className={styles.createServiceSection}
-                        style={{ margin: 0 }}
-                      >
-                        <h2 className={styles.createServiceSectionTitle}>
-                          Financial information
-                        </h2>
-                        <div className={styles.createServiceSectionItem}>
-                          <Input label="SKU" placeHolderText="Enter SKU" />
-                        </div>
-                        <div className={styles.createServiceSectionItem}>
-                          <Input
-                            label="Procedure code"
-                            placeHolderText="Enter procedure code"
-                          />
-                        </div>
-                        <div className={styles.createServiceSectionItem}>
-                          <Input
-                            label="Invoice item name"
-                            placeHolderText="Enter invoice item name"
-                            tooltip="lorem ipsum"
-                          />
-                        </div>
-                        <div className={styles.createServiceSectionItem}>
-                          <Input
-                            label="Display text on invoice"
-                            placeHolderText="Enter display text"
-                            tooltip="lorem ipsum"
-                          />
-                        </div>
-                        <div>
-                          <Checkbox defaultChecked={false}>
-                            Use a package sessio to pay for the service{' '}
-                            <Tooltip title="lorem ipsum">
-                              <QuestionCircleOutlined
-                                style={{
-                                  color: 'var(--light-grey-color)',
-                                  marginLeft: '5px',
-                                }}
-                              />
-                            </Tooltip>
-                          </Checkbox>
-                        </div>
-                      </div>
-                    </Panel>
-                  </Collapse>
-                </div>
-              </div>
-              <div className={styles.createServicePricing}>
+          <div className={styles.advancedSettings}>
+            <Collapse ghost>
+              <Panel header="Advanced settings" key="advanced-settings">
                 <div className={styles.createServiceSection}>
                   <h2
                     className={styles.createServiceSectionTitle}
                     style={{ margin: 0 }}
                   >
-                    Pricing & Duration{' '}
+                    Bundling{' '}
                     <Tooltip title="lorem ipsum">
                       <QuestionCircleOutlined
                         style={{
@@ -601,413 +449,507 @@ export const CreateService: FC<CreateServiceProps> = ({
                     className={styles.createServiceSectionSubTitle}
                     style={{ marginBottom: '1rem' }}
                   >
-                    Add the pricing options and duration of the service
+                    Which items work well with a{' '}
+                    {serviceName || '{Service name}'}
                   </h3>
-                  <div className={styles.createServiceSectionItem}>
-                    <div className={styles.pricingOptions}>
-                      {pricingOptions.map((option) => (
-                        <div
-                          key={option.title}
-                          className={
-                            option.selected ? styles.pricingOptionSelected : ''
-                          }
-                          onClick={() => handleSelectPricingOption(option)}
-                        >
-                          <div className={styles.pricingOptionLogos}>
-                            {option.isBook && <Read />}
-                            {option.isSell && <Money />}
-                          </div>
-                          <div className={styles.pricingOptionTitle}>
-                            {option.title}
-                          </div>
-                          <div className={styles.pricingChecked}>
-                            <CheckCircleFilled />
-                          </div>
-                          <Tooltip title="lorem ipsum" mouseLeaveDelay={2}>
-                            <div className={styles.tooltipContainer} />
-                          </Tooltip>
-                        </div>
-                      ))}
+                  <div className={styles.createServiceBundling}>
+                    <div>
+                      <Select placeholder="Type"></Select>
+                    </div>
+                    <div>
+                      <Select placeholder="Select service or product"></Select>
+                    </div>
+                    <div>
+                      <InputNumber placeholder="0" />
                     </div>
                   </div>
-                  <div className={styles.createServiceSectionItem}>
-                    <Form form={form} layout="vertical">
-                      <Form.Item label="Service price">
-                        <div className={styles.currencyInput}>
-                          <NumberFormat
-                            className="ant-input"
-                            prefix="£"
-                            defaultValue="0"
-                            thousandSeparator={true}
-                            inputMode="numeric"
-                            value={servicePrice}
-                            onValueChange={(val: NumberFormatValues) =>
-                              setServicePrice(val.value)
-                            }
-                          />
-                        </div>
-                      </Form.Item>
-                    </Form>
-                  </div>
-                  <div className={styles.createServiceSectionItem}>
-                    <Form form={form} layout="vertical">
-                      <Form.Item label="Duration">
-                        <Select placeholder="Select duration">
-                          {durations.map((duration) => (
-                            <Option key={duration} value={duration}>
-                              {duration}
-                            </Option>
-                          ))}
-                        </Select>
-                      </Form.Item>
-                    </Form>
-                  </div>
-                  <div className={styles.createServiceSectionItem}>
-                    <Form form={form} layout="vertical">
-                      <Form.Item label="Tax">
-                        <Select placeholder="Select tax">
-                          <Option value="defaultSetting">
-                            Default setting
-                          </Option>
-                        </Select>
-                      </Form.Item>
-                    </Form>
-                  </div>
+                  <Button icon={<PlusOutlined />}>Add bundle item</Button>
                 </div>
                 <div className={styles.createServiceSection}>
-                  <h2
-                    className={styles.createServiceSectionTitle}
-                    style={{ margin: 0 }}
-                  >
-                    Deposits & Online Payments
+                  <h2 className={styles.createServiceSectionTitle}>
+                    Auto consumption{' '}
+                    <Tooltip title="lorem ipsum">
+                      <QuestionCircleOutlined
+                        style={{
+                          color: 'var(--light-grey-color)',
+                          marginLeft: '5px',
+                        }}
+                      />
+                    </Tooltip>
                   </h2>
-                  <h3
-                    className={styles.createServiceSectionSubTitle}
-                    style={{ marginBottom: '1rem' }}
-                  >
-                    Setup payments processing with Stripe in order to bill
-                    online for services
-                  </h3>
-                  <div className={styles.createServiceSectionItem}>
-                    <div className={styles.paymentProcessing}>
-                      {paymentProcessing.map((option) => (
-                        <div
-                          key={option.type}
-                          className={
-                            option.selected
-                              ? styles.paymentProcessingOptionSelected
-                              : ''
-                          }
-                          onClick={() =>
-                            handleSelectPaymentProcessingOption(option)
-                          }
-                        >
-                          <div className={styles.paymentProcessingOptionLogos}>
-                            {option.type === 'Amount' && <Money />}
-                            {option.type === 'Percent' && (
-                              <PercentageOutlined />
-                            )}
-                          </div>
-                          <div className={styles.paymentProcessingOptionTitle}>
-                            {option.type}
-                          </div>
-                          <div className={styles.paymentProcessingChecked}>
-                            <CheckCircleFilled />
-                          </div>
-                        </div>
-                      ))}
+                  <div className={styles.createServiceAutoConsumption}>
+                    <div>
+                      <Select placeholder="Select product"></Select>
+                    </div>
+                    <div>
+                      <InputNumber placeholder="0" />
                     </div>
                   </div>
-                  <div className={styles.createServiceSectionItem}>
-                    <Form form={form} layout="vertical">
-                      <Form.Item label="Amount">
-                        <div className={styles.currencyInput}>
-                          <NumberFormat
-                            className="ant-input"
-                            prefix={paymentUnit}
-                            defaultValue={0}
-                          />
-                        </div>
-                      </Form.Item>
-                    </Form>
-                  </div>
-                  <div className={styles.createServiceSectionItem}>
+                  <div>
                     <Checkbox defaultChecked={false}>
-                      Require payment before completing booking
+                      Consumable deduction
                     </Checkbox>
                   </div>
-                  <div className={styles.enableOnlinePayment}>
-                    <p>Enable online payment</p>
-                    <p>
-                      Activate payments with Pabau to befeit from deposit during
-                      and after sale and get access to no show protection,
-                      payment terminals, safe online paymets and many more.
-                    </p>
-                    <p>Enable Reviews</p>
-                  </div>
+                  <Divider style={{ margin: '15px 0' }} />
+                  <Button icon={<PlusOutlined />}>Add new item</Button>
                 </div>
-              </div>
-              <TabMenu
-                menuItems={['Employees', 'Resources', 'Locations']}
-                tabPosition="top"
-                minHeight="1px"
-              >
-                <div className={styles.employeesContainer}>
-                  <div className={styles.createServiceSection}>
-                    <Employees employees={employees} />
+                <div
+                  className={styles.createServiceSection}
+                  style={{ margin: 0 }}
+                >
+                  <h2 className={styles.createServiceSectionTitle}>
+                    Financial information
+                  </h2>
+                  <div className={styles.createServiceSectionItem}>
+                    <Input label="SKU" placeHolderText="Enter SKU" />
                   </div>
-                </div>
-                <div className={styles.resoucesContainer}>
-                  <div className={styles.createServiceSection}>
-                    <SearchTags
-                      title="Rooms"
-                      description="Search rooms"
-                      items={rooms}
-                      itemType="room"
+                  <div className={styles.createServiceSectionItem}>
+                    <Input
+                      label="Procedure code"
+                      placeHolderText="Enter procedure code"
                     />
                   </div>
-                  <div className={styles.createServiceSection}>
-                    <SearchTags
-                      title="Equipment"
-                      description="Select equipment"
-                      items={equipment}
-                      itemType="equipment"
+                  <div className={styles.createServiceSectionItem}>
+                    <Input
+                      label="Invoice item name"
+                      placeHolderText="Enter invoice item name"
+                      tooltip="lorem ipsum"
                     />
                   </div>
+                  <div className={styles.createServiceSectionItem}>
+                    <Input
+                      label="Display text on invoice"
+                      placeHolderText="Enter display text"
+                      tooltip="lorem ipsum"
+                    />
+                  </div>
+                  <div>
+                    <Checkbox defaultChecked={false}>
+                      Use a package sessio to pay for the service{' '}
+                      <Tooltip title="lorem ipsum">
+                        <QuestionCircleOutlined
+                          style={{
+                            color: 'var(--light-grey-color)',
+                            marginLeft: '5px',
+                          }}
+                        />
+                      </Tooltip>
+                    </Checkbox>
+                  </div>
                 </div>
-                <div className={styles.locationsContainer}>
-                  <div className={styles.createServiceSection}>
-                    <h2
-                      className={styles.createServiceSectionTitle}
-                      style={{ margin: 0 }}
-                    >
-                      Locations
-                    </h2>
-                    <h3
-                      className={styles.createServiceSectionSubTitle}
-                      style={{ marginBottom: '1rem' }}
-                    >
-                      Choose the locations this discount can be applied
-                    </h3>
-                    <div className={styles.locationItem}>
-                      <Checkbox
-                        defaultChecked={false}
-                        onChange={(e) => handleSelectAll(e)}
-                      >
-                        Select all
-                      </Checkbox>
+              </Panel>
+            </Collapse>
+          </div>
+        </div>
+        <div className={styles.createServicePricing}>
+          <div className={styles.createServiceSection}>
+            <h2
+              className={styles.createServiceSectionTitle}
+              style={{ margin: 0 }}
+            >
+              Pricing & Duration{' '}
+              <Tooltip title="lorem ipsum">
+                <QuestionCircleOutlined
+                  style={{
+                    color: 'var(--light-grey-color)',
+                    marginLeft: '5px',
+                  }}
+                />
+              </Tooltip>
+            </h2>
+            <h3
+              className={styles.createServiceSectionSubTitle}
+              style={{ marginBottom: '1rem' }}
+            >
+              Add the pricing options and duration of the service
+            </h3>
+            <div className={styles.createServiceSectionItem}>
+              <div className={styles.pricingOptions}>
+                {pricingOptions.map((option) => (
+                  <div
+                    key={option.title}
+                    className={
+                      option.selected ? styles.pricingOptionSelected : ''
+                    }
+                    onClick={() => handleSelectPricingOption(option)}
+                  >
+                    <div className={styles.pricingOptionLogos}>
+                      {option.isBook && <Read />}
+                      {option.isSell && <Money />}
                     </div>
-                    {locationItems?.map((location) => (
+                    <div className={styles.pricingOptionTitle}>
+                      {option.title}
+                    </div>
+                    <div className={styles.pricingChecked}>
+                      <CheckCircleFilled />
+                    </div>
+                    <Tooltip title="lorem ipsum" mouseLeaveDelay={2}>
+                      <div className={styles.tooltipContainer} />
+                    </Tooltip>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className={styles.createServiceSectionItem}>
+              <Form form={form} layout="vertical">
+                <Form.Item label="Service price">
+                  <div className={styles.currencyInput}>
+                    <NumberFormat
+                      className="ant-input"
+                      prefix="£"
+                      defaultValue="0"
+                      thousandSeparator={true}
+                      inputMode="numeric"
+                      value={servicePrice}
+                      onValueChange={(val: NumberFormatValues) =>
+                        setServicePrice(val.value)
+                      }
+                    />
+                  </div>
+                </Form.Item>
+              </Form>
+            </div>
+            <div className={styles.createServiceSectionItem}>
+              <Form form={form} layout="vertical">
+                <Form.Item label="Duration">
+                  <Select placeholder="Select duration">
+                    {durations.map((duration) => (
+                      <Option key={duration} value={duration}>
+                        {duration}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+              </Form>
+            </div>
+            <div className={styles.createServiceSectionItem}>
+              <Form form={form} layout="vertical">
+                <Form.Item label="Tax">
+                  <Select placeholder="Select tax">
+                    <Option value="defaultSetting">Default setting</Option>
+                  </Select>
+                </Form.Item>
+              </Form>
+            </div>
+          </div>
+          <div className={styles.createServiceSection}>
+            <h2
+              className={styles.createServiceSectionTitle}
+              style={{ margin: 0 }}
+            >
+              Deposits & Online Payments
+            </h2>
+            <h3
+              className={styles.createServiceSectionSubTitle}
+              style={{ marginBottom: '1rem' }}
+            >
+              Setup payments processing with Stripe in order to bill online for
+              services
+            </h3>
+            <div className={styles.createServiceSectionItem}>
+              <div className={styles.paymentProcessing}>
+                {paymentProcessing.map((option) => (
+                  <div
+                    key={option.type}
+                    className={
+                      option.selected
+                        ? styles.paymentProcessingOptionSelected
+                        : ''
+                    }
+                    onClick={() => handleSelectPaymentProcessingOption(option)}
+                  >
+                    <div className={styles.paymentProcessingOptionLogos}>
+                      {option.type === 'Amount' && <Money />}
+                      {option.type === 'Percent' && <PercentageOutlined />}
+                    </div>
+                    <div className={styles.paymentProcessingOptionTitle}>
+                      {option.type}
+                    </div>
+                    <div className={styles.paymentProcessingChecked}>
+                      <CheckCircleFilled />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className={styles.createServiceSectionItem}>
+              <Form form={form} layout="vertical">
+                <Form.Item label="Amount">
+                  <div className={styles.currencyInput}>
+                    <NumberFormat
+                      className="ant-input"
+                      prefix={paymentUnit}
+                      defaultValue={0}
+                    />
+                  </div>
+                </Form.Item>
+              </Form>
+            </div>
+            <div className={styles.createServiceSectionItem}>
+              <Checkbox defaultChecked={false}>
+                Require payment before completing booking
+              </Checkbox>
+            </div>
+            <div className={styles.enableOnlinePayment}>
+              <p>Enable online payment</p>
+              <p>
+                Activate payments with Pabau to befeit from deposit during and
+                after sale and get access to no show protection, payment
+                terminals, safe online paymets and many more.
+              </p>
+              <p>Enable Reviews</p>
+            </div>
+          </div>
+        </div>
+        <TabMenu
+          menuItems={['Employees', 'Resources', 'Locations']}
+          tabPosition="top"
+          minHeight="1px"
+        >
+          <div className={styles.employeesContainer}>
+            <div className={styles.createServiceSection}>
+              <Employees employees={employees} />
+            </div>
+          </div>
+          <div className={styles.resoucesContainer}>
+            <div className={styles.createServiceSection}>
+              <SearchTags
+                title="Rooms"
+                description="Search rooms"
+                items={rooms}
+                itemType="room"
+              />
+            </div>
+            <div className={styles.createServiceSection}>
+              <SearchTags
+                title="Equipment"
+                description="Select equipment"
+                items={equipment}
+                itemType="equipment"
+              />
+            </div>
+          </div>
+          <div className={styles.locationsContainer}>
+            <div className={styles.createServiceSection}>
+              <h2
+                className={styles.createServiceSectionTitle}
+                style={{ margin: 0 }}
+              >
+                Locations
+              </h2>
+              <h3
+                className={styles.createServiceSectionSubTitle}
+                style={{ marginBottom: '1rem' }}
+              >
+                Choose the locations this discount can be applied
+              </h3>
+              <div className={styles.locationItem}>
+                <Checkbox
+                  defaultChecked={false}
+                  onChange={(e) => handleSelectAll(e)}
+                >
+                  Select all
+                </Checkbox>
+              </div>
+              {locationItems?.map((location) => (
+                <div key={location.location} className={styles.locationItem}>
+                  <Checkbox
+                    defaultChecked={location.selected}
+                    checked={location.selected}
+                    onChange={(e) => handleCheckLocation(e, location)}
+                  >
+                    {location.location}
+                  </Checkbox>
+                </div>
+              ))}
+            </div>
+          </div>
+        </TabMenu>
+        <div className={styles.createServiceOnlineBooking}>
+          <div className={styles.createServiceSection}>
+            <h2 className={styles.createServiceSectionTitle}>General</h2>
+            <div className={styles.createServiceSectionItem}>
+              <div className={styles.enableServiceOnline}>
+                <Switch
+                  size="small"
+                  defaultChecked={true}
+                  style={{ marginRight: '8px' }}
+                />{' '}
+                Enable this service online
+              </div>
+            </div>
+            <div className={styles.createServiceSectionItem}>
+              <Input
+                label="Friendly name"
+                placeHolderText="Enter friendly name"
+                tooltip="lorem ipsum"
+              />
+            </div>
+            <div
+              className={styles.createServiceSectionItem}
+              style={{ margin: 0 }}
+            >
+              <Form form={form} layout="vertical">
+                <Form.Item label="Description">
+                  <AntInput.TextArea
+                    rows={4}
+                    placeholder="e.g. the world’s most spectacular product"
+                  />
+                </Form.Item>
+              </Form>
+            </div>
+          </div>
+          <div className={styles.advancedSettings}>
+            <Collapse ghost>
+              <Panel header="Advanced settings" key="advanced-settings">
+                <div className={styles.createServiceSection}>
+                  <h2 className={styles.createServiceSectionTitle}>
+                    Restrict patient bookings to
+                  </h2>
+                  <div className={styles.patientBookings}>
+                    {patientBookings.map((option) => (
                       <div
-                        key={location.location}
-                        className={styles.locationItem}
+                        key={option.type}
+                        className={
+                          option.selected ? styles.patientBookingsSelected : ''
+                        }
+                        onClick={() => handleSelectPatientBookings(option)}
                       >
-                        <Checkbox
-                          defaultChecked={location.selected}
-                          checked={location.selected}
-                          onChange={(e) => handleCheckLocation(e, location)}
-                        >
-                          {location.location}
-                        </Checkbox>
+                        <div className={styles.patientBookingsChecked}>
+                          <CheckCircleFilled />
+                        </div>
+                        <div className={styles.patientBookingsTitle}>
+                          {option.type}
+                        </div>
                       </div>
                     ))}
                   </div>
                 </div>
-              </TabMenu>
-              <div className={styles.createServiceOnlineBooking}>
                 <div className={styles.createServiceSection}>
-                  <h2 className={styles.createServiceSectionTitle}>General</h2>
-                  <div className={styles.createServiceSectionItem}>
-                    <div className={styles.enableServiceOnline}>
-                      <Switch
-                        size="small"
-                        defaultChecked={true}
-                        style={{ marginRight: '8px' }}
-                      />{' '}
-                      Enable this service online
-                    </div>
-                  </div>
-                  <div className={styles.createServiceSectionItem}>
-                    <Input
-                      label="Friendly name"
-                      placeHolderText="Enter friendly name"
-                      tooltip="lorem ipsum"
-                    />
-                  </div>
-                  <div
-                    className={styles.createServiceSectionItem}
-                    style={{ margin: 0 }}
-                  >
-                    <Form form={form} layout="vertical">
-                      <Form.Item label="Description">
-                        <AntInput.TextArea
-                          rows={4}
-                          placeholder="e.g. the world’s most spectacular product"
+                  <h2 className={styles.createServiceSectionTitle}>
+                    Available on
+                  </h2>
+                  <div className={styles.availableOn}>
+                    {availableOn.map((option) => (
+                      <div
+                        className={styles.availableOnItem}
+                        key={option.weekDay}
+                      >
+                        <Checkbox
+                          defaultChecked={option.isAvailable}
+                          onChange={(e) =>
+                            handleChangeAvailableOn(
+                              option.weekDay,
+                              e.target.checked
+                            )
+                          }
                         />
-                      </Form.Item>
-                    </Form>
+                        <span>{option.weekDay}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <div className={styles.advancedSettings}>
-                  <Collapse ghost>
-                    <Panel header="Advanced settings" key="advanced-settings">
-                      <div className={styles.createServiceSection}>
-                        <h2 className={styles.createServiceSectionTitle}>
-                          Restrict patient bookings to
-                        </h2>
-                        <div className={styles.patientBookings}>
-                          {patientBookings.map((option) => (
-                            <div
-                              key={option.type}
-                              className={
-                                option.selected
-                                  ? styles.patientBookingsSelected
-                                  : ''
-                              }
-                              onClick={() =>
-                                handleSelectPatientBookings(option)
-                              }
-                            >
-                              <div className={styles.patientBookingsChecked}>
-                                <CheckCircleFilled />
-                              </div>
-                              <div className={styles.patientBookingsTitle}>
-                                {option.type}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      <div className={styles.createServiceSection}>
-                        <h2 className={styles.createServiceSectionTitle}>
-                          Available on
-                        </h2>
-                        <div className={styles.availableOn}>
-                          {availableOn.map((option) => (
-                            <div
-                              className={styles.availableOnItem}
-                              key={option.weekDay}
-                            >
-                              <Checkbox
-                                defaultChecked={option.isAvailable}
-                                onChange={(e) =>
-                                  handleChangeAvailableOn(
-                                    option.weekDay,
-                                    e.target.checked
-                                  )
-                                }
-                              />
-                              <span>{option.weekDay}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </Panel>
-                  </Collapse>
-                </div>
-              </div>
-              <div className={styles.createServiceClientPathway}>
-                <div
-                  className={styles.createServiceClientPathwayItemsContainer}
-                >
-                  <div className={styles.createServiceSection}>
-                    <h2
-                      className={styles.createServiceSectionTitle}
-                      style={{ margin: 0 }}
-                    >
-                      Precare
-                    </h2>
-                    <h3
-                      className={styles.createServiceSectionSubTitle}
-                      style={{ marginBottom: '1rem' }}
-                    >
-                      This is the communication to be set prior to someone
-                      having this service
-                    </h3>
-                    <div className={styles.createServiceClientPathwayItems}>
-                      <div className={styles.createServiceClientPathwayItem}>
-                        <div>
-                          <Botox />
-                        </div>
-                        <p>Botox Precare</p>
-                      </div>
-                      <div className={styles.createServiceClientPathwayItem}>
-                        <div>
-                          <MedicalHistory />
-                        </div>
-                        <p>Medical History</p>
-                      </div>
-                      <div className={styles.createServiceClientPathwayItem}>
-                        <div>
-                          <Treatment />
-                        </div>
-                        <p>Appointment reminder</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.createServiceSection}>
-                    <h2
-                      className={styles.createServiceSectionTitle}
-                      style={{ margin: 0 }}
-                    >
-                      During
-                    </h2>
-                    <h3
-                      className={styles.createServiceSectionSubTitle}
-                      style={{ marginBottom: '1rem' }}
-                    >
-                      These are the forms to be used during this service
-                    </h3>
-                    <div className={styles.createServiceClientPathwayItems}>
-                      <div className={styles.createServiceClientPathwayItem}>
-                        <div>
-                          <Botox />
-                        </div>
-                        <p>Botox treatment form</p>
-                      </div>
-                      <div className={styles.createServiceClientPathwayItem}>
-                        <div>
-                          <Botox />
-                        </div>
-                        <p>Botox consent</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.createServiceSection}>
-                    <h2
-                      className={styles.createServiceSectionTitle}
-                      style={{ margin: 0 }}
-                    >
-                      Aftercare
-                    </h2>
-                    <h3
-                      className={styles.createServiceSectionSubTitle}
-                      style={{ marginBottom: '1rem' }}
-                    >
-                      Here are the communications to be sent after the service
-                      has been checked out
-                    </h3>
-                    <div className={styles.createServiceClientPathwayItems}>
-                      <div className={styles.createServiceClientPathwayItem}>
-                        <div>
-                          <Botox />
-                        </div>
-                        <p>Botox aftercare</p>
-                      </div>
-                      <div className={styles.createServiceClientPathwayItem}>
-                        <div>
-                          <Botox />
-                        </div>
-                        <p>Botox recall</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </TabMenu>
+              </Panel>
+            </Collapse>
           </div>
-        </React.Fragment>
-      </Modal>
+        </div>
+        <div className={styles.createServiceClientPathway}>
+          <div className={styles.createServiceClientPathwayItemsContainer}>
+            <div className={styles.createServiceSection}>
+              <h2
+                className={styles.createServiceSectionTitle}
+                style={{ margin: 0 }}
+              >
+                Precare
+              </h2>
+              <h3
+                className={styles.createServiceSectionSubTitle}
+                style={{ marginBottom: '1rem' }}
+              >
+                This is the communication to be set prior to someone having this
+                service
+              </h3>
+              <div className={styles.createServiceClientPathwayItems}>
+                <div className={styles.createServiceClientPathwayItem}>
+                  <div>
+                    <Botox />
+                  </div>
+                  <p>Botox Precare</p>
+                </div>
+                <div className={styles.createServiceClientPathwayItem}>
+                  <div>
+                    <MedicalHistory />
+                  </div>
+                  <p>Medical History</p>
+                </div>
+                <div className={styles.createServiceClientPathwayItem}>
+                  <div>
+                    <Treatment />
+                  </div>
+                  <p>Appointment reminder</p>
+                </div>
+              </div>
+            </div>
+            <div className={styles.createServiceSection}>
+              <h2
+                className={styles.createServiceSectionTitle}
+                style={{ margin: 0 }}
+              >
+                During
+              </h2>
+              <h3
+                className={styles.createServiceSectionSubTitle}
+                style={{ marginBottom: '1rem' }}
+              >
+                These are the forms to be used during this service
+              </h3>
+              <div className={styles.createServiceClientPathwayItems}>
+                <div className={styles.createServiceClientPathwayItem}>
+                  <div>
+                    <Botox />
+                  </div>
+                  <p>Botox treatment form</p>
+                </div>
+                <div className={styles.createServiceClientPathwayItem}>
+                  <div>
+                    <Botox />
+                  </div>
+                  <p>Botox consent</p>
+                </div>
+              </div>
+            </div>
+            <div className={styles.createServiceSection}>
+              <h2
+                className={styles.createServiceSectionTitle}
+                style={{ margin: 0 }}
+              >
+                Aftercare
+              </h2>
+              <h3
+                className={styles.createServiceSectionSubTitle}
+                style={{ marginBottom: '1rem' }}
+              >
+                Here are the communications to be sent after the service has
+                been checked out
+              </h3>
+              <div className={styles.createServiceClientPathwayItems}>
+                <div className={styles.createServiceClientPathwayItem}>
+                  <div>
+                    <Botox />
+                  </div>
+                  <p>Botox aftercare</p>
+                </div>
+                <div className={styles.createServiceClientPathwayItem}>
+                  <div>
+                    <Botox />
+                  </div>
+                  <p>Botox recall</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </FullScreenReportModal>
     </>
   )
 }
