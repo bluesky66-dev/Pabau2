@@ -24,12 +24,12 @@ export const Invoices: FC<EmailSMSPreviewProps & InvoicesProps> = ({
       </Row>
       {message1 && (
         <Row gutter={[0, 4]} className={styles.break}>
-          <Col>{message1}</Col>
+          <span className={styles.message}>{message1}</span>
         </Row>
       )}
       {message2 && (
         <Row gutter={[0, 4]} className={styles.break}>
-          <Col>{message2}</Col>
+          <span className={styles.message}>{message2}</span>
         </Row>
       )}
       {showEnablePay && (
@@ -40,19 +40,17 @@ export const Invoices: FC<EmailSMSPreviewProps & InvoicesProps> = ({
               backgroundColor={buttonColor}
               className={styles.bookButton}
             >
-              Enable Pay
+              Pay Invoice
             </Button>
           </Col>
         </Row>
       )}
-      {bestRegards && (
-        <Row gutter={[0, 4]} className={styles.bestRegards}>
-          <Col>{bestRegards}</Col>
-        </Row>
-      )}
-      {senderFirstName && (
-        <Row gutter={[0, 4]} className={styles.senderFirstName}>
-          <Col>{senderFirstName}</Col>
+      {(bestRegards || senderFirstName) && (
+        <Row gutter={[0, 4]} className={styles.textBox}>
+          <Col>
+            <p className={styles.text}>{bestRegards}</p>
+            <p className={styles.text}>{senderFirstName}</p>
+          </Col>
         </Row>
       )}
       {showInvoiceButton && (

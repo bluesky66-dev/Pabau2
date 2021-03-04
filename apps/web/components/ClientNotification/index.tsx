@@ -52,7 +52,7 @@ const Index: FC<P> = forwardRef(
       isSmsComponent = true,
       displayRadioGroup = true,
       displayButtons = true,
-      hideEnablePay = false,
+      hideEnablePay = true,
     },
     ref
   ) => {

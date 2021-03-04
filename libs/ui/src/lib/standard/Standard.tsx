@@ -333,6 +333,26 @@ export const Standard: FC<P> = ({
                       </Checkbox>
                     </Row>
                   )}
+                  {!hideEnablePay && (
+                    <Row align="middle">
+                      <Checkbox
+                        className={styles.checkboxStyle}
+                        value="show_enable_pay"
+                        checked={showEnablePay}
+                        onChange={() => onShowEnablePay(!showEnablePay)}
+                      >
+                        Enable pay button
+                      </Checkbox>
+                      <Tooltip
+                        className={styles.tooltipStyle}
+                        placement="topLeft"
+                        color="#595959"
+                        title={`This will Enable Pay Invoice Button`}
+                      >
+                        <QuestionCircleOutlined />
+                      </Tooltip>
+                    </Row>
+                  )}
                   {!hideMedicalHistoryOption && (
                     <>
                       <Row>
@@ -382,26 +402,6 @@ export const Standard: FC<P> = ({
                         )}
                       </div>
                     </>
-                  )}
-                  {!hideEnablePay && (
-                    <Row align="middle">
-                      <Checkbox
-                        className={styles.checkboxStyle}
-                        value="show_enable_pay"
-                        checked={showEnablePay}
-                        onChange={() => onShowEnablePay(!showEnablePay)}
-                      >
-                        Show enable pay
-                      </Checkbox>
-                      <Tooltip
-                        className={styles.tooltipStyle}
-                        placement="topLeft"
-                        color="#595959"
-                        title={`This will Enable Payment Button`}
-                      >
-                        <QuestionCircleOutlined />
-                      </Tooltip>
-                    </Row>
                   )}
                   <ColorPicker
                     heading="Background color"
