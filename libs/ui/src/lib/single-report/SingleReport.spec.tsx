@@ -1,11 +1,10 @@
 import React from 'react'
 import { render } from '@testing-library/react'
+import { SingleReport } from '@pabau/ui'
 
-import { ShowMore } from './ShowMore'
-
-describe('ShowMore', () => {
+describe('SingleReport', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<ShowMore />)
+    const { baseElement } = render(<SingleReport />)
     expect(baseElement).toBeTruthy()
   })
 })

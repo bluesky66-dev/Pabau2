@@ -3,7 +3,7 @@ import { SingleReport } from './SingleReport'
 
 export default {
   component: SingleReport,
-  title: 'SingleReport',
+  title: 'UI/SingleReport',
   args: {
     reportCode: 'FI000',
     reportName: 'Daily Sales',

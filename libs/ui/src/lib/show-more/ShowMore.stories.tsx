@@ -3,7 +3,7 @@ import { ShowMore } from './ShowMore'
 
 export default {
   component: ShowMore,
-  title: 'ShowMore',
+  title: 'UI/ShowMore',
   args: {
     length: 15,
     showAll: false,

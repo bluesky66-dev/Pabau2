@@ -1,9 +1,9 @@
 import React from 'react'
-import { ReportsCard } from './ReportsCard'
+import ReportsCard from './ReportsCard'
 
 export default {
   component: ReportsCard,
-  title: 'ReportsCard',
+  title: 'UI/ReportsCard',
   args: {
     catHeading: 'Staff',
     description:
@@ -71,7 +71,7 @@ Basic.args = {
     {
       id: 4,
       reportCode: 'FI003',
-      reportName: 'Receipts by Employee (detail...',
+      reportName: 'Receipts by Employee Detailed',
       isNew: true,
       favorite: true,
     },
@@ -102,7 +102,7 @@ Basic.args = {
     {
       id: 8,
       reportCode: 'FI007',
-      reportName: 'Receipts by Employee (detail...',
+      reportName: 'Receipts by Employee Detailed',
       isNew: false,
       favorite: true,
     },
@@ -172,7 +172,7 @@ FewReports.args = {
     {
       id: 4,
       reportCode: 'FI003',
-      reportName: 'Receipts by Employee (detail...',
+      reportName: 'Receipts by Employee Detailed',
       isNew: true,
       favorite: true,
     },

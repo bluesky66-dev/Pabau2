@@ -1,6 +1,6 @@
 import React, { ReactText, useState } from 'react'
-import { SingleReport } from '../SingleReport/SingleReport'
-import { ShowMore } from '../ShowMore/ShowMore'
+import { SingleReport } from '../single-report/SingleReport'
+import { ShowMore } from '../show-more/ShowMore'
 import { v4 as uuidv4 } from 'uuid'
 
 import styles from './ReportsCard.module.less'
@@ -126,3 +126,5 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
     </div>
   )
 }
+
+export default ReportsCard
