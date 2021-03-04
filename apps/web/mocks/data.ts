@@ -59,7 +59,7 @@ export const reportCardsData = [
       },
       {
         id: 8,
-        reportCode: '"FI012',
+        reportCode: 'FI012',
         reportName: 'Receipts by Category',
         isNew: false,
         favorite: false,
@@ -591,7 +591,6 @@ export const reportCardsData = [
         isNew: true,
         favorite: true,
       },
-
       {
         id: 2,
         reportCode: 'CO085',
@@ -599,7 +598,6 @@ export const reportCardsData = [
         isNew: false,
         favorite: false,
       },
-
       {
         id: 3,
         reportCode: 'CO090',
@@ -607,7 +605,6 @@ export const reportCardsData = [
         isNew: false,
         favorite: false,
       },
-
       {
         id: 4,
         reportCode: 'CO095',
@@ -622,7 +619,6 @@ export const reportCardsData = [
         isNew: false,
         favorite: false,
       },
-
       {
         id: 6,
         reportCode: 'MA005',
@@ -630,7 +626,6 @@ export const reportCardsData = [
         isNew: false,
         favorite: false,
       },
-
       {
         id: 7,
         reportCode: 'MA010',
@@ -638,7 +633,6 @@ export const reportCardsData = [
         isNew: false,
         favorite: false,
       },
-
       {
         id: 8,
         reportCode: 'MA025',
@@ -646,7 +640,6 @@ export const reportCardsData = [
         isNew: false,
         favorite: false,
       },
-
       {
         id: 9,
         reportCode: 'MA030',
@@ -786,7 +779,7 @@ export const reportCardsData = [
       {
         id: 4,
         reportCode: 'ST015',
-        reportName: 'Staff Hourrs',
+        reportName: 'Staff Hours',
         isNew: false,
         favorite: true,
       },
@@ -952,22 +945,22 @@ export const reportCardsData = [
     catHeading: 'Custom',
     graphDescription: 'Revenue by week',
     description:
-      'Monitor your overall finances including sales, refunds, taxes, payments and more',
+      'Reports you have customized yourself to produce specific results',
     chartLabel: '0',
     reports: [],
     graphData: [
-      ['Jan', 20],
+      ['Jan', 5],
       ['Feb', 5],
-      ['Mar', 12],
-      ['Apr', 20],
+      ['Mar', 5],
+      ['Apr', 5],
       ['May', 5],
-      ['Jun', 12],
-      ['Jul', 20],
+      ['Jun', 5],
+      ['Jul', 5],
       ['Aug', 5],
-      ['Sep', 12],
-      ['Oct', 20],
+      ['Sep', 5],
+      ['Oct', 5],
       ['Nov', 5],
-      ['Dec', 12],
+      ['Dec', 5],
     ],
   },
   // {

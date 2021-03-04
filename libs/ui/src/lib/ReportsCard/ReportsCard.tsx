@@ -14,6 +14,7 @@ import {
   YAxis,
   Tooltip,
   AreaSeries,
+  AreaSplineSeries,
 } from 'react-jsx-highcharts'
 
 interface report {
@@ -47,7 +48,9 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
 
   const showMoreHandler = () => setShowAll((showAll) => !showAll)
 
-  const reportsData = showAll ? reports : reports?.slice(0, 9)
+  const reportsData = showAll
+    ? reports
+    : reports?.slice(0, reports?.length > 10 ? 9 : 10)
 
   return (
     <div className={styles.reportsCard}>
@@ -65,8 +68,10 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
               height="36px"
               borderRadius={3}
               marginBottom={0}
-              backgroundColor="rgba(236, 237, 240, 0.2)"
+              backgroundColor="#ECEDF008"
               type="area"
+              spacingLeft={0}
+              spacingRight={0}
             />
 
             <Tooltip
@@ -78,7 +83,18 @@ export const ReportsCard: React.FC<ReportsCardProps> = ({
             <XAxis id="XAxis" visible={false}></XAxis>
 
             <YAxis id="YAxis" visible={false}>
-              <AreaSeries id={catHeading} name={catHeading} data={graphData} />
+              <AreaSeries
+                id={catHeading}
+                name={catHeading}
+                data={graphData}
+                color="#54B2D3"
+                fillColor="#EEF7FB"
+                fillOpacity={1}
+                lineWidth={1}
+                marker={{
+                  radius: 2,
+                }}
+              />
             </YAxis>
           </HighchartsChart>
         </HighchartsProvider>

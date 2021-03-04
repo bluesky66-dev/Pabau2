@@ -21,7 +21,7 @@ export const SingleReport: React.FC<SingleReportProps> = ({
     <div className={styles.singleReport}>
       <div
         className={styles.singleReportContainer}
-        style={{ width: `calc(100% - ${isNew ? '75px' : '0'})` }}
+        style={{ width: `calc(100% - ${isNew ? '75px' : '10px'})` }}
       >
         <Button
           type="text"
