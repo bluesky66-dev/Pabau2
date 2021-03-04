@@ -13,6 +13,7 @@ describe('RightSidebar', () => {
           txtQuestion: '',
           txtBlock: '',
           txtInputType: '',
+          txtDefaults: '',
           arrItems: [],
           required: false,
         }}
