@@ -70,7 +70,6 @@ const colorData = [
   '#f4fc03',
   '#bf15c2',
   '#486578',
-  '#9a3ac9',
 ]
 
 export const ColorPicker: FC<PickerProps> = ({
@@ -96,13 +95,13 @@ export const ColorPicker: FC<PickerProps> = ({
   }
   const onClickAddCustomColor = () => {
     setIsAddingColor((e) => !e)
-    if (isAddingColor) {
-      colorData.push(selColor)
-      setColorList(colorData)
-    }
   }
   const handleChangeComplete = (color) => {
     onClickColorItem(color.hex)
+    colorData.pop()
+    colorData.push(color.hex)
+    setColorList(colorData)
+    setIsAddingColor((e) => !e)
   }
 
   return (
@@ -122,10 +121,11 @@ export const ColorPicker: FC<PickerProps> = ({
             onLeave={() => onLeave?.(color)}
           />
         ))}
+        <div className={styles.addColor} onClick={() => onClickAddCustomColor()}>
+          <PlusOutlined />
+        </div>
       </div>
-      <div className={styles.addColor} onClick={() => onClickAddCustomColor()}>
-        <PlusOutlined />
-      </div>
+      
       {isAddingColor && (
         <SketchPicker
           color={selColor}
