@@ -107,7 +107,6 @@ const Form: FC<P> = ({ schema, formik, layout = 'vertical' }) => {
                 <Input
                   //disabled={isSubmitting}
                   name={name}
-                  type={type}
                   placeholder={example && `eg ${example}`}
                   autoFocus={i === 0}
                 />
