@@ -4,14 +4,28 @@
   }
 }
 
-.medicalFormMain {
+.medicalFormMainTab {
   :global {
     .ant-tabs-nav {
       margin-bottom: 0px;
+      height: 80px;
     }
     .ant-tabs-content-holder {
       background: #f7f7f9;
     }
+    .ant-tabs-tab {
+      align-items: flex-end;
+    }
+  }
+}
+
+.medicalFormName {
+  .label {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    color: #9292a3;
   }
 }
 .tabName {
@@ -19,6 +33,20 @@
   font-size: 14px;
   line-height: 18px;
   font-style: normal;
+}
+.MedicalFormPreviewOldPanel {
+  padding : 10px;
+  width: 100%;
+  // height: 100%;
+}
+.MedicalFormPreviewOldResultPanel {
+  width: 100%;
+  height: 100%;
+  padding : 0 20px;
+}
+.formPreviewButton {
+  margin-top : 10px;
+  margin-bottom: 10px;
 }
 .medicalFormEditPanel {
   display: block;
@@ -37,7 +65,7 @@
       background-color: white;
     }
   }
-  .medicalFormEditLeftPanelCollapseComponent {
+  .medicalFormEditLeftPanelCollapseComponentCollapse {
     :global {
       .ant-collapse-content-box {
         padding: 0;
@@ -55,7 +83,30 @@
         margin: 0;
       }
       .ant-tabs-content-holder {
-        height: 350px;
+        height: 230px;
+        overflow-y: auto;
+      }
+    }
+  }
+  .medicalFormEditLeftPanelCollapseComponentExpend {
+    :global {
+      .ant-collapse-content-box {
+        padding: 0;
+      }
+      .ant-tabs > .ant-tabs-nav .ant-tabs-nav-list,
+      .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-list {
+        width: 100%;
+      }
+      .ant-tabs-tab {
+        flex: 1 1;
+        justify-content: center;
+        margin: 0;
+      }
+      .ant-tabs-nav {
+        margin: 0;
+      }
+      .ant-tabs-content-holder {
+        height: 690px;
         overflow-y: auto;
       }
     }
@@ -64,8 +115,20 @@
 .medicalFormEditLeftPanelCollapse {
   display: block;
 }
+.MedicalFormEditLeft {
+  width: 336px;
+}
 .MedicalFormEditMain {
-  max-height: 780px;
+  max-height: 805px;
+  width:  calc(100% - 744px);
+}
+.MedicalFormEditRight {
+  width: 408px;
+  position: absolute;
+  right: 0px;
+}
+.medicalFormEditMainEmptyPanel {
+  text-align: center;
 }
 .medicalFormEditMainPanel {
   display: block;
@@ -108,6 +171,14 @@
 }
 .MedicalFormComponentPanel {
   display: block;
+  :global {
+    .ant-tabs-tabpane {
+      overflow: hidden;
+    }
+    .ant-tabs-nav {
+      height: 40px;
+    }
+  }
 }
 .medicalFormPreviewPanel {
   display: block;
@@ -116,6 +187,7 @@
   z-index: 1;
   position: absolute;
   right: 16px;
+  margin-top: 25px;
   .createButton {
     margin-right: 5px;
   }
@@ -127,7 +199,7 @@
   z-index: 1;
   position: absolute;
   left: 16px;
-  padding-top: 10px;
+  padding-top: 30px;
   span {
     font-style: normal;
     font-weight: 500;

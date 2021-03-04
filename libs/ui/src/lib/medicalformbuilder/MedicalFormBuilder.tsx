@@ -1,20 +1,26 @@
 import { EditOutlined, EyeOutlined } from '@ant-design/icons'
 import { Tabs } from 'antd'
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import styles from './MedicalFormBuilder.module.less'
 import MedicalFormEdit from './MedicalFormEdit'
 import MedicalFormInfo from './MedicalFormInfo'
+import { PreviewData } from './MedicalFormInterface'
 import MedicalFormPreview from './MedicalFormPreview'
 import MedicalFormSetting from './MedicalFormSetting'
 
 const { TabPane } = Tabs
 
-const MedicalFormBuilder: FC = () => {
+const MedicalFormBuilder: FC<PreviewData> = ({ previewData }) => {
+  const [formName, setFormName] = useState('IPL Treatment Record (Clone)')
+  const changeFormName = (formName) => {
+    setFormName(formName)
+  }
+
   return (
     <>
-      <MedicalFormInfo formName="IPL Treatment Record (Clone)" />
+      <MedicalFormInfo formName={formName} />
       <MedicalFormSetting />
-      <Tabs defaultActiveKey="1" centered className={styles.medicalFormMain}>
+      <Tabs defaultActiveKey="1" centered className={styles.medicalFormMainTab}>
         <TabPane
           tab={
             <span className={styles.tabName}>
@@ -25,7 +31,11 @@ const MedicalFormBuilder: FC = () => {
           }
           key="1"
         >
-          <MedicalFormEdit />
+          <MedicalFormEdit
+            previewData={previewData}
+            changeFormName={changeFormName}
+            formName={'IPL Treatment Record (Clone)'}
+          />
         </TabPane>
         <TabPane
           tab={
