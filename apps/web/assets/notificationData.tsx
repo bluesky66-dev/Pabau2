@@ -250,7 +250,7 @@ const notificationData = {
         'The email you will send when you email someone a copy of their prescription',
       icon: <ReconciliationOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/medical-forms',
       disabled: true,
     },
     {

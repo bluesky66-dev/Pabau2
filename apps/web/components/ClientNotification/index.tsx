@@ -6,6 +6,7 @@ import NewAppointmentPreview from '../../pages/client-notifications/new-appointm
 import RescheduleAppointmentPreview from '../../pages/client-notifications/rescheduled-appointment/RescheduleAppointmentPreview'
 import BookedOntoClassPreview from '../../pages/client-notifications/class-booked/BookedOntoClassPreview'
 import WaitListPreview from '../../pages/client-notifications/waitlist/WaitListPreview'
+import MedicalFormsPreview from '../../pages/client-notifications/medical-forms/MedicalFormsPreview'
 
 interface P {
   onSeletedTab: (number) => void
@@ -243,6 +244,14 @@ const Index: FC<P> = forwardRef(
               buttonColor={buttonColor}
               informationMessage={informationMessage}
               type={type}
+            />
+          ) : type === 'medical-forms' ? (
+            <MedicalFormsPreview
+              standardTapIndex={standardTapIndex}
+              backGroundColor={backGroundColor}
+              activeSocialIcons={activeSocialIcons}
+              selectLanguage={selectLanguage}
+              buttonColor={buttonColor}
             />
           ) : (
             <Appointment
