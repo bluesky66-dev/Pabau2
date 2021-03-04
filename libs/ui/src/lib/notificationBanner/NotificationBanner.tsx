@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-
+import classNames from 'classnames'
 import { Button } from '../button/Button'
 import styles from './NotificationBanner.module.less'
 import { Row, Col } from 'antd'
@@ -14,6 +14,8 @@ interface P {
   showPaymentButton?: boolean
   email?: string
   showEmail?: boolean
+  buttonText?: string
+  buttonClass?: string
 }
 
 export const NotificationBanner: FC<P> = ({
@@ -28,6 +30,8 @@ export const NotificationBanner: FC<P> = ({
   // const [isHide, setHide] = useState(false)
   showPaymentButton = true,
   showEmail = false,
+  buttonText = 'Enable Payments',
+  buttonClass = '',
 }) => {
   return (
     <div
@@ -41,12 +45,12 @@ export const NotificationBanner: FC<P> = ({
           {showEmail && <p className={styles.linkEmail}>{email}</p>}
           {showPaymentButton && (
             <Button
-              className={styles.btnPayment}
+              className={classNames(styles.btnPayment, buttonClass)}
               // onClick={() => {}}
               size="middle"
               type="link"
             >
-              Enable Payments
+              {buttonText}
             </Button>
           )}
         </Col>

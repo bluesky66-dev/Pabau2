@@ -1,8 +1,14 @@
 import React, { useState } from 'react'
-import { Layout, Breadcrumb, NotificationBanner } from '@pabau/ui'
+import { Breadcrumb, Layout, NotificationBanner, TabMenu } from '@pabau/ui'
 import { Typography } from 'antd'
+import {
+  PaymentProcessingOverview,
+  PabauPay,
+  CardTerminal,
+} from '../../../components/Setup/PaymentProcessing'
 import notificationBannerImage from '../../../assets/images/notification-image-lab-page.png'
 import styles from './index.module.less'
+
 const { Title } = Typography
 export function PaymentProcessing() {
   const [hideBanner, setHideBanner] = useState(false)
@@ -14,9 +20,11 @@ export function PaymentProcessing() {
         imgPath={notificationBannerImage}
         allowClose={true}
         setHide={[hideBanner, setHideBanner]}
+        buttonText="Start Now"
+        buttonClass={styles.buttonNotification}
       />
-      <div className={styles.clientNotificationsContent}>
-        <div className={styles.clientNotificationTop}>
+      <div className={styles.mainContent}>
+        <div className={styles.pageTop}>
           <div>
             <Breadcrumb
               breadcrumbItems={[
@@ -27,6 +35,11 @@ export function PaymentProcessing() {
             <Title>Payment Processing</Title>
           </div>
         </div>
+        <TabMenu menuItems={['Overview', 'Pabau Pay', 'Card Terminal']}>
+          <PaymentProcessingOverview />
+          <PabauPay />
+          <CardTerminal />
+        </TabMenu>
       </div>
     </Layout>
   )
