@@ -11397,7 +11397,7 @@ enum contacts_select_column {
 columns and relationships of "credit_note_type"
 """
 type credit_note_type {
-  code: Int!
+  code: String
   created_at: timestamptz!
   id: uuid!
   invoice_prefix: String!
@@ -11434,7 +11434,6 @@ type credit_note_type_aggregate_fields {
 
 """aggregate avg on columns"""
 type credit_note_type_avg_fields {
-  code: Float
   order: Float
 }
 
@@ -11445,7 +11444,7 @@ input credit_note_type_bool_exp {
   _and: [credit_note_type_bool_exp!]
   _not: credit_note_type_bool_exp
   _or: [credit_note_type_bool_exp!]
-  code: Int_comparison_exp
+  code: String_comparison_exp
   created_at: timestamptz_comparison_exp
   id: uuid_comparison_exp
   invoice_prefix: String_comparison_exp
@@ -11467,7 +11466,6 @@ enum credit_note_type_constraint {
 input type for incrementing numeric columns in table "credit_note_type"
 """
 input credit_note_type_inc_input {
-  code: Int
   order: Int
 }
 
@@ -11475,16 +11473,15 @@ input credit_note_type_inc_input {
 input type for inserting data into table "credit_note_type"
 """
 input credit_note_type_insert_input {
-  code: Int
+  code: String
   invoice_prefix: String
   is_active: Boolean
   name: String
-  order: Int
 }
 
 """aggregate max on columns"""
 type credit_note_type_max_fields {
-  code: Int
+  code: String
   created_at: timestamptz
   id: uuid
   invoice_prefix: String
@@ -11495,7 +11492,7 @@ type credit_note_type_max_fields {
 
 """aggregate min on columns"""
 type credit_note_type_min_fields {
-  code: Int
+  code: String
   created_at: timestamptz
   id: uuid
   invoice_prefix: String
@@ -11574,35 +11571,30 @@ enum credit_note_type_select_column {
 input type for updating data in table "credit_note_type"
 """
 input credit_note_type_set_input {
-  code: Int
+  code: String
   invoice_prefix: String
   is_active: Boolean
   name: String
   order: Int
-  updated_at: timestamptz
 }
 
 """aggregate stddev on columns"""
 type credit_note_type_stddev_fields {
-  code: Float
   order: Float
 }
 
 """aggregate stddev_pop on columns"""
 type credit_note_type_stddev_pop_fields {
-  code: Float
   order: Float
 }
 
 """aggregate stddev_samp on columns"""
 type credit_note_type_stddev_samp_fields {
-  code: Float
   order: Float
 }
 
 """aggregate sum on columns"""
 type credit_note_type_sum_fields {
-  code: Int
   order: Int
 }
 
@@ -11624,26 +11616,20 @@ enum credit_note_type_update_column {
 
   """column name"""
   order
-
-  """column name"""
-  updated_at
 }
 
 """aggregate var_pop on columns"""
 type credit_note_type_var_pop_fields {
-  code: Float
   order: Float
 }
 
 """aggregate var_samp on columns"""
 type credit_note_type_var_samp_fields {
-  code: Float
   order: Float
 }
 
 """aggregate variance on columns"""
 type credit_note_type_variance_fields {
-  code: Float
   order: Float
 }
 
@@ -13115,6 +13101,273 @@ enum lead_update_column {
 }
 
 """
+columns and relationships of "library"
+"""
+type library {
+  created_at: timestamptz!
+  email: String
+  id: uuid!
+  is_active: Boolean!
+  name: String!
+  order: Int!
+  phone: String
+  provider_no: String
+  type: String
+  updated_at: timestamptz!
+}
+
+"""
+aggregated selection of "library"
+"""
+type library_aggregate {
+  aggregate: library_aggregate_fields
+  nodes: [library!]!
+}
+
+"""
+aggregate fields of "library"
+"""
+type library_aggregate_fields {
+  avg: library_avg_fields
+  count(columns: [library_select_column!], distinct: Boolean): Int!
+  max: library_max_fields
+  min: library_min_fields
+  stddev: library_stddev_fields
+  stddev_pop: library_stddev_pop_fields
+  stddev_samp: library_stddev_samp_fields
+  sum: library_sum_fields
+  var_pop: library_var_pop_fields
+  var_samp: library_var_samp_fields
+  variance: library_variance_fields
+}
+
+"""aggregate avg on columns"""
+type library_avg_fields {
+  order: Float
+}
+
+"""
+Boolean expression to filter rows from the table "library". All fields are combined with a logical 'AND'.
+"""
+input library_bool_exp {
+  _and: [library_bool_exp!]
+  _not: library_bool_exp
+  _or: [library_bool_exp!]
+  created_at: timestamptz_comparison_exp
+  email: String_comparison_exp
+  id: uuid_comparison_exp
+  is_active: Boolean_comparison_exp
+  name: String_comparison_exp
+  order: Int_comparison_exp
+  phone: String_comparison_exp
+  provider_no: String_comparison_exp
+  type: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "library"
+"""
+enum library_constraint {
+  """unique or primary key constraint"""
+  library_pkey
+}
+
+"""
+input type for incrementing numeric columns in table "library"
+"""
+input library_inc_input {
+  order: Int
+}
+
+"""
+input type for inserting data into table "library"
+"""
+input library_insert_input {
+  email: String
+  is_active: Boolean
+  name: String
+  order: Int
+  phone: String
+  provider_no: String
+  type: String
+}
+
+"""aggregate max on columns"""
+type library_max_fields {
+  created_at: timestamptz
+  email: String
+  id: uuid
+  name: String
+  order: Int
+  phone: String
+  provider_no: String
+  type: String
+  updated_at: timestamptz
+}
+
+"""aggregate min on columns"""
+type library_min_fields {
+  created_at: timestamptz
+  email: String
+  id: uuid
+  name: String
+  order: Int
+  phone: String
+  provider_no: String
+  type: String
+  updated_at: timestamptz
+}
+
+"""
+response of any mutation on the table "library"
+"""
+type library_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [library!]!
+}
+
+"""
+on conflict condition type for table "library"
+"""
+input library_on_conflict {
+  constraint: library_constraint!
+  update_columns: [library_update_column!]!
+  where: library_bool_exp
+}
+
+"""Ordering options when selecting data from "library"."""
+input library_order_by {
+  created_at: order_by
+  email: order_by
+  id: order_by
+  is_active: order_by
+  name: order_by
+  order: order_by
+  phone: order_by
+  provider_no: order_by
+  type: order_by
+  updated_at: order_by
+}
+
+"""primary key columns input for table: library"""
+input library_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "library"
+"""
+enum library_select_column {
+  """column name"""
+  created_at
+
+  """column name"""
+  email
+
+  """column name"""
+  id
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  order
+
+  """column name"""
+  phone
+
+  """column name"""
+  provider_no
+
+  """column name"""
+  type
+
+  """column name"""
+  updated_at
+}
+
+"""
+input type for updating data in table "library"
+"""
+input library_set_input {
+  email: String
+  is_active: Boolean
+  name: String
+  order: Int
+  phone: String
+  provider_no: String
+  type: String
+}
+
+"""aggregate stddev on columns"""
+type library_stddev_fields {
+  order: Float
+}
+
+"""aggregate stddev_pop on columns"""
+type library_stddev_pop_fields {
+  order: Float
+}
+
+"""aggregate stddev_samp on columns"""
+type library_stddev_samp_fields {
+  order: Float
+}
+
+"""aggregate sum on columns"""
+type library_sum_fields {
+  order: Int
+}
+
+"""
+update columns of table "library"
+"""
+enum library_update_column {
+  """column name"""
+  email
+
+  """column name"""
+  is_active
+
+  """column name"""
+  name
+
+  """column name"""
+  order
+
+  """column name"""
+  phone
+
+  """column name"""
+  provider_no
+
+  """column name"""
+  type
+}
+
+"""aggregate var_pop on columns"""
+type library_var_pop_fields {
+  order: Float
+}
+
+"""aggregate var_samp on columns"""
+type library_var_samp_fields {
+  order: Float
+}
+
+"""aggregate variance on columns"""
+type library_variance_fields {
+  order: Float
+}
+
+"""
 columns and relationships of "locations"
 """
 type locations {
@@ -14234,6 +14487,19 @@ type mutation_root {
   delete_lead_by_pk(id: uuid!): lead
 
   """
+  delete data from the table: "library"
+  """
+  delete_library(
+    """filter the rows which have to be deleted"""
+    where: library_bool_exp!
+  ): library_mutation_response
+
+  """
+  delete single row from the table: "library"
+  """
+  delete_library_by_pk(id: uuid!): library
+
+  """
   delete data from the table: "locations"
   """
   delete_locations(
@@ -14738,6 +15004,28 @@ type mutation_root {
     """on conflict condition"""
     on_conflict: lead_on_conflict
   ): lead
+
+  """
+  insert data into the table: "library"
+  """
+  insert_library(
+    """the rows to be inserted"""
+    objects: [library_insert_input!]!
+
+    """on conflict condition"""
+    on_conflict: library_on_conflict
+  ): library_mutation_response
+
+  """
+  insert a single row into the table: "library"
+  """
+  insert_library_one(
+    """the row to be inserted"""
+    object: library_insert_input!
+
+    """on conflict condition"""
+    on_conflict: library_on_conflict
+  ): library
 
   """
   insert data into the table: "locations"
@@ -15554,6 +15842,32 @@ type mutation_root {
     _set: lead_set_input
     pk_columns: lead_pk_columns_input!
   ): lead
+
+  """
+  update data of the table: "library"
+  """
+  update_library(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: library_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: library_set_input
+
+    """filter the rows which have to be updated"""
+    where: library_bool_exp!
+  ): library_mutation_response
+
+  """
+  update single row of the table: "library"
+  """
+  update_library_by_pk(
+    """increments the numeric columns with given value of the filtered values"""
+    _inc: library_inc_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: library_set_input
+    pk_columns: library_pk_columns_input!
+  ): library
 
   """
   update data of the table: "locations"
@@ -18061,6 +18375,49 @@ type query_root {
   lead_by_pk(id: uuid!): lead
 
   """
+  fetch data from the table: "library"
+  """
+  library(
+    """distinct select on columns"""
+    distinct_on: [library_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [library_order_by!]
+
+    """filter the rows returned"""
+    where: library_bool_exp
+  ): [library!]!
+
+  """
+  fetch aggregated fields from the table: "library"
+  """
+  library_aggregate(
+    """distinct select on columns"""
+    distinct_on: [library_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [library_order_by!]
+
+    """filter the rows returned"""
+    where: library_bool_exp
+  ): library_aggregate!
+
+  """fetch data from the table: "library" using primary key columns"""
+  library_by_pk(id: uuid!): library
+
+  """
   fetch data from the table: "locations"
   """
   locations(
@@ -19170,6 +19527,8 @@ type stock_take {
   count_no: String!
   counted_by: String!
   created_at: timestamptz!
+  discrepanciesDown: Int
+  discrepanciesUp: Int
   id: uuid!
   location: String!
   name: String!
@@ -19206,6 +19565,8 @@ type stock_take_aggregate_fields {
 
 """aggregate avg on columns"""
 type stock_take_avg_fields {
+  discrepanciesDown: Float
+  discrepanciesUp: Float
   total: Float
 }
 
@@ -19219,6 +19580,8 @@ input stock_take_bool_exp {
   count_no: String_comparison_exp
   counted_by: String_comparison_exp
   created_at: timestamptz_comparison_exp
+  discrepanciesDown: Int_comparison_exp
+  discrepanciesUp: Int_comparison_exp
   id: uuid_comparison_exp
   location: String_comparison_exp
   name: String_comparison_exp
@@ -19240,6 +19603,8 @@ enum stock_take_constraint {
 input type for incrementing numeric columns in table "stock_take"
 """
 input stock_take_inc_input {
+  discrepanciesDown: Int
+  discrepanciesUp: Int
   total: numeric
 }
 
@@ -19249,6 +19614,8 @@ input type for inserting data into table "stock_take"
 input stock_take_insert_input {
   count_no: String
   counted_by: String
+  discrepanciesDown: Int
+  discrepanciesUp: Int
   location: String
   name: String
   start_date: String
@@ -19261,6 +19628,8 @@ type stock_take_max_fields {
   count_no: String
   counted_by: String
   created_at: timestamptz
+  discrepanciesDown: Int
+  discrepanciesUp: Int
   id: uuid
   location: String
   name: String
@@ -19275,6 +19644,8 @@ type stock_take_min_fields {
   count_no: String
   counted_by: String
   created_at: timestamptz
+  discrepanciesDown: Int
+  discrepanciesUp: Int
   id: uuid
   location: String
   name: String
@@ -19309,6 +19680,8 @@ input stock_take_order_by {
   count_no: order_by
   counted_by: order_by
   created_at: order_by
+  discrepanciesDown: order_by
+  discrepanciesUp: order_by
   id: order_by
   location: order_by
   name: order_by
@@ -19335,6 +19708,12 @@ enum stock_take_select_column {
 
   """column name"""
   created_at
+
+  """column name"""
+  discrepanciesDown
+
+  """column name"""
+  discrepanciesUp
 
   """column name"""
   id
@@ -19364,6 +19743,8 @@ input type for updating data in table "stock_take"
 input stock_take_set_input {
   count_no: String
   counted_by: String
+  discrepanciesDown: Int
+  discrepanciesUp: Int
   location: String
   name: String
   start_date: String
@@ -19373,21 +19754,29 @@ input stock_take_set_input {
 
 """aggregate stddev on columns"""
 type stock_take_stddev_fields {
+  discrepanciesDown: Float
+  discrepanciesUp: Float
   total: Float
 }
 
 """aggregate stddev_pop on columns"""
 type stock_take_stddev_pop_fields {
+  discrepanciesDown: Float
+  discrepanciesUp: Float
   total: Float
 }
 
 """aggregate stddev_samp on columns"""
 type stock_take_stddev_samp_fields {
+  discrepanciesDown: Float
+  discrepanciesUp: Float
   total: Float
 }
 
 """aggregate sum on columns"""
 type stock_take_sum_fields {
+  discrepanciesDown: Int
+  discrepanciesUp: Int
   total: numeric
 }
 
@@ -19400,6 +19789,12 @@ enum stock_take_update_column {
 
   """column name"""
   counted_by
+
+  """column name"""
+  discrepanciesDown
+
+  """column name"""
+  discrepanciesUp
 
   """column name"""
   location
@@ -19419,16 +19814,22 @@ enum stock_take_update_column {
 
 """aggregate var_pop on columns"""
 type stock_take_var_pop_fields {
+  discrepanciesDown: Float
+  discrepanciesUp: Float
   total: Float
 }
 
 """aggregate var_samp on columns"""
 type stock_take_var_samp_fields {
+  discrepanciesDown: Float
+  discrepanciesUp: Float
   total: Float
 }
 
 """aggregate variance on columns"""
 type stock_take_variance_fields {
+  discrepanciesDown: Float
+  discrepanciesUp: Float
   total: Float
 }
 
@@ -20014,6 +20415,49 @@ type subscription_root {
 
   """fetch data from the table: "lead" using primary key columns"""
   lead_by_pk(id: uuid!): lead
+
+  """
+  fetch data from the table: "library"
+  """
+  library(
+    """distinct select on columns"""
+    distinct_on: [library_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [library_order_by!]
+
+    """filter the rows returned"""
+    where: library_bool_exp
+  ): [library!]!
+
+  """
+  fetch aggregated fields from the table: "library"
+  """
+  library_aggregate(
+    """distinct select on columns"""
+    distinct_on: [library_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [library_order_by!]
+
+    """filter the rows returned"""
+    where: library_bool_exp
+  ): library_aggregate!
+
+  """fetch data from the table: "library" using primary key columns"""
+  library_by_pk(id: uuid!): library
 
   """
   fetch data from the table: "locations"
