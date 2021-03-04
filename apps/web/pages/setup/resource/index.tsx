@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
-import React from 'react'
+import React, { useState } from 'react'
+import { CreateResource } from '@pabau/ui'
 import CrudLayout from '../../../components/CrudLayout/CrudLayout'
-import { useRouter } from 'next/router'
 
 /* eslint-disable-next-line */
 export interface ResourceProps {
@@ -126,10 +126,9 @@ const UPDATE_ORDER_MUTATION = gql`
 `
 
 export function Resource(props: ResourceProps) {
-  const router = useRouter()
-
+  const [visible, setVisible] = useState(false)
   const createPageOnClick = () => {
-    router.push('/setup/resource/create')
+    setVisible(true)
   }
 
   return (
@@ -146,6 +145,11 @@ export function Resource(props: ResourceProps) {
         showNotificationBanner={true}
         createPage={true}
         createPageOnClick={createPageOnClick}
+      />
+      <CreateResource
+        visible={visible}
+        onClose={() => setVisible(false)}
+        onCreate={() => setVisible(false)}
       />
     </div>
   )
