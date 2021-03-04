@@ -3,6 +3,7 @@ import { Table, Badge, Typography } from 'antd'
 import { LetterBadge, LetterBadgeColors } from '../letter-badge/LetterBadge'
 import { DownOutlined, UpOutlined } from '@ant-design/icons'
 import { PresetStatusColorType } from 'antd/lib/_util/colors'
+import styles from './TeamReport.module.less'
 const { Text } = Typography
 
 export enum TableRowType {
@@ -84,7 +85,7 @@ const transformTableCell = (
   if (record.type && record.type === TableRowType.Header && text) {
     const lb = letter_badges[record.header_num]
     ret = (
-      <Text>
+      <Text strong className={styles.antTableSectionCell}>
         <LetterBadge color={lb.color}>{lb ? lb.letter : '*'}</LetterBadge>
         {text}
       </Text>
