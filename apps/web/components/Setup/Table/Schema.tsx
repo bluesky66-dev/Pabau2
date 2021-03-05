@@ -65,7 +65,14 @@ const LIST_QUERY = gql`
       type
       email
       phone
+      website
+      health_code_identifier
+      country
+      city
+      street
+      post_code
       is_active
+      company
       order
     }
   }
@@ -142,29 +149,39 @@ const LIST_AGGREGATE_QUERY = gql`
 
 const ADD_MUTATION = gql`
   mutation insert_third_parties_one(
-    $name: String
+    $name: String!
+    $providerNo: String
     $type: String
     $email: String
-    $phone: Int
-    $provider_no: String
+    $phone: String
+    $website: String
+    $healthCodeIdentifier: String
+    $country: String
+    $city: String
+    $street: String
+    $postCode: String
     $isActive: Boolean
+    $company: String
   ) {
     insert_third_parties_one(
       object: {
         name: $name
+        provider_no: $providerNo
         type: $type
         email: $email
-        provider_no: $provider_no
         phone: $phone
+        website: $website
+        health_code_identifier: $healthCodeIdentifier
+        country: $country
+        city: $city
+        street: $street
+        post_code: $postCode
         is_active: $isActive
+        company: $company
       }
     ) {
+      __typename
       id
-      name
-      email
-      phone
-      provider_no
-      type
     }
   }
 `
@@ -172,22 +189,36 @@ const ADD_MUTATION = gql`
 const EDIT_MUTATION = gql`
   mutation update_job_title_by_pk(
     $id: uuid!
-    $name: String
+    $name: String!
+    $providerNo: String
     $type: String
-    $paidBlockOut: Boolean = false
-    $backgroundColor: String
-    $defaultTime: Int
+    $email: String
+    $phone: String
+    $website: String
+    $healthCodeIdentifier: String
+    $country: String
+    $city: String
+    $street: String
+    $postCode: String
     $isActive: Boolean
+    $company: String
   ) {
     update_third_parties_by_pk(
       pk_columns: { id: $id }
       _set: {
         name: $name
+        provider_no: $providerNo
         type: $type
-        paidBlockOut: $paidBlockOut
-        backgroundColor: $backgroundColor
-        defaultTime: $defaultTime
+        email: $email
+        phone: $phone
+        website: $website
+        health_code_identifier: $healthCodeIdentifier
+        country: $country
+        city: $city
+        street: $street
+        post_code: $postCode
         is_active: $isActive
+        company: $company
       }
     ) {
       id

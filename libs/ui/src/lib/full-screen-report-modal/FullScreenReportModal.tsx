@@ -20,10 +20,10 @@ export interface FullScreenReportModalProps {
   operations: Array<OperationType>
   onVatRegistered?: (val: boolean) => void
   onActivated?: (val: boolean) => void
-  onBackClick?: () => void
+  onBackClick?: (e) => void
   onSave?: () => void
   onCreate?: () => void
-  onCancel?: () => void
+  onCancel?: (e) => void
   onReset?: () => void
   onDelete?: () => void
   deleteBtnText?: string
@@ -72,7 +72,7 @@ export const FullScreenReportModal: FC<FullScreenReportModalProps> = ({
         <div className={styles.fullScreenModalHeader}>
           <div>
             <LeftOutlined
-              onClick={() => onBackClick?.()}
+              onClick={(e) => onBackClick?.(e)}
               style={{
                 color: 'var(--light-grey-color)',
                 marginRight: '24px',
@@ -132,7 +132,7 @@ export const FullScreenReportModal: FC<FullScreenReportModalProps> = ({
                 )}
                 {operation === OperationType.cancel && (
                   <Button
-                    onClick={() => onCancel?.()}
+                    onClick={(e) => onCancel?.(e)}
                     style={{ marginRight: '1rem' }}
                   >
                     {cancelBtnText || 'Cancel'}

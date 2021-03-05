@@ -1,118 +1,300 @@
 import React, { useState, FC } from 'react'
 import {
   Breadcrumb,
-  Button,
+  OperationType,
   FullScreenReportModal,
   PhoneNumberInput,
-  Switch,
   TabbedTable,
+  Notification,
+  NotificationType,
+  BasicModal as Modal,
 } from '@pabau/ui'
-import { Card, Col, Row, Typography, Divider, Input, Form, Select } from 'antd'
-
-import { CheckCircleFilled } from '@ant-design/icons'
-import ThirdPartyTable from '../../components/Setup/Table/ThirdPartyTable'
-import { thirdPartySchema } from '../../components/Setup/Table/Schema'
-import { LibraryTable } from '../../components/Setup/Table/LibraryTable'
+import countries from 'i18n-iso-countries'
+import english from 'i18n-iso-countries/langs/en.json'
+import { Card, Col, Row, Typography, Divider } from 'antd'
+import { Form, Input, Select } from 'formik-antd'
+import classNames from 'classnames'
 import Layout from '../../components/Layout/Layout'
 import AddButton from '../../components/AddButton'
 import styles from './third-parties.module.less'
+import active from '../../assets/images/active.svg'
+import company from '../../assets/images/company.svg'
+import activeCompany from '../../assets/images/active-company.svg'
+import insurance from '../../assets/images/insurance.svg'
+import activeInsurance from '../../assets/images/active-insurance.svg'
+
+import ThirdPartyTable from '../../components/Setup/Table/ThirdPartyTable'
+import {
+  thirdPartySchema,
+  Mutations,
+} from '../../components/Setup/Table/Schema'
+import LibraryTable from '../../components/Setup/Table/LibraryTable'
+import { useMutation } from '@apollo/client'
+
+import { Formik } from 'formik'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ThirdPartiesProps {}
 
+interface EditFieldsType {
+  id: string
+  type: string
+  name: string
+  provider_no: string
+  phone: string
+  email: string
+  website: string
+  country: string
+  city: string
+  street: string
+  post_code: string
+  healthCodeIdentifier: string
+  is_active: boolean
+  company: string
+}
+
 const ThirdParties: FC<ThirdPartiesProps> = (ThirdPartiesProps) => {
   const { Title } = Typography
+  const { Option } = Select
+  const [activeTab, setActiveTab] = useState('0')
+  const [searchTerm, setSearchTerm] = useState('')
+  const [isActive, setIsActive] = useState(true)
   const [showModal, setShowModal] = useState<boolean>(false)
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false)
 
-  const openModal = () => {
+  const formikEditFields = () => {
+    const fields: EditFieldsType = {
+      id: '',
+      type: '',
+      name: '',
+      provider_no: '',
+      phone: '',
+      email: '',
+      website: '',
+      country: '',
+      city: '',
+      street: '',
+      post_code: '',
+      healthCodeIdentifier: '',
+      is_active: true,
+      company: 'ID goes here',
+    }
+    return fields
+  }
+  const [editPage, setEditPage] = useState<EditFieldsType>(formikEditFields())
+
+  countries.registerLocale(english)
+  const countriesName = countries.getNames('en')
+
+  const [addMutation] = useMutation(Mutations.ADD_MUTATION, {
+    onCompleted() {
+      Notification(
+        NotificationType.success,
+        `Success! You have successfully created a third parties`
+      )
+    },
+    onError(err) {
+      console.log('ERROR WHILE CREATING:', err)
+      Notification(
+        NotificationType.error,
+        `Error! While creating a third parties`
+      )
+    },
+  })
+
+  const [editMutation] = useMutation(Mutations.EDIT_MUTATION, {
+    onCompleted() {
+      Notification(
+        NotificationType.success,
+        `Success! You have successfully edited a third parties`
+      )
+    },
+    onError() {
+      Notification(
+        NotificationType.error,
+        `Error! While editing a third parties`
+      )
+    },
+  })
+
+  const [deleteMutation] = useMutation(Mutations.DELETE_MUTATION, {
+    onCompleted() {
+      Notification(
+        NotificationType.success,
+        `Success! You have successfully deleted a third parties`
+      )
+    },
+    onError() {
+      Notification(
+        NotificationType.error,
+        `Error! While deleting a third parties`
+      )
+    },
+  })
+
+  console.log('ACTIVE TAB:', activeTab, typeof activeTab)
+  const initialValues = {
+    type: '',
+    name: '',
+    providerNo: '',
+    phone: '',
+    email: '',
+    website: '',
+    country: '',
+    city: '',
+    street: '',
+    postCode: '',
+    healthCodeIdentifier: '',
+    isActive: true,
+    company: 'ID goes here',
+  }
+
+  const setEditFields = () => {
+    const editObj = {
+      id: editPage.id,
+      type: editPage.type,
+      name: editPage.name,
+      providerNo: editPage.provider_no,
+      phone: editPage.phone,
+      email: editPage.email,
+      website: editPage.website,
+      country: editPage.country,
+      city: editPage.city,
+      street: editPage.street,
+      postCode: editPage.post_code,
+      healthCodeIdentifier: editPage.healthCodeIdentifier,
+      isActive: editPage.is_active,
+      company: editPage.company,
+    }
+    return editObj
+  }
+
+  const openModal = (setFieldValue) => {
+    setFieldValue('type', 'Company')
     setShowModal(true)
   }
 
-  const handleBackClick = () => {
+  const handleBackClick = (e, handleReset) => {
+    handleReset(e)
+    setEditPage(formikEditFields())
     setShowModal(false)
   }
 
-  const headerContent = () => {
-    return (
-      <div className={styles.thirdPartiesHeader}>
-        <h4> Create Third parties</h4>
-        <div className={styles.thirdPartiesStatus}>
-          <div className={styles.active}>
-            <small>Activate</small>{' '}
-            <Switch checked={true} onClick={() => alert('clicked')} />
-          </div>
-
-          <div className={styles.btnCancel}>
-            <Button type="default" onClick={handleBackClick}>
-              Cancel
-            </Button>
-          </div>
-          <div className={styles.btnDelete}>
-            <Button type="default">Save as draft</Button>
-          </div>
-          <div>
-            <Button>Create</Button>
-          </div>
-        </div>
-      </div>
-    )
+  const handleThirdPartyType = (type, setFieldValue) => {
+    setFieldValue('type', type)
   }
 
-  const modelContent = () => {
+  const countryOptions = () => {
+    const options = Object.keys(countriesName).map((c) => (
+      <Option key={c} value={countriesName[c]}>
+        {countriesName[c]}
+      </Option>
+    ))
+    return options
+  }
+
+  const modelContent = (setFieldValue, values) => {
     return (
       <div className={styles.mainWrapper}>
         <Form layout="vertical">
           <div className={styles.contentWrapper}>
             <h3>Type</h3>
-            <div className={styles.customForm}>
-              <Form.Item label="Type">
-                <CheckCircleFilled />
-              </Form.Item>
+            <div className={styles.thirdPartyType}>
+              <div
+                className={
+                  values.type === 'Company'
+                    ? classNames(styles.typeWrapper, styles.active)
+                    : styles.typeWrapper
+                }
+                onClick={() => handleThirdPartyType('Company', setFieldValue)}
+              >
+                {values.type === 'Company' ? (
+                  <img src={activeCompany} alt="companyLogo" />
+                ) : (
+                  <img src={company} alt="companyLogo" />
+                )}
+                <span>Company</span>
+                <img className={styles.imgActive} src={active} alt="checked" />
+              </div>
+              <div
+                className={
+                  values.type === 'Insurance'
+                    ? classNames(styles.typeWrapper, styles.active)
+                    : styles.typeWrapper
+                }
+                onClick={() => handleThirdPartyType('Insurance', setFieldValue)}
+              >
+                {values.type === 'Insurance' ? (
+                  <img src={activeInsurance} alt="insuranceLogo" />
+                ) : (
+                  <img src={insurance} alt="insuranceLogo" />
+                )}
+                <span>Insurance</span>
+                <img className={styles.imgActive} src={active} alt="checked" />
+              </div>
             </div>
           </div>
           <div className={styles.contentWrapper}>
             <h3>General</h3>
             <div className={styles.customForm}>
-              <Form.Item label="Name">
-                <Input name="Name" placeholder="Enter Name" />
+              <Form.Item label="Name" name="name">
+                <Input name="name" placeholder="/Enter Name" />
               </Form.Item>
-              <Form.Item label="Provider No.">
-                <Input name="providerNo." placeholder="Enter provider number" />
+              <Form.Item label="Provider No." name="providerNo">
+                <Input name="providerNo" placeholder="Enter provider number" />
               </Form.Item>
             </div>
           </div>
           <div className={styles.contentWrapper}>
             <h3>Contact information</h3>
             <div className={styles.customForm}>
-              <Form.Item>
+              <Form.Item name="phone">
                 <PhoneNumberInput
                   label="Phone"
-                  onChange={() => alert('hello')}
+                  value={values.phone}
+                  onChange={(e) => setFieldValue('phone', e)}
                 />
               </Form.Item>
-              <Form.Item label="Email">
+              <Form.Item label="Email" name="email">
                 <Input name="email" placeholder="company@company.com" />
               </Form.Item>
-              <Form.Item label="Website">
+              <Form.Item label="Website" name="website">
                 <Input name="website" placeholder="www.company.com" />
               </Form.Item>
+              {values.type === 'Insurance' && (
+                <Form.Item
+                  label="Healthcode identifier"
+                  name="healthCodeIdentifier"
+                  tooltip="Contact your Healthcode representative to obtain this code"
+                >
+                  <Input
+                    name="healthCodeIdentifier"
+                    placeholder="www.company.com"
+                  />
+                </Form.Item>
+              )}
             </div>
           </div>
           <div className={styles.contentWrapper}>
             <h3>Address information</h3>
             <div className={styles.customForm}>
-              <Form.Item label={'Country'}>
-                <Select placeholder="Select Country">
-                  <option>aa</option>
+              <Form.Item label={'Country'} name="country">
+                <Select
+                  name="country"
+                  showSearch
+                  placeholder="Select Country"
+                  value={values.country ? values.country : 'Select country'}
+                >
+                  {countryOptions()}
                 </Select>
               </Form.Item>
-              <Form.Item label={'City'}>
+              <Form.Item label={'City'} name="city">
                 <Input name="city" placeholder="Enter city" />
               </Form.Item>
-              <Form.Item label={'Street'}>
+              <Form.Item label={'Street'} name="street">
                 <Input name="street" placeholder="Enter street" />
               </Form.Item>
-              <Form.Item label={'Post code'}>
+              <Form.Item label={'Post code'} name="postCode">
                 <Input name="postCode" placeholder="Enter post code" />
               </Form.Item>
             </div>
@@ -121,9 +303,6 @@ const ThirdParties: FC<ThirdPartiesProps> = (ThirdPartiesProps) => {
       </div>
     )
   }
-  const [activeTab, setActiveTab] = useState('0')
-  const [searchTerm, setSearchTerm] = useState('')
-  const [isActive, setIsActive] = useState(true)
 
   const onSearch = (value) => {
     if (searchTerm !== value) {
@@ -135,64 +314,158 @@ const ThirdParties: FC<ThirdPartiesProps> = (ThirdPartiesProps) => {
     setIsActive((e) => !e)
   }
 
-  const handleTabClick = (activeKey) => {
+  const handleTabClick = (activeKey, setFieldValue) => {
+    if (activeKey === '0') {
+      setFieldValue('company', 'ID goes here')
+    } else if (activeKey === '1') {
+      setFieldValue('company', null)
+    }
     setActiveTab(activeKey)
   }
 
+  const handleOperationsType = () => {
+    return !editPage.id
+      ? [OperationType.active, OperationType.cancel, OperationType.create]
+      : [
+          OperationType.active,
+          OperationType.cancel,
+          OperationType.delete,
+          OperationType.save,
+        ]
+  }
+
+  const handleEditPage = (data) => {
+    setEditPage(data)
+    setShowModal(true)
+  }
+
+  const showDelteConfirmDialog = () => {
+    setShowDeleteModal(true)
+  }
+
+  const onSubmit = async (values, { resetForm }) => {
+    !editPage.id
+      ? await addMutation({
+          variables: values,
+          optimisticResponse: {},
+        })
+      : await editMutation({
+          variables: values,
+          optimisticResponse: {},
+        })
+    resetForm()
+    setEditPage(formikEditFields())
+    setShowModal(false)
+  }
   return (
-    <Layout>
-      {console.log(activeTab)}
-      <Card bodyStyle={{ padding: 0 }}>
-        <Row className={styles.headerContainer}>
-          <Col>
-            <Breadcrumb
-              breadcrumbItems={[
-                { breadcrumbName: 'Setup', path: 'setup' },
-                { breadcrumbName: 'third-parties', path: '' },
-              ]}
-            />
-            <Title>Third Parties</Title>
-          </Col>
-          <Col>
-            <AddButton
-              onClick={() => openModal()}
-              onFilterSource={onFilterSource}
-              onSearch={onSearch}
-              // schema={activeTab === '0' ? thirdPartySchema : libraryTableSchema}
-              schema={thirdPartySchema}
-              tableSearch={true}
-              needTranslation={false}
-              addFilter={true}
-            />
-          </Col>
-        </Row>
-      </Card>
-      <Divider style={{ margin: 0 }} />
-      <div style={{ background: '#fff' }}>
-        <TabbedTable
-          tabItems={['Third parties', 'Library']}
-          tabClick={(activeKey) => handleTabClick(activeKey)}
-        >
-          <ThirdPartyTable
-            searchTerm={searchTerm}
-            isActive={isActive}
-            openModal={openModal}
-          />
-          <LibraryTable
-            searchTerm={searchTerm}
-            isActive={isActive}
-            openModal={openModal}
-          />
-        </TabbedTable>
-      </div>
-      <FullScreenReportModal
-        visible={showModal}
-        content={modelContent}
-        title={headerContent}
-        header={true}
-        onBackClick={handleBackClick}
-      />
-    </Layout>
+    <Formik
+      enableReinitialize={true}
+      initialValues={editPage.id ? setEditFields() : initialValues}
+      onSubmit={(values, { resetForm }) => {
+        const newValues = { ...values }
+        if (values.type === 'company') {
+          delete newValues.healthCodeIdentifier
+        }
+        onSubmit(newValues, { resetForm })
+      }}
+    >
+      {({ setFieldValue, handleSubmit, handleReset, values }) => (
+        <Layout>
+          <Card bodyStyle={{ padding: 0 }}>
+            <Row className={styles.headerContainer}>
+              <Col>
+                <Breadcrumb
+                  breadcrumbItems={[
+                    { breadcrumbName: 'Setup', path: 'setup' },
+                    { breadcrumbName: 'third-parties', path: '' },
+                  ]}
+                />
+                <Title>Third Parties</Title>
+              </Col>
+              <Col>
+                <AddButton
+                  onClick={() => openModal(setFieldValue)}
+                  onFilterSource={onFilterSource}
+                  onSearch={onSearch}
+                  schema={thirdPartySchema}
+                  tableSearch={true}
+                  needTranslation={false}
+                  addFilter={true}
+                />
+              </Col>
+            </Row>
+          </Card>
+          <Divider style={{ margin: 0 }} />
+          <div style={{ background: '#fff' }}>
+            <TabbedTable
+              tabItems={['Third parties', 'Library']}
+              tabClick={(activeKey) => handleTabClick(activeKey, setFieldValue)}
+            >
+              <ThirdPartyTable
+                searchTerm={searchTerm}
+                isActive={isActive}
+                openModal={() => openModal(setFieldValue)}
+                setEditPage={handleEditPage}
+              />
+              <LibraryTable
+                searchTerm={searchTerm}
+                isActive={isActive}
+                openModal={() => openModal(setFieldValue)}
+                setEditPage={handleEditPage}
+              />
+            </TabbedTable>
+          </div>
+          <FullScreenReportModal
+            title={`${!editPage.id ? 'Create' : 'Edit'} Third Parties`}
+            visible={showModal}
+            operations={handleOperationsType()}
+            enableCreateBtn={true}
+            onCancel={(e) => handleBackClick(e, handleReset)}
+            onBackClick={(e) => handleBackClick(e, handleReset)}
+            activated={values.isActive}
+            onActivated={(value) => setFieldValue('isActive', value)}
+            onDelete={showDelteConfirmDialog}
+            onCreate={handleSubmit}
+            onSave={handleSubmit}
+          >
+            {modelContent(setFieldValue, values)}
+          </FullScreenReportModal>
+          <Modal
+            modalWidth={682}
+            centered={true}
+            onCancel={() => {
+              setShowDeleteModal(false)
+            }}
+            onOk={async () => {
+              const { id } = editPage as { id: string }
+              await deleteMutation({
+                variables: { id },
+                optimisticResponse: {},
+              })
+              setEditPage(formikEditFields())
+              setShowDeleteModal(false)
+              setShowModal(false)
+            }}
+            visible={showDeleteModal}
+            title={`Delete ${thirdPartySchema.short}?`}
+            newButtonText={thirdPartySchema.deleteBtnLabel || 'Yes, Delete'}
+            isValidate={true}
+          >
+            <span
+              style={{
+                fontFamily: 'Circular-Std-Book',
+                fontWeight: 'normal',
+                fontSize: '16px',
+                lineHeight: '20px',
+                color: '#9292A3',
+              }}
+            >
+              {editPage?.name} will be deleted. This action is irreversable
+            </span>
+          </Modal>
+        </Layout>
+      )}
+    </Formik>
   )
 }
 
