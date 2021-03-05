@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Notification, NotificationType } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import ClientNotification from '../../../components/ClientNotification/index'
-import CommonNotificationHeader from '../CommonNotificationHeader'
+import CommonNotificationHeader from '../../../components/ClientNotification/CommonNotificationHeader'
 
 const Index: FC = () => {
   const [setIndexTab, setSelectedTab] = React.useState(1)
@@ -46,10 +46,18 @@ const Index: FC = () => {
         hideServiceOption={true}
         hideEmployeeNameOption={true}
         standardMessage={
-          'This notification automatically sends to clients when they book their appointment'
+          'The default email template you will send with a clients Outstanding invoice attached'
         }
         type={'outstandingInvoice'}
         hideEnablePay={false}
+        smsCustom={
+          'Hi Anna,\n' +
+          'I hope you are well.\n' +
+          'I just wanted to drop you a quick note to remind you that 02/03/2021 in respect of our invoice 00001 is due for payment on 31/03/2021.\n' +
+          'I would be really grateful if you could confirm that everything is on track for payment.\n' +
+          'Best regards,\n' +
+          'Rina\n'
+        }
       />
     </Layout>
   )
