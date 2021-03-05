@@ -162,6 +162,7 @@ const SettingElementOption: FC<P> = ({ onChange, paramItems }) => {
       >
         {btnTitle}
       </Button>
+      <br />
     </>
   )
 }
