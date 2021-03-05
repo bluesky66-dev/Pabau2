@@ -21,6 +21,7 @@ interface SchemaItem {
   short?: string
   shortLower?: string
   min?: number
+  max?: number
   example?: string | number | any
   description?: string
   extra?: JSX.Element
