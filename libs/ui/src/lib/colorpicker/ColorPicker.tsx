@@ -121,14 +121,16 @@ export const ColorPicker: FC<PickerProps> = ({
             onLeave={() => onLeave?.(color)}
           />
         ))}
-        <div className={styles.addColor} onClick={() => onClickAddCustomColor()}>
+        <div
+          className={styles.addColor}
+          onClick={() => onClickAddCustomColor()}
+        >
           <PlusOutlined />
         </div>
       </div>
-      
       {isAddingColor && (
         <SketchPicker
-        className={styles.customPicker}
+          className={styles.customPicker}
           color={selColor}
           presetColors={[]}
           disableAlpha={true}
