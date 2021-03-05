@@ -5,7 +5,6 @@ import {
   FilterOutlined,
   PlusSquareFilled,
   SearchOutlined,
-  InboxOutlined,
 } from '@ant-design/icons'
 import { Drawer, Input, Popover, Radio } from 'antd'
 import classNames from 'classnames'
@@ -135,7 +134,9 @@ const AddButton: FC<P> = ({
           <Input
             className={styles.searchMarketingStyle}
             placeholder={
-              needTranslation ? t('search-placeholder.translation') : 'Search'
+              needTranslation
+                ? t('marketingsource-input-search-placeholder.translation')
+                : 'Search'
             }
             value={marketingSourceSearch}
             onChange={(e) => setMarketingSourceSearch(e.target.value)}
@@ -158,30 +159,15 @@ const AddButton: FC<P> = ({
             </Button>
           )}
         </Popover>
-        {schema.createButtonLabel && (
-          <Button
-            className={styles.createSourceBtn}
-            type="primary"
-            onClick={() => onClick?.()}
-          >
-            {needTranslation
-              ? t('marketingsource-header-create.translation')
-              : schema.createButtonLabel}
-          </Button>
-        )}
-        {schema.inboxButton && (
-          <Button
-            className={styles.inboxSourceBtn}
-            type="primary"
-            onClick={() => onClick?.()}
-          >
-            <InboxOutlined />{' '}
-            {needTranslation
-              ? t('marketingsource-header-create.translation')
-              : 'Inbox'}
-            <span className={styles.inboxMsgNum}> 3</span>
-          </Button>
-        )}
+        <Button
+          className={styles.createSourceBtn}
+          type="primary"
+          onClick={() => onClick?.()}
+        >
+          {needTranslation
+            ? t('marketingsource-header-create-btn.translation')
+            : schema.createButtonLabel}
+        </Button>
       </div>
     </>
   )

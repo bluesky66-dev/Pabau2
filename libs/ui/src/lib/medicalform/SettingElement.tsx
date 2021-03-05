@@ -28,6 +28,7 @@ import SettingElementFileUpload from './SettingElementFileUpload'
 import SettingElementMultiOptions from './SettingElementMultiOptions'
 import SettingElementOption from './SettingElementOption'
 import SettingElementQuestion from './SettingElementQuestion'
+import SettingElementTextBlock from './SettingElementTextBlock'
 import SettingElementTextBox from './SettingElementTextBox'
 import SettingElementTypeOption from './SettingElementTypeOption'
 import SettingMedicalForm from './SettingMedicalForm'
@@ -55,7 +56,6 @@ const SettingElement: FC<P> = ({
   const [form, setForm] = useState(JSON.parse(JSON.stringify(selectedForm)))
   const [addedItems, setAddedItems] = useState(0)
   const [errMsg, setErrMsg] = useState('')
-
   const componentInfos = [
     {
       component: 'basic_heading',
@@ -286,6 +286,7 @@ const SettingElement: FC<P> = ({
 
   useEffect(() => {
     setForm(JSON.parse(JSON.stringify(selectedForm)))
+    setAddedItems(selectedForm.arrItems.length)
   }, [selectedForm])
 
   const eventhandler = (addedItems) => {
@@ -301,6 +302,8 @@ const SettingElement: FC<P> = ({
     selectedForm.txtInputType = form.txtInputType
     selectedForm.arrItems = form.arrItems
     selectedForm.required = form.required
+    selectedForm.txtDefaults = form.txtDefaults
+
     if (
       component === 'basic_singlechoice' ||
       component === 'basic_multiplechoice' ||
@@ -322,7 +325,6 @@ const SettingElement: FC<P> = ({
   }
 
   const requireFunc = (checked) => {
-    console.log('checked =', checked)
     const tempForm = { ...form, required: checked }
     setForm(tempForm)
   }
@@ -333,6 +335,11 @@ const SettingElement: FC<P> = ({
 
   const onChangeText = (value) => {
     const tempForm = { ...form, txtBlock: value }
+    setForm(tempForm)
+  }
+
+  const onChangeDefaults = (value) => {
+    const tempForm = { ...form, txtDefaults: value }
     setForm(tempForm)
   }
 
@@ -401,10 +408,21 @@ const SettingElement: FC<P> = ({
             )}
 
             {filteredComponent[0].component === 'basic_shortanswer' && (
-              <SettingElementTypeOption title="Input type" />
+              <SettingElementTypeOption
+                title="Input type"
+                value={form.txtInputType}
+              />
+            )}
+            {filteredComponent[0].component === 'basic_longanswer' && (
+              <SettingElementTextBox
+                desc="Enter your text"
+                title="Text"
+                value={form.txtBlock}
+                onChangeText={onChangeText}
+              />
             )}
             {filteredComponent[0].component === 'basic_textblock' && (
-              <SettingElementTextBox
+              <SettingElementTextBlock
                 desc="Enter your text"
                 title="Text"
                 value={form.txtBlock}
@@ -433,7 +451,10 @@ const SettingElement: FC<P> = ({
               filteredComponent[0].component === 'basic_singlechoice' ||
               filteredComponent[0].component === 'basic_multiplechoice' ||
               filteredComponent[0].component === 'basic_dropdown') && (
-              <SettingElementAdvanced />
+              <SettingElementAdvanced
+                defaultFieldValue={form.txtDefaults}
+                onChangeDefaults={onChangeDefaults}
+              />
             )}
           </SettingMedicalFormBody>
           <SettingMedicalFormBottom

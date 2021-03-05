@@ -73,6 +73,9 @@ Now add `import { } from '@pabau/ui'` at top of the new page file and fill in th
 
 ## Bridge
 
+1. Step 1: Change the Mysql database
+2. Step 2: Launch Pabau locally
+
 To view the GraphQA endpoint which will expose the legacy database run `yarn nx serve bridge-api`
 
 Our ORM of choice is prisma, the schema file is located at `apps/bridge-api/prisma/schema.prisma` and is following a strict naming convention
