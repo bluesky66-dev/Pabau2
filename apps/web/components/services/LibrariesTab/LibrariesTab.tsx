@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from 'react'
 import { gql } from '@apollo/client'
 import { Row, Col } from 'antd'
-import { LibraryModal, useLiveQuery } from '@pabau/ui'
+import { LibraryModal, LibraryCard, useLiveQuery } from '@pabau/ui'
 import { FileProtectOutlined } from '@ant-design/icons'
 import styles from './library_tab.module.less'
 
@@ -58,19 +58,12 @@ export const LibrariesTab: FC = () => {
       {libItems.length > 0 &&
         libItems.map((el, key) => (
           <Col lg={6} md={8} sm={8} xs={24} key={`col-key-${key * 123}`}>
-            <div
-              className={styles.libraryCard}
+            <LibraryCard
+              title={el.library_name}
+              bundleCount={el.data?.length}
+              isPlus={el.is_plus}
               onClick={() => showLibraryInstaller(el)}
-            >
-              <div>
-                <span>
-                  <FileProtectOutlined color="#9292A3;" />
-                </span>
-                {el.is_plus && <span className="plus">Plus</span>}
-              </div>
-              <h4>{el.library_name}</h4>
-              <p>{el.data?.length}</p>
-            </div>
+            />
           </Col>
         ))}
       <Col md={24}>
