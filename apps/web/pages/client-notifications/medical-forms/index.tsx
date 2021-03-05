@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Notification, NotificationType } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import ClientNotification from '../../../components/ClientNotification/index'
-import CommonNotificationHeader from '../CommonNotificationHeader'
+import CommonNotificationHeader from '../../../components/ClientNotification/CommonNotificationHeader'
 
 const Index: FC = () => {
   const [setIndexTab, setSelectedTab] = React.useState(1)
