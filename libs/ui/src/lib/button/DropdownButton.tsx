@@ -12,6 +12,13 @@ interface P extends NativeButtonProps {
   disabled?: boolean
   color?: string
   backgroundColor?: string
+  placement?:
+    | 'bottomLeft'
+    | 'topLeft'
+    | 'topCenter'
+    | 'topRight'
+    | 'bottomCenter'
+    | 'bottomRight'
   style?: HTMLProps<HTMLElement>['style']
   className?: string
   menuItems?: MenuItem[]
@@ -23,6 +30,7 @@ export const DropdownButton: FC<P> = ({
   disabled,
   color,
   backgroundColor,
+  placement = 'bottomLeft',
   children,
   style,
   menuItems,
@@ -46,7 +54,7 @@ export const DropdownButton: FC<P> = ({
     <Dropdown
       overlay={menu}
       className="dropdown-btn"
-      placement="bottomLeft"
+      placement={placement}
       arrow
     >
       <AntButton
