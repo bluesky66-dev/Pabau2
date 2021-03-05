@@ -2,10 +2,12 @@ import React from 'react'
 import { RightOutlined } from '@ant-design/icons'
 import styles from './SetupChip.module.less'
 import { Collapse } from 'antd'
+import Link from 'next/link'
 
 export interface SubDataMenuTitleMobile {
   title: string
   data: string[]
+  href?: string
 }
 
 export interface SetupGridSubMenuMobileProps {
@@ -45,7 +47,13 @@ export function SetupGridSubMenuMobile(
         </Collapse>
       ) : (
         <div className={styles.titleWrap}>
-          <div className={styles.title}>{subTitleData.title}</div>
+          {subTitleData.href ? (
+            <Link href={subTitleData.href}>
+              <div className={styles.title}>{subTitleData.title}</div>
+            </Link>
+          ) : (
+            <div className={styles.title}>{subTitleData.title}</div>
+          )}
         </div>
       )}
     </div>
