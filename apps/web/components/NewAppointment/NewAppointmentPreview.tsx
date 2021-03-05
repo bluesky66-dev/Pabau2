@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Appointment } from '@pabau/ui'
-import CustomTemplate from '../CustomTemplate'
+import CustomTemplate from '../../pages/client-notifications/CustomTemplate'
 
 interface P {
   requestConfirm?: boolean
