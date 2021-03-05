@@ -14,7 +14,7 @@ import {
   // ShareAltOutlined,
   // DeleteOutlined,
 } from '@ant-design/icons'
-import arrayMove from 'array-move'
+// import arrayMove from 'array-move'
 import {
   SortableContainer,
   SortableElement,
@@ -143,13 +143,13 @@ const Custom: FC<CustomProps> = ({ items }) => {
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
     if (oldIndex !== newIndex) {
-      const newData = arrayMove(
-        // eslint-disable-next-line unicorn/prefer-spread
-        [].concat(communicationItems),
-        oldIndex,
-        newIndex
-      ).filter((el) => !!el)
-      setCommunicationItems(newData)
+      // const newData = arrayMove(
+      //   // eslint-disable-next-line unicorn/prefer-spread
+      //   [].concat(communicationItems),
+      //   oldIndex,
+      //   newIndex
+      // ).filter((el) => !!el)
+      // setCommunicationItems(newData)
     }
   }
 
