@@ -15,7 +15,11 @@ const ContextWrapper: FC = ({ children }) => {
     },
   })
 
-  return <UserContext.Provider value={authenticated ? data : null}>{children}</UserContext.Provider>
+  return (
+    <UserContext.Provider value={authenticated ? data : null}>
+      {children}
+    </UserContext.Provider>
+  )
 }
 
 export default ContextWrapper

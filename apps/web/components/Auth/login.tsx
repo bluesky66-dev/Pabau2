@@ -8,7 +8,6 @@ import { EyeInvisibleOutlined, LinkedinFilled } from '@ant-design/icons'
 import { ReactComponent as GoogleIcon } from '../../assets/images/google.svg'
 import { ReactComponent as SSOIcon } from '../../assets/images/sso.svg'
 import { gql, useMutation } from '@apollo/client'
-import { useRouter } from 'next/router'
 import { useCookies } from 'react-cookie'
 
 export interface LoginFormProps {
