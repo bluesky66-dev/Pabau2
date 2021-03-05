@@ -285,21 +285,34 @@ const InnerElement: FC<P> = ({
                       marginLeft: 'auto',
                       marginRight: 'auto',
                     }}
-                    src={innerDrawingIcon}
+                    src={
+                      formData.arrItems?.length > 0
+                        ? `https://prelive-crm.pabau.com${formData.arrItems[0].name}`
+                        : innerDrawingIcon
+                    }
                     alt=""
                   />
                 )}
                 {formData.txtQuestion !== '' &&
+                  formData.formName !== 'basic_textblock' &&
                   formData.formName !== 'basic_singlechoice' &&
                   formData.formName !== 'basic_multiplechoice' &&
                   formData.formName !== 'basic_dropdown' && (
-                    <p>{formData.txtQuestion}</p>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: formData.txtQuestion }}
+                    />
                   )}
+                {formData.formName === 'basic_textblock' && (
+                  <div
+                    dangerouslySetInnerHTML={{ __html: formData.txtBlock }}
+                  />
+                )}
                 {formData.txtBlock !== '' &&
+                  formData.formName !== 'basic_textblock' &&
                   formData.formName !== 'basic_singlechoice' &&
                   formData.formName !== 'basic_multiplechoice' &&
                   formData.formName !== 'basic_dropdown' && (
-                    <p>
+                    <div>
                       {formData.txtBlock?.split('\n').map(function (item) {
                         return (
                           <>
@@ -308,7 +321,10 @@ const InnerElement: FC<P> = ({
                           </>
                         )
                       })}
-                    </p>
+                    </div>
+                    // <div
+                    //   dangerouslySetInnerHTML={{ __html: formData.txtBlock }}
+                    // />
                   )}
                 {((formData.arrItems && formData.arrItems?.length > 0) ||
                   formData.txtQuestion !== '') &&
