@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Button } from '@pabau/ui'
-import styles from './style.module.less'
+import styles from '../../pages/client-notifications/style.module.less'
 import { getFlag } from '../../mocks/utils'
 
 interface p {
