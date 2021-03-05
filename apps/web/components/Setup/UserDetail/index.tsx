@@ -15,6 +15,7 @@ import { userDetail, fields, graphData } from '../../../mocks/UserDetail'
 import PersonalDetail from './PersonalDetail/PersonalDetail'
 import Permission from './Permissions/Permissions'
 import Document from './Documents/Documents'
+import Service from './Services/Service'
 import CustomizeFields from './PersonalDetail/CustomizeFields'
 import AvatarImage from '../../../assets/images/avatar.png'
 import { LeftOutlined } from '@ant-design/icons'
@@ -107,7 +108,7 @@ const Index: FC = () => {
                 <PersonalDetail field={fieldsData} graphData={graphData} />
               </TabPane>
               <TabPane tab={<span>Services</span>} key="2">
-                Content of Tab
+                <Service />
               </TabPane>
               <TabPane tab={<span>Permissions</span>} key="3">
                 <Permission />
