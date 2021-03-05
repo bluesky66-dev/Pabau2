@@ -5,7 +5,6 @@ import {
   MobileHeader,
   Notification,
   NotificationType,
-  SimpleDropdown,
 } from '@pabau/ui'
 import React, { FC, useEffect, useState, useRef } from 'react'
 import { DocumentNode, useMutation } from '@apollo/client'
@@ -42,73 +41,6 @@ interface P {
   needTranslation?: boolean
 }
 
-const languages = [
-  {
-    key: 'en',
-    value: 'English(UK)',
-  },
-  {
-    key: 'en-us',
-    value: 'English(US)',
-  },
-  {
-    key: 'de',
-    value: 'German',
-  },
-  {
-    key: 'fr',
-    value: 'French',
-  },
-  {
-    key: 'es',
-    value: 'Spanish',
-  },
-  {
-    key: 'ar',
-    value: 'Arabic',
-  },
-  {
-    key: 'bg',
-    value: 'Bulgarian',
-  },
-  {
-    key: 'cs',
-    value: 'Czech',
-  },
-  {
-    key: 'da',
-    value: 'Danish',
-  },
-  {
-    key: 'hu',
-    value: 'Hungarian',
-  },
-  {
-    key: 'lv',
-    value: 'Latvian',
-  },
-  {
-    key: 'no',
-    value: 'Norwegian',
-  },
-  {
-    key: 'pl',
-    value: 'Polish',
-  },
-  {
-    key: 'sv',
-    value: 'Swedish',
-  },
-  {
-    key: 'ro',
-    value: 'Romanian',
-  },
-  {
-    key: 'ru',
-    value: 'Russian',
-  },
-]
-
 const CrudTable: FC<P> = ({
   schema,
   addQuery,
@@ -128,14 +60,9 @@ const CrudTable: FC<P> = ({
   const [isLoading, setIsLoading] = useState(true)
   const [isActive, setIsActive] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
-  const [currentLanguage, setCurrentLanguage] = useState<string>('English(UK)')
-  const { t, i18n } = useTranslationI18()
+  const { t } = useTranslationI18()
   const crudTableRef = useRef(null)
 
-  useEffect(() => {
-    const data = languages.find(({ value }) => value === currentLanguage)
-    i18n.changeLanguage(data.key)
-  }, [currentLanguage, i18n])
   // eslint-disable-next-line graphql/template-strings
   const [editMutation] = useMutation(editQuery, {
     onCompleted(data) {
@@ -406,10 +333,6 @@ const CrudTable: FC<P> = ({
     setEditingRow({ name: '', isCreate: true })
   }
 
-  const handleLanguageChange = (language: string): void => {
-    setCurrentLanguage(language)
-  }
-
   return (
     <div ref={crudTableRef}>
       <Formik
@@ -532,22 +455,19 @@ const CrudTable: FC<P> = ({
               <div style={{ background: '#FFF' }}>
                 <Breadcrumb
                   breadcrumbItems={[
-                    { breadcrumbName: 'Setup', path: 'setup' },
+                    {
+                      breadcrumbName: needTranslation
+                        ? t(
+                            'marketingsource-header-breadcrumb-setup-link.translation'
+                          )
+                        : 'Setup',
+                      path: 'setup',
+                    },
                     { breadcrumbName: schema.full || schema.short, path: '' },
                   ]}
                 />
                 <Title>{schema.full || schema.short}</Title>
               </div>
-              {needTranslation && (
-                <div className={styles.btn}>
-                  <SimpleDropdown
-                    label={'Change Language'}
-                    dropdownItems={prepareLanguages(languages)}
-                    value={currentLanguage}
-                    onSelected={handleLanguageChange}
-                  />
-                </div>
-              )}
               {addQuery && !createPage ? (
                 <AddButton
                   onClick={createNew}
@@ -638,13 +558,6 @@ const CrudTable: FC<P> = ({
       </Formik>
     </div>
   )
-}
-
-function prepareLanguages(languages): Array<string> {
-  const array = languages?.map(({ value }) => {
-    return value
-  })
-  return array
 }
 
 export default CrudTable
