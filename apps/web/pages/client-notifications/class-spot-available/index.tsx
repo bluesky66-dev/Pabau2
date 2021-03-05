@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Notification, NotificationType } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import ClientNotification from '../../../components/ClientNotification/index'
-import CommonNotificationHeader from '../CommonNotificationHeader'
+import CommonNotificationHeader from '../../../components/ClientNotification/CommonNotificationHeader'
 
 const Index: FC = () => {
   const [setIndexTab, setSelectedTab] = React.useState(1)
@@ -49,6 +49,14 @@ const Index: FC = () => {
           'This notification automatically sends to clients when a class slot becomes available'
         }
         type={'classSpotAvailable'}
+        smsCustom={
+          'Good news! \n' +
+          '\n' +
+          'You recently were placed in our waitlist and a new class spot is now available. If you would still like to book your appointment please get in touch via Phone or Email:\n' +
+          '\n' +
+          '+44 000 987 507\n' +
+          'info@theclinic.com'
+        }
       />
     </Layout>
   )

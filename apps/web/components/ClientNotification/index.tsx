@@ -6,7 +6,7 @@ import NewAppointmentPreview from '../ClientNotificationPreview/NewAppointmentPr
 import RescheduleAppointmentPreview from '../ClientNotificationPreview/RescheduleAppointmentPreview'
 import BookedOntoClassPreview from '../ClientNotificationPreview/BookedOntoClassPreview'
 import WaitListPreview from '../ClientNotificationPreview/WaitListPreview'
-import ClassSpotAvailablePreview from '../../pages/client-notifications/class-spot-available/ClassSpotAvailablePreview'
+import ClassSpotAvailablePreview from '../ClientNotificationPreview/ClassSpotAvailablePreview'
 
 interface P {
   onSeletedTab: (number) => void
