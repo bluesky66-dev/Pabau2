@@ -9,7 +9,7 @@ export interface PhoneNumberInputProps {
   countryCode?: string
   label?: string
   value?: string
-  onChange(val): void
+  onChange(val: string, valid?: boolean): void
 }
 
 export const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
@@ -29,17 +29,20 @@ export const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
     }
   }, [value, countryCode])
   const handleChangeInput = (val, country) => {
+    let validNumber
     try {
       const isValid = phoneUtil.isValidNumberForRegion(
         phoneUtil.parse(val, country.countryCode.toUpperCase()),
         country.countryCode.toUpperCase()
       )
       setValid(isValid)
+      validNumber = isValid
     } catch {
       setValid(false)
+      validNumber = false
     }
     setPhoneNumber(val)
-    onChange(`${val}`)
+    onChange(`${val}`, validNumber)
   }
 
   return (
@@ -59,9 +62,9 @@ export const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
         />
       </div>
       {!valid && (
-        <p className={styles.phoneNumberValidMsg}>
+        <div className={styles.phoneNumberValidMsg}>
           Please enter a valid phone number
-        </p>
+        </div>
       )}
     </div>
   )

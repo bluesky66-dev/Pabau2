@@ -1,8 +1,12 @@
-import { ApolloServer } from 'apollo-server'
+import { ApolloServer } from 'apollo-server-express'
+import express from 'express';
 import { schema } from './schema'
 import { createContext } from './context'
+import cookieSession from 'cookie-session'
 
-const port_number = 4000;
+const PORT = 4000;
+const app = express();
+app.set('trust proxy', true);
 
 const server = new ApolloServer({
   schema,
@@ -10,11 +14,18 @@ const server = new ApolloServer({
   tracing: true,
 });
 
-server.listen(
-  { port: port_number },
+app.use(
+  cookieSession({
+    signed: false,
+    secure: false,
+  })
+)
+server.applyMiddleware({app})
+app.listen(
+  { port: PORT },
   () =>
     console.log(
-      `http://localhost:4000`,
+      `Server running on port ${PORT}`,
     ),
 )
 
