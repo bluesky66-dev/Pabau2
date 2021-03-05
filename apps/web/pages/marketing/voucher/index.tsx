@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect, useRef } from 'react'
 import Layout from '../../../components/Layout/Layout'
-import ExternalLink from './../../../components/Setup/CreateGiftVoucher/assets/external-link.svg'
-import ActiveIcon from './../../../components/Setup/CreateGiftVoucher/assets/active.svg'
+import ExternalLink from './../../../components/Marketing/CreateGiftVoucher/assets/external-link.svg'
+import ActiveIcon from './../../../components/Marketing/CreateGiftVoucher/assets/active.svg'
 import { Card, Row, Col, Input, Select } from 'antd'
 import classNames from 'classnames'
 import { HomeOutlined, EditOutlined } from '@ant-design/icons'
@@ -326,7 +326,7 @@ export const CreateVoucher: FC<CreateVoucherProps> = ({ title }) => {
           <div className={styles.themesDiv}>
             <div>
               <span>Voucher Theme</span>
-              <span>Plus</span>
+              <span className={styles.plus}>Plus</span>
             </div>
             <div>
               <Row>
@@ -348,7 +348,14 @@ export const CreateVoucher: FC<CreateVoucherProps> = ({ title }) => {
                         style={{
                           backgroundImage: `url(${el?.url})`,
                         }}
-                      ></div>
+                        className={
+                          el.url === voucherBackgrounUrl && styles.selectedColor
+                        }
+                      >
+                        {el.url === voucherBackgrounUrl && (
+                          <img src={ActiveIcon} alt="active" />
+                        )}
+                      </div>
                       <span>{el?.name}</span>
                     </Col>
                   ))}

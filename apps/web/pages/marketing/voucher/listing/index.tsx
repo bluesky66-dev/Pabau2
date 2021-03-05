@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
-import Layout from './../../../components/Layout/Layout'
+import Layout from './../../../../components/Layout/Layout'
 import {
   SearchOutlined,
   FilterOutlined,
@@ -14,7 +14,7 @@ import {
   Pagination,
   Table,
 } from '@pabau/ui'
-import VoucherIcon from '../../../components/Setup/GiftVouchersList/assets/VocherIcon'
+import VoucherIcon from '../../../../components/Marketing/GiftVouchersList/assets/VocherIcon'
 import { Card, Row, Col } from 'antd'
 import styles from './index.module.less'
 

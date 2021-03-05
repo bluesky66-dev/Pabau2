@@ -247,7 +247,7 @@
                 line-height: 18px;
                 color: #3d3d46;
               }
-              span:last-child {
+              .plus {
                 background: #eef7fb;
                 border-radius: 6px;
                 font-size: 12px;
@@ -288,6 +288,13 @@
                   border-radius: 2px;
                   background-repeat: no-repeat;
                   background-position: center;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+
+                  &.selectedColor {
+                    border: 2px solid green;
+                  }
                 }
                 span {
                   font-weight: normal;
@@ -301,7 +308,7 @@
                 }
 
                 &:last-child div {
-                  background-image: url('./../../../components/Setup/CreateGiftVoucher/assets/cloud-upload.png') !important;
+                  background-image: url('./../../../components/Marketing/CreateGiftVoucher/assets/cloud-upload.png') !important;
                   border: 1px solid #54b2d3 !important;
                   display: flex;
                   justify-content: center;
