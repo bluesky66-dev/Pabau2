@@ -148,7 +148,7 @@ export const VoucherCard: FC<VoucherCardProps> = ({
 
                 <div className={styles.middleRow}>
                   <div>
-                    <h1>{currencyType + voucherPrice}</h1>
+                    <h1>{voucherPrice && currencyType + voucherPrice}</h1>
                     <p>{voucherPriceLabel}</p>
                   </div>
                 </div>
