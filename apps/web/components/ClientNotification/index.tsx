@@ -245,7 +245,8 @@ const Index: FC<P> = forwardRef(
               type={type}
             />
           ) : type === 'medical-forms' ||
-            type === 'clinic-emailing-timeline' ? (
+            type === 'clinic-emailing-timeline' ||
+            type === 'emailAppointment' ? (
             <MedicalFormsPreview
               standardTapIndex={standardTapIndex}
               backGroundColor={backGroundColor}

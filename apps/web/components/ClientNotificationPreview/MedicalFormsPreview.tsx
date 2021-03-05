@@ -23,6 +23,7 @@ interface Data {
   closingText: string
   signatureBlock: string
   clinicEmailingMessage: string
+  emailAppointmentMessage: string
 }
 
 const langData: LangData = {
@@ -33,6 +34,8 @@ const langData: LangData = {
     clinicEmailingMessage: 'Please find attached your appointment summary.',
     closingText: 'Kind regards,',
     signatureBlock: 'Your friends at The Clinic',
+    emailAppointmentMessage:
+      'Please find attached your appointment schedule for the day',
   },
   sp: {
     greeting: 'Querida Sophia,',
@@ -41,6 +44,8 @@ const langData: LangData = {
     clinicEmailingMessage: 'Adjunto encontrará el resumen de su cita.',
     closingText: 'Saludos cordiales,',
     signatureBlock: 'Tus amigos en The Clinic',
+    emailAppointmentMessage:
+      'Adjunto encontrará su horario de citas para el día.',
   },
   fr: {
     greeting: 'Chère Sophia,',
@@ -50,6 +55,8 @@ const langData: LangData = {
       'Veuillez trouver ci-joint le résumé de votre rendez-vous.',
     closingText: 'Sincères amitiés,',
     signatureBlock: 'Vos amis à la clinique',
+    emailAppointmentMessage:
+      'Veuillez trouver ci-joint votre horaire de rendez-vous pour la journée',
   },
   ru: {
     greeting: 'Дорогая София,',
@@ -59,6 +66,8 @@ const langData: LangData = {
       'Пожалуйста, найдите в приложении краткое изложение вашей встречи.',
     closingText: 'С уважением,',
     signatureBlock: 'Ваши друзья в клинике',
+    emailAppointmentMessage:
+      'Пожалуйста, найдите в приложении ваше расписание встреч на день',
   },
   ar: {
     greeting: 'عزيزتي صوفيا ،',
@@ -67,6 +76,7 @@ const langData: LangData = {
     clinicEmailingMessage: 'يرجى الاطلاع على ملخص موعدك المرفق.',
     closingText: 'أطيب التحيات،',
     signatureBlock: 'أصدقاؤك في العيادة',
+    emailAppointmentMessage: 'يرجى الاطلاع على مرفق جدول مواعيدك لهذا اليوم',
   },
   bg: {
     greeting: 'Скъпа София,',
@@ -75,6 +85,7 @@ const langData: LangData = {
     clinicEmailingMessage: 'Моля, вижте приложеното резюме на вашата среща.',
     closingText: 'Поздрави,',
     signatureBlock: 'Вашите приятели в клиниката',
+    emailAppointmentMessage: 'Приложете график за срещи за деня',
   },
   cs: {
     greeting: 'Drahá Sophia,',
@@ -83,6 +94,8 @@ const langData: LangData = {
     clinicEmailingMessage: 'V příloze naleznete shrnutí schůzky.',
     closingText: 'S přátelským pozdravem,',
     signatureBlock: 'Vaši přátelé na klinice',
+    emailAppointmentMessage:
+      'V příloze naleznete harmonogram schůzek pro daný den',
   },
   da: {
     greeting: 'Kære Sophia,',
@@ -91,6 +104,7 @@ const langData: LangData = {
     clinicEmailingMessage: 'Se vedhæftet din oversigt over aftaler.',
     closingText: 'Med venlig hilsen,',
     signatureBlock: 'Dine venner på klinikken',
+    emailAppointmentMessage: 'Se vedhæftet din tidsplan for dagen',
   },
   hu: {
     greeting: 'Kedves Sophia,',
@@ -99,6 +113,7 @@ const langData: LangData = {
     clinicEmailingMessage: 'Kérjük, csatolja a találkozó összefoglalóját.',
     closingText: 'Üdvözlettel,',
     signatureBlock: 'A barátaid a Klinikán',
+    emailAppointmentMessage: 'Kérjük, csatolja a napi találkozó ütemezését',
   },
   lv: {
     greeting: 'Mīļā Sofija,',
@@ -107,6 +122,7 @@ const langData: LangData = {
     clinicEmailingMessage: 'Lūdzu, pievienojiet tikšanās kopsavilkumu.',
     closingText: 'Ar cieņu,',
     signatureBlock: 'Jūsu draugi klīnikā',
+    emailAppointmentMessage: 'Lūdzu, pievienojiet šīs dienas tikšanās grafiku',
   },
   no: {
     greeting: 'Kjære Sophia,',
@@ -115,6 +131,7 @@ const langData: LangData = {
     clinicEmailingMessage: 'Vennligst finn vedlagte avtalesammendrag.',
     closingText: 'Vennlig hilsen,',
     signatureBlock: 'Dine venner på The Clinic',
+    emailAppointmentMessage: 'Vennligst finn vedlagte avtaleplan for dagen',
   },
   pl: {
     greeting: 'Droga Zofio,',
@@ -123,6 +140,8 @@ const langData: LangData = {
     clinicEmailingMessage: 'W załączeniu podsumowanie spotkania.',
     closingText: 'Z poważaniem,',
     signatureBlock: 'Twoi przyjaciele z The Clinic',
+    emailAppointmentMessage:
+      'W załączeniu znajduje się harmonogram spotkań na dany dzień',
   },
   sw: {
     greeting: 'Kära Sophia,',
@@ -131,6 +150,7 @@ const langData: LangData = {
     clinicEmailingMessage: 'Vänligen se bifogad din mötesöversikt.',
     closingText: 'Vänliga Hälsningar,',
     signatureBlock: 'Dina vänner på kliniken',
+    emailAppointmentMessage: 'Vänligen se bifogat ditt schema för dagen',
   },
   ro: {
     greeting: 'Dragă Sophia,',
@@ -139,6 +159,8 @@ const langData: LangData = {
     clinicEmailingMessage: 'Vă rugăm să găsiți atașat rezumatul întâlnirii.',
     closingText: 'Salutări calde,',
     signatureBlock: 'Prietenii tăi de la clinică',
+    emailAppointmentMessage:
+      'Vă rugăm să găsiți atașat programul dvs. de programare pentru ziua respectivă',
   },
 }
 
@@ -176,6 +198,8 @@ const MedicalFormsPreview: FC<P> = ({
             message={
               type === 'clinic-emailing-timeline'
                 ? selectLangData.clinicEmailingMessage
+                : type === 'emailAppointment'
+                ? selectLangData.emailAppointmentMessage
                 : selectLangData.message
             }
             buttonColor={buttonColor}

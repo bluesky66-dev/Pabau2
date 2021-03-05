@@ -268,7 +268,7 @@ const notificationData = {
         'The email you will send if someone requested a list of their appointment history',
       icon: <CalendarOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/email-appointments',
       disabled: true,
     },
     {
