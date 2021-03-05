@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import CrudLayout from '../../../components/CrudLayout/CrudLayout'
-import { CreateMedicalCondition } from '@pabau/ui'
+import { CreateMedicalCondition, LibraryCard } from '@pabau/ui'
 import { gql } from '@apollo/client'
 const schema: Schema = {
   full: 'Invoice Templates',
@@ -135,6 +135,21 @@ export const MedicalConditions = () => {
         createPage
         createPageOnClick={() => setVisible(true)}
       />
+      {[
+        {
+          title: 'Entire Database',
+          bundleCount: 1040,
+        },
+        {
+          title: 'Top 100 Most Used',
+          bundleCount: 1000,
+        },
+      ].map((item, index) => {
+        const { title, bundleCount } = item
+        return (
+          <LibraryCard key={index} title={title} bundleCount={bundleCount} />
+        )
+      })}
       <CreateMedicalCondition
         visible={visible}
         onClose={() => setVisible(false)}
