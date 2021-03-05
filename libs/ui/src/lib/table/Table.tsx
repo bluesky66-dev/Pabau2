@@ -42,6 +42,8 @@ function array_move(arr, old_index, new_index) {
 
 export type TableType = {
   onRowClick?: (e) => void
+  onRowHover?: (e) => void
+  onLeaveRow?: (e) => void
   padlocked?: string[]
   noDataText?: string
   noDataBtnText?: string
@@ -49,6 +51,7 @@ export type TableType = {
   onAddTemplate?: () => void
   searchTerm?: string
   needTranslation?: boolean
+  isHover?: boolean
 } & TableProps<never> &
   DragProps
 
@@ -57,8 +60,11 @@ export const Table: FC<TableType> = ({
   padlocked,
   isCustomColorExist = false,
   isCustomIconExist = false,
+  isHover = false,
   updateDataSource,
   onRowClick,
+  onRowHover,
+  onLeaveRow,
   noDataText,
   noDataBtnText,
   noDataIcon = <ContactsOutlined />,
@@ -180,6 +186,15 @@ export const Table: FC<TableType> = ({
       ? [{ ...dragColumn }, ...(props.columns || [])]
       : props.columns
   }
+
+  const onHoverEnterHandle = (data) => {
+    onRowHover?.(data)
+  }
+
+  const onHoverLeaveHandle = (data) => {
+    onLeaveRow?.(data)
+  }
+
   return !dataSource?.length && !props.loading && !searchTerm ? (
     <div className={styles.noDataTableBox}>
       <div className={styles.noDataTextStyle}>
@@ -208,8 +223,12 @@ export const Table: FC<TableType> = ({
           }, // click row
           //   onDoubleClick: (event) => {}, // double click row
           //   onContextMenu: (event) => {}, // right button click row
-          //   onMouseEnter: (event) => {}, // mouse enter row
-          //   onMouseLeave: (event) => {}, // mouse leave row
+          onMouseEnter: (event) => {
+            isHover && onHoverEnterHandle(record)
+          },
+          onMouseLeave: (event) => {
+            isHover && onHoverLeaveHandle(record)
+          },
         }
       }}
       pagination={false}

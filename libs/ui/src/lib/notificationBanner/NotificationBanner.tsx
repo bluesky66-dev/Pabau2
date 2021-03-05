@@ -14,6 +14,7 @@ interface P {
   showPaymentButton?: boolean
   email?: string
   showEmail?: boolean
+  paymentButtonTitle?: string
 }
 
 export const NotificationBanner: FC<P> = ({
@@ -28,6 +29,7 @@ export const NotificationBanner: FC<P> = ({
   // const [isHide, setHide] = useState(false)
   showPaymentButton = true,
   showEmail = false,
+  paymentButtonTitle = 'Enable Payments',
 }) => {
   return (
     <div
@@ -46,7 +48,7 @@ export const NotificationBanner: FC<P> = ({
               size="middle"
               type="link"
             >
-              Enable Payments
+              {paymentButtonTitle}
             </Button>
           )}
         </Col>

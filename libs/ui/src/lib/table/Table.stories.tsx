@@ -6,6 +6,7 @@ import React, { FC, useState } from 'react'
 import { Table } from './Table'
 import { data } from './mock'
 import { ContactsOutlined } from '@ant-design/icons'
+import _ from "lodash";
 
 const padlocked = ['Book Now Link', 'Instagram', 'Facebook']
 
@@ -26,6 +27,12 @@ const columns = [
   {
     title: 'STATUS',
     dataIndex: 'is_active',
+    className: 'drag-visible',
+    visible: true,
+  },
+  {
+    title: '',
+    dataIndex: 'visibleData',
     className: 'drag-visible',
     visible: true,
   },
@@ -152,3 +159,52 @@ const TableWithNoDataStory: FC = ({ ...args }) => {
   )
 }
 export const TableWithNoData = TableWithNoDataStory.bind({})
+
+const TableWithHoverFeatureStory: FC = ({ ...args }) => {
+  const [dataSource, setDataSource]: any = useState(data)
+  const updateDataSource = ({ newData, oldIndex, newIndex }) => {
+    setDataSource(newData)
+  }
+
+  const renderVisibleData = () => {
+    return (
+      <Button>Test</Button>
+    )
+  }
+  const onHoverEnterHandle = (value) => {
+    value.visibleData = renderVisibleData()
+    const result = dataSource.map((itemList) => {
+      if (itemList.key === value.key) {
+        return value
+      }
+      return _.omit(itemList, 'visibleData')
+    })
+    setDataSource(result)
+  }
+  const onHoverLeaveHandle = (value) => {
+    const resultDD = dataSource.map((itemList) => {
+      if (itemList.key === value.key) {
+        return _.omit(itemList, 'visibleData')
+      }
+      return itemList
+    })
+    setDataSource(resultDD)
+  }
+
+  return (
+    <div style={{ border: '1px solid var(--light-grey-color)' }}>
+      <Table
+        {...args}
+        padlocked={[]}
+        dataSource={dataSource}
+        isHover={true}
+        draggable={false}
+        onRowHover={onHoverEnterHandle}
+        onLeaveRow={onHoverLeaveHandle}
+        updateDataSource={updateDataSource}
+        noDataIcon={<ContactsOutlined />}
+      />
+    </div>
+  )
+}
+export const TableWithHoverFeature = TableWithHoverFeatureStory.bind({})
