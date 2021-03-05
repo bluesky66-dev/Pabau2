@@ -112,6 +112,18 @@ export interface ConnectRegistrationProps {
   text?: string
 }
 
+export interface DocumentSharedProps {
+  userEmail?: string
+  userName?: string
+  buttonName?: string
+  clinicName?: string
+  infoText?: string
+  closingText?: string
+  signatureBlock?: string
+  messageLine1?: string
+  messageLine2?: string
+}
+
 export interface MedicalFormProps {
   message?: string
   contactNumber?: string

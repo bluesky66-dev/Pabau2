@@ -17,6 +17,7 @@ import EmailSmsPreview, {
   ReferralProps,
   InvoicesProps,
   UpComingAppoinmentReminderProps,
+  DocumentSharedProps,
 } from './EmailSmsPreview'
 import NoShowAppointmentComponent from './NoShowAppointment'
 import BookedOnClass from './BookedOntoClass'
@@ -35,6 +36,7 @@ import ClassesSpotAvailable from './ClassesSpotAvailable'
 import RequestFeedBacks from './RequestFeedBack'
 import NewAppoinmentsIsBooked from './NewAppointmentIsBooked'
 import UpComingAppointmentReminder from './UpComingAppoinmentReminder'
+import DocumentSharedComponent from './DocumentShared'
 
 export default {
   component: EmailSmsPreview,
@@ -834,6 +836,64 @@ UpComingAppointmentReminders.args = {
     'This is a friendly reminder that we have you scheduled for Botox 1 area on Monday, 16 November at 11:00.\n You can find us at 574 Beverly Road, H3454, England, GB.',
   footerIconGroup: true,
   contactNumber: '+44 000 987 507',
+  smsGreeting: 'Hi Sophia!',
+  smsMessage:
+    'This is a friendly reminder that we have you scheduled for Botox 1 area on Monday, 16 November at 11:00.',
+  smsFooterText: 'See you soon!',
+}
+
+const DocumentSharedStory = ({
+  greeting,
+  footerIconGroup,
+  smsGreeting,
+  smsMessage,
+  smsFooterText,
+  messageLine1,
+  messageLine2,
+  closingText,
+  signatureBlock,
+  clinicName,
+  userEmail,
+  userName,
+  buttonColor,
+  buttonName,
+  infoText,
+}: PropsWithChildren<EmailSMSPreviewProps & DocumentSharedProps>) => (
+  <EmailSmsPreview
+    greeting={greeting}
+    footerIconGroup={footerIconGroup}
+    smsGreeting={smsGreeting}
+    smsMessage={smsMessage}
+    smsFooterText={smsFooterText}
+  >
+    <DocumentSharedComponent
+      messageLine1={messageLine1}
+      messageLine2={messageLine2}
+      userEmail={userEmail}
+      userName={userName}
+      buttonName={buttonName}
+      buttonColor={buttonColor}
+      clinicName={clinicName}
+      closingText={closingText}
+      signatureBlock={signatureBlock}
+      infoText={infoText}
+    />
+  </EmailSmsPreview>
+)
+
+export const DocumentShared = DocumentSharedStory.bind({})
+DocumentShared.args = {
+  greeting: 'Dear Sophia,',
+  messageLine1: 'You have received a new secure email',
+  clinicName: 'Clinic',
+  userName: 'Sophia',
+  userEmail: 'info@theclinic.com',
+  messageLine2: 'Please click the link below to access:',
+  footerIconGroup: true,
+  closingText: 'Kind regards,',
+  signatureBlock: 'The Clinic Team',
+  infoText:
+    "We're required by EU law to send your personal information in an encrypted format. It is free to view and all you have to do is click on the link in the email below that reads \"Click to read this secure email online\". This will take you through to a secure page with 'Pabau'.",
   smsGreeting: 'Hi Sophia!',
   smsMessage:
     'This is a friendly reminder that we have you scheduled for Botox 1 area on Monday, 16 November at 11:00.',
