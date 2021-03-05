@@ -1,10 +1,20 @@
 import React, { FC, useEffect, useState } from 'react'
-import { FormType, FormTypeSetting, MedicalFormCard } from '@pabau/ui'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { FormType, MedicalFormCard } from '@pabau/ui'
 import { Form, Divider, Button, Popover, Tag } from 'antd'
 import { FilePdfOutlined, BarsOutlined, CheckOutlined } from '@ant-design/icons'
 import styles from './Library.module.less'
 
-const defaultFormTypes: FormTypeSetting = {
+interface Setting {
+  medicalHistory: boolean
+  consent: boolean
+  treatmentForm: boolean
+  epaper: boolean
+  presciption: boolean
+  labForm: boolean
+}
+
+const defaultFormTypes: Setting = {
   medicalHistory: false,
   consent: false,
   treatmentForm: false,
@@ -13,6 +23,7 @@ const defaultFormTypes: FormTypeSetting = {
   labForm: false,
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const defaultCardData = [
   {
     image: <FilePdfOutlined />,
@@ -92,15 +103,15 @@ interface TagItem {
 }
 
 interface LibraryProps {
-  initialSetting?: FormTypeSetting
+  initialSetting?: Setting
   initialTags?: TagItem[]
 }
 
 const Library: FC<LibraryProps> = ({ initialSetting, initialTags }) => {
   const [form] = Form.useForm()
-  const [setting, setSetting] = useState<FormTypeSetting>(defaultFormTypes)
+  const [setting, setSetting] = useState<Setting>(defaultFormTypes)
   const [tags, setTags] = useState<TagItem[]>(defaultTags)
-  const handleChangeSetting = (change: FormTypeSetting) => {
+  const handleChangeSetting = (change: Setting) => {
     setSetting(change)
   }
   const handleTagClick = (index: number) => {
@@ -170,7 +181,7 @@ const Library: FC<LibraryProps> = ({ initialSetting, initialTags }) => {
             <Button shape="circle" icon={<BarsOutlined />} />
           </div>
         </Popover>
-        <MedicalFormCard list={defaultCardData} />
+        {/* <MedicalFormCard list={defaultCardData} /> */}
       </div>
     </div>
   )
