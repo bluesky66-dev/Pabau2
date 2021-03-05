@@ -7709,14 +7709,14 @@ input CmContactWhereUniqueInput {
 type Company {
   admin: Int!
   creation_date: DateTime!
-  cron_enabled: Boolean
+  cron_enabled: Boolean!
   details: CompanyDetails
   digit8: Int!
   id: Int!
   image: String!
-  remote_connect: String
-  remote_url: String
-  slug: String
+  remote_connect: String!
+  remote_url: String!
+  slug: String!
   subscription: CompanySubscription
   user: String!
 }
@@ -7733,13 +7733,13 @@ input CompanyCreateInput {
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
-  cron_enabled: Boolean
+  cron_enabled: Boolean!
   details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
-  remote_connect: String
-  remote_url: String
-  slug: String
+  remote_connect: String!
+  remote_url: String!
+  slug: String!
   subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
@@ -7876,13 +7876,13 @@ input CompanyCreateWithoutAcceptEmailTokenInput {
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
-  cron_enabled: Boolean
+  cron_enabled: Boolean!
   details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
-  remote_connect: String
-  remote_url: String
-  slug: String
+  remote_connect: String!
+  remote_url: String!
+  slug: String!
   subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
@@ -7898,13 +7898,13 @@ input CompanyCreateWithoutAccountBalanceInput {
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
-  cron_enabled: Boolean
+  cron_enabled: Boolean!
   details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
-  remote_connect: String
-  remote_url: String
-  slug: String
+  remote_connect: String!
+  remote_url: String!
+  slug: String!
   subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
@@ -7920,13 +7920,13 @@ input CompanyCreateWithoutCmCampaignInput {
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
-  cron_enabled: Boolean
+  cron_enabled: Boolean!
   details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
-  remote_connect: String
-  remote_url: String
-  slug: String
+  remote_connect: String!
+  remote_url: String!
+  slug: String!
   subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
@@ -7942,13 +7942,13 @@ input CompanyCreateWithoutCmCaseInput {
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
-  cron_enabled: Boolean
+  cron_enabled: Boolean!
   details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
-  remote_connect: String
-  remote_url: String
-  slug: String
+  remote_connect: String!
+  remote_url: String!
+  slug: String!
   subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
@@ -7964,13 +7964,13 @@ input CompanyCreateWithoutCmCaseReplyInput {
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
-  cron_enabled: Boolean
+  cron_enabled: Boolean!
   details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
-  remote_connect: String
-  remote_url: String
-  slug: String
+  remote_connect: String!
+  remote_url: String!
+  slug: String!
   subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
@@ -7987,12 +7987,12 @@ input CompanyCreateWithoutDetailsInput {
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
-  cron_enabled: Boolean
+  cron_enabled: Boolean!
   digit8: Int!
   image: String!
-  remote_connect: String
-  remote_url: String
-  slug: String
+  remote_connect: String!
+  remote_url: String!
+  slug: String!
   subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
@@ -8008,13 +8008,13 @@ input CompanyCreateWithoutMarketingSourceInput {
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
-  cron_enabled: Boolean
+  cron_enabled: Boolean!
   details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
-  remote_connect: String
-  remote_url: String
-  slug: String
+  remote_connect: String!
+  remote_url: String!
+  slug: String!
   subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
@@ -8031,13 +8031,13 @@ input CompanyCreateWithoutSubscriptionInput {
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
-  cron_enabled: Boolean
+  cron_enabled: Boolean!
   details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
-  remote_connect: String
-  remote_url: String
-  slug: String
+  remote_connect: String!
+  remote_url: String!
+  slug: String!
   user: String!
 }
 
@@ -8052,13 +8052,13 @@ input CompanyCreateWithoutThirdPartyAccesInput {
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
-  cron_enabled: Boolean
+  cron_enabled: Boolean!
   details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
-  remote_connect: String
-  remote_url: String
-  slug: String
+  remote_connect: String!
+  remote_url: String!
+  slug: String!
   subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
@@ -8074,13 +8074,13 @@ input CompanyCreateWithoutTwoFactorHistoryInput {
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
-  cron_enabled: Boolean
+  cron_enabled: Boolean!
   details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
-  remote_connect: String
-  remote_url: String
-  slug: String
+  remote_connect: String!
+  remote_url: String!
+  slug: String!
   subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
@@ -8096,13 +8096,13 @@ input CompanyCreateWithoutUserInput {
   TwoFactorHistory: TwoFactorHistoryCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
-  cron_enabled: Boolean
+  cron_enabled: Boolean!
   details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
-  remote_connect: String
-  remote_url: String
-  slug: String
+  remote_connect: String!
+  remote_url: String!
+  slug: String!
   subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
@@ -9798,13 +9798,13 @@ input CompanyUpdateInput {
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
-  cron_enabled: NullableBoolFieldUpdateOperationsInput
+  cron_enabled: BoolFieldUpdateOperationsInput
   details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
-  remote_connect: NullableStringFieldUpdateOperationsInput
-  remote_url: NullableStringFieldUpdateOperationsInput
-  slug: NullableStringFieldUpdateOperationsInput
+  remote_connect: StringFieldUpdateOperationsInput
+  remote_url: StringFieldUpdateOperationsInput
+  slug: StringFieldUpdateOperationsInput
   subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
@@ -9812,12 +9812,12 @@ input CompanyUpdateInput {
 input CompanyUpdateManyMutationInput {
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
-  cron_enabled: NullableBoolFieldUpdateOperationsInput
+  cron_enabled: BoolFieldUpdateOperationsInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
-  remote_connect: NullableStringFieldUpdateOperationsInput
-  remote_url: NullableStringFieldUpdateOperationsInput
-  slug: NullableStringFieldUpdateOperationsInput
+  remote_connect: StringFieldUpdateOperationsInput
+  remote_url: StringFieldUpdateOperationsInput
+  slug: StringFieldUpdateOperationsInput
   user: StringFieldUpdateOperationsInput
 }
 
@@ -9920,13 +9920,13 @@ input CompanyUpdateWithoutAcceptEmailTokenInput {
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
-  cron_enabled: NullableBoolFieldUpdateOperationsInput
+  cron_enabled: BoolFieldUpdateOperationsInput
   details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
-  remote_connect: NullableStringFieldUpdateOperationsInput
-  remote_url: NullableStringFieldUpdateOperationsInput
-  slug: NullableStringFieldUpdateOperationsInput
+  remote_connect: StringFieldUpdateOperationsInput
+  remote_url: StringFieldUpdateOperationsInput
+  slug: StringFieldUpdateOperationsInput
   subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
@@ -9942,13 +9942,13 @@ input CompanyUpdateWithoutAccountBalanceInput {
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
-  cron_enabled: NullableBoolFieldUpdateOperationsInput
+  cron_enabled: BoolFieldUpdateOperationsInput
   details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
-  remote_connect: NullableStringFieldUpdateOperationsInput
-  remote_url: NullableStringFieldUpdateOperationsInput
-  slug: NullableStringFieldUpdateOperationsInput
+  remote_connect: StringFieldUpdateOperationsInput
+  remote_url: StringFieldUpdateOperationsInput
+  slug: StringFieldUpdateOperationsInput
   subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
@@ -9964,13 +9964,13 @@ input CompanyUpdateWithoutCmCampaignInput {
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
-  cron_enabled: NullableBoolFieldUpdateOperationsInput
+  cron_enabled: BoolFieldUpdateOperationsInput
   details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
-  remote_connect: NullableStringFieldUpdateOperationsInput
-  remote_url: NullableStringFieldUpdateOperationsInput
-  slug: NullableStringFieldUpdateOperationsInput
+  remote_connect: StringFieldUpdateOperationsInput
+  remote_url: StringFieldUpdateOperationsInput
+  slug: StringFieldUpdateOperationsInput
   subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
@@ -9986,13 +9986,13 @@ input CompanyUpdateWithoutCmCaseInput {
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
-  cron_enabled: NullableBoolFieldUpdateOperationsInput
+  cron_enabled: BoolFieldUpdateOperationsInput
   details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
-  remote_connect: NullableStringFieldUpdateOperationsInput
-  remote_url: NullableStringFieldUpdateOperationsInput
-  slug: NullableStringFieldUpdateOperationsInput
+  remote_connect: StringFieldUpdateOperationsInput
+  remote_url: StringFieldUpdateOperationsInput
+  slug: StringFieldUpdateOperationsInput
   subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
@@ -10008,13 +10008,13 @@ input CompanyUpdateWithoutCmCaseReplyInput {
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
-  cron_enabled: NullableBoolFieldUpdateOperationsInput
+  cron_enabled: BoolFieldUpdateOperationsInput
   details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
-  remote_connect: NullableStringFieldUpdateOperationsInput
-  remote_url: NullableStringFieldUpdateOperationsInput
-  slug: NullableStringFieldUpdateOperationsInput
+  remote_connect: StringFieldUpdateOperationsInput
+  remote_url: StringFieldUpdateOperationsInput
+  slug: StringFieldUpdateOperationsInput
   subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
@@ -10031,12 +10031,12 @@ input CompanyUpdateWithoutDetailsInput {
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
-  cron_enabled: NullableBoolFieldUpdateOperationsInput
+  cron_enabled: BoolFieldUpdateOperationsInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
-  remote_connect: NullableStringFieldUpdateOperationsInput
-  remote_url: NullableStringFieldUpdateOperationsInput
-  slug: NullableStringFieldUpdateOperationsInput
+  remote_connect: StringFieldUpdateOperationsInput
+  remote_url: StringFieldUpdateOperationsInput
+  slug: StringFieldUpdateOperationsInput
   subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
@@ -10052,13 +10052,13 @@ input CompanyUpdateWithoutMarketingSourceInput {
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
-  cron_enabled: NullableBoolFieldUpdateOperationsInput
+  cron_enabled: BoolFieldUpdateOperationsInput
   details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
-  remote_connect: NullableStringFieldUpdateOperationsInput
-  remote_url: NullableStringFieldUpdateOperationsInput
-  slug: NullableStringFieldUpdateOperationsInput
+  remote_connect: StringFieldUpdateOperationsInput
+  remote_url: StringFieldUpdateOperationsInput
+  slug: StringFieldUpdateOperationsInput
   subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
@@ -10075,13 +10075,13 @@ input CompanyUpdateWithoutSubscriptionInput {
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
-  cron_enabled: NullableBoolFieldUpdateOperationsInput
+  cron_enabled: BoolFieldUpdateOperationsInput
   details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
-  remote_connect: NullableStringFieldUpdateOperationsInput
-  remote_url: NullableStringFieldUpdateOperationsInput
-  slug: NullableStringFieldUpdateOperationsInput
+  remote_connect: StringFieldUpdateOperationsInput
+  remote_url: StringFieldUpdateOperationsInput
+  slug: StringFieldUpdateOperationsInput
   user: StringFieldUpdateOperationsInput
 }
 
@@ -10096,13 +10096,13 @@ input CompanyUpdateWithoutThirdPartyAccesInput {
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
-  cron_enabled: NullableBoolFieldUpdateOperationsInput
+  cron_enabled: BoolFieldUpdateOperationsInput
   details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
-  remote_connect: NullableStringFieldUpdateOperationsInput
-  remote_url: NullableStringFieldUpdateOperationsInput
-  slug: NullableStringFieldUpdateOperationsInput
+  remote_connect: StringFieldUpdateOperationsInput
+  remote_url: StringFieldUpdateOperationsInput
+  slug: StringFieldUpdateOperationsInput
   subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
@@ -10118,13 +10118,13 @@ input CompanyUpdateWithoutTwoFactorHistoryInput {
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
-  cron_enabled: NullableBoolFieldUpdateOperationsInput
+  cron_enabled: BoolFieldUpdateOperationsInput
   details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
-  remote_connect: NullableStringFieldUpdateOperationsInput
-  remote_url: NullableStringFieldUpdateOperationsInput
-  slug: NullableStringFieldUpdateOperationsInput
+  remote_connect: StringFieldUpdateOperationsInput
+  remote_url: StringFieldUpdateOperationsInput
+  slug: StringFieldUpdateOperationsInput
   subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
@@ -10140,13 +10140,13 @@ input CompanyUpdateWithoutUserInput {
   TwoFactorHistory: TwoFactorHistoryUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
-  cron_enabled: NullableBoolFieldUpdateOperationsInput
+  cron_enabled: BoolFieldUpdateOperationsInput
   details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
-  remote_connect: NullableStringFieldUpdateOperationsInput
-  remote_url: NullableStringFieldUpdateOperationsInput
-  slug: NullableStringFieldUpdateOperationsInput
+  remote_connect: StringFieldUpdateOperationsInput
+  remote_url: StringFieldUpdateOperationsInput
+  slug: StringFieldUpdateOperationsInput
   subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
@@ -10221,14 +10221,14 @@ input CompanyWhereInput {
   User: UserListRelationFilter
   admin: IntFilter
   creation_date: DateTimeFilter
-  cron_enabled: BoolNullableFilter
+  cron_enabled: BoolFilter
   details: CompanyDetailsWhereInput
   digit8: IntFilter
   id: IntFilter
   image: StringFilter
-  remote_connect: StringNullableFilter
-  remote_url: StringNullableFilter
-  slug: StringNullableFilter
+  remote_connect: StringFilter
+  remote_url: StringFilter
+  slug: StringFilter
   subscription: CompanySubscriptionWhereInput
   user: StringFilter
 }

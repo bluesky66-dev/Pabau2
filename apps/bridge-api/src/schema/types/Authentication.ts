@@ -16,15 +16,15 @@ export const Authentication = extendType({
         if(!loginInput.username || !loginInput.password){
           throw new Error("Malformed Parameters")
         }
-        try{
-          const token = new AuthenticationService(ctx, loginInput).handleLoginRequest();
-          ctx.req.session = {
-            jwt: await token
-          }
-          return await token
-        } catch {
-          throw new Error("Unauthorized access")
+        // try{
+        const token = new AuthenticationService(ctx, loginInput).handleLoginRequest();
+        ctx.req.session = {
+          jwt: await token
         }
+        return await token
+        // } catch {
+        //   throw new Error("Unauthorized access")
+        // }
       },
     });
   },

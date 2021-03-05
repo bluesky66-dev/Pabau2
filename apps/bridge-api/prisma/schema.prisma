@@ -177,10 +177,10 @@ model Company {
   admin          Int
   creation_date  DateTime
   image          String
-  slug           String?              @unique
-  remote_url     String?
-  remote_connect String?
-  cron_enabled   Boolean?
+  slug           String              @unique
+  remote_url     String
+  remote_connect String
+  cron_enabled   Boolean
   details        CompanyDetails?
   subscription   CompanySubscription?
 

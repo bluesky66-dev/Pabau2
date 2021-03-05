@@ -52,7 +52,7 @@ export class User {
   calendar_order: boolean | number
   force_password: boolean | number
   login_disabled: boolean | number
-  password_algor: boolean | number;
+  password_algor: number;
   staff_read_only: boolean | number
   stock_read_only: boolean | number
   can_lab_requests: boolean;
