@@ -6,14 +6,7 @@ import {
   ApartmentOutlined,
 } from '@ant-design/icons'
 import { Anchor, Input } from 'antd'
-import {
-  TabbedTable,
-  Button,
-  Breadcrumb,
-  VoucherCard,
-  Pagination,
-  Table,
-} from '@pabau/ui'
+import { TabbedTable, Button, VoucherCard, Pagination, Table } from '@pabau/ui'
 import VoucherIcon from '../../../components/Marketing/GiftVouchersList/assets/VocherIcon'
 import { Card, Row, Col } from 'antd'
 import styles from './index.module.less'
@@ -214,14 +207,6 @@ const GiftVouchers: FC<GiftVouchersProps> = ({ title }) => {
   const cardHeader = (
     <div className={styles.header}>
       <div className="leftDiv">
-        <div>
-          <Breadcrumb
-            breadcrumbItems={[
-              { breadcrumbName: 'Marketing', path: '/marketing' },
-              { breadcrumbName: 'Gift Vouchers', path: '/marketing/vouchers' },
-            ]}
-          />
-        </div>
         <h3 className={styles.drugsHeading}>Gift Vouchers</h3>
       </div>
       <div className="rightDiv">
