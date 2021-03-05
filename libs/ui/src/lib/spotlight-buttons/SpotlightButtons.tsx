@@ -1,19 +1,18 @@
 import React from 'react'
-
+import { PabauPlus } from '../badge/Badge'
 import styles from './SpotlightButtons.module.less'
 type ReactElementLike =
   | React.FunctionComponent<{ className?: string }>
   | React.ComponentClass<{ className?: string }, unknown>
   | React.FC<unknown>
   | React.ComponentClass<unknown, unknown>
-/* eslint-disable-next-line */
+
 export interface SpotlightButtonsProps {
   buttons: {
     name: string
     icon: ReactElementLike
-    badge?: ReactElementLike
-    href?: string // exclusive with onClick
-    onClick?: (e: MouseEvent) => void // exclusive with href
+    badge?: boolean
+    href?: string
   }[]
 }
 
@@ -37,7 +36,7 @@ export const SpotlightButtons: React.FC<SpotlightButtonsProps> = (
               </span>
               <div className={styles.InlineContent}>
                 <h2>{name}</h2>
-                {Badge && <Badge></Badge>}
+                {Badge && <PabauPlus label="plus" />}
               </div>
             </div>
           </a>
