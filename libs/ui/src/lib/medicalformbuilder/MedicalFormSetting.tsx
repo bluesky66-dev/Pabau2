@@ -19,7 +19,7 @@ const MedicalFormSetting: FC = () => {
   return (
     <div className={styles.medicalFormSettingPanel}>
       <Button type={ButtonTypes.primary} className={styles.createButton}>
-        Create From
+        Create Form
       </Button>
       <Dropdown overlay={menu} placement="bottomRight" arrow>
         <Button type={ButtonTypes.default} className={styles.moreButton}>

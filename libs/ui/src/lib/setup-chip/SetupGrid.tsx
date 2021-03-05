@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { RightOutlined } from '@ant-design/icons'
 import { Collapse } from 'antd'
+import Link from 'next/link'
 
 import styles from './SetupChip.module.less'
 
@@ -9,6 +10,7 @@ const { Panel } = Collapse
 export interface SubDataTitle {
   title: string
   data: string[]
+  href?: string
 }
 
 export interface SetupGridProps {
@@ -64,7 +66,13 @@ export function SetupGrid(props: SetupGridProps): JSX.Element {
               </Collapse>
             ) : (
               <div key={index} className={styles.listItem}>
-                <span>{subTitle.title}</span>
+                {subTitle.href ? (
+                  <Link href={subTitle.href}>
+                    <span>{subTitle.title}</span>
+                  </Link>
+                ) : (
+                  <span>{subTitle.title}</span>
+                )}
               </div>
             )
           })}

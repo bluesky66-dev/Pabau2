@@ -17,15 +17,20 @@ interface Schema {
   breadScrumbs?: array<BreadScrumb>
   createButtonLabel?: string
   inboxButton?: boolean
+  deleteDescField?: string
+  tooltip?: string
+  createButtonLabel?: string
+  padlocked?: string[]
 }
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 interface SchemaItem {
   full?: string
   fullLower?: string
   short?: string
   shortLower?: string
   min?: number
-  example?: string | number | any
+  max?: number
+  example?: string | number
   description?: string
   extra?: JSX.Element
   cssWidth?: string
@@ -44,8 +49,8 @@ interface SchemaItem {
   radio?: TypeValues[]
   validateMsg?: string
   selectOptions?: TypeValues[]
+  collapsible?: boolean
 }
-
 interface TypeValues {
   label: string
   value: string

@@ -1,5 +1,5 @@
-import { CheckCircleFilled } from '@ant-design/icons'
-import { Button, Col, Row, Tooltip } from 'antd'
+import { CheckCircleFilled, ExclamationCircleOutlined } from '@ant-design/icons'
+import { Button, Col, Modal, Row, Tooltip } from 'antd'
 import React, { FC, ReactNode, useEffect, useState } from 'react'
 import { ReactComponent as ConsentSelected } from '../../assets/images/form-type/consent-selected.svg'
 import { ReactComponent as Consent } from '../../assets/images/form-type/consent.svg'
@@ -15,6 +15,8 @@ import { ReactComponent as TreatmentSelected } from '../../assets/images/form-ty
 import { ReactComponent as Treatment } from '../../assets/images/form-type/treatment.svg'
 import styles from './FormType.module.less'
 
+const { confirm } = Modal
+
 interface Setting {
   medicalHistory: boolean
   consent: boolean
@@ -24,6 +26,7 @@ interface Setting {
   labForm: boolean
 }
 export interface FormTypeProps {
+  isEditing?: () => boolean
   setting: Setting
   onChangeSetting: (val: Setting) => void
 }
@@ -85,18 +88,41 @@ const defaultTypeInfos: FormTypeInfo = {
   },
 }
 
-export const FormType: FC<FormTypeProps> = ({ setting, onChangeSetting }) => {
+export const FormType: FC<FormTypeProps> = ({
+  isEditing,
+  setting,
+  onChangeSetting,
+}) => {
   const aligns = [
+    styles.formTypeStart,
     styles.formTypeCenter,
-    styles.formTypeCenter,
-    styles.formTypeCenter,
+    styles.formTypeEnd,
   ]
   const [formTypeInfo, setFormTypesInfo] = useState<FormTypeInfo>(
     defaultTypeInfos
   )
-  const handleClickItem = (name) => {
+  const showWarningMessage = (name) => {
+    confirm({
+      title: 'Warning',
+      icon: <ExclamationCircleOutlined />,
+      content:
+        'You are about to change the type of form. This will reset your data',
+      onOk() {
+        goClickItem(name)
+      },
+      onCancel() {
+        console.log('cancel')
+      },
+    })
+  }
+
+  const goClickItem = (name) => {
     const typeInfo = { ...formTypeInfo }
-    typeInfo[name].selected = !typeInfo[name].selected
+    const newValue = !typeInfo[name].selected
+    for (const key of Object.keys(setting)) {
+      typeInfo[key].selected = false
+    }
+    typeInfo[name].selected = newValue
     setFormTypesInfo({ ...typeInfo })
     onChangeSetting({
       medicalHistory: typeInfo.medicalHistory.selected,
@@ -107,6 +133,16 @@ export const FormType: FC<FormTypeProps> = ({ setting, onChangeSetting }) => {
       labForm: typeInfo.labForm.selected,
     })
   }
+
+  const handleClickItem = (name) => {
+    console.log('FormType:handleClickItem', isEditing?.())
+    if (isEditing?.() === true) {
+      showWarningMessage(name)
+      return
+    }
+    goClickItem(name)
+  }
+
   useEffect(() => {
     const typeInfo = { ...defaultTypeInfos }
     for (const key of Object.keys(setting)) {
@@ -116,6 +152,7 @@ export const FormType: FC<FormTypeProps> = ({ setting, onChangeSetting }) => {
   }, [setting])
   return (
     <div className={styles.formTypeContainer}>
+      <div className={styles.label}>Form Type</div>
       <Row>
         {Object.keys(formTypeInfo).map((key, index) => (
           <Col key={key} span={8} className={aligns[index % 3]}>
