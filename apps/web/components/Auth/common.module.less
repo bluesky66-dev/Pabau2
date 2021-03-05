@@ -1,0 +1,106 @@
+.signup-wrapper{
+   display: flex;
+  min-height: 100vh;
+  .signup-background {
+    background: #EEF7FB;
+    flex: 1 50%;
+    max-width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      max-width: 100%;
+    }
+  }
+  .signup-content {
+    flex: 1 50%;
+    max-width: 50%;
+    padding: 40px 130px;
+    background: #FFFFFF;
+    .signup-logo {
+      margin-bottom: 80px;
+      div {
+        height: auto !important;
+      }
+    }
+    .signup-form {
+      .form-head {
+        margin-bottom: 40px;
+        text-align: center;
+        h6 {
+          color: #3D3D46;
+          font-weight: 500;
+          font-size: 20px;
+          line-height: 25px;
+          margin-bottom: 16px;
+        }
+        span {
+          color: #9292A3;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 18px;
+        }
+      }
+      .signup-form-input {
+        .signup-input {
+          margin-bottom: 24px;
+          :global .ant-form-item-label {
+            padding-bottom: 2px;
+            label {
+              color: #9292A3;
+            }
+          }
+          :global .ant-form-item-control-input-content{
+            p{
+              display:none !important;
+            }
+          }
+        }
+        .signup-timezone {
+          margin-bottom: 16px;
+          :global .ant-form-item-label {
+            padding-bottom: 2px;
+          }
+        }
+        .signup-button {
+          margin-top: 40px;
+          .btn-started {
+            background: #54B2D3;
+            border-radius: 4px;
+            color: #FFFFFF;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 20px;
+            text-transform: capitalize;
+            padding: 10px;
+            width: 100%;
+            height: auto;
+            text-shadow: none;
+            box-shadow: none;
+          }
+        }
+        .signup-agree {
+          span {
+            color: #9292A3;
+            a {
+              color: #54B2D3;
+            }
+          }
+        }
+      }
+      .signup-login {
+        margin-top: 16px;
+        text-align: center;
+        span {
+          color: #9292A3;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 20px;
+          a {
+            color: #54B2D3;
+          }
+        }
+      }
+    }
+  }
+}

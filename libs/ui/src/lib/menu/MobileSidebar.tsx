@@ -65,7 +65,7 @@ export const MobileSidebar: FC<SidebarProps> = ({
     )
   }
 
-  const onClickMenu = (e) => {
+  const onClickMenu = async (e) => {
     setSelectedKeys([e.key])
     if (e.key.includes('Notifications')) {
       onClickNotificationDrawer()
@@ -73,7 +73,7 @@ export const MobileSidebar: FC<SidebarProps> = ({
       onClickChatDrawer()
     }
     if (e.key.includes('Marketing')) {
-      router.push('/marketing/sources')
+      await router.push('/marketing/sources')
     }
   }
 

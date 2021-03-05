@@ -3,9 +3,9 @@ import { Notification, NotificationType } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import ClientNotification from '../../../components/ClientNotification/index'
 import { renderToString } from 'react-dom/server'
-import AppointmentEmailPreview from './email-preview'
+import AppointmentEmailPreview from '../../../components/ClientNotificationEmailPreview/appointmentReminderEmailPreview'
 import { apiURL } from '../../../baseUrl'
-import CommonNotificationHeader from '../CommonNotificationHeader'
+import CommonNotificationHeader from '../../../components/ClientNotification/CommonNotificationHeader'
 
 const Index: FC = () => {
   const [setIndexTab, setSelectedTab] = React.useState(1)
