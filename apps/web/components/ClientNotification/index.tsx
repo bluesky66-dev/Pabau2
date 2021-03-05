@@ -245,7 +245,7 @@ const Index: FC<P> = forwardRef(
               informationMessage={informationMessage}
               type={type}
             />
-          ) : type === 'documentShared' ? (
+          ) : type === 'documentShared' || type === 'secureEmailTemplate' ? (
             <DocumentSharedPreview
               standardTapIndex={standardTapIndex}
               backGroundColor={backGroundColor}

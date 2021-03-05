@@ -232,7 +232,7 @@ const notificationData = {
         'The default secure email template which gets sent out via email',
       icon: <SafetyOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/secure-email-template',
       disabled: true,
     },
     {
