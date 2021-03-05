@@ -1,0 +1,250 @@
+@color-green: #65CD98;
+@color-yellow: #FAAD14;
+@color-grey: #9292A3;
+@color-main: #3D3D46;
+@color-lt-grey-02: #ECEDF0;
+.peerFeedbackStyles {
+  box-sizing: border-box;
+  padding: 28px 24px;
+  width: 1000px;
+  // font-family: 'Circular-Std';
+  font-style: normal;
+  font-weight: normal;
+  color: @color-main;
+
+  .main-title {
+    display: flex;
+    justify-content: space-between;
+
+    .main-title-text {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 40px;
+    }
+
+    .remind-button-container {
+      margin-top: -4px;
+
+      .remindButton {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        color: @color-grey;
+      }
+    }
+  }
+
+  .avatar-list {
+    margin-top: 20px;
+    padding-left: 5px;
+  }
+
+  .sub-text {
+    font-size: 12px;
+    line-height: 16px;
+    color: @color-grey;
+    margin-top: 16px;
+  }
+
+  .sub-content {
+    font-size: 14px;
+    line-height: 22px;
+    margin-top: 2px;
+  }
+
+  .review-container {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid @color-lt-grey-02;
+    box-sizing: border-box;
+    border-radius: 4px;
+
+    .review-filled-text {
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 18px;
+    }
+    .filled-percent-container {
+      margin-top: 12px;
+      display: flex;
+
+      .filled-percent-title {
+
+        .filled-percent-text {
+          font-size: 30px;
+          line-height: 38px;
+          margin-right: 55px;
+        }
+
+        .filled-number {
+          font-size: 14px;
+          line-height: 18px;
+          color: @color-grey;
+          margin-top: 10px;
+        }
+      }
+
+      .filled-progress-container {
+        flex: 1;
+        margin-top: -4px;
+      }
+    }
+
+
+  }
+
+  .table-container {
+    margin-top: 20px;
+    padding: 0px;
+    .table-content {
+
+      :global .ant-table-thead > tr > th {
+        background: transparent;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+        color: @color-grey;
+        padding: 16px;
+        height: 54px;
+      }
+
+      .tool-tip-margin {
+        margin-left: 5px;
+      }
+
+      .employee-row {
+        text-align: center;
+
+        .column-info {
+          padding: 0px;
+
+          .flex-div {
+            display: flex;
+            padding: 9.3px 6.3px;
+
+            .user-avatar {
+              Width: 50.67px;
+              Height: 33.33px;
+              margin: auto;
+              text-align: center;
+            }
+
+            .flex-full-div {
+              flex: 1;
+              padding-left: 8px;
+              text-align: left;
+
+              .user-name {
+                font-size: 14px;
+                line-height: 18px;
+                color: @color-main;
+              }
+
+              .user-title {
+                font-size: 12px;
+                line-height: 16px;
+                color: @color-grey;
+              }
+            }
+          }
+        }
+
+        .column-analytical-thinking {
+          padding: 0px;
+          background: rgba(101, 205, 152, 0.05);
+          font-size: 14px;
+          color: #65CD98;
+        }
+
+        .column-attention-to-detail {
+          padding: 0px;
+          background: rgba(101, 205, 152, 0.05);
+          font-size: 14px;
+          color: #65CD98;
+        }
+
+        .column-my-custom-category {
+          padding: 0px;
+          background: rgba(255, 168, 39, 0.05);;
+          font-size: 14px;
+          color: #FAAD14;
+        }
+      }
+
+      .report-row {
+        text-align: left;
+
+        :global .ant-table-cell {
+          padding: 0px 0px 0px 16px;
+        }
+
+        .column-info {
+          padding: 0px;
+
+          .flex-div {
+            display: flex;
+            padding: 9.3px 6.3px;
+            .user-avatar {
+              Width: 50.67px;
+              Height: 33.33px;
+              margin: auto;
+              text-align: center;
+            }
+            .flex-full-div {
+              flex: 1;
+              padding-left: 8px;
+              text-align: left;
+              .user-name {
+                font-size: 14px;
+                line-height: 18px;
+                color: @color-main;
+              }
+              .user-title {
+                font-size: 12px;
+                line-height: 16px;
+                color: @color-grey;
+              }
+            }
+          }
+        }
+
+        .column-remove {
+          font-size: 22px;
+        }
+
+        .preview-button {
+          font-size: 14px;
+          line-height: 20px;
+          color: @color-grey;
+        }
+      }
+
+      .summary-title-column {
+        font-size: 14px;
+        color: @color-main;
+      }
+
+      .summary-column {
+        font-size: 14px;
+        align-items: center;
+        text-align: center;
+        color: @color-main;
+      }
+    }
+  }
+
+  :global .ant-collapse {
+    width: 100%;
+    .ant-collapse-item {
+      width: 100%;
+      // .ant-collapse-header {
+
+      // }
+      .ant-collapse-content {
+        .ant-collapse-content-box {
+          padding: 0px;
+        }
+      }
+    }
+  }
+}
