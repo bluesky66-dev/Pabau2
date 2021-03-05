@@ -1,13 +1,12 @@
 import React, { FC, useState, forwardRef } from 'react'
 import { ClientNotification, Standard, Appointment, Smstext } from '@pabau/ui'
-import CancelAppointmentPreview from '../../pages/client-notifications/cancelled-appointment/CancelAppointmentPreview'
-import NoShowAppointmentPreview from '../../pages/client-notifications/noshow-appointment/NoShowAppointmentPreview'
-import NewAppointmentPreview from '../../pages/client-notifications/new-appointment/NewAppointmentPreview'
-import RescheduleAppointmentPreview from '../../pages/client-notifications/rescheduled-appointment/RescheduleAppointmentPreview'
-import BookedOntoClassPreview from '../../pages/client-notifications/class-booked/BookedOntoClassPreview'
-import WaitListPreview from '../../pages/client-notifications/waitlist/WaitListPreview'
-import MedicalFormsPreview from '../../components/ClientNotification/MedicalForms/MedicalFormsPreview'
-import ClinicEmailingTimelinePreview from '../../components/ClientNotification/ClinicEmailingTimeline/ClinicEmailingTimelinePreview'
+import CancelAppointmentPreview from '../ClientNotificationPreview/CancelAppointmentPreview'
+import NoShowAppointmentPreview from '../ClientNotificationPreview/NoShowAppointmentPreview'
+import NewAppointmentPreview from '../ClientNotificationPreview/NewAppointmentPreview'
+import RescheduleAppointmentPreview from '../ClientNotificationPreview/RescheduleAppointmentPreview'
+import BookedOntoClassPreview from '../ClientNotificationPreview/BookedOntoClassPreview'
+import WaitListPreview from '../ClientNotificationPreview/WaitListPreview'
+import MedicalFormsPreview from '../ClientNotificationPreview/MedicalFormsPreview'
 
 interface P {
   onSeletedTab: (number) => void
@@ -245,21 +244,15 @@ const Index: FC<P> = forwardRef(
               informationMessage={informationMessage}
               type={type}
             />
-          ) : type === 'medical-forms' ? (
+          ) : type === 'medical-forms' ||
+            type === 'clinic-emailing-timeline' ? (
             <MedicalFormsPreview
               standardTapIndex={standardTapIndex}
               backGroundColor={backGroundColor}
               activeSocialIcons={activeSocialIcons}
               selectLanguage={selectLanguage}
               buttonColor={buttonColor}
-            />
-          ) : type === 'clinic-emailing-timeline' ? (
-            <ClinicEmailingTimelinePreview
-              standardTapIndex={standardTapIndex}
-              backGroundColor={backGroundColor}
-              activeSocialIcons={activeSocialIcons}
-              selectLanguage={selectLanguage}
-              buttonColor={buttonColor}
+              type={type}
             />
           ) : (
             <Appointment
