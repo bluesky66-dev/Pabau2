@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Notification, NotificationType } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import ClientNotification from '../../../components/ClientNotification/index'
-import CommonNotificationHeader from '../CommonNotificationHeader'
+import CommonNotificationHeader from '../../../components/ClientNotification/CommonNotificationHeader'
 
 const Index: FC = () => {
   const [setIndexTab, setSelectedTab] = React.useState(1)
@@ -49,6 +49,16 @@ const Index: FC = () => {
           'The email the client receives when they register to your Online Booking portal'
         }
         type={'connectRegistration'}
+        smsCustom={
+          'Account created\n' +
+          'Congratulations Sophia, your account has been successfully created. Follow this link to access your online account:\n' +
+          'URL://CONNECTURL\n' +
+          'Here are your login credentials:\n' +
+          'Username: Sophia17\n' +
+          'Password: Sophia0193091\n' +
+          'Kind regards,\n' +
+          'Your friends at The Clinic\n'
+        }
       />
     </Layout>
   )
