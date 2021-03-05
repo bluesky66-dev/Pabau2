@@ -6,6 +6,7 @@ import NewAppointmentPreview from '../ClientNotificationPreview/NewAppointmentPr
 import RescheduleAppointmentPreview from '../ClientNotificationPreview/RescheduleAppointmentPreview'
 import BookedOntoClassPreview from '../ClientNotificationPreview/BookedOntoClassPreview'
 import WaitListPreview from '../ClientNotificationPreview/WaitListPreview'
+import DocumentSharedPreview from '../ClientNotificationPreview/DocumnetSharedPreview'
 
 interface P {
   onSeletedTab: (number) => void
@@ -236,6 +237,16 @@ const Index: FC<P> = forwardRef(
             />
           ) : type === 'waitList' ? (
             <WaitListPreview
+              standardTapIndex={standardTapIndex}
+              backGroundColor={backGroundColor}
+              activeSocialIcons={activeSocialIcons}
+              selectLanguage={selectLanguage}
+              buttonColor={buttonColor}
+              informationMessage={informationMessage}
+              type={type}
+            />
+          ) : type === 'documentShared' ? (
+            <DocumentSharedPreview
               standardTapIndex={standardTapIndex}
               backGroundColor={backGroundColor}
               activeSocialIcons={activeSocialIcons}

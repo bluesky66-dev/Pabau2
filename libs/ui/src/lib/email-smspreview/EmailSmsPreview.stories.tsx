@@ -894,8 +894,8 @@ DocumentShared.args = {
   signatureBlock: 'The Clinic Team',
   infoText:
     "We're required by EU law to send your personal information in an encrypted format. It is free to view and all you have to do is click on the link in the email below that reads \"Click to read this secure email online\". This will take you through to a secure page with 'Pabau'.",
-  smsGreeting: 'Hi Sophia!',
+  smsGreeting: 'Dear Sophia!',
   smsMessage:
-    'This is a friendly reminder that we have you scheduled for Botox 1 area on Monday, 16 November at 11:00.',
-  smsFooterText: 'See you soon!',
+    'Please find attached your file. If you have any questions do not hesitate to contact us at +44 000 987 507.',
+  smsFooterText: 'Kind regards,<br/>The clinic Team',
 }

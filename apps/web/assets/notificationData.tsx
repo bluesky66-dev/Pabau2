@@ -259,7 +259,7 @@ const notificationData = {
         'The email you will send when you share a document with a client through Pabau Connect',
       icon: <ExportOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/document-shared',
       disabled: true,
     },
     {
