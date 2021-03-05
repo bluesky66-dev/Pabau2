@@ -44,13 +44,15 @@ const CrudModal: FC<P> = ({
   // const formRef = useEnsuredForwardedRef<{ submitForm: () => void }>(null)
 
   const schemaForm = { ...schema, fields: { ...schema.fields } }
-  const specialFormElement = schemaForm.fields['is_active']
+  const specialFormElement =
+    schemaForm.fields['is_active'] || schemaForm.fields['public']
   delete schemaForm.fields['is_active']
   const [specialBoolean, setSpecialBoolean] = useState<boolean>(
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    (editingRow?.id && editingRow?.is_active) ??
-      (typeof specialFormElement?.defaultvalue === 'boolean' &&
+    (editingRow?.id && (editingRow?.is_active || editingRow?.public)) ??
+      ((typeof specialFormElement?.defaultvalue === 'boolean' ||
+        typeof specialFormElement?.defaultvalue === 'number') &&
         specialFormElement.defaultvalue) ??
       true
   )
@@ -58,8 +60,9 @@ const CrudModal: FC<P> = ({
   useEffect(() => {
     setSpecialBoolean(
       (editingRow?.id && (editingRow?.is_active as boolean)) ??
-        (typeof specialFormElement?.defaultvalue === 'boolean' &&
-          (specialFormElement.defaultvalue as boolean)) ??
+        ((typeof specialFormElement?.defaultvalue === 'boolean' ||
+          typeof specialFormElement?.defaultvalue === 'number') &&
+          (Boolean(specialFormElement.defaultvalue) as boolean)) ??
         true
     )
   }, [editingRow, specialFormElement])

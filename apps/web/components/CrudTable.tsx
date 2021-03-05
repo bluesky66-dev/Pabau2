@@ -6,7 +6,7 @@ import {
   Notification,
   NotificationType,
 } from '@pabau/ui'
-import React, { FC, useEffect, useState, useRef } from 'react'
+import React, { FC, useEffect, useState, useRef, useContext } from 'react'
 import { DocumentNode, useMutation } from '@apollo/client'
 import AddButton from './AddButton'
 import { Breadcrumb } from '@pabau/ui'
@@ -21,6 +21,7 @@ import { LeftOutlined } from '@ant-design/icons'
 import classNames from 'classnames'
 import { useTranslationI18 } from '../hooks/useTranslationI18'
 import { useRouter } from 'next/router'
+import { UserContext } from '../context/UserContext'
 
 const { Title } = Typography
 interface P {
@@ -57,11 +58,16 @@ const CrudTable: FC<P> = ({
   needTranslation = false,
 }) => {
   const [isLoading, setIsLoading] = useState(true)
-  const [isActive, setIsActive] = useState(true)
+  const [isActive, setIsActive] = useState<boolean | number>(true)
   const [searchTerm, setSearchTerm] = useState('')
   const { t } = useTranslationI18()
   const crudTableRef = useRef(null)
   const router = useRouter()
+  const user = useContext(UserContext)
+
+  useEffect(() => {
+    console.log(user?.company?.id)
+  })
 
   // eslint-disable-next-line graphql/template-strings
   const [editMutation] = useMutation(editQuery, {
@@ -104,7 +110,7 @@ const CrudTable: FC<P> = ({
   const [paginateData, setPaginateData] = useState({
     total: 0,
     offset: 0,
-    limit: 50,
+    limit: 20,
     currentPage: 1,
     showingRecords: 0,
   })
@@ -116,6 +122,7 @@ const CrudTable: FC<P> = ({
   const getQueryVariables = () => {
     const queryOptions = {
       variables: {
+        companyId: user?.company?.id,
         isActive,
         searchTerm: '%' + searchTerm + '%',
         offset: paginateData.offset,
@@ -135,6 +142,7 @@ const CrudTable: FC<P> = ({
   const getAggregateQueryVariables = () => {
     const queryOptions = {
       variables: {
+        companyId: user?.company?.id,
         isActive,
         searchTerm: '%' + searchTerm + '%',
       },
@@ -171,12 +179,13 @@ const CrudTable: FC<P> = ({
         setSourceData(data)
       }
     }
-    if (aggregateData)
+    if (aggregateData) {
       setPaginateData({
         ...paginateData,
-        total: aggregateData?.aggregate.count,
+        total: aggregateData,
         showingRecords: data?.length,
       })
+    }
     if (!loading && data) setIsLoading(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, aggregateData, loading])
@@ -208,7 +217,7 @@ const CrudTable: FC<P> = ({
     setPaginateData({
       total: 0,
       offset: 0,
-      limit: 50,
+      limit: 10,
       currentPage: 1,
       showingRecords: 0,
     })
@@ -287,7 +296,7 @@ const CrudTable: FC<P> = ({
       case 'checkbox':
         return defaultVal || true
       case 'number':
-        return defaultVal
+        return Boolean(defaultVal)
       default:
         return defaultVal || ''
     }

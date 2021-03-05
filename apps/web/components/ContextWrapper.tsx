@@ -4,7 +4,7 @@ import { gql, useQuery } from '@apollo/client'
 import { UserContext } from '../context/UserContext'
 
 // eslint-disable-next-line
-const CURRENT_USER = gql`  query retrieveAuthenticatedUser($Id: Int!, $CompanyId: Int!) { user(where: { id: $Id }) { username full_name } company(where: { id: $CompanyId }) { details {company_name,language  } }}`
+const CURRENT_USER = gql`  query retrieveAuthenticatedUser($Id: Int!, $CompanyId: Int!) { user(where: { id: $Id }) { id username full_name } company(where: { id: $CompanyId }) { id details {company_name,language  } }}`
 
 const ContextWrapper: FC = ({ children }) => {
   const [authenticated, user] = useLogin(false)

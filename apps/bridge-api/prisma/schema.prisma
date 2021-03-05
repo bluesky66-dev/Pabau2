@@ -19,7 +19,7 @@ model TwoFactorHistory {
   @@map("2fa_history")
 }
 
-model ThirdPartyAcces {
+model ThirdPartyAccess {
   id           Int     @id @default(autoincrement())
   occupier     Int
   company_id   Int     @map("occupier")
@@ -31,7 +31,6 @@ model ThirdPartyAcces {
   logo         String
   access_id    Int
   company      Company @relation(fields: [company_id], references: [id])
-
 
   @@map("3rd_party_access")
 }
@@ -1646,6 +1645,7 @@ model CmCampaign {
 }
 
 model CmCampaignNote {
+
   ID          Int                      @id @default(autoincrement())
   OwnerID     Int
   BookingID   Int

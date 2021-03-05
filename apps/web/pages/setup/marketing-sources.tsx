@@ -2,66 +2,78 @@ import { gql } from '@apollo/client'
 import { NextPage } from 'next'
 import React, { useContext, useEffect } from 'react'
 import CrudLayout from '../../components/CrudLayout/CrudLayout'
-/* eslint-disable graphql/template-strings */
 import { useTranslationI18 } from '../../hooks/useTranslationI18'
 import { UserContext } from '../../context/UserContext'
 import { languageMapper } from '../../helper/languageMapper'
 
+console.log(UserContext)
+
 const LIST_QUERY = gql`
   query marketing_sources(
-    $isActive: Boolean = true
+    $public: Int = 1
     $searchTerm: String = ""
-    $offset: Int
-    $limit: Int
+    $offset: Int = 0
+    $limit: Int = 10
+    $companyId: Int
   ) {
-    marketing_source(
-      offset: $offset
-      limit: $limit
-      order_by: { order: desc }
+    marketingSources(
+      first: $offset
+      last: $limit
+      orderBy: { source_name: desc }
       where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
+        company_id: { equals: $companyId }
+        public: { equals: $public }
+        OR: [{ AND: [{ source_name: { contains: $searchTerm } }] }]
       }
     ) {
       __typename
       id
-      name
-      is_active
-      order
+      source_name
+      public
     }
   }
 `
+
 const LIST_AGGREGATE_QUERY = gql`
   query marketing_source_aggregate(
-    $isActive: Boolean = true
+    $public: Int = 1
     $searchTerm: String = ""
+    $companyId: Int
   ) {
-    marketing_source_aggregate(
+    marketingSourcesCount(
       where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
+        company_id: { equals: $companyId }
+        public: { equals: $public }
+        OR: [{ AND: [{ source_name: { contains: $searchTerm } }] }]
       }
-    ) {
-      aggregate {
-        count
-      }
-    }
+    )
   }
 `
 const DELETE_MUTATION = gql`
-  mutation delete_marketing_source($id: uuid!) {
-    delete_marketing_source_by_pk(id: $id) {
+  mutation delete_marketing_source($id: Int) {
+    deleteOneMarketingSource(where: { id: $id }) {
       __typename
       id
     }
   }
 `
 const ADD_MUTATION = gql`
-  mutation add_marketing_source($name: String!, $is_active: Boolean) {
-    insert_marketing_source_one(
-      object: { name: $name, is_active: $is_active }
+  mutation add_marketing_source(
+    $imported: Int = 0
+    $is_active: Int = 1
+    $name: String!
+    $custom_id: Int = 0
+    $company_id: Int = 8901 #TODO refactor with actual company_id
+  ) {
+    createOneMarketingSource(
+      data: {
+        company: { connect: { id: $company_id } }
+        imported: $imported
+        source_name: $name
+        public: $is_active
+        custom_id: $custom_id
+      }
     ) {
-      __typename
       id
     }
   }
@@ -100,8 +112,6 @@ export const Index: NextPage = () => {
 
   const user = useContext(UserContext)
 
-  console.log('asdasdasdasdasd', user)
-
   useEffect(() => {
     if (user) {
       const lan = user.company.details.language
@@ -132,7 +142,7 @@ export const Index: NextPage = () => {
     },
     deleteBtnLabel: 'Yes, Delete Source',
     fields: {
-      name: {
+      source_name: {
         full: 'Friendly Name',
         fullLower: 'friendly name',
         short: t('marketingsource-name-textfield.translation'),
@@ -144,10 +154,10 @@ export const Index: NextPage = () => {
         cssWidth: 'max',
         type: 'string',
       },
-      is_active: {
+      public: {
         full: t('marketingsource-tableColumn-active.translation'),
-        type: 'boolean',
-        defaultvalue: true,
+        type: 'number',
+        defaultvalue: 1,
       },
     },
   }
