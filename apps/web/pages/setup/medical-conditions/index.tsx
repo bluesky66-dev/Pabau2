@@ -10,16 +10,16 @@ const schema: Schema = {
   createButtonLabel: 'New Condition',
   messages: {
     create: {
-      success: 'You have successfully created a lab',
-      error: 'While creating a lab',
+      success: 'You have successfully created a invoice template',
+      error: 'While creating a invoice template',
     },
     update: {
-      success: 'You have successfully updated a lab',
-      error: 'While updating a lab',
+      success: 'You have successfully updated a invoice template',
+      error: 'While updating a invoice template',
     },
     delete: {
-      success: 'You have successfully deleted a lab',
-      error: 'While deleting a lab',
+      success: 'You have successfully deleted a invoice template',
+      error: 'While deleting a invoice template',
     },
   },
   fields: {
@@ -29,7 +29,7 @@ const schema: Schema = {
       short: 'Condition Name',
       shortLower: 'condition name',
       min: 2,
-      example: 'Surgical lab',
+      example: 'Diabetic',
       cssWidth: 'max',
       type: 'string',
     },
