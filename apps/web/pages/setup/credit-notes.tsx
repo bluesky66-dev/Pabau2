@@ -41,6 +41,7 @@ const DELETE_MUTATION = gql`
     }
   }
 `
+/* eslint-disable graphql/template-strings */
 const ADD_MUTATION = gql`
   mutation add_credit_note_types(
     $name: String!
