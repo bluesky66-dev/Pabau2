@@ -122,12 +122,14 @@ const Payments: FC = () => {
 
   return (
     <div>
-      <Table
-        loading={loading}
-        pagination={false}
-        columns={PaymentColumns}
-        dataSource={payments}
-      />
+      <div style={{ backgroundColor: '#FFF' }}>
+        <Table
+          loading={loading}
+          pagination={false}
+          columns={PaymentColumns}
+          dataSource={payments}
+        />
+      </div>
       <Pagination
         showingRecords={paginateData.showingRecords}
         defaultCurrent={1}

@@ -8,7 +8,7 @@ const InvoiceColumns = [
     title: '',
     dataIndex: 'invoice_no',
     visible: true,
-    width: '30px',
+    width: '40px',
     // eslint-disable-next-line react/display-name
     render: (_, data) => <Avatar src={data.invoice_logo} size="small" />,
   },
@@ -42,6 +42,7 @@ const InvoiceColumns = [
     render: (_, { customer }) => (
       <Typography.Text style={{ color: '#54B2D3' }}>{customer}</Typography.Text>
     ),
+    ellipsis: true,
   },
   {
     title: 'Debtor',
@@ -53,6 +54,7 @@ const InvoiceColumns = [
         {debtor}
       </Typography.Text>
     ),
+    ellipsis: true,
   },
   {
     title: 'Status',
@@ -206,13 +208,15 @@ const Invoice: FC = () => {
 
   return (
     <section>
-      <Table
-        key={loading?.toString()}
-        loading={loading}
-        pagination={false}
-        columns={InvoiceColumns}
-        dataSource={invoices}
-      />
+      <div style={{ backgroundColor: '#FFF' }}>
+        <Table
+          key={loading?.toString()}
+          loading={loading}
+          pagination={false}
+          columns={InvoiceColumns}
+          dataSource={invoices}
+        />
+      </div>
       <Pagination
         showingRecords={paginateData.showingRecords}
         defaultCurrent={1}

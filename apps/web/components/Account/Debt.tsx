@@ -17,6 +17,7 @@ const DebtColumns = [
     title: '',
     dataIndex: '',
     visible: true,
+    width: '40px',
     // eslint-disable-next-line react/display-name
     render: () => (
       <Avatar
@@ -55,6 +56,7 @@ const DebtColumns = [
     render: (_, { customer }) => (
       <Typography.Text style={{ color: '#54B2D3' }}>{customer}</Typography.Text>
     ),
+    ellipsis: true,
   },
   {
     title: 'Debtor',
@@ -64,6 +66,7 @@ const DebtColumns = [
     render: (_, { debtor }) => (
       <Typography.Text style={{ color: '#54B2D3' }}>{debtor}</Typography.Text>
     ),
+    ellipsis: true,
   },
   {
     title: 'Status',
@@ -209,12 +212,14 @@ const Debt: FC = () => {
 
   return (
     <div>
-      <Table
-        loading={loading}
-        pagination={false}
-        columns={DebtColumns}
-        dataSource={debts}
-      />
+      <div style={{ backgroundColor: '#FFF' }}>
+        <Table
+          loading={loading}
+          pagination={false}
+          columns={DebtColumns}
+          dataSource={debts}
+        />
+      </div>
       <Pagination
         showingRecords={paginateData.showingRecords}
         defaultCurrent={1}

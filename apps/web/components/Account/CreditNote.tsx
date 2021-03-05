@@ -8,6 +8,7 @@ const CreditNoteColumns = [
     title: 'Credit No.',
     dataIndex: 'credit_no',
     visible: true,
+    width: '90px',
     // eslint-disable-next-line react/display-name
     render: (_, { credit_no }) => (
       <Typography.Text style={{ color: '#54B2D3' }}>
@@ -24,6 +25,7 @@ const CreditNoteColumns = [
     title: 'Credit Date',
     dataIndex: 'credit_date',
     visible: true,
+    width: '120px',
   },
   {
     title: 'Customer',
@@ -33,6 +35,7 @@ const CreditNoteColumns = [
     render: (_, { customer }) => (
       <Typography.Text style={{ color: '#54B2D3' }}>{customer}</Typography.Text>
     ),
+    ellipsis: true,
   },
   {
     title: 'Debtor',
@@ -42,11 +45,13 @@ const CreditNoteColumns = [
     render: (_, { debtor }) => (
       <Typography.Text style={{ color: '#54B2D3' }}>{debtor}</Typography.Text>
     ),
+    ellipsis: true,
   },
   {
     title: 'Invoice No.',
     dataIndex: 'invoice_no',
     visible: true,
+    width: '100px',
     // eslint-disable-next-line react/display-name
     render: (_, { invoice_no }) => (
       <Typography.Text style={{ color: '#54B2D3' }}>
@@ -58,6 +63,7 @@ const CreditNoteColumns = [
     title: 'Total',
     dataIndex: 'total',
     visible: true,
+    width: '80px',
     // eslint-disable-next-line react/display-name
     render: (_, { total }) => (
       <Typography.Text>£{total.toFixed(2)}</Typography.Text>
@@ -136,12 +142,14 @@ const CreditNotes: FC = () => {
 
   return (
     <div>
-      <Table
-        loading={loading}
-        pagination={false}
-        columns={CreditNoteColumns}
-        dataSource={creditNotes}
-      />
+      <div style={{ backgroundColor: '#FFF' }}>
+        <Table
+          loading={loading}
+          pagination={false}
+          columns={CreditNoteColumns}
+          dataSource={creditNotes}
+        />
+      </div>
       <Pagination
         showingRecords={paginateData.showingRecords}
         defaultCurrent={1}
