@@ -1,9 +1,11 @@
 import { gql } from '@apollo/client'
 import { NextPage } from 'next'
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import CrudLayout from '../../../components/CrudLayout/CrudLayout'
 /* eslint-disable graphql/template-strings */
-import { useTranslation } from 'react-i18next'
+import { useTranslationI18 } from '../../../hooks/useTranslationI18'
+import { UserContext } from '../../../context/UserContext'
+import { languageMapper } from '../../../helper/languageMapper'
 
 const LIST_QUERY = gql`
   query marketing_sources(
@@ -94,7 +96,20 @@ const UPDATE_ORDER_MUTATION = gql`
 `
 
 export const Index: NextPage = () => {
-  const { t } = useTranslation('common')
+  const { t, i18n } = useTranslationI18()
+
+  const user = useContext(UserContext)
+
+  console.log('asdasdasdasdasd', user)
+
+  useEffect(() => {
+    if (user) {
+      const lan = user.company.details.language
+      const lanCode = lan ? languageMapper(lan) : 'en'
+      i18n.changeLanguage(lanCode)
+    }
+  }, [user, i18n])
+
   const schema: Schema = {
     full: t('marketingsource-title.translation'),
     fullLower: t('marketingsource-title.translation'),
@@ -117,7 +132,7 @@ export const Index: NextPage = () => {
     },
     deleteBtnLabel: 'Yes, Delete Source',
     fields: {
-      source_name: {
+      name: {
         full: 'Friendly Name',
         fullLower: 'friendly name',
         short: t('marketingsource-name-textfield.translation'),
@@ -129,10 +144,10 @@ export const Index: NextPage = () => {
         cssWidth: 'max',
         type: 'string',
       },
-      public: {
+      is_active: {
         full: t('marketingsource-tableColumn-active.translation'),
-        type: 'number',
-        defaultvalue: 1,
+        type: 'boolean',
+        defaultvalue: true,
       },
     },
   }
