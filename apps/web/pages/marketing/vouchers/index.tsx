@@ -1,11 +1,11 @@
 import React, { FC, useState, useEffect } from 'react'
-import Layout from './../../../../components/Layout/Layout'
+import Layout from '../../../components/Layout/Layout'
 import {
   SearchOutlined,
   FilterOutlined,
   ApartmentOutlined,
 } from '@ant-design/icons'
-import { Input } from 'antd'
+import { Anchor, Input } from 'antd'
 import {
   TabbedTable,
   Button,
@@ -14,9 +14,11 @@ import {
   Pagination,
   Table,
 } from '@pabau/ui'
-import VoucherIcon from '../../../../components/Marketing/GiftVouchersList/assets/VocherIcon'
+import VoucherIcon from '../../../components/Marketing/GiftVouchersList/assets/VocherIcon'
 import { Card, Row, Col } from 'antd'
 import styles from './index.module.less'
+
+const { Link } = Anchor
 
 const giftCardSettings = {
   cardWidth: 500,
@@ -48,77 +50,91 @@ const data = [
   {
     id: 1,
     key: '1',
-    name: 'Paracetamol (Acetominophen)',
-    unit: 'Mg',
-    frequency: '1 per day',
-    route: 'Orally',
-    comment: 'Twice per 6 hours after treatment',
+    number: '7214771214',
+    description: 'FTT Voucher',
+    name: 'FTT Voucher',
+    purchase_date: '14/01/2021',
+    expiry_date: '14/01/2022',
+    amount: '£100',
+    remaining_balance: '£100',
     is_active: 1,
     index: 0,
   },
   {
     id: 2,
     key: '2',
-    name: 'From a friend',
-    unit: 'Mg',
-    frequency: 'coffee',
-    route: 'Monday, 4 Feb 2019',
-    comment: 'Twice per 6 hours after treatment',
+    number: '7214771214',
+    description: 'FTT Voucher',
+    name: 'FTT Voucher',
+    purchase_date: '14/01/2021',
+    expiry_date: '14/01/2022',
+    amount: '£100',
+    remaining_balance: '£100',
     is_active: 0,
     index: 1,
   },
   {
     id: 3,
     key: '3',
-    name: 'Instagram',
-    unit: 'Mg',
-    frequency: 'clock',
-    route: 'Orally',
-    comment: 'Twice per 6 hours after treatment',
+    number: '7214771214',
+    description: 'FTT Voucher',
+    name: 'FTT Voucher',
+    purchase_date: '14/01/2021',
+    expiry_date: '14/01/2022',
+    amount: '£100',
+    remaining_balance: '£100',
     is_active: 0,
     index: 2,
   },
   {
     id: 4,
     key: '4',
-    name: 'Imported',
-    unit: 'Mg',
-    frequency: '1 per day',
-    route: 'Orally',
-    comment: 'Twice per 6 hours after treatment',
+    number: '7214771214',
+    description: 'FTT Voucher',
+    name: 'FTT Voucher',
+    purchase_date: '14/01/2021',
+    expiry_date: '14/01/2022',
+    amount: '£100',
+    remaining_balance: '£100',
     is_active: 1,
     index: 3,
   },
   {
     id: 5,
     key: '5',
-    name: 'Walk-in',
-    unit: 'Mg',
-    frequency: '1 per day',
-    route: 'Orally',
-    comment: 'Twice per 6 hours after treatment',
+    number: '7214771214',
+    description: 'FTT Voucher',
+    name: 'FTT Voucher',
+    purchase_date: '14/01/2021',
+    expiry_date: '14/01/2022',
+    amount: '£100',
+    remaining_balance: '£100',
     is_active: 1,
     index: 4,
   },
   {
     id: 6,
     key: '6',
-    name: 'Facebook',
-    unit: 'Mg',
-    frequency: '1 per day',
-    route: 'Orally',
-    comment: 'Twice per 6 hours after treatment',
+    number: '7214771214',
+    description: 'FTT Voucher',
+    name: 'FTT Voucher',
+    purchase_date: '14/01/2021',
+    expiry_date: '14/01/2022',
+    amount: '£100',
+    remaining_balance: '£100',
     is_active: 0,
     index: 5,
   },
   {
     id: 7,
     key: '7',
-    name: 'Fresha',
-    unit: 'Mg',
-    frequency: '1 per day',
-    route: 'Orally',
-    comment: 'Twice per 6 hours after treatment',
+    number: '7214771214',
+    description: 'FTT Voucher',
+    name: 'FTT Voucher',
+    purchase_date: '14/01/2021',
+    expiry_date: '14/01/2022',
+    amount: '£100',
+    remaining_balance: '£100',
     is_active: 0,
     index: 6,
   },
@@ -126,29 +142,41 @@ const data = [
 
 const columns = [
   {
+    title: 'Number',
+    dataIndex: 'number',
+    visible: true,
+    width: '150px',
+  },
+  {
+    title: 'Description',
+    dataIndex: 'description',
+    visible: true,
+    width: '250px',
+  },
+  {
     title: 'Name',
     dataIndex: 'name',
-    className: 'leftPadding',
+    visible: true,
+    width: '250px',
+  },
+  {
+    title: 'Purchase Date',
+    dataIndex: 'purchase_date',
     visible: true,
   },
   {
-    title: 'Units',
-    dataIndex: 'unit',
+    title: 'Expiry Date',
+    dataIndex: 'expiry_date',
     visible: true,
   },
   {
-    title: 'Frequency',
-    dataIndex: 'frequency',
+    title: 'Amount',
+    dataIndex: 'amount',
     visible: true,
   },
   {
-    title: 'Route',
-    dataIndex: 'route',
-    visible: true,
-  },
-  {
-    title: 'Comment',
-    dataIndex: 'comment',
+    title: 'Remaining Balance',
+    dataIndex: 'remaining_balance',
     visible: true,
   },
   {
@@ -157,10 +185,9 @@ const columns = [
     visible: true,
   },
   {
-    title: '',
+    title: <span style={{ visibility: 'hidden' }}>view</span>,
     dataIndex: 'view',
     visible: true,
-    width: '150',
     className: 'lastColumn',
     render: function renderTableSource() {
       return (
@@ -190,8 +217,8 @@ const GiftVouchers: FC<GiftVouchersProps> = ({ title }) => {
         <div>
           <Breadcrumb
             breadcrumbItems={[
-              { breadcrumbName: 'Setup', path: 'setup' },
-              { breadcrumbName: 'Gift Vouchers', path: '' },
+              { breadcrumbName: 'Marketing', path: '/marketing' },
+              { breadcrumbName: 'Gift Vouchers', path: '/marketing/vouchers' },
             ]}
           />
         </div>
@@ -199,9 +226,16 @@ const GiftVouchers: FC<GiftVouchersProps> = ({ title }) => {
       </div>
       <div className="rightDiv">
         {activeTab === tabItems[0] && (
-          <Button type="primary" size="large">
-            Add Voucher Type
-          </Button>
+          <Anchor>
+            <Link
+              href="/marketing/vouchers/create"
+              title={
+                <Button type="primary" size="large">
+                  Create Voucher
+                </Button>
+              }
+            />
+          </Anchor>
         )}
         {activeTab === tabItems[1] && (
           <div>
@@ -297,14 +331,18 @@ const GiftVouchers: FC<GiftVouchersProps> = ({ title }) => {
                           <div className={styles.noDataIcon}>
                             <VoucherIcon />
                           </div>
-                          <h2>Add a voucher type</h2>
-                          <p>You have no active voucher types</p>
-                          <Button
-                            className={styles.createTemaplateBtn}
-                            type="primary"
-                          >
-                            {`Add Voucher Type`}
-                          </Button>
+                          <h2>Add a voucher</h2>
+                          <p>You have no active vouchers</p>
+                          <Anchor>
+                            <Link
+                              href="/marketing/vouchers/create"
+                              title={
+                                <Button type="primary" size="large">
+                                  Create Voucher
+                                </Button>
+                              }
+                            />
+                          </Anchor>
                         </div>
                       </div>
                     </div>

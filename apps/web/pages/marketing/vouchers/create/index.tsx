@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect, useRef } from 'react'
-import Layout from '../../../components/Layout/Layout'
-import ExternalLink from './../../../components/Marketing/CreateGiftVoucher/assets/external-link.svg'
-import ActiveIcon from './../../../components/Marketing/CreateGiftVoucher/assets/active.svg'
+import Layout from '../../../../components/Layout/Layout'
+import ExternalLink from '../../../../components/Marketing/CreateGiftVoucher/assets/external-link.svg'
+import ActiveIcon from '../../../../components/Marketing/CreateGiftVoucher/assets/active.svg'
 import { Card, Row, Col, Input, Select } from 'antd'
 import classNames from 'classnames'
 import { HomeOutlined, EditOutlined } from '@ant-design/icons'
@@ -82,7 +82,6 @@ export const CreateVoucher: FC<CreateVoucherProps> = ({ title }) => {
   const [voucherRelationLabel] = useState('Redeem all services')
   const [voucherTermsConditions, setVoucherTermsConditions] = useState(null)
   const [termsConditionsCount, setTermsConditionsCount] = useState(0)
-  const [currencyType, setCurrencyType] = useState('£')
   const [clientNotes, setClientNotes] = useState(null)
   const [clientNotesCount, setClientNotesCount] = useState(0)
   const [voucherBackgrounUrl, setVoucherBackgroundUrl] = useState(null)
@@ -94,25 +93,14 @@ export const CreateVoucher: FC<CreateVoucherProps> = ({ title }) => {
     setActiveStep(step)
   }
 
-  const currencySelect = (
-    <Select
-      defaultValue="£"
-      className="select-before"
-      onChange={(val) => setCurrencyType(val)}
-    >
-      <Option value="£">£</Option>
-      <Option value="$">$</Option>
-    </Select>
-  )
-
   const cardHeader = (
     <div className={styles.voucherBuilderHeader}>
       <div className={styles.leftCardHeading}>
         <div className={styles.breadcrumbDiv}>
           <Breadcrumb
             breadcrumbItems={[
-              { breadcrumbName: 'Marketing', path: 'marketing' },
-              { breadcrumbName: 'Voucher', path: '' },
+              { breadcrumbName: 'Vouchers', path: '' },
+              { breadcrumbName: 'Create Voucher', path: '' },
             ]}
           />
         </div>
@@ -157,7 +145,7 @@ export const CreateVoucher: FC<CreateVoucherProps> = ({ title }) => {
             voucherPriceLabel={voucherName}
             voucherRelation={voucherRelation}
             voucherRelationLabel={voucherRelationLabel}
-            currencyType={currencyType}
+            currencyType="£"
             voucherType=""
           />
         </div>
@@ -229,7 +217,7 @@ export const CreateVoucher: FC<CreateVoucherProps> = ({ title }) => {
             </label>
             <div>
               <Input
-                addonBefore={currencySelect}
+                addonBefore="£"
                 type="number"
                 size="large"
                 min={0}
