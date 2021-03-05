@@ -118,12 +118,13 @@ export const Header: FC<P> = ({
   searchRender,
   onCreateChannel,
   onMessageType,
-  ...props
+  ...rest
 }) => {
   const [openNotificationDrawer, setNotificationDrawer] = useState<boolean>(
     false
   )
   const [openMessageDrawer, setMessageDrawer] = useState<boolean>(false)
+
   return (
     <>
       <AntHeader
@@ -163,7 +164,7 @@ export const Header: FC<P> = ({
                 <div>
                   <QuickCreate />
                 </div>
-                <AvatarDropDown />
+                <AvatarDropDown {...rest} />
               </div>
             </Col>
           </Row>
