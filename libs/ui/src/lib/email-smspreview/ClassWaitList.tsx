@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
-import { EmailSMSPreviewProps, ClassRescheduledProps } from './EmailSMSPreview'
+import { EmailSMSPreviewProps, ClassWaitListProps } from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
-import { Button } from '../button/button'
+import styles from './EmailSmsPreview.module.less'
+import { Button } from '../button/Button'
 
-export const ClassWaitList: FC<
-  ClassRescheduledProps & EmailSMSPreviewProps
-> = ({ message }) => {
+export const ClassWaitList: FC<ClassWaitListProps & EmailSMSPreviewProps> = ({
+  message,
+}) => {
   return (
     <>
       <Row gutter={[0, 4]} className={styles.break}>

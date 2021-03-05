@@ -525,20 +525,19 @@
       - invoice_prefix
       - is_active
       - name
-      - order
       backend_only: false
   select_permissions:
   - role: public
     permission:
       columns:
-      - code
-      - created_at
-      - id
-      - invoice_prefix
       - is_active
-      - name
       - order
+      - code
+      - invoice_prefix
+      - name
+      - created_at
       - updated_at
+      - id
       filter: {}
       allow_aggregations: true
   update_permissions:
@@ -550,7 +549,6 @@
       - is_active
       - name
       - order
-      - updated_at
       filter: {}
       check: null
   delete_permissions:
@@ -860,6 +858,52 @@
 - table:
     schema: public
     name: library
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - email
+      - is_active
+      - name
+      - order
+      - phone
+      - provider_no
+      - type
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - order
+      - email
+      - name
+      - phone
+      - provider_no
+      - type
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - email
+      - is_active
+      - name
+      - order
+      - phone
+      - provider_no
+      - type
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: locations
