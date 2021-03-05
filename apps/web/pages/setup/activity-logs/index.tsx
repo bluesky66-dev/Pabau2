@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from 'react'
 import CommonHeader from '../common-header'
 import Layout from '../../../components/Layout/Layout'
+import { CustomScrollbar } from '../../../components/CustomScrollbar'
 import { Typography, Row, Popover, List } from 'antd'
 import { Breadcrumb, SetupSearchInput, Checkbox } from '@pabau/ui'
 import styles from './index.module.less'
@@ -71,7 +72,21 @@ export interface FilerDataItems {
 }
 const Data = [
   {
+    key: 8,
+    icon: <UserOutlined />,
+    user: 'Anonymous user from 5.9.113.0',
+    time: '10:21',
+    updated_time: '20 minutes ago',
+    upload_file_title:
+      'Failed to login with username “Pabau” (incorrect password entered)',
+    file_name: '',
+    file_size: '12 Mb',
+    file_attachment: false,
+  },
+  {
     key: 1,
+    icon: Logo,
+    user: 'You',
     time: '10:21',
     updated_time: 'about 5 hour ago',
     upload_file_title: 'Updated page',
@@ -81,6 +96,8 @@ const Data = [
   },
   {
     key: 2,
+    icon: Logo,
+    user: 'You',
     time: '10:21',
     updated_time: 'about 5 hour ago',
     upload_file_title: 'Uploaded attachment',
@@ -90,6 +107,8 @@ const Data = [
   },
   {
     key: 3,
+    icon: Logo,
+    user: 'You',
     time: '9:25',
     updated_time: 'about 6 hour ago',
     upload_file_title: 'Uploaded attachment',
@@ -99,6 +118,8 @@ const Data = [
   },
   {
     key: 4,
+    icon: Logo,
+    user: 'You',
     time: '9:20',
     updated_time: 'about 6 hour ago',
     upload_file_title: 'Uploaded attachment',
@@ -108,6 +129,8 @@ const Data = [
   },
   {
     key: 5,
+    icon: Logo,
+    user: 'You',
     time: '9:20',
     updated_time: 'about 6 hour ago',
     upload_file_title: 'Edited file',
@@ -117,6 +140,8 @@ const Data = [
   },
   {
     key: 4,
+    icon: Logo,
+    user: 'You',
     time: '9:20',
     updated_time: 'about 6 hour ago',
     upload_file_title: 'Uploaded attachment',
@@ -124,6 +149,14 @@ const Data = [
     file_attachment: true,
     file_size: '657 Kb',
   },
+]
+
+const list = [
+  { label: 'Last 7 Days', value: false, key: 0 },
+  { label: 'Last 14 Days', value: false, key: 1 },
+  { label: 'Last 30 Days', value: false, key: 2 },
+  { label: 'Last 60 Days', value: false, key: 3 },
+  { label: 'Last 90 Days', value: false, key: 4 },
 ]
 
 export interface FilerDataProps {
@@ -137,6 +170,8 @@ export const Index: FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currentFilter, setCurrentFilter] = useState<FilerDataItems[]>([])
   const [searchValue, setSearchValue] = useState<string>('')
+  const [daysList, setDaysList] = useState([...list])
+  const [day, setDay] = useState('')
 
   const onFilterChange = (key: string, value: boolean, index: number) => {
     const tempRecords = { ...filterData }
@@ -179,79 +214,107 @@ export const Index: FC = () => {
     setCurrentFilter(response)
   }, [filterData])
 
+  const onChangeDay = (val, name) => {
+    const selectedList = [...daysList]
+    for (const item of selectedList) {
+      if (item.label === name) {
+        item.value = val
+        setDay(item.label)
+      } else {
+        item.value = false
+      }
+    }
+    setDaysList(selectedList)
+  }
+
   const content = (
-    <div>
-      <SetupSearchInput onChange={handleSearch} />
-      {filterData.marketingSourceFilterData.length > 0 && (
-        <p>Marketing Sources</p>
-      )}
-      <div className={styles.marketingWrapper}>
-        {filterData.marketingSourceFilterData.map((data) => (
-          <div key={data.key}>
-            <Checkbox
-              checked={data.value}
-              onChange={(e) =>
-                onFilterChange(
-                  'marketingSourceFilterData',
-                  e.target.checked,
-                  data.key
-                )
-              }
-            >
-              <Highlighter
-                searchWords={[searchValue]}
-                textToHighlight={data.title}
-              />
-            </Checkbox>
-          </div>
-        ))}
-      </div>
-      {filterData.mediaFilterData.length > 0 && <p>Media</p>}
-      <div className={styles.mediaWrapper}>
-        {filterData.mediaFilterData.map((data) => (
-          <div key={data.key}>
-            <Checkbox
-              checked={data.value}
-              onChange={(e) =>
-                onFilterChange('mediaFilterData', e.target.checked, data.key)
-              }
-            >
-              <Highlighter
-                searchWords={[searchValue]}
-                textToHighlight={data.title}
-              />
-            </Checkbox>
-          </div>
-        ))}
-      </div>
-      {filterData.securityFilterData.length > 0 && <p>security</p>}
-      <div className={styles.securityWrapper}>
-        {filterData.securityFilterData.map((data) => (
-          <div key={data.key}>
-            <Checkbox
-              checked={data.value}
-              onChange={(e) =>
-                onFilterChange('securityFilterData', e.target.checked, data.key)
-              }
-            >
-              <Highlighter
-                searchWords={[searchValue]}
-                textToHighlight={data.title}
-              />
-            </Checkbox>
-          </div>
-        ))}
-      </div>
+    <div className={styles.actionsContent}>
+      <CustomScrollbar autoHide={true} className={styles.customScrollbar}>
+        <SetupSearchInput onChange={handleSearch} />
+        {filterData.marketingSourceFilterData.length > 0 && (
+          <span className={styles.actionsTitle}>Marketing Sources</span>
+        )}
+        <div className={styles.marketingWrapper}>
+          {filterData.marketingSourceFilterData.map((data) => (
+            <div key={data.key} className={styles.actionsList}>
+              <Checkbox
+                checked={data.value}
+                onChange={(e) =>
+                  onFilterChange(
+                    'marketingSourceFilterData',
+                    e.target.checked,
+                    data.key
+                  )
+                }
+              >
+                <Highlighter
+                  searchWords={[searchValue]}
+                  textToHighlight={data.title}
+                />
+              </Checkbox>
+            </div>
+          ))}
+        </div>
+        {filterData.mediaFilterData.length > 0 && (
+          <span className={styles.actionsTitle}>Media</span>
+        )}
+        <div className={styles.mediaWrapper}>
+          {filterData.mediaFilterData.map((data) => (
+            <div key={data.key} className={styles.actionsList}>
+              <Checkbox
+                checked={data.value}
+                onChange={(e) =>
+                  onFilterChange('mediaFilterData', e.target.checked, data.key)
+                }
+              >
+                <Highlighter
+                  searchWords={[searchValue]}
+                  textToHighlight={data.title}
+                />
+              </Checkbox>
+            </div>
+          ))}
+        </div>
+        {filterData.securityFilterData.length > 0 && (
+          <span className={styles.actionsTitle}>security</span>
+        )}
+        <div className={styles.securityWrapper}>
+          {filterData.securityFilterData.map((data) => (
+            <div key={data.key} className={styles.actionsList}>
+              <Checkbox
+                checked={data.value}
+                onChange={(e) =>
+                  onFilterChange(
+                    'securityFilterData',
+                    e.target.checked,
+                    data.key
+                  )
+                }
+              >
+                <Highlighter
+                  searchWords={[searchValue]}
+                  textToHighlight={data.title}
+                />
+              </Checkbox>
+            </div>
+          ))}
+        </div>
+      </CustomScrollbar>
     </div>
   )
 
-  const daylist = (
-    <div>
-      <p>Last 7 Days</p>
-      <p>Last 14 Days</p>
-      <p>Last 30 Days</p>
-      <p>Last 60 Days</p>
-      <p>Last 90 Days</p>
+  const model = (
+    <div className={styles.actionsContent}>
+      {daysList.map((item) => (
+        <div className={styles.actionsList} key={item.key}>
+          <Checkbox
+            checked={item.value}
+            onChange={(e) => onChangeDay(e.target.checked, item.label)}
+          >
+            {item.label}
+          </Checkbox>
+        </div>
+      ))}
     </div>
   )
 
@@ -290,6 +353,7 @@ export const Index: FC = () => {
                   trigger="click"
                   visible={isFilterVisible}
                   onVisibleChange={(visible) => setFilterVisible(visible)}
+                  overlayClassName={styles.actionsPopover}
                 >
                   <span
                     className={styles.highlightText}
@@ -301,19 +365,20 @@ export const Index: FC = () => {
                 </Popover>
                 <span className={styles.text}>For the</span>
                 <Popover
-                  content={daylist}
+                  content={model}
                   title="Select days"
                   placement="bottomRight"
                   trigger="click"
                   visible={isDayFilterVisible}
                   onVisibleChange={(visible) => setDayFilterVisible(visible)}
+                  overlayClassName={styles.actionsPopover}
                 >
                   <span
                     className={styles.highlightText}
                     onClick={() => setDayFilterVisible(true)}
                   >
                     {' '}
-                    Last 30 days
+                    {day === '' ? 'Last 30 days' : day}
                   </span>
                 </Popover>
               </div>
@@ -328,23 +393,6 @@ export const Index: FC = () => {
 
           <div className={styles.activityListBlock}>
             <div className={styles.activityListCard}>
-              <div className={styles.anonymousList}>
-                <div className={styles.box}>
-                  <div className={styles.icon}>
-                    <UserOutlined />
-                  </div>
-                  <div className={styles.content}>
-                    <div className={styles.userTime}>
-                      Anonymous user from{' '}
-                      <span>5.9.113.0 &middot; 3:59 (20 minutes ago)</span>
-                    </div>
-                    <div className={styles.userContent}>
-                      Failed to login with username “Pabau” (incorrect password
-                      entered)
-                    </div>
-                  </div>
-                </div>
-              </div>
               <List
                 itemLayout="horizontal"
                 className={styles.list}
@@ -354,17 +402,25 @@ export const Index: FC = () => {
                     <div className={styles.box}>
                       <List.Item.Meta
                         className={styles.icon}
-                        avatar={<img src={Logo} alt="" />}
+                        avatar={
+                          typeof item.icon === 'object' ? (
+                            item.icon
+                          ) : (
+                            <img src={item.icon} alt="" />
+                          )
+                        }
                       />
                       <div className={styles.content}>
                         <div className={styles.userTime}>
-                          You &middot; <span>{item.time}</span>&nbsp;
+                          {item.user} &middot; <span>{item.time}</span>&nbsp;
                           <span>({item.updated_time})</span>
                         </div>
                         <div className={styles.userContent}>
                           <span>{item.upload_file_title}</span>&nbsp;
                           <span className={styles.label}>
-                            <q>{item.file_name}</q>
+                            {item.file_name === '' ? null : (
+                              <q> {item.file_name}</q>
+                            )}
                           </span>
                         </div>
                         {item.file_attachment === true && (
