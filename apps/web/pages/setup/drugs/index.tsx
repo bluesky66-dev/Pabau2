@@ -1,16 +1,44 @@
 import React, { FC, useState, useEffect } from 'react'
+import { gql } from '@apollo/client'
 import Layout from '../../../components/Layout/Layout'
-import { TabbedTable, Button, Table, Breadcrumb, Pagination } from '@pabau/ui'
+import {
+  TabbedTable,
+  Button,
+  Table,
+  Breadcrumb,
+  Pagination,
+  LibraryCard,
+  LibraryModal,
+  useLiveQuery,
+} from '@pabau/ui'
 import { Card, Input, Row, Col, Popover, Radio } from 'antd'
 import {
   SearchOutlined,
   ApartmentOutlined,
-  FileProtectOutlined,
   FilterOutlined,
 } from '@ant-design/icons'
 import styles from './index.module.less'
 
-const data = [
+const LIST_QUERY = gql`
+  query library_installers($limit: Int, $libLocation: String) {
+    library_installers(
+      limit: $limit
+      where: { library_location: { _ilike: $libLocation } }
+    ) {
+      library_name
+      library_image
+      library_description
+      library_location
+      library_language
+      is_plus
+      data
+      created_date
+      id
+    }
+  }
+`
+
+const fData = [
   {
     id: 1,
     key: '1',
@@ -150,7 +178,9 @@ const Index: FC<P> = ({ ...props }) => {
   const [showCreateBtn, setShowCreateBtn] = useState(true)
   const [searchTerm, setSearchTerm] = useState(null)
   const [dataSource, setDataSource] = useState(null)
-  const [libItems] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])
+  const [libItems, setLibItems] = useState([])
+  const [libraryInstaller, setLibraryInstaller] = useState(false)
+  const [libraryIntallerData, setLibraryInstallerData] = useState(null)
 
   const tabItems = ['Drugs', 'Library']
 
@@ -248,9 +278,30 @@ const Index: FC<P> = ({ ...props }) => {
     }
   }
 
+  const showLibraryInstaller = (item) => {
+    setLibraryInstallerData(item)
+    setLibraryInstaller((libraryInstaller) => !libraryInstaller)
+  }
+
+  const getQueryVariables = () => {
+    const queryOptions = {
+      variables: {
+        limit: 10,
+        libLocation: 'drug',
+      },
+    }
+    return queryOptions
+  }
+
+  const { data, error, loading } = useLiveQuery(LIST_QUERY, getQueryVariables())
+
   useEffect(() => {
-    setDataSource(data)
-  }, [])
+    setDataSource(fData)
+    if (!loading && data) {
+      setLibItems(data)
+    }
+    console.log('D:', data)
+  }, [data, error, loading])
 
   return (
     <Layout>
@@ -283,13 +334,11 @@ const Index: FC<P> = ({ ...props }) => {
                         xs={24}
                         key={`col-key-${key * 123}`}
                       >
-                        <div className={styles.libraryCard}>
-                          <div>
-                            <FileProtectOutlined color="#9292A3;" />
-                          </div>
-                          <h4>BNF Drug Database</h4>
-                          <p>1082 drugs</p>
-                        </div>
+                        <LibraryCard
+                          onClick={() => showLibraryInstaller(el)}
+                          title={el.library_name}
+                          bundleCount={el.data?.length}
+                        />
                       </Col>
                     ))}
                 </Row>
@@ -307,6 +356,25 @@ const Index: FC<P> = ({ ...props }) => {
             />
           </div>
         )}
+        <Row>
+          <Col md={24}>
+            {libraryIntallerData && (
+              <LibraryModal
+                image={
+                  libraryIntallerData?.library_image ||
+                  'https://wallpaperaccess.com/full/271965.jpg'
+                }
+                title={libraryIntallerData?.library_name}
+                subTitle={libraryIntallerData?.library_description}
+                visible={libraryInstaller}
+                bundleTypes={libraryIntallerData?.data}
+                onClose={() =>
+                  setLibraryInstaller((libraryInstaller) => !libraryInstaller)
+                }
+              />
+            )}
+          </Col>
+        </Row>
       </div>
     </Layout>
   )

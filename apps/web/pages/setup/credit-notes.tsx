@@ -44,7 +44,6 @@ const DELETE_MUTATION = gql`
 const ADD_MUTATION = gql`
   mutation add_credit_note_types(
     $name: String!
-    $code: String
     $invoice_prefix: String
     $is_active: Boolean
   ) {
@@ -52,7 +51,6 @@ const ADD_MUTATION = gql`
       object: {
         name: $name
         is_active: $is_active
-        code: $code
         invoice_prefix: $invoice_prefix
       }
     ) {
@@ -67,7 +65,6 @@ const EDIT_MUTATION = gql`
     $name: String!
     $is_active: Boolean
     $invoice_prefix: String
-    $code: String
     $order: Int
   ) {
     update_credit_note_type_by_pk(
@@ -77,7 +74,6 @@ const EDIT_MUTATION = gql`
         invoice_prefix: $invoice_prefix
         is_active: $is_active
         order: $order
-        code: $code
       }
     ) {
       __typename

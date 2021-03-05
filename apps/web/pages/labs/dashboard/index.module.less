@@ -1,0 +1,143 @@
+.labsDashboard {
+  display: flex;
+  flex-direction: column;
+
+  .topBanner {
+    margin-bottom: 30px;
+  }
+
+  .labsDashboardCard {
+    background: #ffffff;
+
+    .cardHeader {
+      min-height: 50px;
+      border-bottom: 1px solid #ecedf0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-right: 25px;
+
+      :global h1 {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 25px;
+        color: #3d3d46;
+        padding: 5px 24px;
+      }
+    }
+
+    .cardBody {
+      .tabs {
+        margin-bottom: 40px;
+        padding: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .tab {
+          // cursor: pointer;
+          border: 1px solid #ecedf0;
+          box-sizing: border-box;
+          border-radius: 4px;
+          min-width: 24%;
+
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          padding: 10px 20px;
+          margin-bottom: 10px;
+
+          :global {
+            div:first-child {
+              line-height: 0px;
+              padding-right: 20px;
+              &.requested {
+                path {
+                  fill: #54b2d3;
+                }
+              }
+              &.processing {
+                path {
+                  fill: #faad14;
+                }
+              }
+              &.received {
+                path {
+                  fill: #65cd98;
+                }
+              }
+              &.sent {
+                path {
+                  fill: #7b61e2;
+                }
+              }
+            }
+            div:last-child {
+              h3 {
+                margin: 0px;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 32px;
+                display: flex;
+                align-items: center;
+                text-align: center;
+                color: #3d3d46;
+              }
+              p {
+                margin: 0px;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 10px;
+                line-height: 13px;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                color: #9292a3;
+              }
+            }
+          }
+          &:hover {
+            border-color: #54b2d3;
+          }
+
+          @media screen and (max-width: 834px) {
+            & {
+              min-width: 48%;
+              margin-bottom: 20px;
+            }
+          }
+
+          @media screen and (max-width: 320px) {
+            & {
+              min-width: 100%;
+              margin-bottom: 10px;
+            }
+          }
+        }
+      }
+
+      .content {
+        .contentHead {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          padding: 25px;
+          border-bottom: 1px solid #ecedf0;
+
+          :global {
+            h3 {
+              font-style: normal;
+              font-weight: normal;
+              font-size: 20px;
+              line-height: 25px;
+              color: #3d3d46;
+            }
+          }
+        }
+      }
+    }
+  }
+}
