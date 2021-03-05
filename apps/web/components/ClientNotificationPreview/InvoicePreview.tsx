@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { EmailSmsPreview, Invoices } from '@pabau/ui'
-import CustomTemplate from '../../../pages/client-notifications/CustomTemplate'
+import CustomTemplate from '../ClientNotification/CustomTemplate'
 
 interface P {
   standardTapIndex: string
