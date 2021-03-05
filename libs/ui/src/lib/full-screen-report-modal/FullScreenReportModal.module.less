@@ -71,25 +71,20 @@
   }
 }
 
-.fullScreenModalOps {
+.moreButton {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
   display: flex;
+  justify-content: center;
   align-items: center;
-}
-
-.operationSwitch {
-  display: flex;
-  font-family: var(--font-family);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 18px;
+  cursor: pointer;
   color: var(--light-grey-color);
-  margin-right: 2rem;
+  border: 1px solid var(--border-color-base);
 }
 
-.fullScreenModalBody {
-  :global {
-    .ant-tabs-nav {
-      background-color: white;
-    }
-  }
+.mobileVersionOperations {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
 }
