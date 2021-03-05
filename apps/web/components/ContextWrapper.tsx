@@ -7,7 +7,6 @@ import { UserContext } from '../context/UserContext'
 const CURRENT_USER = gql`  query retrieveAuthenticatedUser($Id: Int!, $CompanyId: Int!) { user(where: { id: $Id }) { username full_name } company(where: { id: $CompanyId }) { details {company_name,language  } }}`
 
 const ContextWrapper: FC = ({ children }) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [authenticated, user] = useLogin(false)
   const { data } = useQuery(CURRENT_USER, {
     variables: {
@@ -16,7 +15,7 @@ const ContextWrapper: FC = ({ children }) => {
     },
   })
 
-  return <UserContext.Provider value={data}>{children}</UserContext.Provider>
+  return <UserContext.Provider value={authenticated ? data : null}>{children}</UserContext.Provider>
 }
 
 export default ContextWrapper

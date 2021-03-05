@@ -1,7 +1,8 @@
-import React, { FC, useContext, useEffect } from 'react'
+import React, { FC } from 'react'
 import { Layout as PabauLayout, LayoutProps } from '@pabau/ui'
 import Search from '../Search'
-import { UserContext } from '../../context/UserContext'
+import useLogin from '../../hooks/authentication/useLogin'
+import Login from '../../pages/login'
 
 const onMessageType = () => {
   //add mutation for send message textbox
@@ -13,13 +14,8 @@ const onCreateChannel = (name, description, isPrivate) => {
 }
 
 const Layout: FC<LayoutProps> = ({ children, ...props }) => {
-  const user = useContext(UserContext)
-
-  useEffect(() => {
-    console.log('This is context')
-    console.log(user)
-  })
-  return (
+  const [authenticated] = useLogin(false)
+  return authenticated ? (
     <PabauLayout
       searchRender={() => <Search />}
       onCreateChannel={onCreateChannel}
@@ -28,6 +24,8 @@ const Layout: FC<LayoutProps> = ({ children, ...props }) => {
     >
       {children}
     </PabauLayout>
+  ) : (
+    <Login />
   )
 }
 

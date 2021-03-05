@@ -23,7 +23,6 @@ interface LoginProps {
 // eslint-disable-next-line
 const LOGIN_MUTATION = gql` mutation login($email: String!, $password: String!) { login(username: $email, password: $password) }`
 const LoginMain: FC<LoginProps> = ({ handlePageShow }) => {
-  const router = useRouter()
   const [login] = useMutation(LOGIN_MUTATION)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cookie, setCookie] = useCookies(['user'])
@@ -72,9 +71,7 @@ const LoginMain: FC<LoginProps> = ({ handlePageShow }) => {
           })}
           onSubmit={async (value: LoginFormProps) => {
             try {
-              if (await loginHandler(value)) {
-                await router.push('/index')
-              }
+              await loginHandler(value)
             } catch (error) {
               console.error(error)
             }
