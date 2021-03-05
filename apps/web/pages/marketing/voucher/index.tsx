@@ -99,8 +99,8 @@ export const CreateVoucher: FC<CreateVoucherProps> = ({ title }) => {
         <div className={styles.breadcrumbDiv}>
           <Breadcrumb
             breadcrumbItems={[
-              { breadcrumbName: 'Setup', path: 'setup' },
-              { breadcrumbName: 'Gift Voucher', path: '' },
+              { breadcrumbName: 'Marketing', path: 'marketing' },
+              { breadcrumbName: 'Voucher', path: '' },
             ]}
           />
         </div>
