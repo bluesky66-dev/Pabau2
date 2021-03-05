@@ -11,6 +11,19 @@ export interface ShareReviewProps {
   companyName: string
   date: Date
 }
+export const getFacebookUrl = (picture: string): string =>
+  'http://www.facebook.com/sharer.php?u=https://www.pabau.com&picture=' +
+  picture
+export const getUrl = async (
+  ref: HTMLElement,
+  imagePlaceholder: string
+): Promise<string> => {
+  return await toPng(ref || new HTMLElement(), {
+    width: 550,
+    height: 520,
+    imagePlaceholder,
+  })
+}
 export const ShareReview: FC<ShareReviewProps> = (props: ShareReviewProps) => {
   const [url, setUrl] = useState('')
   const ref = useRef(null)
@@ -69,13 +82,8 @@ export const ShareReview: FC<ShareReviewProps> = (props: ShareReviewProps) => {
                     if (!ref.current || url) {
                       return
                     }
-                    console.log('ref current')
                     setUrl(
-                      await toPng(ref.current || new HTMLElement(), {
-                        width: 550,
-                        height: 520,
-                        imagePlaceholder: props.logo,
-                      })
+                      await getUrl(ref.current || new HTMLElement(), props.logo)
                     )
                   } catch (error) {
                     console.log(error)
@@ -134,11 +142,7 @@ export const ShareReview: FC<ShareReviewProps> = (props: ShareReviewProps) => {
         </Card>
       </div>
       <Image src={url} />
-      <a
-        href={`http://www.facebook.com/sharer.php?u=https://www.pabau.com&picture=${url}`}
-      >
-        Share
-      </a>
+      <a href={getFacebookUrl(url)}>Share</a>
     </>
   )
 }
