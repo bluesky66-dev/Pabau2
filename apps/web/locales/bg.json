@@ -1,0 +1,38 @@
+{
+    "marketingsource-header-create": {
+      "translation": "Създайте маркетингов източник"
+    },
+    "marketingsource-title": {
+      "translation": "Маркетингови източници"
+    },
+    "marketingsource-name-textfield": {
+      "translation": "Фамилия"
+    },
+    "marketingsource-name-placeholder": {
+      "translation": "например. Facebook"
+    },
+    "marketingsource-header-edit": {
+      "translation": "Създайте маркетингов източник"
+    },
+    "marketingsource-input-search-placeholder": {
+      "translation": "Потърсете"
+    },
+    "marketingsource-button-filter": {
+      "translation": "Филтрирано"
+    },
+    "marketingsource-tableColumn-active": {
+      "translation": "Активен"
+    },
+    "marketingsource-tableRow-active-btn": {
+      "translation": "Aktiv"
+    },
+    "marketingsource-tableRow-inActive-btn": {
+      "translation": "Неактивен"
+    },
+    "marketingsource-header-create-btn": {
+      "translation": "Създайте източник"
+    },
+    "marketingsource-header-breadcrumb-setup-link": {
+      "translation": "Инсталирай"
+    }
+  }

@@ -1,0 +1,38 @@
+{
+    "marketingsource-header-create": {
+      "translation": "أنشئ مصدر تسويق"
+    },
+    "marketingsource-title": {
+      "translation": "مصادر التسويق"
+    },
+    "marketingsource-name-textfield": {
+      "translation": "الكنية"
+    },
+    "marketingsource-name-placeholder": {
+      "translation": "مثلا. الفيسبوك"
+    },
+    "marketingsource-header-edit": {
+      "translation": "أنشئ مصدر تسويق"
+    },
+    "marketingsource-input-search-placeholder": {
+      "translation": "ابحث عن"
+    },
+    "marketingsource-button-filter": {
+      "translation": "تمت تصفيته"
+    },
+    "marketingsource-tableColumn-active": {
+      "translation": "نشيط"
+    },
+    "marketingsource-tableRow-active-btn": {
+      "translation": "أكتيف"
+    },
+    "marketingsource-tableRow-inActive-btn": {
+      "translation": "غير نشط"
+    },
+    "marketingsource-header-create-btn": {
+      "translation": "قم بإنشاء مصدر"
+    },
+    "marketingsource-header-breadcrumb-setup-link": {
+      "translation": "تثبيت"
+    }
+  }

@@ -1,0 +1,38 @@
+{
+    "marketingsource-header-create": {
+      "translation": "Creați o sursă de marketing"
+    },
+    "marketingsource-title": {
+      "translation": "Surse de marketing"
+    },
+    "marketingsource-name-textfield": {
+      "translation": "Nume"
+    },
+    "marketingsource-name-placeholder": {
+      "translation": "de exemplu. Facebook"
+    },
+    "marketingsource-header-edit": {
+      "translation": "Editați sursa de marketing"
+    },
+    "marketingsource-input-search-placeholder": {
+      "translation": "Căutare"
+    },
+    "marketingsource-button-filter": {
+      "translation": "Filtru"
+    },
+    "marketingsource-tableColumn-active": {
+      "translation": "Activ"
+    },
+    "marketingsource-tableRow-active-btn": {
+      "translation": "Aktiv"
+    },
+    "marketingsource-tableRow-inActive-btn": {
+      "translation": "Inactiv"
+    },
+    "marketingsource-header-create-btn": {
+      "translation": "Creați sursă"
+    },
+    "marketingsource-header-breadcrumb-setup-link": {
+      "translation": "Înființat"
+    }
+  }

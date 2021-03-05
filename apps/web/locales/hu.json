@@ -1,0 +1,38 @@
+{
+    "marketingsource-header-create": {
+      "translation": "Hozzon létre egy marketing forrást"
+    },
+    "marketingsource-title": {
+      "translation": "Marketing források"
+    },
+    "marketingsource-name-textfield": {
+      "translation": "Vezetéknév"
+    },
+    "marketingsource-name-placeholder": {
+      "translation": "például. Facebook"
+    },
+    "marketingsource-header-edit": {
+      "translation": "Hozzon létre egy marketing forrást"
+    },
+    "marketingsource-input-search-placeholder": {
+      "translation": "Keres"
+    },
+    "marketingsource-button-filter": {
+      "translation": "Szűrt"
+    },
+    "marketingsource-tableColumn-active": {
+      "translation": "Aktív"
+    },
+    "marketingsource-tableRow-active-btn": {
+      "translation": "Aktiv"
+    },
+    "marketingsource-tableRow-inActive-btn": {
+      "translation": "Inaktiv"
+    },
+    "marketingsource-header-create-btn": {
+      "translation": "Opret in kilde"
+    },
+    "marketingsource-header-breadcrumb-setup-link": {
+      "translation": "Telepítés"
+    }
+  }

@@ -100,8 +100,6 @@ export const Index: NextPage = () => {
 
   const user = useContext(UserContext)
 
-  console.log('asdasdasdasdasd', user)
-
   useEffect(() => {
     if (user) {
       const lan = user.company.details.language

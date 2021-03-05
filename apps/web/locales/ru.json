@@ -1,0 +1,38 @@
+{
+    "marketingsource-header-create": {
+      "translation": "Создать маркетинговый источник"
+    },
+    "marketingsource-title": {
+      "translation": "Источники маркетинга"
+    },
+    "marketingsource-name-textfield": {
+      "translation": "Имя"
+    },
+    "marketingsource-name-placeholder": {
+      "translation": "Например. Facebook"
+    },
+    "marketingsource-header-edit": {
+      "translation": "Создайте маркетинговый источник"
+    },
+    "marketingsource-input-search-placeholder": {
+      "translation": "Ищу"
+    },
+    "marketingsource-button-filter": {
+      "translation": "фильтр"
+    },
+    "marketingsource-tableColumn-active": {
+      "translation": "активный"
+    },
+    "marketingsource-tableRow-active-btn": {
+      "translation": "активный"
+    },
+    "marketingsource-tableRow-inActive-btn": {
+      "translation": "неактивный"
+    },
+    "marketingsource-header-create-btn": {
+      "translation": "Опрет в килде"
+    },
+    "marketingsource-header-breadcrumb-setup-link": {
+      "translation": "настраивать"
+    }
+  }

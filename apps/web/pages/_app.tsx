@@ -20,6 +20,18 @@ import i18next from 'i18next'
 import de from '../locales/de.json'
 import en from '../locales/en.json'
 import fr from '../locales/fr.json'
+import sp from '../locales/sp.json'
+import ar from '../locales/ar.json'
+import bg from '../locales/bg.json'
+import cz from '../locales/cz.json'
+import da from '../locales/da.json'
+import hu from '../locales/hu.json'
+import lv from '../locales/lv.json'
+import no from '../locales/no.json'
+import pl from '../locales/pl.json'
+import sw from '../locales/sw.json'
+import ro from '../locales/ro.json'
+import ru from '../locales/ru.json'
 import ContextWrapper from '../components/ContextWrapper'
 require('../styles/global.less')
 require('../../../libs/ui/src/styles/antd.less')
@@ -160,6 +172,42 @@ i18next.init({
     },
     fr: {
       common: fr,
+    },
+    sp: {
+      common: sp,
+    },
+    ar: {
+      common: ar,
+    },
+    bg: {
+      common: bg,
+    },
+    cz: {
+      common: cz,
+    },
+    da: {
+      common: da,
+    },
+    hu: {
+      common: hu,
+    },
+    lv: {
+      common: lv,
+    },
+    no: {
+      common: no,
+    },
+    pl: {
+      common: pl,
+    },
+    sw: {
+      common: sw,
+    },
+    ro: {
+      common: ro,
+    },
+    ru: {
+      common: ru,
     },
   },
 })

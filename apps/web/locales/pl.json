@@ -1,0 +1,38 @@
+{
+    "marketingsource-header-create": {
+      "translation": "Utwórz źródło marketingowe"
+    },
+    "marketingsource-title": {
+      "translation": "Źródła marketingowe"
+    },
+    "marketingsource-name-textfield": {
+      "translation": "Nazwisko"
+    },
+    "marketingsource-name-placeholder": {
+      "translation": "na przykład. Facebook"
+    },
+    "marketingsource-header-edit": {
+      "translation": "Utwórz źródło marketingowe"
+    },
+    "marketingsource-input-search-placeholder": {
+      "translation": "Szukać"
+    },
+    "marketingsource-button-filter": {
+      "translation": "Przefiltrowany"
+    },
+    "marketingsource-tableColumn-active": {
+      "translation": "Aktywny"
+    },
+    "marketingsource-tableRow-active-btn": {
+      "translation": "Aktiv"
+    },
+    "marketingsource-tableRow-inActive-btn": {
+      "translation": "Inaktiv"
+    },
+    "marketingsource-header-create-btn": {
+      "translation": "Opret in kilde"
+    },
+    "marketingsource-header-breadcrumb-setup-link": {
+      "translation": "zainstalować"
+    }
+  }

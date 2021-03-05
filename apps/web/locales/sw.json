@@ -1,0 +1,38 @@
+{
+    "marketingsource-header-create": {
+      "translation": "Skapa en marknadsföringskälla"
+    },
+    "marketingsource-title": {
+      "translation": "Marknadsföringskällor"
+    },
+    "marketingsource-name-textfield": {
+      "translation": "Efternamn"
+    },
+    "marketingsource-name-placeholder": {
+      "translation": "till exempel. Facebook"
+    },
+    "marketingsource-header-edit": {
+      "translation": "Skapa en marknadsföringskälla"
+    },
+    "marketingsource-input-search-placeholder": {
+      "translation": "Leta efter"
+    },
+    "marketingsource-button-filter": {
+      "translation": "Filtrerad"
+    },
+    "marketingsource-tableColumn-active": {
+      "translation": "Aktiva"
+    },
+    "marketingsource-tableRow-active-btn": {
+      "translation": "Aktiv"
+    },
+    "marketingsource-tableRow-inActive-btn": {
+      "translation": "Inaktiv"
+    },
+    "marketingsource-header-create-btn": {
+      "translation": "Opret i kilde"
+    },
+    "marketingsource-header-breadcrumb-setup-link": {
+      "translation": "Installera"
+    }
+  }

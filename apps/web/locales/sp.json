@@ -1,0 +1,125 @@
+{
+    "marketingsource-header-create": {
+        "translation": "Crear fuente de marketing"
+    },
+    "marketingsource-title": {
+        "translation": "Fuentes de marketing"
+    },
+    "marketingsource-name-textfield": {
+        "translation": "Nombre"
+    },
+    "marketingsource-name-placeholder": {
+        "translation": "p.ej. Facebook"
+    },
+    "marketingsource-header-edit": {
+        "translation": "Editar fuente de marketing"
+    },
+    "KEY": {
+        "translation": "Texto"
+    },
+    "search.placeholder": {
+        "translation": "Buscar clientes o leads"
+    },
+    "avatar.balance": {
+        "translation": "Equilibrio"
+    },
+    "avatar.account.settings": {
+        "translation": "Configuraciones de la cuenta"
+    },
+    "avatar.tasks": {
+        "translation": "Tareas"
+    },
+    "avatar.give.feedback": {
+        "translation": "Give feedback"
+    },
+    "avatar.help.support": {
+        "translation": "Servicio de asistencia"
+    },
+    "avatar.help.support.header": {
+        "translation": "Servicio de asistencia"
+    },
+    "avatar.help.support.centre": {
+        "translation": "Centro de ayuda"
+    },
+    "avatar.help.video.guides": {
+        "translation": "Guías de video"
+    },
+    "avatar.help.contact.support": {
+        "translation": "Soporte de contacto"
+    },
+    "avatar.select.language": {
+        "translation": "Select language"
+    },
+    "avatar.change.company": {
+        "translation": "Seleccionar empresa"
+    },
+    "avatar.logout": {
+        "translation": "Cerrar sesión"
+    },
+    "search.client.label": {
+        "translation": "Clientes"
+    },
+    "search.lead.label": {
+        "translation": "Dirige"
+    },
+    "search.result.one": {
+        "translation": "Resultado principal"
+    },
+    "search.result.two": {
+        "translation": "Todos los resultados"
+    },
+    "search.new.client": {
+        "translation": "Agregar nueva cliente"
+    },
+    "search.advanced.search": {
+        "translation": "Búsqueda Avanzada"
+    },
+    "notifications.header": {
+        "translation": "Notificaciones"
+    },
+    "notifications.tab.activity": {
+        "translation": "Actividad"
+    },
+    "notifications.tab.news": {
+        "translation": "Noticias"
+    },
+    "notifications.today": {
+        "translation": "Hoy dia"
+    },
+    "notifications.yesterday": {
+        "translation": "Ayer"
+    },
+    "notifications.report": {
+        "translation": "Reporte"
+    },
+    "notifications.appointment": {
+        "translation": "Cita \n"
+    },
+    "notifications.lead": {
+        "translation": "Dirige"
+    },
+    "news.learn": {
+        "translation": "Aprende más"
+    },
+    "marketingsource-input-search-placeholder": {
+        "translation": "Buscar"
+    },
+    "marketingsource-button-filter": {
+        "translation": "Filtrar"
+    },
+    "marketingsource-tableColumn-active": {
+        "translation": "Activo"
+    },
+    "marketingsource-tableRow-active-btn": {
+        "translation": "Aktiv"
+    },
+    "marketingsource-tableRow-inActive-btn": {
+        "translation": "Inactivo"
+    },
+    "marketingsource-header-create-btn": {
+        "translation": "Crear fuente"
+    },
+    "marketingsource-header-breadcrumb-setup-link": {
+        "translation": "Configuración"
+    }
+}
