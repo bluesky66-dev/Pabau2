@@ -1,0 +1,102 @@
+.listContainer {
+  max-height: 60vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  @media (max-width: 767px) {
+    max-height: calc(100vh - 196px);
+  }
+
+  .imgContainer {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    background: #F7F7F9;
+    height: 120px;
+
+    @media (min-width: 1024px) {
+      height: 136px;
+    }
+
+    .listImg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .checked {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #54B2D3;
+      background: #FFF;
+      border-radius: 50%;
+    }
+
+    .chooseFileBtn {
+      display: flex;
+      background: #54B2D3;
+      border-radius: 4px;
+      padding: 5px 16px;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      color: #FFF;
+      margin: 20px 0 12px;
+
+      span {
+        margin-right: 10px;
+      }
+
+      @media (max-width: 767px) {
+        padding: 4px 6px;
+        margin: 10px 0;
+        span {
+          margin-right: 4px;
+        }
+      }
+    }
+  }
+
+  .selectedImg {
+    border-color: #54B2D3;
+  }
+}
+
+.searchBar {
+  :global {
+    .ant-input-search-button {
+      padding-left: 0;
+      padding-right: 0;
+      border-left-width: 0;
+    }
+  }
+}
+
+.modalContainer {
+  :global {
+    .ant-modal {
+      top: 20px;
+
+      @media (max-width: 767px) {
+        top: 0;
+        margin: 0;
+        max-width: 100%;
+        padding-bottom: 0;
+      }
+    }
+
+    .ant-modal-content {
+      border-radius: 0;
+    }
+
+    .ant-modal-title {
+      font-size: 18px;
+    }
+  }
+}
