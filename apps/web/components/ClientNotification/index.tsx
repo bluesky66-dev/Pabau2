@@ -1,11 +1,11 @@
 import React, { FC, useState, forwardRef } from 'react'
 import { ClientNotification, Standard, Appointment, Smstext } from '@pabau/ui'
-import CancelAppointmentPreview from '../../pages/client-notifications/cancelled-appointment/CancelAppointmentPreview'
-import NoShowAppointmentPreview from '../../pages/client-notifications/noshow-appointment/NoShowAppointmentPreview'
-import NewAppointmentPreview from '../../pages/client-notifications/new-appointment/NewAppointmentPreview'
-import RescheduleAppointmentPreview from '../../pages/client-notifications/rescheduled-appointment/RescheduleAppointmentPreview'
-import BookedOntoClassPreview from '../../pages/client-notifications/class-booked/BookedOntoClassPreview'
-import WaitListPreview from '../../pages/client-notifications/waitlist/WaitListPreview'
+import CancelAppointmentPreview from '../ClientNotificationPreview/CancelAppointmentPreview'
+import NoShowAppointmentPreview from '../ClientNotificationPreview/NoShowAppointmentPreview'
+import NewAppointmentPreview from '../ClientNotificationPreview/NewAppointmentPreview'
+import RescheduleAppointmentPreview from '../ClientNotificationPreview/RescheduleAppointmentPreview'
+import BookedOntoClassPreview from '../ClientNotificationPreview/BookedOntoClassPreview'
+import WaitListPreview from '../ClientNotificationPreview/WaitListPreview'
 import ConnectRegistrationPreview from '../../pages/client-notifications/connect-registration/ConnectRegistrationPreview'
 
 interface P {
