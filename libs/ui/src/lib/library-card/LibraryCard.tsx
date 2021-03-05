@@ -2,7 +2,6 @@ import React, { FC } from 'react'
 import { FileProtectOutlined } from '@ant-design/icons'
 import styles from './LibraryCard.module.less'
 
-/* eslint-disable-next-line */
 export interface LibraryCardProps {
   isPlus?: boolean
   title: string | number

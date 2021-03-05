@@ -2,7 +2,6 @@ import React, { FC, useState, useEffect } from 'react'
 import { gql } from '@apollo/client'
 import { Row, Col } from 'antd'
 import { LibraryModal, LibraryCard, useLiveQuery } from '@pabau/ui'
-import { FileProtectOutlined } from '@ant-design/icons'
 import styles from './library_tab.module.less'
 
 const LIST_QUERY = gql`
