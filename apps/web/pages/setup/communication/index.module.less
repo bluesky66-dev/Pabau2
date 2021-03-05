@@ -1,0 +1,35 @@
+.medical-forms-container {
+    background-color: white;
+    width: 100%;
+    margin-top: 32px;
+  
+    :global {
+      .ant-tabs-content .ant-tabs-content-top {
+        height: 100vh;
+      }
+    }
+  }
+  
+  .medical-forms-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 24px;
+    :global {
+      .ant-typography, .ant-breadcrumb {
+        padding: 0;
+      }
+      .ant-breadcrumb {
+        margin-bottom: 8px;
+      }
+    }
+    .medical-forms-ops {
+      display: flex;
+      align-items: center;
+      > div {
+        margin-left: 1rem;
+      }
+    }
+    @media (max-width: 991px) {
+      flex-direction: column;
+    }
+  }
