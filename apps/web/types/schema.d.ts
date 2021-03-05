@@ -12,6 +12,11 @@ interface Schema {
   messages?: messages
   fields: Record<string, SchemaItem>
   shemaType?: string
+  draggable?: boolean
+  notification?: Record<NotificationItems>
+  breadScrumbs?: array<BreadScrumb>
+  createButtonLabel?: string
+  inboxButton?: boolean
   deleteDescField?: string
   tooltip?: string
   createButtonLabel?: string
