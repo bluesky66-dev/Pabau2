@@ -1,6 +1,13 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { monthlyTicks, series, meta, services, employees, years } from './mock'
+import {
+  ticks,
+  series,
+  meta,
+  serviceGroups,
+  employees,
+  yearsData,
+} from './mock'
 
 import TeamReportChart from './TeamReportChart'
 
@@ -8,13 +15,12 @@ describe('TeamReportChart', () => {
   it('should render successfully', () => {
     const { baseElement } = render(
       <TeamReportChart
-        type="monthly"
-        ticks={monthlyTicks}
+        ticks={ticks.monthly}
         series={series}
         meta={meta}
-        services={services}
+        serviceGroups={serviceGroups}
         employees={employees}
-        years={years}
+        years={yearsData.monthly}
       />
     )
     expect(baseElement).toBeTruthy()

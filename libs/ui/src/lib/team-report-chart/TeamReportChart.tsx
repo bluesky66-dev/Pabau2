@@ -47,9 +47,11 @@ export interface TeamReportCategoryType {
 }
 
 export interface TeamReportChartSeries {
-  name: string
+  title: string
+  serviceName: string
   data: number[]
   formatter: (value: number) => string
+  color?: string
 }
 
 export interface TeamReportServiceGroup {
@@ -63,27 +65,26 @@ export interface TeamReportEmployee {
 }
 
 export interface TeamReportMeta {
+  type: 'monthly' | 'quater' | 'yearly'
   services: string[]
   employees: string[]
   years: string[]
 }
 
 export interface TeamReportChartProps {
-  type?: 'monthly' | 'quater' | 'yearly'
   ticks: string[]
   series: TeamReportChartSeries[]
   meta: TeamReportMeta
-  services: TeamReportServiceGroup[]
+  serviceGroups: TeamReportServiceGroup[]
   employees: TeamReportEmployee[]
   years: string[]
   onChangeMeta?: (meta: TeamReportMeta) => void
 }
 
 export const TeamReportChart: FC<TeamReportChartProps> = ({
-  type = 'monthly',
   ticks,
   series,
-  services,
+  serviceGroups,
   employees,
   years,
   meta,
@@ -102,6 +103,7 @@ export const TeamReportChart: FC<TeamReportChartProps> = ({
     legend: { enabled: false },
     xAxis: [
       {
+        crosshair: true,
         categories: ticks,
         title: { enabled: false },
         gridLineWidth: 1,
@@ -112,6 +114,20 @@ export const TeamReportChart: FC<TeamReportChartProps> = ({
           style: {
             color: '#9292A3',
             fontSize: '14px',
+          },
+        },
+        events: {
+          setExtremes: function (e) {
+            const thisChart = this.chart
+
+            for (const chart of Highcharts.charts) {
+              if (chart !== thisChart && chart?.xAxis[0].setExtremes) {
+                // It is null while updating
+                chart.xAxis[0].setExtremes(e.min, e.max, undefined, false, {
+                  trigger: 'syncExtremes',
+                })
+              }
+            }
           },
         },
       },
@@ -134,9 +150,10 @@ export const TeamReportChart: FC<TeamReportChartProps> = ({
       opposite: index > 0 ? true : undefined,
     })),
     series: series.map((item, index) => ({
-      name: item.name,
-      data: item.data,
+      name: item.title,
+      data: item.data.slice(0, ticks.length),
       yAxis: index,
+      color: item.color,
     })),
     plotOptions: {
       series: {
@@ -187,7 +204,8 @@ export const TeamReportChart: FC<TeamReportChartProps> = ({
             },
           },
         },
-        data: series[index].data,
+        data: series[index].data.slice(0, ticks.length),
+        color: series[index].color,
       },
     ],
     navigator: {
@@ -195,6 +213,17 @@ export const TeamReportChart: FC<TeamReportChartProps> = ({
       handles: { enabled: false },
       height: 40,
       margin: 0,
+      series: {
+        type: 'scatter',
+      },
+      xAxis: {
+        crosshair: true,
+        lineWidth: 0,
+        tickLength: 0,
+        labels: {
+          enabled: false,
+        },
+      },
     },
   })
 
@@ -210,11 +239,11 @@ export const TeamReportChart: FC<TeamReportChartProps> = ({
       ],
     },
     ...series.map((serie, index) => ({
-      title: serie.name,
+      title: serie.title,
       visible: true,
       children: [
         {
-          dataIndex: serie.name,
+          dataIndex: serie.title,
           align: 'right',
           width: `${100 / (series.length + 1)}%`,
           title: (
@@ -231,7 +260,7 @@ export const TeamReportChart: FC<TeamReportChartProps> = ({
 
   const tableData = ticks.map((tick, index) => {
     const data = { date: tick }
-    series.map((serie) => (data[serie.name] = serie.data[index]))
+    series.map((serie) => (data[serie.title] = serie.data[index]))
     return data
   })
 
@@ -261,6 +290,18 @@ export const TeamReportChart: FC<TeamReportChartProps> = ({
     onChangeMeta?.({ ...meta, employees: selected })
   }
 
+  const handleToggleYearType = () => {
+    onChangeMeta?.({
+      ...meta,
+      type:
+        meta.type === 'yearly'
+          ? 'quater'
+          : meta.type === 'quater'
+          ? 'monthly'
+          : 'yearly',
+    })
+  }
+
   const handleToggleYear = (year: string) => {
     const selected = meta.years
     const index = selected.indexOf(year)
@@ -288,7 +329,7 @@ export const TeamReportChart: FC<TeamReportChartProps> = ({
                 >
                   {service}
                 </span>
-                {index === series.length - 2 && (
+                {index === meta.services.length - 2 && (
                   <span style={{ marginLeft: 6 }}>and</span>
                 )}
               </>
@@ -301,7 +342,7 @@ export const TeamReportChart: FC<TeamReportChartProps> = ({
               }
               content={
                 <div className={styles.selectServiceContent}>
-                  {services.map((grp, index) => (
+                  {serviceGroups.map((grp, index) => (
                     <div
                       className={styles.selectServiceGroup}
                       key={serviceMarkers[index].marker}
@@ -319,6 +360,7 @@ export const TeamReportChart: FC<TeamReportChartProps> = ({
                         <Checkbox
                           key={service}
                           className={styles.selectService}
+                          checked={meta.services.includes(service)}
                           onChange={(checked) => handleToggleService(service)}
                         >
                           {service}
@@ -369,11 +411,15 @@ export const TeamReportChart: FC<TeamReportChartProps> = ({
               trigger="hover"
               className={styles.selectService}
             >
-              <span className={styles.addEmployee}>
-                {employees.length === meta.employees.length
-                  ? 'All'
-                  : meta.employees.join(' ')}
-              </span>
+              {employees.length === meta.employees.length ? (
+                <span className={styles.addEmployee}>All</span>
+              ) : (
+                meta.employees.map((employee) => (
+                  <span className={styles.addEmployee} key={employee}>
+                    {employee}
+                  </span>
+                ))
+              )}
             </Popover>
           </div>
           <div className={styles.years}>
@@ -382,7 +428,19 @@ export const TeamReportChart: FC<TeamReportChartProps> = ({
               overlayClassName={styles.selectServicePopup}
               placement="bottomRight"
               title={
-                <div className={styles.selectServiceTitle}>Select a year</div>
+                <div className={styles.selectServiceTitle}>
+                  Select a
+                  <span
+                    className={styles.selectYearType}
+                    onClick={handleToggleYearType}
+                  >
+                    {meta.type === 'yearly'
+                      ? 'Year'
+                      : meta.type === 'monthly'
+                      ? 'Month'
+                      : 'Quater'}
+                  </span>
+                </div>
               }
               content={
                 <div className={styles.selectYearContent}>
@@ -403,11 +461,15 @@ export const TeamReportChart: FC<TeamReportChartProps> = ({
               trigger="hover"
               className={styles.selectService}
             >
-              <span className={styles.addYear}>
-                {years.length === meta.years.length
-                  ? 'All'
-                  : meta.years.join(' ')}
-              </span>
+              {years.length === meta.years.length ? (
+                <span className={styles.addYear}>All</span>
+              ) : (
+                meta.years.map((year) => (
+                  <span className={styles.addYear} key={year}>
+                    {year}
+                  </span>
+                ))
+              )}
             </Popover>
           </div>
           <Space size={16} className={styles.actions}>
