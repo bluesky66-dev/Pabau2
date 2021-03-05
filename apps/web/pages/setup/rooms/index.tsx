@@ -3,10 +3,6 @@ import React, { useState } from 'react'
 import { CreateRoom } from '@pabau/ui'
 import CrudLayout from '../../../components/CrudLayout/CrudLayout'
 
-/* eslint-disable-next-line */
-export interface RoomsProps {
-}
-
 const schema: Schema = {
   full: 'Rooms',
   fullLower: 'rooms',
@@ -125,7 +121,7 @@ const UPDATE_ORDER_MUTATION = gql`
   }
 `
 
-export function Labs(props: RoomsProps) {
+export function Labs() {
   const [visible, setVisible] = useState(false)
   const createPageOnClick = () => {
     setVisible(true)
