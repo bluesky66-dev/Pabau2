@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Typography } from 'antd'
-import { Table, InventoryLabel } from '@pabau/ui'
+import { Table, ButtonLabel } from '@pabau/ui'
 import { ShopOutlined } from '@ant-design/icons'
 
 import { Products as ProductsData } from './mock'
@@ -59,7 +59,17 @@ const ProductsColumns = [
     visible: true,
     // eslint-disable-next-line react/display-name
     render: (_, { status }) => (
-      <InventoryLabel labelType={status.toLowerCase()} />
+      <ButtonLabel
+        text={status}
+        style={{ width: 90 }}
+        type={
+          status === 'Good'
+            ? 'success'
+            : status === 'Low'
+            ? 'warning'
+            : 'danger'
+        }
+      />
     ),
   },
 ]

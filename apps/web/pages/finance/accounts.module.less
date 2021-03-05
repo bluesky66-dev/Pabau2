@@ -1,0 +1,33 @@
+.desktop-view-none {
+  display: none;
+}
+
+.mobileHeaderContainer {
+  background-color: #fff;
+}
+
+.desktopHeader {
+  background-color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 24px;
+
+  .searchInput {
+    max-width: 250px;
+  }
+  button {
+    margin-left: 16px;
+    color: #9292A3;
+  }
+}
+
+@media (min-width: 200px) and (max-width: 767px) {
+  .mobile-view-none {
+    display: none;
+  }
+
+  .desktop-view-none {
+    display: block;
+  }
+}
