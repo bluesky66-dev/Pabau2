@@ -1,3 +1,4 @@
+export * from './lib/spotlight-buttons/SpotlightButtons'
 export * from './lib/custom-progress/CustomProgress'
 export * from './lib/peer-feedback/PeerFeedback'
 export * from './lib/file-uploder/FileUploder'
