@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { EmailSmsPreview, Birthday } from '@pabau/ui'
 import CustomTemplate from '../../components/ClientNotification/CustomTemplate'
 
@@ -173,10 +173,8 @@ const BirthdayPreview: FC<P> = ({
   selectLanguage,
   informationMessage,
 }) => {
-  const [selectLangData, setSelectLangData] = React.useState<Data>(
-    langData['en']
-  )
-  React.useEffect(() => {
+  const [selectLangData, setSelectLangData] = useState<Data>(langData['en'])
+  useEffect(() => {
     if (langData[`${selectLanguage.toLowerCase()}`]) {
       setSelectLangData({ ...langData[`${selectLanguage.toLowerCase()}`] })
     }

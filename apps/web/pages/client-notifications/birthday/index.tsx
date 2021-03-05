@@ -1,15 +1,14 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Notification, NotificationType } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import ClientNotification from '../../../components/ClientNotification/index'
 import CommonNotificationHeader from '../../../components/ClientNotification/CommonNotificationHeader'
 
 const Index: FC = () => {
-  const [setIndexTab, setSelectedTab] = React.useState(1)
+  const [setIndexTab, setSelectedTab] = useState(1)
 
   const showNotification = (email) => {
     if (setIndexTab === 1) {
-      console.log(email)
       Notification(NotificationType.success, 'Test message sent')
     }
     if (setIndexTab === 2) {
