@@ -108,7 +108,7 @@ const createTemplateStepArgs = [
     SMS: {
       title: 'What type of sms template are you creating',
       subTitle: 'Step 2 of 2',
-      items: itemsWithAddon,
+      items: defaultItems,
     },
     Letter: {
       title: 'What type of letter template are you creating',
