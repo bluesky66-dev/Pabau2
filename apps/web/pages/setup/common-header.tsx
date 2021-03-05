@@ -32,7 +32,7 @@ const CommonHeader: FC<P> = ({ handleSearch }) => {
             <MenuOutlined
               className="menuHeaderIconColor"
               onClick={() => {
-                setMenuDrawer((e) => !openMenuDrawer)
+                setMenuDrawer(() => !openMenuDrawer)
               }}
             />
             <p>Setup</p>
@@ -55,7 +55,7 @@ const CommonHeader: FC<P> = ({ handleSearch }) => {
       {openMenuDrawer && (
         <MobileSidebar
           searchRender={() => <Search />}
-          onSideBarClosed={() => setMenuDrawer((e) => !openMenuDrawer)}
+          onSideBarClosed={() => setMenuDrawer(() => !openMenuDrawer)}
           onClickNotificationDrawer={() => setNotificationDrawer((e) => !e)}
           onClickChatDrawer={() => setMessageDrawer((e) => !e)}
         />
