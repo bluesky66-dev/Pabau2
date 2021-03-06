@@ -84,19 +84,24 @@ export const Advanced: FC = () => {
     <div className={styles.calendarSettingsAdvanced}>
       <div className={styles.settingContent}>
         <Title className={styles.headerText}>Advanced</Title>
-        <span className={styles.description}>
-          configure any further settings.
+        <span className={styles.hideSection}>
+          <span className={`${styles.description}`}>
+            Configure any further settings.
+          </span>
         </span>
       </div>
       <div className={styles.advancedControls}>
         {advancedControls.map((advanced) => {
           return (
-            <div key={advanced.key}>
-              <Checkbox key={advanced.key} defaultChecked={advanced.value}>
+            <div key={advanced.key} className={styles.advancedCheckList}>
+              <Checkbox
+                key={advanced.key}
+                defaultChecked={advanced.value}
+                className={styles.advancedCheck}
+              >
                 <span className={styles.appointmentText}>{advanced.type}</span>
               </Checkbox>
               <HelpTooltip helpText={advanced.help} />
-              <br />
             </div>
           )
         })}

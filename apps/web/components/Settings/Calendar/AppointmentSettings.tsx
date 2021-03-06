@@ -48,16 +48,19 @@ const AppointmentSettings = () => (
     <div className={styles.settingContent}>
       <Title className={styles.headerText}>Appointment settings</Title>
       <span className={styles.description}>
-        Setup your calendar to automatically have your communication <br />{' '}
-        checkbox selected as well as allowing your appointments to <br />{' '}
-        overlap.
+        Setup your calendar to automatically have your communication checkbox
+        selected as well as allowing your appointments to overlap.
       </span>
     </div>
     <div className={styles.appointmentsControls}>
       {appointmentsControls.map((appointment) => {
         return (
-          <div key={appointment.key}>
-            <Checkbox key={appointment.key} defaultChecked={appointment.value}>
+          <div key={appointment.key} className={styles.advancedCheckList}>
+            <Checkbox
+              key={appointment.key}
+              defaultChecked={appointment.value}
+              className={styles.advancedCheck}
+            >
               <span className={styles.appointmentText}>{appointment.type}</span>
             </Checkbox>
             <HelpTooltip helpText={appointment.label} />

@@ -37,9 +37,8 @@ const Appearance = () => (
     <div className={styles.settingContent}>
       <Title className={styles.headerText}>Appearance</Title>
       <span className={styles.description}>
-        Customize the look and feel of the appointment card such <br /> as
-        changing the layout of both the tooltip and the <br /> appointment card
-        itself.
+        Customize the look and feel of the appointment card such as changing the
+        layout of both the tooltip and the appointment card itself.
       </span>
     </div>
     <div className={styles.generalControls}>

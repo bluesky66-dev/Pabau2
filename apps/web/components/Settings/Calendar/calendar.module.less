@@ -1,8 +1,11 @@
 .setting-content {
   padding-top: 20px;
   padding-left: 24px;
-  min-height: 129px;
+  padding-bottom: 16px;
   border-bottom: 1px solid var(--border-color-base);
+  @media screen and (max-width: 767px) {
+    padding: 20px 16px 18px;
+  }
   .header-text {
     font-style: normal;
     font-weight: bold;
@@ -19,6 +22,13 @@
     font-size: 14px;
     line-height: 18px;
     color: var(--light-grey-color);
+    min-height: 60px;
+    width: 400px;
+    display: block;
+    @media screen and (max-width: 767px) {
+      min-height: auto;
+      width: 320px;
+    }
   }
 }
 .calendar-settings-configuration {
@@ -26,9 +36,15 @@
     padding-top: 23px;
     padding-right: 24px;
     padding-left: 24px;
+    @media screen and (max-width: 767px) {
+      padding: 20px 16px 18px;
+    }
 
     .time-slot-select {
-      min-width: 448px;
+      width: 448px;
+      @media screen and (max-width: 767px) {
+        width: 100%;
+      }
       :global {
         .ant-select-selector {
           min-height: 40px;
@@ -62,6 +78,11 @@
 
     .col-left-space {
       padding-left: 6px;
+      @media screen and (max-width: 767px) {
+        width: 100%;
+        padding-left: 0;
+        padding-top: 16px;
+      }
       p {
         font-size: 14px;
         color: var(--light-grey-color);
@@ -85,13 +106,15 @@
           }
           padding: 8px 11px;
           border: 1px solid #ecedf0;
-        
-         
         }
       }
     }
     .col-right-space {
       padding-right: 6px;
+      @media screen and (max-width: 767px) {
+        width: 100%;
+        padding-right: 0;
+      }
       p {
         font-size: 14px;
         color: var(--light-grey-color);
@@ -115,15 +138,20 @@
           }
           padding: 8px 11px;
           border: 1px solid #ecedf0;
-        
-         
         }
       }
-      
     }
     .time-input-space {
       padding-top: 16px;
       width: 448px;
+      @media screen and (max-width: 767px) {
+        width: 100%;
+      }
+      ::global .ant-col {
+        @media screen and (max-width: 767px) {
+          width: 100%;
+        }
+      }
     }
   }
   .title-text-style {
@@ -139,9 +167,18 @@
   .appointments-controls {
     padding-top: 30px;
     padding-left: 24px;
+    @media screen and (max-width: 767px) {
+      padding: 18px 16px 0;
+    }
     :global {
       .ant-checkbox-wrapper {
         padding-bottom: 22px;
+      }
+    }
+    .advanced-check-list {
+      display: flex;
+      .advanced-check {
+        display: flex;
       }
     }
     .appointment-text {
@@ -163,6 +200,9 @@
     padding-top: 30px;
     padding-left: 24px;
     border-bottom: 1px solid var(--border-color-base);
+    @media screen and (max-width: 767px) {
+      padding: 18px 16px 0;
+    }
     :global {
       .ant-checkbox-wrapper {
         padding-bottom: 22px;
@@ -186,6 +226,9 @@
     padding-left: 24px;
     padding-bottom: 24px;
     border-bottom: 1px solid var(--border-color-base);
+    @media screen and (max-width: 767px) {
+      padding: 18px 16px 20px;
+    }
     .font-size-select {
       :global {
         .ant-select {
@@ -213,15 +256,25 @@
     font-weight: bold;
     font-family: Circular-Std-Book;
     font-style: normal;
+    margin-bottom: 12px;
   }
 }
 .calendar-settings-advanced {
   .advanced-controls {
     padding-top: 30px;
     padding-left: 24px;
+    @media screen and (max-width: 767px) {
+      padding: 18px 16px;
+    }
     :global {
       .ant-checkbox-wrapper {
         padding-bottom: 22px;
+      }
+    }
+    .advanced-check-list {
+      display: flex;
+      .advanced-check {
+        display: flex;
       }
     }
     .advanced-text {
@@ -236,5 +289,11 @@
       font-size: 14px;
       color: var(--light-grey-color);
     }
+  }
+}
+
+.hideSection {
+  @media screen and (min-width: 767px) {
+    display: none;
   }
 }

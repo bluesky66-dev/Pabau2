@@ -1,13 +1,28 @@
 .settings-menu {
   border: 1px solid var(--border-color-base);
+  @media screen and (max-width: 767px) {
+    border: none;
+    background-color: #fff;
+  }
   :global {
     .ant-tabs {
       line-height: 18px;
+      .ant-tabs-content-holder {
+        border-left: 1px solid #ecedf0;
+        @media screen and (max-width: 767px) {
+          border-left: none;
+        }
+      }
     }
     .ant-tabs > .ant-tabs-nav {
       width: 200px;
+      @media screen and (max-width: 767px) {
+        width: 100%;
+        margin-bottom: 0;
+      }
     }
-    .ant-tabs-left > .ant-tabs-nav .ant-tabs-tab, .ant-tabs-tab-active {
+    .ant-tabs-left > .ant-tabs-nav .ant-tabs-tab,
+    .ant-tabs-tab-active {
       padding-left: 24px;
       padding-top: 11px;
       padding-bottom: 11px;
@@ -25,6 +40,18 @@
     }
     .ant-tabs-tab {
       color: var(--light-grey-color);
+      @media screen and (max-width: 767px) {
+        min-width: 148px;
+        margin: 0;
+        justify-content: center;
+        border-bottom: 1px solid #ebecef;
+      }
+      &.ant-tabs-tab-active {
+        @media screen and (max-width: 767px) {
+          padding-left: 0;
+          background-color: transparent;
+        }
+      }
     }
     .ant-tabs-left > .ant-tabs-nav .ant-tabs-tab-active .ant-tabs-tab-btn {
       font-family: 'Circular-Std-Book';
@@ -33,7 +60,10 @@
       font-size: 14px;
       line-height: 18px;
     }
-    .ant-tabs-left > .ant-tabs-content-holder > .ant-tabs-content > .ant-tabs-tabpane {
+    .ant-tabs-left
+      > .ant-tabs-content-holder
+      > .ant-tabs-content
+      > .ant-tabs-tabpane {
       padding-left: 0;
     }
   }

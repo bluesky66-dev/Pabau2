@@ -30,11 +30,33 @@ export const SettingsMenu: FC<P> = (props) => {
   ]
 
   const menuItems = props.items || generalSettingsMenu
+  const size = useWindowSize()
+  function useWindowSize() {
+    const [windowSize, setWindowSize] = React.useState({
+      width: 0,
+      height: 0,
+    })
+
+    React.useEffect(() => {
+      function handleResize() {
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        })
+      }
+      window.addEventListener('resize', handleResize)
+      handleResize()
+      return () => window.removeEventListener('resize', handleResize)
+    }, [])
+
+    return windowSize
+  }
+
   return (
     <div className={styles.settingsMenu}>
       <Tabs
-        defaultActiveKey="2"
-        tabPosition={'left'}
+        defaultActiveKey="0"
+        tabPosition={size.width > 767 ? 'left' : 'top'}
         style={{ minHeight: '100vh' }}
       >
         {menuItems.map((menu, i) => (
