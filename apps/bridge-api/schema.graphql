@@ -350,10 +350,10 @@ input AccountBalanceCreateInput {
   insurance_company_id: Int!
 }
 
-input AccountBalanceCreateNestedManyWithoutCompanyInput {
-  connect: [AccountBalanceWhereUniqueInput!]
-  connectOrCreate: [AccountBalanceCreateOrConnectWithoutCompanyInput!]
-  create: [AccountBalanceCreateWithoutCompanyInput!]
+input AccountBalanceCreateNestedOneWithoutCompanyInput {
+  connect: AccountBalanceWhereUniqueInput
+  connectOrCreate: AccountBalanceCreateOrConnectWithoutCompanyInput
+  create: AccountBalanceCreateWithoutCompanyInput
 }
 
 input AccountBalanceCreateOrConnectWithoutCompanyInput {
@@ -366,12 +366,6 @@ input AccountBalanceCreateWithoutCompanyInput {
   contact_id: Int
   imported: Int!
   insurance_company_id: Int!
-}
-
-input AccountBalanceListRelationFilter {
-  every: AccountBalanceWhereInput
-  none: AccountBalanceWhereInput
-  some: AccountBalanceWhereInput
 }
 
 type AccountBalanceLog {
@@ -470,24 +464,11 @@ input AccountBalanceLogWhereUniqueInput {
 
 input AccountBalanceOrderByInput {
   balance: SortOrder
-  company: CompanyOrderByInput
   company_id: SortOrder
   contact_id: SortOrder
   id: SortOrder
   imported: SortOrder
   insurance_company_id: SortOrder
-}
-
-input AccountBalanceScalarWhereInput {
-  AND: [AccountBalanceScalarWhereInput!]
-  NOT: [AccountBalanceScalarWhereInput!]
-  OR: [AccountBalanceScalarWhereInput!]
-  balance: FloatFilter
-  company_id: IntFilter
-  contact_id: IntNullableFilter
-  id: IntFilter
-  imported: IntFilter
-  insurance_company_id: IntFilter
 }
 
 input AccountBalanceUpdateInput {
@@ -505,27 +486,14 @@ input AccountBalanceUpdateManyMutationInput {
   insurance_company_id: IntFieldUpdateOperationsInput
 }
 
-input AccountBalanceUpdateManyWithWhereWithoutCompanyInput {
-  data: AccountBalanceUpdateManyMutationInput!
-  where: AccountBalanceScalarWhereInput!
-}
-
-input AccountBalanceUpdateManyWithoutCompanyInput {
-  connect: [AccountBalanceWhereUniqueInput!]
-  connectOrCreate: [AccountBalanceCreateOrConnectWithoutCompanyInput!]
-  create: [AccountBalanceCreateWithoutCompanyInput!]
-  delete: [AccountBalanceWhereUniqueInput!]
-  deleteMany: [AccountBalanceScalarWhereInput!]
-  disconnect: [AccountBalanceWhereUniqueInput!]
-  set: [AccountBalanceWhereUniqueInput!]
-  update: [AccountBalanceUpdateWithWhereUniqueWithoutCompanyInput!]
-  updateMany: [AccountBalanceUpdateManyWithWhereWithoutCompanyInput!]
-  upsert: [AccountBalanceUpsertWithWhereUniqueWithoutCompanyInput!]
-}
-
-input AccountBalanceUpdateWithWhereUniqueWithoutCompanyInput {
-  data: AccountBalanceUpdateWithoutCompanyInput!
-  where: AccountBalanceWhereUniqueInput!
+input AccountBalanceUpdateOneWithoutCompanyInput {
+  connect: AccountBalanceWhereUniqueInput
+  connectOrCreate: AccountBalanceCreateOrConnectWithoutCompanyInput
+  create: AccountBalanceCreateWithoutCompanyInput
+  delete: Boolean
+  disconnect: Boolean
+  update: AccountBalanceUpdateWithoutCompanyInput
+  upsert: AccountBalanceUpsertWithoutCompanyInput
 }
 
 input AccountBalanceUpdateWithoutCompanyInput {
@@ -535,10 +503,9 @@ input AccountBalanceUpdateWithoutCompanyInput {
   insurance_company_id: IntFieldUpdateOperationsInput
 }
 
-input AccountBalanceUpsertWithWhereUniqueWithoutCompanyInput {
+input AccountBalanceUpsertWithoutCompanyInput {
   create: AccountBalanceCreateWithoutCompanyInput!
   update: AccountBalanceUpdateWithoutCompanyInput!
-  where: AccountBalanceWhereUniqueInput!
 }
 
 input AccountBalanceWhereInput {
@@ -7707,40 +7674,49 @@ input CmContactWhereUniqueInput {
 }
 
 type Company {
+  AcceptEmailToken(after: AcceptEmailTokenWhereUniqueInput, before: AcceptEmailTokenWhereUniqueInput, first: Int, last: Int): [AcceptEmailToken!]!
+  AccountBalance: AccountBalance
+  CmCampaign(after: CmCampaignWhereUniqueInput, before: CmCampaignWhereUniqueInput, first: Int, last: Int): [CmCampaign!]!
+  CmCase(after: CmCaseWhereUniqueInput, before: CmCaseWhereUniqueInput, first: Int, last: Int): [CmCase!]!
+  CmCaseReply(after: CmCaseReplyWhereUniqueInput, before: CmCaseReplyWhereUniqueInput, first: Int, last: Int): [CmCaseReply!]!
+  Details: CompanyDetails
+  MarketingSource(after: MarketingSourceWhereUniqueInput, before: MarketingSourceWhereUniqueInput, first: Int, last: Int): [MarketingSource!]!
+  Subscription: CompanySubscription
+  ThirdPartyAccess(after: ThirdPartyAccessWhereUniqueInput, before: ThirdPartyAccessWhereUniqueInput, first: Int, last: Int): [ThirdPartyAccess!]!
+  TwoFactorHistory(after: TwoFactorHistoryWhereUniqueInput, before: TwoFactorHistoryWhereUniqueInput, first: Int, last: Int): [TwoFactorHistory!]!
+  User(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
   admin: Int!
   creation_date: DateTime!
   cron_enabled: Boolean!
-  details: CompanyDetails
   digit8: Int!
   id: Int!
   image: String!
   remote_connect: String!
   remote_url: String!
   slug: String!
-  subscription: CompanySubscription
   user: String!
 }
 
 input CompanyCreateInput {
   AcceptEmailToken: AcceptEmailTokenCreateNestedManyWithoutCompanyInput
-  AccountBalance: AccountBalanceCreateNestedManyWithoutCompanyInput
+  AccountBalance: AccountBalanceCreateNestedOneWithoutCompanyInput
   CmCampaign: CmCampaignCreateNestedManyWithoutCompanyInput
   CmCase: CmCaseCreateNestedManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyCreateNestedManyWithoutCompanyInput
+  Details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   MarketingSource: MarketingSourceCreateNestedManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesCreateNestedManyWithoutCompanyInput
+  Subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessCreateNestedManyWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryCreateNestedManyWithoutCompanyInput
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
   cron_enabled: Boolean!
-  details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
   remote_connect: String!
   remote_url: String!
   slug: String!
-  subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
 
@@ -7792,10 +7768,10 @@ input CompanyCreateNestedOneWithoutSubscriptionInput {
   create: CompanyCreateWithoutSubscriptionInput
 }
 
-input CompanyCreateNestedOneWithoutThirdPartyAccesInput {
+input CompanyCreateNestedOneWithoutThirdPartyAccessInput {
   connect: CompanyWhereUniqueInput
-  connectOrCreate: CompanyCreateOrConnectWithoutThirdPartyAccesInput
-  create: CompanyCreateWithoutThirdPartyAccesInput
+  connectOrCreate: CompanyCreateOrConnectWithoutThirdPartyAccessInput
+  create: CompanyCreateWithoutThirdPartyAccessInput
 }
 
 input CompanyCreateNestedOneWithoutTwoFactorHistoryInput {
@@ -7850,8 +7826,8 @@ input CompanyCreateOrConnectWithoutSubscriptionInput {
   where: CompanyWhereUniqueInput!
 }
 
-input CompanyCreateOrConnectWithoutThirdPartyAccesInput {
-  create: CompanyCreateWithoutThirdPartyAccesInput!
+input CompanyCreateOrConnectWithoutThirdPartyAccessInput {
+  create: CompanyCreateWithoutThirdPartyAccessInput!
   where: CompanyWhereUniqueInput!
 }
 
@@ -7866,24 +7842,24 @@ input CompanyCreateOrConnectWithoutUserInput {
 }
 
 input CompanyCreateWithoutAcceptEmailTokenInput {
-  AccountBalance: AccountBalanceCreateNestedManyWithoutCompanyInput
+  AccountBalance: AccountBalanceCreateNestedOneWithoutCompanyInput
   CmCampaign: CmCampaignCreateNestedManyWithoutCompanyInput
   CmCase: CmCaseCreateNestedManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyCreateNestedManyWithoutCompanyInput
+  Details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   MarketingSource: MarketingSourceCreateNestedManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesCreateNestedManyWithoutCompanyInput
+  Subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessCreateNestedManyWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryCreateNestedManyWithoutCompanyInput
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
   cron_enabled: Boolean!
-  details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
   remote_connect: String!
   remote_url: String!
   slug: String!
-  subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
 
@@ -7892,97 +7868,98 @@ input CompanyCreateWithoutAccountBalanceInput {
   CmCampaign: CmCampaignCreateNestedManyWithoutCompanyInput
   CmCase: CmCaseCreateNestedManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyCreateNestedManyWithoutCompanyInput
+  Details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   MarketingSource: MarketingSourceCreateNestedManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesCreateNestedManyWithoutCompanyInput
+  Subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessCreateNestedManyWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryCreateNestedManyWithoutCompanyInput
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
   cron_enabled: Boolean!
-  details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
   remote_connect: String!
   remote_url: String!
   slug: String!
-  subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
 
 input CompanyCreateWithoutCmCampaignInput {
   AcceptEmailToken: AcceptEmailTokenCreateNestedManyWithoutCompanyInput
-  AccountBalance: AccountBalanceCreateNestedManyWithoutCompanyInput
+  AccountBalance: AccountBalanceCreateNestedOneWithoutCompanyInput
   CmCase: CmCaseCreateNestedManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyCreateNestedManyWithoutCompanyInput
+  Details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   MarketingSource: MarketingSourceCreateNestedManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesCreateNestedManyWithoutCompanyInput
+  Subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessCreateNestedManyWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryCreateNestedManyWithoutCompanyInput
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
   cron_enabled: Boolean!
-  details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
   remote_connect: String!
   remote_url: String!
   slug: String!
-  subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
 
 input CompanyCreateWithoutCmCaseInput {
   AcceptEmailToken: AcceptEmailTokenCreateNestedManyWithoutCompanyInput
-  AccountBalance: AccountBalanceCreateNestedManyWithoutCompanyInput
+  AccountBalance: AccountBalanceCreateNestedOneWithoutCompanyInput
   CmCampaign: CmCampaignCreateNestedManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyCreateNestedManyWithoutCompanyInput
+  Details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   MarketingSource: MarketingSourceCreateNestedManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesCreateNestedManyWithoutCompanyInput
+  Subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessCreateNestedManyWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryCreateNestedManyWithoutCompanyInput
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
   cron_enabled: Boolean!
-  details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
   remote_connect: String!
   remote_url: String!
   slug: String!
-  subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
 
 input CompanyCreateWithoutCmCaseReplyInput {
   AcceptEmailToken: AcceptEmailTokenCreateNestedManyWithoutCompanyInput
-  AccountBalance: AccountBalanceCreateNestedManyWithoutCompanyInput
+  AccountBalance: AccountBalanceCreateNestedOneWithoutCompanyInput
   CmCampaign: CmCampaignCreateNestedManyWithoutCompanyInput
   CmCase: CmCaseCreateNestedManyWithoutCompanyInput
+  Details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   MarketingSource: MarketingSourceCreateNestedManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesCreateNestedManyWithoutCompanyInput
+  Subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessCreateNestedManyWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryCreateNestedManyWithoutCompanyInput
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
   cron_enabled: Boolean!
-  details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
   remote_connect: String!
   remote_url: String!
   slug: String!
-  subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
 
 input CompanyCreateWithoutDetailsInput {
   AcceptEmailToken: AcceptEmailTokenCreateNestedManyWithoutCompanyInput
-  AccountBalance: AccountBalanceCreateNestedManyWithoutCompanyInput
+  AccountBalance: AccountBalanceCreateNestedOneWithoutCompanyInput
   CmCampaign: CmCampaignCreateNestedManyWithoutCompanyInput
   CmCase: CmCaseCreateNestedManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyCreateNestedManyWithoutCompanyInput
   MarketingSource: MarketingSourceCreateNestedManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesCreateNestedManyWithoutCompanyInput
+  Subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessCreateNestedManyWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryCreateNestedManyWithoutCompanyInput
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
@@ -7993,46 +7970,45 @@ input CompanyCreateWithoutDetailsInput {
   remote_connect: String!
   remote_url: String!
   slug: String!
-  subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
 
 input CompanyCreateWithoutMarketingSourceInput {
   AcceptEmailToken: AcceptEmailTokenCreateNestedManyWithoutCompanyInput
-  AccountBalance: AccountBalanceCreateNestedManyWithoutCompanyInput
+  AccountBalance: AccountBalanceCreateNestedOneWithoutCompanyInput
   CmCampaign: CmCampaignCreateNestedManyWithoutCompanyInput
   CmCase: CmCaseCreateNestedManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyCreateNestedManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesCreateNestedManyWithoutCompanyInput
+  Details: CompanyDetailsCreateNestedOneWithoutCompanyInput
+  Subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessCreateNestedManyWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryCreateNestedManyWithoutCompanyInput
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
   cron_enabled: Boolean!
-  details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
   remote_connect: String!
   remote_url: String!
   slug: String!
-  subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
 
 input CompanyCreateWithoutSubscriptionInput {
   AcceptEmailToken: AcceptEmailTokenCreateNestedManyWithoutCompanyInput
-  AccountBalance: AccountBalanceCreateNestedManyWithoutCompanyInput
+  AccountBalance: AccountBalanceCreateNestedOneWithoutCompanyInput
   CmCampaign: CmCampaignCreateNestedManyWithoutCompanyInput
   CmCase: CmCaseCreateNestedManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyCreateNestedManyWithoutCompanyInput
+  Details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   MarketingSource: MarketingSourceCreateNestedManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesCreateNestedManyWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessCreateNestedManyWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryCreateNestedManyWithoutCompanyInput
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
   cron_enabled: Boolean!
-  details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
   remote_connect: String!
@@ -8041,69 +8017,69 @@ input CompanyCreateWithoutSubscriptionInput {
   user: String!
 }
 
-input CompanyCreateWithoutThirdPartyAccesInput {
+input CompanyCreateWithoutThirdPartyAccessInput {
   AcceptEmailToken: AcceptEmailTokenCreateNestedManyWithoutCompanyInput
-  AccountBalance: AccountBalanceCreateNestedManyWithoutCompanyInput
+  AccountBalance: AccountBalanceCreateNestedOneWithoutCompanyInput
   CmCampaign: CmCampaignCreateNestedManyWithoutCompanyInput
   CmCase: CmCaseCreateNestedManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyCreateNestedManyWithoutCompanyInput
+  Details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   MarketingSource: MarketingSourceCreateNestedManyWithoutCompanyInput
+  Subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryCreateNestedManyWithoutCompanyInput
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
   cron_enabled: Boolean!
-  details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
   remote_connect: String!
   remote_url: String!
   slug: String!
-  subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
 
 input CompanyCreateWithoutTwoFactorHistoryInput {
   AcceptEmailToken: AcceptEmailTokenCreateNestedManyWithoutCompanyInput
-  AccountBalance: AccountBalanceCreateNestedManyWithoutCompanyInput
+  AccountBalance: AccountBalanceCreateNestedOneWithoutCompanyInput
   CmCampaign: CmCampaignCreateNestedManyWithoutCompanyInput
   CmCase: CmCaseCreateNestedManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyCreateNestedManyWithoutCompanyInput
+  Details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   MarketingSource: MarketingSourceCreateNestedManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesCreateNestedManyWithoutCompanyInput
+  Subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessCreateNestedManyWithoutCompanyInput
   User: UserCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
   cron_enabled: Boolean!
-  details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
   remote_connect: String!
   remote_url: String!
   slug: String!
-  subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
 
 input CompanyCreateWithoutUserInput {
   AcceptEmailToken: AcceptEmailTokenCreateNestedManyWithoutCompanyInput
-  AccountBalance: AccountBalanceCreateNestedManyWithoutCompanyInput
+  AccountBalance: AccountBalanceCreateNestedOneWithoutCompanyInput
   CmCampaign: CmCampaignCreateNestedManyWithoutCompanyInput
   CmCase: CmCaseCreateNestedManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyCreateNestedManyWithoutCompanyInput
+  Details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   MarketingSource: MarketingSourceCreateNestedManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesCreateNestedManyWithoutCompanyInput
+  Subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessCreateNestedManyWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryCreateNestedManyWithoutCompanyInput
   admin: Int!
   creation_date: DateTime!
   cron_enabled: Boolean!
-  details: CompanyDetailsCreateNestedOneWithoutCompanyInput
   digit8: Int!
   image: String!
   remote_connect: String!
   remote_url: String!
   slug: String!
-  subscription: CompanySubscriptionCreateNestedOneWithoutCompanyInput
   user: String!
 }
 
@@ -9129,17 +9105,18 @@ input CompanyDetailsWhereUniqueInput {
 }
 
 input CompanyOrderByInput {
+  AccountBalance: AccountBalanceOrderByInput
+  Details: CompanyDetailsOrderByInput
+  Subscription: CompanySubscriptionOrderByInput
   admin: SortOrder
   creation_date: SortOrder
   cron_enabled: SortOrder
-  details: CompanyDetailsOrderByInput
   digit8: SortOrder
   id: SortOrder
   image: SortOrder
   remote_connect: SortOrder
   remote_url: SortOrder
   slug: SortOrder
-  subscription: CompanySubscriptionOrderByInput
   user: SortOrder
 }
 
@@ -9788,24 +9765,24 @@ input CompanySubscriptionWhereUniqueInput {
 
 input CompanyUpdateInput {
   AcceptEmailToken: AcceptEmailTokenUpdateManyWithoutCompanyInput
-  AccountBalance: AccountBalanceUpdateManyWithoutCompanyInput
+  AccountBalance: AccountBalanceUpdateOneWithoutCompanyInput
   CmCampaign: CmCampaignUpdateManyWithoutCompanyInput
   CmCase: CmCaseUpdateManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyUpdateManyWithoutCompanyInput
+  Details: CompanyDetailsUpdateOneWithoutCompanyInput
   MarketingSource: MarketingSourceUpdateManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesUpdateManyWithoutCompanyInput
+  Subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessUpdateManyWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryUpdateManyWithoutCompanyInput
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
   cron_enabled: BoolFieldUpdateOperationsInput
-  details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
   remote_connect: StringFieldUpdateOperationsInput
   remote_url: StringFieldUpdateOperationsInput
   slug: StringFieldUpdateOperationsInput
-  subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
 
@@ -9885,12 +9862,12 @@ input CompanyUpdateOneRequiredWithoutSubscriptionInput {
   upsert: CompanyUpsertWithoutSubscriptionInput
 }
 
-input CompanyUpdateOneRequiredWithoutThirdPartyAccesInput {
+input CompanyUpdateOneRequiredWithoutThirdPartyAccessInput {
   connect: CompanyWhereUniqueInput
-  connectOrCreate: CompanyCreateOrConnectWithoutThirdPartyAccesInput
-  create: CompanyCreateWithoutThirdPartyAccesInput
-  update: CompanyUpdateWithoutThirdPartyAccesInput
-  upsert: CompanyUpsertWithoutThirdPartyAccesInput
+  connectOrCreate: CompanyCreateOrConnectWithoutThirdPartyAccessInput
+  create: CompanyCreateWithoutThirdPartyAccessInput
+  update: CompanyUpdateWithoutThirdPartyAccessInput
+  upsert: CompanyUpsertWithoutThirdPartyAccessInput
 }
 
 input CompanyUpdateOneRequiredWithoutTwoFactorHistoryInput {
@@ -9910,24 +9887,24 @@ input CompanyUpdateOneRequiredWithoutUserInput {
 }
 
 input CompanyUpdateWithoutAcceptEmailTokenInput {
-  AccountBalance: AccountBalanceUpdateManyWithoutCompanyInput
+  AccountBalance: AccountBalanceUpdateOneWithoutCompanyInput
   CmCampaign: CmCampaignUpdateManyWithoutCompanyInput
   CmCase: CmCaseUpdateManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyUpdateManyWithoutCompanyInput
+  Details: CompanyDetailsUpdateOneWithoutCompanyInput
   MarketingSource: MarketingSourceUpdateManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesUpdateManyWithoutCompanyInput
+  Subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessUpdateManyWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryUpdateManyWithoutCompanyInput
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
   cron_enabled: BoolFieldUpdateOperationsInput
-  details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
   remote_connect: StringFieldUpdateOperationsInput
   remote_url: StringFieldUpdateOperationsInput
   slug: StringFieldUpdateOperationsInput
-  subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
 
@@ -9936,97 +9913,98 @@ input CompanyUpdateWithoutAccountBalanceInput {
   CmCampaign: CmCampaignUpdateManyWithoutCompanyInput
   CmCase: CmCaseUpdateManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyUpdateManyWithoutCompanyInput
+  Details: CompanyDetailsUpdateOneWithoutCompanyInput
   MarketingSource: MarketingSourceUpdateManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesUpdateManyWithoutCompanyInput
+  Subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessUpdateManyWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryUpdateManyWithoutCompanyInput
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
   cron_enabled: BoolFieldUpdateOperationsInput
-  details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
   remote_connect: StringFieldUpdateOperationsInput
   remote_url: StringFieldUpdateOperationsInput
   slug: StringFieldUpdateOperationsInput
-  subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
 
 input CompanyUpdateWithoutCmCampaignInput {
   AcceptEmailToken: AcceptEmailTokenUpdateManyWithoutCompanyInput
-  AccountBalance: AccountBalanceUpdateManyWithoutCompanyInput
+  AccountBalance: AccountBalanceUpdateOneWithoutCompanyInput
   CmCase: CmCaseUpdateManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyUpdateManyWithoutCompanyInput
+  Details: CompanyDetailsUpdateOneWithoutCompanyInput
   MarketingSource: MarketingSourceUpdateManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesUpdateManyWithoutCompanyInput
+  Subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessUpdateManyWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryUpdateManyWithoutCompanyInput
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
   cron_enabled: BoolFieldUpdateOperationsInput
-  details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
   remote_connect: StringFieldUpdateOperationsInput
   remote_url: StringFieldUpdateOperationsInput
   slug: StringFieldUpdateOperationsInput
-  subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
 
 input CompanyUpdateWithoutCmCaseInput {
   AcceptEmailToken: AcceptEmailTokenUpdateManyWithoutCompanyInput
-  AccountBalance: AccountBalanceUpdateManyWithoutCompanyInput
+  AccountBalance: AccountBalanceUpdateOneWithoutCompanyInput
   CmCampaign: CmCampaignUpdateManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyUpdateManyWithoutCompanyInput
+  Details: CompanyDetailsUpdateOneWithoutCompanyInput
   MarketingSource: MarketingSourceUpdateManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesUpdateManyWithoutCompanyInput
+  Subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessUpdateManyWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryUpdateManyWithoutCompanyInput
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
   cron_enabled: BoolFieldUpdateOperationsInput
-  details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
   remote_connect: StringFieldUpdateOperationsInput
   remote_url: StringFieldUpdateOperationsInput
   slug: StringFieldUpdateOperationsInput
-  subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
 
 input CompanyUpdateWithoutCmCaseReplyInput {
   AcceptEmailToken: AcceptEmailTokenUpdateManyWithoutCompanyInput
-  AccountBalance: AccountBalanceUpdateManyWithoutCompanyInput
+  AccountBalance: AccountBalanceUpdateOneWithoutCompanyInput
   CmCampaign: CmCampaignUpdateManyWithoutCompanyInput
   CmCase: CmCaseUpdateManyWithoutCompanyInput
+  Details: CompanyDetailsUpdateOneWithoutCompanyInput
   MarketingSource: MarketingSourceUpdateManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesUpdateManyWithoutCompanyInput
+  Subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessUpdateManyWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryUpdateManyWithoutCompanyInput
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
   cron_enabled: BoolFieldUpdateOperationsInput
-  details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
   remote_connect: StringFieldUpdateOperationsInput
   remote_url: StringFieldUpdateOperationsInput
   slug: StringFieldUpdateOperationsInput
-  subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
 
 input CompanyUpdateWithoutDetailsInput {
   AcceptEmailToken: AcceptEmailTokenUpdateManyWithoutCompanyInput
-  AccountBalance: AccountBalanceUpdateManyWithoutCompanyInput
+  AccountBalance: AccountBalanceUpdateOneWithoutCompanyInput
   CmCampaign: CmCampaignUpdateManyWithoutCompanyInput
   CmCase: CmCaseUpdateManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyUpdateManyWithoutCompanyInput
   MarketingSource: MarketingSourceUpdateManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesUpdateManyWithoutCompanyInput
+  Subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessUpdateManyWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryUpdateManyWithoutCompanyInput
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
@@ -10037,46 +10015,45 @@ input CompanyUpdateWithoutDetailsInput {
   remote_connect: StringFieldUpdateOperationsInput
   remote_url: StringFieldUpdateOperationsInput
   slug: StringFieldUpdateOperationsInput
-  subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
 
 input CompanyUpdateWithoutMarketingSourceInput {
   AcceptEmailToken: AcceptEmailTokenUpdateManyWithoutCompanyInput
-  AccountBalance: AccountBalanceUpdateManyWithoutCompanyInput
+  AccountBalance: AccountBalanceUpdateOneWithoutCompanyInput
   CmCampaign: CmCampaignUpdateManyWithoutCompanyInput
   CmCase: CmCaseUpdateManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyUpdateManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesUpdateManyWithoutCompanyInput
+  Details: CompanyDetailsUpdateOneWithoutCompanyInput
+  Subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessUpdateManyWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryUpdateManyWithoutCompanyInput
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
   cron_enabled: BoolFieldUpdateOperationsInput
-  details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
   remote_connect: StringFieldUpdateOperationsInput
   remote_url: StringFieldUpdateOperationsInput
   slug: StringFieldUpdateOperationsInput
-  subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
 
 input CompanyUpdateWithoutSubscriptionInput {
   AcceptEmailToken: AcceptEmailTokenUpdateManyWithoutCompanyInput
-  AccountBalance: AccountBalanceUpdateManyWithoutCompanyInput
+  AccountBalance: AccountBalanceUpdateOneWithoutCompanyInput
   CmCampaign: CmCampaignUpdateManyWithoutCompanyInput
   CmCase: CmCaseUpdateManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyUpdateManyWithoutCompanyInput
+  Details: CompanyDetailsUpdateOneWithoutCompanyInput
   MarketingSource: MarketingSourceUpdateManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesUpdateManyWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessUpdateManyWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryUpdateManyWithoutCompanyInput
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
   cron_enabled: BoolFieldUpdateOperationsInput
-  details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
   remote_connect: StringFieldUpdateOperationsInput
@@ -10085,69 +10062,69 @@ input CompanyUpdateWithoutSubscriptionInput {
   user: StringFieldUpdateOperationsInput
 }
 
-input CompanyUpdateWithoutThirdPartyAccesInput {
+input CompanyUpdateWithoutThirdPartyAccessInput {
   AcceptEmailToken: AcceptEmailTokenUpdateManyWithoutCompanyInput
-  AccountBalance: AccountBalanceUpdateManyWithoutCompanyInput
+  AccountBalance: AccountBalanceUpdateOneWithoutCompanyInput
   CmCampaign: CmCampaignUpdateManyWithoutCompanyInput
   CmCase: CmCaseUpdateManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyUpdateManyWithoutCompanyInput
+  Details: CompanyDetailsUpdateOneWithoutCompanyInput
   MarketingSource: MarketingSourceUpdateManyWithoutCompanyInput
+  Subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryUpdateManyWithoutCompanyInput
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
   cron_enabled: BoolFieldUpdateOperationsInput
-  details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
   remote_connect: StringFieldUpdateOperationsInput
   remote_url: StringFieldUpdateOperationsInput
   slug: StringFieldUpdateOperationsInput
-  subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
 
 input CompanyUpdateWithoutTwoFactorHistoryInput {
   AcceptEmailToken: AcceptEmailTokenUpdateManyWithoutCompanyInput
-  AccountBalance: AccountBalanceUpdateManyWithoutCompanyInput
+  AccountBalance: AccountBalanceUpdateOneWithoutCompanyInput
   CmCampaign: CmCampaignUpdateManyWithoutCompanyInput
   CmCase: CmCaseUpdateManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyUpdateManyWithoutCompanyInput
+  Details: CompanyDetailsUpdateOneWithoutCompanyInput
   MarketingSource: MarketingSourceUpdateManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesUpdateManyWithoutCompanyInput
+  Subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessUpdateManyWithoutCompanyInput
   User: UserUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
   cron_enabled: BoolFieldUpdateOperationsInput
-  details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
   remote_connect: StringFieldUpdateOperationsInput
   remote_url: StringFieldUpdateOperationsInput
   slug: StringFieldUpdateOperationsInput
-  subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
 
 input CompanyUpdateWithoutUserInput {
   AcceptEmailToken: AcceptEmailTokenUpdateManyWithoutCompanyInput
-  AccountBalance: AccountBalanceUpdateManyWithoutCompanyInput
+  AccountBalance: AccountBalanceUpdateOneWithoutCompanyInput
   CmCampaign: CmCampaignUpdateManyWithoutCompanyInput
   CmCase: CmCaseUpdateManyWithoutCompanyInput
   CmCaseReply: CmCaseReplyUpdateManyWithoutCompanyInput
+  Details: CompanyDetailsUpdateOneWithoutCompanyInput
   MarketingSource: MarketingSourceUpdateManyWithoutCompanyInput
-  ThirdPartyAcces: ThirdPartyAccesUpdateManyWithoutCompanyInput
+  Subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
+  ThirdPartyAccess: ThirdPartyAccessUpdateManyWithoutCompanyInput
   TwoFactorHistory: TwoFactorHistoryUpdateManyWithoutCompanyInput
   admin: IntFieldUpdateOperationsInput
   creation_date: DateTimeFieldUpdateOperationsInput
   cron_enabled: BoolFieldUpdateOperationsInput
-  details: CompanyDetailsUpdateOneWithoutCompanyInput
   digit8: IntFieldUpdateOperationsInput
   image: StringFieldUpdateOperationsInput
   remote_connect: StringFieldUpdateOperationsInput
   remote_url: StringFieldUpdateOperationsInput
   slug: StringFieldUpdateOperationsInput
-  subscription: CompanySubscriptionUpdateOneWithoutCompanyInput
   user: StringFieldUpdateOperationsInput
 }
 
@@ -10191,9 +10168,9 @@ input CompanyUpsertWithoutSubscriptionInput {
   update: CompanyUpdateWithoutSubscriptionInput!
 }
 
-input CompanyUpsertWithoutThirdPartyAccesInput {
-  create: CompanyCreateWithoutThirdPartyAccesInput!
-  update: CompanyUpdateWithoutThirdPartyAccesInput!
+input CompanyUpsertWithoutThirdPartyAccessInput {
+  create: CompanyCreateWithoutThirdPartyAccessInput!
+  update: CompanyUpdateWithoutThirdPartyAccessInput!
 }
 
 input CompanyUpsertWithoutTwoFactorHistoryInput {
@@ -10209,27 +10186,27 @@ input CompanyUpsertWithoutUserInput {
 input CompanyWhereInput {
   AND: [CompanyWhereInput!]
   AcceptEmailToken: AcceptEmailTokenListRelationFilter
-  AccountBalance: AccountBalanceListRelationFilter
+  AccountBalance: AccountBalanceWhereInput
   CmCampaign: CmCampaignListRelationFilter
   CmCase: CmCaseListRelationFilter
   CmCaseReply: CmCaseReplyListRelationFilter
+  Details: CompanyDetailsWhereInput
   MarketingSource: MarketingSourceListRelationFilter
   NOT: [CompanyWhereInput!]
   OR: [CompanyWhereInput!]
-  ThirdPartyAcces: ThirdPartyAccesListRelationFilter
+  Subscription: CompanySubscriptionWhereInput
+  ThirdPartyAccess: ThirdPartyAccessListRelationFilter
   TwoFactorHistory: TwoFactorHistoryListRelationFilter
   User: UserListRelationFilter
   admin: IntFilter
   creation_date: DateTimeFilter
   cron_enabled: BoolFilter
-  details: CompanyDetailsWhereInput
   digit8: IntFilter
   id: IntFilter
   image: StringFilter
   remote_connect: StringFilter
   remote_url: StringFilter
   slug: StringFilter
-  subscription: CompanySubscriptionWhereInput
   user: StringFilter
 }
 
@@ -10463,16 +10440,16 @@ type MarketingSource {
   custom_id: Int!
   id: Int!
   imported: Int!
-  public: Int!
-  source_name: String!
+  isActive: Int!
+  name: String!
 }
 
 input MarketingSourceCreateInput {
   company: CompanyCreateNestedOneWithoutMarketingSourceInput!
   custom_id: Int!
   imported: Int!
-  public: Int!
-  source_name: String!
+  isActive: Int!
+  name: String!
 }
 
 input MarketingSourceCreateNestedManyWithoutCompanyInput {
@@ -10489,8 +10466,8 @@ input MarketingSourceCreateOrConnectWithoutCompanyInput {
 input MarketingSourceCreateWithoutCompanyInput {
   custom_id: Int!
   imported: Int!
-  public: Int!
-  source_name: String!
+  isActive: Int!
+  name: String!
 }
 
 input MarketingSourceListRelationFilter {
@@ -10505,8 +10482,8 @@ input MarketingSourceOrderByInput {
   custom_id: SortOrder
   id: SortOrder
   imported: SortOrder
-  public: SortOrder
-  source_name: SortOrder
+  isActive: SortOrder
+  name: SortOrder
 }
 
 input MarketingSourceScalarWhereInput {
@@ -10517,23 +10494,23 @@ input MarketingSourceScalarWhereInput {
   custom_id: IntFilter
   id: IntFilter
   imported: IntFilter
-  public: IntFilter
-  source_name: StringFilter
+  isActive: IntFilter
+  name: StringFilter
 }
 
 input MarketingSourceUpdateInput {
   company: CompanyUpdateOneRequiredWithoutMarketingSourceInput
   custom_id: IntFieldUpdateOperationsInput
   imported: IntFieldUpdateOperationsInput
-  public: IntFieldUpdateOperationsInput
-  source_name: StringFieldUpdateOperationsInput
+  isActive: IntFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
 }
 
 input MarketingSourceUpdateManyMutationInput {
   custom_id: IntFieldUpdateOperationsInput
   imported: IntFieldUpdateOperationsInput
-  public: IntFieldUpdateOperationsInput
-  source_name: StringFieldUpdateOperationsInput
+  isActive: IntFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
 }
 
 input MarketingSourceUpdateManyWithWhereWithoutCompanyInput {
@@ -10562,8 +10539,8 @@ input MarketingSourceUpdateWithWhereUniqueWithoutCompanyInput {
 input MarketingSourceUpdateWithoutCompanyInput {
   custom_id: IntFieldUpdateOperationsInput
   imported: IntFieldUpdateOperationsInput
-  public: IntFieldUpdateOperationsInput
-  source_name: StringFieldUpdateOperationsInput
+  isActive: IntFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
 }
 
 input MarketingSourceUpsertWithWhereUniqueWithoutCompanyInput {
@@ -10581,8 +10558,8 @@ input MarketingSourceWhereInput {
   custom_id: IntFilter
   id: IntFilter
   imported: IntFilter
-  public: IntFilter
-  source_name: StringFilter
+  isActive: IntFilter
+  name: StringFilter
 }
 
 input MarketingSourceWhereUniqueInput {
@@ -10760,7 +10737,7 @@ type Mutation {
   createOneMediaLlibraryAttachments(data: MediaLlibraryAttachmentsCreateInput!): MediaLlibraryAttachments!
   createOneSecondAtAnswer(data: SecondAtAnswerCreateInput!): SecondAtAnswer!
   createOneSecondAtQuestion(data: SecondAtQuestionCreateInput!): SecondAtQuestion!
-  createOneThirdPartyAcces(data: ThirdPartyAccesCreateInput!): ThirdPartyAcces!
+  createOneThirdPartyAccess(data: ThirdPartyAccessCreateInput!): ThirdPartyAccess!
   createOneTimezone(data: TimezoneCreateInput!): Timezone!
   createOneTwoFactorHistory(data: TwoFactorHistoryCreateInput!): TwoFactorHistory!
   createOneUser(data: UserCreateInput!): User!
@@ -10854,7 +10831,7 @@ type Mutation {
   deleteManyMediaLlibraryAttachments(where: MediaLlibraryAttachmentsWhereInput): AffectedRowsOutput!
   deleteManySecondAtAnswer(where: SecondAtAnswerWhereInput): AffectedRowsOutput!
   deleteManySecondAtQuestion(where: SecondAtQuestionWhereInput): AffectedRowsOutput!
-  deleteManyThirdPartyAcces(where: ThirdPartyAccesWhereInput): AffectedRowsOutput!
+  deleteManyThirdPartyAccess(where: ThirdPartyAccessWhereInput): AffectedRowsOutput!
   deleteManyTimezone(where: TimezoneWhereInput): AffectedRowsOutput!
   deleteManyTwoFactorHistory(where: TwoFactorHistoryWhereInput): AffectedRowsOutput!
   deleteManyUser(where: UserWhereInput): AffectedRowsOutput!
@@ -10948,13 +10925,12 @@ type Mutation {
   deleteOneMediaLlibraryAttachments(where: MediaLlibraryAttachmentsWhereUniqueInput!): MediaLlibraryAttachments
   deleteOneSecondAtAnswer(where: SecondAtAnswerWhereUniqueInput!): SecondAtAnswer
   deleteOneSecondAtQuestion(where: SecondAtQuestionWhereUniqueInput!): SecondAtQuestion
-  deleteOneThirdPartyAcces(where: ThirdPartyAccesWhereUniqueInput!): ThirdPartyAcces
+  deleteOneThirdPartyAccess(where: ThirdPartyAccessWhereUniqueInput!): ThirdPartyAccess
   deleteOneTimezone(where: TimezoneWhereUniqueInput!): Timezone
   deleteOneTwoFactorHistory(where: TwoFactorHistoryWhereUniqueInput!): TwoFactorHistory
   deleteOneUser(where: UserWhereUniqueInput!): User
   deleteOneUserSecurityQuestionsAnser(where: UserSecurityQuestionsAnserWhereUniqueInput!): UserSecurityQuestionsAnser
   deleteOnecandidate(where: candidateWhereUniqueInput!): candidate
-  login(password: String!, username: String!): String
   updateManyAcLog(data: AcLogUpdateManyMutationInput!, where: AcLogWhereInput): AffectedRowsOutput!
   updateManyAcLogAction(data: AcLogActionUpdateManyMutationInput!, where: AcLogActionWhereInput): AffectedRowsOutput!
   updateManyAcLogUrl(data: AcLogUrlUpdateManyMutationInput!, where: AcLogUrlWhereInput): AffectedRowsOutput!
@@ -11043,7 +11019,7 @@ type Mutation {
   updateManyMediaLlibraryAttachments(data: MediaLlibraryAttachmentsUpdateManyMutationInput!, where: MediaLlibraryAttachmentsWhereInput): AffectedRowsOutput!
   updateManySecondAtAnswer(data: SecondAtAnswerUpdateManyMutationInput!, where: SecondAtAnswerWhereInput): AffectedRowsOutput!
   updateManySecondAtQuestion(data: SecondAtQuestionUpdateManyMutationInput!, where: SecondAtQuestionWhereInput): AffectedRowsOutput!
-  updateManyThirdPartyAcces(data: ThirdPartyAccesUpdateManyMutationInput!, where: ThirdPartyAccesWhereInput): AffectedRowsOutput!
+  updateManyThirdPartyAccess(data: ThirdPartyAccessUpdateManyMutationInput!, where: ThirdPartyAccessWhereInput): AffectedRowsOutput!
   updateManyTimezone(data: TimezoneUpdateManyMutationInput!, where: TimezoneWhereInput): AffectedRowsOutput!
   updateManyTwoFactorHistory(data: TwoFactorHistoryUpdateManyMutationInput!, where: TwoFactorHistoryWhereInput): AffectedRowsOutput!
   updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): AffectedRowsOutput!
@@ -11137,7 +11113,7 @@ type Mutation {
   updateOneMediaLlibraryAttachments(data: MediaLlibraryAttachmentsUpdateInput!, where: MediaLlibraryAttachmentsWhereUniqueInput!): MediaLlibraryAttachments
   updateOneSecondAtAnswer(data: SecondAtAnswerUpdateInput!, where: SecondAtAnswerWhereUniqueInput!): SecondAtAnswer
   updateOneSecondAtQuestion(data: SecondAtQuestionUpdateInput!, where: SecondAtQuestionWhereUniqueInput!): SecondAtQuestion
-  updateOneThirdPartyAcces(data: ThirdPartyAccesUpdateInput!, where: ThirdPartyAccesWhereUniqueInput!): ThirdPartyAcces
+  updateOneThirdPartyAccess(data: ThirdPartyAccessUpdateInput!, where: ThirdPartyAccessWhereUniqueInput!): ThirdPartyAccess
   updateOneTimezone(data: TimezoneUpdateInput!, where: TimezoneWhereUniqueInput!): Timezone
   updateOneTwoFactorHistory(data: TwoFactorHistoryUpdateInput!, where: TwoFactorHistoryWhereUniqueInput!): TwoFactorHistory
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
@@ -11231,7 +11207,7 @@ type Mutation {
   upsertOneMediaLlibraryAttachments(create: MediaLlibraryAttachmentsCreateInput!, update: MediaLlibraryAttachmentsUpdateInput!, where: MediaLlibraryAttachmentsWhereUniqueInput!): MediaLlibraryAttachments!
   upsertOneSecondAtAnswer(create: SecondAtAnswerCreateInput!, update: SecondAtAnswerUpdateInput!, where: SecondAtAnswerWhereUniqueInput!): SecondAtAnswer!
   upsertOneSecondAtQuestion(create: SecondAtQuestionCreateInput!, update: SecondAtQuestionUpdateInput!, where: SecondAtQuestionWhereUniqueInput!): SecondAtQuestion!
-  upsertOneThirdPartyAcces(create: ThirdPartyAccesCreateInput!, update: ThirdPartyAccesUpdateInput!, where: ThirdPartyAccesWhereUniqueInput!): ThirdPartyAcces!
+  upsertOneThirdPartyAccess(create: ThirdPartyAccessCreateInput!, update: ThirdPartyAccessUpdateInput!, where: ThirdPartyAccessWhereUniqueInput!): ThirdPartyAccess!
   upsertOneTimezone(create: TimezoneCreateInput!, update: TimezoneUpdateInput!, where: TimezoneWhereUniqueInput!): Timezone!
   upsertOneTwoFactorHistory(create: TwoFactorHistoryCreateInput!, update: TwoFactorHistoryUpdateInput!, where: TwoFactorHistoryWhereUniqueInput!): TwoFactorHistory!
   upsertOneUser(create: UserCreateInput!, update: UserUpdateInput!, where: UserWhereUniqueInput!): User!
@@ -11729,15 +11705,15 @@ type Query {
   marketingSourcesCount(where: MarketingSourceWhereInput): Int
   mediaLlibraryAttachments(after: MediaLlibraryAttachmentsWhereUniqueInput, before: MediaLlibraryAttachmentsWhereUniqueInput, first: Int, last: Int, orderBy: [MediaLlibraryAttachmentsOrderByInput!], where: MediaLlibraryAttachmentsWhereInput): [MediaLlibraryAttachments!]!
   mediaLlibraryAttachmentsCount(where: MediaLlibraryAttachmentsWhereInput): Int
-  ping: String
   secondAtAnswer(where: SecondAtAnswerWhereUniqueInput!): SecondAtAnswer
   secondAtAnswers(after: SecondAtAnswerWhereUniqueInput, before: SecondAtAnswerWhereUniqueInput, first: Int, last: Int, orderBy: [SecondAtAnswerOrderByInput!], where: SecondAtAnswerWhereInput): [SecondAtAnswer!]!
   secondAtAnswersCount(where: SecondAtAnswerWhereInput): Int
   secondAtQuestion(where: SecondAtQuestionWhereUniqueInput!): SecondAtQuestion
   secondAtQuestions(after: SecondAtQuestionWhereUniqueInput, before: SecondAtQuestionWhereUniqueInput, first: Int, last: Int, orderBy: [SecondAtQuestionOrderByInput!], where: SecondAtQuestionWhereInput): [SecondAtQuestion!]!
   secondAtQuestionsCount(where: SecondAtQuestionWhereInput): Int
-  thirdPartyAcces(after: ThirdPartyAccesWhereUniqueInput, before: ThirdPartyAccesWhereUniqueInput, first: Int, last: Int, orderBy: [ThirdPartyAccesOrderByInput!], where: ThirdPartyAccesWhereInput): [ThirdPartyAcces!]!
-  thirdPartyAccesCount(where: ThirdPartyAccesWhereInput): Int
+  thirdPartyAccess(where: ThirdPartyAccessWhereUniqueInput!): ThirdPartyAccess
+  thirdPartyAccesses(after: ThirdPartyAccessWhereUniqueInput, before: ThirdPartyAccessWhereUniqueInput, first: Int, last: Int, orderBy: [ThirdPartyAccessOrderByInput!], where: ThirdPartyAccessWhereInput): [ThirdPartyAccess!]!
+  thirdPartyAccessesCount(where: ThirdPartyAccessWhereInput): Int
   timezone(where: TimezoneWhereUniqueInput!): Timezone
   timezones(after: TimezoneWhereUniqueInput, before: TimezoneWhereUniqueInput, first: Int, last: Int, orderBy: [TimezoneOrderByInput!], where: TimezoneWhereInput): [Timezone!]!
   timezonesCount(where: TimezoneWhereInput): Int
@@ -11875,7 +11851,7 @@ input StringNullableFilter {
   startsWith: String
 }
 
-type ThirdPartyAcces {
+type ThirdPartyAccess {
   access_id: Int!
   company: Company!
   company_id: Int!
@@ -11885,51 +11861,48 @@ type ThirdPartyAcces {
   id: Int!
   last_name: String!
   logo: String!
-  occupier: Int!
   passcode: Int!
 }
 
-input ThirdPartyAccesCreateInput {
+input ThirdPartyAccessCreateInput {
   access_id: Int!
-  company: CompanyCreateNestedOneWithoutThirdPartyAccesInput!
+  company: CompanyCreateNestedOneWithoutThirdPartyAccessInput!
   company_name: String!
   email: String!
   first_name: String!
   last_name: String!
   logo: String!
-  occupier: Int!
   passcode: Int!
 }
 
-input ThirdPartyAccesCreateNestedManyWithoutCompanyInput {
-  connect: [ThirdPartyAccesWhereUniqueInput!]
-  connectOrCreate: [ThirdPartyAccesCreateOrConnectWithoutCompanyInput!]
-  create: [ThirdPartyAccesCreateWithoutCompanyInput!]
+input ThirdPartyAccessCreateNestedManyWithoutCompanyInput {
+  connect: [ThirdPartyAccessWhereUniqueInput!]
+  connectOrCreate: [ThirdPartyAccessCreateOrConnectWithoutCompanyInput!]
+  create: [ThirdPartyAccessCreateWithoutCompanyInput!]
 }
 
-input ThirdPartyAccesCreateOrConnectWithoutCompanyInput {
-  create: ThirdPartyAccesCreateWithoutCompanyInput!
-  where: ThirdPartyAccesWhereUniqueInput!
+input ThirdPartyAccessCreateOrConnectWithoutCompanyInput {
+  create: ThirdPartyAccessCreateWithoutCompanyInput!
+  where: ThirdPartyAccessWhereUniqueInput!
 }
 
-input ThirdPartyAccesCreateWithoutCompanyInput {
+input ThirdPartyAccessCreateWithoutCompanyInput {
   access_id: Int!
   company_name: String!
   email: String!
   first_name: String!
   last_name: String!
   logo: String!
-  occupier: Int!
   passcode: Int!
 }
 
-input ThirdPartyAccesListRelationFilter {
-  every: ThirdPartyAccesWhereInput
-  none: ThirdPartyAccesWhereInput
-  some: ThirdPartyAccesWhereInput
+input ThirdPartyAccessListRelationFilter {
+  every: ThirdPartyAccessWhereInput
+  none: ThirdPartyAccessWhereInput
+  some: ThirdPartyAccessWhereInput
 }
 
-input ThirdPartyAccesOrderByInput {
+input ThirdPartyAccessOrderByInput {
   access_id: SortOrder
   company: CompanyOrderByInput
   company_id: SortOrder
@@ -11939,14 +11912,13 @@ input ThirdPartyAccesOrderByInput {
   id: SortOrder
   last_name: SortOrder
   logo: SortOrder
-  occupier: SortOrder
   passcode: SortOrder
 }
 
-input ThirdPartyAccesScalarWhereInput {
-  AND: [ThirdPartyAccesScalarWhereInput!]
-  NOT: [ThirdPartyAccesScalarWhereInput!]
-  OR: [ThirdPartyAccesScalarWhereInput!]
+input ThirdPartyAccessScalarWhereInput {
+  AND: [ThirdPartyAccessScalarWhereInput!]
+  NOT: [ThirdPartyAccessScalarWhereInput!]
+  OR: [ThirdPartyAccessScalarWhereInput!]
   access_id: IntFilter
   company_id: IntFilter
   company_name: StringFilter
@@ -11955,77 +11927,73 @@ input ThirdPartyAccesScalarWhereInput {
   id: IntFilter
   last_name: StringFilter
   logo: StringFilter
-  occupier: IntFilter
   passcode: IntFilter
 }
 
-input ThirdPartyAccesUpdateInput {
+input ThirdPartyAccessUpdateInput {
   access_id: IntFieldUpdateOperationsInput
-  company: CompanyUpdateOneRequiredWithoutThirdPartyAccesInput
+  company: CompanyUpdateOneRequiredWithoutThirdPartyAccessInput
   company_name: StringFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   first_name: StringFieldUpdateOperationsInput
   last_name: StringFieldUpdateOperationsInput
   logo: StringFieldUpdateOperationsInput
-  occupier: IntFieldUpdateOperationsInput
   passcode: IntFieldUpdateOperationsInput
 }
 
-input ThirdPartyAccesUpdateManyMutationInput {
-  access_id: IntFieldUpdateOperationsInput
-  company_name: StringFieldUpdateOperationsInput
-  email: StringFieldUpdateOperationsInput
-  first_name: StringFieldUpdateOperationsInput
-  last_name: StringFieldUpdateOperationsInput
-  logo: StringFieldUpdateOperationsInput
-  occupier: IntFieldUpdateOperationsInput
-  passcode: IntFieldUpdateOperationsInput
-}
-
-input ThirdPartyAccesUpdateManyWithWhereWithoutCompanyInput {
-  data: ThirdPartyAccesUpdateManyMutationInput!
-  where: ThirdPartyAccesScalarWhereInput!
-}
-
-input ThirdPartyAccesUpdateManyWithoutCompanyInput {
-  connect: [ThirdPartyAccesWhereUniqueInput!]
-  connectOrCreate: [ThirdPartyAccesCreateOrConnectWithoutCompanyInput!]
-  create: [ThirdPartyAccesCreateWithoutCompanyInput!]
-  delete: [ThirdPartyAccesWhereUniqueInput!]
-  deleteMany: [ThirdPartyAccesScalarWhereInput!]
-  disconnect: [ThirdPartyAccesWhereUniqueInput!]
-  set: [ThirdPartyAccesWhereUniqueInput!]
-  update: [ThirdPartyAccesUpdateWithWhereUniqueWithoutCompanyInput!]
-  updateMany: [ThirdPartyAccesUpdateManyWithWhereWithoutCompanyInput!]
-  upsert: [ThirdPartyAccesUpsertWithWhereUniqueWithoutCompanyInput!]
-}
-
-input ThirdPartyAccesUpdateWithWhereUniqueWithoutCompanyInput {
-  data: ThirdPartyAccesUpdateWithoutCompanyInput!
-  where: ThirdPartyAccesWhereUniqueInput!
-}
-
-input ThirdPartyAccesUpdateWithoutCompanyInput {
+input ThirdPartyAccessUpdateManyMutationInput {
   access_id: IntFieldUpdateOperationsInput
   company_name: StringFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   first_name: StringFieldUpdateOperationsInput
   last_name: StringFieldUpdateOperationsInput
   logo: StringFieldUpdateOperationsInput
-  occupier: IntFieldUpdateOperationsInput
   passcode: IntFieldUpdateOperationsInput
 }
 
-input ThirdPartyAccesUpsertWithWhereUniqueWithoutCompanyInput {
-  create: ThirdPartyAccesCreateWithoutCompanyInput!
-  update: ThirdPartyAccesUpdateWithoutCompanyInput!
-  where: ThirdPartyAccesWhereUniqueInput!
+input ThirdPartyAccessUpdateManyWithWhereWithoutCompanyInput {
+  data: ThirdPartyAccessUpdateManyMutationInput!
+  where: ThirdPartyAccessScalarWhereInput!
 }
 
-input ThirdPartyAccesWhereInput {
-  AND: [ThirdPartyAccesWhereInput!]
-  NOT: [ThirdPartyAccesWhereInput!]
-  OR: [ThirdPartyAccesWhereInput!]
+input ThirdPartyAccessUpdateManyWithoutCompanyInput {
+  connect: [ThirdPartyAccessWhereUniqueInput!]
+  connectOrCreate: [ThirdPartyAccessCreateOrConnectWithoutCompanyInput!]
+  create: [ThirdPartyAccessCreateWithoutCompanyInput!]
+  delete: [ThirdPartyAccessWhereUniqueInput!]
+  deleteMany: [ThirdPartyAccessScalarWhereInput!]
+  disconnect: [ThirdPartyAccessWhereUniqueInput!]
+  set: [ThirdPartyAccessWhereUniqueInput!]
+  update: [ThirdPartyAccessUpdateWithWhereUniqueWithoutCompanyInput!]
+  updateMany: [ThirdPartyAccessUpdateManyWithWhereWithoutCompanyInput!]
+  upsert: [ThirdPartyAccessUpsertWithWhereUniqueWithoutCompanyInput!]
+}
+
+input ThirdPartyAccessUpdateWithWhereUniqueWithoutCompanyInput {
+  data: ThirdPartyAccessUpdateWithoutCompanyInput!
+  where: ThirdPartyAccessWhereUniqueInput!
+}
+
+input ThirdPartyAccessUpdateWithoutCompanyInput {
+  access_id: IntFieldUpdateOperationsInput
+  company_name: StringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  first_name: StringFieldUpdateOperationsInput
+  last_name: StringFieldUpdateOperationsInput
+  logo: StringFieldUpdateOperationsInput
+  passcode: IntFieldUpdateOperationsInput
+}
+
+input ThirdPartyAccessUpsertWithWhereUniqueWithoutCompanyInput {
+  create: ThirdPartyAccessCreateWithoutCompanyInput!
+  update: ThirdPartyAccessUpdateWithoutCompanyInput!
+  where: ThirdPartyAccessWhereUniqueInput!
+}
+
+input ThirdPartyAccessWhereInput {
+  AND: [ThirdPartyAccessWhereInput!]
+  NOT: [ThirdPartyAccessWhereInput!]
+  OR: [ThirdPartyAccessWhereInput!]
   access_id: IntFilter
   company: CompanyWhereInput
   company_id: IntFilter
@@ -12035,11 +12003,10 @@ input ThirdPartyAccesWhereInput {
   id: IntFilter
   last_name: StringFilter
   logo: StringFilter
-  occupier: IntFilter
   passcode: IntFilter
 }
 
-input ThirdPartyAccesWhereUniqueInput {
+input ThirdPartyAccessWhereUniqueInput {
   id: Int
 }
 

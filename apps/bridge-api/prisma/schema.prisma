@@ -21,7 +21,6 @@ model TwoFactorHistory {
 
 model ThirdPartyAccess {
   id           Int     @id @default(autoincrement())
-  occupier     Int
   company_id   Int     @map("occupier")
   company_name String
   email        String
@@ -170,21 +169,30 @@ model AcLogUrl {
 }
 
 model Company {
-  id             Int                  @id @default(autoincrement())
-  user           String
-  digit8         Int
-  admin          Int
-  creation_date  DateTime
-  image          String
-  slug           String              @unique
-  remote_url     String
-  remote_connect String
-  cron_enabled   Boolean
-  details        CompanyDetails?
-  subscription   CompanySubscription?
+  id               Int                  @id @default(autoincrement())
+  user             String
+  digit8           Int
+  admin            Int
+  creation_date    DateTime
+  image            String
+  slug             String               @unique
+  remote_url       String
+  remote_connect   String
+  cron_enabled     Boolean
+  Details          CompanyDetails?
+  Subscription     CompanySubscription?
+  TwoFactorHistory TwoFactorHistory[]
+  ThirdPartyAccess ThirdPartyAccess[]
+  AcceptEmailToken AcceptEmailToken[]
+  AccountBalance   AccountBalance?
+  MarketingSource  MarketingSource[]
+  CmCase           CmCase[]
+  CmCaseReply      CmCaseReply[]
+  CmCampaign       CmCampaign[]
+  User             User[]
+
 
   @@map("admin")
-
 }
 
 model AdvertCampaign {
@@ -914,18 +922,18 @@ model CancellationPolicy {
 }
 
 model MarketingSource {
-  id          Int     @id @default(autoincrement())
-  source_name String
-  company_id  Int     @map("occupier")
-  custom_id   Int
-  public      Int
-  imported    Int
-  company     Company @relation(fields: [company_id], references: [id])
+  id         Int     @id @default(autoincrement())
+  name       String  @map("source_name")
+  company_id Int     @map("occupier")
+  custom_id  Int
+  isActive   Int     @map("public")
+  imported   Int
+  company    Company @relation(fields: [company_id], references: [id])
 
 
   @@index([company_id], name: "company_id")
-  @@index([public], name: "public")
-  @@index([source_name], name: "source_name")
+  @@index([isActive], name: "public")
+  @@index([name], name: "source_name")
   @@map("marketing_sources")
 }
 

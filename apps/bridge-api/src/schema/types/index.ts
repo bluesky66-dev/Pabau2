@@ -1,5 +1,5 @@
 export * from './TwoFactorHistory';
-export * from './ThirdPartyAcces';
+export * from './ThirdPartyAccess';
 export * from './AcceptEmailToken';
 export * from './AccountBalance';
 export * from './AccountBalanceLog';
@@ -92,5 +92,3 @@ export * from './CmCampaignNote';
 export * from './CmContact';
 export * from './User';
 export * from './UserSecurityQuestionsAnser';
-export * from './Authentication'
-export * from './Ping'

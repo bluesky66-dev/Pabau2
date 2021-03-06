@@ -65,10 +65,6 @@ const CrudTable: FC<P> = ({
   const router = useRouter()
   const user = useContext(UserContext)
 
-  useEffect(() => {
-    console.log(user?.company?.id)
-  })
-
   // eslint-disable-next-line graphql/template-strings
   const [editMutation] = useMutation(editQuery, {
     onCompleted(data) {
@@ -123,7 +119,7 @@ const CrudTable: FC<P> = ({
     const queryOptions = {
       variables: {
         companyId: user?.company?.id,
-        isActive,
+        isActive: Number(isActive),
         searchTerm: '%' + searchTerm + '%',
         offset: paginateData.offset,
         limit: paginateData.limit,
@@ -223,12 +219,15 @@ const CrudTable: FC<P> = ({
     })
   }
 
-  if (error) return <p>Error :( {error.message}</p>
+  if (error) {
+    console.error(error)
+  }
 
   const { fields } = schema
 
   const onSubmit = async (values, { resetForm }) => {
-    console.log('got submittal!', values)
+    values['companyId'] = user?.company?.id
+    console.log(values)
     await (values.id
       ? editMutation({
           variables: values,
@@ -264,6 +263,7 @@ const CrudTable: FC<P> = ({
                   query: listQuery,
                   data: {
                     [key]: [...existing[key], values],
+                    companyId: user?.company?.id,
                   },
                 })
               }
@@ -296,7 +296,7 @@ const CrudTable: FC<P> = ({
       case 'checkbox':
         return defaultVal || true
       case 'number':
-        return Boolean(defaultVal)
+        return Number(defaultVal)
       default:
         return defaultVal || ''
     }
@@ -558,7 +558,7 @@ const CrudTable: FC<P> = ({
             />
             <Pagination
               total={paginateData.total}
-              defaultPageSize={50}
+              defaultPageSize={15}
               showSizeChanger={false}
               onChange={onPaginationChange}
               pageSize={paginateData.limit}

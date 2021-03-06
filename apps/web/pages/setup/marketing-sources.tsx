@@ -14,7 +14,7 @@ const LIST_QUERY = gql`
     $searchTerm: String = ""
     $offset: Int = 0
     $limit: Int = 10
-    $companyId: Int
+    $companyId: Int!
   ) {
     marketingSources(
       first: $offset
@@ -38,7 +38,7 @@ const LIST_AGGREGATE_QUERY = gql`
   query marketing_source_aggregate(
     $public: Int = 1
     $searchTerm: String = ""
-    $companyId: Int
+    $companyId: Int!
   ) {
     marketingSourcesCount(
       where: {
@@ -63,11 +63,11 @@ const ADD_MUTATION = gql`
     $is_active: Int = 1
     $name: String!
     $custom_id: Int = 0
-    $company_id: Int = 8901 #TODO refactor with actual company_id
+    $companyId: Int!
   ) {
     createOneMarketingSource(
       data: {
-        company: { connect: { id: $company_id } }
+        company: { connect: { id: $companyId } }
         imported: $imported
         source_name: $name
         public: $is_active
@@ -80,19 +80,15 @@ const ADD_MUTATION = gql`
 `
 const EDIT_MUTATION = gql`
   mutation update_marketing_source_by_pk(
-    $id: uuid!
-    $name: String!
-    $is_active: Boolean
-    $order: Int
+    $id: Int!
+    $source_name: String
+    $public: Int = 1
   ) {
-    update_marketing_source_by_pk(
-      pk_columns: { id: $id }
-      _set: { name: $name, is_active: $is_active, order: $order }
+    updateOneMarketingSource(
+      data: { source_name: { set: $source_name }, public: { set: $public } }
+      where: { id: $id }
     ) {
-      __typename
       id
-      is_active
-      order
     }
   }
 `

@@ -13,8 +13,17 @@ export const Company = objectType({
     t.model.remote_url();
     t.model.remote_connect();
     t.model.cron_enabled();
-    t.model.details();
-    t.model.subscription();
+    t.model.Details();
+    t.model.Subscription();
+    t.model.TwoFactorHistory();
+    t.model.ThirdPartyAccess();
+    t.model.AcceptEmailToken();
+    t.model.AccountBalance();
+    t.model.MarketingSource();
+    t.model.CmCase();
+    t.model.CmCaseReply();
+    t.model.CmCampaign();
+    t.model.User();
   },
 });
 
