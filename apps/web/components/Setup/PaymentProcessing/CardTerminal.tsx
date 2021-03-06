@@ -18,7 +18,12 @@ const CardTerminal: FC = () => {
   const [form] = Form.useForm()
   const [visibleModal, setVisibleModal] = useState(false)
   const balance = 7883.18
-  const [terminal, setTerminal] = useState<TerminalData | null>(null)
+  const [terminal, setTerminal] = useState<TerminalData | null>({
+    amount: 0,
+    description: '',
+    descriptor: '',
+  })
+  const { amount, description, descriptor } = terminal
   const [, forceUpdate] = useState({})
 
   useEffect(() => {
@@ -79,7 +84,7 @@ const CardTerminal: FC = () => {
         visible={visibleModal}
         modalWidth={682}
         dangerButtonText="Cancel"
-        newButtonText={`Pay out £${terminal.amount}`}
+        newButtonText={`Pay out £${amount}`}
         newButtonDisable={false}
         isValidate={true}
         closable
@@ -125,7 +130,7 @@ const CardTerminal: FC = () => {
               <Form.Item label="Amount to pay out" required>
                 <InputNumber
                   placeholder="Amount to pay out"
-                  value={terminal.amount}
+                  value={amount}
                   max={balance}
                   formatter={(value) =>
                     `£ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
@@ -144,7 +149,17 @@ const CardTerminal: FC = () => {
           <Row>
             <Col span={24}>
               <Form.Item label="Description">
-                <TextArea placeholder="Add some description" rows={4} />
+                <TextArea
+                  placeholder="Add some description"
+                  rows={4}
+                  value={description}
+                  onChange={(event) =>
+                    setTerminal({
+                      ...terminal,
+                      description: event.target.value,
+                    })
+                  }
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -157,7 +172,7 @@ const CardTerminal: FC = () => {
               >
                 <Input
                   placeholder="Statement descriptor"
-                  value={terminal.descriptor}
+                  value={descriptor}
                   onChange={(event) =>
                     setTerminal({ ...terminal, descriptor: event.target.value })
                   }

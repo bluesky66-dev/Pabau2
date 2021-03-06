@@ -22,17 +22,17 @@ const PaymentProcessingOverview: FC = () => {
           description="Get paid faster with online payment options."
         />
         <Row className={styles.marginTopMd}>
-          <Checkbox checked>
+          <Checkbox>
             Allow clients to view their payment activity online.
           </Checkbox>
         </Row>
         <Row className={styles.marginTopSm}>
-          <Checkbox checked>
+          <Checkbox>
             Allow clients to view their payment activity online.
           </Checkbox>
         </Row>
         <Row className={styles.marginTopSm}>
-          <Checkbox checked>Allow payments for booking online.</Checkbox>
+          <Checkbox>Allow payments for booking online.</Checkbox>
         </Row>
       </div>
       <div className={classNames(styles.sectionPadding, styles.sectionBorder)}>
