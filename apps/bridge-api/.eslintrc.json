@@ -1,5 +1,9 @@
 {
   "extends": "../../.eslintrc.json",
-  "ignorePatterns": ["!**/*", "src/generated/**"],
+  "ignorePatterns": [
+    "!**/*",
+    "src/generated/**",
+    "src/schema/graphql/**"
+  ],
   "rules": {}
 }
