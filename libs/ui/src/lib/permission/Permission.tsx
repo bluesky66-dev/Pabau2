@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Switch, Row, Col } from 'antd'
+import { Switch, Row, Col, Tooltip } from 'antd'
 import { Button } from '@pabau/ui'
 import styles from './Permission.module.less'
 import { QuestionCircleOutlined } from '@ant-design/icons'
@@ -8,6 +8,7 @@ export interface ContainerType {
   name: string
   value: boolean
   key: number
+  tooltipMessage?: string
 }
 export interface PermissionFieldType {
   name: string
@@ -61,7 +62,9 @@ export const Permission: FC<PermissionProps> = ({
                 <div>
                   <div className={styles.dataname}>
                     <p>{data.name}</p>
-                    <QuestionCircleOutlined />
+                    <Tooltip title={data.tooltipMessage}>
+                      <QuestionCircleOutlined />
+                    </Tooltip>
                   </div>
                 </div>
                 <div>

@@ -17,6 +17,7 @@ import Permission from './Permissions/Permissions'
 import Document from './Documents/Documents'
 import Service from './Services/Service'
 import Performance from './Performance/Performance'
+import Emergency from './Emergency/Emergency'
 import CustomizeFields from './PersonalDetail/CustomizeFields'
 import AvatarImage from '../../../assets/images/avatar.png'
 import { LeftOutlined } from '@ant-design/icons'
@@ -118,7 +119,7 @@ const Index: FC = () => {
                 <Document />
               </TabPane>
               <TabPane tab={<span>Emergency</span>} key="5">
-                Content of Tab
+                <Emergency />
               </TabPane>
               <TabPane tab={<span>Training</span>} key="6">
                 Content of Tab
