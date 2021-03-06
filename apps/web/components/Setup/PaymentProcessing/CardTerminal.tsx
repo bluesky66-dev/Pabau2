@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { Row, Col, Form, Input, InputNumber } from 'antd'
 import classNames from 'classnames'
 import { BasicModal } from '@pabau/ui'
@@ -11,6 +11,14 @@ const { TextArea } = Input
 const CardTerminal: FC = () => {
   const [form] = Form.useForm()
   const [visibleModal, setVisibleModal] = useState(false)
+  const balance = 7883.18
+  const [amount, setAmount] = useState(balance)
+  const [descriptor, setDescriptor] = useState('')
+  const [, forceUpdate] = useState({})
+
+  useEffect(() => {
+    forceUpdate({})
+  }, [])
 
   const onCloseModal = () => {
     setVisibleModal(false)
@@ -20,10 +28,19 @@ const CardTerminal: FC = () => {
     setVisibleModal(true)
   }
 
+  const onPayout = () => {
+    console.log('onPayout')
+  }
+
+  const onFormFinish = (values) => {
+    console.log('Finish:', values)
+  }
+
   const formItemLayout = {
     labelCol: { span: 24 },
     wrapperCol: { span: 24 },
   }
+
   return (
     <div>
       <div className={classNames(styles.sectionPadding, styles.sectionBorder)}>
@@ -57,20 +74,20 @@ const CardTerminal: FC = () => {
         visible={visibleModal}
         modalWidth={682}
         dangerButtonText="Cancel"
-        newButtonText="Pay out £7,883.18"
+        newButtonText={`Pay out £${amount}`}
         newButtonDisable={false}
-        isValidate
+        isValidate={true}
         closable
         onCancel={onCloseModal}
         onDelete={onCloseModal}
+        onOk={() => onPayout()}
       >
         <Form
           {...formItemLayout}
           layout="horizontal"
           form={form}
-          initialValues={{ layout: 'horizontal' }}
-          name="basic"
           className={styles.payoutModalForm}
+          onFinish={onFormFinish}
         >
           <Row>
             <Col
@@ -83,7 +100,7 @@ const CardTerminal: FC = () => {
               )}
             >
               <label>Available balance</label>
-              <p>£7,883.18</p>
+              <p>£{balance}</p>
             </Col>
             <Col
               md={12}
@@ -100,14 +117,16 @@ const CardTerminal: FC = () => {
           </Row>
           <Row className={styles.inputMarginBottom}>
             <Col span={24}>
-              <Form.Item label="Amount to pay out">
+              <Form.Item label="Amount to pay out" required>
                 <InputNumber
                   placeholder="Amount to pay out"
-                  defaultValue={7883.18}
+                  value={amount}
+                  max={balance}
                   formatter={(value) =>
                     `£ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                   }
                   parser={(value) => value.replace(/£\s?|(,*)/g, '')}
+                  onChange={(value) => setAmount(value)}
                 />
               </Form.Item>
             </Col>
@@ -124,10 +143,12 @@ const CardTerminal: FC = () => {
               <Form.Item
                 label="Statement descriptor"
                 tooltip={'Statement descriptor'}
+                required
               >
                 <Input
                   placeholder="Add some description"
-                  value="www.pabau.com"
+                  value={descriptor}
+                  onChange={(event) => setDescriptor(event.target.value)}
                 />
               </Form.Item>
             </Col>
