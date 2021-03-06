@@ -100,7 +100,8 @@ interface ReviewConfig {
 const Reviews: FC<ReviewConfig> = () => {
   const [hideBanner, setHideBanner] = useState(false)
   const isMobile = useMedia('(max-width: 768px)', false)
-  const [data, setData] = useState(dataList)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [data, setData] = useState<any>(dataList)
 
   const handleConfigure = (): void => {
     // console.log('Save Object', posConfigObj)
@@ -253,7 +254,8 @@ const Reviews: FC<ReviewConfig> = () => {
 
   const onHoverHandle = (item) => {
     item.visibleData1 = renderVisibleData()
-    const result = data.map((itemList) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const result = data.map((itemList: any) => {
       if (itemList.key === item.key) {
         return item
       }
@@ -262,7 +264,8 @@ const Reviews: FC<ReviewConfig> = () => {
     setData(result)
   }
   const onHoverLeave = (item) => {
-    const resultData = data.map((itemList) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const resultData = data.map((itemList: any) => {
       if (itemList.key === item.key) {
         return _.omit(itemList, 'visibleData1')
       }
