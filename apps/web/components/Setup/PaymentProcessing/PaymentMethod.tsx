@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Row } from 'antd'
-import { Button } from '@pabau/ui'
+import { Button, ButtonTypes } from '@pabau/ui'
 import styles from './index.module.less'
 import checkboxOutlined from '../../../assets/images/checkbox-outlined.svg'
 
@@ -9,14 +9,15 @@ interface P {
   listItems: Array<string>
   icon: string
   iconClass: string
+  buttonText?: string
 }
 
 const PaymentMethod: FC<P> = ({
-  children,
   method,
   listItems,
   icon,
   iconClass,
+  buttonText = 'Connect',
 }) => {
   const listItemRender = listItems.map((listItem, i) => {
     return (
@@ -37,7 +38,9 @@ const PaymentMethod: FC<P> = ({
           <h4>{method}</h4>
           {listItemRender}
         </div>
-        <Button className={styles.methodButton}>Connect</Button>
+        <Button type={ButtonTypes.primary} className={styles.methodButton}>
+          {buttonText}
+        </Button>
       </div>
     </Row>
   )

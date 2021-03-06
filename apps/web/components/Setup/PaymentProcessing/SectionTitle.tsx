@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { Row, Col } from 'antd'
+import { Button, ButtonTypes } from '@pabau/ui'
 import styles from './index.module.less'
 
 interface P {
@@ -8,6 +9,7 @@ interface P {
   description?: string
   showButton?: boolean
   buttonText?: string
+  onClick?: () => void
 }
 
 const SectionTitle: FC<P> = ({
@@ -16,6 +18,7 @@ const SectionTitle: FC<P> = ({
   description,
   showButton = false,
   buttonText = '',
+  onClick,
 }) => {
   return (
     <Row className={styles.sectionHeader}>
@@ -24,6 +27,11 @@ const SectionTitle: FC<P> = ({
         {subTitle && <h4>{subTitle}</h4>}
         {description && <p>{description}</p>}
       </Col>
+      {showButton && (
+        <Button type={ButtonTypes.primary} size="large" onClick={onClick}>
+          {buttonText}
+        </Button>
+      )}
     </Row>
   )
 }

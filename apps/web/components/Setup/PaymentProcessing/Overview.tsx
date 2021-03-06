@@ -1,11 +1,13 @@
 import React, { FC, useState } from 'react'
 import { Row, Col } from 'antd'
+import classNames from 'classnames'
 import styles from './index.module.less'
 import SectionTitle from './SectionTitle'
 import PaymentMethod from './PaymentMethod'
 import { Checkbox, SimpleDropdown } from '@pabau/ui'
 import paypal from '../../../assets/images/paypal.png'
 import stripe from '../../../assets/images/stripe.png'
+import pabauCard from '../../../assets/images/pabau-card.png'
 
 const PaymentProcessingOverview: FC = () => {
   const [currency, setCurrency] = useState('GBP')
@@ -33,7 +35,7 @@ const PaymentProcessingOverview: FC = () => {
           <Checkbox checked>Allow payments for booking online.</Checkbox>
         </Row>
       </div>
-      <div className={styles.sectionCurrency}>
+      <div className={classNames(styles.sectionPadding, styles.sectionBorder)}>
         <SectionTitle
           subTitle="Select your currency"
           description="Choose the default currency for all your services, estimates & invoices."
@@ -49,7 +51,12 @@ const PaymentProcessingOverview: FC = () => {
           </Col>
         </Row>
       </div>
-      <div className={styles.sectionPaymentMethods}>
+      <div
+        className={classNames(
+          styles.sectionPaymentMethods,
+          styles.sectionPadding
+        )}
+      >
         <SectionTitle
           subTitle="Choose your preferred payment methods"
           description="Clients can pay you via debit/credit card, PayPal, or both. "
@@ -66,12 +73,13 @@ const PaymentProcessingOverview: FC = () => {
         />
         <PaymentMethod
           method="Card Payments"
-          icon={paypal}
+          icon={pabauCard}
           iconClass={styles.paypalIcon}
           listItems={[
             'Take payments directly into Pabau',
             'Funds directly to your bank account',
           ]}
+          buttonText="Order"
         />
         <PaymentMethod
           method="Enable Self Pay"
