@@ -168,7 +168,7 @@ const TableWithHoverFeatureStory: FC = ({ ...args }) => {
 
   const renderVisibleData = () => {
     return (
-      <Button>Test</Button>
+      <Button>Share</Button>
     )
   }
   const onHoverEnterHandle = (value) => {
@@ -182,13 +182,13 @@ const TableWithHoverFeatureStory: FC = ({ ...args }) => {
     setDataSource(result)
   }
   const onHoverLeaveHandle = (value) => {
-    const resultDD = dataSource.map((itemList) => {
+    const resultData = dataSource.map((itemList) => {
       if (itemList.key === value.key) {
         return _.omit(itemList, 'visibleData')
       }
       return itemList
     })
-    setDataSource(resultDD)
+    setDataSource(resultData)
   }
 
   return (
