@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import EmployeeListModel, { EmployeeListModelProps } from './EmployeeListModel'
 import { userList } from './mock'
+import { action } from '@storybook/addon-actions'
 
 export default {
   component: EmployeeListModel,
@@ -17,5 +18,10 @@ export const EmployeeListModelStory: FC<EmployeeListModelProps> = ({
   label,
   ListTitle,
 }) => (
-  <EmployeeListModel userList={userList} label={label} ListTitle={ListTitle} />
+  <EmployeeListModel
+    userList={userList}
+    label={label}
+    ListTitle={ListTitle}
+    onClick={action('onClick')}
+  />
 )
