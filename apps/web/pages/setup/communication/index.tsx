@@ -17,8 +17,10 @@ import {
   Button,
   ChooseModal,
   ChooseModalItem,
+  FullScreenReportModal,
   Notification,
   NotificationType,
+  OperationType,
 } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import Custom from '../../../components/Setup/Communication/Custom'
@@ -31,6 +33,8 @@ import styles from './index.module.less'
 const { Title } = Typography
 
 // interface IndexProps {}
+
+/*--- Choose Modal Props ---*/
 const addOnStyle = {
   width: '40px',
   height: '40px',
@@ -91,7 +95,7 @@ const defaultItems: ChooseModalItem[] = [
   },
 ]
 
-const createTemplateStepArgs = [
+const chooseTemplateStepArgs = [
   {
     SelectType: {
       title: 'Select the type of template you wish to create',
@@ -118,58 +122,101 @@ const createTemplateStepArgs = [
   },
 ]
 
-interface CreateTemplateState {
+interface ChooseTemplateState {
   _step: number
   _type: string
 }
 
-const defaultCreateTemplateState: CreateTemplateState = {
+const defaultChooseTemplateState: ChooseTemplateState = {
   _step: 0,
   _type: 'SelectType',
 }
+
+/*--- Choose Modal Props End ---*/
+
+/*--- Template Modal Props ---*/
+
+const defaultCreateTemplateState = {
+  title: 'Create SMS Template',
+  visible: false,
+  operations: [
+    OperationType.active,
+    OperationType.cancel,
+    OperationType.create,
+  ],
+  cancelBtnText: 'Cancel',
+  createBtnText: 'Save',
+  enableCreateBtn: true,
+  activated: true,
+}
+/*--- Template Modal Props End ---*/
 
 export const Index: FC = () => {
   const [hideBanner, setHideBanner] = useState(false)
   const [currentTab, setCurrentTab] = useState('Custom')
   const [query, setQuery] = useState('')
 
-  /*--- Create Template Modal State ---*/
-  const [createTemplateVisible, setCreateTemplateVisible] = useState(false)
-  const [createTemplateStep, setCreateTemplateStep] = useState(
-    defaultCreateTemplateState
+  /*--- Choose Modal State ---*/
+  const [chooseTemplateVisible, setChooseTemplateVisible] = useState(false)
+  const [chooseTemplateStep, setChooseTemplateStep] = useState(
+    defaultChooseTemplateState
   )
-  const [createTemplateArgs, setCreateTemplateArgs] = useState(
-    createTemplateStepArgs[defaultCreateTemplateState._step][
-      defaultCreateTemplateState._type
+  const [chooseTemplateArgs, setChooseTemplateArgs] = useState(
+    chooseTemplateStepArgs[defaultChooseTemplateState._step][
+      defaultChooseTemplateState._type
     ]
   )
-  /*--- Create Template Modal State End ---*/
+  /*--- Choose Modal State End ---*/
 
-  /*--- Create Template Modal Action ---*/
-  function createTemplateAction() {
-    setCreateTemplateVisible(!createTemplateVisible)
+  /*--- Create Modal State ---*/
+
+  const [createTemplateArgs, setCreateTemplateArgs] = useState(
+    defaultCreateTemplateState
+  )
+
+  /*--- Create Modal State End ---*/
+
+  /*--- Choose Modal Action ---*/
+  function chooseTemplateAction() {
+    setChooseTemplateVisible(!chooseTemplateVisible)
   }
 
   useEffect(() => {
-    setCreateTemplateArgs(
-      createTemplateStepArgs[createTemplateStep._step][createTemplateStep._type]
+    setChooseTemplateArgs(
+      chooseTemplateStepArgs[chooseTemplateStep._step][chooseTemplateStep._type]
     )
-  }, [createTemplateStep])
+  }, [chooseTemplateStep])
 
-  function nextCreateTemplate(item: ChooseModalItem) {
-    let _step = createTemplateStep._step + 1
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  useEffect(() => {}, [])
+
+  function nextChooseTemplate(item: ChooseModalItem) {
+    let _step = chooseTemplateStep._step + 1
     let _type = item.title
     if (_step === 2) {
       _step = 0
       _type = 'SelectType'
+      // chooseTemplateAction()
+      createTemplateAction()
     }
-    const _tempStep: CreateTemplateState = {
+    const _tempStep: ChooseTemplateState = {
       _step: _step,
       _type: _type,
     }
-    setCreateTemplateStep(_tempStep)
+    setChooseTemplateStep(_tempStep)
   }
-  /*--- Create Template Modal Action End---*/
+  /*--- Choose Modal Action End---*/
+
+  /*--- Choose Modal Action ---*/
+
+  function createTemplateAction() {
+    setCreateTemplateArgs({
+      ...createTemplateArgs,
+      visible: !createTemplateArgs.visible,
+    })
+  }
+
+  /*--- Choose Modal Action End ---*/
 
   return (
     <>
@@ -211,7 +258,7 @@ export const Index: FC = () => {
                   <div>
                     <Button
                       type="primary"
-                      onClick={() => createTemplateAction()}
+                      onClick={() => chooseTemplateAction()}
                     >
                       {'Create Template'}
                     </Button>
@@ -240,25 +287,26 @@ export const Index: FC = () => {
           </TabMenu>
         </div>
       </Layout>
-      {createTemplateArgs && (
+      {chooseTemplateArgs && (
         <ChooseModal
-          {...(createTemplateStepArgs[createTemplateStep._step][
-            createTemplateStep._type
+          {...(chooseTemplateStepArgs[chooseTemplateStep._step][
+            chooseTemplateStep._type
           ] ||
-            createTemplateStepArgs[defaultCreateTemplateState._step][
-              defaultCreateTemplateState._type
+            chooseTemplateStepArgs[defaultChooseTemplateState._step][
+              defaultChooseTemplateState._type
             ])}
-          visible={createTemplateVisible}
-          onClose={() => createTemplateAction()}
+          visible={chooseTemplateVisible}
+          onClose={() => chooseTemplateAction()}
           onSelected={(item: ChooseModalItem) => {
             Notification(
               NotificationType.info,
               `Seleted Service Type: ${item.title}`
             )
-            nextCreateTemplate(item)
+            nextChooseTemplate(item)
           }}
         />
       )}
+      <FullScreenReportModal {...createTemplateArgs} />
     </>
   )
 }
