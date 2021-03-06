@@ -3,12 +3,18 @@ import CommonHeader from '../common-header'
 import Layout from '../../../components/Layout/Layout'
 import { CustomScrollbar } from '../../../components/CustomScrollbar'
 import { Typography, Row, Popover, List } from 'antd'
-import { Breadcrumb, SetupSearchInput, Checkbox } from '@pabau/ui'
+import {
+  Breadcrumb,
+  SetupSearchInput,
+  Checkbox,
+  EmployeeListModel,
+} from '@pabau/ui'
 import styles from './index.module.less'
 import dynamic from 'next/dynamic'
 import Highlighter from 'react-highlight-words'
 import { UserOutlined, FileFilled } from '@ant-design/icons'
 import Logo from '../../../assets/images/logo.svg'
+import userAvatar from '../../../assets/images/user-avatar.svg'
 
 const ActivityChart = dynamic(
   () => import('../../../components/activity-logs/ActivityChart'),
@@ -157,6 +163,33 @@ const list = [
   { label: 'Last 30 Days', value: false, key: 2 },
   { label: 'Last 60 Days', value: false, key: 3 },
   { label: 'Last 90 Days', value: false, key: 4 },
+]
+
+const userList = [
+  {
+    userId: '1',
+    userAvatar: userAvatar,
+    username: ' Will Lawsons',
+    isSelected: false,
+  },
+  {
+    userId: '2',
+    userAvatar: userAvatar,
+    username: ' Will Lawsons',
+    isSelected: false,
+  },
+  {
+    userId: '3',
+    userAvatar: userAvatar,
+    username: ' Will Lawsons',
+    isSelected: false,
+  },
+  {
+    userId: '4',
+    userAvatar: userAvatar,
+    username: ' Will Lawsons',
+    isSelected: false,
+  },
 ]
 
 export interface FilerDataProps {
@@ -344,7 +377,11 @@ export const Index: FC = () => {
             <Row>
               <div>
                 <span className={styles.text}>Showing</span>
-                <span className={styles.highlightText}> All Employees</span>
+                <EmployeeListModel
+                  userList={userList}
+                  label={'All Employees'}
+                  ListTitle={'Select an Employee'}
+                />
                 <span className={styles.text}>By</span>
                 <Popover
                   content={content}
