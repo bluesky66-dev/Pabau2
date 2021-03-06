@@ -8,12 +8,17 @@ import terminalIcon from '../../../assets/images/terminal.png'
 
 const { TextArea } = Input
 
+interface TerminalData {
+  amount: number
+  description: string
+  descriptor: string
+}
+
 const CardTerminal: FC = () => {
   const [form] = Form.useForm()
   const [visibleModal, setVisibleModal] = useState(false)
   const balance = 7883.18
-  const [amount, setAmount] = useState(balance)
-  const [descriptor, setDescriptor] = useState('')
+  const [terminal, setTerminal] = useState<TerminalData | null>(null)
   const [, forceUpdate] = useState({})
 
   useEffect(() => {
@@ -74,7 +79,7 @@ const CardTerminal: FC = () => {
         visible={visibleModal}
         modalWidth={682}
         dangerButtonText="Cancel"
-        newButtonText={`Pay out £${amount}`}
+        newButtonText={`Pay out £${terminal.amount}`}
         newButtonDisable={false}
         isValidate={true}
         closable
@@ -120,13 +125,18 @@ const CardTerminal: FC = () => {
               <Form.Item label="Amount to pay out" required>
                 <InputNumber
                   placeholder="Amount to pay out"
-                  value={amount}
+                  value={terminal.amount}
                   max={balance}
                   formatter={(value) =>
                     `£ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
                   }
                   parser={(value) => value.replace(/£\s?|(,*)/g, '')}
-                  onChange={(value) => setAmount(value)}
+                  onChange={(value) =>
+                    setTerminal({
+                      ...terminal,
+                      amount: Number.parseFloat(value as string),
+                    })
+                  }
                 />
               </Form.Item>
             </Col>
@@ -146,9 +156,11 @@ const CardTerminal: FC = () => {
                 required
               >
                 <Input
-                  placeholder="Add some description"
-                  value={descriptor}
-                  onChange={(event) => setDescriptor(event.target.value)}
+                  placeholder="Statement descriptor"
+                  value={terminal.descriptor}
+                  onChange={(event) =>
+                    setTerminal({ ...terminal, descriptor: event.target.value })
+                  }
                 />
               </Form.Item>
             </Col>
