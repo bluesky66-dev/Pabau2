@@ -1,6 +1,8 @@
 import { MedicalFormTypes } from '@pabau/ui'
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
+import backImg from '../../assets/images/medicalform_back.svg'
+import backgroundImg from '../../assets/images/medicalform_builder.svg'
 import InnerElement from '../medicalform/InnerElement'
 import styles from './MedicalFormBuilder.module.less'
 
@@ -45,6 +47,17 @@ const MedicalFormEditMain: FC<P> = ({ ...props }) => {
           className={styles.medicalFormEditMainPanel}
           ref={provided.innerRef}
         >
+          {draggedForms.length === 0 && (
+            <div className={styles.medicalFormEditMainEmptyPanel}>
+              <img src={backgroundImg} alt="" />
+              <h1>Start building your form with components</h1>
+              <span>Drag and drop components from the left menu here</span>
+              <div className={styles.medicalFormEditDesc}>
+                <img src={backImg} alt="" />
+                <span>Place your first component here</span>
+              </div>
+            </div>
+          )}
           {draggedForms?.map((form, index) => {
             return (
               <Draggable key={form.id} draggableId={form.id} index={index}>

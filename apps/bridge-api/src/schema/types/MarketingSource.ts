@@ -1,56 +1,45 @@
-import { objectType, extendType, nonNull, intArg, } from "nexus";
-import { Context } from "../../context";
+import { objectType, extendType } from 'nexus';
 
 export const MarketingSource = objectType({
   name: 'MarketingSource',
   definition(t) {
-    t.model.id()
-    t.model.source_name()
-    t.model.occupier({
-      alias: 'company_id'
-    })
-    t.model.custom_id()
-    t.model.company()
-    t.model.public()
-    t.model.imported()
-  }
-})
+    t.model.id();
+    t.model.source_name();
+    t.model.company_id();
+    t.model.custom_id();
+    t.model.public();
+    t.model.imported();
+    t.model.company();
+  },
+});
 
-export const MarketingSourceQuery = extendType({
+export const marketingSourceQuery = extendType({
   type: 'Query',
-  definition(t ) {
-    t.field("marketingSource", {
-      type: MarketingSource,
-      args: {
-        id: nonNull(intArg())
-      },
-      async resolve(_root, args, ctx:Context){
-        return ctx.prisma.marketingSource.findFirst({
-          where: {
-            id: Number(args.id) ?? undefined
-          }
-        }).then((result) => {
-          if(result === null){
-            throw new Error(`No such marketing source with id of ${args.id}`)
-          }
-          return result
-        })
-      }
-    })
-    t.crud.marketingSources({
-      alias: 'marketingSources',
-      pagination: true,
-      filtering: true,
-      ordering: true,
-    });
-  }
-})
+  definition(t) {
+    t.crud.marketingSource();
+    t.crud.marketingSources({ filtering: true, ordering: true });
 
-export const MarketingSourceMutation = extendType({
+    t.field('marketingSourcesCount', {
+      type: 'Int',
+      args: {
+        where: 'MarketingSourceWhereInput',
+      },
+      async resolve(_root, args, ctx) {
+        return ctx.prisma.marketingSource.count(args);
+      },
+    });
+  },
+});
+
+export const marketingSourceMutation = extendType({
   type: 'Mutation',
   definition(t) {
-    t.crud.createOneMarketingSource()
-    t.crud.deleteOneMarketingSource();
+    t.crud.createOneMarketingSource();
     t.crud.updateOneMarketingSource();
-  }
-})
+    t.crud.upsertOneMarketingSource();
+    t.crud.deleteOneMarketingSource();
+
+    t.crud.updateManyMarketingSource();
+    t.crud.deleteManyMarketingSource();
+  },
+});
