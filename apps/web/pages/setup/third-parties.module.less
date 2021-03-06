@@ -183,3 +183,38 @@
     }
   }
 }
+
+.create-third-parties {
+  background-color: #fff;
+  .all-content-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .text-style {
+      display: flex;
+      align-items: center;
+      p {
+        margin-bottom: 0px;
+        font-family: Circular-Std-Medium;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 17px;
+        line-height: 22px;
+        text-transform: capitalize;
+        color: var(--grey-text-color);
+        padding-left: 10px;
+      }
+    }
+  }  
+}
+
+.third-parties-tabs {
+  :global .ant-tabs {
+    .ant-tabs-nav {
+      background-color: #ffffff;
+      @media (max-width: 767px) {
+        margin-top: 16px !important; 
+      }
+    }
+  }
+}

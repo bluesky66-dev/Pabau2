@@ -133,7 +133,6 @@ const ThirdPartyTable: FC<ThirdPartyTableProps> = ({
     <div className={styles.dragTable}>
       <Table
         pagination={sourceData?.length > 10 ? {} : false}
-        style={{ height: '100%' }}
         scroll={{ x: 'max-content' }}
         // sticky={{ offsetScroll: 80, offsetHeader: 80 }}
         draggable={true}
@@ -141,7 +140,7 @@ const ThirdPartyTable: FC<ThirdPartyTableProps> = ({
         noDataText={thirdPartySchema.fullLower}
         searchTerm={searchTerm}
         columns={columns}
-        dataSource={data?.map((d) => ({ ...d, key: d.id }))}
+        dataSource={sourceData?.map((d) => ({ ...d, key: d.id }))}
         updateDataSource={({ newData, oldIndex, newIndex }) => {
           newData = newData.map((data, i) => {
             data.order = sourceData[i].order
