@@ -13,7 +13,7 @@ import {
   TabMenu,
   Breadcrumb,
   NotificationBanner,
-  // MedicalFilter,
+  MedicalFilter,
   Button,
   ChooseModal,
   ChooseModalItem,
@@ -21,6 +21,7 @@ import {
   Notification,
   NotificationType,
   OperationType,
+  MedicalFilterProps,
 } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import Custom from '../../../components/Setup/Communication/Custom'
@@ -33,6 +34,33 @@ import styles from './index.module.less'
 const { Title } = Typography
 
 // interface IndexProps {}
+
+/*--- Filter Props ---*/
+
+const communicationFilterProps: MedicalFilterProps = {
+  filter: {
+    language: 'English (UK)',
+    status: 'active',
+    formtype: {
+      medicalHistory: false,
+      consent: false,
+      treatmentForm: false,
+      epaper: false,
+      presciption: false,
+      labForm: false,
+    },
+  },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onApply: () => {},
+}
+
+/*--- Filter Props End ---*/
+
+/*--- TabMenu Props ---*/
+
+const tabMenuProps: Array<string> = ['Custom', 'Library']
+
+/*--- TabMenu Props End ---*/
 
 /*--- Choose Modal Props ---*/
 const addOnStyle = {
@@ -153,7 +181,7 @@ const defaultCreateTemplateState = {
 
 export const Index: FC = () => {
   const [hideBanner, setHideBanner] = useState(false)
-  const [currentTab, setCurrentTab] = useState('Custom')
+  const [currentTab, setCurrentTab] = useState(0)
   const [query, setQuery] = useState('')
 
   /*--- Choose Modal State ---*/
@@ -222,6 +250,7 @@ export const Index: FC = () => {
     <>
       <CommonHeader />
       <Layout>
+        {/* Need to upgrade Last NotificationBanner  */}
         <NotificationBanner
           title="Enable client notifications"
           desc="We recomment enabling enabling your confirmation email so that Pabau will automatically send out your questionnaire to a client at the point of booking an appointment."
@@ -244,7 +273,7 @@ export const Index: FC = () => {
               <Title>{'Communication Templates'}</Title>
             </div>
             <div className={styles.medicalFormsOps}>
-              {currentTab === 'Custom' && (
+              {tabMenuProps[currentTab] === 'Custom' && (
                 <>
                   <div>
                     <Input
@@ -254,7 +283,9 @@ export const Index: FC = () => {
                       placeholder="Search in Custom"
                     />
                   </div>
-                  <div>{/* <MedicalFilter /> */}</div>
+                  <div>
+                    <MedicalFilter {...communicationFilterProps} />
+                  </div>
                   <div>
                     <Button
                       type="primary"
@@ -265,7 +296,7 @@ export const Index: FC = () => {
                   </div>
                 </>
               )}
-              {currentTab === 'Library' && (
+              {tabMenuProps[currentTab] === 'Library' && (
                 <Input
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
@@ -278,8 +309,8 @@ export const Index: FC = () => {
           <TabMenu
             tabPosition="top"
             minHeight="100vh"
-            menuItems={['Custom', 'Library']}
-            onChange={(key) => setCurrentTab(key)}
+            menuItems={tabMenuProps}
+            onChange={(key) => setCurrentTab(Number.parseInt(key))}
           >
             <Custom />
             <Library />
