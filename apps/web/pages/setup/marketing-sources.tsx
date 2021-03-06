@@ -1,11 +1,11 @@
 import { gql } from '@apollo/client'
 import { NextPage } from 'next'
 import React, { useContext, useEffect } from 'react'
-import CrudLayout from '../../../components/CrudLayout/CrudLayout'
+import CrudLayout from '../../components/CrudLayout/CrudLayout'
 /* eslint-disable graphql/template-strings */
-import { useTranslationI18 } from '../../../hooks/useTranslationI18'
-import { UserContext } from '../../../context/UserContext'
-import { languageMapper } from '../../../helper/languageMapper'
+import { useTranslationI18 } from '../../hooks/useTranslationI18'
+import { UserContext } from '../../context/UserContext'
+import { languageMapper } from '../../helper/languageMapper'
 
 const LIST_QUERY = gql`
   query marketing_sources(
