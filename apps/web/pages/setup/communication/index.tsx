@@ -28,12 +28,12 @@ import Custom from '../../../components/Setup/Communication/Custom'
 import Library from '../../../components/Setup/Communication/Library'
 import CommonHeader from '../common-header'
 // import notificationBannerImage from '../../../assets/images/notification-image.png'
+import { ReactComponent as LetterOutlined } from '../../../assets/images/form-type/consent-selected.svg'
+import { ReactComponent as MarketingOutlined } from '../../../assets/images/form-type/marketing.svg'
 import icon from '../../../assets/images/notification.png'
 import styles from './index.module.less'
 
 const { Title } = Typography
-
-// interface IndexProps {}
 
 /*--- Filter Props ---*/
 
@@ -75,7 +75,7 @@ const addOnStyle = {
   fontSize: '16px',
 }
 
-const itemsWithAddon: ChooseModalItem[] = [
+const chooseModalTypeItems: ChooseModalItem[] = [
   {
     title: 'General',
     icon: <MailOutlined />,
@@ -96,7 +96,7 @@ const itemsWithAddon: ChooseModalItem[] = [
   },
   {
     title: 'Letter',
-    icon: <MessageOutlined />,
+    icon: <LetterOutlined />,
     addonIcon: (
       <div style={addOnStyle}>
         <RightOutlined />
@@ -105,7 +105,7 @@ const itemsWithAddon: ChooseModalItem[] = [
   },
 ]
 
-const defaultItems: ChooseModalItem[] = [
+const chooseModalEmailItems: ChooseModalItem[] = [
   {
     title: 'General',
     description: 'Services booked by one client in a single visit',
@@ -121,6 +121,29 @@ const defaultItems: ChooseModalItem[] = [
     icon: <TeamOutlined />,
     description: 'Sell multiple services as a packaged bundle',
   },
+  {
+    title: 'Marketing',
+    icon: <MarketingOutlined />,
+    description: 'Sell multiple services as a packaged bundle',
+  },
+]
+
+const chooseModalSMSItems: ChooseModalItem[] = [
+  {
+    title: 'General',
+    description: 'Services booked by one client in a single visit',
+    icon: <CalendarOutlined />,
+  },
+  {
+    title: 'Confirmations',
+    icon: <FileDoneOutlined />,
+    description: 'Use Pabau’s online video conferencing',
+  },
+  {
+    title: 'Marketing',
+    icon: <MarketingOutlined />,
+    description: 'Sell multiple services as a packaged bundle',
+  },
 ]
 
 const chooseTemplateStepArgs = [
@@ -128,24 +151,24 @@ const chooseTemplateStepArgs = [
     SelectType: {
       title: 'Select the type of template you wish to create',
       subTitle: 'Step 1 of 2',
-      items: itemsWithAddon,
+      items: chooseModalTypeItems,
     },
   },
   {
     General: {
       title: 'What type of email template are you creating',
       subTitle: 'Step 2 of 2',
-      items: defaultItems,
+      items: chooseModalEmailItems,
     },
     SMS: {
       title: 'What type of sms template are you creating',
       subTitle: 'Step 2 of 2',
-      items: defaultItems,
+      items: chooseModalSMSItems,
     },
     Letter: {
       title: 'What type of letter template are you creating',
       subTitle: 'Step 2 of 2',
-      items: itemsWithAddon,
+      items: chooseModalTypeItems,
     },
   },
 ]
@@ -178,6 +201,8 @@ const defaultCreateTemplateState = {
   activated: true,
 }
 /*--- Template Modal Props End ---*/
+
+// interface IndexProps {}
 
 export const Index: FC = () => {
   const [hideBanner, setHideBanner] = useState(false)
