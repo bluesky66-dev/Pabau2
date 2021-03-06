@@ -12,7 +12,10 @@ interface Schema {
   messages?: messages
   fields: Record<string, SchemaItem>
   shemaType?: string
+  deleteDescField?: string
+  tooltip?: string
   createButtonLabel?: string
+  padlocked?: string[]
 }
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface SchemaItem {
@@ -41,8 +44,8 @@ interface SchemaItem {
   radio?: TypeValues[]
   validateMsg?: string
   selectOptions?: TypeValues[]
+  collapsible?: boolean
 }
-
 interface TypeValues {
   label: string
   value: string
