@@ -23,7 +23,6 @@ import { useTranslationI18 } from '../hooks/useTranslationI18'
 import { useRouter } from 'next/router'
 
 const { Title } = Typography
-
 interface P {
   schema: Schema
   addQuery?: DocumentNode
@@ -503,6 +502,7 @@ const CrudTable: FC<P> = ({
               isCustomIconExist={checkCustomColorIconExsist('icon')}
               noDataBtnText={schema.full}
               noDataText={schema.fullLower}
+              padlocked={schema.padlocked}
               onAddTemplate={() => createNew()}
               searchTerm={searchTerm}
               columns={[
