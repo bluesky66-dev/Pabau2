@@ -7,6 +7,7 @@ export default {
   args: {
     reviewDate: new Date(new Date().setMonth(new Date().getMonth() + 1)),
     reviewPeriod: 'annual',
+    isReviewDatePeriodFrequency: true,
   },
 }
 

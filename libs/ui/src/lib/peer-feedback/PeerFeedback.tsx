@@ -60,7 +60,7 @@ interface Employee {
   myCustomCategory: number
 }
 
-interface Report {
+export interface ReportProps {
   id: number
   info: User
   requestedOn: string
@@ -77,7 +77,8 @@ export type PeerFeedbackProps = {
   filled: string
   reviewData: ReviewData
   employees: Employee[]
-  reports: Report[]
+  reports: ReportProps[]
+  onReportDelete?: (reportId: number) => void
 }
 
 export const PeerFeedback: FC<PeerFeedbackProps> = ({
@@ -90,6 +91,7 @@ export const PeerFeedback: FC<PeerFeedbackProps> = ({
   reviewData,
   employees,
   reports,
+  onReportDelete,
   ...props
 }) => {
   interface ReviewPercent {
@@ -180,8 +182,8 @@ export const PeerFeedback: FC<PeerFeedbackProps> = ({
     ) : null
   }
 
-  const RemoveColumn = () => {
-    return <DeleteOutlined />
+  const RemoveColumn = ({ info }) => {
+    return <DeleteOutlined onClick={() => onReportDelete?.(info.id)} />
   }
 
   const employeeColumns = [
@@ -246,7 +248,7 @@ export const PeerFeedback: FC<PeerFeedbackProps> = ({
       className: styles.columnRemove,
       width: 66,
       // eslint-disable-next-line react/display-name
-      render: () => <RemoveColumn />,
+      render: (info: ReportProps) => <RemoveColumn info={info} />,
     },
   ]
 

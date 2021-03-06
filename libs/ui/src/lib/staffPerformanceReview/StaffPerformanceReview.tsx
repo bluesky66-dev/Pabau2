@@ -22,9 +22,12 @@ export enum periodType {
 interface P {
   reviewDate: Date
   reviewPeriod?: periodType
+  isReviewDatePeriodFrequency?: boolean
 }
 
-const StaffPerformanceReview: FC<P> = () => {
+export const StaffPerformanceReview: FC<P> = ({
+  isReviewDatePeriodFrequency,
+}) => {
   const [reviewDate, setReviewDate] = useState(new Date())
   const [reviewPeriod, setReviewPeriod] = useState('threeMonth')
 
@@ -363,21 +366,23 @@ const StaffPerformanceReview: FC<P> = () => {
   }
   return (
     <div>
-      <div className={styles.review}>
-        <DatePicker
-          style={{ marginRight: '25px' }}
-          disabledDate={(current) => {
-            return (
-              moment().add(-1, 'days') >= current ||
-              moment().endOf('year') <= current
-            )
-          }}
-          onChange={onDateChange}
-        />
-        <Dropdown overlay={menu} placement="bottomCenter" arrow>
-          <Button>{reviewPeriod}</Button>
-        </Dropdown>
-      </div>
+      {isReviewDatePeriodFrequency && (
+        <div className={styles.review}>
+          <DatePicker
+            style={{ marginRight: '25px' }}
+            disabledDate={(current) => {
+              return (
+                moment().add(-1, 'days') >= current ||
+                moment().endOf('year') <= current
+              )
+            }}
+            onChange={onDateChange}
+          />
+          <Dropdown overlay={menu} placement="bottomCenter" arrow>
+            <Button>{reviewPeriod}</Button>
+          </Dropdown>
+        </div>
+      )}
       <div className={styles.reviewDate}>
         NEXT REVIEW IS ON {DateFormatter(reviewDate)}
       </div>

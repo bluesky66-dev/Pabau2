@@ -16,6 +16,7 @@ import PersonalDetail from './PersonalDetail/PersonalDetail'
 import Permission from './Permissions/Permissions'
 import Document from './Documents/Documents'
 import Service from './Services/Service'
+import Performance from './Performance/Performance'
 import CustomizeFields from './PersonalDetail/CustomizeFields'
 import AvatarImage from '../../../assets/images/avatar.png'
 import { LeftOutlined } from '@ant-design/icons'
@@ -130,7 +131,7 @@ const Index: FC = () => {
                 }
                 key="7"
               >
-                Content of Tab
+                <Performance />
               </TabPane>
             </Tabs>
           </div>
