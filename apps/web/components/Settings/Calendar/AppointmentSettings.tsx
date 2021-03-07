@@ -13,33 +13,33 @@ interface AppointmentControlItems {
 }
 const appointmentsControls: AppointmentControlItems[] = [
   {
-    type: 'Allow appointments to overlap',
+    type: 'Allow appointments to overlap in your calendar with no warning.',
     value: true,
-    label: 'Allow appointments to overlap',
+    label: 'Allow appointments to overlap in your calendar with no warning.',
     key: 1,
   },
   {
-    type: 'Appointment reminder',
+    type: 'Set the appointment reminder to schedule by default.',
     value: true,
-    label: 'Appointment reminder',
+    label: 'Set the appointment reminder to schedule by default.',
     key: 2,
   },
   {
-    type: 'Email confirmation',
+    type: 'Set the appointment email confirmation to send by default.',
     value: true,
-    label: 'Email confirmation',
+    label: 'Set the appointment email confirmation to send by default.',
     key: 3,
   },
   {
-    type: 'SMS confirmation',
+    type: 'Set the appointment SMS confirmation to be sent by default.',
     value: true,
-    label: 'SMS confirmation',
+    label: 'Set the appointment SMS confirmation to be sent by default.',
     key: 4,
   },
   {
     type: 'Request feedback',
     value: true,
-    label: 'Request feedback',
+    label: 'Request feedback1',
     key: 5,
   },
 ]
