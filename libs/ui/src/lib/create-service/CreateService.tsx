@@ -312,7 +312,28 @@ export const CreateService: FC<CreateServiceProps> = ({
           'Pricing',
           'Staff & Resources',
           'Online Booking',
-          'Client pathway',
+          <div
+            key="client-pathway"
+            style={{ display: 'flex', alignItems: 'center' }}
+          >
+            Client pathway{' '}
+            <span
+              style={{
+                display: 'inline-block',
+                padding: '3px 12px',
+                fontFamily: 'var(--font-family)',
+                fontSize: '12px',
+                lineHeight: '14px',
+                fontWeight: 400,
+                color: 'var(--primary-color)',
+                backgroundColor: '#eef7fb',
+                borderRadius: '6px',
+                marginLeft: '8px',
+              }}
+            >
+              Plus
+            </span>
+          </div>,
         ]}
         onCancel={() => {
           setShowModal(false)
