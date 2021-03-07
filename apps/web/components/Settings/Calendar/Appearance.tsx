@@ -13,21 +13,22 @@ interface AppearanceGeneralItems {
 }
 const AppearanceGeneralItems: AppearanceGeneralItems[] = [
   {
-    type: 'Enable initials',
+    type: 'Enable staff initials',
     value: true,
-    help: 'Enable initials',
+    help: 'We will hide your users photos and show only the initials',
     key: 1,
   },
   {
     type: 'Hide surnames',
     value: false,
-    help: 'Hide surnames',
+    help: 'We will hide your clients surname entirely.',
     key: 2,
   },
   {
     type: 'Hide appointment times',
     value: true,
-    help: 'Hide appointment times',
+    help:
+      'We will not show the appointment time on your appointment (allowing for more space)',
     key: 3,
   },
 ]

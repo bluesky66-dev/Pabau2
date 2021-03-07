@@ -41,7 +41,10 @@ export function Calendar(props: CalendarProps) {
   ]
 
   const onSaveChange = () => {
-    Notification(NotificationType['success'], 'Saved Successfully')
+    Notification(
+      NotificationType['success'],
+      'Success! - We have saved your calendar settings changes'
+    )
   }
 
   return (
@@ -54,7 +57,7 @@ export function Calendar(props: CalendarProps) {
                 <Breadcrumb
                   breadcrumbItems={[
                     { breadcrumbName: 'Setup', path: 'setup' },
-                    { breadcrumbName: 'Marketing Source', path: '' },
+                    { breadcrumbName: 'Calendar Settings', path: '' },
                   ]}
                 />
               </span>

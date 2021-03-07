@@ -38,7 +38,7 @@ const Configuration = () => (
           <Select
             className={styles.timeSlotSelect}
             placeholder="Please select"
-            defaultValue={['1 minutes']}
+            defaultValue={['15 minutes']}
             options={options}
           />
           <Row className={styles.timeInputSpace}>
@@ -66,7 +66,6 @@ const Configuration = () => (
                 placeholder="Please select"
                 defaultValue={['1 minutes']}
                 options={optionslist}
-                disabled
               />
             </Col>
           </Row>

@@ -16,55 +16,63 @@ export const Advanced: FC = () => {
     {
       type: 'Raise invoice when appointment is completed',
       value: true,
-      help: 'Raise invoice when appointment is completed',
+      help:
+        'This was automatically create an unpaid invoice the moment you mark an appointment as completed.',
       key: 1,
     },
     {
       type: 'Advanced calendar lockout',
       value: false,
-      help: 'Advanced calendar lockout',
+      help:
+        'Calendar lockout will only accept the PIN code of last logged in user, additionally, if a wrong pin is entered multiple times, the system will log out entirely and redirect to loginscreen.      ',
       key: 2,
     },
     {
-      type: 'Disable booking from package',
+      type: 'Disable booking from course',
       value: true,
-      help: 'Disable booking from package',
+      help:
+        'Stops users seeing the notification for cleints to use a session from there course.',
       key: 3,
     },
     {
       type: 'Disable filtering by service',
       value: true,
-      help: 'Disable booking by service',
+      help:
+        'You will not be able to filter the calendar on service availability.',
       key: 4,
     },
     {
       type: 'Auto-complete',
       value: true,
-      help: 'Auto-complete',
+      help:
+        'We will automatically complete appointments when the appointment duration has finished.',
       key: 5,
     },
     {
       type: 'Ordering the employees by location',
       value: true,
-      help: 'Ordering the employees by location',
+      help:
+        'Your calendar will automatically arrange itself to be ordered by location.',
       key: 6,
     },
     {
       type: 'Hide client name on appointment arrival notification',
       value: true,
-      help: 'Hide client name on appointment arrival notification',
+      help: 'We will mask the clients full name when they are checked in.',
       key: 7,
     },
     {
       type: "Allow service without contract's price",
       value: true,
-      help: "Allow service without contract's price",
+      help:
+        'We will allow you to book services even if they do not have a price.',
       key: 8,
     },
     {
       type: 'Hide/Show accounts',
       value: true,
-      help: 'Hide/Show accounts',
+      help:
+        'This will allow you to view financial information from the calendar',
       key: 9,
     },
     {
