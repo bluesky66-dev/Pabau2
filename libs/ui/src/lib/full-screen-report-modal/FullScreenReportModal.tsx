@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useState, ReactNode } from 'react'
 import { useMedia } from 'react-use'
 import { Button, TabMenu } from '@pabau/ui'
 import { Modal, Switch, Popover } from 'antd'
@@ -16,7 +16,7 @@ export enum OperationType {
 }
 
 export interface FullScreenReportModalProps {
-  title: string
+  title: ReactNode
   visible: boolean
   operations: Array<OperationType>
   onVatRegistered?: (val: boolean) => void
