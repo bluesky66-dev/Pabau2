@@ -623,6 +623,244 @@
     margin-bottom: 0;
     border-bottom: 1px solid #ECEDF0;
   }
+  .assessment-wrapper{
+    display: flex;
+    padding: 40px 24px;
+    .assessment-card {
+      flex: 1 50%;
+      max-width: calc(50% - 8px);
+      margin-right: 16px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+    .content-wrapper{
+      border: 1px solid #ECEDF0;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      min-height: 311px;
+      height: 100%;
+      &.contentNoData {
+        height: auto;
+      }
+      .content-header{
+        padding: 16px;
+        &.headerBorder {
+          border-bottom: 1px solid #ECEDF0;
+        }
+        .content-title {
+          display: flex;
+          svg{
+            color: #54B2D3;
+            margin-right: 10px;
+            margin-top: 5px;
+          }
+          .title{
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 24px;
+            color: #3D3D46;
+          }
+        }
+        .sub-title {
+          color: #9292A3;
+          font-weight: normal;
+          font-size: 12px;
+          line-height: 16px;
+        }
+      }
+      .content-body {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        .no-content {
+          padding: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          flex: 1;
+          .no-content-icon {
+            position: relative;
+            margin-bottom: 20px;
+            &:after {
+              content: "";
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 40px;
+              height: 40px;
+              background: #EEF7FB;
+              border-radius: 50%;
+            }
+            :global .anticon {
+              margin-left: 12px;
+              margin-bottom: 9px;
+              z-index: 1;
+              position: relative;
+            }
+            svg{
+              color: #54B2D3;
+              height: 38px;
+              width: 38px;
+            }
+          }
+          .desc{
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 20px;
+            text-align: center;
+            color: #9292A3;
+          }
+        }
+
+        .self-assessment-block {
+          .self-assessment-box {
+            .self-assessment-box-list {
+              padding: 16px;
+              border-bottom: 1px solid #ECEDF0;;
+              .self-assessment-list {
+                margin-bottom: 16px;
+                &:last-child {
+                  margin-bottom: 0;
+                }
+                .self-assessment-question {
+                  color: #9292A3;
+                  font-weight: normal;
+                  font-size: 12px;
+                  line-height: 16px;
+                  margin-bottom: 2px;
+                }
+                .self-assessment-answer {
+                  color: #3D3D46;
+                  font-weight: normal;
+                  font-size: 14px;
+                  line-height: 22px;
+                }
+              }
+            }
+          }
+          .self-assessment-unlock {
+            padding: 16px;
+            :global .anticon {
+              color: #54B2D3;
+              margin-right: 8px;
+            }
+            span {
+              color: #9292A3;
+              font-weight: normal;
+              font-size: 16px;
+              line-height: 24px;
+              a {
+                color: #54B2D3;
+              }
+            }
+          }
+        }
+        .manager-assessment-block {
+          .manager-assessment-box {
+            padding: 16px;
+            &.border {
+              border-bottom: 1px solid #ECEDF0;
+            }
+            .manager-assessment-questions {
+              color: #54B2D3;
+              font-weight: normal;
+              font-size: 12px;
+              line-height: 16px;
+              margin-bottom: 16px;
+              display: block;
+            }
+            .manager-assessment-list {
+              margin-bottom: 16px;
+              &:last-child {
+                margin-bottom: 0;
+              }
+              :global .ant-form-item-label {
+                padding-bottom: 0;
+                margin-bottom: 2px;
+                label {
+                  color: #9292A3;
+                  font-weight: normal;
+                  font-size: 14px;
+                  line-height: 22px;
+                }
+              }
+              :global .ant-form-item-control {
+                .ant-select {
+                  .ant-select-selector {
+                    border-radius: 4px;
+                    .ant-select-selection-item {
+                      color: #3D3D46;
+                      font-weight: normal;
+                      font-size: 16px;
+                    }
+                  }
+                }
+                .ant-form-item-control-input {
+                  .ant-input {
+                    color: #3D3D46;
+                    font-weight: normal;
+                    font-size: 16px;
+                    line-height: 24px;
+                  }
+                }
+              }
+            }
+            .manager-assessment-step-save {
+              padding-top: 8px;
+              .btn-right-space {
+                margin-right: 16px;
+              }
+            }
+
+            .manager-assessment-options {
+              margin-bottom: 16px;
+              &:last-child {
+                margin-bottom: 0;
+              }
+              .manager-assessment-options-label {
+                color: #9292A3;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 22px;
+                margin-bottom: 8px;
+              }
+              .manager-assessment-options-list {
+                display: flex;
+                align-items: center;
+                margin-bottom: 4px;
+                .count {
+                  width: 20px;
+                  height: 20px;
+                  border-radius: 50%;
+                  border: 1px solid #ECEDF0;
+                  margin-right: 8px;
+                  color: #B8B8C0;
+                  font-weight: normal;
+                  font-size: 14px;
+                  line-height: 20px;
+                  text-align: center;
+                  &.selected {
+                    background: #54B2D3;
+                    border-color: #54B2D3;
+                    color: #FFFFFF;
+                  }
+                }
+              }
+              .manager-assessment-options-value {
+                color: #B8B8C0;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 22px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 .emergency-main-wrapper {
   .emergency-head {

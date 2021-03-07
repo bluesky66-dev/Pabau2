@@ -1243,3 +1243,74 @@ export const emergencyData = {
     workPhone: '(+656) 254-2568',
   },
 }
+export const performanceAssessmentData = {
+  isSelfAssessment: true,
+  selfAssessment: {
+    completed: 'Aug 24, 2020 at 8:04 PM by Jennifer Caldwell',
+    questionAnswer: [
+      {
+        key: '1',
+        question: 'How well does Bills company recognize my value?',
+        answer: 'I feel I am highly valued.',
+      },
+      {
+        key: '2',
+        question:
+          'What would have the greatest impact on my ability to do my best work more often?',
+        answer: 'Coworkers were more committed to doing great work.',
+      },
+    ],
+    moreQuestionAnswer: [
+      {
+        key: '1',
+        question: 'What are some things I do well?',
+        answer:
+          'We’re doing a great job measuring the success of our team activities. This has come a long way and the team is fully behind our new measurement processes.',
+      },
+      {
+        key: '2',
+        question: 'How could I improve?',
+        answer:
+          'I need to spend more time with my immediate team. With our ongoing strategy meetings and business planning I’ve been less accessible to my team and I’m sensing some frustration from my team, especially on recruiting decisions.',
+      },
+    ],
+  },
+  isManagerAssessment: true,
+  managerAssessment: {
+    completed: 'Aug 24, 2020 at 8:04 PM by Jennifer Caldwell',
+    selectOptions: [
+      {
+        label: 'If Jennifer got a job offer elsewhere, I would... ',
+        options: [
+          'Convince Jennifer to stay. Jennifer would be difficult to replace.',
+          'Convince Jennifer to stay. Jennifer would be difficult to replace.',
+        ],
+        value:
+          'Convince Jennifer to stay. Jennifer would be difficult to replace.',
+        count: 4,
+      },
+      {
+        label: 'How engaged is Jennifer at work?',
+        options: [
+          'Good engagement and a mostly positive attitude.',
+          'Good engagement and a mostly positive attitude.',
+        ],
+        value:
+          'Convince Jennifer to stay. Jennifer would be difficult to replace.',
+        count: 4,
+      },
+    ],
+    questionAnswer: [
+      {
+        question: 'What are some things Jennifer does well?',
+        answer:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in libero ullamcorper, congue sapien id.Lorem ipsum dolor sit.',
+      },
+      {
+        question: 'How could Jennifer improve?',
+        answer:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in libero ullamcorper, congue sapien id.Lorem ipsum dolor sit.',
+      },
+    ],
+  },
+}

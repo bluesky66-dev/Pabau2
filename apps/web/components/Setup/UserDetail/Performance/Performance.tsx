@@ -5,6 +5,7 @@ import {
   PeerFeedback,
   ReportProps,
 } from '@pabau/ui'
+import Assessment from './Assessment'
 import styles from '../UserDetail.module.less'
 import { performance } from '../../../../mocks/UserDetail'
 
@@ -43,7 +44,7 @@ const Performance = () => {
           reports={reports}
           onReportDelete={onReportDelete}
         />
-        <div>Content of Assessment</div>
+        <Assessment />
       </TabMenu>
     </div>
   )
