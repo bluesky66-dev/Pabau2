@@ -22,6 +22,7 @@ import {
   NotificationType,
   OperationType,
   MedicalFilterProps,
+  CreateTemplateModal,
 } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import Custom from '../../../components/Setup/Communication/Custom'
@@ -363,6 +364,7 @@ export const Index: FC = () => {
         />
       )}
       <FullScreenReportModal {...createTemplateArgs} />
+      <CreateTemplateModal visible={false} />
     </>
   )
 }

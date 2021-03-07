@@ -1,3 +1,7 @@
+export * from './lib/create-template-modal/CreateTemplateModal'
+export * from './lib/communication-template-preview/CommunicationTemplatePreview'
+export * from './lib/choose-type-group/ChooseTypeGroup'
+export * from './lib/create-template-bar/CreateTemplateBar'
 export * from './lib/file-uploder/FileUploder'
 export * from './lib/read-review/ReadReview'
 export * from './lib/document-upload-modal/DocumentUploadModal'
