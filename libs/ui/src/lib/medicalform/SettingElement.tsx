@@ -122,6 +122,14 @@ const SettingElement: FC<P> = ({
       desc: 'Draw on an image or a photo',
     },
     {
+      component: 'basic_staticimage',
+      type: { type },
+      iconUrl: drawingIcon,
+      bgcolor: '#F78561',
+      title: 'Image',
+      desc: 'Show an image or a photo',
+    },
+    {
       component: 'basic_signature',
       type: { type },
       iconUrl: signatureIcon,
@@ -392,7 +400,8 @@ const SettingElement: FC<P> = ({
               />
             )}
             {(filteredComponent[0].component === 'basic_signature' ||
-              filteredComponent[0].component === 'basic_drawing') && (
+              filteredComponent[0].component === 'basic_drawing' ||
+              filteredComponent[0].component === 'basic_staticimage') && (
               <SettingElementQuestion
                 desc="Enter your title"
                 title="Title"
@@ -406,7 +415,12 @@ const SettingElement: FC<P> = ({
                 desc="Click or drag file to this area to upload"
               />
             )}
-
+            {filteredComponent[0].component === 'basic_staticimage' && (
+              <SettingElementFileUpload
+                title="Image"
+                desc="Click or drag file to this area to upload"
+              />
+            )}
             {filteredComponent[0].component === 'basic_shortanswer' && (
               <SettingElementTypeOption
                 title="Input type"
@@ -463,7 +477,9 @@ const SettingElement: FC<P> = ({
             requireFunc={requireFunc}
             required={selectedForm.required}
             needLeft={
-              filteredComponent[0].component === 'basic_textblock'
+              filteredComponent[0].component === 'basic_textblock' ||
+              filteredComponent[0].component === 'basic_heading' ||
+              filteredComponent[0].component === 'basic_conditions'
                 ? false
                 : true
             }

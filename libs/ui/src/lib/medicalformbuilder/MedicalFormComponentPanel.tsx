@@ -39,6 +39,7 @@ const hideFormInfos: HideForm = {
     'basic_traveldestination',
     'basic_conditions',
     'basic_drawing',
+    'basic_staticimage',
   ],
   labForm: [
     'basic_drugs',
@@ -47,6 +48,7 @@ const hideFormInfos: HideForm = {
     'basic_vaccinescheduler',
     'basic_traveldestination',
     'basic_drawing',
+    'basic_staticimage',
   ],
 }
 

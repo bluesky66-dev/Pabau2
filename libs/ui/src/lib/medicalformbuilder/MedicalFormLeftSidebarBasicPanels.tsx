@@ -135,6 +135,7 @@ const MedicalFormLeftSidebarBasicPanels: FC<P> = ({ ...props }) => {
               ?.filter(
                 (form) =>
                   form.formName === 'basic_drawing' ||
+                  form.formName === 'basic_staticimage' ||
                   form.formName === 'basic_signature'
               )
               .map((form) => {

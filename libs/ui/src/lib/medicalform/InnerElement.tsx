@@ -109,6 +109,13 @@ const InnerElement: FC<P> = ({
       title: 'Drawing',
     },
     {
+      component: 'basic_staticimage',
+      type: { type },
+      iconUrl: drawingIcon,
+      bgcolor: '#F78561',
+      title: 'Image',
+    },
+    {
       component: 'basic_signature',
       type: { type },
       iconUrl: signatureIcon,
@@ -275,9 +282,26 @@ const InnerElement: FC<P> = ({
               formData.txtBlock !== '' ||
               formData.txtInputType !== '' ||
               formData.formName === 'basic_drawing' ||
+              formData.formName === 'basic_staticimage' ||
               (formData.arrItems && formData.arrItems.length > 0)) && (
               <InnerMedicalFormBody>
                 {formData.formName === 'basic_drawing' && (
+                  <img
+                    style={{
+                      width: '300px',
+                      display: 'block',
+                      marginLeft: 'auto',
+                      marginRight: 'auto',
+                    }}
+                    src={
+                      formData.arrItems?.length > 0
+                        ? `https://prelive-crm.pabau.com${formData.arrItems[0].name}`
+                        : innerDrawingIcon
+                    }
+                    alt=""
+                  />
+                )}
+                {formData.formName === 'basic_staticimage' && (
                   <img
                     style={{
                       width: '300px',

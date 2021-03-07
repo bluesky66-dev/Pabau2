@@ -31,18 +31,35 @@ const MedicalFormEditLeft: FC<P> = ({ ...props }) => {
     defaultSelectedFormInfos
   )
   const [componentClass, setComponentClass] = useState(
-    styles.medicalFormEditLeftPanelCollapseComponentCollapse
+    styles.medicalFormEditLeftPanelCollapseComponentExpend
   )
-  const [openPanel, setOpenPanel] = useState<string[]>(['1', '2'])
+  const [openPanel, setOpenPanel] = useState<string[]>(['1'])
 
+  const isSelectedFormType = (setting) => {
+    const selectedFormType = Object.entries(setting).filter(
+      ([key, value]) => value === true
+    )
+    return selectedFormType.length === 0 ? false : true
+  }
   const onSelectFormType = (setting) => {
     refreshDraggedFroms?.()
     setSelectedFormTypes(setting)
-    setOpenPanel(['2'])
-    setComponentClass(styles.medicalFormEditLeftPanelCollapseComponentExpend)
+    if (isSelectedFormType(setting)) {
+      setOpenPanel(['2'])
+      setComponentClass(styles.medicalFormEditLeftPanelCollapseComponentExpend)
+    } else {
+      setOpenPanel(['1'])
+      setComponentClass(
+        styles.medicalFormEditLeftPanelCollapseComponentCollapse
+      )
+    }
   }
   const callback = (key) => {
-    setOpenPanel(key)
+    if (isSelectedFormType(selectedFormTypes)) {
+      setOpenPanel(key)
+    } else {
+      setOpenPanel(['1'])
+    }
   }
 
   useEffect(() => {

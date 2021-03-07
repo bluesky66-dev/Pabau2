@@ -97,6 +97,14 @@ const LeftSidebarElement: FC<P> = ({ type, component }) => {
       desc: 'Draw on an image or a photo',
     },
     {
+      component: 'basic_staticimage',
+      type: { type },
+      iconUrl: drawingIcon,
+      bgcolor: '#F78561',
+      title: 'Image',
+      desc: 'Show an image or a photo',
+    },
+    {
       component: 'basic_signature',
       type: { type },
       iconUrl: signatureIcon,
