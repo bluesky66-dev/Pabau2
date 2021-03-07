@@ -14,6 +14,7 @@ import {
   ChooseModal,
   FullScreenReportModal,
   OperationType,
+  ImageSelectorModal,
 } from '@pabau/ui'
 import {
   Collapse,
@@ -70,6 +71,8 @@ export const CreateService: FC<CreateServiceProps> = ({
 }) => {
   const [form] = Form.useForm()
   const [showModal, setShowModal] = useState(false)
+  const [showImageSelector, setShowImageSelector] = useState(false)
+  const [selectedImage, setSelectedImage] = useState('')
   const [showChooseModal, setShowChooseModal] = useState(false)
   const [serviceType, setServiceType] = useState('')
   const [serviceName, setServiceName] = useState('')
@@ -436,15 +439,36 @@ export const CreateService: FC<CreateServiceProps> = ({
               </div>
               <div>
                 <p className={styles.createServiceSectionItemTitle}>Image</p>
-                <div className={styles.createServiceImageContainer}>
-                  <PictureOutlined
-                    style={{
-                      color: 'var(--light-grey-color)',
-                      fontSize: '32px',
-                    }}
-                  />
+                <div
+                  className={styles.createServiceImageContainer}
+                  style={{ backgroundImage: `url(${selectedImage})` }}
+                >
+                  {!selectedImage && (
+                    <PictureOutlined
+                      style={{
+                        color: 'var(--light-grey-color)',
+                        fontSize: '32px',
+                      }}
+                    />
+                  )}
                 </div>
-                <Button icon={<PlusOutlined />}>Choose from library</Button>
+                <Button
+                  icon={<PlusOutlined />}
+                  onClick={() => setShowImageSelector(true)}
+                >
+                  Choose from library
+                </Button>
+                <ImageSelectorModal
+                  visible={showImageSelector}
+                  onOk={(image) => {
+                    console.log(image)
+                    setSelectedImage(image.source)
+                    setShowImageSelector(false)
+                  }}
+                  onCancel={() => {
+                    setShowImageSelector(false)
+                  }}
+                />
               </div>
             </div>
           </div>
