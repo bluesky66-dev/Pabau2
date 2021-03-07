@@ -19,11 +19,10 @@ import { Formik, FormikErrors } from 'formik'
 import Layout from './Layout/Layout'
 import { LeftOutlined } from '@ant-design/icons'
 import classNames from 'classnames'
-import Link from 'next/link'
 import { useTranslationI18 } from '../hooks/useTranslationI18'
+import { useRouter } from 'next/router'
 
 const { Title } = Typography
-
 interface P {
   schema: Schema
   addQuery?: DocumentNode
@@ -62,6 +61,7 @@ const CrudTable: FC<P> = ({
   const [searchTerm, setSearchTerm] = useState('')
   const { t } = useTranslationI18()
   const crudTableRef = useRef(null)
+  const router = useRouter()
 
   // eslint-disable-next-line graphql/template-strings
   const [editMutation] = useMutation(editQuery, {
@@ -333,6 +333,10 @@ const CrudTable: FC<P> = ({
     setEditingRow({ name: '', isCreate: true })
   }
 
+  const handleBack = () => {
+    router.back()
+  }
+
   return (
     <div ref={crudTableRef}>
       <Formik
@@ -398,9 +402,7 @@ const CrudTable: FC<P> = ({
             <MobileHeader className={styles.marketingSourceHeader}>
               <div className={styles.allContentAlignMobile}>
                 <div className={styles.marketingTextStyle}>
-                  <Link href="/">
-                    <LeftOutlined />
-                  </Link>
+                  <LeftOutlined onClick={handleBack} />
                   <p>
                     {' '}
                     {needTranslation
@@ -500,6 +502,7 @@ const CrudTable: FC<P> = ({
               isCustomIconExist={checkCustomColorIconExsist('icon')}
               noDataBtnText={schema.full}
               noDataText={schema.fullLower}
+              padlocked={schema.padlocked}
               onAddTemplate={() => createNew()}
               searchTerm={searchTerm}
               columns={[
