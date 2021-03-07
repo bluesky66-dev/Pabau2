@@ -35,7 +35,7 @@ export interface FullScreenReportModalProps {
   enableCreateBtn?: boolean
   activated?: boolean
   vatRegistered?: boolean
-  subMenu?: Array<string>
+  subMenu?: Array<ReactNode>
 }
 
 export const FullScreenReportModal: FC<FullScreenReportModalProps> = ({
@@ -254,7 +254,7 @@ export const FullScreenReportModal: FC<FullScreenReportModalProps> = ({
             <TabMenu menuItems={subMenu} tabPosition="top" minHeight="1px">
               {children
                 ? children
-                : subMenu.map((menu) => <div key={menu}>{menu}</div>)}
+                : subMenu.map((menu, i) => <div key={i}>{menu}</div>)}
             </TabMenu>
           ) : (
             children
