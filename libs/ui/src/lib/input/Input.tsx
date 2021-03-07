@@ -16,6 +16,7 @@ export interface CheckBoxProps extends FormProps {
   placeHolderText?: string
   reqiredMsg?: string
   type?: string
+  tooltip?: string
   onChange?(val): void
 }
 
@@ -28,6 +29,7 @@ export function Input({
   requiredMark = false,
   reqiredMsg,
   type,
+  tooltip,
   onChange,
   ...props
 }: PropsWithChildren<CheckBoxProps>): JSX.Element {
@@ -71,7 +73,12 @@ export function Input({
         layout="vertical"
         initialValues={{ 'input-item': text }} // Use initialValues when using form
       >
-        <Form.Item label={label ? label : ''} name="input-item" rules={rules}>
+        <Form.Item
+          label={label ? label : ''}
+          tooltip={tooltip ? tooltip : ''}
+          name="input-item"
+          rules={rules}
+        >
           <AntInput
             className="input-style"
             placeholder={placeHolderText}

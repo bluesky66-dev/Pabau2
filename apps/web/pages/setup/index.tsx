@@ -94,7 +94,11 @@ const Index: FC = () => {
         { title: 'Client Portal', data: [] },
         { title: 'Feedback Survey', data: [] },
         { title: 'Lead Forms', data: [] },
-        { title: 'Marketing Sources', data: [] },
+        {
+          title: 'Marketing Sources',
+          data: [],
+          href: '/setup/marketing-sources',
+        },
       ],
       image: marketingImage,
     },
