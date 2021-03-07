@@ -15,7 +15,7 @@ const AppearanceGeneralItems: AppearanceGeneralItems[] = [
   {
     type: 'Enable staff initials',
     value: true,
-    help: 'We will hide your users photos and show only the initials',
+    help: 'We will hide your users photos and show only the initials.',
     key: 1,
   },
   {
@@ -28,7 +28,7 @@ const AppearanceGeneralItems: AppearanceGeneralItems[] = [
     type: 'Hide appointment times',
     value: true,
     help:
-      'We will not show the appointment time on your appointment (allowing for more space)',
+      'We will not show the appointment time on your appointment (allowing for more space).',
     key: 3,
   },
 ]

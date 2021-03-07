@@ -72,7 +72,7 @@ export const Advanced: FC = () => {
       type: 'Hide/Show accounts',
       value: true,
       help:
-        'This will allow you to view financial information from the calendar',
+        'This will allow you to view financial information from the calendar.',
       key: 9,
     },
     {
@@ -84,7 +84,7 @@ export const Advanced: FC = () => {
     {
       type: 'Revert to original room view',
       value: true,
-      help: 'Revert to original room view',
+      help: 'Disable room view ordering by service priority.',
       key: 11,
     },
   ]
