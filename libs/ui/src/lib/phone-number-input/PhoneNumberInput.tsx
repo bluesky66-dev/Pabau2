@@ -7,32 +7,37 @@ import styles from './PhoneNumberInput.module.less'
 const phoneUtil = PhoneNumberUtil.getInstance()
 export interface PhoneNumberInputProps {
   countryCode?: string
-  onChange(val): void
+  label?: string
+  onChange(val: string, valid?: boolean): void
 }
 
 export const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
   countryCode = 'GB',
+  label = 'Phone Number',
   onChange,
 }) => {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [valid, setValid] = useState(true)
   const handleChangeInput = (val, country) => {
+    let validNumber
     try {
       const isValid = phoneUtil.isValidNumberForRegion(
         phoneUtil.parse(val, country.countryCode.toUpperCase()),
         country.countryCode.toUpperCase()
       )
       setValid(isValid)
+      validNumber = isValid
     } catch {
       setValid(false)
+      validNumber = false
     }
     setPhoneNumber(val)
-    onChange(`${val}`)
+    onChange(`${val}`, validNumber)
   }
 
   return (
     <div className={styles.phoneNumberInputContainer}>
-      <p className={styles.phoneNumberLabel}>Phone Number</p>
+      <p className={styles.phoneNumberLabel}>{label}</p>
       <div
         className={
           valid
@@ -47,9 +52,9 @@ export const PhoneNumberInput: FC<PhoneNumberInputProps> = ({
         />
       </div>
       {!valid && (
-        <p className={styles.phoneNumberValidMsg}>
+        <div className={styles.phoneNumberValidMsg}>
           Please enter a valid phone number
-        </p>
+        </div>
       )}
     </div>
   )

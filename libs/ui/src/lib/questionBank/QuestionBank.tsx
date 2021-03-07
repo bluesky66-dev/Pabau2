@@ -12,7 +12,7 @@ export interface IQuestionOptions {
   checked: boolean
 }
 
-interface IMenuOptions {
+export interface IMenuOptions {
   key: string
   value: string
 }

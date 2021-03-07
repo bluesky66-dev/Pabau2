@@ -4,20 +4,12 @@ import React from 'react'
 import CrudLayout from '../../components/CrudLayout/CrudLayout'
 
 const LIST_QUERY = gql`
-  query job_title(
-    $isActive: Boolean = true
-    $offset: Int
-    $limit: Int
-    $searchTerm: String = ""
-  ) {
+  query job_title($isActive: Boolean = true, $offset: Int, $limit: Int) {
     job_title(
       offset: $offset
       limit: $limit
       order_by: { order: desc }
-      where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-      }
+      where: { is_active: { _eq: $isActive } }
     ) {
       __typename
       id
@@ -28,16 +20,8 @@ const LIST_QUERY = gql`
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query job_title_aggregate(
-    $isActive: Boolean = true
-    $searchTerm: String = ""
-  ) {
-    job_title_aggregate(
-      where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-      }
-    ) {
+  query job_title_aggregate($isActive: Boolean = true) {
+    job_title_aggregate(where: { is_active: { _eq: $isActive } }) {
       aggregate {
         count
       }
@@ -92,6 +76,7 @@ const schema: Schema = {
   fullLower: 'job title',
   short: 'Job Title',
   shortLower: 'job title',
+  createButtonLabel: 'Create Job Title',
   messages: {
     create: {
       success: 'You have successfully created a job title',
@@ -113,6 +98,7 @@ const schema: Schema = {
       short: 'Name',
       shortLower: 'name',
       min: 2,
+      max: 50,
       example: 'Therapist',
       // description: 'A friendly name',
       // extra: <i>Please note: blah blah blahh</i>,
