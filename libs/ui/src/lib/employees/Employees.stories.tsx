@@ -11,18 +11,18 @@ export default {
 }
 
 const defaultEmployees: Employee[] = [
-  { name: 'Jessica Winter' },
-  { name: 'Jeff Hackley' },
-  { name: 'Alexander Wang' },
-  { name: 'Linda Davis' },
-  { name: 'William Tyson' },
-  { name: 'Max Starck' },
-  { name: 'Kyle Walsh' },
-  { name: 'Owen Phillips' },
-  { name: 'Aidan Kelly' },
-  { name: 'Ewan Morgan' },
-  { name: 'Jordan Martin' },
-  { name: 'Grant Dudley' },
+  { name: 'Jessica Winter', selected: false },
+  { name: 'Jeff Hackley', selected: false },
+  { name: 'Alexander Wang', selected: false },
+  { name: 'Linda Davis', selected: false },
+  { name: 'William Tyson', selected: false },
+  { name: 'Max Starck', selected: false },
+  { name: 'Kyle Walsh', selected: false },
+  { name: 'Owen Phillips', selected: false },
+  { name: 'Aidan Kelly', selected: false },
+  { name: 'Ewan Morgan', selected: false },
+  { name: 'Jordan Martin', selected: false },
+  { name: 'Grant Dudley', selected: false },
 ]
 
 export interface EmployeesStoryProps {

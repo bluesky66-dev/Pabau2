@@ -8,28 +8,25 @@ import styles from './Employees.module.less'
 export interface Employee {
   avatar?: string
   name: string
-}
-
-export interface EmployeeItem {
-  avatar?: string
-  name: string
   selected: boolean
 }
 
 export interface EmployeesProps {
   employees: Employee[]
+  onSelected?: (items: Employee[]) => void
 }
 
-export const Employees: FC<EmployeesProps> = ({ employees }) => {
+export const Employees: FC<EmployeesProps> = ({ employees, onSelected }) => {
   const [searchQuery, setSearchQuery] = useState('')
-  const [employeeItems, setEmployeeItems] = useState<EmployeeItem[]>([])
+  const [employeeItems, setEmployeeItems] = useState<Employee[]>([])
   const [loadMore, setLoadMore] = useState(false)
   const handleSelectEmployee = (employee) => {
-    const items: EmployeeItem[] = [...employeeItems]
+    const items: Employee[] = [...employeeItems]
     for (const item of items) {
       if (item.name === employee.name) item.selected = !item.selected
     }
     setEmployeeItems([...items])
+    onSelected?.(items.filter((item) => item.selected === true))
   }
   const handleChangeSearchQuery = (e) => {
     // setSearchQuery(e.target.value)
@@ -42,9 +39,7 @@ export const Employees: FC<EmployeesProps> = ({ employees }) => {
     )
   }
   useEffect(() => {
-    setEmployeeItems(
-      employees.map((employee) => ({ ...employee, selected: false }))
-    )
+    setEmployeeItems([...employees])
     setLoadMore(false)
   }, [employees])
   return (

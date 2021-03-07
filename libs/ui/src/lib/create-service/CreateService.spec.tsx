@@ -8,6 +8,7 @@ describe('CreateService', () => {
     const { baseElement } = render(
       <CreateService
         visible={true}
+        contracts={[]}
         employees={[]}
         rooms={[]}
         equipment={[]}
