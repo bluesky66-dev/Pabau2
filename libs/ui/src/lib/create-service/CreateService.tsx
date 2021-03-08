@@ -1,7 +1,8 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useState, useEffect, ReactNode } from 'react'
 import classNames from 'classnames'
 import NumberFormat, { NumberFormatValues } from 'react-number-format'
 import {
+  Avatar,
   Button,
   TabMenu,
   Switch,
@@ -14,6 +15,7 @@ import {
   ChooseModal,
   FullScreenReportModal,
   OperationType,
+  ImageSelectorModal,
 } from '@pabau/ui'
 import {
   Collapse,
@@ -39,6 +41,7 @@ import { ReactComponent as Money } from '../../assets/images/pricing/money.svg'
 import { ReactComponent as Botox } from '../../assets/images/botox.svg'
 import { ReactComponent as Treatment } from '../../assets/images/form-type/treatment.svg'
 import { ReactComponent as MedicalHistory } from '../../assets/images/form-type/medical-history.svg'
+import { ReactComponent as Environment } from '../../assets/images/environment.svg'
 import styles from './CreateService.module.less'
 
 const { Panel } = Collapse
@@ -46,12 +49,21 @@ const { Option, OptGroup } = Select
 
 interface LocationItem {
   location: string
+  detail: string
+  img?: string
   selected: boolean
 }
 
+interface ContractItem {
+  logo: ReactNode
+  name: string
+  type: string
+}
+
 export interface CreateServiceProps {
+  contracts: ContractItem[]
   employees: Employee[]
-  locations: Array<string>
+  locations: LocationItem[]
   rooms: Array<string>
   equipment: Array<string>
   visible: boolean
@@ -60,6 +72,7 @@ export interface CreateServiceProps {
 }
 
 export const CreateService: FC<CreateServiceProps> = ({
+  contracts,
   employees,
   locations,
   rooms,
@@ -70,15 +83,19 @@ export const CreateService: FC<CreateServiceProps> = ({
 }) => {
   const [form] = Form.useForm()
   const [showModal, setShowModal] = useState(false)
+  const [showImageSelector, setShowImageSelector] = useState(false)
+  const [selectedImage, setSelectedImage] = useState('')
   const [showChooseModal, setShowChooseModal] = useState(false)
   const [serviceType, setServiceType] = useState('')
   const [serviceName, setServiceName] = useState('')
   const [selectedColor, setSelectedColor] = useState('')
   const [category, setCategory] = useState('')
   const [servicePrice, setServicePrice] = useState('0')
-  const [sliderValue, setSliderValue] = useState(0)
+  const [sliderValue, setSliderValue] = useState(1)
   const [paymentUnit, setPaymentUnit] = useState('%')
+  const [duration, setDuration] = useState('')
   const [locationItems, setLocationItems] = useState<LocationItem[]>([])
+  const [selectedEmployees, setSelectedEmployees] = useState<Employee[]>([])
   const appointmentColors = [
     '#7986cb',
     '#64b5f6',
@@ -258,10 +275,9 @@ export const CreateService: FC<CreateServiceProps> = ({
     setShowModal(false)
   }, [visible])
   useEffect(() => {
-    setLocationItems([
-      ...locations.map((location) => ({ location, selected: false })),
-    ])
-  }, [locations])
+    setSelectedEmployees(employees.filter((item) => item.selected === true))
+    setLocationItems(locations)
+  }, [locations, employees])
   return (
     <>
       <ChooseModal
@@ -312,7 +328,28 @@ export const CreateService: FC<CreateServiceProps> = ({
           'Pricing',
           'Staff & Resources',
           'Online Booking',
-          'Client pathway',
+          <div
+            key="client-pathway"
+            style={{ display: 'flex', alignItems: 'center' }}
+          >
+            Client pathway{' '}
+            <span
+              style={{
+                display: 'inline-block',
+                padding: '3px 12px',
+                fontFamily: 'var(--font-family)',
+                fontSize: '12px',
+                lineHeight: '14px',
+                fontWeight: 400,
+                color: 'var(--primary-color)',
+                backgroundColor: '#eef7fb',
+                borderRadius: '6px',
+                marginLeft: '8px',
+              }}
+            >
+              Plus
+            </span>
+          </div>,
         ]}
         onCancel={() => {
           setShowModal(false)
@@ -343,7 +380,7 @@ export const CreateService: FC<CreateServiceProps> = ({
                       value={sliderValue}
                       onChange={(val) => setSliderValue(val)}
                       calculatedValue={`${sliderValue}`}
-                      min={0}
+                      min={1}
                       max={50}
                     />
                   </Form.Item>
@@ -415,15 +452,37 @@ export const CreateService: FC<CreateServiceProps> = ({
               </div>
               <div>
                 <p className={styles.createServiceSectionItemTitle}>Image</p>
-                <div className={styles.createServiceImageContainer}>
-                  <PictureOutlined
-                    style={{
-                      color: 'var(--light-grey-color)',
-                      fontSize: '32px',
-                    }}
-                  />
+                <div
+                  className={styles.createServiceImageContainer}
+                  style={{ backgroundImage: `url(${selectedImage})` }}
+                >
+                  {!selectedImage && (
+                    <PictureOutlined
+                      style={{
+                        color: 'var(--light-grey-color)',
+                        fontSize: '32px',
+                      }}
+                    />
+                  )}
                 </div>
-                <Button icon={<PlusOutlined />}>Choose from library</Button>
+                <Button
+                  icon={<PlusOutlined />}
+                  onClick={() => setShowImageSelector(true)}
+                >
+                  Choose from library
+                </Button>
+                <ImageSelectorModal
+                  visible={showImageSelector}
+                  initialSearch={serviceName}
+                  onOk={(image) => {
+                    console.log(image)
+                    setSelectedImage(image.source)
+                    setShowImageSelector(false)
+                  }}
+                  onCancel={() => {
+                    setShowImageSelector(false)
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -598,7 +657,6 @@ export const CreateService: FC<CreateServiceProps> = ({
                       className="ant-input"
                       prefix="£"
                       defaultValue="0"
-                      thousandSeparator={true}
                       inputMode="numeric"
                       value={servicePrice}
                       onValueChange={(val: NumberFormatValues) =>
@@ -612,7 +670,10 @@ export const CreateService: FC<CreateServiceProps> = ({
             <div className={styles.createServiceSectionItem}>
               <Form form={form} layout="vertical">
                 <Form.Item label="Duration">
-                  <Select placeholder="Select duration">
+                  <Select
+                    placeholder="Select duration"
+                    onSelect={(val: string) => setDuration(val)}
+                  >
                     {durations.map((duration) => (
                       <Option key={duration} value={duration}>
                         {duration}
@@ -685,20 +746,162 @@ export const CreateService: FC<CreateServiceProps> = ({
                 </Form.Item>
               </Form>
             </div>
-            <div className={styles.createServiceSectionItem}>
+            <div
+              className={styles.createServiceSectionItem}
+              style={{ margin: 0 }}
+            >
               <Checkbox defaultChecked={false}>
                 Require payment before completing booking
               </Checkbox>
             </div>
-            <div className={styles.enableOnlinePayment}>
-              <p>Enable online payment</p>
-              <p>
-                Activate payments with Pabau to befeit from deposit during and
-                after sale and get access to no show protection, payment
-                terminals, safe online paymets and many more.
-              </p>
-              <p>Enable Reviews</p>
-            </div>
+          </div>
+          <div className={styles.advancedSettings}>
+            <Collapse ghost>
+              <Panel
+                header="Special Pricing Ootions"
+                key="special-pricing-options"
+              >
+                <div className={styles.createServiceSection}>
+                  <h2
+                    className={styles.createServiceSectionTitle}
+                    style={{ margin: 0 }}
+                  >
+                    Employees
+                  </h2>
+                  <h3
+                    className={styles.createServiceSectionSubTitle}
+                    style={{ marginBottom: '1rem' }}
+                  >
+                    Add pricing for each team member
+                  </h3>
+                  <div className={styles.teamMemberPricingHeader}>
+                    <div>Name</div>
+                    <div>
+                      <span>Price</span>
+                      <span>Duration</span>
+                    </div>
+                  </div>
+                  {selectedEmployees.map((item) => (
+                    <div className={styles.teamMemberPricing} key={item.name}>
+                      <div>
+                        <Avatar src={item?.avatar} name={item.name} size={40} />
+                        <span>{item.name}</span>
+                      </div>
+                      <div>
+                        <div className={styles.currencyInput}>
+                          <NumberFormat
+                            className="ant-input"
+                            placeholder={`£${servicePrice}`}
+                            prefix="£"
+                            inputMode="numeric"
+                          />
+                        </div>
+                        <div>
+                          <Select placeholder={duration}>
+                            {durations.map((item) => (
+                              <Option key={item} value={item}>
+                                {item}
+                              </Option>
+                            ))}
+                          </Select>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className={styles.createServiceSection}>
+                  <h2
+                    className={styles.createServiceSectionTitle}
+                    style={{ margin: 0 }}
+                  >
+                    Location
+                  </h2>
+                  <h3
+                    className={styles.createServiceSectionSubTitle}
+                    style={{ marginBottom: '1rem' }}
+                  >
+                    Add pricing for each location
+                  </h3>
+                  <div className={styles.locationPricingHeader}>
+                    <span>Name</span>
+                    <span>Price</span>
+                  </div>
+                  {locationItems
+                    .filter((location) => location.selected === true)
+                    .map((item) => (
+                      <div
+                        className={styles.locationPricingItem}
+                        key={item.location}
+                      >
+                        <div>
+                          <div
+                            style={{
+                              backgroundImage: item.img
+                                ? `url(${item.img})`
+                                : 'none',
+                            }}
+                          >
+                            {!item.img && <Environment />}
+                          </div>
+                          <div>
+                            <span>{item.location}</span>
+                            <span>{item.detail}</span>
+                          </div>
+                        </div>
+                        <div>
+                          <div className={styles.currencyInput}>
+                            <NumberFormat
+                              className="ant-input"
+                              placeholder={`£${servicePrice}`}
+                              prefix="£"
+                              inputMode="numeric"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+                <div className={styles.createServiceSection}>
+                  <h2
+                    className={styles.createServiceSectionTitle}
+                    style={{ margin: 0 }}
+                  >
+                    Contract
+                  </h2>
+                  <h3
+                    className={styles.createServiceSectionSubTitle}
+                    style={{ marginBottom: '1rem' }}
+                  >
+                    Add pricing for each contract
+                  </h3>
+                  <div className={styles.contractPricingHeader}>
+                    <span>Name</span>
+                    <span>Price</span>
+                  </div>
+                  {contracts.map((item) => (
+                    <div className={styles.contractPricingItem} key={item.name}>
+                      <div>
+                        <div>{item.logo}</div>
+                        <div>
+                          <span>{item.name}</span>
+                          <span>{item.type}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div className={styles.currencyInput}>
+                          <NumberFormat
+                            className="ant-input"
+                            placeholder={`£${servicePrice}`}
+                            prefix="£"
+                            inputMode="numeric"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Panel>
+            </Collapse>
           </div>
         </div>
         <TabMenu
@@ -708,7 +911,10 @@ export const CreateService: FC<CreateServiceProps> = ({
         >
           <div className={styles.employeesContainer}>
             <div className={styles.createServiceSection}>
-              <Employees employees={employees} />
+              <Employees
+                employees={employees}
+                onSelected={(items) => setSelectedEmployees(items)}
+              />
             </div>
           </div>
           <div className={styles.resoucesContainer}>
