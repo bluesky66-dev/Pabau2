@@ -18,7 +18,6 @@ const Index: FC = () => {
 
   const showNotification = (email) => {
     if (setIndexTab === 1) {
-      console.log(email)
       Notification(NotificationType.success, 'Test message sent')
     }
     if (setIndexTab === 2) {
