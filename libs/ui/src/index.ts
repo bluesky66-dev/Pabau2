@@ -1,3 +1,4 @@
+export * from './lib/create-letter-template-bar/CreateLetterTemplateBar'
 export * from './lib/create-template-modal/CreateTemplateModal'
 export * from './lib/communication-template-preview/CommunicationTemplatePreview'
 export * from './lib/choose-type-group/ChooseTypeGroup'

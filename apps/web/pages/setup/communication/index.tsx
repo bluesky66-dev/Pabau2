@@ -1,14 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import { Typography, Input } from 'antd'
-import {
-  CalendarOutlined,
-  FileDoneOutlined,
-  MailOutlined,
-  MessageOutlined,
-  RightOutlined,
-  SearchOutlined,
-  TeamOutlined,
-} from '@ant-design/icons'
+import { SearchOutlined } from '@ant-design/icons'
 import {
   TabMenu,
   Breadcrumb,
@@ -17,22 +9,25 @@ import {
   Button,
   ChooseModal,
   ChooseModalItem,
-  FullScreenReportModal,
   Notification,
   NotificationType,
-  OperationType,
   MedicalFilterProps,
   CreateTemplateModal,
+  CreateTemplateModalProps,
 } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import Custom from '../../../components/Setup/Communication/Custom'
 import Library from '../../../components/Setup/Communication/Library'
 import CommonHeader from '../common-header'
 // import notificationBannerImage from '../../../assets/images/notification-image.png'
-import { ReactComponent as LetterOutlined } from '../../../assets/images/form-type/consent-selected.svg'
-import { ReactComponent as MarketingOutlined } from '../../../assets/images/form-type/marketing.svg'
 import icon from '../../../assets/images/notification.png'
 import styles from './index.module.less'
+import {
+  defaultChooseTemplateState,
+  chooseTemplateStepArgs,
+  ChooseTemplateState,
+} from './choose-modal.data'
+import { createTemplateStateArgs } from './template-modal.data'
 
 const { Title } = Typography
 
@@ -63,146 +58,6 @@ const tabMenuProps: Array<string> = ['Custom', 'Library']
 
 /*--- TabMenu Props End ---*/
 
-/*--- Choose Modal Props ---*/
-const addOnStyle = {
-  width: '40px',
-  height: '40px',
-  borderRadius: '50%',
-  border: '1px solid var(--border-color-base)',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  color: 'var(--grey-text-color)',
-  fontSize: '16px',
-}
-
-const chooseModalTypeItems: ChooseModalItem[] = [
-  {
-    title: 'General',
-    icon: <MailOutlined />,
-    addonIcon: (
-      <div style={addOnStyle}>
-        <RightOutlined />
-      </div>
-    ),
-  },
-  {
-    title: 'SMS',
-    icon: <MessageOutlined />,
-    addonIcon: (
-      <div style={addOnStyle}>
-        <RightOutlined />
-      </div>
-    ),
-  },
-  {
-    title: 'Letter',
-    icon: <LetterOutlined />,
-    addonIcon: (
-      <div style={addOnStyle}>
-        <RightOutlined />
-      </div>
-    ),
-  },
-]
-
-const chooseModalEmailItems: ChooseModalItem[] = [
-  {
-    title: 'General',
-    description: 'Services booked by one client in a single visit',
-    icon: <CalendarOutlined />,
-  },
-  {
-    title: 'Confirmations',
-    icon: <FileDoneOutlined />,
-    description: 'Use Pabau’s online video conferencing',
-  },
-  {
-    title: 'Leads',
-    icon: <TeamOutlined />,
-    description: 'Sell multiple services as a packaged bundle',
-  },
-  {
-    title: 'Marketing',
-    icon: <MarketingOutlined />,
-    description: 'Sell multiple services as a packaged bundle',
-  },
-]
-
-const chooseModalSMSItems: ChooseModalItem[] = [
-  {
-    title: 'General',
-    description: 'Services booked by one client in a single visit',
-    icon: <CalendarOutlined />,
-  },
-  {
-    title: 'Confirmations',
-    icon: <FileDoneOutlined />,
-    description: 'Use Pabau’s online video conferencing',
-  },
-  {
-    title: 'Marketing',
-    icon: <MarketingOutlined />,
-    description: 'Sell multiple services as a packaged bundle',
-  },
-]
-
-const chooseTemplateStepArgs = [
-  {
-    SelectType: {
-      title: 'Select the type of template you wish to create',
-      subTitle: 'Step 1 of 2',
-      items: chooseModalTypeItems,
-    },
-  },
-  {
-    General: {
-      title: 'What type of email template are you creating',
-      subTitle: 'Step 2 of 2',
-      items: chooseModalEmailItems,
-    },
-    SMS: {
-      title: 'What type of sms template are you creating',
-      subTitle: 'Step 2 of 2',
-      items: chooseModalSMSItems,
-    },
-    Letter: {
-      title: 'What type of letter template are you creating',
-      subTitle: 'Step 2 of 2',
-      items: chooseModalTypeItems,
-    },
-  },
-]
-
-interface ChooseTemplateState {
-  _step: number
-  _type: string
-}
-
-const defaultChooseTemplateState: ChooseTemplateState = {
-  _step: 0,
-  _type: 'SelectType',
-}
-
-/*--- Choose Modal Props End ---*/
-
-/*--- Template Modal Props ---*/
-
-const defaultCreateTemplateState = {
-  title: 'Create SMS Template',
-  visible: false,
-  operations: [
-    OperationType.active,
-    OperationType.cancel,
-    OperationType.create,
-  ],
-  cancelBtnText: 'Cancel',
-  createBtnText: 'Save',
-  enableCreateBtn: true,
-  activated: true,
-}
-/*--- Template Modal Props End ---*/
-
 // interface IndexProps {}
 
 export const Index: FC = () => {
@@ -224,9 +79,16 @@ export const Index: FC = () => {
 
   /*--- Create Modal State ---*/
 
-  const [createTemplateArgs, setCreateTemplateArgs] = useState(
-    defaultCreateTemplateState
-  )
+  const [
+    createTemplateArgs,
+    setCreateTemplateArgs,
+  ] = useState<CreateTemplateModalProps>(null)
+
+  /*--- Create Modal State End ---*/
+
+  /*--- Template Type State ---*/
+
+  const [selectedTemplateType, setSelectedTemplateType] = useState('SMS')
 
   /*--- Create Modal State End ---*/
 
@@ -241,36 +103,57 @@ export const Index: FC = () => {
     )
   }, [chooseTemplateStep])
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  useEffect(() => {}, [])
-
   function nextChooseTemplate(item: ChooseModalItem) {
-    let _step = chooseTemplateStep._step + 1
-    let _type = item.title
-    if (_step === 2) {
-      _step = 0
-      _type = 'SelectType'
-      // chooseTemplateAction()
-      createTemplateAction()
+    if (chooseTemplateStep._step === 0) {
+      setSelectedTemplateType(item.title)
     }
-    const _tempStep: ChooseTemplateState = {
-      _step: _step,
-      _type: _type,
+
+    if (chooseTemplateStep._step === 0 && item.title === 'Letter') {
+      // createTemplateAction()
+    } else {
+      const _step = chooseTemplateStep._step + 1
+      const _type = item.title
+      if (_step === 2) {
+        // _step = 0
+        // _type = 'SelectType'
+        createTemplateAction()
+      } else {
+        const _tempStep: ChooseTemplateState = {
+          _step: _step,
+          _type: _type,
+        }
+        setChooseTemplateStep(_tempStep)
+      }
     }
-    setChooseTemplateStep(_tempStep)
   }
   /*--- Choose Modal Action End---*/
 
-  /*--- Choose Modal Action ---*/
+  /*--- Create Template Modal Action ---*/
 
   function createTemplateAction() {
+    const tempState: CreateTemplateModalProps =
+      createTemplateStateArgs[selectedTemplateType]
     setCreateTemplateArgs({
-      ...createTemplateArgs,
-      visible: !createTemplateArgs.visible,
+      ...tempState,
+      onClosed: () => closeCreateTemplateModalAction(),
+      visible: true,
     })
   }
 
-  /*--- Choose Modal Action End ---*/
+  const closeCreateTemplateModalAction = () => {
+    const tempState = createTemplateArgs
+    setCreateTemplateArgs({
+      ...tempState,
+      visible: false,
+    })
+  }
+
+  useEffect(() => {
+    if (selectedTemplateType === 'Letter') createTemplateAction()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedTemplateType])
+
+  /*--- Create Template Modal Action End ---*/
 
   return (
     <>
@@ -363,8 +246,7 @@ export const Index: FC = () => {
           }}
         />
       )}
-      <FullScreenReportModal {...createTemplateArgs} />
-      <CreateTemplateModal visible={false} />
+      <CreateTemplateModal {...createTemplateArgs} />
     </>
   )
 }

@@ -9,6 +9,8 @@ export default {
     actions: { argTypesRegex: '^on[A-Z].*' },
   },
 }
-export const CreateTemplate: FC = () => {
+const CreateTemplateModalStory: FC = () => {
   return <CreateTemplateModal />
 }
+
+export const CreateSMSTemplateModal = CreateTemplateModalStory.bind({})
