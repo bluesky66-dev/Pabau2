@@ -145,7 +145,9 @@ const AddButton: FC<P> = ({
           <Input
             className={styles.searchMarketingStyle}
             placeholder={
-              needTranslation ? t('search-placeholder.translation') : 'Search'
+              needTranslation
+                ? t('marketingsource-input-search-placeholder.translation')
+                : 'Search'
             }
             value={marketingSourceSearch}
             onChange={(e) => setMarketingSourceSearch(e.target.value)}
@@ -174,7 +176,7 @@ const AddButton: FC<P> = ({
           onClick={() => onClick?.()}
         >
           {needTranslation
-            ? t('marketingsource-header-create.translation')
+            ? t('marketingsource-header-create-btn.translation')
             : schema.createButtonLabel}
         </Button>
       </div>
