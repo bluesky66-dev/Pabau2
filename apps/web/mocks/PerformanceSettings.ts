@@ -2,6 +2,48 @@ const reviewScheduleValue = {
   reviewDate: new Date(new Date().setMonth(new Date().getMonth() + 1)),
 }
 
+const peerQuestionList = {
+  peerSelfAssessmentQuestion: [
+    {
+      key: 1,
+      value:
+        '(Name) takes careful consideration before attempting tasks, before executing them with perfection.',
+    },
+    {
+      key: 2,
+      value:
+        '(Name) takes time to help the team, often taken time away from performing their own tasks.',
+    },
+    {
+      key: 3,
+      value:
+        '(Name) turns up to work with enthuism and energy to plough through.',
+    },
+    {
+      key: 4,
+      value: '(Name) is dedicated to his job.',
+    },
+  ],
+  questionEmployee: [
+    {
+      key: 1,
+      value: 'Good Thinker',
+    },
+    {
+      key: 2,
+      value: 'Team Player',
+    },
+    {
+      key: 3,
+      value: 'Motivated',
+    },
+    {
+      key: 4,
+      value: 'Dedication',
+    },
+  ],
+}
+
 const AssessmentList = {
   selfAssessmentQuestion: [
     {
@@ -39,11 +81,28 @@ const AssessmentList = {
       value: 'How could (Name) improve?',
     },
   ],
+  peerAssessmentList: peerQuestionList,
 }
+
+const peopleList = [
+  { name: 'Jessica Winter', selected: false },
+  { name: 'Jeff Hackley', selected: false },
+  { name: 'Alexander Wang', selected: false },
+  { name: 'Linda Davis', selected: false },
+  { name: 'William Tyson', selected: false },
+  { name: 'Max Starck', selected: false },
+  { name: 'Kyle Walsh', selected: false },
+  { name: 'Owen Phillips', selected: false },
+  { name: 'Aidan Kelly', selected: false },
+  { name: 'Ewan Morgan', selected: false },
+  { name: 'Jordan Martin', selected: false },
+  { name: 'Grant Dudley', selected: false },
+]
 
 export const PerformanceConfigObj = {
   review: {
     date: reviewScheduleValue.reviewDate,
   },
   assessment: AssessmentList,
+  peopleList: { peopleList: peopleList },
 }

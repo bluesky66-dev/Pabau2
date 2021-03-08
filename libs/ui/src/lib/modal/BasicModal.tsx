@@ -11,7 +11,7 @@ export interface BasicModalProps {
   onDelete?: () => void
   visible?: boolean
   newButtonText?: string
-  title?: string
+  title?: React.ReactNode
   modalWidth?: number
   isValidate?: boolean
   footer?: boolean

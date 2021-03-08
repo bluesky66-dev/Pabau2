@@ -11,12 +11,14 @@ import { PerformanceConfigObj } from '../../../mocks/PerformanceSettings'
 
 import ReviewSettings from '../../../components/Setup/Settings/ReviewSettings/ReviewSettings'
 import AssessmentSettings from '../../../components/Setup/Settings/AssessmentSettings/AssessmentSettings'
+import PeopleSettings from '../../../components/Setup/Settings/PeopleSettings/PeopleSettings'
 
 import styles from './pos-configuration.module.less'
 
 interface P {
   review: reviewScheduleConfig
   assessment: assessmentScheduleConfig
+  people: peopleConfig
 }
 
 const Performance: FC<P> = () => {
@@ -24,7 +26,7 @@ const Performance: FC<P> = () => {
 
   const handleChange = (
     key: string,
-    obj: reviewScheduleConfig | assessmentScheduleConfig
+    obj: reviewScheduleConfig | assessmentScheduleConfig | peopleConfig
   ) => {
     console.log(obj)
   }
@@ -33,7 +35,7 @@ const Performance: FC<P> = () => {
     console.log('Save Object')
   }
 
-  const tabItems = ['Review Schedule', 'Assessment']
+  const tabItems = ['Review Schedule', 'Assessment', 'People']
 
   return (
     <div className={styles.mainWrapper}>
@@ -78,6 +80,10 @@ const Performance: FC<P> = () => {
             />
             <AssessmentSettings
               listAssessment={PerformanceConfigObj.assessment}
+              handleChange={handleChange}
+            />
+            <PeopleSettings
+              peopleList={PerformanceConfigObj.peopleList}
               handleChange={handleChange}
             />
           </TabMenu>

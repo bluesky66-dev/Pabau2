@@ -13,7 +13,7 @@ const ReviewSettings: FC<P> = ({ handleChange, date: { date } }) => {
   const renderContent = (): JSX.Element => {
     return (
       <div>
-        <StaffPerformanceReview reviewDate={date} />
+        <StaffPerformanceReview reviewDate={date} isNote={true} />
       </div>
     )
   }
