@@ -18,10 +18,9 @@ enum NotificationType {
 
 const Index: FC = () => {
   const [setIndexTab, setSelectedTab] = React.useState(1)
-  const [email, setEmail] = React.useState('')
   const ref = useRef()
 
-  const showNotification = () => {
+  const showNotification = (val) => {
     if (setIndexTab === 1) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -68,7 +67,7 @@ const Index: FC = () => {
               activeSocialIcons={activeSocialIcons}
             />
           )}`,
-          email: email,
+          email: val,
           subject: 'TEST',
         }),
       }
@@ -101,8 +100,7 @@ const Index: FC = () => {
         ]}
         title={'Upcoming appointment reminder'}
         setIndexTab={setIndexTab}
-        showNotification={showNotification}
-        setEmail={setEmail}
+        handleNotificationSubmit={showNotification}
       />
       <ClientNotification
         ref={ref}

@@ -16,9 +16,11 @@ interface P {
   informationMessage?: string
   standardTapIndex?: string
   activeSocialIcons?: string[]
+  addMedicalHisButton?: boolean
+  medicalMessage?: string
 }
 
-const NewAppointmentPreview: FC<P> = ({
+const RescheduleAppointmentPreview: FC<P> = ({
   requestConfirm,
   allowRescheduling,
   allowCancellation,
@@ -31,6 +33,8 @@ const NewAppointmentPreview: FC<P> = ({
   buttonColor,
   standardTapIndex,
   activeSocialIcons = [],
+  addMedicalHisButton,
+  medicalMessage,
 }) => {
   return (
     <div>
@@ -42,14 +46,15 @@ const NewAppointmentPreview: FC<P> = ({
           displayPolicy={displayPolicy}
           showService={showService}
           showEmployeeName={showEmployeeName}
-          addMedicalHisButton={false}
+          addMedicalHisButton={addMedicalHisButton}
+          medicalMessage={medicalMessage}
           selectLanguage={selectLanguage}
           backGroundColor={backGroundColor}
           buttonColor={buttonColor}
           informationMessage={informationMessage}
           standardTapIndex={standardTapIndex}
           activeSocialIcons={activeSocialIcons}
-          type={'new'}
+          type={'reschedule'}
         />
       ) : (
         <div
@@ -66,4 +71,4 @@ const NewAppointmentPreview: FC<P> = ({
   )
 }
 
-export default NewAppointmentPreview
+export default RescheduleAppointmentPreview

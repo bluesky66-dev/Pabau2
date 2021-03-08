@@ -49,12 +49,15 @@ interface Email {
   cancelPolicy: string
   complete: string
   newAppointmentGreeting: string
+  rescheduleAppointmentGreeting: string
 }
 
 const langData: LangData = {
   en: {
     greeting: 'Hi Kristy, see you soon!',
     newAppointmentGreeting: 'Hi Kristy, your appointment is confirmed.',
+    rescheduleAppointmentGreeting:
+      'Hi Kristy, your appointment has been rescheduled.',
     detail: 'Appointment details:',
     date: 'Monday, 16 November at 11:00',
     reschedule: 'Reschedule',
@@ -71,6 +74,7 @@ const langData: LangData = {
   sp: {
     greeting: 'Hola Kristy, ¡hasta pronto!',
     newAppointmentGreeting: 'Hola Kristy, tu cita está confirmada.',
+    rescheduleAppointmentGreeting: 'Hola Kristy, tu cita ha sido reprogramada.',
     detail: 'Detalles de la cita:',
     date: 'Lunes 16 de noviembre a las 11:00',
     reschedule: 'Reprogramar',
@@ -87,6 +91,8 @@ const langData: LangData = {
   fr: {
     greeting: 'Salut Kristy, à bientôt!',
     newAppointmentGreeting: 'Bonjour Kristy, votre rendez-vous est confirmé.',
+    rescheduleAppointmentGreeting:
+      'Bonjour Kristy, votre rendez-vous a été reporté.',
     detail: 'Détails du rendez-vous:',
     date: 'Lundi 16 novembre à 11:00',
     reschedule: 'Replanifier',
@@ -103,6 +109,7 @@ const langData: LangData = {
   ru: {
     greeting: 'Привет, Кристи, до скорой встречи!',
     newAppointmentGreeting: 'Привет, Кристи, твоя встреча подтверждена.',
+    rescheduleAppointmentGreeting: 'Привет, Кристи, твоя встреча перенесена.',
     detail: 'Сведения о встрече:',
     date: 'Понедельник, 16 ноября в 11:00',
     reschedule: 'Перенести график',
@@ -119,6 +126,7 @@ const langData: LangData = {
   ar: {
     greeting: 'مرحبًا كريستي ، أراك قريبًا!',
     newAppointmentGreeting: 'مرحبا كريستي ، تم تأكيد موعدك.',
+    rescheduleAppointmentGreeting: 'مرحبًا كريستي ، تم إعادة تحديد موعدك.',
     detail: 'تفاصيل الموعد:',
     date: 'الاثنين 16 نوفمبر الساعة 11:00',
     reschedule: 'إعادة الجدولة',
@@ -135,6 +143,8 @@ const langData: LangData = {
   bg: {
     greeting: 'Здравей, Кристи, до скоро!',
     newAppointmentGreeting: 'Здравей, Кристи, уговорената среща е потвърдена',
+    rescheduleAppointmentGreeting:
+      'Здравей, Кристи, срещата ти беше разсрочена.',
     detail: 'Подробности за назначаването:',
     date: 'Понеделник, 16 ноември от 11:00',
     reschedule: 'Разсрочване',
@@ -152,6 +162,7 @@ const langData: LangData = {
   cs: {
     greeting: 'Ahoj Kristy, uvidíme se brzy!',
     newAppointmentGreeting: 'Ahoj Kristy, tvé jmenování je potvrzeno.',
+    rescheduleAppointmentGreeting: 'Ahoj Kristy, tvůj termín byl změněn.',
     detail: 'Podrobnosti o schůzce:',
     date: 'Pondělí 16. listopadu v 11:00',
     reschedule: 'Přeplánovat',
@@ -169,6 +180,7 @@ const langData: LangData = {
   da: {
     greeting: 'Hej Kristy, vi ses snart!',
     newAppointmentGreeting: 'Hej Kristy, din aftale er bekræftet.',
+    rescheduleAppointmentGreeting: 'Hej Kristy, din aftale er blevet omlagt.',
     detail: 'Udnævnelsesoplysninger:',
     date: 'Mandag 16. november kl. 11:00',
     reschedule: 'Planlæg om',
@@ -185,6 +197,7 @@ const langData: LangData = {
   hu: {
     greeting: 'Szia Kristy, hamarosan találkozunk!',
     newAppointmentGreeting: 'Szia Kristy, kinevezésedet megerősítették.',
+    rescheduleAppointmentGreeting: 'Szia Kristy, a kinevezésedet átütemezték.',
     detail: 'Kinevezés részletei:',
     date: 'November 16., hétfő, 11:00',
     reschedule: 'Átütemezés',
@@ -201,6 +214,8 @@ const langData: LangData = {
   lv: {
     greeting: 'Sveika Kristij, tiekamies drīz!',
     newAppointmentGreeting: 'Sveika, Kristij, jūsu iecelšana ir apstiprināta.',
+    rescheduleAppointmentGreeting:
+      'Sveika, Kristij, jūsu iecelšana ir pārcelta.',
     detail: 'Informācija par iecelšanu amatā:',
     date: 'Pirmdien, 16. novembrī, pulksten 11:00',
     reschedule: 'Pārplānojiet',
@@ -217,6 +232,7 @@ const langData: LangData = {
   no: {
     greeting: 'Hei Kristy, vi sees snart!',
     newAppointmentGreeting: 'Hei Kristy, avtalen din er bekreftet.',
+    rescheduleAppointmentGreeting: 'Hei Kristy, avtalen din er omlagt.',
     detail: 'Avtaledetaljer:',
     date: 'Mandag 16. november kl 11:00',
     reschedule: 'Planlegge på nytt',
@@ -233,6 +249,8 @@ const langData: LangData = {
   pl: {
     greeting: 'Cześć Kristy, do zobaczenia wkrótce!',
     newAppointmentGreeting: 'Cześć Kristy, twoja wizyta została potwierdzona.',
+    rescheduleAppointmentGreeting:
+      'Cześć Kristy, twoje spotkanie zostało przełożone.',
     detail: 'Szczegóły wizyty:',
     date: 'Poniedziałek, 16 listopada o godzinie 11:00',
     reschedule: 'Przełóż',
@@ -250,6 +268,7 @@ const langData: LangData = {
   sw: {
     greeting: 'Hej Kristy, vi ses snart!',
     newAppointmentGreeting: 'Hej Kristy, ditt möte är bekräftat.',
+    rescheduleAppointmentGreeting: 'Hej Kristy, ditt möte har omplanerats.',
     detail: 'Tidsinformation:',
     date: 'Måndag 16 november kl 11:00',
     reschedule: 'Boka om',
@@ -266,6 +285,8 @@ const langData: LangData = {
   ro: {
     greeting: 'Bună Kristy, ne vedem în curând!',
     newAppointmentGreeting: 'Salut Kristy, numirea ta este confirmată.',
+    rescheduleAppointmentGreeting:
+      'Bună, Kristy, numirea ta a fost reprogramată.',
     detail: 'Detalii despre programare:',
     date: 'Luni, 16 noiembrie la 11:00',
     reschedule: 'Reprogramează',
@@ -398,6 +419,8 @@ export const Appointment: FC<P> = ({
               <span className={styles.greetingText}>
                 {type === 'new'
                   ? selectLangData.newAppointmentGreeting
+                  : type === 'reschedule'
+                  ? selectLangData.rescheduleAppointmentGreeting
                   : selectLangData.greeting}
               </span>
             </Col>

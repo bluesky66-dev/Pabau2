@@ -235,15 +235,15 @@
     justify-content: flex-end;
   }
 }
-
+@tablet: ~"only screen and (max-width: 768px)";
 .notificationSendButton {
-  @media screen and (max-width: 768px) {
+  @media @tablet {
     display: none;
   }
 }
 
 .notificationSaveButton {
-  @media screen and (max-width: 768px) {
+  @media @tablet {
     display: none;
   }
 }
@@ -263,8 +263,10 @@
   }
 }
 
+
+
 .hide-section {
-  @media screen and (max-width: 768px) {
+  @media @tablet{
     display: none;
   }
 }
@@ -287,7 +289,7 @@
 .appointment-wrapper {
   background: #fff;
   border-bottom: 1px solid #ECEDF0;
-  @media screen and (max-width: 767px) {
+  @media @tablet {
     h1 {
       padding-top: 20px;
     }
