@@ -1,11 +1,14 @@
 import React, { FC } from 'react'
 import { Form as AntForm, Input, Radio, Checkbox } from 'formik-antd'
-import { Col, Row } from 'antd'
-import { FormikContextType } from 'formik'
+// import { Radio } from 'antd'
+import { Col, Row, Collapse } from 'antd'
+import styles from './CrudTable.module.less'
 import { ColorPicker, FontIcon, HelpTooltip, TimeInput } from '@pabau/ui'
-
+import { FormikContextType } from 'formik'
 import moment from 'moment'
-import styles from './Form.module.less'
+
+const { Panel } = Collapse
+
 interface P {
   schema: Schema
   /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -36,6 +39,7 @@ const Form: FC<P> = ({ schema, formik, layout = 'vertical' }) => {
                 type,
                 radio,
                 full,
+                collapsible,
                 col = 24,
                 selectOptions,
                 required,
@@ -110,7 +114,6 @@ const Form: FC<P> = ({ schema, formik, layout = 'vertical' }) => {
                   </AntForm.Item>
                 </div>
               )}
-
               {type === 'icon' && values.appointment_type === 'Icon' && (
                 <AntForm.Item key={name} name={name}>
                   <FontIcon
@@ -156,6 +159,27 @@ const Form: FC<P> = ({ schema, formik, layout = 'vertical' }) => {
                     <HelpTooltip placement={'top'} helpText={description} />
                   )}
                 </AntForm.Item>
+              )}
+              {collapsible && (
+                <Collapse
+                  className={styles.advanceCollapsible}
+                  defaultActiveKey={'0'}
+                  ghost
+                  expandIconPosition="right"
+                >
+                  <Panel header={extra} key="1">
+                    {(type === 'string' || type === 'number') && (
+                      <AntForm.Item label={short} name={name}>
+                        <Input
+                          name={name}
+                          type={type}
+                          placeholder={example && `eg ${example}`}
+                          autoFocus={i === 0}
+                        />
+                      </AntForm.Item>
+                    )}
+                  </Panel>
+                </Collapse>
               )}
               {(type === 'string' || type === 'number') && (
                 <AntForm.Item

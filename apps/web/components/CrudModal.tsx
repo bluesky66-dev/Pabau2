@@ -3,6 +3,9 @@ import React, { FC, useEffect, useState } from 'react'
 import { BasicModal as Modal, Notification, NotificationType } from '@pabau/ui'
 import { DocumentNode, useMutation } from '@apollo/client'
 import { useFormikContext } from 'formik'
+import { Tooltip } from 'antd'
+import { QuestionCircleOutlined } from '@ant-design/icons'
+
 interface P {
   schema: Schema
   addQuery?: DocumentNode
@@ -61,6 +64,8 @@ const CrudModal: FC<P> = ({
     )
   }, [editingRow, specialFormElement])
 
+  console.log('formik', formik)
+
   return (
     <>
       <Modal
@@ -112,7 +117,10 @@ const CrudModal: FC<P> = ({
             color: '#9292A3',
           }}
         >
-          {editingRow?.name} will be deleted. This action is irreversable
+          {schema.deleteDescField
+            ? editingRow[schema.deleteDescField]
+            : editingRow?.name}{' '}
+          will be deleted. This action is irreversable
         </span>
       </Modal>
       <Modal
@@ -126,9 +134,20 @@ const CrudModal: FC<P> = ({
         onOk={() => formik.submitForm()}
         visible={!openDeleteModal}
         title={
-          typeof editingRow === 'object' && editingRow.isCreate
-            ? `Create ${schema.full}`
-            : `Edit ${schema.full}`
+          typeof editingRow === 'object' && editingRow.isCreate ? (
+            <span>
+              {`Create ${schema.full}`}
+              {schema.tooltip && (
+                <Tooltip placement="top" title={schema.tooltip}>
+                  <QuestionCircleOutlined
+                    style={{ marginLeft: 10, fontSize: 16 }}
+                  />
+                </Tooltip>
+              )}
+            </span>
+          ) : (
+            `Edit ${schema.full}`
+          )
         }
         newButtonText={
           typeof editingRow === 'object' && editingRow.isCreate

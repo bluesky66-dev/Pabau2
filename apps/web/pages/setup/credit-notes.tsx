@@ -8,16 +8,12 @@ const LIST_QUERY = gql`
     $isActive: Boolean = true
     $offset: Int
     $limit: Int
-    $searchTerm: String = ""
   ) {
     credit_note_type(
       offset: $offset
       limit: $limit
       order_by: { order: desc }
-      where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-      }
+      where: { is_active: { _eq: $isActive } }
     ) {
       id
       name
@@ -29,16 +25,8 @@ const LIST_QUERY = gql`
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query credit_note_type_aggregate(
-    $isActive: Boolean = true
-    $searchTerm: String = ""
-  ) {
-    credit_note_type_aggregate(
-      where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-      }
-    ) {
+  query credit_note_type_aggregate($isActive: Boolean = true) {
+    credit_note_type_aggregate(where: { is_active: { _eq: $isActive } }) {
       aggregate {
         count
       }
@@ -57,7 +45,7 @@ const DELETE_MUTATION = gql`
 const ADD_MUTATION = gql`
   mutation add_credit_note_types(
     $name: String!
-    $code: Int
+    $code: String
     $invoice_prefix: String
     $is_active: Boolean
   ) {
@@ -79,11 +67,19 @@ const EDIT_MUTATION = gql`
     $id: uuid!
     $name: String!
     $is_active: Boolean
+    $invoice_prefix: String
+    $code: String
     $order: Int
   ) {
     update_credit_note_type_by_pk(
       pk_columns: { id: $id }
-      _set: { name: $name, is_active: $is_active, order: $order }
+      _set: {
+        name: $name
+        invoice_prefix: $invoice_prefix
+        is_active: $is_active
+        order: $order
+        code: $code
+      }
     ) {
       __typename
       id
@@ -130,6 +126,7 @@ const schema: Schema = {
       short: 'Name',
       shortLower: 'name',
       min: 2,
+      max: 50,
       example: 'Insurance Shortfall',
       // description: 'A friendly name',
       // extra: <i>Please note: blah blah blahh</i>,
@@ -142,6 +139,7 @@ const schema: Schema = {
       short: 'Code',
       shortLower: 'code',
       min: 0,
+      max: 50,
       example: 2,
       description: 'A code',
       cssWidth: 'max',
@@ -153,8 +151,9 @@ const schema: Schema = {
       fullLower: 'invoice prefix',
       short: 'Invoice Prefix',
       shortLower: 'invoice prefix',
-      min: 0,
       example: 'RCN',
+      min: 0,
+      max: 50,
       description: 'A invoice prefix',
       cssWidth: 'max',
       visible: false,

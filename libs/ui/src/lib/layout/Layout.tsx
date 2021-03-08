@@ -37,17 +37,15 @@ export const Layout: FC<LayoutProps> = ({
   ...rest
 }) => {
   const [collapsed, setCollapsed] = useState(true)
-
   const onSideBarCollapsed = (collapsed) => setCollapsed(collapsed)
-
   return (
     <AntLayout {...rest} className={styles.main}>
       <AntLayout style={{ background: '#F7F7F9' }}>
-        {/* {(isTablet || !isMobile) && <Header searchRender={searchRender} />} */}
         <Header
           searchRender={searchRender}
           onCreateChannel={onCreateChannel}
           onMessageType={onMessageType}
+          {...rest}
         />
         <AntLayout className={styles.headerMargin}>
           <Menu onSideBarCollapsed={onSideBarCollapsed} active={active} />
@@ -59,10 +57,8 @@ export const Layout: FC<LayoutProps> = ({
           >
             <Content
               style={{
-                // boxShadow: '0 0.5rem 1rem rgba(0,0,0,.1)',
                 position: 'relative',
                 minHeight: 'calc(100vh - 146px)',
-                // background: '#FFF',
                 borderRadius: '4px',
               }}
             >
