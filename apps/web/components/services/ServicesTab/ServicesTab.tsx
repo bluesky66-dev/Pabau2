@@ -1,5 +1,17 @@
 import React, { FC, useState, useEffect } from 'react'
-import { TabMenu, Table, DotButton, Pagination, Avatar } from '@pabau/ui'
+import {
+  TabMenu,
+  Table,
+  DotButton,
+  Pagination,
+  Avatar,
+  BasicModal as CreateServiceGroup,
+  CreateService,
+  Input,
+  Switch,
+  SearchTags,
+  ImageSelectorModal,
+} from '@pabau/ui'
 import { Button, Dropdown, Menu, Popover, Tooltip } from 'antd'
 import {
   CaretDownFilled,
@@ -7,8 +19,12 @@ import {
   PlusOutlined,
   EditOutlined,
   VideoCameraOutlined,
+  PlusCircleFilled,
+  DeleteOutlined,
 } from '@ant-design/icons'
 import { Donate, File, Folder, Injection, Key, Team, Globe } from '../assets'
+import { ReactComponent as Bupa } from '../../../assets/images/bupa.svg'
+import { ReactComponent as AxaPPP } from '../../../assets/images/axa-ppp.svg'
 import Label from '../StatusLabel/label'
 import styles from './services_tab.module.less'
 
@@ -280,7 +296,67 @@ const columnsView2 = [
   },
 ]
 
+const rooms = ['Botox', ' Theraphy', 'Massage', 'Lab']
+
+const equipment = [
+  'Equipment A',
+  'Equipment B',
+  'Equipment C',
+  'Equipment D',
+  'Equipment E',
+  'Equipment F',
+  'Equipment G',
+]
+
+const contracts = [
+  {
+    logo: <Bupa />,
+    name: 'BUPA',
+    type: 'Insurance',
+  },
+  {
+    logo: <AxaPPP />,
+    name: 'AXA PPP',
+    type: 'Insurance',
+  },
+]
+
+const employees = [
+  { name: 'Jessica Winter', selected: false },
+  { name: 'Jeff Hackley', selected: false },
+  { name: 'Alexander Wang', selected: false },
+  { name: 'Linda Davis', selected: false },
+  { name: 'William Tyson', selected: false },
+  { name: 'Max Starck', selected: false },
+  { name: 'Kyle Walsh', selected: false },
+  { name: 'Owen Phillips', selected: false },
+  { name: 'Aidan Kelly', selected: false },
+  { name: 'Ewan Morgan', selected: false },
+  { name: 'Jordan Martin', selected: false },
+  { name: 'Grant Dudley', selected: false },
+]
+
+const locations = [
+  {
+    location: 'The London Clinic',
+    detail: '20 Devonshire Pl, Marylebone, London W1G 6BW, UK',
+    selected: false,
+  },
+  {
+    location: 'Sloan Medical Centre',
+    detail: '2 Little London Rd, Meersbrook, Sheffield S8 0YH, UK',
+    selected: false,
+  },
+  {
+    location: 'Sheffield Late Night Pharmacy',
+    detail: '277 Fulwood Rd, Sheffield S10 3BD, UK',
+    selected: false,
+  },
+]
+
 export interface SP {
+  showCreateServiceModal: boolean
+  onCloseCreateServiceModal?: () => void
   searchTerm?: string
   updatedCategories?: []
 }
@@ -288,25 +364,133 @@ export interface SP {
 export const ServicesTab: FC<SP> = ({
   searchTerm,
   updatedCategories,
-  ...rest
+  showCreateServiceModal,
+  onCloseCreateServiceModal,
 }) => {
   const services = ['Seasonal Offers', 'The Beauty & Skin Clinic – Prepaid']
   const togglesViews = ['Standard View', 'Detailed View']
-  const LeftTabMenuItems = [
-    'Groups',
-    'Appointments',
-    'Enrollments',
-    'Arrivals',
-    'Pricing',
-    'Contracts',
-    'Injectables',
-  ]
-
+  const [showCreateGroup, setShowCreateGroup] = useState(false)
+  const [showImageSelector, setShowImageSelector] = useState(false)
   const [columns, setColumns] = useState(columnsView1)
   const [selectedToggleView, setSelectedToggleView] = useState(togglesViews[0])
   const [selectedService, setSelectedService] = useState(services[0])
   const [paginationState] = useState(true)
   const [sourceData, setSourceData] = useState(null)
+  const GroupsItem = ({ onClick }) => {
+    const [showOps, setShowOps] = useState(false)
+    return (
+      <div
+        className={styles.groupsItem}
+        onMouseEnter={() => setShowOps(true)}
+        onMouseLeave={() => setShowOps(false)}
+      >
+        <span>Groups</span>
+        {showOps && (
+          <PlusCircleFilled
+            style={{
+              color: 'var(--primary-color)',
+              fontSize: '24px',
+              cursor: 'pointer',
+            }}
+            onClick={() => onClick()}
+          />
+        )}
+      </div>
+    )
+  }
+  const TabMenuItem = ({ title, onEdit, onDelete }) => {
+    const [showOps, setShowOps] = useState(false)
+    return (
+      <div
+        className={styles.tabMenuItem}
+        onMouseEnter={() => setShowOps(true)}
+        onMouseLeave={() => setShowOps(false)}
+      >
+        <span>{title}</span>
+        {showOps && (
+          <div className={styles.tabMenuItemOps}>
+            <div onClick={() => onEdit()}>
+              <EditOutlined />
+            </div>
+            <div onClick={() => onDelete()}>
+              <DeleteOutlined />
+            </div>
+          </div>
+        )}
+      </div>
+    )
+  }
+  const LeftTabMenuItems = [
+    <React.Fragment key="groups">
+      <GroupsItem onClick={() => setShowCreateGroup(true)} />
+    </React.Fragment>,
+    <React.Fragment key="appointment">
+      <TabMenuItem
+        title="Appointments"
+        onEdit={() => {
+          return
+        }}
+        onDelete={() => {
+          return
+        }}
+      />
+    </React.Fragment>,
+    <React.Fragment key="enrollments">
+      <TabMenuItem
+        title="Enrollments"
+        onEdit={() => {
+          return
+        }}
+        onDelete={() => {
+          return
+        }}
+      />
+    </React.Fragment>,
+    <React.Fragment key="Arrivals">
+      <TabMenuItem
+        title="Arrivals"
+        onEdit={() => {
+          return
+        }}
+        onDelete={() => {
+          return
+        }}
+      />
+    </React.Fragment>,
+    <React.Fragment key="Pricing">
+      <TabMenuItem
+        title="Pricing"
+        onEdit={() => {
+          return
+        }}
+        onDelete={() => {
+          return
+        }}
+      />
+    </React.Fragment>,
+    <React.Fragment key="Contracts">
+      <TabMenuItem
+        title="Contracts"
+        onEdit={() => {
+          return
+        }}
+        onDelete={() => {
+          return
+        }}
+      />
+    </React.Fragment>,
+    <React.Fragment key="Injectables">
+      <TabMenuItem
+        title="Injectables"
+        onEdit={() => {
+          return
+        }}
+        onDelete={() => {
+          return
+        }}
+      />
+    </React.Fragment>,
+  ]
 
   useEffect(() => {
     setSourceData(data)
@@ -429,7 +613,7 @@ export const ServicesTab: FC<SP> = ({
           tabPosition="left"
           menuItems={LeftTabMenuItems}
           className={styles.leftTabMenu}
-          disabledKeys={[`${LeftTabMenuItems[0]}`]}
+          disabledKeys={[0]}
           activeDefaultKey="1"
           minHeight="50vh"
           size="large"
@@ -461,6 +645,76 @@ export const ServicesTab: FC<SP> = ({
           <div className={styles.appointments}>{serviceHeader()}</div>
         </TabMenu>
       </div>
+      <CreateService
+        visible={showCreateServiceModal}
+        onClose={() => onCloseCreateServiceModal?.()}
+        rooms={rooms}
+        equipment={equipment}
+        contracts={contracts}
+        employees={employees}
+        locations={locations}
+      />
+      <CreateServiceGroup
+        visible={showCreateGroup}
+        modalWidth={500}
+        wrapClassName={styles.createServiceGroup}
+        title="Create service group"
+        onCancel={() => setShowCreateGroup(false)}
+      >
+        <div className="nameInput">
+          <label>Name</label>
+          <Input placeHolderText="Enter Name" />
+        </div>
+        <div style={{ marginTop: '30px' }}>
+          <SearchTags
+            items={rooms}
+            description="Service categories"
+            itemType="room"
+          />
+        </div>
+        <div className="chooseImageInput">
+          <label>Image</label>
+          <Button
+            type="default"
+            size="small"
+            className={styles.chooseImgBtn}
+            onClick={() => setShowImageSelector(true)}
+          >
+            <PlusOutlined />
+            Choose from Library
+          </Button>
+        </div>
+        <div className="footerBtnInput">
+          <div>
+            <label>Active</label>
+            <Switch defaultChecked={true} />
+          </div>
+          <div>
+            <Button
+              type="default"
+              size="large"
+              onClick={() => setShowCreateGroup(false)}
+            >
+              Cancel
+            </Button>
+          </div>
+          <div>
+            <Button type="primary" size="large">
+              Create
+            </Button>
+          </div>
+        </div>
+      </CreateServiceGroup>
+      <ImageSelectorModal
+        visible={showImageSelector}
+        initialSearch={''}
+        onOk={(image) => {
+          setShowImageSelector(false)
+        }}
+        onCancel={() => {
+          setShowImageSelector(false)
+        }}
+      />
     </div>
   )
 }

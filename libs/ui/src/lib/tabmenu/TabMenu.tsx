@@ -11,7 +11,7 @@ interface P extends TabsProps {
   minHeight?: string
   onChange?: (key: number | string) => void
   className?: string
-  disabledKeys?: string[]
+  disabledKeys?: number[]
   activeDefaultKey?: string
 }
 
@@ -43,7 +43,7 @@ export const TabMenu: FC<P> = ({
             <TabPane
               tab={menuItems[i]}
               key={i}
-              disabled={disabledKeys?.includes(menuItems[i])}
+              disabled={disabledKeys?.includes(i)}
             >
               {tab}
             </TabPane>

@@ -5,17 +5,13 @@
         border-bottom: 1px solid #ecedf0;
       }
       .ant-tabs-tab {
-        padding: 15px 24px !important;
+        height: 40px;
+        padding: 0 !important;
         &.ant-tabs-tab-active {
-          padding-right: 15px 24px !important;
           background-color: #eef7fb !important;
         }
         &.ant-tabs-tab-disabled {
           cursor: default;
-          padding: 16px 24px !important;
-          div {
-            font-size: 16px !important;
-          }
         }
       }
     }
@@ -138,6 +134,126 @@
       flex-wrap: wrap;
       padding: 12px;
       max-width: 184px !important;
+    }
+  }
+}
+
+.groupsItem {
+  width: 200px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px 0 24px;
+  > span {
+    &:nth-child(1) {
+      font-family: var(--font-family);
+      font-size: 14px;
+      line-height: 18px;
+    }
+  }
+  :global {
+    .anticon {
+      margin: 0 !important;
+    }
+  }
+}
+
+.tabMenuItem {
+  width: 200px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px 0 24px;
+  > span {
+    &:nth-child(1) {
+      font-family: var(--font-family);
+      font-size: 14px;
+      line-height: 18px;
+    }
+  }
+  &:hover {
+    > span {
+      &:nth-child(1) {
+        color: var(--primary-color);
+      }
+    }
+  }
+}
+
+.tabMenuItemOps {
+  display: flex;
+  align-items: center;
+  > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 12px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color-base);
+    font-size: 14px;
+    color: var(--light-grey-color);
+    :global {
+      .anticon {
+        margin: 0 !important;
+      }
+    }
+  }
+}
+
+.createServiceGroup {
+  :global {
+    .ant-modal {
+      padding: 0;
+    }
+    .ant-modal-body {
+      & > div {
+        label {
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 22px;
+          display: flex;
+          align-items: center;
+          color: #9292a3;
+          padding-top: 30px;
+          margin-bottom: 2.5px;
+        }
+      }
+      .chooseImageInput button {
+        padding-left: 20px;
+        padding-right: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 32px;
+      }
+      .footerBtnInput {
+        margin-top: 30px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        div:first-child {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          label {
+            margin-top: 5px;
+            padding: 0px 10px 0px 0px;
+          }
+        }
+        div:not(:first-child) {
+          button {
+            margin-left: 15px;
+            padding-left: 20px;
+            padding-right: 20px;
+          }
+        }
+      }
     }
   }
 }

@@ -309,6 +309,7 @@ export const CreateService: FC<CreateServiceProps> = ({
         onClose={() => {
           setShowChooseModal(false)
           setShowModal(false)
+          onClose()
         }}
       />
       <FullScreenReportModal
@@ -475,7 +476,6 @@ export const CreateService: FC<CreateServiceProps> = ({
                   visible={showImageSelector}
                   initialSearch={serviceName}
                   onOk={(image) => {
-                    console.log(image)
                     setSelectedImage(image.source)
                     setShowImageSelector(false)
                   }}

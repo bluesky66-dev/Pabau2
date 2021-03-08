@@ -10,10 +10,10 @@ import {
 import styles from './SearchTags.module.less'
 
 export interface SearchTagsProps {
-  title: string
-  description: string
+  title?: string
+  description?: string
   items: Array<string>
-  itemType: string
+  itemType?: string
 }
 
 export interface SearchTag {
@@ -63,8 +63,8 @@ export const SearchTags: FC<SearchTagsProps> = ({
   }, [items])
   return (
     <div className={styles.searchTags}>
-      <h2>{title}</h2>
-      <h3>{description}</h3>
+      {title && <h2>{title}</h2>}
+      {description && <h3>{description}</h3>}
       {items.length > 0 && !showSearchInput && (
         <SearchOutlined
           style={{

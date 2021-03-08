@@ -15,15 +15,17 @@
     .ant-table-thead > tr > th:hover {
       background: #eef7fb !important;
     }
-  }
-  :global {
     .ant-tabs-top {
-      .ant-tabs-nav-wrap {
-        border-bottom: 1px solid #ecedf0;
-      }
-      .ant-tabs-tab {
-        padding: 15px 50px !important;
-        background-color: transparent !important;
+      >.ant-tabs-nav {
+        >.ant-tabs-nav-wrap {
+          border-bottom: 1px solid #ecedf0;
+          >.ant-tabs-nav-list {
+            >.ant-tabs-tab {
+              padding: 15px 50px !important;
+              background-color: transparent !important;
+            }
+          }
+        }
       }
     }
   }

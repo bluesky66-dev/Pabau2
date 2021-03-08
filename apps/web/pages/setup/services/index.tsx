@@ -21,6 +21,7 @@ export const Index: FC = () => {
   const [isStatusActive, setIsStatusActive] = useState(null)
   const [isBookingActive, setIsBookingActive] = useState(null)
   const [showCreateBtn] = useState(true)
+  const [showCreateService, setShowCreateService] = useState(false)
   const [totalCategories, setTotalCategories] = useState(0)
   const [paginationState, setPaginationState] = useState(false)
   const [searchTerm, setSearchTerm] = useState(null)
@@ -84,6 +85,7 @@ export const Index: FC = () => {
   const addBtnClick = () => {
     switch (addBtnLabel) {
       case AddBtnLabels[0]:
+        setShowCreateService(true)
         break
       case AddBtnLabels[1]:
         setAddCategoryModal(true)
@@ -182,6 +184,8 @@ export const Index: FC = () => {
               <div className={styles.servicesTab}>
                 <ServicesTab
                   searchTerm={searchTerm}
+                  showCreateServiceModal={showCreateService}
+                  onCloseCreateServiceModal={() => setShowCreateService(false)}
                   updatedCategories={updatedCategories}
                 />
               </div>
