@@ -2,7 +2,10 @@ import { MedicalFormPreview as MedicalFormPreviewPanel } from '@pabau/ui'
 import React, { FC } from 'react'
 import styles from './MedicalFormBuilder.module.less'
 
-const MedicalFormPreview: FC = () => {
+interface P {
+  refreshPreview: boolean
+}
+const MedicalFormPreview: FC<P> = ({ refreshPreview }) => {
   return (
     <div className={styles.medicalFormEditPanel}>
       <MedicalFormPreviewPanel
@@ -10,6 +13,7 @@ const MedicalFormPreview: FC = () => {
         appTemp="https://fresha.com/"
         step={2}
         stepData={[]}
+        visiblePreviewButton={!refreshPreview}
         user={{
           name: 'Sylvia Cole',
           date: 'December 24, 1992',

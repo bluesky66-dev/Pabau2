@@ -1,14 +1,14 @@
-import React, { FC, useState } from 'react'
 import { EyeOutlined } from '@ant-design/icons'
-import { Divider, Tag } from 'antd'
 import {
-  Button,
-  TabMenu,
+  Avatar,
   BasicModal,
+  Button,
   Stepper,
   StepperItem,
-  Avatar,
+  TabMenu,
 } from '@pabau/ui'
+import { Divider, Tag } from 'antd'
+import React, { FC, useEffect, useState } from 'react'
 import styles from './MedicalFormPreview.module.less'
 
 interface MedicalPreviewUserProps {
@@ -24,6 +24,7 @@ export interface MedicalFormPreviewProps {
   appTemp: string
   step: number
   stepData: StepperItem[]
+  visiblePreviewButton: boolean
 }
 
 export const MedicalFormPreview: FC<MedicalFormPreviewProps> = ({
@@ -32,13 +33,21 @@ export const MedicalFormPreview: FC<MedicalFormPreviewProps> = ({
   appTemp,
   step,
   stepData,
+  visiblePreviewButton,
 }) => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(!visiblePreviewButton)
+
+  useEffect(() => {
+    setVisible(!visiblePreviewButton)
+  }, [visiblePreviewButton])
+
   return (
     <>
-      <Button icon={<EyeOutlined />} onClick={() => setVisible(true)}>
-        Preview
-      </Button>
+      {visiblePreviewButton && (
+        <Button icon={<EyeOutlined />} onClick={() => setVisible(true)}>
+          Preview
+        </Button>
+      )}
       {visible && (
         <BasicModal
           wrapClassName={styles.tempPreviewContainer}
