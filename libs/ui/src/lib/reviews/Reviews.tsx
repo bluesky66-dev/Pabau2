@@ -53,7 +53,8 @@ export const Reviews: FC<ReviewsProps> = ({
       dataIndex: 'isPlus',
       key: 'isPlus',
       // eslint-disable-next-line react/display-name
-      render: (text, record) => record.isPlus && <PabauPlus label="Plus" />,
+      render: (text, record) =>
+        record.isPlus && <PabauPlus label="Plus" modalType="Marketing" />,
     },
   ]
 

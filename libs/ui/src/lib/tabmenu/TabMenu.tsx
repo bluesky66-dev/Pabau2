@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 import { Tabs } from 'antd'
 import { TabsProps } from 'antd/lib/tabs'
 import styles from './TabMenu.module.less'
@@ -6,7 +6,7 @@ import styles from './TabMenu.module.less'
 const { TabPane } = Tabs
 interface P extends TabsProps {
   tabPosition?: 'top' | 'left'
-  menuItems: Array<string>
+  menuItems: Array<ReactNode>
   minHeight?: string
   onChange?: (key: number | string) => void
 }
