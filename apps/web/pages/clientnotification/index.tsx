@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Typography, Input, Modal } from 'antd'
 import { Button, Breadcrumb, PhoneNumberInput, Notification } from '@pabau/ui'
 import Layout from '../../components/Layout/Layout'
-import ClientNotification from '../../components/ClientNotification/index'
+import ClientNotification from '../../components/ClientNotification'
 import styles from './index.module.less'
 
 const { Title } = Typography
