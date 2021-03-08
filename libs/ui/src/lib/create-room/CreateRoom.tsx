@@ -2,16 +2,17 @@ import React, { FC, useState, useEffect } from 'react'
 import {
   Switch,
   Input,
+  InputNumber,
   Checkbox,
   FullScreenReportModal,
   OperationType,
 } from '@pabau/ui'
 import { Collapse, Radio, Typography } from 'antd'
 import {
-  CheckOutlined,
   DollarOutlined,
   PercentageOutlined,
   CaretDownOutlined,
+  CheckCircleFilled,
 } from '@ant-design/icons'
 import styles from './CreateRoom.module.less'
 const { Panel } = Collapse
@@ -29,6 +30,8 @@ export const CreateRoom: FC<CreateRoomProps> = ({
 }) => {
   const [showModal, setShowModal] = useState(false)
   const [advancedSetting, setAdvancedSetting] = useState('currency')
+  const [allServicesSelected, setAllServicesSelected] = useState(true)
+
   useEffect(() => {
     setShowModal(visible)
   }, [visible])
@@ -63,40 +66,59 @@ export const CreateRoom: FC<CreateRoomProps> = ({
             <Input label="Room Name" placeHolderText="eg. Room 1" />
           </div>
           <div className={styles.createServiceSectionItem}>
-            <Switch />
-            All services can be performed in this room
+            <Switch
+              size="small"
+              className={styles.switchBtn}
+              checked={allServicesSelected}
+              onChange={(isSelected) => setAllServicesSelected(isSelected)}
+            />
+            <span className={styles.subtitle}>
+              All services can be performed in this room
+            </span>
           </div>
         </div>
-        <div className={styles.createServiceSection}>
-          <h2 className={styles.createServiceSectionTitle}>Services</h2>
-          <div className={styles.createServiceSectionItem} />
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          <div className={styles.createServiceSectionItem}>
-            <Checkbox /> Select All
+
+        {allServicesSelected && (
+          <div className={styles.createServiceSection}>
+            <h2 className={styles.createServiceSectionTitle}>Services</h2>
+            <span className={styles.subtitle}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </span>
+            <div className={styles.createServiceSectionItem} />
+            <div className={styles.createServiceSectionItem}>
+              <Checkbox className={styles.checkbox} /> Select All
+            </div>
+            <div className={styles.createServiceSectionItem}>
+              {[
+                'Travel Clinic',
+                'Vaccination Services',
+                'COVID-19 Antibody Testing System',
+                'Period Delay Service',
+                'Mole Screening Service',
+                'Health Checks',
+                'Aesthetic Services',
+                'Sexual Health Services',
+              ].map((service, index) => {
+                return (
+                  <div key={index} className={styles.listContainer}>
+                    <span className={styles.icon}>
+                      <CaretDownOutlined />
+                    </span>
+                    <Checkbox className={styles.checkbox} />
+                    <span className={styles.serviceTitle}>{service}</span>
+                  </div>
+                )
+              })}
+            </div>
           </div>
-          <div className={styles.createServiceSectionItem}>
-            {[
-              'Travel Clinic',
-              'Vaccination Services',
-              'COVID-19 Antibody Testing System',
-              'Period Delay Service',
-              'Mole Screening Service',
-              'Health Checks',
-              'Aesthetic Services',
-              'Sexual Health Services',
-            ].map((service, index) => {
-              return (
-                <div key={index}>
-                  <CaretDownOutlined />
-                  <Checkbox /> {service}
-                </div>
-              )
-            })}
-          </div>
-        </div>
+        )}
+
         <div className={styles.advancedSettings}>
           <Collapse ghost>
-            <Panel header="Advanced settings" key="advanced-settings">
+            <Panel
+              header={<span className={styles.header}>Advanced settings</span>}
+              key="advanced-settings"
+            >
               <div className={styles.createServiceSection}>
                 <h2
                   className={styles.createServiceSectionTitle}
@@ -146,7 +168,7 @@ export const CreateRoom: FC<CreateRoomProps> = ({
                           }}
                         >
                           {item.value === advancedSetting && (
-                            <CheckOutlined
+                            <CheckCircleFilled
                               style={{
                                 position: 'absolute',
                                 right: 12,
@@ -154,15 +176,30 @@ export const CreateRoom: FC<CreateRoomProps> = ({
                               }}
                             />
                           )}
-                          <Icon style={{ fontSize: 30 }} />
+                          <Icon
+                            style={{
+                              fontSize: 24,
+                              color:
+                                item.value === advancedSetting
+                                  ? '#54B2D3'
+                                  : '#9292A3',
+                            }}
+                          />
                           <Paragraph>{label}</Paragraph>
                         </div>
                       </Radio.Button>
                     )
                   })}
                 </Radio.Group>
-                <div className={styles.createServiceSectionItem}>
-                  <Input label="Room Fee" placeHolderText="$ 50" />
+                <div
+                  className={`${styles.createServiceSectionItem} ${styles.roomFeeInput}`}
+                >
+                  <InputNumber
+                    label="Room Fee"
+                    placeHolderText="$ 50"
+                    showCurrency
+                    currency="$"
+                  />
                 </div>
               </div>
             </Panel>
@@ -172,25 +209,31 @@ export const CreateRoom: FC<CreateRoomProps> = ({
       <div className={styles.createServicePricing}>
         <div className={styles.createServiceSection}>
           <h2 className={styles.createServiceSectionTitle}>Services</h2>
+          <span className={styles.subtitle}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </span>
           <div className={styles.createServiceSectionItem} />
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           <div className={styles.createServiceSectionItem}>
-            <Checkbox /> Select All
+            <Checkbox className={styles.checkbox} /> Select All
           </div>
           <div className={styles.createServiceSectionItem}>
             {[
-              'The London Clinic',
-              'Sloan Medical Centre',
-              'Sheffield Late Night Pharmacy',
-              'Sloan Medical Centre',
-              'The London Clinic',
-              'Sloan Medical Centre',
-              'Sheffield Late Night Pharmacy',
-              'Sloan Medical Centre',
+              'Travel Clinic',
+              'Vaccination Services',
+              'COVID-19 Antibody Testing System',
+              'Period Delay Service',
+              'Mole Screening Service',
+              'Health Checks',
+              'Aesthetic Services',
+              'Sexual Health Services',
             ].map((service, index) => {
               return (
-                <div key={index}>
-                  <Checkbox /> {service}
+                <div key={index} className={styles.listContainer}>
+                  <span className={styles.icon}>
+                    <CaretDownOutlined />
+                  </span>
+                  <Checkbox className={styles.checkbox} />
+                  <span className={styles.serviceTitle}>{service}</span>
                 </div>
               )
             })}
