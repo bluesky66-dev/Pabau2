@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-
 import { Button } from '../button/Button'
 import styles from './NotificationBanner.module.less'
 import { Row, Col } from 'antd'

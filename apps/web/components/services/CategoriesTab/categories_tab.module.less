@@ -1,0 +1,101 @@
+.categoriesTabMain {
+  .categoryGroup {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+
+    span {
+      margin-right: 5px;
+    }
+  }
+}
+
+:global {
+  .addCategoryModal {
+    .ant-modal-close {
+      top: 10px;
+      right: 20px;
+    }
+    .ant-modal-body {
+      & > div {
+        label {
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 22px;
+          display: flex;
+          align-items: center;
+          color: #9292a3;
+          padding-top: 30px;
+          margin-bottom: 2.5px;
+        }
+      }
+      .colorInput {
+        div.colors {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          flex-wrap: wrap;
+          span {
+            border-width: 2px;
+            border-style: solid;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            cursor: pointer;
+
+            &:hover {
+              opacity: 0.9;
+            }
+          }
+        }
+        div.selected {
+          margin: 10px 0px 0px 2.5px;
+          display: inline-block;
+          min-width: 50px;
+          min-height: 25px;
+          padding: 5px 15px;
+          color: #ffffff;
+          font-weight: 600;
+          border-radius: 5px;
+        }
+      }
+      .chooseImageInput button {
+        padding-left: 20px;
+        padding-right: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 32px;
+
+        span.anticon {
+          margin-top: 2px;
+        }
+      }
+      .footerBtnInput {
+        margin-top: 30px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        div:first-child {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          label {
+            margin-top: 5px;
+            padding: 0px 10px 0px 0px;
+          }
+        }
+        div:not(:first-child) {
+          button {
+            margin-left: 15px;
+            padding-left: 20px;
+            padding-right: 20px;
+          }
+        }
+      }
+    }
+  }
+}

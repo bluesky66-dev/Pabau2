@@ -515,14 +515,12 @@
         filter: {}
 - table:
     schema: public
-    name: credit_note_type
+    name: courses
   insert_permissions:
   - role: public
     permission:
       check: {}
       columns:
-      - code
-      - invoice_prefix
       - is_active
       - name
       backend_only: false
@@ -646,7 +644,6 @@
       - invoice_prefix
       - invoice_starting_number
       - invoice_template
-      - is_draft
       - is_active
       - name
       - order
@@ -660,23 +657,22 @@
   - role: public
     permission:
       columns:
+      - is_active
+      - vat_registered
+      - order
+      - invoice_starting_number
+      - post_code
       - city
       - country
-      - created_at
-      - id
       - invoice_prefix
-      - invoice_starting_number
       - invoice_template
-      - is_draft
-      - is_active
       - name
-      - order
       - phone
-      - post_code
       - street
-      - updated_at
-      - vat_registered
       - website
+      - created_at
+      - updated_at
+      - id
       filter: {}
       allow_aggregations: true
   update_permissions:
@@ -688,7 +684,6 @@
       - invoice_prefix
       - invoice_starting_number
       - invoice_template
-      - is_draft
       - is_active
       - name
       - order
@@ -906,6 +901,106 @@
       filter: {}
 - table:
     schema: public
+    name: library
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - email
+      - is_active
+      - name
+      - order
+      - phone
+      - provider_no
+      - type
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - order
+      - email
+      - name
+      - phone
+      - provider_no
+      - type
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - email
+      - is_active
+      - name
+      - order
+      - phone
+      - provider_no
+      - type
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: library_installers
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - id
+      - library_name
+      - library_description
+      - library_image
+      - library_location
+      - library_language
+      - data
+      - created_date
+      - is_plus
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_plus
+      - id
+      - data
+      - library_description
+      - library_image
+      - library_language
+      - library_location
+      - library_name
+      - created_date
+      filter: {}
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_plus
+      - id
+      - data
+      - library_description
+      - library_image
+      - library_language
+      - library_location
+      - library_name
+      - created_date
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
     name: locations
   insert_permissions:
   - role: public
@@ -1034,6 +1129,9 @@
       filter: {}
 - table:
     schema: public
+    name: packages
+- table:
+    schema: public
     name: payment_types
   insert_permissions:
   - role: public
@@ -1078,6 +1176,9 @@
   - role: public
     permission:
       filter: {}
+- table:
+    schema: public
+    name: peer_review
 - table:
     schema: public
     name: petty_cash_types
@@ -1482,6 +1583,7 @@
     permission:
       check: {}
       columns:
+      - company
       - email
       - is_active
       - name
@@ -1494,22 +1596,24 @@
   - role: public
     permission:
       columns:
-      - created_at
-      - email
-      - id
       - is_active
-      - name
       - order
+      - company
+      - email
+      - name
       - phone
       - provider_no
       - type
+      - created_at
       - updated_at
+      - id
       filter: {}
       allow_aggregations: true
   update_permissions:
   - role: public
     permission:
       columns:
+      - company
       - email
       - is_active
       - name
