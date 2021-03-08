@@ -4,7 +4,7 @@ import { Button, Breadcrumb, PhoneNumberInput, Notification } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import ClientNotification from '../../../components/ClientNotification/index'
 import styles from './index.module.less'
-import CommonHeader from '../../setup/CommonHeader'
+import CommonHeader from '../../setup/common-header'
 import { DownOutlined, LeftOutlined } from '@ant-design/icons'
 
 const { Title } = Typography
@@ -215,7 +215,10 @@ const Index: FC = () => {
           }
           type={'noShowAppointment'}
           smsCustom={
-            'Hi Anna,<br/> We had you scheduled today at 11:30 but unfortunately you didn\'t show up.<br/>Please get back in touch on <span style="color: #00A1E1;">+4444444444</span> to reschedule.<br/>Your friends at The Clinic'
+            'Hi Anna,\n' +
+            "We had you scheduled today at 11:30 but unfortunately you didn't show up.\n" +
+            'Please get back in touch on +4444444444 to reschedule.\n' +
+            'Your friends at The Clinic'
           }
         />
       </Layout>
