@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState, ReactNode } from 'react'
 import { useMedia } from 'react-use'
 import { Button, TabMenu } from '@pabau/ui'
 import { Modal, Switch, Popover } from 'antd'
@@ -16,7 +16,7 @@ export enum OperationType {
 }
 
 export interface FullScreenReportModalProps {
-  title: string
+  title: ReactNode
   visible: boolean
   operations: Array<OperationType>
   onVatRegistered?: (val: boolean) => void
@@ -35,7 +35,7 @@ export interface FullScreenReportModalProps {
   enableCreateBtn?: boolean
   activated?: boolean
   vatRegistered?: boolean
-  subMenu?: Array<string>
+  subMenu?: Array<ReactNode>
 }
 
 export const FullScreenReportModal: FC<FullScreenReportModalProps> = ({
@@ -62,6 +62,16 @@ export const FullScreenReportModal: FC<FullScreenReportModalProps> = ({
   children,
 }) => {
   const isMobile = useMedia('(max-width: 767px)', false)
+  const [vat, setVat] = useState(true)
+  const [active, setActive] = useState(true)
+  const handleChangeVat = (checked) => {
+    setVat(checked)
+    onVatRegistered?.(checked)
+  }
+  const handleChangeActive = (checked) => {
+    setActive(checked)
+    onActivated?.(checked)
+  }
   const mobileVersionOperations = () => (
     <div className={styles.mobileVersionOperations}>
       {operations.map((operation) => (
@@ -74,8 +84,8 @@ export const FullScreenReportModal: FC<FullScreenReportModalProps> = ({
               VAT registered{' '}
               <Switch
                 size="small"
-                defaultChecked={vatRegistered || true}
-                onChange={(checked) => onVatRegistered?.(checked)}
+                checked={vat}
+                onChange={(checked) => handleChangeVat(checked)}
                 style={{ marginLeft: '12px' }}
               />
             </div>
@@ -88,8 +98,8 @@ export const FullScreenReportModal: FC<FullScreenReportModalProps> = ({
               Active{' '}
               <Switch
                 size="small"
-                defaultChecked={activated || true}
-                onChange={(checked) => onActivated?.(checked)}
+                checked={active}
+                onChange={(checked) => handleChangeActive(checked)}
                 style={{ marginLeft: '12px' }}
               />
             </div>
@@ -133,6 +143,10 @@ export const FullScreenReportModal: FC<FullScreenReportModalProps> = ({
       ))}
     </div>
   )
+  useEffect(() => {
+    setVat(vatRegistered || false)
+    setActive(activated || false)
+  }, [activated, vatRegistered])
   return (
     <Modal
       visible={visible}
@@ -163,8 +177,8 @@ export const FullScreenReportModal: FC<FullScreenReportModalProps> = ({
                       VAT registered{' '}
                       <Switch
                         size="small"
-                        defaultChecked={vatRegistered || true}
-                        onChange={(checked) => onVatRegistered?.(checked)}
+                        checked={vat}
+                        onChange={(checked) => handleChangeVat(checked)}
                         style={{ marginLeft: '12px' }}
                       />
                     </div>
@@ -174,8 +188,8 @@ export const FullScreenReportModal: FC<FullScreenReportModalProps> = ({
                       Active{' '}
                       <Switch
                         size="small"
-                        defaultChecked={activated || true}
-                        onChange={(checked) => onActivated?.(checked)}
+                        checked={active}
+                        onChange={(checked) => handleChangeActive(checked)}
                         style={{ marginLeft: '12px' }}
                       />
                     </div>
@@ -241,7 +255,7 @@ export const FullScreenReportModal: FC<FullScreenReportModalProps> = ({
             <TabMenu menuItems={subMenu} tabPosition="top" minHeight="1px">
               {children
                 ? children
-                : subMenu.map((menu) => <div key={menu}>{menu}</div>)}
+                : subMenu.map((menu, i) => <div key={i}>{menu}</div>)}
             </TabMenu>
           ) : (
             children
