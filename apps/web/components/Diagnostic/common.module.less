@@ -1,0 +1,160 @@
+.codeset-table-block {
+    .codeset-table {
+        table {
+            thead {
+                th {
+                    color: #9292A3;
+                    font-weight: 500;
+                    font-size: 12px;
+                    line-height: 18px;
+                    border-top: none;
+                    border-bottom: 1px solid #F1F1F1;
+                    &:nth-of-type(3n) {
+                        width: 45%;
+                    }
+                }
+            }
+            tbody {
+                td {
+                    border-bottom: 1px solid #F1F1F1;
+                    color: #3D3D46;
+                    font-weight: normal;
+                    font-size: 14px;
+                    line-height: 22px;
+                }
+            }
+        }
+    }
+    .codes-table {
+        table {
+            thead {
+                th {
+                    color: #9292A3;
+                    font-weight: 500;
+                    font-size: 12px;
+                    line-height: 18px;
+                    border-top: none;
+                    border-bottom: 1px solid #F1F1F1;
+                    &:last-child {
+                        width: 35%;
+                    }
+                }
+            }
+            tbody {
+                td {
+                    border-bottom: 1px solid #F1F1F1;
+                    color: #3D3D46;
+                    font-weight: normal;
+                    font-size: 14px;
+                    line-height: 22px;
+                }
+            }
+        }
+    }
+}
+
+.create-codeset-modal {
+    .input-list {
+        .input-box {
+            margin-bottom: 32px;
+           :global .ant-form-item-label {
+               padding-bottom: 0;
+               margin-bottom: 2px;
+            }
+        }
+        .create-codeset-btn {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 40px;
+            :global .ant-row {
+                margin-bottom: 0;
+                .ant-btn {
+                    &[disabled] {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.create-code-modal {
+    .create-code-form {
+        .basic-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            .eye-icon{
+                color: #54B2D3;
+            }
+            .basic-text {
+                color: #3D3D46;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 18px;
+                margin-left: 8px;
+            }
+        }
+        .input-list {
+            margin-bottom: 16px;
+            display: flex;
+            .input-box {
+                margin-bottom: 0;
+                flex: 1;
+                margin-right: 16px;
+                &:last-child {
+                    margin-right: 0;
+                }
+                :global .ant-form-item-label {
+                    padding-bottom: 0;
+                    margin-bottom: 2px;
+                }
+            }
+        }
+        .advanced-info {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            .up-icon {
+                color: #9292A3;
+            }
+            .info-text {
+                color: #3D3D46;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 18px;
+            }
+        }
+        .advanced-list {
+            display: flex;
+            margin-bottom: 20px;
+            .input-box {
+                margin-bottom: 0;
+                flex: 1;
+                margin-right: 16px;
+                &:last-child {
+                    margin-right: 0;
+                }
+                :global .ant-form-item-label {
+                    padding-bottom: 0;
+                    margin-bottom: 2px;
+                }
+            }
+        }
+        .create-codeset-btn {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 40px;
+            :global .ant-row {
+                margin-bottom: 0;
+                .ant-btn {
+                    &[disabled] {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -3,9 +3,11 @@ import { gql, useMutation } from '@apollo/client'
 import React, { FC, useEffect, useState } from 'react'
 import { Table, useLiveQuery } from '@pabau/ui'
 import styles from './common.module.less'
-
+import { LockOutlined, LoadingOutlined } from '@ant-design/icons'
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface CodeProps {}
+export interface CodeProps {
+  searchTerms: string
+}
 
 const schema: Schema = {
   full: 'diagnostic_code',
@@ -106,7 +108,7 @@ export const UPDATE_CODE_ORDER = gql`
   }
 `
 
-const Code: FC = (props: CodeProps) => {
+const Code: FC<CodeProps> = ({ searchTerms }) => {
   const getQueryVariables = () => {
     const queryOptions = {
       variables: {},
@@ -127,7 +129,20 @@ const Code: FC = (props: CodeProps) => {
     if (!loading && data) {
       setIsLoading(false)
     }
-  }, [data, loading])
+    if (searchTerms) {
+      const searchData = sourceData.filter(
+        (data, i) =>
+          data.code.toLowerCase().includes(searchTerms) ||
+          data.layer1.toLowerCase().includes(searchTerms) ||
+          data.layer2.toLowerCase().includes(searchTerms) ||
+          data.layer3.toLowerCase().includes(searchTerms) ||
+          data.description.toLowerCase().includes(searchTerms)
+      )
+      setSourceData(searchData)
+    } else {
+      setSourceData(data)
+    }
+  }, [data, loading, searchTerms])
 
   const [updateOrderMutation] = useMutation(UPDATE_CODE_ORDER, {
     onError(err) {
@@ -145,8 +160,8 @@ const Code: FC = (props: CodeProps) => {
             const existing = proxy.readQuery({
               query: LIST_QUERY,
             })
-            if (existing) {
-              const key = Object.keys(existing)[0]
+            if (existing.diagnostic_codes) {
+              const key = Object.keys(existing.diagnostic_codes)[0]
               proxy.writeQuery({
                 query: LIST_QUERY,
                 data: {
@@ -160,43 +175,49 @@ const Code: FC = (props: CodeProps) => {
   }
 
   return (
-    <div>
-      <Table
-        loading={isLoading}
-        // eslint-disable-next-line
+    <div className={styles.codesetTableBlock}>
+      {loading ? (
+        <LoadingOutlined className={styles.loader} spin />
+      ) : (
+        <div className={styles.codesTable}>
+          <Table
+            loading={isLoading}
+            // eslint-disable-next-line
         dataSource={sourceData?.map((e: { id: any }) => ({
-          key: e.id,
-          ...e,
-        }))}
-        updateDataSource={({ newData, oldIndex, newIndex }) => {
-          newData = newData.map((data, i) => {
-            data.order = sourceData[i].order
-            return data
-          })
-          if (oldIndex > newIndex) {
-            for (let i = newIndex; i <= oldIndex; i++) {
-              updateOrder(newData[i])
-            }
-          } else {
-            for (let i = oldIndex; i <= newIndex; i++) {
-              updateOrder(newData[i])
-            }
-          }
-          setSourceData(newData)
-        }}
-        padlocked={[]}
-        draggable={true}
-        columns={[
-          ...Object.entries(schema.fields).map(([k, v]) => ({
-            dataIndex: k,
-            width: v.cssWidth,
-            title: v.short || v.full,
-            visible: Object.prototype.hasOwnProperty.call(v, 'visible')
-              ? v.visible
-              : true,
-          })),
-        ]}
-      />
+              key: e.id,
+              ...e,
+            }))}
+            updateDataSource={({ newData, oldIndex, newIndex }) => {
+              newData = newData.map((data, i) => {
+                data.order = sourceData[i].order
+                return data
+              })
+              if (oldIndex > newIndex) {
+                for (let i = newIndex; i <= oldIndex; i++) {
+                  updateOrder(newData[i])
+                }
+              } else {
+                for (let i = oldIndex; i <= newIndex; i++) {
+                  updateOrder(newData[i])
+                }
+              }
+              setSourceData(newData)
+            }}
+            padlocked={[]}
+            draggable={true}
+            columns={[
+              ...Object.entries(schema.fields).map(([k, v]) => ({
+                dataIndex: k,
+                width: v.cssWidth,
+                title: v.short || v.full,
+                visible: Object.prototype.hasOwnProperty.call(v, 'visible')
+                  ? v.visible
+                  : true,
+              })),
+            ]}
+          />
+        </div>
+      )}
     </div>
   )
 }

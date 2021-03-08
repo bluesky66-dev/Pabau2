@@ -1,0 +1,37 @@
+.diagnostic-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #FFFFFF;
+    border-radius: 4px 4px 0px 0px;
+    .right--section {
+        padding-right: 24px;
+        .search-with-btn {
+            display: flex;
+            align-items: center;
+            :global .ant-btn {
+                margin-left: 16px;
+            }
+        }
+    }
+}
+.diagnostic-tabs {
+   :global .ant-tabs {
+        .ant-tabs-nav {
+            background-color: #FFFFFF;
+            border-top: 1px solid #EBECEF;
+            &::before {
+                border-color: #EBECEF;
+            }
+            .ant-tabs-nav-wrap {
+                .ant-tabs-tab {
+                    min-width: 160px;
+                    justify-content: center;
+                    &.ant-tabs-tab-active {
+                        background-color: transparent;
+                    }
+                }
+            }
+        }
+    }
+}
