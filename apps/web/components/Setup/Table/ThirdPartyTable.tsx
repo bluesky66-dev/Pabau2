@@ -10,33 +10,16 @@ import styles from '../../../../../libs/ui/src/lib/table/Table.module.less'
 import { columns, thirdPartySchema, Queries, Mutations } from './Schema'
 import { useMutation } from '@apollo/client'
 
-interface EditFieldsType {
-  id: string
-  type: string
-  name: string
-  provider_no: string
-  phone: string
-  email: string
-  website: string
-  country: string
-  city: string
-  street: string
-  post_code: string
-  healthCodeIdentifier: string
-  is_active: boolean
-  company: string
-}
-
 interface ThirdPartyTableProps {
   searchTerm?: string
-  isActive?: boolean
+  filterPreferences?: ThirdPartiesFilterPreferencetype
   openModal?(): void
-  setEditPage?(data: EditFieldsType): void
+  setEditPage?(data: ThirdPartiesEditFieldsType): void
 }
 
 const ThirdPartyTable: FC<ThirdPartyTableProps> = ({
   searchTerm,
-  isActive,
+  filterPreferences,
   openModal,
   setEditPage,
 }) => {
@@ -61,7 +44,8 @@ const ThirdPartyTable: FC<ThirdPartyTableProps> = ({
 
   const { data, error, loading } = useLiveQuery(Queries.LIST_QUERY, {
     variables: {
-      isActive,
+      isActive: filterPreferences.isActive,
+      type: filterPreferences.type,
       company: false,
       searchTerm: '%' + searchTerm + '%',
       offset: paginateData.offset,
@@ -71,7 +55,8 @@ const ThirdPartyTable: FC<ThirdPartyTableProps> = ({
 
   const { data: aggregateData } = useLiveQuery(Queries.LIST_AGGREGATE_QUERY, {
     variables: {
-      isActive,
+      isActive: filterPreferences.isActive,
+      type: filterPreferences.type,
       company: false,
       searchTerm: '%' + searchTerm + '%',
     },

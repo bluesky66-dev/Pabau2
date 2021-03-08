@@ -44,6 +44,7 @@ export const columns = [
 const LIST_QUERY = gql`
   query third_parties(
     $isActive: Boolean = true
+    $type: [String!]
     $company: Boolean
     $offset: Int
     $limit: Int
@@ -55,6 +56,7 @@ const LIST_QUERY = gql`
       order_by: { order: desc }
       where: {
         is_active: { _eq: $isActive }
+        type: { _in: $type }
         company: { _is_null: $company }
         _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
       }
@@ -77,46 +79,17 @@ const LIST_QUERY = gql`
     }
   }
 `
-
-// const LIST_LIBRARY_QUERY = gql`
-//   query third_parties(
-//     $isActive: Boolean = true
-//     $company: Boolean
-//     $offset: Int
-//     $limit: Int
-//     $searchTerm: String = ""
-//   ) {
-//     third_parties(
-//       offset: $offset
-//       limit: $limit
-//       order_by: { order: desc }
-//       where: {
-//         is_active: { _eq: $isActive }
-//         company: { _is_null: $company }
-//         _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-//       }
-//     ) {
-//       id
-//       name
-//       provider_no
-//       type
-//       email
-//       phone
-//       is_active
-//       order
-//     }
-//   }
-// `
-
 const LIST_AGGREGATE_QUERY = gql`
   query third_parties_aggregate(
     $isActive: Boolean = true
+    $type: [String!]
     $company: Boolean
     $searchTerm: String = ""
   ) {
     third_parties_aggregate(
       where: {
         is_active: { _eq: $isActive }
+        type: { _in: $type }
         company: { _is_null: $company }
         _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
       }
@@ -127,25 +100,6 @@ const LIST_AGGREGATE_QUERY = gql`
     }
   }
 `
-
-// const LIST_LIBRARY_AGGREGATE_QUERY = gql`
-//   query third_parties_aggregate(
-//     $isActive: Boolean = true
-//     $searchTerm: String = ""
-//   ) {
-//     third_parties_aggregate(
-//       where: {
-//         is_active: { _eq: $isActive }
-//         company: { _eq: "ID goes here" }
-//         _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-//       }
-//     ) {
-//       aggregate {
-//         count
-//       }
-//     }
-//   }
-// `
 
 const ADD_MUTATION = gql`
   mutation insert_third_parties_one(
@@ -259,37 +213,5 @@ export const thirdPartySchema: Schema = {
   short: 'third parties',
   shortLower: 'third parties',
   createButtonLabel: 'Create Third Party',
-  // messages: {
-  //   create: {
-  //     success: 'You have successfully created a department',
-  //     error: 'While creating a department',
-  //   },
-  //   update: {
-  //     success: 'You have successfully updated a department',
-  //     error: 'While updating a department',
-  //   },
-  //   delete: {
-  //     success: 'You have successfully deleted a department',
-  //     error: 'While deleting a department',
-  //   },
-  // },
-  fields: {
-    // name: {
-    //   full: 'Department Name',
-    //   fullLower: 'department name',
-    //   short: 'Name',
-    //   shortLower: 'name',
-    //   min: 2,
-    //   example: 'Surgical Department',
-    //   // description: 'A friendly name',
-    //   // extra: <i>Please note: blah blah blahh</i>,
-    //   cssWidth: 'max',
-    //   type: 'string',
-    // },
-    // is_active: {
-    //   full: 'Status',
-    //   type: 'boolean',
-    //   defaultvalue: true,
-    // },
-  },
+  fields: {},
 }

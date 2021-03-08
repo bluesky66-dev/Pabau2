@@ -40,36 +40,25 @@ import { Formik } from 'formik'
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ThirdPartiesProps {}
 
-interface EditFieldsType {
-  id: string
-  type: string
-  name: string
-  provider_no: string
-  phone: string
-  email: string
-  website: string
-  country: string
-  city: string
-  street: string
-  post_code: string
-  healthCodeIdentifier: string
-  is_active: boolean
-  company: string
-}
-
 const ThirdParties: FC<ThirdPartiesProps> = (ThirdPartiesProps) => {
   const isMobile = useMedia('(max-width: 768px)', false)
   const { Title } = Typography
   const { Option } = Select
   // const [activeTab, setActiveTab] = useState('0')
   const [searchTerm, setSearchTerm] = useState('')
-  const [isActive, setIsActive] = useState(true)
   const [showModal, setShowModal] = useState<boolean>(false)
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false)
+  const [
+    filterPreferences,
+    setFilterPreferences,
+  ] = useState<ThirdPartiesFilterPreferencetype>({
+    isActive: true,
+    type: ['Company', 'Insurance'],
+  })
   const router = useRouter()
 
   const formikEditFields = () => {
-    const fields: EditFieldsType = {
+    const fields: ThirdPartiesEditFieldsType = {
       id: '',
       type: '',
       name: '',
@@ -87,7 +76,9 @@ const ThirdParties: FC<ThirdPartiesProps> = (ThirdPartiesProps) => {
     }
     return fields
   }
-  const [editPage, setEditPage] = useState<EditFieldsType>(formikEditFields())
+  const [editPage, setEditPage] = useState<ThirdPartiesEditFieldsType>(
+    formikEditFields()
+  )
 
   countries.registerLocale(english)
   const countriesName = countries.getNames('en')
@@ -198,9 +189,8 @@ const ThirdParties: FC<ThirdPartiesProps> = (ThirdPartiesProps) => {
     }
   }
 
-  const onFilterSource = () => {
-    setIsActive((e) => !e)
-  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  const onFilterSource = () => {}
 
   const handleTabClick = (activeKey, setFieldValue) => {
     if (activeKey === '0') {
@@ -208,7 +198,6 @@ const ThirdParties: FC<ThirdPartiesProps> = (ThirdPartiesProps) => {
     } else if (activeKey === '1') {
       setFieldValue('company', null)
     }
-    // setActiveTab(activeKey)
   }
 
   const handleOperationsType = () => {
@@ -400,6 +389,7 @@ const ThirdParties: FC<ThirdPartiesProps> = (ThirdPartiesProps) => {
                   tableSearch={true}
                   needTranslation={false}
                   addFilter={true}
+                  setFilterPreferences={setFilterPreferences}
                 />
               </div>
             </MobileHeader>
@@ -426,6 +416,7 @@ const ThirdParties: FC<ThirdPartiesProps> = (ThirdPartiesProps) => {
                       tableSearch={true}
                       needTranslation={false}
                       addFilter={true}
+                      setFilterPreferences={setFilterPreferences}
                     />
                   </Col>
                 </Row>
@@ -441,13 +432,13 @@ const ThirdParties: FC<ThirdPartiesProps> = (ThirdPartiesProps) => {
               >
                 <ThirdPartyTable
                   searchTerm={searchTerm}
-                  isActive={isActive}
+                  filterPreferences={filterPreferences}
                   openModal={() => openModal(setFieldValue)}
                   setEditPage={handleEditPage}
                 />
                 <LibraryTable
                   searchTerm={searchTerm}
-                  isActive={isActive}
+                  filterPreferences={filterPreferences}
                   openModal={() => openModal(setFieldValue)}
                   setEditPage={handleEditPage}
                 />

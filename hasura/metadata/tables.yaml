@@ -1,24 +1,54 @@
 - table:
     schema: public
+    name: Discounts
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - amount
+      - discount_code
+      - discount_name
+      - is_active
+      - order
+      backend_only: false
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - amount
+      - discount_code
+      - discount_name
+      - is_active
+      - order
+      - updated_at
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
     name: Labs
   insert_permissions:
-    - role: public
-      permission:
-        check: {}
-        columns:
-          - city
-          - country
-          - email
-          - integration
-          - is_active
-          - name
-          - order
-          - phone
-          - postal_code
-          - provider_number
-          - street
-          - street2
-        backend_only: false
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - city
+      - country
+      - email
+      - integration
+      - is_active
+      - name
+      - order
+      - phone
+      - postal_code
+      - provider_number
+      - street
+      - street2
+      backend_only: false
   select_permissions:
   - role: public
     permission:
@@ -41,79 +71,212 @@
       filter: {}
       allow_aggregations: true
   update_permissions:
-    - role: public
-      permission:
-        columns:
-          - city
-          - country
-          - email
-          - integration
-          - is_active
-          - name
-          - order
-          - phone
-          - postal_code
-          - provider_number
-          - street
-          - street2
-        filter: {}
-        check: null
+  - role: public
+    permission:
+      columns:
+      - city
+      - country
+      - email
+      - integration
+      - is_active
+      - name
+      - order
+      - phone
+      - postal_code
+      - provider_number
+      - street
+      - street2
+      filter: {}
+      check: null
   delete_permissions:
-    - role: public
-      permission:
-        filter: {}
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: Library
 - table:
     schema: public
+    name: Lists_campaign
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - members
+      - name
+      - order
+      - type
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - created_at
+      - id
+      - members
+      - name
+      - order
+      - type
+      - updated_at
+      filter: {}
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - members
+      - name
+      - order
+      - type
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: Newsletter_campaign
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - clicked
+      - last_modified
+      - name
+      - opened
+      - order
+      - revenue
+      - sent_date
+      - sent_to
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - clicked
+      - created_at
+      - id
+      - last_modified
+      - name
+      - opened
+      - order
+      - revenue
+      - sent_date
+      - sent_to
+      - updated_at
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - clicked
+      - last_modified
+      - name
+      - opened
+      - order
+      - revenue
+      - sent_date
+      - sent_to
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: SMS_campaign
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - last_modified
+      - name
+      - order
+      - sent_date
+      - sent_to
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - created_at
+      - id
+      - last_modified
+      - name
+      - order
+      - sent_date
+      - sent_to
+      - updated_at
+      filter: {}
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - last_modified
+      - name
+      - order
+      - sent_date
+      - sent_to
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
     name: appointment_status
   insert_permissions:
-    - role: public
-      permission:
-        check: {}
-        columns:
-          - appointment_type
-          - color
-          - icon
-          - is_active
-          - name
-          - order
-          - track_time
-        backend_only: false
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - appointment_type
+      - color
+      - icon
+      - is_active
+      - name
+      - order
+      - track_time
+      backend_only: false
   select_permissions:
-    - role: public
-      permission:
-        columns:
-          - is_active
-          - track_time
-          - order
-          - appointment_type
-          - color
-          - icon
-          - name
-          - created_at
-          - updated_at
-          - id
-        filter: {}
-        allow_aggregations: true
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - track_time
+      - order
+      - appointment_type
+      - color
+      - icon
+      - name
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+      allow_aggregations: true
   update_permissions:
-    - role: public
-      permission:
-        columns:
-          - appointment_type
-          - color
-          - icon
-          - is_active
-          - name
-          - order
-          - track_time
-        filter: {}
-        check: null
+  - role: public
+    permission:
+      columns:
+      - appointment_type
+      - color
+      - icon
+      - is_active
+      - name
+      - order
+      - track_time
+      filter: {}
+      check: null
   delete_permissions:
-    - role: public
-      permission:
-        filter: {}
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: block_out_options
@@ -395,45 +558,45 @@
     schema: public
     name: cancellation_reasons
   insert_permissions:
-    - role: public
-      permission:
-        check: {}
-        columns:
-          - cancellation_policy
-          - is_active
-          - name
-          - order
-          - type
-        backend_only: false
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - cancellation_policy
+      - is_active
+      - name
+      - order
+      - type
+      backend_only: false
   select_permissions:
-    - role: public
-      permission:
-        columns:
-          - is_active
-          - order
-          - cancellation_policy
-          - name
-          - type
-          - created_at
-          - updated_at
-          - id
-        filter: {}
-        allow_aggregations: true
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - order
+      - cancellation_policy
+      - name
+      - type
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+      allow_aggregations: true
   update_permissions:
-    - role: public
-      permission:
-        columns:
-          - cancellation_policy
-          - is_active
-          - name
-          - order
-          - type
-        filter: {}
-        check: null
+  - role: public
+    permission:
+      columns:
+      - cancellation_policy
+      - is_active
+      - name
+      - order
+      - type
+      filter: {}
+      check: null
   delete_permissions:
-    - role: public
-      permission:
-        filter: {}
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: category
@@ -481,38 +644,80 @@
     schema: public
     name: colors
   insert_permissions:
-    - role: public
-      permission:
-        check: {}
-        columns:
-          - id
-          - created_at
-          - updated_at
-          - color
-        backend_only: false
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - id
+      - created_at
+      - updated_at
+      - color
+      backend_only: false
   select_permissions:
-    - role: public
-      permission:
-        columns:
-          - color
-          - id
-          - updated_at
-        filter: {}
+  - role: public
+    permission:
+      columns:
+      - color
+      - id
+      - updated_at
+      filter: {}
 - table:
     schema: public
     name: contacts
   select_permissions:
-    - role: public
-      permission:
-        columns:
-          - mobile_number
-          - client_id
-          - first_name
-          - last_name
-          - created_at
-          - updated_at
-          - id
-        filter: {}
+  - role: public
+    permission:
+      columns:
+      - mobile_number
+      - client_id
+      - first_name
+      - last_name
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+- table:
+    schema: public
+    name: courses
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - is_active
+      - name
+      - order
+      - service
+      - session
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - created_at
+      - id
+      - is_active
+      - name
+      - order
+      - service
+      - session
+      - updated_at
+      filter: {}
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - name
+      - order
+      - service
+      - session
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: credit_note_type
@@ -552,47 +757,248 @@
       filter: {}
       check: null
   delete_permissions:
-    - role: public
-      permission:
-        filter: {}
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: credit_notes
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - debtor
+      - credit_date
+      - credit_no
+      - customer
+      - invoice_no
+      - location
+      - total
+      - type
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - debtor
+      - created_at
+      - credit_date
+      - credit_no
+      - customer
+      - id
+      - invoice_no
+      - location
+      - total
+      - type
+      - updated_at
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - debtor
+      - credit_date
+      - credit_no
+      - customer
+      - invoice_no
+      - location
+      - total
+      - type
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: debt
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - age
+      - balance
+      - customer
+      - debtor
+      - inv_date
+      - invoice_no
+      - last_action
+      - location
+      - status
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - age
+      - balance
+      - created_at
+      - customer
+      - debtor
+      - id
+      - inv_date
+      - invoice_no
+      - last_action
+      - location
+      - status
+      - updated_at
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - age
+      - balance
+      - customer
+      - debtor
+      - inv_date
+      - invoice_no
+      - last_action
+      - location
+      - status
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: departments
   insert_permissions:
-    - role: public
-      permission:
-        check: {}
-        columns:
-          - is_active
-          - name
-          - order
-        backend_only: false
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - is_active
+      - name
+      backend_only: false
   select_permissions:
-    - role: public
-      permission:
-        columns:
-          - created_at
-          - id
-          - is_active
-          - name
-          - order
-          - updated_at
-        filter: {}
-        allow_aggregations: true
+  - role: public
+    permission:
+      columns:
+      - created_at
+      - id
+      - is_active
+      - name
+      - order
+      - updated_at
+      filter: {}
+      allow_aggregations: true
   update_permissions:
-    - role: public
-      permission:
-        columns:
-          - is_active
-          - name
-          - order
-          - updated_at
-        filter: {}
-        check: null
+  - role: public
+    permission:
+      columns:
+      - is_active
+      - name
+      - order
+      - updated_at
+      filter: {}
+      check: null
   delete_permissions:
-    - role: public
-      permission:
-        filter: {}
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: diagnostic_codes
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - code
+      - description
+      - is_active
+      - layer1
+      - layer2
+      - layer3
+      - layer4
+      - order
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - code
+      - created_at
+      - description
+      - id
+      - is_active
+      - layer1
+      - layer2
+      - layer3
+      - layer4
+      - order
+      - updated_at
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - code
+      - description
+      - is_active
+      - layer1
+      - layer2
+      - layer3
+      - layer4
+      - order
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: diagnostic_codeset
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - codes
+      - is_active
+      - is_lock
+      - name
+      - order
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - codes
+      - created_at
+      - id
+      - is_active
+      - is_lock
+      - name
+      - order
+      - updated_at
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - codes
+      - is_active
+      - is_lock
+      - name
+      - order
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: family_relationships
@@ -630,9 +1036,76 @@
       filter: {}
       check: null
   delete_permissions:
-    - role: public
-      permission:
-        filter: {}
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: invoices
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - balance
+      - customer
+      - debtor
+      - gross
+      - inv_date
+      - invoice_logo
+      - invoice_no
+      - location
+      - net
+      - paid
+      - payment
+      - status
+      - vat
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - balance
+      - created_at
+      - customer
+      - debtor
+      - gross
+      - id
+      - inv_date
+      - invoice_logo
+      - invoice_no
+      - location
+      - net
+      - paid
+      - payment
+      - status
+      - updated_at
+      - vat
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - balance
+      - customer
+      - debtor
+      - gross
+      - inv_date
+      - invoice_logo
+      - invoice_no
+      - location
+      - net
+      - paid
+      - payment
+      - status
+      - vat
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: issuing_company
@@ -646,7 +1119,6 @@
       - invoice_prefix
       - invoice_starting_number
       - invoice_template
-      - is_draft
       - is_active
       - name
       - order
@@ -660,23 +1132,22 @@
   - role: public
     permission:
       columns:
+      - is_active
+      - vat_registered
+      - order
+      - invoice_starting_number
+      - post_code
       - city
       - country
-      - created_at
-      - id
       - invoice_prefix
-      - invoice_starting_number
       - invoice_template
-      - is_draft
-      - is_active
       - name
-      - order
       - phone
-      - post_code
       - street
-      - updated_at
-      - vat_registered
       - website
+      - created_at
+      - updated_at
+      - id
       filter: {}
       allow_aggregations: true
   update_permissions:
@@ -688,7 +1159,6 @@
       - invoice_prefix
       - invoice_starting_number
       - invoice_template
-      - is_draft
       - is_active
       - name
       - order
@@ -700,9 +1170,9 @@
       filter: {}
       check: null
   delete_permissions:
-    - role: public
-      permission:
-        filter: {}
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: job_title
@@ -738,9 +1208,9 @@
       filter: {}
       check: null
   delete_permissions:
-    - role: public
-      permission:
-        filter: {}
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: labs_dashboard
@@ -852,9 +1322,9 @@
       filter: {}
       check: null
   delete_permissions:
-    - role: public
-      permission:
-        filter: {}
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: library
@@ -900,6 +1370,57 @@
       - type
       filter: {}
       check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: library_installers
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - id
+      - library_name
+      - library_description
+      - library_image
+      - library_location
+      - library_language
+      - data
+      - created_date
+      - is_plus
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_plus
+      - id
+      - data
+      - library_description
+      - library_image
+      - library_language
+      - library_location
+      - library_name
+      - created_date
+      filter: {}
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - is_plus
+      - id
+      - data
+      - library_description
+      - library_image
+      - library_language
+      - library_location
+      - library_name
+      - created_date
+      filter: {}
+      check: {}
   delete_permissions:
   - role: public
     permission:
@@ -959,9 +1480,9 @@
       filter: {}
       check: null
   delete_permissions:
-    - role: public
-      permission:
-        filter: {}
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: marketing_campaign
@@ -1034,6 +1555,9 @@
       filter: {}
 - table:
     schema: public
+    name: packages
+- table:
+    schema: public
     name: payment_types
   insert_permissions:
   - role: public
@@ -1078,6 +1602,58 @@
   - role: public
     permission:
       filter: {}
+- table:
+    schema: public
+    name: payments
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - account
+      - amount
+      - inv_date
+      - location
+      - payment_method
+      - payment_no
+      - user
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - account
+      - amount
+      - created_at
+      - id
+      - inv_date
+      - location
+      - payment_method
+      - payment_no
+      - updated_at
+      - user
+      filter: {}
+      allow_aggregations: true
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - account
+      - amount
+      - inv_date
+      - location
+      - payment_method
+      - payment_no
+      - user
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: peer_review
 - table:
     schema: public
     name: petty_cash_types
@@ -1482,41 +2058,62 @@
     permission:
       check: {}
       columns:
+      - city
+      - company
+      - country
       - email
+      - health_code_identifier
       - is_active
       - name
       - order
       - phone
+      - post_code
       - provider_no
+      - street
       - type
+      - website
       backend_only: false
   select_permissions:
   - role: public
     permission:
       columns:
+      - city
+      - company
+      - country
       - created_at
       - email
+      - health_code_identifier
       - id
       - is_active
       - name
       - order
       - phone
+      - post_code
       - provider_no
+      - street
       - type
       - updated_at
+      - website
       filter: {}
       allow_aggregations: true
   update_permissions:
   - role: public
     permission:
       columns:
+      - city
+      - company
+      - country
       - email
+      - health_code_identifier
       - is_active
       - name
       - order
       - phone
+      - post_code
       - provider_no
+      - street
       - type
+      - website
       filter: {}
       check: null
   delete_permissions:

@@ -9,33 +9,16 @@ import {
 import { columns, thirdPartySchema, Queries, Mutations } from './Schema'
 import { useMutation } from '@apollo/client'
 
-interface EditFieldsType {
-  id: string
-  type: string
-  name: string
-  provider_no: string
-  phone: string
-  email: string
-  website: string
-  country: string
-  city: string
-  street: string
-  post_code: string
-  healthCodeIdentifier: string
-  is_active: boolean
-  company: string
-}
-
 interface LibraryTableProps {
   searchTerm?: string
-  isActive?: boolean
+  filterPreferences?: ThirdPartiesFilterPreferencetype
   openModal?(): void
-  setEditPage?(data: EditFieldsType): void
+  setEditPage?(data: ThirdPartiesEditFieldsType): void
 }
 
 const LibraryTable: FC<LibraryTableProps> = ({
   searchTerm,
-  isActive,
+  filterPreferences,
   openModal,
   setEditPage,
 }) => {
@@ -60,7 +43,8 @@ const LibraryTable: FC<LibraryTableProps> = ({
 
   const { data, error, loading } = useLiveQuery(Queries.LIST_QUERY, {
     variables: {
-      isActive,
+      isActive: filterPreferences.isActive,
+      type: filterPreferences.type,
       company: true,
       searchTerm: '%' + searchTerm + '%',
       offset: paginateData.offset,
@@ -70,7 +54,8 @@ const LibraryTable: FC<LibraryTableProps> = ({
 
   const { data: aggregateData } = useLiveQuery(Queries.LIST_AGGREGATE_QUERY, {
     variables: {
-      isActive,
+      isActive: filterPreferences.isActive,
+      type: filterPreferences.type,
       company: true,
       searchTerm: '%' + searchTerm + '%',
     },
