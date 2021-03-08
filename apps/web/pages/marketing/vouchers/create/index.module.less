@@ -106,7 +106,7 @@
       padding: 0px 24px;
 
       display: flex;
-      flex-direction: column;
+      // flex-direction: column;
       justify-content: center;
       align-items: flex-end;
 
@@ -125,12 +125,16 @@
         line-height: 18px;
         color: #54b2d3;
       }
+      button {
+        margin-left: 10px;
+      }
       @media screen and (max-width: 525px) {
         padding: 12.5px 24px 0px 24px;
         border-top: 1px solid #ecedf0;
         width: 100%;
         align-items: flex-start;
-        justify-content: space-between;
+        // justify-content: space-between;
+        justify-content: center;
 
         .switchDiv {
           display: flex;
@@ -232,6 +236,33 @@
                 margin-top: 2.5px;
               }
             }
+            :global .services-input {
+              cursor: text !important;
+              background-color: transparent;
+              input {
+                cursor: text !important;
+              }
+              svg {
+                cursor: pointer;
+                color: #8c8c8c;
+                fill: #8c8c8c;
+                path {
+                  color: #8c8c8c;
+                  fill: #8c8c8c;
+                }
+
+                &:active {
+                  fill: #54b2d3;
+                  path {
+                    fill: #54b2d3;
+                  }
+                }
+              }
+              &:hover {
+                border-color: #ecedf0;
+                box-shadow: none;
+              }
+            }
           }
           .themesDiv {
             margin-bottom: 15px;
@@ -246,6 +277,7 @@
                 font-size: 14px;
                 line-height: 18px;
                 color: #3d3d46;
+                margin-right: 10px;
               }
               .plus {
                 background: #eef7fb;
@@ -256,7 +288,6 @@
                 justify-content: center;
                 align-items: center;
                 color: #54b2d3;
-                margin-left: 10px;
                 padding: 5px 10px;
               }
             }
@@ -437,5 +468,13 @@
   }
   .ant-select-selector {
     font-size: 14px !important;
+  }
+  .servicesModal {
+    padding-bottom: 0px;
+
+    .ant-modal-close {
+      top: 10px;
+      right: 20px;
+    }
   }
 }

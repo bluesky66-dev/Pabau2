@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import styles from './Wizard.module.less'
 import { Button } from '@pabau/ui'
+import { ButtonType } from 'antd/lib/button/button'
+
 interface WizardProps {
   onPrev?: () => void
   onNext?: () => void
@@ -8,11 +10,12 @@ interface WizardProps {
   active: number
   allSteps: number
   showNextBtn?: boolean
-  nextBtnLabel?: string | number
+  nextBtnLabel?: string | number | ReactNode
   disableNextStep?: boolean
   disablePrevStep?: boolean
   extraBtn?: boolean
-  extraBtnLabel?: string | number
+  extraBtnType?: ButtonType
+  extraBtnLabel?: string | number | ReactNode
 }
 
 export const Wizard: React.FC<WizardProps> = ({
@@ -22,9 +25,10 @@ export const Wizard: React.FC<WizardProps> = ({
   active,
   allSteps,
   showNextBtn = true,
-  disableNextStep = false,
+  disableNextStep = true,
   disablePrevStep = true,
   extraBtn = false,
+  extraBtnType = 'default',
   extraBtnLabel = 'Extra Button',
   nextBtnLabel = 'Next Step',
   children,
@@ -35,7 +39,7 @@ export const Wizard: React.FC<WizardProps> = ({
       {/* <div style={{ marginTop: '20px' }}></div> */}
       <div className={styles.footer}>
         <Button
-          onClick={(event) => onPrev?.()}
+          onClick={() => onPrev?.()}
           disabled={active < 1 || (active === allSteps - 1 && disablePrevStep)}
         >
           Previous Step
@@ -46,19 +50,16 @@ export const Wizard: React.FC<WizardProps> = ({
 
         <div>
           {extraBtn && (
-            <Button
-              type="default"
-              onClick={(event) => extraBtnClick?.()}
-              style={{ marginRight: '10px' }}
-            >
+            <Button type={extraBtnType} onClick={() => extraBtnClick?.()}>
               {extraBtnLabel}
             </Button>
           )}
           {showNextBtn && (
             <Button
               type="primary"
-              onClick={(event) => onNext?.()}
-              disabled={disableNextStep || allSteps - 1 <= active}
+              onClick={() => onNext?.()}
+              style={{ marginLeft: '10px' }}
+              disabled={disableNextStep && allSteps - 1 <= active}
             >
               {nextBtnLabel}
             </Button>

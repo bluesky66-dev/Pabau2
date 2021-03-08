@@ -1,9 +1,10 @@
 /* eslint-disable */
-import React, { useEffect } from 'react'
+import React, { useEffect, ReactNode } from 'react'
 import styles from './Wstepper.module.less'
 import Wizard from '../wizard/Wizard'
-import { StepperItem, Button } from '@pabau/ui'
+import { StepperItem } from '@pabau/ui'
 import Stepper from '../stepper/Stepper'
+import { ButtonType } from 'antd/lib/button/button'
 
 interface WStepperProps {
   active: number
@@ -11,9 +12,10 @@ interface WStepperProps {
   showNextBtn?: boolean
   disableNextStep?: boolean
   disablePrevStep?: boolean
-  nextBtnLabel?: string | number
+  nextBtnLabel?: string | number | ReactNode
   extraBtn?: boolean
-  extraBtnLabel?: string | number
+  extraBtnType?: ButtonType
+  extraBtnLabel?: string | number | ReactNode
   extraBtnClick?: () => void
   onActiveStepChange?: (index) => void
 }

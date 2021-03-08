@@ -1,0 +1,82 @@
+.serviceInputSearch {
+  margin-bottom: 20px;
+}
+
+.serviceInputSearch {
+  :global input + span {
+    svg {
+      fill: #9292a3;
+      path {
+        fill: #9292a3;
+      }
+    }
+  }
+}
+
+.saveBtn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+:global {
+  .ant-modal-close {
+    right: 22.5px;
+    top: 10px;
+  }
+  .ant-tree-treenode {
+    width: 100%;
+    box-shadow: inset 0px -1px 0px #f4f4f6, inset 0px 1px 0px #f4f4f6;
+    padding: 5px 25px 5px 5px !important;
+    position: relative;
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+
+    .ant-tree-node-content-wrapper {
+      min-height: 100%;
+      padding: 15px 5px;
+    }
+
+    .title {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+
+      span.main:first-child {
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 18px;
+        color: #3d3d46;
+      }
+      span.sub:last-child {
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 100%;
+        color: silver;
+      }
+    }
+
+    .ant-tree-checkbox {
+      margin-top: 0px;
+    }
+
+    .ant-tree-switcher {
+      padding: 15px 0px;
+      position: absolute;
+      right: 0px;
+
+      span {
+        font-size: 15px;
+      }
+
+      svg {
+        fill: #8c8c8c;
+        path {
+          fill: #8c8c8c;
+        }
+      }
+    }
+  }
+}

@@ -1,11 +1,20 @@
 import React, { FC, useState, useEffect, useRef } from 'react'
 import Layout from '../../../../components/Layout/Layout'
-import ExternalLink from '../../../../components/Marketing/CreateGiftVoucher/assets/external-link.svg'
+// import ExternalLink from '../../../../components/Marketing/CreateGiftVoucher/assets/external-link.svg'
 import ActiveIcon from '../../../../components/Marketing/CreateGiftVoucher/assets/active.svg'
+import SelectServices from '../../../../components/Marketing/CreateGiftVoucher/SelectServices'
 import { Card, Row, Col, Input, Select } from 'antd'
 import classNames from 'classnames'
-import { HomeOutlined, EditOutlined } from '@ant-design/icons'
-import { Breadcrumb, Switch, Wstepper, VoucherCard, TabMenu } from '@pabau/ui'
+import { HomeOutlined, EditOutlined, RightOutlined } from '@ant-design/icons'
+import {
+  Breadcrumb,
+  Switch,
+  Wstepper,
+  VoucherCard,
+  TabMenu,
+  PabauPlus,
+  Button,
+} from '@pabau/ui'
 import styles from './index.module.less'
 
 const { TextArea } = Input
@@ -54,7 +63,6 @@ export interface CreateVoucherProps {
 
 export const CreateVoucher: FC<CreateVoucherProps> = ({ title }) => {
   const aligns = [styles.pRight, styles.pX, styles.pX, styles.pLeft]
-
   const bgSelectRef = useRef<HTMLInputElement>(null)
 
   const steps = [
@@ -89,7 +97,24 @@ export const CreateVoucher: FC<CreateVoucherProps> = ({ title }) => {
   const [bgColors, updateBGColors] = useState([])
   const [selectedBgColor, setSelectedBGColor] = useState(null)
 
+  const [showNextBtn, setShowNextBtn] = useState(true)
+  const [showExtraBtn, setShowExtraBtn] = useState(false)
+
   const onStepChange = (step) => {
+    switch (step) {
+      case 0:
+        setShowNextBtn(true)
+        setShowExtraBtn(false)
+        break
+
+      case 1:
+        setShowNextBtn(false)
+        setShowExtraBtn(true)
+        break
+
+      default:
+        return
+    }
     setActiveStep(step)
   }
 
@@ -99,7 +124,7 @@ export const CreateVoucher: FC<CreateVoucherProps> = ({ title }) => {
         <div className={styles.breadcrumbDiv}>
           <Breadcrumb
             breadcrumbItems={[
-              { breadcrumbName: 'Vouchers', path: '' },
+              { breadcrumbName: 'Vouchers', path: 'marketing/vouchers' },
               { breadcrumbName: 'Create Voucher', path: '' },
             ]}
           />
@@ -107,7 +132,7 @@ export const CreateVoucher: FC<CreateVoucherProps> = ({ title }) => {
         <div className={styles.heading}>Gift Voucher</div>
       </div>
       <div className={styles.rightCardHeadBtns}>
-        <div className={styles.switchDiv}>
+        {/* <div className={styles.switchDiv}>
           <span>Sell this voucher online</span>
           <span>
             <Switch defaultChecked={true} />
@@ -118,6 +143,16 @@ export const CreateVoucher: FC<CreateVoucherProps> = ({ title }) => {
             https://connect-lutetia.pabau.me/booking{' '}
             <img src={ExternalLink} alt="External Link" />
           </a>
+        </div> */}
+        <div>
+          <Button type="default" size="large">
+            Send Test Email
+          </Button>
+        </div>
+        <div>
+          <Button type="primary" size="large">
+            Save
+          </Button>
         </div>
       </div>
     </div>
@@ -249,6 +284,17 @@ export const CreateVoucher: FC<CreateVoucherProps> = ({ title }) => {
               </Select>
             </div>
           </div>
+          <div className={styles.contDiv}>
+            <span className={styles.contHeading}>Services included</span>
+          </div>
+          <div className={styles.contDiv}>
+            <label>
+              <span>Included services</span>
+            </label>
+            <div>
+              <SelectServices />
+            </div>
+          </div>
         </div>
       )}
       {activeStep === 1 && (
@@ -314,7 +360,7 @@ export const CreateVoucher: FC<CreateVoucherProps> = ({ title }) => {
           <div className={styles.themesDiv}>
             <div>
               <span>Voucher Theme</span>
-              <span className={styles.plus}>Plus</span>
+              <PabauPlus label="plus" />
             </div>
             <div>
               <Row>
@@ -429,6 +475,8 @@ export const CreateVoucher: FC<CreateVoucherProps> = ({ title }) => {
           url: url,
         })
         await updateThemes(existingThemes)
+        setSelectedBGColor(null)
+        setVoucherBackgroundUrl(url)
       }
     }
   }
@@ -441,11 +489,23 @@ export const CreateVoucher: FC<CreateVoucherProps> = ({ title }) => {
             <Col md={24} className={styles.voucherBuilderBody}>
               <Wstepper
                 disablePrevStep={false}
-                showNextBtn={true}
-                nextBtnLabel="Next Step"
+                showNextBtn={showNextBtn}
+                nextBtnLabel={
+                  <span>
+                    Next Step <RightOutlined />
+                  </span>
+                }
                 active={activeStep}
                 data={steps}
                 onActiveStepChange={onStepChange}
+                extraBtn={showExtraBtn}
+                extraBtnType="primary"
+                extraBtnLabel={
+                  <span>
+                    Create <RightOutlined />
+                  </span>
+                }
+                extraBtnClick={() => alert('HELLO')}
               >
                 <Row
                   className={classNames(
