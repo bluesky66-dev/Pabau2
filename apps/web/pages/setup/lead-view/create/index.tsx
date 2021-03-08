@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react'
 import { Layout, Breadcrumb, MobileHeader, Input } from '@pabau/ui'
-import AddButton from './addButton'
 import Link from 'next/link'
 import { Typography, Col, Row } from 'antd'
 import { Form as AntForm } from 'antd'
@@ -9,7 +8,8 @@ import { LeftOutlined } from '@ant-design/icons'
 import { Formik, FormikErrors } from 'formik'
 import classNames from 'classnames'
 import styles from './index.module.less'
-import FieldRow from './FieldRow'
+import FieldRow from '../../../../components/Setup/LeadView/FieldRow'
+import AddButton from '../../../../components/Setup/LeadView/AddButton'
 
 const { Title } = Typography
 

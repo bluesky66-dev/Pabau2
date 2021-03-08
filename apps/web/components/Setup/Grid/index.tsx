@@ -1,6 +1,6 @@
 import React from 'react'
 import { SetupGrid, SetupGridProps } from '@pabau/ui'
-import styles from '../Setup.module.less'
+import styles from '../../../pages/setup/Setup.module.less'
 
 interface p {
   data: SetupGridProps[]

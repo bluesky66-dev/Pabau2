@@ -12,7 +12,7 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import { LeftOutlined } from '@ant-design/icons'
 
-import SearchResults from './../setup/searchResults'
+import SearchResults from '../../components/Setup/SearchResults'
 import Layout from '../../components/Layout/Layout'
 import styles from './reports.module.less'
 import { reportCardsData } from '../../mocks/data'
@@ -76,7 +76,7 @@ const Reports: FC = () => {
           </div>
         </MobileHeader>
       </div>
-      <Layout>
+      <Layout active="reports">
         <Card bodyStyle={{ padding: 0 }}>
           <Row
             className={classNames(

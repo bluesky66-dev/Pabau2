@@ -1,6 +1,6 @@
 import React from 'react'
 import { SetupGridMobile, SubDataTitle } from '@pabau/ui'
-import styles from '../Setup.module.less'
+import styles from '../../../pages/setup/Setup.module.less'
 
 interface SetupGridMobileProps {
   image: string

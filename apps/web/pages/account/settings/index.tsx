@@ -8,9 +8,9 @@ import { Layout } from '@pabau/ui'
 import { Button, Col, Row, Tabs } from 'antd'
 import React, { FC } from 'react'
 import styles from './index.module.less'
-import Notification from './notifications'
-import Profile from './profile'
-import Security from './security'
+import Notification from '../../../components/Account/Settings/Notifications'
+import Profile from '../../../components/Account/Settings/Profile'
+import Security from '../../../components/Account/Settings/Security'
 
 const { TabPane } = Tabs
 const Index: FC = () => {

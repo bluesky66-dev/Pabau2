@@ -14,7 +14,7 @@ import React, { FC } from 'react'
 
 const { TextArea } = Input
 
-const ReactQuill = dynamic(() => import('../../../components/MyReactQuill'), {
+const ReactQuill = dynamic(() => import('../../MyReactQuill'), {
   ssr: false,
 })
 

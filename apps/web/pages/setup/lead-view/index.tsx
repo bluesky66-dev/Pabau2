@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 import React from 'react'
-import CrudLayout from '../../../components/CrudLayout/CrudLayout'
 import { useRouter } from 'next/router'
+import CrudLayout from '../../../components/CrudLayout/CrudLayout'
 
 /* eslint-disable-next-line */
 export interface LeadsProps { }
@@ -31,6 +31,7 @@ const LIST_QUERY = gql`
     }
   }
 `
+
 const LIST_AGGREGATE_QUERY = gql`
   query lead_aggregate($isActive: Boolean = true, $searchTerm: String = "") {
     Labs_aggregate(
@@ -45,6 +46,7 @@ const LIST_AGGREGATE_QUERY = gql`
     }
   }
 `
+
 const DELETE_MUTATION = gql`
   mutation delete_lead_by_pk($id: uuid!) {
     delete_lead_by_pk(id: $id) {
@@ -53,6 +55,7 @@ const DELETE_MUTATION = gql`
     }
   }
 `
+
 const ADD_MUTATION = gql`
   mutation MyMutation {
     insert_lead_one(
@@ -87,6 +90,7 @@ const ADD_MUTATION = gql`
     }
   }
 `
+
 const EDIT_MUTATION = gql`
   mutation update_lead_by_pk(
     $id: uuid!

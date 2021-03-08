@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Button, Checkbox } from '@pabau/ui'
-import styles from './index.module.less'
+import styles from '../../../pages/setup/lead-view/create/index.module.less'
 import classNames from 'classnames'
 
 interface P {

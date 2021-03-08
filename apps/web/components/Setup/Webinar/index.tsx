@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import { Webinar, Button, WebinarModal, WebinarModalProps } from '@pabau/ui'
-import styles from '../Setup.module.less'
+import styles from '../../../pages/setup/Setup.module.less'
 
 import backgroundImage from '../../../assets/images/user.png'
 

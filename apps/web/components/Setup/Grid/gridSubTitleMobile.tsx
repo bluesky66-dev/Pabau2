@@ -1,7 +1,7 @@
 import React, { useState, useEffect, FC } from 'react'
 import { LeftOutlined } from '@ant-design/icons'
 import { SetupGridSubMenuMobile, SetupGridProps } from '@pabau/ui'
-import styles from '../Setup.module.less'
+import styles from '../../../pages/setup/Setup.module.less'
 
 interface P {
   data: SetupGridProps[]

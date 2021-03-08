@@ -7,12 +7,12 @@ import {
   MobileHeader,
 } from '@pabau/ui'
 import styles from './lead-forms.module.less'
-import LeadSettings from './lead-capture/LeadSetting'
-import LeadIntegration from './lead-capture/LeadIntegration'
-import LeadTesting from './lead-capture/LeadTesting'
-import LeadResult from './lead-capture/LeadResult'
-import LeadFormResult from './lead-capture/lead-forms/LeadFormResult'
-import LeadCustomizeForm from './lead-capture/lead-forms/LeadCustomizeForm'
+import LeadSettings from '../../components/Setup/LeadCapture/LeadSetting'
+import LeadIntegration from '../../components/Setup/LeadCapture/LeadIntegration'
+import LeadTesting from '../../components/Setup/LeadCapture/LeadTesting'
+import LeadResult from '../../components/Setup/LeadCapture/LeadResult'
+import LeadFormResult from '../../components/Setup/LeadCapture/lead-forms/LeadFormResult'
+import LeadCustomizeForm from '../../components/Setup/LeadCapture/lead-forms/LeadCustomizeForm'
 import {
   FlagOutlined,
   HomeOutlined,

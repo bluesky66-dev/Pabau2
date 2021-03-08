@@ -4,10 +4,10 @@ import { Button, Breadcrumb, PhoneNumberInput, Notification } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import ClientNotification from '../../../components/ClientNotification/index'
 import styles from './index.module.less'
-import CommonHeader from '../../setup/CommonHeader'
+import CommonHeader from '../../../components/CommonHeader'
 import { DownOutlined, LeftOutlined } from '@ant-design/icons'
 import { renderToString } from 'react-dom/server'
-import AppointmentEmailPreview from './email-preview'
+import AppointmentEmailPreview from '../../../components/ClientNotification/AppointmentEmailPreview'
 import { apiURL } from '../../../baseUrl'
 const { Title } = Typography
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { Checkbox, Button } from '@pabau/ui'
 import { Form as AntForm, Col, Row } from 'antd'
 import AdvanceField from './AdvanceField'
-import styles from './index.module.less'
+import styles from '../../../pages/setup/lead-view/create/index.module.less'
 
 function FieldRow({ field, handleAddField }) {
   return (

@@ -7,12 +7,12 @@ import Layout from '../components/Layout/Layout'
 import useLogin from '../hooks/authentication/useLogin'
 import Login from './login'
 import { gql, useQuery } from '@apollo/client'
-import CommonHeader from './setup/CommonHeader'
+import CommonHeader from '../components/CommonHeader'
 
 // eslint-disable-next-line
 const CURRENT_USER = gql`  query retrieveAuthenticatedUser($Id: Int!, $CompanyId: Int!) { user(where: { id: $Id }) { username full_name } company(where: { id: $CompanyId }) { details {company_name,language  } }}`
 
-const Index: FC = () => {
+const Pages: FC = () => {
   const { t } = useTranslation()
   const [showGrid, setShowGrid] = useState(false)
   const [authenticated, user] = useLogin(false)
@@ -23,9 +23,8 @@ const Index: FC = () => {
     },
   })
 
-  const onGridLayoutChange = () => {
-
-  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  const onGridLayoutChange = () => {}
 
   return authenticated ? (
     <div>
@@ -33,7 +32,7 @@ const Index: FC = () => {
       <Layout pageTitle={t('common', 'index.title')} {...data}>
         {!showGrid && <Button onClick={() => setShowGrid(true)}>Edit</Button>}
         <hr />
-        {showGrid && <Grid  onLayoutChange={onGridLayoutChange}/>}v{version}
+        {showGrid && <Grid onLayoutChange={onGridLayoutChange} />}v{version}
       </Layout>
     </div>
   ) : (
@@ -41,4 +40,4 @@ const Index: FC = () => {
   )
 }
 
-export default Index
+export default Pages

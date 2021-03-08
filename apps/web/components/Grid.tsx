@@ -8,7 +8,10 @@ import { Responsive, WidthProvider } from 'react-grid-layout'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
-export default class ShowcaseLayout extends React.Component {
+export default class ShowcaseLayout extends React.Component<
+  { onLayoutChange: (layout: any, layouts: any) => void },
+  any
+> {
   constructor(props: any) {
     super(props)
     this.state = {

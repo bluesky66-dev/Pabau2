@@ -3,7 +3,7 @@ import { Card } from 'antd'
 import Highlighter from 'react-highlight-words'
 
 import { SetupEmptySearch } from '@pabau/ui'
-import styles from '../Setup.module.less'
+import styles from '../../../pages/setup/Setup.module.less'
 
 interface searchProps {
   subTitle: string

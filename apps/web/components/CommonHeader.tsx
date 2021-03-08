@@ -8,8 +8,8 @@ import {
   PabauMessages,
 } from '@pabau/ui'
 import { MenuOutlined } from '@ant-design/icons'
-import Search from '../../components/Search'
-import styles from './Setup.module.less'
+import Search from './Search'
+import styles from '../pages/setup/Setup.module.less'
 import classNames from 'classnames'
 
 interface P {

@@ -9,7 +9,7 @@ import {
   DropdownButton as DropDownButton,
 } from '@pabau/ui'
 import Layout from '../../components/Layout/Layout'
-import CommonHeader from '../setup/CommonHeader'
+import CommonHeader from '../../components/CommonHeader'
 import notificationData from '../../assets/notificationData'
 import notificationBannerImage from '../../assets/images/notification-image.png'
 import styles from './style.module.less'
