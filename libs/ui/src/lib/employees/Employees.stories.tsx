@@ -29,14 +29,17 @@ export interface EmployeesStoryProps {
   employees: Employee[]
 }
 
-export const EmployeesStory: FC<EmployeesStoryProps> = ({
-  employees = defaultEmployees,
-}) => {
+const EmployeesStory: FC<EmployeesStoryProps> = ({ ...args }) => {
   return (
-    <div
-      style={{ padding: '27px 32px 32px', maxWidth: '502px', width: '100%' }}
-    >
-      <Employees employees={employees} />
+    <div style={{ padding: '27px 32px 32px', width: '502px' }}>
+      <Employees {...args} />
     </div>
   )
+}
+
+export const Default = EmployeesStory.bind({})
+Default.args = {
+  employees: defaultEmployees,
+  title: '',
+  description: '',
 }

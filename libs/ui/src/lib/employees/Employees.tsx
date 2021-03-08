@@ -12,11 +12,18 @@ export interface Employee {
 }
 
 export interface EmployeesProps {
+  title?: string
+  description?: string
   employees: Employee[]
   onSelected?: (items: Employee[]) => void
 }
 
-export const Employees: FC<EmployeesProps> = ({ employees, onSelected }) => {
+export const Employees: FC<EmployeesProps> = ({
+  employees,
+  onSelected,
+  title,
+  description,
+}) => {
   const [searchQuery, setSearchQuery] = useState('')
   const [employeeItems, setEmployeeItems] = useState<Employee[]>([])
   const [loadMore, setLoadMore] = useState(false)
@@ -29,7 +36,6 @@ export const Employees: FC<EmployeesProps> = ({ employees, onSelected }) => {
     onSelected?.(items.filter((item) => item.selected === true))
   }
   const handleChangeSearchQuery = (e) => {
-    // setSearchQuery(e.target.value)
     setEmployeeItems(
       employees
         .filter((employee) =>
@@ -44,8 +50,11 @@ export const Employees: FC<EmployeesProps> = ({ employees, onSelected }) => {
   }, [employees])
   return (
     <div className={styles.employeesContainer}>
-      <h2>Employees</h2>
-      <h3>Choose which team members would required access to this location</h3>
+      <h2>{title || 'Employees'}</h2>
+      <h3>
+        {description ||
+          'Choose which team members would required access to this location'}
+      </h3>
       <div>
         <AntInput
           value={searchQuery}
