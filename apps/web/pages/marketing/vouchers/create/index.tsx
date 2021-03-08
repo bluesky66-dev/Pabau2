@@ -505,7 +505,6 @@ export const CreateVoucher: FC<CreateVoucherProps> = ({ title }) => {
                     Create <RightOutlined />
                   </span>
                 }
-                extraBtnClick={() => alert('HELLO')}
               >
                 <Row
                   className={classNames(
