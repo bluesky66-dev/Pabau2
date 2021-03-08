@@ -18,12 +18,10 @@ enum NotificationType {
 
 const Index: FC = () => {
   const [setIndexTab, setSelectedTab] = React.useState(1)
-  const ref = useRef()
+  const ref = useRef(null)
 
   const showNotification = (val) => {
     if (setIndexTab === 1) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       const propsData = ref?.current?.propsData() || {}
       const {
         requestConfirm,

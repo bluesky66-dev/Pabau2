@@ -1,4 +1,4 @@
-import React, { FC, useState, forwardRef } from 'react'
+import React, { FC, useState, forwardRef, ForwardedRef } from 'react'
 import { ClientNotification, Standard, Appointment, Smstext } from '@pabau/ui'
 import CancelAppointmentPreview from '../../pages/client-notifications/cancelled-appointment/CancelAppointmentPreview'
 import NoShowAppointmentPreview from '../../pages/client-notifications/noshow-appointment/NoShowAppointmentPreview'
@@ -12,7 +12,7 @@ interface P {
   isSmsComponent?: boolean
   displayRadioGroup?: boolean
   displayButtons?: boolean
-  ref?: unknown
+  ref?: ForwardedRef<null>
   standardMessage?: string
   hideReminderTimeFrameTabPane?: boolean
   hideRequestConfirmationOption?: boolean

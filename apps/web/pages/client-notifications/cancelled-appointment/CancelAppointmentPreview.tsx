@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { Button, EmailSmsPreview, CancelAClassBooking } from '@pabau/ui'
 import { getFlag } from '../../../mocks/utils'
 import styles from './index.module.less'
@@ -199,10 +199,8 @@ const CancelAppointmentPreview: FC<P> = ({
   informationMessage,
   type,
 }) => {
-  const [selectLangData, setSelectLangData] = React.useState<Data>(
-    langData['en']
-  )
-  React.useEffect(() => {
+  const [selectLangData, setSelectLangData] = useState<Data>(langData['en'])
+  useEffect(() => {
     if (langData[`${selectLanguage.toLowerCase()}`]) {
       setSelectLangData({ ...langData[`${selectLanguage.toLowerCase()}`] })
     }
