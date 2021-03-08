@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import { Row } from 'antd'
 import { Button, ButtonTypes } from '@pabau/ui'
+import CustomCheckBox from './CustomCheckBox'
 import styles from './index.module.less'
-import checkboxOutlined from '../../../assets/images/checkbox-outlined.svg'
 
 interface P {
   method: string
@@ -20,12 +20,7 @@ const PaymentMethod: FC<P> = ({
   buttonText = 'Connect',
 }) => {
   const listItemRender = listItems.map((listItem, i) => {
-    return (
-      <div key={i} className={styles.listItem}>
-        <img src={checkboxOutlined} alt="check outlined" />
-        <span>{listItem}</span>
-      </div>
-    )
+    return <CustomCheckBox key={i} checked label={listItem} disabled />
   })
 
   return (

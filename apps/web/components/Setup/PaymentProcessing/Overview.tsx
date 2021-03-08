@@ -4,16 +4,22 @@ import classNames from 'classnames'
 import styles from './index.module.less'
 import SectionTitle from './SectionTitle'
 import PaymentMethod from './PaymentMethod'
-import { Checkbox, SimpleDropdown } from '@pabau/ui'
+import CustomCheckBox from './CustomCheckBox'
+import { SimpleDropdown } from '@pabau/ui'
 import paypal from '../../../assets/images/paypal.png'
 import stripe from '../../../assets/images/stripe.png'
 import pabauCard from '../../../assets/images/pabau-card.png'
 
 const PaymentProcessingOverview: FC = () => {
   const [currency, setCurrency] = useState('GBP')
+  const [allow, setAllow] = useState('1')
   const handleCurrency = (value) => {
     setCurrency(value)
   }
+  const onChangeAllow = (value) => {
+    setAllow(value)
+  }
+
   return (
     <div>
       <div className={styles.sectionChecklist}>
@@ -22,17 +28,28 @@ const PaymentProcessingOverview: FC = () => {
           description="Get paid faster with online payment options."
         />
         <Row className={styles.marginTopMd}>
-          <Checkbox>
-            Allow clients to view their payment activity online.
-          </Checkbox>
+          <CustomCheckBox
+            value={'1'}
+            checked={allow === '1'}
+            onChange={onChangeAllow}
+            label="Allow clients to view their payment activity online."
+          />
         </Row>
         <Row className={styles.marginTopSm}>
-          <Checkbox>
-            Allow clients to view their payment activity online.
-          </Checkbox>
+          <CustomCheckBox
+            value={'2'}
+            checked={allow === '2'}
+            onChange={onChangeAllow}
+            label="Allow clients to view their payment activity online."
+          />
         </Row>
         <Row className={styles.marginTopSm}>
-          <Checkbox>Allow payments for booking online.</Checkbox>
+          <CustomCheckBox
+            value={'3'}
+            checked={allow === '3'}
+            onChange={onChangeAllow}
+            label="Allow payments for booking online."
+          />
         </Row>
       </div>
       <div className={classNames(styles.sectionPadding, styles.sectionBorder)}>

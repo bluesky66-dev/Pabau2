@@ -125,9 +125,10 @@
   }
 }
 
-.list-item {
+.custom-checkbox {
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   img {
     width: 13px;
@@ -143,6 +144,12 @@
   &:not(:first-child) {
     margin-top: 12px;
   }
+}
+
+.not-checked {
+  width: 13px;
+  background: transparent;
+  margin-right: 10px;
 }
 
 .method-button {
@@ -337,4 +344,59 @@
 
 .input-margin-bottom {
   margin-bottom: 16px;
+}
+
+.pay-out-item {
+  margin-bottom: 22px;
+
+  :global {
+    .ant-form-item {
+      height: 100%;
+      margin-bottom: 0;
+
+      .ant-form-item-label {
+        align-self: flex-start;
+      }
+      .ant-form-item-control {
+        align-self: flex-end;
+
+        .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+          height: 40px;
+        }
+        .ant-select-single .ant-select-selector .ant-select-selection-item, .ant-select-single .ant-select-selector .ant-select-selection-placeholder {
+          line-height: 40px;
+        }
+      }
+    }
+
+  }
+}
+
+.item-md-padding-left {
+  padding-left: 12px;
+  @media (max-width: 767px) {
+    padding-left: 0;
+  }
+}
+
+.item-md-padding-right {
+  padding-right: 12px;
+  @media (max-width: 767px) {
+    padding-right: 0;
+  }
+}
+
+.contact-details {
+  h2 {
+    font-size: 18px;
+    color: var(--grey-text-color);
+    margin-bottom: 0;
+    margin-top: 32px;
+    line-height: 22px;
+  }
+  p {
+    font-size: 14px;
+    color: var(--light-grey-text-color);
+    line-height: 18px;
+  }
 }

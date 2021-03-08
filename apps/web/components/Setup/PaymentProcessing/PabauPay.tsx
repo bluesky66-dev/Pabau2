@@ -6,13 +6,20 @@ import { Button, ButtonTypes } from '@pabau/ui'
 import styles from './index.module.less'
 import pabauCard from '../../../assets/images/card-pabau.svg'
 
-const PabauPay: FC = () => {
+interface P {
+  onRequestTerminal?: () => void
+}
+
+const PabauPay: FC<P> = ({ onRequestTerminal }) => {
   return (
     <div>
       <div className={classNames(styles.sectionPadding, styles.sectionBorder)}>
         <SectionTitle
           title="Pabau Card Processing"
           description="On this account you’ll receive funds from clients paying online with integrated card processing."
+          showButton
+          buttonText="Pay out to bank"
+          onClick={onRequestTerminal}
         />
         <div className={styles.balanceCard}>
           <h4>Your current balance is £0</h4>
