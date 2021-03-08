@@ -20,7 +20,7 @@ export const CancelAClassBooking: FC<
 }) => {
   return (
     <>
-      <Row className={styles.cancelTag}>
+      <Row className={`${styles.cancelTag} ${styles.top}`}>
         <Col>
           <span>{text}</span>
         </Col>
