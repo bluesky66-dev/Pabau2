@@ -1,4 +1,4 @@
-import React, { FC, useState, forwardRef } from 'react'
+import React, { FC, useState, forwardRef, useImperativeHandle } from 'react'
 import { ClientNotification, Standard, Appointment, Smstext } from '@pabau/ui'
 import CancelAppointmentPreview from '../ClientNotificationPreview/CancelAppointmentPreview'
 import NoShowAppointmentPreview from '../ClientNotificationPreview/NoShowAppointmentPreview'
@@ -71,10 +71,10 @@ const Index: FC<P> = forwardRef(
     const [hideAppearanceTabPane, setHideAppearanceTabPane] = useState(true)
     const [smsMessage, setSmsMessage] = useState(smsCustom || 'Hi, Kristy')
 
-    const [activeSocialIcons, setActiveSocialIcons] = React.useState([])
+    const [activeSocialIcons, setActiveSocialIcons] = useState([])
     const [disableCustomTab, setDisableCustomTab] = useState(false)
 
-    React.useImperativeHandle(ref, () => ({
+    useImperativeHandle(ref, () => ({
       propsData: () => {
         return {
           requestConfirm: requestConfirmation,

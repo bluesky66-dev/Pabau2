@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactNode } from 'react'
+import React, { PropsWithChildren, ReactNode, useState } from 'react'
 import { Row, Col, Divider, Radio } from 'antd'
 import styles from './EmailSmsPreview.module.less'
 import { ReactComponent as NormalClinicLogo } from '../../assets/images/normal-clinic-logo.svg'
@@ -239,7 +239,7 @@ export const EmailSmsPreview = (
     contactInfoNumber,
     activeSocialIcons = ['facebook', 'whatsApp', 'instagram', 'twitter'],
   } = props
-  const [previewStatus, setPreviewStatus] = React.useState(
+  const [previewStatus, setPreviewStatus] = useState(
     previewCustomStatus || 'email'
   )
 
