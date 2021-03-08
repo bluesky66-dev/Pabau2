@@ -1,0 +1,651 @@
+.createServiceGeneral,
+.createServicePricing,
+.createServiceOnlineBooking,
+.employeesContainer,
+.resoucesContainer,
+.locationsContainer {
+  width: 100%;
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.createServiceSection {
+  background-color: white;
+  max-width: 596px;
+  width: 100%;
+  padding: 27px 32px 32px;
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+
+.createServiceSectionTitle {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--grey-text-color);
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.createServiceSectionSubTitle {
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--light-grey-color);
+  margin: 0;
+}
+
+.createServiceSectionItem {
+  margin-bottom: 20px;
+  :global {
+    .ant-select {
+      width: 100%;
+    }
+    .ant-form-item {
+      margin: 0;
+    }
+    .ant-form-item-label {
+      padding-bottom: 2px;
+      label {
+        font-family: var(--font-family);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 22px;
+        color: var(--light-grey-color); 
+      }
+    }
+  }
+}
+
+.createServiceSectionItemTitle {
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--light-grey-color);
+  margin: 0;
+  margin-bottom: 2px;
+}
+
+.appointmentColor {
+  margin-bottom: 8px;
+}
+
+.appointmentColorTitle {
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--light-grey-color);
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.appointmentColorItems {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.appointmentColorItem {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin: 0 12px 12px 0;
+  > div {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+}
+
+.appointmentColorSelected {
+  border: 1px solid var(--primary-color);
+  > div {
+    border: 1px solid white;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+  }
+}
+
+.createServiceImageContainer {
+  width: 100%;
+  height: 236px;
+  background-color: #f7f7f9;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.advancedSettings {
+  max-width: 596px;
+  width: 100%;
+  :global {
+    .ant-collapse {
+      &-content-box {
+        padding: 0 !important;
+      }
+      &-header {
+        padding-left: 22px !important;
+        padding-top: 0 !important;
+      }
+      &-arrow {
+        left: 0 !important;
+        padding: 0 !important;
+        transform: rotateX(-180deg) !important;
+      }
+    }
+  }
+}
+
+.createServiceBundling {
+  display: grid;
+  grid-template-columns: 1fr 2fr 80px;
+  grid-column-gap: 8px;
+  margin-bottom: 12px;
+
+  > div {
+    :global {
+      .ant-select {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.createServiceAutoConsumption {
+  display: grid;
+  grid-template-columns: 1fr 80px;
+  grid-column-gap: 8px;
+  margin-bottom: 15px;
+
+  > div {
+    :global {
+      .ant-select {
+        width: 100%;
+      }
+    }
+  } 
+}
+
+.pricingOptions {
+  width: 100%;
+  height: 76px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  > div {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--border-color-base);
+    &:nth-child(1) {
+      border-radius: 4px 0 0 4px;
+    }
+    &:nth-child(2) {
+      border-radius: 0;
+    }
+    &:nth-child(3) {
+      border-radius: 0 4px 4px 0;
+    }
+  }
+}
+
+.tooltipContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.pricingOptionLogos {
+  width: 56px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4px;
+  > svg {
+    &:nth-child(2) {
+      margin-left: 8px;
+    }
+  }
+}
+
+.pricingOptionTitle {
+  font-family: var(--font-family);
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  color: var(--grey-text-color);
+}
+
+.pricingChecked {
+  display: none;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  color: var(--primary-color);
+}
+
+.pricingOptionSelected {
+  background-color: #eef7fb;
+  border: 1px solid var(--primary-color) !important;
+  .pricingChecked {
+    display: block;
+  }
+}
+
+.enableOnlinePayment {
+  width: 100%;
+  padding: 20px;
+  background-color: #e9faff;
+  border: 1px solid var(--border-color-base);
+  border-radius: 4px;
+  > p {
+    margin: 0;
+    font-family: var(--font-family);
+    font-size: 14px;
+    line-height: 22px;
+    &:nth-child(1) {
+      margin-bottom: 8px;
+      font-weight: 700;
+      color: var(--grey-text-color);
+    }
+    &:nth-child(2) {
+      margin-bottom: 8px;
+      font-weight: 400;
+      color: var(--grey-text-color);
+    }
+    &:nth-child(3) {
+      cursor: pointer;
+      font-weight: 400;
+      color: var(--primary-color);
+    }
+  }
+}
+
+.currencyInput {
+  > input {
+    padding: 0 11px;
+    width: 100%;
+    height: 30px;
+    border: 1px solid var(--border-color-base);
+    border-radius: 2px;
+    outline: none;
+  }
+}
+
+.paymentProcessing {
+  width: 100%;
+  height: 76px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  > div {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--border-color-base);
+    &:nth-child(1) {
+      border-radius: 4px 0 0 4px;
+    }
+    &:nth-child(2) {
+      border-radius: 0 4px 4px 0;
+    }
+  }
+}
+
+.paymentProcessingOptionLogos {
+  width: 100%;
+  height: 24px;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4px;
+  color: var(--primary-color);
+}
+
+.paymentProcessingOptionTitle {
+  font-family: var(--font-family);
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  color: var(--grey-text-color);
+}
+
+.paymentProcessingChecked {
+  display: none;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  color: var(--primary-color);
+}
+
+.paymentProcessingOptionSelected {
+  background-color: #eef7fb;
+  border: 1px solid var(--primary-color) !important;
+  .paymentProcessingChecked {
+    display: block;
+  }
+}
+
+.patientBookings {
+  width: 100%;
+  height: 76px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  > div {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--border-color-base);
+    &:nth-child(1) {
+      border-radius: 4px 0 0 4px;
+    }
+    &:nth-child(2) {
+      border-radius: 0;
+    }
+    &:nth-child(3) {
+      border-radius: 0 4px 4px 0;
+    }
+  }
+}
+
+.patientBookingsTitle {
+  font-family: var(--font-family);
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  color: var(--grey-text-color);
+}
+
+.patientBookingsChecked {
+  opacity: 0;
+  color: var(--primary-color);
+  font-size: 14px;
+}
+
+.patientBookingsSelected {
+  background-color: #eef7fb;
+  border: 1px solid var(--primary-color) !important;
+  .patientBookingsChecked {
+    opacity: 1;
+  }
+}
+
+.availableOn {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.availableOnItem {
+  width: 38px;
+  padding: 8px 2px 2px;
+  margin-right: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  >span {
+    font-family: var(--font-family);
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    margin-top: 8px;
+    color: var(--grey-text-color);
+  }
+}
+
+.createServiceClientPathway {
+  width: 100%;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.createServiceClientPathwayItemsContainer {
+  max-width: 1116px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 24px;
+}
+
+.createServiceClientPathwayItems {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 1rem;
+}
+
+.createServiceClientPathwayItem {
+  width: 100%;
+  max-width: 85px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 85px;
+    height: 85px;
+    border: 1px solid var(--border-color-base);
+    border-radius: 4px;
+  }
+  > p {
+    text-align: center;
+    font-family: var(--font-family);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 15px;
+    color: var(--light-grey-color);
+    margin: 0;
+    margin-top: 8px;
+  }
+}
+
+.enableServiceOnline {
+  display: flex;
+  align-items: center;
+}
+
+.locationItem {
+  margin-bottom: 1rem;
+  &:last-child {
+    margin: 0;
+  }
+}
+
+.teamMemberPricing {
+  box-sizing: border-box;
+  width: 100%;
+  height: 80px;
+  border-top: 1px solid var(--border-color-base);
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-column-gap: 28px;
+  > div {
+    &:nth-child(1) {
+      display: flex;
+      align-items: center;
+      > span {
+        font-family: var(--font-family);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 22px;
+        color: var(--grey-text-color);
+        margin-left: 12px;
+      }
+    }
+    &:nth-child(2) {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      grid-column-gap: 1rem;
+      > div {
+        display: flex;
+        align-items: center;
+      }
+      :global {
+        .ant-select {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.teamMemberPricingHeader {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-column-gap: 28px;
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--light-grey-color);
+  padding: 6px 0;
+  > div {
+    &:nth-child(2) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}
+
+.locationPricingHeader, .contractPricingHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--light-grey-color);
+  padding: 6px 0;
+}
+
+.locationPricingItem {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  grid-column-gap: 1rem;
+  height: 80px;
+  width: 100%;
+  border-top: 1px solid var(--border-color-base);
+  > div {
+    &:nth-child(1) {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      grid-column-gap: 12px;
+      align-content: center;
+      >div {
+        &:nth-child(1) {
+          width: 100%;
+          height: 40px;
+          background-color: #f7f7f9;
+          border-radius: 4px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-position: center;
+          background-size: cover;
+          background-repeat: no-repeat;
+        }
+        &:nth-child(2) {
+          display: flex;
+          flex-direction: column;
+          align-content: center;
+          > span {
+            font-family: var(--font-family);
+            font-weight: 400;
+            &:nth-child(1) {
+              color: var(--grey-text-color);
+              font-size: 14px;
+              line-height: 22px;
+            }
+            &:nth-child(2) {
+              color: var(--light-grey-color);
+              font-size: 12px;
+              line-height: 16px;
+            }
+          }
+        }
+      }
+    }
+    &:nth-child(2) {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.contractPricingItem {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  grid-column-gap: 1rem;
+  height: 80px;
+  width: 100%;
+  border-top: 1px solid var(--border-color-base);
+  > div {
+    &:nth-child(1) {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      grid-column-gap: 12px;
+      align-content: center;
+      >div {
+        &:nth-child(1) {
+          width: 100%;
+          height: 40px;
+          border-radius: 4px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        &:nth-child(2) {
+          display: flex;
+          flex-direction: column;
+          align-content: center;
+          > span {
+            font-family: var(--font-family);
+            font-weight: 400;
+            &:nth-child(1) {
+              color: var(--grey-text-color);
+              font-size: 14px;
+              line-height: 22px;
+            }
+            &:nth-child(2) {
+              color: var(--light-grey-color);
+              font-size: 12px;
+              line-height: 16px;
+            }
+          }
+        }
+      }
+    }
+    &:nth-child(2) {
+      display: flex;
+      align-items: center;
+    }
+  } 
+}
