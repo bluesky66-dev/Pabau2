@@ -1,9 +1,11 @@
 import React, { FC, ReactNode } from 'react'
 import { CheckOutlined } from '@ant-design/icons'
 import { Row, Col } from 'antd'
+
 import { BasicModal, Button } from '@pabau/ui'
 import styles from './UpgradeModal.module.less'
-export interface SectionDataProps {
+
+export interface sectionDataProps {
   icon: ReactNode
   title: string
   description: string
@@ -12,12 +14,12 @@ export interface UpgradeModalProps {
   title?: string
   visible?: boolean
   modalWidth?: number
-  onCancel: () => void
+  onCancel?: () => void
   plan?: string
   description?: string
   btnText?: string
   sectionTitle?: string
-  sectionData?: SectionDataProps[]
+  sectionData?: sectionDataProps[]
   sectionUpgradeTitle?: string
   sectionUpgradeData?: string[]
   linkText?: string
@@ -45,7 +47,7 @@ export const UpgradeModal: FC<UpgradeModalProps> = ({
       footer={false}
       centered={true}
       className={styles.upgradeModal}
-      onCancel={() => onCancel()}
+      onCancel={() => onCancel?.()}
     >
       <div className={styles.upgradeModalWrapper}>
         <div className={styles.upgradePlan}>
@@ -60,17 +62,19 @@ export const UpgradeModal: FC<UpgradeModalProps> = ({
         <div className={styles.sectionWrapper}>
           <div className={styles.sectionHead}>{sectionTitle}</div>
           <div className={styles.sectionMainWrap}>
-            {sectionData?.map((thread, index) => {
-              return (
-                <div key={thread.title} className={styles.sectionDataWrapper}>
-                  <div className={styles.iconWrap}>{thread.icon}</div>
-                  <div className={styles.descWrap}>
-                    <p>{thread.title}</p>
-                    <span>{thread.description}</span>
+            {sectionData &&
+              sectionData?.length > 0 &&
+              sectionData.map((thread, index) => {
+                return (
+                  <div key={index} className={styles.sectionDataWrapper}>
+                    <div className={styles.iconWrap}>{thread.icon}</div>
+                    <div className={styles.descWrap}>
+                      <p>{thread.title}</p>
+                      <span>{thread.description}</span>
+                    </div>
                   </div>
-                </div>
-              )
-            })}
+                )
+              })}
           </div>
         </div>
         <div className={styles.sectionUpgrade}>

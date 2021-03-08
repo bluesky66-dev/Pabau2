@@ -43,10 +43,8 @@
 .disabledStatus {
   align-self: flex-start;
   right: 10px;
-  border-width: 1px;
   width: 91px;
   height: 24px;
-  border-color: #24bee1;
   display: flex;
   align-items: center;
   background: #fafafa;
@@ -71,4 +69,39 @@
   font-weight: normal;
   font-size: 12px;
   line-height: 14px;
+}
+
+.tooltipCard {
+  min-width: 100px;
+
+  .upArrow {
+    height: 23px;
+    width: 23px;
+    border-radius: 50%;
+    border: 2px solid #54B2D3;
+    color: #54B2D3;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .primaryText {
+    color: #3D3D46;
+  }
+
+  .secondaryText {
+    color: #9292A3;
+    font-size: 12px;
+    margin-bottom: 0;
+    max-width: fit-content;
+    margin-top: 2px;
+  }
+
+  :global {
+    .ant-tooltip-inner {
+      padding: 0;
+      border-radius: 5px;
+    }
+  }
 }
