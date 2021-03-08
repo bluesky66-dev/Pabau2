@@ -136,6 +136,10 @@ const Form: FC<P> = ({ schema, formik, layout = 'vertical' }) => {
                 <Input
                   //disabled={isSubmitting}
                   name={name}
+                  onChange={(e) => {
+                    formik.handleChange(e)
+                    formik.setFieldTouched(name, true)
+                  }}
                   placeholder={example && `eg ${example}`}
                   autoFocus={i === 0}
                 />
