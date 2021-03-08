@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
-import { EmailSMSPreviewProps, NoShowAppointmentProps } from './EmailSMSPreview'
+import { EmailSMSPreviewProps, NoShowAppointmentProps } from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
-import { Button } from '../button/button'
+import styles from './EmailSmsPreview.module.less'
+import { Button } from '../button/Button'
 
 export const NoShowAppointment: FC<
   NoShowAppointmentProps & EmailSMSPreviewProps
@@ -32,7 +32,10 @@ export const NoShowAppointment: FC<
           </Col>
         </Row>
       ) : (
-        <Row gutter={[0, 4]} className={styles.titleRow}>
+        <Row
+          gutter={[0, 4]}
+          className={`${styles.titleRow} ${styles.centerline}`}
+        >
           <Col>
             <span className={styles.message}>
               Click here to get your appointment online

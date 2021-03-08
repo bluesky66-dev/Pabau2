@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Button, EmailSMSPreview, NoShowAppointment } from '@pabau/ui'
+import { Button, EmailSmsPreview, NoShowAppointment } from '@pabau/ui'
 import styles from './index.module.less'
 import ENSVG from '../../../../../libs/ui/src/assets/images/lang-logos/en.svg'
 import FRSVG from '../../../../../libs/ui/src/assets/images/lang-logos/french.svg'
@@ -204,7 +204,7 @@ const NoShowAppointmentPreview: FC<P> = ({
   return (
     <div>
       {standardTapIndex === '1' ? (
-        <EmailSMSPreview
+        <EmailSmsPreview
           greeting={selectLangData.greeting}
           subtitle={selectLangData.subTitle}
           footerIconGroup={true}
@@ -225,7 +225,7 @@ const NoShowAppointmentPreview: FC<P> = ({
             closingText={selectLangData.closingText}
             signatureBlock={selectLangData.signatureBlock}
           />
-        </EmailSMSPreview>
+        </EmailSmsPreview>
       ) : (
         <div
           className={styles.cardAddTemplateContainer}

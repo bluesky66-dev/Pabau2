@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import { EmailSMSPreviewProps, ReminderForClassProps } from './EmailSMSPreview'
+import { EmailSMSPreviewProps, ReminderForClassProps } from './EmailSmsPreview'
 import { Col, Row } from 'antd'
-import styles from './EmailSMSPreview.module.less'
+import styles from './EmailSmsPreview.module.less'
 
 export const ReminderForClass: FC<
   ReminderForClassProps & EmailSMSPreviewProps
@@ -26,9 +26,7 @@ export const ReminderForClass: FC<
       </Row>
       <Row gutter={[0, 16]}>
         <Col>
-          <span className={styles.line}>
-            We look forward to seeing you then!
-          </span>
+          <span className={styles.line}>We’ll see you soon!</span>
         </Col>
       </Row>
       <Row className={styles.textBox}>

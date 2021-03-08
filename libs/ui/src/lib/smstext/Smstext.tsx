@@ -12,10 +12,7 @@ export const Smstext: React.FC<P> = ({ smsMessage, manageAppointment }) => {
   return (
     <div className={styles.container}>
       <div className={styles.smsContainer}>
-        <span
-          className={styles.smsText}
-          dangerouslySetInnerHTML={{ __html: smsMessage || '' }}
-        ></span>
+        <span className={styles.smsText}>{smsMessage}</span>
         <img
           src={ic_sms}
           alt=""

@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Button, EmailSMSPreview, CancelAClassBooking } from '@pabau/ui'
+import { Button, EmailSmsPreview, CancelAClassBooking } from '@pabau/ui'
 import styles from './index.module.less'
 import ENSVG from '../../../../../libs/ui/src/assets/images/lang-logos/en.svg'
 import FRSVG from '../../../../../libs/ui/src/assets/images/lang-logos/french.svg'
@@ -239,7 +239,7 @@ const CancelAppointmentPreview: FC<P> = ({
   return (
     <div>
       {standardTapIndex === '1' ? (
-        <EmailSMSPreview
+        <EmailSmsPreview
           greeting={selectLangData.greeting}
           footerIconGroup={true}
           previewButtonGroup={false}
@@ -265,7 +265,7 @@ const CancelAppointmentPreview: FC<P> = ({
             message={selectLangData.message}
             buttonColor={buttonColor}
           />
-        </EmailSMSPreview>
+        </EmailSmsPreview>
       ) : (
         <div
           className={styles.cardAddTemplateContainer}

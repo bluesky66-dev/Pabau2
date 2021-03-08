@@ -4,7 +4,7 @@ import { Button, Breadcrumb, PhoneNumberInput, Notification } from '@pabau/ui'
 import Layout from '../../../components/Layout/Layout'
 import ClientNotification from '../../../components/ClientNotification/index'
 import styles from './index.module.less'
-import CommonHeader from '../../setup/CommonHeader'
+import CommonHeader from '../../setup/common-header'
 import { DownOutlined, LeftOutlined } from '@ant-design/icons'
 
 const { Title } = Typography

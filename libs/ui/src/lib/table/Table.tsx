@@ -103,10 +103,7 @@ export const Table: FC<TableType> = ({
   }
   const renderActiveButton = (isActive) => {
     return (
-      <Button
-        className={isActive ? styles.activeBtn : styles.disableSourceBtn}
-        disabled={!isActive}
-      >
+      <Button className={styles.activeBtn}>
         {needTranslation
           ? isActive
             ? t('marketingsource-tableRow-active-btn.translation')
