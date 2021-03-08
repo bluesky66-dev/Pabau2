@@ -1437,7 +1437,7 @@ export interface User {
   salt?: string;
   created?: Date;
   last_login?: Date;
-  company_id: number;
+  company_id?: number;
   hash: string;
   email: string;
   admin: number;
