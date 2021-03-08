@@ -22,7 +22,7 @@ interface P {
   tableSearch?: boolean
   addFilter?: boolean
   needTranslation?: boolean
-  setFilterPreferences(data: ThirdPartiesFilterPreferencetype): void
+  setFilterPreferences?(data: ThirdPartiesFilterPreferencetype): void
 }
 
 const AddButton: FC<P> = ({
