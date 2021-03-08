@@ -65,7 +65,6 @@ export const schema: Schema = {
 }
 const LIST_QUERY = gql`
   query diagnostic_codeset(
-    $isActive: Boolean = true
     $searchTerm: String = ""
     $offset: Int
     $limit: Int
@@ -74,10 +73,7 @@ const LIST_QUERY = gql`
       offset: $offset
       limit: $limit
       order_by: { order: desc }
-      where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-      }
+      where: { name: { _ilike: $searchTerm } }
     ) {
       id
       name
