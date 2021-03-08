@@ -11,32 +11,35 @@ export default {
 }
 
 const defaultEmployees: Employee[] = [
-  { name: 'Jessica Winter' },
-  { name: 'Jeff Hackley' },
-  { name: 'Alexander Wang' },
-  { name: 'Linda Davis' },
-  { name: 'William Tyson' },
-  { name: 'Max Starck' },
-  { name: 'Kyle Walsh' },
-  { name: 'Owen Phillips' },
-  { name: 'Aidan Kelly' },
-  { name: 'Ewan Morgan' },
-  { name: 'Jordan Martin' },
-  { name: 'Grant Dudley' },
+  { name: 'Jessica Winter', selected: false },
+  { name: 'Jeff Hackley', selected: false },
+  { name: 'Alexander Wang', selected: false },
+  { name: 'Linda Davis', selected: false },
+  { name: 'William Tyson', selected: false },
+  { name: 'Max Starck', selected: false },
+  { name: 'Kyle Walsh', selected: false },
+  { name: 'Owen Phillips', selected: false },
+  { name: 'Aidan Kelly', selected: false },
+  { name: 'Ewan Morgan', selected: false },
+  { name: 'Jordan Martin', selected: false },
+  { name: 'Grant Dudley', selected: false },
 ]
 
 export interface EmployeesStoryProps {
   employees: Employee[]
 }
 
-export const EmployeesStory: FC<EmployeesStoryProps> = ({
-  employees = defaultEmployees,
-}) => {
+const EmployeesStory: FC<EmployeesStoryProps> = ({ ...args }) => {
   return (
-    <div
-      style={{ padding: '27px 32px 32px', maxWidth: '502px', width: '100%' }}
-    >
-      <Employees employees={employees} />
+    <div style={{ padding: '27px 32px 32px', width: '502px' }}>
+      <Employees {...args} />
     </div>
   )
+}
+
+export const Default = EmployeesStory.bind({})
+Default.args = {
+  employees: defaultEmployees,
+  title: '',
+  description: '',
 }
