@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import { JwtPayloadDto } from '../app/authentication/dto'
 
@@ -11,15 +11,16 @@ declare global {
 }
 
 const authenticatedUser = (req: Request, res: Response, next: NextFunction) => {
-  if (!req.session?.jwt){
-    return next;
-  }
   try{
-    const payload = jwt.verify(ctx.req.session.jwt, 'madskills') as JwtPayloadDto;
-    ctx.req.authenticatedUser = payload
+    if (!req.session?.jwt){
+      console.log('Token not found')
+    } else{
+      req.authenticatedUser = jwt.verify(req.session?.jwt, 'madskills') as JwtPayloadDto
+    }
   } catch(error) {
-    console.log(error)
+    console.error(error)
+  } finally {
+    next();
   }
-  next();
 };
 export default authenticatedUser;

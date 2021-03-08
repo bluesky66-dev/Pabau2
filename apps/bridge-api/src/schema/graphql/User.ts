@@ -1,4 +1,5 @@
 import { objectType, arg, extendType } from 'nexus'
+import { Context } from "../../context";
 
 export const User = objectType({
   name: 'User',
@@ -129,6 +130,16 @@ export const userQuery = extendType({
         return ctx.prisma.user.count(args as any)
       },
     })
+    t.field('authenticatedUser', {
+      type: 'User',
+      async resolve(_, args, ctx:Context){
+        if (!ctx.req.session.jwt || ctx.req.session.jwt.length == 0){
+          throw new Error('Unauthorized access')
+        }
+        return ctx.prisma.user.findFirst({
+        })
+      }
+    })
   },
 })
 
@@ -139,7 +150,5 @@ export const userMutation = extendType({
     t.crud.updateOneUser()
     t.crud.upsertOneUser()
     t.crud.deleteOneUser()
-    t.crud.updateManyUser()
-    t.crud.deleteManyUser()
   },
 })

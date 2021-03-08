@@ -1,59 +1,80 @@
-import { LoginInputDto, JwtPayloadDto} from "./dto";
-import { User } from '../../schema/types'
+import { LoginInputDto, JwtPayloadDto, LogoutInputDto } from "./dto";
+import { User } from '../../../prisma/schema'
 import jwt from 'jsonwebtoken'
 import { Context } from "../../context";
-import * as crypto from "crypto";
-import { BinaryToTextEncoding } from "crypto";
+import { createHash, BinaryToTextEncoding } from "crypto";
 
 export class AuthenticationService {
 
-  public user:User[];
+  private user:User;
 
-  public constructor(private ctx: Context, private loginInput:LoginInputDto) {}
+  public constructor(private ctx: Context) {}
   //TODO Refactor once company select screen is defined
-  public async handleLoginRequest(): Promise<string> {
+  public async handleLoginRequest(loginInput:LoginInputDto): Promise<string> {
     const users: User[] =  await this.ctx.prisma.user.findMany({
       where: {
         username: {
-          equals: this.loginInput.username
+          equals: loginInput.username
         },
       },
     })
-    this.user = users.filter(currentUser => {
-      return Promise.resolve(this.verifyPassword(currentUser, this.loginInput.password))
-    })
-    console.log((this.user))
+    this.user = users.find(currentUser => currentUser.password === this.generatePassword(currentUser, loginInput))
     if(!this.user || Object.getOwnPropertyNames(this.user).length === 0){
-      throw new Error('Unauthorized access');
+      throw new Error('Unauthorized access')
     }
-    return this.generateJWT('madskills');
+    return this.generateJWT('madskills')
   }
-  protected async generateHash(password:string, encryption:string, encoding:BinaryToTextEncoding): Promise<string>{
-      return crypto.createHash(encryption).update(password).digest(encoding);
+  public async handleLogoutRequest(logoutInputDto: LogoutInputDto):Promise<boolean> {
+    return !!(await this.ctx.prisma.user.findFirst({
+      where:{
+        id:logoutInputDto.userId
+      }
+    }))
   }
-
-  private async verifyPassword(user: User, password: string): Promise<string> {
-    if(user.password_algor === 1){
-      return this.generateHash(password, 'md5', 'hex');
-    } if (user.password_algor === 2) {
-      return this.generateHash(user.salt + password + user.salt, 'sha1', 'hex');
-    }
-    throw new Error('Password algorithm not supported')
+  /**
+   * Generate md5 or sh1 hash
+   * @param password
+   * @param encryption
+   * @param encoding
+   *
+   * @return hashed password
+   * @protected
+   */
+  private generateHash(password:string, encryption:string, encoding:BinaryToTextEncoding): string{
+      return createHash(encryption).update(password).digest(encoding);
   }
   private async generateJWT(key: string): Promise<string>{
     return jwt.sign(<JwtPayloadDto> {
-      'user': this.user[0].id,
-      'company': this.user[0].company_id,
-      'username': this.user[0].username,
+      'user': this.user.id,
+      'company': this.user.company_id,
+      'username': this.user.username,
       'https://hasura.io/jwt/claims': {
         "x-hasura-allowed-roles": [
           'public','admin'
         ],
         'x-hasura-default-role': 'public',
-        'x-hasura-user-id': this.user[0].id,
-        'x-hasura-org-id': this.user[0].company_id,
+        'x-hasura-user-id': this.user.id,
+        'x-hasura-org-id': this.user.company_id,
         'x-hasura-james': 123
       }
     }, key)
+  }
+  /**
+   * Password enum [1: md5, 2:sha1]
+   * @param user
+   * @param loginInput
+   *
+   * @return encoded password as string
+   * @private
+   */
+  private generatePassword(user: User, loginInput:LoginInputDto): string {
+    switch (user.password_algor) {
+      case 1:
+        return this.generateHash(loginInput.password, 'md5', 'hex')
+      case 2:
+        return this.generateHash(user.salt + loginInput.password + user.salt, 'sha1', 'hex');
+      default:
+        throw new Error('Password algorithm not supported')
+    }
   }
 }

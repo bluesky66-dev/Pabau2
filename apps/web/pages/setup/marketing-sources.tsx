@@ -19,17 +19,17 @@ const LIST_QUERY = gql`
     marketingSources(
       first: $offset
       last: $limit
-      orderBy: { source_name: desc }
+      orderBy: { name: desc }
       where: {
         company_id: { equals: $companyId }
-        public: { equals: $public }
-        OR: [{ AND: [{ source_name: { contains: $searchTerm } }] }]
+        isActive: { equals: $public }
+        OR: [{ AND: [{ name: { contains: $searchTerm } }] }]
       }
     ) {
       __typename
       id
-      source_name
-      public
+      name
+      isActive
     }
   }
 `
@@ -43,8 +43,8 @@ const LIST_AGGREGATE_QUERY = gql`
     marketingSourcesCount(
       where: {
         company_id: { equals: $companyId }
-        public: { equals: $public }
-        OR: [{ AND: [{ source_name: { contains: $searchTerm } }] }]
+        isActive: { equals: $public }
+        OR: [{ AND: [{ name: { contains: $searchTerm } }] }]
       }
     )
   }
@@ -110,7 +110,7 @@ export const Index: NextPage = () => {
 
   useEffect(() => {
     if (user) {
-      const lan = user.company.details.language
+      const lan = user.company?.details?.language
       const lanCode = lan ? languageMapper(lan) : 'en'
       i18n.changeLanguage(lanCode)
     }

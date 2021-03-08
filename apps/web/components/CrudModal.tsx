@@ -45,7 +45,9 @@ const CrudModal: FC<P> = ({
 
   const schemaForm = { ...schema, fields: { ...schema.fields } }
   const specialFormElement =
-    schemaForm.fields['is_active'] || schemaForm.fields['public']
+    schemaForm.fields['is_active'] ||
+    schemaForm.fields['public'] ||
+    schemaForm.fields['isActive']
   delete schemaForm.fields['is_active']
   const [specialBoolean, setSpecialBoolean] = useState<boolean>(
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -60,8 +62,7 @@ const CrudModal: FC<P> = ({
   useEffect(() => {
     setSpecialBoolean(
       (editingRow?.id && (editingRow?.is_active as boolean)) ??
-        ((typeof specialFormElement?.defaultvalue === 'boolean' ||
-          typeof specialFormElement?.defaultvalue === 'number') &&
+        (typeof specialFormElement?.defaultvalue === 'boolean' &&
           (Boolean(specialFormElement.defaultvalue) as boolean)) ??
         true
     )

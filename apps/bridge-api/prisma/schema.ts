@@ -1967,11 +1967,6 @@ export enum train_course_difficulty {
   Pro = 'Pro',
 }
 
-export enum train_course_dates_status {
-  is_false = 'is_false',
-  is_true = 'is_true',
-}
-
 export enum treatment_plans_status {
   OPEN = 'OPEN',
   COMPLETE = 'COMPLETE',

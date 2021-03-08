@@ -37,25 +37,26 @@ module.exports = {
     'react/prop-types': 0,
     'react/react-in-jsx-scope': 0,
     'react/destructuring-assignment': ['error', 'always'],
-    'graphql/template-strings': [
-      'error',
-      {
-        // Import default settings for your GraphQL client. Supported values:
-        // 'apollo', 'relay', 'lokka', 'fraql', 'literal'
-        env: 'apollo',
-
-        // Import your schema JSON here
-        schemaJson: require('../../graphql.schema.json'),
-
-        // OR provide absolute path to your schema JSON (but not if using `eslint --cache`!)
-        // schemaJsonFilepath: path.resolve(__dirname, './schema.json'),
-
-        // OR provide the schema in the Schema Language format
-        // schemaString: printSchema(schema),
-
-        // tagName is gql by default
-      },
-    ],
+    // TODO temp disabling graphql/template-strings until we resolve issues sync issues
+    // 'graphql/template-strings': [
+    //   'error',
+    //   {
+    //     // Import default settings for your GraphQL client. Supported values:
+    //     // 'apollo', 'relay', 'lokka', 'fraql', 'literal'
+    //     env: 'apollo',
+    //
+    //     // Import your schema JSON here
+    //     schemaJson: require('../../graphql.schema.json'),
+    //
+    //     // OR provide absolute path to your schema JSON (but not if using `eslint --cache`!)
+    //     // schemaJsonFilepath: path.resolve(__dirname, './schema.json'),
+    //
+    //     // OR provide the schema in the Schema Language format
+    //     // schemaString: printSchema(schema),
+    //
+    //     // tagName is gql by default
+    //   },
+    // ],
   },
   plugins: ['graphql'],
 }

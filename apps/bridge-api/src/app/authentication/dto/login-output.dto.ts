@@ -1,5 +1,14 @@
-export interface LoginOutputDto{
-  user_id: number;
-  company_id: number;
+export interface LoginOutputDto {
+  user: UserOutput;
+  company: CompanyOutput;
+}
 
+interface UserOutput {
+  user_id: number;
+  username: string;
+}
+
+interface CompanyOutput {
+  company_id: number;
+  language: string;
 }

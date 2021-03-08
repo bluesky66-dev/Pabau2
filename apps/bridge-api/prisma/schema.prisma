@@ -11595,7 +11595,7 @@ model User {
   salt                           String?
   created                        DateTime?
   last_login                     DateTime?
-  company_id                     Int                          @map("company")
+  company_id                     Int?                          @map("company")
   hash                           String
   email                          String
   admin                          Int
@@ -11682,7 +11682,7 @@ model User {
   can_move_blockout              Int                          @default(1)
   main_contact                   Boolean
   user_security_questions_answer UserSecurityQuestionsAnser[]
-  company                        Company                      @relation(fields: [company_id], references: [id])
+  company                        Company?                      @relation(fields: [company_id], references: [id])
 
 
   @@index([calendar_order], name: "calendar_order")
@@ -13533,10 +13533,10 @@ enum train_course_difficulty {
   Pro
 }
 
-enum train_course_dates_status {
-  is_false  @map("0")
-  is_true   @map("1")
-}
+//enum train_course_dates_status {
+//  is_false  @map("0")
+//  is_true   @map("1")
+//}
 
 enum treatment_plans_status {
   OPEN

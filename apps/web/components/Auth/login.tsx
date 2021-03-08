@@ -19,8 +19,11 @@ export interface LoginFormProps {
 interface LoginProps {
   handlePageShow: (page: string) => void
 }
-// eslint-disable-next-line
-const LOGIN_MUTATION = gql` mutation login($email: String!, $password: String!) { login(username: $email, password: $password) }`
+const LOGIN_MUTATION = gql`
+  mutation login($email: String!, $password: String!) {
+    login(username: $email, password: $password)
+  }
+`
 const LoginMain: FC<LoginProps> = ({ handlePageShow }) => {
   const [login] = useMutation(LOGIN_MUTATION)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -44,7 +47,6 @@ const LoginMain: FC<LoginProps> = ({ handlePageShow }) => {
     })
     return true
   }
-
   return (
     <div>
       <div className={styles.signInForm}>

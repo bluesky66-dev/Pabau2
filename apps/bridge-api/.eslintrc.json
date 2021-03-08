@@ -5,5 +5,7 @@
     "src/generated/**",
     "src/schema/graphql/**"
   ],
-  "rules": {}
+  "rules": {
+    "@typescript-eslint/no-namespace": [1, { "allowDeclarations": true }]
+  }
 }

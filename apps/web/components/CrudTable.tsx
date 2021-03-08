@@ -65,6 +65,10 @@ const CrudTable: FC<P> = ({
   const router = useRouter()
   const user = useContext(UserContext)
 
+  useEffect(() => {
+    console.log('Current context')
+    console.log(user)
+  }, [user])
   // eslint-disable-next-line graphql/template-strings
   const [editMutation] = useMutation(editQuery, {
     onCompleted(data) {
@@ -296,7 +300,7 @@ const CrudTable: FC<P> = ({
       case 'checkbox':
         return defaultVal || true
       case 'number':
-        return Number(defaultVal)
+        return Number(defaultVal) || 1
       default:
         return defaultVal || ''
     }

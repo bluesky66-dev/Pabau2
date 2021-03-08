@@ -29,7 +29,7 @@ require('react-phone-input-2/lib/style.css')
 const cache = new InMemoryCache()
 const GRAPHQL_ENDPOINT = 'wss://api.new.pabau.com/v1/graphql'
 const GRAPHQL_HTTP_ENDPOINT =
-  process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT ||
+  'http://host.docker.internal:8080/v1/graphql' ||
   'https://api.new.pabau.com/v1/graphql'
 
 const iconList = Object.keys(Icons)
