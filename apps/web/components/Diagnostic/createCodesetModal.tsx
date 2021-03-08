@@ -7,9 +7,9 @@ import styles from './common.module.less'
 import * as Yup from 'yup'
 
 const ADD_MUTATION = gql`
-  mutation insert_diagnostic_codeset_one($name: String!, $isActive: Boolean) {
+  mutation insert_diagnostic_codeset_one($name: String!, $is_active: Boolean) {
     insert_diagnostic_codeset_one(
-      object: { name: $name, is_active: $isActive }
+      object: { name: $name, is_active: $is_active }
     ) {
       id
     }
@@ -44,6 +44,7 @@ const CreateCodesetModal: FC<CreateCodesetProps> = ({ visible, onCancel }) => {
       name: Yup.string().required('Name is required'),
     }),
     onSubmit: async (values) => {
+      debugger
       await addMutation({
         variables: values,
         optimisticResponse: {},
