@@ -22,6 +22,7 @@ import { LeftOutlined } from '@ant-design/icons'
 import classNames from 'classnames'
 import Link from 'next/link'
 import { useTranslationI18 } from '../hooks/useTranslationI18'
+import * as Sentry from '@sentry/react'
 
 const { Title } = Typography
 
@@ -144,6 +145,7 @@ const CrudTable: FC<P> = ({
       )
     },
     onError(err) {
+      Sentry.captureException(new Error(schema.full + '\n ' + err))
       Notification(
         NotificationType.error,
         `Error! ${schema.messages.update.error}`
@@ -166,6 +168,7 @@ const CrudTable: FC<P> = ({
       )
     },
     onError(err) {
+      Sentry.captureException(new Error(schema.full + '\n ' + err))
       Notification(
         NotificationType.error,
         `Error! ${schema.messages.create.error}`

@@ -37,7 +37,7 @@ const DELETE_MUTATION = gql`
   }
 `
 const ADD_MUTATION = gql`
-  mutation insert_departments_one($name: String!, $is_active: Boolean) {
+  mutation insert_departments_one($name: Boolean, $is_active: string) {
     insert_departments_one(object: { name: $name, is_active: $is_active }) {
       __typename
       id
@@ -47,8 +47,8 @@ const ADD_MUTATION = gql`
 const EDIT_MUTATION = gql`
   mutation update_departments_by_pk(
     $id: uuid!
-    $name: String!
-    $is_active: Boolean
+    $name: Boolean
+    $is_active: String
     $order: Int
   ) {
     update_departments_by_pk(
