@@ -8,7 +8,6 @@ interface P extends TabsProps {
   tabPosition?: 'top' | 'left'
   menuItems: Array<string>
   minHeight?: string
-  onTabChanged?(): void
 }
 
 export const TabMenu: FC<P> = ({
@@ -16,19 +15,11 @@ export const TabMenu: FC<P> = ({
   children,
   menuItems,
   minHeight = '100vh',
-  onTabChanged,
   ...props
 }) => {
   return (
     <div className={styles.calendarSettings}>
-      <Tabs
-        {...props}
-        tabPosition={tabPosition}
-        style={{ minHeight }}
-        onChange={(e) => {
-          onTabChanged(e)
-        }}
-      >
+      <Tabs {...props} tabPosition={tabPosition} style={{ minHeight }}>
         {Array.isArray(children) &&
           children?.map((tab, i) => (
             <TabPane tab={menuItems[i]} key={i}>

@@ -10,7 +10,6 @@ import Code from '../../../components/Diagnostic/codes'
 import Library from '../../../components/Diagnostic/library'
 import CreateCodesetModal from '../../../components/Diagnostic/createCodesetModal'
 import CreateCodeModal from '../../../components/Diagnostic/createCodeModal'
-import { schema } from '../../../components/Diagnostic/codeset'
 const { Title } = Typography
 
 const Index: FC = () => {
@@ -94,9 +93,7 @@ const Index: FC = () => {
             tabPosition="top"
             menuItems={['Your Codesets', 'Codes', 'Library']}
             minHeight="592px"
-            onTabChanged={(e: string) => {
-              setActiveTab(e)
-            }}
+            onTabClick={(activeKey) => setActiveTab(activeKey)}
           >
             <CodeSet searchTerms={searchTerms} />
             <Code searchTerms={searchTerms} />
@@ -105,14 +102,12 @@ const Index: FC = () => {
         </div>
         {openCodesetModal && (
           <CreateCodesetModal
-            schema={schema}
             visible={openCodesetModal}
             onCancel={() => setOpenCodesetModal(false)}
           />
         )}
         {openCodeModal && (
           <CreateCodeModal
-            schema={schema}
             visible={openCodeModal}
             onCancel={() => setOpenCodeModal(false)}
           />

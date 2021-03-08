@@ -114,7 +114,13 @@ export const Table: FC<TableType> = ({
       </Button>
     )
   }
-
+  const renderLockIcon = (isLock) => {
+    return (
+      <div className={styles.lockIcon}>
+        {isLock ? <LockOutlined color="#B8B8C0" /> : null}{' '}
+      </div>
+    )
+  }
   const renderTableSource = (val, rowData) => {
     return (
       <div className={styles.alignItems}>
@@ -166,6 +172,8 @@ export const Table: FC<TableType> = ({
               col.dataIndex === 'integration')
           ) {
             col.render = renderActiveButton
+          } else if (col.dataIndex === 'is_lock') {
+            col.render = renderLockIcon
           } else if (!col.render) {
             col.render = renderTableSource
           }

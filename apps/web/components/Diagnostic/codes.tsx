@@ -1,9 +1,9 @@
 import { gql, useMutation } from '@apollo/client'
 
-import React, { FC, useEffect, useState } from 'react'
-import { Table, useLiveQuery } from '@pabau/ui'
+import React, { FC, useEffect, useRef, useState } from 'react'
+import { Pagination, Table, useLiveQuery } from '@pabau/ui'
 import styles from './common.module.less'
-import { LockOutlined, LoadingOutlined } from '@ant-design/icons'
+
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CodeProps {
   searchTerms: string
@@ -84,8 +84,25 @@ const schema: Schema = {
 }
 
 export const LIST_QUERY = gql`
-  query ListCode {
-    diagnostic_codes(order_by: { order: asc }) {
+  query diagnostic_codes($searchTerm: String = "", $offset: Int, $limit: Int) {
+    diagnostic_codes(
+      offset: $offset
+      limit: $limit
+      order_by: { order: desc }
+      where: {
+        layer1: { _ilike: $searchTerm }
+        _or: {
+          layer2: { _ilike: $searchTerm }
+          _or: {
+            layer3: { _ilike: $searchTerm }
+            _or: {
+              layer4: { _ilike: $searchTerm }
+              _or: { description: { _ilike: $searchTerm } }
+            }
+          }
+        }
+      }
+    ) {
       id
       code
       layer1
@@ -108,41 +125,77 @@ export const UPDATE_CODE_ORDER = gql`
   }
 `
 
+const LIST_AGGREGATE_QUERY = gql`
+  query diagnostic_codes_aggregate($searchTerm: String = "") {
+    diagnostic_codes_aggregate(
+      where: { description: { _ilike: $searchTerm } }
+    ) {
+      aggregate {
+        count
+      }
+    }
+  }
+`
 const Code: FC<CodeProps> = ({ searchTerms }) => {
+  const codesetRef = useRef(null)
+
+  const [sourceData, setSourceData] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [paginateData, setPaginateData] = useState({
+    total: 0,
+    offset: 0,
+    limit: 5,
+    currentPage: 1,
+    showingRecords: 0,
+  })
   const getQueryVariables = () => {
     const queryOptions = {
-      variables: {},
+      variables: {
+        searchTerm: '%' + searchTerms + '%',
+        offset: paginateData.offset,
+        limit: paginateData.limit,
+      },
+    }
+
+    return queryOptions
+  }
+
+  const getAggregateQueryVariables = () => {
+    const queryOptions = {
+      variables: {
+        searchTerm: '%' + searchTerms + '%',
+      },
     }
 
     return queryOptions
   }
 
   const { data, loading } = useLiveQuery(LIST_QUERY, getQueryVariables())
-
-  const [sourceData, setSourceData] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const { data: aggregateData } = useLiveQuery(
+    LIST_AGGREGATE_QUERY,
+    getAggregateQueryVariables()
+  )
 
   useEffect(() => {
-    if (data) {
-      setSourceData(data)
+    if (codesetRef.current) {
+      codesetRef.current.scrollIntoView({ behavior: 'smooth' })
     }
-    if (!loading && data) {
-      setIsLoading(false)
-    }
-    if (searchTerms) {
-      const searchData = sourceData.filter(
-        (data, i) =>
-          data.code.toLowerCase().includes(searchTerms) ||
-          data.layer1.toLowerCase().includes(searchTerms) ||
-          data.layer2.toLowerCase().includes(searchTerms) ||
-          data.layer3.toLowerCase().includes(searchTerms) ||
-          data.description.toLowerCase().includes(searchTerms)
-      )
-      setSourceData(searchData)
-    } else {
-      setSourceData(data)
-    }
-  }, [data, loading, searchTerms])
+  }, [paginateData.currentPage])
+
+  useEffect(() => {
+    if (data) setSourceData(data)
+
+    if (aggregateData)
+      setPaginateData({
+        ...paginateData,
+        total: aggregateData?.aggregate.count,
+        showingRecords: data?.length,
+      })
+
+    if (!loading && data) setIsLoading(false)
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, loading, searchTerms, aggregateData])
 
   const [updateOrderMutation] = useMutation(UPDATE_CODE_ORDER, {
     onError(err) {
@@ -160,7 +213,7 @@ const Code: FC<CodeProps> = ({ searchTerms }) => {
             const existing = proxy.readQuery({
               query: LIST_QUERY,
             })
-            if (existing.diagnostic_codes) {
+            if (existing?.diagnostic_codes) {
               const key = Object.keys(existing.diagnostic_codes)[0]
               proxy.writeQuery({
                 query: LIST_QUERY,
@@ -174,50 +227,73 @@ const Code: FC<CodeProps> = ({ searchTerms }) => {
       })
   }
 
+  const onPaginationChange = (currentPage) => {
+    const offset = paginateData.limit * (currentPage - 1)
+    setPaginateData({ ...paginateData, offset, currentPage: currentPage })
+  }
+
+  function onShowSizeChange(currentPage, pageSize) {
+    const offset = pageSize * (currentPage - 1)
+    setPaginateData({
+      ...paginateData,
+      limit: 20,
+      offset,
+      currentPage: currentPage,
+    })
+  }
+
   return (
-    <div className={styles.codesetTableBlock}>
-      {loading ? (
-        <LoadingOutlined className={styles.loader} spin />
-      ) : (
-        <div className={styles.codesTable}>
-          <Table
-            loading={isLoading}
-            // eslint-disable-next-line
-        dataSource={sourceData?.map((e: { id: any }) => ({
-              key: e.id,
-              ...e,
-            }))}
-            updateDataSource={({ newData, oldIndex, newIndex }) => {
-              newData = newData.map((data, i) => {
-                data.order = sourceData[i].order
-                return data
-              })
-              if (oldIndex > newIndex) {
-                for (let i = newIndex; i <= oldIndex; i++) {
-                  updateOrder(newData[i])
-                }
-              } else {
-                for (let i = oldIndex; i <= newIndex; i++) {
-                  updateOrder(newData[i])
-                }
+    <div ref={codesetRef} className={styles.codesetTableBlock}>
+      <div className={styles.codesTable}>
+        <Table
+          loading={isLoading}
+          // eslint-disable-next-line
+          dataSource={sourceData?.map((e: { id: any }) => ({
+            key: e.id,
+            ...e,
+          }))}
+          updateDataSource={({ newData, oldIndex, newIndex }) => {
+            newData = newData.map((data, i) => {
+              data.order = sourceData[i].order
+              return data
+            })
+            if (oldIndex > newIndex) {
+              for (let i = newIndex; i <= oldIndex; i++) {
+                updateOrder(newData[i])
               }
-              setSourceData(newData)
-            }}
-            padlocked={[]}
-            draggable={true}
-            columns={[
-              ...Object.entries(schema.fields).map(([k, v]) => ({
-                dataIndex: k,
-                width: v.cssWidth,
-                title: v.short || v.full,
-                visible: Object.prototype.hasOwnProperty.call(v, 'visible')
-                  ? v.visible
-                  : true,
-              })),
-            ]}
-          />
-        </div>
-      )}
+            } else {
+              for (let i = oldIndex; i <= newIndex; i++) {
+                updateOrder(newData[i])
+              }
+            }
+            setSourceData(newData)
+          }}
+          padlocked={[]}
+          draggable={true}
+          columns={[
+            ...Object.entries(schema.fields).map(([k, v]) => ({
+              dataIndex: k,
+              width: v.cssWidth,
+              title: v.short || v.full,
+              visible: Object.prototype.hasOwnProperty.call(v, 'visible')
+                ? v.visible
+                : true,
+            })),
+          ]}
+          searchTerm={searchTerms}
+          pagination={sourceData?.length > 10 ? {} : false}
+        />
+        <Pagination
+          total={paginateData.total}
+          defaultPageSize={50}
+          showSizeChanger={true}
+          onChange={onPaginationChange}
+          pageSize={paginateData.limit}
+          current={paginateData.currentPage}
+          showingRecords={paginateData.showingRecords}
+          onShowSizeChange={onShowSizeChange}
+        />
+      </div>
     </div>
   )
 }

@@ -44,7 +44,6 @@ const CreateCodesetModal: FC<CreateCodesetProps> = ({ visible, onCancel }) => {
       name: Yup.string().required('Name is required'),
     }),
     onSubmit: async (values) => {
-      debugger
       await addMutation({
         variables: values,
         optimisticResponse: {},

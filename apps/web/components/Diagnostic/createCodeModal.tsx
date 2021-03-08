@@ -1,9 +1,10 @@
+/* eslint-disable graphql/template-strings */
 import React, { FC } from 'react'
 import { gql, useMutation } from '@apollo/client'
 import { BasicModal, Button, NotificationType, Notification } from '@pabau/ui'
 import { useFormik } from 'formik'
 import { Form, Input, Checkbox, Typography } from 'antd'
-import { EyeOutlined, ArrowUpOutlined } from '@ant-design/icons'
+import { EyeOutlined, UpOutlined } from '@ant-design/icons'
 
 import styles from './common.module.less'
 import * as Yup from 'yup'
@@ -17,6 +18,9 @@ const ADD_MUTATION = gql`
     $layer3: String!
     $layer4: String!
     $is_active: Boolean
+    $icd9_code: String!
+    $icd10_code: String!
+    $osics10_code: String!
   ) {
     insert_diagnostic_codes_one(
       object: {
@@ -27,6 +31,9 @@ const ADD_MUTATION = gql`
         layer3: $layer3
         layer4: $layer4
         is_active: $is_active
+        ICD9_code: $icd9_code
+        ICD10_code: $icd10_code
+        OSICS10_code: $osics10_code
       }
     ) {
       id
@@ -199,10 +206,10 @@ const CreateCodesetModal: FC<CreateCodesetProps> = ({ visible, onCancel }) => {
             </Form.Item>
           </div>
           <div className={styles.advancedInfo}>
-          <ArrowUpOutlined className={styles.upIcon}/>
             <Typography className={styles.infoText}>
               Advanced Information
             </Typography>
+            <UpOutlined className={styles.upIcon} />
           </div>
 
           <div className={styles.advancedList}>

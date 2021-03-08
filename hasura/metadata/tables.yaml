@@ -1,5 +1,35 @@
 - table:
     schema: public
+    name: Discounts
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - amount
+      - discount_code
+      - discount_name
+      - is_active
+      - order
+      backend_only: false
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - amount
+      - discount_code
+      - discount_name
+      - is_active
+      - order
+      - updated_at
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
+- table:
+    schema: public
     name: Labs
   insert_permissions:
   - role: public
@@ -68,6 +98,42 @@
 - table:
     schema: public
     name: Lists_campaign
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - members
+      - name
+      - order
+      - type
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - created_at
+      - id
+      - members
+      - name
+      - order
+      - type
+      - updated_at
+      filter: {}
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - members
+      - name
+      - order
+      - type
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: Newsletter_campaign
@@ -80,6 +146,7 @@
       - last_modified
       - name
       - opened
+      - order
       - revenue
       - sent_date
       - sent_to
@@ -88,16 +155,17 @@
   - role: public
     permission:
       columns:
-      - last_modified
-      - sent_date
       - clicked
-      - opened
-      - revenue
-      - sent_to
-      - name
       - created_at
-      - updated_at
       - id
+      - last_modified
+      - name
+      - opened
+      - order
+      - revenue
+      - sent_date
+      - sent_to
+      - updated_at
       filter: {}
       allow_aggregations: true
   update_permissions:
@@ -108,6 +176,7 @@
       - last_modified
       - name
       - opened
+      - order
       - revenue
       - sent_date
       - sent_to
@@ -120,6 +189,45 @@
 - table:
     schema: public
     name: SMS_campaign
+  insert_permissions:
+  - role: public
+    permission:
+      check: {}
+      columns:
+      - last_modified
+      - name
+      - order
+      - sent_date
+      - sent_to
+      backend_only: false
+  select_permissions:
+  - role: public
+    permission:
+      columns:
+      - created_at
+      - id
+      - last_modified
+      - name
+      - order
+      - sent_date
+      - sent_to
+      - updated_at
+      filter: {}
+  update_permissions:
+  - role: public
+    permission:
+      columns:
+      - last_modified
+      - name
+      - order
+      - sent_date
+      - sent_to
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: public
+    permission:
+      filter: {}
 - table:
     schema: public
     name: appointment_status
@@ -769,7 +877,6 @@
       columns:
       - is_active
       - name
-      - order
       backend_only: false
   select_permissions:
   - role: public
@@ -807,9 +914,12 @@
       columns:
       - code
       - description
+      - is_active
       - layer1
       - layer2
       - layer3
+      - layer4
+      - order
       backend_only: false
   select_permissions:
   - role: public
@@ -819,20 +929,27 @@
       - created_at
       - description
       - id
+      - is_active
       - layer1
       - layer2
       - layer3
+      - layer4
+      - order
       - updated_at
       filter: {}
+      allow_aggregations: true
   update_permissions:
   - role: public
     permission:
       columns:
       - code
       - description
+      - is_active
       - layer1
       - layer2
       - layer3
+      - layer4
+      - order
       filter: {}
       check: null
   delete_permissions:
@@ -866,6 +983,7 @@
       - order
       - updated_at
       filter: {}
+      allow_aggregations: true
   update_permissions:
   - role: public
     permission:
