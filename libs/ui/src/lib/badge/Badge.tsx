@@ -37,7 +37,7 @@ type ModalType = 'Marketing' | 'Care' | 'Staff' | 'Intelligence'
 export interface PlusProps {
   label?: string
   disabled?: boolean
-  modalType: ModalType
+  modalType?: ModalType
 }
 
 const getColor = (type: ModalType) => {
