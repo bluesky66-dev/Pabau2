@@ -32361,7 +32361,6 @@ export interface NexusGenFieldTypes {
     statement_id: number; // Int!
   }
   Mutation: { // field return type
-    authenticatedUser: NexusGenRootTypes['User'] | null; // User
     createOneAcLog: NexusGenRootTypes['AcLog']; // AcLog!
     createOneAcLogAction: NexusGenRootTypes['AcLogAction']; // AcLogAction!
     createOneAcLogUrl: NexusGenRootTypes['AcLogUrl']; // AcLogUrl!
@@ -32547,6 +32546,7 @@ export interface NexusGenFieldTypes {
     deleteManyThirdPartyAccess: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
     deleteManyTimezone: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
     deleteManyTwoFactorHistory: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
+    deleteManyUser: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
     deleteManyUserSecurityQuestionsAnser: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
     deleteManycandidate: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
     deleteOneAcLog: NexusGenRootTypes['AcLog'] | null; // AcLog
@@ -32643,8 +32643,6 @@ export interface NexusGenFieldTypes {
     deleteOneUser: NexusGenRootTypes['User'] | null; // User
     deleteOneUserSecurityQuestionsAnser: NexusGenRootTypes['UserSecurityQuestionsAnser'] | null; // UserSecurityQuestionsAnser
     deleteOnecandidate: NexusGenRootTypes['candidate'] | null; // candidate
-    login: string | null; // String
-    logout: boolean | null; // Boolean
     updateManyAcLog: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
     updateManyAcLogAction: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
     updateManyAcLogUrl: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
@@ -32736,6 +32734,7 @@ export interface NexusGenFieldTypes {
     updateManyThirdPartyAccess: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
     updateManyTimezone: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
     updateManyTwoFactorHistory: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
+    updateManyUser: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
     updateManyUserSecurityQuestionsAnser: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
     updateManycandidate: NexusGenRootTypes['AffectedRowsOutput']; // AffectedRowsOutput!
     updateOneAcLog: NexusGenRootTypes['AcLog'] | null; // AcLog
@@ -32994,7 +32993,6 @@ export interface NexusGenFieldTypes {
     attachmentHelperLite: NexusGenRootTypes['AttachmentHelperLite'] | null; // AttachmentHelperLite
     attachmentHelperLites: NexusGenRootTypes['AttachmentHelperLite'][]; // [AttachmentHelperLite!]!
     attachmentHelperLitesCount: number | null; // Int
-    authenticatedUser: NexusGenRootTypes['User'] | null; // User
     automationAction: NexusGenRootTypes['AutomationAction'] | null; // AutomationAction
     automationActions: NexusGenRootTypes['AutomationAction'][]; // [AutomationAction!]!
     automationActionsCount: number | null; // Int
@@ -33277,7 +33275,6 @@ export interface NexusGenFieldTypes {
     marketingSourcesCount: number | null; // Int
     mediaLlibraryAttachments: NexusGenRootTypes['MediaLlibraryAttachments'][]; // [MediaLlibraryAttachments!]!
     mediaLlibraryAttachmentsCount: number | null; // Int
-    ping: string | null; // String
     secondAtAnswer: NexusGenRootTypes['SecondAtAnswer'] | null; // SecondAtAnswer
     secondAtAnswers: NexusGenRootTypes['SecondAtAnswer'][]; // [SecondAtAnswer!]!
     secondAtAnswersCount: number | null; // Int
@@ -41420,7 +41417,6 @@ export interface NexusGenFieldTypeNames {
     statement_id: 'Int'
   }
   Mutation: { // field return type name
-    authenticatedUser: 'User'
     createOneAcLog: 'AcLog'
     createOneAcLogAction: 'AcLogAction'
     createOneAcLogUrl: 'AcLogUrl'
@@ -41606,6 +41602,7 @@ export interface NexusGenFieldTypeNames {
     deleteManyThirdPartyAccess: 'AffectedRowsOutput'
     deleteManyTimezone: 'AffectedRowsOutput'
     deleteManyTwoFactorHistory: 'AffectedRowsOutput'
+    deleteManyUser: 'AffectedRowsOutput'
     deleteManyUserSecurityQuestionsAnser: 'AffectedRowsOutput'
     deleteManycandidate: 'AffectedRowsOutput'
     deleteOneAcLog: 'AcLog'
@@ -41702,8 +41699,6 @@ export interface NexusGenFieldTypeNames {
     deleteOneUser: 'User'
     deleteOneUserSecurityQuestionsAnser: 'UserSecurityQuestionsAnser'
     deleteOnecandidate: 'candidate'
-    login: 'String'
-    logout: 'Boolean'
     updateManyAcLog: 'AffectedRowsOutput'
     updateManyAcLogAction: 'AffectedRowsOutput'
     updateManyAcLogUrl: 'AffectedRowsOutput'
@@ -41795,6 +41790,7 @@ export interface NexusGenFieldTypeNames {
     updateManyThirdPartyAccess: 'AffectedRowsOutput'
     updateManyTimezone: 'AffectedRowsOutput'
     updateManyTwoFactorHistory: 'AffectedRowsOutput'
+    updateManyUser: 'AffectedRowsOutput'
     updateManyUserSecurityQuestionsAnser: 'AffectedRowsOutput'
     updateManycandidate: 'AffectedRowsOutput'
     updateOneAcLog: 'AcLog'
@@ -42053,7 +42049,6 @@ export interface NexusGenFieldTypeNames {
     attachmentHelperLite: 'AttachmentHelperLite'
     attachmentHelperLites: 'AttachmentHelperLite'
     attachmentHelperLitesCount: 'Int'
-    authenticatedUser: 'User'
     automationAction: 'AutomationAction'
     automationActions: 'AutomationAction'
     automationActionsCount: 'Int'
@@ -42336,7 +42331,6 @@ export interface NexusGenFieldTypeNames {
     marketingSourcesCount: 'Int'
     mediaLlibraryAttachments: 'MediaLlibraryAttachments'
     mediaLlibraryAttachmentsCount: 'Int'
-    ping: 'String'
     secondAtAnswer: 'SecondAtAnswer'
     secondAtAnswers: 'SecondAtAnswer'
     secondAtAnswersCount: 'Int'
@@ -43731,6 +43725,9 @@ export interface NexusGenArgTypes {
     deleteManyTwoFactorHistory: { // args
       where?: NexusGenInputs['TwoFactorHistoryWhereInput'] | null; // TwoFactorHistoryWhereInput
     }
+    deleteManyUser: { // args
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    }
     deleteManyUserSecurityQuestionsAnser: { // args
       where?: NexusGenInputs['UserSecurityQuestionsAnserWhereInput'] | null; // UserSecurityQuestionsAnserWhereInput
     }
@@ -44018,13 +44015,6 @@ export interface NexusGenArgTypes {
     }
     deleteOnecandidate: { // args
       where: NexusGenInputs['candidateWhereUniqueInput']; // candidateWhereUniqueInput!
-    }
-    login: { // args
-      password: string; // String!
-      username: string; // String!
-    }
-    logout: { // args
-      userId: number; // Int!
     }
     updateManyAcLog: { // args
       data: NexusGenInputs['AcLogUpdateManyMutationInput']; // AcLogUpdateManyMutationInput!
@@ -44389,6 +44379,10 @@ export interface NexusGenArgTypes {
     updateManyTwoFactorHistory: { // args
       data: NexusGenInputs['TwoFactorHistoryUpdateManyMutationInput']; // TwoFactorHistoryUpdateManyMutationInput!
       where?: NexusGenInputs['TwoFactorHistoryWhereInput'] | null; // TwoFactorHistoryWhereInput
+    }
+    updateManyUser: { // args
+      data: NexusGenInputs['UserUpdateManyMutationInput']; // UserUpdateManyMutationInput!
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     }
     updateManyUserSecurityQuestionsAnser: { // args
       data: NexusGenInputs['UserSecurityQuestionsAnserUpdateManyMutationInput']; // UserSecurityQuestionsAnserUpdateManyMutationInput!

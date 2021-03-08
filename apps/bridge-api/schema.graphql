@@ -24166,7 +24166,6 @@ input MediaLlibraryAttachmentsWhereUniqueInput {
 }
 
 type Mutation {
-  authenticatedUser: User
   createOneAcLog(data: AcLogCreateInput!): AcLog!
   createOneAcLogAction(data: AcLogActionCreateInput!): AcLogAction!
   createOneAcLogUrl(data: AcLogUrlCreateInput!): AcLogUrl!
@@ -24352,6 +24351,7 @@ type Mutation {
   deleteManyThirdPartyAccess(where: ThirdPartyAccessWhereInput): AffectedRowsOutput!
   deleteManyTimezone(where: TimezoneWhereInput): AffectedRowsOutput!
   deleteManyTwoFactorHistory(where: TwoFactorHistoryWhereInput): AffectedRowsOutput!
+  deleteManyUser(where: UserWhereInput): AffectedRowsOutput!
   deleteManyUserSecurityQuestionsAnser(where: UserSecurityQuestionsAnserWhereInput): AffectedRowsOutput!
   deleteManycandidate(where: candidateWhereInput): AffectedRowsOutput!
   deleteOneAcLog(where: AcLogWhereUniqueInput!): AcLog
@@ -24448,8 +24448,6 @@ type Mutation {
   deleteOneUser(where: UserWhereUniqueInput!): User
   deleteOneUserSecurityQuestionsAnser(where: UserSecurityQuestionsAnserWhereUniqueInput!): UserSecurityQuestionsAnser
   deleteOnecandidate(where: candidateWhereUniqueInput!): candidate
-  login(password: String!, username: String!): String
-  logout(userId: Int!): Boolean
   updateManyAcLog(data: AcLogUpdateManyMutationInput!, where: AcLogWhereInput): AffectedRowsOutput!
   updateManyAcLogAction(data: AcLogActionUpdateManyMutationInput!, where: AcLogActionWhereInput): AffectedRowsOutput!
   updateManyAcLogUrl(data: AcLogUrlUpdateManyMutationInput!, where: AcLogUrlWhereInput): AffectedRowsOutput!
@@ -24541,6 +24539,7 @@ type Mutation {
   updateManyThirdPartyAccess(data: ThirdPartyAccessUpdateManyMutationInput!, where: ThirdPartyAccessWhereInput): AffectedRowsOutput!
   updateManyTimezone(data: TimezoneUpdateManyMutationInput!, where: TimezoneWhereInput): AffectedRowsOutput!
   updateManyTwoFactorHistory(data: TwoFactorHistoryUpdateManyMutationInput!, where: TwoFactorHistoryWhereInput): AffectedRowsOutput!
+  updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): AffectedRowsOutput!
   updateManyUserSecurityQuestionsAnser(data: UserSecurityQuestionsAnserUpdateManyMutationInput!, where: UserSecurityQuestionsAnserWhereInput): AffectedRowsOutput!
   updateManycandidate(data: candidateUpdateManyMutationInput!, where: candidateWhereInput): AffectedRowsOutput!
   updateOneAcLog(data: AcLogUpdateInput!, where: AcLogWhereUniqueInput!): AcLog
@@ -25035,7 +25034,6 @@ type Query {
   attachmentHelperLite(where: AttachmentHelperLiteWhereUniqueInput!): AttachmentHelperLite
   attachmentHelperLites(after: AttachmentHelperLiteWhereUniqueInput, before: AttachmentHelperLiteWhereUniqueInput, first: Int, last: Int, orderBy: [AttachmentHelperLiteOrderByInput!], where: AttachmentHelperLiteWhereInput): [AttachmentHelperLite!]!
   attachmentHelperLitesCount(where: AttachmentHelperLiteWhereInput): Int
-  authenticatedUser: User
   automationAction(where: AutomationActionWhereUniqueInput!): AutomationAction
   automationActions(after: AutomationActionWhereUniqueInput, before: AutomationActionWhereUniqueInput, first: Int, last: Int, orderBy: [AutomationActionOrderByInput!], where: AutomationActionWhereInput): [AutomationAction!]!
   automationActionsCount(where: AutomationActionWhereInput): Int
@@ -25318,7 +25316,6 @@ type Query {
   marketingSourcesCount(where: MarketingSourceWhereInput): Int
   mediaLlibraryAttachments(after: MediaLlibraryAttachmentsWhereUniqueInput, before: MediaLlibraryAttachmentsWhereUniqueInput, first: Int, last: Int, orderBy: [MediaLlibraryAttachmentsOrderByInput!], where: MediaLlibraryAttachmentsWhereInput): [MediaLlibraryAttachments!]!
   mediaLlibraryAttachmentsCount(where: MediaLlibraryAttachmentsWhereInput): Int
-  ping: String
   secondAtAnswer(where: SecondAtAnswerWhereUniqueInput!): SecondAtAnswer
   secondAtAnswers(after: SecondAtAnswerWhereUniqueInput, before: SecondAtAnswerWhereUniqueInput, first: Int, last: Int, orderBy: [SecondAtAnswerOrderByInput!], where: SecondAtAnswerWhereInput): [SecondAtAnswer!]!
   secondAtAnswersCount(where: SecondAtAnswerWhereInput): Int
