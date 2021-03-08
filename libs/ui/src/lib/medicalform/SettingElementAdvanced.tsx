@@ -1,18 +1,25 @@
 import { Button, ButtonTypes } from '@pabau/ui'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import SettingDefaultField from './SettingDefaultField'
 import SettingLinkedField from './SettingLinkedField'
 
 interface P {
+  changedForm: boolean
   defaultFieldValue: string
   onChangeDefaults: (value: string) => void
 }
 
 const SettingElementAdvanced: FC<P> = ({
+  changedForm,
   defaultFieldValue,
   onChangeDefaults,
 }) => {
   const [advanced, setAdvanced] = useState(false)
+
+  useEffect(() => {
+    setAdvanced(false)
+  }, [changedForm])
+
   return (
     <>
       {advanced && (

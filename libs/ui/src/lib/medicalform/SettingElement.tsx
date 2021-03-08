@@ -55,6 +55,7 @@ const SettingElement: FC<P> = ({
 }) => {
   const [form, setForm] = useState(JSON.parse(JSON.stringify(selectedForm)))
   const [addedItems, setAddedItems] = useState(0)
+  const [changedForm, setChangedForm] = useState(false)
   const [errMsg, setErrMsg] = useState('')
   const componentInfos = [
     {
@@ -295,6 +296,7 @@ const SettingElement: FC<P> = ({
   useEffect(() => {
     setForm(JSON.parse(JSON.stringify(selectedForm)))
     setAddedItems(selectedForm.arrItems.length)
+    setChangedForm(!changedForm)
   }, [selectedForm])
 
   const eventhandler = (addedItems) => {
@@ -466,6 +468,7 @@ const SettingElement: FC<P> = ({
               filteredComponent[0].component === 'basic_multiplechoice' ||
               filteredComponent[0].component === 'basic_dropdown') && (
               <SettingElementAdvanced
+                changedForm={changedForm}
                 defaultFieldValue={form.txtDefaults}
                 onChangeDefaults={onChangeDefaults}
               />
