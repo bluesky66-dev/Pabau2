@@ -25,6 +25,7 @@ export interface MedicalFormPreviewProps {
   step: number
   stepData: StepperItem[]
   visiblePreviewButton: boolean
+  closePreviewDialog?: () => void
 }
 
 export const MedicalFormPreview: FC<MedicalFormPreviewProps> = ({
@@ -34,12 +35,17 @@ export const MedicalFormPreview: FC<MedicalFormPreviewProps> = ({
   step,
   stepData,
   visiblePreviewButton,
+  closePreviewDialog,
 }) => {
   const [visible, setVisible] = useState(!visiblePreviewButton)
 
   useEffect(() => {
     setVisible(!visiblePreviewButton)
   }, [visiblePreviewButton])
+
+  const onCancel = () => {
+    closePreviewDialog ? closePreviewDialog() : setVisible(false)
+  }
 
   return (
     <>
@@ -55,7 +61,7 @@ export const MedicalFormPreview: FC<MedicalFormPreviewProps> = ({
           visible={visible}
           newButtonText="Test As Client"
           width="50%"
-          onCancel={() => setVisible(false)}
+          onCancel={onCancel}
         >
           <div className={styles.tempPreviewTabMenuContainer}>
             <TabMenu tabPosition="top" menuItems={['Desktop', 'App']}>

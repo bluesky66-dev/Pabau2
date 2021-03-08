@@ -12,23 +12,30 @@ const { TabPane } = Tabs
 
 const MedicalFormBuilder: FC<PreviewData> = ({ previewData }) => {
   const [formName, setFormName] = useState('IPL Treatment Record (Clone)')
-  const [refreshPreview, setRefreshPreview] = useState(true)
+  const [refreshPreview, setRefreshPreview] = useState(false)
+  const [activatePanel, setActivatePanel] = useState('1')
   const changeFormName = (formName) => {
     setFormName(formName)
   }
+
   const changeTab = (key) => {
+    setRefreshPreview(false)
     if (key === '2') {
       setRefreshPreview(true)
-    } else {
-      setRefreshPreview(false)
     }
+    setActivatePanel('1')
   }
+
+  const closePreviewDialog = () => {
+    setRefreshPreview(false)
+  }
+
   return (
     <>
       <MedicalFormInfo formName={formName} />
       <MedicalFormSetting />
       <Tabs
-        defaultActiveKey="1"
+        activeKey={activatePanel}
         centered
         className={styles.medicalFormMainTab}
         onChange={changeTab}
@@ -48,6 +55,12 @@ const MedicalFormBuilder: FC<PreviewData> = ({ previewData }) => {
             changeFormName={changeFormName}
             formName={'IPL Treatment Record (Clone)'}
           />
+          {refreshPreview === true && (
+            <MedicalFormPreview
+              refreshPreview={refreshPreview}
+              closePreviewDialog={closePreviewDialog}
+            />
+          )}
         </TabPane>
         <TabPane
           tab={
@@ -58,7 +71,7 @@ const MedicalFormBuilder: FC<PreviewData> = ({ previewData }) => {
           }
           key="2"
         >
-          <MedicalFormPreview refreshPreview={refreshPreview} />
+          {/* <MedicalFormPreview refreshPreview={refreshPreview} /> */}
         </TabPane>
       </Tabs>
     </>

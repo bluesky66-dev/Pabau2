@@ -4,8 +4,9 @@ import styles from './MedicalFormBuilder.module.less'
 
 interface P {
   refreshPreview: boolean
+  closePreviewDialog: () => void
 }
-const MedicalFormPreview: FC<P> = ({ refreshPreview }) => {
+const MedicalFormPreview: FC<P> = ({ refreshPreview, closePreviewDialog }) => {
   return (
     <div className={styles.medicalFormEditPanel}>
       <MedicalFormPreviewPanel
@@ -20,6 +21,7 @@ const MedicalFormPreview: FC<P> = ({ refreshPreview }) => {
           src: '',
           tags: ['Botox'],
         }}
+        closePreviewDialog={closePreviewDialog}
       />
     </div>
   )
