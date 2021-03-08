@@ -405,7 +405,7 @@ export const Standard: FC<P> = ({
               )}
               <div className={styles.clientLang}>
                 <div className={styles.papauPlusContainer}>
-                  <PabauPlus label="Plus" />
+                  <PabauPlus label="Plus" modalType="Care" />
                 </div>
               </div>
 
@@ -463,7 +463,7 @@ export const Standard: FC<P> = ({
 
               <div className={styles.clientLang}>
                 <div className={styles.papauPlusContainer}>
-                  <PabauPlus label="Plus" />
+                  <PabauPlus label="Plus" modalType="Marketing" />
                 </div>
               </div>
 

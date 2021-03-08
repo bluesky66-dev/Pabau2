@@ -13,7 +13,7 @@
 
 .createServiceSection {
   background-color: white;
-  max-width: 502px;
+  max-width: 596px;
   width: 100%;
   padding: 27px 32px 32px;
   border-radius: 4px;
@@ -119,6 +119,9 @@
   width: 100%;
   height: 236px;
   background-color: #f7f7f9;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -126,7 +129,7 @@
 }
 
 .advancedSettings {
-  max-width: 502px;
+  max-width: 596px;
   width: 100%;
   :global {
     .ant-collapse {
@@ -472,4 +475,177 @@
   &:last-child {
     margin: 0;
   }
+}
+
+.teamMemberPricing {
+  box-sizing: border-box;
+  width: 100%;
+  height: 80px;
+  border-top: 1px solid var(--border-color-base);
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-column-gap: 28px;
+  > div {
+    &:nth-child(1) {
+      display: flex;
+      align-items: center;
+      > span {
+        font-family: var(--font-family);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 22px;
+        color: var(--grey-text-color);
+        margin-left: 12px;
+      }
+    }
+    &:nth-child(2) {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      grid-column-gap: 1rem;
+      > div {
+        display: flex;
+        align-items: center;
+      }
+      :global {
+        .ant-select {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.teamMemberPricingHeader {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-column-gap: 28px;
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--light-grey-color);
+  padding: 6px 0;
+  > div {
+    &:nth-child(2) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}
+
+.locationPricingHeader, .contractPricingHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  color: var(--light-grey-color);
+  padding: 6px 0;
+}
+
+.locationPricingItem {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  grid-column-gap: 1rem;
+  height: 80px;
+  width: 100%;
+  border-top: 1px solid var(--border-color-base);
+  > div {
+    &:nth-child(1) {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      grid-column-gap: 12px;
+      align-content: center;
+      >div {
+        &:nth-child(1) {
+          width: 100%;
+          height: 40px;
+          background-color: #f7f7f9;
+          border-radius: 4px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-position: center;
+          background-size: cover;
+          background-repeat: no-repeat;
+        }
+        &:nth-child(2) {
+          display: flex;
+          flex-direction: column;
+          align-content: center;
+          > span {
+            font-family: var(--font-family);
+            font-weight: 400;
+            &:nth-child(1) {
+              color: var(--grey-text-color);
+              font-size: 14px;
+              line-height: 22px;
+            }
+            &:nth-child(2) {
+              color: var(--light-grey-color);
+              font-size: 12px;
+              line-height: 16px;
+            }
+          }
+        }
+      }
+    }
+    &:nth-child(2) {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.contractPricingItem {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  grid-column-gap: 1rem;
+  height: 80px;
+  width: 100%;
+  border-top: 1px solid var(--border-color-base);
+  > div {
+    &:nth-child(1) {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      grid-column-gap: 12px;
+      align-content: center;
+      >div {
+        &:nth-child(1) {
+          width: 100%;
+          height: 40px;
+          border-radius: 4px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        &:nth-child(2) {
+          display: flex;
+          flex-direction: column;
+          align-content: center;
+          > span {
+            font-family: var(--font-family);
+            font-weight: 400;
+            &:nth-child(1) {
+              color: var(--grey-text-color);
+              font-size: 14px;
+              line-height: 22px;
+            }
+            &:nth-child(2) {
+              color: var(--light-grey-color);
+              font-size: 12px;
+              line-height: 16px;
+            }
+          }
+        }
+      }
+    }
+    &:nth-child(2) {
+      display: flex;
+      align-items: center;
+    }
+  } 
 }
