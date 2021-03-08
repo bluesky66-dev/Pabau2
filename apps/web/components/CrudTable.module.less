@@ -104,6 +104,23 @@
   background-color: #fff;
 }
 
+.advance-collapsible {
+  :global {
+    .ant-collapse-header {
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+      min-width: 114px;
+      display: inline-block;
+      color: #3d3d46;
+      font-size: 16px;
+      font-family: 'Circular-Std-Bold';
+    }
+    .ant-collapse-content-box {
+      padding: 0;
+    }
+  }
+}
+
 @media (min-width: 768px) and (max-width: 1024px) {
   .table-main-heading {
     display: block;
@@ -167,3 +184,13 @@
     align-items: center;
   }
 }
+
+// .table-custom {
+//   :global .ant-table-tbody {
+//     tr {
+//       td {
+//         word-break: break-all;
+//       }
+//     }
+//   }
+// }
