@@ -16,6 +16,7 @@ import {
   FullScreenReportModal,
   OperationType,
   ImageSelectorModal,
+  PabauPlus,
 } from '@pabau/ui'
 import {
   Collapse,
@@ -334,21 +335,8 @@ export const CreateService: FC<CreateServiceProps> = ({
             style={{ display: 'flex', alignItems: 'center' }}
           >
             Client pathway{' '}
-            <span
-              style={{
-                display: 'inline-block',
-                padding: '3px 12px',
-                fontFamily: 'var(--font-family)',
-                fontSize: '12px',
-                lineHeight: '14px',
-                fontWeight: 400,
-                color: 'var(--primary-color)',
-                backgroundColor: '#eef7fb',
-                borderRadius: '6px',
-                marginLeft: '8px',
-              }}
-            >
-              Plus
+            <span style={{ marginLeft: '8px' }}>
+              <PabauPlus label="Plus" />
             </span>
           </div>,
         ]}
@@ -704,72 +692,6 @@ export const CreateService: FC<CreateServiceProps> = ({
                     className={styles.createServiceSectionTitle}
                     style={{ margin: 0 }}
                   >
-                    Deposits & Online Payments
-                  </h2>
-                  <h3
-                    className={styles.createServiceSectionSubTitle}
-                    style={{ marginBottom: '1rem' }}
-                  >
-                    Setup payments processing with Stripe in order to bill
-                    online for services
-                  </h3>
-                  <div className={styles.createServiceSectionItem}>
-                    <div className={styles.paymentProcessing}>
-                      {paymentProcessing.map((option) => (
-                        <div
-                          key={option.type}
-                          className={
-                            option.selected
-                              ? styles.paymentProcessingOptionSelected
-                              : ''
-                          }
-                          onClick={() =>
-                            handleSelectPaymentProcessingOption(option)
-                          }
-                        >
-                          <div className={styles.paymentProcessingOptionLogos}>
-                            {option.type === 'Amount' && <Money />}
-                            {option.type === 'Percent' && (
-                              <PercentageOutlined />
-                            )}
-                          </div>
-                          <div className={styles.paymentProcessingOptionTitle}>
-                            {option.type}
-                          </div>
-                          <div className={styles.paymentProcessingChecked}>
-                            <CheckCircleFilled />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className={styles.createServiceSectionItem}>
-                    <Form form={form} layout="vertical">
-                      <Form.Item label="Amount">
-                        <div className={styles.currencyInput}>
-                          <NumberFormat
-                            className="ant-input"
-                            prefix={paymentUnit}
-                            defaultValue={0}
-                          />
-                        </div>
-                      </Form.Item>
-                    </Form>
-                  </div>
-                  <div
-                    className={styles.createServiceSectionItem}
-                    style={{ margin: 0 }}
-                  >
-                    <Checkbox defaultChecked={false}>
-                      Require payment before completing booking
-                    </Checkbox>
-                  </div>
-                </div>
-                <div className={styles.createServiceSection}>
-                  <h2
-                    className={styles.createServiceSectionTitle}
-                    style={{ margin: 0 }}
-                  >
                     Employees
                   </h2>
                   <h3
@@ -906,6 +828,68 @@ export const CreateService: FC<CreateServiceProps> = ({
                 </div>
               </Panel>
             </Collapse>
+          </div>
+          <div className={styles.createServiceSection}>
+            <h2
+              className={styles.createServiceSectionTitle}
+              style={{ margin: 0 }}
+            >
+              Deposits & Online Payments
+            </h2>
+            <h3
+              className={styles.createServiceSectionSubTitle}
+              style={{ marginBottom: '1rem' }}
+            >
+              Setup payments processing with Stripe in order to bill online for
+              services
+            </h3>
+            <div className={styles.createServiceSectionItem}>
+              <div className={styles.paymentProcessing}>
+                {paymentProcessing.map((option) => (
+                  <div
+                    key={option.type}
+                    className={
+                      option.selected
+                        ? styles.paymentProcessingOptionSelected
+                        : ''
+                    }
+                    onClick={() => handleSelectPaymentProcessingOption(option)}
+                  >
+                    <div className={styles.paymentProcessingOptionLogos}>
+                      {option.type === 'Amount' && <Money />}
+                      {option.type === 'Percent' && <PercentageOutlined />}
+                    </div>
+                    <div className={styles.paymentProcessingOptionTitle}>
+                      {option.type}
+                    </div>
+                    <div className={styles.paymentProcessingChecked}>
+                      <CheckCircleFilled />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className={styles.createServiceSectionItem}>
+              <Form form={form} layout="vertical">
+                <Form.Item label="Amount">
+                  <div className={styles.currencyInput}>
+                    <NumberFormat
+                      className="ant-input"
+                      prefix={paymentUnit}
+                      defaultValue={0}
+                    />
+                  </div>
+                </Form.Item>
+              </Form>
+            </div>
+            <div
+              className={styles.createServiceSectionItem}
+              style={{ margin: 0 }}
+            >
+              <Checkbox defaultChecked={false}>
+                Require payment before completing booking
+              </Checkbox>
+            </div>
           </div>
         </div>
         <TabMenu
