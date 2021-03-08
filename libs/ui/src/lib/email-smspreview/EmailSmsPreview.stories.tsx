@@ -17,6 +17,7 @@ import EmailSmsPreview, {
   ReferralProps,
   InvoicesProps,
   UpComingAppoinmentReminderProps,
+  PackageSessionProps,
 } from './EmailSmsPreview'
 import NoShowAppointmentComponent from './NoShowAppointment'
 import BookedOnClass from './BookedOntoClass'
@@ -35,6 +36,7 @@ import ClassesSpotAvailable from './ClassesSpotAvailable'
 import RequestFeedBacks from './RequestFeedBack'
 import NewAppoinmentsIsBooked from './NewAppointmentIsBooked'
 import UpComingAppointmentReminder from './UpComingAppoinmentReminder'
+import PackageSessionComponent from './PackageSession'
 
 export default {
   component: EmailSmsPreview,
@@ -837,5 +839,36 @@ UpComingAppointmentReminders.args = {
   smsGreeting: 'Hi Sophia!',
   smsMessage:
     'This is a friendly reminder that we have you scheduled for Botox 1 area on Monday, 16 November at 11:00.',
+  smsFooterText: 'See you soon!',
+}
+
+const PackageSessionStory = ({
+  greeting,
+  message,
+  footerIconGroup,
+  smsGreeting,
+  smsMessage,
+  smsFooterText,
+}: PropsWithChildren<EmailSMSPreviewProps & PackageSessionProps>) => (
+  <EmailSmsPreview
+    greeting={greeting}
+    footerIconGroup={footerIconGroup}
+    smsGreeting={smsGreeting}
+    smsMessage={smsMessage}
+    smsFooterText={smsFooterText}
+  >
+    <PackageSessionComponent message={message} />
+  </EmailSmsPreview>
+)
+
+export const PackageSession = PackageSessionStory.bind({})
+PackageSession.args = {
+  greeting: 'Hi Anna,',
+  message:
+    'You have just reached your final session for PACKAGE. To purchase another package, you can do so by clicking the below link.',
+  footerIconGroup: true,
+  smsGreeting: 'Hi Sophia!',
+  smsMessage:
+    'You have just reached your final session for PACKAGE. To purchase another package, you can do so by clicking the below link',
   smsFooterText: 'See you soon!',
 }

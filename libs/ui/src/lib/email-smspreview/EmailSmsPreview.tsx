@@ -118,6 +118,10 @@ export interface MedicalFormProps {
   text?: string
 }
 
+export interface PackageSessionProps {
+  message?: string
+}
+
 export interface NewAppoinmentsIsBookedProps {
   message?: string
   contactNumber?: number

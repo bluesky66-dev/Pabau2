@@ -6,6 +6,7 @@ import NewAppointmentPreview from '../ClientNotificationPreview/NewAppointmentPr
 import RescheduleAppointmentPreview from '../ClientNotificationPreview/RescheduleAppointmentPreview'
 import BookedOntoClassPreview from '../ClientNotificationPreview/BookedOntoClassPreview'
 import WaitListPreview from '../ClientNotificationPreview/WaitListPreview'
+import PackageSessionPreview from '../ClientNotificationPreview/PackageSessionPreview'
 
 interface P {
   onSeletedTab: (number) => void
@@ -243,6 +244,14 @@ const Index: FC<P> = forwardRef(
               buttonColor={buttonColor}
               informationMessage={informationMessage}
               type={type}
+            />
+          ) : type === 'package-session-used' ? (
+            <PackageSessionPreview
+              standardTapIndex={standardTapIndex}
+              backGroundColor={backGroundColor}
+              activeSocialIcons={activeSocialIcons}
+              selectLanguage={selectLanguage}
+              buttonColor={buttonColor}
             />
           ) : (
             <Appointment

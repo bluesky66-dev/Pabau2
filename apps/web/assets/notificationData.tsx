@@ -205,7 +205,7 @@ const notificationData = {
         'he default email template you will send when a client has used all their package sessions',
       icon: <ScheduleOutlined />,
       smartDelivery: false,
-      link: null,
+      link: '/client-notifications/package-session-used',
       disabled: true,
     },
     {
