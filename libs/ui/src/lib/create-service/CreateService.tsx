@@ -336,7 +336,7 @@ export const CreateService: FC<CreateServiceProps> = ({
           >
             Client pathway{' '}
             <span style={{ marginLeft: '8px' }}>
-              <PabauPlus label="Plus" />
+              <PabauPlus label="Plus" modalType="Marketing" />
             </span>
           </div>,
         ]}
