@@ -1,8 +1,13 @@
 import React, { FC } from 'react'
 import { Form as AntForm, Input, Radio, Checkbox } from 'formik-antd'
 // import { Radio } from 'antd'
+import { Collapse } from 'antd'
+import styles from './CrudTable.module.less'
 import { ColorPicker, FontIcon, HelpTooltip } from '@pabau/ui'
 import { FormikContextType } from 'formik'
+
+const { Panel } = Collapse
+
 interface P {
   schema: Schema
   /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -30,6 +35,7 @@ const Form: FC<P> = ({ schema, formik, layout = 'vertical' }) => {
               type,
               radio,
               full,
+              collapsible,
               required,
             },
           ],
@@ -91,7 +97,30 @@ const Form: FC<P> = ({ schema, formik, layout = 'vertical' }) => {
                 )}
               </AntForm.Item>
             )}
-            {(type === 'string' || type === 'number') && (
+
+            {collapsible && (
+              <Collapse
+                className={styles.advanceCollapsible}
+                defaultActiveKey={'0'}
+                ghost
+                expandIconPosition="right"
+              >
+                <Panel header={extra} key="1">
+                  {(type === 'string' || type === 'number') && (
+                    <AntForm.Item label={short} name={name}>
+                      <Input
+                        name={name}
+                        type={type}
+                        placeholder={example && `eg ${example}`}
+                        autoFocus={i === 0}
+                      />
+                    </AntForm.Item>
+                  )}
+                </Panel>
+              </Collapse>
+            )}
+
+            {(type === 'string' || type === 'number') && !collapsible && (
               <AntForm.Item
                 key={name}
                 label={short}

@@ -1,4 +1,5 @@
 import React from 'react'
+import { FileTextFilled } from '@ant-design/icons'
 import FullScreenReportModal, {
   FullScreenReportModalProps,
   OperationType,
@@ -109,4 +110,24 @@ Newsletter.args = {
   title: 'FTT Skin Clinics update',
   visible: false,
   operations: [],
+}
+
+export const CreateSMSTemplate = FullScreenModalStory.bind({})
+CreateSMSTemplate.args = {
+  title: (
+    <>
+      <FileTextFilled
+        style={{
+          fontSize: '22px',
+          color: 'var(--primary-color)',
+          marginRight: '12px',
+        }}
+      />{' '}
+      Create SMS Template
+    </>
+  ),
+  visible: false,
+  operations: [OperationType.create],
+  createBtnText: 'Save',
+  enableCreateBtn: true,
 }
