@@ -11,6 +11,7 @@ export interface MedicalFormTypes {
   txtQuestion: string
   txtBlock: string
   txtInputType: string
+  txtDefaults: string
   arrItems: OptionType[]
   required: boolean
 }
@@ -30,6 +31,14 @@ export interface SelectedForms {
   labForm: boolean
 }
 
+export interface ArrayItem {
+  value: string
+  baseline: boolean
+  critical: boolean
+  desc?: string
+  trigger?: number
+}
+
 export const defaultSelectedFormInfos: SelectedForms = {
   medicalHistory: false,
   consent: false,
@@ -37,4 +46,20 @@ export const defaultSelectedFormInfos: SelectedForms = {
   epaper: false,
   presciption: false,
   labForm: false,
+}
+
+export const defaultFormValue: MedicalFormTypes = {
+  id: '',
+  formType: '',
+  formName: '',
+  txtQuestion: '',
+  txtBlock: '',
+  txtInputType: '',
+  txtDefaults: '',
+  arrItems: [],
+  required: false,
+}
+
+export interface PreviewData {
+  previewData: string
 }

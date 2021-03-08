@@ -101,7 +101,25 @@
     "news.learn": {
         "translation": "Learn more"
     },
-    "marketingsource-input-search": {
+    "marketingsource-input-search-placeholder": {
         "translation": "Search"
+    },
+    "marketingsource-button-filter": {
+        "translation": "Filter"
+    },
+    "marketingsource-tableColumn-active": {
+        "translation": "Active"
+    },
+    "marketingsource-tableRow-active-btn": {
+        "translation": "Active"
+    },
+    "marketingsource-tableRow-inActive-btn": {
+        "translation": "Inactive"
+    },
+    "marketingsource-header-create-btn": {
+        "translation": "Create Source"
+    },
+    "marketingsource-header-breadcrumb-setup-link": {
+        "translation": "Setup"
     }
 }
