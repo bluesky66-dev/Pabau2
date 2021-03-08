@@ -6,7 +6,6 @@ import CrudLayout from '../../components/CrudLayout/CrudLayout'
 const LIST_QUERY = gql`
   query appointment_status(
     $isActive: Boolean = true
-    $searchTerm: String = ""
     $offset: Int
     $limit: Int
   ) {
@@ -14,10 +13,7 @@ const LIST_QUERY = gql`
       offset: $offset
       limit: $limit
       order_by: { order: desc }
-      where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-      }
+      where: { is_active: { _eq: $isActive } }
     ) {
       __typename
       id
@@ -32,16 +28,8 @@ const LIST_QUERY = gql`
   }
 `
 const LIST_AGGREGATE_QUERY = gql`
-  query appointment_status_aggregate(
-    $isActive: Boolean = true
-    $searchTerm: String = ""
-  ) {
-    appointment_status_aggregate(
-      where: {
-        is_active: { _eq: $isActive }
-        _or: [{ _and: [{ name: { _ilike: $searchTerm } }] }]
-      }
-    ) {
+  query appointment_status_aggregate($isActive: Boolean = true) {
+    appointment_status_aggregate(where: { is_active: { _eq: $isActive } }) {
       aggregate {
         count
       }
@@ -180,6 +168,7 @@ const schema: Schema = {
       short: 'Name',
       shortLower: 'name',
       min: 2,
+      max: 50,
       example: 'Running Late',
       cssWidth: 'max',
       type: 'string',
