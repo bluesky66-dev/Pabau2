@@ -8,31 +8,34 @@ import styles from './Employees.module.less'
 export interface Employee {
   avatar?: string
   name: string
-}
-
-export interface EmployeeItem {
-  avatar?: string
-  name: string
   selected: boolean
 }
 
 export interface EmployeesProps {
+  title?: string
+  description?: string
   employees: Employee[]
+  onSelected?: (items: Employee[]) => void
 }
 
-export const Employees: FC<EmployeesProps> = ({ employees }) => {
+export const Employees: FC<EmployeesProps> = ({
+  employees,
+  onSelected,
+  title,
+  description,
+}) => {
   const [searchQuery, setSearchQuery] = useState('')
-  const [employeeItems, setEmployeeItems] = useState<EmployeeItem[]>([])
+  const [employeeItems, setEmployeeItems] = useState<Employee[]>([])
   const [loadMore, setLoadMore] = useState(false)
   const handleSelectEmployee = (employee) => {
-    const items: EmployeeItem[] = [...employeeItems]
+    const items: Employee[] = [...employeeItems]
     for (const item of items) {
       if (item.name === employee.name) item.selected = !item.selected
     }
     setEmployeeItems([...items])
+    onSelected?.(items.filter((item) => item.selected === true))
   }
   const handleChangeSearchQuery = (e) => {
-    // setSearchQuery(e.target.value)
     setEmployeeItems(
       employees
         .filter((employee) =>
@@ -42,15 +45,16 @@ export const Employees: FC<EmployeesProps> = ({ employees }) => {
     )
   }
   useEffect(() => {
-    setEmployeeItems(
-      employees.map((employee) => ({ ...employee, selected: false }))
-    )
+    setEmployeeItems([...employees])
     setLoadMore(false)
   }, [employees])
   return (
     <div className={styles.employeesContainer}>
-      <h2>Employees</h2>
-      <h3>Choose which team members would required access to this location</h3>
+      <h2>{title || 'Employees'}</h2>
+      <h3>
+        {description ||
+          'Choose which team members would required access to this location'}
+      </h3>
       <div>
         <AntInput
           value={searchQuery}
