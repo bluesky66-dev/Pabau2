@@ -255,7 +255,15 @@ const SettingLinkedField: FC<linkedFieldProps> = ({
     if (linkedFieldValue !== '') {
       setAddLinkedField(false)
       setItems([])
-      const selectedItem = getLinkedFieldItem(linkedFieldValue)
+      const linkedFieldItems: LinkedFieldItem[] = []
+      for (const group of linkedFields) {
+        for (const item of group.group_items) {
+          linkedFieldItems.push(item)
+        }
+      }
+      const selectedItem = linkedFieldItems.filter(
+        (item) => item.item_value === linkedFieldValue
+      )
       if (selectedItem.length > 0) {
         addItem(selectedItem[0].item_label)
       }
