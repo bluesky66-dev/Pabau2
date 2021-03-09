@@ -36,6 +36,93 @@ const SettingLinkedField: FC<linkedFieldProps> = ({
   const [items, setItems] = useState<itemProps[]>([])
   const linkedFields: LinkedFieldGroup[] = [
     {
+      group_label: 'Basic Fields',
+      group_items: [
+        {
+          item_value: 'FName',
+          item_label: 'First Name',
+        },
+        {
+          item_value: 'LName',
+          item_label: 'Last Name',
+        },
+        {
+          item_value: 'Email',
+          item_label: 'Email',
+        },
+        {
+          item_value: 'Phone',
+          item_label: 'Phone',
+        },
+        {
+          item_value: 'Mobile',
+          item_label: 'Mobile',
+        },
+        {
+          item_value: 'DOB',
+          item_label: 'Date of Birth',
+        },
+        {
+          item_value: 'MailingCountry',
+          item_label: 'Country',
+        },
+        {
+          item_value: 'MailingCity',
+          item_label: 'City',
+        },
+        {
+          item_value: 'MailingPostal',
+          item_label: 'Postal',
+        },
+        {
+          item_value: 'MailingProvince',
+          item_label: 'Province',
+        },
+        {
+          item_value: 'MailingStreet',
+          item_label: 'Street',
+        },
+        {
+          item_value: 'FullAddress',
+          item_label: 'Full Address',
+        },
+      ],
+    },
+    {
+      group_label: 'Insurance Fields',
+      group_items: [
+        {
+          item_value: 'membership_number',
+          item_label: 'Membership Number',
+        },
+        {
+          item_value: 'auth_code',
+          item_label: 'Authorisation Code',
+        },
+      ],
+    },
+    {
+      group_label: 'Preferences',
+      group_items: [
+        {
+          item_value: 'MarketingOptInEmail',
+          item_label: 'Email Marketing',
+        },
+        {
+          item_value: 'MarketingOptInText',
+          item_label: 'SMS Marketing',
+        },
+        {
+          item_value: 'MarketingOptInPhone',
+          item_label: 'Phone',
+        },
+        {
+          item_value: 'MarketingOptInPost',
+          item_label: 'Letters',
+        },
+      ],
+    },
+    {
       group_label: 'Custom Fields',
       group_items: [
         {
@@ -128,93 +215,6 @@ const SettingLinkedField: FC<linkedFieldProps> = ({
         },
       ],
     },
-    {
-      group_label: 'Basic Fields',
-      group_items: [
-        {
-          item_value: 'FName',
-          item_label: 'First Name',
-        },
-        {
-          item_value: 'LName',
-          item_label: 'Last Name',
-        },
-        {
-          item_value: 'Email',
-          item_label: 'Email',
-        },
-        {
-          item_value: 'Phone',
-          item_label: 'Phone',
-        },
-        {
-          item_value: 'Mobile',
-          item_label: 'Mobile',
-        },
-        {
-          item_value: 'DOB',
-          item_label: 'Date of Birth',
-        },
-        {
-          item_value: 'MailingCountry',
-          item_label: 'Country',
-        },
-        {
-          item_value: 'MailingCity',
-          item_label: 'City',
-        },
-        {
-          item_value: 'MailingPostal',
-          item_label: 'Postal',
-        },
-        {
-          item_value: 'MailingProvince',
-          item_label: 'Province',
-        },
-        {
-          item_value: 'MailingStreet',
-          item_label: 'Street',
-        },
-        {
-          item_value: 'FullAddress',
-          item_label: 'Full Address',
-        },
-      ],
-    },
-    {
-      group_label: 'Insurance Fields',
-      group_items: [
-        {
-          item_value: 'membership_number',
-          item_label: 'Membership Number',
-        },
-        {
-          item_value: 'auth_code',
-          item_label: 'Authorisation Code',
-        },
-      ],
-    },
-    {
-      group_label: 'Preferences',
-      group_items: [
-        {
-          item_value: 'MarketingOptInEmail',
-          item_label: 'Email Marketing',
-        },
-        {
-          item_value: 'MarketingOptInText',
-          item_label: 'SMS Marketing',
-        },
-        {
-          item_value: 'MarketingOptInPhone',
-          item_label: 'Phone',
-        },
-        {
-          item_value: 'MarketingOptInPost',
-          item_label: 'Letters',
-        },
-      ],
-    },
   ]
 
   const [addLinkedField, setAddLinkedField] = useState(false)
@@ -230,17 +230,21 @@ const SettingLinkedField: FC<linkedFieldProps> = ({
     ])
   }
 
-  const handleChange = (value) => {
+  const getLinkedFieldItem = (value) => {
     const linkedFieldItems: LinkedFieldItem[] = []
     for (const group of linkedFields) {
       for (const item of group.group_items) {
         linkedFieldItems.push(item)
       }
     }
-    setAddLinkedField(false)
     const selectedItem = linkedFieldItems.filter(
       (item) => item.item_value === value
     )
+    return selectedItem
+  }
+  const handleChange = (value) => {
+    setAddLinkedField(false)
+    const selectedItem = getLinkedFieldItem(value)
     if (selectedItem.length > 0) {
       addItem(selectedItem[0].item_label)
       onChangeLinkedField(selectedItem[0].item_value)
@@ -248,7 +252,14 @@ const SettingLinkedField: FC<linkedFieldProps> = ({
   }
 
   useEffect(() => {
-    console.log('linkedFieldValue =', linkedFieldValue)
+    if (linkedFieldValue !== '') {
+      setAddLinkedField(false)
+      setItems([])
+      const selectedItem = getLinkedFieldItem(linkedFieldValue)
+      if (selectedItem.length > 0) {
+        addItem(selectedItem[0].item_label)
+      }
+    }
   }, [linkedFieldValue])
 
   const handleOptions = (index, value) => {
