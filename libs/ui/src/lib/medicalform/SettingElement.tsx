@@ -313,7 +313,7 @@ const SettingElement: FC<P> = ({
     selectedForm.arrItems = form.arrItems
     selectedForm.required = form.required
     selectedForm.txtDefaults = form.txtDefaults
-
+    selectedForm.txtLinkedField = form.txtLinkedField
     if (
       component === 'basic_singlechoice' ||
       component === 'basic_multiplechoice' ||
@@ -350,6 +350,11 @@ const SettingElement: FC<P> = ({
 
   const onChangeDefaults = (value) => {
     const tempForm = { ...form, txtDefaults: value }
+    setForm(tempForm)
+  }
+
+  const onChangeLinkedField = (value) => {
+    const tempForm = { ...form, txtLinkedField: value }
     setForm(tempForm)
   }
 
@@ -471,6 +476,8 @@ const SettingElement: FC<P> = ({
                 changedForm={changedForm}
                 defaultFieldValue={form.txtDefaults}
                 onChangeDefaults={onChangeDefaults}
+                linkedFieldValue={form.txtLinkedField}
+                onChangeLinkedField={onChangeLinkedField}
               />
             )}
           </SettingMedicalFormBody>

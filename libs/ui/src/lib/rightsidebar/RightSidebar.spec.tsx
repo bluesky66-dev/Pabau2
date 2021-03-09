@@ -14,6 +14,7 @@ describe('RightSidebar', () => {
           txtBlock: '',
           txtInputType: '',
           txtDefaults: '',
+          txtLinkedField: '',
           arrItems: [],
           required: false,
         }}

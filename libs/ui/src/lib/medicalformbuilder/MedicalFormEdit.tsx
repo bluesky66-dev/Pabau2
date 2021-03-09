@@ -83,6 +83,7 @@ const copy = (source, destination, droppableSourceId, endIndex, formInfo) => {
     txtBlock: formInfo.txtBlock,
     txtInputType: formInfo.txtInputType,
     txtDefaults: formInfo.txtDefaults,
+    txtLinkedField: formInfo.txtLinkedField,
     arrItems: formInfo.arrItems,
     required: formInfo.required,
   })
@@ -140,6 +141,8 @@ const getFormInfo = (form) => {
     txtDefaultsValue = form.defaults
   }
 
+  const txtLinkedFieldValue = ''
+
   let arrItemsValue: OptionType[] = []
   if (
     form.cssClass === 'checkbox' ||
@@ -162,6 +165,7 @@ const getFormInfo = (form) => {
     txtBlock: txtBlockValue,
     txtInputType: txtInputTypeValue,
     txtDefaults: txtDefaultsValue,
+    txtLinkedField: txtLinkedFieldValue,
     arrItems: arrItemsValue,
     required: form.required === 'true' ? true : false,
   }
