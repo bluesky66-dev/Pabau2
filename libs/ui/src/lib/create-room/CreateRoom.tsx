@@ -11,8 +11,8 @@ import { Collapse, Radio, Typography } from 'antd'
 import {
   DollarOutlined,
   PercentageOutlined,
-  CaretDownOutlined,
   CheckCircleFilled,
+  CaretRightOutlined,
 } from '@ant-design/icons'
 import styles from './CreateRoom.module.less'
 const { Panel } = Collapse
@@ -23,6 +23,17 @@ export interface CreateRoomProps {
   onCreate?: () => void
 }
 
+const ALL_SERVICES = [
+  'Travel Clinic',
+  'Vaccination Services',
+  'COVID-19 Antibody Testing System',
+  'Period Delay Service',
+  'Mole Screening Service',
+  'Health Checks',
+  'Aesthetic Services',
+  'Sexual Health Services',
+]
+
 export const CreateRoom: FC<CreateRoomProps> = ({
   visible,
   onClose,
@@ -31,6 +42,9 @@ export const CreateRoom: FC<CreateRoomProps> = ({
   const [showModal, setShowModal] = useState(false)
   const [advancedSetting, setAdvancedSetting] = useState('currency')
   const [allServicesSelected, setAllServicesSelected] = useState(true)
+  const [selectedServices, setSelectedServices] = useState<string[]>(
+    ALL_SERVICES
+  )
 
   useEffect(() => {
     setShowModal(visible)
@@ -86,25 +100,42 @@ export const CreateRoom: FC<CreateRoomProps> = ({
             </span>
             <div className={styles.createServiceSectionItem} />
             <div className={styles.createServiceSectionItem}>
-              <Checkbox className={styles.checkbox} /> Select All
+              <Checkbox
+                className={styles.checkbox}
+                checked={selectedServices.length === ALL_SERVICES.length}
+                onChange={(event) => {
+                  const { checked } = event.target
+                  if (checked) {
+                    setSelectedServices(ALL_SERVICES)
+                  } else {
+                    setSelectedServices([])
+                  }
+                }}
+              />{' '}
+              Select All
             </div>
             <div className={styles.createServiceSectionItem}>
-              {[
-                'Travel Clinic',
-                'Vaccination Services',
-                'COVID-19 Antibody Testing System',
-                'Period Delay Service',
-                'Mole Screening Service',
-                'Health Checks',
-                'Aesthetic Services',
-                'Sexual Health Services',
-              ].map((service, index) => {
+              {ALL_SERVICES.map((service, index) => {
                 return (
                   <div key={index} className={styles.listContainer}>
                     <span className={styles.icon}>
-                      <CaretDownOutlined />
+                      <CaretRightOutlined />
                     </span>
-                    <Checkbox className={styles.checkbox} />
+                    <Checkbox
+                      className={styles.checkbox}
+                      checked={selectedServices.indexOf(service) !== -1}
+                      onChange={(event) => {
+                        const { checked } = event.target
+                        if (checked) {
+                          setSelectedServices((prev) => [...prev, service])
+                        } else {
+                          const index = selectedServices.indexOf(service)
+                          const selServices = [...selectedServices]
+                          selServices.splice(index, 1)
+                          setSelectedServices(selServices)
+                        }
+                      }}
+                    />
                     <span className={styles.serviceTitle}>{service}</span>
                   </div>
                 )
@@ -230,7 +261,7 @@ export const CreateRoom: FC<CreateRoomProps> = ({
               return (
                 <div key={index} className={styles.listContainer}>
                   <span className={styles.icon}>
-                    <CaretDownOutlined />
+                    <CaretRightOutlined />
                   </span>
                   <Checkbox className={styles.checkbox} />
                   <span className={styles.serviceTitle}>{service}</span>
