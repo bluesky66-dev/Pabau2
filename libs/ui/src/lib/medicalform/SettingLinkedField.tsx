@@ -232,9 +232,10 @@ const SettingLinkedField: FC<linkedFieldProps> = ({
 
   const handleChange = (value) => {
     const linkedFieldItems: LinkedFieldItem[] = []
-    linkedFields.map((group) => {
+    const a = linkedFields.map((group) => {
       group.group_items.map((item) => linkedFieldItems.push(item))
     })
+    console.log('a =', a)
     setAddLinkedField(false)
     const selectedItem = linkedFieldItems.filter(
       (item) => item.item_value === value
@@ -246,9 +247,8 @@ const SettingLinkedField: FC<linkedFieldProps> = ({
   }
 
   useEffect(() => {
-    setItems([])
-    handleChange(linkedFieldValue)
-  }, [linkedFieldValue, handleChange])
+    console.log('linkedFieldValue =', linkedFieldValue)
+  }, [linkedFieldValue])
 
   const handleOptions = (index, value) => {
     const tempItems = [...items]
