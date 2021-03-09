@@ -252,28 +252,7 @@ const SettingLinkedField: FC<linkedFieldProps> = ({
   }
 
   useEffect(() => {
-    if (linkedFieldValue !== '') {
-      setAddLinkedField(false)
-      setItems([])
-      const linkedFieldItems: LinkedFieldItem[] = []
-      for (const group of linkedFields) {
-        for (const item of group.group_items) {
-          linkedFieldItems.push(item)
-        }
-      }
-      const selectedItem = linkedFieldItems.filter(
-        (item) => item.item_value === linkedFieldValue
-      )
-      if (selectedItem.length > 0) {
-        setItems([
-          {
-            id: 0,
-            name: selectedItem[0].item_label,
-            editing: false,
-          },
-        ])
-      }
-    }
+    console.log('linkedFieldValue =', linkedFieldValue)
   }, [linkedFieldValue])
 
   const handleOptions = (index, value) => {
