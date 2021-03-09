@@ -78,8 +78,17 @@ export const Default = CreateServiceStory.bind({})
 Default.args = {
   visible: false,
   rooms,
+  roomsTitle: 'Rooms',
+  roomsDesc: 'Select rooms',
+  roomsItemType: 'room',
   equipment,
+  equipmentTitle: 'Equipment',
+  equipmentDesc: 'Select equipment',
+  equipmentItemType: 'equipment',
   contracts,
   employees,
+  employeesTitle: 'Employees',
+  employeesDesc:
+    'Choose which team members would requred access to this location',
   locations,
 }

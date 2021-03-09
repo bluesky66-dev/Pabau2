@@ -64,9 +64,17 @@ interface ContractItem {
 export interface CreateServiceProps {
   contracts: ContractItem[]
   employees: Employee[]
+  employeesTitle?: string
+  employeesDesc?: string
   locations: LocationItem[]
   rooms: Array<string>
+  roomsTitle?: string
+  roomsDesc?: string
+  roomsItemType?: string
   equipment: Array<string>
+  equipmentTitle?: string
+  equipmentDesc?: string
+  equipemntItemType?: string
   visible: boolean
   onClose: () => void
   onCreate?: () => void
@@ -75,9 +83,17 @@ export interface CreateServiceProps {
 export const CreateService: FC<CreateServiceProps> = ({
   contracts,
   employees,
+  employeesTitle,
+  employeesDesc,
   locations,
   rooms,
+  roomsDesc,
+  roomsItemType,
+  roomsTitle,
   equipment,
+  equipemntItemType,
+  equipmentDesc,
+  equipmentTitle,
   visible,
   onClose,
   onCreate,
@@ -905,6 +921,8 @@ export const CreateService: FC<CreateServiceProps> = ({
             <div className={styles.createServiceSection}>
               <Employees
                 employees={employees}
+                title={employeesTitle || ''}
+                description={employeesDesc || ''}
                 onSelected={(items) => setSelectedEmployees(items)}
               />
             </div>
@@ -912,18 +930,18 @@ export const CreateService: FC<CreateServiceProps> = ({
           <div className={styles.resoucesContainer}>
             <div className={styles.createServiceSection}>
               <SearchTags
-                title="Rooms"
-                description="Select which rooms this service can be performed in."
+                title={roomsTitle || ''}
+                description={roomsDesc || ''}
                 items={rooms}
-                itemType="room"
+                itemType={roomsItemType || 'room'}
               />
             </div>
             <div className={styles.createServiceSection}>
               <SearchTags
-                title="Equipment"
-                description="Select if this service requires any particular piece of equipment."
+                title={equipmentTitle || ''}
+                description={equipmentDesc || ''}
                 items={equipment}
-                itemType="equipment"
+                itemType={equipemntItemType || 'equipment'}
               />
             </div>
           </div>
