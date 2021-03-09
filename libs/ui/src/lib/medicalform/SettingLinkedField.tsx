@@ -267,7 +267,7 @@ const SettingLinkedField: FC<linkedFieldProps> = ({
       if (selectedItem.length > 0) {
         setItems([
           {
-            id: items.length,
+            id: 0,
             name: selectedItem[0].item_label,
             editing: false,
           },
