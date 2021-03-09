@@ -119,7 +119,7 @@ export const ReviewChoice: FC<P> = ({
               <div className={styles.descriptionHead}>
                 <span className={styles.descriptionTitle}>{review.header}</span>
                 <span className={styles.plusLabel}>
-                  <PabauPlus label="plus" />
+                  <PabauPlus label="plus" modalType="Marketing" />
                 </span>
               </div>
               <Badge label="Disabled" disabled={false} />
