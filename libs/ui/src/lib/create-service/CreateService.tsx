@@ -592,7 +592,7 @@ export const CreateService: FC<CreateServiceProps> = ({
                   <div>
                     <Checkbox defaultChecked={false}>
                       Use a package session to pay for the service{' '}
-                      <Tooltip title="boof">
+                      <Tooltip title="This service can only be redeemed with a pre-paid package.">
                         <QuestionCircleOutlined
                           style={{
                             color: 'var(--light-grey-color)',
