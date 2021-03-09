@@ -248,7 +248,7 @@ const SettingLinkedField: FC<linkedFieldProps> = ({
   useEffect(() => {
     setItems([])
     handleChange(linkedFieldValue)
-  }, [linkedFieldValue])
+  }, [linkedFieldValue, handleChange])
 
   const handleOptions = (index, value) => {
     const tempItems = [...items]
