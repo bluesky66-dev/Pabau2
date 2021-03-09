@@ -1,16 +1,23 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Row, Col } from 'antd'
 import classNames from 'classnames'
 import SectionTitle from './SectionTitle'
 import { Button, ButtonTypes } from '@pabau/ui'
 import styles from './index.module.less'
 import pabauCard from '../../../assets/images/card-pabau.svg'
+import { PayOutModal } from './index'
 
-interface P {
-  onRequestTerminal?: () => void
-}
+const PabauPay: FC = () => {
+  const [visibleModal, setVisibleModal] = useState(false)
 
-const PabauPay: FC<P> = ({ onRequestTerminal }) => {
+  const onCloseModal = () => {
+    setVisibleModal(false)
+  }
+
+  const onPayOut = () => {
+    setVisibleModal(true)
+  }
+
   return (
     <div>
       <div className={classNames(styles.sectionPadding, styles.sectionBorder)}>
@@ -19,7 +26,7 @@ const PabauPay: FC<P> = ({ onRequestTerminal }) => {
           description="On this account you’ll receive funds from clients paying online with integrated card processing."
           showButton
           buttonText="Pay out to bank"
-          onClick={onRequestTerminal}
+          onClick={onPayOut}
         />
         <div className={styles.balanceCard}>
           <h4>Your current balance is £0</h4>
@@ -64,6 +71,7 @@ const PabauPay: FC<P> = ({ onRequestTerminal }) => {
         <h6>Account number</h6>
         <p>**** 2002</p>
       </div>
+      <PayOutModal visible={visibleModal} onCloseModal={onCloseModal} />
     </div>
   )
 }

@@ -1,15 +1,21 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Row } from 'antd'
 import classNames from 'classnames'
 import SectionTitle from './SectionTitle'
 import styles from './index.module.less'
 import terminalIcon from '../../../assets/images/terminal.png'
+import { RequestTerminalModal } from './index'
 
-interface P {
-  onRequestTerminal?: () => void
-}
+const CardTerminal: FC = () => {
+  const [visibleModal, setVisibleModal] = useState(false)
 
-const CardTerminal: FC<P> = ({ onRequestTerminal }) => {
+  const onCloseModal = () => {
+    setVisibleModal(false)
+  }
+
+  const onRequestTerminal = () => {
+    setVisibleModal(true)
+  }
   return (
     <div>
       <div className={classNames(styles.sectionPadding, styles.sectionBorder)}>
@@ -38,6 +44,10 @@ const CardTerminal: FC<P> = ({ onRequestTerminal }) => {
           </div>
         </Row>
       </div>
+      <RequestTerminalModal
+        visible={visibleModal}
+        onCloseModal={onCloseModal}
+      />
     </div>
   )
 }

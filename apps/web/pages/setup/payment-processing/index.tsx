@@ -5,7 +5,6 @@ import {
   PaymentProcessingOverview,
   PabauPay,
   CardTerminal,
-  PayOutModal,
 } from '../../../components/Setup/PaymentProcessing'
 import notificationBannerImage from '../../../assets/images/notification-image-lab-page.png'
 import styles from './index.module.less'
@@ -13,16 +12,6 @@ import styles from './index.module.less'
 const { Title } = Typography
 export function PaymentProcessing() {
   const [hideBanner, setHideBanner] = useState(false)
-  const [visibleModal, setVisibleModal] = useState(false)
-
-  const onCloseModal = () => {
-    setVisibleModal(false)
-  }
-
-  const onRequestTerminal = () => {
-    setVisibleModal(true)
-  }
-
   return (
     <Layout>
       <NotificationBanner
@@ -48,11 +37,10 @@ export function PaymentProcessing() {
         </div>
         <TabMenu menuItems={['Overview', 'Balances', 'Card Terminal']}>
           <PaymentProcessingOverview />
-          <PabauPay onRequestTerminal={onRequestTerminal} />
-          <CardTerminal onRequestTerminal={onRequestTerminal} />
+          <PabauPay />
+          <CardTerminal />
         </TabMenu>
       </div>
-      <PayOutModal visible={visibleModal} onCloseModal={onCloseModal} />
     </Layout>
   )
 }
