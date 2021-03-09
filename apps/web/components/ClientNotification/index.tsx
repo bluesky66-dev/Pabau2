@@ -5,6 +5,27 @@ import NoShowAppointmentPreview from '../../pages/client-notifications/noshow-ap
 import NewAppointmentPreview from '../../pages/client-notifications/new-appointment/NewAppointmentPreview'
 import RescheduleAppointmentPreview from '../../pages/client-notifications/rescheduled-appointment/RescheduleAppointmentPreview'
 
+interface refProps {
+  propsData?: () => DataProps
+}
+
+interface DataProps {
+  requestConfirm?: boolean
+  allowRescheduling?: boolean
+  allowCancellation?: boolean
+  displayPolicy?: boolean
+  showService?: boolean
+  showEmployeeName?: boolean
+  addMedicalHisButton?: boolean
+  selectLanguage?: string
+  backGroundColor?: string
+  buttonColor?: string
+  informationMessage?: string
+  medicalMessage?: string
+  standardTapIndex?: string
+  activeSocialIcons?: string[]
+}
+
 interface P {
   onSeletedTab: (number) => void
   isTabComponent?: boolean
@@ -12,7 +33,7 @@ interface P {
   isSmsComponent?: boolean
   displayRadioGroup?: boolean
   displayButtons?: boolean
-  ref?: ForwardedRef<null>
+  ref?: ForwardedRef<refProps>
   standardMessage?: string
   hideReminderTimeFrameTabPane?: boolean
   hideRequestConfirmationOption?: boolean
